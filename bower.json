@@ -1,0 +1,14 @@
+{
+  "name": "hsg-shell",
+  "version": "0.0.1",
+  "authors": [
+    "Wolfgang Meier <wolfgangmm@gmail.com>"
+  ],
+  "description": "history.state.gov Redesign",
+  "main": "index.html",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "animate.css": "~3.3.0"
+  }
+}
