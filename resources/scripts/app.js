@@ -43,6 +43,7 @@ $(document).ready(function() {
                     }
                     if (data.toc) {
                         $("#toc .toc-inner").empty().append(data.toc);
+                        initNavigation($("#toc"));
                     }
                     if (data.next) {
                         $(".nav-next").attr("href", data.next).css("visibility", "");
@@ -74,6 +75,20 @@ $(document).ready(function() {
         });
     }
     
+    function initNavigation(container) {
+        // click on page navigation previous/next buttons
+        container.find(".page-nav,.toc-link").click(function(ev) {
+            ev.preventDefault();
+            
+            var relPath = this.pathname.replace(new RegExp("^" + appRoot + "(.*)$"), "$1");
+            var url = "url=" + relPath + "&" + this.search.substring(1);
+            if (historySupport) {
+                history.pushState(null, null, this.href);
+            }
+            load(url, this.className.split(" ")[0]);
+        });
+    }
+    
     function showContent(container, animIn, animOut) {
         container.removeClass("animated " + animOut);
         $("#content-container").addClass("animated " + animIn).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
@@ -87,18 +102,7 @@ $(document).ready(function() {
     }
     
     resize();
-    // click on page navigation previous/next buttons
-    $(".page-nav,.toc-link").click(function(ev) {
-        ev.preventDefault();
-        
-        var relPath = this.pathname.replace(new RegExp("^" + appRoot + "(.*)$"), "$1");
-        var url = "url=" + relPath + "&" + this.search.substring(1);
-        console.log("url: %s", url);
-        if (historySupport) {
-            history.pushState(null, null, this.href);
-        }
-        load(url, this.className.split(" ")[0]);
-    });
+    
     // select volume from dropdown
     $("#select-volume").change(function(ev) {
         var path = "/" + $(this).val();
@@ -158,5 +162,6 @@ $(document).ready(function() {
         });
     }
     
+    initNavigation($("#content"));
     initContent();
 });
