@@ -45,6 +45,7 @@ $(document).ready(function() {
                         $("#toc .toc-inner").empty().append(data.toc);
                         initNavigation($("#toc"));
                     }
+                    highlightToc(data.tocCurrent);
                     if (data.next) {
                         $(".nav-next").attr("href", data.next).css("visibility", "");
                     } else {
@@ -87,6 +88,10 @@ $(document).ready(function() {
             }
             load(url, this.className.split(" ")[0]);
         });
+    }
+    
+    function highlightToc(activeId) {
+        $("#toc li a[href='" + activeId + "']").addClass("highlight");
     }
     
     function showContent(container, animIn, animOut) {

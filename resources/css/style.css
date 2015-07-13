@@ -32,6 +32,9 @@ body {
 #toc .toc-inner > ul {
   padding-left: 0;
 }
+#toc .highlight {
+  background-color: #dddde8;
+}
 #content-container {
   -webkit-animation-duration: 400ms;
   -moz-animation-duration: 400ms;

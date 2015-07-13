@@ -14,21 +14,21 @@ import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/ap
 
 declare
     %templates:wrap
-function toc:table-of-contents($node as node(), $model as map(*), $volume as xs:string, $id-to-highlight as xs:string?) {
-    toc:toc($model?data, $id-to-highlight)
+function toc:table-of-contents($node as node(), $model as map(*), $volume as xs:string) {
+    toc:toc($model?data)
 };
 
-declare function toc:toc($root as node(), $id-to-highlight as xs:string?) {
+declare function toc:toc($root as node()) {
     <div class="toc-inner">
         <h2>{toc:volume-title($root, "volume")}</h2>
-        <ul>{toc:toc-passthru($root/ancestor-or-self::tei:TEI/tei:text, $id-to-highlight)}</ul>
+        <ul>{toc:toc-passthru($root/ancestor-or-self::tei:TEI/tei:text, $root/ancestor-or-self::tei:div[@type != "document"][1])}</ul>
     </div>
 };
 
-declare function toc:toc-passthru($node as item()*, $id-to-highlight as xs:string?) {
+declare function toc:toc-passthru($node as item()*, $current as element()) {
     let $divs := $node//tei:div[empty(ancestor::tei:div) or ancestor::tei:div[1] is $node]
     return
-        $divs ! toc:toc-div(., $id-to-highlight)
+        $divs ! toc:toc-div(., $current)
 };
 
 declare function toc:volume-id($node as node()) {
@@ -40,7 +40,7 @@ declare function toc:volume-title($node as node(), $type as xs:string) as text()
 };
 
 (: handles divs for TOCs :)
-declare function toc:toc-div($node as element(tei:div), $id-to-highlight as xs:string?) {
+declare function toc:toc-div($node as element(tei:div), $current as element()) {
     let $sections-to-suppress := ('toc')
     return
     (: we only show certain divs :)
@@ -48,12 +48,11 @@ declare function toc:toc-div($node as element(tei:div), $id-to-highlight as xs:s
         <li>
             {
             let $href := attribute href { $node/@xml:id }
-            let $highlight := if ($node/@xml:id = $id-to-highlight) then attribute class {'highlight'} else ()
+            let $highlight := if ($node is $current) then 'highlight' else ()
             return
-                <a class="toc-link">
+                <a class="toc-link {$highlight}">
                 {
                     $href,
-                    $highlight,
                     toc:toc-head($node/tei:head[1]) 
                 }
                 </a>
@@ -79,7 +78,7 @@ declare function toc:toc-div($node as element(tei:div), $id-to-highlight as xs:s
             else
                 <ul>
                 {
-                    toc:toc-passthru($node, $id-to-highlight)
+                    toc:toc-passthru($node, $current)
                 }
                 </ul>
             }
