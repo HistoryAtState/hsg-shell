@@ -82,7 +82,7 @@ $(document).ready(function() {
     
     function initNavigation(container) {
         // click on page navigation previous/next buttons
-        container.find(".page-nav,.toc-link").click(function(ev) {
+        container.find(".page-nav, #toc .toc-link").click(function(ev) {
             ev.preventDefault();
             
             var relPath = this.pathname.replace(new RegExp("^" + appRoot + "(.*)$"), "$1");
@@ -116,11 +116,15 @@ $(document).ready(function() {
     // select volume from dropdown
     $("#select-volume").change(function(ev) {
         var path = "/" + $(this).val();
-        var url= "url=" + path;
-        if (historySupport) {
-            history.pushState(null, null, appRoot + path);
-        }
-        load({url: path, toc: true});
+        // if ($(this).hasClass("async")) {
+        //     var url= "url=" + path;
+        //     if (historySupport) {
+        //         history.pushState(null, null, appRoot + path);
+        //     }
+        //     load({url: path, toc: true});
+        // } else {
+        window.location = appRoot + path;
+        // }
     });
     
     $("#zoom-in").click(function(ev) {

@@ -14,18 +14,24 @@ import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/ap
 
 declare
     %templates:wrap
-function toc:table-of-contents($node as node(), $model as map(*), $volume as xs:string) {
-    toc:toc($model?data)
+function toc:table-of-contents($node as node(), $model as map(*), $volume as xs:string, $heading as xs:boolean?, $highlight as xs:boolean?) {
+    toc:toc($model?data, $heading, $highlight)
 };
 
-declare function toc:toc($root as node()) {
+declare function toc:toc($root as node(), $show-heading as xs:boolean?, $highlight as xs:boolean?) {
     <div class="toc-inner">
-        <h2>{toc:volume-title($root, "volume")}</h2>
-        <ul>{toc:toc-passthru($root/ancestor-or-self::tei:TEI/tei:text, $root/ancestor-or-self::tei:div[@type != "document"][1])}</ul>
+        { if ($show-heading) then <h2>{toc:volume-title($root, "volume")}</h2> else () }
+        <ul>
+        {
+            toc:toc-passthru(
+                $root/ancestor-or-self::tei:TEI/tei:text,
+                if ($highlight) then $root/ancestor-or-self::tei:div[@type != "document"][1] else ()
+            )
+        }</ul>
     </div>
 };
 
-declare function toc:toc-passthru($node as item()*, $current as element()) {
+declare function toc:toc-passthru($node as item()*, $current as element()?) {
     let $divs := $node//tei:div[empty(ancestor::tei:div) or ancestor::tei:div[1] is $node]
     return
         $divs ! toc:toc-div(., $current)
@@ -40,7 +46,7 @@ declare function toc:volume-title($node as node(), $type as xs:string) as text()
 };
 
 (: handles divs for TOCs :)
-declare function toc:toc-div($node as element(tei:div), $current as element()) {
+declare function toc:toc-div($node as element(tei:div), $current as element()?) {
     let $sections-to-suppress := ('toc')
     return
     (: we only show certain divs :)

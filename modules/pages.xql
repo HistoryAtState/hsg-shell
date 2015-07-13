@@ -88,9 +88,17 @@ function pages:view($node as node(), $model as map(*), $view as xs:string) {
         pages:process-content($config:odd, $xml)
 };
 
+declare
+    %templates:wrap
+function pages:header($node as node(), $model as map(*)) {
+    let $header := $model?data/ancestor-or-self::tei:TEI/tei:teiHeader
+    return
+        pages:process-content($config:odd, $header)
+};
+
 declare function pages:process-content($odd as xs:string, $xml as element()*) {
 	let $html :=
-        pmu:process(odd:get-compiled($config:odd-source, $config:odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", $config:module-config)
+        pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", $config:module-config)
     let $class := if ($html//*[@class = ('margin-note')]) then "margin-right" else ()
     return
         <div class="content {$class}">

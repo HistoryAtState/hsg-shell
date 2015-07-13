@@ -51,9 +51,10 @@ else
     let $match := analyze-string($exist:path, "^/([^/]+)/?(.*)$")
     let $volume := $match//fn:group[@nr = "1"]/string()
     let $id := $match//fn:group[@nr = "2"]/string()
+    let $page := if ($id and $id != "") then "index.html" else "volume.html"
     return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/index.html"/>
+            <forward url="{$exist:controller}/{$page}"/>
             <view>
                 <forward url="{$exist:controller}/modules/view.xql">
                     <add-parameter name="volume" value="{$volume}"/>

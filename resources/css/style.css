@@ -3,10 +3,22 @@
   font-size: 14px;
   line-height: 24px;
 }
+.heading {
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #911625;
+}
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 14px;
   line-height: 24px;
+}
+#volume .titleStmt1 {
+  margin-top: 0;
+  font-size: 1.25em;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #911625;
 }
 #sections select {
   display: block;
@@ -19,25 +31,30 @@ body {
   text-transform: uppercase;
   color: #911625;
 }
-#toc {
+#toc,
+#volume {
   -webkit-animation-duration: 400ms;
   -moz-animation-duration: 400ms;
   animation-duration: 400ms;
 }
-#toc h2 {
+#toc h2,
+#volume h2 {
   background-color: #dddde8;
   font-size: 1.2em;
   line-height: 1.25;
   margin-bottom: 1.25em;
 }
-#toc .toc-inner ul {
+#toc .toc-inner ul,
+#volume .toc-inner ul {
   list-style: none;
   padding-left: 2em;
 }
-#toc .toc-inner > ul {
+#toc .toc-inner > ul,
+#volume .toc-inner > ul {
   padding-left: 0;
 }
-#toc .highlight {
+#toc .highlight,
+#volume .highlight {
   background-color: #dddde8;
 }
 #content-container {
@@ -60,7 +77,7 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   color: #911625;
-  font-size: 16px;
+  font-size: 1.25em;
   line-height: 1.5;
   padding: 10px 10px 10px 0;
   margin-left: 60px;

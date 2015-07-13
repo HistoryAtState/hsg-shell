@@ -43,7 +43,7 @@ return
                         $prev/@xml:id/string()
                     else (),
                 "title": pages:title($xml/ancestor-or-self::tei:TEI),
-                "toc": if ($toc) then toc:toc($xml) else (),
+                "toc": if ($toc) then toc:toc($xml, true(), true()) else (),
                 "tocCurrent": $xml/ancestor-or-self::tei:div[@type != "document"][1]/@xml:id/string(),
                 "content": $html
             }

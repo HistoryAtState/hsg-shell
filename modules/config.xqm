@@ -41,7 +41,7 @@ declare variable $config:odd-source := $config:odd-root || "/source";
 
 declare variable $config:odd-compiled := $config:odd-root || "/compiled";
 
-declare variable $config:odd := "teisimple.odd";
+declare variable $config:odd := "frus.odd";
 
 declare variable $config:module-config := doc($config:odd-source || "/configuration.xml")/*;
 

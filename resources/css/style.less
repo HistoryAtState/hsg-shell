@@ -12,10 +12,23 @@
     line-height: @lineHeight;
 }
 
+.heading {
+    font-weight: 800;
+    text-transform: uppercase;
+    color: @colorHead;
+}
+
 body {
     .baseFont;
 }
 
+#volume {
+    .titleStmt1 {
+        margin-top: 0;
+        font-size: 1.25em;
+        .heading;
+    }
+}
 #sections {
     select {
         display: block;
@@ -25,13 +38,11 @@ body {
     
     h2 {
         font-size: 0.825em;
-        font-weight: 800;
-        text-transform: uppercase;
-        color: @colorHead;
+        .heading;
     }
 }
 
-#toc {
+#toc, #volume {
     -webkit-animation-duration: 400ms;
     -moz-animation-duration: 400ms;
     animation-duration: 400ms;
@@ -74,10 +85,8 @@ body {
     border-bottom: 2px solid #CCC;
 
     h5 {
-        font-weight: 800;
-        text-transform: uppercase;
-        color: @colorHead;
-        font-size: 16px;
+        .heading;
+        font-size: 1.25em;
         line-height: 1.5;
         padding: 10px 10px 10px 0;
         margin-left: 60px;
