@@ -9,6 +9,8 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";
+import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";
 
 declare
     %templates:wrap
@@ -103,5 +105,6 @@ declare function toc:remove-nodes-deep($nodes as node()*, $nodes-to-remove as no
 declare function toc:toc-head($node as element(tei:head)) {
     let $head-sans-note := if ($node//tei:note) then toc:remove-nodes-deep($node, $node//tei:note) else $node
     return
-        $head-sans-note
+        pmu:process(odd:get-compiled($config:odd-source, $config:odd, $config:odd-compiled), $head-sans-note/node(), 
+            $config:odd-compiled, "web", "../generated", $config:module-config)
 };
