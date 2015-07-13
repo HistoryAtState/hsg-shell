@@ -63,3 +63,28 @@ function app:administrations($node as node(), $model as map(*)) {
             }
     return $choices
 };
+
+declare
+    %templates:wrap
+function app:facets($node as node(), $model as map(*)) {
+    let $persons := distinct-values($model?data//tei:persName/@corresp)
+    return
+        map {
+            "persons": $persons
+        }
+};
+
+declare
+    %templates:wrap
+function app:view-persons($node as node(), $model as map(*)) {
+    app:get-persons($model?data, $model?persons)
+};
+
+declare function app:get-persons($root as element(), $ids as xs:string*) {
+    let $persons := $root/ancestor-or-self::tei:TEI/id("persons")
+    for $id in $ids
+    let $name := $persons//tei:persName[@xml:id = substring($id, 2)]
+    order by $name
+    return
+        <li><a href="persons{$id}" data-toggle="tooltip" title="{normalize-space($name/../following-sibling::text())}">{$name/string()}</a></li>
+};

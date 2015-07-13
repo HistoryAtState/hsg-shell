@@ -111,6 +111,11 @@
                 <elementSpec ident="date" mode="change">
                     <model behaviour="inline"/>
                 </elementSpec>
+                <elementSpec ident="persName" mode="add">
+                    <model behaviour="inline">
+                        <outputRendition>font-weight: bold</outputRendition>
+                    </model>
+                </elementSpec>
                 <moduleRef key="tei"/>
                 <moduleRef key="header"/>
                 <moduleRef key="tagdocs"/>

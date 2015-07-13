@@ -438,6 +438,8 @@ declare function model:apply($config as map(*), $input as node()*) {
                 html:table($config, ., "table", .)
             case element(rhyme) return
                 html:inline($config, ., "rhyme", .)
+            case element(persName) return
+                html:inline($config, ., "persName", .)
             case element(exist:match) return
                 html:match($config, ., .)
             case text() | xs:anyAtomicType return

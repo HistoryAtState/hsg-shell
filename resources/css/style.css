@@ -31,6 +31,10 @@ body {
   text-transform: uppercase;
   color: #911625;
 }
+#person-panel ul {
+  list-style: none;
+  padding-left: 0;
+}
 #toc,
 #volume {
   -webkit-animation-duration: 400ms;

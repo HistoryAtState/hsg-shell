@@ -38,7 +38,7 @@ function pages:load($node as node(), $model as map(*), $volume as xs:string?, $i
 };
 
 declare function pages:load-xml($view as xs:string, $id as xs:string?, $volume as xs:string) {
-    console:log("Loading volume: " || $volume || "; div: " || $id || string-length($id)),
+    console:log("Loading volume: " || $volume || "; div: " || $id),
 	if ($view = "div") then
         if ($id) then
             let $doc := doc($config:VOLUMES_PATH || "/" || $volume || ".xml")/tei:TEI
