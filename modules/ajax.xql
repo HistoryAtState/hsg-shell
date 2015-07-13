@@ -17,7 +17,7 @@ declare option output:media-type "application/json";
  : page.
  :)
 let $url := request:get-parameter("url", ())
-let $toc := boolean(request:get-parameter("toc", "false"))
+let $toc := boolean(request:get-parameter("toc", ()))
 let $match := analyze-string($url, "^/([^/]+)/?(.*)$")
 let $volume := $match//fn:group[@nr = "1"]/string()
 let $id := $match//fn:group[@nr = "2"]/string()

@@ -19,6 +19,11 @@ body {
   text-transform: uppercase;
   color: #911625;
 }
+#toc {
+  -webkit-animation-duration: 400ms;
+  -moz-animation-duration: 400ms;
+  animation-duration: 400ms;
+}
 #toc h2 {
   background-color: #dddde8;
   font-size: 1.2em;

@@ -42,8 +42,12 @@ $(document).ready(function() {
                         $("#navigation-title").text(data.title);
                     }
                     if (data.toc) {
-                        $("#toc .toc-inner").empty().append(data.toc);
-                        initNavigation($("#toc"));
+                        $("#toc").addClass("animated fadeOut")
+                            .one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
+                                $("#toc .toc-inner").empty().append(data.toc);
+                                initNavigation($("#toc"));
+                                showContent($(this), "fadeIn", "fadeOut");
+                            });
                     }
                     highlightToc(data.tocCurrent);
                     if (data.next) {
@@ -91,12 +95,13 @@ $(document).ready(function() {
     }
     
     function highlightToc(activeId) {
+        $("#toc li a").removeClass("highlight");
         $("#toc li a[href='" + activeId + "']").addClass("highlight");
     }
     
     function showContent(container, animIn, animOut) {
         container.removeClass("animated " + animOut);
-        $("#content-container").addClass("animated " + animIn).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
+        container.addClass("animated " + animIn).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
             $(this).removeClass("animated " + animIn);
         });
     }
