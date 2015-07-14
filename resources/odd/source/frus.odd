@@ -111,10 +111,32 @@
                 <elementSpec ident="date" mode="change">
                     <model behaviour="inline"/>
                 </elementSpec>
-                <elementSpec ident="persName" mode="add">
-                    <model behaviour="inline">
-                        <outputRendition>font-weight: bold</outputRendition>
+                <elementSpec mode="change" ident="hi">
+                    <model predicate="@rend = 'strong'" behaviour="inline">
+                        <outputRendition>font-weight: bold;</outputRendition>
                     </model>
+                    <model predicate="@rendition" behaviour="inline" useSourceRendition="true">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
+                    <model predicate="not(@rendition)" behaviour="inline">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="note">
+                    <model predicate="@place" behaviour="note">
+                        <param name="place">@place</param>
+                        <param name="label">@n</param>
+                    </model>
+                    <model behaviour="note"/>
+                </elementSpec><!-- Elements not in TEI Simple -->
+                <elementSpec ident="persName" mode="add">
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <elementSpec ident="gloss" mode="add">
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <elementSpec ident="term" mode="add">
+                    <model behaviour="inline"/>
                 </elementSpec>
                 <moduleRef key="tei"/>
                 <moduleRef key="header"/>

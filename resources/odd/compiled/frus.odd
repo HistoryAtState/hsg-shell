@@ -2138,6 +2138,9 @@ relatedItem element must be empty</sch:report>
                         <ref xmlns="http://relaxng.org/ns/structure/1.0" name="macro.paraContent"/>
                     </content>
                     <attList/>
+                    <model predicate="@rend = 'strong'" behaviour="inline">
+                        <outputRendition>font-weight: bold;</outputRendition>
+                    </model>
                     <model predicate="@rendition" behaviour="inline" useSourceRendition="true">
                         <outputRendition>font-style: italic;</outputRendition>
                     </model>
@@ -2464,14 +2467,7 @@ relatedItem element must be empty</sch:report>
                         <param name="place">@place</param>
                         <param name="label">@n</param>
                     </model>
-                    <model predicate="parent::div and not(@place)" behaviour="block">
-                        <outputRendition>margin-left: 10px;margin-right: 10px; font-size:smaller;</outputRendition>
-                    </model>
-                    <model predicate="not(@place)" behaviour="inline">
-                        <outputRendition scope="before">content:" [";</outputRendition>
-                        <outputRendition scope="after">content:"] ";</outputRendition>
-                        <outputRendition>font-size:small;</outputRendition>
-                    </model>
+                    <model behaviour="note"/>
                 </elementSpec>
                 <elementSpec rend="change" module="core" ident="num">
                     <classes>
@@ -6803,9 +6799,15 @@ border-bottom: solid 1pt blue;
                 </elementSpec>
                 <elementSpec rend="add" module="derived-module-frus" ident="persName" mode="add">
                     <attList/>
-                    <model behaviour="inline">
-                        <outputRendition>font-weight: bold</outputRendition>
-                    </model>
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <elementSpec rend="add" module="derived-module-frus" ident="gloss" mode="add">
+                    <attList/>
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <elementSpec rend="add" module="derived-module-frus" ident="term" mode="add">
+                    <attList/>
+                    <model behaviour="inline"/>
                 </elementSpec>
                 <moduleSpec n="ST" xml:id="DSTTEI2" ident="tei" type="core"/>
                 <moduleSpec n="CO" xml:id="DCO" ident="core"/>

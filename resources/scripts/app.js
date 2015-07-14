@@ -44,6 +44,12 @@ $(document).ready(function() {
                     if (data.persons) {
                         $("#person-panel ul").replaceWith(data.persons);
                         initNavigation("#person-panel a");
+                        $('#person-panel a').tooltip({placement: "auto top"});
+                    }
+                    if (data.gloss) {
+                        $("#gloss-panel ul").replaceWith(data.gloss);
+                        initNavigation("#gloss-panel a");
+                        $('#gloss-panel a').tooltip({placement: "auto top"});
                     }
                     if (data.toc) {
                         $("#toc").addClass("animated fadeOut")
@@ -109,7 +115,6 @@ $(document).ready(function() {
         container.addClass("animated " + animIn).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
             $(this).removeClass("animated " + animIn);
             if (id) {
-                console.log("scrolling to %s", id);
                 var target = document.getElementById(id.substring(1));
                 target && target.scrollIntoView();
             }
@@ -189,7 +194,7 @@ $(document).ready(function() {
         });
     }
     
-    initNavigation("#content .page-nav, #toc .toc-link, #person-panel a");
+    initNavigation("#content .page-nav, #toc .toc-link, #person-panel a, #gloss-panel a");
     initContent();
     
     $('[data-toggle="tooltip"]').tooltip({placement: "auto top"});

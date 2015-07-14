@@ -22,13 +22,10 @@
 .head2 { font-style: italic; }
 .head3 { font-style: italic; }
 .head4 { font-weight: bold; }
-.hi1 { font-style: italic; }
+.hi1 { font-weight: bold; }
 .hi2 { font-style: italic; }
+.hi3 { font-style: italic; }
 .l { margin-left: 1em; }
-.note2 { margin-left: 10px;margin-right: 10px; font-size:smaller; }
-.note3:before { content:" ["; }
-.note3:after { content:"] "; }
-.note3 { font-size:small; }
 .p { text-align: justify; }
 .pb { display: block; margin-left: 4pt; color: grey; float: right; }
 .pb:before { content: '[Page '; }
@@ -72,4 +69,3 @@
 .figure2 { display: block; border-top: solid 1pt blue; border-bottom: solid 1pt blue; }
 .row1 { font-weight: bold; }
 .table { font-size: smaller; background-color: #F0F0F0; }
-.persName { font-weight: bold }

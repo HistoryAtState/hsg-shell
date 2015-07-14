@@ -31,7 +31,8 @@ body {
   text-transform: uppercase;
   color: #911625;
 }
-#person-panel ul {
+#person-panel ul,
+#gloss-panel ul {
   list-style: none;
   padding-left: 0;
 }
@@ -72,6 +73,11 @@ body {
     margin-left: 60px;
     margin-right: 60px;
   }
+}
+#content-container .note {
+  margin-left: .25em;
+  font-size: 9px;
+  vertical-align: super;
 }
 .navigation-top {
   margin-bottom: 1em;

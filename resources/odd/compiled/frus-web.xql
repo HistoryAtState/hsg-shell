@@ -120,13 +120,16 @@ declare function model:apply($config as map(*), $input as node()*) {
                                 else
                                     html:block($config, ., "head6", .)
             case element(hi) return
-                if (@rendition) then
-                    html:inline($config, ., css:get-rendition(., "hi1"), .)
+                if (@rend = 'strong') then
+                    html:inline($config, ., "hi1", .)
                 else
-                    if (not(@rendition)) then
-                        html:inline($config, ., "hi2", .)
+                    if (@rendition) then
+                        html:inline($config, ., css:get-rendition(., "hi2"), .)
                     else
-                        $config?apply($config, ./node())
+                        if (not(@rendition)) then
+                            html:inline($config, ., "hi3", .)
+                        else
+                            $config?apply($config, ./node())
             case element(item) return
                 html:listItem($config, ., "item", .)
             case element(l) return
@@ -160,13 +163,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                 if (@place) then
                     html:note($config, ., "note1", ., @place, @n)
                 else
-                    if (parent::div and not(@place)) then
-                        html:block($config, ., "note2", .)
-                    else
-                        if (not(@place)) then
-                            html:inline($config, ., "note3", .)
-                        else
-                            $config?apply($config, ./node())
+                    html:note($config, ., "note2", ., (), ())
             case element(num) return
                 html:inline($config, ., "num", .)
             case element(orig) return
@@ -440,6 +437,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                 html:inline($config, ., "rhyme", .)
             case element(persName) return
                 html:inline($config, ., "persName", .)
+            case element(gloss) return
+                html:inline($config, ., "gloss", .)
+            case element(term) return
+                html:inline($config, ., "term", .)
             case element(exist:match) return
                 html:match($config, ., .)
             case text() | xs:anyAtomicType return

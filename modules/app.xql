@@ -67,11 +67,10 @@ function app:administrations($node as node(), $model as map(*)) {
 declare
     %templates:wrap
 function app:facets($node as node(), $model as map(*)) {
-    let $persons := distinct-values($model?data//tei:persName/@corresp)
-    return
-        map {
-            "persons": $persons
-        }
+    map {
+        "persons": distinct-values($model?data//tei:persName/@corresp),
+        "gloss": distinct-values($model?data//tei:gloss/@target)
+    }
 };
 
 declare
@@ -87,4 +86,19 @@ declare function app:get-persons($root as element(), $ids as xs:string*) {
     order by $name
     return
         <li><a href="persons{$id}" data-toggle="tooltip" title="{normalize-space($name/../following-sibling::text())}">{$name/string()}</a></li>
+};
+
+declare
+    %templates:wrap
+function app:view-gloss($node as node(), $model as map(*)) {
+    app:get-gloss($model?data, $model?gloss)
+};
+
+declare function app:get-gloss($root as element(), $ids as xs:string*) {
+    let $terms := $root/ancestor-or-self::tei:TEI/id("terms")
+    for $id in $ids
+    let $term := $terms//tei:term[@xml:id = substring($id, 2)]
+    order by $term
+    return
+        <li><a href="terms{$id}" data-toggle="tooltip" title="{normalize-space($term/../following-sibling::text())}">{$term/text()}</a></li>
 };
