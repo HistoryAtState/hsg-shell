@@ -111,6 +111,9 @@ $(document).ready(function() {
     }
     
     function showContent(container, animIn, animOut, id) {
+        if (!id) {
+            window.scrollTo(0,0);
+        }
         container.removeClass("animated " + animOut);
         container.addClass("animated " + animIn).one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
             $(this).removeClass("animated " + animIn);

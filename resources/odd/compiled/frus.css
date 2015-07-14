@@ -24,9 +24,12 @@
 .head4 { font-weight: bold; }
 .hi1 { font-weight: bold; }
 .hi2 { font-style: italic; }
-.hi3 { font-style: italic; }
+.hi3 { font-variant: small-caps; }
+.hi4 { font-style: italic; }
+.hi5 { font-style: italic; }
 .l { margin-left: 1em; }
-.p { text-align: justify; }
+.p1 { text-align: center; }
+.p2 { text-align: justify; }
 .pb { display: block; margin-left: 4pt; color: grey; float: right; }
 .pb:before { content: '[Page '; }
 .pb:after { content: ']'; }

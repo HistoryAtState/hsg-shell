@@ -115,6 +115,12 @@
                     <model predicate="@rend = 'strong'" behaviour="inline">
                         <outputRendition>font-weight: bold;</outputRendition>
                     </model>
+                    <model predicate="@rend = 'italic'" behaviour="inline">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
+                    <model predicate="@rend = 'smallcaps'" behaviour="inline">
+                        <outputRendition>font-variant: small-caps;</outputRendition>
+                    </model>
                     <model predicate="@rendition" behaviour="inline" useSourceRendition="true">
                         <outputRendition>font-style: italic;</outputRendition>
                     </model>
@@ -128,6 +134,14 @@
                         <param name="label">@n</param>
                     </model>
                     <model behaviour="note"/>
+                </elementSpec>
+                <elementSpec mode="change" ident="p">
+                    <model predicate="@rend = 'center'" behaviour="paragraph" useSourceRendition="true">
+                        <outputRendition>text-align: center;</outputRendition>
+                    </model>
+                    <model behaviour="paragraph" useSourceRendition="true">
+                        <outputRendition>text-align: justify;</outputRendition>
+                    </model>
                 </elementSpec><!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
                     <model behaviour="inline"/>

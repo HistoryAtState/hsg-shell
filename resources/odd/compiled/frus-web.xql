@@ -123,13 +123,19 @@ declare function model:apply($config as map(*), $input as node()*) {
                 if (@rend = 'strong') then
                     html:inline($config, ., "hi1", .)
                 else
-                    if (@rendition) then
-                        html:inline($config, ., css:get-rendition(., "hi2"), .)
+                    if (@rend = 'italic') then
+                        html:inline($config, ., "hi2", .)
                     else
-                        if (not(@rendition)) then
+                        if (@rend = 'smallcaps') then
                             html:inline($config, ., "hi3", .)
                         else
-                            $config?apply($config, ./node())
+                            if (@rendition) then
+                                html:inline($config, ., css:get-rendition(., "hi4"), .)
+                            else
+                                if (not(@rendition)) then
+                                    html:inline($config, ., "hi5", .)
+                                else
+                                    $config?apply($config, ./node())
             case element(item) return
                 html:listItem($config, ., "item", .)
             case element(l) return
@@ -169,7 +175,10 @@ declare function model:apply($config as map(*), $input as node()*) {
             case element(orig) return
                 html:inline($config, ., "orig", .)
             case element(p) return
-                html:paragraph($config, ., css:get-rendition(., "p"), .)
+                if (@rend = 'center') then
+                    html:paragraph($config, ., css:get-rendition(., "p1"), .)
+                else
+                    html:paragraph($config, ., css:get-rendition(., "p2"), .)
             case element(pb) return
                 html:break($config, ., css:get-rendition(., "pb"), ., 'page', (concat(if(@n) then     concat(@n,' ') else '',if(@facs) then     concat('@',@facs) else '')))
             case element(publisher) return
