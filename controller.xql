@@ -50,7 +50,16 @@ else
     let $match := analyze-string($exist:path, "^/historicaldocuments/([^/]+)/?(.*)$")
     let $volume := $match//fn:group[@nr = "1"]/string()
     let $id := $match//fn:group[@nr = "2"]/string()
-    let $page := if (not($volume) and not($id)) then 'historicaldocuments.html' else if ($id and $id != "") then "index.html" else "volume.html"
+    let $page := 
+        (: volume interior page :)
+        if ($id and $id != "") then 
+            "volume-interior.html"
+        (: volume landing page :)
+        else if ($volume and $volume != "") then
+            "volume-landing.html" 
+        (: section landing page :)
+        else (: if (not($volume) and not($id)) then :)
+            'historicaldocuments.html' 
     let $log := console:log('volume: ' || $volume || ' id: ' || $id || ' page: ' || $page)
     return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
