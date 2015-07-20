@@ -18,7 +18,7 @@ declare option output:media-type "application/json";
  :)
 let $url := request:get-parameter("url", ())
 let $toc := boolean(request:get-parameter("toc", ()))
-let $match := analyze-string($url, "^/([^/]+)/?(.*)$")
+let $match := analyze-string($url, "^/historicaldocuments/([^/]+)/?(.*)$")
 let $volume := $match//fn:group[@nr = "1"]/string()
 let $id := $match//fn:group[@nr = "2"]/string()
 let $xml := pages:load-xml("div", $id, $volume)
