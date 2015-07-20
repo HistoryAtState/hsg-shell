@@ -39,7 +39,7 @@ function app:volumes($node as node(), $model as map(*), $volume as xs:string?) {
     order by $vol-id
     return
         <option>{ 
-            attribute value { $vol-id || "/" },
+            attribute value { "./historicaldocuments/" || $vol-id },
             $selected,
             $brief-title
         }</option>
