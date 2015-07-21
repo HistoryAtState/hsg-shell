@@ -36,6 +36,11 @@ body {
   list-style: none;
   padding-left: 0;
 }
+#person-panel li,
+#gloss-panel li {
+  margin-left: .5em;
+  text-indent: -0.5em;
+}
 #toc,
 #volume {
   -webkit-animation-duration: 400ms;
@@ -52,11 +57,12 @@ body {
 #toc .toc-inner ul,
 #volume .toc-inner ul {
   list-style: none;
-  padding-left: 2em;
-}
-#toc .toc-inner > ul,
-#volume .toc-inner > ul {
   padding-left: 0;
+}
+#toc .toc-inner li,
+#volume .toc-inner li {
+  margin-left: .5em;
+  text-indent: -0.5em;
 }
 #toc .highlight,
 #volume .highlight {
