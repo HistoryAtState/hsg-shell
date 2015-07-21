@@ -56,7 +56,7 @@ declare function toc:toc-div($node as element(tei:div), $current as element()?) 
             let $href := attribute href { $node/@xml:id }
             let $highlight := if ($node is $current) then 'highlight' else ()
             return
-                <a class="toc-link {$highlight}">
+                <a class="{string-join(('toc-link', $highlight), ' ')}">
                 {
                     $href,
                     toc:toc-head($node/tei:head[1]) 
