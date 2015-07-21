@@ -109,7 +109,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     if (parent::table) then
                         html:block($config, ., "head2", .)
                     else
-                        if (parent::lg) then
+                        if (parent::list/@type = ('participants', 'to', 'from', 'subject')) then
                             html:block($config, ., "head3", .)
                         else
                             if (parent::list) then
@@ -147,13 +147,13 @@ declare function model:apply($config as map(*), $input as node()*) {
             case element(lg) return
                 html:block($config, ., "lg", .)
             case element(list) return
-                if (@rendition) then
-                    html:list($config, ., css:get-rendition(., "list1"), item)
+                if (@rend = 'bulleted') then
+                    html:list($config, ., "list1", .)
                 else
-                    if (not(@rendition)) then
-                        html:list($config, ., "list2", item)
+                    if (@type = ('participants', 'to', 'from', 'subject')) then
+                        html:list($config, ., "list2", .)
                     else
-                        $config?apply($config, ./node())
+                        html:list($config, ., "list3", .)
             case element(listBibl) return
                 if (bibl) then
                     html:list($config, ., "listBibl1", bibl)
@@ -166,10 +166,10 @@ declare function model:apply($config as map(*), $input as node()*) {
             case element(name) return
                 html:inline($config, ., "name", .)
             case element(note) return
-                if (@place) then
-                    html:note($config, ., "note1", ., @place, @n)
+                if (@rend = 'inline') then
+                    html:paragraph($config, ., "note1", .)
                 else
-                    html:note($config, ., "note2", ., (), ())
+                    html:note($config, ., "note2", ., "foot", @n/string())
             case element(num) return
                 html:inline($config, ., "num", .)
             case element(orig) return
@@ -348,13 +348,10 @@ declare function model:apply($config as map(*), $input as node()*) {
             case element(dateline) return
                 html:block($config, ., "dateline", .)
             case element(div) return
-                if (@type='title_page') then
-                    html:block($config, ., "div1", .)
+                if (@type = ('compilation', 'chapter', 'subchapter')) then
+                    ext-html:document-list($config, ., "div1")
                 else
-                    if (parent::body or parent::front or parent::back) then
-                        html:section($config, ., "div2", .)
-                    else
-                        html:block($config, ., "div3", .)
+                    html:block($config, ., "div2", .)
             case element(docAuthor) return
                 if (ancestor::teiHeader) then
                     (: Omit if located in teiHeader. :)

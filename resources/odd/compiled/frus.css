@@ -20,7 +20,7 @@
 .gap3:before { content: '[...]'; }
 .head1 { font-style: italic; }
 .head2 { font-style: italic; }
-.head3 { font-style: italic; }
+.head3 { margin-left: -2.8em; }
 .head4 { font-weight: bold; }
 .hi1 { font-weight: bold; }
 .hi2 { font-style: italic; }
@@ -28,8 +28,11 @@
 .hi4 { font-style: italic; }
 .hi5 { font-style: italic; }
 .l { margin-left: 1em; }
+.list1 { list-style-type: disc; }
+.list2 { list-style-type: none; line-height: 1.3em; }
+.list3 { list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0 }
+.note1 { font-size: smaller; }
 .p1 { text-align: center; }
-.p2 { text-align: justify; }
 .pb { display: block; margin-left: 4pt; color: grey; float: right; }
 .pb:before { content: '[Page '; }
 .pb:after { content: ']'; }
@@ -58,7 +61,7 @@
 .castList { list-style: ordered; }
 .argument { margin-bottom: 0.5em; }
 .closer { margin-top: 1em; margin-left: 1em; margin-left: 1em; }
-.div1 { border: 1px solid black; padding: 5px; }
+.dateline { text-align: right; }
 .docTitle2 { font-size: larger; }
 .floatingText { margin: 6pt; border: solid black 1pt; }
 .signed1 { text-align: right; }
