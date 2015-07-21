@@ -141,8 +141,8 @@
                     <model predicate="@rend = 'center'" behaviour="paragraph" useSourceRendition="true">
                         <outputRendition>text-align: center;</outputRendition>
                     </model>
-                    <model behaviour="paragraph" useSourceRendition="true">
-                        <outputRendition>text-align: justify;</outputRendition>
+                    <model behaviour="paragraph" useSourceRendition="true"/>
+                </elementSpec>
                 <elementSpec mode="change" ident="dateline">
                     <model behaviour="block">
                         <outputRendition>text-align: right;</outputRendition>
