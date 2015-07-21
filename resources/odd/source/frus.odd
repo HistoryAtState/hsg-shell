@@ -149,7 +149,28 @@
                         <outputRendition>text-align: right;</outputRendition>
                     </model>
                 </elementSpec>
+                <elementSpec mode="change" ident="list">
+                    <model predicate="@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
+                        <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
                     </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="head">
+                    <model predicate="parent::figure" behaviour="block">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
+                    <model predicate="parent::table" behaviour="block">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
+                    <model predicate="parent::list/@type = ('participants', 'to', 'from', 'subject')" behaviour="block">
+                        <outputRendition>margin-left: -2.8em;</outputRendition>
+                    </model>
+                    <model predicate="parent::list" behaviour="block">
+                        <outputRendition>font-weight: bold;</outputRendition>
+                    </model>
+                    <model predicate="parent::div" behaviour="heading">
+                        <param name="level">count(ancestor::div)</param>
+                    </model>
+                    <model behaviour="block"/>
                 </elementSpec><!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
                     <model behaviour="inline"/>
