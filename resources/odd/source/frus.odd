@@ -132,11 +132,10 @@
                     <model predicate="@rend = 'inline'" behaviour="paragraph">
                         <outputRendition>font-size: smaller;</outputRendition>
                     </model>
-                    <model predicate="@place" behaviour="note">
-                        <param name="place">@place</param>
-                        <param name="label">@n</param>
+                    <model behaviour="note">
+                        <param name="place">"foot"</param>
+                        <param name="label">@n/string()</param>
                     </model>
-                    <model behaviour="note"/>
                 </elementSpec>
                 <elementSpec mode="change" ident="p">
                     <model predicate="@rend = 'center'" behaviour="paragraph" useSourceRendition="true">
