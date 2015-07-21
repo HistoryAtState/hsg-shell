@@ -2118,8 +2118,8 @@ relatedItem element must be empty</sch:report>
                     <model predicate="parent::table" behaviour="block">
                         <outputRendition>font-style: italic;</outputRendition>
                     </model>
-                    <model predicate="parent::lg" behaviour="block">
-                        <outputRendition>font-style: italic;</outputRendition>
+                    <model predicate="parent::list/@type = ('participants', 'to', 'from', 'subject')" behaviour="block">
+                        <outputRendition>margin-left: -2.8em;</outputRendition>
                     </model>
                     <model predicate="parent::list" behaviour="block">
                         <outputRendition>font-weight: bold;</outputRendition>
@@ -2337,11 +2337,14 @@ relatedItem element must be empty</sch:report>
                             </valList>
                         </attDef>
                     </attList>
-                    <model predicate="@rendition" behaviour="list" useSourceRendition="true">
-                        <param name="content">item</param>
+                    <model predicate="@rend = 'bulleted'" behaviour="list">
+                        <outputRendition>list-style-type: disc;</outputRendition>
                     </model>
-                    <model predicate="not(@rendition)" behaviour="list">
-                        <param name="content">item</param>
+                    <model predicate="@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
+                        <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
+                    </model>
+                    <model behaviour="list">
+                        <outputRendition>list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0</outputRendition>
                     </model>
                 </elementSpec>
                 <elementSpec rend="change" module="core" ident="listBibl">
@@ -2469,11 +2472,13 @@ relatedItem element must be empty</sch:report>
                             </datatype>
                         </attDef>
                     </attList>
-                    <model predicate="@place" behaviour="note">
-                        <param name="place">@place</param>
-                        <param name="label">@n</param>
+                    <model predicate="@rend = 'inline'" behaviour="paragraph">
+                        <outputRendition>font-size: smaller;</outputRendition>
                     </model>
-                    <model behaviour="note"/>
+                    <model behaviour="note">
+                        <param name="place">"foot"</param>
+                        <param name="label">@n/string()</param>
+                    </model>
                 </elementSpec>
                 <elementSpec rend="change" module="core" ident="num">
                     <classes>
@@ -2533,9 +2538,7 @@ relatedItem element must be empty</sch:report>
                     <model predicate="@rend = 'center'" behaviour="paragraph" useSourceRendition="true">
                         <outputRendition>text-align: center;</outputRendition>
                     </model>
-                    <model behaviour="paragraph" useSourceRendition="true">
-                        <outputRendition>text-align: justify;</outputRendition>
-                    </model>
+                    <model behaviour="paragraph" useSourceRendition="true"/>
                 </elementSpec>
                 <elementSpec rend="change" module="core" ident="pb">
                     <classes>
@@ -6010,7 +6013,9 @@ The @spanTo attribute of <name/> is required.</assert>
                         </zeroOrMore>
                     </content>
                     <attList/>
-                    <model behaviour="block"/>
+                    <model behaviour="block">
+                        <outputRendition>text-align: right;</outputRendition>
+                    </model>
                 </elementSpec>
                 <elementSpec rend="change" module="textstructure" ident="div">
                     <classes>
@@ -6072,10 +6077,7 @@ The @spanTo attribute of <name/> is required.</assert>
                         </group>
                     </content>
                     <attList/>
-                    <model predicate="@type='title_page'" behaviour="block">
-                        <outputRendition>border: 1px solid black; padding: 5px;</outputRendition>
-                    </model>
-                    <model behaviour="section" predicate="parent::body or parent::front or parent::back"/>
+                    <model predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
                     <model behaviour="block"/>
                 </elementSpec>
                 <elementSpec rend="change" module="textstructure" ident="docAuthor">

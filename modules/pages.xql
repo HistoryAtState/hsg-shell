@@ -197,26 +197,8 @@ declare function pages:get-previous($div as element(tei:div)?) {
 declare function pages:get-content($div as element()) {
     if ($div instance of element(tei:teiHeader)) then 
         $div
-    else
-        if ($div instance of element(tei:div)) then
-            if ($div/tei:div) then
-                if (count(($div/tei:div[1])/preceding-sibling::*) < 5) then
-                    let $child := $div/tei:div[1]
-                    return
-                        element { node-name($div) } {
-                            $div/@*,
-                            $child/preceding-sibling::*,
-                            pages:get-content($child)
-                        }
-                else
-                    element { node-name($div) } {
-                        $div/@*,
-                        $div/tei:div[1]/preceding-sibling::*
-                    }
-            else
-                $div
-        else 
-            $div
+    else (: if ($div instance of element(tei:div)) then :)
+        $div
 };
 
 declare

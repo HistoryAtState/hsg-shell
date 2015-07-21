@@ -31,6 +31,15 @@ declare function toc:toc($root as node(), $show-heading as xs:boolean?, $highlig
     </div>
 };
 
+declare function toc:toc-inner($root as node(), $show-heading as xs:boolean?) {
+    <div class="toc-inner">
+        { if ($show-heading) then <h2>{toc:volume-title($root, "volume")}</h2> else () }
+        <ul>{
+            toc:toc-passthru($root, ())
+        }</ul>
+    </div>
+};
+
 declare function toc:toc-passthru($node as item()*, $current as element()?) {
     let $divs := $node//tei:div[empty(ancestor::tei:div) or ancestor::tei:div[1] is $node]
     return
@@ -129,4 +138,79 @@ declare function toc:href($node as element(tei:div)) {
         )
         ,
         '/')
+};
+
+declare function toc:document-list($config as map(*), $node as element(tei:div), $class) {
+    let $head := $node/tei:head[1]
+    let $head-sans-notes := toc:remove-nodes-deep($head, $head//tei:note)
+    let $child-documents-to-show := $node/tei:div[@type='document']
+    let $has-inner-sections := $node/tei:div[@type != 'document']
+    return
+        <div class="{$class}">
+            <h3>{
+                if ($head-sans-notes) then $config?apply-children($config, $head-sans-notes, $head-sans-notes) else ()
+                ,
+                for $note in $head//tei:note
+                return
+                    <sup>{$note/@n/string()}</sup>
+            }</h3>
+            {
+                for $note in $head//tei:note
+                return
+                    <p>{
+                        if ($note/@n) then 
+                            <sup>{concat($note/@n, '. ')}</sup> 
+                        else 
+                            ()
+                        ,
+                        if ($note) then $config?apply-children($config, $note, $note)[not(. instance of attribute())] else ()
+                    }</p>
+            ,
+            (: for example of chapter div without no documents but a child paragraph, see frus1952-54v08/comp3
+                for an example of a subchapter div with a table, see frus1945Malta/ch8subch44 :)
+            let $child-nodes := $node/node()
+            let $first-head := index-of($child-nodes, $node/tei:head[1])
+            let $first-div := index-of($child-nodes, $node/tei:div[1])
+            let $nodes-to-render := subsequence($child-nodes, $first-head + 1, $first-div - $first-head - 1)
+            return
+                if ($nodes-to-render) then $config?apply-children($config, $nodes-to-render, $nodes-to-render) else ()
+            ,
+            for $document in $child-documents-to-show
+            let $docnumber := $document/@n
+            let $docid := $document/@xml:id
+            let $doctitle := $document/tei:head[1]
+            let $doctitle-sans-note := toc:remove-nodes-deep($doctitle, $doctitle//tei:note)
+            let $docsource := $document//tei:note[@type='source'][1]
+            let $docdateline := subsequence($document//tei:dateline, 1, 1)
+            let $docsummary := $document//tei:note[@type='summary']
+            let $href := toc:href($document)
+            return
+                (
+                <hr class="list"/>,
+                <h4><a href="{$href}">{
+                	(: show a bracketed document number for volumes that don't use document numbers :)
+                	if (not(starts-with($document/tei:head, concat($docnumber, '.')))) then 
+                		concat('[', $docnumber, '] ') 
+                	else 
+                		concat($docnumber, '. ')
+                	, 
+                	if ($doctitle-sans-note) then $config?apply-children($config, $doctitle-sans-note, $doctitle-sans-note) else ()
+                }</a></h4>,
+                if ($docdateline) then <p class="dateline">{$config?apply-children($config, $docdateline, $docdateline)}</p> else (),
+                if ($docsummary) then <p>{$config?apply-children($config, $docsummary, $docsummary)}</p> else (),
+                if ($docsource) then <p class="sourcenote">{$config?apply-children($config, $docsource, $docsource)}</p> else ()
+                )
+            ,
+            if ($has-inner-sections) then
+                (
+                <hr/>
+                ,
+                <div>
+                    <h4>Contents</h4>
+                    <div style="padding-left: 1em">{toc:toc-inner($node, false())}</div>
+                </div>
+                )
+            else ()
+            }
+        </div>
 };
