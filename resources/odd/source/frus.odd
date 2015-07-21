@@ -144,6 +144,11 @@
                     </model>
                     <model behaviour="paragraph" useSourceRendition="true">
                         <outputRendition>text-align: justify;</outputRendition>
+                <elementSpec mode="change" ident="dateline">
+                    <model behaviour="block">
+                        <outputRendition>text-align: right;</outputRendition>
+                    </model>
+                </elementSpec>
                     </model>
                 </elementSpec><!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
