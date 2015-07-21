@@ -53,7 +53,7 @@ declare function toc:toc-div($node as element(tei:div), $current as element()?) 
     if (not($node/@xml:id = $sections-to-suppress) and not($node/@type = 'document')) then
         <li>
             {
-            let $href := attribute href { $node/@xml:id }
+            let $href := attribute href { toc:href($node) }
             let $highlight := if ($node is $current) then 'highlight' else ()
             return
                 <a class="{string-join(('toc-link', $highlight), ' ')}">
@@ -112,4 +112,21 @@ declare function toc:toc-head($node as element(tei:head)) {
     return
         pmu:process(odd:get-compiled($config:odd-source, $config:odd, $config:odd-compiled), $head-sans-note/node(), 
             $config:odd-compiled, "web", "../generated", $config:module-config)
+};
+
+(: construct link to a FRUS div :)
+declare function toc:href($node as element(tei:div)) {
+    string-join(
+        (
+            (: use method from pages:app-root for the following 2 items :)
+            request:get-context-path(),
+            substring-after($config:app-root, "/db/"),
+            (: hard code section url fragment :)
+            'historicaldocuments',
+            (: TODO replace substring/util:document-name with root($node)/@xml:id when volumes conform to this :)
+            substring-before(util:document-name($node), '.xml'),
+            $node/@xml:id
+        )
+        ,
+        '/')
 };
