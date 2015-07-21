@@ -149,8 +149,14 @@
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="list">
+                    <model predicate="@rend = 'bulleted'" behaviour="list">
+                        <outputRendition>list-style-type: disc;</outputRendition>
+                    </model>
                     <model predicate="@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
                         <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
+                    </model>
+                    <model behaviour="list">
+                        <outputRendition>list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0</outputRendition>
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="head">
