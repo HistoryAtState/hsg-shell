@@ -176,6 +176,10 @@
                         <param name="level">count(ancestor::div)</param>
                     </model>
                     <model behaviour="block"/>
+                </elementSpec>
+                <elementSpec ident="div" mode="change">
+                    <model predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
+                    <model behaviour="block"/>
                 </elementSpec><!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
                     <model behaviour="inline"/>
