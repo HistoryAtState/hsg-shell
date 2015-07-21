@@ -129,6 +129,9 @@
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="note">
+                    <model predicate="@rend = 'inline'" behaviour="paragraph">
+                        <outputRendition>font-size: smaller;</outputRendition>
+                    </model>
                     <model predicate="@place" behaviour="note">
                         <param name="place">@place</param>
                         <param name="label">@n</param>
