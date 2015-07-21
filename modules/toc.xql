@@ -100,7 +100,7 @@ declare function toc:remove-nodes-deep($nodes as node()*, $nodes-to-remove as no
         else
             typeswitch (.)
                 case element() return
-                    toc:remove-nodes-deep(node(), $nodes-to-remove)
+                    element {local-name(.)} {toc:remove-nodes-deep(./node(), $nodes-to-remove)}
                 default return
                     .
     )
