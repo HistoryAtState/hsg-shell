@@ -148,7 +148,7 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
     return
         <div class="{$class}">
             <h3>{
-                if ($head-sans-notes) then $config?apply-children($config, $head-sans-notes, $head-sans-notes) else ()
+                $config?apply-children($config, $head-sans-notes, $head-sans-notes)
                 ,
                 for $note in $head//tei:note
                 return
@@ -173,7 +173,7 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
             let $first-div := index-of($child-nodes, $node/tei:div[1])
             let $nodes-to-render := subsequence($child-nodes, $first-head + 1, $first-div - $first-head - 1)
             return
-                if ($nodes-to-render) then $config?apply-children($config, $nodes-to-render, $nodes-to-render) else ()
+                if ($nodes-to-render) then $config?apply-children($config, $nodes-to-render, $nodes-to-render)[not(. instance of attribute())] (: predicate needed to prevent "cannot have an attribute after an element" error :) else ()
             ,
             for $document in $child-documents-to-show
             let $docnumber := $document/@n
