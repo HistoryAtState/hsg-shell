@@ -180,6 +180,16 @@
                 <elementSpec ident="div" mode="change">
                     <model predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
                     <model behaviour="block"/>
+                </elementSpec>
+                <elementSpec ident="ref" mode="change">
+                    <model behaviour="ref"/>
+                </elementSpec>
+                <elementSpec ident="pb" mode="change">
+                    <model behaviour="link">
+                        <param name="content">concat('[Page ', @n, ']')</param>
+                        <param name="link">@xml:id</param><!--<param name="link">concat('http://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
+                        <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
+                    </model>
                 </elementSpec><!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
                     <model behaviour="inline"/>

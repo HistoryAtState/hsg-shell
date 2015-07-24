@@ -180,7 +180,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                 else
                     html:paragraph($config, ., css:get-rendition(., "p2"), .)
             case element(pb) return
-                html:break($config, ., css:get-rendition(., "pb"), ., 'page', (concat(if(@n) then     concat(@n,' ') else '',if(@facs) then     concat('@',@facs) else '')))
+                html:link($config, ., "pb", concat('[Page ', @n, ']'), @xml:id)
             case element(publisher) return
                 html:inline($config, ., "publisher", .)
             case element(pubPlace) return
@@ -201,13 +201,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     (: If it is inside a paragraph then it is inline, otherwise it is block level :)
                     html:block($config, ., css:get-rendition(., "quote2"), .)
             case element(ref) return
-                if (not(@target)) then
-                    html:inline($config, ., "ref1", .)
-                else
-                    if (not(text())) then
-                        html:link($config, ., "ref2", @target, @target)
-                    else
-                        html:link($config, ., "ref3", ., @target)
+                ext-html:ref($config, ., "ref")
             case element(reg) return
                 html:inline($config, ., "reg", .)
             case element(rs) return

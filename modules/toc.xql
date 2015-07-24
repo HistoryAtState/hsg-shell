@@ -125,19 +125,31 @@ declare function toc:toc-head($node as element(tei:head)) {
 
 (: construct link to a FRUS div :)
 declare function toc:href($node as element(tei:div)) {
-    string-join(
-        (
-            (: use method from pages:app-root for the following 2 items :)
-            request:get-context-path(),
-            substring-after($config:app-root, "/db/"),
-            (: hard code section url fragment :)
-            'historicaldocuments',
-            (: TODO replace substring/util:document-name with root($node)/@xml:id when volumes conform to this :)
-            substring-before(util:document-name($node), '.xml'),
-            $node/@xml:id
-        )
+    let $volume := 
+        (: TODO replace substring/util:document-name with root($node)/@xml:id when volumes conform to this :)
+        substring-before(util:document-name($node), '.xml')
+    let $id := $node/@xml:id
+    return
+        toc:href($volume, $id, ())
+};
+
+declare function toc:href($volume as xs:string, $id as xs:string*, $fragment as xs:string*) {
+    concat(
+        string-join(
+            (
+                (: use method from pages:app-root for the following 2 items :)
+                request:get-context-path(),
+                substring-after($config:app-root, "/db/"),
+                (: hard code section url fragment :)
+                'historicaldocuments',
+                $volume,
+                $id
+            )
+            ,
+            '/')
         ,
-        '/')
+        if ($fragment) then concat('#', $fragment) else ()
+    )
 };
 
 declare function toc:document-list($config as map(*), $node as element(tei:div), $class) {

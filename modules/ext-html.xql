@@ -26,3 +26,21 @@ declare function pmf:list-from-items($config as map(*), $node as element(), $cla
 declare function pmf:document-list($config as map(*), $node as element(), $class as xs:string+) {
     toc:document-list($config, $node, $class)
 };
+
+(: turn ref/@target into link. TODO extend to footnotes, etc. :)
+declare function pmf:ref($config as map(*), $node as element(), $class as xs:string+) {
+    let $target := $node/@target
+    let $href :=
+        if (matches($target, '^http')) then
+            $target
+        else if (matches($target, '^frus')) then
+            if (contains($target, '#')) then
+                toc:href(substring-before($target, '#'), substring-after($target, '#'), ())
+            else
+                toc:href($target, (), ())
+        else
+            $target
+    return
+        <a href="{$href}">{$config?apply-children($config, $node, .)}</a>
+};
+

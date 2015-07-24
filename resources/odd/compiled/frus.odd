@@ -2550,7 +2550,7 @@ relatedItem element must be empty</sch:report>
                         <memberOf key="att.breaking"/>
                     </classes>
                     <content>
-                        <empty xmlns="http://relaxng.org/ns/structure/1.0"/>
+                        <rng:empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
                     </content>
                     <constraintSpec ident="pbposition" scheme="isoschematron">
                         <constraint>
@@ -2558,17 +2558,10 @@ relatedItem element must be empty</sch:report>
                         </constraint>
                     </constraintSpec>
                     <attList/>
-                    <model behaviour="break" useSourceRendition="true">
-                        <param name="type">'page'</param>
-                        <param name="label">(concat(if(@n) then     concat(@n,' ') else '',if(@facs) then     concat('@',@facs) else ''))</param>
-                        <outputRendition>
-	  display: block;
-	  margin-left: 4pt;
-	  color: grey;
-	  float: right;
-	</outputRendition>
-                        <outputRendition scope="before">content: '[Page ';</outputRendition>
-                        <outputRendition scope="after">content: ']';</outputRendition>
+                    <model behaviour="link">
+                        <param name="content">concat('[Page ', @n, ']')</param>
+                        <param name="link">@xml:id</param>
+                        <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
                     </model>
                 </elementSpec>
                 <elementSpec rend="change" module="core" ident="publisher">
@@ -2680,14 +2673,7 @@ relatedItem element must be empty</sch:report>
                         </constraint>
                     </constraintSpec>
                     <attList/>
-                    <model behaviour="inline" predicate="not(@target)"/>
-                    <model predicate="not(text())" behaviour="link">
-                        <param name="content">@target</param>
-                        <param name="link">@target</param>
-                    </model>
-                    <model behaviour="link">
-                        <param name="link">@target</param>
-                    </model>
+                    <model behaviour="ref"/>
                 </elementSpec>
                 <elementSpec rend="change" module="core" ident="reg">
                     <classes>

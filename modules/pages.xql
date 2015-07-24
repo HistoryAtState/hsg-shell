@@ -85,7 +85,12 @@ function pages:view($node as node(), $model as map(*), $view as xs:string) {
         else
             $model?data//*:body/*
     return
-        pages:process-content($config:odd, $xml)
+        if ($xml instance of element(tei:pb)) then
+            let $href := concat('http://static.history.state.gov/frus/', root($xml)/tei:TEI/@xml:id, '/medium/', $xml/@facs, '.png')
+            return
+                <img src="{$href}"/>
+        else
+            pages:process-content($config:odd, $xml)
 };
 
 declare
@@ -158,7 +163,7 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
         else
             let $parent := $div/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
             let $prevDiv := $div/preceding::tei:div[1]
-            let $prevDiv := pages:get-previous(if ($parent and (empty($prevDiv) or $div/.. >> $prevDiv)) then $div/.. else $prevDiv)
+            let $prevDiv := pages:get-previous(if ($parent and (empty($prevDiv) or $div/.. >> $prevDiv) and not($node/self::tei:pb)) then $div/.. else $prevDiv)
             let $nextDiv := pages:get-next($div)
         (:        ($div//tei:div[not(*[1] instance of element(tei:div))] | $div/following::tei:div)[1]:)
             return
@@ -171,7 +176,9 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
 };
 
 declare function pages:get-next($div as element()) {
-    if ($div/tei:div) then
+    if ($div/self::tei:pb) then
+        $div/following::tei:pb[1]
+    else if ($div/tei:div) then
         if (count(($div/tei:div[1])/preceding-sibling::*) < 5) then
             pages:get-next($div/tei:div[1])
         else
@@ -180,8 +187,10 @@ declare function pages:get-next($div as element()) {
         $div/following::tei:div[1]
 };
 
-declare function pages:get-previous($div as element(tei:div)?) {
-    if (empty($div)) then
+declare function pages:get-previous($div as element()?) {
+    if ($div/self::tei:pb) then
+        $div/preceding::tei:pb[1]
+    else if (empty($div)) then
         ()
     else
         if (

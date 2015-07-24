@@ -34,8 +34,6 @@
 .note1 { font-size: smaller; }
 .p1 { text-align: center; }
 .pb { display: block; margin-left: 4pt; color: grey; float: right; }
-.pb:before { content: '[Page '; }
-.pb:after { content: ']'; }
 .q1 { margin-left: 10px; margin-right: 10px; }
 .q2:before { content: '‘'; }
 .q2:after { content: '’'; }
