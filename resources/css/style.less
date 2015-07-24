@@ -5,6 +5,10 @@
 @colorHead: #911625;
 
 @backgroundSidebar: #dddde8;
+@navbar-height:37px;
+
+@dropdown-color:#000066;
+@dropdown-background:#dddde8;
 
 .baseFont {
     font-family: @baseFont;
@@ -20,8 +24,104 @@
 
 body {
     .baseFont;
+    background:#ffffff url("//s3.amazonaws.com/static.history.state.gov/images/background.gif") repeat-x scroll 0 0;
 }
 
+input{
+    // padding:0;
+    height:20px;
+}
+
+
+header{
+    background: #ffffff none repeat scroll 0 0;
+    border-color: #dddde8;
+    border-style: solid;
+    border-width: 1px;
+    margin-top: 15px;
+    padding: 10px 0 20px;
+}
+
+.banner{
+    background-color:white; 
+    max-width:100%;
+    border-collapse:collapse;
+    padding-bottom:15px;
+}
+.banner__search{
+    text-align:right;
+    margin-right:20px;
+}
+.gobox{
+    line-height:0.4;
+    padding:7px;
+    margin-left:2px;
+}
+
+.searchbox p{
+    font-size:0.825em;
+}
+
+.navbar{
+    background: #000066 url("//s3.amazonaws.com/static.history.state.gov/images/navbar3.png") repeat-x scroll 0 0;
+    padding: 0;
+    color:white;
+    margin-bottom:0;
+    min-height:@navbar-height;
+}
+#main-nav{
+    max-height: @navbar-height;
+    height:@navbar-height;    
+}
+.navbar .container-fluid{
+    height:@navbar-height;
+}
+.navbar-inner {
+    min-height: 0px;
+}
+.navbar-nav{
+    margin-top:-2px;
+}
+#main-nav > .container-fluid{
+    padding-left:0;
+}
+.navbar-brand, .navbar-nav li a{
+    height:@navbar-height;
+    line-height:@navbar-height;
+    padding-top:0;
+    color:white;
+}
+.navbar-default .navbar-nav > .dropdown.open a{
+    background:transparent;
+    color:@dropdown-color;
+}
+.navbar-default .navbar-nav > .dropdown.open .dropdown-menu a:hover{
+    background-color:#f3f3f3;
+}
+.navbar-collapse{
+    padding-left:0;
+}
+
+.dropdown-menu{
+    background-color:@dropdown-background;
+}
+// .dropdown-menu li{
+//     border-bottom:1px solid;
+// }
+
+#content{
+    background-color:white;
+    border-color: #dddde8;
+    border-style: solid;
+    border-width: 1px;
+    padding:10px 0 0;
+    
+    .row{
+        margin-left:0;
+        margin-right:0;
+    }
+
+}
 #volume {
     .titleStmt1 {
         margin-top: 0;
