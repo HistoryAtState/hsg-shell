@@ -187,7 +187,7 @@
                 <elementSpec ident="pb" mode="change">
                     <model behaviour="link">
                         <param name="content">concat('[Page ', @n, ']')</param>
-                        <param name="link">concat('http://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param><!-- TODO swap with this when we've added full handing for pg_ views --><!--<param name="link">@xml:id</param>-->
+                        <param name="link">@xml:id</param><!--<param name="link">concat('http://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
                         <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
                     </model>
                 </elementSpec><!-- Elements not in TEI Simple -->

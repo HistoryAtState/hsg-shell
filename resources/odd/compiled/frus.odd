@@ -2560,7 +2560,7 @@ relatedItem element must be empty</sch:report>
                     <attList/>
                     <model behaviour="link">
                         <param name="content">concat('[Page ', @n, ']')</param>
-                        <param name="link">concat('http://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>
+                        <param name="link">@xml:id</param>
                         <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
                     </model>
                 </elementSpec>
