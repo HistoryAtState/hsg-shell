@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.w3.org/1999/xhtml" data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
+    <div class="row" data-template="pages:load">
+        <div class="col-md-3">
+            <div class="row">
+                <div id="sections" class="col-md-12 panel panel-default">
+                    <h2>Countries</h2>
+                    <label for="select-volume">Countries</label>
+                    <select id="select-volume" name="volumes" data-template="app:countries" class="form-control async">
+                        <option>Choose Country</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" id="volume">
+            <div id="content-inner">
+                <h1>Countries</h1>
+                <p>Please select a country from the Countries dropdown menu</p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="resources/scripts/app.js"/>
+</div>

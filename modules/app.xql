@@ -102,3 +102,21 @@ declare function app:get-gloss($root as element(), $ids as xs:string*) {
     return
         <li><a href="terms{$id}" data-toggle="tooltip" title="{normalize-space(string-join($term/../following-sibling::text()))}">{$term/text()}</a></li>
 };
+
+declare
+    %templates:wrap
+function app:countries($node as node(), $model as map(*), $country as xs:string?) {
+    for $c in ('china', 'england', 'iran')
+    let $selected := if ($c = $country) then attribute selected {"selected"} else ()
+    let $brief-title := concat(upper-case(substring($c, 1, 1)), substring($c, 2))
+    return
+        <option>{ 
+            attribute value { "./countries/" || $c },
+            $selected,
+            $brief-title
+        }</option>
+};
+
+declare function app:uri($node as node(), $model as map(*), $uri as xs:string?) {
+    <code>{$uri}</code>
+};
