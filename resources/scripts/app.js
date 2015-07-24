@@ -42,14 +42,20 @@ $(document).ready(function() {
                         $("#navigation-title").text(data.title);
                     }
                     if (data.persons) {
-                        $("#person-panel ul").replaceWith(data.persons);
+                        $("#person-panel ul").replaceWith(data.persons).show();
                         initNavigation("#person-panel a");
                         $('#person-panel a').tooltip({placement: "auto top"});
+                        $("#person-panel").show();
+                    } else {
+                        $("#person-panel").hide();
                     }
                     if (data.gloss) {
                         $("#gloss-panel ul").replaceWith(data.gloss);
                         initNavigation("#gloss-panel a");
                         $('#gloss-panel a').tooltip({placement: "auto top"});
+                        $("#gloss-panel").show();
+                    } else {
+                        $("#gloss-panel").hide();
                     }
                     if (data.toc) {
                         $("#toc").addClass("animated fadeOut")
