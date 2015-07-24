@@ -180,6 +180,9 @@
                 <elementSpec ident="div" mode="change">
                     <model predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
                     <model behaviour="block"/>
+                </elementSpec>
+                <elementSpec ident="ref" mode="change">
+                    <model behaviour="ref"/>
                 </elementSpec><!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
                     <model behaviour="inline"/>

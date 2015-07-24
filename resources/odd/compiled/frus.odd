@@ -2680,14 +2680,7 @@ relatedItem element must be empty</sch:report>
                         </constraint>
                     </constraintSpec>
                     <attList/>
-                    <model behaviour="inline" predicate="not(@target)"/>
-                    <model predicate="not(text())" behaviour="link">
-                        <param name="content">@target</param>
-                        <param name="link">@target</param>
-                    </model>
-                    <model behaviour="link">
-                        <param name="link">@target</param>
-                    </model>
+                    <model behaviour="ref"/>
                 </elementSpec>
                 <elementSpec rend="change" module="core" ident="reg">
                     <classes>

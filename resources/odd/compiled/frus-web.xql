@@ -201,13 +201,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     (: If it is inside a paragraph then it is inline, otherwise it is block level :)
                     html:block($config, ., css:get-rendition(., "quote2"), .)
             case element(ref) return
-                if (not(@target)) then
-                    html:inline($config, ., "ref1", .)
-                else
-                    if (not(text())) then
-                        html:link($config, ., "ref2", @target, @target)
-                    else
-                        html:link($config, ., "ref3", ., @target)
+                ext-html:ref($config, ., "ref")
             case element(reg) return
                 html:inline($config, ., "reg", .)
             case element(rs) return
