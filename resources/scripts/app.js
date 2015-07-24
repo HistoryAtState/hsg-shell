@@ -107,7 +107,7 @@ $(document).ready(function() {
     
     function highlightToc(activeId) {
         $("#toc li a").removeClass("highlight");
-        $("#toc li a[href='" + activeId + "']").addClass("highlight");
+        $("#toc-" + activeId).addClass("highlight");
     }
     
     function showContent(container, animIn, animOut, id) {

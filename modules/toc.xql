@@ -65,7 +65,7 @@ declare function toc:toc-div($node as element(tei:div), $current as element()?) 
             let $href := attribute href { toc:href($node) }
             let $highlight := if ($node is $current) then 'highlight' else ()
             return
-                <a class="{string-join(('toc-link', $highlight), ' ')}">
+                <a class="{string-join(('toc-link', $highlight), ' ')}" id="toc-{$node/@xml:id}">
                 {
                     $href,
                     toc:toc-head($node/tei:head[1]) 
@@ -181,8 +181,8 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
             (: for example of chapter div without no documents but a child paragraph, see frus1952-54v08/comp3
                 for an example of a subchapter div with a table, see frus1945Malta/ch8subch44 :)
             let $child-nodes := $node/node()
-            let $first-head := index-of($child-nodes, $node/tei:head[1])
-            let $first-div := index-of($child-nodes, $node/tei:div[1])
+            let $first-head := if ($node/tei:head) then index-of($child-nodes, $node/tei:head[1]) else 1
+            let $first-div := if ($node/tei:div) then index-of($child-nodes, $node/tei:div[1]) else 1
             let $nodes-to-render := subsequence($child-nodes, $first-head + 1, $first-div - $first-head - 1)
             return
                 if ($nodes-to-render) then $config?apply($config, $nodes-to-render) else ()
