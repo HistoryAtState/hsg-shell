@@ -180,7 +180,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                 else
                     html:paragraph($config, ., css:get-rendition(., "p2"), .)
             case element(pb) return
-                html:break($config, ., css:get-rendition(., "pb"), ., 'page', (concat(if(@n) then     concat(@n,' ') else '',if(@facs) then     concat('@',@facs) else '')))
+                html:link($config, ., "pb", concat('[Page ', @n, ']'), concat('http://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png'))
             case element(publisher) return
                 html:inline($config, ., "publisher", .)
             case element(pubPlace) return
