@@ -175,7 +175,7 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                         else 
                             ()
                         ,
-                        if ($note) then $config?apply($config, $note) else ()
+                        if ($note) then $config?apply($config, $note/node()) else ()
                     }</p>
             ,
             (: for example of chapter div without no documents but a child paragraph, see frus1952-54v08/comp3
