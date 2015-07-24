@@ -88,6 +88,7 @@ $(document).ready(function() {
                 html: true
             });
         });
+        initNavigation(".content .section-link");
     }
     
     function initNavigation(selector) {
@@ -197,7 +198,7 @@ $(document).ready(function() {
         });
     }
     
-    initNavigation("#content .page-nav, #toc .toc-link, #person-panel a, #gloss-panel a");
+    initNavigation("#content .page-nav, .content .section-link, #toc .toc-link, #person-panel a, #gloss-panel a");
     initContent();
     
     $('[data-toggle="tooltip"]').tooltip({placement: "auto top"});

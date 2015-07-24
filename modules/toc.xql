@@ -199,7 +199,7 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
             return
                 (
                 <hr class="list"/>,
-                <h4><a href="{$href}">{
+                <h4><a href="{$href}" class="section-link">{
                 	(: show a bracketed document number for volumes that don't use document numbers :)
                 	if (not(starts-with($document/tei:head, concat($docnumber, '.')))) then 
                 		concat('[', $docnumber, '] ') 
