@@ -65,7 +65,7 @@ declare function toc:toc-div($node as element(tei:div), $current as element()?) 
             let $href := attribute href { toc:href($node) }
             let $highlight := if ($node is $current) then 'highlight' else ()
             return
-                <a class="{string-join(('toc-link', $highlight), ' ')}">
+                <a class="{string-join(('toc-link', $highlight), ' ')}" id="toc-{$node/@xml:id}">
                 {
                     $href,
                     toc:toc-head($node/tei:head[1]) 
@@ -160,7 +160,7 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
     return
         <div class="{$class}">
             <h3>{
-                $config?apply-children($config, $head-sans-notes, $head-sans-notes)
+                $config?apply-children($config, $node, $head-sans-notes)
                 ,
                 for $note in $head//tei:note
                 return
@@ -175,17 +175,17 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                         else 
                             ()
                         ,
-                        if ($note) then $config?apply-children($config, $note, $note)[not(. instance of attribute())] else ()
+                        if ($note) then $config?apply($config, $note/node()) else ()
                     }</p>
             ,
             (: for example of chapter div without no documents but a child paragraph, see frus1952-54v08/comp3
                 for an example of a subchapter div with a table, see frus1945Malta/ch8subch44 :)
             let $child-nodes := $node/node()
-            let $first-head := index-of($child-nodes, $node/tei:head[1])
-            let $first-div := index-of($child-nodes, $node/tei:div[1])
+            let $first-head := if ($node/tei:head) then index-of($child-nodes, $node/tei:head[1]) else 1
+            let $first-div := if ($node/tei:div) then index-of($child-nodes, $node/tei:div[1]) else 1
             let $nodes-to-render := subsequence($child-nodes, $first-head + 1, $first-div - $first-head - 1)
             return
-                if ($nodes-to-render) then $config?apply-children($config, $nodes-to-render, $nodes-to-render)[not(. instance of attribute())] (: predicate needed to prevent "cannot have an attribute after an element" error :) else ()
+                if ($nodes-to-render) then $config?apply($config, $nodes-to-render) else ()
             ,
             for $document in $child-documents-to-show
             let $docnumber := $document/@n
@@ -199,18 +199,18 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
             return
                 (
                 <hr class="list"/>,
-                <h4><a href="{$href}">{
+                <h4><a href="{$href}" class="section-link">{
                 	(: show a bracketed document number for volumes that don't use document numbers :)
                 	if (not(starts-with($document/tei:head, concat($docnumber, '.')))) then 
                 		concat('[', $docnumber, '] ') 
                 	else 
                 		concat($docnumber, '. ')
                 	, 
-                	if ($doctitle-sans-note) then $config?apply-children($config, $doctitle-sans-note, $doctitle-sans-note) else ()
+                	if ($doctitle-sans-note) then $config?apply($config, $doctitle-sans-note) else ()
                 }</a></h4>,
-                if ($docdateline) then <p class="dateline">{$config?apply-children($config, $docdateline, $docdateline)}</p> else (),
-                if ($docsummary) then <p>{$config?apply-children($config, $docsummary, $docsummary)}</p> else (),
-                if ($docsource) then <p class="sourcenote">{$config?apply-children($config, $docsource, $docsource)}</p> else ()
+                if ($docdateline) then <p class="dateline">{$config?apply($config, $docdateline)}</p> else (),
+                if ($docsummary) then <p>{$config?apply($config, $docsummary)}</p> else (),
+                if ($docsource) then <p class="sourcenote">{$config?apply($config, $docsource)}</p> else ()
                 )
             ,
             if ($has-inner-sections) then

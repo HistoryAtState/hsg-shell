@@ -66,6 +66,16 @@ function app:administrations($node as node(), $model as map(*)) {
 
 declare
     %templates:wrap
+function app:hide-if-empty($node as node(), $model as map(*), $property as xs:string) {
+        if (empty($model($property))) then
+            attribute style { "display: none" }
+        else
+            (),
+        templates:process($node/node(), $model)
+};
+
+declare
+    %templates:wrap
 function app:facets($node as node(), $model as map(*)) {
     map {
         "persons": distinct-values($model?data//tei:persName/@corresp),

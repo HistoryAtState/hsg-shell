@@ -45,8 +45,14 @@ return
                 "title": pages:title($xml/ancestor-or-self::tei:TEI),
                 "toc": if ($toc) then toc:toc($xml, true(), true()) else (),
                 "tocCurrent": $xml/ancestor-or-self::tei:div[@type != "document"][1]/@xml:id/string(),
-                "persons": <ul>{app:get-persons($xml, distinct-values($xml//tei:persName/@corresp))}</ul>,
-                "gloss": <ul>{app:get-gloss($xml, distinct-values($xml//tei:gloss/@target))}</ul>,
+                "persons": 
+                    let $persons := app:get-persons($xml, distinct-values($xml//tei:persName/@corresp))
+                    return
+                        if ($persons) then <ul>{$persons}</ul> else (),
+                "gloss": 
+                    let $gloss := app:get-gloss($xml, distinct-values($xml//tei:gloss/@target))
+                    return
+                        if ($gloss) then <ul>{$gloss}</ul> else (),
                 "content": $html
             }
     else

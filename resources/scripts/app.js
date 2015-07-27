@@ -42,14 +42,20 @@ $(document).ready(function() {
                         $("#navigation-title").text(data.title);
                     }
                     if (data.persons) {
-                        $("#person-panel ul").replaceWith(data.persons);
+                        $("#person-panel ul").replaceWith(data.persons).show();
                         initNavigation("#person-panel a");
                         $('#person-panel a').tooltip({placement: "auto top"});
+                        $("#person-panel").show();
+                    } else {
+                        $("#person-panel").hide();
                     }
                     if (data.gloss) {
                         $("#gloss-panel ul").replaceWith(data.gloss);
                         initNavigation("#gloss-panel a");
                         $('#gloss-panel a').tooltip({placement: "auto top"});
+                        $("#gloss-panel").show();
+                    } else {
+                        $("#gloss-panel").hide();
                     }
                     if (data.toc) {
                         $("#toc").addClass("animated fadeOut")
@@ -88,6 +94,7 @@ $(document).ready(function() {
                 html: true
             });
         });
+        initNavigation(".content .section-link");
     }
     
     function initNavigation(selector) {
@@ -107,7 +114,7 @@ $(document).ready(function() {
     
     function highlightToc(activeId) {
         $("#toc li a").removeClass("highlight");
-        $("#toc li a[href='" + activeId + "']").addClass("highlight");
+        $("#toc-" + activeId).addClass("highlight");
     }
     
     function showContent(container, animIn, animOut, id) {
@@ -197,7 +204,7 @@ $(document).ready(function() {
         });
     }
     
-    initNavigation("#content .page-nav, #toc .toc-link, #person-panel a, #gloss-panel a");
+    initNavigation("#content .page-nav, .content .section-link, #toc .toc-link, #person-panel a, #gloss-panel a");
     initContent();
     
     $('[data-toggle="tooltip"]').tooltip({placement: "auto top"});
