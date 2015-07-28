@@ -53,7 +53,12 @@ return
                     let $gloss := app:get-gloss($xml, distinct-values($xml//tei:gloss/@target))
                     return
                         if ($gloss) then <ul>{$gloss}</ul> else (),
-                "content": $html
+                "content": serialize($html, 
+                    <output:serialization-parameters xmlns:output="http://www.w3.org/2010/xslt-xquery-serialization">
+                      <output:omit-xml-declaration value="yes"/>
+                      <output:indent>no</output:indent>
+                    </output:serialization-parameters>
+                )
             }
     else
         map { "error": "Not found" }
