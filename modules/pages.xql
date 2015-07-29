@@ -85,12 +85,7 @@ function pages:view($node as node(), $model as map(*), $view as xs:string) {
         else
             $model?data//*:body/*
     return
-        if ($xml instance of element(tei:pb)) then
-            let $href := concat('http://static.history.state.gov/frus/', root($xml)/tei:TEI/@xml:id, '/medium/', $xml/@facs, '.png')
-            return
-                <img src="{$href}"/>
-        else
-            pages:process-content($config:odd, $xml)
+        pages:process-content($config:odd, $xml)
 };
 
 declare
@@ -103,7 +98,13 @@ function pages:header($node as node(), $model as map(*)) {
 
 declare function pages:process-content($odd as xs:string, $xml as element()*) {
 	let $html :=
-        pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", $config:module-config)
+        if ($xml instance of element(tei:pb)) then
+            let $href := concat('http://static.history.state.gov/frus/', substring-before(util:document-name($xml), '.xml')(: TODO replace with root($xml)/tei:TEI/@xml:id when we have this consistently :), '/medium/', $xml/@facs, '.png')
+            return
+                (: TODO insert alt text :)
+                <img src="{$href}"/>
+        else
+            pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", $config:module-config)
     let $class := if ($html//*[@class = ('margin-note')]) then "margin-right" else ()
     return
         <div class="content {$class}">
@@ -161,11 +162,8 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                 "work" : $work
             }
         else
-            let $parent := $div/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
-            let $prevDiv := $div/preceding::tei:div[1]
-            let $prevDiv := pages:get-previous(if ($parent and (empty($prevDiv) or $div/.. >> $prevDiv) and not($node/self::tei:pb)) then $div/.. else $prevDiv)
+            let $prevDiv := pages:get-previous($div)
             let $nextDiv := pages:get-next($div)
-        (:        ($div//tei:div[not(*[1] instance of element(tei:div))] | $div/following::tei:div)[1]:)
             return
                 map {
                     "previous" : $prevDiv,
