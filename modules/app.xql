@@ -8,6 +8,7 @@ import module namespace templates="http://exist-db.org/xquery/templates" ;
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";
 import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";
+import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xql";
 
 declare
     %templates:wrap
@@ -129,4 +130,31 @@ function app:countries($node as node(), $model as map(*), $country as xs:string?
 
 declare function app:uri($node as node(), $model as map(*), $uri as xs:string?) {
     <code>{$uri}</code>
+};
+
+declare function app:volume-breadcrumb($node as node(), $model as map(*), $volume as xs:string) {
+    let $head := root($model?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+    return <a href="../{$volume}">{$node/@*, $head/string()}</a>
+};
+
+declare function app:section-breadcrumb($node as node(), $model as map(*)) {
+    let $div := $model?data
+    return
+        <a href="{$div/@xml:id}">
+        { $node/@* }
+        { app:breadcrumb-heading($div) }
+        </a>
+};
+
+declare function app:breadcrumb-heading($div as element(tei:div)) {
+    if ($div/@type eq 'document') then
+        concat('Document ', $div/@n/string())
+    else if (local-name($div) eq 'pb') then 
+        if ($div/ancestor::tei:div[@type eq 'document'][1]/tei:pb[1]/@n eq '1') then 
+            concat('Document ', $div/ancestor::tei:div[@type eq 'document'][1]/@n/string(), ', Page ', $div/@n/string())
+        else 
+            concat('Page ', $div/@n/string())
+    else 
+        (: strip footnotes off of chapter titles - an Eisenhower phenomenon :)
+        toc:toc-head($div/tei:head)
 };

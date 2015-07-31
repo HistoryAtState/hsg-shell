@@ -41,6 +41,9 @@ $(document).ready(function() {
                     if (data.title) {
                         $("#navigation-title").text(data.title);
                     }
+                    if (data.breadcrumbSection) {
+                        $(".breadcrumb .section").text(data.breadcrumbSection);
+                    }
                     if (data.persons) {
                         $("#person-panel ul").replaceWith(data.persons).show();
                         initNavigation("#person-panel a");

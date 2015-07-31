@@ -98,7 +98,6 @@ header {
   margin-right: 0;
 }
 #volume .titleStmt1 {
-  margin-top: 0;
   font-size: 1.25em;
   font-weight: 800;
   text-transform: uppercase;
@@ -169,6 +168,10 @@ header {
   font-size: 9px;
   vertical-align: super;
 }
+.breadcrumb {
+  font-size: 85%;
+  background-color: transparent;
+}
 .navigation-top {
   margin-bottom: 1em;
   border-bottom: 2px solid #CCC;
@@ -179,7 +182,7 @@ header {
   color: #911625;
   font-size: 1.25em;
   line-height: 1.5;
-  padding: 10px 10px 10px 0;
+  padding: 0 10px 10px 0;
   margin-left: 60px;
   margin-right: 60px;
 }
