@@ -24,9 +24,7 @@ let $id := $match//fn:group[@nr = "2"]/string()
 let $xml := pages:load-xml("div", $id, $volume)
 return
     if ($xml) then
-        let $parent := $xml/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
-        let $prevDiv := $xml/preceding::tei:div[1]
-        let $prev := pages:get-previous(if ($parent and (empty($prevDiv) or $xml/.. >> $prevDiv)) then $xml/.. else $prevDiv)
+        let $prev := pages:get-previous($xml)
         let $next := pages:get-next($xml)
         let $html := pages:process-content($config:odd, pages:get-content($xml))
         let $doc := replace($volume, "^.*/([^/]+)$", "$1")
