@@ -24,9 +24,23 @@ let $id := $match//fn:group[@nr = "2"]/string()
 let $xml := pages:load-xml("div", $id, $volume)
 return
     if ($xml) then
-        let $prev := pages:get-previous($xml)
+        let $parent := $xml/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
+        let $prevDiv := $xml/preceding::tei:div[1]
+        let $prev := pages:get-previous(
+            if ($xml instance of element(tei:pb)) then
+                $xml
+            else if ($parent and (empty($prevDiv) or $xml/.. >> $prevDiv)) then 
+                $xml/.. 
+            else $prevDiv
+        )
         let $next := pages:get-next($xml)
-        let $html := pages:process-content($config:odd, pages:get-content($xml))
+        let $html := 
+            if ($xml instance of element(tei:pb)) then
+                let $href := concat('http://static.history.state.gov/frus/', root($xml)/tei:TEI/@xml:id, '/medium/', $xml/@facs, '.png')
+                return
+                    <div class="content"><img src="{$href}"/></div>
+            else
+                pages:process-content($config:odd, pages:get-content($xml))
         let $doc := replace($volume, "^.*/([^/]+)$", "$1")
         return
             map {

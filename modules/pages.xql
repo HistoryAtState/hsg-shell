@@ -96,7 +96,9 @@ function pages:view($node as node(), $model as map(*), $view as xs:string) {
         if ($xml instance of element(tei:pb)) then
             let $href := concat('http://static.history.state.gov/frus/', root($xml)/tei:TEI/@xml:id, '/medium/', $xml/@facs, '.png')
             return
-                <img src="{$href}"/>
+                <div class="content">
+                    <img src="{$href}"/>
+                </div>
         else
             pages:process-content($config:odd, $xml)
 };
