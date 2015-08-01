@@ -147,10 +147,10 @@ declare function app:section-breadcrumb($node as node(), $model as map(*)) {
         </a>
 };
 
-declare function app:breadcrumb-heading($div as element(tei:div)) {
+declare function app:breadcrumb-heading($div as element()) {
     if ($div/@type eq 'document') then
         concat('Document ', $div/@n/string())
-    else if (local-name($div) eq 'pb') then 
+    else if ($div instance of element(tei:pb)) then 
         if ($div/ancestor::tei:div[@type eq 'document'][1]/tei:pb[1]/@n eq '1') then 
             concat('Document ', $div/ancestor::tei:div[@type eq 'document'][1]/@n/string(), ', Page ', $div/@n/string())
         else 
