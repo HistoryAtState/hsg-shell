@@ -9,6 +9,7 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";
 import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";
 import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xql";
+import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 declare
     %templates:wrap
@@ -128,8 +129,8 @@ function app:countries($node as node(), $model as map(*), $country as xs:string?
         }</option>
 };
 
-declare function app:uri($node as node(), $model as map(*), $uri as xs:string?) {
-    <code>{$uri}</code>
+declare function app:uri($node as node(), $model as map(*)) {
+    <code>{request:get-attribute("hsg-shell.path")}</code>
 };
 
 declare function app:volume-breadcrumb($node as node(), $model as map(*), $volume as xs:string) {
@@ -157,4 +158,16 @@ declare function app:breadcrumb-heading($div as element(tei:div)) {
     else 
         (: strip footnotes off of chapter titles - an Eisenhower phenomenon :)
         toc:toc-head($div/tei:head)
+};
+
+declare
+    %templates:wrap
+function app:handle-error($node as node(), $model as map(*), $code as xs:integer?) {
+    let $errcode := request:get-attribute("hsg-shell.errcode")
+    let $log := console:log("error: " || $errcode || " code: " || $code)
+    return
+        if ((empty($errcode) and empty($code)) or $code = $errcode) then
+            templates:process($node/node(), $model)
+        else
+            ()
 };

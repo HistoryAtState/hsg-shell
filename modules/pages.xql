@@ -39,20 +39,28 @@ function pages:load($node as node(), $model as map(*), $volume as xs:string?, $i
 
 declare function pages:load-xml($view as xs:string, $id as xs:string?, $volume as xs:string) {
     console:log("Loading volume: " || $volume || "; div: " || $id),
-	if ($view = "div") then
-        if ($id) then
-            let $doc := doc($config:VOLUMES_PATH || "/" || $volume || ".xml")/tei:TEI
-            return 
-                $doc/id($id)
+    let $block :=
+    	if ($view = "div") then
+            if ($id) then
+                let $doc := doc($config:VOLUMES_PATH || "/" || $volume || ".xml")/tei:TEI
+                return 
+                    $doc/id($id)
+            else
+                let $div := (doc($config:VOLUMES_PATH || "/" || $volume || ".xml")//tei:div)[1]
+                return
+                    if ($div) then
+                        $div
+                    else
+                        doc($config:VOLUMES_PATH || "/" || $volume || ".xml")//tei:body
         else
-            let $div := (doc($config:VOLUMES_PATH || "/" || $volume || ".xml")//tei:div)[1]
-            return
-                if ($div) then
-                    $div
-                else
-                    doc($config:VOLUMES_PATH || "/" || $volume || ".xml")//tei:body
-    else
-        doc($config:VOLUMES_PATH || "/" || $volume || ".xml")//tei:text
+            doc($config:VOLUMES_PATH || "/" || $volume || ".xml")//tei:text
+    return
+        if (empty($block)) then (
+            request:set-attribute("hsg-shell.errcode", 404),
+            request:set-attribute("hsg-shell.path", string-join(($volume, $id), "/")),
+            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "chapter " || $id || " in Volume " || $volume || " not found")
+        ) else
+            $block
 };
 
 declare function pages:xml-link($node as node(), $model as map(*), $doc as xs:string) {
@@ -85,7 +93,12 @@ function pages:view($node as node(), $model as map(*), $view as xs:string) {
         else
             $model?data//*:body/*
     return
-        pages:process-content($config:odd, $xml)
+        if ($xml instance of element(tei:pb)) then
+            let $href := concat('http://static.history.state.gov/frus/', root($xml)/tei:TEI/@xml:id, '/medium/', $xml/@facs, '.png')
+            return
+                <img src="{$href}"/>
+        else
+            pages:process-content($config:odd, $xml)
 };
 
 declare
@@ -98,13 +111,7 @@ function pages:header($node as node(), $model as map(*)) {
 
 declare function pages:process-content($odd as xs:string, $xml as element()*) {
 	let $html :=
-        if ($xml instance of element(tei:pb)) then
-            let $href := concat('http://static.history.state.gov/frus/', substring-before(util:document-name($xml), '.xml')(: TODO replace with root($xml)/tei:TEI/@xml:id when we have this consistently :), '/medium/', $xml/@facs, '.png')
-            return
-                (: TODO insert alt text :)
-                <img src="{$href}"/>
-        else
-            pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", $config:module-config)
+        pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", $config:module-config)
     let $class := if ($html//*[@class = ('margin-note')]) then "margin-right" else ()
     return
         <div class="content {$class}">
@@ -162,8 +169,11 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                 "work" : $work
             }
         else
-            let $prevDiv := pages:get-previous($div)
+            let $parent := $div/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
+            let $prevDiv := $div/preceding::tei:div[1]
+            let $prevDiv := pages:get-previous(if ($parent and (empty($prevDiv) or $div/.. >> $prevDiv) and not($node/self::tei:pb)) then $div/.. else $prevDiv)
             let $nextDiv := pages:get-next($div)
+        (:        ($div//tei:div[not(*[1] instance of element(tei:div))] | $div/following::tei:div)[1]:)
             return
                 map {
                     "previous" : $prevDiv,
