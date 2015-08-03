@@ -178,9 +178,15 @@ declare function model:apply($config as map(*), $input as node()*) {
                 if (@rend = 'center') then
                     fo:paragraph($config, ., css:get-rendition(., "p1"), .)
                 else
-                    fo:paragraph($config, ., css:get-rendition(., "p2"), .)
+                    if (@rend = 'flushleft') then
+                        fo:paragraph($config, ., css:get-rendition(., "p2"), .)
+                    else
+                        fo:paragraph($config, ., css:get-rendition(., "p3"), .)
             case element(pb) return
-                fo:link($config, ., "pb", concat('[Page ', @n, ']'), @xml:id)
+                (
+                    fo:omit($config, ., "pb2", .)
+                )
+
             case element(publisher) return
                 fo:inline($config, ., "publisher", .)
             case element(pubPlace) return
@@ -243,7 +249,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                 )
 
             case element(teiHeader) return
-                fo:block($config, ., "teiHeader", .)
+                (
+                    fo:omit($config, ., "teiHeader2", .)
+                )
+
             case element(titleStmt) return
                 (
                     fo:heading($config, ., "titleStmt1", title[@type="complete"]),
@@ -342,7 +351,10 @@ declare function model:apply($config as map(*), $input as node()*) {
             case element(dateline) return
                 fo:block($config, ., "dateline", .)
             case element(div) return
-                fo:block($config, ., "div2", .)
+                (
+                    fo:block($config, ., "div2", .)
+                )
+
             case element(docAuthor) return
                 if (ancestor::teiHeader) then
                     (: Omit if located in teiHeader. :)

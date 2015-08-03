@@ -53,7 +53,10 @@
         <body>
             <schemaSpec ident="frus" start="TEI teiCorpus" source="teisimple.odd">
                 <elementSpec mode="change" ident="teiHeader">
-                    <model behaviour="block"/>
+                    <modelSequence>
+                        <model output="web" behaviour="block"/>
+                        <model behaviour="omit"/>
+                    </modelSequence>
                 </elementSpec>
                 <elementSpec mode="change" ident="fileDesc">
                     <modelSequence>
@@ -141,7 +144,12 @@
                     <model predicate="@rend = 'center'" behaviour="paragraph" useSourceRendition="true">
                         <outputRendition>text-align: center;</outputRendition>
                     </model>
-                    <model behaviour="paragraph" useSourceRendition="true"/>
+                    <model predicate="@rend = 'flushleft'" behaviour="paragraph" useSourceRendition="true">
+                        <outputRendition>text-align: justify;</outputRendition>
+                    </model>
+                    <model behaviour="paragraph" useSourceRendition="true">
+                        <outputRendition>text-align: justify; text-indent: 1.5em;</outputRendition>
+                    </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="dateline">
                     <model behaviour="block">
@@ -181,18 +189,23 @@
                     <model behaviour="block"/>
                 </elementSpec>
                 <elementSpec ident="div" mode="change">
-                    <model output="web" predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
-                    <model behaviour="block"/>
+                    <modelSequence>
+                        <model output="web" predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
+                        <model behaviour="block"/>
+                    </modelSequence>
                 </elementSpec>
                 <elementSpec ident="ref" mode="change">
                     <model behaviour="ref"/>
                 </elementSpec>
                 <elementSpec ident="pb" mode="change">
-                    <model behaviour="link">
-                        <param name="content">concat('[Page ', @n, ']')</param>
-                        <param name="link">@xml:id</param><!--<param name="link">concat('http://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
-                        <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
-                    </model>
+                    <modelSequence>
+                        <model output="web" behaviour="link">
+                            <param name="content">concat('[Page ', @n, ']')</param>
+                            <param name="link">@xml:id</param><!--<param name="link">concat('http://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
+                            <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
+                        </model>
+                        <model output="print" behaviour="omit"/>
+                    </modelSequence>
                 </elementSpec>
                 <elementSpec mode="change" ident="quote">
                     <model predicate="ancestor::p and empty(descendant::p|descendant::div)" behaviour="inline" useSourceRendition="true">
@@ -204,6 +217,11 @@
                         <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
                         <outputRendition>margin-left: 10px; margin-right: 10px;
                         </outputRendition>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="closer">
+                    <model behaviour="block">
+                        <outputRendition>text-align: right; margin-top: 1em; margin-left: 1em;</outputRendition>
                     </model>
                 </elementSpec><!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">

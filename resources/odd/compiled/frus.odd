@@ -2541,7 +2541,12 @@ relatedItem element must be empty</sch:report>
                     <tei:model predicate="@rend = 'center'" behaviour="paragraph" useSourceRendition="true">
                         <tei:outputRendition>text-align: center;</tei:outputRendition>
                     </tei:model>
-                    <tei:model behaviour="paragraph" useSourceRendition="true"/>
+                    <tei:model predicate="@rend = 'flushleft'" behaviour="paragraph" useSourceRendition="true">
+                        <tei:outputRendition>text-align: justify;</tei:outputRendition>
+                    </tei:model>
+                    <tei:model behaviour="paragraph" useSourceRendition="true">
+                        <tei:outputRendition>text-align: justify; text-indent: 1.5em;</tei:outputRendition>
+                    </tei:model>
                 </tei:elementSpec>
                 <tei:elementSpec xmlns:tei="http://www.tei-c.org/ns/1.0" rend="change" module="core" ident="pb">
                     <tei:classes>
@@ -2561,11 +2566,14 @@ relatedItem element must be empty</sch:report>
                         </tei:constraint>
                     </tei:constraintSpec>
                     <tei:attList/>
-                    <tei:model behaviour="link">
-                        <tei:param name="content">concat('[Page ', @n, ']')</tei:param>
-                        <tei:param name="link">@xml:id</tei:param>
-                        <tei:outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</tei:outputRendition>
-                    </tei:model>
+                    <tei:modelSequence>
+                        <tei:model output="web" behaviour="link">
+                            <tei:param name="content">concat('[Page ', @n, ']')</tei:param>
+                            <tei:param name="link">@xml:id</tei:param>
+                            <tei:outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</tei:outputRendition>
+                        </tei:model>
+                        <tei:model output="print" behaviour="omit"/>
+                    </tei:modelSequence>
                 </tei:elementSpec>
                 <tei:elementSpec xmlns:tei="http://www.tei-c.org/ns/1.0" rend="change" module="core" ident="publisher">
                     <tei:classes>
@@ -4194,7 +4202,10 @@ On <name/>, either the @marks attribute should be used, or a paragraph of descri
                             </tei:valList>
                         </tei:attDef>
                     </tei:attList>
-                    <tei:model behaviour="block"/>
+                    <tei:modelSequence>
+                        <tei:model output="web" behaviour="block"/>
+                        <tei:model behaviour="omit"/>
+                    </tei:modelSequence>
                 </tei:elementSpec>
                 <tei:elementSpec xmlns:tei="http://www.tei-c.org/ns/1.0" rend="add" module="header" ident="textClass">
                     <tei:classes>
@@ -5982,7 +5993,7 @@ The @spanTo attribute of <name/> is required.</assert>
                     </tei:content>
                     <tei:attList/>
                     <tei:model behaviour="block">
-                        <tei:outputRendition>margin-top: 1em; margin-left: 1em; margin-left: 1em;</tei:outputRendition>
+                        <tei:outputRendition>text-align: right; margin-top: 1em; margin-left: 1em;</tei:outputRendition>
                     </tei:model>
                 </tei:elementSpec>
                 <tei:elementSpec xmlns:tei="http://www.tei-c.org/ns/1.0" rend="change" module="textstructure" ident="dateline">
@@ -6066,8 +6077,10 @@ The @spanTo attribute of <name/> is required.</assert>
                         </group>
                     </tei:content>
                     <tei:attList/>
-                    <tei:model output="web" predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
-                    <tei:model behaviour="block"/>
+                    <tei:modelSequence>
+                        <tei:model output="web" predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
+                        <tei:model behaviour="block"/>
+                    </tei:modelSequence>
                 </tei:elementSpec>
                 <tei:elementSpec xmlns:tei="http://www.tei-c.org/ns/1.0" rend="change" module="textstructure" ident="docAuthor">
                     <tei:classes>

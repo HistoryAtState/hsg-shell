@@ -1,0 +1,32 @@
+.front {
+    font-family: "Palatino";
+}
+.body2 {
+    font-family: "Palatino";
+}
+.floatingText {
+    padding: 6pt;
+}
+.p1 {
+    space-before: .5em;
+    space-after: .5em;
+}
+.p2 {
+    space-before: .5em;
+    space-after: .5em;
+}
+.p3 {
+    space-before: .5em;
+    space-after: .5em;
+}
+.note1 {
+    keep-with-next.within-page: always;
+}
+.opener {
+    keep-with-next.within-page: always;
+}
+.closer {
+    keep-together.within-page: always;
+    keep-with-previous.within-page: always;
+    space-after: 1em;
+}
