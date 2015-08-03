@@ -23,7 +23,7 @@
         </module>
     </output><!-- General fo extension functions -->
     <output mode="print">
-        <module mode="print" uri="http://www.tei-c.org/tei-simple/xquery/ext-fo" prefix="ext-fo" at="../modules/ext-fo.xql"/>
+        <module mode="print" uri="http://history.state.gov/ns/site/hsg/pmf-fo" prefix="ext-fo" at="../../hsg-shell/modules/ext-fo.xql"/>
     </output><!-- Special web configuration for the documentation (to handle <code>) -->
     <output mode="web" odd="documentation">
         <module mode="html" uri="http://www.tei-c.org/tei-simple/xquery/ext-html" prefix="ext-html" at="../modules/ext-html.xql"/>
