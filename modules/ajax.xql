@@ -61,11 +61,11 @@ return
                 "persons": 
                     let $persons := app:get-persons($xml, distinct-values($xml//tei:persName/@corresp))
                     return
-                        if ($persons) then <ul>{$persons}</ul> else (),
+                        if ($persons) then <div class="list-group">{$persons}</div> else (),
                 "gloss": 
                     let $gloss := app:get-gloss($xml, distinct-values($xml//tei:gloss/@target))
                     return
-                        if ($gloss) then <ul>{$gloss}</ul> else (),
+                        if ($gloss) then <div class="list-group">{$gloss}</div> else (),
                 "content": serialize($html, 
                     <output:serialization-parameters xmlns:output="http://www.w3.org/2010/xslt-xquery-serialization">
                       <output:omit-xml-declaration value="yes"/>

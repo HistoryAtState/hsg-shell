@@ -97,7 +97,7 @@ declare function app:get-persons($root as element(), $ids as xs:string*) {
     let $name := $persons//tei:persName[@xml:id = substring($id, 2)]
     order by $name
     return
-        <li><a href="persons{$id}" data-toggle="tooltip" title="{normalize-space(string-join($name/../following-sibling::text()))}">{$name/string()}</a></li>
+        <a href="persons{$id}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($name/../following-sibling::text()))}">{$name/string()}</a>
 };
 
 declare
@@ -112,7 +112,7 @@ declare function app:get-gloss($root as element(), $ids as xs:string*) {
     let $term := $terms//tei:term[@xml:id = substring($id, 2)]
     order by $term
     return
-        <li><a href="terms{$id}" data-toggle="tooltip" title="{normalize-space(string-join($term/../following-sibling::text()))}">{$term/text()}</a></li>
+        <a href="terms{$id}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($term/../following-sibling::text()))}">{$term/text()}</a>
 };
 
 declare
