@@ -169,7 +169,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                 if (@rend = 'inline') then
                     html:paragraph($config, ., "note1", .)
                 else
-                    html:note($config, ., "note2", ., "foot", @n/string())
+                    ext-html:note($config, ., "note2", ., "foot", @n/string())
             case element(num) return
                 html:inline($config, ., "num", .)
             case element(orig) return
@@ -178,9 +178,15 @@ declare function model:apply($config as map(*), $input as node()*) {
                 if (@rend = 'center') then
                     html:paragraph($config, ., css:get-rendition(., "p1"), .)
                 else
-                    html:paragraph($config, ., css:get-rendition(., "p2"), .)
+                    if (@rend = 'flushleft') then
+                        html:paragraph($config, ., css:get-rendition(., "p2"), .)
+                    else
+                        html:paragraph($config, ., css:get-rendition(., "p3"), .)
             case element(pb) return
-                html:link($config, ., "pb", concat('[Page ', @n, ']'), @xml:id)
+                (
+                    html:link($config, ., "pb1", concat('[Page ', @n, ']'), @xml:id)
+                )
+
             case element(publisher) return
                 html:inline($config, ., "publisher", .)
             case element(pubPlace) return
@@ -243,7 +249,11 @@ declare function model:apply($config as map(*), $input as node()*) {
                 )
 
             case element(teiHeader) return
-                html:block($config, ., "teiHeader", .)
+                (
+                    html:block($config, ., "teiHeader1", .),
+                    html:omit($config, ., "teiHeader2", .)
+                )
+
             case element(titleStmt) return
                 (
                     html:heading($config, ., "titleStmt1", title[@type="complete"]),
@@ -342,10 +352,14 @@ declare function model:apply($config as map(*), $input as node()*) {
             case element(dateline) return
                 html:block($config, ., "dateline", .)
             case element(div) return
-                if (@type = ('compilation', 'chapter', 'subchapter')) then
-                    ext-html:document-list($config, ., "div1")
-                else
+                (
+                    if (@type = ('compilation', 'chapter', 'subchapter')) then
+                        ext-html:document-list($config, ., "div1")
+                    else
+                        (),
                     html:block($config, ., "div2", .)
+                )
+
             case element(docAuthor) return
                 if (ancestor::teiHeader) then
                     (: Omit if located in teiHeader. :)

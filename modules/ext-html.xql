@@ -44,3 +44,36 @@ declare function pmf:ref($config as map(*), $node as element(), $class as xs:str
         <a href="{$href}">{$config?apply-children($config, $node, .)}</a>
 };
 
+declare function pmf:note($config as map(*), $node as element(), $class as xs:string+, $content, $place, $label) {
+    switch ($place)
+        case "margin" return
+            if ($label) then (
+                <span class="margin-note-ref">{$label}</span>,
+                <span class="margin-note">
+                    <span class="n">{$label/string()}) </span>{ $config?apply-children($config, $node, $content) }
+                </span>
+            ) else
+                <span class="margin-note">
+                { $config?apply-children($config, $node, $content) }
+                </span>
+        default return
+            let $id := translate(util:node-id($node), "-", "_")
+            let $nr :=
+                if ($label) then
+                    $label
+                else
+                    count($node/preceding::tei:note) + 1
+            return (
+                <span id="fnref:{$id}">
+                    <a class="note" rel="footnote" href="#fn:{$id}">
+                    { $nr }
+                    </a>
+                </span>,
+                <li class="footnote" id="fn:{$id}" value="{$nr}">
+                    <span class="fn-content">
+                        {$config?apply-children($config, $node, $content/node())}
+                    </span>
+                    <a class="fn-back" href="#fnref:{$id}">↩</a>
+                </li>
+            )
+};

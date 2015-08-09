@@ -114,11 +114,36 @@ function pages:header($node as node(), $model as map(*)) {
 declare function pages:process-content($odd as xs:string, $xml as element()*) {
 	let $html :=
         pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", $config:module-config)
+    let $content := pages:clean-footnotes($html)
     let $class := if ($html//*[@class = ('margin-note')]) then "margin-right" else ()
     return
         <div class="content {$class}">
-        {$html}
+            {$content}
+            <div class="footnotes">
+                <ol>{$html//li[@class="footnote"]}</ol>
+            </div>
         </div>
+};
+
+declare function pages:clean-footnotes($nodes as node()*) {
+    for $node in $nodes
+    return
+        typeswitch($node)
+            case element(li) return
+                if ($node/@class = "footnote") then
+                    ()
+                else
+                    element { node-name($node) } {
+                        $node/@*,
+                        pages:clean-footnotes($node/node())
+                    }
+            case element() return
+                element { node-name($node) } {
+                    $node/@*,
+                    pages:clean-footnotes($node/node())
+                }
+            default return
+                $node
 };
 
 declare
