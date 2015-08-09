@@ -293,9 +293,9 @@ declare function app:uri($node as node(), $model as map(*)) {
     <code>{request:get-attribute("hsg-shell.path")}</code>
 };
 
-declare function app:volume-breadcrumb($node as node(), $model as map(*), $volume as xs:string) {
+declare function app:volume-breadcrumb($node as node(), $model as map(*), $volume as xs:string, $id as xs:string?) {
     let $head := root($model?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
-    return <a href="../{$volume}">{$node/@*, $head/string()}</a>
+    return <a href="{if ($id) then '../' else ()}{$volume}">{$node/@*, $head/string()}</a>
 };
 
 declare function app:section-breadcrumb($node as node(), $model as map(*)) {
