@@ -49,7 +49,7 @@ function app:volumes($node as node(), $model as map(*), $volume as xs:string?) {
 
 declare
     %templates:wrap
-function app:administrations($node as node(), $model as map(*)) {
+function app:administrations($node as node(), $model as map(*), $volume as xs:string?) {
     $node/*,
     let $published-vols := collection($config:VOLUME_METADATA)//volume[publication-status eq 'published']
     let $administrations := distinct-values($published-vols//administration)
@@ -58,13 +58,173 @@ function app:administrations($node as node(), $model as map(*)) {
         for $admins in $code-table-items
         let $adminname := $admins/*:label
         let $admincode := $admins/*:value
+        let $selected := if ($admincode = $volume) then attribute selected {"selected"} else ()
         return 
             element option { 
-                attribute value { $admincode },
+                attribute value { "./historicaldocuments/" || $admincode },
+                $selected,
                 element label {$adminname/string()}
             }
     return $choices
 };
+
+(: BEGIN: administration.html :)
+declare
+    %templates:wrap
+function app:load-administration($node as node(), $model as map(*), $volume as xs:string) {
+    let $admin := doc('/db/cms/apps/volumes/code-tables/administration-code-table.xml')//item[value = $volume]
+    let $published-vols-in-admin := collection('/db/cms/apps/volumes/data')//volume[administration eq $volume][publication-status eq 'published']
+    let $grouping-codes := doc('/db/cms/apps/volumes/code-tables/grouping-code-table.xml')//item
+    let $groupings-in-use := 
+        for $g in distinct-values($published-vols-in-admin/grouping[@administration/tokenize(., '\s+') = $volume]) order by index-of($grouping-codes/value, $g) return $g
+    return
+        map {
+            "admin-id": $volume,
+            "admin": $admin,
+            "published-vols": $published-vols-in-admin,
+            "grouping-codes": $grouping-codes,
+            "groupings-in-use": $groupings-in-use
+        }
+};
+
+declare
+    %templates:wrap
+function app:group-info($node as node(), $model as map(*)) {
+    if (count($model?groupings-in-use) gt 1) then
+        <p>Volumes are grouped into {
+            for $g at $n in $model?groupings-in-use 
+            return (
+                <a href="#{$g}-volumes">{$model?grouping-codes[value=$g]/label/string()}</a>,
+                if ($n lt count($model?groupings-in-use)) then 
+                    concat(
+                        if (count($model?groupings-in-use) gt 2) then ', ' else (),
+                        if ($n = count($model?groupings-in-use) - 1) then ' and ' else ()
+                    )
+                else ()
+            )
+        } categories.</p>
+    else()
+};
+
+declare
+    %templates:wrap
+function app:administration-name($node as node(), $model as map(*)) {
+    switch ($model?admin-id)
+        case "pre-truman" return
+            "Foreign Relations volumes covering the " || $model?admin/label/text() || " Period"
+        case "nixon-ford" return
+            'Nixon-Ford Administrations' 
+        default return
+            concat($model?admin/label, ' Administration')
+};
+
+declare
+    %templates:wrap
+function app:volumes-by-administration-group($node as node(), $model as map(*)) {
+    if (count($model?groupings-in-use) gt 1 and $model?admin-id ne "pre-truman") then
+        for $vols in $model?published-vols
+        group by $grouping := $vols/grouping[@administration/tokenize(., '\s+') = $model?admin-id]
+        order by index-of($model?grouping-codes/value, $grouping)
+        return
+            (: TODO: bug in templates.xql forces us to call templates:process manually :)
+            templates:process($node/node(), map:new(($model,
+                map {
+                    "group": $grouping/string(),
+                    "volumes": $vols
+                }
+            )))
+    else
+        ()
+};
+
+declare
+    %templates:wrap
+function app:volumes-by-administration($node as node(), $model as map(*)) {
+    if (count($model?groupings-in-use) le 1 and $model?admin-id ne "pre-truman") then
+        for $vols in $model?published-vols
+        group by $subseries := $vols/title[@type='sub-series']
+        order by $subseries/@n
+        return
+            (: TODO: bug in templates.xql forces us to call templates:process manually :)
+            templates:process($node/node(), map:new(($model,
+                map {
+                    "series-title": $vols[1]/title[@type='sub-series']/string(),
+                    "volumes": $vols
+                }
+            )))
+    else
+        ()
+};
+
+declare
+    %templates:wrap
+function app:volumes-pre-truman($node as node(), $model as map(*)) {
+    if ($model?admin-id eq "pre-truman") then
+        for $vol in $model?published-vols
+        let $vol-id := $vol/@id
+        let $voltext := $vol/title[@type="complete"]
+        return
+            templates:process($node/node(), map:new(($model,
+                map {
+                    "title": $voltext/string(),
+                    "vol-id": $vol-id
+                }
+            )))
+    else
+        ()
+};
+
+declare
+    %templates:wrap
+function app:volumes-by-group($node as node(), $model as map(*)) {
+    for $g-vols in $model?volumes
+    group by $subseries := $g-vols/title[@type='sub-series']
+    order by $subseries/@n
+    return
+        (: TODO: bug in templates.xql forces us to call templates:process manually :)
+        templates:process($node/node(), map:new(($model,
+            map {
+                "series-title": $g-vols[1]/title[@type='sub-series']/string(),
+                "volumes": $g-vols
+            }
+        )))
+};
+
+declare
+    %templates:wrap
+function app:series-title($node as node(), $model as map(*)) {
+    $model?series-title
+};
+
+declare
+    %templates:wrap
+function app:series-volumes($node as node(), $model as map(*)) {
+    for $vol in $model?volumes
+    let $title := string-join(for $title in ($vol/title[@type='volume'], $vol/title[@type='volumenumber'])[. ne ''] return $title, ', ')
+    let $vol-id := $vol/@id
+    order by $vol-id
+    return
+        templates:process($node/node(), map:new(($model,
+            map {
+                "title": $title,
+                "vol-id": $vol-id
+            }
+        )))
+};
+
+declare
+    %templates:wrap
+function app:volume-title($node as node(), $model as map(*)) {
+    $model?title
+};
+
+declare
+    %templates:wrap
+function app:administration-group-code($node as node(), $model as map(*)) {
+    $model?grouping-codes[value = $model?group]/label/string()
+};
+
+(: END: administration.html :)
 
 declare
     %templates:wrap
@@ -188,7 +348,7 @@ declare function app:parse-params($node as node(), $model as map(*)) {
                                     let $paramName := $token/fn:group[1]
                                     let $default := $token/fn:group[2]
                                     return
-                                        request:get-parameter($paramName, $default)
+                                        (request:get-parameter($paramName, $default), $model?($paramName))[1]
                                 default return $token
                     )
                 }

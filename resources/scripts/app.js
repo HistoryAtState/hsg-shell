@@ -141,18 +141,10 @@ $(document).ready(function() {
     
     resize();
     
-    // select volume from dropdown
-    $("#select-volume").change(function(ev) {
+    // select volume or administration from dropdown
+    $("#select-volume, #select-administration").change(function(ev) {
         var path = "/" + $(this).val();
-        // if ($(this).hasClass("async")) {
-        //     var url= "url=" + path;
-        //     if (historySupport) {
-        //         history.pushState(null, null, appRoot + path);
-        //     }
-        //     load({url: path, toc: true});
-        // } else {
         window.location = appRoot + path;
-        // }
     });
     
     $("#zoom-in").click(function(ev) {

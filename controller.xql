@@ -50,13 +50,17 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
     let $match := analyze-string($exist:path, "^/historicaldocuments/?([^/]+)/?(.*)$")
     let $volume := $match//fn:group[@nr = "1"]/string()
     let $id := $match//fn:group[@nr = "2"]/string()
-    let $page := 
-        (: volume interior page :)
-        if ($id and $id != "") then 
-            "volume-interior.html"
-        (: volume landing page :)
-        else if ($volume and $volume != "") then
-            "volume-landing.html" 
+    let $page :=
+        if ($volume and $volume != "") then
+            if (starts-with($volume, "frus")) then
+                (: volume interior page :)
+                if ($id and $id != "") then 
+                    "volume-interior.html"
+                (: volume landing page :)
+                else
+                    "volume-landing.html"
+            else
+                "administration.html"
         (: section landing page :)
         else (: if (not($volume) and not($id)) then :)
             'historicaldocuments.html' 
