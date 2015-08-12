@@ -257,10 +257,26 @@ declare function model:apply($config as map(*), $input as node()*) {
             case element(titleStmt) return
                 (
                     html:heading($config, ., "titleStmt1", title[@type="complete"]),
-                    html:block($config, ., "titleStmt2", "Editors:"),
-                    ext-html:list-from-items($config, ., "titleStmt3", editor[@role="primary"], ()),
-                    html:block($config, ., "titleStmt4", "General Editor:"),
-                    ext-html:list-from-items($config, ., "titleStmt5", editor[@role="general"], ())
+                    if (count(editor[@role = 'primary']) gt 1) then
+                        html:block($config, ., "titleStmt2", "Editors:")
+                    else
+                        (),
+                    if (count(editor[@role = 'primary']) eq 1) then
+                        html:block($config, ., "titleStmt3", "Editor:")
+                    else
+                        (),
+                    if (editor[@role = 'primary']) then
+                        ext-html:list-from-items($config, ., "titleStmt4", editor[@role="primary"], ())
+                    else
+                        (),
+                    if (editor[@role = 'general']) then
+                        html:block($config, ., "titleStmt5", "General Editor:")
+                    else
+                        (),
+                    if (editor[@role = 'general']) then
+                        ext-html:list-from-items($config, ., "titleStmt6", editor[@role="general"], ())
+                    else
+                        ()
                 )
 
             case element(g) return
@@ -352,14 +368,10 @@ declare function model:apply($config as map(*), $input as node()*) {
             case element(dateline) return
                 html:block($config, ., "dateline", .)
             case element(div) return
-                (
-                    if (@type = ('compilation', 'chapter', 'subchapter')) then
-                        ext-html:document-list($config, ., "div1")
-                    else
-                        (),
+                if (@type = ('compilation', 'chapter', 'subchapter')) then
+                    ext-html:document-list($config, ., "div1")
+                else
                     html:block($config, ., "div2", .)
-                )
-
             case element(docAuthor) return
                 if (ancestor::teiHeader) then
                     (: Omit if located in teiHeader. :)

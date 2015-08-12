@@ -49,7 +49,10 @@
 .stage { font-style: italic; }
 .unclear:after { content: ' [?] '; }
 .titleStmt2 { font-weight: bold }
-.titleStmt4 { font-weight: bold }
+.titleStmt3 { font-weight: bold }
+.titleStmt4 { list-style-type: none }
+.titleStmt5 { font-weight: bold }
+.titleStmt6 { list-style-type: none }
 .supplied2:before { content:"<"; }
 .supplied2:after { content:">"; }
 .supplied3:before { content:"["; }
@@ -74,4 +77,3 @@
 .figDesc { color: grey;font-style:italic; }
 .figure2 { display: block; border-top: solid 1pt blue; border-bottom: solid 1pt blue; }
 .row1 { font-weight: bold; }
-.table { font-size: smaller; background-color: #F0F0F0; }
