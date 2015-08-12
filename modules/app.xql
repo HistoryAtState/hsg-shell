@@ -322,6 +322,35 @@ declare function app:breadcrumb-heading($div as element()) {
 
 declare
     %templates:wrap
+function app:fix-links($node as node(), $model as map(*)) {
+    templates:process(app:fix-links($node/node()), $model)
+};
+
+declare function app:fix-links($nodes as node()*) {
+    for $node in $nodes
+    return
+        typeswitch($node)
+            case element(a) return
+                let $href := 
+                    replace(
+                        replace($node/@href, "\$extern", "http://history.state.gov"),
+                        "\$app",
+                        (request:get-context-path() || "/apps/hsg-shell")
+                    )
+                return
+                    <a href="{$href}">
+                        {$node/@* except $node/@href, $node/node()}
+                    </a>
+            case element() return
+                element { node-name($node) } {
+                    $node/@*, app:fix-links($node/node())
+                }
+            default return
+                $node
+};
+
+declare
+    %templates:wrap
 function app:handle-error($node as node(), $model as map(*), $code as xs:integer?) {
     let $errcode := request:get-attribute("hsg-shell.errcode")
     let $log := console:log("error: " || $errcode || " code: " || $code)
