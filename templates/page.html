@@ -13,17 +13,17 @@
         <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"/>
     </head>
     <body id="body">
-        <header class="container banner">
+        <header class="container banner" data-template="app:fix-links">
             <div class="row">
                 <div class="col-sm-8">
-                    <a href="/">
+                    <a href="$app/">
                         <img width="525" height="101" src="//s3.amazonaws.com/static.history.state.gov/images/hobanner.gif" alt="Office of the Historian"/>
                     </a>
                 </div>
                 <div class="col-sm-4">
                     <div class="banner__search">
                         <div class="searchbox">
-                            <form method="get" action="/search">
+                            <form method="get" action="$extern/search">
                                 <p class="form-group">Search: <input type="text" size="15" name="q" style="margin-bottom: 0"/>
                                     <input type="submit" value="GO" class="gobox btn btn-default"/>
                                 </p>
@@ -46,15 +46,13 @@
                 <div class="navbar-collapse collapse" id="navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/exist/apps/hsg-shell/" shape="rect">
-                                <img width="57" height="22" src="//s3.amazonaws.com/static.history.state.gov/images/home.png"/>
-                                <span class="hidden">Home</span>
+                            <a href="$app/" shape="rect">
+                                <span style="color: white">Home</span>
                             </a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <img width="161" height="22" src="//s3.amazonaws.com/static.history.state.gov/images/historicaldocs.png"/>
-                                <span class="hidden">Historical Documents</span>
+                            <a href="$app/historicaldocuments" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span style="color: white">Historical Documents</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -77,9 +75,8 @@
                             </ul>
                         </li>
                         <li id="index_nav" class="dropdown">
-                            <a href="/departmenthistory" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <img width="151" height="22" src="//s3.amazonaws.com/static.history.state.gov/images/depthistory.png"/>
-                                <span class="hide">Department History</span>
+                            <a href="$extern/departmenthistory" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span style="color: white">Department History</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -111,9 +108,8 @@
                             </ul>
                         </li>
                         <li id="milestones_nav" class="dropdown">
-                            <a href="/milestones" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <img width="130" height="22" src="//s3.amazonaws.com/static.history.state.gov/images/keymilestones.png"/>
-                                <span class="hide">Key Milestones</span>
+                            <a href="$extern/milestones" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span style="color: white">Key Milestones</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -176,9 +172,8 @@
                             </ul>
                         </li>
                         <li id="countries_nav" class="dropdown">
-                            <a href="/countries" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <img width="133" height="22" src="//s3.amazonaws.com/static.history.state.gov/images/guidetocountries.png"/>
-                                <span class="hide">Guide to Countries</span>
+                            <a href="$extern/countries" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span style="color: white">Guide to Countries</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -191,8 +186,7 @@
                         </li>
                         <li id="resources_nav" class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <img width="114" height="22" src="//s3.amazonaws.com/static.history.state.gov/images/moreresources.png"/>
-                                <span class="hide">More Resources</span>
+                                <span style="color: white">More Resources</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
