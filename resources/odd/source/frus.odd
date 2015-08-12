@@ -195,10 +195,8 @@
                     <model behaviour="block"/>
                 </elementSpec>
                 <elementSpec ident="div" mode="change">
-                    <modelSequence>
-                        <model output="web" predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
-                        <model behaviour="block"/>
-                    </modelSequence>
+                    <model output="web" predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
+                    <model behaviour="block"/>
                 </elementSpec>
                 <elementSpec ident="ref" mode="change">
                     <model behaviour="ref"/>
