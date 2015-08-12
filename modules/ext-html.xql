@@ -27,7 +27,7 @@ declare function pmf:document-list($config as map(*), $node as element(), $class
     toc:document-list($config, $node, $class)
 };
 
-(: turn ref/@target into link. TODO extend to footnotes, etc. :)
+(: turn ref/@target into link. TODO extend to footnotes, e.g., #d3fn3, frus1948v01p1#d3fn1, etc. :)
 declare function pmf:ref($config as map(*), $node as element(), $class as xs:string+) {
     let $target := $node/@target
     let $href :=
@@ -38,6 +38,8 @@ declare function pmf:ref($config as map(*), $node as element(), $class as xs:str
                 toc:href(substring-before($target, '#'), substring-after($target, '#'), ())
             else
                 toc:href($target, (), ())
+        else if (starts-with($target, '#')) then
+            toc:href(substring-before(util:document-name($node), '.xml'), substring-after($target, '#'), ())
         else
             $target
     return
