@@ -57,7 +57,7 @@ return
                 "title": pages:title($xml/ancestor-or-self::tei:TEI),
                 "toc": if ($toc) then toc:toc($xml, true(), true()) else (),
                 "tocCurrent": $xml/ancestor-or-self::tei:div[@type != "document"][1]/@xml:id/string(),
-                "breadcrumbSection": app:breadcrumb-heading($xml/ancestor-or-self::tei:div[1]),
+                "breadcrumbSection": app:breadcrumb-heading($xml),
                 "persons": 
                     let $persons := app:get-persons($xml, distinct-values($xml//tei:persName/@corresp))
                     return

@@ -311,10 +311,14 @@ declare function app:breadcrumb-heading($div as element()) {
     if ($div/@type eq 'document') then
         concat('Document ', $div/@n/string())
     else if ($div instance of element(tei:pb)) then 
+        (: The following assumes that the pb is inside a document div. TODO: extend for pbs in front matter, etc.; 
+           consider adding a sidebar linking back to document(s) that fall on the pb :)
+        (:
         if ($div/ancestor::tei:div[@type eq 'document'][1]/tei:pb[1]/@n eq '1') then 
             concat('Document ', $div/ancestor::tei:div[@type eq 'document'][1]/@n/string(), ', Page ', $div/@n/string())
         else 
-            concat('Page ', $div/@n/string())
+        :)
+        concat('Page ', $div/@n/string())
     else 
         (: strip footnotes off of chapter titles - an Eisenhower phenomenon :)
         toc:toc-head($div/tei:head)
