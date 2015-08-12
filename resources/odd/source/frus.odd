@@ -227,6 +227,9 @@
                     <model behaviour="block">
                         <outputRendition>text-align: right; margin-top: 1em; margin-left: 1em;</outputRendition>
                     </model>
+                </elementSpec><!-- override background-color and font-size property from teisimple.odd -->
+                <elementSpec mode="change" ident="table">
+                    <model behaviour="table"/>
                 </elementSpec><!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
                     <model behaviour="inline"/>
