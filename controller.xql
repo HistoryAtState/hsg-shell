@@ -158,7 +158,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                     </dispatch>
 else
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/404.html"/>
+        <forward url="{$exist:controller}/pages/404.html"/>
         <view>
             <forward url="{$exist:controller}/modules/view.xql">
                 <add-parameter name="uri" value="{$exist:path}"/>
