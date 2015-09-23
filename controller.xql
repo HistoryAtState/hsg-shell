@@ -81,7 +81,7 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                 </forward>
             </view>
     		<error-handler>
-    			<forward url="{$exist:controller}/error-page.html" method="get"/>
+    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
     			<forward url="{$exist:controller}/modules/view.xql"/>
     		</error-handler>
         </dispatch>
@@ -103,7 +103,7 @@ else if (matches($exist:path, '^/countries/?')) then
                 </forward>
             </view>
     		<error-handler>
-    			<forward url="{$exist:controller}/error-page.html" method="get"/>
+    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
     			<forward url="{$exist:controller}/modules/view.xql"/>
     		</error-handler>
         </dispatch>
@@ -141,7 +141,7 @@ else
             </forward>
         </view>
 		<error-handler>
-			<forward url="{$exist:controller}/error-page.html" method="get"/>
+			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
 			<forward url="{$exist:controller}/modules/view.xql"/>
 		</error-handler>
     </dispatch>
