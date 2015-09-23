@@ -334,17 +334,38 @@ declare function app:fix-links($nodes as node()*) {
     for $node in $nodes
     return
         typeswitch($node)
-            case element(a) return
-                let $href := 
-                    replace(
-                        replace($node/@href, "\$extern", "http://history.state.gov"),
-                        "\$app",
-                        (request:get-context-path() || "/apps/hsg-shell")
-                    )
-                return
-                    <a href="{$href}">
-                        {$node/@* except $node/@href, $node/node()}
-                    </a>
+            case element(a) | element(link)
+            return
+                (: skip links with @data-template attributes; otherwise we can run into duplicate @href errors :)
+                if ($node/@data-template) then 
+                    $node 
+                else
+                    let $href := 
+                        replace(
+                            replace($node/@href, "\$extern", "http://history.state.gov"),
+                            "\$app",
+                            (request:get-context-path() || "/apps/hsg-shell")
+                        )
+                    return
+                        element { node-name($node) } {
+                            attribute href {$href}, $node/@* except $node/@href, $node/node()
+                        }
+            case element(script)
+            return
+                (: skip links with @data-template attributes; otherwise we can run into duplicate @src errors :)
+                if ($node/@data-template) then 
+                    $node 
+                else
+                    let $src := 
+                        replace(
+                            replace($node/@src, "\$extern", "http://history.state.gov"),
+                            "\$app",
+                            (request:get-context-path() || "/apps/hsg-shell")
+                        )
+                    return
+                        element { node-name($node) } {
+                            attribute src {$src}, $node/@* except $node/@src, $node/node()
+                        }
             case element() return
                 element { node-name($node) } {
                     $node/@*, app:fix-links($node/node())

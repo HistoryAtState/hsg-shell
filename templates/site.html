@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html data-template="pages:app-root">
-    <head>
+    <head data-template="app:fix-links">
         <title data-template="config:app-title">App Title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta data-template="config:app-meta"/>
-        <link rel="shortcut icon" href="resources/images/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="bower_components/animate.css/animate.min.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
+        <link rel="shortcut icon" href="$app/resources/images/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="$app/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="$app/bower_components/animate.css/animate.min.css"/>
+        <link rel="stylesheet" type="text/css" href="$app/resources/css/style.css"/>
         <link rel="stylesheet" type="text/css" data-template="pages:styles" data-template-odd="frus.odd"/>
-        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"/>
-        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"/>
+        <script type="text/javascript" src="$app/bower_components/jquery/dist/jquery.min.js"/>
+        <script type="text/javascript" src="$app/bower_components/bootstrap/dist/js/bootstrap.min.js"/>
     </head>
     <body id="body">
         <header class="container banner" data-template="app:fix-links">
