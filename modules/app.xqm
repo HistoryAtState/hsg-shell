@@ -8,7 +8,7 @@ import module namespace templates="http://exist-db.org/xquery/templates" ;
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";
 import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";
-import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xql";
+import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xqm";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 declare

@@ -4,9 +4,9 @@ declare namespace output="http://www.w3.org/2010/xslt-xquery-serialization";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
-import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xql";
-import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xql";
-import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xql";
+import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
+import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xqm";
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 
 declare option output:method "json";

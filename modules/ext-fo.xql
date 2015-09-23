@@ -6,7 +6,7 @@ xquery version "3.1";
 module namespace pmf="http://history.state.gov/ns/site/hsg/pmf-fo";
 
 import module namespace print="http://www.tei-c.org/tei-simple/xquery/functions/fo" at "/db/apps/tei-simple/content/fo-functions.xql";
-import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xql";
+import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xqm";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace fo="http://www.w3.org/1999/XSL/Format";

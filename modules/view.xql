@@ -12,9 +12,10 @@ import module namespace templates="http://exist-db.org/xquery/templates" ;
  : templating.
  :)
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
-import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xql";
-import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xql";
-import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xql";
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
+import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
+import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xqm";
+import module namespace pocom="http://history.state.gov/ns/site/hsg/pocom" at "pocom.xqm";
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 
