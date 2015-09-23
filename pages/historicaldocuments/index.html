@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.w3.org/1999/xhtml" data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                <div id="sections" class="col-md-12 panel panel-default">
+                    <h2>Historical Documents</h2>
+                    <label for="select-volume">Volumes</label>
+                    <select id="select-volume" name="volumes" data-template="app:volumes" class="form-control async">
+                        <option>Choose Volume</option>
+                    </select>
+                    <label for="select-administration">Browse by Administration</label>
+                    <select id="select-administration" name="administrations" data-template="app:administrations" class="form-control">
+                        <option>Choose Administration</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" id="volume">
+            <div id="content-inner">
+                <h1>Historical Documents</h1>
+                <p>The <em>Foreign Relations of the United States</em> (FRUS) series presents the official
+                    documentary historical record of major U.S. foreign policy decisions and significant
+                    diplomatic activity.</p>
+                <p>Search <a href="/search?within=documents">within the volumes</a>, or browse them by
+                    administration:</p>
+                <table class="bordered">
+                    <tr>
+                        <td style="text-align: center; margin: 7px; padding: 4px; border: 1px solid #dddde8; color: #aaa;">
+                            <a href="/historicaldocuments/truman">
+                                <img src="//s3.amazonaws.com/static.history.state.gov/images/truman.jpg" alt="Harry S. Truman" width="89" height="76" class="image_borderteaser"/>
+                                <br/> Truman Administration <br/> 1945–1952</a>
+                        </td>
+                        <td style="text-align: center; margin: 7px; padding: 4px; border: 1px solid #dddde8; color: #aaa;">
+                            <a href="/historicaldocuments/eisenhower">
+                                <img src="//s3.amazonaws.com/static.history.state.gov/images/eisenhower.jpg" alt="Dwight D. Eisenhower" width="89" height="76" class="image_borderteaser"/>
+                                <br/> Eisenhower Administration <br/> 1953–1960</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; margin: 7px; padding: 4px; border: 1px solid #dddde8; color: #aaa;">
+                            <a href="/historicaldocuments/kennedy">
+                                <img src="//s3.amazonaws.com/static.history.state.gov/images/jkennedy2.jpg" alt="John F. Kennedy" width="89" height="76" class="image_borderteaser"/>
+                                <br/> Kennedy Administration <br/> 1961–1963</a>
+                        </td>
+                        <td style="text-align: center; margin: 7px; padding: 4px; border: 1px solid #dddde8; color: #aaa; max-width: 10em">
+                            <a href="/historicaldocuments/johnson">
+                                <img src="//s3.amazonaws.com/static.history.state.gov/images/ljohnson.jpg" alt="LBJ" width="89" height="76" class="image_borderteaser"/>
+                                <br/> Johnson Administration<br/> 1964–1968</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; margin: 7px; padding: 4px; border: 1px solid #dddde8; color: #aaa;">
+                            <a href="/historicaldocuments/nixon-ford">
+                                <img src="//s3.amazonaws.com/static.history.state.gov/images/rnixon2.jpg" alt="Richard Nixon" width="89" height="76" class="image_borderteaser"/>
+                                <br/> Nixon Administration<br/> 1969–1974</a>
+                        </td>
+                        <td style="text-align: center; margin: 7px; padding: 4px; border: 1px solid #dddde8; color: #aaa;">
+                            <a href="/historicaldocuments/nixon-ford">
+                                <img src="//s3.amazonaws.com/static.history.state.gov/images/gford2.jpg" alt="Gerald Ford" width="89" height="76" class="image_borderteaser"/>
+                                <br/> Ford Administration<br/> 1974–1976</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; margin: 7px; padding: 4px; border: 1px solid #dddde8; color: #aaa;">
+                            <a href="/historicaldocuments/carter">
+                                <img src="//s3.amazonaws.com/static.history.state.gov/images/jcarter.jpg" alt="Jimmy Carter" width="89" height="76" class="image_borderteaser"/>
+                                <br/> Carter Administration<br/> 1977–1980 </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="resources/scripts/app.js"/>
+</div>
