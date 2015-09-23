@@ -334,8 +334,7 @@ declare function app:fix-links($nodes as node()*) {
     for $node in $nodes
     return
         typeswitch($node)
-            case element(a) | element(link)
-            return
+            case element(a) | element(link) return
                 (: skip links with @data-template attributes; otherwise we can run into duplicate @href errors :)
                 if ($node/@data-template) then 
                     $node 
@@ -348,10 +347,9 @@ declare function app:fix-links($nodes as node()*) {
                         )
                     return
                         element { node-name($node) } {
-                            attribute href {$href}, $node/@* except $node/@href, $node/node()
+                            attribute href {$href}, $node/@* except $node/@href, app:fix-links($node/node())
                         }
-            case element(script)
-            return
+            case  element(img) | element(script) return
                 (: skip links with @data-template attributes; otherwise we can run into duplicate @src errors :)
                 if ($node/@data-template) then 
                     $node 
