@@ -105,3 +105,16 @@ declare function app:parse-params($node as node(), $model as map(*)) {
         templates:process($node/node(), $model)
     }
 };
+
+declare function app:available-pages($node as node(), $model as map(*)) {
+    <ul data-template="app:fix-links">
+        {
+        let $available-pages := doc($config:app-root || '/templates/site.html')//div[@id = 'navbar-collapse-1']//a[starts-with(@href, '$app')][not(@class = 'dropdown-toggle')]
+        for $link in $available-pages
+        return
+            <li>
+                {element {node-name($link)} {$link/@href, $link/string()}}
+            </li>
+        }
+    </ul>
+};
