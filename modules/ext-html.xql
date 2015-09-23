@@ -5,7 +5,7 @@ xquery version "3.1";
  :)
 module namespace pmf="http://history.state.gov/ns/site/hsg/pmf-html";
 
-import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xql";
+import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xql";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 

@@ -3,7 +3,7 @@ xquery version "3.0";
 (:~
  : Template functions to render table of contents.
  :)
-module namespace toc="http://history.state.gov/ns/site/hsg/toc";
+module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 

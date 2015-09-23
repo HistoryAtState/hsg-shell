@@ -45,9 +45,9 @@ declare variable $config:odd := "frus.odd";
 
 declare variable $config:module-config := doc($config:odd-source || "/configuration.xml")/*;
 
-declare variable $config:VOLUMES_PATH := "/db/apps/frus/volumes/";
+declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes/";
 
-declare variable $config:VOLUME_METADATA := "/db/apps/frus/bibliography/";
+declare variable $config:FRUS_METADATA_COL := "/db/apps/frus/bibliography/";
 
 (:~
  : Resolve the given path using the current application context.
