@@ -1,6 +1,12 @@
 xquery version "3.0";
 
-module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom";
+module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html";
+
+(:~
+ : "pocom" stands for Principal Officers and Chiefs of Mission
+ : relevant pages are in pages/departmenthistory/people: index, principals-chiefs, secretaries, etc.
+ : draws on data in /db/apps/pocom - installed via pocom.xar
+ :)
 
 import module namespace templates="http://exist-db.org/xquery/templates" ;
 
