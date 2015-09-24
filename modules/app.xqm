@@ -19,7 +19,7 @@ function app:hide-if-empty($node as node(), $model as map(*), $property as xs:st
 declare
     %templates:wrap
 function app:fix-links($node as node(), $model as map(*)) {
-    templates:process(app:fix-links($node/node()), $model)
+    app:fix-links(templates:process($node/node(), $model))
 };
 
 declare function app:fix-links($nodes as node()*) {
@@ -107,7 +107,7 @@ declare function app:parse-params($node as node(), $model as map(*)) {
 };
 
 declare function app:available-pages($node as node(), $model as map(*)) {
-    <ul data-template="app:fix-links">
+    <ul>
         {
         for $section in doc($config:app-root || '/templates/site.html')//div[@id = 'navbar-collapse-1']//a[starts-with(@href, '$app')][not(@class = 'dropdown-toggle')]/ancestor::li[2]
         return
