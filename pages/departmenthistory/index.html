@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.w3.org/1999/xhtml" data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
+<div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div class="row" data-template="pages:load">
         <div class="col-md-3">
             <div class="row">
@@ -9,15 +9,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9" id="volume">
-            <div id="content-inner">
+        <div class="col-md-9">
+            <div id="content-inner" data-template="app:fix-links">
                 <h1>Department History</h1>
                 <p>Since its creation in 1789, the Department of State has carried out a series 
                     of reorganizations and has created new offices and bureaus to deal with 
                     new diplomatic challenges.</p>
                 <p>This portion of our website contains 
                     <a href="$app/departmenthistory/short-history">a short history of the 
-                        department</a>, <a href="/departmenthistory/people/secretaries">biographies 
+                        department</a>, <a href="$app/departmenthistory/people/secretaries">biographies 
                             of the Secretaries of State</a>, a database of 
                     <a href="$app/departmenthistory/people/principals-chiefs">Principal Officers and Chiefs of Mission</a>, and a history of 
                     <a href="$app/departmenthistory/buildings">the buildings of the Department of State</a>.</p>

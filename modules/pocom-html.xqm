@@ -339,7 +339,7 @@ function pocom:person-entry($node as node(), $model as map(*), $person-id as xs:
         let $career := (doc($pocom:CODE-TABLES-COL || '/career-appointee-codes.xml')//item[value = $person/career-type]/label/string(), '(Unknown career type)')[1]
         let $formatted-roles := pocom:format-roles($person)
         return
-            <div xmlns="http://www.w3.org/1999/xhtml">
+            <div>
                 {
                     $career
                     ,
@@ -376,7 +376,7 @@ declare function pocom:format-roles($person) {
                 return
                     pocom:format-role($person, $role-node/*[2])
             return
-                <li xmlns="http://www.w3.org/1999/xhtml">
+                <li>
                     <em>Concurrent Appointments</em>
                     <ol style="list-style-type: lower-alpha">{$sorted-roles}</ol>
                 </li>
@@ -447,14 +447,14 @@ declare function pocom:format-role($person, $role) {
     let $dates := 
             if ($roleclass = 'principal-position') then
                 (
-                if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', pocom:date-to-english($appointed/date))), <br xmlns="http://www.w3.org/1999/xhtml"/>) else (),
-                if ($started/date ne '') then (normalize-space(concat('Entry on Duty: ', $started/note, ' ', pocom:date-to-english($started/date))), <br xmlns="http://www.w3.org/1999/xhtml"/>) else (),
+                if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', pocom:date-to-english($appointed/date))), <br/>) else (),
+                if ($started/date ne '') then (normalize-space(concat('Entry on Duty: ', $started/note, ' ', pocom:date-to-english($started/date))), <br/>) else (),
                 if ($ended/date ne '') then normalize-space(concat('Termination of Appointment: ', $ended/note, ' ', pocom:date-to-english($ended/date) )) else ()
                 )
             else (: if ($roleclass = ('country-mission', 'org-mission')) then :)
                 (
-                if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', pocom:date-to-english($appointed/date))), <br xmlns="http://www.w3.org/1999/xhtml"/>) else (),
-                if ($started/date ne '') then (normalize-space(concat('Presentation of Credentials: ', $started/note, ' ', pocom:date-to-english($started/date))), <br xmlns="http://www.w3.org/1999/xhtml"/>) else (),
+                if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', pocom:date-to-english($appointed/date))), <br/>) else (),
+                if ($started/date ne '') then (normalize-space(concat('Presentation of Credentials: ', $started/note, ' ', pocom:date-to-english($started/date))), <br/>) else (),
                 if ($ended/date ne '') then normalize-space(concat('Termination of Mission: ', $ended/note, ' ', pocom:date-to-english($ended/date) )) else ()
                 )
     let $role-id := $role/id
@@ -463,13 +463,13 @@ declare function pocom:format-role($person, $role) {
         for $note in $role/note 
         return 
             if ($note/@auto-generated) then 
-                <span xmlns="http://www.w3.org/1999/xhtml" style="background-color: #dddde8">{$note/string()}</span> 
+                <span style="background-color: #dddde8">{$note/string()}</span> 
             else 
                 $note/string()
         :)
     order by $startdate
     return
-        <li xmlns="http://www.w3.org/1999/xhtml" id="{$role-id}">
+        <li id="{$role-id}">
             <strong>{
                 if ($roleclass eq 'country-mission') then 
                     <a href="{pocom:chief-country-href($current-territory-id)}">{concat($roletitle, ' (', $whereserved, ')')}</a>
