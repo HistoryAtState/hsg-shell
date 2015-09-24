@@ -29,7 +29,7 @@ declare function pocom:year-from-date($date) {
     else ()
 };
 
-declare function pocom:date-to-english($date) as xs:string {
+declare function pocom:date-to-english($date as xs:string) as xs:string {
     let $english-months := ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
     return
         if ($date castable as xs:date) then 
@@ -53,7 +53,9 @@ declare function pocom:person($person-id) {
     collection($pocom:PEOPLE-COL)/person[id = $person-id]
 };
 
-declare function pocom:person-name-first-last($person-id) {
+declare 
+    %templates:wrap
+function pocom:person-name-first-last($node as node(), $model as map(*), $person-id) {
     let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
     let $namebase := $person/persName
     return
@@ -61,6 +63,26 @@ declare function pocom:person-name-first-last($person-id) {
             ($namebase/forename, $namebase/surname, $namebase/genName),
             ' '
         )
+};
+
+declare 
+    %templates:wrap
+function pocom:person-name-birth-death($node as node(), $model as map(*), $person-id) {
+    let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
+    let $namebase := $person/persName
+    let $dates := concat($person/birth, '–', $person/death)
+    let $birth-death := 
+        concat(
+            if ($person/birth ne '') then $person/birth else '?', 
+            '–', 
+            if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death
+            )
+    return
+        string-join(
+            ($namebase/forename, $namebase/surname, $namebase/genName, '(' || $birth-death || ')'),
+            ' '
+        )
+        
 };
 
 declare function pocom:person-href($person-id) {
@@ -72,7 +94,7 @@ declare function pocom:secretaries($node as node(), $model as map(*)) {
         {
             for $secretary in doc($pocom:POSITIONS-PRINCIPALS-COL || '/secretary.xml')//principal[not(@treatAsConsecutive)]
             let $person-id := $secretary/person-id
-            let $name := pocom:person-name-first-last($person-id)
+            let $name := pocom:person-name-first-last($node, $model, $person-id)
             let $startyear := pocom:year-from-date($secretary/started/date)
             let $endyear := 
                 if ($secretary/following-sibling::principal[1][@treatAsConsecutive]) then
@@ -119,7 +141,7 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
             {
             for $principal in ($role//principal, $role//chief)
             let $person-id := $principal/person-id
-            let $name := pocom:person-name-first-last($person-id)
+            let $name := pocom:person-name-first-last($node, $model, $person-id)
             let $startdate := 
                 (
                 $principal/started/date,
@@ -235,13 +257,12 @@ declare function pocom:chiefs-by-role-or-country-id($node as node(), $model as m
         if ($role) then
             pocom:principal-officers-by-role-id($node, $model, $role-or-country-id)
         else
-            pocom:chiefs-by-country-id($role-or-country-id)
+            pocom:chiefs-by-country-id($node, $model, $role-or-country-id)
 };
 
-declare function pocom:chiefs-by-country-id($country-id) {
+declare function pocom:chiefs-by-country-id($node as node(), $model as map(*), $country-id as xs:string) {
     let $country := collection($pocom:OLD-COUNTRIES-COL)/country[id eq $country-id]
     let $country-name := $country/label/text()
-    let $country-iso2 := $country/iso2/text()
     let $country-mission := collection($pocom:MISSIONS-COUNTRIES-COL)/country-mission[territory-id eq $country-id]
     let $chiefs-entries := $country-mission/chiefs/*
     let $other-nominees := $country-mission/other-nominees/chief
@@ -255,17 +276,14 @@ declare function pocom:chiefs-by-country-id($country-id) {
                 if ($chief-entry/self::chief) then
                     let $chief := $chief-entry
                     let $chief-id := $chief/person-id
-                    let $person := $people-collection/person[id = $chief-id]
-                    let $persName := $person/persName
-                    let $name := concat($persName/forename, ' ', $persName/surname, if ($persName/genName) then concat(' ', $persName/genName) else ())
-                    let $birth-death := concat(if ($person/birth ne '') then $person/birth else '?', '–', if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death)
+                    let $name-birth-death := pocom:person-name-birth-death($node, $model, $chief-id)
                     let $startdate := 
                         (
                         $chief/started/date,
                         $chief/appointed/date
                         )[. ne ''][1]
-                    let $start-date-english := pocom:date-to-english($startdate)
-                    let $end-date-english := pocom:date-to-english($chief/ended/date)
+                    let $start-date-english := if ($startdate) then pocom:date-to-english($startdate) else ()
+                    let $end-date-english := if ($chief/ended/date) then pocom:date-to-english($chief/ended/date) else ()
                     let $position-label := $positions-collection/role[id eq $chief/role-title-id]/names/singular/string()
                     (: No more ordering! - we're relying on the document order of the country mission file :)
                     (:order by $startdate:)
@@ -274,7 +292,7 @@ declare function pocom:chiefs-by-country-id($country-id) {
                     let $is-on-todays-map := $current-territory-id eq $contemporary-territory-id
                     let $territory-name := if ($is-on-todays-map) then () else concat(', ', gsh:territory-id-to-short-name($contemporary-territory-id))
                     return
-                        <li style="padding-bottom: .5em"><a href="{pocom:person-href($chief-id)}">{data($name)} ({$birth-death})</a>
+                        <li style="padding-bottom: .5em"><a href="{pocom:person-href($chief-id)}">{$name-birth-death}</a>
                             <ul><li>{$position-label} {$territory-name}, {if ($start-date-english = $end-date-english) then $start-date-english else concat($start-date-english, '–', $end-date-english)}</li></ul>
                         </li>
             else (: if ($chief-entry/self::mission-note) then :)
@@ -299,10 +317,173 @@ declare function pocom:chiefs-by-country-id($country-id) {
             }
         </ul>
     return
-        <div class="content">
+        <div>
             <h3 id="chiefs-of-mission">Chiefs of Mission</h3>
             {$chieflisting}
             <h3 id="other-nominees">Other Nominees</h3>
             {if ($other-nominees) then $other-nominee-listing else <p><em>None</em></p>}
         </div>
+};
+
+declare 
+    %templates:wrap 
+function pocom:person-entry($node as node(), $model as map(*), $person-id as xs:string) {
+(:    if (doc-available(concat('/db/cms/apps/tei-content/data/secretary-bios/', $person-id, '.xml'))) then:)
+(:        dept:show-biography() :)
+(:    else:)
+        let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
+        let $residence := 
+            for $state-code in $person/residence/state-id[. ne '']
+            let $state-name := doc($pocom:CODE-TABLES-COL || '/us-state-codes.xml')//item[value = $state-code]/label
+            return $state-name
+        let $career := (doc($pocom:CODE-TABLES-COL || '/career-appointee-codes.xml')//item[value = $person/career-type]/label/string(), '(Unknown career type)')[1]
+        let $formatted-roles := pocom:format-roles($person)
+        return
+            <div xmlns="http://www.w3.org/1999/xhtml">
+                {
+                    $career
+                    ,
+                    if (empty($residence)) then 
+                        ()
+                    else if (count($residence) gt 1) then 
+                        (<br/>, concat('States of Residence: ', string-join($residence, ', ')) )
+                    else 
+                        (<br/>, concat('State of Residence: ', $residence) )
+                    ,
+                    <ol>{$formatted-roles}</ol>
+                }
+            </div>
+};
+
+declare function pocom:format-roles($person) {
+    let $person-id := $person/id
+    let $concurrent-appointments := collection($pocom:CONCURRENT-APPOINTMENTS-COL)/concurrent-appointments[person-id = $person-id]
+    let $roles := collection($pocom:DATA-COL)//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
+    let $concurrent-groups :=
+        for $group in $concurrent-appointments 
+        let $concurrent-roles := $roles[id = $group/chief-id]
+        return
+            <group>{pocom:sort-roles($concurrent-roles) ! (: preserve all info needed to reconstruct position description with dept:format-role() :) element {root(.)/*/name()} {./preceding::territory-id, element {./name()} {./*, <note auto-generated="yes">{pocom:summarize-other-concurrent-appointments($group/id, ./id)}</note>}}}</group>
+    let $non-concurrent := pocom:sort-roles($roles[not(id = $concurrent-appointments/chief-id)])
+    let $full-listing := pocom:sort-roles(($concurrent-groups, $non-concurrent))
+    for $item in $full-listing
+    return
+        if ($item/self::group) then 
+            let $sorted-roles := 
+                for $role in $item/*
+                (: delicately construct a new root node containing all of the info needed to reconstruct position description with dept:format-role() :)
+                let $role-node := element {$role/name()} {$role/*}
+                return
+                    pocom:format-role($person, $role-node/*[2])
+            return
+                <li xmlns="http://www.w3.org/1999/xhtml">
+                    <em>Concurrent Appointments</em>
+                    <ol style="list-style-type: lower-alpha">{$sorted-roles}</ol>
+                </li>
+        else
+            pocom:format-role($person, $item)
+};
+
+declare function pocom:sort-roles($roles) {
+    (: why, oh why, does sorting not work without the namespace wildcard?! :)
+    for $role in $roles
+    let $sort-date := subsequence($role//*:date[. ne ''], 1, 1)
+    order by $sort-date
+    return 
+        $role
+};
+
+declare function pocom:join-with-and($words as xs:string+) as xs:string {
+    let $count := count($words)
+    return
+        if ($count = 1) then 
+            $words
+        else if ($count = 2) then
+            string-join($words, ' and ')
+        else
+            concat(
+                string-join(subsequence($words, 1, $count - 1), ', '),
+                ', and ',
+                $words[last()]
+            )
+};
+ 
+declare function pocom:summarize-concurrent-appointments($id as xs:string) {
+    pocom:summarize-other-concurrent-appointments($id, ())
+};
+ 
+declare function pocom:summarize-other-concurrent-appointments($id as xs:string, $excluded-id as xs:string?) {
+    let $doc := collection($pocom:CONCURRENT-APPOINTMENTS-COL)/concurrent-appointments[id = $id]
+    let $appointments := collection($pocom:MISSIONS-COUNTRIES-COL)//chief[id = $doc/chief-id[not(. = $excluded-id)]]
+    let $countries := pocom:join-with-and($appointments/contemporary-territory-id ! gsh:territory-id-to-short-name(.))
+    let $resident-at := gsh:locale-id-to-short-name($doc/resident-at/locale-id)
+    let $complete-summary := concat(if ($excluded-id) then 'Also accredited to ' else 'Accredited to ', $countries, '; resident at ', $resident-at, '.')
+    return
+        $complete-summary
+};
+
+declare function pocom:format-role($person, $role) {
+    let $role-title-id := $role/role-title-id
+    let $roleinfo := collection($pocom:DATA-COL)/*[id = $role-title-id]
+    let $roletitle := $roleinfo/names/singular/text()
+    let $rolesubtype := $roleinfo/category
+    let $roleclass := root($role)/*/name()
+    let $current-territory-id := root($role)/*/territory-id
+    let $contemporary-territory-id := $role/contemporary-territory-id
+    let $whereserved := if ($contemporary-territory-id) then (gsh:territory-id-to-short-name($contemporary-territory-id), (: fall back on original country ID in case it's different than GSH's country ID :) collection($pocom:OLD-COUNTRIES-COL)//id[. = $contemporary-territory-id]/label)[1] else ()
+    let $persName := $person/persName
+    let $name := concat($persName/forename, ' ', $persName/surname, if ($persName/genName) then concat(' ', $persName/genName) else ())
+    let $birth-death := concat(if ($person/birth ne '') then $person/birth else '?', '–', if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death)
+    let $appointed := $role/appointed
+    let $started := $role/started
+    let $ended := $role/ended
+    let $startdate := 
+        (
+        $started/date,
+        $appointed/date
+        )[. ne ''][1]
+    let $start-date-english := pocom:date-to-english($startdate)
+    let $end-date-english := pocom:date-to-english($ended/date)
+    let $dates := 
+            if ($roleclass = 'principal-position') then
+                (
+                if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', pocom:date-to-english($appointed/date))), <br xmlns="http://www.w3.org/1999/xhtml"/>) else (),
+                if ($started/date ne '') then (normalize-space(concat('Entry on Duty: ', $started/note, ' ', pocom:date-to-english($started/date))), <br xmlns="http://www.w3.org/1999/xhtml"/>) else (),
+                if ($ended/date ne '') then normalize-space(concat('Termination of Appointment: ', $ended/note, ' ', pocom:date-to-english($ended/date) )) else ()
+                )
+            else (: if ($roleclass = ('country-mission', 'org-mission')) then :)
+                (
+                if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', pocom:date-to-english($appointed/date))), <br xmlns="http://www.w3.org/1999/xhtml"/>) else (),
+                if ($started/date ne '') then (normalize-space(concat('Presentation of Credentials: ', $started/note, ' ', pocom:date-to-english($started/date))), <br xmlns="http://www.w3.org/1999/xhtml"/>) else (),
+                if ($ended/date ne '') then normalize-space(concat('Termination of Mission: ', $ended/note, ' ', pocom:date-to-english($ended/date) )) else ()
+                )
+    let $role-id := $role/id
+    let $notes := string-join($role/note, ' ')
+        (:
+        for $note in $role/note 
+        return 
+            if ($note/@auto-generated) then 
+                <span xmlns="http://www.w3.org/1999/xhtml" style="background-color: #dddde8">{$note/string()}</span> 
+            else 
+                $note/string()
+        :)
+    order by $startdate
+    return
+        <li xmlns="http://www.w3.org/1999/xhtml" id="{$role-id}">
+            <strong>{
+                if ($roleclass eq 'country-mission') then 
+                    <a href="{pocom:chief-country-href($current-territory-id)}">{concat($roletitle, ' (', $whereserved, ')')}</a>
+                else if ($roleclass eq 'org-mission') then
+                    <a href="{pocom:chief-role-href($role-title-id)}">{$roletitle}</a>
+                else (: if ($roleclasss eq 'principal-position') then :)
+                    <a href="{pocom:principal-role-href($role-title-id)}">{$roletitle}</a>
+            }</strong>
+            <br/>
+            {
+            $dates,
+            if (normalize-space($notes) ne '') then 
+                <ul><li><em>{$notes ! (., ' ')}</em></li></ul> 
+            else ()
+            }
+        </li>
 };
