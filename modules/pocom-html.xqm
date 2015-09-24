@@ -13,6 +13,7 @@ import module namespace templates="http://exist-db.org/xquery/templates" ;
 declare variable $pocom:DATA-COL := '/db/apps/pocom';
 declare variable $pocom:PEOPLE-COL := $pocom:DATA-COL || '/people';
 declare variable $pocom:POSITIONS-PRINCIPALS-COL := $pocom:DATA-COL || '/positions-principals';
+declare variable $pocom:CODE-TABLES-COL := $pocom:DATA-COL || '/code-tables';
 
 declare function pocom:year-from-date($date) {
     if ($date castable as xs:date) then 
@@ -57,4 +58,75 @@ declare function pocom:secretaries($node as node(), $model as map(*)) {
                 <li><a href="{pocom:person-href($person-id)}">{$name}</a> ({$years})</li>
         }
     </ol>
+};
+
+declare function pocom:principal-role-href($role-id) {
+    '$app/departmenthistory/people/principalofficers/' || $role-id
+};
+
+declare function pocom:principal-officers($node as node(), $model as map(*)) {
+    <ul>
+        {
+            for $rolecategory in doc($pocom:CODE-TABLES-COL || '/role-category-codes.xml')//item[not(value = ('', 'country', 'international-organization'))]
+            return
+                <li>
+                    {$rolecategory/label/string()}
+                    <ul>
+                        {
+                            for $roles in collection($pocom:POSITIONS-PRINCIPALS-COL)/principal-position[category eq $rolecategory/value]
+                            let $roleid := $roles/id
+                            let $rolename := $roles/names/plural
+                            order by $rolename
+                            return
+                                <li><a href="{pocom:principal-role-href($roleid)}">{$rolename/string()}</a></li>
+                        }
+                    </ul>
+                </li>
+        }
+    </ul>
+};
+
+declare function pocom:principal-officers-by-role-id($node as node(), $model as map(*), $role-id as xs:string) {
+    let $role := collection($pocom:DATA-COL)//id[. = $role-id]/..
+    let $rolename := $role/names/plural
+    let $principalslisting :=
+        <ul>
+            {
+            for $principal in ($role//principal, $role//chief)
+            let $person-id := $principal/person-id
+            let $name := pocom:person-name-first-last($person-id)
+            let $startdate := 
+                (
+                $principal/started/date,
+                $principal/appointed/date
+                )[. ne ''][1]
+            let $startyear := pocom:year-from-date($startdate)
+            let $endyear := pocom:year-from-date($principal/ended/date)
+            let $years := if ($startyear = $endyear) then $startyear else concat($startyear, '–', $endyear)
+            let $note := $principal/note/text() 
+                (: If we want to show the note in this list add this before the </li>:
+                 :     {if ($note) then (<ul><li><em>{$note}</em></li></ul>) else ''}
+                 :)
+            return
+                <li><a href="{pocom:person-href($person-id)}">{$name}</a> ({$years})</li>
+            }
+        </ul>
+    let $description := $role/description
+    return
+        (
+            if ($description) then <div style="font-style: italic">{$description/node()}</div> else ()
+            ,
+            $principalslisting
+        )
+};
+
+declare 
+    %templates:wrap 
+function pocom:role-label($node as node(), $model as map(*), $role-id as xs:string, $form as xs:string) {
+    let $role := collection($pocom:DATA-COL)//id[. = $role-id]/..
+    return
+        if ($form = 'plural') then
+            $role/names/plural/string()
+        else
+            $role/names/singular/string()
 };
