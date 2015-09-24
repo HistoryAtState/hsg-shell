@@ -85,7 +85,8 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
     			<forward url="{$exist:controller}/modules/view.xql"/>
     		</error-handler>
         </dispatch>
-        
+
+(: handle requests for countries section :)
 else if (matches($exist:path, '^/countries/?')) then
     let $log := console:log('using countries for exist:path: ' || $exist:path)
     let $fragments := tokenize(substring-after($exist:path, '/countries/'), '/')[. ne '']
@@ -108,6 +109,7 @@ else if (matches($exist:path, '^/countries/?')) then
     		</error-handler>
         </dispatch>
 
+(: handle requests for departmenthistory section :)
 else if (matches($exist:path, '^/departmenthistory/?')) then
     let $log := console:log('using departmenthistory for exist:path: ' || $exist:path)
     let $fragments := tokenize(substring-after($exist:path, '/departmenthistory/'), '/')[. ne '']
@@ -283,6 +285,8 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                 			<forward url="{$exist:controller}/modules/view.xql"/>
                 		</error-handler>
                     </dispatch>
+
+(: fallback: return 404 :)
 else
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller}/pages/404.html"/>
