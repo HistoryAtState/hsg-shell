@@ -42,18 +42,18 @@ declare function pages:load-xml($view as xs:string, $id as xs:string?, $volume a
     let $block :=
     	if ($view = "div") then
             if ($id) then
-                let $doc := doc($config:VOLUMES_PATH || "/" || $volume || ".xml")/tei:TEI
+                let $doc := doc($config:FRUS_VOLUMES_COL || "/" || $volume || ".xml")/tei:TEI
                 return 
                     $doc/id($id)
             else
-                let $div := (doc($config:VOLUMES_PATH || "/" || $volume || ".xml")//tei:div)[1]
+                let $div := (doc($config:FRUS_VOLUMES_COL || "/" || $volume || ".xml")//tei:div)[1]
                 return
                     if ($div) then
                         $div
                     else
-                        doc($config:VOLUMES_PATH || "/" || $volume || ".xml")//tei:body
+                        doc($config:FRUS_VOLUMES_COL || "/" || $volume || ".xml")//tei:body
         else
-            doc($config:VOLUMES_PATH || "/" || $volume || ".xml")//tei:text
+            doc($config:FRUS_VOLUMES_COL || "/" || $volume || ".xml")//tei:text
     return
         if (empty($block)) then (
             request:set-attribute("hsg-shell.errcode", 404),
