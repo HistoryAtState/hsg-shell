@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
-    <div data-template="app:load-administration">
+    <div data-template="frus:load-administration">
         <div class="row">
             <ol class="breadcrumb">
                 <li>
@@ -10,7 +10,7 @@
                     <a href=".">Historical Documents</a>
                 </li>
                 <li>
-                    <a href="#" data-template="app:administration-name"/>
+                    <a href="#" data-template="frus:administration-name"/>
                 </li>
             </ol>
         </div>
@@ -20,11 +20,11 @@
                     <div id="sections" class="col-md-12 panel panel-default">
                         <h2>Historical Documents</h2>
                         <label for="select-volume">Volumes</label>
-                        <select id="select-volume" name="volumes" data-template="app:volumes" class="form-control">
+                        <select id="select-volume" name="volumes" data-template="frus:volumes" class="form-control">
                             <option>Choose Volume</option>
                         </select>
                         <label for="select-administration">Browse by Administration</label>
-                        <select id="select-administration" name="administrations" data-template="app:administrations" class="form-control">
+                        <select id="select-administration" name="administrations" data-template="frus:administrations" class="form-control">
                             <option>Choose Administration</option>
                         </select>
                     </div>
@@ -32,35 +32,35 @@
             </div>
             <div class="col-md-9" id="volume">
                 <div id="content-inner">
-                    <h1 class="titleStmt1" data-template="app:administration-name"/>
-                    <ol data-template="app:volumes-pre-truman">
+                    <h1 class="titleStmt1" data-template="frus:administration-name"/>
+                    <ol data-template="frus:volumes-pre-truman">
                         <li>
                             <a href="${vol-id}" data-template="app:parse-params">
-                                <span data-template="app:volume-title"/>
+                                <span data-template="frus:volume-title"/>
                             </a>
                         </li>
                     </ol>
-                    <div data-template="app:volumes-by-administration-group">
-                        <p data-template="app:group-info"/>
+                    <div data-template="frus:volumes-by-administration-group">
+                        <p data-template="frus:group-info"/>
                         <h3 id="${group}-volumes" data-template="app:parse-params">
-                            <span data-template="app:administration-group-code"/> volumes</h3>
-                        <div data-template="app:volumes-by-group">
-                            <h4 data-template="app:series-title"/>
-                            <ol data-template="app:series-volumes">
+                            <span data-template="frus:administration-group-code"/> volumes</h3>
+                        <div data-template="frus:volumes-by-group">
+                            <h4 data-template="frus:series-title"/>
+                            <ol data-template="frus:series-volumes">
                                 <li>
                                     <a href="${vol-id}" data-template="app:parse-params">
-                                        <span data-template="app:volume-title"/>
+                                        <span data-template="frus:volume-title"/>
                                     </a>
                                 </li>
                             </ol>
                         </div>
                     </div>
-                    <div data-template="app:volumes-by-administration">
-                        <h4 data-template="app:series-title"/>
-                        <ol data-template="app:series-volumes">
+                    <div data-template="frus:volumes-by-administration">
+                        <h4 data-template="frus:series-title"/>
+                        <ol data-template="frus:series-volumes">
                             <li>
                                 <a href="${vol-id}" data-template="app:parse-params">
-                                    <span data-template="app:volume-title"/>
+                                    <span data-template="frus:volume-title"/>
                                 </a>
                             </li>
                         </ol>

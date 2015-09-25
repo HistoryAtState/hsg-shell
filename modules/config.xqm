@@ -49,6 +49,8 @@ declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes/";
 
 declare variable $config:FRUS_METADATA_COL := "/db/apps/frus/bibliography/";
 
+declare variable $config:FRUS_CODE_TABLES_COL := "/db/apps/frus/code-tables/";
+
 (:~
  : Resolve the given path using the current application context.
  : If the app resides in the file system,

@@ -14,7 +14,7 @@ function fh:volumes($node as node(), $model as map(*), $volume as xs:string?) {
     $node/*,
     for $vol in collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]
     let $vol-id := substring-before(util:document-name($vol), '.xml')
-    let $volume-metadata := collection($config:FRUS_METADATA)/volume[@id = $vol-id]
+    let $volume-metadata := collection($config:FRUS_METADATA_COL)/volume[@id = $vol-id]
     let $volume-title := $volume-metadata/title[@type='volume']
     let $volume-number := $volume-metadata/title[@type='volumenumber']
     let $sub-series-n := $volume-metadata/title[@type='sub-series']/@n
@@ -50,7 +50,7 @@ function fh:administrations($node as node(), $model as map(*), $volume as xs:str
     $node/*,
     let $published-vols := collection($config:FRUS_METADATA_COL)//volume[publication-status eq 'published']
     let $administrations := distinct-values($published-vols//administration)
-    let $code-table-items := doc('/db/cms/apps/volumes/code-tables/administration-code-table.xml')//item[value = $administrations]
+    let $code-table-items := doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $administrations]
     let $choices :=
         for $admins in $code-table-items
         let $adminname := $admins/*:label
@@ -58,7 +58,7 @@ function fh:administrations($node as node(), $model as map(*), $volume as xs:str
         let $selected := if ($admincode = $volume) then attribute selected {"selected"} else ()
         return 
             element option { 
-                attribute value { "./historicaldocuments/" || $admincode },
+                attribute value { "$app/historicaldocuments/" || $admincode },
                 $selected,
                 element label {$adminname/string()}
             }
@@ -69,9 +69,9 @@ function fh:administrations($node as node(), $model as map(*), $volume as xs:str
 declare
     %templates:wrap
 function fh:load-administration($node as node(), $model as map(*), $volume as xs:string) {
-    let $admin := doc('/db/cms/apps/volumes/code-tables/administration-code-table.xml')//item[value = $volume]
-    let $published-vols-in-admin := collection('/db/cms/apps/volumes/data')//volume[administration eq $volume][publication-status eq 'published']
-    let $grouping-codes := doc('/db/cms/apps/volumes/code-tables/grouping-code-table.xml')//item
+    let $admin := doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $volume]
+    let $published-vols-in-admin := collection($config:FRUS_METADATA_COL)//volume[administration eq $volume][publication-status eq 'published']
+    let $grouping-codes := doc($config:FRUS_CODE_TABLES_COL || '/grouping-code-table.xml')//item
     let $groupings-in-use := 
         for $g in distinct-values($published-vols-in-admin/grouping[@administration/tokenize(., '\s+') = $volume]) order by index-of($grouping-codes/value, $g) return $g
     return
