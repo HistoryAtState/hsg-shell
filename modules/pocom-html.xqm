@@ -393,6 +393,55 @@ declare function pocom:sort-roles($roles) {
         $role
 };
 
+declare function pocom:format-index($node as node(), $model as map(*), $people as element(person)+, $year as xs:integer?) {
+    <ul>{
+        for $person in $people
+        let $person-id := $person/id
+        let $url := concat('$app/departmenthistory/people/', $person-id)
+        let $namebase := $person/persName
+        let $name := concat($namebase/surname, ', ', $namebase/forename, if ($namebase/genName ne '') then concat(', ', $namebase/genName) else ())
+        let $dates := concat(if ($person/birth ne '') then $person/birth else '?', '–', if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death)
+        let $career-indicator := if ($person/career-type = ('fso', 'both')) then '*' else ()
+        return
+            <li style="padding: .5em 0">{$career-indicator}<a href="{$url}">{$name}</a> ({$dates})
+                <ul>{
+                    let $roles := collection($pocom:PEOPLE-COL)//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
+                    for $role in $roles
+                    let $contemporary-territory-id := $role/contemporary-territory-id
+                    let $title := concat(pocom:role-label($node, $model, $role/role-title-id, 'singular'), if ($contemporary-territory-id) then concat(', ', gsh:territory-id-to-short-name($contemporary-territory-id)) else ())
+                    let $years := 
+                        for $date in ($role/started/date, $role/ended/date)
+                        return 
+                            if ($date castable as xs:date) then 
+                                year-from-date(xs:date($date)) 
+                            else if (matches($date, '^\d{4}-\d{2}$')) then
+                                xs:integer(substring($date, 1, 4))
+                            else ()
+                    let $years-summary := 
+                        if (exists($years)) then 
+                            let $start-year := min($years)
+                            let $end-year := max($years)
+                            return 
+                                if ($start-year ne $end-year) then concat($start-year, '–', $end-year) else $start-year
+                        else if ($role[not(.//date castable as xs:date)]/note) then
+                            string-join($role[not(.//date castable as xs:date)]/note/text(), '; ')
+                        else
+                            'no date on record'
+                    let $event-is-relevant := 
+                        if (exists($dates)) then 
+                            let $start-year := min($years)
+                            let $end-year := max($years)
+                            return
+                                $year ge $start-year and $year le $end-year
+                        else false()
+                    order by $years[1]
+                    return
+                        <li>{if ($event-is-relevant) then attribute style { 'font-weight: bold' } else ()}{$title} ({$years-summary})</li>
+                }</ul>
+            </li>
+    }</ul>
+};
+
 declare function pocom:join-with-and($words as xs:string+) as xs:string {
     let $count := count($words)
     return
@@ -486,4 +535,59 @@ declare function pocom:format-role($person, $role) {
             else ()
             }
         </li>
+};
+
+declare function pocom:people-list($node as node(), $model as map(*)) {
+    let $surnames := collection($pocom:PEOPLE-COL)//surname
+    let $letters := 
+        for $letter in 
+            distinct-values(
+                for $x in $surnames/substring(., 1, 1) 
+                return lower-case($x)
+            )
+        order by $letter 
+        return $letter
+    return
+        <ul class="numbersnav">{
+            for $letter in $letters
+            return
+                <li><a href="{concat('$app/departmenthistory/people/by-name/', $letter)}">{upper-case($letter)}</a></li>
+        }</ul>
+};
+
+declare function pocom:people-list-by-letter($node as node(), $model as map(*), $letter as xs:string) {
+    let $chiefs := 
+        for $chief in collection(concat($pocom:PEOPLE-COL, '/', $letter))/person 
+        order by $chief/id 
+        return $chief
+    return
+        pocom:format-index($node, $model, $chiefs, ())
+};
+
+declare function pocom:upper-case-letter($node as node(), $model as map(*), $letter as xs:string) {
+    upper-case($letter)
+};
+
+declare function pocom:people-list-prev-next-letter($node as node(), $model as map(*), $letter as xs:string) {
+    let $surnames := collection($pocom:PEOPLE-COL)//surname
+    let $letters := for $letter in distinct-values(for $x in $surnames/substring(., 1, 1) return lower-case($x)) order by $letter return $letter
+    let $prev := if ($letter gt $letters[1]) then $letters[index-of($letters, $letter) - 1] else ()
+    let $next := if ($letter lt $letters[last()]) then $letters[index-of($letters, $letter) + 1] else ()
+    let $prevlink := 
+        if ($prev) then 
+            <li class="left"><a href="{concat('$app/departmenthistory/people/by-name/', $prev)}">« {upper-case($prev)}</a></li>
+        else ()
+    let $nextlink := 
+        if ($next) then
+            <li class="right"><a href="{concat('$app/departmenthistory/people/by-name/', $next)}">{upper-case($next)} »</a></li>
+        else ()
+    return 
+        (
+        <div id="contentnav">
+            <ul>
+                {$prevlink, $nextlink}
+            </ul> 
+        </div>,
+        <!-- close contentnav -->
+        )
 };
