@@ -8,10 +8,12 @@ declare variable $exist:controller external;
 declare variable $exist:prefix external;
 declare variable $exist:root external;
 
+(: 
 console:log('request:get-uri(): ' || request:get-uri())
 ,
 console:log('$exist:path: ' || $exist:path)
 ,
+:)
 (: redirect requests for app root ('') to '/' :)
 if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -52,7 +54,6 @@ else if (ends-with($exist:resource, ".xql")) then
 
 (: handle requests for historicaldocuments section :)
 else if (matches($exist:path, '^/historicaldocuments/?')) then
-    let $log := console:log('using historicaldocuments for exist:path: ' || $exist:path)
     let $match := analyze-string($exist:path, "^/historicaldocuments/?([^/]+)/?(.*)$")
     let $volume := $match//fn:group[@nr = "1"]/string()
     let $id := $match//fn:group[@nr = "2"]/string()
@@ -70,7 +71,6 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
         (: section landing page :)
         else (: if (not($volume) and not($id)) then :)
             'historicaldocuments/index.html' 
-    let $log := console:log('volume: ' || $volume || ' id: ' || $id || ' page: ' || $page)
     return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <forward url="{$exist:controller}/pages/{$page}"/>
@@ -88,12 +88,10 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
 
 (: handle requests for countries section :)
 else if (matches($exist:path, '^/countries/?')) then
-    let $log := console:log('using countries for exist:path: ' || $exist:path)
     let $fragments := tokenize(substring-after($exist:path, '/countries/'), '/')[. ne '']
     let $country := $fragments[1]
     let $id := $fragments[2]
     let $page := 'countries/index.html' 
-    let $log := console:log('country: ' || $country || ' id: ' || $id || ' page: ' || $page)
     return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <forward url="{$exist:controller}/pages/{$page}"/>
@@ -111,7 +109,6 @@ else if (matches($exist:path, '^/countries/?')) then
 
 (: handle requests for departmenthistory section :)
 else if (matches($exist:path, '^/departmenthistory/?')) then
-    let $log := console:log('using departmenthistory for exist:path: ' || $exist:path)
     let $fragments := tokenize(substring-after($exist:path, '/departmenthistory/'), '/')[. ne '']
     return
         switch ($fragments[1])
@@ -239,7 +236,6 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                     default return 
                                         let $page := 'departmenthistory/people/chiefsofmission/by-role-or-country-id.html'
                                         let $role-or-country-id := $fragments[3]
-                                        let $log := console:log('chiefsofmission: looking for role or country id: ' || $role-or-country-id)
                                         return
                                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                                 <forward url="{$exist:controller}/pages/{$page}"/>
