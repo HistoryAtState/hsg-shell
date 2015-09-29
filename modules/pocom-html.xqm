@@ -537,7 +537,7 @@ declare function pocom:format-role($person, $role) {
         </li>
 };
 
-declare function pocom:people-list($node as node(), $model as map(*)) {
+declare function pocom:letters($node as node(), $model as map(*)) {
     let $surnames := collection($pocom:PEOPLE-COL)//surname
     let $letters := 
         for $letter in 
@@ -555,7 +555,7 @@ declare function pocom:people-list($node as node(), $model as map(*)) {
         }</ul>
 };
 
-declare function pocom:people-list-by-letter($node as node(), $model as map(*), $letter as xs:string) {
+declare function pocom:letter($node as node(), $model as map(*), $letter as xs:string) {
     let $chiefs := 
         for $chief in collection(concat($pocom:PEOPLE-COL, '/', $letter))/person 
         order by $chief/id 
@@ -564,11 +564,15 @@ declare function pocom:people-list-by-letter($node as node(), $model as map(*), 
         pocom:format-index($node, $model, $chiefs, ())
 };
 
-declare function pocom:upper-case-letter($node as node(), $model as map(*), $letter as xs:string) {
+declare function pocom:letter-requested($node as node(), $model as map(*), $letter as xs:string) {
     upper-case($letter)
 };
 
-declare function pocom:people-list-prev-next-letter($node as node(), $model as map(*), $letter as xs:string) {
+declare function pocom:year-requested($node as node(), $model as map(*), $year as xs:string) {
+    $year
+};
+
+declare function pocom:letters-prev-next-nav($node as node(), $model as map(*), $letter as xs:string) {
     let $surnames := collection($pocom:PEOPLE-COL)//surname
     let $letters := for $letter in distinct-values(for $x in $surnames/substring(., 1, 1) return lower-case($x)) order by $letter return $letter
     let $prev := if ($letter gt $letters[1]) then $letters[index-of($letters, $letter) - 1] else ()
