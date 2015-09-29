@@ -595,3 +595,99 @@ declare function pocom:letters-prev-next-nav($node as node(), $model as map(*), 
         <!-- close contentnav -->
         )
 };
+
+declare function pocom:years($node as node(), $model as map(*)) {
+    let $all-years := distinct-values(for $date in collection($pocom:DATA-COL)//date[not(. = '')] return xs:integer(substring($date, 1, 4)))
+    let $years := min($all-years) to max($all-years)
+    let $decades := distinct-values(for $year in $years return substring($year, 1, 3))
+    let $count := count($decades)
+    let $one-third := $count div 3
+    let $first-third := (1 to xs:integer(floor($one-third)))
+    let $second-third := (xs:integer(ceiling($one-third)) to xs:integer(floor($one-third * 2)))
+    let $last-third := (xs:integer(ceiling(($one-third * 2))) to $count)
+    return
+        <div class="row">
+            <div class="col-md-4">{
+                for $decade in $decades[position() = $first-third]
+                return
+                    <div>
+                        <h3>{concat($decade, '0s')}</h3>
+                        <ul>{
+                            for $year in $years[starts-with(., $decade)]
+                            return
+                               <li><a href="{concat('$app/departmenthistory/people/by-year/', $year)}">{$year}</a></li>
+                        }</ul>
+                    </div>
+            }</div>
+            <div class="col-md-4">{
+                for $decade in $decades[position() = $second-third]
+                return
+                    <div>
+                        <h3>{concat($decade, '0s')}</h3>
+                        <ul>{
+                            for $year in $years[starts-with(., $decade)]
+                            return
+                               <li><a href="{concat('$app/departmenthistory/people/by-year/', $year)}">{$year}</a></li>
+                        }</ul>
+                    </div>
+            }</div>
+            <div class="col-md-4">{
+                for $decade in $decades[position() = $last-third]
+                return
+                    <div>
+                        <h3>{concat($decade, '0s')}</h3>
+                        <ul>{
+                            for $year in $years[starts-with(., $decade)]
+                            return
+                               <li><a href="{concat('$app/departmenthistory/people/by-year/', $year)}">{$year}</a></li>
+                        }</ul>
+                    </div>
+            }</div>
+        </div>
+};
+
+declare function pocom:year($node as node(), $model as map(*), $year as xs:integer) { 
+    let $roles := collection($pocom:DATA-COL)//date/../..
+    let $roles-in-year := 
+        for $role in $roles
+        let $dates := 
+            for $date in $role//date 
+            return 
+                if ($date castable as xs:date) then 
+                    year-from-date(xs:date($date)) 
+                else ()
+        return 
+            if (exists($dates)) then 
+                let $start-year:= min($dates)
+                let $end-year := max($dates)
+                return 
+                    if ($start-year le $year and $year le $end-year) then 
+                        $role 
+                    else ()
+            else ()
+    let $people-in-year-ids := $roles-in-year/person-id
+    let $people := collection($pocom:PEOPLE-COL)/person[id = $people-in-year-ids]
+    return
+        pocom:format-index($node, $model, $people, $year)
+};
+
+declare function pocom:years-prev-next-nav($node as node(), $model as map(*), $year as xs:integer) {
+    let $first-year := 1778 (:min($years):)
+    let $last-year := year-from-date(current-date()) (:max($years):)
+    let $prev := if ($year gt $first-year) then $year - 1 else ()
+    let $next := if ($year lt $last-year) then $year + 1 else ()
+    let $prevlink := 
+        if ($prev) then 
+            <li class="left"><a href="{concat('$app/departmenthistory/people/by-year/', $prev)}">« {$prev}</a></li>
+        else ()
+    let $nextlink := 
+        if ($next) then
+            <li class="right"><a href="{concat('$app/departmenthistory/people/by-year/', $next)}">{$next} »</a></li>
+        else ()
+    return 
+        <div id="contentnav">
+            <ul>
+                {$prevlink, $nextlink}
+            </ul> 
+        </div>
+};
