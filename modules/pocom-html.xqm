@@ -405,7 +405,7 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
         return
             <li style="padding: .5em 0">{$career-indicator}<a href="{$url}">{$name}</a> ({$dates})
                 <ul>{
-                    let $roles := collection($pocom:PEOPLE-COL)//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
+                    let $roles := collection($pocom:DATA-COL)//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
                     for $role in $roles
                     let $contemporary-territory-id := $role/contemporary-territory-id
                     let $title := concat(pocom:role-label($node, $model, $role/role-title-id, 'singular'), if ($contemporary-territory-id) then concat(', ', gsh:territory-id-to-short-name($contemporary-territory-id)) else ())
