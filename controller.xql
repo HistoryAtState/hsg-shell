@@ -456,6 +456,29 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                 		</error-handler>
                     </dispatch>
 
+(: handle requests for about section :)
+else if (matches($exist:path, '^/about/?')) then
+    let $fragments := tokenize(substring-after($exist:path, '/about/'), '/')[. ne '']
+    let $page := 
+        if ($fragments[1]) then
+            switch ($fragments[1])
+                case "contact-us" return 'about/contact-us.html'
+                case "the-historian" return 'about/the-historian.html'
+                default return '404.html'
+        else
+            'about/index.html'
+    return
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/pages/{$page}"/>
+            <view>
+                <forward url="{$exist:controller}/modules/view.xql"/>
+            </view>
+    		<error-handler>
+    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+    			<forward url="{$exist:controller}/modules/view.xql"/>
+    		</error-handler>
+        </dispatch>
+
 (: fallback: return 404 :)
 else
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -470,4 +493,3 @@ else
 			<forward url="{$exist:controller}/modules/view.xql"/>
 		</error-handler>
     </dispatch>
-
