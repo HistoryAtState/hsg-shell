@@ -464,6 +464,7 @@ else if (matches($exist:path, '^/about/?')) then
             switch ($fragments[1])
                 case "contact-us" return 'about/contact-us.html'
                 case "the-historian" return 'about/the-historian.html'
+                case "recent-publications" return 'about/recent-publications.html'
                 default return '404.html'
         else
             'about/index.html'

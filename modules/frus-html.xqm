@@ -292,3 +292,24 @@ declare function fh:breadcrumb-heading($div as element()) {
         (: strip footnotes off of chapter titles - an Eisenhower phenomenon :)
         toc:toc-head($div/tei:head)
 };
+
+declare function fh:recent-publications($node, $model) {
+    let $last-year := xs:string(year-from-date(current-date()) - 1)
+    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year ge $last-year]
+    for $year in distinct-values($volumes/published-year)
+    order by $year descending
+    return
+        <div>
+            <h4>{$year}</h4>
+            <ol>
+                {
+                for $volume in $volumes[published-year = $year]
+                let $vol-id := $volume/@id
+                let $title := substring-after($volume/title[@type eq 'complete']/text(), 'Foreign Relations of the United States, ')
+                order by $vol-id
+                return 
+                    <li><a href="$app/historicaldocuments/{$vol-id}">{$title}</a></li>
+                }
+            </ol>
+        </div>
+};
