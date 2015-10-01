@@ -409,7 +409,36 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                     			<forward url="{$exist:controller}/modules/view.xql"/>
                     		</error-handler>
                         </dispatch>
-            case "visits" return ()
+            case "visits" return
+                if ($fragments[2]) then
+                    let $page := 'departmenthistory/visits/country-or-year.html'
+                    let $country-or-year := $fragments[2]
+                    return
+                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                            <forward url="{$exist:controller}/pages/{$page}"/>
+                            <view>
+                                <forward url="{$exist:controller}/modules/view.xql">
+                                    <add-parameter name="country-or-year" value="{$country-or-year}"/>
+                                </forward>
+                            </view>
+                    		<error-handler>
+                    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                    			<forward url="{$exist:controller}/modules/view.xql"/>
+                    		</error-handler>
+                        </dispatch>
+                else
+                    let $page := 'departmenthistory/visits/index.html'
+                    return
+                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                            <forward url="{$exist:controller}/pages/{$page}"/>
+                            <view>
+                                <forward url="{$exist:controller}/modules/view.xql"/>
+                            </view>
+                    		<error-handler>
+                    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                    			<forward url="{$exist:controller}/modules/view.xql"/>
+                    		</error-handler>
+                        </dispatch>
             default return
                 let $page := 
                     switch ($fragments[1]) 
