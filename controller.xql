@@ -480,6 +480,53 @@ else if (matches($exist:path, '^/about/?')) then
     		</error-handler>
         </dispatch>
 
+(: handle requests for developer section :)
+else if (matches($exist:path, '^/developer/?')) then
+    let $fragments := tokenize(substring-after($exist:path, '/developer/'), '/')[. ne '']
+    let $page := 
+        if ($fragments[1]) then
+            switch ($fragments[1])
+                case "catalog" return 'developer/catalog.html'
+                default return '404.html'
+        else
+            'developer/index.html'
+    return
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/pages/{$page}"/>
+            <view>
+                <forward url="{$exist:controller}/modules/view.xql"/>
+            </view>
+    		<error-handler>
+    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+    			<forward url="{$exist:controller}/modules/view.xql"/>
+    		</error-handler>
+        </dispatch>
+
+(: handle requests for open section :)
+(: TODO add the atom feeds: /open/frus-latest.xml, /open/frus-metadata.xml:)
+else if (matches($exist:path, '^/open/?')) then
+    let $fragments := tokenize(substring-after($exist:path, '/open/'), '/')[. ne '']
+    let $page := 
+        if ($fragments[1]) then
+            switch ($fragments[1])
+                case "frus-latest" return 'open/frus-latest/index.html'
+                case "frus-metadata" return 'open/frus-metadata/index.html'
+                default return '404.html'
+        else
+            'open/index.html'
+    return
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/pages/{$page}"/>
+            <view>
+                <forward url="{$exist:controller}/modules/view.xql"/>
+            </view>
+    		<error-handler>
+    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+    			<forward url="{$exist:controller}/modules/view.xql"/>
+    		</error-handler>
+        </dispatch>
+
+
 (: fallback: return 404 :)
 else
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
