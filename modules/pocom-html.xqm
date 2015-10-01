@@ -691,3 +691,12 @@ declare function pocom:years-prev-next-nav($node as node(), $model as map(*), $y
             </ul> 
         </div>
 };
+
+declare function pocom:current-secretary-of-state($node as node(), $model as map(*)) {
+    let $secretaries := doc($pocom:POSITIONS-PRINCIPALS-COL || '/secretary.xml')//principal[not(@treatAsConsecutive)]
+    let $current-secretary := $secretaries[last()]
+    let $person-id := $current-secretary/person-id
+    let $name := pocom:person-name-first-last($node, $model, $person-id)
+    return
+        <a href="{concat('$app/departmenthistory/people/', $person-id)}">{$name}</a>
+};

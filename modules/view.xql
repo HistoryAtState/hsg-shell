@@ -18,6 +18,7 @@ import module namespace frus="http://history.state.gov/ns/site/hsg/frus-html" at
 import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";
 import module namespace pocom="http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";
 import module namespace countries="http://history.state.gov/ns/site/hsg/countries-html" at "countries-html.xqm";
+import module namespace travels="http://history.state.gov/ns/site/hsg/travels-html" at "travels-html.xqm";
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 
