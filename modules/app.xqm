@@ -41,7 +41,7 @@ declare function app:fix-links($nodes as node()*) {
                         element { node-name($node) } {
                             attribute href {$href}, $node/@* except $node/@href, app:fix-links($node/node())
                         }
-            case  element(img) | element(script) return
+            case element(img) | element(script) return
                 (: skip links with @data-template attributes; otherwise we can run into duplicate @src errors :)
                 if ($node/@data-template) then 
                     $node 
@@ -55,6 +55,21 @@ declare function app:fix-links($nodes as node()*) {
                     return
                         element { node-name($node) } {
                             attribute src {$src}, $node/@* except $node/@src, $node/node()
+                        }
+            case element(option) return
+                (: skip links with @data-template attributes; otherwise we can run into duplicate @value errors :)
+                if ($node/@data-template) then 
+                    $node 
+                else
+                    let $value := 
+                        replace(
+                            replace($node/@value, "\$extern", "http://history.state.gov"),
+                            "\$app",
+                            (request:get-context-path() || "/apps/hsg-shell")
+                        )
+                    return
+                        element { node-name($node) } {
+                            attribute value {$value}, $node/@* except $node/@value, $node/node()
                         }
             case element() return
                 element { node-name($node) } {
