@@ -89,23 +89,126 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
 (: handle requests for countries section :)
 else if (matches($exist:path, '^/countries/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/countries/'), '/')[. ne '']
-    let $country := $fragments[1]
-    let $id := $fragments[2]
-    let $page := 'countries/index.html' 
     return
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/pages/{$page}"/>
-            <view>
-                <forward url="{$exist:controller}/modules/view.xql">
-                    <add-parameter name="country" value="{$country}"/>
-                    <add-parameter name="id" value="{$id}"/>
-                </forward>
-            </view>
-    		<error-handler>
-    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
-    			<forward url="{$exist:controller}/modules/view.xql"/>
-    		</error-handler>
-        </dispatch>
+        if ($fragments[1]) then
+            switch ($fragments[1])
+                case "all" return
+                    let $page := 'countries/all.html'
+                    return
+                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                            <forward url="{$exist:controller}/pages/{$page}"/>
+                            <view>
+                                <forward url="{$exist:controller}/modules/view.xql"/>
+                            </view>
+                    		<error-handler>
+                    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                    			<forward url="{$exist:controller}/modules/view.xql"/>
+                    		</error-handler>
+                        </dispatch>
+                case "issues" return
+                    if ($fragments[2]) then
+                        let $resource := $fragments[2]
+                        let $page := 'countries/issues/resource.html'
+                        return
+                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                <forward url="{$exist:controller}/pages/{$page}"/>
+                                <view>
+                                    <forward url="{$exist:controller}/modules/view.xql">
+                                        <add-parameter name="resource" value="{$resource}"/>
+                                    </forward>
+                                </view>
+                        		<error-handler>
+                        			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                        			<forward url="{$exist:controller}/modules/view.xql"/>
+                        		</error-handler>
+                            </dispatch>
+                    else
+                        let $page := 'countries/issues/index.html'
+                        return
+                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                <forward url="{$exist:controller}/pages/{$page}"/>
+                                <view>
+                                    <forward url="{$exist:controller}/modules/view.xql"/>
+                                </view>
+                        		<error-handler>
+                        			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                        			<forward url="{$exist:controller}/modules/view.xql"/>
+                        		</error-handler>
+                            </dispatch>
+                case "archives" return
+                    if ($fragments[2]) then
+                        switch ($fragments[2])
+                            case "all" return
+                                let $page := 'countries/archives/all.html'
+                                return
+                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                    <forward url="{$exist:controller}/pages/{$page}"/>
+                                    <view>
+                                        <forward url="{$exist:controller}/modules/view.xql"/>
+                                    </view>
+                            		<error-handler>
+                            			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                            			<forward url="{$exist:controller}/modules/view.xql"/>
+                            		</error-handler>
+                                </dispatch>
+                            default return
+                                let $country := $fragments[2]
+                                let $page := 'countries/archives/country.html'
+                                return
+                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                        <forward url="{$exist:controller}/pages/{$page}"/>
+                                        <view>
+                                            <forward url="{$exist:controller}/modules/view.xql">
+                                                <add-parameter name="country" value="{$country}"/>
+                                            </forward>
+                                        </view>
+                                		<error-handler>
+                                			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                                			<forward url="{$exist:controller}/modules/view.xql"/>
+                                		</error-handler>
+                                    </dispatch>
+                    else
+                        let $page := 'countries/archives/index.html'
+                        return
+                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                <forward url="{$exist:controller}/pages/{$page}"/>
+                                <view>
+                                    <forward url="{$exist:controller}/modules/view.xql"/>
+                                </view>
+                        		<error-handler>
+                        			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                        			<forward url="{$exist:controller}/modules/view.xql"/>
+                        		</error-handler>
+                            </dispatch>
+                default return
+                    let $page := 'countries/article.html'
+                    let $country-id := $fragments[1]
+                    return
+                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                            <forward url="{$exist:controller}/pages/{$page}"/>
+                            <view>
+                                <forward url="{$exist:controller}/modules/view.xql">
+                                    <add-parameter name="country-id" value="{$country-id}"/>
+                                </forward>
+                            </view>
+                    		<error-handler>
+                    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                    			<forward url="{$exist:controller}/modules/view.xql"/>
+                    		</error-handler>
+                        </dispatch>
+        else 
+            let $page := 'countries/index.html' 
+            return
+                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                    <forward url="{$exist:controller}/pages/{$page}"/>
+                    <view>
+                        <forward url="{$exist:controller}/modules/view.xql"/>
+                    </view>
+            		<error-handler>
+            			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+            			<forward url="{$exist:controller}/modules/view.xql"/>
+            		</error-handler>
+                </dispatch>
 
 (: handle requests for departmenthistory section :)
 else if (matches($exist:path, '^/departmenthistory/?')) then

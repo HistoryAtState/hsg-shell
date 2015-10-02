@@ -3,19 +3,37 @@
     <div class="row" data-template="pages:load">
         <div class="col-md-3">
             <div class="row">
-                <div id="sections" class="col-md-12 panel panel-default">
+                <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
                     <h2>Countries</h2>
                     <label for="select-volume">Countries</label>
-                    <select id="select-volume" name="volumes" data-template="app:countries" class="form-control async">
-                        <option>Choose Country</option>
-                    </select>
+                    <select id="select-volume" name="volumes" data-template="countries:dropdown" class="form-control async"/>
                 </div>
             </div>
         </div>
-        <div class="col-md-9" id="volume">
-            <div id="content-inner">
+        <div class="col-md-9">
+            <div id="content-inner" data-template="app:fix-links">
                 <h1>Countries</h1>
-                <p>Please select a country from the Countries dropdown menu</p>
+                <p>This section provides historical reference information on aspects of
+                    the United States’ relations with the countries of the world. The central component is a guide to
+                    matters of diplomatic recognition and the establishment and maintenance of diplomatic relations between
+                    the United States and states of the world, from 1776 to the present.</p>
+                <p>This guide brings together information on these subjects from among
+                    diverse and widely scattered documentary and archival sources. The most significant categories of
+                    information provided for each individual country include: </p>
+                <ol>
+                    <li>the date and circumstances under which the United States recognized, or was recognized by, each
+                        state;</li>
+                    <li>the date and mode by which the United States established diplomatic relations with each state;</li>
+                    <li>the date the United States established a physical diplomatic presence through a legation, embassy,
+                        or other mission in each country; </li>
+                    <li>and the dates and circumstances of any interruption or resumption of diplomatic relations. </li>
+                </ol>
+                <p>Over time, additional details will be added for each country, such
+                    as information on the United States consular presence.</p>
+                <p>Finally, this section also provides historical information on some
+                    territorial entities that the United States has not recognized or with which it does not have diplomatic
+                    relations.</p>
+                <p>Select an article from the left sidebar, or view a list of <a href="$app/countries/all">all countries</a>.</p>
             </div>
         </div>
     </div>
