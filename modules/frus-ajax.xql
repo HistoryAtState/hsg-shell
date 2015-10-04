@@ -5,7 +5,8 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
-import module namespace toc="http://history.state.gov/ns/site/hsg/toc" at "toc.xqm";
+import module namespace fh="http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
+import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 
@@ -57,13 +58,13 @@ return
                 "title": pages:title($xml/ancestor-or-self::tei:TEI),
                 "toc": if ($toc) then toc:toc($xml, true(), true()) else (),
                 "tocCurrent": $xml/ancestor-or-self::tei:div[@type != "document"][1]/@xml:id/string(),
-                "breadcrumbSection": app:breadcrumb-heading($xml),
+                "breadcrumbSection": fh:breadcrumb-heading($xml),
                 "persons": 
-                    let $persons := app:get-persons($xml, distinct-values($xml//tei:persName/@corresp))
+                    let $persons := fh:get-persons($xml, distinct-values($xml//tei:persName/@corresp))
                     return
                         if ($persons) then <div class="list-group">{$persons}</div> else (),
                 "gloss": 
-                    let $gloss := app:get-gloss($xml, distinct-values($xml//tei:gloss/@target))
+                    let $gloss := fh:get-gloss($xml, distinct-values($xml//tei:gloss/@target))
                     return
                         if ($gloss) then <div class="list-group">{$gloss}</div> else (),
                 "content": serialize($html, 

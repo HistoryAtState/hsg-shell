@@ -23,7 +23,7 @@ $(document).ready(function() {
         container.addClass("animated " + animOut)
             .one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
             $.ajax({
-                url: appRoot + "/modules/ajax.xql",
+                url: appRoot + "/modules/frus-ajax.xql",
                 dataType: "json",
                 data: params,
                 error: function(xhr, status) {
