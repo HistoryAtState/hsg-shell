@@ -155,6 +155,11 @@ $(document).ready(function() {
         window.location = appRoot + path;
     });
     
+    $("#select-administration").change(function(ev) {
+        var path = "/" + $(this).val();
+        window.location = $(this).val();
+    });
+    
     $("#zoom-in").click(function(ev) {
         ev.preventDefault();
         var size = getFontSize();
