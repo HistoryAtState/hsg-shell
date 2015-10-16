@@ -60,7 +60,7 @@ declare function ch:country-article-title($node, $model, $country-id as xs:strin
 
 declare function ch:country-article($node, $model, $country-id as xs:string) {
     let $doc := doc($ch:RDCR_ARTICLES_COL || '/' || $country-id || '.xml')
-    let $text := $doc//tei:text
+    let $text := $doc//tei:body
     return
         pages:process-content($config:odd, $text)
 };
