@@ -69,6 +69,8 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
             (: calling this 'volume' is getting kludgy - TODO - adapt to $fragments approach of other sections :)
             else if ($volume = "about-frus") then
                 "historicaldocuments/about-frus.html"
+            else if ($volume = "status-of-the-series") then
+                "historicaldocuments/status-of-the-series.html"
             else
                 "historicaldocuments/administrations.html"
         (: section landing page :)

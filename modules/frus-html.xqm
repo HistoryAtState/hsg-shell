@@ -313,3 +313,155 @@ declare function fh:recent-publications($node, $model) {
             </ol>
         </div>
 };
+
+declare function fh:current-year($node, $model) {
+    year-from-date(current-date())
+};
+
+declare function fh:last-year($node, $model) {
+    year-from-date(current-date()) - 1
+};
+
+declare function fh:next-year($node, $model) {
+    year-from-date(current-date()) + 1
+};
+
+declare function fh:volumes-published-this-year($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year ge $this-year]
+    return
+        fh:list-published-volumes($volumes)
+};
+
+declare function fh:volumes-published-this-year-count($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year ge $this-year]
+    return
+        count($volumes)
+};
+
+declare function fh:volumes-published-last-year($node, $model) {
+    let $last-year := xs:string(year-from-date(current-date()) - 1)
+    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year ge $last-year]
+    return
+        fh:list-published-volumes($volumes)
+};
+
+declare function fh:volumes-published-last-year-count($node, $model) {
+    let $last-year := xs:string(year-from-date(current-date()) - 1)
+    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year ge $last-year]
+    return
+        count($volumes)
+};
+
+declare function fh:volumes-planned-for-publication-this-year($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $vols-planned-for-publication := collection($config:FRUS_METADATA_COL)/volume[publication-status ne 'published']
+    let $vols-planned-for-publication-this-year := $vols-planned-for-publication[public-target-publication-year eq $this-year]
+    return
+        fh:list-planned-volumes($vols-planned-for-publication-this-year)
+};
+
+declare function fh:volumes-planned-for-publication-this-year-count($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $vols-planned-for-publication := collection($config:FRUS_METADATA_COL)/volume[publication-status ne 'published']
+    let $vols-planned-for-publication-this-year := $vols-planned-for-publication[public-target-publication-year eq $this-year]
+    return
+        count($vols-planned-for-publication-this-year)
+};
+
+declare function fh:volumes-planned-next-year-beyond-in-production($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond-in-production := $vols-planned-next-year-beyond[publication-status eq 'in-production']
+    return
+        fh:list-planned-volumes($vols-planned-next-year-beyond-in-production)
+};
+
+declare function fh:volumes-planned-next-year-beyond-in-production-count($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond-in-production := $vols-planned-next-year-beyond[publication-status eq 'in-production']
+    return
+        count($vols-planned-next-year-beyond-in-production)
+};
+
+declare function fh:volumes-planned-next-year-beyond-under-declassification($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond-under-declassification := $vols-planned-next-year-beyond[publication-status eq 'under-declassification']
+    return
+        fh:list-planned-volumes($vols-planned-next-year-beyond-under-declassification)
+};
+
+declare function fh:volumes-planned-next-year-beyond-under-declassification-count($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond-under-declassification := $vols-planned-next-year-beyond[publication-status eq 'under-declassification']
+    return
+        count($vols-planned-next-year-beyond-under-declassification)
+};
+
+declare function fh:volumes-planned-next-year-beyond-being-researched-or-prepared($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond-being-researched-or-prepared := $vols-planned-next-year-beyond[publication-status eq 'being-researched-or-prepared']
+    return
+        fh:list-planned-volumes($vols-planned-next-year-beyond-being-researched-or-prepared)
+};
+
+declare function fh:volumes-planned-next-year-beyond-being-researched-or-prepared-count($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond-being-researched-or-prepared := $vols-planned-next-year-beyond[publication-status eq 'being-researched-or-prepared']
+    return
+        count($vols-planned-next-year-beyond-being-researched-or-prepared)
+};
+
+declare function fh:volumes-planned-next-year-beyond-being-planned-research-not-yet-begun($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond-being-planned-research-not-yet-begun := $vols-planned-next-year-beyond[publication-status eq 'being-planned-research-not-yet-begun']
+    return
+        fh:list-planned-volumes($vols-planned-next-year-beyond-being-planned-research-not-yet-begun)
+};
+
+declare function fh:volumes-planned-next-year-beyond-being-planned-research-not-yet-begun-count($node, $model) {
+    let $this-year := xs:string(year-from-date(current-date()))
+    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond-being-planned-research-not-yet-begun := $vols-planned-next-year-beyond[publication-status eq 'being-planned-research-not-yet-begun']
+    return
+        count($vols-planned-next-year-beyond-being-planned-research-not-yet-begun)
+};
+
+declare function fh:list-published-volumes($volumes) {
+    <ol>{
+        for $vol in $volumes
+        let $vol-id := $vol/@id/string()
+        let $vol-title := substring-after($vol/title[@type eq 'complete']/text(), 'Foreign Relations of the United States, ')
+        let $published-date-raw := xs:date($vol/published-date)
+        let $published-date := fh:published-date-to-english($published-date-raw)
+        order by $published-date-raw
+        return
+            <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title}</a> ({$published-date})</li>
+    }</ol>
+};
+
+declare function fh:list-planned-volumes($volumes) {
+    <ol>{
+        for $vol in $volumes
+        let $vol-id := $vol/@id/string()
+        let $vol-title := substring-after($vol/title[@type eq 'complete']/text(), 'Foreign Relations of the United States, ')
+        order by $vol-id
+        return
+            <li>{$vol-title}</li>
+    }</ol>
+};
+
+declare function fh:published-date-to-english($date as xs:date) {
+    let $english-months := ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
+    let $published-month := $english-months[xs:integer(month-from-date($date))]
+    let $published-date := concat($published-month, ' ', day-from-date($date))
+    return 
+        $published-date
+};
