@@ -28,9 +28,10 @@ function ch:dropdown($node as node(), $model as map(*), $country-id as xs:string
             $brief-title
         }</option>
     ,
-    <option value="$app/all">... view all</option>
+    <option value="$app/countries/all">... view all</option>
 };
 
+(: TODO: Turn into two-column listing as in pocom:chiefs-countries-list() :)
 declare function ch:list($node, $model) {
     let $titles := collection($ch:RDCR_ARTICLES_COL)//tei:title[@type='short']
     for $letter in distinct-values($titles/substring(upper-case(.), 1, 1))
