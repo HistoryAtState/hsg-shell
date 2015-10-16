@@ -20,6 +20,7 @@ function ch:dropdown($node as node(), $model as map(*), $country-id as xs:string
     let $article-id := substring-before(util:document-name($c), '.xml')
     let $selected := if ($article-id = $country-id) then attribute selected {"selected"} else ()
     let $brief-title := $c//tei:title[@type='short']/string()
+    order by $article-id
     return
         <option>{ 
             attribute value { "$app/countries/" || $article-id },
