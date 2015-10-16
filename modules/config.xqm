@@ -51,6 +51,8 @@ declare variable $config:FRUS_METADATA_COL := "/db/apps/frus/bibliography/";
 
 declare variable $config:FRUS_CODE_TABLES_COL := "/db/apps/frus/code-tables/";
 
+declare variable $config:S3_CACHE_COL := "/db/apps/s3/cache/";
+
 (:~
  : Resolve the given path using the current application context.
  : If the app resides in the file system,
