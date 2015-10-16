@@ -71,6 +71,8 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                 "historicaldocuments/about-frus.html"
             else if ($volume = "status-of-the-series") then
                 "historicaldocuments/status-of-the-series.html"
+            else if ($volume = "citing-frus") then
+                "historicaldocuments/citing-frus.html"
             else
                 "historicaldocuments/administrations.html"
         (: section landing page :)
