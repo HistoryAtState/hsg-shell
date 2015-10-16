@@ -8,7 +8,7 @@ import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "p
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
-declare variable $archives:ARCHIVES_COL := '/db/apps/archives';
+declare variable $archives:ARCHIVES_COL := '/db/apps/wwdai';
 declare variable $archives:ARCHIVES_ARTICLES_COL := $archives:ARCHIVES_COL || '/articles';
 
 declare
@@ -20,6 +20,7 @@ function archives:dropdown($node as node(), $model as map(*), $country-id as xs:
     let $article-id := substring-before(util:document-name($c), '.xml')
     let $selected := if ($article-id = $country-id) then attribute selected {"selected"} else ()
     let $brief-title := $c//tei:title[@type='short']/string()
+    order by $article-id
     return
         <option>{ 
             attribute value { "$app/countries/archives/" || $article-id },
@@ -51,16 +52,16 @@ declare function archives:list($node, $model) {
         </div>
 };
 
-declare function archives:country-article-title($node, $model, $country-id as xs:string) {
+declare function archives:article-title($node, $model, $country-id as xs:string) {
     let $doc := doc($archives:ARCHIVES_ARTICLES_COL || '/' || $country-id || '.xml')
     let $title := $doc//tei:title[@type='complete']/string()
     return
         $title
 };
 
-declare function archives:country-article($node, $model, $country-id as xs:string) {
+declare function archives:article($node, $model, $country-id as xs:string) {
     let $doc := doc($archives:ARCHIVES_ARTICLES_COL || '/' || $country-id || '.xml')
-    let $text := $doc//tei:text
+    let $text := $doc//tei:body
     return
         pages:process-content($config:odd, $text)
 };

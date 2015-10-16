@@ -152,14 +152,14 @@ else if (matches($exist:path, '^/countries/?')) then
                             		</error-handler>
                                 </dispatch>
                             default return
-                                let $country := $fragments[2]
-                                let $page := 'countries/archives/country.html'
+                                let $country-id := $fragments[2]
+                                let $page := 'countries/archives/article.html'
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                         <forward url="{$exist:controller}/pages/{$page}"/>
                                         <view>
                                             <forward url="{$exist:controller}/modules/view.xql">
-                                                <add-parameter name="country" value="{$country}"/>
+                                                <add-parameter name="country-id" value="{$country-id}"/>
                                             </forward>
                                         </view>
                                 		<error-handler>
