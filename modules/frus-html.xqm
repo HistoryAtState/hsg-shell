@@ -38,7 +38,7 @@ function fh:volumes($node as node(), $model as map(*), $volume as xs:string?) {
     order by $vol-id
     return
         <option>{ 
-            attribute value { "./historicaldocuments/" || $vol-id },
+            attribute value { "$app/historicaldocuments/" || $vol-id },
             $selected,
             $brief-title
         }</option>
