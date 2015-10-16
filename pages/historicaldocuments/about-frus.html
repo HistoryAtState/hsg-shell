@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
+                    <h2>Historical Documents</h2>
+                    <label for="select-volume">Volumes</label>
+                    <select id="select-volume" name="volumes" data-template="frus:volumes" class="form-control async">
+                        <option>Choose Volume</option>
+                    </select>
+                    <label for="select-administration">Browse by Administration</label>
+                    <select id="select-administration" name="administrations" data-template="frus:administrations" class="form-control">
+                        <option>Choose Administration</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" id="volume" data-template="app:fix-links">
+            <div id="content-inner">
+                <h1>About the <em>Foreign Relations of the United States</em> Series</h1>
+                <p>The <em>Foreign Relations of the United States</em> series presents the official documentary
+                    historical record of major U.S. foreign policy decisions and significant diplomatic
+                    activity. The series, which is produced by the State Department's Office of the Historian,
+                    <a href="$app/historicaldocuments/frus-history">began in 1861</a> and now comprises more than 450 individual volumes. The volumes published over
+                    the last two decades increasingly contain declassified records from all the foreign affairs
+                    agencies.</p>
+                <p>
+                    <em>Foreign Relations</em> volumes contain documents from Presidential libraries, Departments of State
+                    and Defense, National Security Council, Central Intelligence Agency, Agency for
+                    International Development, and other foreign affairs agencies as well as the private papers
+                    of individuals involved in formulating U.S. foreign policy. In general, the editors choose
+                    documentation that illuminates policy formulation and major aspects and repercussions of its
+                    execution. Volumes published over the past few years have expanded the scope of the series
+                    in two important ways: first by including documents from a wider range of government
+                    agencies, particularly those involved with intelligence activity and covert actions, and
+                    second by including transcripts prepared from Presidential tape recordings.</p>
+                <p>Volumes in the series since 1952 are organized chronologically according to Presidential
+                    administrations, and geographically and topically within each subseries: 25 volumes cover
+                    the <a href="$app/historicaldocuments/kennedy">Kennedy administration</a> (1961-1963), 34 cover
+                    the <a href="$app/historicaldocuments/johnson">Johnson administration</a> (1964-1968), and about
+                    54 are scheduled for the <a href="/historicaldocuments/nixon-ford">Nixon and Ford
+                        administrations</a> (1969-1976). Volumes on the Nixon, Ford, Carter, and Reagan
+                    administrations are now being 
+                    <a href="$app/historicaldocuments/status-of-the-series">researched, annotated, and prepared for
+                        publication</a>.</p>
+                <p>Volumes may be purchased through the <a href="http://bookstore.gpo.gov/subjects/sb-210.jsp">U.S. Government Printing Office</a> (202-512-1800). Recent volumes are also available
+                        <a href="$app/historicaldocuments/">online</a>. For further information please <a href="$app/about/contact-us">contact the Office of the Historian</a>.</p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="resources/scripts/app.js"/>
+</div>
