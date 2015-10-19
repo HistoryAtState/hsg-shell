@@ -659,6 +659,59 @@ else if (matches($exist:path, '^/milestones/?')) then
             		</error-handler>
                 </dispatch>
 
+(: handle requests for conferences section :)
+else if (matches($exist:path, '^/conferences/?')) then
+    let $fragments := tokenize(substring-after($exist:path, '/conferences/'), '/')[. ne '']
+    return
+        if ($fragments[1]) then
+            if ($fragments[2]) then
+                let $conference-id := $fragments[1]
+                let $section-id := $fragments[2]
+                let $page := 'conferences/conference/section.html'
+                return
+                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                        <forward url="{$exist:controller}/pages/{$page}"/>
+                        <view>
+                            <forward url="{$exist:controller}/modules/view.xql">
+                                <add-parameter name="conference-id" value="{$conference-id}"/>
+                                <add-parameter name="section-id" value="{$section-id}"/>
+                            </forward>
+                        </view>
+                		<error-handler>
+                			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                			<forward url="{$exist:controller}/modules/view.xql"/>
+                		</error-handler>
+                    </dispatch>
+            else
+                let $conference-id := $fragments[1]
+                let $page := 'conferences/conference/index.html'
+                return
+                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                        <forward url="{$exist:controller}/pages/{$page}"/>
+                        <view>
+                            <forward url="{$exist:controller}/modules/view.xql">
+                                <add-parameter name="conference-id" value="{$conference-id}"/>
+                            </forward>
+                        </view>
+                		<error-handler>
+                			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                			<forward url="{$exist:controller}/modules/view.xql"/>
+                		</error-handler>
+                    </dispatch>
+        else
+            let $page := 'conferences/index.html'
+            return
+                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                    <forward url="{$exist:controller}/pages/{$page}"/>
+                    <view>
+                        <forward url="{$exist:controller}/modules/view.xql"/>
+                    </view>
+            		<error-handler>
+            			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+            			<forward url="{$exist:controller}/modules/view.xql"/>
+            		</error-handler>
+                </dispatch>
+
 (: handle requests for developer section :)
 else if (matches($exist:path, '^/developer/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/developer/'), '/')[. ne '']
