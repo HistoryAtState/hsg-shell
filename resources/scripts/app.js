@@ -150,7 +150,7 @@ $(document).ready(function() {
     resize();
     
     // select volume or administration from dropdown
-    $("#select-volume, #select-administration, #select-country").change(function(ev) {
+    $("#select-volume, #select-administration, #select-country, #select-chapter").change(function(ev) {
         window.location = $(this).val();
     });
     
