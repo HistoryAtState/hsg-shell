@@ -3,6 +3,7 @@ xquery version "3.0";
 module namespace fh = "http://history.state.gov/ns/site/hsg/frus-html";
 
 import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
@@ -468,7 +469,7 @@ declare function fh:published-date-to-english($date as xs:date) {
 };
 
 declare function fh:volumes-with-ebooks() {
-    for $hit in collection('/db/history/data/s3-resources/static.history.state.gov/frus/')//filename[ends-with(., '.epub')]
+    for $hit in collection($config:HSG_S3_CACHE_COL || 'frus')//filename[ends-with(., '.epub')]
     return
         substring-before($hit, '.epub')
 };
@@ -484,14 +485,14 @@ declare function fh:frus-ebooks-catalog($node, $model) {
             return
                 (
                 <div id="{$vol-id}">
-                    <img src="http://static.history.state.gov/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/><!--
-                    <a href="/historicaldocuments/{$vol-id}"><em>{frusx:volume-title($vol-id, 'series')}</em>, {string-join((frusx:volume-title($vol-id, 'subseries'), frusx:volume-title($vol-id, 'volumenumber'), frusx:volume-title($vol-id, 'volume')), ', ')}</a>. 
+                    <img src="http://static.history.state.gov/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
+                    <a href="/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'subseries'), fh:vol-title($vol-id, 'volumenumber'), fh:vol-title($vol-id, 'volume')), ', ')}</a>. 
                         <br/>
-                        Ebook last updated: {xsl:format-dateTime(xs:dateTime(frusx:ebook-last-updated($vol-id)), 'MMMM D, YYYY')}. 
+                        Ebook last updated: {xsl:format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), 'MMMM D, YYYY')}. 
                         <ul class="buttons" style="text-align: right">
-                            <li><a href="{frusx:epub-url($vol-id)}">EPUB ({ try {frusx:epub-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.epub'}})</a></li>
-                            <li><a href="{frusx:mobi-url($vol-id)}">Mobi ({ try {frusx:mobi-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.mobi'}})</a></li>
-                        </ul>-->
+                            <li><a href="{fh:epub-url($vol-id)}">EPUB ({ try {fh:epub-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.epub'}})</a></li>
+                            <li><a href="{fh:mobi-url($vol-id)}">Mobi ({ try {fh:mobi-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.mobi'}})</a></li>
+                        </ul>
                 </div>
                 ,
                 <hr class="space"/>
@@ -509,7 +510,7 @@ declare function fh:frus-history-ebook-entry() {
     let $book-title := pages:process-content($config:odd, $book//tei:title[@type='complete'])
     let $preview-edition := if ($book//tei:sourceDesc/tei:p[1] = 'Preview Edition') then ' (Preview Edition)' else ()
     let $vol-id := 'frus-history'
-    let $s3-resources-col := concat('/db/history/data/s3-resources/static.history.state.gov/', $vol-id)
+    let $s3-resources-col := concat($config:HSG_S3_CACHE_COL, $vol-id)
     let $s3-base-url := concat('http://static.history.state.gov/', $vol-id)
     let $epub-filename := concat($vol-id, '.epub')
     let $mobi-filename := concat($vol-id, '.mobi')
@@ -521,9 +522,9 @@ declare function fh:frus-history-ebook-entry() {
     let $mobi-resource := (doc(concat($s3-resources-col, '/ebooks/resources.xml'))//filename[. = $mobi-filename]/parent::resource)[1]
     let $pdf-resource := (doc(concat($s3-resources-col, '/ebooks/resources.xml'))//filename[. = $pdf-filename]/parent::resource)[1]
     let $last-updated := $epub-resource/last-modified/string()
-(:    let $epub-size := try { paho:bytes-to-readable($epub-resource//size) } catch * {'problem getting size of ' || $epub-filename}:)
-(:    let $mobi-size := try { paho:bytes-to-readable($mobi-resource//size) } catch * {'problem getting size of ' || $mobi-filename}:)
-(:    let $pdf-size := try { paho:bytes-to-readable($pdf-resource//size) } catch * {'problem getting size of ' || $pdf-filename}:)
+    let $epub-size := try { app:bytes-to-readable($epub-resource//size) } catch * {'problem getting size of ' || $epub-filename}
+    let $mobi-size := try { app:bytes-to-readable($mobi-resource//size) } catch * {'problem getting size of ' || $mobi-filename}
+    let $pdf-size := try { app:bytes-to-readable($pdf-resource//size) } catch * {'problem getting size of ' || $pdf-filename}
     return
         <div id="frus-history" xmlns="http://www.w3.org/1999/xhtml">
             <img src="{$s3-base-url}/covers/{$vol-id}-thumb.png" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
@@ -531,15 +532,64 @@ declare function fh:frus-history-ebook-entry() {
                 <br/>
                 Ebook last updated: {xsl:format-dateTime(xs:dateTime($last-updated), 'MMMM D, YYYY')}. 
                 <ul class="buttons" style="text-align: right">
-                <!--
                     <li><a href="{$epub-url}">EPUB ({$epub-size})</a></li>
                     <li><a href="{$mobi-url}">Mobi ({$mobi-size})</a></li>
                     <li><a href="{$mobi-url}">PDF ({$pdf-size})</a></li>
-                -->
                 </ul>
         </div>
 };
 
 declare function fh:exists-volume($vol-id) {
     exists(collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id])
+};
+
+declare function fh:exists-volume-in-db($vol-id) {
+    exists(fh:volume($vol-id))
+};
+
+declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
+	if (fh:exists-volume-in-db($vol-id)) then 
+	    fh:volume($vol-id)//tei:title[@type = $type][1]/text()
+    else 
+        collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id]/title[@type eq $type]/text()
+};
+
+declare function fh:vol-title($vol-id as xs:string+) {
+	if (fh:exists-volume-in-db($vol-id)) then 
+	    fh:volume($vol-id)//tei:title[@type = 'complete']/text()
+    else 
+        collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id]/title[@type eq 'complete']/text()
+};
+
+declare function fh:volume($vol-id as xs:string) {
+    doc(concat($config:FRUS_VOLUMES_COL, $vol-id, '.xml'))
+};
+
+declare function fh:ebook-last-updated($vol-id) {
+    let $epub-filename := concat($vol-id, '.epub')
+    let $epub := (doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.epub')]/parent::resource)[1]
+    return
+        $epub/last-modified/string()
+};
+
+declare function fh:epub-size($vol-id) {
+    let $epub := (doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.epub')]/parent::resource)[1]
+    let $size := $epub//size
+    return
+        app:bytes-to-readable($size)
+};
+
+declare function fh:mobi-size($vol-id) {
+    let $mobi := (doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.mobi')]/parent::resource)[1]
+    let $size := $mobi//size
+    return
+        app:bytes-to-readable($size)
+};
+
+declare function fh:mobi-url($vol-id) {
+	concat('//', $config:S3_DOMAIN, '/frus/', $vol-id, '/ebook/', $vol-id, '.mobi')
+};
+
+declare function fh:epub-url($vol-id) {
+	concat('//', $config:S3_DOMAIN, '/frus/', $vol-id, '/ebook/', $vol-id, '.epub')
 };

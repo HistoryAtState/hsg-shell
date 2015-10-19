@@ -53,6 +53,12 @@ declare variable $config:FRUS_CODE_TABLES_COL := "/db/apps/frus/code-tables/";
 
 declare variable $config:S3_CACHE_COL := "/db/apps/s3/cache/";
 
+declare variable $config:S3_BUCKET := "static.history.state.gov";
+
+declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $config:S3_BUCKET || "/";
+
+declare variable $config:S3_DOMAIN := $config:S3_BUCKET || ".s3.amazonaws.com";
+
 (:~
  : Resolve the given path using the current application context.
  : If the app resides in the file system,

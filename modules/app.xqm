@@ -140,3 +140,11 @@ declare function app:available-pages($node as node(), $model as map(*)) {
         }
     </ul>
 };
+
+declare function app:bytes-to-readable($bytes as xs:integer) {
+    if ($bytes gt 1000000) then
+        concat((round($bytes div 10000) div 100), 'mb')
+    else if ($bytes gt 1000) then 
+        concat(round($bytes div 1000), 'kb')
+    else ()
+};
