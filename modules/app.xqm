@@ -141,6 +141,27 @@ declare function app:available-pages($node as node(), $model as map(*)) {
     </ul>
 };
 
+declare function app:not-yet-available-pages($node as node(), $model as map(*)) {
+    <ul>
+        {
+        for $section in doc($config:app-root || '/templates/site.html')//div[@id = 'navbar-collapse-1']//a[starts-with(@href, '$extern')][not(@class = 'dropdown-toggle')]/ancestor::li[2]
+        return
+            <li>{
+                $section/a/string(),
+                <ul>{
+                    let $available-pages := $section//a[starts-with(@href, '$extern')][not(@class = 'dropdown-toggle')]
+                    for $link in $available-pages
+                    return
+                        <li>
+                            {element {node-name($link)} {$link/@href, $link/string()}}
+                        </li>
+                }</ul>
+            }</li>
+        }
+    </ul>
+};
+
+
 declare function app:bytes-to-readable($bytes as xs:integer) {
     if ($bytes gt 1000000) then
         concat((round($bytes div 10000) div 100), 'mb')
