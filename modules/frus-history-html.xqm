@@ -54,7 +54,14 @@ declare function fhh:monograph-toc($node, $model) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
     let $toc := toc:toc-passthru($doc, ())
     return
-        <div class="toc"><ul>{$toc}</ul></div>
+        <ul>{$toc}</ul>
+};
+
+declare function fhh:chapter($node, $model, $chapter-id) {
+    let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
+    let $chapter := $doc/id($chapter-id)
+    return
+        pages:process-content($config:odd, $chapter)
 };
 
 declare function fhh:most-recent-documents($node, $model) {

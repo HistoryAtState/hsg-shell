@@ -55,6 +55,7 @@ else if (ends-with($exist:resource, ".xql")) then
 (: handle requests for historicaldocuments section :)
 else if (matches($exist:path, '^/historicaldocuments/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/historicaldocuments/'), '/')[. ne '']
+(:    let $log := console:log("hsg-shell controller.xql fragments: " || string-join(for $f at $n in $fragments return concat($n, ": ", $f), ', ')):)
     return
         if ($fragments[1]) then
             switch ($fragments[1])
@@ -118,12 +119,15 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                 		</error-handler>
                                     </dispatch>
                             default return
-                                let $page := "historicaldocuments/frus-history/index.html"
+                                let $page := "historicaldocuments/frus-history/monograph-interior.html"
+                                let $chapter-id := $fragments[2]
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                         <forward url="{$exist:controller}/pages/{$page}"/>
                                         <view>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
+                                            <forward url="{$exist:controller}/modules/view.xql">
+                                                <add-parameter name="chapter-id" value="{$chapter-id}"/>
+                                            </forward>
                                         </view>
                                 		<error-handler>
                                 			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
