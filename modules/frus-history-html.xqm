@@ -238,3 +238,67 @@ declare function fhh:document-pdf($node, $model, $document-id) {
     return
         pages:process-content($config:odd, $pdf-text)
 };
+
+declare function fhh:articles-list($node, $model) {
+    for $article in collection($fhh:FRUS_HISTORY_ARTICLES_COL)/tei:TEI[.//tei:author]
+    let $title := pages:process-content($config:odd, $article//tei:title[@type="complete"])
+    let $url := replace(util:document-name($article), '.xml$', '')
+    let $author := $article//tei:author
+    let $teaser := pages:process-content($config:odd, $article//tei:body/tei:div[1]/tei:p[1]) (: TODO suppress footnotes from being displayed here :)
+    let $date := $article//tei:publicationStmt/tei:date
+    order by xs:date($date/@when) descending
+    return
+        <div>
+            <h3>
+                <a href="$app/historicaldocuments/frus-history/research/{$url}">{$title}</a>
+            </h3>
+            <p>By {$author/string()}</p>
+            <p>{$date}</p>
+            {$teaser}
+        </div>
+};
+
+declare function fhh:article-list-sidebar($node, $model, $article-id) {
+    <ul>{
+        for $article in collection($fhh:FRUS_HISTORY_ARTICLES_COL)/tei:TEI[.//tei:author]
+        let $title := pages:process-content($config:odd, $article//tei:title[@type="short"])
+        let $id := replace(util:document-name($article), '.xml$', '')
+        let $highlight-status := if ($id eq $article-id) then attribute class {'highlight'} else ()
+        let $date := $article//tei:publicationStmt/tei:date
+        order by $date/@when descending
+        return
+            <li>{$highlight-status}<a href="$app/historicaldocuments/frus-history/research/{$id}">{$title}</a> ({$date/text()})</li>
+    }</ul>
+};
+
+declare function fhh:article-title($node, $model, $article-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+    return
+        pages:process-content($config:odd, $article//tei:title[@type='complete'])
+};
+
+declare function fhh:article-author($node, $model, $article-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+    let $author := $article//tei:author/text()
+    let $affiliation := $article//tei:sponsor/text()
+    let $date := $article//tei:publicationStmt/tei:date/text()
+    return
+        (
+            <h3>By <span itemprop="author">{$author}</span><br/>
+            <span itemprop="sourceOrganization">{$affiliation}</span></h3>,
+            <h4>Released <span itemprop="datePublished">{$date}</span></h4>
+        )    
+};
+
+declare function fhh:article-description($node, $model, $article-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+    let $publication-statement := $article//tei:sourceDesc/tei:p
+    return
+        pages:process-content($config:odd, $publication-statement)
+};
+
+declare function fhh:article($node, $model, $article-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+    return
+        pages:process-content($config:odd, $article//tei:text/*)
+};
