@@ -71,6 +71,21 @@ declare function app:fix-links($nodes as node()*) {
                         element { node-name($node) } {
                             attribute value {$value}, $node/@* except $node/@value, $node/node()
                         }
+            case element(form) return
+                (: skip links with @data-template attributes; otherwise we can run into duplicate @value errors :)
+                if ($node/@data-template) then 
+                    $node 
+                else
+                    let $action := 
+                        replace(
+                            replace($node/@action, "\$extern", "http://history.state.gov"),
+                            "\$app",
+                            (request:get-context-path() || "/apps/hsg-shell")
+                        )
+                    return
+                        element { node-name($node) } {
+                            attribute action {$action}, $node/@* except $node/@action, $node/node()
+                        }
             case element() return
                 element { node-name($node) } {
                     $node/@*, app:fix-links($node/node())
