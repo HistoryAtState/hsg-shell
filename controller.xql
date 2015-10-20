@@ -908,6 +908,26 @@ else if (matches($exist:path, '^/open/?')) then
     		</error-handler>
         </dispatch>
 
+else if (matches($exist:path, '^/search/?')) then
+    let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
+    let $page := 
+        if ($fragments[1]) then
+            switch ($fragments[1])
+                case "tips" return 'search/tips.html'
+                default return '404.html'
+        else
+            'search/index.html'
+    return
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/pages/{$page}"/>
+            <view>
+                <forward url="{$exist:controller}/modules/view.xql"/>
+            </view>
+    		<error-handler>
+    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+    			<forward url="{$exist:controller}/modules/view.xql"/>
+    		</error-handler>
+        </dispatch>
 
 (: fallback: return 404 :)
 else
