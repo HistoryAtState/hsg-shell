@@ -8,6 +8,7 @@ module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html";
  : draws on data in /db/apps/pocom - installed via pocom.xar
  :)
 
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace gsh="http://history.state.gov/ns/xquery/geospatialhistory" at "/db/apps/gsh/modules/gsh.xqm";
 import module namespace templates="http://exist-db.org/xquery/templates";
 
@@ -20,34 +21,6 @@ declare variable $pocom:PEOPLE-COL := $pocom:DATA-COL || '/people';
 declare variable $pocom:POSITIONS-PRINCIPALS-COL := $pocom:DATA-COL || '/positions-principals';
 declare variable $pocom:ROLES-COUNTRY-CHIEFS-COL := $pocom:DATA-COL || '/roles-country-chiefs';
 declare variable $pocom:OLD-COUNTRIES-COL := '/db/apps/gsh/data/countries-old';
-
-declare function pocom:year-from-date($date) {
-    if ($date castable as xs:date) then 
-        year-from-date($date)
-    else if (matches($date, '^\d{4}-\d{2}$')) then
-        replace($date, '^(\d{4})-\d{2}$', '$1')
-    else ()
-};
-
-declare function pocom:date-to-english($date as xs:string) as xs:string {
-    let $english-months := ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
-    return
-        if ($date castable as xs:date) then 
-            let $month-num := month-from-date($date)
-            let $month := $english-months[$month-num]
-            let $year := year-from-date($date)
-            let $day := day-from-date($date)
-            return 
-                concat($month, ' ', $day, ', ', $year)
-        else if (matches($date, '^\d{4}-\d{2}$')) then
-            let $year := substring($date, 1, 4)
-            let $month-num := xs:integer(substring($date, 6, 2))
-            let $month := $english-months[$month-num]
-            return 
-                concat($month, ' ', $year)
-        else 
-            $date
-};
 
 declare function pocom:person($person-id) {
     collection($pocom:PEOPLE-COL)/person[id = $person-id]
@@ -95,12 +68,12 @@ declare function pocom:secretaries($node as node(), $model as map(*)) {
             for $secretary in doc($pocom:POSITIONS-PRINCIPALS-COL || '/secretary.xml')//principal[not(@treatAsConsecutive)]
             let $person-id := $secretary/person-id
             let $name := pocom:person-name-first-last($node, $model, $person-id)
-            let $startyear := pocom:year-from-date($secretary/started/date)
+            let $startyear := app:year-from-date($secretary/started/date)
             let $endyear := 
                 if ($secretary/following-sibling::principal[1][@treatAsConsecutive]) then
-                    pocom:year-from-date($secretary/following-sibling::principal[1][@treatAsConsecutive]/ended/date)
+                    app:year-from-date($secretary/following-sibling::principal[1][@treatAsConsecutive]/ended/date)
                 else 
-                    pocom:year-from-date($secretary/ended/date)
+                    app:year-from-date($secretary/ended/date)
             let $years := concat($startyear, '–', $endyear)
             return
                 <li><a href="{pocom:person-href($person-id)}">{$name}</a> ({$years})</li>
@@ -147,8 +120,8 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
                 $principal/started/date,
                 $principal/appointed/date
                 )[. ne ''][1]
-            let $startyear := pocom:year-from-date($startdate)
-            let $endyear := pocom:year-from-date($principal/ended/date)
+            let $startyear := app:year-from-date($startdate)
+            let $endyear := app:year-from-date($principal/ended/date)
             let $years := if ($startyear = $endyear) then $startyear else concat($startyear, '–', $endyear)
             let $note := $principal/note/text() 
                 (: If we want to show the note in this list add this before the </li>:
@@ -282,8 +255,8 @@ declare function pocom:chiefs-by-country-id($node as node(), $model as map(*), $
                         $chief/started/date,
                         $chief/appointed/date
                         )[. ne ''][1]
-                    let $start-date-english := if ($startdate) then pocom:date-to-english($startdate) else ()
-                    let $end-date-english := if ($chief/ended/date) then pocom:date-to-english($chief/ended/date) else ()
+                    let $start-date-english := if ($startdate) then app:date-to-english($startdate) else ()
+                    let $end-date-english := if ($chief/ended/date) then app:date-to-english($chief/ended/date) else ()
                     let $position-label := $positions-collection/role[id eq $chief/role-title-id]/names/singular/string()
                     (: No more ordering! - we're relying on the document order of the country mission file :)
                     (:order by $startdate:)
@@ -491,20 +464,20 @@ declare function pocom:format-role($person, $role) {
         $started/date,
         $appointed/date
         )[. ne ''][1]
-    let $start-date-english := pocom:date-to-english($startdate)
-    let $end-date-english := pocom:date-to-english($ended/date)
+    let $start-date-english := app:date-to-english($startdate)
+    let $end-date-english := app:date-to-english($ended/date)
     let $dates := 
             if ($roleclass = 'principal-position') then
                 (
-                if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', pocom:date-to-english($appointed/date))), <br/>) else (),
-                if ($started/date ne '') then (normalize-space(concat('Entry on Duty: ', $started/note, ' ', pocom:date-to-english($started/date))), <br/>) else (),
-                if ($ended/date ne '') then normalize-space(concat('Termination of Appointment: ', $ended/note, ' ', pocom:date-to-english($ended/date) )) else ()
+                if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', app:date-to-english($appointed/date))), <br/>) else (),
+                if ($started/date ne '') then (normalize-space(concat('Entry on Duty: ', $started/note, ' ', app:date-to-english($started/date))), <br/>) else (),
+                if ($ended/date ne '') then normalize-space(concat('Termination of Appointment: ', $ended/note, ' ', app:date-to-english($ended/date) )) else ()
                 )
             else (: if ($roleclass = ('country-mission', 'org-mission')) then :)
                 (
-                if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', pocom:date-to-english($appointed/date))), <br/>) else (),
-                if ($started/date ne '') then (normalize-space(concat('Presentation of Credentials: ', $started/note, ' ', pocom:date-to-english($started/date))), <br/>) else (),
-                if ($ended/date ne '') then normalize-space(concat('Termination of Mission: ', $ended/note, ' ', pocom:date-to-english($ended/date) )) else ()
+                if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', app:date-to-english($appointed/date))), <br/>) else (),
+                if ($started/date ne '') then (normalize-space(concat('Presentation of Credentials: ', $started/note, ' ', app:date-to-english($started/date))), <br/>) else (),
+                if ($ended/date ne '') then normalize-space(concat('Termination of Mission: ', $ended/note, ' ', app:date-to-english($ended/date) )) else ()
                 )
     let $role-id := $role/id
     let $notes := string-join($role/note, ' ')

@@ -2,9 +2,9 @@ xquery version "3.0";
 
 module namespace app="http://history.state.gov/ns/site/hsg/templates";
 
-import module namespace templates="http://exist-db.org/xquery/templates" ;
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
+import module namespace templates="http://exist-db.org/xquery/templates" ;
 
 declare
     %templates:wrap
@@ -168,4 +168,33 @@ declare function app:bytes-to-readable($bytes as xs:integer) {
     else if ($bytes gt 1000) then 
         concat(round($bytes div 1000), 'kb')
     else ()
+};
+
+declare function app:year-from-date($date) as xs:string {
+    if ($date castable as xs:date) then 
+        year-from-date($date)
+    else if (matches($date, '^\d{4}-\d{2}$')) then
+        replace($date, '^(\d{4})-\d{2}$', '$1')
+    else (: (if (matches($date, '^\d{4}$'))) then :)
+        $date
+};
+
+declare function app:date-to-english($date as xs:string) as xs:string {
+    let $english-months := ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
+    return
+        if ($date castable as xs:date) then 
+            let $month-num := month-from-date($date)
+            let $month := $english-months[$month-num]
+            let $year := year-from-date($date)
+            let $day := day-from-date($date)
+            return 
+                concat($month, ' ', $day, ', ', $year)
+        else if (matches($date, '^\d{4}-\d{2}$')) then
+            let $year := substring($date, 1, 4)
+            let $month-num := xs:integer(substring($date, 6, 2))
+            let $month := $english-months[$month-num]
+            return 
+                concat($month, ' ', $year)
+        else 
+            $date
 };

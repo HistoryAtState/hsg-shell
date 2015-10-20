@@ -13,13 +13,13 @@ import module namespace templates="http://exist-db.org/xquery/templates" ;
  :)
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
-import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace archives="http://history.state.gov/ns/site/hsg/archives-html" at "archives-html.xqm";
 import module namespace conferences="http://history.state.gov/ns/site/hsg/conferences-html" at "conferences-html.xqm";
 import module namespace countries="http://history.state.gov/ns/site/hsg/countries-html" at "countries-html.xqm";
 import module namespace frus="http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
 import module namespace frus-history="http://history.state.gov/ns/site/hsg/frus-history-html" at "frus-history-html.xqm";
 import module namespace milestones="http://history.state.gov/ns/site/hsg/milestones-html" at "milestones-html.xqm";
+import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace pocom="http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";
 import module namespace travels="http://history.state.gov/ns/site/hsg/travels-html" at "travels-html.xqm";
 import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";

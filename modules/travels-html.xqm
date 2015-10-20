@@ -8,6 +8,7 @@ module namespace travels = "http://history.state.gov/ns/site/hsg/travels-html";
  : draws on data in /db/apps/travels - installed via travels.xar
  :)
 
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace gsh="http://history.state.gov/ns/xquery/geospatialhistory" at "/db/apps/gsh/modules/gsh.xqm";
 import module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";
 import module namespace templates="http://exist-db.org/xquery/templates";
@@ -52,12 +53,12 @@ declare function travels:secretaries($node as node(), $model as map(*)) {
             for $person-id in $secretaries-who-travelled
             let $name := pocom:person-name-first-last($node, $model, $person-id)
             let $secretary-role := doc($pocom:POSITIONS-PRINCIPALS-COL || '/secretary.xml')//principal[person-id = $person-id][1]
-            let $startyear := pocom:year-from-date($secretary-role/started/date)
+            let $startyear := app:year-from-date($secretary-role/started/date)
             let $endyear := 
                 if ($secretary-role/following-sibling::principal[@treatAsConsecutive]) then
-                    pocom:year-from-date($secretary-role/following-sibling::principal[@treatAsConsecutive][last()]/ended/date)
+                    app:year-from-date($secretary-role/following-sibling::principal[@treatAsConsecutive][last()]/ended/date)
                 else 
-                    pocom:year-from-date($secretary-role/ended/date)
+                    app:year-from-date($secretary-role/ended/date)
            let $years := concat($startyear, '–', $endyear)
            order by $secretary-role/started/date
            return
