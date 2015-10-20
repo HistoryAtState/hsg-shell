@@ -302,3 +302,39 @@ declare function fhh:article($node, $model, $article-id) {
     return
         pages:process-content($config:odd, $article//tei:text/*)
 };
+
+declare function fhh:events($node, $model) {
+    let $events := collection($fhh:FRUS_HISTORY_EVENTS_COL)/event
+    let $upcoming-events := $events[xs:date(event-date) ge current-date()]
+    let $upcoming-events-list := 
+        for $event at $count in $upcoming-events
+        order by xs:date($event/event-date) ascending
+        return
+            (
+            $event/full-description/node(),
+            if ($count lt count($upcoming-events)) then <hr/> else ()
+            )
+
+    let $recent-events := $events[xs:date(event-date) lt current-date()]
+    let $recent-events-list := 
+        for $event at $count in $recent-events
+        order by xs:date($event/event-date) descending
+        return
+            (
+            $event/full-description/node(),
+            if ($count lt count($recent-events)) then <hr/> else ()
+            )
+    return
+        <div>
+            {
+            if ($upcoming-events) then 
+                (
+                <h1>Upcoming Events</h1>,
+                $upcoming-events-list
+                )
+            else ()
+            }
+            <h1>Recent Events</h1>
+            { $recent-events-list }
+        </div>
+};
