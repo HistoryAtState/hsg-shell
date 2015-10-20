@@ -48,7 +48,7 @@ function fh:volumes($node as node(), $model as map(*), $volume as xs:string?) {
 
 declare
     %templates:wrap
-function fh:administrations($node as node(), $model as map(*), $volume as xs:string?) {
+function fh:administrations($node as node(), $model as map(*), $administration-id as xs:string?) {
     $node/*,
     let $published-vols := collection($config:FRUS_METADATA_COL)//volume[publication-status eq 'published']
     let $administrations := distinct-values($published-vols//administration)
@@ -57,7 +57,7 @@ function fh:administrations($node as node(), $model as map(*), $volume as xs:str
         for $admins in $code-table-items
         let $adminname := $admins/*:label
         let $admincode := $admins/*:value
-        let $selected := if ($admincode = $volume) then attribute selected {"selected"} else ()
+        let $selected := if ($admincode = $administration-id) then attribute selected {"selected"} else ()
         return 
             element option { 
                 attribute value { "$app/historicaldocuments/" || $admincode },
@@ -70,15 +70,15 @@ function fh:administrations($node as node(), $model as map(*), $volume as xs:str
 (: BEGIN: administration.html :)
 declare
     %templates:wrap
-function fh:load-administration($node as node(), $model as map(*), $volume as xs:string) {
-    let $admin := doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $volume]
-    let $published-vols-in-admin := collection($config:FRUS_METADATA_COL)//volume[administration eq $volume][publication-status eq 'published']
+function fh:load-administration($node as node(), $model as map(*), $administration-id as xs:string) {
+    let $admin := doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $administration-id]
+    let $published-vols-in-admin := collection($config:FRUS_METADATA_COL)//volume[administration eq $administration-id][publication-status eq 'published']
     let $grouping-codes := doc($config:FRUS_CODE_TABLES_COL || '/grouping-code-table.xml')//item
     let $groupings-in-use := 
-        for $g in distinct-values($published-vols-in-admin/grouping[@administration/tokenize(., '\s+') = $volume]) order by index-of($grouping-codes/value, $g) return $g
+        for $g in distinct-values($published-vols-in-admin/grouping[@administration/tokenize(., '\s+') = $administration-id]) order by index-of($grouping-codes/value, $g) return $g
     return
         map {
-            "admin-id": $volume,
+            "admin-id": $administration-id,
             "admin": $admin,
             "published-vols": $published-vols-in-admin,
             "grouping-codes": $grouping-codes,
