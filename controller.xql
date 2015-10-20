@@ -59,6 +59,33 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
     return
         if ($fragments[1]) then
             switch ($fragments[1])
+                case "pre-1861" return
+                    if ($fragments[2]) then
+                        let $page := "historicaldocuments/pre-1861/serial-set.html"
+                        return
+                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                <forward url="{$exist:controller}/pages/{$page}"/>
+                                <view>
+                                    <forward url="{$exist:controller}/modules/view.xql"/>
+                                </view>
+                        		<error-handler>
+                        			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                        			<forward url="{$exist:controller}/modules/view.xql"/>
+                        		</error-handler>
+                            </dispatch>
+                    else
+                        let $page := "historicaldocuments/pre-1861/index.html"
+                        return
+                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                <forward url="{$exist:controller}/pages/{$page}"/>
+                                <view>
+                                    <forward url="{$exist:controller}/modules/view.xql"/>
+                                </view>
+                        		<error-handler>
+                        			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                        			<forward url="{$exist:controller}/modules/view.xql"/>
+                        		</error-handler>
+                            </dispatch>
                 case "frus-history" return
                     if ($fragments[2]) then
                         switch ($fragments[2])
@@ -201,7 +228,7 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                             		</error-handler>
                                 </dispatch>
                     else
-                        if ($fragments[1] = ("about-frus", "status-of-the-series", "citing-frus", "ebooks")) then
+                        if ($fragments[1] = ("about-frus", "citing-frus", "ebooks", "other-electronic-resources", "status-of-the-series")) then
                             let $page := "historicaldocuments/" || $fragments[1] || ".html" 
                             return
                                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
