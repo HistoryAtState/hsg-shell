@@ -61,18 +61,60 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
             switch ($fragments[1])
                 case "pre-1861" return
                     if ($fragments[2]) then
-                        let $page := "historicaldocuments/pre-1861/serial-set.html"
-                        return
-                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/{$page}"/>
-                                <view>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
-                                </view>
-                        		<error-handler>
-                        			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
-                        			<forward url="{$exist:controller}/modules/view.xql"/>
-                        		</error-handler>
-                            </dispatch>
+                        if ($fragments[3]) then
+                            switch ($fragments[3])
+                                case "all" return
+                                    let $page := "historicaldocuments/pre-1861/serial-set/all.html"
+                                    return
+                                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                            <forward url="{$exist:controller}/pages/{$page}"/>
+                                            <view>
+                                                <forward url="{$exist:controller}/modules/view.xql"/>
+                                            </view>
+                                    		<error-handler>
+                                    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                                    			<forward url="{$exist:controller}/modules/view.xql"/>
+                                    		</error-handler>
+                                        </dispatch>
+                                case "browse" return
+                                    let $page := "historicaldocuments/pre-1861/serial-set/browse.html"
+                                    return
+                                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                            <forward url="{$exist:controller}/pages/{$page}"/>
+                                            <view>
+                                                <forward url="{$exist:controller}/modules/view.xql"/>
+                                            </view>
+                                    		<error-handler>
+                                    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                                    			<forward url="{$exist:controller}/modules/view.xql"/>
+                                    		</error-handler>
+                                        </dispatch>
+                                default return
+                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                        <forward url="{$exist:controller}/pages/404.html"/>
+                                        <view>
+                                            <forward url="{$exist:controller}/modules/view.xql">
+                                                <add-parameter name="uri" value="{$exist:path}"/>
+                                            </forward>
+                                        </view>
+                                		<error-handler>
+                                			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                                			<forward url="{$exist:controller}/modules/view.xql"/>
+                                		</error-handler>
+                                    </dispatch>
+                        else
+                            let $page := "historicaldocuments/pre-1861/serial-set/index.html"
+                            return
+                                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                    <forward url="{$exist:controller}/pages/{$page}"/>
+                                    <view>
+                                        <forward url="{$exist:controller}/modules/view.xql"/>
+                                    </view>
+                            		<error-handler>
+                            			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                            			<forward url="{$exist:controller}/modules/view.xql"/>
+                            		</error-handler>
+                                </dispatch>
                     else
                         let $page := "historicaldocuments/pre-1861/index.html"
                         return
