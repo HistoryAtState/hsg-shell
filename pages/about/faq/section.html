@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
+    <div class="row" data-template="pages:load">
+        <div class="col-md-3">
+            <div class="row">
+                <div id="sections" class="col-md-12 panel panel-default">
+                    <h2>About</h2>
+                    <p>Insert sidebar here</p>
+                </div>
+                <div id="toc" class="col-md-12 panel panel-default" data-template="app:fix-links">
+                    <div class="toc-inner" data-template="toc:table-of-contents" data-template-heading="true" data-template-highlight="true"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" id="volume">
+            <div class="row" id="content-inner" data-template="app:fix-links">
+                <div class="content" data-template="pages:view"/>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="resources/scripts/app.js"/>
+</div>
