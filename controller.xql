@@ -862,6 +862,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
 (: handle requests for about section :)
 else if (matches($exist:path, '^/about/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/about/'), '/')[. ne '']
+    let $log := console:log("hsg-shell controller.xql fragments: " || string-join(for $f at $n in $fragments return concat($n, ": ", $f), ', '))
     return
         if ($fragments[1]) then
             switch ($fragments[1])
@@ -890,6 +891,25 @@ else if (matches($exist:path, '^/about/?')) then
                         let $page := "about/faq/index.html"
                         let $publication-id := 'faq'
                         let $document-id := 'faq'
+                        return
+                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                <forward url="{$exist:controller}/pages/{$page}"/>
+                                <view>
+                                    <forward url="{$exist:controller}/modules/view.xql">
+                                        <add-parameter name="publication-id" value="{$publication-id}"/>
+                                        <add-parameter name="document-id" value="{$document-id}"/>
+                                    </forward>
+                                </view>
+                        		<error-handler>
+                        			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                        			<forward url="{$exist:controller}/modules/view.xql"/>
+                        		</error-handler>
+                            </dispatch>
+                case "hac" return
+                    if ($fragments[2]) then
+                        let $page := "about/hac/section.html"
+                        let $publication-id := 'hac'
+                        let $document-id := 'hac'
                         let $section-id := $fragments[2]
                         return
                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -906,9 +926,27 @@ else if (matches($exist:path, '^/about/?')) then
                         			<forward url="{$exist:controller}/modules/view.xql"/>
                         		</error-handler>
                             </dispatch>
+                    else
+                        let $page := "about/hac/index.html"
+                        let $publication-id := 'hac'
+                        let $document-id := 'hac'
+                        return
+                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                <forward url="{$exist:controller}/pages/{$page}"/>
+                                <view>
+                                    <forward url="{$exist:controller}/modules/view.xql">
+                                        <add-parameter name="publication-id" value="{$publication-id}"/>
+                                        <add-parameter name="document-id" value="{$document-id}"/>
+                                    </forward>
+                                </view>
+                        		<error-handler>
+                        			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                        			<forward url="{$exist:controller}/modules/view.xql"/>
+                        		</error-handler>
+                            </dispatch>
                 default return
                     let $page := 
-                        switch ($fragments[2])
+                        switch ($fragments[1])
                             case "contact-us" return 'about/contact-us.html'
                             case "the-historian" return 'about/the-historian.html'
                             case "recent-publications" return 'about/recent-publications.html'

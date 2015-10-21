@@ -38,7 +38,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
-    console:log("pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id),
+    console:log("pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
     let $block :=
     	if ($view = "div") then
             if ($section-id) then
