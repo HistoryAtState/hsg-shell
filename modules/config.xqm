@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 (:~
  : A set of helper functions to access the application context from
@@ -45,7 +45,7 @@ declare variable $config:odd := "frus.odd";
 
 declare variable $config:module-config := doc($config:odd-source || "/configuration.xml")/*;
 
-declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes/";
+declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes";
 
 declare variable $config:FRUS_METADATA_COL := "/db/apps/frus/bibliography/";
 
@@ -58,6 +58,32 @@ declare variable $config:S3_BUCKET := "static.history.state.gov";
 declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $config:S3_BUCKET || "/";
 
 declare variable $config:S3_DOMAIN := $config:S3_BUCKET || ".s3.amazonaws.com";
+
+declare variable $config:BUILDINGS_COL := "/db/apps/other-publications/buildings";
+
+declare variable $config:PUBLICATIONS := 
+    map {
+        "frus": map {
+            "collection": $config:FRUS_VOLUMES_COL,
+            "select-document": function($document-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd"
+        },
+        "buildings": map {
+            "collection": $config:BUILDINGS_COL,
+            "select-document": function($document-id) { doc($config:BUILDINGS_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:BUILDINGS_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd"
+        }
+    };
+
+declare variable $config:PUBLICATION-COLLECTIONS := 
+    map {
+        $config:FRUS_VOLUMES_COL: "frus",
+        $config:BUILDINGS_COL: "buildings"
+    };
 
 (:~
  : Resolve the given path using the current application context.
