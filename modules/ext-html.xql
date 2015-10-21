@@ -28,7 +28,11 @@ declare function pmf:document-list($config as map(*), $node as element(), $class
     toc:document-list($config, $node, $class)
 };
 
-(: turn ref/@target into link. TODO extend to footnotes, e.g., #d3fn3, frus1948v01p1#d3fn1, etc. :)
+(: turn ref/@target into link. 
+ : TODO: 
+ : - extend to footnotes, e.g., #d3fn3, frus1948v01p1#d3fn1
+ : - extend to persName id references - which should point to the persons div; terms; index references; etc.
+ :)
 declare function pmf:ref($config as map(*), $node as element(), $class as xs:string+) {
     let $publication-id := map:get($hsg-config:PUBLICATION-COLLECTIONS, util:collection-name($node))
     let $document-id := substring-before(util:document-name($node), '.xml')
