@@ -6,6 +6,7 @@ xquery version "3.1";
 module namespace pmf="http://history.state.gov/ns/site/hsg/pmf-html";
 
 import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";
+import module namespace hsg-config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
@@ -29,17 +30,24 @@ declare function pmf:document-list($config as map(*), $node as element(), $class
 
 (: turn ref/@target into link. TODO extend to footnotes, e.g., #d3fn3, frus1948v01p1#d3fn1, etc. :)
 declare function pmf:ref($config as map(*), $node as element(), $class as xs:string+) {
+    let $publication-id := map:get($hsg-config:PUBLICATION-COLLECTIONS, util:collection-name($node))
+    let $document-id := substring-before(util:document-name($node), '.xml')
     let $target := $node/@target
-    let $href :=
-        if (matches($target, '^http')) then
+    let $href := 
+        (: generic: catch http, mailto links :)
+        if (matches($target, '^http|mailto')) then
             $target
+        (: FRUS-specific conventions: pointer to a (different) frus volume :)
         else if (matches($target, '^frus')) then
+            (: pointer to location within that volume :)
             if (contains($target, '#')) then
-                toc:href(substring-before($target, '#'), substring-after($target, '#'), ())
+                toc:href($publication-id, substring-before($target, '#'), substring-after($target, '#'), ())
+            (: pointer to that volume's landing page :)
             else
-                toc:href($target, (), ())
+                toc:href($publication-id, $target, (), ())
+        (: generic: pointer to location within document :)
         else if (starts-with($target, '#')) then
-            toc:href(substring-before(util:document-name($node), '.xml'), substring-after($target, '#'), ())
+            toc:href($publication-id, $document-id, substring-after($target, '#'), ())
         else
             $target
     return

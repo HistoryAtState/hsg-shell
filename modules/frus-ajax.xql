@@ -22,7 +22,7 @@ let $toc := boolean(request:get-parameter("toc", ()))
 let $match := analyze-string($url, "^/historicaldocuments/([^/]+)/?(.*)$")
 let $volume := $match//fn:group[@nr = "1"]/string()
 let $id := $match//fn:group[@nr = "2"]/string()
-let $xml := pages:load-xml("div", $id, $volume)
+let $xml := pages:load-xml("frus", $volume, $id, "div")
 return
     if ($xml) then
         let $parent := $xml/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]

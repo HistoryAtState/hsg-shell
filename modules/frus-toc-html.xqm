@@ -14,7 +14,7 @@ import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/ap
 
 declare
     %templates:wrap
-function toc:table-of-contents($node as node(), $model as map(*), $volume as xs:string, $heading as xs:boolean?, $highlight as xs:boolean?) {
+function toc:table-of-contents($node as node(), $model as map(*), $document-id as xs:string, $heading as xs:boolean?, $highlight as xs:boolean?) {
     toc:toc($model?data, $heading, $highlight)
 };
 
@@ -125,28 +125,18 @@ declare function toc:toc-head($node as element(tei:head)) {
 
 (: construct link to a FRUS div :)
 declare function toc:href($node as element(tei:div)) {
-    let $volume := 
+    let $publication-id := map:get($config:PUBLICATION-COLLECTIONS, util:collection-name($node))
+    let $document-id := 
         (: TODO replace substring/util:document-name with root($node)/@xml:id when volumes conform to this :)
         substring-before(util:document-name($node), '.xml')
-    let $id := $node/@xml:id
+    let $section-id := $node/@xml:id
     return
-        toc:href($volume, $id, ())
+        toc:href($publication-id, $document-id, $section-id, ())
 };
 
-declare function toc:href($volume as xs:string, $id as xs:string*, $fragment as xs:string*) {
+declare function toc:href($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string*, $fragment as xs:string*) {
     concat(
-        string-join(
-            (
-                (: use method from pages:app-root for the following 2 items :)
-                request:get-context-path(),
-                substring-after($config:app-root, "/db/"),
-                (: hard code section url fragment :)
-                'historicaldocuments',
-                $volume,
-                $id
-            )
-            ,
-            '/')
+        map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
         ,
         if ($fragment) then concat('#', $fragment) else ()
     )

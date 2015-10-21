@@ -264,9 +264,9 @@ declare function fh:get-gloss($root as element(), $ids as xs:string*) {
         <a href="terms{$id}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($term/../following-sibling::text()))}">{$term/text()}</a>
 };
 
-declare function fh:volume-breadcrumb($node as node(), $model as map(*), $volume as xs:string, $id as xs:string?) {
+declare function fh:volume-breadcrumb($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
     let $head := root($model?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
-    return <a href="{if ($id) then '../' else ()}{$volume}">{$node/@*, $head/string()}</a>
+    return <a href="{if ($section-id) then '../' else ()}{$document-id}">{$node/@*, $head/string()}</a>
 };
 
 declare function fh:section-breadcrumb($node as node(), $model as map(*)) {

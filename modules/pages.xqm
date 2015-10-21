@@ -31,34 +31,32 @@ declare variable $pages:EXIDE :=
 declare
     %templates:wrap
     %templates:default("view", "div")
-function pages:load($node as node(), $model as map(*), $volume as xs:string?, $id as xs:string?, $view as xs:string) {
+function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?, $view as xs:string) {
     map {
-        "data": if (exists($volume)) then pages:load-xml($view, $id, $volume) else ()
+        "data": if (exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else ()
     }
 };
 
-declare function pages:load-xml($view as xs:string, $id as xs:string?, $volume as xs:string) {
-    console:log("Loading volume: " || $volume || "; div: " || $id),
+declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
+    console:log("Loading publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id),
     let $block :=
     	if ($view = "div") then
-            if ($id) then
-                let $doc := doc($config:FRUS_VOLUMES_COL || "/" || $volume || ".xml")/tei:TEI
-                return 
-                    $doc/id($id)
+            if ($section-id) then
+                map:get($config:PUBLICATIONS, $publication-id)?select-section($document-id, $section-id)
             else
-                let $div := (doc($config:FRUS_VOLUMES_COL || "/" || $volume || ".xml")//tei:div)[1]
+                let $div := (map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:div)[1]
                 return
                     if ($div) then
                         $div
                     else
-                        doc($config:FRUS_VOLUMES_COL || "/" || $volume || ".xml")//tei:body
+                        map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:body
         else
-            doc($config:FRUS_VOLUMES_COL || "/" || $volume || ".xml")//tei:text
+            map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:text
     return
         if (empty($block)) then (
             request:set-attribute("hsg-shell.errcode", 404),
-            request:set-attribute("hsg-shell.path", string-join(($volume, $id), "/")),
-            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "chapter " || $id || " in Volume " || $volume || " not found")
+            request:set-attribute("hsg-shell.path", string-join(($document-id, $section-id), "/")),
+            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "publication " || $publication-id || " document " || $document-id || " section " || $section-id || " not found")
         ) else
             $block
 };
@@ -287,4 +285,13 @@ function pages:app-root($node as node(), $model as map(*)) {
         attribute data-app { request:get-context-path() || substring-after($config:app-root, "/db") },
         templates:process($node/*, $model)
     }
+};
+
+(: lets a template provide a full path to a document, as used in pages/departmenthistory/buildings. 
+ : TODO: extend with an $odd parameter. :)
+declare function pages:render-document($node, $model, $document-path, $section-id) {
+    let $doc := doc($document-path)
+    let $section := $doc/id($section-id)
+    return
+        pages:process-content($config:odd, $section)
 };
