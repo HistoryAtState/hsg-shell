@@ -60,6 +60,7 @@ declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $con
 declare variable $config:S3_DOMAIN := $config:S3_BUCKET || ".s3.amazonaws.com";
 
 declare variable $config:BUILDINGS_COL := "/db/apps/other-publications/buildings";
+declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
 
 declare variable $config:PUBLICATIONS := 
     map {
@@ -76,13 +77,21 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:BUILDINGS_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd"
+        },
+        "short-history": map {
+            "collection": $config:SHORT_HISTORY_COL,
+            "select-document": function($document-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd"
         }
     };
 
 declare variable $config:PUBLICATION-COLLECTIONS := 
     map {
         $config:FRUS_VOLUMES_COL: "frus",
-        $config:BUILDINGS_COL: "buildings"
+        $config:BUILDINGS_COL: "buildings",
+        $config:SHORT_HISTORY_COL: "short-history"
     };
 
 (:~

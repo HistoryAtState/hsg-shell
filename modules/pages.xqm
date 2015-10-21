@@ -33,12 +33,12 @@ declare
     %templates:default("view", "div")
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?, $view as xs:string) {
     map {
-        "data": if (exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else ()
+        "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else ()
     }
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
-    console:log("Loading publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id),
+    console:log("pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id),
     let $block :=
     	if ($view = "div") then
             if ($section-id) then
