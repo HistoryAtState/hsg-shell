@@ -1144,6 +1144,55 @@ else if (matches($exist:path, '^/open/?')) then
     		</error-handler>
         </dispatch>
 
+(: handle requests for tags section :)
+else if (matches($exist:path, '^/tags/?')) then
+    let $fragments := tokenize(substring-after($exist:path, '/tags/'), '/')[. ne '']
+    return
+        if ($fragments[1]) then
+            switch ($fragments[1])
+                case "all" return
+                    let $page := "tags/all.html"
+                    return
+                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                            <forward url="{$exist:controller}/pages/{$page}"/>
+                            <view>
+                                <forward url="{$exist:controller}/modules/view.xql"/>
+                            </view>
+                    		<error-handler>
+                    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                    			<forward url="{$exist:controller}/modules/view.xql"/>
+                    		</error-handler>
+                        </dispatch>
+                default return
+                    let $page := "tags/browse.html"
+                    let $tag-id := $fragments[1]
+                    return
+                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                            <forward url="{$exist:controller}/pages/{$page}"/>
+                            <view>
+                                <forward url="{$exist:controller}/modules/view.xql">
+                                    <add-parameter name="tag-id" value="{$tag-id}"/>
+                                </forward>
+                            </view>
+                    		<error-handler>
+                    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                    			<forward url="{$exist:controller}/modules/view.xql"/>
+                    		</error-handler>
+                        </dispatch>
+        else
+            let $page := "tags/index.html"
+            return
+                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                    <forward url="{$exist:controller}/pages/{$page}"/>
+                    <view>
+                        <forward url="{$exist:controller}/modules/view.xql"/>
+                    </view>
+            		<error-handler>
+            			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+            			<forward url="{$exist:controller}/modules/view.xql"/>
+            		</error-handler>
+                </dispatch>
+
 else if (matches($exist:path, '^/search/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
     let $page := 

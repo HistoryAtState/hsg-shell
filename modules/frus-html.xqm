@@ -554,7 +554,7 @@ declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
         collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id]/title[@type eq $type]/text()
 };
 
-declare function fh:vol-title($vol-id as xs:string+) {
+declare function fh:vol-title($vol-id as xs:string) {
 	if (fh:exists-volume-in-db($vol-id)) then 
 	    fh:volume($vol-id)//tei:title[@type = 'complete']/text()
     else 

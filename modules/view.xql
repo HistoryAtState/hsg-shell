@@ -22,6 +22,7 @@ import module namespace milestones="http://history.state.gov/ns/site/hsg/milesto
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace pocom="http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";
 import module namespace serial-set="http://history.state.gov/ns/site/hsg/serial-set-html" at "serial-set-html.xqm";
+import module namespace tags="http://history.state.gov/ns/site/hsg/tags-html" at "tags-html.xqm";
 import module namespace travels="http://history.state.gov/ns/site/hsg/travels-html" at "travels-html.xqm";
 import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";
 import module namespace visits="http://history.state.gov/ns/site/hsg/visits-html" at "visits-html.xqm";
