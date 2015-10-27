@@ -16,6 +16,7 @@ import module namespace app="http://history.state.gov/ns/site/hsg/templates" at 
 import module namespace archives="http://history.state.gov/ns/site/hsg/archives-html" at "archives-html.xqm";
 import module namespace conferences="http://history.state.gov/ns/site/hsg/conferences-html" at "conferences-html.xqm";
 import module namespace countries="http://history.state.gov/ns/site/hsg/countries-html" at "countries-html.xqm";
+import module namespace edu="http://history.state.gov/ns/site/hsg/education-html" at "education-html.xqm";
 import module namespace frus="http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
 import module namespace frus-history="http://history.state.gov/ns/site/hsg/frus-history-html" at "frus-history-html.xqm";
 import module namespace milestones="http://history.state.gov/ns/site/hsg/milestones-html" at "milestones-html.xqm";

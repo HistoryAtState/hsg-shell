@@ -61,6 +61,7 @@ declare variable $config:S3_DOMAIN := $config:S3_BUCKET || ".s3.amazonaws.com";
 
 declare variable $config:BUILDINGS_COL := "/db/apps/other-publications/buildings";
 declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
+declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education/introductions";
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
 declare variable $config:HAC_COL := "/db/apps/hac";
 
@@ -100,6 +101,13 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:HAC_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd"
+        },
+        "education": map {
+            "collection": $config:EDUCATION_COL,
+            "select-document": function($document-id) { doc($config:EDUCATION_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:EDUCATION_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd"
         }
     };
 
@@ -109,7 +117,8 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:BUILDINGS_COL: "buildings",
         $config:SHORT_HISTORY_COL: "short-history",
         $config:FAQ_COL: "faq",
-        $config:HAC_COL: "hac"
+        $config:HAC_COL: "hac",
+        $config:EDUCATION_COL: "edu"
     };
 
 (:~
