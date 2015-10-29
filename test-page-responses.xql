@@ -16,7 +16,12 @@ let $pages :=
         '/conferences',
         '/developer',
         '/education',
-        '/open'
+        '/open',
+        '/historicaldocuments',
+        '/historicaldocuments/truman',
+        '/historicaldocuments/pre-truman',
+        '/historicaldocuments/frus1969-76v18',
+        '/historicaldocuments/frus1969-76v18/d1'
     )
 let $app-base-url := 'http://localhost:8080/exist/apps/hsg-shell'
 let $items :=
@@ -31,17 +36,18 @@ return
         <h1>{count($items)} pages tested</h1>
         {
             for $item-group in $items
-            group by $s := $item-group/http:response/@status
-            order by $s
+            group by $status-code := $item-group/http:response/@status
+            order by $status-code
             return
                 <div>
-                    <h2>{$s/string()} ({count($item-group)})</h2>
+                    <h2>{$status-code/string()} ({count($item-group)})</h2>
                     <table>
                         <thead>
                             <tr>
                                 <th>Page</th>
                                 <th>Status</th>
                                 <th>Message</th>
+                                <th>Time spent</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,14 +56,22 @@ return
                                 let $url := $item/http:request/@href
                                 let $status := $item/http:response/@status
                                 let $message := $item/http:response/@message
+                                let $spent-millis := $item/http:response/@spent-millis
                                 order by $url
                                 return
                                     <tr>
                                         <td><a href="{$url}">{substring-after($url, $app-base-url)}</a></td>
                                         <td>{$status/string()}</td>
                                         <td>{$message/string()}</td>
+                                        <td>{$spent-millis/string()}ms</td>
                                     </tr>
                             }
+                            <tr>
+                                <td/>
+                                <td/>
+                                <td>Total:</td>
+                                <td>{sum($item-group/http:response/@spent-millis ! (. cast as xs:integer))}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
