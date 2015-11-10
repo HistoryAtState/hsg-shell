@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="tei-pm.nvdl"
   type="application/xml"
   schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
@@ -230,6 +229,16 @@
                 </elementSpec><!-- override background-color and font-size property from teisimple.odd -->
                 <elementSpec mode="change" ident="table">
                     <model behaviour="table"/>
+                </elementSpec>
+                <elementSpec mode="change" ident="graphic">
+                    <model behaviour="graphic">
+                        <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
+                            "/" || @url || (if(matches(@url, "\.[^\.]+$")) then "" else ".png"))</param>
+                        <param name="width">@width</param>
+                        <param name="height">@height</param>
+                        <param name="scale">@scale</param>
+                        <param name="title">desc</param>
+                    </model>
                 </elementSpec><!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
                     <model behaviour="inline"/>

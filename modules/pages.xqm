@@ -33,7 +33,8 @@ declare
     %templates:default("view", "div")
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?, $view as xs:string) {
     map {
-        "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else ()
+        "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else (),
+        "document-id": $document-id
     }
 };
 
@@ -84,7 +85,7 @@ declare function pages:xml-link($node as node(), $model as map(*), $doc as xs:st
 
 declare 
     %templates:default("view", "div")
-function pages:view($node as node(), $model as map(*), $view as xs:string) {
+function pages:view($node as node(), $model as map(*), $view as xs:string, $base-path as xs:string) {
     let $xml := 
         if ($view = "div") then
             pages:get-content($model("data"))
@@ -98,7 +99,7 @@ function pages:view($node as node(), $model as map(*), $view as xs:string) {
                     <img src="{$href}"/>
                 </div>
         else
-            pages:process-content($config:odd, $xml)
+            pages:process-content($config:odd, $xml, map { "base-uri": $base-path || "/" || $model?document-id })
 };
 
 declare
@@ -110,8 +111,13 @@ function pages:header($node as node(), $model as map(*)) {
 };
 
 declare function pages:process-content($odd as xs:string, $xml as element()*) {
+    pages:process-content($odd, $xml, ())
+};
+
+declare function pages:process-content($odd as xs:string, $xml as element()*, $parameters as map(*)?) {
 	let $html :=
-        pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", $config:module-config)
+        pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", 
+            $config:module-config, $parameters)
     let $content := pages:clean-footnotes($html)
     let $class := if ($html//*[@class = ('margin-note')]) then "margin-right" else ()
     return
