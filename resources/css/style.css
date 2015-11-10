@@ -179,6 +179,13 @@ header {
 #content-container .popover-content {
   text-indent: 0;
 }
+.content .list3 dt {
+  float: left;
+  display: inline;
+}
+.content .list3 dd {
+  margin-left: 3em;
+}
 .breadcrumb {
   font-size: 85%;
   background-color: transparent;

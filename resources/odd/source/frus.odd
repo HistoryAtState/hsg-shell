@@ -170,6 +170,9 @@
                         <param name="content">item</param>
                         <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
                     </model>
+                    <model predicate="label" behaviour="list">
+                        <param name="content">item</param>
+                    </model>
                     <model behaviour="list">
                         <param name="content">item</param>
                         <outputRendition>list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0</outputRendition>
@@ -239,6 +242,10 @@
                         <param name="scale">@scale</param>
                         <param name="title">desc</param>
                     </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="label"><!-- Silly rule to avoid class 'label' -->
+                    <model predicate="@foo='baz'" behaviour="inline"/>
+                    <model behaviour="inline"/>
                 </elementSpec><!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
                     <model behaviour="inline"/>
