@@ -183,6 +183,9 @@ header {
   font-size: 85%;
   background-color: transparent;
 }
+.breadcrumb > li {
+  display: inline !important;
+}
 .navigation-top {
   margin-bottom: 1em;
   border-bottom: 2px solid #CCC;
