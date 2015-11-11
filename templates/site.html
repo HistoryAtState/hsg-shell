@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <html data-template="pages:app-root">
     <head data-template="app:fix-links">
         <title data-template="config:app-title">App Title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta data-template="config:app-meta"/>
         <link rel="shortcut icon" href="$app/resources/images/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="$app/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <!--        <link rel="stylesheet" type="text/css" href="$app/bower_components/bootstrap/dist/css/bootstrap.min.css"/>-->
+        <!--        <link rel="stylesheet" type="text/css" href="$app/resources/css/variables.css"/>-->
         <link rel="stylesheet" type="text/css" href="$app/bower_components/animate.css/animate.min.css"/>
         <link rel="stylesheet" type="text/css" href="$app/resources/css/style.css"/>
         <link rel="stylesheet" type="text/css" data-template="pages:styles" data-template-odd="frus.odd"/>
@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-sm-8">
                     <a href="$app/">
-                        <img width="525" height="101" src="//s3.amazonaws.com/static.history.state.gov/images/hobanner.gif" alt="Office of the Historian"/>
+                        <img class="img-responsive" width="525" height="101" src="//s3.amazonaws.com/static.history.state.gov/images/hobanner.gif" alt="Office of the Historian"/>
                     </a>
                 </div>
                 <div class="col-sm-4">
@@ -33,8 +33,8 @@
                 </div>
             </div>
         </header>
-        <nav id="main-nav" class="container navbar navbar-default" role="navigation" data-template="app:fix-links">
-            <div class="container-fluid">
+        <div role="navigation" class="container navbar navbar-default" data-template="app:fix-links">
+            <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
@@ -87,11 +87,11 @@
                                 </li>
                                 <li>
                                     <a href="$app/departmenthistory/people/secretaries">Biographies of the Secretaries of
-                                    State</a>
+                                        State</a>
                                 </li>
                                 <li>
                                     <a href="$app/departmenthistory/people/principals-chiefs">Principal Officers and Chiefs of
-                                    Mission</a>
+                                        Mission</a>
                                 </li>
                                 <li>
                                     <a href="$app/departmenthistory/travels/secretary">Travels of the Secretary of State</a>
@@ -221,7 +221,8 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </div>
         <div id="content" class="container"/>
+        <script type="text/javascript" src="$app/resources/scripts/app.js"/>
     </body>
 </html>
