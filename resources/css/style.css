@@ -6955,9 +6955,22 @@ header {
 #content-container .popover-content {
   text-indent: 0;
 }
+#content-container .popover {
+  max-width: 80%;
+}
+.content .list3 dt {
+  float: left;
+  display: inline;
+}
+.content .list3 dd {
+  margin-left: 3em;
+}
 .breadcrumb {
   font-size: 85%;
   background-color: transparent;
+}
+.breadcrumb > li {
+  display: inline !important;
 }
 .navigation-top {
   margin-bottom: 1em;

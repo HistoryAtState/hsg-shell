@@ -26,7 +26,7 @@ let $xml := pages:load-xml("frus", $volume, $id, "div")
 return
     if ($xml) then
         let $parent := $xml/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
-        let $prevDiv := $xml/preceding::tei:div[1]
+        let $prevDiv := $xml/preceding::tei:div[not(@xml:id = $config:IGNORED_DIVS)][1]
         let $prev := pages:get-previous(
             if ($xml instance of element(tei:pb)) then
                 $xml

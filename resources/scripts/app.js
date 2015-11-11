@@ -89,6 +89,8 @@ $(document).ready(function() {
         $(".content .note").popover({
             html: true,
             trigger: "hover",
+            placement: "auto bottom",
+            viewport: "#content-container",
             content: function() {
                 var fn = document.getElementById(this.hash.substring(1));
                 return $(fn).find(".fn-content").html();

@@ -65,6 +65,8 @@ declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
 declare variable $config:HAC_COL := "/db/apps/hac";
 
+declare variable $config:IGNORED_DIVS := ("toc");
+
 declare variable $config:PUBLICATIONS := 
     map {
         "frus": map {
