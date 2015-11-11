@@ -179,6 +179,9 @@ header {
 #content-container .popover-content {
   text-indent: 0;
 }
+#content-container .popover {
+  max-width: 80%;
+}
 .content .list3 dt {
   float: left;
   display: inline;
