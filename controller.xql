@@ -548,7 +548,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 </dispatch>
                         case "by-name" return
                             if ($fragments[3]) then 
-                                let $page := 'departmenthistory/people/letter.html'
+                                let $page := 'departmenthistory/people/by-name/letter.html'
                                 let $letter := $fragments[3]
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -564,7 +564,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 		</error-handler>
                                     </dispatch>
                             else 
-                                let $page := 'departmenthistory/people/by-name.html'
+                                let $page := 'departmenthistory/people/by-name/index.html'
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                         <forward url="{$exist:controller}/pages/{$page}"/>
@@ -578,7 +578,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                     </dispatch>
                         case "by-year" return
                             if ($fragments[3]) then 
-                                let $page := 'departmenthistory/people/year.html'
+                                let $page := 'departmenthistory/people/by-year/year.html'
                                 let $year := $fragments[3]
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -594,7 +594,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 		</error-handler>
                                     </dispatch>
                             else 
-                                let $page := 'departmenthistory/people/by-year.html'
+                                let $page := 'departmenthistory/people/by-year/index.html'
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                         <forward url="{$exist:controller}/pages/{$page}"/>
