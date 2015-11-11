@@ -72,18 +72,26 @@ declare
     %templates:wrap
 function fh:load-administration($node as node(), $model as map(*), $administration-id as xs:string) {
     let $admin := doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $administration-id]
-    let $published-vols-in-admin := collection($config:FRUS_METADATA_COL)//volume[administration eq $administration-id][publication-status eq 'published']
-    let $grouping-codes := doc($config:FRUS_CODE_TABLES_COL || '/grouping-code-table.xml')//item
-    let $groupings-in-use := 
-        for $g in distinct-values($published-vols-in-admin/grouping[@administration/tokenize(., '\s+') = $administration-id]) order by index-of($grouping-codes/value, $g) return $g
     return
-        map {
-            "admin-id": $administration-id,
-            "admin": $admin,
-            "published-vols": $published-vols-in-admin,
-            "grouping-codes": $grouping-codes,
-            "groupings-in-use": $groupings-in-use
-        }
+        if(empty($admin)) then
+            (
+            request:set-attribute("hsg-shell.errcode", 404),
+            request:set-attribute("hsg-shell.path", string-join(($administration-id), "/")),
+            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "administration " || $administration-id || " not found")
+            )
+    else
+        let $published-vols-in-admin := collection($config:FRUS_METADATA_COL)//volume[administration eq $administration-id][publication-status eq 'published']
+        let $grouping-codes := doc($config:FRUS_CODE_TABLES_COL || '/grouping-code-table.xml')//item
+        let $groupings-in-use := 
+            for $g in distinct-values($published-vols-in-admin/grouping[@administration/tokenize(., '\s+') = $administration-id]) order by index-of($grouping-codes/value, $g) return $g
+        return
+            map {
+                "admin-id": $administration-id,
+                "admin": $admin,
+                "published-vols": $published-vols-in-admin,
+                "grouping-codes": $grouping-codes,
+                "groupings-in-use": $groupings-in-use
+            }
 };
 
 declare
