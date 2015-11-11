@@ -289,7 +289,14 @@ function pages:app-root($node as node(), $model as map(*)) {
     element { node-name($node) } {
         $node/@*,
         attribute data-app { request:get-context-path() || substring-after($config:app-root, "/db") },
-        templates:process($node/*, $model)
+        let $content := templates:process($node/*, $model)
+        return (
+            <head>
+                { $content/self::head/* }
+                <title>{$content//div[@class="page-title"]/string()}</title>
+            </head>,
+            $content/self::body
+        )
     }
 };
 
