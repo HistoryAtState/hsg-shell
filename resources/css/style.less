@@ -1,3 +1,5 @@
+@import "../../bower_components/bootstrap/less/bootstrap.less";
+
 @baseFont: Palatino, Georgia, "Times New Roman", Times, serif;
 @fontSize: 14px;
 @lineHeight: 24px;
@@ -9,6 +11,14 @@
 
 @dropdown-color: #000066;
 @dropdown-background: #dddde8;
+
+@grid-float-breakpoint:995px;
+
+@logo-text-color:#030361;
+
+#body{
+    min-width:320px;
+}
 
 .baseFont {
     font-family: @baseFont;
@@ -43,7 +53,7 @@ header{
 }
 
 .banner{
-    background-color:white; 
+    background-color:white;
     max-width:100%;
     border-collapse:collapse;
     padding-bottom:15px;
@@ -64,6 +74,7 @@ header{
 
 .navbar{
     background: #000066 url("//s3.amazonaws.com/static.history.state.gov/images/navbar3.png") repeat-x scroll 0 0;
+    // background: url("//s3.amazonaws.com/static.history.state.gov/images/navbar3.png") repeat-x scroll 0 0;
     padding: 0;
     color:white;
     margin-bottom:0;
@@ -71,7 +82,7 @@ header{
 }
 #main-nav{
     max-height: @navbar-height;
-    height:@navbar-height;    
+    height:@navbar-height;
 }
 .navbar .container-fluid{
     height:@navbar-height;
@@ -102,9 +113,15 @@ header{
     padding-left:0;
 }
 
-.dropdown-menu{
+.dropdown-menu, .collapsing, .collapse.in{
     background-color:@dropdown-background;
 }
+
+.collapsing li, .collapse.in li{
+    padding-left:10px;
+    color:@dropdown-color;
+}
+
 // .dropdown-menu li{
 //     border-bottom:1px solid;
 // }
@@ -115,7 +132,7 @@ header{
     border-style: solid;
     border-width: 1px;
     padding:10px 0 0;
-    
+
     .row{
         margin-left:0;
         margin-right:0;
@@ -136,7 +153,7 @@ header{
         width: 100%;
         margin-bottom: 1em;
     }
-    
+
     h2 {
         font-size: 0.825em;
         .heading;
@@ -162,24 +179,24 @@ header{
     -webkit-animation-duration: 400ms;
     -moz-animation-duration: 400ms;
     animation-duration: 400ms;
-    
+
     h2 {
         background-color: @backgroundSidebar;
         font-size: 1.2em;
         line-height: 1.25;
         margin-bottom: 1.25em;
     }
-    
+
     .toc-inner ul {
         list-style: none;
         padding-left: 0;
     }
-    
+
     .toc-inner li {
         margin-left: .5em;
         text-indent: -.5em;
     }
-    
+
     .highlight {
         background-color: @backgroundSidebar;
     }
@@ -190,24 +207,24 @@ header{
     -moz-animation-duration: 400ms;
     animation-duration: 400ms;
     overflow:auto;
-    
+
     @media (min-width: 769px) {
         margin-left: 60px;
         margin-right: 60px;
     }
-    
+
     .note {
         margin-left: .25em;
         font-size: 12px;
         vertical-align: super;
     }
-    
+
     .footnotes {
         margin-top: 1em;
         padding-top: 1em;
         border-top: 1px solid #CCC;
     }
-    
+
     .popover-content {
         text-indent: 0;
     }
@@ -250,13 +267,13 @@ header{
         margin-left: 60px;
         margin-right: 60px;
     }
-    
-    .page-nav, .page-nave:link, page-nav:active {
+
+    .page-nav, .page-nave:link, .page-nav:active {
         width: 30px;
         font-size: 20px;
         text-decoration: none;
         color: #ccc;
-        
+
         @media (min-width: 769px) {
             position: fixed;
             margin: 0;
@@ -269,7 +286,7 @@ header{
             text-align: center;
         }
     }
-    
+
     .nav-next {
         right: 10px;
     }
