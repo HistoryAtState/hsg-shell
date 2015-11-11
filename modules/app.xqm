@@ -101,7 +101,8 @@ function app:handle-error($node as node(), $model as map(*), $code as xs:integer
     let $log := console:log("error: " || $errcode || " code: " || $code)
     return
         if ((empty($errcode) and empty($code)) or $code = $errcode) then
-            templates:process($node/node(), $model)
+            (templates:process($node/node(), $model),
+            response:set-status-code($errcode))
         else
             ()
 };
