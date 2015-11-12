@@ -19,10 +19,16 @@ declare option output:media-type "application/json";
  :)
 let $url := request:get-parameter("url", ())
 let $toc := boolean(request:get-parameter("toc", ()))
-let $match := analyze-string($url, "^/historicaldocuments/([^/]+)/?(.*)$")
-let $volume := $match//fn:group[@nr = "1"]/string()
-let $id := $match//fn:group[@nr = "2"]/string()
-let $xml := pages:load-xml("frus", $volume, $id, "div")
+let $match := analyze-string($url, "^/([^/]+)/([^/]+)/?(.*)$")
+let $publication := $match//fn:group[@nr = "1"]/string()
+let $volume := $match//fn:group[@nr = "2"]/string()
+let $id := $match//fn:group[@nr = "3"]/string()
+let $pub :=
+  switch($publication)
+    case 'historicaldocuments' return 'frus'
+    default return $volume
+let $volume := if($volume) then $volume else $pub
+let $xml := pages:load-xml($pub, $volume, $id, "div")
 return
     if ($xml) then
         let $parent := $xml/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
@@ -42,6 +48,7 @@ return
                     <div class="content"><img src="{$href}"/></div>
             else
                 pages:process-content($config:odd, pages:get-content($xml))
+        let $html := app:fix-links($html)
         let $doc := replace($volume, "^.*/([^/]+)$", "$1")
         return
             map {

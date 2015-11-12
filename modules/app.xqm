@@ -97,7 +97,7 @@ declare function app:fix-links($nodes as node()*) {
 declare
     %templates:wrap
 function app:handle-error($node as node(), $model as map(*), $code as xs:integer?) {
-    let $errcode := request:get-attribute("hsg-shell.errcode")
+    let $errcode := if(request:get-attribute("hsg-shell.errcode")) then request:get-attribute("hsg-shell.errcode") else 400
     let $log := console:log("error: " || $errcode || " code: " || $code)
     return
         if ((empty($errcode) and empty($code)) or $code = $errcode) then
@@ -186,13 +186,13 @@ declare function app:bytes-to-readable($bytes as xs:integer) {
     else ()
 };
 
-declare function app:year-from-date($date) as xs:string {
+declare function app:year-from-date($date) {
     if ($date castable as xs:date) then 
         year-from-date($date)
     else if (matches($date, '^\d{4}-\d{2}$')) then
         replace($date, '^(\d{4})-\d{2}$', '$1')
     else (: (if (matches($date, '^\d{4}$'))) then :)
-        $date
+        string($date)
 };
 
 declare function app:date-to-english($date as xs:string) as xs:string {
