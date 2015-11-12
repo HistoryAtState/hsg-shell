@@ -60,7 +60,6 @@ header{
 }
 .banner__search{
     text-align:right;
-    margin-right:20px;
 }
 .gobox{
     line-height:0.4;
@@ -68,18 +67,50 @@ header{
     margin-left:2px;
 }
 
+.searchbox{
+    position:relative;
+    margin-top:10px;
+}
 .searchbox p{
     font-size:0.825em;
 }
-
+#search-box{
+    padding-right:30px;
+}
+.search-button{
+    position:absolute;
+    top:1px;
+    right:1px;
+    border:none !important;
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    background:whitesmoke;
+}
+.fa-search{
+    font-size:16px;
+}
+.fa.fa-bars{
+    font-size:24px;
+}
+.navbar-toggle{
+    padding:5px 10px 0px 12px;
+}
 .navbar{
-    background: #000066 url("//s3.amazonaws.com/static.history.state.gov/images/navbar3.png") repeat-x scroll 0 0;
+    // background: #000066 url("//s3.amazonaws.com/static.history.state.gov/images/navbar3.png") repeat-x scroll 0 0;
     // background: url("//s3.amazonaws.com/static.history.state.gov/images/navbar3.png") repeat-x scroll 0 0;
+    background:@logo-text-color;
     padding: 0;
     color:white;
     margin-bottom:0;
     min-height:@navbar-height;
 }
+// @media (max-width: 995px) {
+//     .navbar{
+//         background:white;
+//     }
+
+// }
+
 #main-nav{
     max-height: @navbar-height;
     height:@navbar-height;

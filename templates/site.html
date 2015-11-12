@@ -3,10 +3,9 @@
         <title data-template="config:app-title">App Title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta data-template="config:app-meta"/>
-        <link rel="shortcut icon" href="$app/resources/images/favicon.ico"/>
-        <!--        <link rel="stylesheet" type="text/css" href="$app/bower_components/bootstrap/dist/css/bootstrap.min.css"/>-->
-        <!--        <link rel="stylesheet" type="text/css" href="$app/resources/css/variables.css"/>-->
+        <link rel="shortcut icon" href="$app/resources/images/favicon.ico"/><!--        <link rel="stylesheet" type="text/css" href="$app/bower_components/bootstrap/dist/css/bootstrap.min.css"/>--><!--        <link rel="stylesheet" type="text/css" href="$app/resources/css/variables.css"/>-->
         <link rel="stylesheet" type="text/css" href="$app/bower_components/animate.css/animate.min.css"/>
+        <link rel="stylesheet" type="text/css" href="$app/bower_components/font-awesome/css/font-awesome.min.css"/>
         <link rel="stylesheet" type="text/css" href="$app/resources/css/style.css"/>
         <link rel="stylesheet" type="text/css" data-template="pages:styles" data-template-odd="frus.odd"/>
         <script type="text/javascript" src="$app/bower_components/jquery/dist/jquery.min.js"/>
@@ -15,17 +14,21 @@
     <body id="body">
         <header class="container banner" data-template="app:fix-links">
             <div class="row">
-                <div class="col-sm-8">
-                    <a href="$app/">
-                        <img class="img-responsive" width="525" height="101" src="//s3.amazonaws.com/static.history.state.gov/images/hobanner.gif" alt="Office of the Historian"/>
+                <div class="col-sm-7">
+                    <a href="$app/"><!--<img class="img-responsive" width="525" height="101" src="//s3.amazonaws.com/static.history.state.gov/images/hobanner.gif" alt="Office of the Historian"/>-->
+                        <img class="img-responsive" width="400" src="resources/images/Office-of-the-Historian-logo_500x168.jpg" alt="Office of the Historian"/>
                     </a>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                     <div class="banner__search">
                         <div class="searchbox">
                             <form method="get" action="$app/search">
-                                <p class="form-group">Search: <input type="text" size="15" name="q" style="margin-bottom: 0"/>
-                                    <input type="submit" value="GO" class="gobox btn btn-default"/>
+                                <p class="form-group">
+                                    <!-- Search: -->
+                                    <input type="text" size="15" name="q" style="margin-bottom: 0" placeholder="search..." class="form-control" id="search-box"/>
+                                    <button type="submit" value="GO" class="search-button btn btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </p>
                             </form>
                         </div>
@@ -38,9 +41,12 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-bars"></i>
+                        <!--
                         <span class="icon-bar"/>
                         <span class="icon-bar"/>
                         <span class="icon-bar"/>
+                        -->
                     </button><!--<a data-template="config:app-title" class="navbar-brand" href="./index.html">App Title</a>-->
                 </div>
                 <div class="navbar-collapse collapse" id="navbar-collapse-1">
