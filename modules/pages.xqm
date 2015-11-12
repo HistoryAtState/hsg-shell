@@ -29,13 +29,16 @@ declare variable $pages:EXIDE :=
         replace($path, "/+", "/");
         
 declare
-    %templates:wrap
     %templates:default("view", "div")
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?, $view as xs:string) {
-    map {
+    let $content := map {
         "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else (),
         "document-id": $document-id
     }
+    let $html := templates:process($node/*, map:new(($model, $content)))
+    let $midtitle := if(map:get($config:PUBLICATIONS, $publication-id)?title) then map:get($config:PUBLICATIONS, $publication-id)?title || ' - ' else ()
+    let $head := root($content?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+        return ($html, <div class="page-title" style="display:none">{$head/string()} -  {$midtitle} Office of Historian</div>)
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {

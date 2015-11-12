@@ -74,42 +74,48 @@ declare variable $config:PUBLICATIONS :=
             "select-document": function($document-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd"
+            "odd": "frus.odd",
+            "title": "Historical Documents"
         },
         "buildings": map {
             "collection": $config:BUILDINGS_COL,
             "select-document": function($document-id) { doc($config:BUILDINGS_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:BUILDINGS_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd"
+            "odd": "frus.odd",
+            "title": "Buildings - Department History"
         },
         "short-history": map {
             "collection": $config:SHORT_HISTORY_COL,
             "select-document": function($document-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd"
+            "odd": "frus.odd",
+            "title": "Short History - Department History"
         },
         "faq": map {
             "collection": $config:FAQ_COL,
             "select-document": function($document-id) { doc($config:FAQ_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:FAQ_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd"
-        },
+            "odd": "frus.odd",
+            "title": "FAQ - About Us"
+},
         "hac": map {
             "collection": $config:HAC_COL,
             "select-document": function($document-id) { doc($config:HAC_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:HAC_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd"
+            "odd": "frus.odd",
+            "title": "Historical Advisory Committee - About Us"
         },
         "education": map {
             "collection": $config:EDUCATION_COL,
             "select-document": function($document-id) { doc($config:EDUCATION_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:EDUCATION_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd"
+            "odd": "frus.odd",
+            "title": "Education Resources"
         }
     };
 
