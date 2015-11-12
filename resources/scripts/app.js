@@ -1,7 +1,12 @@
 $(document).ready(function() {
     var historySupport = !!(window.history && window.history.pushState);
     var appRoot = $("html").data("app");
-    
+
+    //make sure the mobile menu is hidden when window is resized
+    $( window ).resize(function() {
+        $( ".collapse").collapse("hide");
+    });
+
     function resize() {
         var wh = ($(window).height()) / 2;
         $(".page-nav").css("top", wh);
