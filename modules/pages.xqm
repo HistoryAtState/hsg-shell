@@ -36,18 +36,19 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         "document-id": $document-id
     }
     let $html := templates:process($node/*, map:new(($model, $content)))
-    let $midtitle := if(map:get($config:PUBLICATIONS, $publication-id)?title) then map:get($config:PUBLICATIONS, $publication-id)?title || ' - ' else ()
+    let $title := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?title else ()
+    let $midtitle := if($title) then $title || ' - ' else ()
     let $head := root($content?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
-        return ($html, <div class="page-title" style="display:none">{$head/string()} -  {$midtitle} Office of Historian</div>)
+    return ($html, <div class="page-title" style="display:none">{$head/string()} -  {$midtitle} Office of Historian</div>)
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
     console:log("pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
     let $block :=
     	if ($view = "div") then
-            if ($section-id) then
+            if ($section-id) then (
                 map:get($config:PUBLICATIONS, $publication-id)?select-section($document-id, $section-id)
-            else
+            ) else
                 let $div := (map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:div)[1]
                 return
                     if ($div) then
