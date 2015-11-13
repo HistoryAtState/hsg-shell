@@ -33,7 +33,8 @@ declare
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?, $view as xs:string) {
     let $content := map {
         "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else (),
-        "document-id": $document-id
+        "document-id": $document-id,
+        "odd": if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?odd else $config:odd
     }
     let $html := templates:process($node/*, map:new(($model, $content)))
     let $title := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?title else ()
@@ -103,7 +104,7 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $base
                     <img src="{$href}"/>
                 </div>
         else
-            pages:process-content($config:odd, $xml, map { "base-uri": $base-path || "/" || $model?document-id })
+            pages:process-content($model?odd, $xml, map { "base-uri": $base-path || "/" || $model?document-id })
 };
 
 declare
@@ -111,7 +112,7 @@ declare
 function pages:header($node as node(), $model as map(*)) {
     let $header := $model?data/ancestor-or-self::tei:TEI/tei:teiHeader
     return
-        pages:process-content($config:odd, $header)
+        pages:process-content($model?odd, $header)
 };
 
 declare function pages:process-content($odd as xs:string, $xml as element()*) {
@@ -274,7 +275,7 @@ function pages:navigation-link($node as node(), $model as map(*), $direction as 
         <a data-doc="{util:document-name($model($direction))}"
             data-root="{util:node-id($model($direction))}"
             data-current="{util:node-id($model('div'))}"
-            data-odd="{$config:odd}">
+            data-odd="{$model?odd}">
         {
             $node/@* except $node/@href,
             let $id := $model($direction)/@xml:id
@@ -310,5 +311,5 @@ declare function pages:render-document($node, $model, $document-path, $section-i
     let $doc := doc($document-path)
     let $section := $doc/id($section-id)
     return
-        pages:process-content($config:odd, $section)
+        pages:process-content($model?odd, $section)
 };

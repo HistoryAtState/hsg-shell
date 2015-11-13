@@ -1,0 +1,277 @@
+<?xml-model href="tei-pm.nvdl"
+  type="application/xml"
+  schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>TEI Simple customization</title>
+            </titleStmt>
+            <publicationStmt>
+                <publisher>TEI Consortium</publisher>
+                <availability>
+                    <licence target="http://creativecommons.org/licenses/by-sa/3.0/"> Distributed under a
+                        Creative Commons Attribution-ShareAlike 3.0 Unported License </licence>
+                    <licence target="http://www.opensource.org/licenses/BSD-2-Clause">
+                        <p>Cop yright 2014 TEI Consortium.</p>
+                        <p>All rights reserved. </p>
+                        <p>Redistribution and use in source and binary forms, with or without
+                            modification, are permitted provided that the following conditions are met:</p>
+                        <list>
+                            <item>Redistributions of source code must retain the above copyright notice,
+                                this list of conditions and the following disclaimer.</item>
+                            <item>Redistributions in binary form must reproduce the above copyright notice,
+                                this list of conditions and the following disclaimer in the documentation
+                                and/or other materials provided with the distribution.</item>
+                        </list>
+                        <p>This software is provided by the copyright holders and contributors "as is" and
+                            any express or implied warranties, including, but not limited to, the implied
+                            warranties of merchantability and fitness for a particular purpose are
+                            disclaimed. In no event shall the copyright holder or contributors be liable
+                            for any direct, indirect, incidental, special, exemplary, or consequential
+                            damages (including, but not limited to, procurement of substitute goods or
+                            services; loss of use, data, or profits; or business interruption) however
+                            caused and on any theory of liability, whether in contract, strict liability,
+                            or tort (including negligence or otherwise) arising in any way out of the use
+                            of this software, even if advised of the possibility of such damage.</p>
+                    </licence>
+                    <p>TEI material can be licensed differently depending on the use you intend to make
+                        of it. Hence it is made available under both the CC+BY and BSD-2 licences. The
+                        CC+BY licence is generally appropriate for usages which treat TEI content as data
+                        or documentation. The BSD-2 licence is generally appropriate for usage of TEI
+                        content in a software environment. For further information or clarification,
+                        please contact the <ref target="mailto:info@tei-c.org">TEI Consortium</ref>. </p>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <p>created ab initio during a meeting in Oxford</p>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <schemaSpec ident="departmenthistory" start="TEI teiCorpus" source="teisimple.odd">
+                <elementSpec mode="change" ident="teiHeader">
+                    <modelSequence>
+                        <model output="web" behaviour="block"/>
+                        <model behaviour="omit"/>
+                    </modelSequence>
+                </elementSpec>
+                <elementSpec mode="change" ident="fileDesc">
+                    <modelSequence>
+                        <model behaviour="block">
+                            <param name="content">titleStmt</param>
+                        </model>
+                        <model behaviour="block">
+                            <param name="content">publicationStmt</param>
+                        </model>
+                    </modelSequence>
+                </elementSpec>
+                <elementSpec ident="titleStmt" mode="change">
+                    <modelSequence>
+                        <model behaviour="heading">
+                            <param name="content">title[@type="complete"]</param>
+                        </model><!-- Singular vs. plural for "editor(s)" -->
+                        <model predicate="count(editor[@role = 'primary']) gt 1" behaviour="block">
+                            <param name="content">"Editors:"</param>
+                            <outputRendition>font-weight: bold</outputRendition>
+                        </model>
+                        <model predicate="count(editor[@role = 'primary']) eq 1" behaviour="block">
+                            <param name="content">"Editor:"</param>
+                            <outputRendition>font-weight: bold</outputRendition>
+                        </model>
+                        <model predicate="editor[@role = 'primary']" behaviour="list-from-items">
+                            <param name="content">editor[@role="primary"]</param>
+                            <outputRendition>list-style-type: none</outputRendition>
+                        </model>
+                        <model predicate="editor[@role = 'general']" behaviour="block">
+                            <param name="content">"General Editor:"</param>
+                            <outputRendition>font-weight: bold</outputRendition>
+                        </model>
+                        <model predicate="editor[@role = 'general']" behaviour="list-from-items">
+                            <param name="content">editor[@role="general"]</param>
+                            <outputRendition>list-style-type: none</outputRendition>
+                        </model>
+                    </modelSequence>
+                </elementSpec>
+                <elementSpec ident="title" mode="change">
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <elementSpec ident="publicationStmt" mode="change">
+                    <modelSequence>
+                        <model behaviour="block">
+                            <param name="content">publisher</param>
+                        </model>
+                        <model behaviour="block">
+                            <param name="content">pubPlace</param>
+                        </model>
+                        <model behaviour="block">
+                            <param name="content">date</param>
+                        </model>
+                    </modelSequence>
+                </elementSpec>
+                <elementSpec ident="publisher" mode="change">
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <elementSpec ident="pubPlace" mode="change">
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <elementSpec ident="date" mode="change">
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <elementSpec mode="change" ident="hi">
+                    <model predicate="@rend = 'strong'" behaviour="inline">
+                        <outputRendition>font-weight: bold;</outputRendition>
+                    </model>
+                    <model predicate="@rend = 'italic'" behaviour="inline">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
+                    <model predicate="@rend = 'smallcaps'" behaviour="inline">
+                        <outputRendition>font-variant: small-caps;</outputRendition>
+                    </model>
+                    <model predicate="@rendition" behaviour="inline" useSourceRendition="true">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
+                    <model predicate="not(@rendition)" behaviour="inline">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="note">
+                    <model predicate="@rend = 'inline'" behaviour="paragraph">
+                        <outputRendition>font-size: smaller;</outputRendition>
+                    </model>
+                    <model behaviour="note">
+                        <param name="place">"foot"</param>
+                        <param name="label">@n/string()</param>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="p">
+                    <model predicate="@rend = 'center'" behaviour="paragraph" useSourceRendition="true">
+                        <outputRendition>text-align: center;</outputRendition>
+                    </model>
+                    <model predicate="@rend = 'flushleft'" behaviour="paragraph" useSourceRendition="true">
+                        <outputRendition>text-align: justify;</outputRendition>
+                    </model>
+                    <model behaviour="paragraph" useSourceRendition="true">
+                        <outputRendition>text-align: justify; text-indent: 1.5em;</outputRendition>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="dateline">
+                    <model behaviour="block">
+                        <outputRendition>text-align: right;</outputRendition>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="list">
+                    <model predicate="@rend = 'bulleted'" behaviour="list">
+                        <param name="content">item</param>
+                        <outputRendition>list-style-type: disc;</outputRendition>
+                    </model>
+                    <model predicate="@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
+                        <param name="content">item</param>
+                        <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
+                    </model>
+                    <model predicate="label" behaviour="list">
+                        <param name="content">item</param>
+                    </model>
+                    <model behaviour="list">
+                        <param name="content">item</param>
+                        <outputRendition>list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0</outputRendition>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="head">
+                    <model predicate="parent::figure" behaviour="block">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
+                    <model predicate="parent::table" behaviour="block">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
+                    <model predicate="parent::list/@type = ('participants', 'to', 'from', 'subject')" behaviour="block">
+                        <outputRendition>margin-left: -2.8em;</outputRendition>
+                    </model>
+                    <model predicate="parent::list" behaviour="block">
+                        <outputRendition>font-weight: bold;</outputRendition>
+                    </model>
+                    <model predicate="parent::div" behaviour="heading">
+                        <param name="level">count(ancestor::div)</param>
+                    </model>
+                    <model behaviour="block"/>
+                </elementSpec>
+                <elementSpec ident="div" mode="change">
+                    <model output="web" predicate="@type = ('compilation', 'chapter')" behaviour="document-list"/>
+                    <model behaviour="block"/>
+                </elementSpec>
+                <elementSpec ident="ref" mode="change">
+                    <model behaviour="ref"/>
+                </elementSpec>
+                <elementSpec ident="pb" mode="change">
+                    <modelSequence>
+                        <model output="web" behaviour="link">
+                            <param name="content">concat('[Page ', @n, ']')</param>
+                            <param name="link">@xml:id</param><!--<param name="link">concat('http://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
+                            <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
+                        </model>
+                        <model output="print" behaviour="omit"/>
+                    </modelSequence>
+                </elementSpec>
+                <elementSpec mode="change" ident="quote">
+                    <model predicate="ancestor::p and empty(descendant::p|descendant::div)" behaviour="inline" useSourceRendition="true">
+                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
+                        <outputRendition scope="before">content: '‘';</outputRendition>
+                        <outputRendition scope="after">content: '’';</outputRendition>
+                    </model>
+                    <model behaviour="block" useSourceRendition="true">
+                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
+                        <outputRendition>margin-left: 10px; margin-right: 10px;
+                        </outputRendition>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="closer">
+                    <model behaviour="block">
+                        <outputRendition>text-align: right; margin-top: 1em; margin-left: 1em;</outputRendition>
+                    </model>
+                </elementSpec><!-- override background-color and font-size property from teisimple.odd -->
+                <elementSpec mode="change" ident="table">
+                    <model behaviour="table"/>
+                </elementSpec>
+                <elementSpec mode="change" ident="graphic">
+                    <model behaviour="graphic">
+                        <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
+                            "/" || @url || (if(matches(@url, "\.[^\.]+$")) then "" else ".png"))</param>
+                        <param name="width">@width</param>
+                        <param name="height">@height</param>
+                        <param name="scale">@scale</param>
+                        <param name="title">desc</param>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="label"><!-- Silly rule to avoid class 'label' -->
+                    <model predicate="@foo='baz'" behaviour="inline"/>
+                    <model behaviour="inline"/>
+                </elementSpec><!-- Elements not in TEI Simple -->
+                <elementSpec ident="persName" mode="add">
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <elementSpec ident="gloss" mode="add">
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <elementSpec ident="term" mode="add">
+                    <model behaviour="inline"/>
+                </elementSpec>
+                <moduleRef key="tei"/>
+                <moduleRef key="header"/>
+                <moduleRef key="tagdocs"/>
+                <moduleRef key="core"/>
+                <moduleRef key="gaiji"/>
+                <moduleRef key="namesdates"/>
+                <moduleRef key="msdescription"/>
+                <moduleRef key="corpus"/>
+                <moduleRef key="transcr"/>
+                <moduleRef key="analysis"/>
+                <moduleRef key="linking"/>
+                <moduleRef key="drama"/>
+                <moduleRef key="textstructure"/>
+                <moduleRef key="figures"/>
+                <moduleRef key="verse"/>
+            </schemaSpec>
+        </body>
+    </text>
+</TEI>

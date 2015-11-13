@@ -31,6 +31,7 @@ let $volume := if($volume) then $volume else $pub
 let $xml := pages:load-xml($pub, $volume, $id, "div")
 return
     if ($xml) then
+        let $odd := if ($pub) then map:get($config:PUBLICATIONS, $pub)?odd else $config:odd
         let $parent := $xml/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
         let $prevDiv := $xml/preceding::tei:div[not(@xml:id = $config:IGNORED_DIVS)][1]
         let $prev := pages:get-previous(
@@ -47,13 +48,13 @@ return
                 return
                     <div class="content"><img src="{$href}"/></div>
             else
-                pages:process-content($config:odd, pages:get-content($xml))
+                pages:process-content($odd, pages:get-content($xml))
         let $html := app:fix-links($html)
         let $doc := replace($volume, "^.*/([^/]+)$", "$1")
         return
             map {
                 "doc": $doc,
-                "odd": $config:odd,
+                "odd": $odd,
                 "next": 
                     if ($next) then 
                         $next/@xml:id/string()
