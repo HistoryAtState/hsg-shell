@@ -10,6 +10,10 @@ import module namespace hsg-config="http://history.state.gov/ns/site/hsg/config"
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
+declare function pmf:passthrough($config as map(*), $node as element(), $class as xs:string+) {
+    $node
+};
+
 declare function pmf:list-from-items($config as map(*), $node as element(), $class as xs:string+, $content, $ordered) {
     if ($ordered) then
         <ol class="{$class}">
