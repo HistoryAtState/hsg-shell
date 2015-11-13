@@ -15,6 +15,7 @@
 @grid-float-breakpoint:995px;
 
 @logo-text-color:#030361;
+@logo-text-color2:#2f5f8f;
 
 #body{
     min-width:320px;
@@ -95,6 +96,17 @@ header{
 .navbar-toggle{
     padding:5px 10px 0px 12px;
 }
+.navbar-toggle:hover{
+    color:@logo-text-color;
+}
+.toggle-text{
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 12px;
+    padding-left: 5px;
+    text-transform: uppercase;
+    vertical-align: text-bottom;
+}
 .navbar{
     // background: #000066 url("//s3.amazonaws.com/static.history.state.gov/images/navbar3.png") repeat-x scroll 0 0;
     // background: url("//s3.amazonaws.com/static.history.state.gov/images/navbar3.png") repeat-x scroll 0 0;
@@ -147,6 +159,20 @@ header{
 .dropdown-menu, .collapsing, .collapse.in{
     background-color:@dropdown-background;
 }
+
+.navbar .collapse.in li, .navbar .collapsing li{
+    background-color:@logo-text-color;
+}
+
+.navbar .dropdown.open .dropdown-menu li{
+    background-color:@dropdown-background;
+    padding-left:0;
+
+    a{
+        color:@logo-text-color;
+    }
+}
+
 
 .collapsing li, .collapse.in li{
     padding-left:10px;
