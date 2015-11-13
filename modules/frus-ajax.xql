@@ -48,7 +48,7 @@ return
                 return
                     <div class="content"><img src="{$href}"/></div>
             else
-                pages:process-content($odd, pages:get-content($xml))
+                pages:process-content($odd, pages:get-content($xml), map { "base-uri": $pub || (if ($volume ne $pub) then "/" || $volume else ()) })
         let $html := app:fix-links($html)
         let $doc := replace($volume, "^.*/([^/]+)$", "$1")
         return

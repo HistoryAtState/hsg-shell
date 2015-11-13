@@ -34,6 +34,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $content := map {
         "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else (),
         "document-id": $document-id,
+        "base-path": if ($publication-id != $document-id) then $publication-id || "/" else (),
         "odd": if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?odd else $config:odd
     }
     let $html := templates:process($node/*, map:new(($model, $content)))
@@ -90,7 +91,7 @@ declare function pages:xml-link($node as node(), $model as map(*), $doc as xs:st
 
 declare 
     %templates:default("view", "div")
-function pages:view($node as node(), $model as map(*), $view as xs:string, $base-path as xs:string) {
+function pages:view($node as node(), $model as map(*), $view as xs:string) {
     let $xml := 
         if ($view = "div") then
             pages:get-content($model("data"))
@@ -104,7 +105,7 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $base
                     <img src="{$href}"/>
                 </div>
         else
-            pages:process-content($model?odd, $xml, map { "base-uri": $base-path || "/" || $model?document-id })
+            pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path || $model?document-id })
 };
 
 declare
