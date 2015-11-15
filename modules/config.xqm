@@ -90,7 +90,7 @@ declare variable $config:PUBLICATIONS :=
             "select-document": function($document-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd",
+            "odd": "departmenthistory.odd",
             "title": "Short History - Department History"
         },
         "faq": map {
