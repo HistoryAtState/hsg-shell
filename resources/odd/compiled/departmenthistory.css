@@ -1,0 +1,79 @@
+/* Generated stylesheet. Do not edit. */
+/* Generated from /db/apps/hsg-shell/resources/odd/compiled/departmenthistory.odd */
+
+/* Global styles */
+
+
+/* Model rendition styles */
+
+.add { color: green; text-decoration: underline; }
+.address { margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 2em; }
+.addrLine { white-space: nowrap; }
+.corr2:before { content: '['; }
+.corr2:after { content: ']'; }
+.del { text-decoration: line-through; }
+.foreign { font-style:italic; }
+.gap1 { color: grey; }
+.gap2:before { content: '[..'; }
+.gap2:after { content: '..]'; }
+.gap2 { color: grey; }
+.gap3:before { content: '[...]'; }
+.head1 { font-style: italic; }
+.head2 { font-style: italic; }
+.head3 { margin-left: -2.8em; }
+.head4 { font-weight: bold; }
+.hi1 { font-weight: bold; }
+.hi2 { font-style: italic; }
+.hi3 { font-variant: small-caps; }
+.hi4 { font-style: italic; }
+.hi5 { font-style: italic; }
+.l { margin-left: 1em; }
+.list1 { list-style-type: disc; }
+.list2 { list-style-type: none; line-height: 1.3em; }
+.list4 { list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0 }
+.note1 { font-size: smaller; }
+.p1 { text-align: center; }
+.p2 { text-align: justify; }
+.p3 { text-align: justify; text-indent: 1.5em; }
+.pb1 { display: block; margin-left: 4pt; color: grey; float: right; }
+.q1 { margin-left: 10px; margin-right: 10px; }
+.q2:before { content: '‘'; }
+.q2:after { content: '’'; }
+.q3 { margin-left: 10px; margin-right: 10px; }
+.quote1:before { content: '‘'; }
+.quote1:after { content: '’'; }
+.quote2 { margin-left: 10px; margin-right: 10px; }
+.sic2:before { content: '{'; }
+.sic2:after { content: '}'; }
+.speaker { font-style:italic; }
+.stage { font-style: italic; }
+.unclear:after { content: ' [?] '; }
+.titleStmt2 { font-weight: bold }
+.titleStmt3 { font-weight: bold }
+.titleStmt4 { list-style-type: none }
+.titleStmt5 { font-weight: bold }
+.titleStmt6 { list-style-type: none }
+.supplied2:before { content:"<"; }
+.supplied2:after { content:">"; }
+.supplied3:before { content:"["; }
+.supplied3:after { content:"]"; }
+.supplied4:before { content:"("; }
+.supplied4:after { content:")"; }
+.supplied5:before { content:"{"; }
+.supplied5:after { content:"}"; }
+.castList { list-style: ordered; }
+.argument { margin-bottom: 0.5em; }
+.closer { text-align: right; margin-top: 1em; margin-left: 1em; }
+.dateline { text-align: right; }
+.docTitle2 { font-size: larger; }
+.floatingText { margin: 6pt; border: solid black 1pt; }
+.signed1 { text-align: right; }
+.signed2 { font-style: italic; }
+.text { max-width: 80%; margin: auto; font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif; }
+.titlePage { text-align: center; }
+.trailer { color: green; }
+.figDesc:before { content: '[..'; }
+.figDesc:after { content: '..]'; }
+.figDesc { color: grey;font-style:italic; }
+.figure2 { display: block; border-top: solid 1pt blue; border-bottom: solid 1pt blue; }
+.row1 { font-weight: bold; }

@@ -1,11 +1,11 @@
 (:~
 
     Transformation module generated from TEI ODD extensions for processing models.
-    ODD: /db/apps/hsg-shell/resources/odd/compiled/frus.odd
+    ODD: /db/apps/hsg-shell/resources/odd/compiled/departmenthistory.odd
  :)
 xquery version "3.1";
 
-module namespace model="http://www.tei-c.org/tei-simple/models/frus.odd";
+module namespace model="http://www.tei-c.org/tei-simple/models/departmenthistory.odd";
 
 declare default element namespace "http://www.tei-c.org/ns/1.0";
 
@@ -14,8 +14,6 @@ declare namespace xhtml='http://www.w3.org/1999/xhtml';
 import module namespace css="http://www.tei-c.org/tei-simple/xquery/css" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/css.xql";
 
 import module namespace html="http://www.tei-c.org/tei-simple/xquery/functions" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/html-functions.xql";
-
-import module namespace ext-html="http://history.state.gov/ns/site/hsg/pmf-html" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/../../hsg-shell/modules/ext-html.xql";
 
 (:~
 
@@ -28,7 +26,7 @@ declare function model:transform($options as map(*), $input as node()*) {
         map:new(($options,
             map {
                 "output": ["web"],
-                "odd": "/db/apps/hsg-shell/resources/odd/compiled/frus.odd",
+                "odd": "/db/apps/hsg-shell/resources/odd/compiled/departmenthistory.odd",
                 "apply": model:apply#2,
                 "apply-children": model:apply-children#3
             }
@@ -181,7 +179,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     if (@rend = 'inline') then
                         html:paragraph($config, ., "note1", .)
                     else
-                        ext-html:note($config, ., "note2", ., "foot", @n/string())
+                        html:note($config, ., "note2", ., "foot", @n/string())
                 case element(num) return
                     html:inline($config, ., "num", .)
                 case element(orig) return
@@ -219,7 +217,8 @@ declare function model:apply($config as map(*), $input as node()*) {
                         (: If it is inside a paragraph then it is inline, otherwise it is block level :)
                         html:block($config, ., css:get-rendition(., "quote2"), .)
                 case element(ref) return
-                    ext-html:ref($config, ., "ref")
+                    (: No function found for behavior: ref :)
+                    $config?apply($config, ./node())
                 case element(reg) return
                     html:inline($config, ., "reg", .)
                 case element(rs) return
@@ -278,7 +277,8 @@ declare function model:apply($config as map(*), $input as node()*) {
                         else
                             (),
                         if (editor[@role = 'primary']) then
-                            ext-html:list-from-items($config, ., "titleStmt4", editor[@role="primary"], ())
+                            (: No function found for behavior: list-from-items :)
+                            $config?apply($config, ./node())
                         else
                             (),
                         if (editor[@role = 'general']) then
@@ -286,7 +286,8 @@ declare function model:apply($config as map(*), $input as node()*) {
                         else
                             (),
                         if (editor[@role = 'general']) then
-                            ext-html:list-from-items($config, ., "titleStmt6", editor[@role="general"], ())
+                            (: No function found for behavior: list-from-items :)
+                            $config?apply($config, ./node())
                         else
                             ()
                     )
@@ -380,8 +381,9 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(dateline) return
                     html:block($config, ., "dateline", .)
                 case element(div) return
-                    if (@type = ('compilation', 'chapter', 'subchapter')) then
-                        ext-html:document-list($config, ., "div1")
+                    if (@type = ('compilation', 'chapter')) then
+                        (: No function found for behavior: document-list :)
+                        $config?apply($config, ./node())
                     else
                         html:block($config, ., "div2", .)
                 case element(docAuthor) return
@@ -473,12 +475,6 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:table($config, ., "table", .)
                 case element(rhyme) return
                     html:inline($config, ., "rhyme", .)
-                case element(xhtml:object) return
-                    ext-html:passthrough($config, ., "xhtml:object")
-                case element(xhtml:div) return
-                    ext-html:passthrough($config, ., "xhtml:div")
-                case element(xhtml:script) return
-                    ext-html:passthrough($config, ., "xhtml:script")
                 case element(persName) return
                     html:inline($config, ., "persName", .)
                 case element(gloss) return

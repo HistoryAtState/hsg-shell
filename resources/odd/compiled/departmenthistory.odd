@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xml:base="" xml:lang="en">
     <teiHeader>
         <fileDesc>
@@ -2107,7 +2108,7 @@ relatedItem element must be empty</sch:report>
                     <attList/>
                     <model behaviour="graphic">
                         <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
-                            "/" || @url || (if(matches(@url, "\.[^\.]+$")) then "" else ".png"))</param>
+                            "/" || @url || (if ("^.*\.[^\.]+$") then "" else ".png"))</param>
                         <param name="width">@width</param>
                         <param name="height">@height</param>
                         <param name="scale">@scale</param>

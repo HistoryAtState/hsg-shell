@@ -1768,7 +1768,7 @@ The element indicated by @spanTo (<sch:value-of select="@spanTo"/>) must follow 
                         <constraintSpec ident="quotationContents" scheme="isoschematron">
                             <constraint>
                                 <report xmlns="http://purl.oclc.org/dsdl/schematron" test="not(@marks) and not (tei:p)">
-On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @marks attribute should be used, or a paragraph of description provided</report>
+On <name/>, either the @marks attribute should be used, or a paragraph of description provided</report>
                             </constraint>
                         </constraintSpec>
                         <attList>
@@ -3449,7 +3449,7 @@ relatedItem element must be empty</sch:report>
                         <constraintSpec ident="spanTo" scheme="isoschematron">
                             <constraint>
                                 <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="@spanTo">
-The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/> is required.</assert>
+The @spanTo attribute of <name/> is required.</assert>
                             </constraint>
                         </constraintSpec>
                         <constraintSpec ident="spanTo_fr" scheme="isoschematron" xml:lang="fr">
@@ -6011,7 +6011,7 @@ border-bottom: solid 1pt blue;
                         <constraintSpec scheme="isoschematron" ident="refAtts">
                             <constraint>
                                 <report xmlns="http://purl.oclc.org/dsdl/schematron" test="@target and @cRef">Only one of the
-	attributes @target' and @cRef' may be supplied on <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>
+	attributes @target' and @cRef' may be supplied on <name/>
                                 </report>
                             </constraint>
                         </constraintSpec>
@@ -6472,7 +6472,7 @@ border-bottom: solid 1pt blue;
                         <constraintSpec ident="substContents1" scheme="isoschematron">
                             <constraint>
                                 <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="child::tei:add and child::tei:del">
-                                    <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/> must have at least one child add and at least one child del</assert>
+                                    <name/> must have at least one child add and at least one child del</assert>
                             </constraint>
                         </constraintSpec>
                         <attList/>
