@@ -65,6 +65,12 @@ declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
 declare variable $config:HAC_COL := "/db/apps/hac";
 
+declare variable $config:FRUS_HISTORY_COL := '/db/apps/frus-history';
+declare variable $config:FRUS_HISTORY_ARTICLES_COL := $config:FRUS_HISTORY_COL || '/articles';
+declare variable $config:FRUS_HISTORY_DOCUMENTS_COL := $config:FRUS_HISTORY_COL || '/documents';
+declare variable $config:FRUS_HISTORY_EVENTS_COL := $config:FRUS_HISTORY_COL || '/events';
+declare variable $config:FRUS_HISTORY_MONOGRAPH_COL := $config:FRUS_HISTORY_COL || '/monograph';
+
 declare variable $config:IGNORED_DIVS := ("toc");
 
 declare variable $config:PUBLICATIONS := 
@@ -116,6 +122,14 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "title": "Education Resources"
+        },
+        "frus-history-monograph": map {
+            "collection": $config:FRUS_HISTORY_MONOGRAPH_COL,
+            "select-document": function($document-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd",
+            "title": "History of the Foreign Relations Series"
         }
     };
 
@@ -126,7 +140,8 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:SHORT_HISTORY_COL: "short-history",
         $config:FAQ_COL: "faq",
         $config:HAC_COL: "hac",
-        $config:EDUCATION_COL: "edu"
+        $config:EDUCATION_COL: "edu",
+        $config:FRUS_HISTORY_MONOGRAPH_COL: "frus-history-monograph"
     };
 
 (:~

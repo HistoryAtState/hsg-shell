@@ -206,13 +206,15 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                         </dispatch>
                             default return
                                 let $page := "historicaldocuments/frus-history/monograph-interior.html"
-                                let $chapter-id := $fragments[2]
+                                let $section-id := $fragments[2]
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                         <forward url="{$exist:controller}/pages/{$page}"/>
                                         <view>
                                             <forward url="{$exist:controller}/modules/view.xql">
-                                                <add-parameter name="chapter-id" value="{$chapter-id}"/>
+                                                <add-parameter name="publication-id" value="frus-history-monograph"/>
+                                                <add-parameter name="document-id" value="frus-history"/>
+                                                <add-parameter name="section-id" value="{$section-id}"/>
                                             </forward>
                                         </view>
                                 		<error-handler>
@@ -224,7 +226,10 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                         let $page := "historicaldocuments/frus-history/index.html"
                         return
                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/{$page}"/>
+                                <forward url="{$exist:controller}/pages/{$page}">
+                                    <add-parameter name="publication-id" value="frus-history-monograph"/>
+                                    <add-parameter name="document-id" value="frus-history"/>
+                                </forward>
                                 <view>
                                     <forward url="{$exist:controller}/modules/view.xql"/>
                                 </view>

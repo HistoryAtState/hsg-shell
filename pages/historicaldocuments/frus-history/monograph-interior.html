@@ -9,14 +9,23 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9" id="volume">
-            <div id="content-inner" data-template="app:fix-links">
-                <h1>
+        <div class="col-md-9" data-template="pages:navigation">
+            <div class="navigation-top">
+                <a data-template="pages:navigation-link" data-template-direction="next" class="nav-next page-nav">
+                    <i class="glyphicon glyphicon-chevron-right"/>
+                </a>
+                <a data-template="pages:navigation-link" data-template-direction="previous" class="nav-prev page-nav">
+                    <i class="glyphicon glyphicon-chevron-left"/>
+                </a>
+                <h5 id="navigation-title">
                     <span data-template="frus-history:monograph-title"/>
-                </h1>
-                <div data-template="frus-history:chapter"/>
+                </h5>
+            </div>
+            <div id="content-inner">
+                <div id="content-container" data-template="app:fix-links">
+                    <div class="content" data-template="pages:view" data-template-base-path="frus-history"/>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
