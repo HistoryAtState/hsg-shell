@@ -41,7 +41,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $title := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?title else ()
     let $midtitle := if($title) then $title || ' - ' else ()
     let $head := root($content?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
-    return ($html, <div class="page-title" style="display:none">{$head/string()} -  {$midtitle} Office of Historian</div>)
+    return ($html, <div class="page-title" style="display:none">{if($head) then $head/string() || " - " else ()} {$midtitle} Office of Historian</div>)
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {

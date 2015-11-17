@@ -91,6 +91,14 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "title": "Buildings - Department History"
         },
+        "about-frus": map {
+            "collection": "/db/apps/hsg-shell/pages/historicaldocuments",
+            "select-document": function($document-id) { doc("/db/apps/hsg-shell/pages/historicaldocuments/about-frus.html") },
+            "select-section": function($document-id, $section-id) { doc("/db/apps/hsg-shell/pages/historicaldocuments/about-frus.html")},
+            "html-href": function($document-id, $section-id) { "/db/apps/hsg-shell/pages/historicaldocuments/about-frus.html" },
+            "odd": "frus.odd",
+            "title": "About the Foreign Relations Series - Historical Documents"
+        },
         "short-history": map {
             "collection": $config:SHORT_HISTORY_COL,
             "select-document": function($document-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml') },
