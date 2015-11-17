@@ -64,6 +64,7 @@ declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short
 declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education/introductions";
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
 declare variable $config:HAC_COL := "/db/apps/hac";
+declare variable $config:HIST_DOCS :=  "/db/apps/hsg-shell/pages/historicaldocuments";
 
 declare variable $config:FRUS_HISTORY_COL := '/db/apps/frus-history';
 declare variable $config:FRUS_HISTORY_ARTICLES_COL := $config:FRUS_HISTORY_COL || '/articles';
@@ -92,12 +93,44 @@ declare variable $config:PUBLICATIONS :=
             "title": "Buildings - Department History"
         },
         "about-frus": map {
-            "collection": "/db/apps/hsg-shell/pages/historicaldocuments",
-            "select-document": function($document-id) { doc("/db/apps/hsg-shell/pages/historicaldocuments/about-frus.html") },
-            "select-section": function($document-id, $section-id) { doc("/db/apps/hsg-shell/pages/historicaldocuments/about-frus.html")},
-            "html-href": function($document-id, $section-id) { "/db/apps/hsg-shell/pages/historicaldocuments/about-frus.html" },
+            "collection": $config:HIST_DOCS,
+            "select-document": function($document-id) { doc($config:HIST_DOCS || "/about-frus.html") },
+            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/about-frus.html")},
+            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/about-frus.html" },
             "odd": "frus.odd",
             "title": "About the Foreign Relations Series - Historical Documents"
+        },
+        "status-of-the-series": map {
+            "collection": $config:HIST_DOCS,
+            "select-document": function($document-id) { doc($config:HIST_DOCS || "/status-of-the-series.html") },
+            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/status-of-the-series.html")},
+            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/status-of-the-series.html" },
+            "odd": "frus.odd",
+            "title": "Foreign Relations of the United States: Status of the Series - Historical Documents"
+        },
+        "ebooks": map {
+            "collection": $config:HIST_DOCS,
+            "select-document": function($document-id) { doc($config:HIST_DOCS || "/ebooks.html") },
+            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/ebooks.html")},
+            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/ebooks" },
+            "odd": "frus.odd",
+            "title": "EBooks - Historical Documents"
+        },
+        "citing-frus": map {
+            "collection": $config:HIST_DOCS,
+            "select-document": function($document-id) { doc($config:HIST_DOCS || "/citing-frus.html") },
+            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/citing-frus.html")},
+            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/citing-frus" },
+            "odd": "frus.odd",
+            "title": "Citing the Foreign Relations series - Historical Documents"
+        },
+        "other-electronic-resources": map {
+            "collection": $config:HIST_DOCS,
+            "select-document": function($document-id) { doc($config:HIST_DOCS || "/other-electronic-resources.html") },
+            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/other-electronic-resources.html")},
+            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/other-electronic-resources" },
+            "odd": "frus.odd",
+            "title": "Electronic Resources for U.S. Foreign Relations - Historical Documents"
         },
         "short-history": map {
             "collection": $config:SHORT_HISTORY_COL,
