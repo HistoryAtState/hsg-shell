@@ -317,7 +317,11 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                     <forward url="{$exist:controller}/pages/{$page}"/>
                     <view>
-                        <forward url="{$exist:controller}/modules/view.xql"/>
+                        <forward url="{$exist:controller}/modules/view.xql">
+                            <add-parameter name="publication-id" value="historicaldocuments"/>
+                            <add-parameter name="document-id" value="historicaldocuments"/>
+                            <add-parameter name="section-id" value="all"/>
+                        </forward>
                     </view>
             		<error-handler>
             			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -856,11 +860,20 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                     switch ($fragments[1]) 
                         case "wwi" return 'departmenthistory/wwi.html'
                         default return 'departmenthistory/index.html'
+                let $link := 
+                    switch ($fragments[1]) 
+                        case "wwi" return 'wwi'
+                        default return 'departmenthistory'
                 return
                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                         <forward url="{$exist:controller}/pages/{$page}"/>
                         <view>
-                            <forward url="{$exist:controller}/modules/view.xql"/>
+                            <forward url="{$exist:controller}/modules/view.xql">
+                                <add-parameter name="publication-id" value="{$link}"/>
+                                <add-parameter name="document-id" value="{$link}"/>
+                                <add-parameter name="section-id" value="all"/>
+
+                            </forward>
                         </view>
                 		<error-handler>
                 			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
