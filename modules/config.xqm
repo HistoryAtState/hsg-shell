@@ -66,7 +66,6 @@ declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
 declare variable $config:HAC_COL := "/db/apps/hac";
 declare variable $config:HIST_DOCS :=  "/db/apps/hsg-shell/pages/historicaldocuments";
-declare variable $config:DEPT_HIST :=  "/db/apps/hsg-shell/pages/departmenthistory";
 
 declare variable $config:FRUS_HISTORY_COL := '/db/apps/frus-history';
 declare variable $config:FRUS_HISTORY_ARTICLES_COL := $config:FRUS_HISTORY_COL || '/articles';
@@ -95,68 +94,52 @@ declare variable $config:PUBLICATIONS :=
             "title": "Buildings - Department History"
         },
         "historicaldocuments": map {
-            "collection": $config:HIST_DOCS,
-            "select-document": function($document-id) { doc($config:HIST_DOCS || "/index.html") },
-            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/index.html")},
-            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/index.html" },
-            "odd": "frus.odd",
             "title": "Historical Documents"
         },
         "about-frus": map {
-            "collection": $config:HIST_DOCS,
-            "select-document": function($document-id) { doc($config:HIST_DOCS || "/about-frus.html") },
-            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/about-frus.html")},
-            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/about-frus.html" },
-            "odd": "frus.odd",
             "title": "About the Foreign Relations Series - Historical Documents"
         },
         "status-of-the-series": map {
-            "collection": $config:HIST_DOCS,
-            "select-document": function($document-id) { doc($config:HIST_DOCS || "/status-of-the-series.html") },
-            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/status-of-the-series.html")},
-            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/status-of-the-series.html" },
-            "odd": "frus.odd",
             "title": "Foreign Relations of the United States: Status of the Series - Historical Documents"
         },
         "ebooks": map {
-            "collection": $config:HIST_DOCS,
-            "select-document": function($document-id) { doc($config:HIST_DOCS || "/ebooks.html") },
-            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/ebooks.html")},
-            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/ebooks" },
-            "odd": "frus.odd",
-            "title": "EBooks - Historical Documents"
+            "title": "Ebooks - Historical Documents"
         },
         "citing-frus": map {
-            "collection": $config:HIST_DOCS,
-            "select-document": function($document-id) { doc($config:HIST_DOCS || "/citing-frus.html") },
-            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/citing-frus.html")},
-            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/citing-frus" },
-            "odd": "frus.odd",
             "title": "Citing the Foreign Relations series - Historical Documents"
         },
         "other-electronic-resources": map {
-            "collection": $config:HIST_DOCS,
-            "select-document": function($document-id) { doc($config:HIST_DOCS || "/other-electronic-resources.html") },
-            "select-section": function($document-id, $section-id) { doc($config:HIST_DOCS || "/other-electronic-resources.html")},
-            "html-href": function($document-id, $section-id) { $config:HIST_DOCS || "/other-electronic-resources" },
-            "odd": "frus.odd",
             "title": "Electronic Resources for U.S. Foreign Relations - Historical Documents"
         },
         "departmenthistory": map {
-            "collection": $config:DEPT_HIST,
-            "select-document": function($document-id) { doc($config:DEPT_HIST || "/departmenthistory/index.html")},
-            "select-section": function($document-id, $section-id) { doc($config:DEPT_HIST || "/index.html")},
-            "html-href":  function($document-id, $section-id) { $config:DEPT_HIST || "/index.html"},
-            "odd": "frus.odd",
-            "title": "Department History"
+            "title": "Historical Documents"
         },
-        "wwi": map {
-            "collection": $config:DEPT_HIST,
-            "select-document": function($document-id) { doc($config:DEPT_HIST || "/departmenthistory/wwi.html")},
-            "select-section": function($document-id, $section-id) { doc($config:DEPT_HIST || "/wwi.html")},
-            "html-href":  function($document-id, $section-id) { $config:DEPT_HIST || "/wwi.html"},
-            "odd": "frus.odd",
-            "title": "World War I and the Department - Department History"
+        "people": map {
+            "title": "People - Department History"
+        },
+        "secretaries": map {
+            "title": "Biographies of the Secretaries of State - Department History"
+        },
+        "principals-chiefs": map {
+            "title": "Principal Officers and Chiefs of Mission - Department History"
+        },
+        "people-by-alpha": map {
+            "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History"
+        },
+        "people-by-year": map {
+            "title": "Principal Officers and Chiefs of Mission Chronological Listing - Department History"
+        },
+        "people-by-role": map {
+            "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History"
+        },
+        "travels": map {
+            "title": "Presidents and Secretaries of State Foreign Travels - Department History"
+        },
+        "travels-president": map {
+            "title": "Travels of the President - Department History"
+        },
+        "travels-secretary": map {
+            "title": "Travels of the Secretary of State - Department History"
         },
         "short-history": map {
             "collection": $config:SHORT_HISTORY_COL,
