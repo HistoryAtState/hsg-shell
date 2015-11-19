@@ -91,9 +91,11 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                         </dispatch>
                                 default return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                        <forward url="{$exist:controller}/pages/404.html"/>
+                                        <forward url="{$exist:controller}/pages/error-page.html">
+                                        </forward>
                                         <view>
                                             <forward url="{$exist:controller}/modules/view.xql">
+                                                <set-attribute name="hsg-shell.errcode" value="404"/>
                                                 <add-parameter name="uri" value="{$exist:path}"/>
                                             </forward>
                                         </view>
@@ -825,9 +827,11 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                     </dispatch>
                         default return 
                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/404.html"/>
+                                <forward url="{$exist:controller}/pages/error-page.html">
+                                </forward>
                                 <view>
                                     <forward url="{$exist:controller}/modules/view.xql">
+                                        <set-attribute name="hsg-shell.errcode" value="404"/>
                                         <add-parameter name="uri" value="{$exist:path}"/>
                                     </forward>
                                 </view>
@@ -995,12 +999,14 @@ else if (matches($exist:path, '^/about/?')) then
                             case "contact-us" return 'about/contact-us.html'
                             case "the-historian" return 'about/the-historian.html'
                             case "recent-publications" return 'about/recent-publications.html'
-                            default return '404.html'
+                            default return 'error-page.html'
                     return
                         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                            <forward url="{$exist:controller}/pages/{$page}"/>
+                            <forward url="{$exist:controller}/pages/{$page}">
+                            </forward>
                             <view>
                                 <forward url="{$exist:controller}/modules/view.xql">
+                                    <set-attribute name="hsg-shell.errcode" value="404"/>
                                     <add-parameter name="uri" value="{$exist:path}"/>
                                 </forward>
                             </view>
@@ -1156,7 +1162,7 @@ else if (matches($exist:path, '^/developer/?')) then
         if ($fragments[1]) then
             switch ($fragments[1])
                 case "catalog" return 'developer/catalog.html'
-                default return '404.html'
+                default return 'error-page.html'
         else
             'developer/index.html'
     return
@@ -1180,7 +1186,7 @@ else if (matches($exist:path, '^/open/?')) then
             switch ($fragments[1])
                 case "frus-latest" return 'open/frus-latest/index.html'
                 case "frus-metadata" return 'open/frus-metadata/index.html'
-                default return '404.html'
+                default return 'error-page.html'
         else
             'open/index.html'
     return
@@ -1282,12 +1288,15 @@ else if (matches($exist:path, '^/education/?')) then
                         		</error-handler>
                             </dispatch>
                 default return
-                    let $page := "404.html"
+                    let $page := "error-page.html"
                     return
                         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                            <forward url="{$exist:controller}/pages/{$page}"/>
+                            <forward url="{$exist:controller}/pages/{$page}">
+        </forward>
                             <view>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
+                                <forward url="{$exist:controller}/modules/view.xql">
+                                    <set-attribute name="hsg-shell.errcode" value="404"/>
+                                </forward>
                             </view>
                     		<error-handler>
                     			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -1315,7 +1324,7 @@ else if (matches($exist:path, '^/search/?')) then
         if ($fragments[1]) then
             switch ($fragments[1])
                 case "tips" return 'search/tips.html'
-                default return '404.html'
+                default return 'error-page.html'
         else
             'search/index.html'
     return
@@ -1333,9 +1342,10 @@ else if (matches($exist:path, '^/search/?')) then
 (: fallback: return 404 :)
 else
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/pages/404.html"/>
+        <forward url="{$exist:controller}/pages/error-page.html"/>
         <view>
             <forward url="{$exist:controller}/modules/view.xql">
+                <set-attribute name="hsg-shell.errcode" value="404"/>
                 <add-parameter name="uri" value="{$exist:path}"/>
             </forward>
         </view>
