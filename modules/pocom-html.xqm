@@ -122,7 +122,7 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
                 )[. ne ''][1]
             let $startyear := app:year-from-date($startdate)
             let $endyear := app:year-from-date($principal/ended/date)
-            let $years := if ($startyear = $endyear) then $startyear else concat($startyear, '–', $endyear)
+            let $years := if (string($startyear) = string($endyear)) then $startyear else concat($startyear, '–', $endyear)
             let $note := $principal/note/text() 
                 (: If we want to show the note in this list add this before the </li>:
                  :     {if ($note) then (<ul><li><em>{$note}</em></li></ul>) else ''}
