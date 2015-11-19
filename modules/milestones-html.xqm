@@ -13,12 +13,12 @@ declare variable $milestones:MILESTONES_CHAPTERS_COL := $milestones:MILESTONES_C
 
 declare
     %templates:wrap
-function milestones:dropdown($node as node(), $model as map(*), $chapter-id as xs:string?) {
+function milestones:dropdown($node as node(), $model as map(*), $document-id as xs:string?) {
     <option value="">Choose one</option>
     ,
     for $c in collection($milestones:MILESTONES_CHAPTERS_COL)/tei:TEI
     let $c-id := substring-before(util:document-name($c), '.xml')
-    let $selected := if ($c-id = $chapter-id) then attribute selected {"selected"} else ()
+    let $selected := if ($c-id = $document-id) then attribute selected {"selected"} else ()
     let $brief-title := $c//tei:title[@type='short']/string()
     order by $c-id
     return
@@ -56,29 +56,29 @@ declare function milestones:list($node, $model) {
             </div>
 };
 
-declare function milestones:chapter-title($node, $model, $chapter-id as xs:string) {
-    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $chapter-id || '.xml')
+declare function milestones:chapter-title($node, $model, $document-id as xs:string) {
+    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $document-id || '.xml')
     let $title := $doc//tei:title[@type='complete']/string()
     return
         $title
 };
 
-declare function milestones:chapter-intro($node, $model, $chapter-id as xs:string, $base-path as xs:string) {
-    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $chapter-id || '.xml')
+declare function milestones:chapter-intro($node, $model, $document-id as xs:string, $base-path as xs:string) {
+    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $document-id || '.xml')
     let $text := $doc//tei:front
     return
         pages:process-content($config:odd, $text, map { "base-uri": $base-path })
 };
 
-declare function milestones:article-title($node, $model, $chapter-id as xs:string, $article-id as xs:string) {
-    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $chapter-id || '.xml')
+declare function milestones:article-title($node, $model, $document-id as xs:string, $article-id as xs:string) {
+    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $document-id || '.xml')
     let $title := $doc//tei:title[@type='complete']/string()
     return
         $title
 };
 
-declare function milestones:article($node, $model, $chapter-id as xs:string, $article-id as xs:string, $base-path as xs:string) {
-    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $chapter-id || '.xml')
+declare function milestones:article($node, $model, $document-id as xs:string, $article-id as xs:string, $base-path as xs:string) {
+    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $document-id || '.xml')
     let $text := $doc/id($article-id)
     return
         pages:process-content($config:odd, $text, map { "base-uri": $base-path })

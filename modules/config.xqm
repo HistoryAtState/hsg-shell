@@ -62,6 +62,7 @@ declare variable $config:S3_DOMAIN := $config:S3_BUCKET || ".s3.amazonaws.com";
 
 declare variable $config:BUILDINGS_COL := "/db/apps/other-publications/buildings";
 declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
+declare variable $config:MILESTONES_COL := "/db/apps/milestones/chapters";
 declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education/introductions";
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
 declare variable $config:HAC_COL := "/db/apps/hac";
@@ -112,7 +113,7 @@ declare variable $config:PUBLICATIONS :=
             "title": "Electronic Resources for U.S. Foreign Relations - Historical Documents"
         },
         "departmenthistory": map {
-            "title": "Historical Documents"
+            "title": "Department History"
         },
         "people": map {
             "title": "People - Department History"
@@ -140,6 +141,14 @@ declare variable $config:PUBLICATIONS :=
         },
         "travels-secretary": map {
             "title": "Travels of the Secretary of State - Department History"
+        },
+        "milestones": map {
+            "collection": $config:MILESTONES_COL,
+            "select-document": function($document-id) { doc($config:MILESTONES_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:MILESTONES_COL|| '/' || $document-id || '.xml') },
+            "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd",
+            "title": "Milestones in the History of U.S. Foreign Relations"
         },
         "short-history": map {
             "collection": $config:SHORT_HISTORY_COL,
