@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="tei-pm.nvdl"
   type="application/xml"
   schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
@@ -236,7 +237,7 @@
                 <elementSpec mode="change" ident="graphic">
                     <model behaviour="graphic">
                         <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
-                            "/" || @url || (if ("^.*\.[^\.]+$") then "" else ".png"))</param>
+                            "/" || @url || (if (matches(@url, "^.*\.[^\.]+$")) then "" else ".png"))</param>
                         <param name="width">@width</param>
                         <param name="height">@height</param>
                         <param name="scale">@scale</param>
