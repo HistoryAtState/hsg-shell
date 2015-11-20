@@ -105,7 +105,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                             html:inline($config, ., "gap3", .)
                 case element(graphic) return
                     html:graphic($config, ., "graphic", ., xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
-                            "/" || @url || (if ("^.*\.[^\.]+$") then "" else ".png")), @width, @height, @scale, desc)
+                            "/" || @url || (if (matches(@url, "^.*\.[^\.]+$")) then "" else ".png")), @width, @height, @scale, desc)
                 case element(head) return
                     if (parent::figure) then
                         html:block($config, ., "head1", .)
