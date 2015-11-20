@@ -246,7 +246,7 @@ declare function pages:get-next($div as element()) {
     if ($div/self::tei:pb) then
         $div/following::tei:pb[1]
     else if ($div/tei:div) then
-        if (count(($div/tei:div[1])/preceding-sibling::*) < 5) then
+        if (not($div[@type = ('compilation', 'chapter', 'subchapter')]) and count(($div/tei:div[1])/preceding-sibling::*) < 5) then
             pages:get-next($div/tei:div[1])
         else
             $div/tei:div[1]
