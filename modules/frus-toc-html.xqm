@@ -57,6 +57,7 @@ declare function toc:volume-title($node as node(), $type as xs:string) as text()
 (: handles divs for TOCs :)
 declare function toc:toc-div($node as element(tei:div), $current as element()?) {
     let $sections-to-suppress := ('toc')
+    let $type := $node/tei:div/@type
     return
     (: we only show certain divs :)
     if (not($node/@xml:id = $sections-to-suppress) and not($node/@type = 'document')) then
@@ -73,7 +74,7 @@ declare function toc:toc-div($node as element(tei:div), $current as element()?) 
                 </a>
             ,
             
-            if ($node/tei:div/@type = 'document') then
+            if ($type = 'document') then
                 concat(
                     ' (Document',
                     let $child-docs := $node/tei:div[@type = 'document']
@@ -87,10 +88,6 @@ declare function toc:toc-div($node as element(tei:div), $current as element()?) 
                     , ')'
                     )
             else 
-                ()
-            ,
-            if ($node/tei:div/@type = 'document') then ()
-            else
                 <ul>
                 {
                     toc:toc-passthru($node, $current)

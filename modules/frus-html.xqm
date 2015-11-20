@@ -250,11 +250,12 @@ function fh:view-persons($node as node(), $model as map(*)) {
 
 declare function fh:get-persons($root as element(), $ids as xs:string*) {
     let $persons := $root/ancestor-or-self::tei:TEI/id("persons")
-    for $id in $ids
-    let $name := $persons//tei:persName[@xml:id = substring($id, 2)]
+    for $idref in $ids
+    let $id := substring($idref, 2)
+    let $name := $persons//tei:persName[@xml:id = $id]
     order by $name
     return
-        <a href="persons{$id}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($name/../following-sibling::text()))}">{$name/string()}</a>
+        <a href="persons{$idref}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($name/../following-sibling::text()))}">{$name/string()}</a>
 };
 
 declare
@@ -265,11 +266,12 @@ function fh:view-gloss($node as node(), $model as map(*)) {
 
 declare function fh:get-gloss($root as element(), $ids as xs:string*) {
     let $terms := $root/ancestor-or-self::tei:TEI/id("terms")
-    for $id in $ids
-    let $term := $terms//tei:term[@xml:id = substring($id, 2)]
+    for $idref in $ids
+    let $id := substring($idref, 2)
+    let $term := $terms//tei:term[@xml:id = $id]
     order by $term
     return
-        <a href="terms{$id}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($term/../following-sibling::text()))}">{$term/text()}</a>
+        <a href="terms{$idref}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($term/../following-sibling::text()))}">{$term/text()}</a>
 };
 
 declare function fh:volume-breadcrumb($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
