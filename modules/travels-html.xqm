@@ -71,7 +71,7 @@ declare function travels:secretaries-destinations($node as node(), $model as map
     <ul>
         {
             for $country in distinct-values(collection($travels:SECRETARY_TRAVELS_COL)//country)
-            let $country-id := collection($travels:SECRETARY_TRAVELS_COL)//country[. eq $country][1]/@id/string()
+            let $country-id := collection($travels:SECRETARY_TRAVELS_COL)//country[. = $country][1]/@id/string()
             order by $country
             return
                 <li><a href="$app/departmenthistory/travels/secretary/{$country-id}">{$country}</a></li>

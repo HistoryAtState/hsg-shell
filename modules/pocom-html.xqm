@@ -13,6 +13,7 @@ import module namespace gsh="http://history.state.gov/ns/xquery/geospatialhistor
 import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare variable $pocom:DATA-COL := '/db/apps/pocom';
+declare variable $pocom:DATA := collection($pocom:DATA-COL);
 declare variable $pocom:CODE-TABLES-COL := $pocom:DATA-COL || '/code-tables';
 declare variable $pocom:CONCURRENT-APPOINTMENTS-COL := $pocom:DATA-COL || '/concurrent-appointments';
 declare variable $pocom:MISSIONS-COUNTRIES-COL := $pocom:DATA-COL || '/missions-countries';
@@ -143,7 +144,7 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
 declare 
     %templates:wrap 
 function pocom:role-label($node as node(), $model as map(*), $role-id as xs:string, $form as xs:string) {
-    let $role := collection($pocom:DATA-COL)//id[. = $role-id]/..
+    let $role := $pocom:DATA//id[. = $role-id]/..
     return
         if ($form = 'plural') then
             $role/names/plural/string()
@@ -378,7 +379,7 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
         return
             <li style="padding: .5em 0">{$career-indicator}<a href="{$url}">{$name}</a> ({$dates})
                 <ul>{
-                    let $roles := collection($pocom:DATA-COL)//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
+                    let $roles := $pocom:DATA//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
                     for $role in $roles
                     let $contemporary-territory-id := $role/contemporary-territory-id
                     let $title := concat(pocom:role-label($node, $model, $role/role-title-id, 'singular'), if ($contemporary-territory-id) then concat(', ', gsh:territory-id-to-short-name($contemporary-territory-id)) else ())
