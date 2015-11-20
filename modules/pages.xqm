@@ -207,8 +207,10 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
             }
         else
             let $parent := $div/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
-            let $prevDiv := $div/preceding::tei:div[not(@xml:id = $config:IGNORED_DIVS)][1]
-            let $prevDiv := pages:get-previous(if ($parent and (empty($prevDiv) or $div/.. >> $prevDiv) and not($node/self::tei:pb)) then $div/.. else $prevDiv)
+            let $prevDiv := if (not($div/self::tei:pb)) then $div/preceding::tei:div[not(@xml:id = $config:IGNORED_DIVS)][1] else $div
+            let $prevDiv := pages:get-previous(
+                if ($parent and (empty($prevDiv) or $div/.. >> $prevDiv) and not($node/self::tei:pb)) then $div/.. else $prevDiv
+            )
             let $nextDiv := pages:get-next($div)
         (:        ($div//tei:div[not(*[1] instance of element(tei:div))] | $div/following::tei:div)[1]:)
             return
