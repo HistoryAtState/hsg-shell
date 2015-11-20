@@ -64,6 +64,8 @@ declare variable $config:S3_DOMAIN := $config:S3_BUCKET || ".s3.amazonaws.com";
 declare variable $config:ARCHIVES_COL := "/db/apps/wwdai";
 declare variable $config:ARCHIVES_ARTICLES_COL := $config:ARCHIVES_COL || "/articles";
 declare variable $config:BUILDINGS_COL := "/db/apps/other-publications/buildings";
+declare variable $config:CONFERENCES_COL := "/db/apps/conferences";
+declare variable $config:CONFERENCES_ARTICLES_COL := $config:CONFERENCES_COL || "/data";
 declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
 declare variable $config:COUNTRIES_ARTICLES_COL := "/db/apps/rdcr/articles";
 declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
@@ -106,6 +108,15 @@ declare variable $config:PUBLICATIONS :=
         },
         "about-frus": map {
             "title": "About the Foreign Relations Series - Historical Documents"
+        },
+        "conferences": map {
+            "collection": $config:CONFERENCES_ARTICLES_COL,
+            "select-document": function($document-id) { doc($config:CONFERENCES_ARTICLES_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:CONFERENCES_ARTICLES_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/conferences/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd",
+            "title": "Conferences",
+            "base-path": function($document-id, $section-id) { "conferences" }
         },
         "status-of-the-series": map {
             "title": "Foreign Relations of the United States: Status of the Series - Historical Documents"
@@ -203,7 +214,7 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "title": "FAQ - About Us"
-},
+        },
         "hac": map {
             "collection": $config:HAC_COL,
             "select-document": function($document-id) { doc($config:HAC_COL || '/' || $document-id || '.xml') },
@@ -239,7 +250,8 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:FAQ_COL: "faq",
         $config:HAC_COL: "hac",
         $config:EDUCATION_COL: "edu",
-        $config:FRUS_HISTORY_MONOGRAPH_COL: "frus-history-monograph"
+        $config:FRUS_HISTORY_MONOGRAPH_COL: "frus-history-monograph",
+        $config:CONFERENCES_ARTICLES_COL: "conferences"
     };
 
 (:~
