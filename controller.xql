@@ -285,9 +285,7 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                     <forward url="{$exist:controller}/pages/{$page}"/>
                                     <view>
-                                        <forward url="{$exist:controller}/modules/view.xql">
-                                            <add-parameter name="publication-id" value="{$fragments[1]}"/>
-                                        </forward>
+                                        <forward url="{$exist:controller}/modules/view.xql"/>
                                     </view>
                             		<error-handler>
                             			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -385,7 +383,9 @@ else if (matches($exist:path, '^/countries/?')) then
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                     <forward url="{$exist:controller}/pages/{$page}"/>
                                     <view>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
+                                        <forward url="{$exist:controller}/modules/view.xql">
+                                            <add-parameter name="publication-id" value="archives"/>
+                                        </forward>
                                     </view>
                             		<error-handler>
                             			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -393,14 +393,15 @@ else if (matches($exist:path, '^/countries/?')) then
                             		</error-handler>
                                 </dispatch>
                             default return
-                                let $country-id := $fragments[2]
+                                let $document-id := $fragments[2]
                                 let $page := 'countries/archives/article.html'
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                         <forward url="{$exist:controller}/pages/{$page}"/>
                                         <view>
                                             <forward url="{$exist:controller}/modules/view.xql">
-                                                <add-parameter name="country-id" value="{$country-id}"/>
+                                                <add-parameter name="publication-id" value="archives"/>
+                                                <add-parameter name="document-id" value="{$document-id}"/>
                                             </forward>
                                         </view>
                                 		<error-handler>
@@ -414,7 +415,9 @@ else if (matches($exist:path, '^/countries/?')) then
                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                 <forward url="{$exist:controller}/pages/{$page}"/>
                                 <view>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
+                                    <forward url="{$exist:controller}/modules/view.xql">
+                                        <add-parameter name="publication-id" value="archives"/>
+                                    </forward>
                                 </view>
                         		<error-handler>
                         			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -423,13 +426,14 @@ else if (matches($exist:path, '^/countries/?')) then
                             </dispatch>
                 default return
                     let $page := 'countries/article.html'
-                    let $country-id := $fragments[1]
+                    let $document-id := $fragments[1]
                     return
                         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                             <forward url="{$exist:controller}/pages/{$page}"/>
                             <view>
                                 <forward url="{$exist:controller}/modules/view.xql">
-                                    <add-parameter name="country-id" value="{$country-id}"/>
+                                    <add-parameter name="publication-id" value="countries"/>
+                                    <add-parameter name="document-id" value="{$document-id}"/>
                                 </forward>
                             </view>
                     		<error-handler>
@@ -443,7 +447,9 @@ else if (matches($exist:path, '^/countries/?')) then
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                     <forward url="{$exist:controller}/pages/{$page}"/>
                     <view>
-                        <forward url="{$exist:controller}/modules/view.xql"/>
+                        <forward url="{$exist:controller}/modules/view.xql">
+                            <add-parameter name="publication-id" value="countries"/>
+                        </forward>
                     </view>
             		<error-handler>
             			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -477,7 +483,6 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                         </dispatch>
                 else
                     let $page := 'departmenthistory/short-history/index.html'
-                    let $section-id := $fragments[2]
                     return
                         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                             <forward url="{$exist:controller}/pages/{$page}"/>
@@ -485,6 +490,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 <forward url="{$exist:controller}/modules/view.xql">
                                     <add-parameter name="publication-id" value="short-history"/>
                                     <add-parameter name="document-id" value="short-history"/>
+                                    <add-parameter name="section-id" value="intro"/>
                                 </forward>
                             </view>
                     		<error-handler>
@@ -520,6 +526,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 <forward url="{$exist:controller}/modules/view.xql">
                                     <add-parameter name="publication-id" value="buildings"/>
                                     <add-parameter name="document-id" value="buildings"/>
+                                    <add-parameter name="section-id" value="intro"/>
                                 </forward>
                             </view>
                     		<error-handler>
@@ -864,6 +871,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                             <forward url="{$exist:controller}/pages/{$page}"/>
                             <view>
                                 <forward url="{$exist:controller}/modules/view.xql">
+                                    <add-parameter name="publication-id" value="visits"/>
                                     <add-parameter name="country-or-year" value="{$country-or-year}"/>
                                 </forward>
                             </view>
@@ -878,7 +886,9 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                             <forward url="{$exist:controller}/pages/{$page}"/>
                             <view>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
+                                <forward url="{$exist:controller}/modules/view.xql">
+                                    <add-parameter name="publication-id" value="visits"/>
+                                </forward>
                             </view>
                     		<error-handler>
                     			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -1021,7 +1031,9 @@ else if (matches($exist:path, '^/about/?')) then
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                     <forward url="{$exist:controller}/pages/{$page}"/>
                     <view>
-                        <forward url="{$exist:controller}/modules/view.xql"/>
+                        <forward url="{$exist:controller}/modules/view.xql">
+                            <add-parameter name="publication-id" value="about"/>
+                        </forward>
                     </view>
             		<error-handler>
             			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -1035,8 +1047,8 @@ else if (matches($exist:path, '^/milestones/?')) then
     return
         if ($fragments[1]) then
             if ($fragments[2]) then
-                let $chapter-id := $fragments[1]
-                let $article-id := $fragments[2]
+                let $document-id := $fragments[1]
+                let $section-id := $fragments[2]
                 let $page := 'milestones/chapter/article.html'
                 return
                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -1044,8 +1056,8 @@ else if (matches($exist:path, '^/milestones/?')) then
                         <view>
                             <forward url="{$exist:controller}/modules/view.xql">
                                 <add-parameter name="publication-id" value="milestones"/>
-                                <add-parameter name="document-id" value="{$chapter-id}"/>
-                                <add-parameter name="article-id" value="{$article-id}"/>
+                                <add-parameter name="document-id" value="{$document-id}"/>
+                                <add-parameter name="section-id" value="{$section-id}"/>
                             </forward>
                         </view>
                 		<error-handler>
@@ -1079,6 +1091,7 @@ else if (matches($exist:path, '^/milestones/?')) then
                                 <forward url="{$exist:controller}/modules/view.xql">
                                     <add-parameter name="publication-id" value="milestones"/>
                                     <add-parameter name="document-id" value="{$chapter-id}"/>
+                                    <add-parameter name="section-id" value="foreword"/>
                                 </forward>
                             </view>
                     		<error-handler>
@@ -1213,7 +1226,9 @@ else if (matches($exist:path, '^/tags/?')) then
                         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                             <forward url="{$exist:controller}/pages/{$page}"/>
                             <view>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
+                                <forward url="{$exist:controller}/modules/view.xql">
+                                    <add-parameter name="publication-id" value="tags"/>
+                                </forward>
                             </view>
                     		<error-handler>
                     			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -1228,6 +1243,7 @@ else if (matches($exist:path, '^/tags/?')) then
                             <forward url="{$exist:controller}/pages/{$page}"/>
                             <view>
                                 <forward url="{$exist:controller}/modules/view.xql">
+                                    <add-parameter name="publication-id" value="tags"/>
                                     <add-parameter name="tag-id" value="{$tag-id}"/>
                                 </forward>
                             </view>
@@ -1242,7 +1258,9 @@ else if (matches($exist:path, '^/tags/?')) then
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                     <forward url="{$exist:controller}/pages/{$page}"/>
                     <view>
-                        <forward url="{$exist:controller}/modules/view.xql"/>
+                        <forward url="{$exist:controller}/modules/view.xql">
+                            <add-parameter name="publication-id" value="tags"/>
+                        </forward>
                     </view>
             		<error-handler>
             			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>

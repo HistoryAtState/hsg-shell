@@ -55,31 +55,3 @@ declare function milestones:list($node, $model) {
                 </ul>
             </div>
 };
-
-declare function milestones:chapter-title($node, $model, $document-id as xs:string) {
-    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $document-id || '.xml')
-    let $title := $doc//tei:title[@type='complete']/string()
-    return
-        $title
-};
-
-declare function milestones:chapter-intro($node, $model, $document-id as xs:string, $base-path as xs:string) {
-    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $document-id || '.xml')
-    let $text := $doc//tei:front
-    return
-        pages:process-content($config:odd, $text, map { "base-uri": $base-path })
-};
-
-declare function milestones:article-title($node, $model, $document-id as xs:string, $article-id as xs:string) {
-    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $document-id || '.xml')
-    let $title := $doc//tei:title[@type='complete']/string()
-    return
-        $title
-};
-
-declare function milestones:article($node, $model, $document-id as xs:string, $article-id as xs:string, $base-path as xs:string) {
-    let $doc := doc($milestones:MILESTONES_CHAPTERS_COL || '/' || $document-id || '.xml')
-    let $text := $doc/id($article-id)
-    return
-        pages:process-content($config:odd, $text, map { "base-uri": $base-path })
-};

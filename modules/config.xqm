@@ -61,6 +61,8 @@ declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $con
 
 declare variable $config:S3_DOMAIN := $config:S3_BUCKET || ".s3.amazonaws.com";
 
+declare variable $config:ARCHIVES_COL := "/db/apps/wwdai";
+declare variable $config:ARCHIVES_ARTICLES_COL := $config:ARCHIVES_COL || "/articles";
 declare variable $config:BUILDINGS_COL := "/db/apps/other-publications/buildings";
 declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
 declare variable $config:COUNTRIES_ARTICLES_COL := "/db/apps/rdcr/articles";
@@ -126,6 +128,17 @@ declare variable $config:PUBLICATIONS :=
             "title": "Countries",
             "base-path": function($document-id, $section-id) { "countries" }
         },
+        "archives": map {
+            "collection": $config:ARCHIVES_ARTICLES_COL,
+            "select-document": function($document-id) { doc($config:ARCHIVES_ARTICLES_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:ARCHIVES_ARTICLES_COL || '/' || $document-id || '.xml')//tei:body },
+            "html-href": function($document-id, $section-id) { "$app/countries/" || string-join(($document-id, $section-id), '/') },
+            "odd": "departmenthistory.odd",
+            "title": "World Wide Diplomatic Archives Indes"
+        },
+        "about": map {
+            "title": "About Us"
+        },
         "departmenthistory": map {
             "title": "Department History"
         },
@@ -147,6 +160,9 @@ declare variable $config:PUBLICATIONS :=
         "people-by-role": map {
             "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History"
         },
+        "tags": map {
+            "title": "Tags"
+        },
         "travels": map {
             "title": "Presidents and Secretaries of State Foreign Travels - Department History"
         },
@@ -155,6 +171,12 @@ declare variable $config:PUBLICATIONS :=
         },
         "travels-secretary": map {
             "title": "Travels of the Secretary of State - Department History"
+        },
+        "visits": map {
+            "title": "Visits of Foreign Leaders and Heads of State - Department History"
+        },
+        "wwi": map {
+            "title": "World War I - Department History"
         },
         "milestones": map {
             "collection": $config:MILESTONES_COL,

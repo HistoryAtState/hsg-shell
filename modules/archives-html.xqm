@@ -51,17 +51,3 @@ declare function archives:list($node, $model) {
             </ul>
         </div>
 };
-
-declare function archives:article-title($node, $model, $country-id as xs:string) {
-    let $doc := doc($archives:ARCHIVES_ARTICLES_COL || '/' || $country-id || '.xml')
-    let $title := $doc//tei:title[@type='complete']/string()
-    return
-        $title
-};
-
-declare function archives:article($node, $model, $country-id as xs:string) {
-    let $doc := doc($archives:ARCHIVES_ARTICLES_COL || '/' || $country-id || '.xml')
-    let $text := $doc//tei:body
-    return
-        pages:process-content($config:odd, $text)
-};

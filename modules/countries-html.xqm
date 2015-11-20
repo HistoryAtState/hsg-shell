@@ -52,17 +52,3 @@ declare function ch:list($node, $model) {
             </ul>
         </div>
 };
-
-declare function ch:country-article-title($node, $model, $country-id as xs:string) {
-    let $doc := doc($ch:RDCR_ARTICLES_COL || '/' || $country-id || '.xml')
-    let $title := $doc//tei:title[@type='complete']/string()
-    return
-        $title
-};
-
-declare function ch:country-article($node, $model, $country-id as xs:string, $base-path as xs:string) {
-    let $doc := doc($ch:RDCR_ARTICLES_COL || '/' || $country-id || '.xml')
-    let $text := $doc//tei:body
-    return
-        pages:process-content($config:odd, $text, map { "base-uri": $base-path })
-};
