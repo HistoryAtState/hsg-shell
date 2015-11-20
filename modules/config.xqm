@@ -9,8 +9,9 @@ import module namespace console="http://exist-db.org/xquery/console";
 
 declare namespace templates="http://exist-db.org/xquery/templates";
 
-declare namespace repo="http://exist-db.org/xquery/repo";
 declare namespace expath="http://expath.org/ns/pkg";
+declare namespace repo="http://exist-db.org/xquery/repo";
+declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 (: 
     Determine the application root collection from the current module load path.
@@ -61,6 +62,8 @@ declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $con
 declare variable $config:S3_DOMAIN := $config:S3_BUCKET || ".s3.amazonaws.com";
 
 declare variable $config:BUILDINGS_COL := "/db/apps/other-publications/buildings";
+declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
+declare variable $config:COUNTRIES_ARTICLES_COL := "/db/apps/rdcr/articles";
 declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
 declare variable $config:MILESTONES_COL := "/db/apps/milestones/chapters";
 declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education/introductions";
@@ -84,7 +87,8 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "title": "Historical Documents"
+            "title": "Historical Documents",
+            "base-path": function($document-id, $section-id) { "frus/" || $document-id }
         },
         "buildings": map {
             "collection": $config:BUILDINGS_COL,
@@ -92,7 +96,8 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:BUILDINGS_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "title": "Buildings - Department History"
+            "title": "Buildings - Department History",
+            "base-path": function($document-id, $section-id) { "buildings" }
         },
         "historicaldocuments": map {
             "title": "Historical Documents"
@@ -111,6 +116,15 @@ declare variable $config:PUBLICATIONS :=
         },
         "other-electronic-resources": map {
             "title": "Electronic Resources for U.S. Foreign Relations - Historical Documents"
+        },
+        "countries": map {
+            "collection": $config:COUNTRIES_ARTICLES_COL,
+            "select-document": function($document-id) { doc($config:COUNTRIES_ARTICLES_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:COUNTRIES_ARTICLES_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/countries/" || string-join(($document-id, $section-id), '/') },
+            "odd": "departmenthistory.odd",
+            "title": "Countries",
+            "base-path": function($document-id, $section-id) { "countries" }
         },
         "departmenthistory": map {
             "title": "Department History"
@@ -145,10 +159,11 @@ declare variable $config:PUBLICATIONS :=
         "milestones": map {
             "collection": $config:MILESTONES_COL,
             "select-document": function($document-id) { doc($config:MILESTONES_COL || '/' || $document-id || '.xml') },
-            "select-section": function($document-id, $section-id) { doc($config:MILESTONES_COL|| '/' || $document-id || '.xml') },
-            "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd",
-            "title": "Milestones in the History of U.S. Foreign Relations"
+            "select-section": function($document-id, $section-id) { doc($config:MILESTONES_COL|| '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/milestones/" || string-join(($document-id, $section-id), '/') },
+            "odd": "departmenthistory.odd",
+            "title": "Milestones in the History of U.S. Foreign Relations",
+            "base-path": function($document-id, $section-id) { "milestones" }
         },
         "short-history": map {
             "collection": $config:SHORT_HISTORY_COL,
@@ -156,7 +171,8 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
             "odd": "departmenthistory.odd",
-            "title": "Short History - Department History"
+            "title": "Short History - Department History",
+            "base-path": function($document-id, $section-id) { "short-history" }
         },
         "faq": map {
             "collection": $config:FAQ_COL,
@@ -188,7 +204,8 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "title": "History of the Foreign Relations Series"
+            "title": "History of the Foreign Relations Series",
+            "base-path": function($document-id, $section-id) { "frus-history" }
         }
     };
 

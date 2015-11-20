@@ -34,14 +34,39 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $content := map {
         "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else (),
         "document-id": $document-id,
-        "base-path": if ($publication-id != $document-id) then $publication-id || "/" else (),
-        "odd": if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?odd else $config:odd
+        "base-path": 
+            if (exists($publication-id)) then
+                (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
+                if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
+                    map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id) 
+                else ()
+            else (),
+        "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?odd else $config:odd
     }
     let $html := templates:process($node/*, map:new(($model, $content)))
+    (: without an entry in $config:PUBLICATIONS and a publication-id parameter from controller.xql, 
+     : only the stock "Office of the Historian" title will appear in the <title> element :)
     let $title := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?title else ()
-    let $midtitle := if($title) then $title || ' - ' else ()
-    let $head := root($content?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
-    return ($html, <div class="page-title" style="display:none">{if($head) then $head/string() || " - " else ()} {$midtitle} Office of Historian</div>)
+    let $head :=
+        if ($section-id) then
+            if ($content?data instance of element(tei:div)) then 
+                $content?data/tei:head 
+            else 
+                root($content?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+        (: we can't trust pages:load-xml for the purposes of finding a document's title, since it returns the document's first descendant div :)
+        (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
+        else if ($publication-id and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'select-document')) then
+            map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+        (: allow for pages that don't have an entry in $config:PUBLICATIONS at all :)
+        else 
+            ()
+    return 
+        (
+            $html, 
+            <div class="page-title" style="display:none">{
+                string-join(($head, $title, "Office of the Historian")[. ne ''], " - ")
+            }</div>
+        )
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
@@ -51,12 +76,7 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
             if ($section-id) then (
                 map:get($config:PUBLICATIONS, $publication-id)?select-section($document-id, $section-id)
             ) else
-                let $div := (map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:div)[1]
-                return
-                    if ($div) then
-                        $div
-                    else
-                        map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:body
+                map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:body
         else
             map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:text
     return
@@ -105,7 +125,7 @@ function pages:view($node as node(), $model as map(*), $view as xs:string) {
                     <img src="{$href}"/>
                 </div>
         else
-            pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path || $model?document-id })
+            pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path })
 };
 
 declare
