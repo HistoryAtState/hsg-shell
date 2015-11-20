@@ -28,7 +28,7 @@ function archives:dropdown($node as node(), $model as map(*), $country-id as xs:
             $brief-title
         }</option>
     ,
-    <option value="$app/all">... view all</option>
+    <option value="$app/countries/archives/all">... view all</option>
 };
 
 declare function archives:list($node, $model) {

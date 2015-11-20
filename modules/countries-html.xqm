@@ -13,12 +13,12 @@ declare variable $ch:RDCR_ARTICLES_COL := $ch:RDCR_COL || '/articles';
 
 declare
     %templates:wrap
-function ch:dropdown($node as node(), $model as map(*), $country-id as xs:string?) {
+function ch:dropdown($node as node(), $model as map(*), $document-id as xs:string?) {
     <option value="">Choose one</option>
     ,
     for $c in collection($ch:RDCR_ARTICLES_COL)/tei:TEI
     let $article-id := substring-before(util:document-name($c), '.xml')
-    let $selected := if ($article-id = $country-id) then attribute selected {"selected"} else ()
+    let $selected := if ($document-id = $article-id) then attribute selected {"selected"} else ()
     let $brief-title := $c//tei:title[@type='short']/string()
     order by $article-id
     return
