@@ -1,41 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
-    <div class="row" data-template="pages:load">
-        <div class="col-md-3">
-            <div class="row">
-                <div id="sections" class="col-md-12 panel panel-default">
-                    <h2>About</h2>
-                    <p>Insert sidebar here</p>
+    <div data-template="pages:load">
+        <div class="row">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/about">About</a>
+                </li>
+                <li>
+                    <a href="$app/about/the-historian">The Historian</a>
+                </li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <div id="sections" class="col-md-12 panel panel-default">
+                        <h2>About</h2>
+                        <p>Insert sidebar here</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-9" id="volume">
-            <div id="content-inner" data-template="app:fix-links">
-                <h1>The Historian</h1>
-                <p>Dr. Stephen Randolph serves as The Historian of the U.S. Department of State.
-                    Appointed to that position in April 2012, Dr. Randolph is responsible for the
-                        <em>Foreign Relations of the United States</em> series, which
-                    has documented American foreign relations since its inception in 1861. The
-                    Office of the Historian is further responsible for documenting the history of
-                    the Department of State, for providing historical analysis and support to policy
-                    makers throughout the Department of State, and for history-based outreach to the
-                    educational community and the American public.</p>
-                <p>Prior to his arrival in the Department of State, Dr. Randolph served on the
-                    faculty at the Industrial College of the Armed Forces, National Defense
-                    University, from 1997-2011. While there he served as department chairman for the
-                    Department of Grand Strategy and Mobilization, and later for the Department of
-                    Military Strategy and Logistics. He then served as the Associate Dean of Faculty
-                    responsible for curriculum planning, accreditation, and strategic planning until
-                    moving to the Department of State in 2011.</p>
-                <p>Dr. Randolph graduated from the United States Air Force Academy in 1974, and
-                    served twenty-seven years on active duty in the Air Force, retiring as a colonel
-                    in 2001. While on active duty he flew F-4s and F-15s, with a tour in Operation
-                    Desert Storm, and served in senior staff positions on the Joint Staff and the
-                    Air Staff. He earned a master’s degree in the History of Science from the Johns
-                    Hopkins University in 1975, and a Doctorate in History from the George
-                    Washington University in 2005. Dr. Randolph is the author of <em>Powerful and 
-                        Brutal Weapons: Nixon, Kissinger, and the Easter Offensive</em>, 
-                    published by Harvard University Press in 2007.</p>
+            <div class="col-md-9">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>The Historian</h1>
+                    <p>Dr. Stephen Randolph serves as The Historian of the U.S. Department of State.
+                        Appointed to that position in April 2012, Dr. Randolph is responsible for the
+                            <em>Foreign Relations of the United States</em> series, which
+                        has documented American foreign relations since its inception in 1861. The
+                        Office of the Historian is further responsible for documenting the history of
+                        the Department of State, for providing historical analysis and support to policy
+                        makers throughout the Department of State, and for history-based outreach to the
+                        educational community and the American public.</p>
+                    <p>Prior to his arrival in the Department of State, Dr. Randolph served on the
+                        faculty at the Industrial College of the Armed Forces, National Defense
+                        University, from 1997-2011. While there he served as department chairman for the
+                        Department of Grand Strategy and Mobilization, and later for the Department of
+                        Military Strategy and Logistics. He then served as the Associate Dean of Faculty
+                        responsible for curriculum planning, accreditation, and strategic planning until
+                        moving to the Department of State in 2011.</p>
+                    <p>Dr. Randolph graduated from the United States Air Force Academy in 1974, and
+                        served twenty-seven years on active duty in the Air Force, retiring as a colonel
+                        in 2001. While on active duty he flew F-4s and F-15s, with a tour in Operation
+                        Desert Storm, and served in senior staff positions on the Joint Staff and the
+                        Air Staff. He earned a master’s degree in the History of Science from the Johns
+                        Hopkins University in 1975, and a Doctorate in History from the George
+                        Washington University in 2005. Dr. Randolph is the author of <em>Powerful and 
+                            Brutal Weapons: Nixon, Kissinger, and the Easter Offensive</em>, 
+                        published by Harvard University Press in 2007.</p>
+                </div>
             </div>
         </div>
     </div>

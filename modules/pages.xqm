@@ -341,3 +341,24 @@ declare function pages:render-document($node, $model, $document-path, $section-i
     return
         pages:process-content($model?odd, $section)
 };
+
+declare 
+    %templates:wrap
+function pages:document-link($node, $model) {
+    element a { 
+        $node/@*, 
+        root($model?data)//tei:title[@type = 'complete']/string()
+    }
+};
+
+declare 
+    %templates:wrap
+function pages:section-link($node, $model) {
+    element a { 
+        $node/@*, 
+        if ($model?data instance of element(tei:div)) then
+            $model?data/tei:head[1]/string() 
+        else 
+            root($model?data)//tei:title[@type = 'complete']/string()
+    }
+};

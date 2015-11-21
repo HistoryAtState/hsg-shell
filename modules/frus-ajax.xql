@@ -23,15 +23,16 @@ let $match := analyze-string($url, "^/([^/]+)/([^/]+)/?(.*)$")
 let $publication := $match//fn:group[@nr = "1"]/string()
 let $volume := $match//fn:group[@nr = "2"]/string()
 let $id := $match//fn:group[@nr = "3"]/string()
-let $pub :=
-  switch($publication)
-    case 'historicaldocuments' return 'frus'
-    default return $volume
-let $volume := if($volume) then $volume else $pub
-let $xml := pages:load-xml($pub, $volume, $id, "div")
+(: TODO Please add comments describing assumption of the path parsing and mapping onto publication-id/document-id/section-id logic :)
+let $publication-id :=
+    switch ($publication)
+        case 'historicaldocuments' return 'frus'
+        default return $publication
+let $volume := if ($volume) then $volume else $publication-id (: TODO see above - please explain :)
+let $xml := pages:load-xml($publication-id, $volume, $id, "div")
 return
     if ($xml) then
-        let $odd := if ($pub) then map:get($config:PUBLICATIONS, $pub)?odd else $config:odd
+        let $odd := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?odd else $config:odd
         let $parent := $xml/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
         let $prevDiv := $xml/preceding::tei:div[not(@xml:id = $config:IGNORED_DIVS)][1]
         let $prev := pages:get-previous(
@@ -48,7 +49,7 @@ return
                 return
                     <div class="content"><img src="{$href}"/></div>
             else
-                pages:process-content($odd, pages:get-content($xml), map { "base-uri": $pub || (if ($volume ne $pub) then "/" || $volume else ()) })
+                pages:process-content($odd, pages:get-content($xml), map { "base-uri": $publication-id || (if ($volume ne $publication-id) then "/" || $volume else ()) })
         let $html := app:fix-links($html)
         let $doc := replace($volume, "^.*/([^/]+)$", "$1")
         return

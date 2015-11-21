@@ -1,44 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
-    <div class="row" data-template="pages:load">
-        <div class="col-md-3">
-            <div class="row">
-                <div id="sections" class="col-md-12 panel panel-default">
-                    <h2>About</h2>
-                    <p>Insert sidebar here</p>
+    <div data-template="pages:load">
+        <div class="row">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/about">About</a>
+                </li>
+                <li>
+                    <a href="$app/about/contact-us">Contact Us</a>
+                </li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <div id="sections" class="col-md-12 panel panel-default">
+                        <h2>About</h2>
+                        <p>Insert sidebar here</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-9" id="volume">
-            <div id="content-inner" data-template="app:fix-links">
-                <h1>Contact Us</h1>
-                <p>The Office of the Historian welcomes all comments and queries concerning its
-                    publications and will advise on research strategies for U.S. diplomatic history
-                    and Department of State history.</p>
-                <p>Before contacting our office, please consult the <a href="$app/about/faq">Frequently Asked Questions</a> page,
-                    which includes answers to many common questions.</p>
-                <p>Additionally, our website has numerous resources which may answer your questions, including:<ul>
-                        <li>
-                            <a href="$app/historicaldocuments">Historical Documents – <em>Foreign Relations of the United
-                            States</em>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/departmenthistory">Department History</a>
-                        </li>
-                        <li>
-                            <a href="/countries">Countries</a>
-                        </li>
-                        <li>
-                            <a href="/milestones">Milestones of U.S. foreign relations</a>
-                        </li>
-                        <li>
-                            <a href="/education">Resources for teachers</a>
-                        </li>
-                    </ul>
-                </p>
-                <p>The Office of the Historian can be reached via email at <a href="mailto:history@state.gov">history@state.gov</a>, by phone at
-                    202-955-0200, or by fax at 202-955-0268.</p>
+            <div class="col-md-9">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Contact Us</h1>
+                    <p>The Office of the Historian welcomes all comments and queries concerning its
+                        publications and will advise on research strategies for U.S. diplomatic history
+                        and Department of State history.</p>
+                    <p>Before contacting our office, please consult the <a href="$app/about/faq">Frequently Asked Questions</a> page,
+                        which includes answers to many common questions.</p>
+                    <p>Additionally, our website has numerous resources which may answer your questions, including:<ul>
+                            <li>
+                                <a href="$app/historicaldocuments">Historical Documents – <em>Foreign Relations of the United
+                                States</em>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory">Department History</a>
+                            </li>
+                            <li>
+                                <a href="$app/countries">Countries</a>
+                            </li>
+                            <li>
+                                <a href="$app/milestones">Milestones of U.S. foreign relations</a>
+                            </li>
+                            <li>
+                                <a href="$app/education">Resources for teachers</a>
+                            </li>
+                        </ul>
+                    </p>
+                    <p>The Office of the Historian can be reached via email at <a href="mailto:history@state.gov">history@state.gov</a>, by phone at
+                        202-955-0200, or by fax at 202-955-0268.</p>
+                </div>
             </div>
         </div>
     </div>

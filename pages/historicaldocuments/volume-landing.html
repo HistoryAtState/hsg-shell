@@ -2,12 +2,12 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb" data-template="app:fix-links">
                 <li>
-                    <a href="..">Home</a>
+                    <a href="$app">Home</a>
                 </li>
                 <li>
-                    <a href=".">Historical Documents</a>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
                 </li>
                 <li>
                     <a data-template="frus:volume-breadcrumb"/>

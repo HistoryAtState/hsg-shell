@@ -122,6 +122,7 @@ $(document).ready(function() {
             ev.preventDefault();
             var params = {
                 url: this.pathname.replace(new RegExp("^" + appRoot + "(.*)$"), "$1")
+                // TODO?: figure out how to pass publication-id back to frus-ajax.xql
             };
             if (historySupport) {
                 history.pushState(null, null, this.href);
