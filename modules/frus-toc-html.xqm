@@ -41,7 +41,9 @@ declare function toc:toc-inner($root as node(), $show-heading as xs:boolean?) {
 };
 
 declare function toc:toc-passthru($node as item()*, $current as element()?) {
-    let $divs := $node//tei:div[empty(ancestor::tei:div) or ancestor::tei:div[1] is $node]
+    (: Process immediate descendant divs, excluding nested ones :)
+    let $divs := $node//tei:div except $node//tei:div//tei:div
+(:    let $divs := $node//tei:div[empty(ancestor::tei:div) or ancestor::tei:div[1] is $node]:)
     return
         $divs ! toc:toc-div(., $current)
 };
@@ -57,7 +59,7 @@ declare function toc:volume-title($node as node(), $type as xs:string) as text()
 (: handles divs for TOCs :)
 declare function toc:toc-div($node as element(tei:div), $current as element()?) {
     let $sections-to-suppress := ('toc')
-    let $type := $node/tei:div/@type
+    let $type := $node/tei:div/@type/string()
     return
     (: we only show certain divs :)
     if (not($node/@xml:id = $sections-to-suppress) and not($node/@type = 'document')) then

@@ -16,7 +16,7 @@ function fh:volumes($node as node(), $model as map(*), $volume as xs:string?) {
     $node/*,
     for $vol in collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]
     let $vol-id := substring-before(util:document-name($vol), '.xml')
-    let $volume-metadata := collection($config:FRUS_METADATA_COL)/volume[@id = $vol-id]
+    let $volume-metadata := $config:FRUS_METADATA/volume[@id = $vol-id]
     let $volume-title := $volume-metadata/title[@type='volume']
     let $volume-number := $volume-metadata/title[@type='volumenumber']
     let $sub-series-n := $volume-metadata/title[@type='sub-series']/@n

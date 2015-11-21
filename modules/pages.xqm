@@ -226,7 +226,12 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                 "work" : $work
             }
         else
-            let $parent := $div/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
+            (:  TODO: not sure if the following check for divs containing only a div as first element is needed.
+                Code was copied from tei-simple generic app where this case could occur and led to empty pages.
+                Do we need the same for hsg? The check is very expensive.
+            :)
+(:            let $parent := $div/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]:)
+            let $parent := $div/ancestor::tei:div[1]
             let $prevDiv := if (not($div/self::tei:pb)) then $div/preceding::tei:div[not(@xml:id = $config:IGNORED_DIVS)][1] else $div
             let $prevDiv := pages:get-previous(
                 if ($parent and (empty($prevDiv) or $div/.. >> $prevDiv) and not($node/self::tei:pb)) then $div/.. else $prevDiv

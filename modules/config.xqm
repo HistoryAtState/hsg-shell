@@ -51,6 +51,8 @@ declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes";
 
 declare variable $config:FRUS_METADATA_COL := "/db/apps/frus/bibliography/";
 
+declare variable $config:FRUS_METADATA := collection($config:FRUS_METADATA_COL);
+
 declare variable $config:FRUS_CODE_TABLES_COL := "/db/apps/frus/code-tables/";
 
 declare variable $config:S3_CACHE_COL := "/db/apps/s3/cache/";
