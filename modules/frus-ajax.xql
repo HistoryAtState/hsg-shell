@@ -32,7 +32,7 @@ let $volume := if ($volume) then $volume else $publication-id (: TODO see above 
 let $xml := pages:load-xml($publication-id, $volume, $id, "div")
 return
     if ($xml) then
-        let $odd := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?odd else $config:odd
+        let $odd := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
         let $parent := $xml/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]
         let $prevDiv := $xml/preceding::tei:div[not(@xml:id = $config:IGNORED_DIVS)][1]
         let $prev := pages:get-previous(
@@ -58,7 +58,6 @@ return
         return
             map {
                 "doc": $doc,
-                "odd": $odd,
                 "next": 
                     if ($next) then 
                         $next/@xml:id/string()

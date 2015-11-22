@@ -11,8 +11,8 @@ declare namespace expath="http://expath.org/ns/pkg";
 
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
-import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";
-import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";
+(:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
+(:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 declare variable $pages:app-root := request:get-context-path() || substring-after($config:app-root, "/db");
@@ -41,7 +41,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                     map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id) 
                 else ()
             else (),
-        "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?odd else $config:odd
+        "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
     }
     let $html := templates:process($node/*, map:new(($model, $content)))
     (: without an entry in $config:PUBLICATIONS and a publication-id parameter from controller.xql, 
@@ -136,14 +136,16 @@ function pages:header($node as node(), $model as map(*)) {
         pages:process-content($model?odd, $header)
 };
 
-declare function pages:process-content($odd as xs:string, $xml as element()*) {
+declare function pages:process-content($odd as function(*), $xml as element()*) {
     pages:process-content($odd, $xml, ())
 };
 
-declare function pages:process-content($odd as xs:string, $xml as element()*, $parameters as map(*)?) {
+declare function pages:process-content($odd as function(*), $xml as element()*, $parameters as map(*)?) {
+(:    console:log("Processing content using odd: " || $odd),:)
 	let $html :=
-        pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", 
-            $config:module-config, $parameters)
+	    $odd($xml, $parameters)
+(:        pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", :)
+(:            $config:module-config, $parameters):)
     let $content := pages:clean-footnotes($html)
     let $class := if ($html//*[@class = ('margin-note')]) then "margin-right" else ()
     return
@@ -302,8 +304,7 @@ function pages:navigation-link($node as node(), $model as map(*), $direction as 
     else if ($model($direction)) then
         <a data-doc="{util:document-name($model($direction))}"
             data-root="{util:node-id($model($direction))}"
-            data-current="{util:node-id($model('div'))}"
-            data-odd="{$model?odd}">
+            data-current="{util:node-id($model('div'))}">
         {
             $node/@* except $node/@href,
             let $id := $model($direction)/@xml:id
