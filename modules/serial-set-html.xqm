@@ -158,6 +158,6 @@ declare function ssh:article($node, $model, $country-id as xs:string) {
     let $doc := doc($ssh:ARCHIVES_ARTICLES_COL || '/' || $country-id || '.xml')
     let $text := $doc//tei:body
     return
-        pages:process-content($config:odd, $text)
+        pages:process-content($model?odd, $text)
 };
 

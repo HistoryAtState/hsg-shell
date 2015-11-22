@@ -52,6 +52,9 @@ return
                 pages:process-content($odd, pages:get-content($xml), map { "base-uri": $publication-id || (if ($volume ne $publication-id) then "/" || $volume else ()) })
         let $html := app:fix-links($html)
         let $doc := replace($volume, "^.*/([^/]+)$", "$1")
+        let $model := map {
+            "odd": $odd
+        }
         return
             map {
                 "doc": $doc,
@@ -65,9 +68,9 @@ return
                         $prev/@xml:id/string()
                     else (),
                 "title": pages:title($xml/ancestor-or-self::tei:TEI),
-                "toc": if ($toc) then toc:toc($xml, true(), true()) else (),
+                "toc": if ($toc) then toc:toc($model, $xml, true(), true()) else (),
                 "tocCurrent": $xml/ancestor-or-self::tei:div[@type != "document"][1]/@xml:id/string(),
-                "breadcrumbSection": fh:breadcrumb-heading($xml),
+                "breadcrumbSection": fh:breadcrumb-heading($model, $xml),
                 "persons": 
                     let $persons := fh:get-persons($xml, distinct-values($xml//tei:persName/@corresp))
                     return

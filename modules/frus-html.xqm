@@ -294,11 +294,11 @@ declare function fh:section-breadcrumb($node as node(), $model as map(*)) {
     return
         <a href="{$div/@xml:id}">
         { $node/@* }
-        { fh:breadcrumb-heading($div) }
+        { fh:breadcrumb-heading($model, $div) }
         </a>
 };
 
-declare function fh:breadcrumb-heading($div as element()) {
+declare function fh:breadcrumb-heading($model as map(*), $div as element()) {
     if ($div/@type eq 'document') then
         concat('Document ', $div/@n/string())
     else if ($div instance of element(tei:pb)) then 
@@ -312,7 +312,7 @@ declare function fh:breadcrumb-heading($div as element()) {
         concat('Page ', $div/@n/string())
     else 
         (: strip footnotes off of chapter titles - an Eisenhower phenomenon :)
-        toc:toc-head($div/tei:head)
+        toc:toc-head($model, $div/tei:head)
 };
 
 declare function fh:recent-publications($node, $model) {
@@ -518,16 +518,16 @@ declare function fh:frus-ebooks-catalog($node, $model) {
                 <hr class="space"/>
                 )
             ,
-            fh:frus-history-ebook-entry()
+            fh:frus-history-ebook-entry($model)
             ,
             <hr class="space"/>
             }
         </div>
 };
 
-declare function fh:frus-history-ebook-entry() {
+declare function fh:frus-history-ebook-entry($model as map(*)) {
     let $book := doc('/db/cms/apps/tei-content/data/frus-history/frus-history.xml')
-    let $book-title := pages:process-content($config:odd, $book//tei:title[@type='complete'])
+    let $book-title := pages:process-content($model?odd, $book//tei:title[@type='complete'])
     let $preview-edition := if ($book//tei:sourceDesc/tei:p[1] = 'Preview Edition') then ' (Preview Edition)' else ()
     let $vol-id := 'frus-history'
     let $s3-resources-col := concat($config:HSG_S3_CACHE_COL, $vol-id)

@@ -42,7 +42,7 @@ declare function edu:list-modules-full($node, $model) {
     let $tei-intro := doc(concat($edu:INTRODUCTIONS_COL, '/', $tei-document-name, '.xml'))
     let $title := $tei-intro//tei:title[@type='short']/text()
     let $text := $tei-intro//tei:body/tei:div[1]/tei:p[1]
-    let $description := pages:process-content($config:odd, $text)
+    let $description := pages:process-content($model?odd, $text)
     let $availability-status := $module/availability-status
     let $availability-message := 
         <span class="availability-info">{
@@ -66,7 +66,7 @@ declare function edu:module-introduction($node, $model, $document-id as xs:strin
     let $doc := doc(concat($edu:INTRODUCTIONS_COL, '/', $module/tei-document-name, '.xml'))
     let $longtitle := $doc//tei:title[@type='complete']
     let $text := $doc//tei:text/*
-    let $intro-body := pages:process-content($config:odd, $text)
+    let $intro-body := pages:process-content($model?odd, $text)
     let $file := $module//file
     let $file-name := $file/name/text()
     let $file-label := $file/label/text()        

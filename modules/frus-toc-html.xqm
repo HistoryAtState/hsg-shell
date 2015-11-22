@@ -15,15 +15,16 @@ import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/ap
 declare
     %templates:wrap
 function toc:table-of-contents($node as node(), $model as map(*), $document-id as xs:string, $heading as xs:boolean?, $highlight as xs:boolean?) {
-    toc:toc($model?data, $heading, $highlight)
+    toc:toc($model, $model?data, $heading, $highlight)
 };
 
-declare function toc:toc($root as node(), $show-heading as xs:boolean?, $highlight as xs:boolean?) {
+declare function toc:toc($model as map(*), $root as node(), $show-heading as xs:boolean?, $highlight as xs:boolean?) {
     <div class="toc-inner">
         { if ($show-heading) then <h2>{toc:volume-title($root, "volume")}</h2> else () }
         <ul>
         {
             toc:toc-passthru(
+                $model,
                 $root/ancestor-or-self::tei:TEI/tei:text,
                 if ($highlight) then $root/ancestor-or-self::tei:div[@type != "document"][1] else ()
             )
@@ -31,21 +32,21 @@ declare function toc:toc($root as node(), $show-heading as xs:boolean?, $highlig
     </div>
 };
 
-declare function toc:toc-inner($root as node(), $show-heading as xs:boolean?) {
+declare function toc:toc-inner($model as map(*), $root as node(), $show-heading as xs:boolean?) {
     <div class="toc-inner">
         { if ($show-heading) then <h2>{toc:volume-title($root, "volume")}</h2> else () }
         <ul>{
-            toc:toc-passthru($root, ())
+            toc:toc-passthru($model, $root, ())
         }</ul>
     </div>
 };
 
-declare function toc:toc-passthru($node as item()*, $current as element()?) {
+declare function toc:toc-passthru($model as map(*), $node as item()*, $current as element()?) {
     (: Process immediate descendant divs, excluding nested ones :)
     let $divs := $node//tei:div except $node//tei:div//tei:div
 (:    let $divs := $node//tei:div[empty(ancestor::tei:div) or ancestor::tei:div[1] is $node]:)
     return
-        $divs ! toc:toc-div(., $current)
+        $divs ! toc:toc-div($model, ., $current)
 };
 
 declare function toc:volume-id($node as node()) {
@@ -57,7 +58,7 @@ declare function toc:volume-title($node as node(), $type as xs:string) as text()
 };
 
 (: handles divs for TOCs :)
-declare function toc:toc-div($node as element(tei:div), $current as element()?) {
+declare function toc:toc-div($model as map(*), $node as element(tei:div), $current as element()?) {
     let $sections-to-suppress := ('toc')
     let $type := $node/tei:div/@type/string()
     return
@@ -71,7 +72,7 @@ declare function toc:toc-div($node as element(tei:div), $current as element()?) 
                 <a class="{string-join(('toc-link', $highlight), ' ')}" id="toc-{$node/@xml:id}">
                 {
                     $href,
-                    toc:toc-head($node/tei:head[1]) 
+                    toc:toc-head($model, $node/tei:head[1]) 
                 }
                 </a>
             ,
@@ -92,7 +93,7 @@ declare function toc:toc-div($node as element(tei:div), $current as element()?) 
             else 
                 <ul>
                 {
-                    toc:toc-passthru($node, $current)
+                    toc:toc-passthru($model, $node, $current)
                 }
                 </ul>
             }
@@ -115,10 +116,10 @@ declare function toc:remove-nodes-deep($nodes as node()*, $nodes-to-remove as no
 };
 
 (: handles heads for TOCs :)
-declare function toc:toc-head($node as element(tei:head)) {
+declare function toc:toc-head($model as map(*), $node as element(tei:head)) {
     let $head-sans-note := if ($node//tei:note) then toc:remove-nodes-deep($node, $node//tei:note) else $node
     return
-        pmu:process(odd:get-compiled($config:odd-source, $config:odd, $config:odd-compiled), $head-sans-note/node(), 
+        pmu:process(odd:get-compiled($config:odd-source, $model?odd, $config:odd-compiled), $head-sans-note/node(), 
             $config:odd-compiled, "web", "../generated", $config:module-config)
 };
 
@@ -208,7 +209,15 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                 ,
                 <div>
                     <h4>Contents</h4>
-                    <div style="padding-left: 1em">{toc:toc-inner($node, false())}</div>
+                    <div style="padding-left: 1em">
+                        <div class="toc-inner">
+                            <ul>{
+                                let $divs := $node//tei:div except $node//tei:div//tei:div
+                                return
+                                    $config?apply-children($config, $node, $divs)
+                            }</ul>
+                        </div>
+                    </div>
                 </div>
                 )
             else ()

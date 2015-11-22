@@ -18,7 +18,7 @@ declare variable $fhh:FRUS_HISTORY_MONOGRAPH_COL := $fhh:FRUS_HISTORY_COL || '/m
 
 declare function fhh:monograph-title($node, $model) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
-    let $title := pages:process-content($config:odd, $doc//tei:title[@type='complete'])
+    let $title := pages:process-content($model?odd, $doc//tei:title[@type='complete'])
     return
         $title
 };
@@ -52,7 +52,7 @@ declare function fhh:monograph-edition-info($node, $model) {
 
 declare function fhh:monograph-toc($node, $model) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
-    let $toc := toc:toc-passthru($doc, ())
+    let $toc := toc:toc-passthru($model, $doc, ())
     return
         <ul>{$toc}</ul>
 };
@@ -61,7 +61,7 @@ declare function fhh:chapter($node, $model, $chapter-id) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
     let $chapter := $doc/id($chapter-id)
     return
-        pages:process-content($config:odd, $chapter)
+        pages:process-content($model?odd, $chapter)
 };
 
 declare function fhh:most-recent-documents($node, $model) {
@@ -96,7 +96,7 @@ declare function fhh:most-recent-articles($node, $model) {
         <ul>
             {
             for $doc in subsequence($articles, 1, 3)
-            let $title := pages:process-content($config:odd, $doc//tei:title[@type="short"])
+            let $title := pages:process-content($model?odd, $doc//tei:title[@type="short"])
             let $date := $doc//tei:publicationStmt/tei:date
             let $url := replace(util:document-name($doc), '.xml$', '')
             return
@@ -222,29 +222,29 @@ declare function fhh:document-title($node, $model, $document-id) {
     let $doc := doc($fhh:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml")
     let $title := $doc//tei:title[@type='complete']
     return
-        pages:process-content($config:odd, $title)
+        pages:process-content($model?odd, $title)
 };
 
 declare function fhh:document($node, $model, $document-id) {
     let $doc := doc($fhh:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml")
     let $text := $doc//tei:text/*
     return
-        pages:process-content($config:odd, $text)
+        pages:process-content($model?odd, $text)
 };
 
 declare function fhh:document-pdf($node, $model, $document-id) {
     let $doc := doc($fhh:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml")
     let $pdf-text := $doc//tei:sourceDesc
     return
-        pages:process-content($config:odd, $pdf-text)
+        pages:process-content($model?odd, $pdf-text)
 };
 
 declare function fhh:articles-list($node, $model) {
     for $article in collection($fhh:FRUS_HISTORY_ARTICLES_COL)/tei:TEI[.//tei:author]
-    let $title := pages:process-content($config:odd, $article//tei:title[@type="complete"])
+    let $title := pages:process-content($model?odd, $article//tei:title[@type="complete"])
     let $url := replace(util:document-name($article), '.xml$', '')
     let $author := $article//tei:author
-    let $teaser := pages:process-content($config:odd, $article//tei:body/tei:div[1]/tei:p[1]) (: TODO suppress footnotes from being displayed here :)
+    let $teaser := pages:process-content($model?odd, $article//tei:body/tei:div[1]/tei:p[1]) (: TODO suppress footnotes from being displayed here :)
     let $date := $article//tei:publicationStmt/tei:date
     order by xs:date($date/@when) descending
     return
@@ -261,7 +261,7 @@ declare function fhh:articles-list($node, $model) {
 declare function fhh:article-list-sidebar($node, $model, $article-id) {
     <ul>{
         for $article in collection($fhh:FRUS_HISTORY_ARTICLES_COL)/tei:TEI[.//tei:author]
-        let $title := pages:process-content($config:odd, $article//tei:title[@type="short"])
+        let $title := pages:process-content($model?odd, $article//tei:title[@type="short"])
         let $id := replace(util:document-name($article), '.xml$', '')
         let $highlight-status := if ($id eq $article-id) then attribute class {'highlight'} else ()
         let $date := $article//tei:publicationStmt/tei:date
@@ -274,7 +274,7 @@ declare function fhh:article-list-sidebar($node, $model, $article-id) {
 declare function fhh:article-title($node, $model, $article-id) {
     let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
     return
-        pages:process-content($config:odd, $article//tei:title[@type='complete'])
+        pages:process-content($model?odd, $article//tei:title[@type='complete'])
 };
 
 declare function fhh:article-author($node, $model, $article-id) {
@@ -294,13 +294,13 @@ declare function fhh:article-description($node, $model, $article-id) {
     let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
     let $publication-statement := $article//tei:sourceDesc/tei:p
     return
-        pages:process-content($config:odd, $publication-statement)
+        pages:process-content($model?odd, $publication-statement)
 };
 
 declare function fhh:article($node, $model, $article-id) {
     let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
     return
-        pages:process-content($config:odd, $article//tei:text/*)
+        pages:process-content($model?odd, $article//tei:text/*)
 };
 
 declare function fhh:events($node, $model) {
