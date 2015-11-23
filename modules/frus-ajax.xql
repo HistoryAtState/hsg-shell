@@ -27,7 +27,10 @@ let $id := $match//fn:group[@nr = "3"]/string()
 let $publication-id :=
     switch ($publication)
         case 'historicaldocuments' return 'frus'
+        case 'about' return
+            $volume
         default return $publication
+let $log := console:log("publication: " || $publication || ", volume: " || $volume)
 let $volume := if ($volume) then $volume else $publication-id (: TODO see above - please explain :)
 let $xml := pages:load-xml($publication-id, $volume, $id, "div")
 return
@@ -58,7 +61,7 @@ return
         return
             map {
                 "doc": $doc,
-                "next": 
+                "next":
                     if ($next) then 
                         $next/@xml:id/string()
                     else (),
