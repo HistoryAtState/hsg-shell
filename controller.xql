@@ -991,6 +991,7 @@ else if (matches($exist:path, '^/about/?')) then
                         let $page := "about/hac/index.html"
                         let $publication-id := 'hac'
                         let $document-id := 'hac'
+                        let $section-id := 'intro'
                         return
                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                 <forward url="{$exist:controller}/pages/{$page}"/>
@@ -998,6 +999,7 @@ else if (matches($exist:path, '^/about/?')) then
                                     <forward url="{$exist:controller}/modules/view.xql">
                                         <add-parameter name="publication-id" value="{$publication-id}"/>
                                         <add-parameter name="document-id" value="{$document-id}"/>
+                                        <add-parameter name="section-id" value="{$section-id}"/>
                                     </forward>
                                 </view>
                         		<error-handler>
