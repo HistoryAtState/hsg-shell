@@ -1,20 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div class="row" data-template="pages:load">
-        <div class="col-md-3">
-            <div class="row">
-                <div id="sections" class="col-md-12 panel panel-default">
-                    <h2>About</h2>
-                    <p>Insert sidebar here</p>
+        <div class="row">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/about">About</a>
+                </li>
+                <li>
+                    <a href="$app/about/hac">Historical Advisory Committee</a>
+                </li>
+                <li>
+                    <a class="section" href="." data-template="pages:section-link"/>
+                </li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-md-9" data-template="pages:navigation">
+                <div class="navigation-top">
+                    <a data-template="pages:navigation-link" data-template-direction="next" class="nav-next page-nav">
+                        <i class="glyphicon glyphicon-chevron-right"/>
+                    </a>
+                    <a data-template="pages:navigation-link" data-template-direction="previous" class="nav-prev page-nav">
+                        <i class="glyphicon glyphicon-chevron-left"/>
+                    </a>
+                    <h5 id="navigation-title" data-template="pages:navigation-title"/>
                 </div>
-                <div id="toc" class="col-md-12 panel panel-default" data-template="app:fix-links">
-                    <div class="toc-inner" data-template="toc:table-of-contents" data-template-heading="true" data-template-highlight="true"/>
+                <div id="content-inner">
+                    <div id="content-container" data-template="app:fix-links">
+                        <div class="content" data-template="pages:view"/>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-9" id="volume">
-            <div class="row" id="content-inner" data-template="app:fix-links">
-                <div class="content" data-template="pages:view" data-template-base-path="hac"/>
+            <div class="col-md-3">
+                <div class="row">
+                    <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
+                        <h2>About</h2>
+                        <ul>
+                            <li>
+                                <a href="$app/about/contact-us">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="$app/about/faq">Frequently Asked Questions</a>
+                            </li>
+                            <li>
+                                <a href="$app/about/the-historian">The Historian</a>
+                            </li>
+                            <li>
+                                <a href="$app/about/hac">Historical Advisory Committee</a>
+                            </li>
+                            <li>
+                                <a href="$app/about/recent-publications">Recent Publications</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="toc" class="col-md-12 panel panel-default" data-template="app:fix-links">
+                        <div class="toc-inner" data-template="toc:table-of-contents" data-template-heading="true" data-template-highlight="true"/>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
