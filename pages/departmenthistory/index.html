@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
-    <div class="row" data-template="pages:load">
-        <div class="col-md-3">
-            <div class="row">
-                <div id="sections" class="col-md-12 panel panel-default">
-                    <h2>Department History</h2>
-                    <p>Insert sidebar here</p>
-                </div>
-            </div>
+    <div data-template="pages:load">
+        <div class="row">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/departmenthistory">Department History</a>
+                </li>
+            </ol>
         </div>
-        <div class="col-md-9">
-            <div id="content-container" data-template="app:fix-links">
-                <div id="content-inner">
+        <div class="row">
+            <div class="col-md-9">
+                <div id="content-inner" data-template="app:fix-links">
                     <h1>Department History</h1>
                     <p>Since its creation in 1789, the Department of State has carried out a series 
                     of reorganizations and has created new offices and bureaus to deal with 
@@ -40,6 +42,51 @@
                         </ul>
                     </p>
                     <p>The number of diplomatic posts increased from 41 in 1900 to 168 in 2004 and continues to grow.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
+                        <h2>Department History</h2>
+                        <ul>
+                            <li>
+                                <a href="$app/departmenthistory/short-history" class="highlight">Short History</a>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory/buildings">Buildings of the Department</a>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory/people">People</a>
+                                <ul>
+                                    <li>
+                                        <a href="$app/departmenthistory/people/secretaries">Biographies of the Secretaries
+                                            of State</a>
+                                    </li>
+                                    <li>
+                                        <a href="$app/departmenthistory/people/principals-chiefs">Principal Officers and
+                                            Chiefs of Mission</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory/travels">Travels</a>
+                                <ul>
+                                    <li>
+                                        <a href="$app/departmenthistory/travels/secretary">Travels of the Secretary</a>
+                                    </li>
+                                    <li>
+                                        <a href="$app/departmenthistory/travels/president">Travels of the President</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory/visits">Visits by Foreign Leaders</a>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory/wwi">World War I and the Department</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

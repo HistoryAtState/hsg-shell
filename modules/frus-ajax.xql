@@ -27,8 +27,11 @@ let $id := $match//fn:group[@nr = "3"]/string()
 let $publication-id :=
     switch ($publication)
         case 'historicaldocuments' return 'frus'
-        case 'about' return
-            $volume
+        case 'about' return $volume
+        case 'departmenthistory' return 
+            switch ($volume) 
+                case 'short-history' return 'short-history'
+                default return $publication
         default return $publication
 let $log := console:log("publication: " || $publication || ", volume: " || $volume)
 let $volume := if ($volume) then $volume else $publication-id (: TODO see above - please explain :)
