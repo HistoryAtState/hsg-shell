@@ -9,6 +9,7 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 
@@ -89,7 +90,7 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
                         else
                             concat('s ', $first, '-', $last)
                     , ')'
-                    )
+                )
             else 
                 <ul>
                 {
@@ -119,7 +120,11 @@ declare function toc:remove-nodes-deep($nodes as node()*, $nodes-to-remove as no
 declare function toc:toc-head($model as map(*), $node as element(tei:head)) {
     let $head-sans-note := if ($node//tei:note) then toc:remove-nodes-deep($node, $node//tei:note) else $node
     return
-        $model?odd($head-sans-note/node(), ())
+        (: Check if we're called via tei-simple pm or templating :)
+        if (exists($model?apply-children)) then
+            $model?apply-children($model, $node, $head-sans-note/node())
+        else
+            $model?odd($head-sans-note/node(), ())
 (:        pmu:process(odd:get-compiled($config:odd-source, $model?odd, $config:odd-compiled), $head-sans-note/node(), :)
 (:            $config:odd-compiled, "web", "../generated", $config:module-config):)
 };
@@ -143,6 +148,9 @@ declare function toc:href($publication-id as xs:string, $document-id as xs:strin
     )
 };
 
+(:~
+ : Generate table of contents for divs. Called via tei-simple pm.
+ :)
 declare function toc:document-list($config as map(*), $node as element(tei:div), $class) {
     let $head := $node/tei:head[1]
     let $head-sans-notes := toc:remove-nodes-deep($head, $head//tei:note)
@@ -212,11 +220,7 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                     <h4>Contents</h4>
                     <div style="padding-left: 1em">
                         <div class="toc-inner">
-                            <ul>{
-                                let $divs := $node//tei:div except $node//tei:div//tei:div
-                                return
-                                    $config?apply-children($config, $node, $divs)
-                            }</ul>
+                            <ul>{ toc:toc-inner($config, $node, false()) }</ul>
                         </div>
                     </div>
                 </div>
