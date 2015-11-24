@@ -6836,6 +6836,17 @@ header {
 .navbar-toggle {
   padding: 5px 10px 0px 12px;
 }
+.navbar-toggle:hover {
+  color: #030361;
+}
+.toggle-text {
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 12px;
+  padding-left: 5px;
+  text-transform: uppercase;
+  vertical-align: text-bottom;
+}
 .navbar {
   background: #030361;
   padding: 0;
@@ -6880,6 +6891,17 @@ header {
 .collapsing,
 .collapse.in {
   background-color: #dddde8;
+}
+.navbar .collapse.in li,
+.navbar .collapsing li {
+  background-color: #030361;
+}
+.navbar .dropdown.open .dropdown-menu li {
+  background-color: #dddde8;
+  padding-left: 0;
+}
+.navbar .dropdown.open .dropdown-menu li a {
+  color: #030361;
 }
 .collapsing li,
 .collapse.in li {
@@ -6995,6 +7017,12 @@ header {
 }
 .breadcrumb > li {
   display: inline !important;
+}
+.breadcrumb li:first-child:before {
+  content: "";
+}
+.breadcrumb li:before {
+  content: "›";
 }
 .navigation-top {
   margin-bottom: 1em;
