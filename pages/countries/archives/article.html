@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
-    <div class="row" data-template="pages:load">
-        <div class="col-md-3">
-            <div class="row">
-                <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
-                    <h2>Countries</h2>
-                    <label for="select-volume">Archives</label>
-                    <select id="select-volume" name="volumes" data-template="archives:dropdown" class="form-control async">
-                        <option>Choose Archive</option>
-                    </select>
-                </div>
-            </div>
+    <div data-template="pages:load">
+        <div class="row">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/countries">Countries</a>
+                </li>
+                <li>
+                    <a href="$app/countries/archives">Archives</a>
+                </li>
+                <li>
+                    <a class="section" href="." data-template="pages:document-link"/>
+                </li>
+            </ol>
         </div>
-        <div class="col-md-9">
-            <div id="content-inner" data-template="app:fix-links">
-                <div class="content" data-template="pages:view"/>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="content-inner" data-template="app:fix-links">
+                    <div class="content" data-template="pages:view"/>
+                </div>
             </div>
         </div>
     </div>
