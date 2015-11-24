@@ -364,7 +364,7 @@ function pages:section-link($node, $model) {
     }
 };
 
-declare function pages:deep-section-breadcrumbs($node, $model) {
+declare function pages:deep-section-breadcrumbs($node, $model, $truncate as xs:boolean?) {
     if ($model?data instance of element(tei:div)) then
         for $div in $model?data/ancestor-or-self::tei:div[@xml:id]
         return
@@ -372,7 +372,16 @@ declare function pages:deep-section-breadcrumbs($node, $model) {
                 element a {
                     attribute class { "section" },
                     attribute href { $div/@xml:id },
-                    $div/tei:head/string()
+                    if ($truncate) then
+                        let $words := tokenize($div/tei:head, '\s+')
+                        let $max-word-count := 8
+                        return
+                            if (count($words) gt $max-word-count) then
+                                concat(string-join(subsequence($words, 1, $max-word-count), ' '), '...')
+                            else
+                                $div/tei:head/string()
+                    else
+                        $div/tei:head/string()
                 }
             }
     else
