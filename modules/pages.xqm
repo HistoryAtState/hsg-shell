@@ -363,3 +363,23 @@ function pages:section-link($node, $model) {
             root($model?data)//tei:title[@type = 'complete']/string()
     }
 };
+
+declare function pages:deep-section-breadcrumbs($node, $model) {
+    if ($model?data instance of element(tei:div)) then
+        for $div in $model?data/ancestor-or-self::tei:div[@xml:id]
+        return
+            element li {
+                element a {
+                    attribute class { "section" },
+                    attribute href { $div/@xml:id },
+                    $div/tei:head/string()
+                }
+            }
+    else
+        element li {
+            element a { 
+                attribute class { "section" },
+                root($model?data)//tei:title[@type = 'complete']/string()
+            }
+        }
+};
