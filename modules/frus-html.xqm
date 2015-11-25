@@ -526,7 +526,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
 };
 
 declare function fh:frus-history-ebook-entry($model as map(*)) {
-    let $book := doc('/db/cms/apps/tei-content/data/frus-history/frus-history.xml')
+    let $book := doc('/db/apps/frus-history/monograph/frus-history.xml')
     let $book-title := pages:process-content($model?odd, $book//tei:title[@type='complete'])
     let $preview-edition := if ($book//tei:sourceDesc/tei:p[1] = 'Preview Edition') then ' (Preview Edition)' else ()
     let $vol-id := 'frus-history'
