@@ -214,3 +214,48 @@ declare function app:date-to-english($date as xs:string) as xs:string {
         else 
             $date
 };
+
+declare function app:load-most-recent-tweets($node as node(), $model as map(*)) {
+    let $tweets := 
+        for $tweet in collection($config:TWITTER_COL)/tweet
+        order by $tweet/date
+        return $tweet
+    let $content := map { "tweets": subsequence($tweets, count($tweets) - 2) }
+    let $html := templates:process($node/*, map:new(($model, $content)))
+    return
+        $html
+};
+
+declare function app:tweet-html($node as node(), $model as map(*)) {
+    let $nodes := $model?tweet/html/node()
+    for $node in $nodes
+    return 
+        ($node, if ($node/self::a and $node/following-sibling::node()[1]/self::a) then '&#160;' else ())
+};
+
+declare function app:tweet-date($node as node(), $model as map(*)) {
+    app:format-relative-date(xs:dateTime($model?tweet/date))
+};
+
+declare %templates:wrap function app:tweet-href($node as node(), $model as map(*)) {
+    attribute href { $model?tweet/url/string() }
+};
+
+declare function app:format-relative-date($created as xs:dateTime) as xs:string {
+    let $same-day := if (current-dateTime() - $created le xs:dayTimeDuration('P1D')) then true() else false()
+    return
+        if ($same-day) then
+            let $duration := current-dateTime() - $created 
+            return
+                if (hours-from-duration($duration) ge 1) then concat(hours-from-duration($duration), 'h')
+                else if (minutes-from-duration($duration) ge 1) then concat(minutes-from-duration($duration), 'm')
+                else 'just now'
+        else
+            let $date := format-dateTime($created, '[D] [Mn,*-3]')
+            let $tokens := tokenize($date, '\s')
+            let $day := $tokens[1]
+            let $month := $tokens[2]
+            let $month := concat(upper-case(substring($month, 1, 1)), lower-case(substring($month, 2, 2)))
+            return 
+                concat($day, ' ', $month)
+};

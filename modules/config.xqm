@@ -84,6 +84,7 @@ declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
 declare variable $config:HAC_COL := "/db/apps/hac";
 declare variable $config:HIST_DOCS :=  "/db/apps/hsg-shell/pages/historicaldocuments";
+declare variable $config:TWITTER_COL := "/db/apps/twitter/data/HistoryAtState";
 
 declare variable $config:FRUS_HISTORY_COL := '/db/apps/frus-history';
 declare variable $config:FRUS_HISTORY_ARTICLES_COL := $config:FRUS_HISTORY_COL || '/articles';

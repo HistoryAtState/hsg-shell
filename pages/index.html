@@ -2,7 +2,27 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div class="row">
         <div class="col-md-12" data-template="app:fix-links">
-            <h1>history.state.gov 3.0 shell</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Stay connected with HistoryAtState</h2>
+                    <div>
+                        <h3>Twitter</h3>
+                        <ul data-template="app:load-most-recent-tweets">
+                            <li data-template="templates:each" data-template-from="tweets" data-template-to="tweet">
+                                <span data-template="app:tweet-html"/>
+                                <ul>
+                                    <li>
+                                        <a>
+                                            <span data-template="app:tweet-href"/>
+                                            <span data-template="app:tweet-date"/>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     <h2>Available</h2>
