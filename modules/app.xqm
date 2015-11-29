@@ -215,7 +215,7 @@ declare function app:date-to-english($date as xs:string) as xs:string {
             $date
 };
 
-declare function app:load-most-recent-tweets($node as node(), $model as map(*)) {
+declare %templates:wrap function app:load-most-recent-tweets($node as node(), $model as map(*)) {
     let $tweets := 
         for $tweet in collection($config:TWITTER_COL)/tweet
         order by $tweet/date
