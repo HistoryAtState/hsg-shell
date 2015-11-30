@@ -76,12 +76,20 @@ return
                 "toc": if ($toc) then toc:toc($model, $xml, true(), true()) else (),
                 "tocCurrent": $xml/ancestor-or-self::tei:div[@type != "document"][1]/@xml:id/string(),
                 "breadcrumbSection": fh:breadcrumb-heading($model, $xml),
-                "persons": 
-                    let $persons := fh:get-persons($xml, distinct-values($xml//tei:persName/@corresp))
+                "persons":
+                    let $persons := 
+                        if ($xml/@type=('compilation', 'chapter', 'subchapter')) then 
+                            ()
+                        else
+                            fh:get-persons($xml, distinct-values($xml//tei:persName/@corresp))
                     return
                         if ($persons) then <div class="list-group">{$persons}</div> else (),
                 "gloss": 
-                    let $gloss := fh:get-gloss($xml, distinct-values($xml//tei:gloss/@target))
+                    let $gloss := 
+                        if ($xml/@type=('compilation', 'chapter', 'subchapter')) then 
+                            ()
+                        else
+                            fh:get-gloss($xml, distinct-values($xml//tei:gloss/@target))
                     return
                         if ($gloss) then <div class="list-group">{$gloss}</div> else (),
                 "content": serialize($html, 

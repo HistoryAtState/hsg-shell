@@ -237,8 +237,16 @@ declare
     %templates:wrap
 function fh:facets($node as node(), $model as map(*)) {
     map {
-        "persons": distinct-values($model?data//tei:persName/@corresp),
-        "gloss": distinct-values($model?data//tei:gloss/@target)
+        "persons": 
+            if ($model?data/@type=('compilation', 'chapter', 'subchapter')) then
+                ()
+            else
+                distinct-values($model?data//tei:persName/@corresp),
+        "gloss": 
+            if ($model?data/@type=('compilation', 'chapter', 'subchapter')) then
+                ()
+            else
+                distinct-values($model?data//tei:gloss/@target)
     }
 };
 
@@ -252,10 +260,11 @@ declare function fh:get-persons($root as element(), $ids as xs:string*) {
     let $persons := $root/ancestor-or-self::tei:TEI/id("persons")
     for $idref in $ids
     let $id := substring($idref, 2)
-    let $name := $persons//tei:persName[@xml:id = $id]
+    let $name := $persons/id($id)
+(:    let $name := $persons//tei:persName[@xml:id = $id]:)
     order by $name
     return
-        <a href="persons{$idref}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($name/../following-sibling::text()))}">{$name/string()}</a>
+        <a href="persons{$idref}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($name/..//text()))}">{$name/string()}</a>
 };
 
 declare
@@ -268,7 +277,8 @@ declare function fh:get-gloss($root as element(), $ids as xs:string*) {
     let $terms := $root/ancestor-or-self::tei:TEI/id("terms")
     for $idref in $ids
     let $id := substring($idref, 2)
-    let $term := $terms//tei:term[@xml:id = $id]
+    let $term := $terms/id($id)
+(:    let $term := $terms//tei:term[@xml:id = $id]:)
     order by $term
     return
         <a href="terms{$idref}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($term/../following-sibling::text()))}">{$term/text()}</a>
