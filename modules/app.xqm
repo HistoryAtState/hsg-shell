@@ -215,12 +215,14 @@ declare function app:date-to-english($date as xs:string) as xs:string {
             $date
 };
 
-declare %templates:wrap function app:load-most-recent-tweets($node as node(), $model as map(*)) {
-    let $tweets := 
+declare %templates:wrap function app:load-most-recent-tweets($node as node(), $model as map(*), $how-many as xs:integer) {
+    let $ordered-tweets := 
         for $tweet in collection($config:TWITTER_COL)/tweet
         order by $tweet/date
         return $tweet
-    let $content := map { "tweets": subsequence($tweets, count($tweets) - 2) }
+    let $tweets-to-show := subsequence($ordered-tweets, count($ordered-tweets) - $how-many + 1)
+    let $newest-on-top := reverse($tweets-to-show)
+    let $content := map { "tweets": $newest-on-top }
     let $html := templates:process($node/*, map:new(($model, $content)))
     return
         $html
@@ -258,4 +260,29 @@ declare function app:format-relative-date($created as xs:dateTime) as xs:string 
             let $month := concat(upper-case(substring($month, 1, 1)), lower-case(substring($month, 2, 2)))
             return 
                 concat($day, ' ', $month)
+};
+
+declare %templates:wrap function app:load-most-recent-tumblr-posts($node as node(), $model as map(*), $how-many as xs:integer) {
+    let $ordered-posts := 
+        for $post in collection($config:TUMBLR_COL)/post
+        order by $post/date
+        return $post
+    let $posts-to-show := subsequence($ordered-posts, count($ordered-posts) - $how-many + 1)
+    let $newest-on-top := reverse($posts-to-show)
+    let $content := map { "posts": $newest-on-top }
+    let $html := templates:process($node/*, map:new(($model, $content)))
+    return
+        $html
+};
+
+declare function app:tumblr-post-title($node as node(), $model as map(*)) {
+    $model?post/short-title/string()
+};
+
+declare function app:tumblr-post-date($node as node(), $model as map(*)) {
+    app:format-relative-date(xs:dateTime($model?post/date))
+};
+
+declare %templates:wrap function app:tumblr-post-href($node as node(), $model as map(*)) {
+    attribute href { $model?post/url/string() }
 };

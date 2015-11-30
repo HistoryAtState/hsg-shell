@@ -7,7 +7,7 @@
                     <h2>Stay connected with HistoryAtState</h2>
                     <div>
                         <h3>Twitter</h3>
-                        <ul data-template="app:load-most-recent-tweets">
+                        <ul data-template="app:load-most-recent-tweets" data-template-how-many="3">
                             <li data-template="templates:each" data-template-from="tweets" data-template-to="tweet">
                                 <span data-template="app:tweet-html"/>
                                 <ul>
@@ -15,6 +15,22 @@
                                         <a>
                                             <span data-template="app:tweet-href"/>
                                             <span data-template="app:tweet-date"/>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Tumblr</h3>
+                        <ul data-template="app:load-most-recent-tumblr-posts" data-template-how-many="2">
+                            <li data-template="templates:each" data-template-from="posts" data-template-to="post">
+                                <span data-template="app:tumblr-post-title"/>
+                                <ul>
+                                    <li>
+                                        <a>
+                                            <span data-template="app:tumblr-post-href"/>
+                                            <span data-template="app:tumblr-post-date"/>
                                         </a>
                                     </li>
                                 </ul>
