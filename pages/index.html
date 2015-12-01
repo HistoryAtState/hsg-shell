@@ -1,55 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div class="row">
-        <div class="col-md-12" data-template="app:fix-links">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2>Stay connected with HistoryAtState</h2>
-                    <div>
-                        <h3>Twitter</h3>
-                        <ul data-template="app:load-most-recent-tweets" data-template-how-many="3">
-                            <li data-template="templates:each" data-template-from="tweets" data-template-to="tweet">
-                                <span data-template="app:tweet-html"/>
-                                <ul>
-                                    <li>
-                                        <a>
-                                            <span data-template="app:tweet-href"/>
-                                            <span data-template="app:tweet-date"/>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+        <div class="col-md-8"><!-- Carousel - http://getbootstrap.com/javascript/#carousel -->
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-template="app:load-carousel-items"><!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-template="templates:each" data-template-from="carousel-items" data-template-to="carousel-item">
+                        <span data-template="app:carousel-list-slide-to-count-attribute"/>
+                        <span data-template="app:carousel-list-class-attribute"/>
+                    </li>
+                </ol><!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox" data-template="app:fix-links">
+                    <div data-template="templates:each" data-template-from="carousel-items" data-template-to="carousel-item">
+                        <span data-template="app:carousel-div-class-attribute"/>
+                        <a>
+                            <span data-template="app:carousel-item-href-attribute"/>
+                            <img style="width:100%">
+                                <span data-template="app:carousel-image-src-attribute"/>
+                                <span data-template="app:carousel-image-alt-attribute"/>
+                            </img>
+                        </a>
+                        <div class="carousel-caption">
+                            <h3>
+                                <a>
+                                    <span data-template="app:carousel-item-href-attribute"/>
+                                    <span data-template="app:carousel-item-heading"/>
+                                </a>
+                            </h3>
+                            <p data-template="app:carousel-item-description"/>
+                        </div>
                     </div>
-                    <div>
-                        <h3>Tumblr</h3>
-                        <ul data-template="app:load-most-recent-tumblr-posts" data-template-how-many="2">
-                            <li data-template="templates:each" data-template-from="posts" data-template-to="post">
-                                <span data-template="app:tumblr-post-title"/>
-                                <ul>
-                                    <li>
-                                        <a>
-                                            <span data-template="app:tumblr-post-href"/>
-                                            <span data-template="app:tumblr-post-date"/>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                </div><!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"/>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"/>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Available</h2>
-                    <p>The following sections/pages have been ported to this app and can be selected from the menu above or directly from these links.</p>
-                    <ul data-template="app:available-pages"/>
-                </div>
-                <div class="col-md-6">
-                    <h2>Not yet ported</h2>
-                    <p>The following sections/pages have not yet been ported to this app. Links go to the current production version of history.state.gov.</p>
-                    <ul data-template="app:not-yet-available-pages"/>
-                </div>
+        </div>
+        <div class="col-md-4">
+            <h2>Stay connected with HistoryAtState</h2>
+            <div>
+                <h3>Twitter</h3>
+                <ul data-template="app:load-most-recent-tweets" data-template-how-many="3">
+                    <li data-template="templates:each" data-template-from="tweets" data-template-to="tweet">
+                        <span data-template="app:tweet-html"/>
+                        <ul>
+                            <li>
+                                <a>
+                                    <span data-template="app:tweet-href"/>
+                                    <span data-template="app:tweet-date"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3>Tumblr</h3>
+                <ul data-template="app:load-most-recent-tumblr-posts" data-template-how-many="2">
+                    <li data-template="templates:each" data-template-from="posts" data-template-to="post">
+                        <span data-template="app:tumblr-post-title"/>
+                        <ul>
+                            <li>
+                                <a>
+                                    <span data-template="app:tumblr-post-href"/>
+                                    <span data-template="app:tumblr-post-date"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

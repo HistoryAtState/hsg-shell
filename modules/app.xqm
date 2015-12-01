@@ -286,3 +286,81 @@ declare function app:tumblr-post-date($node as node(), $model as map(*)) {
 declare %templates:wrap function app:tumblr-post-href($node as node(), $model as map(*)) {
     attribute href { $model?post/url/string() }
 };
+
+(: carousel :)
+
+declare %templates:wrap function app:load-carousel-items($node as node(), $model as map(*)) {
+    let $carousel-ids := doc($config:CAROUSEL_COL || '/data/display-order/display-order.xml')//topic-id
+    let $carousel-items := collection($config:CAROUSEL_COL || '/data/entries')/topic[id = $carousel-ids]
+    let $ordered-carousel-items := for $item in $carousel-items order by index-of($carousel-ids, $item/id) return $item
+    let $content := map { "carousel-items": $ordered-carousel-items }
+    let $html := templates:process($node/*, map:new(($model, $content)))
+    return
+        $html
+};
+
+declare function app:carousel-list-slide-to-count-attribute($node as node(), $model as map(*)) {
+    let $item := $model?carousel-item
+    let $n := index-of($model?carousel-items, $item) - 1
+    return
+        attribute data-slide {$n}
+};
+
+declare function app:carousel-list-class-attribute($node as node(), $model as map(*)) {
+    let $item := $model?carousel-item
+    let $n := index-of($model?carousel-items, $item) - 1
+    return
+        if ($n = 0) then
+            attribute class {"active"}
+        else ()
+};
+
+declare function app:carousel-image-src-attribute($node as node(), $model as map(*)) {
+    let $item := $model?carousel-item
+    let $image-src := '//' || $config:S3_DOMAIN || '/topics/' || $item/image
+    return
+        attribute src { $image-src }
+};
+
+declare function app:carousel-image-alt-attribute($node as node(), $model as map(*)) {
+    let $item := $model?carousel-item
+    let $image-alt := $item/image-description
+    return
+        attribute alt { $image-alt }
+};
+
+declare function app:carousel-div-class-attribute($node as node(), $model as map(*)) {
+    let $item := $model?carousel-item
+    let $n := index-of($model?carousel-items, $item) - 1
+    return
+        attribute class {
+            "item" ||
+            (
+                if ($n = 0) then
+                    " active"
+                else ()
+            )
+        }
+};
+
+declare function app:carousel-item-heading($node as node(), $model as map(*)) {
+    let $item := $model?carousel-item
+    let $heading := $item/title/node()
+    return
+        $heading
+};
+
+declare %templates:wrap function app:carousel-item-description($node as node(), $model as map(*)) {
+    let $item := $model?carousel-item
+    let $description := $item/body/node()
+    return
+        $description
+};
+
+declare function app:carousel-item-href-attribute($node as node(), $model as map(*)) {
+    let $item := $model?carousel-item
+    let $link := $item/link/string()
+    let $href := if (starts-with($link, '/')) then ('$app' || $link) else $link
+    return
+        attribute href { $href }
+};
