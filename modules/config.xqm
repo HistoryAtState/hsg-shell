@@ -74,6 +74,7 @@ declare variable $config:S3_DOMAIN := $config:S3_BUCKET || ".s3.amazonaws.com";
 declare variable $config:ARCHIVES_COL := "/db/apps/wwdai";
 declare variable $config:ARCHIVES_ARTICLES_COL := $config:ARCHIVES_COL || "/articles";
 declare variable $config:BUILDINGS_COL := "/db/apps/other-publications/buildings";
+declare variable $config:CAROUSEL_COL := "/db/apps/carousel";
 declare variable $config:CONFERENCES_COL := "/db/apps/conferences";
 declare variable $config:CONFERENCES_ARTICLES_COL := $config:CONFERENCES_COL || "/data";
 declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
