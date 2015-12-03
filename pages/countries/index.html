@@ -19,6 +19,17 @@
                         the United States’ relations with the countries of the world. The central component is a guide to
                         matters of diplomatic recognition and the establishment and maintenance of diplomatic relations between
                         the United States and states of the world, from 1776 to the present.</p>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <select data-template="countries:load-countries" class="form-control" onchange="location = this.options[this.selectedIndex].value;">
+                                <option value="#">Select a country:</option>
+                                <option data-template="templates:each" data-template-from="articles" data-template-to="article">
+                                    <span data-template="countries:article-href-value-attribute"/>
+                                    <span data-template="countries:article-title"/>
+                                </option>
+                            </select>
+                        </div>
+                    </form>
                     <p>This guide brings together information on these subjects from among
                         diverse and widely scattered documentary and archival sources. The most significant categories of
                         information provided for each individual country include: </p>

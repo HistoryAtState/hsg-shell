@@ -11,6 +11,27 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare variable $ch:RDCR_COL := '/db/apps/rdcr';
 declare variable $ch:RDCR_ARTICLES_COL := $ch:RDCR_COL || '/articles';
 
+declare %templates:wrap function ch:load-countries($node as node(), $model as map(*)) {
+    let $ordered-articles := 
+        for $c in collection($ch:RDCR_ARTICLES_COL)/tei:TEI
+        order by util:document-name($c)
+        return $c
+    let $content := map { "articles": $ordered-articles }
+    let $html := templates:process($node/*, map:new(($model, $content)))
+    return
+        $html
+};
+
+declare function ch:article-title($node as node(), $model as map(*)) {
+    $model?article//tei:title[@type='short']/string()
+};
+
+declare function ch:article-href-value-attribute($node as node(), $model as map(*)) {
+    let $article-id := substring-before(util:document-name($model?article), '.xml')
+    return
+        attribute value { "$app/countries/" ||  $article-id }
+};
+
 declare
     %templates:wrap
 function ch:dropdown($node as node(), $model as map(*), $document-id as xs:string?) {
