@@ -317,7 +317,8 @@ declare function app:carousel-list-class-attribute($node as node(), $model as ma
 
 declare function app:carousel-image-src-attribute($node as node(), $model as map(*)) {
     let $item := $model?carousel-item
-    let $image-src := '//' || $config:S3_DOMAIN || '/topics/' || $item/image
+    let $vol-id := replace($item/image, '\.(png|jpg)', '')
+    let $image-src := '//' || $config:S3_DOMAIN || '/frus/' || $vol-id || '/covers/' || $vol-id || '.jpg'
     return
         attribute src { $image-src }
 };
