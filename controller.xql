@@ -13,6 +13,8 @@ console:log('request:get-uri(): ' || request:get-uri())
 ,
 console:log('$exist:path: ' || $exist:path)
 ,
+console:log('nginx-request-uri: ' || request:get-header('nginx-request-uri'))
+,
 :)
 (: redirect requests for app root ('') to '/' :)
 if ($exist:path eq '') then
