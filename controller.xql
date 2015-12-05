@@ -17,13 +17,13 @@ console:log('nginx-request-uri: ' || request:get-header('nginx-request-uri'))
 ,
 :)
 (: redirect requests for app root ('') to '/' :)
-if ($exist:path eq '') then
+if ($exist:path eq '' and (: remove after beta period :) request:get-header('nginx-request-uri') ne '/beta') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <redirect url="{request:get-uri()}/"/>
     </dispatch>
     
 (: handle request for landing page, e.g., http://history.state.gov/ :)
-else if ($exist:path eq "/") then
+else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq '' and request:get-header('nginx-request-uri') eq '/beta')) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller}/pages/index.html"/>
         <view>

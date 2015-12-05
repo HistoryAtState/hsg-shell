@@ -34,9 +34,13 @@ declare function app:fix-this-link($node as node(), $model as map(*)) {
 declare function app:fix-links($nodes as node()*) {
     let $nginx-request-uri := request:get-header('nginx-request-uri')
     let $path-to-app := 
-        (: if request received from nginx, app will position links as if at site root :) 
+        (: if request received from nginx :)
         if ($nginx-request-uri) then 
-            ""
+            if (starts-with($nginx-request-uri, '/beta')) then 
+                "/beta"
+            (: we must be out of beta! urls can assume root :) 
+            else
+                ""
         (: otherwise we're in the eXist URL space :)
         else 
             request:get-context-path() || "/apps/hsg-shell"
