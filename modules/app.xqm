@@ -22,6 +22,15 @@ function app:fix-links($node as node(), $model as map(*)) {
     app:fix-links(templates:process($node/node(), $model))
 };
 
+declare function app:fix-this-link($node as node(), $model as map(*)) {
+    app:fix-links(
+        templates:process(
+            element { node-name($node) } { $node/@* except $node/@data-template, $node/node() }, 
+            $model
+        )
+    )
+};
+
 declare function app:fix-links($nodes as node()*) {
     let $nginx-request-uri := request:get-header('nginx-request-uri')
     let $path-to-app := 
