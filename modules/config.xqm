@@ -69,7 +69,7 @@ declare variable $config:S3_BUCKET := "static.history.state.gov";
 
 declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $config:S3_BUCKET || "/";
 
-declare variable $config:S3_DOMAIN := $config:S3_BUCKET || ".s3.amazonaws.com";
+declare variable $config:S3_DOMAIN := "s3.amazonaws.com/" || $config:S3_BUCKET;
 
 declare variable $config:ARCHIVES_COL := "/db/apps/wwdai";
 declare variable $config:ARCHIVES_ARTICLES_COL := $config:ARCHIVES_COL || "/articles";
