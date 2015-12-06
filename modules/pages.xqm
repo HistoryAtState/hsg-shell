@@ -147,15 +147,15 @@ declare
 function pages:view($node as node(), $model as map(*), $view as xs:string) {
     let $xml := 
         if ($view = "div") then
-            pages:get-content($model("data"))
+            pages:get-content($model?data)
         else
             $model?data//*:body/*
     return
         if ($xml instance of element(tei:pb)) then
-            let $href := concat('http://static.history.state.gov/frus/', root($xml)/tei:TEI/@xml:id, '/medium/', $xml/@facs, '.png')
+            let $href := concat('//', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
             return
                 <div class="content">
-                    <img src="{$href}"/>
+                    <img src="{$href}" class="img-responsive img-thumbnail center-block"/>
                 </div>
         else
             pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path })

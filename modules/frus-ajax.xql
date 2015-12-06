@@ -51,9 +51,11 @@ return
         let $next := pages:get-next($xml)
         let $html := 
             if ($xml instance of element(tei:pb)) then
-                let $href := concat('http://static.history.state.gov/frus/', root($xml)/tei:TEI/@xml:id, '/medium/', $xml/@facs, '.png')
+                let $href := concat('//', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
                 return
-                    <div class="content"><img src="{$href}"/></div>
+                    <div class="content">
+                        <img src="{$href}" class="img-responsive img-thumbnail center-block"/>
+                    </div>
             else
                 pages:process-content($odd, pages:get-content($xml), map { "base-uri": $publication-id || (if ($volume ne $publication-id) then "/" || $volume else ()) })
         let $html := app:fix-links($html)
