@@ -6929,8 +6929,8 @@ header {
 }
 #toc .toc-inner li,
 #volume .toc-inner li {
-  margin-left: .5em;
-  text-indent: -0.5em;
+  margin-left: 2em;
+  text-indent: -2em;
 }
 #toc .highlight,
 #volume .highlight {
