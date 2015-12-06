@@ -81,11 +81,44 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
             map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:text
     return
         if (empty($block)) then (
+            pages:load-fallback-page($publication-id, $document-id, $section-id)
+        ) else
+            $block
+};
+
+declare function pages:load-fallback-page($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
+    let $volume := $config:FRUS_METADATA/volume[@id=$document-id]
+    let $log := console:log("Loading fallback page for " || $document-id)
+    return
+        if (empty($volume)) then (
             request:set-attribute("hsg-shell.errcode", 404),
             request:set-attribute("hsg-shell.path", string-join(($document-id, $section-id), "/")),
             error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "publication " || $publication-id || " document " || $document-id || " section " || $section-id || " not found")
         ) else
-            $block
+            pages:volume-to-tei($volume)
+};
+
+declare function pages:volume-to-tei($volume as element()) {
+    <tei:TEI xmlns:frus="http://history.state.gov/frus/ns/1.0" xml:id="{$volume/@id}">
+        <tei:teiHeader>
+            <tei:fileDesc>
+                <tei:titleStmt>
+                    <tei:title type="complete">{$volume/title[@type="complete"]/node()}</tei:title>
+                    <tei:title type="subseries">{$volume/title[@type="sub-series"]/node()}</tei:title>
+                    <tei:title type="volumenumber">{$volume/title[@type="volumenumber"]/node()}</tei:title>
+                    <tei:title type="volume">{$volume/title[@type="volume"]/node()}</tei:title>
+                    {
+                        for $editor in $volume/editor
+                        return
+                            <tei:editor>{$editor/@role, $editor/node()}</tei:editor>
+                    }
+                </tei:titleStmt>
+            </tei:fileDesc>
+            <tei:sourceDesc>
+            { $volume/summary/* }
+            </tei:sourceDesc>
+        </tei:teiHeader>
+    </tei:TEI>
 };
 
 declare function pages:xml-link($node as node(), $model as map(*), $doc as xs:string) {

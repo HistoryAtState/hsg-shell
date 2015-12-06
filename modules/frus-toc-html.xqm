@@ -16,21 +16,28 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 declare
     %templates:wrap
 function toc:table-of-contents($node as node(), $model as map(*), $document-id as xs:string, $heading as xs:boolean?, $highlight as xs:boolean?) {
-    toc:toc($model, $model?data, $heading, $highlight)
+    (: check if document is stored in db or just generated TEI :)
+    if (util:document-name($model?data)) then
+        toc:toc($model, $model?data, $heading, $highlight)
+    else
+        ()
 };
 
-declare function toc:toc($model as map(*), $root as node(), $show-heading as xs:boolean?, $highlight as xs:boolean?) {
-    <div class="toc-inner">
-        { if ($show-heading) then <h2>{toc:volume-title($root, "volume")}</h2> else () }
-        <ul>
-        {
-            toc:toc-passthru(
-                $model,
-                $root/ancestor-or-self::tei:TEI/tei:text,
-                if ($highlight) then $root/ancestor-or-self::tei:div[@type != "document"][1] else ()
-            )
-        }</ul>
-    </div>
+declare function toc:toc($model as map(*), $root as node()?, $show-heading as xs:boolean?, $highlight as xs:boolean?) {
+    if ($root) then
+        <div class="toc-inner">
+            { if ($show-heading) then <h2>{toc:volume-title($root, "volume")}</h2> else () }
+            <ul>
+            {
+                toc:toc-passthru(
+                    $model,
+                    $root/ancestor-or-self::tei:TEI/tei:text,
+                    if ($highlight) then $root/ancestor-or-self::tei:div[@type != "document"][1] else ()
+                )
+            }</ul>
+        </div>
+    else
+        ()
 };
 
 declare function toc:toc-inner($model as map(*), $root as node(), $show-heading as xs:boolean?) {
@@ -79,18 +86,16 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
             ,
             
             if ($type = 'document') then
-                concat(
-                    ' (Document',
-                    let $child-docs := $node/tei:div[@type = 'document']
-                    let $first := $child-docs[1]/@n
-                    let $last := $child-docs[last()]/@n
-                    return
-                        if ($first = $last) then
-                            concat(' ', $first)
-                        else
-                            concat('s ', $first, '-', $last)
-                    , ')'
-                )
+                let $child-docs := $node/tei:div[@type = 'document']
+                let $first := $child-docs[1]/@n
+                let $last := $child-docs[last()]/@n
+                let $document :=
+                    if ($first = $last) then
+                        concat(' ', $first)
+                    else
+                        concat('s ', $first, '-', $last)
+                return
+                    concat(' (Document', $document, ')')
             else 
                 <ul>
                 {
