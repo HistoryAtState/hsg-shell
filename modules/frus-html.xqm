@@ -227,6 +227,25 @@ function fh:volume-title($node as node(), $model as map(*)) {
 
 declare
     %templates:wrap
+function fh:volume-availability-summary($node as node(), $model as map(*)) {
+    let $volume-id := $model?vol-id
+    let $full-text := if (fh:exists-volume-in-db($volume-id)) then 'Full Text' else ()
+    let $ebook := if (fh:exists-ebook($volume-id)) then 'Ebook' else ()
+    let $pdf := if (fh:exists-pdf($volume-id)) then 'PDF' else ()
+    return
+        if ($full-text or $ebook or $pdf) then 
+            <span style="font-style: italic; font-size: .9em; color: #606060">{
+                concat(
+                   ' (',
+                   string-join(($full-text, $ebook, $pdf), ', '),
+                   ')'
+                )
+            }</span>
+        else ()
+};
+
+declare
+    %templates:wrap
 function fh:administration-group-code($node as node(), $model as map(*)) {
     $model?grouping-codes[value = $model?group]/label/string()
 };
@@ -575,6 +594,14 @@ declare function fh:exists-volume($vol-id) {
 
 declare function fh:exists-volume-in-db($vol-id) {
     exists(fh:volume($vol-id))
+};
+
+declare function fh:exists-ebook($vol-id) {
+    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.epub')])
+};
+
+declare function fh:exists-pdf($vol-id) {
+    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.pdf')])
 };
 
 declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
