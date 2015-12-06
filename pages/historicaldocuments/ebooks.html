@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
-    <div data-template="pages:load">
-        <div class="col-md-3">
-            <div class="row">
-                <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
-                    <h2>Historical Documents</h2>
-                    <label for="select-volume">Volumes</label>
-                    <select id="select-volume" name="volumes" data-template="frus:volumes" class="form-control async">
-                        <option>Choose Volume</option>
-                    </select>
-                    <label for="select-administration">Browse by Administration</label>
-                    <select id="select-administration" name="administrations" data-template="frus:administrations" class="form-control">
-                        <option>Choose Administration</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9" id="volume" data-template="app:fix-links">
+    <div class="row">
+        <ol class="breadcrumb" data-template="app:fix-links">
+            <li>
+                <a href="$app">Home</a>
+            </li>
+            <li>
+                <a href="$app/historicaldocuments">Historical Documents</a>
+            </li>
+            <li>
+                <a href="$app/historicaldocuments/ebooks">Ebooks</a>
+            </li>
+        </ol>
+    </div>
+    <div class="row" data-template="pages:load">
+        <div class="col-md-12" data-template="app:fix-links">
             <div id="content-inner">
-                <h2>EBooks</h2>
+                <h2>Ebooks</h2>
                 <p>The Office of the Historian offers ebook editions of a growing number of volumes from the
                         <em>Foreign Relations of the United States</em> (<em>FRUS</em>) series. Far lighter and
                     more portable than printed editions of <em>FRUS</em>, the ebook edition offers the full
