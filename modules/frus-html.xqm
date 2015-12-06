@@ -507,7 +507,7 @@ declare function fh:volumes-with-ebooks() {
 declare function fh:frus-ebooks-catalog($node, $model) {
     let $vol-ids := fh:volumes-with-ebooks()
     return
-        <div xmlns="http://www.w3.org/1999/xhtml" id="catalog">
+        <div id="catalog">
             <p>The following {count($vol-ids)} volumes are currently available:</p>
             {
             for $vol-id in $vol-ids
@@ -516,7 +516,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
                 (
                 <div id="{$vol-id}">
                     <img src="http://static.history.state.gov/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-                    <a href="/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'subseries'), fh:vol-title($vol-id, 'volumenumber'), fh:vol-title($vol-id, 'volume')), ', ')}</a>. 
+                    <a href="$app/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'subseries'), fh:vol-title($vol-id, 'volumenumber'), fh:vol-title($vol-id, 'volume')), ', ')}</a>. 
                         <br/>
                         Ebook last updated: {xsl:format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), 'MMMM D, YYYY')}. 
                         <ul class="buttons" style="text-align: right">
@@ -556,9 +556,9 @@ declare function fh:frus-history-ebook-entry($model as map(*)) {
     let $mobi-size := try { app:bytes-to-readable($mobi-resource//size) } catch * {'problem getting size of ' || $mobi-filename}
     let $pdf-size := try { app:bytes-to-readable($pdf-resource//size) } catch * {'problem getting size of ' || $pdf-filename}
     return
-        <div id="frus-history" xmlns="http://www.w3.org/1999/xhtml">
+        <div id="frus-history">
             <img src="{$s3-base-url}/covers/{$vol-id}-thumb.png" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-            <a href="/historicaldocuments/{$vol-id}">{$book-title}{$preview-edition}</a>.
+            <a href="$app/historicaldocuments/{$vol-id}">{$book-title}{$preview-edition}</a>.
                 <br/>
                 Ebook last updated: {xsl:format-dateTime(xs:dateTime($last-updated), 'MMMM D, YYYY')}. 
                 <ul class="buttons" style="text-align: right">
