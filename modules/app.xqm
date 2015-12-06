@@ -31,6 +31,16 @@ declare function app:fix-this-link($node as node(), $model as map(*)) {
     )
 };
 
+declare function app:nginx-request-uri($node as node(), $model as map(*)) {
+    (
+    <meta name="nginx-request-uri" value="{request:get-header('nginx-request-uri')}"/>,
+    <meta name="request-context-path" value="{request:get-context-path()}"/>,
+    <meta name="request-get-uri" value="{request:get-uri()}"/>,
+    <meta name="request-get-url" value="{request:get-url()}"/>,
+    <meta name="request-get-effective-uri" value="{request:get-effective-uri()}"/>
+    )
+};
+
 declare function app:fix-links($nodes as node()*) {
     let $nginx-request-uri := request:get-header('nginx-request-uri')
     let $path-to-app := 
@@ -382,4 +392,32 @@ declare function app:carousel-item-href-attribute($node as node(), $model as map
     let $href := if (starts-with($link, '/')) then ('$app' || $link) else $link
     return
         attribute href { $href }
+};
+
+declare function app:non-beta-link($node as node(), $model as map(*)) {
+    let $url := 'https://history.state.gov' || request:get-parameter('url', '/#')
+    return
+        <a href="{$url}">{$url}</a>
+};
+
+declare function app:insert-url-parameter($node as node(), $model as map(*)) {
+    element a { attribute href { 
+        concat(
+            app:fix-this-link($node, $model)/@href, 
+            if ($node/@href=request:get-uri()) then 
+                ()
+            else 
+                concat(
+                    '?url=', 
+                    encode-for-uri(
+                        if (starts-with(request:get-uri(), '/beta/exist/apps/hsg-shell')) then
+                            substring-after(request:get-uri(), '/beta/exist/apps/hsg-shell') 
+                        else if (starts-with(request:get-uri(), '/exist/apps/hsg-shell')) then
+                            substring-after(request:get-uri(), '/exist/apps/hsg-shell') 
+                        else 
+                            request:get-uri()
+                    )
+                )
+        )
+    }, $node/@* except $node/@href, $node/node() } 
 };

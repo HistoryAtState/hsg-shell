@@ -11,9 +11,9 @@ declare variable $exist:root external;
 (: 
 console:log('request:get-uri(): ' || request:get-uri())
 ,
-console:log('$exist:path: ' || $exist:path)
-,
 console:log('nginx-request-uri: ' || request:get-header('nginx-request-uri'))
+,
+console:log('exist:path: ' || $exist:path)
 ,
 :)
 (: redirect requests for app root ('') to '/' :)
@@ -918,6 +918,25 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                 			<forward url="{$exist:controller}/modules/view.xql"/>
                 		</error-handler>
                     </dispatch>
+
+(: handle requests for about section :)
+else if ($exist:path = '/about-the-beta') then
+    let $page := 'about-the-beta.html'
+    return
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/pages/{$page}">
+            </forward>
+            <view>
+                <forward url="{$exist:controller}/modules/view.xql">
+                    <set-attribute name="hsg-shell.errcode" value="404"/>
+                    <add-parameter name="uri" value="{$exist:path}"/>
+                </forward>
+            </view>
+    		<error-handler>
+    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+    			<forward url="{$exist:controller}/modules/view.xql"/>
+    		</error-handler>
+        </dispatch>
 
 (: handle requests for about section :)
 else if (matches($exist:path, '^/about/?')) then
