@@ -395,9 +395,19 @@ declare function app:carousel-item-href-attribute($node as node(), $model as map
 };
 
 declare function app:non-beta-link($node as node(), $model as map(*)) {
-    let $url := 'https://history.state.gov' || request:get-parameter('url', '/#')
+    let $url := 'https://history.state.gov' || 
+        (
+            request:get-parameter('url', ()), 
+            substring-after(request:get-uri(), '/hsg-shell') || 
+                (
+                    if (request:get-query-string() ne '') then 
+                        ('?' || request:get-query-string()) 
+                    else 
+                        ()
+                )
+        )[1]
     return
-        element a { $node/@* except $node/@href, attribute href {$url}, 'Return to ' || $url }
+        element a { $node/@* except $node/@href, attribute href {$url}, 'Go to non-beta page: ' || $url }
 };
 
 declare function app:insert-url-parameter($node as node(), $model as map(*)) {
@@ -410,12 +420,19 @@ declare function app:insert-url-parameter($node as node(), $model as map(*)) {
                 concat(
                     '?url=', 
                     encode-for-uri(
-                        if (starts-with(request:get-uri(), '/beta/exist/apps/hsg-shell')) then
-                            substring-after(request:get-uri(), '/beta/exist/apps/hsg-shell') 
-                        else if (starts-with(request:get-uri(), '/exist/apps/hsg-shell')) then
-                            substring-after(request:get-uri(), '/exist/apps/hsg-shell') 
-                        else 
-                            request:get-uri()
+                        concat(
+                            if (starts-with(request:get-uri(), '/beta/exist/apps/hsg-shell')) then
+                                substring-after(request:get-uri(), '/beta/exist/apps/hsg-shell') 
+                            else if (starts-with(request:get-uri(), '/exist/apps/hsg-shell')) then
+                                substring-after(request:get-uri(), '/exist/apps/hsg-shell') 
+                            else 
+                                request:get-uri()
+                            ,
+                            if (request:get-query-string() ne '') then 
+                                ('?' || request:get-query-string()) 
+                            else 
+                                ()
+                        )
                     )
                 )
         )
