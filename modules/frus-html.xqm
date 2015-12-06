@@ -592,7 +592,7 @@ declare function fh:vol-title($vol-id as xs:string) {
 };
 
 declare function fh:volume($vol-id as xs:string) {
-    doc(concat($config:FRUS_VOLUMES_COL, $vol-id, '.xml'))
+    doc(concat($config:FRUS_VOLUMES_COL, '/', $vol-id, '.xml'))
 };
 
 declare function fh:ebook-last-updated($vol-id) {
