@@ -17,7 +17,7 @@
                     <h1>About the Beta</h1>
                     <p>The Office of the Historian is working on a new version of 
                         <a href="https://history.state.gov">history.state.gov</a>. In order to gather feedback
-                        before the website is officially released, we are previewing the new site here, at
+                        before the website is officially released, we are sharing the new site in “beta”—or preview form—at
                         <a href="https://history.state.gov/beta">history.state.gov/beta</a>. Please have a 
                         look around and send us your suggestions via email at 
                         <a href="mailto:history@state.gov">history@state.gov</a> or on Twitter at 
@@ -26,15 +26,21 @@
                         contain bugs. The data here is not updated as regularly as the main site. So please visit the 
                         original version of the site for its content.</p>
                     <div data-template="templates:if-parameter-set" data-template-param="url">
-                        <p>If you wish to return to the original, non-beta version of the 
-                        page you visited before you clicked on the “Read About The Beta” ribbon, please select 
-                        the following link:</p>
                         <blockquote>
-                            <a data-template="app:non-beta-link"/>
+                            <p>Note: If you wish to return to the original, non-beta version of the 
+                        page you visited before you clicked on the “Learn about this beta” ribbon, please select 
+                        the following link:</p>
+                            <p class="text-center">
+                                <a data-template="app:non-beta-link" role="button" class="btn btn-default"/>
+                            </p>
                         </blockquote>
                     </div>
                     <div data-template="templates:if-parameter-unset" data-template-param="url">
-                        <p>Click on the “Read About The Beta” ribbon on any page to view a link to the original version of the page.</p>
+                        <blockquote>
+                            <p>Note: If, while using this “beta” version of our site, you wish to return to the original, 
+                            non-beta version of any page, just click on the “Learn about the beta” ribbon, and you 
+                            will be presented with a link beneath this paragraph.</p>
+                        </blockquote>
                     </div>
                     <h2>Features Currently on Display</h2>
                     <ul>

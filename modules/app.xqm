@@ -397,14 +397,14 @@ declare function app:carousel-item-href-attribute($node as node(), $model as map
 declare function app:non-beta-link($node as node(), $model as map(*)) {
     let $url := 'https://history.state.gov' || request:get-parameter('url', '/#')
     return
-        <a href="{$url}">{$url}</a>
+        element a { $node/@* except $node/@href, attribute href {$url}, 'Return to ' || $url }
 };
 
 declare function app:insert-url-parameter($node as node(), $model as map(*)) {
     element a { attribute href { 
         concat(
             app:fix-this-link($node, $model)/@href, 
-            if ($node/@href=request:get-uri()) then 
+            if (ends-with(request:get-uri(), '/about-the-beta')) then 
                 ()
             else 
                 concat(
