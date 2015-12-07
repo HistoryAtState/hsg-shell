@@ -8,12 +8,14 @@ $(document).ready(function() {
     });
 
     function resize() {
-        var wh = ($(window).height()) / 2;
-        $(".page-nav").css("top", wh);
-        $(".nav-prev").css("left", $("#content-inner").offset().left);
-        $(".nav-next").css("left", $("#content-inner").offset().left + $("#content-inner").width() - 60);
-        var tw = $(".toc").width();
-        $(".toc").css("max-width", tw);
+        if ($(window).width() > 768) {
+            var wh = ($(window).height()) / 2;
+            $(".page-nav").css("top", wh);
+            $(".nav-prev").css("left", $("#content-inner").offset().left);
+            $(".nav-next").css("left", $("#content-inner").offset().left + $("#content-inner").width() - 60);
+            var tw = $(".toc").width();
+            $(".toc").css("max-width", tw);
+        }
     }
     
     function getFontSize() {
@@ -203,7 +205,7 @@ $(document).ready(function() {
                     return;
                 }
                 var params = {
-                    url: nav.pathname.replace(/^.*\/([^/]+\/[^/]+)$/, "$1") + "&" + nav.search.substring(1)
+                    url: nav.pathname.replace(new RegExp("^" + appRoot + "(.*)$"), "$1")
                 };
                 if (historySupport) {
                     history.pushState(null, null, nav.href);

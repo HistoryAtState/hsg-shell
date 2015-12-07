@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="$app/resources/css/style.css"/>
         <link rel="stylesheet" type="text/css" data-template="pages:styles" data-template-odd="frus.odd"/>
         <script type="text/javascript" src="$app/bower_components/jquery/dist/jquery.min.js"/>
+        <script type="text/javascript" src="$app/bower_components/bower_components/jquery-touchswipe/jquery.touchSwipe.min.js"/>
         <script type="text/javascript" src="$app/bower_components/bootstrap/dist/js/bootstrap.min.js"/>
     </head>
     <body id="body"><!-- remove after beta -->
@@ -27,11 +28,10 @@
                     <div class="banner__search">
                         <div class="searchbox">
                             <form method="get" action="$app/search">
-                                <p class="form-group">
-                                    <!-- Search: -->
+                                <p class="form-group"><!-- Search: -->
                                     <input type="text" size="15" name="q" style="margin-bottom: 0" placeholder="Search..." class="form-control" id="search-box"/>
                                     <button type="submit" value="GO" class="search-button btn btn-default">
-                                        <i class="fa fa-search"></i>
+                                        <i class="fa fa-search"/>
                                     </button>
                                 </p>
                             </form>

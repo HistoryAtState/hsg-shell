@@ -10,6 +10,7 @@
   "dependencies": {
     "bootstrap": "~3.3.5",
     "animate.css": "~3.3.0",
-    "font-awesome": "~4.4.0"
+    "font-awesome": "~4.4.0",
+    "jquery-touchswipe": "~1.6.12"
   }
 }
