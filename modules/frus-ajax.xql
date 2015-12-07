@@ -18,6 +18,8 @@ declare option output:media-type "application/json";
  : page.
  :)
 let $url := request:get-parameter("url", ())
+(: remove after beta. brittle url logic here. :)
+let $url := if (starts-with($url, '/beta')) then substring-after($url, '/beta') else $url 
 let $toc := boolean(request:get-parameter("toc", ()))
 let $match := analyze-string($url, "^/([^/]+)/([^/]+)/?(.*)$")
 let $publication := $match//fn:group[@nr = "1"]/string()
