@@ -15,22 +15,7 @@
             </ol>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                <div class="row">
-                    <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
-                        <h2>Historical Documents</h2>
-                        <label for="select-volume">Volumes</label>
-                        <select id="select-volume" name="volumes" data-template="frus:volumes" class="form-control">
-                            <option>Choose Volume</option>
-                        </select>
-                        <label for="select-administration">Browse by Administration</label>
-                        <select id="select-administration" name="administrations" data-template="frus:administrations" class="form-control">
-                            <option>Choose Administration</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-7" id="volume">
+            <div class="col-md-10" id="volume">
                 <div id="content-inner" data-template="app:fix-links">
                     <div data-template="pages:header"/>
                     <hr/>
@@ -40,12 +25,12 @@
             <div class="col-md-2">
                 <div id="links-panel" class="panel panel-default">
                     <div class="panel-heading">Links</div>
-                    <div class="list-group">
+                    <div class="list-group"><!--
                         <a class="list-group-item" href="../modules/fo.xql?doc=${volume}" data-template="app:parse-params">
                             <i class="glyphicon glyphicon-print"/> PDF</a>
                         <a class="list-group-item" href="#">
                             <i class="glyphicon glyphicon-book"/> Ebook</a>
-                    </div>
+                        --></div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
+    <div data-template="pages:load">
+        <div class="row">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/about-the-beta">About the Beta</a>
+                </li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>About the Beta</h1>
+                    <p>The Office of the Historian is working on a new version of 
+                        <a href="https://history.state.gov">history.state.gov</a>. In order to gather feedback
+                        before the website is officially released, we are sharing the new site in “beta”—or preview form—at
+                        <a href="https://history.state.gov/beta">history.state.gov/beta</a>. Please have a 
+                        look around and send us your suggestions via email at 
+                        <a href="mailto:history@state.gov">history@state.gov</a> or on Twitter at 
+                        <a href="https://twitter.com/HistoryAtState">@HistoryAtState</a>.</p>
+                    <p>Please forgive our warts during this period. Certain features are incomplete and known to 
+                        contain bugs. The data here is not updated as regularly as the main site. So please visit the 
+                        original version of the site for its content.</p>
+                    <div data-template="templates:if-parameter-set" data-template-param="url">
+                        <blockquote>
+                            <p>Note: If you wish to visit the non-beta version of the 
+                        previous page, please select 
+                        the following link:</p>
+                            <p class="text-center">
+                                <a data-template="app:non-beta-link" role="button" class="btn btn-default"/>
+                            </p>
+                        </blockquote>
+                    </div>
+                    <div data-template="templates:if-parameter-unset" data-template-param="url">
+                        <blockquote>
+                            <p>Note: If, while using this “beta” version of our site, you wish to return to the 
+                            non-beta version of any page, just click on the “Learn about the beta” ribbon, and you 
+                            will be presented with a link beneath this notice.</p>
+                        </blockquote>
+                    </div>
+                    <h2>Features Currently on Display</h2>
+                    <ul>
+                        <li>A mobile device-friendly “responsive” design: Adapts to the size of your device and
+                            is readable on any screen size, from smart phone to tablet and desktop. (On a computer, 
+                            try making your browser window smaller, or, on a mobile device, try changing your screen’s
+                            orientation; notice how the elements of the page adapt to the new size.)
+                        </li>
+                        <li>More fluid reading experience: Quickly advance forward or backward in publications
+                            like the <em>Foreign Relations</em> series.
+                        </li>
+                        <li>A more stable, better performing server code: We have rewritten the entire site from 
+                            scratch with the goal of delivering results faster and sustaining increasing loads 
+                            much better. Nearly all code and datasets can be accessed
+                            on <a href="https://github.com/HistoryAtState">our HistoryAtState GitHub repository</a>.
+                            (Fork our code, and send us your pull requests.)
+                        </li>
+                        <li>Security: Your connection to this page and the entire beta site is SSL-only. 
+                            We will be migrating soon to HSTS to ensure the integrity of your connection to this 
+                            website.</li>
+                    </ul>
+                    <h2>Features Planned for Future Releases</h2>
+                    <p>Besides these features, we are laying the foundation for new resources on the history
+                        of U.S. foreign relations and the Department of State:</p>
+                    <ul>
+                        <li>A unified biographical database of all persons identified in datasets such as the 
+                            <em>Foreign Relations</em> series, Principal Officers and Chiefs of Mission, Travels 
+                            of the President and Secretary of State, and Visits of Foreign Leaders.</li>
+                        <li>Chronological sorting of search results from the <em>Foreign Relations</em> series.</li>
+                        <li>A database of historical country names, for connecting resources about places whose
+                            names have changed over time.</li>
+                    </ul>
+                    <p>Thank you for your interest in this beta, and please return for updates.</p>
+                    <p>
+                        <em>Last Updated: December 5, 2015.</em>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
+                        <h2>Related Links</h2>
+                        <ul>
+                            <li>
+                                <a href="$app/about/contact-us">How to Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/HistoryAtState">@HistoryAtState on Twitter</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/HistoryAtState">HistoryAtState on GitHub</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,7 +22,38 @@ function app:fix-links($node as node(), $model as map(*)) {
     app:fix-links(templates:process($node/node(), $model))
 };
 
+declare function app:fix-this-link($node as node(), $model as map(*)) {
+    app:fix-links(
+        templates:process(
+            element { node-name($node) } { $node/@* except $node/@data-template, $node/node() }, 
+            $model
+        )
+    )
+};
+
+declare function app:nginx-request-uri($node as node(), $model as map(*)) {
+    (
+    <meta name="nginx-request-uri" value="{request:get-header('nginx-request-uri')}"/>,
+    <meta name="request-context-path" value="{request:get-context-path()}"/>,
+    <meta name="request-get-uri" value="{request:get-uri()}"/>,
+    <meta name="request-get-url" value="{request:get-url()}"/>,
+    <meta name="request-get-effective-uri" value="{request:get-effective-uri()}"/>
+    )
+};
+
 declare function app:fix-links($nodes as node()*) {
+    let $nginx-request-uri := request:get-header('nginx-request-uri')
+    let $path-to-app := 
+        (: if request received from nginx :)
+        if ($nginx-request-uri) then 
+            if (starts-with($nginx-request-uri, '/beta')) then 
+                "/beta"
+            (: we must be out of beta! urls can assume root :) 
+            else
+                ""
+        (: otherwise we're in the eXist URL space :)
+        else 
+            request:get-context-path() || "/apps/hsg-shell"
     for $node in $nodes
     return
         typeswitch($node)
@@ -33,29 +64,26 @@ declare function app:fix-links($nodes as node()*) {
                 else
                     let $href := 
                         replace(
-                            replace($node/@href, "\$extern", "http://history.state.gov"),
+                            replace($node/@href, "\$extern", "https://history.state.gov"),
                             "\$app",
-                            (request:get-context-path() || "/apps/hsg-shell")
+                            $path-to-app
                         )
                     return
                         element { node-name($node) } {
                             attribute href {$href}, $node/@* except $node/@href, app:fix-links($node/node())
                         }
             case element(img) | element(script) return
-                (: skip links with @data-template attributes; otherwise we can run into duplicate @src errors :)
-                if ($node/@data-template) then 
-                    $node 
-                else
-                    let $src := 
-                        replace(
-                            replace($node/@src, "\$extern", "http://history.state.gov"),
-                            "\$app",
-                            (request:get-context-path() || "/apps/hsg-shell")
-                        )
-                    return
-                        element { node-name($node) } {
-                            attribute src {$src}, $node/@* except $node/@src, $node/node()
-                        }
+                (: allow imgs and scripts with @data-template attributes :)
+                let $src := 
+                    replace(
+                        replace($node/@src, "\$extern", "https://history.state.gov"),
+                        "\$app",
+                        $path-to-app
+                    )
+                return
+                    element { node-name($node) } {
+                        attribute src {$src}, $node/@* except $node/@src, $node/node()
+                    }
             case element(option) return
                 (: skip links with @data-template attributes; otherwise we can run into duplicate @value errors :)
                 if ($node/@data-template) then 
@@ -65,7 +93,7 @@ declare function app:fix-links($nodes as node()*) {
                         replace(
                             replace($node/@value, "\$extern", "http://history.state.gov"),
                             "\$app",
-                            (request:get-context-path() || "/apps/hsg-shell")
+                            $path-to-app
                         )
                     return
                         element { node-name($node) } {
@@ -80,7 +108,7 @@ declare function app:fix-links($nodes as node()*) {
                         replace(
                             replace($node/@action, "\$extern", "http://history.state.gov"),
                             "\$app",
-                            (request:get-context-path() || "/apps/hsg-shell")
+                            $path-to-app
                         )
                     return
                         element { node-name($node) } {
@@ -97,10 +125,10 @@ declare function app:fix-links($nodes as node()*) {
 declare
     %templates:wrap
 function app:handle-error($node as node(), $model as map(*), $code as xs:int?) {
-    let $errcode := number(request:get-attribute("hsg-shell.errcode"))
+    let $errcode := request:get-attribute("hsg-shell.errcode")
     let $log := console:log("error: " || $errcode || " code: " || $code)
     return
-        if ((empty($errcode) and empty($code)) or $code = $errcode) then
+        if ((empty($errcode) and empty($code)) or $code = number($errcode)) then
             (templates:process($node/node(), $model),
             response:set-status-code(if ($errcode) then $errcode else 400))
         else
@@ -239,7 +267,7 @@ declare function app:tweet-date($node as node(), $model as map(*)) {
     app:format-relative-date(xs:dateTime($model?tweet/date))
 };
 
-declare %templates:wrap function app:tweet-href($node as node(), $model as map(*)) {
+declare function app:tweet-href($node as node(), $model as map(*)) {
     attribute href { $model?tweet/url/string() }
 };
 
@@ -283,7 +311,7 @@ declare function app:tumblr-post-date($node as node(), $model as map(*)) {
     app:format-relative-date(xs:dateTime($model?post/date))
 };
 
-declare %templates:wrap function app:tumblr-post-href($node as node(), $model as map(*)) {
+declare function app:tumblr-post-href($node as node(), $model as map(*)) {
     attribute href { $model?post/url/string() }
 };
 
@@ -317,7 +345,8 @@ declare function app:carousel-list-class-attribute($node as node(), $model as ma
 
 declare function app:carousel-image-src-attribute($node as node(), $model as map(*)) {
     let $item := $model?carousel-item
-    let $image-src := '//' || $config:S3_DOMAIN || '/topics/' || $item/image
+    let $vol-id := replace($item/image, '\.(png|jpg)', '')
+    let $image-src := '//' || $config:S3_DOMAIN || '/frus/' || $vol-id || '/covers/' || $vol-id || '.jpg'
     return
         attribute src { $image-src }
 };
@@ -363,4 +392,49 @@ declare function app:carousel-item-href-attribute($node as node(), $model as map
     let $href := if (starts-with($link, '/')) then ('$app' || $link) else $link
     return
         attribute href { $href }
+};
+
+declare function app:non-beta-link($node as node(), $model as map(*)) {
+    let $url := 'https://history.state.gov' || 
+        (
+            request:get-parameter('url', ()), 
+            substring-after(request:get-uri(), '/hsg-shell') || 
+                (
+                    if (request:get-query-string() ne '') then 
+                        ('?' || request:get-query-string()) 
+                    else 
+                        ()
+                )
+        )[1]
+    return
+        element a { $node/@* except $node/@href, attribute href {$url}, 'Go to non-beta page: ' || $url }
+};
+
+declare function app:insert-url-parameter($node as node(), $model as map(*)) {
+    element a { attribute href { 
+        concat(
+            app:fix-this-link($node, $model)/@href, 
+            if (ends-with(request:get-uri(), '/about-the-beta')) then 
+                ()
+            else 
+                concat(
+                    '?url=', 
+                    encode-for-uri(
+                        concat(
+                            if (starts-with(request:get-uri(), '/beta/exist/apps/hsg-shell')) then
+                                substring-after(request:get-uri(), '/beta/exist/apps/hsg-shell') 
+                            else if (starts-with(request:get-uri(), '/exist/apps/hsg-shell')) then
+                                substring-after(request:get-uri(), '/exist/apps/hsg-shell') 
+                            else 
+                                request:get-uri()
+                            ,
+                            if (request:get-query-string() ne '') then 
+                                ('?' || request:get-query-string()) 
+                            else 
+                                ()
+                        )
+                    )
+                )
+        )
+    }, $node/@* except $node/@href, $node/node() } 
 };

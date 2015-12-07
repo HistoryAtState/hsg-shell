@@ -81,11 +81,62 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
             map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:text
     return
         if (empty($block)) then (
+            pages:load-fallback-page($publication-id, $document-id, $section-id)
+        ) else
+            $block
+};
+
+declare function pages:load-fallback-page($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
+    let $volume := $config:FRUS_METADATA/volume[@id=$document-id]
+    let $log := console:log("Loading fallback page for " || $document-id)
+    return
+        if (empty($volume)) then (
             request:set-attribute("hsg-shell.errcode", 404),
             request:set-attribute("hsg-shell.path", string-join(($document-id, $section-id), "/")),
             error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "publication " || $publication-id || " document " || $document-id || " section " || $section-id || " not found")
         ) else
-            $block
+            pages:volume-to-tei($volume)
+};
+
+declare function pages:volume-to-tei($volume as element()) {
+    <tei:TEI xmlns:frus="http://history.state.gov/frus/ns/1.0" xml:id="{$volume/@id}">
+        <tei:teiHeader>
+            <tei:fileDesc>
+                <tei:titleStmt>
+                    <tei:title type="complete">{$volume/title[@type="complete"]/node()}</tei:title>
+                    <tei:title type="subseries">{$volume/title[@type="sub-series"]/node()}</tei:title>
+                    <tei:title type="volumenumber">{$volume/title[@type="volumenumber"]/node()}</tei:title>
+                    <tei:title type="volume">{$volume/title[@type="volume"]/node()}</tei:title>
+                    {
+                        for $editor in $volume/editor[. ne '']
+                        return
+                            <tei:editor>{$editor/@role, $editor/node()}</tei:editor>
+                    }
+                </tei:titleStmt>
+            </tei:fileDesc>
+            <tei:sourceDesc>
+                {
+                    if ($volume/summary/*) then
+                        <tei:div>
+                            <tei:head>Overview</tei:head>
+                            {$volume/summary/*}
+                        </tei:div>
+                    else if ($volume/location[. ne '']) then
+                        <tei:div>
+                            <tei:p>This volume is available at the following location:</tei:p>
+                            <tei:list>
+                            {
+                                $volume/location[. ne ''] !
+                                    <tei:item>{console:log(serialize(<ref target="{.}">University of Wisconsin-Madison</ref>)), if (./@loc = 'madison') then <ref target="{.}">University of Wisconsin-Madison</ref> else ()}</tei:item>
+                            }
+                            </tei:list>
+                        </tei:div>
+                    else 
+                        ()
+                }
+            </tei:sourceDesc>
+        </tei:teiHeader>
+    </tei:TEI>
 };
 
 declare function pages:xml-link($node as node(), $model as map(*), $doc as xs:string) {
@@ -114,15 +165,15 @@ declare
 function pages:view($node as node(), $model as map(*), $view as xs:string) {
     let $xml := 
         if ($view = "div") then
-            pages:get-content($model("data"))
+            pages:get-content($model?data)
         else
             $model?data//*:body/*
     return
         if ($xml instance of element(tei:pb)) then
-            let $href := concat('http://static.history.state.gov/frus/', root($xml)/tei:TEI/@xml:id, '/medium/', $xml/@facs, '.png')
+            let $href := concat('//', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
             return
                 <div class="content">
-                    <img src="{$href}"/>
+                    <img src="{$href}" class="img-responsive img-thumbnail center-block"/>
                 </div>
         else
             pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path })

@@ -34,7 +34,7 @@
 .note1 { font-size: smaller; }
 .p1 { text-align: center; }
 .p2 { text-align: justify; }
-.p3 { text-align: justify; text-indent: 1.5em; }
+.p3 { text-align: justify; text-indent: 0em; }
 .pb1 { display: block; margin-left: 4pt; color: grey; float: right; }
 .q1 { margin-left: 10px; margin-right: 10px; }
 .q2:before { content: '‘'; }

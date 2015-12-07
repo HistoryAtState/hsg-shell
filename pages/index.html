@@ -1,47 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div class="row">
-        <div class="col-md-8"><!-- Carousel - http://getbootstrap.com/javascript/#carousel -->
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-template="app:load-carousel-items"><!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-template="templates:each" data-template-from="carousel-items" data-template-to="carousel-item">
-                        <span data-template="app:carousel-list-slide-to-count-attribute"/>
-                        <span data-template="app:carousel-list-class-attribute"/>
-                    </li>
-                </ol><!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox" data-template="app:fix-links">
-                    <div data-template="templates:each" data-template-from="carousel-items" data-template-to="carousel-item">
-                        <span data-template="app:carousel-div-class-attribute"/>
+        <div class="col-md-8" data-template="app:load-carousel-items">
+            <h2 style="font-size: 1em; font-weight: 800; text-transform: uppercase; color: #911625">Latest News</h2>
+            <div data-template="templates:each" data-template-from="carousel-items" data-template-to="carousel-item">
+                <div class="row" data-template="app:fix-links">
+                    <div class="col-md-3">
                         <a>
                             <span data-template="app:carousel-item-href-attribute"/>
-                            <img style="width:100%">
+                            <img class="img-responsive">
                                 <span data-template="app:carousel-image-src-attribute"/>
                                 <span data-template="app:carousel-image-alt-attribute"/>
                             </img>
                         </a>
-                        <div class="carousel-caption">
-                            <h3>
-                                <a>
-                                    <span data-template="app:carousel-item-href-attribute"/>
-                                    <span data-template="app:carousel-item-heading"/>
-                                </a>
-                            </h3>
-                            <p data-template="app:carousel-item-description"/>
-                        </div>
                     </div>
-                </div><!-- Controls -->
-                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"/>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"/>
-                    <span class="sr-only">Next</span>
-                </a>
+                    <div class="col-md-9">
+                        <h3>
+                            <a>
+                                <span data-template="app:carousel-item-href-attribute"/>
+                                <span data-template="app:carousel-item-heading"/>
+                            </a>
+                        </h3>
+                        <p data-template="app:carousel-item-description"/>
+                    </div>
+                </div>
+                <hr/>
             </div>
         </div>
         <div class="col-md-4">
-            <h2>Stay connected with HistoryAtState</h2>
+            <h2 style="font-size: 1em; font-weight: 800; text-transform: uppercase; color: #911625">Stay connected</h2>
             <div>
                 <h3>Twitter</h3>
                 <ul data-template="app:load-most-recent-tweets" data-template-how-many="3">

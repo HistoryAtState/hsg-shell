@@ -227,6 +227,25 @@ function fh:volume-title($node as node(), $model as map(*)) {
 
 declare
     %templates:wrap
+function fh:volume-availability-summary($node as node(), $model as map(*)) {
+    let $volume-id := $model?vol-id
+    let $full-text := if (fh:exists-volume-in-db($volume-id)) then 'Full Text' else ()
+    let $ebook := if (fh:exists-ebook($volume-id)) then 'Ebook' else ()
+    let $pdf := if (fh:exists-pdf($volume-id)) then 'PDF' else ()
+    return
+        if ($full-text or $ebook or $pdf) then 
+            <span style="font-style: italic; font-size: .9em; color: #606060">{
+                concat(
+                   ' (',
+                   string-join(($full-text, $ebook, $pdf), ', '),
+                   ')'
+                )
+            }</span>
+        else ()
+};
+
+declare
+    %templates:wrap
 function fh:administration-group-code($node as node(), $model as map(*)) {
     $model?grouping-codes[value = $model?group]/label/string()
 };
@@ -507,7 +526,7 @@ declare function fh:volumes-with-ebooks() {
 declare function fh:frus-ebooks-catalog($node, $model) {
     let $vol-ids := fh:volumes-with-ebooks()
     return
-        <div xmlns="http://www.w3.org/1999/xhtml" id="catalog">
+        <div id="catalog">
             <p>The following {count($vol-ids)} volumes are currently available:</p>
             {
             for $vol-id in $vol-ids
@@ -516,7 +535,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
                 (
                 <div id="{$vol-id}">
                     <img src="http://static.history.state.gov/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-                    <a href="/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'subseries'), fh:vol-title($vol-id, 'volumenumber'), fh:vol-title($vol-id, 'volume')), ', ')}</a>. 
+                    <a href="$app/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'subseries'), fh:vol-title($vol-id, 'volumenumber'), fh:vol-title($vol-id, 'volume')), ', ')}</a>. 
                         <br/>
                         Ebook last updated: {xsl:format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), 'MMMM D, YYYY')}. 
                         <ul class="buttons" style="text-align: right">
@@ -556,9 +575,9 @@ declare function fh:frus-history-ebook-entry($model as map(*)) {
     let $mobi-size := try { app:bytes-to-readable($mobi-resource//size) } catch * {'problem getting size of ' || $mobi-filename}
     let $pdf-size := try { app:bytes-to-readable($pdf-resource//size) } catch * {'problem getting size of ' || $pdf-filename}
     return
-        <div id="frus-history" xmlns="http://www.w3.org/1999/xhtml">
+        <div id="frus-history">
             <img src="{$s3-base-url}/covers/{$vol-id}-thumb.png" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-            <a href="/historicaldocuments/{$vol-id}">{$book-title}{$preview-edition}</a>.
+            <a href="$app/historicaldocuments/{$vol-id}">{$book-title}{$preview-edition}</a>.
                 <br/>
                 Ebook last updated: {xsl:format-dateTime(xs:dateTime($last-updated), 'MMMM D, YYYY')}. 
                 <ul class="buttons" style="text-align: right">
@@ -577,6 +596,14 @@ declare function fh:exists-volume-in-db($vol-id) {
     exists(fh:volume($vol-id))
 };
 
+declare function fh:exists-ebook($vol-id) {
+    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.epub')])
+};
+
+declare function fh:exists-pdf($vol-id) {
+    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.pdf')])
+};
+
 declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
 	if (fh:exists-volume-in-db($vol-id)) then 
 	    fh:volume($vol-id)//tei:title[@type = $type][1]/text()
@@ -592,7 +619,7 @@ declare function fh:vol-title($vol-id as xs:string) {
 };
 
 declare function fh:volume($vol-id as xs:string) {
-    doc(concat($config:FRUS_VOLUMES_COL, $vol-id, '.xml'))
+    doc(concat($config:FRUS_VOLUMES_COL, '/', $vol-id, '.xml'))
 };
 
 declare function fh:ebook-last-updated($vol-id) {

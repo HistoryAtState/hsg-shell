@@ -2609,7 +2609,7 @@ relatedItem element must be empty</sch:report>
                         <outputRendition>text-align: justify;</outputRendition>
                     </model>
                     <model behaviour="paragraph" useSourceRendition="true">
-                        <outputRendition>text-align: justify; text-indent: 1.5em;</outputRendition>
+                        <outputRendition>text-align: justify; text-indent: 0em;</outputRendition>
                     </model>
                 </elementSpec>
                 <elementSpec rend="change" module="core" ident="pb">
