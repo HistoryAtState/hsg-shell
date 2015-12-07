@@ -15,7 +15,11 @@ console:log('$exist:path: ' || $exist:path)
 ,
 :)
 (: redirect requests for app root ('') to '/' :)
-if ($exist:path eq '') then
+if (matches($exist:path, '^/resouces/wdd/?')) then
+     <dispatch xmlns="http://exist.sourceforge.net/NS/exist"></dispatch>
+else if (matches($exist:path, '^/design/?')) then
+     <dispatch xmlns="http://exist.sourceforge.net/NS/exist"></dispatch>
+else if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <redirect url="{request:get-uri()}/"/>
     </dispatch>

@@ -1,0 +1,72 @@
+body{
+    line-height: 1.428;
+    font-size:1.7rem;
+    
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Merriweather","Georgia","Times New Roman",serif;
+  font-weight:700;
+}
+h1{
+    font-size: 4rem;
+    font-weight: 700;
+}
+h2{
+    font-size:3rem;
+}
+h3{
+    font-size:2rem;
+}
+h4{
+    font-size:1.7rem;
+}
+h5{
+    font-size:1.5rem;
+}
+
+h6{
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    /*font-weight: 400;*/
+}
+
+div, span, p, li{
+    font-family: 'Source Sans Pro';
+}
+
+p{
+    /*max-width:54rem;*/
+}
+.navbar{
+    background:#2c6196;
+}
+a, a:hover, a:visited, a:active {
+    color:#2c6196;
+    transition: color 0.5s ease 0s;
+}
+a:hover, a:active, a:focus {
+    color:#030361;
+}
+.breadcrumb{
+    padding:5px 15px;
+    font-size: inherit;
+}
+/*.breadcrumb a{*/
+/*    font-size: 1.2em;*/
+/*}*/
+#sections{
+    padding:0;
+}
+#sections h2{
+    padding-left: 1em;
+}
+#sections ul{
+    margin-bottom:20px;
+    list-style:none;
+    padding:0;
+}
+#sections ul li{
+    padding:10 0 0px 14px;
+    /*border-bottom:1px solid;*/
+    
+}
