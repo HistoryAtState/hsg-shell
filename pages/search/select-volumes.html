@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
+    <div class="row">
+        <ol class="breadcrumb" data-template="app:fix-links">
+            <li>
+                <a href="$app">Home</a>
+            </li>
+            <li>
+                <a href="$app/search">Search</a>
+            </li>
+            <li>
+                <a href="$app/search/select-volumes">Select Volumes</a>
+            </li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="content-inner" data-template="app:fix-links">
+                <p>Read these <a href="$app/search/tips">tips and caveats</a> to understand the limitations of this search engine and how to make the most of its scope, phrase, boolean, wildcard, and proximity options.</p>
+                <form method="get" action="$app/search">
+                    <p class="form-group">
+                        <input type="text" name="q" placeholder="Search..." class="form-control" id="q"/>
+                    </p>
+                    <div>
+                        <p>Select <em>Foreign Relations</em> volumes for full text search:</p>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="within" value="{$vol-id}"/>{$highlightstatus}
+                                {$vol-title}
+                            </label>
+                        </div>
+                    </div>
+                    <p>
+                        <button class="btn btn-default" type="submit">Search</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

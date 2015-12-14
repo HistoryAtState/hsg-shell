@@ -1376,6 +1376,7 @@ else if (matches($exist:path, '^/search/?')) then
     let $page := 
         if ($fragments[1]) then
             switch ($fragments[1])
+                case "select-volumes" return 'search/select-volumes.html'
                 case "tips" return 'search/tips.html'
                 default return 'error-page.html'
         else
