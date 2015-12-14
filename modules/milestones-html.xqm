@@ -11,19 +11,40 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare variable $milestones:MILESTONES_COL := '/db/apps/milestones';
 declare variable $milestones:MILESTONES_CHAPTERS_COL := $milestones:MILESTONES_COL || '/chapters';
 
+declare %templates:wrap function milestones:load-periods($node as node(), $model as map(*)) {
+    let $ordered-articles := 
+        for $c in collection($milestones:MILESTONES_CHAPTERS_COL)/tei:TEI
+        order by util:document-name($c)
+        return $c
+    let $content := map { "periods": $ordered-articles }
+    let $html := templates:process($node/*, map:new(($model, $content)))
+    return
+        $html
+};
+
+declare function milestones:period-title($node as node(), $model as map(*)) {
+    $model?period//tei:title[@type='short']/string()
+};
+
+declare function milestones:period-href-value-attribute($node as node(), $model as map(*)) {
+    let $period-id := substring-before(util:document-name($model?period), '.xml')
+    return
+        attribute value { "$app/milestones/" || $period-id }
+};
+
 declare
     %templates:wrap
 function milestones:dropdown($node as node(), $model as map(*), $document-id as xs:string?) {
     <option value="">Choose one</option>
     ,
     for $c in collection($milestones:MILESTONES_CHAPTERS_COL)/tei:TEI
-    let $c-id := substring-before(util:document-name($c), '.xml')
-    let $selected := if ($c-id = $document-id) then attribute selected {"selected"} else ()
+    let $period-id := substring-before(util:document-name($c), '.xml')
+    let $selected := if ($document-id = $period-id) then attribute selected {"selected"} else ()
     let $brief-title := $c//tei:title[@type='short']/string()
-    order by $c-id
+    order by $period-id
     return
         <option>{ 
-            attribute value { "$app/milestones/" || $c-id },
+            attribute value { "$app/milestones/" || $period-id },
             $selected,
             $brief-title
         }</option>

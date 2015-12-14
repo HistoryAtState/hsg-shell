@@ -1,8 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
-    <div class="row" data-template="pages:load">
-        <div class="col-md-3">
-            <div class="row">
+    <div data-template="pages:load">
+        <div class="row">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/frus-history">History of the <em>Foreign Relations</em> Series</a>
+                </li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>
+                        <span data-template="frus-history:monograph-title"/>
+                    </h1>
+                    <div data-template="frus-history:monograph-editors"/>
+                    <div data-template="frus-history:monograph-edition-info"/>
+                    <p>
+                        <em>Toward “Thorough, Accurate, and Reliable”</em> explores the evolution of the <em>Foreign
+                        Relations of the United States</em> documentary history series from its antecedents in
+                    the early republic through the early 21st century implementation of its current mandate, the
+                    1991 <em>Foreign Relations</em> statute. This book traces how policymakers and an expanding
+                    array of stakeholders translated values like “security,” “legitimacy,” and “transparency”
+                    into practice as they debated how to balance the government’s obligation to protect
+                    sensitive information with its commitment to openness. Determining the “people’s right to
+                    know” has fueled lively discussion for over two centuries, and this work provides important,
+                    historically informed perspectives valuable to policymakers and engaged citizens as that
+                    conversation continues.</p>
+                    <div class="toc">
+                        <ul data-template="frus-history:monograph-toc"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
                     <h2>
                         <em>FRUS</em> History Resources</h2>
@@ -20,29 +56,5 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9" id="volume">
-            <div id="content-inner" data-template="app:fix-links">
-                <h1>
-                    <span data-template="frus-history:monograph-title"/>
-                </h1>
-                <div data-template="frus-history:monograph-editors"/>
-                <div data-template="frus-history:monograph-edition-info"/>
-                <p>
-                    <em>Toward “Thorough, Accurate, and Reliable”</em> explores the evolution of the <em>Foreign
-                    Relations of the United States</em> documentary history series from its antecedents in
-                the early republic through the early 21st century implementation of its current mandate, the
-                1991 <em>Foreign Relations</em> statute. This book traces how policymakers and an expanding
-                array of stakeholders translated values like “security,” “legitimacy,” and “transparency”
-                into practice as they debated how to balance the government’s obligation to protect
-                sensitive information with its commitment to openness. Determining the “people’s right to
-                know” has fueled lively discussion for over two centuries, and this work provides important,
-                historically informed perspectives valuable to policymakers and engaged citizens as that
-                conversation continues.</p>
-                <div class="toc">
-                    <ul data-template="frus-history:monograph-toc"/>
-                </div>
-            </div>
-        </div>
     </div>
-
 </div>

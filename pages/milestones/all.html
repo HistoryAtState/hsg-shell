@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
-    <div class="row" data-template="pages:load">
-        <div class="col-md-3">
-            <div class="row">
-                <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
-                    <h2>Milestones</h2>
-                    <label for="select-chapter">Periods</label>
-                    <select id="select-chapter" name="volumes" data-template="milestones:dropdown" class="form-control async"/>
+    <div data-template="pages:load">
+        <div class="row">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/milestones">Milestones</a>
+                </li>
+                <li>
+                    <a href="$app/milestones/all">All</a>
+                </li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>All Milestones</h1>
+                    <div data-template="milestones:list"/>
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
-            <div id="content-inner" data-template="app:fix-links">
-                <h1>All Milestones</h1>
-                <div data-template="milestones:list"/>
-            </div>
-        </div>
     </div>
-
 </div>

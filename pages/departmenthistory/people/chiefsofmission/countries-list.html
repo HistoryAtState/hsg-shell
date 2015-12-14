@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
-    <div class="row" data-template="pages:load">
-        <div class="col-md-3">
-            <div class="row">
-                <div id="sections" class="col-md-12 panel panel-default">
-                    <h2>Department History</h2>
-                    <p>Insert sidebar here</p>
-                </div>
-            </div>
+    <div data-template="pages:load">
+        <div class="row">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/departmenthistory">Department History</a>
+                </li>
+                <li>
+                    <a href="$app/departmenthistory/people">People</a>
+                </li>
+                <li>
+                    <a href="$app/departmenthistory/people/chiefsofmission">Chiefs of Mission</a>
+                </li>
+                <li>
+                    <a href="$app/departmenthistory/people/chiefsofmission/by-country">By Country</a>
+                </li>
+            </ol>
         </div>
-        <div class="col-md-9" id="volume">
-            <div id="content-container">
+        <div class="row">
+            <div class="col-md-12">
                 <div id="content-inner" data-template="app:fix-links">
                     <h1>Chiefs of Mission By Country</h1>
                     <ul data-template="pocom:chiefs-countries-list"/>
