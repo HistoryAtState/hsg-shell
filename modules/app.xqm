@@ -112,7 +112,7 @@ declare function app:fix-links($nodes as node()*) {
                         )
                     return
                         element { node-name($node) } {
-                            attribute action {$action}, $node/@* except $node/@action, $node/node()
+                            attribute action {$action}, $node/@* except $node/@action, app:fix-links($node/node())
                         }
             case element() return
                 element { node-name($node) } {
