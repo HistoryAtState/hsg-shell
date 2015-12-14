@@ -407,7 +407,7 @@ declare function app:non-beta-link($node as node(), $model as map(*)) {
                 )
         )[1]
     return
-        element a { $node/@* except $node/@href, attribute href {$url}, 'See the non-beta page' }
+        element a { $node/@* except $node/@href, attribute href {$url}, $url }
 };
 
 declare function app:insert-url-parameter($node as node(), $model as map(*)) {

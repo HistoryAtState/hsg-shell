@@ -1385,7 +1385,14 @@ else if (matches($exist:path, '^/search/?')) then
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <forward url="{$exist:controller}/pages/{$page}"/>
             <view>
-                <forward url="{$exist:controller}/modules/view.xql"/>
+                <forward url="{$exist:controller}/modules/view.xql">{
+                    let $within := request:get-parameter('within', ())
+                    let $volume-ids := for $w in $within return if (matches($w, '^frus\d')) then $w else ()
+                    for $volume-id in $volume-ids
+                    let $log := console:log($volume-id)
+                    return
+                        <add-parameter name="volume-id" value="{$volume-id}"/>
+                }</forward>
             </view>
     		<error-handler>
     			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
