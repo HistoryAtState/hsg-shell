@@ -380,7 +380,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(dateline) return
                     html:block($config, ., "dateline", .)
                 case element(div) return
-                    if (@type = ('compilation', 'chapter', 'subchapter')) then
+                    if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter')) then
                         ext-html:document-list($config, ., "div1")
                     else
                         html:block($config, ., "div2", .)

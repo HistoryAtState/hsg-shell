@@ -1849,7 +1849,7 @@ relatedItem element must be empty</sch:report>
                     <constraintSpec mode="add" ident="noEmptyBibl" scheme="isoschematron">
                         <constraint>
                             <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="child::* or child::text()[normalize-space()]" role="ERROR">
-                Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" may not be empty.
+                Element "<name/>" may not be empty.
             </assert>
                         </constraint>
                     </constraintSpec>
@@ -1892,14 +1892,14 @@ relatedItem element must be empty</sch:report>
                     <constraintSpec ident="choiceSize" scheme="isoschematron" mode="add">
                         <constraint>
                             <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="count(*) &gt; 1" role="ERROR">
-                    Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" must have at least two child
+                    Element "<name/>" must have at least two child
 		    elements.</assert>
                         </constraint>
                     </constraintSpec>
                     <constraintSpec ident="choiceContent" scheme="isoschematron" mode="add">
                         <constraint>
                             <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))" role="ERROR">
-                    Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" must have corresponding corr/sic, expand/abbr, reg/orig </assert>
+                    Element "<name/>" must have corresponding corr/sic, expand/abbr, reg/orig </assert>
                         </constraint>
                     </constraintSpec>
                     <attList/>
@@ -6198,7 +6198,7 @@ The @spanTo attribute of <name/> is required.</assert>
                         </constraint>
                     </constraintSpec>
                     <attList/>
-                    <model output="web" predicate="@type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
+                    <model output="web" predicate="$parameters?document-list and @type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
                     <model behaviour="block"/>
                 </elementSpec>
                 <elementSpec rend="change" module="textstructure" ident="docAuthor">
@@ -6638,8 +6638,9 @@ The @spanTo attribute of <name/> is required.</assert>
                     </content>
                     <_0:constraintSpec xmlns:_0="http://www.tei-c.org/ns/1.0" ident="headeronlyelement" scheme="isoschematron">
                         <_0:constraint>
-                            <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:att | tei:biblFull | tei:biblScope | tei:biblStruct | tei:change | tei:charDecl | tei:charProp | tei:editor | tei:editorialDecl | tei:email | tei:encodingDesc | tei:extent | tei:fileDesc | tei:gi | tei:glyph | tei:glyphName | tei:idno | tei:imprint | tei:keywords | tei:licence | tei:listChange | tei:listPerson | tei:localName | tei:monogr | tei:msDesc | tei:msIdentifier | tei:person | tei:physDesc | tei:profileDesc | tei:publicationStmt | tei:relatedItem | tei:repository | tei:resp | tei:respStmt | tei:sourceDesc | tei:tag | tei:teiHeader | tei:term | tei:textClass | tei:textDesc | tei:titleStmt | tei:typeDesc | tei:val | tei:value">
-                                <report test="ancestor::tei:text">Error:  The element <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/> is not permitted outside the header</report>
+                            <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value">
+                                <report test="ancestor::tei:text">Error:  The element <name/>
+is not permitted outside the header</report>
                             </rule>
                         </_0:constraint>
                     </_0:constraintSpec>

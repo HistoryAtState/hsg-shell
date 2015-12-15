@@ -106,7 +106,7 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": 
                 (: Called to transform content based on the odd using tei simple pm :)
-                function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
+                function($xml, $parameters) { pm-frus:transform($xml, map:new(($parameters, map:entry("document-list", true())))) },
             "title": "Historical Documents",
             "base-path": function($document-id, $section-id) { "frus/" || $document-id }
         },
@@ -243,7 +243,7 @@ declare variable $config:PUBLICATIONS :=
             "select-document": function($document-id) { doc($config:HAC_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:HAC_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd",
+            "odd": "historicaldocuments.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Historical Advisory Committee - About Us"
         },
@@ -262,7 +262,9 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
+            "transform": function($xml, $parameters) { 
+                pm-frus:transform($xml, $parameters) 
+            },
             "title": "History of the Foreign Relations Series",
             "base-path": function($document-id, $section-id) { "frus-history" }
         }
