@@ -2,11 +2,13 @@ xquery version "3.0";
 
 module namespace search = "http://history.state.gov/ns/site/hsg/search";
 
+import module namespace kwic="http://exist-db.org/xquery/kwic";
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace fh = "http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
+import module namespace functx = "http://www.functx.com";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
@@ -130,7 +132,7 @@ declare
     :)
 function search:load-results($node, $model, $q as xs:string, $within as xs:string*, $start as xs:integer, $perpage as xs:integer?) {
     let $start-time := util:system-time()
-    let $hits := collection($config:PUBLICATIONS?frus?collection)//tei:div[@type='document'][ft:query(., $q)]
+    let $hits := collection($config:PUBLICATIONS?frus?collection)//tei:div[@xml:id][not(tei:div/@xml:id)][ft:query(., $q)]
     let $end-time := util:system-time()
     let $ordered-hits :=
         for $hit in $hits
@@ -177,12 +179,78 @@ function search:load-results($node, $model, $q as xs:string, $within as xs:strin
         $html
 };
 
-declare 
-    %templates:wrap 
-function search:result-uri($node, $model) {
+declare function search:result-heading($node, $model) {
     let $result := $model?result
+    let $publication-id := 'frus'
+    let $document-id := substring-before(util:document-name($result), '.xml')
+    let $section-id := $result/@xml:id
+    let $publication-config := map:get($config:PUBLICATIONS, $publication-id)
+    let $section-heading := $publication-config?select-section($document-id, $section-id)/tei:head[1] ! functx:remove-elements-deep(., 'note')
+    let $document-heading := $publication-config?select-document($document-id)//tei:title[@type='volume']
+    let $result-heading := ($section-heading || ' (' || $document-heading || ')')
     return
-        util:collection-name($result) || '/' || util:document-name($result) || '#' || $result/@xml:id || ' (score: ' || ft:score($result) || ')'
+        $result-heading
+};
+
+declare function search:result-summary($node, $model) {
+    let $matches-to-highlight := 10
+    let $result := $model?result
+    return 
+        if ($result/@xml:id = 'index') then 
+            '[Back of book index: too many hits to display]'
+        else
+            let $trimmed-hit := search:trim-matches(util:expand($result), $matches-to-highlight)
+            return
+                kwic:summarize($trimmed-hit, <config xmlns="" width="60"/>)/*
+};
+
+declare function search:result-link($node, $model) {
+    let $result := $model?result
+    let $publication-id := 'frus'
+    let $document-id := substring-before(util:document-name($result), '.xml')
+    let $section-id := $result/@xml:id
+    let $href := 
+        map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
+    (: display URL is currently hardcoded to hsg, TODO use actual server name, url structure, etc. :)
+    let $display := 'https://history.state.gov' || substring-after($href, '$app')
+    return
+        app:fix-this-link(element a { attribute href { $href }, $node/@* except $node/@href, $display }, $model)
+};
+
+declare function search:trim-matches($node as element(), $keep as xs:integer) {
+    let $matches := $node//exist:match
+    return 
+        if (count($matches) le $keep) then 
+            $node
+        else
+            search:milestone-chunk($node/node()[1], subsequence($matches, $keep, 1), $node)
+};
+
+declare function search:milestone-chunk(
+  $ms1 as element(),
+  $ms2 as element(),
+  $node as node()*
+) as node()*
+{
+    typeswitch ($node)
+        case element() return
+            if ($node is $ms1) then 
+                $node
+            else if ( some $n in $node/descendant::* satisfies ($n is $ms1 or $n is $ms2) ) then
+                element { name($node) } 
+                    { 
+                    $node/@*,
+                    for $i in $node/node()
+                    return 
+                        search:milestone-chunk($ms1, $ms2, $i) 
+                    }
+            else if ( $node >> $ms1 and $node << $ms2 ) then 
+                $node
+            else ()
+        default return 
+            if ( $node >> $ms1 and $node << $ms2 ) then 
+                $node
+            else ()
 };
 
 declare 

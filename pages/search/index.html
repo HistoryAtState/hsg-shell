@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-12">
             <div id="content-inner" data-template="app:fix-links">
-                <p class="text-warning">This search feature is currently under construction. Regardless of selections below, all searches are restricted to FRUS documents only, and results are not usable.</p>
+                <p class="text-warning">This search feature is currently under construction. Regardless of selections below, all searches are restricted to FRUS documents only.</p>
                 <p>Read these <a href="$app/search/tips">tips and caveats</a> to understand the limitations of this search engine and how to make the most of its scope, phrase, boolean, wildcard, and proximity options.</p>
                 <form method="get" action="$app/search">
                     <p class="form-group">
@@ -84,8 +84,17 @@
                                 <span data-template="search:q"/>
                             </strong>, sorted by relevance. Displaying <span data-template="search:start"/>–<span data-template="search:end"/> of <span data-template="search:result-count"/> results. (Results returned in <span data-template="search:query-duration"/>s.)</p>
                         <div data-template="templates:each" data-template-from="results" data-template-to="result">
-                            <p>Search URI and score: <span data-template="search:result-uri"/>
-                            </p>
+                            <div>
+                                <h3>
+                                    <span data-template="search:result-heading"/>
+                                </h3>
+                                <p>
+                                    <span data-template="search:result-summary"/>
+                                </p>
+                                <p>
+                                    <a href="#" data-template="search:result-link"/>
+                                </p>
+                            </div>
                         </div>
                         <nav>
                             <ul class="pagination">
