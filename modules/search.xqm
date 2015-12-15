@@ -10,11 +10,6 @@ import module namespace fh = "http://history.state.gov/ns/site/hsg/frus-html" at
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
-declare variable $search:SORTBY := 'relevance';
-declare variable $search:SORTORDER := 'descending';
-declare variable $search:START := 0;
-declare variable $search:PERPAGE := 10;
-
 declare function search:load-sections($node, $model) {
     let $content := map { "sections": 
         (
@@ -125,7 +120,15 @@ function search:select-volumes-link($node, $model) {
         app:fix-this-link($link, $model)
 };
 
-declare function search:load-results($node, $model, $q as xs:string, $within as xs:string*) {
+declare 
+    %templates:default("start", 0)
+    %templates:default("perpage", 10)
+    %templates:default("within", "")
+    (:
+    declare variable $search:SORTBY := 'relevance';
+    declare variable $search:SORTORDER := 'descending';
+    :)
+function search:load-results($node, $model, $q as xs:string, $within as xs:string*, $start as xs:integer, $perpage as xs:integer?) {
     let $start-time := util:system-time()
     let $hits := collection($config:PUBLICATIONS?frus?collection)//tei:div[@type='document'][ft:query(., $q)]
     let $end-time := util:system-time()
@@ -133,15 +136,43 @@ declare function search:load-results($node, $model, $q as xs:string, $within as 
         for $hit in $hits
         order by ft:score($hit) descending
         return $hit
-    let $window := subsequence($ordered-hits, 1, $search:PERPAGE)
+    let $adjusted-start := $start + 1
+    let $adjusted-length := $perpage - 1
+    let $hit-count := count($hits)
+    let $effective-end := min(($start + $perpage, $hit-count))
+    let $window := subsequence($ordered-hits, $adjusted-start, $adjusted-length)
     let $results := map { "results": $window }
+    let $page-count := ceiling($hit-count div $perpage) cast as xs:integer
+    let $max-pages := 10
+    let $max-pages-to-either-side := round($max-pages div 2) cast as xs:integer
+    let $current-page := floor($effective-end div $perpage) cast as xs:integer
     let $query-info :=  map { "query-info": 
                             (
-                            map { "result-count": count($hits) },
-                            map { "query-duration": ($end-time - $start-time) }
+                            map { "q": $q },
+                            map { "within": $within },
+                            map { "start": $adjusted-start },
+                            map { "end": $effective-end },
+                            map { "perpage": $perpage },
+                            map { "result-count": $hit-count },
+                            map { "query-duration": seconds-from-duration($end-time - $start-time) },
+                            map { "page-count": $page-count },
+                            map { "current-page": $current-page }
                             )
                         }
-    let $html := templates:process($node/*, map:new(($model, $results, $query-info)))
+    let $pages := map { "pages": 
+                        (
+                            if ($current-page - $max-pages-to-either-side le 0) then 
+                                (1 to $current-page - 1) 
+                            else 
+                                ($current-page - $max-pages-to-either-side) to ($current-page - 1)
+                            , 
+                            if ($current-page + $max-pages-to-either-side ge $page-count) then 
+                                ($current-page to $page-count - 1) 
+                            else 
+                                $current-page to ($current-page + $max-pages-to-either-side - 1) 
+                        )
+                    }
+    let $html := templates:process($node/*, map:new(($model, $results, $query-info, $pages)))
     return
         $html
 };
@@ -164,4 +195,98 @@ declare
     %templates:wrap 
 function search:query-duration($node, $model) {
     $model?query-info?query-duration
+};
+
+declare function search:q($node, $model) {
+    $model?query-info?q
+};
+
+declare function search:start($node, $model) {
+    $model?query-info?start
+};
+
+declare function search:end($node, $model) {
+    $model?query-info?end
+};
+
+declare function search:disabled-class-attribute-for-previous($node, $model) {
+    if ($model?query-info?start eq 1) then 
+        attribute class {"disabled"}
+    else 
+        ()
+};
+
+declare function search:disabled-class-attribute-for-next($node, $model) {
+    if (($model?query-info?current-page + 1) eq $model?pages[last()]) then 
+        attribute class {"disabled"}
+    else 
+        ()
+};
+
+declare function search:active-class-attribute-for-current($node, $model) {
+    if ($model?query-info?current-page = $model?page) then 
+        attribute class {"active"}
+    else 
+        ()
+};
+
+declare function search:page-label($node, $model) {
+    $model?page
+};
+
+declare function search:page-link($node, $model) {
+    app:fix-this-link(
+        element a { 
+            attribute href { 
+                $node/@href || 
+                string-join(
+                    (
+                        ('?q=' || encode-for-uri($model?query-info?q)),
+                        ($model?query-info?within[. ne ''] ! ('within=' || .)), 
+                        (if ($model?page eq 1) then () else 'start=' || (($model?page - 1) * $model?query-info?perpage))
+                    ), 
+                    '&amp;')
+            },
+            $node/@* except $node/@href,
+            $node/node()
+        }
+        , $model)
+};
+
+declare function search:previous-page-link($node, $model) {
+    app:fix-this-link(
+        element a { 
+            attribute href { 
+                $node/@href || 
+                string-join(
+                    (
+                        ('?q=' || encode-for-uri($model?query-info?q)),
+                        ($model?query-info?within[. ne ''] ! ('within=' || .)), 
+                        (if ($model?query-info?current-page eq 1) then () else 'start=' || (($model?query-info?current-page - 2) * $model?query-info?perpage))
+                    ), 
+                    '&amp;')
+            },
+            $node/@* except $node/@href,
+            $node/node()
+        }
+        , $model)
+};
+
+declare function search:next-page-link($node, $model) {
+    app:fix-this-link(
+        element a { 
+            attribute href { 
+                $node/@href || 
+                string-join(
+                    (
+                        ('?q=' || encode-for-uri($model?query-info?q)),
+                        ($model?query-info?within[. ne ''] ! ('within=' || .)), 
+                        (if ($model?query-info?current-page eq 1) then () else 'start=' || ($model?query-info?current-page * $model?query-info?perpage))
+                    ), 
+                    '&amp;')
+            },
+            $node/@* except $node/@href,
+            $node/node()
+        }
+        , $model)
 };
