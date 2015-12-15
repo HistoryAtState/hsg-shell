@@ -24,7 +24,7 @@
                         <label class="checkbox-inline" data-template="templates:each" data-template-from="sections" data-template-to="section">
                             <input type="checkbox" name="within">
                                 <span data-template="search:section-id-value-attribute"/>
-                                <span data-template="templates:if-parameter-set" data-template-param="within">
+                                <span data-template="app:if-parameter-set" data-template-param="within">
                                     <span data-template="search:within-highlight-attribute"/>
                                 </span>
                                 <span data-template="search:section-label"/>
@@ -32,8 +32,8 @@
                         </label>
                     </div>
                     <div data-template="search:load-volumes-within">
-                        <div data-template="templates:if-parameter-set" data-template-param="volume-id">
-                            <p>Restrict search to the following <em>Foreign Relations</em> volume<span data-template="templates:if-parameter-set" data-template-param="within">
+                        <div data-template="app:if-parameter-set" data-template-param="volume-id">
+                            <p>Restrict search to the following <em>Foreign Relations</em> volume<span data-template="app:if-parameter-set" data-template-param="within">
                                     <span data-template="search:plural-if-within-multiple-volumes"/>
                                 </span>:</p>
                             <div class="checkbox" data-template="templates:each" data-template-from="volumes" data-template-to="volume">
@@ -46,28 +46,28 @@
                             </div>
                         </div>
                     </div>
-                    <div data-template="templates:if-parameter-set" data-template-param="volume-id">
+                    <div data-template="app:if-parameter-set" data-template-param="volume-id">
                         <p>
                             <a href="$app/search">Clear these checkboxes</a>, 
                             or <a href="$app/search/select-volumes" data-template="search:select-volumes-link">
                             change selection</a> of <em>Foreign Relations</em> volumes within which to search</p>
                     </div>
-                    <div data-template="templates:if-parameter-unset" data-template-param="volume-id">
-                        <div data-template="templates:if-parameter-set" data-template-param="q">
-                            <div data-template="templates:if-parameter-set" data-template-param="within">
+                    <div data-template="app:if-parameter-unset" data-template-param="volume-id">
+                        <div data-template="app:if-parameter-set" data-template-param="q">
+                            <div data-template="app:if-parameter-set" data-template-param="within">
                                 <p>
                                     <a href="$app/search">Reset this search</a> or 
                                     <a href="$app/search/select-volumes">choose <em>Foreign Relations</em> volumes</a>
                                 </p>
                             </div>
-                            <div data-template="templates:if-parameter-unset" data-template-param="within">
+                            <div data-template="app:if-parameter-unset" data-template-param="within">
                                 <p>
                                     <a href="$app/search/select-volumes" data-template="search:select-volumes-link">Restrict 
                                     this search to specific <em>Foreign Relations</em> volumes</a>
                                 </p>
                             </div>
                         </div>
-                        <div data-template="templates:if-parameter-unset" data-template-param="q">
+                        <div data-template="app:if-parameter-unset" data-template-param="q">
                             <p>
                                 <a href="$app/search/select-volumes">Select specific <em>Foreign Relations</em> volumes to search</a>
                             </p>
@@ -78,7 +78,7 @@
                     </p>
                 </form>
                 <hr/>
-                <div data-template="templates:if-parameter-set" data-template-param="q">
+                <div data-template="app:if-parameter-set" data-template-param="q">
                     <div data-template="search:load-results">
                         <p>Results for keyword search <strong>
                                 <span data-template="search:q"/>

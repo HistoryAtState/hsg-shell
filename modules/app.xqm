@@ -16,6 +16,24 @@ function app:hide-if-empty($node as node(), $model as map(*), $property as xs:st
         templates:process($node/node(), $model)
 };
 
+declare function app:if-parameter-set($node as node(), $model as map(*), $param as xs:string) as item()* {
+    let $param := request:get-parameter($param, ()) 
+    return
+        if (exists($param) and string-join($param) != "") then
+            templates:process($node/node(), $model)
+        else
+            ()
+};
+
+declare function app:if-parameter-unset($node as node(), $model as item()*, $param as xs:string) as item()* {
+    let $param := request:get-parameter($param, ())
+    return
+        if (empty($param) or string-join($param) = "") then
+            templates:process($node/node(), $model)
+        else
+            ()
+};
+
 declare
     %templates:wrap
 function app:fix-links($node as node(), $model as map(*)) {
