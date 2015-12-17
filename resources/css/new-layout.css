@@ -1,0 +1,140 @@
+body{
+    line-height: 1.428;
+    font-size:1.7rem;
+    
+}
+
+.navbar .collapse.in li, .navbar .collapsing li{
+    background:#2c6196;    
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Source Sans Pro";
+  font-weight:700;
+  /*color:#2c6196;*/
+}
+h1{
+    font-size: 4rem;
+    font-weight: 700;
+}
+h2{
+    font-size:3rem;
+}
+h3{
+    font-size:2rem;
+}
+h4{
+    font-size:1.7rem;
+}
+h5{
+    font-size:1.5rem;
+}
+
+h6{
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    /*font-weight: 400;*/
+}
+
+div, span, p, li{
+    /*font-family: 'Source Sans Pro';*/
+    font-family: "Merriweather","Georgia","Times New Roman",serif;
+}
+
+.navbar li, .navbar span {
+  font-family: "Source Sans Pro";
+}
+.navbar-toggle{
+    padding:6px 10px;
+    margin:6px 12px;
+}
+.toggle-text{
+    vertical-align:text-top;
+}
+
+p{
+    /*max-width:54rem;*/
+    margin-bottom:18px;
+}
+.navbar{
+    background:#2c6196;
+}
+a, a:hover, a:visited, a:active {
+    color:#2c6196;
+    transition: color 0.5s ease 0s;
+}
+a:hover, a:active, a:focus {
+    color:#030361;
+}
+
+.fa-search{
+    font-size:14px;
+    line-height: 1.428;
+
+}
+.breadcrumb{
+    padding:5px 15px;
+    font-size: inherit;
+}
+.breadcrumb li{
+  font-family: "Source Sans Pro";
+    
+}
+/*.breadcrumb a{*/
+/*    font-size: 1.2em;*/
+/*}*/
+
+.panel{
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+#sections{
+    padding:0;
+}
+#sections h2{
+    padding-left: 1em;
+    color:#212121;
+    margin-top:20px;
+}
+#sections ul{
+    margin-bottom:20px;
+    list-style:none;
+    padding:0;
+}
+#sections ul li{
+    padding:10 0 0px 14px;
+    /*border-bottom:1px solid;*/
+    
+}
+
+footer.banner{
+    margin:20px auto;
+    border:1px solid #dddde8;
+    padding:50px 50px 50px 40px;
+}
+#search-box{
+    padding-right:40px;
+}
+
+@media (max-width: 992px) {
+    .searchbox{
+        width:100%;
+    }
+    .searchbox .form-group{
+        position:absolute;
+        top:26px;
+        z-index:10;
+        width:70%;
+    }
+    #search-box{
+        width:100%;
+    }
+    .search-button{
+        right:0;
+    }
+    /*#search-box{*/
+    /*    position:absolute;*/
+    /*    z-index:10;*/
+    /*    top:29px;*/
+    /*    width:65%;*/
+    /*}*/
+}
