@@ -59,7 +59,7 @@ declare function app:nginx-request-uri($node as node(), $model as map(*)) {
     )
 };
 
-declare function app:fix-links($nodes as node()*) {
+declare function app:fix-href($href as xs:string*) {
     let $nginx-request-uri := request:get-header('nginx-request-uri')
     let $path-to-app := 
         (: if request received from nginx :)
@@ -72,6 +72,15 @@ declare function app:fix-links($nodes as node()*) {
         (: otherwise we're in the eXist URL space :)
         else 
             request:get-context-path() || "/apps/hsg-shell"
+    return
+        replace(
+            replace($href, "\$extern", "https://history.state.gov"),
+            "\$app",
+            $path-to-app
+        )
+};
+
+declare function app:fix-links($nodes as node()*) {
     for $node in $nodes
     return
         typeswitch($node)
@@ -80,24 +89,14 @@ declare function app:fix-links($nodes as node()*) {
                 if ($node/@data-template) then 
                     $node 
                 else
-                    let $href := 
-                        replace(
-                            replace($node/@href, "\$extern", "https://history.state.gov"),
-                            "\$app",
-                            $path-to-app
-                        )
+                    let $href := app:fix-href($node/@href)
                     return
                         element { node-name($node) } {
                             attribute href {$href}, $node/@* except $node/@href, app:fix-links($node/node())
                         }
             case element(img) | element(script) return
                 (: allow imgs and scripts with @data-template attributes :)
-                let $src := 
-                    replace(
-                        replace($node/@src, "\$extern", "https://history.state.gov"),
-                        "\$app",
-                        $path-to-app
-                    )
+                let $src := app:fix-href($node/@src)
                 return
                     element { node-name($node) } {
                         attribute src {$src}, $node/@* except $node/@src, $node/node()
@@ -107,12 +106,7 @@ declare function app:fix-links($nodes as node()*) {
                 if ($node/@data-template) then 
                     $node 
                 else
-                    let $value := 
-                        replace(
-                            replace($node/@value, "\$extern", "http://history.state.gov"),
-                            "\$app",
-                            $path-to-app
-                        )
+                    let $value := app:fix-href($node/@value)
                     return
                         element { node-name($node) } {
                             attribute value {$value}, $node/@* except $node/@value, $node/node()
@@ -122,12 +116,7 @@ declare function app:fix-links($nodes as node()*) {
                 if ($node/@data-template) then 
                     $node 
                 else
-                    let $action := 
-                        replace(
-                            replace($node/@action, "\$extern", "http://history.state.gov"),
-                            "\$app",
-                            $path-to-app
-                        )
+                    let $action := app:fix-href($node/@action)
                     return
                         element { node-name($node) } {
                             attribute action {$action}, $node/@* except $node/@action, app:fix-links($node/node())
