@@ -115,7 +115,7 @@ declare variable $config:PUBLICATIONS :=
             "select-document": function($document-id) { doc($config:BUILDINGS_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:BUILDINGS_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd",
+            "odd": "departmenthistory.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Buildings - Department History",
             "base-path": function($document-id, $section-id) { "buildings" }
@@ -131,7 +131,7 @@ declare variable $config:PUBLICATIONS :=
             "select-document": function($document-id) { doc($config:CONFERENCES_ARTICLES_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:CONFERENCES_ARTICLES_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/conferences/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd",
+            "odd": "departmenthistory.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Conferences",
             "base-path": function($document-id, $section-id) { "conferences" }
@@ -234,7 +234,7 @@ declare variable $config:PUBLICATIONS :=
             "select-document": function($document-id) { doc($config:FAQ_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:FAQ_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd",
+            "odd": "departmenthistory.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "FAQ - About Us"
         },
@@ -243,7 +243,7 @@ declare variable $config:PUBLICATIONS :=
             "select-document": function($document-id) { doc($config:HAC_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:HAC_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
-            "odd": "historicaldocuments.odd",
+            "odd": "departmenthistory.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Historical Advisory Committee - About Us"
         },
@@ -252,7 +252,7 @@ declare variable $config:PUBLICATIONS :=
             "select-document": function($document-id) { doc($config:EDUCATION_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:EDUCATION_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
-            "odd": "frus.odd",
+            "odd": "departmenthistory.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Education Resources"
         },
