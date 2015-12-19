@@ -244,6 +244,14 @@
                         <param name="title">desc</param>
                     </model>
                 </elementSpec>
+                <elementSpec mode="change" ident="figure">
+                    <model predicate="head or @rendition='simple:display'" behaviour="block"/>
+                    <model behaviour="inline">
+                        <outputRendition>
+display: block;
+</outputRendition>
+                    </model>
+                </elementSpec>
                 <elementSpec mode="change" ident="label"><!-- Silly rule to avoid class 'label' -->
                     <model predicate="@foo='baz'" behaviour="inline"/>
                     <model behaviour="inline"/>

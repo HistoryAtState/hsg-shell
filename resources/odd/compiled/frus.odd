@@ -6795,9 +6795,7 @@ is not permitted outside the header</report>
                     <model behaviour="inline">
                         <outputRendition>
 display: block;
-border-top: solid 1pt blue;
-border-bottom: solid 1pt blue;
-		</outputRendition>
+</outputRendition>
                     </model>
                 </elementSpec>
                 <elementSpec rend="change" module="figures" ident="formula">
