@@ -51,7 +51,7 @@ declare function toc:toc-inner($model as map(*), $root as node(), $show-heading 
 
 declare function toc:toc-passthru($model as map(*), $node as item()*, $current as element()?) {
     (: Process immediate descendant divs, excluding nested ones :)
-    let $divs := $node//tei:div except $node//tei:div//tei:div
+    let $divs := $node//tei:div[@xml:id] except $node//tei:div//tei:div
 (:    let $divs := $node//tei:div[empty(ancestor::tei:div) or ancestor::tei:div[1] is $node]:)
     return
         $divs ! toc:toc-div($model, ., $current)

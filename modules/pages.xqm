@@ -10,6 +10,7 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace expath="http://expath.org/ns/pkg";
 
 import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
@@ -33,6 +34,7 @@ declare
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?, $view as xs:string) {
     let $content := map {
         "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else (),
+        "publication-id": $publication-id,
         "document-id": $document-id,
         "base-path": 
             if (exists($publication-id)) then
@@ -290,11 +292,7 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                 Do we need the same for hsg? The check is very expensive.
             :)
 (:            let $parent := $div/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]:)
-            let $parent := $div/ancestor::tei:div[1]
-            let $prevDiv := if (not($div/self::tei:pb)) then $div/preceding::tei:div[not(@xml:id = $config:IGNORED_DIVS)][1] else $div
-            let $prevDiv := pages:get-previous(
-                if ($parent and (empty($prevDiv) or $div/.. >> $prevDiv) and not($node/self::tei:pb)) then $div/.. else $prevDiv
-            )
+            let $prevDiv := pages:get-previous($div)
             let $nextDiv := pages:get-next($div)
         (:        ($div//tei:div[not(*[1] instance of element(tei:div))] | $div/following::tei:div)[1]:)
             return
@@ -309,29 +307,19 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
 declare function pages:get-next($div as element()) {
     if ($div/self::tei:pb) then
         $div/following::tei:pb[1]
-    else if ($div/tei:div) then
-        if (not($div[@type = ('compilation', 'chapter', 'subchapter')]) and count(($div/tei:div[1])/preceding-sibling::*) < 5) then
-            pages:get-next($div/tei:div[1])
-        else
-            $div/tei:div[1]
+    else if ($div/tei:div[@xml:id]) then
+        $div/tei:div[@xml:id][1]
     else
-        $div/following::tei:div[not(@xml:id = $config:IGNORED_DIVS)][1]
+        $div/following::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
 };
 
 declare function pages:get-previous($div as element()?) {
     if ($div/self::tei:pb) then
         $div/preceding::tei:pb[1]
-    else if (empty($div)) then
-        ()
+    else if ($div/preceding-sibling::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)]) then
+        $div/preceding-sibling::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
     else
-        if (
-            empty($div/preceding-sibling::tei:div)  (: first div in section :)
-            and count($div/preceding-sibling::*) < 5 (: less than 5 elements before div :)
-            and $div/.. instance of element(tei:div) (: parent is a div :)
-        ) then
-            pages:get-previous($div/..)
-        else
-            $div
+        $div/preceding::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
 };
 
 declare function pages:get-content($div as element()) {
@@ -364,9 +352,16 @@ function pages:navigation-link($node as node(), $model as map(*), $direction as 
             data-current="{util:node-id($model('div'))}">
         {
             $node/@* except $node/@href,
-            let $id := $model($direction)/@xml:id
+            let $publication-id := $model?publication-id
+            let $document-id := $model?document-id
+            let $section-id := $model($direction)/@xml:id
+            let $href :=
+                if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'html-href')) then
+                    map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id) 
+                else 
+                    $model($direction)/@xml:id
             return
-                attribute href { $id },
+                attribute href { app:fix-href($href) },
             $node/node()
         }
         </a>
