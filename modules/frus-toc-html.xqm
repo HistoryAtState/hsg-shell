@@ -213,7 +213,7 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                 	if ($doctitle-sans-note) then $config?apply($config, $doctitle-sans-note) else ()
                 }</a></h4>,
                 if ($docdateline) then <p class="dateline">{$config?apply($config, $docdateline)}</p> else (),
-                if ($docsummary) then <p>{$config?apply($config, $docsummary)}</p> else (),
+                if ($docsummary) then <p class="summary">{$config?apply($config, $docsummary/node())}</p> else (),
                 if ($docsource) then <p class="sourcenote">{$config?apply-children($config, $node, $docsource/node())}</p> else ()
                 )
             ,
