@@ -32,6 +32,7 @@ let $publication-id :=
         case 'about' return $volume
         case 'departmenthistory' return 
             switch ($volume) 
+                case 'buildings' return 'buildings'
                 case 'short-history' return 'short-history'
                 default return $publication
         default return $publication
