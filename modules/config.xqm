@@ -279,7 +279,8 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:HAC_COL: "hac",
         $config:EDUCATION_COL: "edu",
         $config:FRUS_HISTORY_MONOGRAPH_COL: "frus-history-monograph",
-        $config:CONFERENCES_ARTICLES_COL: "conferences"
+        $config:CONFERENCES_ARTICLES_COL: "conferences",
+        $config:MILESTONES_COL: "milestones"
     };
 
 (:~

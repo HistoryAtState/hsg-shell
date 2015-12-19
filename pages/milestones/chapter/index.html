@@ -15,9 +15,20 @@
             </ol>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <div id="content-inner" data-template="app:fix-links">
-                    <div class="content" data-template="pages:view"/>
+            <div class="col-md-12" data-template="pages:navigation">
+                <div class="navigation-top">
+                    <a data-template="pages:navigation-link" data-template-direction="next" class="nav-next page-nav">
+                        <i class="glyphicon glyphicon-chevron-right"/>
+                    </a>
+                    <a data-template="pages:navigation-link" data-template-direction="previous" class="nav-prev page-nav">
+                        <i class="glyphicon glyphicon-chevron-left"/>
+                    </a>
+                    <h5 id="navigation-title" data-template="pages:navigation-title"/>
+                </div>
+                <div class="row" id="content-inner" data-template="app:fix-links">
+                    <div id="content-container">
+                        <div data-template="toc:table-of-contents"/>
+                    </div>
                 </div>
             </div>
         </div>
