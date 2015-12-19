@@ -201,10 +201,16 @@ declare function pages:process-content($odd as function(*), $xml as element()*, 
     let $class := if ($html//*[@class = ('margin-note')]) then "margin-right" else ()
     return
         <div class="content {$class}">
-            {$content}
-            <div class="footnotes">
-                <ol>{$html//li[@class="footnote"]}</ol>
-            </div>
+            {
+            $content
+            ,
+            if ($html//li[@class="footnote"]) then
+                <div class="footnotes">
+                    <ol>{$html//li[@class="footnote"]}</ol>
+                </div>
+            else 
+                ()
+            }
         </div>
 };
 
