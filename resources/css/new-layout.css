@@ -41,8 +41,20 @@ div, span, p, li{
     font-family: "Merriweather","Georgia","Times New Roman",serif;
 }
 
+ul{
+    padding:0;
+    list-style:none;
+}
+ol{
+    padding:18px;
+}
+ul li, ol li{
+    margin-bottom:14px;
+}
+
 .navbar li, .navbar span {
   font-family: "Source Sans Pro";
+  margin-bottom:0;
 }
 .navbar-toggle{
     padding:6px 10px;
@@ -84,14 +96,20 @@ a:hover, a:active, a:focus {
 /*    font-size: 1.2em;*/
 /*}*/
 
+#content-inner{
+    max-width:800px;
+    padding-left:200px;
+}
+
+
 .panel{
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 #sections{
-    padding:0;
+    padding:10px;
 }
 #sections h2{
-    padding-left: 1em;
+    padding-left: 0;
     color:#212121;
     margin-top:20px;
 }
@@ -115,7 +133,43 @@ footer.banner{
     padding-right:40px;
 }
 
+.navigation-top{
+    border:none;
+}
+.navigation-top .page-nav{
+    position:fixed;
+    font-size:40px;
+    top:50%;
+}
+
+.navigation-top .page-nav i{
+    text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+    opacity:0.5;
+}
+
+.navigation-top a:hover i{
+    opacity:1.0;
+}
+
+.navigation-top .nav-prev{
+    left:15%;    
+    /*background:red;*/
+}
+.navigation-top .nav-next{
+    right:15%;
+}
 @media (max-width: 992px) {
+    .navigation-top .nav-prev{
+        left:5px;
+        /*background:blue;*/
+    }
+
+    .navigation-top .nav-next{
+        right:10px;
+    }
+    #content-inner{
+        padding-left:0;
+    }
     .searchbox{
         width:100%;
     }
@@ -138,3 +192,16 @@ footer.banner{
     /*    width:65%;*/
     /*}*/
 }
+
+@media (max-width: 768px) {
+    .navigation-top .nav-prev{
+        left:5px;
+        /*background:yellow;*/
+    }
+
+    .navigation-top .nav-next{
+        right:10px;
+    }
+}
+
+

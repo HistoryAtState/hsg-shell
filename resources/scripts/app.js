@@ -8,14 +8,14 @@ $(document).ready(function() {
     });
 
     function resize() {
-        if ($(window).width() > 768) {
-            var wh = ($(window).height()) / 2;
-            $(".page-nav").css("top", wh);
-            $(".nav-prev").css("left", $("#content-inner").offset().left);
-            $(".nav-next").css("left", $("#content-inner").offset().left + $("#content-inner").width() - 60);
-            var tw = $(".toc").width();
-            $(".toc").css("max-width", tw);
-        }
+        // if ($(window).width() > 768) {
+        //     var wh = ($(window).height()) / 2;
+        //     $(".page-nav").css("top", wh);
+        //     $(".nav-prev").css("left", $("#content-inner").offset().left);
+        //     $(".nav-next").css("left", $("#content-inner").offset().left + $("#content-inner").width() - 60);
+        //     var tw = $(".toc").width();
+        //     $(".toc").css("max-width", tw);
+        // }
     }
     
     function getFontSize() {
