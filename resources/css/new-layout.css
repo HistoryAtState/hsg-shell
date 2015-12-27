@@ -52,6 +52,10 @@ ul li, ol li{
     margin-bottom:14px;
 }
 
+select.form-control{
+    margin-bottom:20px;
+}
+
 .navbar li, .navbar span {
   font-family: "Source Sans Pro";
   margin-bottom:0;
