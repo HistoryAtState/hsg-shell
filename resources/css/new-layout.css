@@ -45,16 +45,67 @@ div, span, p, li{
     font-family: "Merriweather","Georgia","Times New Roman",serif;
 }
 
-ul{
-    padding:0;
-    list-style:none;
+
+#content ul{
+    padding-left:1em;
+    /*padding-left:0;*/
+    /*list-style:none;*/
 }
-ol{
-    padding:18px;
-}
-ul li, ol li{
+#content ul li{
     margin-bottom:14px;
 }
+
+/*#content ul li:before{*/
+/*    content:'>';*/
+/*    padding-right:10px;*/
+/*}*/
+
+/*  special for homepage */
+#content ul[data-template='app:load-most-recent-tweets'],
+#content ul[data-template='app:load-most-recent-tumblr-posts']{
+    list-style:none;
+    padding-left:0;
+}
+
+
+
+
+/*ol{*/
+/*    padding:18px;*/
+/*}*/
+
+
+
+
+/*#content ul:first-child{*/
+/*    padding-left:0;*/
+/*    list-style:none;*/
+/*}*/
+/*#content ul li:before{*/
+/*    content: "\0BB \020";*/
+    /*content:'>';*/
+/*    padding-right:10px;*/
+/*    color:#2c6196;*/
+/*}*/
+/*ul li, ol li{*/
+/*    margin-bottom:14px;*/
+    /*padding-left:1em;*/
+/*}*/
+
+/*#sections ul{*/
+/*    list-style:none;*/
+/*}*/
+/*#sections ul li:before{*/
+/*    content:'';*/
+/*}*/
+
+
+/*ol{*/
+/*    padding:18px;*/
+/*}*/
+/*#sections ul li {*/
+/*    padding-left:0;*/
+/*}*/
 
 select.form-control{
     margin-bottom:20px;
