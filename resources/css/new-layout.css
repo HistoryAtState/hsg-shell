@@ -105,8 +105,12 @@ a:hover, a:active, a:focus {
 /*}*/
 
 #content-inner{
-    max-width:800px;
-    padding-left:200px;
+    /*max-width:800px;*/
+    max-width:75rem;
+    padding-left:10rem;
+     /*-webkit-column-count: 2; */
+    /*-moz-column-count: 2; */
+    /*column-count: 2;*/
 }
 
 
