@@ -6982,12 +6982,6 @@ header {
   animation-duration: 400ms;
   overflow: auto;
 }
-@media (min-width: 769px) {
-  #content-container {
-    margin-left: 60px;
-    margin-right: 60px;
-  }
-}
 #content-container .note {
   margin-left: .25em;
   font-size: 12px;
@@ -7035,21 +7029,19 @@ ol.breadcrumb li:before {
   font-size: 1.25em;
   line-height: 1.5;
   padding: 0 10px 10px 0;
-  margin-left: 60px;
-  margin-right: 60px;
 }
-.navigation-top .page-nav,
-.navigation-top .page-nave:link,
-.navigation-top .page-nav:active {
+.page-nav,
+.page-nav:link,
+.page-nav:active {
   width: 30px;
   font-size: 20px;
   text-decoration: none;
   color: #ccc;
 }
 @media (min-width: 769px) {
-  .navigation-top .page-nav,
-  .navigation-top .page-nave:link,
-  .navigation-top .page-nav:active {
+  .page-nav,
+  .page-nav:link,
+  .page-nav:active {
     position: fixed;
     margin: 0;
     width: 60px;
@@ -7062,18 +7054,25 @@ ol.breadcrumb li:before {
   }
 }
 @media (max-width: 768px) {
-  .navigation-top .page-nav,
-  .navigation-top .page-nave:link,
-  .navigation-top .page-nav:active {
-    position: absolute;
-    top: 20px;
+  .page-nav,
+  .page-nav:link,
+  .page-nav:active {
+    position: normal;
+    font-size: 16px;
   }
 }
-.navigation-top .nav-next {
-  right: 10px;
+.navigation-top .page-nav {
+  display: inline-block;
+  position: inherit;
+  font-size: 20px;
+  margin-top: 1.5em;
 }
-.navigation-top .nav-prev {
-  left: 10px;
+.navigation-top .nav-next {
+  text-align: right;
+}
+.navigation-top .col-title {
+  padding-left: 0;
+  padding-right: 0;
 }
 /* override bootstrap, which adds top border to each cell. TODO: modify bootstrap base style */
 .table > tbody > tr > td {

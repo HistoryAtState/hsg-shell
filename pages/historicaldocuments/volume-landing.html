@@ -2,27 +2,29 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <ol class="breadcrumb" data-template="app:fix-links">
-                <li>
-                    <a href="$app">Home</a>
-                </li>
-                <li>
-                    <a href="$app/historicaldocuments">Historical Documents</a>
-                </li>
-                <li>
-                    <a data-template="frus:volume-breadcrumb"/>
-                </li>
-            </ol>
+            <div class="col-md-8 col-md-offset-1">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments">Historical Documents</a>
+                    </li>
+                    <li>
+                        <a data-template="frus:volume-breadcrumb"/>
+                    </li>
+                </ol>
+            </div>
         </div>
         <div class="row">
-            <div class="col-md-10" id="volume">
+            <div class="col-md-8 col-md-offset-1" id="volume">
                 <div id="content-inner" data-template="app:fix-links">
                     <div data-template="pages:header"/>
                     <hr/>
                     <div data-template="toc:table-of-contents" data-template-heading="false" data-template-highlight="false"/>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-offset-1 col-md-2">
                 <div id="links-panel" class="panel panel-default">
                     <div class="panel-heading">Links</div>
                     <div class="list-group"><!--

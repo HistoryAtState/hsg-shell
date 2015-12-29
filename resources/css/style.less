@@ -265,10 +265,10 @@ header{
     animation-duration: 400ms;
     overflow:auto;
 
-    @media (min-width: 769px) {
-        margin-left: 60px;
-        margin-right: 60px;
-    }
+    // @media (min-width: 769px) {
+    //     margin-left: 60px;
+    //     margin-right: 60px;
+    // }
 
     .note {
         margin-left: .25em;
@@ -329,39 +329,56 @@ ol.breadcrumb li:before {
         font-size: 1.25em;
         line-height: 1.5;
         padding: 0 10px 10px 0;
-        margin-left: 60px;
-        margin-right: 60px;
+        // margin-left: 60px;
+        // margin-right: 60px;
     }
 
-    .page-nav, .page-nave:link, .page-nav:active {
-        width: 30px;
+    // .nav-next {
+    //     right: 10px;
+    // }
+    // .nav-prev {
+    //     left: 10px;
+    // }
+}
+
+.page-nav, .page-nav:link, .page-nav:active {
+    width: 30px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #ccc;
+
+    @media (min-width: 769px) {
+        position: fixed;
+        margin: 0;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        font-size: 40px;
+        text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+        position: normal;
+        font-size: 16px;
+        // top: 20px;
+    }
+}
+
+.navigation-top {
+    .page-nav {
+        display: inline-block;
+        position: inherit;
         font-size: 20px;
-        text-decoration: none;
-        color: #ccc;
-
-        @media (min-width: 769px) {
-            position: fixed;
-            margin: 0;
-            width: 60px;
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            flex-direction: column;
-            font-size: 40px;
-            text-align: center;
-        }
-        
-        @media (max-width: 768px) {
-            position: absolute;
-            top: 20px;
-        }
+        margin-top: 1.5em;
     }
-
     .nav-next {
-        right: 10px;
+        text-align: right;
     }
-    .nav-prev {
-        left: 10px;
+    .col-title {
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
