@@ -2,39 +2,55 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <ol class="breadcrumb" data-template="app:fix-links">
-                <li>
-                    <a href="$app">Home</a>
-                </li>
-                <li>
-                    <a href="$app/historicaldocuments">Historical Documents</a>
-                </li>
-                <li>
-                    <a href="$app/historicaldocuments/frus-history">History of the <em>Foreign Relations</em> Series</a>
-                </li>
-                <li>
-                    <a class="section" href="$app/historicaldocuments/frus-history/#">[Insert Breadcrumb Link]</a>
-                </li>
-            </ol>
+            <div class="col-md-8 col-md-offset-1">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments">Historical Documents</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus-history">History of the <em>Foreign Relations</em> Series</a>
+                    </li>
+                    <li>
+                        <a class="section" href="$app/historicaldocuments/frus-history/#">[Insert Breadcrumb Link]</a>
+                    </li>
+                </ol>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-12" data-template="pages:navigation">
-                <div class="navigation-top">
-                    <a data-template="pages:navigation-link" data-template-direction="next" class="nav-next page-nav">
-                        <i class="glyphicon glyphicon-chevron-right"/>
-                    </a>
-                    <a data-template="pages:navigation-link" data-template-direction="previous" class="nav-prev page-nav">
-                        <i class="glyphicon glyphicon-chevron-left"/>
-                    </a>
-                    <h5 id="navigation-title">
-                        <span data-template="frus-history:monograph-title"/>
-                    </h5>
+        <div class="row" data-template="pages:navigation">
+            <div class="col-md-1 hidden-sm hidden-xs">
+                <a data-template="pages:navigation-link" data-template-direction="previous" class="nav-prev page-nav">
+                    <i class="glyphicon glyphicon-chevron-left"/>
+                </a>
+            </div>
+            <div class="col-md-8 col-sm-10">
+                <div class="navigation-top row">
+                    <div class="col-xs-2 col-sm-1 hidden-md hidden-lg">
+                        <a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
+                            <i class="glyphicon glyphicon-chevron-left"/>
+                        </a>
+                    </div>
+                    <div class="col-xs-8 col-sm-10 col-md-12 col-lg-12 col-title">
+                        <h5 id="navigation-title" data-template="frus-history:monograph-title"/>
+                    </div>
+                    <div class="col-xs-2 col-sm-1 hidden-md hidden-lg">
+                        <a data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
+                            <i class="glyphicon glyphicon-chevron-right"/>
+                        </a>
+                    </div>
                 </div>
                 <div id="content-inner">
                     <div id="content-container" data-template="app:fix-links">
                         <div class="content" data-template="pages:view" data-template-base-path="frus-history"/>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-1 hidden-sm hidden-xs">
+                <a data-template="pages:navigation-link" data-template-direction="next" class="nav-next page-nav">
+                    <i class="glyphicon glyphicon-chevron-right"/>
+                </a>
             </div>
         </div>
     </div>

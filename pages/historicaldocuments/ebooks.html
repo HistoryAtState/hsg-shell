@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div class="row">
-        <ol class="breadcrumb" data-template="app:fix-links">
-            <li>
-                <a href="$app">Home</a>
-            </li>
-            <li>
-                <a href="$app/historicaldocuments">Historical Documents</a>
-            </li>
-            <li>
-                <a href="$app/historicaldocuments/ebooks">Ebooks</a>
-            </li>
-        </ol>
+        <div class="col-md-8 col-md-offset-1">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/ebooks">Ebooks</a>
+                </li>
+            </ol>
+        </div>
     </div>
     <div class="row" data-template="pages:load">
-        <div class="col-md-12" data-template="app:fix-links">
+        <div class="col-md-8 col-md-offset-1" data-template="app:fix-links">
             <div id="content-inner">
                 <h2>Ebooks</h2>
                 <p>The Office of the Historian offers ebook editions of a growing number of volumes from the

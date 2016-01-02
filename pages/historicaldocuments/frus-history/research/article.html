@@ -2,26 +2,28 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div class="row" data-template="pages:load">
         <div class="row">
-            <ol class="breadcrumb" data-template="app:fix-links">
-                <li>
-                    <a href="$app">Home</a>
-                </li>
-                <li>
-                    <a href="$app/historicaldocuments">Historical Documents</a>
-                </li>
-                <li>
-                    <a href="$app/historicaldocuments/frus-history">History of the <em>Foreign Relations</em> Series</a>
-                </li>
-                <li>
-                    <a href="$app/historicaldocuments/frus-history/research">Research</a>
-                </li>
-                <li>
-                    <a href="$app/historicaldocuments/frus-history/research/#">[Insert Breadcrumb Here]</a>
-                </li>
-            </ol>
+            <div class="col-md-8 col-md-offset-1">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments">Historical Documents</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus-history">History of the <em>Foreign Relations</em> Series</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus-history/research">Research</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus-history/research/#">[Insert Breadcrumb Here]</a>
+                    </li>
+                </ol>
+            </div>
         </div>
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-8 col-md-offset-1">
                 <div id="content-inner" data-template="app:fix-links" itemscope="itemscope" itemtype="http://schema.org/Article">
                     <h1>
                         <span data-template="frus-history:article-title"/>
