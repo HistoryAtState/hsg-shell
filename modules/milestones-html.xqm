@@ -5,6 +5,7 @@ module namespace milestones = "http://history.state.gov/ns/site/hsg/milestones-h
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
@@ -29,7 +30,7 @@ declare function milestones:period-title($node as node(), $model as map(*)) {
 declare function milestones:period-href-value-attribute($node as node(), $model as map(*)) {
     let $period-id := substring-before(util:document-name($model?period), '.xml')
     return
-        attribute value { "$app/milestones/" || $period-id }
+        attribute value { app:fix-href("$app/milestones/" || $period-id) }
 };
 
 declare
@@ -44,7 +45,7 @@ function milestones:dropdown($node as node(), $model as map(*), $document-id as 
     order by $period-id
     return
         <option>{ 
-            attribute value { "$app/milestones/" || $period-id },
+            attribute value { app:fix-href("$app/milestones/" || $period-id) },
             $selected,
             $brief-title
         }</option>
