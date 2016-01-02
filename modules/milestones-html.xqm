@@ -50,7 +50,7 @@ function milestones:dropdown($node as node(), $model as map(*), $document-id as 
             $brief-title
         }</option>
     ,
-    <option value="$app/milestones/all">... view all</option>
+    <option value="{app:fix-href('$app/milestones/all')}">... view all</option>
 };
 
 declare function milestones:list($node, $model) {

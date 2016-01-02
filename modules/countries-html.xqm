@@ -5,6 +5,7 @@ module namespace ch = "http://history.state.gov/ns/site/hsg/countries-html";
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
@@ -29,7 +30,7 @@ declare function ch:article-title($node as node(), $model as map(*)) {
 declare function ch:article-href-value-attribute($node as node(), $model as map(*)) {
     let $article-id := substring-before(util:document-name($model?article), '.xml')
     return
-        attribute value { "$app/countries/" ||  $article-id }
+        attribute value { app:fix-href("$app/countries/" ||  $article-id) }
 };
 
 declare
@@ -44,12 +45,12 @@ function ch:dropdown($node as node(), $model as map(*), $document-id as xs:strin
     order by $article-id
     return
         <option>{ 
-            attribute value { "$app/countries/" || $article-id },
+            attribute value { app:fix-href("$app/countries/" || $article-id) },
             $selected,
             $brief-title
         }</option>
     ,
-    <option value="$app/countries/all">... view all</option>
+    <option value="{app:fix-href('$app/countries/all')}">... view all</option>
 };
 
 (: TODO: Turn into two-column listing as in pocom:chiefs-countries-list() :)

@@ -2,20 +2,22 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <ol class="breadcrumb" data-template="app:fix-links">
-                <li>
-                    <a href="$app">Home</a>
-                </li>
-                <li>
-                    <a href="$app/countries">Countries</a>
-                </li>
-                <li>
-                    <a class="section" href="." data-template="pages:document-link"/>
-                </li>
-            </ol>
+            <div class="col-md-8 col-md-offset-1">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/countries">Countries</a>
+                    </li>
+                    <li>
+                        <a class="section" href="." data-template="pages:document-link"/>
+                    </li>
+                </ol>
+            </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8 col-md-offset-1">
                 <div id="content-inner" data-template="app:fix-links">
                     <div class="content" data-template="pages:view"/>
                 </div>
