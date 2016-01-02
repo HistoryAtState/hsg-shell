@@ -49,7 +49,7 @@ $(document).ready(function() {
                         $("#navigation-title").text(data.title);
                     }
                     if (data.breadcrumbSection) {
-                        $(".breadcrumb .section").text(data.breadcrumbSection);
+                        $(".breadcrumb .section").html(data.breadcrumbSection);
                     }
                     if (data.persons) {
                         $("#person-panel .list-group").replaceWith(data.persons).show();
