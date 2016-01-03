@@ -46,7 +46,7 @@ ul{
     list-style:none;
 }
 ol{
-    padding:18px;
+    /*padding:18px;*/
 }
 ul li, ol li{
     margin-bottom:14px;
