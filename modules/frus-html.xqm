@@ -534,7 +534,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
             return
                 (
                 <div id="{$vol-id}">
-                    <img src="http://static.history.state.gov/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
+                    <img src="//{$config:S3_DOMAIN}/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
                     <a href="$app/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'subseries'), fh:vol-title($vol-id, 'volumenumber'), fh:vol-title($vol-id, 'volume')), ', ')}</a>. 
                         <br/>
                         Ebook last updated: {xsl:format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), 'MMMM D, YYYY')}. 
@@ -560,7 +560,7 @@ declare function fh:frus-history-ebook-entry($model as map(*)) {
     let $preview-edition := if ($book//tei:sourceDesc/tei:p[1] = 'Preview Edition') then ' (Preview Edition)' else ()
     let $vol-id := 'frus-history'
     let $s3-resources-col := concat($config:HSG_S3_CACHE_COL, $vol-id)
-    let $s3-base-url := concat('http://static.history.state.gov/', $vol-id)
+    let $s3-base-url := concat('//' $config:S3_DOMAIN, '/frus/', $vol-id)
     let $epub-filename := concat($vol-id, '.epub')
     let $mobi-filename := concat($vol-id, '.mobi')
     let $pdf-filename := concat($vol-id, '.pdf')

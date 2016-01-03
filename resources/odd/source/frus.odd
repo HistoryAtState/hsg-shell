@@ -217,7 +217,7 @@
                     <modelSequence>
                         <model output="web" behaviour="link">
                             <param name="content">concat('[Page ', @n, ']')</param>
-                            <param name="link">@xml:id</param><!--<param name="link">concat('http://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
+                            <param name="link">@xml:id</param><!--<param name="link">concat('//s3.amazonaws.com/static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
                             <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
                         </model>
                         <model output="print" behaviour="omit"/>
