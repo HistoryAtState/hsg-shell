@@ -560,7 +560,7 @@ declare function fh:frus-history-ebook-entry($model as map(*)) {
     let $preview-edition := if ($book//tei:sourceDesc/tei:p[1] = 'Preview Edition') then ' (Preview Edition)' else ()
     let $vol-id := 'frus-history'
     let $s3-resources-col := concat($config:HSG_S3_CACHE_COL, $vol-id)
-    let $s3-base-url := concat('//' $config:S3_DOMAIN, '/frus/', $vol-id)
+    let $s3-base-url := concat('//', $config:S3_DOMAIN, '/frus/', $vol-id)
     let $epub-filename := concat($vol-id, '.epub')
     let $mobi-filename := concat($vol-id, '.mobi')
     let $pdf-filename := concat($vol-id, '.pdf')
