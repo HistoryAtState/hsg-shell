@@ -2,17 +2,19 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <ol class="breadcrumb" data-template="app:fix-links">
-                <li>
-                    <a href="$app">Home</a>
-                </li>
-                <li>
-                    <a href="$app/tags">Tags</a>
-                </li>
-            </ol>
+            <div class="col-md-8 col-md-offset-1">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/tags">Tags</a>
+                    </li>
+                </ol>
+            </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8 col-md-offset-1">
                 <div id="content-inner" data-template="app:fix-links">
                     <h1>Tags</h1>
                     <p>The Office of the Historian’s “Subject Taxonomy of the History of U.S. Foreign Relations” covers <span data-template="tags:tag-count"/> subjects, organized into three major sections: <a href="$app/tags/people">People</a>, <a href="/tags/places">Places</a>, and <a href="/tags/topics">Topics</a>. Drill into one of these sections, or view <a href="$app/tags/all">the full taxonomy</a>.</p>
