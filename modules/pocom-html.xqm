@@ -520,7 +520,7 @@ declare function pocom:letters($node as node(), $model as map(*)) {
         order by $letter 
         return $letter
     return
-        <ul class="numbersnav">{
+        <ul class="nav nav-pills">{
             for $letter in $letters
             return
                 <li><a href="{concat('$app/departmenthistory/people/by-name/', $letter)}">{upper-case($letter)}</a></li>
