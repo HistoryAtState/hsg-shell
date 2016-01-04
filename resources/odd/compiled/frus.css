@@ -75,5 +75,6 @@
 .figDesc:before { content: '[..'; }
 .figDesc:after { content: '..]'; }
 .figDesc { color: grey;font-style:italic; }
-.figure2 { display: block; }
+.figure1 { float: left; margin: 0 1em 1em 0; }
+.figure3 { display: block; }
 .row1 { font-weight: bold; }

@@ -6962,19 +6962,12 @@ header {
   line-height: 1.25;
   margin-bottom: 1.25em;
 }
-#toc .toc-inner ul,
-#volume .toc-inner ul {
-  list-style: none;
-  padding-left: 0;
-}
-#toc .toc-inner li,
-#volume .toc-inner li {
-  margin-left: .5em;
-  text-indent: -0.5em;
-}
 #toc .highlight,
 #volume .highlight {
   background-color: #dddde8;
+}
+#faq > ul {
+  list-style: none;
 }
 #content-container {
   -webkit-animation-duration: 400ms;
@@ -7076,7 +7069,7 @@ ol.breadcrumb li:before {
 }
 /* override bootstrap, which adds top border to each cell. TODO: modify bootstrap base style */
 .table > tbody > tr > td {
-  border-top: 0;
+  border-top: 1px;
 }
 .carousel-caption {
   position: initial;
@@ -7122,4 +7115,42 @@ ol.breadcrumb li:before {
 }
 .hi {
   background-color: yellow;
+}
+.toc ul,
+.toc-inner ul,
+.lists ul {
+  list-style: none;
+  padding-left: 0;
+}
+.toc li,
+.toc-inner li,
+.lists li {
+  margin-left: 2em;
+}
+.toc-inner li a {
+  display: block;
+  margin-bottom: 1em;
+}
+.figure1,
+.figure2 {
+  margin: 1em 2em 1em 0!important;
+  text-align: center !important;
+  max-width: 30% !important;
+  float: left !important ;
+}
+.head1 {
+  padding-top: 1em !important;
+}
+.content img {
+  border: 1px solid #C0C0C0 !important;
+  padding: 10px !important;
+  -webkit-border-radius: 1ex;
+  -moz-border-radius: 1ex;
+}
+.content table th,
+.content td {
+  padding: 12px 12px !important;
+}
+.content table {
+  border-spacing: 5px 5px !important;
 }

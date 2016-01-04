@@ -6638,9 +6638,8 @@ The @spanTo attribute of <name/> is required.</assert>
                     </content>
                     <_0:constraintSpec xmlns:_0="http://www.tei-c.org/ns/1.0" ident="headeronlyelement" scheme="isoschematron">
                         <_0:constraint>
-                            <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value">
-                                <report test="ancestor::tei:text">Error:  The element <name/>
-is not permitted outside the header</report>
+                            <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:att | tei:biblFull | tei:biblScope | tei:biblStruct | tei:change | tei:charDecl | tei:charProp | tei:editor | tei:editorialDecl | tei:email | tei:encodingDesc | tei:extent | tei:fileDesc | tei:gi | tei:glyph | tei:glyphName | tei:idno | tei:imprint | tei:keywords | tei:licence | tei:listChange | tei:listPerson | tei:localName | tei:monogr | tei:msDesc | tei:msIdentifier | tei:person | tei:physDesc | tei:profileDesc | tei:publicationStmt | tei:relatedItem | tei:repository | tei:resp | tei:respStmt | tei:sourceDesc | tei:tag | tei:teiHeader | tei:term | tei:textClass | tei:textDesc | tei:titleStmt | tei:typeDesc | tei:val | tei:value">
+                                <report test="ancestor::tei:text">Error:  The element <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/> is not permitted outside the header</report>
                             </rule>
                         </_0:constraint>
                     </_0:constraintSpec>
@@ -6791,6 +6790,12 @@ is not permitted outside the header</report>
                         </zeroOrMore>
                     </content>
                     <attList/>
+                    <model predicate="@rend='smallfloatinline'" behaviour="block">
+                        <outputRendition>
+                            float: left;
+                            margin: 0 1em 1em 0;
+                        </outputRendition>
+                    </model>
                     <model predicate="head or @rendition='simple:display'" behaviour="block"/>
                     <model behaviour="inline">
                         <outputRendition>

@@ -454,10 +454,13 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(figDesc) return
                     html:inline($config, ., "figDesc", .)
                 case element(figure) return
-                    if (head or @rendition='simple:display') then
+                    if (@rend='smallfloatinline') then
                         html:block($config, ., "figure1", .)
                     else
-                        html:inline($config, ., "figure2", .)
+                        if (head or @rendition='simple:display') then
+                            html:block($config, ., "figure2", .)
+                        else
+                            html:inline($config, ., "figure3", .)
                 case element(formula) return
                     if (@rendition='simple:display') then
                         html:block($config, ., "formula1", .)

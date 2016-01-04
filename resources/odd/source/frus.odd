@@ -254,6 +254,11 @@
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="figure">
+                    <model predicate="@rend='smallfloatinline'" behaviour="block">
+                        <outputRendition>
+                            float: left;
+                        </outputRendition>
+                    </model>
                     <model predicate="head or @rendition='simple:display'" behaviour="block"/>
                     <model behaviour="inline">
                         <outputRendition>

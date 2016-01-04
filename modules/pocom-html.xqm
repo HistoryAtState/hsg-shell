@@ -92,7 +92,7 @@ declare function pocom:principal-officers($node as node(), $model as map(*)) {
             for $rolecategory in doc($pocom:CODE-TABLES-COL || '/role-category-codes.xml')//item[not(value = ('', 'country', 'international-organization'))]
             return
                 <li>
-                    {$rolecategory/label/string()}
+                    <h3>{$rolecategory/label/string()}</h3>
                     <ul>
                         {
                             for $roles in collection($pocom:POSITIONS-PRINCIPALS-COL)/principal-position[category eq $rolecategory/value]
