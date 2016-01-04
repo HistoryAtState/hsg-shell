@@ -465,8 +465,6 @@ declare function pocom:format-role($person, $role) {
         $started/date,
         $appointed/date
         )[. ne ''][1]
-    let $start-date-english := app:date-to-english($startdate)
-    let $end-date-english := app:date-to-english($ended/date)
     let $dates := 
             if ($roleclass = 'principal-position') then
                 (
