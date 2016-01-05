@@ -102,7 +102,6 @@
                     <modelSequence>
                         <model behaviour="block">
                             <param name="content">publisher</param>
-                            <outputRendition>font-weight: bold;</outputRendition>
                         </model>
                         <model behaviour="block">
                             <param name="content">pubPlace</param>
