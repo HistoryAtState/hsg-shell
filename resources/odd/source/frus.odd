@@ -192,6 +192,7 @@
                     <model predicate="parent::list" behaviour="block">
                         <outputRendition>font-weight: bold;</outputRendition>
                     </model>
+                    <model predicate="parent::div and @type='shortened-for-running-head'" behaviour="omit"/>
                     <model predicate="parent::div" behaviour="heading">
                         <param name="level">count(ancestor::div)</param>
                     </model>
