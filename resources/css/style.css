@@ -7154,3 +7154,7 @@ ol.breadcrumb li:before {
 .content table {
   border-spacing: 5px 5px !important;
 }
+.quote1 {
+  display: block ;
+  margin: 1em 0 1em 1em ;
+}
