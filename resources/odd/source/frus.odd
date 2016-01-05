@@ -225,9 +225,10 @@
                 </elementSpec>
                 <elementSpec mode="change" ident="quote">
                     <model predicate="ancestor::p and empty(descendant::p|descendant::div)" behaviour="inline" useSourceRendition="true">
-                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
+                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level; no extra quote marks around</desc><!--
                         <outputRendition scope="before">content: '‘';</outputRendition>
                         <outputRendition scope="after">content: '’';</outputRendition>
+-->
                     </model>
                     <model behaviour="block" useSourceRendition="true">
                         <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
