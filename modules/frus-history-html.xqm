@@ -27,11 +27,10 @@ declare function fhh:monograph-editors($node, $model) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
     let $editors := $doc//tei:titlePage//tei:name
     return
-        <ul>
-            {
-                $editors ! <li>{./string()}</li>                    
-            }
-        </ul>
+        <dl>
+            {if(count($editors) gt 1) then <dt>Editors:</dt> else <dt>Editor:</dt>}
+            {$editors ! <dd>{./string()}</dd>}
+        </dl>
 };
 
 declare function fhh:monograph-edition-info($node, $model) {
@@ -43,11 +42,12 @@ declare function fhh:monograph-edition-info($node, $model) {
         $doc//tei:fileDesc//tei:sourceDesc/tei:p
         )
     return
-        <ul>
+        <p>
             {
-                $edition-info ! <li>{./string()}</li>                    
+                for $line at $i in $edition-info
+                return ($line/string(), if($i < count($edition-info)) then <br/> else ())
             }
-        </ul>
+        </p>
 };
 
 declare function fhh:monograph-toc($node, $model) {
