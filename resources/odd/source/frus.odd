@@ -243,7 +243,15 @@
                     </model>
                 </elementSpec><!-- override background-color and font-size property from teisimple.odd -->
                 <elementSpec mode="change" ident="table">
-                    <model behaviour="table"/>
+                    <model behaviour="table" cssClass="table table-striped table-bordered"/>
+                </elementSpec>
+                <elementSpec mode="change" ident="row">
+                    <model predicate="count(preceding-sibling::*) lt 1" behaviour="table-heading">
+                        <desc>Insert table heading. </desc>
+                    </model>
+                    <model predicate="count(preceding-sibling::*) gt 0" behaviour="row">
+                        <desc>Insert table row. </desc>
+                    </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="graphic">
                     <model behaviour="graphic">
