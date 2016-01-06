@@ -7134,19 +7134,19 @@ ol.breadcrumb li:before {
   margin-bottom: 1em;
 }
 .float-left {
-  float: left !important;
+  float: left;
 }
 .figure-floated {
-  margin: 1em 2em 1em 0!important;
-  text-align: center !important;
-  max-width: 30% !important;
+  margin: 1em 2em 1em 0;
+  text-align: center;
+  max-width: 30%;
 }
 .tei-head1 {
-  padding-top: 1em !important;
+  padding-top: 1em;
 }
 .content img {
-  border: 1px solid #C0C0C0 !important;
-  padding: 10px !important;
+  border: 1px solid #C0C0C0;
+  padding: 10px;
   -webkit-border-radius: 1ex;
   -moz-border-radius: 1ex;
 }
