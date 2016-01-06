@@ -45,449 +45,452 @@ declare function model:apply($config as map(*), $input as node()*) {
     $input !         (
             typeswitch(.)
                 case element(abbr) return
-                    html:inline($config, ., "abbr", .)
+                    html:inline($config, ., ("tei-abbr"), .)
                 case element(add) return
-                    html:inline($config, ., "add", .)
+                    html:inline($config, ., ("tei-add"), .)
                 case element(address) return
-                    html:block($config, ., "address", .)
+                    html:block($config, ., ("tei-address"), .)
                 case element(addrLine) return
-                    html:block($config, ., "addrLine", .)
+                    html:block($config, ., ("tei-addrLine"), .)
                 case element(author) return
                     if (ancestor::teiHeader) then
-                        html:omit($config, ., "author1", .)
+                        html:omit($config, ., ("tei-author1"), .)
                     else
-                        html:inline($config, ., "author2", .)
+                        html:inline($config, ., ("tei-author2"), .)
                 case element(bibl) return
                     if (parent::listBibl) then
-                        html:listItem($config, ., "bibl1", .)
+                        html:listItem($config, ., ("tei-bibl1"), .)
                     else
-                        html:inline($config, ., "bibl2", .)
+                        html:inline($config, ., ("tei-bibl2"), .)
                 case element(cb) return
-                    html:break($config, ., "cb", ., 'column', @n)
+                    html:break($config, ., ("tei-cb"), ., 'column', @n)
                 case element(choice) return
                     if (sic and corr) then
-                        html:alternate($config, ., "choice4", ., corr[1], sic[1])
+                        html:alternate($config, ., ("tei-choice4"), ., corr[1], sic[1])
                     else
                         if (abbr and expan) then
-                            html:alternate($config, ., "choice5", ., expan[1], abbr[1])
+                            html:alternate($config, ., ("tei-choice5"), ., expan[1], abbr[1])
                         else
                             if (orig and reg) then
-                                html:alternate($config, ., "choice6", ., reg[1], orig[1])
+                                html:alternate($config, ., ("tei-choice6"), ., reg[1], orig[1])
                             else
                                 $config?apply($config, ./node())
                 case element(cit) return
                     if (child::quote and child::bibl) then
                         (: Insert citation :)
-                        html:cit($config, ., "cit", .)
+                        html:cit($config, ., ("tei-cit"), .)
                     else
                         $config?apply($config, ./node())
                 case element(corr) return
                     if (parent::choice and count(parent::*/*) gt 1) then
                         (: simple inline, if in parent choice. :)
-                        html:inline($config, ., "corr1", .)
+                        html:inline($config, ., ("tei-corr1"), .)
                     else
-                        html:inline($config, ., "corr2", .)
+                        html:inline($config, ., ("tei-corr2"), .)
                 case element(date) return
-                    html:inline($config, ., "date", .)
+                    html:inline($config, ., ("tei-date"), .)
                 case element(del) return
-                    html:inline($config, ., "del", .)
+                    html:inline($config, ., ("tei-del"), .)
                 case element(desc) return
-                    html:inline($config, ., "desc", .)
+                    html:inline($config, ., ("tei-desc"), .)
                 case element(expan) return
-                    html:inline($config, ., "expan", .)
+                    html:inline($config, ., ("tei-expan"), .)
                 case element(foreign) return
-                    html:inline($config, ., "foreign", .)
+                    html:inline($config, ., ("tei-foreign"), .)
                 case element(gap) return
                     if (desc) then
-                        html:inline($config, ., "gap1", .)
+                        html:inline($config, ., ("tei-gap1"), .)
                     else
                         if (@extent) then
-                            html:inline($config, ., "gap2", @extent)
+                            html:inline($config, ., ("tei-gap2"), @extent)
                         else
-                            html:inline($config, ., "gap3", .)
+                            html:inline($config, ., ("tei-gap3"), .)
                 case element(graphic) return
-                    html:graphic($config, ., "graphic", ., xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
+                    html:graphic($config, ., ("tei-graphic"), ., xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
                             "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")), @width, @height, @scale, desc)
                 case element(head) return
                     if (parent::figure) then
-                        html:block($config, ., "head1", .)
+                        html:block($config, ., ("tei-head1"), .)
                     else
                         if (parent::table) then
-                            html:block($config, ., "head2", .)
+                            html:block($config, ., ("tei-head2"), .)
                         else
                             if (parent::list/@type = ('participants', 'to', 'from', 'subject')) then
-                                html:block($config, ., "head3", .)
+                                html:block($config, ., ("tei-head3"), .)
                             else
                                 if (parent::list) then
-                                    html:block($config, ., "head4", .)
+                                    html:block($config, ., ("tei-head4"), .)
                                 else
-                                    if (parent::div) then
-                                        html:heading($config, ., "head5", .)
+                                    if (parent::div and @type='shortened-for-running-head') then
+                                        html:omit($config, ., ("tei-head5"), .)
                                     else
-                                        html:block($config, ., "head6", .)
+                                        if (parent::div) then
+                                            html:heading($config, ., ("tei-head6"), .)
+                                        else
+                                            html:block($config, ., ("tei-head7"), .)
                 case element(hi) return
                     if (@rend = 'strong') then
-                        html:inline($config, ., "hi1", .)
+                        html:inline($config, ., ("tei-hi1"), .)
                     else
                         if (@rend = 'italic') then
-                            html:inline($config, ., "hi2", .)
+                            html:inline($config, ., ("tei-hi2"), .)
                         else
                             if (@rend = 'smallcaps') then
-                                html:inline($config, ., "hi3", .)
+                                html:inline($config, ., ("tei-hi3"), .)
                             else
                                 if (@rendition) then
-                                    html:inline($config, ., css:get-rendition(., "hi4"), .)
+                                    html:inline($config, ., css:get-rendition(., ("tei-hi4")), .)
                                 else
                                     if (not(@rendition)) then
-                                        html:inline($config, ., "hi5", .)
+                                        html:inline($config, ., ("tei-hi5"), .)
                                     else
                                         $config?apply($config, ./node())
                 case element(item) return
-                    html:listItem($config, ., "item", .)
+                    html:listItem($config, ., ("tei-item"), .)
                 case element(l) return
-                    html:block($config, ., css:get-rendition(., "l"), .)
+                    html:block($config, ., css:get-rendition(., ("tei-l")), .)
                 case element(label) return
                     if (@foo='baz') then
-                        html:inline($config, ., "label1", .)
+                        html:inline($config, ., ("tei-label1"), .)
                     else
-                        html:inline($config, ., "label2", .)
+                        html:inline($config, ., ("tei-label2"), .)
                 case element(lb) return
-                    html:break($config, ., css:get-rendition(., "lb"), ., 'line', @n)
+                    html:break($config, ., css:get-rendition(., ("tei-lb")), ., 'line', @n)
                 case element(lg) return
-                    html:block($config, ., "lg", .)
+                    html:block($config, ., ("tei-lg"), .)
                 case element(list) return
                     if (@rend = 'bulleted') then
-                        html:list($config, ., "list1", item)
+                        html:list($config, ., ("tei-list1"), item)
                     else
                         if (@type = ('participants', 'to', 'from', 'subject')) then
-                            html:list($config, ., "list2", item)
+                            html:list($config, ., ("tei-list2"), item)
                         else
                             if (label) then
-                                html:list($config, ., "list3", item)
+                                html:list($config, ., ("tei-list3", "labeled-list"), item)
                             else
-                                html:list($config, ., "list4", item)
+                                html:list($config, ., ("tei-list4"), item)
                 case element(listBibl) return
                     if (bibl) then
-                        html:list($config, ., "listBibl1", bibl)
+                        html:list($config, ., ("tei-listBibl1"), bibl)
                     else
-                        html:block($config, ., "listBibl2", .)
+                        html:block($config, ., ("tei-listBibl2"), .)
                 case element(measure) return
-                    html:inline($config, ., "measure", .)
+                    html:inline($config, ., ("tei-measure"), .)
                 case element(milestone) return
-                    html:inline($config, ., "milestone", .)
+                    html:inline($config, ., ("tei-milestone"), .)
                 case element(name) return
-                    html:inline($config, ., "name", .)
+                    html:inline($config, ., ("tei-name"), .)
                 case element(note) return
                     if (@rend = 'inline') then
-                        html:paragraph($config, ., "note1", .)
+                        html:paragraph($config, ., ("tei-note1"), .)
                     else
-                        ext-html:note($config, ., "note2", ., "foot", @n/string())
+                        ext-html:note($config, ., ("tei-note2"), ., "foot", @n/string())
                 case element(num) return
-                    html:inline($config, ., "num", .)
+                    html:inline($config, ., ("tei-num"), .)
                 case element(orig) return
-                    html:inline($config, ., "orig", .)
+                    html:inline($config, ., ("tei-orig"), .)
                 case element(p) return
                     if (@rend = 'center') then
-                        html:paragraph($config, ., css:get-rendition(., "p1"), .)
+                        html:paragraph($config, ., css:get-rendition(., ("tei-p1")), .)
                     else
                         if (@rend = 'flushleft') then
-                            html:paragraph($config, ., css:get-rendition(., "p2"), .)
+                            html:paragraph($config, ., css:get-rendition(., ("tei-p2")), .)
                         else
-                            html:paragraph($config, ., css:get-rendition(., "p3"), .)
+                            html:paragraph($config, ., css:get-rendition(., ("tei-p3")), .)
                 case element(pb) return
                     (
-                        html:link($config, ., "pb1", concat('[Page ', @n, ']'), @xml:id)
+                        html:link($config, ., ("tei-pb1"), concat('[Page ', @n, ']'), @xml:id)
                     )
 
                 case element(publisher) return
-                    html:inline($config, ., "publisher", .)
+                    html:inline($config, ., ("tei-publisher"), .)
                 case element(pubPlace) return
-                    html:inline($config, ., "pubPlace", .)
+                    html:inline($config, ., ("tei-pubPlace"), .)
                 case element(q) return
                     if (l) then
-                        html:block($config, ., css:get-rendition(., "q1"), .)
+                        html:block($config, ., css:get-rendition(., ("tei-q1")), .)
                     else
                         if (ancestor::p or ancestor::cell) then
-                            html:inline($config, ., css:get-rendition(., "q2"), .)
+                            html:inline($config, ., css:get-rendition(., ("tei-q2")), .)
                         else
-                            html:block($config, ., css:get-rendition(., "q3"), .)
+                            html:block($config, ., css:get-rendition(., ("tei-q3")), .)
                 case element(quote) return
                     if (ancestor::p and empty(descendant::p|descendant::div)) then
-                        (: If it is inside a paragraph then it is inline, otherwise it is block level :)
-                        html:inline($config, ., css:get-rendition(., "quote1"), .)
+                        (: If it is inside a paragraph then it is inline, otherwise it is block level; no extra quote marks around :)
+                        html:inline($config, ., css:get-rendition(., ("tei-quote1")), .)
                     else
                         (: If it is inside a paragraph then it is inline, otherwise it is block level :)
-                        html:block($config, ., css:get-rendition(., "quote2"), .)
+                        html:block($config, ., css:get-rendition(., ("tei-quote2")), .)
                 case element(ref) return
-                    ext-html:ref($config, ., "ref")
+                    ext-html:ref($config, ., ("tei-ref"))
                 case element(reg) return
-                    html:inline($config, ., "reg", .)
+                    html:inline($config, ., ("tei-reg"), .)
                 case element(rs) return
-                    html:inline($config, ., "rs", .)
+                    html:inline($config, ., ("tei-rs"), .)
                 case element(sic) return
                     if (parent::choice and count(parent::*/*) gt 1) then
-                        html:inline($config, ., "sic1", .)
+                        html:inline($config, ., ("tei-sic1"), .)
                     else
-                        html:inline($config, ., "sic2", .)
+                        html:inline($config, ., ("tei-sic2"), .)
                 case element(sp) return
-                    html:block($config, ., "sp", .)
+                    html:block($config, ., ("tei-sp"), .)
                 case element(speaker) return
-                    html:block($config, ., "speaker", .)
+                    html:block($config, ., ("tei-speaker"), .)
                 case element(stage) return
-                    html:block($config, ., "stage", .)
+                    html:block($config, ., ("tei-stage"), .)
                 case element(time) return
-                    html:inline($config, ., "time", .)
+                    html:inline($config, ., ("tei-time"), .)
                 case element(title) return
-                    html:inline($config, ., "title", .)
+                    html:inline($config, ., ("tei-title"), .)
                 case element(unclear) return
-                    html:inline($config, ., "unclear", .)
+                    html:inline($config, ., ("tei-unclear"), .)
                 case element(revisionDesc) return
-                    html:omit($config, ., "revisionDesc", .)
+                    html:omit($config, ., ("tei-revisionDesc"), .)
                 case element(encodingDesc) return
-                    html:omit($config, ., "encodingDesc", .)
+                    html:omit($config, ., ("tei-encodingDesc"), .)
                 case element(fileDesc) return
                     (
-                        html:block($config, ., "fileDesc1", titleStmt),
-                        html:block($config, ., "fileDesc2", publicationStmt)
+                        html:block($config, ., ("tei-fileDesc1"), titleStmt),
+                        html:block($config, ., ("tei-fileDesc2"), publicationStmt)
                     )
 
                 case element(profileDesc) return
-                    html:omit($config, ., "profileDesc", .)
+                    html:omit($config, ., ("tei-profileDesc"), .)
                 case element(publicationStmt) return
                     (
-                        html:block($config, ., "publicationStmt1", publisher),
-                        html:block($config, ., "publicationStmt2", pubPlace),
-                        html:block($config, ., "publicationStmt3", date)
+                        html:block($config, ., ("tei-publicationStmt1"), publisher),
+                        html:block($config, ., ("tei-publicationStmt2"), pubPlace),
+                        html:block($config, ., ("tei-publicationStmt3"), date)
                     )
 
                 case element(teiHeader) return
                     (
-                        html:block($config, ., "teiHeader1", .),
-                        html:omit($config, ., "teiHeader2", .)
+                        html:block($config, ., ("tei-teiHeader1"), .),
+                        html:omit($config, ., ("tei-teiHeader2"), .)
                     )
 
                 case element(titleStmt) return
                     (
-                        html:heading($config, ., "titleStmt1", title[@type="complete"]),
+                        html:heading($config, ., ("tei-titleStmt1"), title[@type="complete"]),
                         if (count(editor[@role = 'primary']) gt 1) then
-                            html:block($config, ., "titleStmt2", "Editors:")
+                            html:block($config, ., ("tei-titleStmt2"), "Editors:")
                         else
                             (),
                         if (count(editor[@role = 'primary']) eq 1) then
-                            html:block($config, ., "titleStmt3", "Editor:")
+                            html:block($config, ., ("tei-titleStmt3"), "Editor:")
                         else
                             (),
                         if (editor[@role = 'primary']) then
-                            ext-html:list-from-items($config, ., "titleStmt4", editor[@role="primary"], ())
+                            ext-html:list-from-items($config, ., ("tei-titleStmt4"), editor[@role="primary"], ())
                         else
                             (),
                         if (editor[@role = 'general']) then
-                            html:block($config, ., "titleStmt5", "General Editor:")
+                            html:block($config, ., ("tei-titleStmt5"), "General Editor:")
                         else
                             (),
                         if (editor[@role = 'general']) then
-                            ext-html:list-from-items($config, ., "titleStmt6", editor[@role="general"], ())
+                            ext-html:list-from-items($config, ., ("tei-titleStmt6"), editor[@role="general"], ())
                         else
                             ()
                     )
 
                 case element(g) return
                     if (not(text())) then
-                        html:glyph($config, ., "g1", .)
+                        html:glyph($config, ., ("tei-g1"), .)
                     else
-                        html:inline($config, ., "g2", .)
+                        html:inline($config, ., ("tei-g2"), .)
                 case element(addSpan) return
-                    html:anchor($config, ., "addSpan", ., @xml:id)
+                    html:anchor($config, ., ("tei-addSpan"), ., @xml:id)
                 case element(am) return
-                    html:inline($config, ., "am", .)
+                    html:inline($config, ., ("tei-am"), .)
                 case element(ex) return
-                    html:inline($config, ., "ex", .)
+                    html:inline($config, ., ("tei-ex"), .)
                 case element(fw) return
                     if (ancestor::p or ancestor::ab) then
-                        html:inline($config, ., "fw1", .)
+                        html:inline($config, ., ("tei-fw1"), .)
                     else
-                        html:block($config, ., "fw2", .)
+                        html:block($config, ., ("tei-fw2"), .)
                 case element(handShift) return
-                    html:inline($config, ., "handShift", .)
+                    html:inline($config, ., ("tei-handShift"), .)
                 case element(space) return
-                    html:inline($config, ., "space", .)
+                    html:inline($config, ., ("tei-space"), .)
                 case element(subst) return
-                    html:inline($config, ., "subst", .)
+                    html:inline($config, ., ("tei-subst"), .)
                 case element(supplied) return
                     if (parent::choice) then
-                        html:inline($config, ., "supplied1", .)
+                        html:inline($config, ., ("tei-supplied1"), .)
                     else
                         if (@reason='damage') then
-                            html:inline($config, ., "supplied2", .)
+                            html:inline($config, ., ("tei-supplied2"), .)
                         else
                             if (@reason='illegible' or not(@reason)) then
-                                html:inline($config, ., "supplied3", .)
+                                html:inline($config, ., ("tei-supplied3"), .)
                             else
                                 if (@reason='omitted') then
-                                    html:inline($config, ., "supplied4", .)
+                                    html:inline($config, ., ("tei-supplied4"), .)
                                 else
-                                    html:inline($config, ., "supplied5", .)
+                                    html:inline($config, ., ("tei-supplied5"), .)
                 case element(c) return
-                    html:inline($config, ., "c", .)
+                    html:inline($config, ., ("tei-c"), .)
                 case element(pc) return
-                    html:inline($config, ., "pc", .)
+                    html:inline($config, ., ("tei-pc"), .)
                 case element(s) return
-                    html:inline($config, ., "s", .)
+                    html:inline($config, ., ("tei-s"), .)
                 case element(w) return
-                    html:inline($config, ., "w", .)
+                    html:inline($config, ., ("tei-w"), .)
                 case element(ab) return
-                    html:paragraph($config, ., "ab", .)
+                    html:paragraph($config, ., ("tei-ab"), .)
                 case element(anchor) return
-                    html:anchor($config, ., "anchor", ., @xml:id)
+                    html:anchor($config, ., ("tei-anchor"), ., @xml:id)
                 case element(seg) return
-                    html:inline($config, ., css:get-rendition(., "seg"), .)
+                    html:inline($config, ., css:get-rendition(., ("tei-seg")), .)
                 case element(actor) return
-                    html:inline($config, ., "actor", .)
+                    html:inline($config, ., ("tei-actor"), .)
                 case element(castGroup) return
                     if (child::*) then
                         (: Insert list. :)
-                        html:list($config, ., "castGroup", castItem|castGroup)
+                        html:list($config, ., ("tei-castGroup"), castItem|castGroup)
                     else
                         $config?apply($config, ./node())
                 case element(castItem) return
                     (: Insert item, rendered as described in parent list rendition. :)
-                    html:listItem($config, ., "castItem", .)
+                    html:listItem($config, ., ("tei-castItem"), .)
                 case element(castList) return
                     if (child::*) then
-                        html:list($config, ., css:get-rendition(., "castList"), castItem)
+                        html:list($config, ., css:get-rendition(., ("tei-castList")), castItem)
                     else
                         $config?apply($config, ./node())
                 case element(role) return
-                    html:block($config, ., "role", .)
+                    html:block($config, ., ("tei-role"), .)
                 case element(roleDesc) return
-                    html:block($config, ., "roleDesc", .)
+                    html:block($config, ., ("tei-roleDesc"), .)
                 case element(spGrp) return
-                    html:block($config, ., "spGrp", .)
+                    html:block($config, ., ("tei-spGrp"), .)
                 case element(argument) return
-                    html:block($config, ., "argument", .)
+                    html:block($config, ., ("tei-argument"), .)
                 case element(back) return
-                    html:block($config, ., "back", .)
+                    html:block($config, ., ("tei-back"), .)
                 case element(body) return
                     (
-                        html:index($config, ., "body1", 'toc', .),
-                        html:block($config, ., "body2", .)
+                        html:index($config, ., ("tei-body1"), 'toc', .),
+                        html:block($config, ., ("tei-body2"), .)
                     )
 
                 case element(byline) return
-                    html:block($config, ., "byline", .)
+                    html:block($config, ., ("tei-byline"), .)
                 case element(closer) return
-                    html:block($config, ., "closer", .)
+                    html:block($config, ., ("tei-closer"), .)
                 case element(dateline) return
-                    html:block($config, ., "dateline", .)
+                    html:block($config, ., ("tei-dateline"), .)
                 case element(div) return
                     if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter')) then
-                        ext-html:document-list($config, ., "div1")
+                        ext-html:document-list($config, ., ("tei-div1"))
                     else
-                        html:block($config, ., "div2", .)
+                        html:block($config, ., ("tei-div2"), .)
                 case element(docAuthor) return
                     if (ancestor::teiHeader) then
                         (: Omit if located in teiHeader. :)
-                        html:omit($config, ., "docAuthor1", .)
+                        html:omit($config, ., ("tei-docAuthor1"), .)
                     else
-                        html:inline($config, ., "docAuthor2", .)
+                        html:inline($config, ., ("tei-docAuthor2"), .)
                 case element(docDate) return
                     if (ancestor::teiHeader) then
                         (: Omit if located in teiHeader. :)
-                        html:omit($config, ., "docDate1", .)
+                        html:omit($config, ., ("tei-docDate1"), .)
                     else
-                        html:inline($config, ., "docDate2", .)
+                        html:inline($config, ., ("tei-docDate2"), .)
                 case element(docEdition) return
                     if (ancestor::teiHeader) then
                         (: Omit if located in teiHeader. :)
-                        html:omit($config, ., "docEdition1", .)
+                        html:omit($config, ., ("tei-docEdition1"), .)
                     else
-                        html:inline($config, ., "docEdition2", .)
+                        html:inline($config, ., ("tei-docEdition2"), .)
                 case element(docImprint) return
                     if (ancestor::teiHeader) then
                         (: Omit if located in teiHeader. :)
-                        html:omit($config, ., "docImprint1", .)
+                        html:omit($config, ., ("tei-docImprint1"), .)
                     else
-                        html:inline($config, ., "docImprint2", .)
+                        html:inline($config, ., ("tei-docImprint2"), .)
                 case element(docTitle) return
                     if (ancestor::teiHeader) then
                         (: Omit if located in teiHeader. :)
-                        html:omit($config, ., "docTitle1", .)
+                        html:omit($config, ., ("tei-docTitle1"), .)
                     else
-                        html:block($config, ., css:get-rendition(., "docTitle2"), .)
+                        html:block($config, ., css:get-rendition(., ("tei-docTitle2")), .)
                 case element(epigraph) return
-                    html:block($config, ., "epigraph", .)
+                    html:block($config, ., ("tei-epigraph"), .)
                 case element(floatingText) return
-                    html:block($config, ., "floatingText", .)
+                    html:block($config, ., ("tei-floatingText"), .)
                 case element(front) return
-                    html:block($config, ., "front", .)
+                    html:block($config, ., ("tei-front"), .)
                 case element(group) return
-                    html:block($config, ., "group", .)
+                    html:block($config, ., ("tei-group"), .)
                 case element(imprimatur) return
-                    html:block($config, ., "imprimatur", .)
+                    html:block($config, ., ("tei-imprimatur"), .)
                 case element(opener) return
-                    html:block($config, ., "opener", .)
+                    html:block($config, ., ("tei-opener"), .)
                 case element(postscript) return
-                    html:block($config, ., "postscript", .)
+                    html:block($config, ., ("tei-postscript"), .)
                 case element(salute) return
                     if (parent::closer) then
-                        html:inline($config, ., "salute1", .)
+                        html:inline($config, ., ("tei-salute1"), .)
                     else
-                        html:block($config, ., "salute2", .)
+                        html:block($config, ., ("tei-salute2"), .)
                 case element(signed) return
                     if (parent::closer) then
-                        html:block($config, ., "signed1", .)
+                        html:block($config, ., ("tei-signed1"), .)
                     else
-                        html:inline($config, ., "signed2", .)
+                        html:inline($config, ., ("tei-signed2"), .)
                 case element(TEI) return
-                    html:document($config, ., "TEI", .)
+                    html:document($config, ., ("tei-TEI"), .)
                 case element(text) return
-                    html:body($config, ., "text", .)
+                    html:body($config, ., ("tei-text"), .)
                 case element(titlePage) return
-                    html:block($config, ., css:get-rendition(., "titlePage"), .)
+                    html:block($config, ., css:get-rendition(., ("tei-titlePage")), .)
                 case element(titlePart) return
-                    html:block($config, ., css:get-rendition(., "titlePart"), .)
+                    html:block($config, ., css:get-rendition(., ("tei-titlePart")), .)
                 case element(trailer) return
-                    html:block($config, ., "trailer", .)
+                    html:block($config, ., ("tei-trailer"), .)
                 case element(cell) return
                     (: Insert table cell. :)
-                    html:cell($config, ., "cell", .)
+                    html:cell($config, ., ("tei-cell"), .)
                 case element(figDesc) return
-                    html:inline($config, ., "figDesc", .)
+                    html:inline($config, ., ("tei-figDesc"), .)
                 case element(figure) return
                     if (@rend='smallfloatinline') then
-                        html:block($config, ., "figure1", .)
+                        html:block($config, ., ("tei-figure1", "float-left figure-floated"), .)
                     else
                         if (head or @rendition='simple:display') then
-                            html:block($config, ., "figure2", .)
+                            html:block($config, ., ("tei-figure2"), .)
                         else
-                            html:inline($config, ., "figure3", .)
+                            html:inline($config, ., ("tei-figure3"), .)
                 case element(formula) return
                     if (@rendition='simple:display') then
-                        html:block($config, ., "formula1", .)
+                        html:block($config, ., ("tei-formula1"), .)
                     else
-                        html:inline($config, ., "formula2", .)
+                        html:inline($config, ., ("tei-formula2"), .)
                 case element(row) return
                     if (@role='label') then
-                        html:row($config, ., "row1", .)
+                        html:row($config, ., ("tei-row1"), .)
                     else
                         (: Insert table row. :)
-                        html:row($config, ., "row2", .)
+                        html:row($config, ., ("tei-row2"), .)
                 case element(table) return
-                    html:table($config, ., "table", .)
+                    html:table($config, ., ("tei-table"), .)
                 case element(rhyme) return
-                    html:inline($config, ., "rhyme", .)
+                    html:inline($config, ., ("tei-rhyme"), .)
                 case element(xhtml:object) return
-                    ext-html:passthrough($config, ., "xhtml:object")
+                    ext-html:passthrough($config, ., ("tei-xhtml:object"))
                 case element(xhtml:div) return
-                    ext-html:passthrough($config, ., "xhtml:div")
+                    ext-html:passthrough($config, ., ("tei-xhtml:div"))
                 case element(xhtml:script) return
-                    ext-html:passthrough($config, ., "xhtml:script")
+                    ext-html:passthrough($config, ., ("tei-xhtml:script"))
                 case element(persName) return
-                    html:inline($config, ., "persName", .)
+                    html:inline($config, ., ("tei-persName"), .)
                 case element(gloss) return
-                    html:inline($config, ., "gloss", .)
+                    html:inline($config, ., ("tei-gloss"), .)
                 case element(term) return
-                    html:inline($config, ., "term", .)
+                    html:inline($config, ., ("tei-term"), .)
                 case element(exist:match) return
                     html:match($config, ., .)
                 case text() | xs:anyAtomicType return

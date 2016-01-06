@@ -6991,12 +6991,14 @@ header {
 #content-container .popover {
   max-width: 80%;
 }
-.content .list3 dt {
-  float: left;
-  display: inline;
+dl {
+  margin: 1.5em 0 1.5em 0;
 }
-.content .list3 dd {
-  margin-left: 3em;
+dl dt {
+  font-weight: bold;
+}
+dl dd {
+  margin-left: 1.5em;
 }
 .breadcrumb {
   font-size: 85%;
@@ -7131,19 +7133,20 @@ ol.breadcrumb li:before {
   display: block;
   margin-bottom: 1em;
 }
-.figure1,
-.figure2 {
-  margin: 1em 2em 1em 0!important;
-  text-align: center !important;
-  max-width: 30% !important;
-  float: left !important ;
+.float-left {
+  float: left;
 }
-.head1 {
-  padding-top: 1em !important;
+.figure-floated {
+  margin: 1em 2em 1em 0;
+  text-align: center;
+  max-width: 30%;
+}
+.tei-head1 {
+  padding-top: 1em;
 }
 .content img {
-  border: 1px solid #C0C0C0 !important;
-  padding: 10px !important;
+  border: 1px solid #C0C0C0;
+  padding: 10px;
   -webkit-border-radius: 1ex;
   -moz-border-radius: 1ex;
 }
@@ -7154,7 +7157,10 @@ ol.breadcrumb li:before {
 .content table {
   border-spacing: 5px 5px !important;
 }
-.quote1 {
-  display: block ;
-  margin: 1em 0 1em 1em ;
+.content .labeled-list dt {
+  float: left;
+  display: inline;
+}
+.content .labeled-list dd {
+  margin-left: 3em;
 }

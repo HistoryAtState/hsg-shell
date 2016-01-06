@@ -286,17 +286,6 @@ header{
     }
 }
 
-.content {
-    .list3 {
-        dt {
-            float: left;
-            display: inline;
-        }
-        dd {
-            margin-left: 3em;
-        }
-    }
-}
 dl {
     margin: 1.5em 0 1.5em 0;
  dt {
@@ -457,22 +446,25 @@ ol.breadcrumb li:before {
     }
 }
 
-.figure1, .figure2 {
-    margin: 1em 2em 1em 0!important;
-    text-align: center !important;
-    max-width: 30% !important;
-    float: left !important ; 
+.float-left {
+    float: left;
+}
+
+.figure-floated {
+    margin: 1em 2em 1em 0;
+    text-align: center;
+    max-width: 30%;
 }
 
 
-.head1 {
-    padding-top: 1em !important;
+.tei-head1 {
+    padding-top: 1em;
 }
 
 .content {
     img {
-        border: 1px solid #C0C0C0 !important;
-        padding: 10px !important;
+        border: 1px solid #C0C0C0;
+        padding: 10px;
         -webkit-border-radius: 1ex;
         -moz-border-radius: 1ex;
     }
@@ -484,6 +476,16 @@ ol.breadcrumb li:before {
     table {
          border-spacing: 5px 5px !important;
          
+    }
+    
+    .labeled-list {
+        dt {
+            float: left;
+            display: inline;
+        }
+        dd {
+            margin-left: 3em;
+        }
     }
 }
 

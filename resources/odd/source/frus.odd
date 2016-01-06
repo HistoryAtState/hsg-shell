@@ -171,7 +171,7 @@
                         <param name="content">item</param>
                         <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
                     </model>
-                    <model predicate="label" behaviour="list">
+                    <model predicate="label" behaviour="list" cssClass="labeled-list">
                         <param name="content">item</param>
                     </model>
                     <model behaviour="list">
@@ -264,11 +264,7 @@
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="figure">
-                    <model predicate="@rend='smallfloatinline'" behaviour="block">
-                        <outputRendition>
-                            float: left;
-                        </outputRendition>
-                    </model>
+                    <model predicate="@rend='smallfloatinline'" behaviour="block" cssClass="float-left figure-floated"/>
                     <model predicate="head or @rendition='simple:display'" behaviour="block"/>
                     <model behaviour="inline">
                         <outputRendition>

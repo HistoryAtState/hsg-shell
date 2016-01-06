@@ -247,8 +247,8 @@
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="figure">
-                    <model predicate="head or @rendition='simple:display'" behaviour="block"/>
-                    <model behaviour="inline">
+                    <model predicate="head or @rendition='simple:display'" behaviour="block" cssClass="float-left figure-floated"/>
+                    <model behaviour="inline" cssClass="float-left figure-floated">
                         <outputRendition>
 display: block;
 </outputRendition>
