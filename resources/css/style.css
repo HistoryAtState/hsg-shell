@@ -7164,3 +7164,7 @@ ol.breadcrumb li:before {
 .content .labeled-list dd {
   margin-left: 3em;
 }
+.content .tei-quote1 {
+  display: block;
+  margin: 1em 0 1em 1em;
+}

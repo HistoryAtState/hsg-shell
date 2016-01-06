@@ -266,7 +266,7 @@ declare function pocom:chiefs-by-country-id($node as node(), $model as map(*), $
                     let $is-on-todays-map := $current-territory-id eq $contemporary-territory-id
                     let $territory-name := if ($is-on-todays-map) then () else concat(', ', gsh:territory-id-to-short-name($contemporary-territory-id))
                     return
-                        <li style="padding-bottom: .5em"><a href="{pocom:person-href($chief-id)}">{$name-birth-death}</a>
+                        <li><a href="{pocom:person-href($chief-id)}">{$name-birth-death}</a>
                             <ul><li>{$position-label} {$territory-name}, {if ($start-date-english = $end-date-english) then $start-date-english else concat($start-date-english, '–', $end-date-english)}</li></ul>
                         </li>
             else (: if ($chief-entry/self::mission-note) then :)
