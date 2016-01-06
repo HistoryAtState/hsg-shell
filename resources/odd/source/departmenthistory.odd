@@ -192,6 +192,7 @@
                     <model predicate="parent::list" behaviour="block">
                         <outputRendition>font-weight: bold;</outputRendition>
                     </model>
+                    <model predicate="parent::div and @type='shortened-for-running-head'" behaviour="omit"/>
                     <model predicate="parent::div" behaviour="heading">
                         <param name="level">count(ancestor::div)</param>
                     </model>
@@ -216,9 +217,10 @@
                 </elementSpec>
                 <elementSpec mode="change" ident="quote">
                     <model predicate="ancestor::p and empty(descendant::p|descendant::div)" behaviour="inline" useSourceRendition="true">
-                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
+                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level; no extra quote marks around</desc><!--
                         <outputRendition scope="before">content: '‘';</outputRendition>
                         <outputRendition scope="after">content: '’';</outputRendition>
+-->
                     </model>
                     <model behaviour="block" useSourceRendition="true">
                         <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
@@ -234,6 +236,11 @@
                 <elementSpec mode="change" ident="table">
                     <model behaviour="table"/>
                 </elementSpec>
+                <elementSpec mode="change" ident="cell">
+                    <model behaviour="cell">
+                        <desc>Insert table cell. </desc>
+                    </model>
+                </elementSpec>
                 <elementSpec mode="change" ident="graphic">
                     <model behaviour="graphic">
                         <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
@@ -245,8 +252,8 @@
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="figure">
-                    <model predicate="head or @rendition='simple:display'" behaviour="block"/>
-                    <model behaviour="inline">
+                    <model predicate="head or @rendition='simple:display'" behaviour="block" cssClass="float-left figure-floated"/>
+                    <model behaviour="inline" cssClass="float-left figure-floated">
                         <outputRendition>
 display: block;
 </outputRendition>

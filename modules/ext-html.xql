@@ -14,6 +14,10 @@ declare function pmf:passthrough($config as map(*), $node as element(), $class a
     $node
 };
 
+declare function pmf:table-heading($config as map(*), $node as element(), $class as xs:string+, $content) {
+    <th class="{$class}">{$config?apply-children($config, $node, $content)}</th>
+};
+
 declare function pmf:list-from-items($config as map(*), $node as element(), $class as xs:string+, $content, $ordered) {
     if ($ordered) then
         <ol class="{$class}">

@@ -171,7 +171,7 @@
                         <param name="content">item</param>
                         <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
                     </model>
-                    <model predicate="label" behaviour="list">
+                    <model predicate="label" behaviour="list" cssClass="labeled-list">
                         <param name="content">item</param>
                     </model>
                     <model behaviour="list">
@@ -192,6 +192,7 @@
                     <model predicate="parent::list" behaviour="block">
                         <outputRendition>font-weight: bold;</outputRendition>
                     </model>
+                    <model predicate="parent::div and @type='shortened-for-running-head'" behaviour="omit"/>
                     <model predicate="parent::div" behaviour="heading">
                         <param name="level">count(ancestor::div)</param>
                     </model>
@@ -225,9 +226,10 @@
                 </elementSpec>
                 <elementSpec mode="change" ident="quote">
                     <model predicate="ancestor::p and empty(descendant::p|descendant::div)" behaviour="inline" useSourceRendition="true">
-                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
+                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level; no extra quote marks around</desc><!--
                         <outputRendition scope="before">content: '‘';</outputRendition>
                         <outputRendition scope="after">content: '’';</outputRendition>
+-->
                     </model>
                     <model behaviour="block" useSourceRendition="true">
                         <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
@@ -243,6 +245,16 @@
                 <elementSpec mode="change" ident="table">
                     <model behaviour="table"/>
                 </elementSpec>
+                <elementSpec mode="change" ident="cell">
+                    <model behaviour="cell">
+                        <desc>Insert table cell. </desc>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="row">
+                    <model behaviour="row">
+                        <desc>Insert table row. </desc>
+                    </model>
+                </elementSpec>
                 <elementSpec mode="change" ident="graphic">
                     <model behaviour="graphic">
                         <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
@@ -254,11 +266,7 @@
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="figure">
-                    <model predicate="@rend='smallfloatinline'" behaviour="block">
-                        <outputRendition>
-                            float: left;
-                        </outputRendition>
-                    </model>
+                    <model predicate="@rend='smallfloatinline'" behaviour="block" cssClass="float-left figure-floated"/>
                     <model predicate="head or @rendition='simple:display'" behaviour="block"/>
                     <model behaviour="inline">
                         <outputRendition>

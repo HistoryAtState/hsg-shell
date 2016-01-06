@@ -2148,6 +2148,7 @@ relatedItem element must be empty</sch:report>
                     <model predicate="parent::list" behaviour="block">
                         <outputRendition>font-weight: bold;</outputRendition>
                     </model>
+                    <model predicate="parent::div and @type='shortened-for-running-head'" behaviour="omit"/>
                     <model predicate="parent::div" behaviour="heading">
                         <param name="level">count(ancestor::div)</param>
                     </model>
@@ -2392,7 +2393,7 @@ relatedItem element must be empty</sch:report>
                         <param name="content">item</param>
                         <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
                     </model>
-                    <model predicate="label" behaviour="list">
+                    <model predicate="label" behaviour="list" cssClass="labeled-list">
                         <param name="content">item</param>
                     </model>
                     <model behaviour="list">
@@ -2717,9 +2718,7 @@ relatedItem element must be empty</sch:report>
                     </content>
                     <attList/>
                     <model predicate="ancestor::p and empty(descendant::p|descendant::div)" behaviour="inline" useSourceRendition="true">
-                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
-                        <outputRendition scope="before">content: '‘';</outputRendition>
-                        <outputRendition scope="after">content: '’';</outputRendition>
+                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level; no extra quote marks around</desc>
                     </model>
                     <model behaviour="block" useSourceRendition="true">
                         <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
@@ -6790,12 +6789,7 @@ The @spanTo attribute of <name/> is required.</assert>
                         </zeroOrMore>
                     </content>
                     <attList/>
-                    <model predicate="@rend='smallfloatinline'" behaviour="block">
-                        <outputRendition>
-                            float: left;
-                            margin: 0 1em 1em 0;
-                        </outputRendition>
-                    </model>
+                    <model predicate="@rend='smallfloatinline'" behaviour="block" cssClass="float-left figure-floated"/>
                     <model predicate="head or @rendition='simple:display'" behaviour="block"/>
                     <model behaviour="inline">
                         <outputRendition>
