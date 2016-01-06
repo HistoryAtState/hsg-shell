@@ -236,6 +236,11 @@
                 <elementSpec mode="change" ident="table">
                     <model behaviour="table"/>
                 </elementSpec>
+                <elementSpec mode="change" ident="cell">
+                    <model behaviour="cell">
+                        <desc>Insert table cell. </desc>
+                    </model>
+                </elementSpec>
                 <elementSpec mode="change" ident="graphic">
                     <model behaviour="graphic">
                         <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
