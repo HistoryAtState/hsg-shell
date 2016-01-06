@@ -285,7 +285,7 @@ declare function pocom:chiefs-by-country-id($node as node(), $model as map(*), $
             let $note := $chief/note
             let $position-label := $positions-collection/role[id eq $chief/role-title-id]/names/singular/string()
             return
-                <li style="padding-bottom: .5em"><a href="{pocom:person-href($chief-id)}">{data($name)} ({$birth-death})</a>
+                <li><a href="{pocom:person-href($chief-id)}">{data($name)} ({$birth-death})</a>
                     <ul><li>{concat($position-label, if ($note) then concat(': ', $note) else ())}</li></ul>
                 </li>
             }
@@ -377,7 +377,7 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
         let $dates := concat(if ($person/birth ne '') then $person/birth else '?', '–', if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death)
         let $career-indicator := if ($person/career-type = ('fso', 'both')) then '*' else ()
         return
-            <li style="padding: .5em 0">{$career-indicator}<a href="{$url}">{$name}</a> ({$dates})
+            <li>{$career-indicator}<a href="{$url}">{$name}</a> ({$dates})
                 <ul>{
                     let $roles := $pocom:DATA//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
                     for $role in $roles
