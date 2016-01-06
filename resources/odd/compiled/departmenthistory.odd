@@ -1849,7 +1849,7 @@ relatedItem element must be empty</sch:report>
                     <constraintSpec mode="add" ident="noEmptyBibl" scheme="isoschematron">
                         <constraint>
                             <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="child::* or child::text()[normalize-space()]" role="ERROR">
-                Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" may not be empty.
+                Element "<name/>" may not be empty.
             </assert>
                         </constraint>
                     </constraintSpec>
@@ -1892,14 +1892,14 @@ relatedItem element must be empty</sch:report>
                     <constraintSpec ident="choiceSize" scheme="isoschematron" mode="add">
                         <constraint>
                             <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="count(*) &gt; 1" role="ERROR">
-                    Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" must have at least two child
+                    Element "<name/>" must have at least two child
 		    elements.</assert>
                         </constraint>
                     </constraintSpec>
                     <constraintSpec ident="choiceContent" scheme="isoschematron" mode="add">
                         <constraint>
                             <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))" role="ERROR">
-                    Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" must have corresponding corr/sic, expand/abbr, reg/orig </assert>
+                    Element "<name/>" must have corresponding corr/sic, expand/abbr, reg/orig </assert>
                         </constraint>
                     </constraintSpec>
                     <attList/>
@@ -2148,6 +2148,7 @@ relatedItem element must be empty</sch:report>
                     <model predicate="parent::list" behaviour="block">
                         <outputRendition>font-weight: bold;</outputRendition>
                     </model>
+                    <model predicate="parent::div and @type='shortened-for-running-head'" behaviour="omit"/>
                     <model predicate="parent::div" behaviour="heading">
                         <param name="level">count(ancestor::div)</param>
                     </model>
@@ -2717,9 +2718,7 @@ relatedItem element must be empty</sch:report>
                     </content>
                     <attList/>
                     <model predicate="ancestor::p and empty(descendant::p|descendant::div)" behaviour="inline" useSourceRendition="true">
-                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
-                        <outputRendition scope="before">content: '‘';</outputRendition>
-                        <outputRendition scope="after">content: '’';</outputRendition>
+                        <desc>If it is inside a paragraph then it is inline, otherwise it is block level; no extra quote marks around</desc>
                     </model>
                     <model behaviour="block" useSourceRendition="true">
                         <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
@@ -6790,8 +6789,8 @@ The @spanTo attribute of <name/> is required.</assert>
                         </zeroOrMore>
                     </content>
                     <attList/>
-                    <model predicate="head or @rendition='simple:display'" behaviour="block"/>
-                    <model behaviour="inline">
+                    <model predicate="head or @rendition='simple:display'" behaviour="block" cssClass="float-left figure-floated"/>
+                    <model behaviour="inline" cssClass="float-left figure-floated">
                         <outputRendition>
 display: block;
 </outputRendition>

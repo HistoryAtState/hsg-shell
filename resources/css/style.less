@@ -286,17 +286,6 @@ header{
     }
 }
 
-.content {
-    .list3 {
-        dt {
-            float: left;
-            display: inline;
-        }
-        dd {
-            margin-left: 3em;
-        }
-    }
-}
 dl {
     margin: 1.5em 0 1.5em 0;
  dt {
@@ -457,15 +446,18 @@ ol.breadcrumb li:before {
     }
 }
 
-.figure1, .figure2 {
+.float-left {
+    float: left !important;
+}
+
+.figure-floated {
     margin: 1em 2em 1em 0!important;
     text-align: center !important;
     max-width: 30% !important;
-    float: left !important ; 
 }
 
 
-.head1 {
+.tei-head1 {
     padding-top: 1em !important;
 }
 
@@ -484,6 +476,16 @@ ol.breadcrumb li:before {
     table {
          border-spacing: 5px 5px !important;
          
+    }
+    
+    .labeled-list {
+        dt {
+            float: left;
+            display: inline;
+        }
+        dd {
+            margin-left: 3em;
+        }
     }
 }
 
