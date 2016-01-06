@@ -81,7 +81,7 @@ declare function edu:module-introduction($node, $model, $document-id as xs:strin
     return 
         <div>
             <h2>{$longtitle/string()}</h2><hr />
-            <p>{$availability-message}. Download the <a href="{concat('$app/', $file-name)}">{$file-label}</a>.</p>
+            <p>{$availability-message}. Download the <a href="{concat('$s3static/', 'edu-modules/', $file-name)}">{$file-label}</a>.</p>
             {$intro-body}
         </div>
 };

@@ -74,9 +74,10 @@ declare function app:fix-href($href as xs:string*) {
             request:get-context-path() || "/apps/hsg-shell"
     return
         replace(
-            replace($href, "\$extern", "https://history.state.gov"),
-            "\$app",
-            $path-to-app
+            replace(
+                replace($href, "\$extern", "https://history.state.gov"),
+                "\$app",$path-to-app
+            ), "\$s3static", "http://" || $config:S3_DOMAIN
         )
 };
 
