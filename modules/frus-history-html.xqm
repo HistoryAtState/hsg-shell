@@ -28,7 +28,7 @@ declare function fhh:monograph-editors($node, $model) {
     let $editors := $doc//tei:titlePage//tei:name
     return
         <dl>
-            {if(count($editors) gt 1) then <dt>Editors:</dt> else <dt>Editor:</dt>}
+            <!-- {if(count($editors) gt 1) then <dt>Editors:</dt> else <dt>Editor:</dt>} -->
             {$editors ! <dd>{./string()}</dd>}
         </dl>
 };
