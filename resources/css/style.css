@@ -7103,7 +7103,7 @@ ol.breadcrumb li:before {
   /* stay on top */
   z-index: 1;
 }
-.ribbon a {
+.ribbon a, .ribbon a:visited {
   border: 1px solid #faa;
   color: #fff;
   display: block;
