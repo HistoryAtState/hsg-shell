@@ -745,6 +745,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                     <view>
                                         <forward url="{$exist:controller}/modules/view.xql">
                                             <add-parameter name="person-id" value="{$person-id}"/>
+                                            <add-parameter name="document-id" value="{$person-id}"/>
                                             <add-parameter name="publication-id" value="people"/>
                                         </forward>
                                     </view>

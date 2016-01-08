@@ -80,6 +80,7 @@ declare variable $config:CONFERENCES_ARTICLES_COL := $config:CONFERENCES_COL || 
 declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
 declare variable $config:COUNTRIES_ARTICLES_COL := "/db/apps/rdcr/articles";
 declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
+declare variable $config:SECRETARY_BIOS_COL := "/db/apps/other-publications/secretary-bios";
 declare variable $config:MILESTONES_COL := "/db/apps/milestones/chapters";
 declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education/introductions";
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
@@ -174,7 +175,16 @@ declare variable $config:PUBLICATIONS :=
             "title": "Department History"
         },
         "people": map {
-            "title": "People - Department History"
+            "collection": $config:SECRETARY_BIOS_COL,
+            "select-document": function($document-id) { doc($config:SECRETARY_BIOS_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:SECRETARY_BIOS_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/departmenthistory/people/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd",
+            "transform": 
+                (: Called to transform content based on the odd using tei simple pm :)
+                function($xml, $parameters) { pm-frus:transform($xml, map:new(($parameters, map:entry("document-list", true())))) },
+            "title": "People - Department History",
+            "base-path": function($document-id, $section-id) { $document-id }
         },
         "secretaries": map {
             "title": "Biographies of the Secretaries of State - Department History"
