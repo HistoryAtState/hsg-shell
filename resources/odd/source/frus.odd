@@ -243,15 +243,15 @@
                     </model>
                 </elementSpec><!-- override background-color and font-size property from teisimple.odd -->
                 <elementSpec mode="change" ident="table">
-                    <model behaviour="table"/>
+                    <model behaviour="table" useSourceRendition="true" cssClass="table"/>
                 </elementSpec>
                 <elementSpec mode="change" ident="cell">
-                    <model behaviour="cell">
+                    <model behaviour="cell" useSourceRendition="true">
                         <desc>Insert table cell. </desc>
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="row">
-                    <model behaviour="row">
+                    <model behaviour="row" useSourceRendition="true">
                         <desc>Insert table row. </desc>
                     </model>
                 </elementSpec>
