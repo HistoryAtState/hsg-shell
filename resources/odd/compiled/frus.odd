@@ -2607,10 +2607,10 @@ relatedItem element must be empty</sch:report>
                         <outputRendition>text-align: center;</outputRendition>
                     </model>
                     <model predicate="@rend = 'flushleft'" behaviour="paragraph" useSourceRendition="true">
-                        <outputRendition>text-align: justify;</outputRendition>
+                        <outputRendition>text-indent: 0em;</outputRendition>
                     </model>
                     <model behaviour="paragraph" useSourceRendition="true">
-                        <outputRendition>text-align: justify; text-indent: 0em;</outputRendition>
+                        <outputRendition>text-indent: 0em;</outputRendition>
                     </model>
                 </elementSpec>
                 <elementSpec rend="change" module="core" ident="pb">
