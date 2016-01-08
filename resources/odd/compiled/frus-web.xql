@@ -33,9 +33,12 @@ declare function model:transform($options as map(*), $input as node()*) {
                 "apply-children": model:apply-children#3
             }
         ))
-        return
-            model:apply($config, $input)
-                        
+    
+    return (
+        html:prepare($config, $input),
+    
+        model:apply($config, $input)
+    )
 };
 
 declare function model:apply($config as map(*), $input as node()*) {
@@ -453,7 +456,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:block($config, ., ("tei-trailer"), .)
                 case element(cell) return
                     (: Insert table cell. :)
-                    html:cell($config, ., ("tei-cell"), .)
+                    html:cell($config, ., css:get-rendition(., ("tei-cell")), .)
                 case element(figDesc) return
                     html:inline($config, ., ("tei-figDesc"), .)
                 case element(figure) return
@@ -470,13 +473,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                     else
                         html:inline($config, ., ("tei-formula2"), .)
                 case element(row) return
-                    if (@role='label') then
-                        html:row($config, ., ("tei-row1"), .)
-                    else
-                        (: Insert table row. :)
-                        html:row($config, ., ("tei-row2"), .)
+                    (: Insert table row. :)
+                    html:row($config, ., css:get-rendition(., ("tei-row")), .)
                 case element(table) return
-                    html:table($config, ., ("tei-table"), .)
+                    html:table($config, ., css:get-rendition(., ("tei-table", "table")), .)
                 case element(rhyme) return
                     html:inline($config, ., ("tei-rhyme"), .)
                 case element(xhtml:object) return

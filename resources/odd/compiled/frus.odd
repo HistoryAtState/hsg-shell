@@ -2607,10 +2607,10 @@ relatedItem element must be empty</sch:report>
                         <outputRendition>text-align: center;</outputRendition>
                     </model>
                     <model predicate="@rend = 'flushleft'" behaviour="paragraph" useSourceRendition="true">
-                        <outputRendition>text-align: justify;</outputRendition>
+                        <outputRendition>text-indent: 0em;</outputRendition>
                     </model>
                     <model behaviour="paragraph" useSourceRendition="true">
-                        <outputRendition>text-align: justify; text-indent: 0em;</outputRendition>
+                        <outputRendition>text-indent: 0em;</outputRendition>
                     </model>
                 </elementSpec>
                 <elementSpec rend="change" module="core" ident="pb">
@@ -6751,7 +6751,7 @@ The @spanTo attribute of <name/> is required.</assert>
                             </valList>
                         </attDef>
                     </attList>
-                    <model behaviour="cell">
+                    <model behaviour="cell" useSourceRendition="true">
                         <desc>Insert table cell. </desc>
                     </model>
                 </elementSpec>
@@ -6844,10 +6844,7 @@ display: block;
                             </valList>
                         </attDef>
                     </attList>
-                    <model predicate="@role='label'" behaviour="row">
-                        <outputRendition>font-weight: bold;</outputRendition>
-                    </model>
-                    <model behaviour="row">
+                    <model behaviour="row" useSourceRendition="true">
                         <desc>Insert table row. </desc>
                     </model>
                 </elementSpec>
@@ -6902,7 +6899,7 @@ display: block;
                             </datatype>
                         </attDef>
                     </attList>
-                    <model behaviour="table"/>
+                    <model behaviour="table" useSourceRendition="true" cssClass="table"/>
                 </elementSpec>
                 <elementSpec rend="change" module="verse" ident="rhyme">
                     <classes>
