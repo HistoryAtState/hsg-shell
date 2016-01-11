@@ -107,7 +107,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:break($config, ., ("tei-cb"), ., 'column', @n)
                 case element(cell) return
                     (: Insert table cell. :)
-                    html:cell($config, ., css:get-rendition(., ("tei-cell")), .)
+                    html:cell($config, ., css:get-rendition(., ("tei-cell")), ., ())
                 case element(choice) return
                     if (sic and corr) then
                         html:alternate($config, ., ("tei-choice4"), ., corr[1], sic[1])
@@ -449,7 +449,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:inline($config, ., ("tei-w"), .)
                 case element(cell) return
                     (: Insert table cell. :)
-                    html:cell($config, ., css:get-rendition(., ("tei-cell")), .)
+                    html:cell($config, ., css:get-rendition(., ("tei-cell")), ., ())
                 case element(row) return
                     (: Insert table row. :)
                     html:row($config, ., css:get-rendition(., ("tei-row")), .)
