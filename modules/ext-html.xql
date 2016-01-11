@@ -42,8 +42,9 @@ declare function pmf:document-list($config as map(*), $node as element(), $class
  : - extend to persName id references - which should point to the persons div; terms; index references; etc.
  :)
 declare function pmf:ref($config as map(*), $node as element(), $class as xs:string+) {
-    let $publication-id := map:get($hsg-config:PUBLICATION-COLLECTIONS, util:collection-name($node))
-    let $document-id := substring-before(util:document-name($node), '.xml')
+    let $docName := util:collection-name($node)
+    let $publication-id := $hsg-config:PUBLICATION-COLLECTIONS?($docName)
+    let $document-id := substring-before($docName, '.xml')
     let $target := $node/@target
     let $href := 
         (: generic: catch http, mailto links :)
