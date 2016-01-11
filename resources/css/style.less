@@ -375,6 +375,16 @@ ol.breadcrumb li:before {
 .table > tbody > tr > td {
     border-top: 1px;
 }
+/* override bootstrap, which adds 8px padding to each cell! TODO: modify bootstrap base style */
+.table > tbody > tr > th,
+.table > tbody > tr > td {
+  padding: 0px 1px;
+  vertical-align: top;
+}
+/* override bootstrap, which makes tables full width. TODO: modify bootstrap base style */
+.table {
+    width: inherit;
+}
 
 .carousel-caption {
     position: initial;
@@ -463,15 +473,6 @@ ol.breadcrumb li:before {
         padding: 10px;
         -webkit-border-radius: 1ex;
         -moz-border-radius: 1ex;
-    }
-    
-    table th, td {
-        padding: 12px 12px !important;
-    }
-    
-    table {
-         border-spacing: 5px 5px !important;
-         
     }
     
     .labeled-list {
