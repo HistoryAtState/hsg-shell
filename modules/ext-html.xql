@@ -44,7 +44,7 @@ declare function pmf:document-list($config as map(*), $node as element(), $class
 declare function pmf:ref($config as map(*), $node as element(), $class as xs:string+) {
     let $docName := util:collection-name($node)
     let $publication-id := $hsg-config:PUBLICATION-COLLECTIONS?($docName)
-    let $document-id := substring-before($docName, '.xml')
+    let $document-id := substring-before(util:document-name($node), '.xml')
     let $target := $node/@target
     let $href := 
         (: generic: catch http, mailto links :)
