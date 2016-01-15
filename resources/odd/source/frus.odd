@@ -162,7 +162,17 @@
                         <outputRendition>text-align: right;</outputRendition>
                     </model>
                 </elementSpec>
-                <elementSpec mode="change" ident="list">
+                <elementSpec mode="change" ident="list"><!-- TODO: check against PM spec. Not sure if modelSequence can be used like this. -->
+                    <modelSequence predicate="head">
+                        <model behaviour="heading" cssClass="listHead">
+                            <param name="content">head/node()</param>
+                            <param name="level">4</param>
+                        </model>
+                        <model behaviour="list" cssClass="list">
+                            <param name="content">item</param>
+                            <outputRendition>list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0</outputRendition>
+                        </model>
+                    </modelSequence>
                     <model predicate="@rend = 'bulleted'" behaviour="list">
                         <param name="content">item</param>
                         <outputRendition>list-style-type: disc;</outputRendition>
@@ -174,7 +184,7 @@
                     <model predicate="label" behaviour="list" cssClass="labeled-list">
                         <param name="content">item</param>
                     </model>
-                    <model behaviour="list">
+                    <model behaviour="list" cssClass="list">
                         <param name="content">item</param>
                         <outputRendition>list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0</outputRendition>
                     </model>

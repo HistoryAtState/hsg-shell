@@ -281,16 +281,23 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(lg) return
                     html:block($config, ., ("tei-lg"), .)
                 case element(list) return
-                    if (@rend = 'bulleted') then
-                        html:list($config, ., ("tei-list1"), item)
+                    if (head) then
+                        (
+                            html:heading($config, ., ("tei-list1", "listHead"), head/node()),
+                            html:list($config, ., ("tei-list2", "list"), item)
+                        )
+
                     else
-                        if (@type = ('participants', 'to', 'from', 'subject')) then
-                            html:list($config, ., ("tei-list2"), item)
+                        if (@rend = 'bulleted') then
+                            html:list($config, ., ("tei-list1"), item)
                         else
-                            if (label) then
-                                html:list($config, ., ("tei-list3", "labeled-list"), item)
+                            if (@type = ('participants', 'to', 'from', 'subject')) then
+                                html:list($config, ., ("tei-list2"), item)
                             else
-                                html:list($config, ., ("tei-list4"), item)
+                                if (label) then
+                                    html:list($config, ., ("tei-list3", "labeled-list"), item)
+                                else
+                                    html:list($config, ., ("tei-list4", "list"), item)
                 case element(listBibl) return
                     if (bibl) then
                         html:list($config, ., ("tei-listBibl1"), bibl)

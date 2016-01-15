@@ -7035,6 +7035,10 @@ ol.breadcrumb li:before {
   padding: 0px 1px;
   vertical-align: top;
 }
+/* override bootstrap, which makes tables full width. TODO: modify bootstrap base style */
+.table {
+  width: inherit;
+}
 .carousel-caption {
   position: initial;
   z-index: inherit;
@@ -7119,4 +7123,11 @@ ol.breadcrumb li:before {
 }
 .content .labeled-list dd {
   margin-left: 3em;
+}
+.content .listHead {
+  font-weight: bold;
+}
+.content .listHead + .list li {
+  margin-left: 2em;
+  font-size: 85%;
 }
