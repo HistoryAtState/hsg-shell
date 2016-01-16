@@ -31,4 +31,7 @@
     <output mode="web" odd="frus">
         <module mode="html" uri="http://history.state.gov/ns/site/hsg/pmf-html" prefix="ext-html" at="../../hsg-shell/modules/ext-html.xql"/>
     </output>
+    <output mode="web" odd="departmenthistory">
+        <module mode="html" uri="http://history.state.gov/ns/site/hsg/pmf-html" prefix="ext-html" at="../../hsg-shell/modules/ext-html.xql"/>
+    </output>
 </modules>

@@ -142,10 +142,13 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(desc) return
                     html:inline($config, ., ("tei-desc"), .)
                 case element(div) return
-                    if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter')) then
+                    if ($parameters?document-list and div[@type='question']) then
                         ext-html:document-list($config, ., ("tei-div1"))
                     else
-                        html:block($config, ., ("tei-div2"), .)
+                        if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section') and exists(div[@type])) then
+                            ext-html:document-list($config, ., ("tei-div2"))
+                        else
+                            html:block($config, ., ("tei-div3"), .)
                 case element(docAuthor) return
                     if (ancestor::teiHeader) then
                         (: Omit if located in teiHeader. :)

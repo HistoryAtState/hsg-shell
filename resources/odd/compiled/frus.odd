@@ -190,7 +190,8 @@
                 <model behaviour="inline"/>
             </elementSpec>
             <elementSpec ident="div" mode="change">
-                <model output="web" predicate="$parameters?document-list and @type = ('compilation', 'chapter', 'subchapter')" behaviour="document-list"/>
+                <model output="web" predicate="$parameters?document-list and div[@type='question']" behaviour="document-list"/>
+                <model output="web" predicate="$parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section') and exists(div[@type])" behaviour="document-list"/>
                 <model behaviour="block"/>
             </elementSpec>
             <elementSpec mode="change" ident="docAuthor">
@@ -370,7 +371,7 @@ display: block;
             <elementSpec mode="change" ident="lg">
                 <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="list"><!-- TODO: check against PM spec -->
+            <elementSpec mode="change" ident="list"><!-- TODO: check against PM spec. Not sure if modelSequence can be used like this. -->
                 <modelSequence predicate="head">
                     <model behaviour="heading" cssClass="listHead">
                         <param name="content">head/node()</param>

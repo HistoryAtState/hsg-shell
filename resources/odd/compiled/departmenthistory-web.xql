@@ -15,6 +15,8 @@ import module namespace css="http://www.tei-c.org/tei-simple/xquery/css" at "xml
 
 import module namespace html="http://www.tei-c.org/tei-simple/xquery/functions" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/html-functions.xql";
 
+import module namespace ext-html="http://history.state.gov/ns/site/hsg/pmf-html" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/../../hsg-shell/modules/ext-html.xql";
+
 (:~
 
     Main entry point for the transformation.
@@ -141,8 +143,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:inline($config, ., ("tei-desc"), .)
                 case element(div) return
                     if (@type = ('compilation', 'chapter')) then
-                        (: No function found for behavior: document-list :)
-                        $config?apply($config, ./node())
+                        ext-html:document-list($config, ., ("tei-div1"))
                     else
                         html:block($config, ., ("tei-div2"), .)
                 case element(docAuthor) return
@@ -302,7 +303,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     if (@rend = 'inline') then
                         html:paragraph($config, ., ("tei-note1"), .)
                     else
-                        html:note($config, ., ("tei-note2"), ., "foot", @n/string())
+                        ext-html:note($config, ., ("tei-note2"), ., "foot", @n/string())
                 case element(num) return
                     html:inline($config, ., ("tei-num"), .)
                 case element(opener) return
@@ -346,8 +347,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         (: If it is inside a paragraph then it is inline, otherwise it is block level :)
                         html:block($config, ., css:get-rendition(., ("tei-quote2")), .)
                 case element(ref) return
-                    (: No function found for behavior: ref :)
-                    $config?apply($config, ./node())
+                    ext-html:ref($config, ., ("tei-ref"))
                 case element(reg) return
                     html:inline($config, ., ("tei-reg"), .)
                 case element(rhyme) return
@@ -462,8 +462,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         else
                             (),
                         if (editor[@role = 'primary']) then
-                            (: No function found for behavior: list-from-items :)
-                            $config?apply($config, ./node())
+                            ext-html:list-from-items($config, ., ("tei-titleStmt4"), editor[@role="primary"], ())
                         else
                             (),
                         if (editor[@role = 'general']) then
@@ -471,8 +470,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         else
                             (),
                         if (editor[@role = 'general']) then
-                            (: No function found for behavior: list-from-items :)
-                            $config?apply($config, ./node())
+                            ext-html:list-from-items($config, ., ("tei-titleStmt6"), editor[@role="general"], ())
                         else
                             ()
                     )
