@@ -45,7 +45,11 @@ declare function pmf:ref($config as map(*), $node as element(), $class as xs:str
     let $docName := util:collection-name($node)
     let $publication-id := $hsg-config:PUBLICATION-COLLECTIONS?($docName)
     let $document-id := substring-before(util:document-name($node), '.xml')
-    let $target := $node/@target
+
+    (: ToDO: Quick fix not sure where the origin is from :)
+    let $tmp := data($node/@target)
+    let $target := if (starts-with($tmp, '/')) then $tmp else ("/" || $tmp)
+    
     let $href := 
         (: generic: catch http, mailto links :)
         if (matches($target, '^http|mailto')) then
