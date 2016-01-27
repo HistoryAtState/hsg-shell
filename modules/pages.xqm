@@ -1,6 +1,6 @@
 xquery version "3.1";
 
-(:~ 
+(:~
  : Template functions to handle page by page navigation and display
  : pages using TEI Simple.
  :)
@@ -18,7 +18,7 @@ import module namespace console="http://exist-db.org/xquery/console" at "java:or
 
 declare variable $pages:app-root := request:get-context-path() || substring-after($config:app-root, "/db");
 
-declare variable $pages:EXIDE := 
+declare variable $pages:EXIDE :=
     let $pkg := collection(repo:get-root())//expath:package[@name = "http://exist-db.org/apps/eXide"]
     let $appLink :=
         if ($pkg) then
@@ -28,7 +28,7 @@ declare variable $pages:EXIDE :=
     let $path := string-join((request:get-context-path(), request:get-attribute("$exist:prefix"), $appLink, "index.html"), "/")
     return
         replace($path, "/+", "/");
-        
+
 declare
     %templates:default("view", "div")
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?, $view as xs:string) {
@@ -36,35 +36,35 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else (),
         "publication-id": $publication-id,
         "document-id": $document-id,
-        "base-path": 
+        "base-path":
             if (exists($publication-id)) then
                 (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
                 if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
-                    map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id) 
+                    map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
                 else ()
             else (),
         "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
     }
     let $html := templates:process($node/*, map:new(($model, $content)))
-    (: without an entry in $config:PUBLICATIONS and a publication-id parameter from controller.xql, 
+    (: without an entry in $config:PUBLICATIONS and a publication-id parameter from controller.xql,
      : only the stock "Office of the Historian" title will appear in the <title> element :)
     let $title := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?title else ()
     let $head :=
         if ($section-id) then
-            if ($content?data instance of element(tei:div)) then 
-                $content?data/tei:head 
-            else 
+            if ($content?data instance of element(tei:div)) then
+                $content?data/tei:head
+            else
                 root($content?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
         (: we can't trust pages:load-xml for the purposes of finding a document's title, since it returns the document's first descendant div :)
         (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
         else if ($publication-id and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'select-document')) then
             map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
         (: allow for pages that don't have an entry in $config:PUBLICATIONS at all :)
-        else 
+        else
             ()
-    return 
+    return
         (
-            $html, 
+            $html,
             <div class="page-title" style="display:none">{
                 string-join(($head, $title, "Office of the Historian")[. ne ''], " - ")
             }</div>
@@ -84,8 +84,10 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
     return
         if (empty($block)) then (
             pages:load-fallback-page($publication-id, $document-id, $section-id)
-        ) else
+        ) else (
+            console:log("Loaded " || document-uri(root($block))),
             $block
+        )
 };
 
 declare function pages:load-fallback-page($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
@@ -133,7 +135,7 @@ declare function pages:volume-to-tei($volume as element()) {
                             }
                             </tei:list>
                         </tei:div>
-                    else 
+                    else
                         ()
                 }
             </tei:sourceDesc>
@@ -162,10 +164,10 @@ declare function pages:xml-link($node as node(), $model as map(*), $doc as xs:st
         }
 };
 
-declare 
+declare
     %templates:default("view", "div")
 function pages:view($node as node(), $model as map(*), $view as xs:string) {
-    let $xml := 
+    let $xml :=
         if ($view = "div") then
             pages:get-content($model?data)
         else
@@ -210,7 +212,7 @@ declare function pages:process-content($odd as function(*), $xml as element()*, 
                 <div class="footnotes">
                     <ol>{$html//li[@class="footnote"]}</ol>
                 </div>
-            else 
+            else
                 ()
             }
         </div>
@@ -274,7 +276,7 @@ function pages:styles($node as node(), $model as map(*), $odd as xs:string?) {
     }
 };
 
-declare 
+declare
     %templates:wrap
     %templates:default("view", "div")
 function pages:navigation($node as node(), $model as map(*), $view as xs:string) {
@@ -319,11 +321,14 @@ declare function pages:get-previous($div as element()?) {
     else if ($div/preceding-sibling::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)]) then
         $div/preceding-sibling::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
     else
-        $div/preceding::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
+        (
+            $div/ancestor::tei:div[@type = ('compilation', 'chapter', 'subchapter', 'section')][tei:div/@type][1],
+            $div/preceding::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
+        )[1]
 };
 
 declare function pages:get-content($div as element()) {
-    if ($div instance of element(tei:teiHeader)) then 
+    if ($div instance of element(tei:teiHeader)) then
         $div
     else (: if ($div instance of element(tei:div)) then :)
         $div
@@ -357,8 +362,8 @@ function pages:navigation-link($node as node(), $model as map(*), $direction as 
             let $section-id := $model($direction)/@xml:id
             let $href :=
                 if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'html-href')) then
-                    map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id) 
-                else 
+                    map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
+                else
                     $model($direction)/@xml:id
             return
                 attribute href { app:fix-href($href) },
@@ -386,7 +391,7 @@ function pages:app-root($node as node(), $model as map(*)) {
     }
 };
 
-(: lets a template provide a full path to a document, as used in pages/departmenthistory/buildings. 
+(: lets a template provide a full path to a document, as used in pages/departmenthistory/buildings.
  : TODO: extend with an $odd parameter. :)
 declare function pages:render-document($node, $model, $document-path, $section-id) {
     let $doc := doc($document-path)
@@ -395,23 +400,23 @@ declare function pages:render-document($node, $model, $document-path, $section-i
         pages:process-content($model?odd, $section)
 };
 
-declare 
+declare
     %templates:wrap
 function pages:document-link($node, $model) {
-    element a { 
-        $node/@*, 
+    element a {
+        $node/@*,
         root($model?data)//tei:title[@type = 'complete']/string()
     }
 };
 
-declare 
+declare
     %templates:wrap
 function pages:section-link($node, $model) {
-    element a { 
-        $node/@*, 
+    element a {
+        $node/@*,
         if ($model?data instance of element(tei:div)) then
-            $model?data/tei:head[1]/string() 
-        else 
+            $model?data/tei:head[1]/string()
+        else
             root($model?data)//tei:title[@type = 'complete']/string()
     }
 };
@@ -438,7 +443,7 @@ declare function pages:deep-section-breadcrumbs($node, $model, $truncate as xs:b
             }
     else
         element li {
-            element a { 
+            element a {
                 attribute class { "section" },
                 root($model?data)//tei:title[@type = 'complete']/string()
             }
