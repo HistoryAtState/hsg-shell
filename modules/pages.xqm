@@ -318,7 +318,7 @@ declare function pages:get-next($div as element()) {
 declare function pages:get-previous($div as element()?) {
     if ($div/self::tei:pb) then
         $div/preceding::tei:pb[1]
-    else if ($div/preceding-sibling::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)]) then
+    else if ($div/preceding-sibling::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][not(tei:div/@type)]) then
         $div/preceding-sibling::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
     else
         (
