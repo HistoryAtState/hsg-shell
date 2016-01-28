@@ -322,7 +322,7 @@ declare function pages:get-previous($div as element()?) {
         $div/preceding-sibling::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
     else
         (
-            $div/ancestor::tei:div[@type = ('compilation', 'chapter', 'subchapter', 'section')][tei:div/@type][1],
+            $div/ancestor::tei:div[@type = ('compilation', 'chapter', 'subchapter', 'section', 'part')][tei:div/@type][1],
             $div/preceding::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
         )[1]
 };

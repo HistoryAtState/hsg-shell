@@ -145,7 +145,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     if ($parameters?document-list and div[@type='question']) then
                         ext-html:document-list($config, ., ("tei-div1"))
                     else
-                        if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section') and exists(div[@type])) then
+                        if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type])) then
                             ext-html:document-list($config, ., ("tei-div2"))
                         else
                             html:block($config, ., ("tei-div3"), .)
