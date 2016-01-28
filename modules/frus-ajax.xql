@@ -13,13 +13,13 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 declare option output:method "json";
 declare option output:media-type "application/json";
 
-(: 
+(:
  : This module is called from Javascript when the user wants to navigate to the next/previous
  : page.
  :)
 let $url := request:get-parameter("url", ())
 (: remove after beta. brittle url logic here. :)
-let $url := if (starts-with($url, '/beta')) then substring-after($url, '/beta') else $url 
+let $url := if (starts-with($url, '/beta')) then substring-after($url, '/beta') else $url
 let $toc := boolean(request:get-parameter("toc", ()))
 let $match := analyze-string($url, "^/([^/]+)/([^/]+)/?(.*)$")
 let $publication := $match//fn:group[@nr = "1"]/string()
@@ -30,8 +30,8 @@ let $publication-id :=
     switch ($publication)
         case 'historicaldocuments' return 'frus'
         case 'about' return $volume
-        case 'departmenthistory' return 
-            switch ($volume) 
+        case 'departmenthistory' return
+            switch ($volume)
                 case 'buildings' return 'buildings'
                 case 'short-history' return 'short-history'
                 default return $publication
@@ -44,7 +44,7 @@ return
         let $odd := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
         let $prev := pages:get-previous($xml)
         let $next := pages:get-next($xml)
-        let $html := 
+        let $html :=
             if ($xml instance of element(tei:pb)) then
                 let $href := concat('//', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
                 return
@@ -56,40 +56,47 @@ return
         let $html := app:fix-links($html)
         let $doc := replace($volume, "^.*/([^/]+)$", "$1")
         let $model := map {
-            "odd": $odd
+            "odd": $odd,
+            "data": $xml
         }
+        let $breadcrumbs :=
+            if ($publication-id = "frus") then
+                <li class="section-breadcrumb">{fh:section-breadcrumb(<n/>, $model)}</li>
+            else
+                pages:deep-section-breadcrumbs(<n/>, $model, true())
         return
             map {
                 "doc": $doc,
                 "next":
-                    if ($next) then 
+                    if ($next) then
                         $next/@xml:id/string()
                     else (),
-                "previous": 
+                "previous":
                     if ($prev) then
                         $prev/@xml:id/string()
                     else (),
                 "title": pages:title($xml/ancestor-or-self::tei:TEI),
                 "toc": if ($toc) then toc:toc($model, $xml, true(), true()) else (),
                 "tocCurrent": $xml/ancestor-or-self::tei:div[@type != "document"][1]/@xml:id/string(),
-                "breadcrumbSection": fh:breadcrumb-heading($model, $xml),
+                (: "breadcrumbSection": fh:breadcrumb-heading($model, $xml), :)
+                "breadcrumbSection": $breadcrumbs,
                 "persons":
-                    let $persons := 
-                        if ($xml/@type=('compilation', 'chapter', 'subchapter')) then 
+                    let $persons :=
+                        if ($xml/@type=('compilation', 'chapter', 'subchapter')) then
                             ()
                         else
                             fh:get-persons($xml, distinct-values($xml//tei:persName/@corresp))
                     return
                         if ($persons) then <div class="list-group">{$persons}</div> else (),
-                "gloss": 
-                    let $gloss := 
-                        if ($xml/@type=('compilation', 'chapter', 'subchapter')) then 
+                "gloss":
+                    let $gloss :=
+                        if ($xml/@type=('compilation', 'chapter', 'subchapter')) then
                             ()
                         else
                             fh:get-gloss($xml, distinct-values($xml//tei:gloss/@target))
                     return
                         if ($gloss) then <div class="list-group">{$gloss}</div> else (),
-                "content": serialize($html, 
+                "content": serialize($html,
                     <output:serialization-parameters xmlns:output="http://www.w3.org/2010/xslt-xquery-serialization">
                       <output:omit-xml-declaration value="yes"/>
                       <output:indent>no</output:indent>

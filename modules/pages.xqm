@@ -426,6 +426,7 @@ declare function pages:deep-section-breadcrumbs($node, $model, $truncate as xs:b
         for $div in $model?data/ancestor-or-self::tei:div[@xml:id]
         return
             element li {
+                attribute class { "section-breadcrumb"},
                 element a {
                     attribute class { "section" },
                     attribute href { $div/@xml:id },
@@ -443,6 +444,7 @@ declare function pages:deep-section-breadcrumbs($node, $model, $truncate as xs:b
             }
     else
         element li {
+            attribute class { "section-breadcrumb" },
             element a {
                 attribute class { "section" },
                 root($model?data)//tei:title[@type = 'complete']/string()
