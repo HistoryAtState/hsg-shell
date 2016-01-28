@@ -28,7 +28,10 @@ let $id := $match//fn:group[@nr = "3"]/string()
 (: TODO Please add comments describing assumption of the path parsing and mapping onto publication-id/document-id/section-id logic :)
 let $publication-id :=
     switch ($publication)
-        case 'historicaldocuments' return 'frus'
+        case 'historicaldocuments' return
+            switch ($volume)
+                case "frus-history" return "frus-history-monograph"
+                default return 'frus'
         case 'about' return $volume
         case 'departmenthistory' return
             switch ($volume)
