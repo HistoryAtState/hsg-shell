@@ -1,6 +1,6 @@
-module namespace pml='http://www.tei-c.org/tei-simple/models/departmenthistory.odd/module';
+module namespace pml='http://www.tei-c.org/tei-simple/models/departmenthistory.odd/web/module';
 
-import module namespace m='http://www.tei-c.org/tei-simple/models/departmenthistory.odd' at '/db/apps/hsg-shell/resources/odd/compiled/departmenthistory-web.xql';
+import module namespace m='http://www.tei-c.org/tei-simple/models/departmenthistory.odd/web' at '/db/apps/hsg-shell/resources/odd/compiled/departmenthistory-web.xql';
 
 (: Generated library module to be directly imported into code which
  : needs to transform TEI nodes using the ODD this module is based on.

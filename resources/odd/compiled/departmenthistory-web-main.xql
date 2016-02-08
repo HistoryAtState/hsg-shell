@@ -1,4 +1,4 @@
-import module namespace m='http://www.tei-c.org/tei-simple/models/departmenthistory.odd' at '/db/apps/hsg-shell/resources/odd/compiled/departmenthistory-web.xql';
+import module namespace m='http://www.tei-c.org/tei-simple/models/departmenthistory.odd/web' at '/db/apps/hsg-shell/resources/odd/compiled/departmenthistory-web.xql';
 
 declare variable $xml external;
 

@@ -7,7 +7,7 @@ xquery version "3.1";
 module namespace config="http://history.state.gov/ns/site/hsg/config";
 import module namespace console="http://exist-db.org/xquery/console";
 
-import module namespace pm-frus='http://www.tei-c.org/tei-simple/models/frus.odd/module' at "../resources/odd/compiled/frus-web-module.xql";
+import module namespace pm-frus='http://www.tei-c.org/tei-simple/models/frus.odd/web/module' at "../resources/odd/compiled/frus-web-module.xql";
 
 declare namespace templates="http://exist-db.org/xquery/templates";
 
