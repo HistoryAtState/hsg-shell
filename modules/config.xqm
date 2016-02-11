@@ -253,7 +253,7 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:HAC_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
+            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:new(($parameters, map:entry("document-list", true())))) },
             "title": "Historical Advisory Committee - About Us"
         },
         "education": map {
