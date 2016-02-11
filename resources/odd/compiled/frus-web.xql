@@ -5,17 +5,17 @@
  :)
 xquery version "3.1";
 
-module namespace model="http://www.tei-c.org/tei-simple/models/frus.odd";
+module namespace model="http://www.tei-c.org/tei-simple/models/frus.odd/web";
 
 declare default element namespace "http://www.tei-c.org/ns/1.0";
 
 declare namespace xhtml='http://www.w3.org/1999/xhtml';
 
-import module namespace css="http://www.tei-c.org/tei-simple/xquery/css" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/css.xql";
+import module namespace css="http://www.tei-c.org/tei-simple/xquery/css" at "xmldb:exist:///db/apps/tei-simple/content/css.xql";
 
-import module namespace html="http://www.tei-c.org/tei-simple/xquery/functions" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/html-functions.xql";
+import module namespace html="http://www.tei-c.org/tei-simple/xquery/functions" at "xmldb:exist:///db/apps/tei-simple/content/html-functions.xql";
 
-import module namespace ext-html="http://history.state.gov/ns/site/hsg/pmf-html" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/../../hsg-shell/modules/ext-html.xql";
+import module namespace ext-html="http://history.state.gov/ns/site/hsg/pmf-html" at "xmldb:exist:///db/apps/tei-simple/content/../../hsg-shell/modules/ext-html.xql";
 
 (:~
 
@@ -145,7 +145,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     if ($parameters?document-list and div[@type='question']) then
                         ext-html:document-list($config, ., ("tei-div1"))
                     else
-                        if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section') and exists(div[@type])) then
+                        if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type])) then
                             ext-html:document-list($config, ., ("tei-div2"))
                         else
                             html:block($config, ., ("tei-div3"), .)

@@ -6934,6 +6934,7 @@ header {
   -moz-animation-duration: 400ms;
   animation-duration: 400ms;
   overflow: auto;
+  min-height: 800px;
 }
 #content-container .note {
   font-size: .75em;

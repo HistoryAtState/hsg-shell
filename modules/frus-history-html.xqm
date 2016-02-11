@@ -18,7 +18,7 @@ declare variable $fhh:FRUS_HISTORY_MONOGRAPH_COL := $fhh:FRUS_HISTORY_COL || '/m
 
 declare function fhh:monograph-title($node, $model) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
-    let $title := pages:process-content($model?odd, $doc//tei:title[@type='complete'])
+    let $title := $model?odd($doc//tei:title[@type='complete'], ())
     return
         $title
 };
@@ -35,7 +35,7 @@ declare function fhh:monograph-editors($node, $model) {
 
 declare function fhh:monograph-edition-info($node, $model) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
-    let $edition-info := 
+    let $edition-info :=
         (
         $doc//tei:fileDesc//tei:publisher,
         $doc//tei:fileDesc//tei:pubPlace,
@@ -65,7 +65,7 @@ declare function fhh:chapter($node, $model, $chapter-id) {
 };
 
 declare function fhh:most-recent-documents($node, $model) {
-    let $documents := 
+    let $documents :=
         for $doc in collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
         let $created := $doc//tei:date[@type='created']/@when
         let $posted := $doc//tei:date[@type='posted']/@when
@@ -86,11 +86,11 @@ declare function fhh:most-recent-documents($node, $model) {
 };
 
 declare function fhh:most-recent-articles($node, $model) {
-    let $articles := 
+    let $articles :=
         for $doc in collection($fhh:FRUS_HISTORY_ARTICLES_COL)/tei:TEI[.//tei:author]
         let $posted := $doc//tei:publicationStmt/tei:date/@when
         order by $posted descending
-        return 
+        return
             $doc
     return
         <ul>
@@ -109,18 +109,18 @@ declare function fhh:most-recent-articles($node, $model) {
 declare function fhh:most-recent-events($node, $model) {
     let $events := collection($fhh:FRUS_HISTORY_EVENTS_COL)/event
     let $upcoming-events := $events[xs:date(event-date) ge current-date()]
-    let $upcoming-events-list := 
+    let $upcoming-events-list :=
         for $event in $upcoming-events
         order by xs:date($event/event-date) ascending
         return
             fhh:event-to-sidebar-list-item($event)
     let $recent-events := $events[xs:date(event-date) lt current-date()]
-    let $recent-events-ordered := 
+    let $recent-events-ordered :=
         for $event in $recent-events
         order by xs:date($event/event-date) descending
         return $event
     let $most-recent-3-events := subsequence($recent-events-ordered, 1, 3)
-    let $recent-events-list := 
+    let $recent-events-list :=
         for $event in $most-recent-3-events
         return
             fhh:event-to-sidebar-list-item($event)
@@ -134,7 +134,7 @@ declare function fhh:most-recent-events($node, $model) {
                     ,
                     if ($recent-events) then
                         ()
-                    else 
+                    else
                         <li><a href="$app/historicaldocuments/frus-history/events">... All events ({count($events)})</a></li>
                 }</ul>
             )
@@ -287,7 +287,7 @@ declare function fhh:article-author($node, $model, $article-id) {
             <h3>By <span itemprop="author">{$author}</span><br/>
             <span itemprop="sourceOrganization">{$affiliation}</span></h3>,
             <h4>Released <span itemprop="datePublished">{$date}</span></h4>
-        )    
+        )
 };
 
 declare function fhh:article-description($node, $model, $article-id) {
@@ -306,7 +306,7 @@ declare function fhh:article($node, $model, $article-id) {
 declare function fhh:events($node, $model) {
     let $events := collection($fhh:FRUS_HISTORY_EVENTS_COL)/event
     let $upcoming-events := $events[xs:date(event-date) ge current-date()]
-    let $upcoming-events-list := 
+    let $upcoming-events-list :=
         for $event at $count in $upcoming-events
         order by xs:date($event/event-date) ascending
         return
@@ -316,7 +316,7 @@ declare function fhh:events($node, $model) {
             )
 
     let $recent-events := $events[xs:date(event-date) lt current-date()]
-    let $recent-events-list := 
+    let $recent-events-list :=
         for $event at $count in $recent-events
         order by xs:date($event/event-date) descending
         return
@@ -327,7 +327,7 @@ declare function fhh:events($node, $model) {
     return
         <div>
             {
-            if ($upcoming-events) then 
+            if ($upcoming-events) then
                 (
                 <h1>Upcoming Events</h1>,
                 $upcoming-events-list

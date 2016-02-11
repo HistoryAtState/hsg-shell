@@ -1,4 +1,4 @@
-import module namespace m='http://www.tei-c.org/tei-simple/models/frus.odd' at '/db/apps/hsg-shell/resources/odd/compiled/frus-web.xql';
+import module namespace m='http://www.tei-c.org/tei-simple/models/frus.odd/web' at '/db/apps/hsg-shell/resources/odd/compiled/frus-web.xql';
 
 declare variable $xml external;
 

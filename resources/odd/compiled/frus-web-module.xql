@@ -1,6 +1,6 @@
-module namespace pml='http://www.tei-c.org/tei-simple/models/frus.odd/module';
+module namespace pml='http://www.tei-c.org/tei-simple/models/frus.odd/web/module';
 
-import module namespace m='http://www.tei-c.org/tei-simple/models/frus.odd' at '/db/apps/hsg-shell/resources/odd/compiled/frus-web.xql';
+import module namespace m='http://www.tei-c.org/tei-simple/models/frus.odd/web' at '/db/apps/hsg-shell/resources/odd/compiled/frus-web.xql';
 
 (: Generated library module to be directly imported into code which
  : needs to transform TEI nodes using the ODD this module is based on.

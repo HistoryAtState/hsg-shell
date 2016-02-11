@@ -7,7 +7,7 @@ xquery version "3.1";
 module namespace config="http://history.state.gov/ns/site/hsg/config";
 import module namespace console="http://exist-db.org/xquery/console";
 
-import module namespace pm-frus='http://www.tei-c.org/tei-simple/models/frus.odd/module' at "../resources/odd/compiled/frus-web-module.xql";
+import module namespace pm-frus='http://www.tei-c.org/tei-simple/models/frus.odd/web/module' at "../resources/odd/compiled/frus-web-module.xql";
 
 declare namespace templates="http://exist-db.org/xquery/templates";
 
@@ -15,10 +15,10 @@ declare namespace expath="http://expath.org/ns/pkg";
 declare namespace repo="http://exist-db.org/xquery/repo";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
-(: 
+(:
     Determine the application root collection from the current module load path.
 :)
-declare variable $config:app-root := 
+declare variable $config:app-root :=
     let $rawPath := system:get-module-load-path()
     let $modulePath :=
         (: strip the xmldb: part :)
@@ -96,7 +96,7 @@ declare variable $config:FRUS_HISTORY_MONOGRAPH_COL := $config:FRUS_HISTORY_COL 
 
 declare variable $config:IGNORED_DIVS := ("toc");
 
-declare variable $config:PUBLICATIONS := 
+declare variable $config:PUBLICATIONS :=
     map {
         "frus": map {
             "collection": $config:FRUS_VOLUMES_COL,
@@ -104,7 +104,7 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": 
+            "transform":
                 (: Called to transform content based on the odd using tei simple pm :)
                 function($xml, $parameters) { pm-frus:transform($xml, map:new(($parameters, map:entry("document-list", true())))) },
             "title": "Historical Documents",
@@ -179,7 +179,7 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:SECRETARY_BIOS_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/people/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": 
+            "transform":
                 (: Called to transform content based on the odd using tei simple pm :)
                 function($xml, $parameters) { pm-frus:transform($xml, map:new(($parameters, map:entry("document-list", true())))) },
             "title": "People - Department History",
@@ -253,7 +253,7 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:HAC_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
+            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:new(($parameters, map:entry("document-list", true())))) },
             "title": "Historical Advisory Committee - About Us"
         },
         "education": map {
@@ -271,15 +271,15 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": function($xml, $parameters) { 
-                pm-frus:transform($xml, $parameters) 
+            "transform": function($xml, $parameters) {
+                pm-frus:transform($xml, map:new(($parameters, map:entry("document-list", true()))))
             },
             "title": "History of the Foreign Relations Series",
             "base-path": function($document-id, $section-id) { "frus-history" }
         }
     };
 
-declare variable $config:PUBLICATION-COLLECTIONS := 
+declare variable $config:PUBLICATION-COLLECTIONS :=
     map {
         $config:FRUS_VOLUMES_COL: "frus",
         $config:BUILDINGS_COL: "buildings",
