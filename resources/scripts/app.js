@@ -48,6 +48,9 @@ $(document).ready(function() {
                     if (data.title) {
                         $("#navigation-title").text(data.title);
                     }
+                    if (data.windowTitle) {
+                        $("html head title").text(data.windowTitle);
+                    }
                     if (data.breadcrumbSection) {
                         $(".breadcrumb .section-breadcrumb").remove();
                         $(".breadcrumb").append(data.breadcrumbSection);

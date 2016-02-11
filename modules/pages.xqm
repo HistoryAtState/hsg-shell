@@ -48,7 +48,11 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $html := templates:process($node/*, map:new(($model, $content)))
     (: without an entry in $config:PUBLICATIONS and a publication-id parameter from controller.xql,
      : only the stock "Office of the Historian" title will appear in the <title> element :)
-    let $title := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?title else ()
+    let $title :=
+        if ($publication-id) then
+            map:get($config:PUBLICATIONS, $publication-id)?title
+        else
+            ($html//(h1|h2|h3))[1]
     let $head :=
         if ($section-id) then
             if ($content?data instance of element(tei:div)) then
@@ -62,6 +66,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         (: allow for pages that don't have an entry in $config:PUBLICATIONS at all :)
         else
             ()
+    let $log := console:log("page title: " || $title)
     return
         (
             $html,
@@ -85,7 +90,7 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
         if (empty($block)) then (
             pages:load-fallback-page($publication-id, $document-id, $section-id)
         ) else (
-            console:log("Loaded " || document-uri(root($block))),
+            console:log("Loaded " || document-uri(root($block)) || " <" || node-name($block) || ">"),
             $block
         )
 };
@@ -381,10 +386,16 @@ function pages:app-root($node as node(), $model as map(*)) {
         $node/@*,
         attribute data-app { request:get-context-path() || substring-after($config:app-root, "/db") },
         let $content := templates:process($node/*, $model)
+        let $titleGenerated := $content//div[@class="page-title"]
+        let $title :=
+            if ($titleGenerated) then
+                $titleGenerated/string()
+            else
+                string-join(($content//(h1|h2|h3)[1], "Office of the Historian"), " - ")
         return (
             <head>
                 { $content/self::head/* }
-                <title>{$content//div[@class="page-title"]/string()}</title>
+                <title>{$title}</title>
             </head>,
             $content/self::body
         )

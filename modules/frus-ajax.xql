@@ -47,6 +47,10 @@ return
         let $odd := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
         let $prev := pages:get-previous($xml)
         let $next := pages:get-next($xml)
+        let $base-path :=
+            if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
+                map:get($config:PUBLICATIONS, $publication-id)?base-path($volume, $id)
+            else ()
         let $html :=
             if ($xml instance of element(tei:pb)) then
                 let $href := concat('//', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
@@ -55,7 +59,7 @@ return
                         <img src="{$href}" class="img-responsive img-thumbnail center-block"/>
                     </div>
             else
-                pages:process-content($odd, pages:get-content($xml), map { "base-uri": $publication-id || (if ($volume ne $publication-id) then "/" || $volume else ()) })
+                pages:process-content($odd, pages:get-content($xml), map { "base-uri": $base-path })
         let $html := app:fix-links($html)
         let $doc := replace($volume, "^.*/([^/]+)$", "$1")
         let $model := map {
@@ -67,6 +71,24 @@ return
                 <li class="section-breadcrumb">{fh:section-breadcrumb(<n/>, $model)}</li>
             else
                 pages:deep-section-breadcrumbs(<n/>, $model, true())
+        let $head :=
+            if ($id) then
+                if ($xml instance of element(tei:div)) then
+                    $xml/tei:head
+                else
+                    root($xml)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+            (: we can't trust pages:load-xml for the purposes of finding a document's title, since it returns the document's first descendant div :)
+            (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
+            else if ($publication-id and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'select-document')) then
+                map:get($config:PUBLICATIONS, $publication-id)?select-document($volume)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+            (: allow for pages that don't have an entry in $config:PUBLICATIONS at all :)
+            else
+                ()
+        let $title :=
+            if ($publication-id) then
+                map:get($config:PUBLICATIONS, $publication-id)?title
+            else
+                ($html//(h1|h2|h3))[1]
         return
             map {
                 "doc": $doc,
@@ -79,6 +101,7 @@ return
                         $prev/@xml:id/string()
                     else (),
                 "title": pages:title($xml/ancestor-or-self::tei:TEI),
+                "windowTitle": string-join(($head, $title, "Office of the Historian")[. ne ''], " - "),
                 "toc": if ($toc) then toc:toc($model, $xml, true(), true()) else (),
                 "tocCurrent": $xml/ancestor-or-self::tei:div[@type != "document"][1]/@xml:id/string(),
                 (: "breadcrumbSection": fh:breadcrumb-heading($model, $xml), :)
