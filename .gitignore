@@ -1,2 +1,7 @@
-build/*
-bower_components/*
+# artifacts
+build
+bower_components
+node_modules
+
+# IDE
+.idea
