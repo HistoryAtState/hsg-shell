@@ -1,6 +1,10 @@
+'use strict';
+
 var gulp = require('gulp'),
     exist = require('gulp-exist'),
-    watch = require('gulp-watch')
+    watch = require('gulp-watch'),
+    sass = require('gulp-sass')
+
 
 exist.createClient({
     host: 'localhost',
@@ -30,10 +34,20 @@ function watchTaskFor(sourcePath) {
     }
 }
 
-gulp.task('watch.modules', watchTaskFor('modules/*'))
-gulp.task('watch.templates', watchTaskFor('templates/*'))
-gulp.task('watch.resources', watchTaskFor('resources/**/*'))
-gulp.task('watch.pages', watchTaskFor('pages/**/*'))
+gulp.task('watch.modules', watchTaskFor('./modules/*'))
+gulp.task('watch.templates', watchTaskFor('./templates/*'))
+gulp.task('watch.resources', watchTaskFor('./resources/**/*'))
+gulp.task('watch.pages', watchTaskFor('./pages/**/*'))
+
+gulp.task('sass', function () {
+    return gulp.src('./resources/sass/main.scss', {base: '.'})
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./resources/css'))
+})
+
+gulp.task('watch.styles', ['watch.resources'], function () {
+    gulp.watch('./resources/sass/**/*.scss', ['sass'])
+})
 
 gulp.task('watch', [
     'watch.modules',
@@ -42,10 +56,10 @@ gulp.task('watch', [
     'watch.pages'
 ])
 
-gulp.task('deploy.modules', deployTaskFor('modules/*'))
-gulp.task('deploy.templates', deployTaskFor('templates/*'))
-gulp.task('deploy.resources', deployTaskFor('resources/**/*'))
-gulp.task('deploy.pages', deployTaskFor('pages/**/*'))
+gulp.task('deploy.modules', deployTaskFor('./modules/*'))
+gulp.task('deploy.templates', deployTaskFor('./templates/*'))
+gulp.task('deploy.resources', deployTaskFor('./resources/**/*'))
+gulp.task('deploy.pages', deployTaskFor('./pages/**/*'))
 
 gulp.task('default', [
     'deploy.modules',
