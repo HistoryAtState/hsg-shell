@@ -18,19 +18,19 @@ var existConfiguration = {
 }
 
 gulp.task('styles:build', function () {
-    return gulp.src('./resources/sass/main.scss', {base: '.'})
+    return gulp.src('./resources/sass/main.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./resources/css'))
 })
 
-gulp.task('styles:deploy', function () {
+gulp.task('styles:deploy', ['styles:build'], function () {
     return gulp.src('./resources/css/*.css', {base: '.'})
+        .pipe(exist.newer(existConfiguration))
         .pipe(exist.dest(existConfiguration))
 })
 
 gulp.task('styles:watch', function () {
-    gulp.watch('./resources/css/*.css', ['styles:deploy'])
-    gulp.watch('./resources/sass/**/*.scss', ['styles:build'])
+    gulp.watch('./resources/sass/**/*.scss', ['styles:deploy'])
 })
 
 gulp.task('default', ['styles:watch'])
