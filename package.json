@@ -1,0 +1,24 @@
+{
+  "name": "hsg-shell",
+  "version": "0.1.0",
+  "description": "## Setup",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-exist": "git+https://github.com/line-o/gulp-exist.git",
+    "gulp-watch": "^4.3.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eXistSolutions/hsg-shell.git"
+  },
+  "author": "eXistSolutions",
+  "bugs": {
+    "url": "https://github.com/eXistSolutions/hsg-shell/issues"
+  },
+  "homepage": "https://github.com/eXistSolutions/hsg-shell#readme"
+}
