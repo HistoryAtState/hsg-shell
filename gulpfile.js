@@ -18,7 +18,7 @@ var existConfiguration = {
 }
 
 gulp.task('styles:build', function () {
-    return gulp.src('./resources/sass/main.scss')
+    return gulp.src('./resources/app/scss/main.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./resources/css'))
 })
@@ -30,7 +30,7 @@ gulp.task('styles:deploy', ['styles:build'], function () {
 })
 
 gulp.task('styles:watch', function () {
-    gulp.watch('./resources/sass/**/*.scss', ['styles:deploy'])
+    gulp.watch('./resources/app/scss/**/*.scss', ['styles:deploy'])
 })
 
 gulp.task('default', ['styles:watch'])
