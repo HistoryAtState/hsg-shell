@@ -33,4 +33,8 @@ gulp.task('styles:watch', function () {
     gulp.watch('./resources/app/scss/**/*.scss', ['styles:deploy'])
 })
 
-gulp.task('default', ['styles:watch'])
+gulp.task('watch', ['styles:watch'])
+gulp.task('build', ['styles:build'])
+gulp.task('deploy', ['styles:deploy'])
+
+gulp.task('default', ['build'])
