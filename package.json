@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {
+    "bootstrap-sass": "^3.3.6",
     "gulp": "^3.9.1",
     "gulp-exist": "git+https://github.com/line-o/gulp-exist.git",
     "gulp-sass": "^2.2.0",
