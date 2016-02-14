@@ -1,0 +1,145 @@
+/* Customized-Bootstrap Elements -------------- */
+
+.carousel-caption {
+  position: initial;
+  z-index: inherit;
+  color: inherit;
+  text-shadow: inherit;
+  left: 15%;
+  right: 15%;
+}
+
+.content img {
+  border: 1px solid #C0C0C0;
+  padding: 10px;
+  -webkit-border-radius: 1ex;
+  -moz-border-radius: 1ex;
+}
+
+.content .labeled-list dt {
+  float: left;
+  display: inline;
+}
+
+.content .labeled-list dd {
+  margin-left: 3em;
+}
+
+.content .listHead {
+  font-weight: bold;
+}
+
+.content .listHead + .list li {
+  margin-left: 2em;
+  font-size: 85%;
+}
+
+/* Navbar ------------- */
+
+.navbar {
+  background: #2c6196;
+  padding: 0;
+  color: white;
+  margin-bottom: 0;
+  min-height: 37px;
+}
+
+.navbar .container-fluid {
+  height: 37px;
+}
+.navbar li, .navbar span {
+  font-family: "Source Sans Pro";
+  margin-bottom:0;
+}
+.navbar-inner {
+  min-height: 0px;
+}
+
+.navbar-nav {
+  margin-top: -2px;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+  height: 37px;
+  line-height: 37px;
+  padding-top: 0;
+  color: white;
+}
+
+.navbar-default .navbar-nav > .dropdown.open a {
+  background: transparent;
+  color: #000066;
+}
+
+.navbar-default .navbar-nav > .dropdown.open .dropdown-menu a:hover {
+  background-color: #f3f3f3;
+}
+
+.navbar-collapse {
+  padding-left: 0;
+}
+
+.navbar-toggle {
+  padding: 6px 10px;
+  margin: 6px 12px;
+}
+
+.navbar-toggle:hover {
+  color: #030361;
+}
+
+.dropdown-menu,
+.collapsing,
+.collapse.in {
+  background-color: #dddde8;
+}
+
+.navbar .collapse.in li,
+.navbar .collapsing li{
+  background:#2c6196;
+}
+
+.navbar .dropdown.open .dropdown-menu li {
+  background-color: #dddde8;
+  padding-left: 0;
+}
+
+.navbar .dropdown.open .dropdown-menu li a {
+  color: #030361;
+}
+
+.collapsing li,
+.collapse.in li {
+  padding-left: 10px;
+  color: #000066;
+}
+
+.breadcrumb {
+  font-size: 85%;
+  background-color: transparent;
+}
+
+.breadcrumb > li {
+  display: inline !important;
+}
+
+ol.breadcrumb li:first-child:before {
+  content: "" !important;
+}
+
+ol.breadcrumb li:before {
+  content: "›" !important;
+}
+
+/* Lists ---------------- */
+
+.list-group i {
+  margin-right: 1em;
+}
+
+/* Panels */
+
+.panel {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
