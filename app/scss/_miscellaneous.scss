@@ -1,0 +1,102 @@
+/* Unklar: Wird nicht verwendet, oder kann dem Markup nicht zugeordnet werden.
+/* Eventuell kommen die Templatesnoch nicht vor auf der Testseite? */
+
+#main-nav {
+  max-height: 37px;
+  height: 37px;
+}
+
+#main-nav > .container-fluid {
+  padding-left: 0;
+}
+
+#volume .titleStmt1 {
+  font-size: 1.25em;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #911625;
+}
+
+#person-panel ul,
+#gloss-panel ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#person-panel li,
+#gloss-panel li {
+  margin-left: .5em;
+  text-indent: -0.5em;
+}
+
+#faq > ul {
+  list-style: none;
+}
+
+#content {
+  background-color: white;
+  border-color: #dddde8;
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px 0 0;
+}
+
+#content .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#content-container {
+  -webkit-animation-duration: 400ms;
+  -moz-animation-duration: 400ms;
+  animation-duration: 400ms;
+  overflow: auto;
+  min-height: 800px;
+}
+
+#content-container .note {
+  font-size: .75em;
+  vertical-align: super;
+}
+
+#content-container .footnotes {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid #CCC;
+}
+
+#content-container .popover-content {
+  text-indent: 0;
+}
+
+#content-container .popover {
+  max-width: 80%;
+}
+
+@media (max-width: 992px) {
+  #content-inner {
+    padding-left: 0;
+  }
+}
+
+.gobox {
+  line-height: 0.4;
+  padding: 7px;
+  margin-left: 2px;
+}
+
+.float-left {
+  float: left;
+}
+
+.figure-floated {
+  margin: 1em 2em 1em 0;
+  text-align: center;
+  max-width: 30%;
+}
+
+.heading {
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #911625;
+}
