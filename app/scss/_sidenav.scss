@@ -1,0 +1,30 @@
+/* Side Navigation -------------- */
+
+#sections {
+  padding: 10px;
+}
+
+#sections select {
+  display: block;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+#sections h2 {
+  font-size: 0.825em;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding-left: 0;
+  color: #212121;
+  margin-top: 20px;
+}
+
+#sections ul {
+  margin-bottom: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+#sections ul li {
+  padding: 10 0 0px 14px;
+}
