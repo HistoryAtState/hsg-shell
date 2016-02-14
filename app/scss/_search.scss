@@ -1,0 +1,63 @@
+/* Searchbox -------------- */
+
+// TODO: Refactor confusing wording for class ".searchbox"
+// and ID "#searchbox". Each is affecting either wrapper or input element.
+
+.searchbox {
+  position: relative;
+  margin-top: 10px;
+}
+
+.searchbox p {
+  font-size: 0.825em;
+}
+
+/* old layout
+#search-box {
+  padding-right: 30px;
+}
+*/
+/* new-layout */
+#search-box {
+  padding-right: 40px;
+}
+
+.search-button {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  border: none !important;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background: whitesmoke;
+}
+
+@media (max-width: 992px) {
+  .searchbox {
+    width: 100%;
+  }
+  .searchbox .form-group {
+    position: absolute;
+    top: 26px;
+    z-index: 10;
+    width: 70%;
+  }
+  #search-box {
+    width: 100%;
+  }
+  .search-button {
+    right: 0;
+  }
+}
+
+/* Can't find it it markup */
+.fa-search {
+  font-size: 16px;
+}
+
+/* Duplicate from "new-layout.css", neither of it can be found in markup */
+.fa-search {
+  font-size: 14px;
+  line-height: 1.428;
+}
+
