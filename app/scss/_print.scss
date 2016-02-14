@@ -1,0 +1,47 @@
+/* Print -------------- */
+
+#toc,
+#volume {
+  -webkit-animation-duration: 400ms;
+  -moz-animation-duration: 400ms;
+  animation-duration: 400ms;
+}
+
+#toc h2,
+#volume h2 {
+  background-color: #dddde8;
+  font-size: 1.2em;
+  line-height: 1.25;
+  margin-bottom: 1.25em;
+}
+
+#toc .highlight,
+#volume .highlight {
+  background-color: #dddde8;
+}
+
+.hi {
+  background-color: yellow;
+}
+
+.toc ul,
+.toc-inner ul,
+.lists ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.toc li,
+.toc-inner li,
+.lists li {
+  margin-left: 2em;
+}
+
+.toc-inner li a {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.tei-head1 {
+  padding-top: 1em;
+}
