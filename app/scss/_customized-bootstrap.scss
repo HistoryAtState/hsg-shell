@@ -47,10 +47,12 @@
 .navbar .container-fluid {
   height: 37px;
 }
+
 .navbar li, .navbar span {
   font-family: "Source Sans Pro";
-  margin-bottom:0;
+  margin-bottom: 0;
 }
+
 .navbar-inner {
   min-height: 0px;
 }
@@ -96,8 +98,8 @@
 }
 
 .navbar .collapse.in li,
-.navbar .collapsing li{
-  background:#2c6196;
+.navbar .collapsing li {
+  background: #2c6196;
 }
 
 .navbar .dropdown.open .dropdown-menu li {
@@ -137,8 +139,13 @@
 /* Breadcrumb ----------- */
 
 .breadcrumb {
-  font-size: 85%;
   background-color: transparent;
+  padding: 5px 0px;
+  font-size: inherit;
+}
+
+.breadcrumb li {
+  font-family: "Source Sans Pro";
 }
 
 .breadcrumb > li {
