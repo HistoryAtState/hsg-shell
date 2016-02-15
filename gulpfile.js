@@ -186,8 +186,7 @@ gulp.task('deploy', ['build'], function () {
             templatesPath,
             pagesPath,
             modulesPath,
-            '*.xql',
-            '*.xqr'
+            otherPath
         ], {base: '.'})
         .pipe(exist.newer(existConfiguration))
         .pipe(exist.dest(existConfiguration))
