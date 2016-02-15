@@ -89,12 +89,15 @@ gulp.task('scripts:watch', function () {
 // styles //
 
 /**
- * TODO: minify, source map
+ * TODO: minify
  */
 
 gulp.task('styles:build', function () {
     return gulp.src('app/scss/main.scss')
         .pipe(sass().on('error', sass.logError))
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('resources/css'))
 })
 
