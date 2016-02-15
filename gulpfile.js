@@ -25,9 +25,7 @@ var existConfiguration = {
 gulp.task('clean', function() {
     return del([
         'resources/css/main.css',
-        'resources/fonts/*',
-        'resources/scripts/*',
-        'resources/images/*'
+        'resources/fonts/*'
     ]);
 });
 
@@ -47,15 +45,16 @@ gulp.task('fonts:deploy', ['fonts:copy'], function () {
 // images //
 
 /**
- * TODO optimize
+ * Image optimization task will *overwrite* an existing image
+ * with its optimized version
  */
 gulp.task('images:optimize', function () {
-    return gulp.src('app/images/*')
+    return gulp.src('resources/images/*')
         .pipe(imagemin({optimizationLevel: 5}))
         .pipe(gulp.dest('resources/images'))
 })
 
-gulp.task('images:deploy', ['images:optimize'], function () {
+gulp.task('images:deploy', function () {
     return gulp.src('resources/images/*', {base: '.'})
         .pipe(exist.newer(existConfiguration))
         .pipe(exist.dest(existConfiguration))
@@ -67,12 +66,9 @@ gulp.task('images:watch', function () {
 
 // scripts //
 
-/**
- * TODO: concat, minify
- */
 gulp.task('scripts:build', function () {
-    return gulp.src('app/js/app.js')
-        .pipe(gulp.dest('resources/scripts'))
+    // minified version of js is used in production only
+    return gulp.src('resources/scripts/app.js')
         .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write())
@@ -80,14 +76,14 @@ gulp.task('scripts:build', function () {
         .pipe(gulp.dest('resources/scripts'))
 })
 
-gulp.task('scripts:deploy', ['scripts:build'], function () {
+gulp.task('scripts:deploy', function () {
     return gulp.src('resources/scripts/*.js', {base: '.'})
         .pipe(exist.newer(existConfiguration))
         .pipe(exist.dest(existConfiguration))
 })
 
 gulp.task('scripts:watch', function () {
-    gulp.watch('app/js/**/*.js', ['scripts:deploy'])
+    gulp.watch('resources/scripts/*.js', ['scripts:deploy'])
 })
 
 // styles //
@@ -95,6 +91,7 @@ gulp.task('scripts:watch', function () {
 /**
  * TODO: minify, source map
  */
+
 gulp.task('styles:build', function () {
     return gulp.src('app/scss/main.scss')
         .pipe(sass().on('error', sass.logError))
@@ -113,18 +110,84 @@ gulp.task('styles:watch', function () {
 
 // pages //
 
+var pagesPath = 'pages/**/*.html';
+gulp.task('pages:deploy', function () {
+    return gulp.src(pagesPath, {base: '.'})
+        .pipe(exist.newer(existConfiguration))
+        .pipe(exist.dest(existConfiguration))
+})
+
+gulp.task('pages:watch', function () {
+    gulp.watch(pagesPath, ['pages:deploy'])
+})
+
 // modules //
+
+var modulesPath = 'modules/*';
+gulp.task('modules:deploy', function () {
+    return gulp.src(modulesPath, {base: '.'})
+        .pipe(exist.newer(existConfiguration))
+        .pipe(exist.dest(existConfiguration))
+})
+
+gulp.task('modules:watch', function () {
+    gulp.watch(modulesPath, ['modules:deploy'])
+})
 
 // templates //
 
-// other files //
+var templatesPath = 'templates/**/*.html';
+gulp.task('templates:deploy', function () {
+    return gulp.src(templatesPath, {base: '.'})
+        .pipe(exist.newer(existConfiguration))
+        .pipe(exist.dest(existConfiguration))
+})
+
+gulp.task('templates:watch', function () {
+    gulp.watch(templatesPath, ['templates:deploy'])
+})
+
+// odd files //
+
+var oddPath = 'resources/odd/**/*';
+gulp.task('odd:deploy', function () {
+    return gulp.src(oddPath, {base: '.'})
+        .pipe(exist.newer(existConfiguration))
+        .pipe(exist.dest(existConfiguration))
+})
+
+gulp.task('odd:watch', function () {
+    gulp.watch(oddPath, ['odd:deploy'])
+})
+
+// files in project root //
+
+var otherPath = '*{.xqr,.xql,.xml}';
+gulp.task('other:deploy', function () {
+    return gulp.src(otherPath, {base: '.'})
+        .pipe(exist.newer(existConfiguration))
+        .pipe(exist.dest(existConfiguration))
+})
+
+gulp.task('other:watch', function () {
+    gulp.watch(otherPath, ['other:deploy'])
+})
 
 // general //
 
-gulp.task('watch', ['styles:watch', 'scripts:watch', 'images:watch'])
-gulp.task('build', ['styles:build', 'scripts:build', 'fonts:copy', 'images:optimize'])
+gulp.task('watch', ['styles:watch', 'scripts:watch', 'images:watch', 'templates:watch',
+                    'pages:watch', 'odd:watch', 'other:watch'])
+
+gulp.task('build', ['scripts:build', 'fonts:copy', 'images:optimize', 'styles:build'])
+
 gulp.task('deploy', ['build'], function () {
-    return gulp.src('resources/**/*', {base: '.'})
+    return gulp.src([
+            'resources/**/*', // odd, styles, fonts, scripts
+            templatesPath,
+            pagesPath,
+            modulesPath,
+            otherPath
+        ], {base: '.'})
         .pipe(exist.newer(existConfiguration))
         .pipe(exist.dest(existConfiguration))
 })
