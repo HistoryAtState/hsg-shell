@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 // Vendor -------------- //
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
@@ -8,6 +9,7 @@
 
 @import "variables";
 @import "base";
+@import "customized-bootstrap";
 
 // Components ---------- //
 
@@ -21,5 +23,4 @@
 
 @import "toc";
 @import "tei";
-@import "customized-bootstrap";
 @import "miscellaneous";
