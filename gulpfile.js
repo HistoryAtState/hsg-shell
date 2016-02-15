@@ -94,9 +94,8 @@ gulp.task('scripts:watch', function () {
 
 gulp.task('styles:build', function () {
     return gulp.src('app/scss/main.scss')
-        .pipe(sass({sourceComments: 'true'}).on('error', sass.logError))
         .pipe(sourcemaps.init())
-        .pipe(sass())
+        .pipe(sass({sourceComments: 'true'}).on('error', sass.logError))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('resources/css'))
 })
