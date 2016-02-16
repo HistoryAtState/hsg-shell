@@ -4,7 +4,7 @@ body {
   font-family: Georgia, "Times New Roman", Times, serif;
   line-height: 1.428;
   font-size: 1.7rem;
-  background: #ffffff url("//s3.amazonaws.com/static.history.state.gov/images/background.gif") repeat-x scroll 0 0;
+  background:  $color-white url("//s3.amazonaws.com/static.history.state.gov/images/background.gif") repeat-x scroll 0 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -55,19 +55,22 @@ a,
 a:hover,
 a:visited,
 a:active {
-  color: #2c6196;
+  color: $color-primary-darker;
+  // color: #2c6196
   transition: color 0.5s ease 0s;
 }
 
 a:hover,
 a:active,
 a:focus {
-  color: #030361;
+  color: $color-primary-darkest;
+  // color: #030361;
 }
 
 header {
-  background: #ffffff none repeat scroll 0 0;
-  border-color: #dddde8;
+  background: $color-white none repeat scroll 0 0;
+  border-color: $color-gray-lighter;
+  // border-color: #dddde8;
   border-style: solid;
   border-width: 1px;
   margin-top: 15px;
