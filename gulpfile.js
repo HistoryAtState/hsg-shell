@@ -83,7 +83,7 @@ gulp.task('scripts:copy', function () {
     return gulp.src([
             'node_modules/jquery/dist/*.js',
             'node_modules/jquery-touchswipe/*.js',
-            'node_modules/bootstrap-sass/assets/javascripts/bootstrap{.min}.js'
+            'node_modules/bootstrap-sass/assets/javascripts/bootstrap{.min,}.js'
         ])
         .pipe(gulp.dest('resources/scripts/vendor'))
 })
