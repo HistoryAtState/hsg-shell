@@ -25,7 +25,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update": "git pull && npm install && gulp && ant"
+    "update": "git pull && npm install && gulp && ant",
+    "build": "npm install && gulp && ant"
   },
   "repository": {
     "type": "git",

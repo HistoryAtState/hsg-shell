@@ -1,41 +1,43 @@
 /* Base -------------- */
 
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  line-height: 1.428;
-  font-size: 1.7rem;
-  background: #ffffff url("//s3.amazonaws.com/static.history.state.gov/images/background.gif") repeat-x scroll 0 0;
+  font-family: $font-serif;
+  //line-height: 1.428;
+  line-height: $base-line-height;
+  font-weight: $font-normal;
+  font-size:   $base-font-size;
+  background:  $color-white url("//s3.amazonaws.com/static.history.state.gov/images/background.gif") repeat-x scroll 0 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Source Sans Pro";
-  font-weight: 700;
-  /*color:#2c6196;*/
+  font-family: $font-sans;
+  font-weight: $font-bold;
+  line-height: $heading-line-height;
 }
 
 h1 {
-  font-size: 4rem;
-  font-weight: 700;
+  font-size: $h1-font-size;
+  font-weight: $font-bold;
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: $h2-font-size;
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: $h3-font-size;
 }
 
 h4 {
-  font-size: 1.7rem;
+  font-size: $h4-font-size;
 }
 
 h5 {
-  font-size: 1.5rem;
+  font-size: $h5-font-size;
 }
 
 h6 {
-  font-size: 1.3rem;
+  font-size: $h6-font-size;
   text-transform: uppercase;
 }
 
@@ -48,26 +50,29 @@ ul li, ol li {
 }
 
 div, span, p, li {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: $font-serif;
 }
 
 a,
 a:hover,
 a:visited,
 a:active {
-  color: #2c6196;
+  color: $color-primary-darker;
+  // color: #2c6196
   transition: color 0.5s ease 0s;
 }
 
 a:hover,
 a:active,
 a:focus {
-  color: #030361;
+  color: $color-primary-darkest;
+  // color: #030361;
 }
 
 header {
-  background: #ffffff none repeat scroll 0 0;
-  border-color: #dddde8;
+  background: $color-white none repeat scroll 0 0;
+  border-color: $color-gray-lighter;
+  // border-color: #dddde8;
   border-style: solid;
   border-width: 1px;
   margin-top: 15px;
@@ -79,21 +84,15 @@ dl {
 }
 
 dl dt {
-  font-weight: bold;
+  font-weight: $font-bold;
 }
 
 input {
   height: 20px;
 }
 
-/* TODO: Refactor following styles, check markup for alternatives */
+/* TODO: Refactor following style, check markup for alternative */
 
 #body {
   min-width: 320px;
-}
-
-.baseFont {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 14px;
-  line-height: 24px;
 }
