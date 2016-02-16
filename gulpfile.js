@@ -93,10 +93,13 @@ gulp.task('scripts:watch', function () {
  */
 
 gulp.task('styles:build', function () {
+    var compiler = sass({
+        sourceMapEmbed: true,
+        sourceMapContents: true
+    })
+    compiler.on('error', sass.logError)
     return gulp.src('app/scss/main.scss')
-        .pipe(sourcemaps.init())
-        .pipe(sass({sourceComments: 'true'}).on('error', sass.logError))
-        .pipe(sourcemaps.write())
+        .pipe(compiler)
         .pipe(gulp.dest('resources/css'))
 })
 
