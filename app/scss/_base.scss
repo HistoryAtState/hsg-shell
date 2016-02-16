@@ -1,15 +1,15 @@
 /* Base -------------- */
 
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
   line-height: 1.428;
   font-size: 1.7rem;
+  font-family: $font-serif;
   background:  $color-white url("//s3.amazonaws.com/static.history.state.gov/images/background.gif") repeat-x scroll 0 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Source Sans Pro";
   font-weight: 700;
+  font-family: $font-sans;
   /*color:#2c6196;*/
 }
 
@@ -48,7 +48,7 @@ ul li, ol li {
 }
 
 div, span, p, li {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: $font-serif;
 }
 
 a,
