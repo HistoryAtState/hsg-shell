@@ -1,18 +1,47 @@
 # hsg-shell
 
+## Prerequisites
+
+You need to have *ant*, *git* and *nodeJS* installed.
+
+For Mac OS X with [homebrew](http://brew.sh#install) installed do
+
+    `brew update && brew upgrade`
+    `brew install ant git node`
+
+When node is installed you should make [gulp](http://gulpjs.com/)) available globally with
+
+    `npm install -g bower gulp`
+
 ## Setup
 
-- Clone the repository
-- For Mac OS X:
-  - Install [homebrew](http://brew.sh#install), or if already installed: `brew update && brew upgrade`
-  - Install required tools part 1 (ant, git, npm, and ruby): `brew install ant git npm ruby`
-  - Install required tools part 2 ([bower](http://bower.io/) and [gulp](http://gulpjs.com/)): `npm install -g bower gulp`
-- Run `bower install` to install the dependencies defined in the project's `bower.json` file
-- Run `npm install` to install node modules needed for the gulp tasks
-- Run `gulp` to build and copy javascripts, fonts, css and images in resources folder
-- Run `ant` to generate the `.xar` file inside the `build` directory
-- Install the `build/hsg-shell-x.y.xar` via the eXist Dashboard Package Manager
-- Click on the "history.state.gov" icon from the eXist Dashboard
+1. Clone the repository
+
+    `git clone https://github.com/eXistSolutions/hsg-shell.git`
+
+1. Install node modules needed for the gulp tasks
+
+    `npm install`
+
+1. Build and copy javascripts, fonts, css and images in resources folder
+
+    `gulp`
+
+1. Generate the `.xar` file inside the `build` directory
+
+    `ant`
+
+1. Switch to the exist Dashboard
+1. Install the `build/hsg-shell-x.y.xar` with the Package Manager
+1. Click on the "history.state.gov" icon on the eXist Dashboard
+
+## Update
+
+To create an up-to-date build package to install in eXistDB, this should do
+
+    `npm run update`
+
+It will just run four of the previous steps one after another (`git pull && npm install && gulp && ant`).
 
 ## Optional: Install bootstrap documentation
 

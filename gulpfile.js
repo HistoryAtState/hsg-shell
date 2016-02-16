@@ -31,10 +31,10 @@ gulp.task('clean', function() {
 
 // fonts //
 
-gulp.task('fonts:copy', function () {
+gulp.task('fonts:copy', ['clean'], function () {
     return gulp.src([
             'node_modules/bootstrap-sass/assets/fonts/**/*',
-            'bower_components/font-awesome/fonts/*'
+            'node_modules/font-awesome/fonts/*'
         ])
         .pipe(gulp.dest('resources/fonts'))
 })
@@ -79,7 +79,16 @@ gulp.task('scripts:build', function () {
         .pipe(gulp.dest('resources/scripts'))
 })
 
-gulp.task('scripts:deploy', function () {
+gulp.task('scripts:copy', function () {
+    return gulp.src([
+            'node_modules/jquery/dist/*.js',
+            'node_modules/jquery-touchswipe/*.js',
+            'node_modules/bootstrap-sass/assets/javascripts/bootstrap{.min}.js'
+        ])
+        .pipe(gulp.dest('resources/scripts/vendor'))
+})
+
+gulp.task('scripts:deploy', ['scripts:copy'], function () {
     return gulp.src('resources/scripts/*.js', {base: '.'})
         .pipe(exist.newer(existConfiguration))
         .pipe(exist.dest(existConfiguration))
@@ -95,7 +104,7 @@ gulp.task('scripts:watch', function () {
  * TODO: minify
  */
 
-gulp.task('styles:build', function () {
+gulp.task('styles:build', ['clean'], function () {
     var compiler = sass({
         sourceMapEmbed: true,
         sourceMapContents: true
@@ -186,7 +195,7 @@ gulp.task('other:watch', function () {
 gulp.task('watch', ['styles:watch', 'scripts:watch', 'images:watch', 'templates:watch',
                     'pages:watch', 'odd:watch', 'other:watch'])
 
-gulp.task('build', ['scripts:build', 'fonts:copy', 'images:optimize', 'styles:build'])
+gulp.task('build', ['scripts:copy', 'fonts:copy', 'images:optimize', 'styles:build'])
 
 gulp.task('deploy', ['build'], function () {
     return gulp.src([
@@ -200,4 +209,4 @@ gulp.task('deploy', ['build'], function () {
         .pipe(exist.dest(existConfiguration))
 })
 
-gulp.task('default', ['clean', 'build'])
+gulp.task('default', ['build'])
