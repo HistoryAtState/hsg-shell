@@ -1,41 +1,43 @@
 /* Base -------------- */
 
 body {
-  line-height: 1.428;
-  font-size: 1.7rem;
   font-family: $font-serif;
+  //line-height: 1.428;
+  line-height: $base-line-height;
+  font-weight: $font-normal;
+  font-size:   $base-font-size;
   background:  $color-white url("//s3.amazonaws.com/static.history.state.gov/images/background.gif") repeat-x scroll 0 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
   font-family: $font-sans;
-  /*color:#2c6196;*/
+  font-weight: $font-bold;
+  line-height: $heading-line-height;
 }
 
 h1 {
-  font-size: 4rem;
-  font-weight: 700;
+  font-size: $h1-font-size;
+  font-weight: $font-bold;
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: $h2-font-size;
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: $h3-font-size;
 }
 
 h4 {
-  font-size: 1.7rem;
+  font-size: $h4-font-size;
 }
 
 h5 {
-  font-size: 1.5rem;
+  font-size: $h5-font-size;
 }
 
 h6 {
-  font-size: 1.3rem;
+  font-size: $h6-font-size;
   text-transform: uppercase;
 }
 
@@ -82,14 +84,14 @@ dl {
 }
 
 dl dt {
-  font-weight: bold;
+  font-weight: $font-bold;
 }
 
 input {
   height: 20px;
 }
 
-/* TODO: Refactor following styles, check markup for alternatives */
+/* TODO: Refactor following style, check markup for alternative */
 
 #body {
   min-width: 320px;
