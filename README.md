@@ -6,12 +6,13 @@ You need to have *ant*, *git* and *nodeJS* installed.
 
 For Mac OS X with [homebrew](http://brew.sh#install) installed do
 
-    `brew update && brew upgrade`
-    `brew install ant git node`
+   `brew update && brew upgrade`
+    
+   `brew install ant git node`
 
 When node is installed you should make [gulp](http://gulpjs.com/)) available globally with
 
-    `npm install -g bower gulp`
+   `npm install -g bower gulp`
 
 ## Setup
 
@@ -39,7 +40,7 @@ When node is installed you should make [gulp](http://gulpjs.com/)) available glo
 
 To create an up-to-date build package to install in eXistDB, this should do
 
-    `npm run update`
+   `npm run update`
 
 It will just run four of the previous steps one after another (`git pull && npm install && gulp && ant`).
 
