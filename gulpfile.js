@@ -32,7 +32,10 @@ gulp.task('clean', function() {
 // fonts //
 
 gulp.task('fonts:copy', function () {
-    return gulp.src('node_modules/bootstrap-sass/assets/fonts/bootstrap/*')
+    return gulp.src([
+            'node_modules/bootstrap-sass/assets/fonts/**/*',
+            'bower_components/font-awesome/fonts/*'
+        ])
         .pipe(gulp.dest('resources/fonts'))
 })
 
