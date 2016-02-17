@@ -24,6 +24,7 @@ var existConfiguration = {
 
 gulp.task('clean', function() {
     return del([
+        'build/**/*',
         'resources/css/main.css',
         'resources/fonts/*'
     ]);
@@ -179,7 +180,7 @@ gulp.task('odd:watch', function () {
 
 // files in project root //
 
-var otherPath = '*{.xqr,.xql,.xml}';
+var otherPath = '*{.xpr,.xqr,.xql,.xml,.xconf}';
 gulp.task('other:deploy', function () {
     return gulp.src(otherPath, {base: '.'})
         .pipe(exist.newer(existConfiguration))
