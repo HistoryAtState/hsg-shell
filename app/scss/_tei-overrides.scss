@@ -1,0 +1,13 @@
+// TEI Overrides -------------- //
+
+// All span elements marked with tei-specific classes
+// will inherit their styles from parent element
+
+span[class="tei-persName"],
+span[class="tei-title"],
+#regular-volumes > span {
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
