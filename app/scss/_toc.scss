@@ -1,5 +1,32 @@
 /* TOC -------------- */
 
+.toc {
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    margin-left: 2em;
+  }
+  li ul {
+    margin-top: .53em;
+  }
+}
+
+.toc-inner {
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    margin-left: 2em;
+  }
+  a {
+    display: block;
+    margin-bottom: 1em;
+  }
+}
+
 #toc,
 #volume {
   -webkit-animation-duration: 400ms;
@@ -24,20 +51,13 @@
   background-color: yellow;
 }
 
-.toc ul,
-.toc-inner ul,
-.lists ul {
-  list-style: none;
-  padding-left: 0;
+.lists {
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    margin-left: 2em;
+  }
 }
 
-.toc li,
-.toc-inner li,
-.lists li {
-  margin-left: 2em;
-}
-
-.toc-inner li a {
-  display: block;
-  margin-bottom: 1em;
-}
