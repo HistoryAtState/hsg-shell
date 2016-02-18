@@ -45,39 +45,6 @@
   margin-right: 0;
 }
 
-#content-container {
-  -webkit-animation-duration: 400ms;
-  -moz-animation-duration: 400ms;
-  animation-duration: 400ms;
-  overflow: auto;
-  min-height: 800px;
-}
-
-#content-container .note {
-  font-size: .75em;
-  vertical-align: super;
-}
-
-#content-container .footnotes {
-  margin-top: 1em;
-  padding-top: 1em;
-  border-top: 1px solid #CCC;
-}
-
-#content-container .popover-content {
-  text-indent: 0;
-}
-
-#content-container .popover {
-  max-width: 80%;
-}
-
-@media (max-width: 992px) {
-  #content-inner {
-    padding-left: 0;
-  }
-}
-
 .gobox {
   line-height: 0.4;
   padding: 7px;
