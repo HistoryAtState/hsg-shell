@@ -267,8 +267,9 @@ declare %templates:wrap function app:load-most-recent-tweets($node as node(), $m
 declare function app:tweet-html($node as node(), $model as map(*)) {
     let $nodes := $model?tweet/html/node()
     for $node in $nodes
-    return 
-        ($node, if ($node/self::a and $node/following-sibling::node()[1]/self::a) then '&#160;' else ())
+        (: re-add space character after each inline-element (text-nodes and anchors) :)
+        return
+            ($node, ' ')
 };
 
 declare function app:tweet-date($node as node(), $model as map(*)) {
