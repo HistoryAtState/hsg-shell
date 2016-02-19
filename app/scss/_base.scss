@@ -1,5 +1,10 @@
 /* Base -------------- */
 
+html {
+  font-family: $font-sans;
+  font-size: $em-base;
+}
+
 body {
   font-family: $font-serif;
   //line-height: 1.428;
@@ -90,12 +95,6 @@ dl dt {
 
 input {
   height: 20px;
-}
-
-/* TODO: Refactor following style, check markup for alternative */
-
-#body {
-  min-width: 320px;
 }
 
 .section-heading {

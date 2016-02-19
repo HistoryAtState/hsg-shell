@@ -2,33 +2,29 @@
 
 .navigation-top {
   margin-bottom: 1em;
-  //border-bottom: 2px solid #CCC;
   border: none;
-}
 
-.navigation-top h5 {
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #911625;
-  font-size: 1.25em;
-  line-height: 1.5;
-  padding: 0 10px 10px 0;
-}
-
-.navigation-top .page-nav {
-  display: inline-block;
-  position: inherit;
-  font-size: 20px;
-  margin-top: 1.5em;
-}
-
-.navigation-top .nav-next {
-  text-align: right;
-}
-
-.navigation-top .col-title {
-  padding-left: 0;
-  padding-right: 0;
+  h5 {
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #911625;
+    font-size: 1.25em;
+    line-height: 1.5;
+    padding: 0 10px 10px 0;
+  }
+  .page-nav {
+    display: inline-block;
+    position: inherit;
+    font-size: 20px;
+    margin-top: 1.5em;
+  }
+  .nav-next {
+    text-align: right;
+  }
+  .col-title {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .toggle-text {
@@ -48,6 +44,15 @@
   position: fixed;
   font-size: 40px;
   top: 50%;
+
+  i {
+    text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+    opacity: 0.5;
+  }
+
+  a:hover i {
+    opacity: 1.0;
+  }
 }
 
 .page-nav,
@@ -61,15 +66,6 @@
 .page-nav:link,
 .page-nav:active {
   font-size: 20px;
-}
-
-.page-nav a:hover i {
-  opacity: 1.0;
-}
-
-.page-nav i {
-  text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
-  opacity: 0.5;
 }
 
 @media (min-width: 769px) {
