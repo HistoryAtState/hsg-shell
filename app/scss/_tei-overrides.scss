@@ -51,3 +51,12 @@ span[class="tei-hi2"],
     max-width: 80%;
   }
 }
+
+.tei-table.table-bordered {
+  width: 100%;
+  tr > th,
+  tr > td {
+    padding: 4px 6px;
+    vertical-align: middle;
+  }
+}
