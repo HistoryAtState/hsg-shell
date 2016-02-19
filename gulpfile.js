@@ -18,7 +18,7 @@ exist.createClient({
 })
 
 exist.defineMimeTypes({
-    'odd': 'application/xml'
+    'application/xml': ['odd']
 })
 
 var existConfiguration = {
