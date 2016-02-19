@@ -4,10 +4,10 @@
 // Typography
 $em-base:             10px;
 $base-font-size:      1.5rem; //(15px)
-$small-font-size:     1.2rem; //(13px)
+$small-font-size:     1.3rem; //(13px)
 $lead-font-size:      2.2rem; //(22px)
 $h1-font-size:        4.4rem; //(44px)
-$h2-font-size:        3.4rem; //(34px)
+$h2-font-size:        3.0rem; //(30px)
 $h3-font-size:        2.4rem; //(24px)
 $h4-font-size:        1.9rem; //(19px)
 $h5-font-size:        1.6rem; //(16px)
@@ -22,6 +22,9 @@ $font-serif:          'Merriweather', 'Georgia', 'Times New Roman', serif;
 
 $font-normal:         400;
 $font-bold:           700;
+
+$font-style-italic:         italic;
+$font-style-normal:         normal;
 
 
 // Color
