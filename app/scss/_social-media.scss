@@ -1,6 +1,24 @@
+.social-sidebar {
+  @extend .col-md-4;
+  padding: 0 2.5rem;
+  @media screen and (min-width: $medium-screen) {
+    border-left: $default-border-style;
+  }
+}
+
 .post-list {
   list-style-type: none;
   padding-left: 0;
+}
+
+.post {
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: $default-border-style;
+}
+
+.post:last-child {
+  border-bottom: none;
 }
 
 .post-body {

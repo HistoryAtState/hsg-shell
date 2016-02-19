@@ -1,0 +1,30 @@
+.carousel-list {
+  @extend .col-md-8;
+  padding: 0 2.5rem;
+}
+
+.carousel-item {
+  @extend .row;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: $default-border-style;
+}
+
+.carousel-item:last-child {
+  border-bottom: none;
+}
+
+.carousel-image {
+  @extend .col-xs-3;
+  margin: .5rem auto;
+  padding: 0;
+}
+
+.carousel-teaser {
+  @extend .col-xs-9;
+  margin-top: 0;
+}
+
+.carousel-title {
+  margin-top: 0;
+}
