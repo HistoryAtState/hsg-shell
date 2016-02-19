@@ -34,10 +34,8 @@
 
 #content {
   background-color: white;
-  border-color: #dddde8;
-  border-style: solid;
-  border-width: 1px;
-  padding: 10px 0 0;
+  border: $default-border-style;
+  padding: 1rem 0 2rem;
 }
 
 #content .row {

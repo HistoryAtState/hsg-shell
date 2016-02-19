@@ -1,10 +1,16 @@
 /* Banner -------------- */
 
 .banner {
-  background-color: white;
+  @extend .container;
   max-width: 100%;
-  border-collapse: collapse;
-  padding-bottom: 15px;
+  border: $default-border-style;
+  background-color: $color-white;
+}
+
+header.banner {
+  margin-top: 15px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .banner__search {
@@ -13,6 +19,5 @@
 
 footer.banner {
   margin: 20px auto;
-  border: 1px solid #dddde8;
   padding: 50px 50px 50px 40px;
 }
