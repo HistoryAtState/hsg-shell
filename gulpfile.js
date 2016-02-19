@@ -17,6 +17,10 @@ exist.createClient({
     basic_auth: { user: 'admin', pass: '' }
 })
 
+exist.defineMimeTypes({
+    'odd': 'application/xml'
+})
+
 var existConfiguration = {
     target: '/db/apps/hsg-shell/',
     retry: true
