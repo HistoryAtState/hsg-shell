@@ -194,7 +194,7 @@ gulp.task('other:watch', function () {
 // general //
 
 gulp.task('watch', ['styles:watch', 'scripts:watch', 'images:watch', 'templates:watch',
-                    'pages:watch', 'odd:watch', 'other:watch'])
+                    'pages:watch', 'odd:watch', 'other:watch', 'modules:watch'])
 
 gulp.task('build', ['scripts:copy', 'fonts:copy', 'images:optimize', 'styles:build'])
 
