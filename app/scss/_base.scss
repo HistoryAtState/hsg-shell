@@ -88,8 +88,9 @@ input {
 }
 
 .section-heading {
-  font-size: 1em;
   font-weight: 800;
   text-transform: uppercase;
-  color: #911625;
+  color: $color-secondary-darkest;
+  font-size: 1.25em;
+  line-height: 1.5;
 }

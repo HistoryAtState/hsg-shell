@@ -5,11 +5,7 @@
   border: none;
 
   h5 {
-    font-weight: 800;
-    text-transform: uppercase;
-    color: #911625;
-    font-size: 1.25em;
-    line-height: 1.5;
+    @extend .section-heading;
     padding: 0 10px 10px 0;
   }
   .page-nav {
