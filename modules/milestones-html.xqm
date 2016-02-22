@@ -63,7 +63,7 @@ declare function milestones:list($node, $model) {
         return
             <div>
                 <h3><a href="{$periodheadingurl}">{data($periodheading)}</a></h3>
-                <ul>
+                <ul class="list-unstyled">
                     {
                     for $item in $milestone/tei:body/tei:div
                     let $title := $item/tei:head
