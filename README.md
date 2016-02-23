@@ -12,11 +12,11 @@ With **[homebrew](http://brew.sh#install)** installed, do
     brew update && brew upgrade
     brew install ant git node
 
-#### Install gulp
+#### Install global node packages
 
 After node is installed just run
 
-    npm install -g gulp
+    npm install -g gulp bower
 
 ## Setup
 
@@ -59,7 +59,7 @@ It will just run four of the previous steps one after another (`git pull && npm 
 
 ## Development
 
-`gulp build` builds the resource folder with fonts, optimized images, minified app.js and compiled styles
+`gulp build` builds the resource folder with fonts, optimized images, vendor javascript libraries and compiled styles
 
 `gulp deploy` sends the resource folder to a local existDB - you may have to edit the credentials in gulpfile.js
 

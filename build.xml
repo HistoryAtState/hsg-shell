@@ -7,7 +7,7 @@
     <target name="xar">
         <mkdir dir="${build.dir}"/>
         <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar"
-             excludes="${build.dir}/** node_modules/** app/** package.json gulpfile.js .idea/**"/>
+             excludes="${build.dir}/** node_modules/** package.json gulpfile.js .*"/>
     </target>
     <target name="clean">
         <delete>

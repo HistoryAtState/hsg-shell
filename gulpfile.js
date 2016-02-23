@@ -38,8 +38,8 @@ gulp.task('clean', function() {
 
 gulp.task('fonts:copy', ['clean'], function () {
     return gulp.src([
-            'node_modules/bootstrap-sass/assets/fonts/**/*',
-            'node_modules/font-awesome/fonts/*'
+            'bower_components/bootstrap-sass/assets/fonts/**/*',
+            'bower_components/font-awesome/fonts/*'
         ])
         .pipe(gulp.dest('resources/fonts'))
 })
@@ -86,9 +86,9 @@ gulp.task('scripts:build', function () {
 
 gulp.task('scripts:copy', function () {
     return gulp.src([
-            'node_modules/jquery/dist/*.js',
-            'node_modules/jquery-touchswipe/*.js',
-            'node_modules/bootstrap-sass/assets/javascripts/bootstrap{.min,}.js'
+            'bower_components/jquery/dist/*.js',
+            'bower_components/jquery-touchswipe/*.js',
+            'bower_components/bootstrap-sass/assets/javascripts/bootstrap{.min,}.js'
         ])
         .pipe(gulp.dest('resources/scripts/vendor'))
 })
