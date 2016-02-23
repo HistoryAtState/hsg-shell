@@ -39,11 +39,14 @@ $icon-font-path: "../fonts/";
 /* Navbar ------------- */
 
 .navbar {
-  background: #2c6196;
+  //background: #2c6196;
+  background: $bg-color-navbar;
+  border-color: $bg-color-navbar;
   padding: 0;
   color: white;
   margin-bottom: 0;
   min-height: 37px;
+  border-radius: 0;
 }
 
 .navbar .container-fluid {
@@ -51,7 +54,7 @@ $icon-font-path: "../fonts/";
 }
 
 .navbar li, .navbar span {
-  font-family: "Source Sans Pro";
+  font-family: $font-sans;
   margin-bottom: 0;
 }
 
@@ -59,21 +62,36 @@ $icon-font-path: "../fonts/";
   min-height: 0px;
 }
 
-.navbar-nav {
+.nav {
   margin-top: -2px;
+
+  @media (min-width: 768px) and (max-width: 991px){
+    font-size: $small-font-size;
+   > li > a {
+     padding: 10px 14px;
+   }
+  }
 }
+
+/*
+.nav > li > a {
+  @media (min-width: 768px) and (max-width: 991px) {
+    padding: 10px 14px;
+  }
+}
+*/
 
 .navbar-brand,
 .navbar-nav li a {
   height: 37px;
   line-height: 37px;
   padding-top: 0;
-  color: white;
+  color: $color-white;
 }
 
-.navbar-default .navbar-nav > .dropdown.open a {
-  background: transparent;
-  color: #000066;
+.mavbar-default .navbar-nav > .dropdown.open a {
+    background: transparent;
+    color: #000066;
 }
 
 .navbar-default .navbar-nav > .dropdown.open .dropdown-menu a:hover {
@@ -87,10 +105,9 @@ $icon-font-path: "../fonts/";
 .navbar-toggle {
   padding: 6px 10px;
   margin: 6px 12px;
-}
-
-.navbar-toggle:hover {
-  color: #030361;
+  &:hover {
+    color: #030361;
+  }
 }
 
 .dropdown-menu,

@@ -76,6 +76,9 @@ $color-cool-blue-lightest:   #dce4ef; // lighten($color-cool-blue, 90%)
 $color-focus:                #3e94cf;
 $color-visited:              #4c2c92;
 
+// Navigation backgroundcolor
+$bg-color-navbar:            $color-primary-darker;
+
 
 // Mobile First Breakpoints
 $xs-screen:         481px;

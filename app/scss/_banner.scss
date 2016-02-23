@@ -4,6 +4,7 @@
   @extend .container;
   max-width: 100%;
   border: $default-border-style;
+  border-bottom: none;
   background-color: $color-white;
 }
 
