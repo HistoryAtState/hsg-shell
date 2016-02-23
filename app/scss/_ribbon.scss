@@ -1,14 +1,23 @@
 // Ribbon ---------- //
 
+.ribbon-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  z-index: 1000;  /* stay on top */
+}
+
 /* https://unindented.org/articles/github-ribbon-using-css-transforms/ */
 .ribbon {
   background-color: $color-secondary-darkest;
-  overflow: hidden;
   white-space: nowrap;
   /* top right corner */
   position: absolute;
   right: -50px;
-  top: 40px;
+  top: 50px;
   /* 45 deg ccw rotation */
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
@@ -19,14 +28,12 @@
   -webkit-box-shadow: 0 0 10px #888;
   -moz-box-shadow: 0 0 10px #888;
   box-shadow: 0 0 10px #888;
-  /* stay on top */
-  z-index: 1;
 
   a {
     border: 1px solid $color-secondary-light;
     color: $color-white;
     display: block;
-    font: bold 1.4rem 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font: bold 1.4rem/1 'Helvetica Neue', Helvetica, Arial, sans-serif;
     margin: 1px 0;
     padding: 10px 50px;
     text-align: center;
