@@ -1,7 +1,7 @@
 .social-sidebar {
   @extend .col-md-4;
   padding: 0 2.5rem;
-  @media screen and (min-width: $medium-screen) {
+  @media screen and (min-width: $small-screen) {
     border-left: $default-border-style;
   }
 }

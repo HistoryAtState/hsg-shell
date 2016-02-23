@@ -78,9 +78,13 @@ $color-visited:              #4c2c92;
 
 
 // Mobile First Breakpoints
-$small-screen:      481px;
-$medium-screen:     600px;
-$large-screen:      1201px;
+$xs-screen:         481px;
+$small-screen:      601px;
+$sm-screen:         841px;
+$medium-screen:     961px;
+$large-screen:     1281px;
+$xlarge-screen:    1441px;
+$xxlarge-screen:   1601px;
 
 
 // Magic Numbers
