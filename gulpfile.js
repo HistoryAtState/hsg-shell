@@ -205,6 +205,7 @@ gulp.task('build', ['fonts:copy', 'images:optimize', 'styles:build'])
 gulp.task('deploy', ['build'], function () {
     return gulp.src([
             'resources/**/*', // odd, styles, fonts, scripts
+            'bower_components/**/*',
             templatesPath,
             pagesPath,
             modulesPath,
