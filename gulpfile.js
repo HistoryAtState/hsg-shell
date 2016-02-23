@@ -200,7 +200,7 @@ gulp.task('other:watch', function () {
 gulp.task('watch', ['styles:watch', 'scripts:watch', 'images:watch', 'templates:watch',
                     'pages:watch', 'odd:watch', 'other:watch', 'modules:watch'])
 
-gulp.task('build', ['scripts:copy', 'fonts:copy', 'images:optimize', 'styles:build'])
+gulp.task('build', ['fonts:copy', 'images:optimize', 'styles:build'])
 
 gulp.task('deploy', ['build'], function () {
     return gulp.src([
