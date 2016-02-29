@@ -217,6 +217,7 @@ $(document).ready(function() {
                 }
                 load(params, nav.className.split(" ")[0]);
             },
+            preventDefaultEvents: false,
             allowPageScroll: "vertical"
         });
     }

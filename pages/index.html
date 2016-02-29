@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div class="row">
-        <div class="col-md-8" data-template="app:load-carousel-items">
-            <h2 style="font-size: 1em; font-weight: 800; text-transform: uppercase; color: #911625">Latest News</h2>
-            <div data-template="templates:each" data-template-from="carousel-items" data-template-to="carousel-item">
-                <div class="row" data-template="app:fix-links">
-                    <div class="col-md-3">
+        <div class="carousel-list col-md-8" data-template="app:load-carousel-items">
+            <h2 class="section-heading">Latest News</h2>
+            <section class="carousel-item" data-template="templates:each" data-template-from="carousel-items" data-template-to="carousel-item">
+                <div data-template="app:fix-links">
+                    <div class="carousel-image">
                         <a>
                             <span data-template="app:carousel-item-href-attribute"/>
                             <img class="img-responsive">
@@ -14,8 +14,8 @@
                             </img>
                         </a>
                     </div>
-                    <div class="col-md-9">
-                        <h3>
+                    <div class="carousel-teaser">
+                        <h3 class="carousel-title">
                             <a>
                                 <span data-template="app:carousel-item-href-attribute"/>
                                 <span data-template="app:carousel-item-heading"/>
@@ -24,43 +24,34 @@
                         <p data-template="app:carousel-item-description"/>
                     </div>
                 </div>
-                <hr/>
-            </div>
+            </section>
         </div>
-        <div class="col-md-4">
-            <h2 style="font-size: 1em; font-weight: 800; text-transform: uppercase; color: #911625">Stay connected</h2>
-            <div>
+        <div class="social-sidebar">
+            <h2 class="section-heading">Stay connected</h2>
+            <section>
                 <h3>Twitter</h3>
-                <ul data-template="app:load-most-recent-tweets" data-template-how-many="3">
-                    <li data-template="templates:each" data-template-from="tweets" data-template-to="tweet">
-                        <span data-template="app:tweet-html"/>
-                        <ul>
-                            <li>
-                                <a>
-                                    <span data-template="app:tweet-href"/>
-                                    <span data-template="app:tweet-date"/>
-                                </a>
-                            </li>
-                        </ul>
+                <ul class="post-list" data-template="app:load-most-recent-tweets" data-template-how-many="3">
+                    <li class="post" data-template="templates:each" data-template-from="tweets" data-template-to="tweet">
+                        <p class="post-body"><span data-template="app:tweet-html"/></p>
+                        <a class="post-meta">
+                            <span data-template="app:tweet-href"/>
+                            <span data-template="app:tweet-date"/>
+                        </a>
                     </li>
                 </ul>
-            </div>
-            <div>
+            </section>
+            <section>
                 <h3>Tumblr</h3>
-                <ul data-template="app:load-most-recent-tumblr-posts" data-template-how-many="2">
-                    <li data-template="templates:each" data-template-from="posts" data-template-to="post">
-                        <span data-template="app:tumblr-post-title"/>
-                        <ul>
-                            <li>
-                                <a>
-                                    <span data-template="app:tumblr-post-href"/>
-                                    <span data-template="app:tumblr-post-date"/>
-                                </a>
-                            </li>
-                        </ul>
+                <ul class="post-list" data-template="app:load-most-recent-tumblr-posts" data-template-how-many="2">
+                    <li class="post" data-template="templates:each" data-template-from="posts" data-template-to="post">
+                        <p class="post-body"><span data-template="app:tumblr-post-title"/></p>
+                        <a class="post-meta">
+                            <span data-template="app:tumblr-post-href"/>
+                            <span data-template="app:tumblr-post-date"/>
+                        </a>
                     </li>
                 </ul>
-            </div>
+            </section>
         </div>
     </div>
 </div>

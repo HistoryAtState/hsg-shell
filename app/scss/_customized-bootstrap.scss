@@ -1,0 +1,202 @@
+/* Customized-Bootstrap Elements -------------- */
+
+$icon-font-path: "../fonts/";
+
+.carousel-caption {
+  position: initial;
+  z-index: inherit;
+  color: inherit;
+  text-shadow: inherit;
+  left: 15%;
+  right: 15%;
+}
+
+.content img {
+  border: 1px solid #C0C0C0;
+  padding: 10px;
+  -webkit-border-radius: 1ex;
+  -moz-border-radius: 1ex;
+}
+
+.content .labeled-list dt {
+  float: left;
+  display: inline;
+}
+
+.content .labeled-list dd {
+  margin-left: 3em;
+}
+
+.content .listHead {
+  font-weight: bold;
+}
+
+.content .listHead + .list li {
+  margin-left: 2em;
+  font-size: 85%;
+}
+
+/* Navbar ------------- */
+
+.navbar {
+  //background: #2c6196;
+  background: $bg-color-navbar;
+  border-color: $bg-color-navbar;
+  padding: 0;
+  color: white;
+  margin-bottom: 0;
+  min-height: 37px;
+  border-radius: 0;
+}
+
+.navbar .container-fluid {
+  height: 37px;
+}
+
+.navbar li, .navbar span {
+  font-family: $font-sans;
+  margin-bottom: 0;
+}
+
+.navbar-inner {
+  min-height: 0px;
+}
+
+.nav {
+  margin-top: -2px;
+
+  @media (min-width: 768px) and (max-width: 991px){
+    font-size: $small-font-size;
+   > li > a {
+     padding: 10px 14px;
+   }
+  }
+}
+
+/*
+.nav > li > a {
+  @media (min-width: 768px) and (max-width: 991px) {
+    padding: 10px 14px;
+  }
+}
+*/
+
+.navbar-brand,
+.navbar-nav li a {
+  height: 37px;
+  line-height: 37px;
+  padding-top: 0;
+  color: $color-white;
+}
+
+.mavbar-default .navbar-nav > .dropdown.open a {
+    background: transparent;
+    color: #000066;
+}
+
+.navbar-default .navbar-nav > .dropdown.open .dropdown-menu a:hover {
+  background-color: #f3f3f3;
+}
+
+.navbar-collapse {
+  padding-left: 0;
+}
+
+.navbar-toggle {
+  padding: 6px 10px;
+  margin: 6px 12px;
+  &:hover {
+    color: #030361;
+  }
+}
+
+.dropdown-menu,
+.collapsing,
+.collapse.in {
+  background-color: #dddde8;
+}
+
+.navbar .collapse.in li,
+.navbar .collapsing li {
+  background: #2c6196;
+}
+
+.navbar .dropdown.open .dropdown-menu li {
+  background-color: #dddde8;
+  padding-left: 0;
+}
+
+.navbar .dropdown.open .dropdown-menu li a {
+  color: #030361;
+}
+
+.collapsing li,
+.collapse.in li {
+  padding-left: 10px;
+  color: #000066;
+}
+
+/* Table -------------- */
+
+/* override bootstrap, which adds top border to each cell. TODO: modify bootstrap base style */
+.table > tbody > tr > td {
+  border-top: 1px;
+}
+
+/* override bootstrap, which adds 8px padding to each cell! TODO: modify bootstrap base style */
+.table > tbody > tr > th,
+.table > tbody > tr > td {
+  padding: 0px 1px;
+  vertical-align: top;
+}
+
+/* override bootstrap, which makes tables full width. TODO: modify bootstrap base style */
+.table {
+  width: inherit;
+}
+
+/* Breadcrumb ----------- */
+
+.breadcrumb {
+  background-color: transparent;
+  padding: 5px 0px;
+  font-size: inherit;
+}
+
+.breadcrumb li {
+  font-family: $font-sans;
+}
+
+.breadcrumb > li {
+  display: inline !important;
+}
+
+ol.breadcrumb li:first-child:before {
+  content: "" !important;
+}
+
+ol.breadcrumb li:before {
+  content: "›" !important;
+}
+
+/* Lists ---------------- */
+
+.list-group i {
+  margin-right: 1em;
+}
+
+/* Panels */
+
+.panel {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* Selectbar in dynamic content pages */
+
+#content-inner {
+  @media (min-width: 768px){
+    .form-group {
+      margin-bottom: 15px;
+    }
+  }
+}

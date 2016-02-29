@@ -106,11 +106,11 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                     if ($tagged-secretary-bios) then
                         <div>
                             <h3>Biographies of the Secretaries of State ({count($tagged-secretary-bios)})</h3>
-                            <ul>{
+                            <ul class="list-unstyled">{
                                 for $bio in $tagged-secretary-bios
                                 let $url := concat('$app/departmenthistory/people/', $bio/secretary-bios-id)
                                 return
-                                    <li style="padding-bottom: .8em; margin-left: 1em; text-indent: -1em"><a href="{$url}">{$bio/title/string()}</a></li>
+                                    <li><a href="{$url}">{$bio/title/string()}</a></li>
                             }</ul>
                         </div>
                     else ()
@@ -118,11 +118,11 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                     if ($tagged-milestone-essays) then
                         <div>
                             <h3>Milestone Essays ({count($tagged-milestone-essays)})</h3>
-                            <ul>{
+                            <ul class="list-unstyled">{
                                 for $essay in $tagged-milestone-essays
                                 let $url := concat('$app/milestones/', $essay/milestone-grouping, '/', $essay/milestone-id)
                                 return
-                                    <li style="padding-bottom: .8em; margin-left: 1em; text-indent: -1em"><a href="{$url}">{$essay/title/string()}</a></li>
+                                    <li><a href="{$url}">{$essay/title/string()}</a></li>
                             }</ul>
                         </div>
                     else ()
@@ -130,14 +130,14 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                     if ($tagged-volumes) then
                         <div>
                             <h3><em>Foreign Relations</em> volumes ({count($tagged-volumes)})</h3>
-                            <ul>{
+                            <ul class="list-unstyled">{
                                 for $volume in $tagged-volumes
                                 let $url := "$app" || substring-after($volume/link, 'history.state.gov')
                                 let $volume-id := substring-after($url, '/historicaldocuments/')
                                 let $volume-title := normalize-space(frus:vol-title($volume-id))
                                 order by $volume-id
                                 return
-                                    <li style="padding-bottom: .8em; margin-left: 1em; text-indent: -1em"><a href="{$url}">{$volume-title}</a></li>
+                                    <li><a href="{$url}">{$volume-title}</a></li>
                             }</ul>
                         </div>
                     else ()

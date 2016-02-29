@@ -1,0 +1,62 @@
+// TEI Overrides -------------- //
+
+// All span elements marked with tei-specific classes
+// will inherit their styles from parent element
+
+span[class="tei-persName"],
+span[class="tei-title"],
+span[class="tei-hi2"],
+#regular-volumes > span {
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+/* Styles for the inner document */
+
+#content-inner {
+  @media (max-width: 992px) {
+    padding-left: 0;
+  }
+
+  h2.tei-head6 {
+    font-family: $font-sans;
+  }
+}
+
+#content-container {
+  -webkit-animation-duration: 400ms;
+  -moz-animation-duration: 400ms;
+  animation-duration: 400ms;
+  overflow: auto;
+  min-height: 800px;
+
+  .note {
+    font-size: .75em;
+    vertical-align: super;
+  }
+
+  .footnotes {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: 1px solid #CCC;
+  }
+
+  .popover-content {
+    text-indent: 0;
+  }
+
+  .popover {
+    max-width: 80%;
+  }
+}
+
+.tei-table.table-bordered {
+  width: 100%;
+  tr > th,
+  tr > td {
+    padding: 4px 6px;
+    vertical-align: middle;
+  }
+}

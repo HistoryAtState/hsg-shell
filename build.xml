@@ -6,7 +6,8 @@
     <property name="build.dir" value="build"/>
     <target name="xar">
         <mkdir dir="${build.dir}"/>
-        <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar" excludes="${build.dir}/*"/>
+        <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar"
+             excludes="${build.dir}/** node_modules/** package.json gulpfile.js .*"/>
     </target>
     <target name="clean">
         <delete>

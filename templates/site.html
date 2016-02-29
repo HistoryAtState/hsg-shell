@@ -4,22 +4,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta data-template="config:app-meta"/><!-- remove after beta -->
         <meta name="robots" content="noindex, nofollow"/>
-        <link rel="shortcut icon" href="$app/resources/images/favicon.ico"/><!--        <link rel="stylesheet" type="text/css" href="$app/bower_components/bootstrap/dist/css/bootstrap.min.css"/>--><!--        <link rel="stylesheet" type="text/css" href="$app/resources/css/variables.css"/>-->
-        <link rel="stylesheet" type="text/css" href="$app/bower_components/animate.css/animate.min.css"/>
-        <link rel="stylesheet" type="text/css" href="$app/bower_components/font-awesome/css/font-awesome.min.css"/>
-        <link rel="stylesheet" type="text/css" href="$app/resources/css/style.css"/>
-        <link rel="stylesheet" type="text/css" href="$app/resources/css/new-layout.css"/>
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic"/>
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro"/>
+        <link rel="shortcut icon" href="$app/resources/images/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="$app/resources/css/main.css"/>
         <link rel="stylesheet" type="text/css" data-template="pages:styles" data-template-odd="frus.odd"/>
-        <script type="text/javascript" src="$app/bower_components/jquery/dist/jquery.min.js"/><!--<script type="text/javascript" src="$app/bower_components/bower_components/jquery-touchswipe/jquery.touchSwipe.min.js"/>-->
-        <script type="text/javascript" src="$app/bower_components/bootstrap/dist/js/bootstrap.min.js"/>
+        <script type="text/javascript" src="$app/bower_components/jquery/dist/jquery.js"/>
+        <script type="text/javascript" src="$app/bower_components/jquery-touchswipe/jquery.touchSwipe.js"/>
+        <script type="text/javascript" src="$app/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"/>
     </head>
     <body id="body"><!-- remove after beta -->
-        <div class="ribbon">
-            <a href="$app/about-the-beta" data-template="app:insert-url-parameter">Learn about the beta</a>
+        <div class="ribbon-container">
+            <div class="ribbon">
+                <a href="$app/about-the-beta" data-template="app:insert-url-parameter">Learn about the beta</a>
+            </div>
         </div>
-        <header class="container banner" data-template="app:fix-links">
+        <header class="banner" data-template="app:fix-links">
             <div class="row">
                 <div class="col-sm-7">
                     <a href="$app/">
@@ -31,7 +29,7 @@
                         <div class="searchbox">
                             <form method="get" action="$app/search">
                                 <p class="form-group"><!-- Search: -->
-                                    <input type="text" size="15" name="q" style="margin-bottom: 0" placeholder="Search..." class="form-control" id="search-box"/>
+                                    <input type="text" size="15" name="q" placeholder="Search..." class="form-control" id="search-box"/>
                                     <button type="submit" value="GO" class="search-button btn btn-default">
                                         <i class="fa fa-search"/>
                                     </button>
@@ -42,7 +40,7 @@
                 </div>
             </div>
         </header>
-        <div role="navigation" class="container navbar navbar-default" data-template="app:fix-links">
+        <nav role="navigation" class="container navbar navbar-default" data-template="app:fix-links">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
@@ -232,9 +230,9 @@
                     </ul>
                 </div>
             </div>
-        </div>
-        <div id="content" class="container"/>
-        <footer class="container banner" data-template="app:fix-links">
+        </nav>
+        <main id="content" class="container"/>
+        <footer class="banner" data-template="app:fix-links">
             <div class="row">
                 <div class="col-sm-12">
                     <a href="/">Home</a> | <a href="$app/about/">About Us</a> | <a href="$app/about/contact-us">Contact Us</a> | <a href="$app/about/faq">FAQ</a> | <a href="http://www.state.gov/misc/87529.htm#privacy">Privacy Notice</a> | <a href="http://www.state.gov/misc/152386.htm">External Link Policy</a> | <a href="http://www.state.gov/misc/87529.htm#copyright">Copyright Info</a> | <a href="$app/search">Search</a>

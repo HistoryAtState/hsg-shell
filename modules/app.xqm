@@ -4,7 +4,7 @@ module namespace app="http://history.state.gov/ns/site/hsg/templates";
 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
-import module namespace templates="http://exist-db.org/xquery/templates" ;
+import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare
     %templates:wrap
@@ -267,8 +267,9 @@ declare %templates:wrap function app:load-most-recent-tweets($node as node(), $m
 declare function app:tweet-html($node as node(), $model as map(*)) {
     let $nodes := $model?tweet/html/node()
     for $node in $nodes
-    return 
-        ($node, if ($node/self::a and $node/following-sibling::node()[1]/self::a) then '&#160;' else ())
+        (: re-add space character after each inline-element (text-nodes and anchors) :)
+        return
+            ($node, ' ')
 };
 
 declare function app:tweet-date($node as node(), $model as map(*)) {

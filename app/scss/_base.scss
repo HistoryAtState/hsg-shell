@@ -1,0 +1,96 @@
+/* Base -------------- */
+
+html {
+  font-family: $font-sans;
+  font-size: $em-base;
+}
+
+body {
+  font-family: $font-serif;
+  //line-height: 1.428;
+  line-height: $base-line-height;
+  font-weight: $font-normal;
+  font-size:   $base-font-size;
+  background:  $color-white url("//s3.amazonaws.com/static.history.state.gov/images/background.gif") repeat-x scroll 0 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-sans;
+  font-weight: $font-bold;
+  line-height: $heading-line-height;
+}
+
+h1 {
+  font-size: $h1-font-size;
+  font-weight: $font-bold;
+}
+
+h2 {
+  font-size: $h2-font-size;
+}
+
+h3 {
+  font-size: $h3-font-size;
+}
+
+h4 {
+  font-size: $h4-font-size;
+}
+
+h5 {
+  font-size: $h5-font-size;
+}
+
+h6 {
+  font-size: $h6-font-size;
+  text-transform: uppercase;
+}
+
+p {
+  margin-bottom: 18px;
+}
+
+ul li,
+ol li {
+  margin-bottom: .53em;
+}
+
+div, span, p, li {
+  font-family: inherit;
+}
+
+a,
+a:hover,
+a:visited,
+a:active {
+  color: $color-primary-darker;
+  // color: #2c6196
+  transition: color 0.5s ease 0s;
+}
+
+a:hover,
+a:active,
+a:focus {
+  color: $color-primary-darkest;
+  // color: #030361;
+}
+
+dl {
+  margin: 1.5em 0 1.5em 0;
+}
+
+dl dt {
+  font-weight: $font-bold;
+}
+
+input {
+  height: 20px;
+}
+
+.section-heading {
+  font-weight: 800;
+  text-transform: uppercase;
+  color: $color-secondary-darkest;
+  font-size: 1.25em;
+  line-height: 1.5;
+}

@@ -1,0 +1,67 @@
+/* TODO: Sort styles into appropriate components */
+
+#main-nav {
+  max-height: 37px;
+  height: 37px;
+}
+
+#main-nav > .container-fluid {
+  padding-left: 0;
+}
+
+#volume .titleStmt1 {
+  font-size: 1.25em;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #911625;
+}
+
+#person-panel ul,
+#gloss-panel ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#person-panel li,
+#gloss-panel li {
+  margin-left: .5em;
+  text-indent: -0.5em;
+}
+
+#faq > ul {
+  list-style: none;
+}
+
+#content {
+  background-color: white;
+  border: $default-border-style;
+  border-top: none;
+  padding: 1rem 0 2rem;
+}
+
+#content .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.gobox {
+  line-height: 0.4;
+  padding: 7px;
+  margin-left: 2px;
+}
+
+.float-left {
+  float: left;
+}
+
+.figure-floated {
+  margin: 1em 2em 1em 0;
+  text-align: center;
+  max-width: 30%;
+}
+
+.heading {
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #911625;
+}

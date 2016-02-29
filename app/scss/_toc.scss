@@ -1,0 +1,63 @@
+/* TOC -------------- */
+
+.toc {
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    margin-left: 2em;
+  }
+  li ul {
+    margin-top: .53em;
+  }
+}
+
+.toc-inner {
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    margin-left: 2em;
+  }
+  a {
+    display: block;
+    margin-bottom: 1em;
+  }
+}
+
+#toc,
+#volume {
+  -webkit-animation-duration: 400ms;
+  -moz-animation-duration: 400ms;
+  animation-duration: 400ms;
+}
+
+#toc h2,
+#volume h2 {
+  background-color: #dddde8;
+  font-size: 1.2em;
+  line-height: 1.25;
+  margin-bottom: 1.25em;
+}
+
+#toc .highlight,
+#volume .highlight {
+  background-color: #dddde8;
+}
+
+.hi {
+  background-color: yellow;
+}
+
+.lists {
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    margin-left: 2em;
+  }
+}
+

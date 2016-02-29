@@ -1,7 +1,10 @@
 # artifacts
 build
-bower_components
 node_modules
+bower_components
+resources/css
+resources/fonts
+resources/scripts/vendor
 
 # IDE
 .idea
