@@ -7,6 +7,6 @@ declare variable $parameters external;
 let $options := map {
     "styles": ["../generated/frus.css"],
     "collection": "/db/apps/hsg-shell/resources/odd/compiled",
-    "parameters": $parameters
+    "parameters": if (exists($parameters)) then $parameters else map {}
 }
 return m:transform($options, $xml)

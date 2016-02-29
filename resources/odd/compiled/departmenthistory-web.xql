@@ -186,9 +186,9 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:inline($config, ., ("tei-figDesc"), .)
                 case element(figure) return
                     if (head or @rendition='simple:display') then
-                        html:block($config, ., ("tei-figure1", "float-left figure-floated"), .)
+                        html:block($config, ., ("tei-figure1", "float-left", "figure-floated"), .)
                     else
-                        html:inline($config, ., ("tei-figure2", "float-left figure-floated"), .)
+                        html:inline($config, ., ("tei-figure2", "float-left", "figure-floated"), .)
                 case element(floatingText) return
                     html:block($config, ., ("tei-floatingText"), .)
                 case element(foreign) return
@@ -242,7 +242,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                                         html:omit($config, ., ("tei-head5"), .)
                                     else
                                         if (parent::div) then
-                                            html:heading($config, ., ("tei-head6"), .)
+                                            html:heading($config, ., ("tei-head6"), ., count(ancestor::div))
                                         else
                                             html:block($config, ., ("tei-head7"), .)
                 case element(hi) return
@@ -452,7 +452,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:cell($config, ., ("tei-cell"), ., ())
                 case element(titleStmt) return
                     (
-                        html:heading($config, ., ("tei-titleStmt1"), title[@type="complete"]),
+                        html:heading($config, ., ("tei-titleStmt1"), title[@type="complete"], ()),
                         if (count(editor[@role = 'primary']) gt 1) then
                             html:block($config, ., ("tei-titleStmt2"), "Editors:")
                         else
@@ -490,6 +490,11 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:inline($config, ., ("tei-term"), .)
                 case element(exist:match) return
                     html:match($config, ., .)
+                case element() return
+                    if (namespace-uri(.) = 'http://www.tei-c.org/ns/1.0') then
+                        $config?apply($config, ./node())
+                    else
+                        .
                 case text() | xs:anyAtomicType return
                     html:escapeChars(.)
                 default return 

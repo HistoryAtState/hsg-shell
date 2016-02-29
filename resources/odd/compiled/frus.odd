@@ -585,7 +585,7 @@ display: block;
                 </model>
             </elementSpec>
             <elementSpec mode="change" ident="table">
-                <model behaviour="table" useSourceRendition="true" cssClass="table"/>
+                <model behaviour="table" useSourceRendition="true" cssClass="table table-hover table-bordered"/>
             </elementSpec>
             <elementSpec mode="change" ident="fileDesc">
                 <modelSequence>

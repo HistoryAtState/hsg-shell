@@ -189,7 +189,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:inline($config, ., ("tei-figDesc"), .)
                 case element(figure) return
                     if (@rend='smallfloatinline') then
-                        html:block($config, ., ("tei-figure1", "float-left figure-floated"), .)
+                        html:block($config, ., ("tei-figure1", "float-left", "figure-floated"), .)
                     else
                         if (head or @rendition='simple:display') then
                             html:block($config, ., ("tei-figure2"), .)
@@ -248,7 +248,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                                         html:omit($config, ., ("tei-head5"), .)
                                     else
                                         if (parent::div) then
-                                            html:heading($config, ., ("tei-head6"), .)
+                                            html:heading($config, ., ("tei-head6"), ., count(ancestor::div))
                                         else
                                             html:block($config, ., ("tei-head7"), .)
                 case element(hi) return
@@ -286,7 +286,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(list) return
                     if (head) then
                         (
-                            html:heading($config, ., ("tei-list1", "listHead"), head/node()),
+                            html:heading($config, ., ("tei-list1", "listHead"), head/node(), 4),
                             html:list($config, ., ("tei-list2", "list"), item)
                         )
 
@@ -420,7 +420,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                                 else
                                     html:inline($config, ., ("tei-supplied5"), .)
                 case element(table) return
-                    html:table($config, ., css:get-rendition(., ("tei-table", "table table-hover table-bordered")), .)
+                    html:table($config, ., css:get-rendition(., ("tei-table", "table", "table-hover", "table-bordered")), .)
                 case element(fileDesc) return
                     (
                         html:block($config, ., ("tei-fileDesc1"), titleStmt),
@@ -465,7 +465,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:row($config, ., css:get-rendition(., ("tei-row")), .)
                 case element(titleStmt) return
                     (
-                        html:heading($config, ., ("tei-titleStmt1"), title[@type="complete"]),
+                        html:heading($config, ., ("tei-titleStmt1"), title[@type="complete"], ()),
                         if (count(editor[@role = 'primary']) gt 1) then
                             html:block($config, ., ("tei-titleStmt2"), "Editors:")
                         else
@@ -509,6 +509,11 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:inline($config, ., ("tei-term"), .)
                 case element(exist:match) return
                     html:match($config, ., .)
+                case element() return
+                    if (namespace-uri(.) = 'http://www.tei-c.org/ns/1.0') then
+                        $config?apply($config, ./node())
+                    else
+                        .
                 case text() | xs:anyAtomicType return
                     html:escapeChars(.)
                 default return 
