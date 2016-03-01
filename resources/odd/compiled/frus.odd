@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:frus="http://history.state.gov/frus/ns/1.0" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
@@ -584,8 +584,8 @@ display: block;
                     <outputRendition scope="after">content:"}";</outputRendition>
                 </model>
             </elementSpec>
-            <elementSpec mode="change" ident="table">
-                <model predicate=".//row/@rendition or .//cell/@rendition" behaviour="table" useSourceRendition="true"/>
+            <elementSpec mode="change" ident="table"><!-- Do not add bootstrap classes for tables which contain @rendition hints -->
+                <model predicate=".//row/@rendition or .//cell/@rendition" behaviour="table" useSourceRendition="true"/><!-- Use bootstrap for basic table styling -->
                 <model behaviour="table" useSourceRendition="true" cssClass="table table-hover table-bordered"/>
             </elementSpec>
             <elementSpec mode="change" ident="fileDesc">
@@ -719,6 +719,9 @@ display: block;
             </elementSpec>
             <elementSpec ident="term" mode="add">
                 <model behaviour="inline"/>
+            </elementSpec>
+            <elementSpec ident="frus:attachment" mode="add">
+                <model behaviour="section"/>
             </elementSpec>
             <outputRendition xml:id="allcaps">text-transform: uppercase;</outputRendition>
             <outputRendition xml:id="blackletter">font-family: fantasy;</outputRendition>

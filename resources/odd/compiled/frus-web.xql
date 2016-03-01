@@ -11,6 +11,10 @@ declare default element namespace "http://www.tei-c.org/ns/1.0";
 
 declare namespace xhtml='http://www.w3.org/1999/xhtml';
 
+declare namespace skos='http://www.w3.org/2004/02/skos/core#';
+
+declare namespace frus='http://history.state.gov/frus/ns/1.0';
+
 import module namespace css="http://www.tei-c.org/tei-simple/xquery/css" at "xmldb:exist:///db/apps/tei-simple/content/css.xql";
 
 import module namespace html="http://www.tei-c.org/tei-simple/xquery/functions" at "xmldb:exist:///db/apps/tei-simple/content/html-functions.xql";
@@ -510,6 +514,8 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:inline($config, ., ("tei-gloss"), .)
                 case element(term) return
                     html:inline($config, ., ("tei-term"), .)
+                case element(frus:attachment) return
+                    html:section($config, ., ("tei-frus:attachment"), .)
                 case element(exist:match) return
                     html:match($config, ., .)
                 case element() return
