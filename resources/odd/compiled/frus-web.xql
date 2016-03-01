@@ -420,7 +420,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                                 else
                                     html:inline($config, ., ("tei-supplied5"), .)
                 case element(table) return
-                    html:table($config, ., css:get-rendition(., ("tei-table", "table", "table-hover", "table-bordered")), .)
+                    if (.//row/@rendition or .//cell/@rendition) then
+                        html:table($config, ., css:get-rendition(., ("tei-table1")), .)
+                    else
+                        html:table($config, ., css:get-rendition(., ("tei-table2", "table", "table-hover", "table-bordered")), .)
                 case element(fileDesc) return
                     (
                         html:block($config, ., ("tei-fileDesc1"), titleStmt),

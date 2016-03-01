@@ -253,7 +253,8 @@
                         <outputRendition>text-align: right; margin-top: 1em; margin-left: 1em;</outputRendition>
                     </model>
                 </elementSpec><!-- override background-color and font-size property from teisimple.odd -->
-                <elementSpec mode="change" ident="table">
+                <elementSpec mode="change" ident="table"><!-- Do not add bootstrap classes for tables which contain @rendition hints -->
+                    <model predicate=".//row/@rendition or .//cell/@rendition" behaviour="table" useSourceRendition="true"/><!-- Use bootstrap for basic table styling -->
                     <model behaviour="table" useSourceRendition="true" cssClass="table table-hover table-bordered"/>
                 </elementSpec>
                 <elementSpec mode="change" ident="cell">

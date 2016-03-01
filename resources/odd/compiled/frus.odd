@@ -585,6 +585,7 @@ display: block;
                 </model>
             </elementSpec>
             <elementSpec mode="change" ident="table">
+                <model predicate=".//row/@rendition or .//cell/@rendition" behaviour="table" useSourceRendition="true"/>
                 <model behaviour="table" useSourceRendition="true" cssClass="table table-hover table-bordered"/>
             </elementSpec>
             <elementSpec mode="change" ident="fileDesc">
