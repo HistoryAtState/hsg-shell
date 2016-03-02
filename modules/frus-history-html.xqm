@@ -64,6 +64,13 @@ declare function fhh:chapter($node, $model, $chapter-id) {
         pages:process-content($model?odd, $chapter)
 };
 
+declare function fhh:document-breadcrumb($node as node(), $model as map(*), $document-id as xs:string) {
+    let $doc := doc($fhh:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml")
+    let $title := $doc//tei:title[@type='short']
+    return
+        <a href="$app/historicaldocuments/frus-history/documents/{$document-id}">{$title/string()}</a>
+};
+
 declare function fhh:most-recent-documents($node, $model) {
     let $documents :=
         for $doc in collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
