@@ -278,6 +278,13 @@ declare function fhh:article-list-sidebar($node, $model, $article-id) {
     }</ul>
 };
 
+declare function fhh:article-breadcrumb($node, $model, $article-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+    let $title := $article//tei:title[@type='short']
+    return
+        <a href="$app/historicaldocuments/frus-history/research/{$article-id}">{$title/string()}</a>
+};
+
 declare function fhh:article-title($node, $model, $article-id) {
     let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
     return
