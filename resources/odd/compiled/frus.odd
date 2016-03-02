@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:frus="http://history.state.gov/frus/ns/1.0" xml:lang="en">
     <teiHeader>
         <fileDesc>
@@ -299,8 +298,6 @@ display: block;
                 <model behaviour="graphic">
                     <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
                             "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png"))</param>
-                    <param name="width">@width</param>
-                    <param name="height">@height</param>
                     <param name="scale">@scale</param>
                     <param name="title">desc</param>
                 </model>
