@@ -138,17 +138,6 @@ $icon-font-path: "../fonts/";
 
 /* Table -------------- */
 
-/* override bootstrap, which adds top border to each cell. TODO: modify bootstrap base style */
-.table > tbody > tr > td {
-  border-top: 1px;
-}
-
-/* override bootstrap, which adds 8px padding to each cell! TODO: modify bootstrap base style */
-.table > tbody > tr > th,
-.table > tbody > tr > td {
-  padding: 0px 1px;
-  vertical-align: top;
-}
 
 /* override bootstrap, which makes tables full width. TODO: modify bootstrap base style */
 .table {
