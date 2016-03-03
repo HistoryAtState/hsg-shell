@@ -24,15 +24,9 @@ After node is installed just run
 
     `git clone https://github.com/eXistSolutions/hsg-shell.git`
 
-1. Install dependencies for the front-end and automation tasks
-
-    `npm install && bower install`
-
-1. Build and copy javascripts, fonts, css and images into the *resources* folder
-
-    `gulp`
-
-1. Generate the *.xar-package* inside the *build* directory
+1. Install dependencies for the front-end and automation tasks (`npm` & `bower`),
+    Build and copy javascripts, fonts, css and images into the *resources* folder (`gulp`) and
+    generate the *.xar-package* inside the *build* directory
 
     `ant`
 
@@ -46,9 +40,7 @@ After node is installed just run
 
 To create an up-to-date build package to install in eXistDB, this should do
 
-    npm run update
-
-It will just run four of the previous steps one after another (`git pull && npm install && gulp && ant`).
+    git pull && ant
 
 ## Optional: Install bootstrap documentation
 
