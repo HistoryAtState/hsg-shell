@@ -1399,6 +1399,18 @@ else if (matches($exist:path, '^/search/?')) then
     		</error-handler>
         </dispatch>
 
+(: handle OPDS API requests :)
+else if (matches($exist:path, '^/api/v1/?')) then
+    let $fragments := tokenize(substring-after($exist:path, '/api/v1/'), '/')[. ne '']
+    let $xql := switch ($fragments[1])
+        case "catalog" return 'opds-catalog.xql'
+        default return 'opds-catalog.xql'
+    return
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/modules/{$xql}"/>
+            <!--TODO Maybe add an error handler, but not the default one. -->
+        </dispatch>
+
 (: fallback: return 404 :)
 else
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
