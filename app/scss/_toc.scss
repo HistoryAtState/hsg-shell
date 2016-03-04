@@ -17,15 +17,19 @@
   ul {
     list-style: none;
     padding-left: 0;
-  }
-  li {
     margin-left: 2em;
   }
+  
+  > ul {
+    margin-left: 0;
+  }
+
   a {
     display: block;
     margin-bottom: 1em;
   }
 }
+
 
 #toc,
 #volume {
