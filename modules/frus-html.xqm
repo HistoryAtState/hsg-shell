@@ -170,6 +170,7 @@ function fh:volumes-pre-truman($node as node(), $model as map(*)) {
         for $vol in $model?published-vols
         let $vol-id := $vol/@id
         let $voltext := $vol/title[@type="complete"]
+        order by $vol-id
         return
             templates:process($node/node(), map:new(($model,
                 map {
