@@ -179,7 +179,7 @@
                     </model>
                     <model predicate="@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
                         <param name="content">item</param>
-                        <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
+                        <outputRendition>list-style-type: none;</outputRendition>
                     </model>
                     <model predicate="label" behaviour="list" cssClass="labeled-list">
                         <param name="content">item</param>
