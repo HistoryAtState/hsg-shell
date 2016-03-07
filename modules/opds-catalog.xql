@@ -267,6 +267,57 @@ declare function opds:browse() {
         opds:feed($feed-id, $feed-title, $feed-updated, $feed-author-name, $feed-author-uri, $feed-links, $entries)
 };
 
+
+declare function opds:search() {
+    let $taxonomy := collection($tags:TAXONOMY_COL)/taxonomy
+    let $q := request:get-parameter('q', ())[1]
+    let $tag-hits := $taxonomy//label[ft:query(., $q)]/..
+    let $tag-hit-ids := $tag-hits/id
+    return
+    
+    let $feed-id := concat($opds:opds-base-url, '/search?q=', $q)
+    let $feed-title := concat('Search ebooks for "', $q, '"')
+    let $feed-updated := current-dateTime()
+    let $feed-author-name := $opds:feed-author-name
+    let $feed-author-uri := $opds:server-url
+    let $feed-links := 
+        (
+        opds:acquisition-link('self', $feed-id, $feed-title),
+        opds:acquisition-link('start', $opds:opds-base-url, 'Home'),
+        opds:search-link()
+        )
+
+    let $entries := 
+        for $tag in $tag-hits
+        let $title := $tag/label/string()
+        let $id := $tag/id/string()
+        let $updated := current-dateTime()
+        let $vols-with-this-tag := tags:resources('frus')[.//tag/@id = $tag//id]
+        let $vols-with-this-tag := 
+            for $vol in $vols-with-this-tag
+            let $link := $vol/link
+            let $vol-id := substring-after($link, 'historicaldocuments/')
+            return
+                if ($vol-id = $opds:frus-ebook-volume-ids) then $vol else ()
+        let $descendant-tags := $tag/(descendant::category | descendant::tag)/id
+        let $summary := concat(if (count($descendant-tags) gt 0) then concat(count($descendant-tags), ' sub-topics, ') else (), count($vols-with-this-tag), ' volumes')
+        let $content := concat('Browse volumes with subject ', $title)
+        let $links := opds:navigation-link('subsection', concat($opds:opds-base-url, '/browse?tag=', $id), $title)
+        order by $title
+        return
+            opds:entry(
+                $title,
+                $id,
+                $updated,
+                $summary,
+                $content,
+                $links
+                )
+    
+    return
+        opds:feed($feed-id, $feed-title, $feed-updated, $feed-author-name, $feed-author-uri, $feed-links, $entries)
+};
+
 declare function opds:catalog() {
     let $feed-id := $opds:opds-base-url
     let $feed-title := 'Office of the Historian Ebook Catalog'
@@ -323,4 +374,5 @@ return
     case 'all' return opds:all()
     case 'recent' return opds:recent()
     case 'browse' return opds:browse()
+    case 'search' return opds:search()
     default return opds:catalog(), <a>{$opds:frus-ebook-volume-ids}</a>
