@@ -78,7 +78,8 @@
 .tei-list2 { list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0 }
 .tei-list3 { list-style-type: disc; }
 .tei-list4 { list-style-type: none; }
-.tei-list6 { list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0 }
+.tei-list5 { list-style-type: none; margin-top: 1em; }
+.tei-list7 { list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0 }
 .tei-note1 { font-size: smaller; }
 .tei-p1 { text-align: center; }
 .tei-p2 { text-indent: 0em; }
