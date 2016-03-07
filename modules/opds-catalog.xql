@@ -11,6 +11,7 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace fh="http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
+import module namespace tags="http://history.state.gov/ns/site/hsg/tags-html" at "tags-html.xqm";
 
 declare option output:method "xml";
 
@@ -86,7 +87,7 @@ declare function opds:entry($title, $id, $updated, $summary, $content, $link) {
 
 
 declare function opds:ebook-entries($vol-ids) {
-    let $volumes := collection($config:FRUS_VOLUMES_COL)
+    (: not needed? let $all-volumes := collection($config:FRUS_VOLUMES_COL) :)
     for $vol-id in $vol-ids
     let $title := normalize-space(fh:vol-title($vol-id, 'volume'))
     let $id := $vol-id
@@ -151,11 +152,119 @@ declare function opds:all() {
 };
 
 declare function opds:recent() {
-    <error>"recent" not supported yet</error>
+    let $feed-id := concat($opds:opds-base-url, '/recent')
+    let $feed-title := 'Recently Published'
+    let $feed-updated := current-dateTime()
+    let $feed-author-name := $opds:feed-author-name
+    let $feed-author-uri := $opds:server-url
+    let $feed-links := 
+        (
+        opds:acquisition-link('self', $feed-id, $feed-title),
+        opds:acquisition-link('start', $opds:opds-base-url, 'Home'),
+        opds:search-link()
+        )
+
+    let $all-volumes := collection($config:FRUS_VOLUMES_COL)
+    let $selected-volumes :=
+        for $volume in $all-volumes/volume[@id = $opds:frus-ebook-volume-ids][publication-status eq 'published']
+        order by $volume/published-year descending
+        return $volume
+    let $n := xs:integer(request:get-parameter('n', '10'))
+    let $last-n-volumes := subsequence($selected-volumes, 1, $n)
+    let $last-n-volume-ids := $last-n-volumes/@id/string()
+    let $entries := opds:ebook-entries($last-n-volume-ids)
+
+    return
+        opds:feed($feed-id, $feed-title, $feed-updated, $feed-author-name, $feed-author-uri, $feed-links, $entries)
+};
+
+declare function opds:tag-not-found-error($tag-requested as xs:string) {
+    (
+    response:set-status-code(404)
+    ,
+    <html>
+        <head>
+            <title>Error 404 (Not Found)</title>
+        </head>
+        <body>
+            <div>
+                <h1>Error 404 (Not Found)</h1>
+                <p>
+                    No resource with tag, "{$tag-requested}", was found.  
+                    Please check the value of the tag URL parameter, or follow a valid link from <a href="/api/v1/catalog">the catalog root</a>.
+                </p>
+            </div>
+        </body>
+    </html>
+    )
 };
 
 declare function opds:browse() {
-    <error>"browse" not supported yet</error>
+    let $taxonomy := collection($tags:TAXONOMY_COL)/taxonomy
+    let $tag-requested := request:get-parameter('tag', ())[1]
+    let $tag-exists := $taxonomy//id[. = $tag-requested]
+    return
+        if ($tag-requested and not($tag-exists)) then
+            opds:tag-not-found-error($tag-requested)
+        else
+        
+        
+    let $tag := if ($tag-requested) then $tag-exists/.. else $taxonomy
+
+    let $feed-id := concat($opds:opds-base-url, '/browse', if ($tag-requested) then concat('?tag=', $tag-requested) else ())
+    let $feed-title := if ($tag-requested) then $tag/label/string() else 'Keywords'
+    let $feed-updated := current-dateTime()
+    let $feed-author-name := $opds:feed-author-name
+    let $feed-author-uri := $opds:server-url
+    let $feed-links := 
+        (
+        opds:acquisition-link('self', $feed-id, $feed-title),
+        opds:acquisition-link('start', $opds:opds-base-url, 'Home'),
+        opds:search-link()
+        )
+
+    let $sub-tags := $tag/(category | tag)
+    
+    let $tag-entries := 
+        for $tag in $sub-tags
+        let $title := $tag/label/string()
+        let $id := $tag/id/string()
+        let $updated := current-dateTime()
+        let $vols-with-this-tag := tags:resources('frus')[.//tag/@id = $tag//id]
+        let $vols-with-this-tag := 
+            for $vol in $vols-with-this-tag
+            let $link := $vol/link
+            let $vol-id := substring-after($link, 'historicaldocuments/')
+            return
+                if ($vol-id = $opds:frus-ebook-volume-ids) then $vol else ()
+        let $descendant-tags := $tag/(descendant::category | descendant::tag)/id
+        let $summary := concat(if (count($descendant-tags) gt 0) then concat(count($descendant-tags), ' sub-topics, ') else (), count($vols-with-this-tag), ' volumes')
+        let $content := concat('Browse volumes with subject ', $title)
+        let $links := opds:navigation-link('subsection', concat($opds:opds-base-url, '/browse?tag=', $id), $title)
+        return
+            opds:entry(
+                $title,
+                $id,
+                $updated,
+                $summary,
+                $content,
+                $links
+                )
+    
+    let $vols-with-this-tag := tags:resources('frus')[.//tag/@id = $tag-requested]
+    let $vol-ids :=
+        for $vol in $vols-with-this-tag
+        let $vol-id := substring-after($vol/link, 'historicaldocuments/')
+        order by $vol-id
+        return
+            $vol-id
+    let $vol-ids :=  $vol-ids[. = $opds:frus-ebook-volume-ids]
+    let $volume-entries := opds:ebook-entries($vol-ids)
+    
+    let $entries := ($tag-entries, $volume-entries)
+    
+    return
+        opds:feed($feed-id, $feed-title, $feed-updated, $feed-author-name, $feed-author-uri, $feed-links, $entries)
 };
 
 declare function opds:catalog() {
@@ -214,4 +323,4 @@ return
     case 'all' return opds:all()
     case 'recent' return opds:recent()
     case 'browse' return opds:browse()
-    default return opds:catalog()
+    default return opds:catalog(), <a>{$opds:frus-ebook-volume-ids}</a>
