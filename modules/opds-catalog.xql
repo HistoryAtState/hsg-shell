@@ -82,6 +82,18 @@ declare function opds:entry($title, $id, $updated, $summary, $content, $link) {
     }
 };
 
+declare function opds:all() {
+    <error>"all" not supported yet</error>
+};
+
+declare function opds:recent() {
+    <error>"recent" not supported yet</error>
+};
+
+declare function opds:browse() {
+    <error>"browse" not supported yet</error>
+};
+
 declare function opds:catalog() {
     let $feed-id := $opds:opds-base-url
     let $feed-title := 'Office of the Historian Ebook Catalog'
@@ -128,27 +140,14 @@ declare function opds:catalog() {
 };
 
 
+let $fragments := tokenize(substring-after(request:get-url(), $opds:opds-path), '/')[. ne '']
+let $operation := $fragments[1] (: first url step after "/catalog" :)
 let $start-time := util:system-time()
 let $end-time := util:system-time()
 let $runtime := (($end-time - $start-time) div xs:dayTimeDuration('PT1S'))
 return
-    <results>
-        {opds:catalog()}
-        <!-- debug info, to be removed -->
-        <server-url>{$opds:server-url}</server-url>
-        <api-url>{$opds:opds-base-url}</api-url>
-        <params>{
-            for $pn in request:get-parameter-names()
-            return
-                <param name="{$pn}">{
-                    request:get-parameter($pn, '???')
-                }</param>
-        }</params>
-        <attrs>{
-            for $an in request:attribute-names()
-            return
-                <attr name="{$an}">{
-                    request:get-attribute($an)
-                }</attr>
-        }</attrs>
-    </results>
+    switch($operation)
+    case 'all' return opds:all()
+    case 'recent' return opds:recent()
+    case 'browse' return opds:browse()
+    default return opds:catalog()
