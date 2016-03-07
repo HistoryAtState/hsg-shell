@@ -10,20 +10,20 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     del = require('del')
 
-exist.createClient({
+exist.defineMimeTypes({
+    'application/xml': ['odd']
+})
+
+var exClient = exist.createClient({
     host: 'localhost',
     port: '8080',
     path: '/exist/xmlrpc',
     basic_auth: { user: 'admin', pass: '' }
 })
 
-exist.defineMimeTypes({
-    'application/xml': ['odd']
-})
-
-var existConfiguration = {
+var targetConfiguration = {
     target: '/db/apps/hsg-shell/',
-    retry: true
+    invalidXMLAsBinary: true
 }
 
 gulp.task('clean', function() {
@@ -46,8 +46,8 @@ gulp.task('fonts:copy', ['clean'], function () {
 
 gulp.task('fonts:deploy', ['fonts:copy'], function () {
     return gulp.src('resources/fonts/*', {base: '.'})
-        .pipe(exist.newer(existConfiguration))
-        .pipe(exist.dest(existConfiguration))
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
 })
 
 // images //
@@ -64,8 +64,8 @@ gulp.task('images:optimize', function () {
 
 gulp.task('images:deploy', function () {
     return gulp.src('resources/images/*', {base: '.'})
-        .pipe(exist.newer(existConfiguration))
-        .pipe(exist.dest(existConfiguration))
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
 })
 
 gulp.task('images:watch', function () {
@@ -95,8 +95,8 @@ gulp.task('scripts:copy', function () {
 
 gulp.task('scripts:deploy', ['scripts:copy'], function () {
     return gulp.src('resources/scripts/*.js', {base: '.'})
-        .pipe(exist.newer(existConfiguration))
-        .pipe(exist.dest(existConfiguration))
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
 })
 
 gulp.task('scripts:watch', function () {
@@ -121,9 +121,9 @@ gulp.task('styles:build', ['clean'], function () {
 })
 
 gulp.task('styles:deploy', ['styles:build'], function () {
-    return gulp.src('resources/css/*.css', {base: '.'})
-        .pipe(exist.newer(existConfiguration))
-        .pipe(exist.dest(existConfiguration))
+    return gulp.src('resources/css/*.css', {base: './'})
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
 })
 
 gulp.task('styles:watch', function () {
@@ -134,9 +134,9 @@ gulp.task('styles:watch', function () {
 
 var pagesPath = 'pages/**/*.html';
 gulp.task('pages:deploy', function () {
-    return gulp.src(pagesPath, {base: '.'})
-        .pipe(exist.newer(existConfiguration))
-        .pipe(exist.dest(existConfiguration))
+    return gulp.src(pagesPath, {base: './'})
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
 })
 
 gulp.task('pages:watch', function () {
@@ -147,9 +147,9 @@ gulp.task('pages:watch', function () {
 
 var modulesPath = 'modules/*';
 gulp.task('modules:deploy', function () {
-    return gulp.src(modulesPath, {base: '.'})
-        .pipe(exist.newer(existConfiguration))
-        .pipe(exist.dest(existConfiguration))
+    return gulp.src(modulesPath, {base: './'})
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
 })
 
 gulp.task('modules:watch', function () {
@@ -160,9 +160,9 @@ gulp.task('modules:watch', function () {
 
 var templatesPath = 'templates/**/*.html';
 gulp.task('templates:deploy', function () {
-    return gulp.src(templatesPath, {base: '.'})
-        .pipe(exist.newer(existConfiguration))
-        .pipe(exist.dest(existConfiguration))
+    return gulp.src(templatesPath, {base: './'})
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
 })
 
 gulp.task('templates:watch', function () {
@@ -173,9 +173,9 @@ gulp.task('templates:watch', function () {
 
 var oddPath = 'resources/odd/**/*';
 gulp.task('odd:deploy', function () {
-    return gulp.src(oddPath, {base: '.'})
-        .pipe(exist.newer(existConfiguration))
-        .pipe(exist.dest(existConfiguration))
+    return gulp.src(oddPath, {base: './'})
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
 })
 
 gulp.task('odd:watch', function () {
@@ -186,9 +186,9 @@ gulp.task('odd:watch', function () {
 
 var otherPath = '*{.xpr,.xqr,.xql,.xml,.xconf}';
 gulp.task('other:deploy', function () {
-    return gulp.src(otherPath, {base: '.'})
-        .pipe(exist.newer(existConfiguration))
-        .pipe(exist.dest(existConfiguration))
+    return gulp.src(otherPath, {base: './'})
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
 })
 
 gulp.task('other:watch', function () {
@@ -210,9 +210,9 @@ gulp.task('deploy', ['build'], function () {
             pagesPath,
             modulesPath,
             otherPath
-        ], {base: '.'})
-        .pipe(exist.newer(existConfiguration))
-        .pipe(exist.dest(existConfiguration))
+        ], {base: './'})
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
 })
 
 gulp.task('default', ['build'])
