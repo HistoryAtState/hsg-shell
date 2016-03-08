@@ -248,12 +248,11 @@ declare function fhh:articles-list($node, $model) {
     let $date := $article//tei:publicationStmt/tei:date
     order by xs:date($date/@when) descending
     return
-        <div>
+        <div class="article-container">
             <h3>
                 <a href="$app/historicaldocuments/frus-history/research/{$url}">{$title}</a>
             </h3>
-            <p>By {$author/string()}</p>
-            <p>{$date}</p>
+            <p>By {$author/string()}{$date}</p>
             {$teaser}
         </div>
 };

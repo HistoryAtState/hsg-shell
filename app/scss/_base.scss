@@ -46,10 +46,6 @@ h6 {
   text-transform: uppercase;
 }
 
-p {
-  margin-bottom: 18px;
-}
-
 ul li,
 ol li {
   margin-bottom: $margin-vertical-base;
@@ -85,4 +81,12 @@ input {
   color: $color-secondary-darkest;
   font-size: 1.25em;
   line-height: 1.5;
+}
+
+p date {
+  display: block;
+}
+
+.article-container {
+  margin: 0 0 2em 0;
 }
