@@ -174,6 +174,15 @@ ol.breadcrumb li:before {
   margin-right: 1em;
 }
 
+dt, dd {
+  line-height: inherit;
+}
+
+dd {
+  margin: 0 0 $margin-vertical-base 1.5em;
+}
+
+
 /* Panels */
 
 .panel {
