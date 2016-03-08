@@ -6,6 +6,7 @@ import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
+import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
@@ -27,10 +28,27 @@ declare function milestones:period-title($node as node(), $model as map(*)) {
     $model?period//tei:title[@type='short']/string()
 };
 
+declare function milestones:period-id($period) {
+    substring-before(util:document-name($period), '.xml')
+};
+
 declare function milestones:period-href-value-attribute($node as node(), $model as map(*)) {
-    let $period-id := substring-before(util:document-name($model?period), '.xml')
+    let $period-id := milestones:period-id($model?period)
     return
         attribute value { app:fix-href("$app/milestones/" || $period-id) }
+};
+
+declare
+    %templates:wrap
+function milestones:period-link($node as node(), $model as map(*)) {
+    <a href="$app/{$model?base-path}/{$model?document-id}">{$model?document-id}</a>
+};
+
+declare
+    %templates:wrap
+function milestones:section-link($node as node(), $model as map(*)) {
+    let $title := $model?data/tei:head[1]/string()
+    return <a href="$app/{$model?base-path}/{$model?document-id}/{$model?section-id}">{$title}</a>
 };
 
 declare

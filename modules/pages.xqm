@@ -36,6 +36,8 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else (),
         "publication-id": $publication-id,
         "document-id": $document-id,
+        "section-id": $section-id,
+        "view": $view,
         "base-path":
             if (exists($publication-id)) then
                 (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
