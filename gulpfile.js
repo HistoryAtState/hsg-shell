@@ -23,7 +23,7 @@ var exClient = exist.createClient({
 
 var targetConfiguration = {
     target: '/db/apps/hsg-shell/',
-    invalidXMLAsBinary: true
+    html5AsBinary: true
 }
 
 gulp.task('clean', function() {
