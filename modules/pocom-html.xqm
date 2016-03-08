@@ -86,6 +86,15 @@ declare function pocom:principal-role-href($role-id) {
     '$app/departmenthistory/people/principalofficers/' || $role-id
 };
 
+declare function pocom:principal-role-label($role-id as xs:string, $plural as xs:boolean) {
+    let $role := $pocom:DATA//id[. = $role-id]/..
+    return
+        if ($plural) then
+            $role/names/plural/string()
+        else
+            $role/names/singular/string()
+};
+
 declare function pocom:principal-officers($node as node(), $model as map(*)) {
     <ul>
         {
@@ -141,15 +150,18 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
         )
 };
 
+declare
+    %templates:wrap
+function pocom:role-breadcrumb($node as node(), $model as map(*), $role-id) {
+    let $href := pocom:principal-role-href($role-id)
+    let $label := pocom:principal-role-label($role-id, (1=1))
+    return <a class="section" href="{$href}">{$label}</a>
+};
+
 declare 
     %templates:wrap 
 function pocom:role-label($node as node(), $model as map(*), $role-id as xs:string, $form as xs:string) {
-    let $role := $pocom:DATA//id[. = $role-id]/..
-    return
-        if ($form = 'plural') then
-            $role/names/plural/string()
-        else
-            $role/names/singular/string()
+    pocom:principal-role-label($role-id, ($form = 'plural'))
 };
 
 declare 
