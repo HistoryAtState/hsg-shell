@@ -27,9 +27,7 @@ declare function pocom:person($person-id) {
     collection($pocom:PEOPLE-COL)/person[id = $person-id]
 };
 
-declare 
-    %templates:wrap
-function pocom:person-name-first-last($node as node(), $model as map(*), $person-id) {
+declare function pocom:person-name-by-id($person-id as xs:string) {
     let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
     let $namebase := $person/persName
     return
@@ -37,6 +35,12 @@ function pocom:person-name-first-last($node as node(), $model as map(*), $person
             ($namebase/forename, $namebase/surname, $namebase/genName),
             ' '
         )
+};
+
+declare 
+    %templates:wrap
+function pocom:person-name-first-last($node as node(), $model as map(*), $person-id) {
+    pocom:person-name-by-id($person-id)
 };
 
 declare 
@@ -164,7 +168,7 @@ function pocom:role-label($node as node(), $model as map(*), $role-id as xs:stri
     pocom:principal-role-label($role-id, ($form = 'plural'))
 };
 
-declare 
+declare
     %templates:wrap 
 function pocom:role-or-country-label($node as node(), $model as map(*), $role-or-country-id as xs:string, $form as xs:string) {
     let $role := collection($pocom:DATA-COL)//id[. = $role-or-country-id]/..
@@ -311,7 +315,28 @@ declare function pocom:chiefs-by-country-id($node as node(), $model as map(*), $
         </div>
 };
 
-declare 
+declare
+    %templates:wrap
+function pocom:chiefsofmission-breadcrumb($node as node(), $model as map(*), $role-or-country-id as xs:string) {
+    let $role := collection($pocom:DATA-COL)//id[. = $role-or-country-id]/..
+    let $country := collection($pocom:OLD-COUNTRIES-COL)//id[. = $role-or-country-id]/..
+    let $href := '$app/departmenthistory/people/chiefsofmission/' || $role-or-country-id
+
+    return
+        if ($role) then
+            <a class="section" href="{$href}">{$role/names/plural/string()}</a>
+        else
+            <a class="section" href="{$href}">{$country/label/string()}</a>
+};
+
+
+declare
+    %templates:wrap
+function pocom:person-breadcrumb($node as node(), $model as map(*), $person-id as xs:string) {
+    <a class="section" href="{pocom:person-href($person-id)}">{pocom:person-name-by-id($person-id)}</a>
+};
+
+declare
     %templates:wrap 
 function pocom:person-entry($node as node(), $model as map(*), $person-id as xs:string) {
 (:    if (doc-available(concat('/db/cms/apps/tei-content/data/secretary-bios/', $person-id, '.xml'))) then:)
