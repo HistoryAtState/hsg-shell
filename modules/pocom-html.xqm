@@ -564,6 +564,13 @@ declare function pocom:letters($node as node(), $model as map(*)) {
         }</ul>
 };
 
+declare
+    %templates:wrap
+function pocom:letter-breadcrumb($node as node(), $model as map(*), $letter as xs:string) {
+    let $href := '$app/departmenthistory/people/by-name/' || $letter
+    return <a href="{$href}">Starting with {upper-case($letter)}</a>
+};
+
 declare function pocom:letter($node as node(), $model as map(*), $letter as xs:string) {
     let $chiefs := 
         for $chief in collection(concat($pocom:PEOPLE-COL, '/', $letter))/person 
@@ -655,7 +662,14 @@ declare function pocom:years($node as node(), $model as map(*)) {
         </div>
 };
 
-declare function pocom:year($node as node(), $model as map(*), $year as xs:integer) { 
+declare
+    %templates:wrap
+function pocom:year-breadcrumb($node as node(), $model as map(*), $year as xs:integer) {
+    let $href := '$app/departmenthistory/people/by-year/' || $year
+    return <a href="{$href}">{$year}</a>
+};
+
+declare function pocom:year($node as node(), $model as map(*), $year as xs:integer) {
     let $roles := collection($pocom:DATA-COL)//date/../..
     let $roles-in-year := 
         for $role in $roles
