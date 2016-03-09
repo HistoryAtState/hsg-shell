@@ -301,10 +301,14 @@ declare function model:apply($config as map(*), $input as node()*) {
                             if (@type = ('participants', 'to', 'from', 'subject')) then
                                 html:list($config, ., ("tei-list2"), item)
                             else
-                                if (label) then
-                                    html:list($config, ., ("tei-list3", "labeled-list"), item)
+                                if (parent::list/@type = ('participants', 'to', 'from', 'subject')) then
+                                    (: This is a nested list within a list-item :)
+                                    html:list($config, ., ("tei-list3"), item)
                                 else
-                                    html:list($config, ., ("tei-list4", "list"), item)
+                                    if (label) then
+                                        html:list($config, ., ("tei-list4", "labeled-list"), item)
+                                    else
+                                        html:list($config, ., ("tei-list5", "list"), item)
                 case element(listBibl) return
                     if (bibl) then
                         html:list($config, ., ("tei-listBibl1"), bibl)
