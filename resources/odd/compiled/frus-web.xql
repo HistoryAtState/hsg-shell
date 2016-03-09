@@ -230,7 +230,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                             html:inline($config, ., ("tei-gap3"), .)
                 case element(graphic) return
                     html:graphic($config, ., ("tei-graphic"), ., xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
-                            "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")), @width, @height, @scale, desc)
+                            "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")), (), (), @scale, desc)
                 case element(group) return
                     html:block($config, ., ("tei-group"), .)
                 case element(handShift) return
