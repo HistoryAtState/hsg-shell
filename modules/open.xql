@@ -13,14 +13,15 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 
 declare option output:method "xml";
 
+declare variable $application-url := request:get-parameter('xql-application-url', '..');
+
+
 declare function open:frus-latest() {
    let $serialize := util:declare-option('exist:serialize', 'method=xml media-type=text/xml indent=yes')
 
    let $title := 'Foreign Relations of the United States: Latest Volumes'
    
    (: Note that RFC 4287 http://tools.ietf.org/html/rfc4287 was used to create these mappings to the Atom standard. :)
-   
-   let $application-url := request:get-parameter('xql-application-url', '..')
    
    let $n := xs:integer(request:get-parameter('n', '10'))
    
@@ -151,7 +152,80 @@ declare function open:frus-latest() {
 };
 
 declare function open:frus-metadata() {
-    <metadata/>
+    let $serialize := util:declare-option('exist:serialize', 'method=xml media-type=text/xml indent=yes')
+
+    let $volumes := 
+        for $volume in collection($config:FRUS_METADATA_COL)/volume[publication-status eq 'published']
+            let $titles := $volume/title[. ne '']
+            let $summary :=
+            
+                string($volume/summary)
+                (: TODO adapt this piece of old code and replace the above stub ^
+                if ($volume/summary/tei:p[1] ne '') then 
+                    render:main($volume/summary,
+                            <parameters>
+                                <param name="abs-site-uri" value="{$application-url}/historicaldocuments/"/>
+                                <!-- <param name="abs-site-uri" value="http://history.state.gov/historicaldocuments/"/> -->
+                            </parameters>
+                            )
+                else ()
+                :)
+            let $locations := $volume/location[. ne ''][./@loc = ('db', 'madison', 'worldcat')]
+            let $media := $volume/media/@type/string()
+            let $published-year := xs:string($volume/published-year[. ne ''])
+            let $coverage := xs:string($volume/coverage[. ne ''][1])
+            let $lengths := $volume/length/span[. ne '']
+            order by string($volume/@id)
+            return 
+                <volume xmlns="http://history.state.gov/ns/1.0">{$volume/@*}
+                    {
+                    for $title in $titles return
+                        element title { $title/@*, $title/text() },
+                    for $location in $locations 
+                    return 
+                        if ($location/@loc = ('madison', 'worldcat')) then 
+                            <location loc="{$location/@loc}">{$location/text()}</location>
+                        else
+                            <location loc="db">{concat($application-url, '/historicaldocuments/', $location)}</location>
+                    ,
+                    <media>{$media}</media>,
+                    <published>{$published-year}</published>,
+                    <coverage>{$coverage}</coverage>,
+                    if ($lengths) then 
+                    <length>{
+                        for $length in $lengths
+                        return 
+                            element span { $length/@*, $length/text() }
+                    }</length>
+                    else (),
+                    if ($summary) then <summary>{ $summary }</summary> else ()
+                    }
+                </volume>
+    return
+        <volumes xmlns="http://history.state.gov/ns/1.0">
+            {'
+    '}
+            {comment {
+                concat(
+                    'Dump of FRUS Volume Metadata from Volume Manager
+    Report Version: 1.0
+    Report Last Updated: '
+                    , 
+                    let $dates :=
+                        for $volume in xmldb:get-child-resources($config:FRUS_METADATA_COL)
+                        return xmldb:last-modified($config:FRUS_METADATA_COL, $volume)
+                    return max($dates)
+                    (:
+                    ,
+                    '
+    See http://history.state.gov/open/frus-metadata
+    for descriptions of the codes used in this file.'
+                    :)
+                    )
+                }
+            }
+            { $volumes }
+        </volumes>
 };
 
 switch(request:get-parameter('xql-feed', ''))
