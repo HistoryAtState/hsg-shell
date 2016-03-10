@@ -1227,24 +1227,32 @@ else if (matches($exist:path, '^/developer/?')) then
 (: TODO add the atom feeds: /open/frus-latest.xml, /open/frus-metadata.xml:)
 else if (matches($exist:path, '^/open/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/open/'), '/')[. ne '']
-    let $page := 
+    let $choice := 
         if ($fragments[1]) then
             switch ($fragments[1])
-                case "frus-latest" return 'open/frus-latest/index.html'
-                case "frus-metadata" return 'open/frus-metadata/index.html'
-                default return 'error-page.html'
+                case "frus-latest" return <choice page="pages/open/frus-latest/index.html" mode="html"/>
+                case "frus-metadata" return <choice page="pages/open/frus-metadata/index.html" mode="html"/>
+                case "frus-latest.xml" return <choice page="modules/open.xql" mode="xml" xql-feed="latest"/>
+                case "frus-metadata.xml" return <choice page="modules/open.xql" mode="xml" xql-feed="metadata"/>
+                default return <choice page="error-page.html" mode="html"/>
         else
-            'open/index.html'
+            <choice page="open/index.html" mode="html"/>
     return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/pages/{$page}"/>
+            <forward url="{$exist:controller}/{$choice/@page}">
+                {if($choice/@xql-feed)
+                    then <add-parameter name="xql-feed" value="{$choice/@xql-feed}"/>
+                    else () }
+            </forward>
+            {if($choice/@mode = 'html') then (
             <view>
                 <forward url="{$exist:controller}/modules/view.xql"/>
-            </view>
+            </view>,
     		<error-handler>
     			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
     			<forward url="{$exist:controller}/modules/view.xql"/>
     		</error-handler>
+            ) else ()}
         </dispatch>
 
 (: handle requests for tags section :)
