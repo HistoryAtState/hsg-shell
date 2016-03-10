@@ -8,6 +8,17 @@ declare variable $exist:controller external;
 declare variable $exist:prefix external;
 declare variable $exist:root external;
 
+declare variable $application-url := concat(
+    request:get-scheme(),
+    '://',
+    request:get-server-name(),
+    let $server-port := request:get-server-port()
+        return if ($server-port = 80) then '' else concat(":", string($server-port)),
+    request:get-context-path(),
+    $exist:prefix,
+    $exist:controller
+);
+
 (: 
 console:log('request:get-uri(): ' || request:get-uri())
 ,
@@ -1224,7 +1235,6 @@ else if (matches($exist:path, '^/developer/?')) then
         </dispatch>
 
 (: handle requests for open section :)
-(: TODO add the atom feeds: /open/frus-latest.xml, /open/frus-metadata.xml:)
 else if (matches($exist:path, '^/open/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/open/'), '/')[. ne '']
     let $choice := 
@@ -1242,6 +1252,9 @@ else if (matches($exist:path, '^/open/?')) then
             <forward url="{$exist:controller}/{$choice/@page}">
                 {if($choice/@xql-feed)
                     then <add-parameter name="xql-feed" value="{$choice/@xql-feed}"/>
+                    else () }
+                {if($choice/@mode = 'xml')
+                    then <add-parameter name="xql-application-url" value="{$application-url}"/>
                     else () }
             </forward>
             {if($choice/@mode = 'html') then (
