@@ -76,10 +76,6 @@ $color-cool-blue-lightest:   #dce4ef; // lighten($color-cool-blue, 90%)
 $color-focus:                #3e94cf;
 $color-visited:              #4c2c92;
 
-// Navigation backgroundcolor
-$bg-color-navbar:            $color-primary-darker;
-
-
 // Mobile First Breakpoints
 $xs-screen:         481px;
 $small-screen:      601px;
@@ -106,3 +102,26 @@ $default-border-style: 1px solid $color-gray-lighter; // was #dddde8
 
 // Margins
 $margin-vertical-base: .53em;
+
+// Bootstrap Variables
+
+$navbar-default-color:                $color-white;
+$navbar-default-bg:                   $color-primary-darker;
+$navbar-default-border:               $color-primary-darker;
+
+$navbar-default-link-color:           $color-white;
+$navbar-default-link-hover-color:     $color-white;
+$navbar-default-link-hover-bg:        $color-cool-blue-light;
+$navbar-default-link-active-color:    $color-cool-blue-lightest;
+$navbar-default-link-active-bg:       $color-primary-darkest;
+$navbar-default-link-disabled-color:  $color-gray-warm-dark;
+
+$navbar-default-toggle-border-color:  $color-white;
+$navbar-default-toggle-hover-bg:      $color-primary-darkest;
+$navbar-default-toggle-icon-bar-bg:   $color-white;
+
+$dropdown-bg:                         $color-white;
+$dropdown-link-color:                 $color-base;
+$dropdown-link-hover-bg:              $color-cool-blue-lightest;
+$dropdown-link-active-bg:             $color-primary-darker;
+$dropdown-link-disabled-color:        $color-gray-warm-dark;
