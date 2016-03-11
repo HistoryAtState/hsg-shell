@@ -12,12 +12,6 @@
   font-size: 0.825em;
 }
 
-/* old layout
-#search-box {
-  padding-right: 30px;
-}
-*/
-/* new-layout */
 #search-box {
   padding-right: 40px;
 }
@@ -30,6 +24,7 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   background: whitesmoke;
+  width: auto;
 }
 
 @media (max-width: 767px) {
@@ -47,14 +42,13 @@
   }
 }
 
-/* Can't find it it markup */
 .fa-search {
   font-size: 16px;
 }
 
-/* Duplicate from "new-layout.css", neither of it can be found in markup */
 .fa-search {
   font-size: 14px;
   line-height: 1.428;
 }
+
 
