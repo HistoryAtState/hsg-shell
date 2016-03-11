@@ -245,8 +245,6 @@
                     <model behaviour="graphic">
                         <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
                             "/" || @url || (if (matches(@url, "^.*\.[^\.]+$")) then "" else ".png"))</param>
-                        <param name="width">@width</param>
-                        <param name="height">@height</param>
                         <param name="scale">@scale</param>
                         <param name="title">desc</param>
                     </model>
