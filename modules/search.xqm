@@ -63,7 +63,7 @@ declare function search:section-id-value-attribute($node, $model) {
 declare function search:section-label($node, $model) {
     let $section-label := $model?section/label
     return
-        $section-label/node()
+        <span class="c-indicator">{$section-label/node()}</span>
 };
 
 declare function search:within-highlight-attribute($node, $model, $within as xs:string+) {
