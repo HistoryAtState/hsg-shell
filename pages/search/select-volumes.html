@@ -25,16 +25,16 @@
                     </p>
                     <div>
                         <p>Select <em>Foreign Relations</em> volumes for full text search:</p>
-                        <div>
-                            <label>
+                        <div class="c-inputs-stacked">
+                            <label class="c-input c-checkbox">
                                 <input type="checkbox" name="within" value="{$vol-id}"/>{$highlightstatus}
                                 {$vol-title}
                             </label>
                         </div>
                     </div>
-                    <p>
-                        <button class="btn btn-default" type="submit">Search</button>
-                    </p>
+                    <button class="btn btn-default btn-primary" type="submit" value="Search">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
+                    </button>
                 </form>
             </div>
         </div>

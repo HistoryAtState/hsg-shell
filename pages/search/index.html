@@ -16,8 +16,8 @@
         <div class="col-md-8 col-md-offset-1">
             <div id="content-inner" data-template="app:fix-links">
                 <p class="text-warning">This search feature is currently under construction. Regardless of selections below, all searches are restricted to FRUS documents only. To perform this search on the non-beta version of history.state.gov at the following link:</p>
-                <p class="text-center">
-                    <a data-template="app:non-beta-link" role="button" class="btn btn-default"/>
+                <p>
+                    <a data-template="app:non-beta-link" role="button" class="btn btn-default btn-primary"/>
                 </p>
                 <p>Read these <a href="$app/search/tips">tips and caveats</a> to understand the limitations of this search engine and how to make the most of its scope, phrase, boolean, wildcard, and proximity options.</p>
                 <form method="get" action="$app/search">
@@ -26,23 +26,25 @@
                     </p>
                     <div data-template="search:load-sections">
                         <p>To limit your results to certain parts of the website, check the appropriate box(es), and then click “Search”:</p>
-                        <label class="checkbox-inline" data-template="templates:each" data-template-from="sections" data-template-to="section">
-                            <input type="checkbox" name="within">
-                                <span data-template="search:section-id-value-attribute"/>
-                                <span data-template="app:if-parameter-set" data-template-param="within">
-                                    <span data-template="search:within-highlight-attribute"/>
-                                </span>
-                                <span data-template="search:section-label"/>
-                            </input>
-                        </label>
+                        <div class="c-inputs-stacked">
+                            <label class="c-input c-checkbox" data-template="templates:each" data-template-from="sections" data-template-to="section">
+                                <input type="checkbox" name="within">
+                                    <span data-template="search:section-id-value-attribute"/>
+                                    <span data-template="app:if-parameter-set" data-template-param="within">
+                                        <span data-template="search:within-highlight-attribute"/>
+                                    </span>
+                                    <span data-template="search:section-label"/>
+                                </input>
+                            </label>
+                        </div>
                     </div>
                     <div data-template="search:load-volumes-within">
                         <div data-template="app:if-parameter-set" data-template-param="volume-id">
                             <p>Restrict search to the following <em>Foreign Relations</em> volume<span data-template="app:if-parameter-set" data-template-param="within">
                                     <span data-template="search:plural-if-within-multiple-volumes"/>
                                 </span>:</p>
-                            <div class="checkbox" data-template="templates:each" data-template-from="volumes" data-template-to="volume">
-                                <label>
+                            <div class="c-inputs-stacked" data-template="templates:each" data-template-from="volumes" data-template-to="volume">
+                                <label class="c-input c-checkbox">
                                     <input type="checkbox" name="within" checked="checked">
                                         <span data-template="search:volume-id-value-attribute"/>
                                         <span data-template="search:volume-title"/>
@@ -78,11 +80,10 @@
                             </p>
                         </div>
                     </div>
-                    <p>
-                        <button class="btn btn-default" type="submit">Search</button>
-                    </p>
+                    <button class="btn btn-default btn-primary" type="submit" value="Search">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
+                    </button>
                 </form>
-                <hr/>
                 <div data-template="app:if-parameter-set" data-template-param="q">
                     <div data-template="search:load-results">
                         <p>Results for keyword search <strong>
