@@ -1,0 +1,41 @@
+/* HSG-Theme -------------- */
+
+.hsg-custom {
+  @extend .container-fluid;
+  @media screen and (min-width: $screen-lg-min) {
+    width: $container-lg;
+    @include container-fixed;
+  }
+}
+
+header.hsg-custom,
+footer.hsg-custom {
+  @media screen and (min-width: $screen-lg-min) {
+    max-width: 100%;
+    border: $default-border-style;
+  }
+}
+
+header.hsg-custom {
+  background-color: $color-white;
+  padding: $padding-horizontal-base;
+  @media screen and (min-width: $screen-lg-min) {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: 15px;
+    border-bottom: none;
+  }
+}
+
+main.hsg-custom {
+  @media screen and (min-width: $screen-lg-min) {
+    background-color: $color-white;
+    border: $default-border-style;
+    border-top: none;
+  }
+  .carousel-item {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
