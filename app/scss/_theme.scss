@@ -49,15 +49,21 @@ footer {
   }
 
   &.hsg-custom {
-    margin: $margin-horizontal-base auto;
+    margin: $margin-horizontal-base auto 0;
+    @media screen and (min-width: $screen-lg-min) {
+      margin-bottom: $margin-horizontal-base;
+    }
   }
 }
 
 .hsg-footer-primary-section {
   background-color: $color-gray-lightest;
-  padding: $padding-large-vertical 0;
+  padding: $padding-base-vertical 0;
   ul {
     &:first-of-type {
+      padding-left: 0;
+    }
+    @media screen and (max-width: $screen-sm) {
       padding-left: 0;
     }
     li {
@@ -70,8 +76,7 @@ footer {
 }
 .hsg-footer-secondary-section {
   background-color: $color-gray-lighter;
-  padding-bottom: 3rem;
-  padding-top: 3rem;
+  padding: $padding-base-vertical 0;
   address {
     text-align: right;
   }
