@@ -39,3 +39,40 @@ main.hsg-custom {
   }
 }
 
+// Footer
+
+footer {
+  font-family: $font-sans;
+  h4 {
+    font-family: $font-serif;
+    line-height: $lead-line-height;
+  }
+
+  &.hsg-custom {
+    margin: $margin-horizontal-base auto;
+  }
+}
+
+.hsg-footer-primary-section {
+  background-color: $color-gray-lightest;
+  padding: $padding-large-vertical 0;
+  ul {
+    &:first-of-type {
+      padding-left: 0;
+    }
+    li {
+      a {
+        display: block;
+        margin-top: 0;
+      }
+    }
+  }
+}
+.hsg-footer-secondary-section {
+  background-color: $color-gray-lighter;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+  address {
+    text-align: right;
+  }
+}
