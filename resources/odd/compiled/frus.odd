@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:frus="http://history.state.gov/frus/ns/1.0" xml:lang="en">
     <teiHeader>
         <fileDesc>
@@ -385,7 +386,12 @@ display: block;
                 </model>
                 <model predicate="@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
                     <param name="content">item</param>
-                    <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
+                    <outputRendition>list-style-type: none;</outputRendition>
+                </model>
+                <model predicate="parent::list/@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
+                    <param name="content">item</param>
+                    <desc>This is a nested list within a list-item</desc>
+                    <outputRendition>list-style-type: none; margin-top: 1em;</outputRendition>
                 </model>
                 <model predicate="label" behaviour="list" cssClass="labeled-list">
                     <param name="content">item</param>

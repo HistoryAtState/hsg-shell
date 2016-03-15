@@ -179,7 +179,12 @@
                     </model>
                     <model predicate="@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
                         <param name="content">item</param>
-                        <outputRendition>list-style-type: none; line-height: 1.3em;</outputRendition>
+                        <outputRendition>list-style-type: none;</outputRendition>
+                    </model>
+                    <model predicate="parent::list/@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
+                        <param name="content">item</param>
+                        <desc>This is a nested list within a list-item</desc>
+                        <outputRendition>list-style-type: none; margin-top: 1em;</outputRendition>
                     </model>
                     <model predicate="label" behaviour="list" cssClass="labeled-list">
                         <param name="content">item</param>
