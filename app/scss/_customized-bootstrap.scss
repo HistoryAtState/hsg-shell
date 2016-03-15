@@ -62,6 +62,9 @@ $icon-font-path: "../fonts/";
       padding: 10px 14px;
     }
   }
+  @media (min-width: $screen-lg-min) {
+    font-size: $large-font-size;
+  }
 }
 
 .navbar-default {
