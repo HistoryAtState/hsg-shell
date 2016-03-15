@@ -67,6 +67,12 @@ declare function tags:descend($taxonomy-level, $tag, $show-even-if-empty) {
     }</ul>
 };
 
+declare function tags:get-link($node, $model, $tag-id as xs:string) {
+    let $tag-id-exists := collection($tags:TAXONOMY_COL)//id[. = $tag-id]
+    let $tag := $tag-id-exists/..
+    return <a href="$app/tags/{$tag/id/string()}">{$tag/label/string()}</a>
+};
+
 declare function tags:show-tag($node, $model, $tag-id as xs:string) {
     let $tag-id-exists := collection($tags:TAXONOMY_COL)//id[. = $tag-id]
     let $tag := $tag-id-exists/..

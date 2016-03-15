@@ -13,9 +13,7 @@
                     <li>
                         <a href="$app/departmenthistory/people">People</a>
                     </li>
-                    <li>
-                        <a href="$app/departmenthistory/people/#">[Insert Breadcrumb Here]</a>
-                    </li>
+                    <li data-template="pocom:person-breadcrumb" />
                 </ol>
             </div>
         </div>
@@ -24,8 +22,6 @@
                 <div id="content-inner" data-template="app:fix-links">
                     <h1 data-template="pocom:person-name-birth-death"/>
                     <div data-template="pocom:person-entry"/>
-                </div>
-                <div id="content-inner">
                     <div id="content-container" data-template="app:fix-links">
                         <div class="content" data-template="pages:view"/>
                     </div>

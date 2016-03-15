@@ -64,6 +64,13 @@ declare function fhh:chapter($node, $model, $chapter-id) {
         pages:process-content($model?odd, $chapter)
 };
 
+declare function fhh:document-breadcrumb($node as node(), $model as map(*), $document-id as xs:string) {
+    let $doc := doc($fhh:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml")
+    let $title := $doc//tei:title[@type='short']
+    return
+        <a href="$app/historicaldocuments/frus-history/documents/{$document-id}">{$title/string()}</a>
+};
+
 declare function fhh:most-recent-documents($node, $model) {
     let $documents :=
         for $doc in collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
@@ -268,6 +275,13 @@ declare function fhh:article-list-sidebar($node, $model, $article-id) {
         return
             <li>{$highlight-status}<a href="$app/historicaldocuments/frus-history/research/{$id}">{$title}</a> ({$date/text()})</li>
     }</ul>
+};
+
+declare function fhh:article-breadcrumb($node, $model, $article-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+    let $title := $article//tei:title[@type='short']
+    return
+        <a href="$app/historicaldocuments/frus-history/research/{$article-id}">{$title/string()}</a>
 };
 
 declare function fhh:article-title($node, $model, $article-id) {
