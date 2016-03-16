@@ -68,7 +68,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         (: allow for pages that don't have an entry in $config:PUBLICATIONS at all :)
         else
             ()
-    let $log := console:log("page title: " || $title)
+    let $log := console:log("pages:load: Page title: " || $title)
     return
         (
             $html,
@@ -92,7 +92,7 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
         if (empty($block)) then (
             pages:load-fallback-page($publication-id, $document-id, $section-id)
         ) else (
-            console:log("Loaded " || document-uri(root($block)) || " <" || node-name($block) || ">"),
+            console:log("pages:load-xml: Loaded " || document-uri(root($block)) || ". Node name: " || node-name($block) || "."),
             $block
         )
 };
