@@ -357,7 +357,10 @@ declare
 function pocom:death-date($node as node(), $model as map(*), $person-id as xs:string) {
     let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
     return
-        if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death/string()
+        if ($person/death and $person/death ne '') then
+            if ($person/death/@type eq 'unknown' and $person/death eq '') then 'Died ?' else 'Died ' || $person/death/string()
+        else
+            ()
 };
 
 declare
