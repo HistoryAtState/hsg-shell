@@ -305,9 +305,10 @@ declare function fh:get-gloss($root as element(), $ids as xs:string*) {
 };
 
 declare function fh:volume-breadcrumb($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
-    let $head := root($model?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+    let $title-tei := root($model?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+    let $title-html := $model?odd($title-tei/node(), ())
     return (
-        <a href="{if ($section-id) then '../' else ()}{$document-id}">{$node/@*, $head/string()}</a>
+        <a href="{if ($section-id) then '../' else ()}{$document-id}">{$node/@*, $title-html}</a>
     )
 };
 
