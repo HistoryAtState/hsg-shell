@@ -32,11 +32,15 @@
                 <h3>Twitter</h3>
                 <ul class="post-list" data-template="app:load-most-recent-tweets" data-template-how-many="3">
                     <li class="post" data-template="templates:each" data-template-from="tweets" data-template-to="tweet">
-                        <p class="post-body"><span data-template="app:tweet-html"/></p>
-                        <a class="post-meta">
-                            <span data-template="app:tweet-href"/>
-                            <span data-template="app:tweet-date"/>
-                        </a>
+                        <p class="post-body">
+                            <span data-template="app:tweet-html"/>
+                        </p>
+                        <p class="post-meta">
+                            <a>
+                                <span data-template="app:tweet-href"/>
+                                <span data-template="app:tweet-date"/>
+                            </a>
+                        </p>
                     </li>
                 </ul>
             </section>
@@ -44,11 +48,15 @@
                 <h3>Tumblr</h3>
                 <ul class="post-list" data-template="app:load-most-recent-tumblr-posts" data-template-how-many="2">
                     <li class="post" data-template="templates:each" data-template-from="posts" data-template-to="post">
-                        <p class="post-body"><span data-template="app:tumblr-post-title"/></p>
-                        <a class="post-meta">
-                            <span data-template="app:tumblr-post-href"/>
-                            <span data-template="app:tumblr-post-date"/>
-                        </a>
+                        <p class="post-body">
+                            <span data-template="app:tumblr-post-title"/>
+                        </p>
+                        <p class="post-meta">
+                            <a>
+                                <span data-template="app:tumblr-post-href"/>
+                                <span data-template="app:tumblr-post-date"/>
+                            </a>
+                        </p>
                     </li>
                 </ul>
             </section>
