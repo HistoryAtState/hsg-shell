@@ -23,6 +23,14 @@ declare variable $pocom:POSITIONS-PRINCIPALS-COL := $pocom:DATA-COL || '/positio
 declare variable $pocom:ROLES-COUNTRY-CHIEFS-COL := $pocom:DATA-COL || '/roles-country-chiefs';
 declare variable $pocom:OLD-COUNTRIES-COL := '/db/apps/gsh/data/countries-old';
 
+declare function pocom:show-biography($node as node(), $model as map(*)){
+    if ($model?data) then
+        templates:process($node/*[1], $model)
+    else
+        templates:process($node/*[2], $model)
+};
+
+
 declare function pocom:person($person-id) {
     collection($pocom:PEOPLE-COL)/person[id = $person-id]
 };
@@ -37,22 +45,22 @@ declare function pocom:person-name-by-id($person-id as xs:string) {
         )
 };
 
-declare 
+declare
     %templates:wrap
 function pocom:person-name-first-last($node as node(), $model as map(*), $person-id) {
     pocom:person-name-by-id($person-id)
 };
 
-declare 
+declare
     %templates:wrap
 function pocom:person-name-birth-death($node as node(), $model as map(*), $person-id) {
     let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
     let $namebase := $person/persName
     let $dates := concat($person/birth, '–', $person/death)
-    let $birth-death := 
+    let $birth-death :=
         concat(
-            if ($person/birth ne '') then $person/birth else '?', 
-            '–', 
+            if ($person/birth ne '') then $person/birth else '?',
+            '–',
             if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death
             )
     return
@@ -60,7 +68,7 @@ function pocom:person-name-birth-death($node as node(), $model as map(*), $perso
             ($namebase/forename, $namebase/surname, $namebase/genName, '(' || $birth-death || ')'),
             ' '
         )
-        
+
 };
 
 declare function pocom:person-href($person-id) {
@@ -74,10 +82,10 @@ declare function pocom:secretaries($node as node(), $model as map(*)) {
             let $person-id := $secretary/person-id
             let $name := pocom:person-name-first-last($node, $model, $person-id)
             let $startyear := app:year-from-date($secretary/started/date)
-            let $endyear := 
+            let $endyear :=
                 if ($secretary/following-sibling::principal[1][@treatAsConsecutive]) then
                     app:year-from-date($secretary/following-sibling::principal[1][@treatAsConsecutive]/ended/date)
-                else 
+                else
                     app:year-from-date($secretary/ended/date)
             let $years := concat($startyear, '–', $endyear)
             return
@@ -129,7 +137,7 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
             for $principal in ($role//principal, $role//chief)
             let $person-id := $principal/person-id
             let $name := pocom:person-name-first-last($node, $model, $person-id)
-            let $startdate := 
+            let $startdate :=
                 (
                 $principal/started/date,
                 $principal/appointed/date
@@ -137,7 +145,7 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
             let $startyear := app:year-from-date($startdate)
             let $endyear := app:year-from-date($principal/ended/date)
             let $years := if (string($startyear) = string($endyear)) then $startyear else concat($startyear, '–', $endyear)
-            let $note := $principal/note/text() 
+            let $note := $principal/note/text()
                 (: If we want to show the note in this list add this before the </li>:
                  :     {if ($note) then (<ul><li><em>{$note}</em></li></ul>) else ''}
                  :)
@@ -162,14 +170,14 @@ function pocom:role-breadcrumb($node as node(), $model as map(*), $role-id) {
     return <a class="section" href="{$href}">{$label}</a>
 };
 
-declare 
-    %templates:wrap 
+declare
+    %templates:wrap
 function pocom:role-label($node as node(), $model as map(*), $role-id as xs:string, $form as xs:string) {
     pocom:principal-role-label($role-id, ($form = 'plural'))
 };
 
 declare
-    %templates:wrap 
+    %templates:wrap
 function pocom:role-or-country-label($node as node(), $model as map(*), $role-or-country-id as xs:string, $form as xs:string) {
     let $role := collection($pocom:DATA-COL)//id[. = $role-or-country-id]/..
     let $country := collection($pocom:OLD-COUNTRIES-COL)//id[. = $role-or-country-id]/..
@@ -229,7 +237,7 @@ declare function pocom:chiefs-countries-list($node as node(), $model as map(*)) 
                                         let $country-name := $country/label/text()
                                         order by $country-name
                                         return
-                                           <li> 
+                                           <li>
                                                <a href="{pocom:chief-country-href($country-id)}">{$country-name}</a>
                                            </li>
                                     }</ul>
@@ -267,7 +275,7 @@ declare function pocom:chiefs-by-country-id($node as node(), $model as map(*), $
                     let $chief := $chief-entry
                     let $chief-id := $chief/person-id
                     let $name-birth-death := pocom:person-name-birth-death($node, $model, $chief-id)
-                    let $startdate := 
+                    let $startdate :=
                         (
                         $chief/started/date,
                         $chief/appointed/date
@@ -337,13 +345,29 @@ function pocom:person-breadcrumb($node as node(), $model as map(*), $person-id a
 };
 
 declare
-    %templates:wrap 
+    %templates:wrap
+function pocom:birth-date($node as node(), $model as map(*), $person-id as xs:string) {
+    let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
+    return
+        $person/birth/string()
+};
+
+declare
+    %templates:wrap
+function pocom:death-date($node as node(), $model as map(*), $person-id as xs:string) {
+    let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
+    return
+        if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death/string()
+};
+
+declare
+    %templates:wrap
 function pocom:person-entry($node as node(), $model as map(*), $person-id as xs:string) {
 (:    if (doc-available(concat('/db/cms/apps/tei-content/data/secretary-bios/', $person-id, '.xml'))) then:)
 (:        dept:show-biography() :)
 (:    else:)
         let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
-        let $residence := 
+        let $residence :=
             for $state-code in $person/residence/state-id[. ne '']
             let $state-name := doc($pocom:CODE-TABLES-COL || '/us-state-codes.xml')//item[value = $state-code]/label
             return $state-name
@@ -354,11 +378,11 @@ function pocom:person-entry($node as node(), $model as map(*), $person-id as xs:
                 {
                     $career
                     ,
-                    if (empty($residence)) then 
+                    if (empty($residence)) then
                         ()
-                    else if (count($residence) gt 1) then 
+                    else if (count($residence) gt 1) then
                         (<br/>, concat('States of Residence: ', string-join($residence, ', ')) )
-                    else 
+                    else
                         (<br/>, concat('State of Residence: ', $residence) )
                     ,
                     <ol>{$formatted-roles}</ol>
@@ -371,7 +395,7 @@ declare function pocom:format-roles($person) {
     let $concurrent-appointments := collection($pocom:CONCURRENT-APPOINTMENTS-COL)/concurrent-appointments[person-id = $person-id]
     let $roles := collection($pocom:DATA-COL)//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
     let $concurrent-groups :=
-        for $group in $concurrent-appointments 
+        for $group in $concurrent-appointments
         let $concurrent-roles := $roles[id = $group/chief-id]
         return
             <group>{pocom:sort-roles($concurrent-roles) ! (: preserve all info needed to reconstruct position description with dept:format-role() :) element {root(.)/*/name()} {./preceding::territory-id, element {./name()} {./*, <note auto-generated="yes">{pocom:summarize-other-concurrent-appointments($group/id, ./id)}</note>}}}</group>
@@ -379,8 +403,8 @@ declare function pocom:format-roles($person) {
     let $full-listing := pocom:sort-roles(($concurrent-groups, $non-concurrent))
     for $item in $full-listing
     return
-        if ($item/self::group) then 
-            let $sorted-roles := 
+        if ($item/self::group) then
+            let $sorted-roles :=
                 for $role in $item/*
                 (: delicately construct a new root node containing all of the info needed to reconstruct position description with dept:format-role() :)
                 let $role-node := element {$role/name()} {$role/*}
@@ -400,7 +424,7 @@ declare function pocom:sort-roles($roles) {
     for $role in $roles
     let $sort-date := subsequence($role//*:date[. ne ''], 1, 1)
     order by $sort-date
-    return 
+    return
         $role
 };
 
@@ -420,26 +444,26 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                     for $role in $roles
                     let $contemporary-territory-id := $role/contemporary-territory-id
                     let $title := concat(pocom:role-label($node, $model, $role/role-title-id, 'singular'), if ($contemporary-territory-id) then concat(', ', gsh:territory-id-to-short-name($contemporary-territory-id)) else ())
-                    let $years := 
+                    let $years :=
                         for $date in ($role/started/date, $role/ended/date)
-                        return 
-                            if ($date castable as xs:date) then 
-                                year-from-date(xs:date($date)) 
+                        return
+                            if ($date castable as xs:date) then
+                                year-from-date(xs:date($date))
                             else if (matches($date, '^\d{4}-\d{2}$')) then
                                 xs:integer(substring($date, 1, 4))
                             else ()
-                    let $years-summary := 
-                        if (exists($years)) then 
+                    let $years-summary :=
+                        if (exists($years)) then
                             let $start-year := min($years)
                             let $end-year := max($years)
-                            return 
+                            return
                                 if ($start-year ne $end-year) then concat($start-year, '–', $end-year) else $start-year
                         else if ($role[not(.//date castable as xs:date)]/note) then
                             string-join($role[not(.//date castable as xs:date)]/note/text(), '; ')
                         else
                             'no date on record'
-                    let $event-is-relevant := 
-                        if (exists($dates)) then 
+                    let $event-is-relevant :=
+                        if (exists($dates)) then
                             let $start-year := min($years)
                             let $end-year := max($years)
                             return
@@ -456,7 +480,7 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
 declare function pocom:join-with-and($words as xs:string+) as xs:string {
     let $count := count($words)
     return
-        if ($count = 1) then 
+        if ($count = 1) then
             $words
         else if ($count = 2) then
             string-join($words, ' and ')
@@ -467,11 +491,11 @@ declare function pocom:join-with-and($words as xs:string+) as xs:string {
                 $words[last()]
             )
 };
- 
+
 declare function pocom:summarize-concurrent-appointments($id as xs:string) {
     pocom:summarize-other-concurrent-appointments($id, ())
 };
- 
+
 declare function pocom:summarize-other-concurrent-appointments($id as xs:string, $excluded-id as xs:string?) {
     let $doc := collection($pocom:CONCURRENT-APPOINTMENTS-COL)/concurrent-appointments[id = $id]
     let $appointments := collection($pocom:MISSIONS-COUNTRIES-COL)//chief[id = $doc/chief-id[not(. = $excluded-id)]]
@@ -497,12 +521,12 @@ declare function pocom:format-role($person, $role) {
     let $appointed := $role/appointed
     let $started := $role/started
     let $ended := $role/ended
-    let $startdate := 
+    let $startdate :=
         (
         $started/date,
         $appointed/date
         )[. ne ''][1]
-    let $dates := 
+    let $dates :=
             if ($roleclass = 'principal-position') then
                 (
                 if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', app:date-to-english($appointed/date))), <br/>) else (),
@@ -518,18 +542,18 @@ declare function pocom:format-role($person, $role) {
     let $role-id := $role/id
     let $notes := string-join($role/note, ' ')
         (:
-        for $note in $role/note 
-        return 
-            if ($note/@auto-generated) then 
-                <span style="background-color: #dddde8">{$note/string()}</span> 
-            else 
+        for $note in $role/note
+        return
+            if ($note/@auto-generated) then
+                <span style="background-color: #dddde8">{$note/string()}</span>
+            else
                 $note/string()
         :)
     order by $startdate
     return
         <li id="{$role-id}">
             <strong>{
-                if ($roleclass eq 'country-mission') then 
+                if ($roleclass eq 'country-mission') then
                     <a href="{pocom:chief-country-href($current-territory-id)}">{concat($roletitle, ' (', $whereserved, ')')}</a>
                 else if ($roleclass eq 'org-mission') then
                     <a href="{pocom:chief-role-href($role-title-id)}">{$roletitle}</a>
@@ -539,8 +563,8 @@ declare function pocom:format-role($person, $role) {
             <br/>
             {
             $dates,
-            if (normalize-space($notes) ne '') then 
-                <ul><li><em>{$notes ! (., ' ')}</em></li></ul> 
+            if (normalize-space($notes) ne '') then
+                <ul><li><em>{$notes ! (., ' ')}</em></li></ul>
             else ()
             }
         </li>
@@ -548,13 +572,13 @@ declare function pocom:format-role($person, $role) {
 
 declare function pocom:letters($node as node(), $model as map(*)) {
     let $surnames := collection($pocom:PEOPLE-COL)//surname
-    let $letters := 
-        for $letter in 
+    let $letters :=
+        for $letter in
             distinct-values(
-                for $x in $surnames/substring(., 1, 1) 
+                for $x in $surnames/substring(., 1, 1)
                 return lower-case($x)
             )
-        order by $letter 
+        order by $letter
         return $letter
     return
         <ul class="nav nav-pills">{
@@ -572,9 +596,9 @@ function pocom:letter-breadcrumb($node as node(), $model as map(*), $letter as x
 };
 
 declare function pocom:letter($node as node(), $model as map(*), $letter as xs:string) {
-    let $chiefs := 
-        for $chief in collection(concat($pocom:PEOPLE-COL, '/', $letter))/person 
-        order by $chief/id 
+    let $chiefs :=
+        for $chief in collection(concat($pocom:PEOPLE-COL, '/', $letter))/person
+        order by $chief/id
         return $chief
     return
         pocom:format-index($node, $model, $chiefs, ())
@@ -593,20 +617,20 @@ declare function pocom:letters-prev-next-nav($node as node(), $model as map(*), 
     let $letters := for $letter in distinct-values(for $x in $surnames/substring(., 1, 1) return lower-case($x)) order by $letter return $letter
     let $prev := if ($letter gt $letters[1]) then $letters[index-of($letters, $letter) - 1] else ()
     let $next := if ($letter lt $letters[last()]) then $letters[index-of($letters, $letter) + 1] else ()
-    let $prevlink := 
-        if ($prev) then 
+    let $prevlink :=
+        if ($prev) then
             <li class="left"><a href="{concat('$app/departmenthistory/people/by-name/', $prev)}">« {upper-case($prev)}</a></li>
         else ()
-    let $nextlink := 
+    let $nextlink :=
         if ($next) then
             <li class="right"><a href="{concat('$app/departmenthistory/people/by-name/', $next)}">{upper-case($next)} »</a></li>
         else ()
-    return 
+    return
         (
         <div id="contentnav">
             <ul>
                 {$prevlink, $nextlink}
-            </ul> 
+            </ul>
         </div>,
         <!-- close contentnav -->
         )
@@ -671,21 +695,21 @@ function pocom:year-breadcrumb($node as node(), $model as map(*), $year as xs:in
 
 declare function pocom:year($node as node(), $model as map(*), $year as xs:integer) {
     let $roles := collection($pocom:DATA-COL)//date/../..
-    let $roles-in-year := 
+    let $roles-in-year :=
         for $role in $roles
-        let $dates := 
-            for $date in $role//date 
-            return 
-                if ($date castable as xs:date) then 
-                    year-from-date(xs:date($date)) 
+        let $dates :=
+            for $date in $role//date
+            return
+                if ($date castable as xs:date) then
+                    year-from-date(xs:date($date))
                 else ()
-        return 
-            if (exists($dates)) then 
+        return
+            if (exists($dates)) then
                 let $start-year:= min($dates)
                 let $end-year := max($dates)
-                return 
-                    if ($start-year le $year and $year le $end-year) then 
-                        $role 
+                return
+                    if ($start-year le $year and $year le $end-year) then
+                        $role
                     else ()
             else ()
     let $people-in-year-ids := $roles-in-year/person-id
@@ -699,19 +723,19 @@ declare function pocom:years-prev-next-nav($node as node(), $model as map(*), $y
     let $last-year := year-from-date(current-date()) (:max($years):)
     let $prev := if ($year gt $first-year) then $year - 1 else ()
     let $next := if ($year lt $last-year) then $year + 1 else ()
-    let $prevlink := 
-        if ($prev) then 
+    let $prevlink :=
+        if ($prev) then
             <li class="left"><a href="{concat('$app/departmenthistory/people/by-year/', $prev)}">« {$prev}</a></li>
         else ()
-    let $nextlink := 
+    let $nextlink :=
         if ($next) then
             <li class="right"><a href="{concat('$app/departmenthistory/people/by-year/', $next)}">{$next} »</a></li>
         else ()
-    return 
+    return
         <div id="contentnav">
             <ul>
                 {$prevlink, $nextlink}
-            </ul> 
+            </ul>
         </div>
 };
 

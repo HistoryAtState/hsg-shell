@@ -31,9 +31,14 @@ declare variable $pages:EXIDE :=
 
 declare
     %templates:default("view", "div")
-function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?, $view as xs:string) {
+    %templates:default("ignore", "false")
+function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?,
+    $view as xs:string, $ignore as xs:boolean) {
     let $content := map {
-        "data": if (exists($publication-id) and exists($document-id)) then pages:load-xml($publication-id, $document-id, $section-id, $view) else (),
+        "data":
+            if (exists($publication-id) and exists($document-id)) then
+                pages:load-xml($publication-id, $document-id, $section-id, $view, $ignore)
+            else (),
         "publication-id": $publication-id,
         "document-id": $document-id,
         "section-id": $section-id,
@@ -79,6 +84,11 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
+    pages:load-xml($publication-id, $document-id, $section-id, $view, false())
+};
+
+declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?,
+    $view as xs:string, $ignore as xs:boolean?) {
     console:log("pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
     let $block :=
     	if ($view = "div") then
@@ -89,7 +99,7 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
         else
             map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:text
     return
-        if (empty($block)) then (
+        if (empty($block) and not($ignore)) then (
             pages:load-fallback-page($publication-id, $document-id, $section-id)
         ) else (
             console:log("Loaded " || document-uri(root($block)) || " <" || node-name($block) || ">"),
@@ -173,7 +183,8 @@ declare function pages:xml-link($node as node(), $model as map(*), $doc as xs:st
 
 declare
     %templates:default("view", "div")
-function pages:view($node as node(), $model as map(*), $view as xs:string) {
+    %templates:default("heading-offset", 0)
+function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int) {
     let $xml :=
         if ($view = "div") then
             pages:get-content($model?data)
@@ -187,7 +198,7 @@ function pages:view($node as node(), $model as map(*), $view as xs:string) {
                     <img src="{$href}" class="img-responsive img-thumbnail center-block"/>
                 </div>
         else
-            pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path })
+            pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path, "heading-offset": $heading-offset })
 };
 
 declare

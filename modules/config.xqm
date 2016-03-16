@@ -183,7 +183,7 @@ declare variable $config:PUBLICATIONS :=
                 (: Called to transform content based on the odd using tei simple pm :)
                 function($xml, $parameters) { pm-frus:transform($xml, map:new(($parameters, map:entry("document-list", true())))) },
             "title": "People - Department History",
-            "base-path": function($document-id, $section-id) { $document-id }
+            "base-path": function($document-id, $section-id) { "secretaries" }
         },
         "secretaries": map {
             "title": "Biographies of the Secretaries of State - Department History"

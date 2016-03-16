@@ -229,7 +229,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         else
                             html:inline($config, ., ("tei-gap3"), .)
                 case element(graphic) return
-                    html:graphic($config, ., ("tei-graphic"), ., xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
+                    html:graphic($config, ., ("tei-graphic"), ., xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri ||
                             "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")), (), (), @scale, desc)
                 case element(group) return
                     html:block($config, ., ("tei-group"), .)
@@ -252,7 +252,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                                         html:omit($config, ., ("tei-head5"), .)
                                     else
                                         if (parent::div) then
-                                            html:heading($config, ., ("tei-head6"), ., count(ancestor::div))
+                                            html:heading($config, ., ("tei-head6"), ., count(ancestor::div) + (if ($parameters?heading-offset) then $parameters?heading-offset else 0))
                                         else
                                             html:block($config, ., ("tei-head7"), .)
                 case element(hi) return

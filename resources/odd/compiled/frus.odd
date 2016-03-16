@@ -297,7 +297,7 @@ display: block;
             </elementSpec>
             <elementSpec mode="change" ident="graphic">
                 <model behaviour="graphic">
-                    <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
+                    <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri ||
                             "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png"))</param>
                     <param name="scale">@scale</param>
                     <param name="title">desc</param>
@@ -324,7 +324,7 @@ display: block;
                 </model>
                 <model predicate="parent::div and @type='shortened-for-running-head'" behaviour="omit"/>
                 <model predicate="parent::div" behaviour="heading">
-                    <param name="level">count(ancestor::div)</param>
+                    <param name="level">count(ancestor::div) + (if ($parameters?heading-offset) then $parameters?heading-offset else 0)</param>
                 </model>
                 <model behaviour="block"/>
             </elementSpec>
