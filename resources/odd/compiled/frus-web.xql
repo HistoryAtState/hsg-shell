@@ -251,10 +251,13 @@ declare function model:apply($config as map(*), $input as node()*) {
                                     if (parent::div and @type='shortened-for-running-head') then
                                         html:omit($config, ., ("tei-head5"), .)
                                     else
-                                        if (parent::div) then
-                                            html:heading($config, ., ("tei-head6"), ., count(ancestor::div) + (if ($parameters?heading-offset) then $parameters?heading-offset else 0))
+                                        if (ancestor::frus:attachment) then
+                                            html:heading($config, ., ("tei-head6"), ., count(ancestor::div intersect ancestor::frus:attachment//div))
                                         else
-                                            html:block($config, ., ("tei-head7"), .)
+                                            if (parent::div) then
+                                                html:heading($config, ., ("tei-head7"), ., count(ancestor::div) + (if ($parameters?heading-offset) then $parameters?heading-offset else 0))
+                                            else
+                                                html:block($config, ., ("tei-head8"), .)
                 case element(hi) return
                     if (@rend = 'strong') then
                         html:inline($config, ., ("tei-hi1"), .)
@@ -519,7 +522,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(term) return
                     html:inline($config, ., ("tei-term"), .)
                 case element(frus:attachment) return
-                    html:section($config, ., ("tei-frus:attachment"), .)
+                    html:section($config, ., ("tei-frus:attachment", "attachment"), .)
                 case element(exist:match) return
                     html:match($config, ., .)
                 case element() return

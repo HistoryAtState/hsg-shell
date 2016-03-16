@@ -208,6 +208,9 @@
                         <outputRendition>font-weight: bold;</outputRendition>
                     </model>
                     <model predicate="parent::div and @type='shortened-for-running-head'" behaviour="omit"/>
+                    <model predicate="ancestor::frus:attachment" behaviour="heading">
+                        <param name="level">count(ancestor::div intersect ancestor::frus:attachment//div)</param>
+                    </model>
                     <model predicate="parent::div" behaviour="heading">
                         <param name="level">count(ancestor::div) + (if ($parameters?heading-offset) then $parameters?heading-offset else 0)</param>
                     </model>
@@ -303,7 +306,7 @@ display: block;
                     <model behaviour="inline"/>
                 </elementSpec>
                 <elementSpec ident="frus:attachment" mode="add">
-                    <model behaviour="section"/>
+                    <model behaviour="section" cssClass="attachment"/>
                 </elementSpec>
                 <moduleRef key="tei"/>
                 <moduleRef key="header"/>
