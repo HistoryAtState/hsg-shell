@@ -55,20 +55,25 @@ declare
     %templates:wrap
 function pocom:person-name-birth-death($node as node(), $model as map(*), $person-id) {
     let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
-    let $namebase := $person/persName
-    let $dates := concat($person/birth, '–', $person/death)
-    let $birth-death :=
-        concat(
-            if ($person/birth ne '') then $person/birth else '?',
-            '–',
-            if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death
-            )
     return
-        string-join(
-            ($namebase/forename, $namebase/surname, $namebase/genName, '(' || $birth-death || ')'),
-            ' '
+        if ($person) then
+            let $namebase := $person/persName
+            let $dates := concat($person/birth, '–', $person/death)
+            let $birth-death :=
+                concat(
+                    if ($person/birth ne '') then $person/birth else '?',
+                    '–',
+                    if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death
+                    )
+            return
+                string-join(
+                    ($namebase/forename, $namebase/surname, $namebase/genName, '(' || $birth-death || ')'),
+                    ' '
+                )
+        else (
+            request:set-attribute("hsg-shell.errcode", 404),
+            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "person " || $person-id || " not found")
         )
-
 };
 
 declare function pocom:person-href($person-id) {
