@@ -167,6 +167,14 @@ declare variable $config:PUBLICATIONS :=
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "World Wide Diplomatic Archives Indes"
         },
+        "articles": map {
+            "collection": $config:FRUS_HISTORY_ARTICLES_COL,
+            "select-document": function($document-id) { doc($config:FRUS_HISTORY_ARTICLES_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_ARTICLES_COL || '/' || $document-id || '.xml')//tei:body },
+            "html-href": function($document-id, $section-id) { "$app/frus-history/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd",
+            "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) }
+        },
         "about": map {
             "title": "About Us"
         },
@@ -289,7 +297,9 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:EDUCATION_COL: "edu",
         $config:FRUS_HISTORY_MONOGRAPH_COL: "frus-history-monograph",
         $config:CONFERENCES_ARTICLES_COL: "conferences",
-        $config:MILESTONES_COL: "milestones"
+        $config:MILESTONES_COL: "milestones",
+        $config:FRUS_HISTORY_ARTICLES_COL: "articles",
+        $config:SECRETARY_BIOS_COL: "people"
     };
 
 (:~
