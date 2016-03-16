@@ -31,7 +31,7 @@ declare function tags:tag-count($node, $model) {
 declare function tags:tags-in-context-toc($node, $model, $tag-id as xs:string*) {
     let $tag := collection($tags:TAXONOMY_COL)//id[. = $tag-id]/..
     return
-        <ul>{
+        <ul class="list-unstyled">{
             for $top-level in collection($tags:TAXONOMY_COL)/taxonomy/(tag | category)
             let $highlight := if ($top-level = $tag) then attribute class {'highlight'} else ()
             let $hit-count := count((collection($tags:RESOURCES_COL || '/frus') | collection($tags:RESOURCES_COL || '/milestones') | collection($tags:RESOURCES_COL || '/secretary-bios'))//tag[@id  = $top-level//id])
@@ -48,7 +48,7 @@ declare function tags:tags-in-context-toc($node, $model, $tag-id as xs:string*) 
 };
 
 declare function tags:descend($taxonomy-level, $tag, $show-even-if-empty) {
-    <ul>{
+    <ul class="list-unstyled">{
         let $entries := $taxonomy-level/(tag | category)
         for $entry in $entries
         let $highlight := if ($entry = $tag) then attribute class {'highlight'} else ()
@@ -96,7 +96,7 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                 if ($child-tags) then 
                     <div>
                         <h3>Tags within {$tag/label/string()}:</h3>
-                        <ul>{
+                        <ul class="list-unstyled">{
                             for $child in $child-tags
                             return
                                 <li><a href="$app/tags/{$child/id}">{$child/label/string()}</a></li>

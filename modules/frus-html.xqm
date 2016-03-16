@@ -305,9 +305,10 @@ declare function fh:get-gloss($root as element(), $ids as xs:string*) {
 };
 
 declare function fh:volume-breadcrumb($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
-    let $head := root($model?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+    let $title-tei := root($model?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+    let $title-html := $model?odd($title-tei/node(), ())
     return (
-        <a href="{if ($section-id) then '../' else ()}{$document-id}">{$node/@*, $head/string()}</a>
+        <a href="{if ($section-id) then '../' else ()}{$document-id}">{$node/@*, $title-html}</a>
     )
 };
 
@@ -342,7 +343,7 @@ declare function fh:breadcrumb-heading($model as map(*), $div as element()) {
         concat('Page ', $div/@n/string())
     else 
         (: strip footnotes off of chapter titles - an Eisenhower phenomenon :)
-        toc:toc-head($model, $div/tei:head)
+        toc:toc-head($model, $div/tei:head[1])
 };
 
 declare function fh:recent-publications($node, $model) {

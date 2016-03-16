@@ -2,6 +2,7 @@
 
 $icon-font-path: "../fonts/";
 
+
 .carousel-caption {
   position: initial;
   z-index: inherit;
@@ -12,7 +13,7 @@ $icon-font-path: "../fonts/";
 }
 
 .content img {
-  border: 1px solid #C0C0C0;
+  border: 1px solid $color-gray-light;
   padding: 10px;
   -webkit-border-radius: 1ex;
   -moz-border-radius: 1ex;
@@ -61,11 +62,14 @@ $icon-font-path: "../fonts/";
       padding: 10px 14px;
     }
   }
+  @media (min-width: $screen-lg-min) {
+    font-size: $large-font-size;
+  }
 }
 
 .navbar-default {
   .navbar-nav {
-    margin: 0 -15px;
+    margin: 0 ($margin-horizontal-base)*(-1);
     > li > a {
       color: $dropdown-link-color;
       transition: color 0s;
@@ -258,3 +262,4 @@ a.btn-primary {
   color: $btn-primary-color;
   background-color: $btn-primary-bg;
 }
+
