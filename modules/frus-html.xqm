@@ -342,7 +342,7 @@ declare function fh:breadcrumb-heading($model as map(*), $div as element()) {
         concat('Page ', $div/@n/string())
     else 
         (: strip footnotes off of chapter titles - an Eisenhower phenomenon :)
-        toc:toc-head($model, $div/tei:head)
+        toc:toc-head($model, $div/tei:head[1])
 };
 
 declare function fh:recent-publications($node, $model) {
