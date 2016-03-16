@@ -1,8 +1,18 @@
 .social-sidebar {
   @extend .col-md-4;
-  padding: 0 2.5rem;
-  @media screen and (min-width: $small-screen) {
+  border: none;
+  h2 {
+   margin-left: $margin-horizontal-base;
+  }
+  @media screen and (min-width: $screen-md-min) {
+    padding: 0 2.5rem;
     border-left: $default-border-style;
+    h2 {
+      margin-left: 0;
+    }
+    section {
+      padding-left: 0;
+    }
   }
 }
 
@@ -24,8 +34,3 @@
 .post-body {
   margin-bottom: 0.2em;
 }
-
-//.post-body a {
-  //margin-left: 0.2em;
-  //margin-right: 0.2em;
-//}

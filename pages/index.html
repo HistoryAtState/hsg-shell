@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div class="row">
-        <div class="carousel-list col-md-8" data-template="app:load-carousel-items">
+        <div class="col-md-8" data-template="app:load-carousel-items">
             <h2 class="section-heading">Latest News</h2>
             <section class="carousel-item" data-template="templates:each" data-template-from="carousel-items" data-template-to="carousel-item">
                 <div data-template="app:fix-links">
@@ -26,9 +26,9 @@
                 </div>
             </section>
         </div>
-        <div class="social-sidebar">
+        <aside class="social-sidebar row">
             <h2 class="section-heading">Stay connected</h2>
-            <section>
+            <section class="col-xs-12 col-sm-6 col-md-12">
                 <h3>Twitter</h3>
                 <ul class="post-list" data-template="app:load-most-recent-tweets" data-template-how-many="3">
                     <li class="post" data-template="templates:each" data-template-from="tweets" data-template-to="tweet">
@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </section>
-            <section>
+            <section class="col-xs-12 col-sm-6 col-md-12">
                 <h3>Tumblr</h3>
                 <ul class="post-list" data-template="app:load-most-recent-tumblr-posts" data-template-how-many="2">
                     <li class="post" data-template="templates:each" data-template-from="posts" data-template-to="post">
@@ -52,6 +52,6 @@
                     </li>
                 </ul>
             </section>
-        </div>
+        </aside>
     </div>
 </div>
