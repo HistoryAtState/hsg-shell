@@ -1,30 +1,35 @@
 /* Side Navigation -------------- */
 
-#sections {
-  padding: 10px;
-}
-
 #sections select {
   display: block;
   width: 100%;
   margin-bottom: 1em;
 }
 
-#sections h2 {
-  font-size: 0.825em;
-  font-weight: 800;
-  text-transform: uppercase;
-  padding-left: 0;
-  color: #212121;
-  margin-top: 20px;
+.section-heading {
+  font-size: 1em;
+  line-height: 1.5;
+  @extend .heading-secondary;
 }
 
-#sections ul {
-  margin-bottom: 20px;
-  list-style: none;
-  padding: 0;
+.hsg-panel {
+  @extend .panel;
+  @extend .panel-default;
 }
 
-#sections ul li {
-  padding: 10 0 0px 14px;
+.hsg-panel-heading {
+  @extend .panel-heading;
+}
+
+.hsg-sidebar-title {
+  @extend .panel-title;
+  @extend .section-heading;
+}
+
+.hsg-list-group {
+  @extend .list-group;
+}
+
+.hsg-list-group-item {
+  @extend .list-group-item;
 }
