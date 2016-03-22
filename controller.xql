@@ -1246,7 +1246,7 @@ else if (matches($exist:path, '^/open/?')) then
                 case "frus-metadata.xml" return <choice page="modules/open.xql" mode="xml" xql-feed="metadata"/>
                 default return <choice page="error-page.html" mode="html"/>
         else
-            <choice page="open/index.html" mode="html"/>
+            <choice page="pages/open/index.html" mode="html"/>
     return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <forward url="{$exist:controller}/{$choice/@page}">
