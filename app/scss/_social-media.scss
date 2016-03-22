@@ -1,10 +1,9 @@
 .social-sidebar {
-  @extend .col-md-4;
   border: none;
   h2 {
    margin-left: $margin-horizontal-base;
   }
-  @media screen and (min-width: $screen-md-min) {
+  @media screen and (min-width: $screen-lg-min) {
     padding: 0 2.5rem;
     border-left: $default-border-style;
     h2 {
