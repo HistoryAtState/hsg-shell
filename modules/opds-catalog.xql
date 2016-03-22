@@ -375,4 +375,4 @@ return
     case 'recent' return opds:recent()
     case 'browse' return opds:browse()
     case 'search' return opds:search()
-    default return opds:catalog(), <a>{$opds:frus-ebook-volume-ids}</a>
+    default return opds:catalog()
