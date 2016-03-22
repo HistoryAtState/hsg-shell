@@ -266,3 +266,20 @@ a.btn-primary {
   background-color: $btn-primary-bg;
 }
 
+/* Thumbnails */
+
+.hsg-thumbnail {
+  @extend .thumbnail;
+}
+
+a.thumbnail {
+  padding: $padding-large-vertical $padding-large-horizontal;
+  min-height: 185px;
+
+  &:hover,
+  &:focus,
+  &.active {
+    border-color: $color-cool-blue-lightest;
+    background-color: $color-cool-blue-lightest;
+  }
+}
