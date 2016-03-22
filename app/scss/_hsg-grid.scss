@@ -110,3 +110,19 @@ footer {
 .hsg-breadcrumb-wrapper {
   @extend .col-md-12;
 }
+
+.hsg-width-two-thirds {
+  @extend .col-md-12;
+  @extend .col-lg-8;
+}
+
+.hsg-width-one-third {
+  @extend .col-md-12;
+  @extend .col-lg-4;
+}
+
+.hsg-thumbnail-wrapper {
+  @extend .col-xs-6;
+  @extend .col-sm-4;
+  @extend .col-md-4;
+}
