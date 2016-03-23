@@ -56,11 +56,11 @@ declare variable $config:module-config := doc($config:odd-source || "/configurat
 
 declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes";
 
-declare variable $config:FRUS_METADATA_COL := "/db/apps/frus/bibliography/";
+declare variable $config:FRUS_METADATA_COL := "/db/apps/frus/bibliography";
 
 declare variable $config:FRUS_METADATA := collection($config:FRUS_METADATA_COL);
 
-declare variable $config:FRUS_CODE_TABLES_COL := "/db/apps/frus/code-tables/";
+declare variable $config:FRUS_CODE_TABLES_COL := "/db/apps/frus/code-tables";
 
 declare variable $config:S3_CACHE_COL := "/db/apps/s3/cache/";
 
@@ -290,6 +290,7 @@ declare variable $config:PUBLICATIONS :=
 declare variable $config:PUBLICATION-COLLECTIONS :=
     map {
         $config:FRUS_VOLUMES_COL: "frus",
+        $config:FRUS_METADATA_COL: "frus",
         $config:BUILDINGS_COL: "buildings",
         $config:SHORT_HISTORY_COL: "short-history",
         $config:FAQ_COL: "faq",
