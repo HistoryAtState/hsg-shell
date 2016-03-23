@@ -10,10 +10,7 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
-import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
-
-import module namespace frus-odd="http://www.tei-c.org/tei-simple/models/frus.odd/web" at "../resources/odd/compiled/frus-web.xql";
-(:$config:odd-compiled || "/frus-web.xql":)
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 
 declare option output:method "xml";
 
@@ -164,22 +161,11 @@ declare function open:frus-metadata() {
             let $raw-summary := $volume/summary
             let $summary := if(normalize-space(string($raw-summary)))
             then
-(:                let $odd := $config:odd-transform-default:)
-                let $publication-id := 'frus'
-(:                let $odd := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default:)
-(: :              let $odd := frus-odd:transform#2:)
+                let $odd := $config:PUBLICATIONS?frus?transform
+                let $html-with-bad-links := $odd($volume/summary/node(),map {})
+                let $html := app:fix-links($html-with-bad-links)
                 return
-                <summary> {$volume/summary/node() ! frus-odd:transform(map {}, .)} </summary>
-(:                string($volume/summary):)
-                (: TODO adapt this piece of old code and replace the above stub ^
-                if ($volume/summary/tei:p[1] ne '') then 
-                    render:main($volume/summary,
-                            <parameters>
-                                <param name="abs-site-uri" value="{$application-url}/historicaldocuments/"/>
-                                <!-- <param name="abs-site-uri" value="http://history.state.gov/historicaldocuments/"/> -->
-                            </parameters>
-                            )
-                :)
+                    <summary xmlns="http://history.state.gov/ns/1.0">{$html}</summary>
             else ()
             let $locations := $volume/location[. ne ''][./@loc = ('db', 'madison', 'worldcat')]
             let $media := $volume/media/@type/string()
