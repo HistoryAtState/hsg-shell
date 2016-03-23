@@ -6,30 +6,54 @@
   margin-bottom: 1em;
 }
 
+// Red, uppercase heading for sidebar
 .section-heading {
+  @extend .heading-secondary;
   font-size: 1em;
   line-height: 1.5;
-  @extend .heading-secondary;
 }
 
+// Panel Box
 .hsg-panel {
   @extend .panel;
   @extend .panel-default;
 }
 
+// Top Heading Wrapper
 .hsg-panel-heading {
   @extend .panel-heading;
 }
 
+// Top Heading
 .hsg-sidebar-title {
   @extend .panel-title;
   @extend .section-heading;
 }
 
+// Second Level Heading Wrapper (Subnavigation)
+.hsg-panel-heading-second-level {
+  @extend .panel-heading;
+  border-top: 1px solid $panel-default-border;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+// Second Level Heading (Subnavigation)
+.hsg-sidebar-title-second-level {
+  @extend .panel-title;
+}
+
+// Panel paragraphs or other elements
+.hsg-panel-body {
+  @extend .panel-body;
+}
+
+// Panel Lists (<ul>)
 .hsg-list-group {
   @extend .list-group;
 }
 
+// Panel List Items (<li>)
 .hsg-list-group-item {
   @extend .list-group-item;
 }

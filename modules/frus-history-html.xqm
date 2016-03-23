@@ -80,15 +80,15 @@ declare function fhh:most-recent-documents($node, $model) {
         return
             $doc
     return
-        <ul>
+        <ul class="hsg-list-group">
             {
             for $doc in subsequence($documents, 1, 3)
             let $title := $doc//tei:title[@type='short']
             let $id := substring-before(util:document-name($doc), '.xml')
             return
-                <li><a href="$app/historicaldocuments/frus-history/documents/{$id}">{$title/string()}</a></li>
+                <li class="hsg-list-group-item"><a href="$app/historicaldocuments/frus-history/documents/{$id}">{$title/string()}</a></li>
             }
-            <li><a href="$app/historicaldocuments/frus-history/documents">... All Documents</a> ({count($documents)})</li>
+            <li class="hsg-list-group-item"><a href="$app/historicaldocuments/frus-history/documents">... All Documents</a> ({count($documents)})</li>
         </ul>
 };
 
@@ -100,16 +100,16 @@ declare function fhh:most-recent-articles($node, $model) {
         return
             $doc
     return
-        <ul>
+        <ul class="hsg-list-group">
             {
             for $doc in subsequence($articles, 1, 3)
             let $title := pages:process-content($model?odd, $doc//tei:title[@type="short"])
             let $date := $doc//tei:publicationStmt/tei:date
             let $url := replace(util:document-name($doc), '.xml$', '')
             return
-                <li><a href="$app/historicaldocuments/frus-history/research/{$url}">{$title}</a> ({$date/string()})</li>
+                <li class="hsg-list-group-item"><a href="$app/historicaldocuments/frus-history/research/{$url}">{$title}</a> ({$date/string()})</li>
             }
-            <li><a href="$app/historicaldocuments/frus-history/research">... All Articles</a> ({count($articles)})</li>
+            <li class="hsg-list-group-item"><a href="$app/historicaldocuments/frus-history/research">... All Articles</a> ({count($articles)})</li>
         </ul>
 };
 
@@ -135,25 +135,25 @@ declare function fhh:most-recent-events($node, $model) {
         (
         if ($upcoming-events) then
             (
-                <h3><a href="$app/historicaldocuments/frus-history/events">Upcoming Events</a></h3>,
-                <ul>{
+                <div class="hsg-panel-heading-second-level"><h3 class="hsg-sidebar-title-second-level"><a href="$app/historicaldocuments/frus-history/events">Upcoming Events</a></h3></div>,
+                <ul class="hsg-list-group">{
                     $upcoming-events-list
                     ,
                     if ($recent-events) then
                         ()
                     else
-                        <li><a href="$app/historicaldocuments/frus-history/events">... All events ({count($events)})</a></li>
+                        <li class="hsg-list-group-item"><a href="$app/historicaldocuments/frus-history/events">... All events ({count($events)})</a></li>
                 }</ul>
             )
         else ()
         ,
         if ($recent-events) then
             (
-                <h3><a href="./frus-history/events">Recent Events</a></h3>,
-                <ul>{
+                <div class="hsg-panel-heading-second-level"><h3 class="hsg-sidebar-title-second-level"><a href="./frus-history/events">Recent Events</a></h3></div>,
+                <ul class="hsg-list-group">{
                     $recent-events-list
                     ,
-                    <li><a href="$app/historicaldocuments/frus-history/events">... All events ({count($events)})</a></li>
+                    <li class="hsg-list-group-item"><a href="$app/historicaldocuments/frus-history/events">... All events ({count($events)})</a></li>
                 }</ul>
             )
         else ()
@@ -164,7 +164,7 @@ declare function fhh:event-to-sidebar-list-item($event as element(event)) {
     let $event-date := app:date-to-english($event/event-date)
     let $event-teaser := $event/teaser/node()
     return
-        <li>
+        <li class="hsg-list-group-item">
             {$event-teaser} {$event-date}
         </li>
 };
