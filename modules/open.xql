@@ -167,7 +167,7 @@ declare function open:frus-metadata() {
 (:                let $odd := $config:odd-transform-default:)
                 let $publication-id := 'frus'
 (:                let $odd := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default:)
-(: :              let $odd := frus-odd:transform:)
+(: :              let $odd := frus-odd:transform#2:)
                 return
                 <summary> {$volume/summary/node() ! frus-odd:transform(map {}, .)} </summary>
 (:                string($volume/summary):)
