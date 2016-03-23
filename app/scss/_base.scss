@@ -87,3 +87,11 @@ p date {
 .article-container {
   margin: 0 0 2em 0;
 }
+
+
+/* Buttons */
+
+.hsg-link-button {
+  @extend .btn;
+  @extend .btn-primary;
+}
