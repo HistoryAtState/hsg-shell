@@ -10,6 +10,10 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
+
+import module namespace frus-odd="http://www.tei-c.org/tei-simple/models/frus.odd/web" at "../resources/odd/compiled/frus-web.xql";
+(:$config:odd-compiled || "/frus-web.xql":)
 
 declare option output:method "xml";
 
@@ -157,9 +161,16 @@ declare function open:frus-metadata() {
     let $volumes := 
         for $volume in collection($config:FRUS_METADATA_COL)/volume[publication-status eq 'published']
             let $titles := $volume/title[. ne '']
-            let $summary :=
-            
-                string($volume/summary)
+            let $raw-summary := $volume/summary
+            let $summary := if(normalize-space(string($raw-summary)))
+            then
+(:                let $odd := $config:odd-transform-default:)
+                let $publication-id := 'frus'
+(:                let $odd := if ($publication-id) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default:)
+(: :              let $odd := frus-odd:transform:)
+                return
+                <summary> {$volume/summary/node() ! frus-odd:transform(map {}, .)} </summary>
+(:                string($volume/summary):)
                 (: TODO adapt this piece of old code and replace the above stub ^
                 if ($volume/summary/tei:p[1] ne '') then 
                     render:main($volume/summary,
@@ -168,8 +179,8 @@ declare function open:frus-metadata() {
                                 <!-- <param name="abs-site-uri" value="http://history.state.gov/historicaldocuments/"/> -->
                             </parameters>
                             )
-                else ()
                 :)
+            else ()
             let $locations := $volume/location[. ne ''][./@loc = ('db', 'madison', 'worldcat')]
             let $media := $volume/media/@type/string()
             let $published-year := xs:string($volume/published-year[. ne ''])
@@ -198,7 +209,7 @@ declare function open:frus-metadata() {
                             element span { $length/@*, $length/text() }
                     }</length>
                     else (),
-                    if ($summary) then <summary>{ $summary }</summary> else ()
+                    $summary
                     }
                 </volume>
     return
