@@ -283,3 +283,11 @@ a.thumbnail {
     background-color: $color-cool-blue-lightest;
   }
 }
+
+/* Blockquotes */
+
+blockquote {
+  font-style: normal;
+  font-size: $base-font-size;
+  margin-left: 4em;
+}
