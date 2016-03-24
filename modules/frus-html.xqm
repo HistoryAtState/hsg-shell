@@ -80,15 +80,15 @@ function fh:load-administration($node as node(), $model as map(*), $administrati
             error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "administration " || $administration-id || " not found")
             )
     else
-        let $published-vols-in-admin := collection($config:FRUS_METADATA_COL)//volume[administration eq $administration-id][publication-status eq 'published']
+        let $vols-in-admin := collection($config:FRUS_METADATA_COL)//volume[administration eq $administration-id]
         let $grouping-codes := doc($config:FRUS_CODE_TABLES_COL || '/grouping-code-table.xml')//item
         let $groupings-in-use := 
-            for $g in distinct-values($published-vols-in-admin/grouping[@administration/tokenize(., '\s+') = $administration-id]) order by index-of($grouping-codes/value, $g) return $g
+            for $g in distinct-values($vols-in-admin/grouping[@administration/tokenize(., '\s+') = $administration-id]) order by index-of($grouping-codes/value, $g) return $g
         return
             map {
                 "admin-id": $administration-id,
                 "admin": $admin,
-                "published-vols": $published-vols-in-admin,
+                "vols-in-admin": $vols-in-admin,
                 "grouping-codes": $grouping-codes,
                 "groupings-in-use": $groupings-in-use
             }
@@ -129,7 +129,7 @@ declare
     %templates:wrap
 function fh:volumes-by-administration-group($node as node(), $model as map(*)) {
     if (count($model?groupings-in-use) gt 1 and $model?admin-id ne "pre-truman") then
-        for $vols in $model?published-vols
+        for $vols in $model?vols-in-admin
         group by $grouping := $vols/grouping[@administration/tokenize(., '\s+') = $model?admin-id]
         order by index-of($model?grouping-codes/value, $grouping)
         return
@@ -148,9 +148,9 @@ declare
     %templates:wrap
 function fh:volumes-by-administration($node as node(), $model as map(*)) {
     if (count($model?groupings-in-use) le 1 and $model?admin-id ne "pre-truman") then
-        for $vols in $model?published-vols
-        group by $subseries := $vols/title[@type='sub-series']
-        order by $subseries/@n
+        for $vols in $model?vols-in-admin
+        group by $subseries := normalize-space($vols/title[@type='sub-series'])
+        order by $vols[1]/title[@type='sub-series']/@n
         return
             (: TODO: bug in templates.xql forces us to call templates:process manually :)
             templates:process($node/node(), map:new(($model,
@@ -167,7 +167,7 @@ declare
     %templates:wrap
 function fh:volumes-pre-truman($node as node(), $model as map(*)) {
     if ($model?admin-id eq "pre-truman") then
-        for $vol in $model?published-vols
+        for $vol in $model?vols-in-admin
         let $vol-id := $vol/@id
         let $voltext := $vol/title[@type="complete"]
         order by $vol-id
@@ -186,8 +186,8 @@ declare
     %templates:wrap
 function fh:volumes-by-group($node as node(), $model as map(*)) {
     for $g-vols in $model?volumes
-    group by $subseries := $g-vols/title[@type='sub-series']
-    order by $subseries/@n
+    group by $subseries := normalize-space($g-vols/title[@type='sub-series'])
+    order by $g-vols[1]/title[@type='sub-series']/@n
     return
         (: TODO: bug in templates.xql forces us to call templates:process manually :)
         templates:process($node/node(), map:new(($model,
@@ -210,12 +210,14 @@ function fh:series-volumes($node as node(), $model as map(*)) {
     for $vol in $model?volumes
     let $title := string-join(for $title in ($vol/title[@type='volume'], $vol/title[@type='volumenumber'])[. ne ''] return $title, ', ')
     let $vol-id := $vol/@id
+    let $publication-status := $vol/publication-status
     order by $vol-id
     return
         templates:process($node/node(), map:new(($model,
             map {
                 "title": $title,
-                "vol-id": $vol-id
+                "vol-id": $vol-id,
+                "publication-status": $publication-status
             }
         )))
 };
@@ -233,14 +235,32 @@ function fh:volume-availability-summary($node as node(), $model as map(*)) {
     let $full-text := if (fh:exists-volume-in-db($volume-id)) then 'Full Text' else ()
     let $ebook := if (fh:exists-ebook($volume-id)) then 'Ebook' else ()
     let $pdf := if (fh:exists-pdf($volume-id)) then 'PDF' else ()
+    let $publication-status := $model?publication-status
+    let $not-published-status := 
+        if ($publication-status = 'published') then 
+            () 
+        else 
+            doc($config:FRUS_CODE_TABLES_COL || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
     return
-        if ($full-text or $ebook or $pdf) then 
+        if ($full-text or $ebook or $pdf or $not-published-status) then 
             <span style="font-style: italic; font-size: .9em; color: #606060">{
-                concat(
-                   ' (',
-                   string-join(($full-text, $ebook, $pdf), ', '),
-                   ')'
-                )
+                if ($full-text or $ebook or $pdf) then
+                    concat(
+                       ' (Published and available in ',
+                       string-join(($full-text, $ebook, $pdf), ', '),
+                       ')'
+                    )
+                else if ($not-published-status) then 
+                    concat(
+                        ' ('
+                        ,
+                        (: <a href="$app/historicaldocuments/{$volume-id}">{$not-published-status}</a>:)
+                        $not-published-status
+                        ,
+                        ')'
+                    )
+                else 
+                    ()
             }</span>
         else ()
 };
