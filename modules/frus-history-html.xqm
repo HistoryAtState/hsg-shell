@@ -213,15 +213,15 @@ declare function fhh:document-list($node, $model) {
 declare function fhh:document-list-full($node, $model, $document-id) {
     let $documents := collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
     return
-        <ul>{
+        <ul class="hsg-list-group">{
             for $doc in $documents
             let $title := $doc//tei:title[@type='short']
             let $created := $doc//tei:date[@type='created']/@when
             let $id := substring-before(util:document-name($doc), '.xml')
-            let $highlight := if ($id = $document-id) then attribute class {'highlight'} else ()
+            let $highlight := if ($id = $document-id) then 'highlight' else ''
             order by $created
             return
-                <li>{$highlight}<a href="./{$id}">{$title/string()}</a></li>
+                <li class="hsg-list-group-item {$highlight}"><a href="./{$id}">{$title/string()}</a></li>
         }</ul>
 };
 
@@ -265,16 +265,16 @@ declare function fhh:articles-list($node, $model) {
 };
 
 declare function fhh:article-list-sidebar($node, $model, $article-id) {
-    <ul>{
-        for $article in collection($fhh:FRUS_HISTORY_ARTICLES_COL)/tei:TEI[.//tei:author]
-        let $title := pages:process-content($model?odd, $article//tei:title[@type="short"])
-        let $id := replace(util:document-name($article), '.xml$', '')
-        let $highlight-status := if ($id eq $article-id) then attribute class {'highlight'} else ()
-        let $date := $article//tei:publicationStmt/tei:date
-        order by $date/@when descending
-        return
-            <li>{$highlight-status}<a href="$app/historicaldocuments/frus-history/research/{$id}">{$title}</a> ({$date/text()})</li>
-    }</ul>
+    <ul class="hsg-list-group">{
+    for $article in collection($fhh:FRUS_HISTORY_ARTICLES_COL)/tei:TEI[.//tei:author]
+    let $title := pages:process-content($model?odd, $article//tei:title[@type="short"])
+    let $id := replace(util:document-name($article), '.xml$', '')
+    let $highlight-status := if ($id eq $article-id) then 'highlight' else ''
+    let $date := $article//tei:publicationStmt/tei:date
+    order by $date/@when descending
+    return
+        <li class="hsg-list-group-item {$highlight-status}"><a href="$app/historicaldocuments/frus-history/research/{$id}">{$title}</a> ({$date/text()})</li>
+        }</ul>
 };
 
 declare function fhh:article-breadcrumb($node, $model, $article-id) {
