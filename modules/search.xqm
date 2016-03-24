@@ -12,6 +12,18 @@ import module namespace functx = "http://www.functx.com";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
+(: Maps search categories to publication ids, see $config:PUBLICATIONS :)
+declare variable $search:SECTIONS := map {
+    "documents": "frus",
+    "department": ("short-history", "people", "buildings"),
+    "milestones": "milestones",
+    "countries": ("countries", "archives"),
+    "conferences": "conferences",
+    "edu": "education",
+    "frus-history": "frus-history-monograph",
+    "about": ("hac", "faq")
+};
+
 declare function search:load-sections($node, $model) {
     let $content := map { "sections": 
         (
@@ -132,7 +144,7 @@ declare
     :)
 function search:load-results($node, $model, $q as xs:string, $within as xs:string*, $start as xs:integer, $perpage as xs:integer?) {
     let $start-time := util:system-time()
-    let $hits := collection($config:PUBLICATIONS?frus?collection)//tei:div[@xml:id][not(tei:div/@xml:id)][ft:query(., $q)]
+    let $hits := search:get-sections($within)//tei:div[@xml:id][not(tei:div/@xml:id)][ft:query(., $q)]
     let $end-time := util:system-time()
     let $ordered-hits :=
         for $hit in $hits
@@ -148,40 +160,53 @@ function search:load-results($node, $model, $q as xs:string, $within as xs:strin
     let $max-pages := 10
     let $max-pages-to-either-side := round($max-pages div 2) cast as xs:integer
     let $current-page := floor($effective-end div $perpage) cast as xs:integer
-    let $query-info :=  map { "query-info": 
-                            (
-                            map { "q": $q },
-                            map { "within": $within },
-                            map { "start": $adjusted-start },
-                            map { "end": $effective-end },
-                            map { "perpage": $perpage },
-                            map { "result-count": $hit-count },
-                            map { "query-duration": seconds-from-duration($end-time - $start-time) },
-                            map { "page-count": $page-count },
-                            map { "current-page": $current-page }
-                            )
-                        }
-    let $pages := map { "pages": 
-                        (
-                            if ($current-page - $max-pages-to-either-side le 0) then 
-                                (1 to $current-page - 1) 
-                            else 
-                                ($current-page - $max-pages-to-either-side) to ($current-page - 1)
-                            , 
-                            if ($current-page + $max-pages-to-either-side ge $page-count) then 
-                                ($current-page to $page-count - 1) 
-                            else 
-                                $current-page to ($current-page + $max-pages-to-either-side - 1) 
-                        )
-                    }
-    let $html := templates:process($node/*, map:new(($model, $results, $query-info, $pages)))
+    let $query-info :=  map { 
+        "query-info": map {
+            "q": $q,
+            "within": $within,
+            "start": $adjusted-start,
+            "end": $effective-end,
+            "perpage": $perpage,
+            "result-count": $hit-count,
+            "query-duration": seconds-from-duration($end-time - $start-time),
+            "page-count": $page-count,
+            "current-page": $current-page
+        },
+        "pages":
+            (
+                if ($current-page - $max-pages-to-either-side le 0) then 
+                    (1 to $current-page - 1) 
+                else 
+                    ($current-page - $max-pages-to-either-side) to ($current-page - 1)
+                ,
+                if ($page-count = 1) then
+                    1
+                else if ($current-page + $max-pages-to-either-side ge $page-count) then 
+                    ($current-page to $page-count - 1) 
+                else 
+                    $current-page to ($current-page + $max-pages-to-either-side - 1) 
+            )
+    }
+    let $html := templates:process($node/*, map:new(($model, $results, $query-info)))
     return
         $html
 };
 
+declare %private function search:get-sections($sections as xs:string*) {
+    if (exists($sections) and $sections != "") then
+        for $section in $sections
+        let $category := $search:SECTIONS?($section)
+        return
+            collection($config:PUBLICATIONS?($category)?collection)
+    else
+        map:for-each($search:SECTIONS, function($section, $category) {
+            collection($config:PUBLICATIONS?($category)?collection)
+        })
+};
+
 declare function search:result-heading($node, $model) {
     let $result := $model?result
-    let $publication-id := 'frus'
+    let $publication-id := $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))
     let $document-id := substring-before(util:document-name($result), '.xml')
     let $section-id := $result/@xml:id
     let $publication-config := map:get($config:PUBLICATIONS, $publication-id)
@@ -206,7 +231,7 @@ declare function search:result-summary($node, $model) {
 
 declare function search:result-link($node, $model) {
     let $result := $model?result
-    let $publication-id := 'frus'
+    let $publication-id := $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))
     let $document-id := substring-before(util:document-name($result), '.xml')
     let $section-id := $result/@xml:id
     let $href := 
