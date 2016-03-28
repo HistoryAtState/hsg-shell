@@ -126,3 +126,22 @@ footer {
   @extend .col-sm-4;
   @extend .col-md-4;
 }
+
+.hsg-navigation-title-wrapper {
+  @extend .col-xs-8;
+  @extend .col-sm-10;
+  @extend .col-md-12;
+  @extend .col-lg-12;
+}
+
+.hsg-width-main {
+  @extend .col.sm-12;
+  @extend .col-md-8;
+  @extend .col-lg-8;
+}
+
+.hsg-width-sidebar {
+  @extend .col-sm-12;
+  @extend .col-md-4;
+  @extend .col-lg-4;
+}
