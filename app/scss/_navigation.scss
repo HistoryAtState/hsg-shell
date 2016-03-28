@@ -4,10 +4,6 @@
   margin-bottom: 1em;
   border: none;
 
-  h5 {
-    @extend .section-heading;
-    padding: 0 10px 10px 0;
-  }
   .page-nav {
     display: inline-block;
     position: inherit;
@@ -23,6 +19,11 @@
   }
 }
 
+.navigation-title {
+  @extend .section-heading;
+  padding: 0 10px 10px 0;
+}
+
 .toggle-text {
   display: inline-block;
   font-family: sans-serif;
@@ -35,7 +36,9 @@
 .page-nav {
   position: fixed;
   font-size: 40px;
-  top: 50%;
+  //top: 50%;
+  bottom: 25%;
+  z-index: 1000;
 
   i {
     text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
@@ -67,10 +70,8 @@
     position: fixed;
     margin: 0;
     width: 60px;
-    display: flex;
     justify-content: center;
     align-content: center;
-    flex-direction: column;
     font-size: 40px;
     text-align: center;
   }
@@ -83,4 +84,11 @@
     position: normal;
     font-size: 16px;
   }
+}
+
+.page-nav.nav-prev {
+  left: 5%;
+}
+.page-nav.nav-next {
+  right: 5%;
 }
