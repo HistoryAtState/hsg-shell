@@ -28,8 +28,30 @@ declare
     %templates:wrap
 function toc:table-of-contents-sidebar($node as node(), $model as map(*), $document-id as xs:string, $heading as xs:boolean?, $highlight as xs:boolean?) {
     let $toc := toc:table-of-contents($node, $model, $document-id, $heading, $highlight)
+    let $head := ($toc/h2/node(), 'Table of Contents')[1]
+    let $list := toc:prepare-sidebar-toc-list($toc/ul)
     return
-        element div { $toc/node() }
+        if ($toc) then 
+            <aside class="hsg-width-sidebar">
+                <div class="hsg-panel">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">{$head}</h2>
+                    </div>
+                    {
+                        $list
+                    }
+                </div>
+            </aside>
+        else ()
+};
+
+declare function toc:prepare-sidebar-toc-list($nodes as node()*) {
+    for $node in $nodes
+    return
+        typeswitch ( $node )
+            case element( ul ) return <ul class="hsg-list-group">{toc:prepare-sidebar-toc-list($node/node())}</ul>
+            case element( li ) return <li class="hsg-list-group-item">{toc:prepare-sidebar-toc-list($node/node())}</li>
+            default return $node
 };
 
 declare function toc:toc($model as map(*), $root as node()?, $show-heading as xs:boolean?, $highlight as xs:boolean?) {
