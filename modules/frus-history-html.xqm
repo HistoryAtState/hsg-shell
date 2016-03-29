@@ -20,7 +20,7 @@ declare function fhh:monograph-title($node, $model) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
     let $title := $model?odd($doc//tei:title[@type='complete'], ())
     return
-        $title
+        <h2 class="navigation-title">{$title}</h2>
 };
 
 declare function fhh:monograph-editors($node, $model) {
