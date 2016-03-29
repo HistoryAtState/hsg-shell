@@ -96,12 +96,13 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
                         concat('s ', $first, '-', $last)
                 return
                     concat(' (Document', $document, ')')
-            else 
+            else if ($node/tei:div) then
                 <ul>
                 {
                     toc:toc-passthru($model, $node, $current)
                 }
                 </ul>
+            else ()
             }
         </li>
     else 
