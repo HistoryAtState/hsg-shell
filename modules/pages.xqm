@@ -185,6 +185,7 @@ declare
     %templates:default("view", "div")
     %templates:default("heading-offset", 0)
 function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int) {
+    let $log := console:log("pages:view: view: " || $view || " heading-offset: " || $heading-offset)
     let $xml :=
         if ($view = "div") then
             pages:get-content($model?data)
