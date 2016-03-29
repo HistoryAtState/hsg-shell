@@ -17,39 +17,35 @@
                 </ol>
             </div>
         </div>
-        <div class="row" data-template="pages:navigation">
-            <div class="col-md-1 hidden-sm hidden-xs">
-                <a title="previous page" data-template="pages:navigation-link" data-template-direction="previous" class="nav-prev page-nav">
-                    <i class="glyphicon glyphicon-chevron-left"/>
-                </a>
+
+        <div class="row">
+            <div class="hsg-navigation-wrapper">
+                <h2 class="hsg-navigation-title" id="navigation-title" data-template="pages:navigation-title"/>
             </div>
-            <div class="col-md-8 col-sm-10">
-                <div class="navigation-top row">
-                    <div class="col-xs-2 col-sm-1 hidden-md hidden-lg">
-                        <a title="previous page" data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
-                            <i class="glyphicon glyphicon-chevron-left"/>
-                        </a>
-                    </div>
-                    <div class="col-xs-8 col-sm-10 col-md-12 col-lg-12 col-title">
-                        <h5 id="navigation-title" data-template="pages:navigation-title"/>
-                    </div>
-                    <div class="col-xs-2 col-sm-1 hidden-md hidden-lg">
-                        <a title="next page" data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
-                            <i class="glyphicon glyphicon-chevron-right"/>
-                        </a>
-                    </div>
-                </div>
+        </div>
+        <div class="row" data-template="pages:navigation">
+            <a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
+                <i class="glyphicon glyphicon-chevron-left"/>
+            </a>
+            <a data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
+                <i class="glyphicon glyphicon-chevron-right"/>
+            </a>
+            <div class="hsg-width-main">
                 <div id="content-inner">
                     <div id="content-container" data-template="app:fix-links">
                         <div class="content" data-template="pages:view"/>
                     </div>
                 </div>
             </div>
-            <div class="col-md-1 hidden-sm hidden-xs">
-                <a title="next page" data-template="pages:navigation-link" data-template-direction="next" class="nav-next page-nav">
-                    <i class="glyphicon glyphicon-chevron-right"/>
-                </a>
-            </div>
+
+            <aside class="hsg-width-sidebar">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Table of Contents</h2>
+                </div>
+                <div id="toc" data-template="app:fix-links">
+                    <div class="toc-inner hsg-panel" data-template="toc:table-of-contents" data-template-heading="true" data-template-highlight="true"/>
+                </div>
+            </aside>
         </div>
     </div>
 </div>
