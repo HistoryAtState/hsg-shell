@@ -111,6 +111,11 @@ footer {
   @extend .col-md-12;
 }
 
+.hsg-width-one-whole {
+  @extend .col-md-12;
+  @extend .col-lg-12;
+}
+
 .hsg-width-two-thirds {
   @extend .col-md-12;
   @extend .col-lg-8;
