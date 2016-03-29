@@ -23,6 +23,15 @@ function toc:table-of-contents($node as node(), $model as map(*), $document-id a
         ()
 };
 
+(: suppress attributes on the TOC div :)
+declare
+    %templates:wrap
+function toc:table-of-contents-sidebar($node as node(), $model as map(*), $document-id as xs:string, $heading as xs:boolean?, $highlight as xs:boolean?) {
+    let $toc := toc:table-of-contents($node, $model, $document-id, $heading, $highlight)
+    return
+        element div { $toc/node() }
+};
+
 declare function toc:toc($model as map(*), $root as node()?, $show-heading as xs:boolean?, $highlight as xs:boolean?) {
     if ($root) then
         <div class="toc-inner">
