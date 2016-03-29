@@ -53,3 +53,13 @@
   text-transform: uppercase;
   color: #911625;
 }
+
+.hsg-tag-list {
+  @extend .list-unstyled;
+  text-indent: -1.5em;
+  margin-left: 1.5em;
+}
+
+.hsg-font-italic {
+  font-style: $font-style-italic;
+}

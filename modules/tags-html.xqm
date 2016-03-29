@@ -175,11 +175,11 @@ declare function tags:all-tags($node, $model) {
 };
 
 declare function tags:taxonomy-to-html-list($taxonomy-node) {
-    <ul style="text-indent: -1.5em; margin-left: 1.5em;">{
+    <ul class="hsg-tag-list">{
         for $tag in $taxonomy-node/(tag | category)
         return
             <li><a href="$app/tags/{$tag/id}">{$tag/label/string()}</a>{
-                if ($tag/definition) then <span style="font-style:italic">&#160; {tags:typeswitch($tag/definition)}</span> else (),
+                if ($tag/definition) then <span class="hsg-font-italic">&#160; {tags:typeswitch($tag/definition)}</span> else (),
                 if ($tag/(tag|category)) then tags:taxonomy-to-html-list($tag) else ()
             }</li>
     }</ul>
