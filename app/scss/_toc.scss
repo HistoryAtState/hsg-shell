@@ -38,13 +38,23 @@
 }
 
 // TOC in sidebar
-.toc-inner .toc-inner {
-  @extend .hsg-panel-heading;
-  > h2 {
-    @extend .hsg-sidebar-title;
+
+.hsg-toc-sidebar .toc-inner {
+  > div {
+    @extend .hsg-panel-heading;
+    > h2 {
+      @extend .hsg-sidebar-title;
+    }
   }
-  ul {
+  @extend .hsg-panel;
+  > ul {
     @extend .hsg-list-group;
+  }
+  > ul ul {
+    margin:0;
+  }
+  li {
+    @extend .hsg-list-group-item;
   }
 }
 
