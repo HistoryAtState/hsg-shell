@@ -104,6 +104,28 @@ footer {
   }
 }
 
+.hsg-footer-list {
+  @extend .col-xs-6;
+  @extend .col-sm-3;
+  @extend .col-md-3;
+  @extend .col-lg-2;
+  @extend .list-unstyled;
+}
+
+// Frontpage
+.hsg-frontpage-sidebar {
+  @extend .row;
+  @extend .social-sidebar;
+  @extend .col-md-12;
+  @extend .col-lg-4;
+}
+
+.hsg-frontpage-section {
+  @extend .col-xs-12;
+  @extend .col-sm-6;
+  @extend .col-md-6;
+  @extend .col-lg-12;
+}
 
 /* Main Content Grid -------------- */
 
