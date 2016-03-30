@@ -2,17 +2,26 @@
 /* Variables ---------- */
 
 // Typography
-$em-base:             10px;
-$base-font-size:      1.5rem; //(15px)
-$small-font-size:     1.3rem; //(13px)
-$large-font-size:     1.7rem; //(17px)
-$lead-font-size:      2.2rem; //(22px)
-$h1-font-size:        4.4rem; //(44px)
-$h2-font-size:        3.0rem; //(30px)
-$h3-font-size:        2.4rem; //(24px)
-$h4-font-size:        1.9rem; //(19px)
-$h5-font-size:        1.6rem; //(16px)
-$h6-font-size:        1.3rem; //(13px)
+$em-base:                10px;
+$base-font-size:         1.5rem; //(15px)
+$small-font-size:        1.3rem; //(13px)
+$large-font-size:        1.7rem; //(17px)
+$lead-font-size:         2.2rem; //(22px)
+
+$h1-font-size:           4.4rem; //(44px)
+$h2-font-size:           3.0rem; //(30px)
+$h3-font-size:           2.4rem; //(24px)
+$h4-font-size:           1.9rem; //(19px)
+$h5-font-size:           1.6rem; //(16px)
+$h6-font-size:           1.3rem; //(13px)
+
+$h1-font-size-sm:        2.5rem; //(44px)
+$h2-font-size-sm:        2.0rem; //(30px)
+$h3-font-size-sm:        1.7rem; //(24px)
+$h4-font-size-sm:        1.5rem; //(19px)
+$h5-font-size-sm:        1.3rem; //(16px)
+$h6-font-size-sm:        1.3rem; //(13px)
+
 
 $base-line-height:    1.7;
 $heading-line-height: 1.3;
