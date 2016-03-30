@@ -655,7 +655,7 @@ declare function pocom:years($node as node(), $model as map(*)) {
     let $last-third := (xs:integer(ceiling(($one-third * 2))) to $count)
     return
         <div class="row">
-            <div class="col-md-4">{
+            <div class="col-xs-4">{
                 for $decade in $decades[position() = $first-third]
                 return
                     <div>
@@ -667,7 +667,7 @@ declare function pocom:years($node as node(), $model as map(*)) {
                         }</ul>
                     </div>
             }</div>
-            <div class="col-md-4">{
+            <div class="col-xs-4">{
                 for $decade in $decades[position() = $second-third]
                 return
                     <div>
@@ -679,7 +679,7 @@ declare function pocom:years($node as node(), $model as map(*)) {
                         }</ul>
                     </div>
             }</div>
-            <div class="col-md-4">{
+            <div class="col-xs-4">{
                 for $decade in $decades[position() = $last-third]
                 return
                     <div>
