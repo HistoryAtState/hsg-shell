@@ -20,26 +20,26 @@ function fh:volumes($node as node(), $model as map(*), $volume as xs:string?) {
     let $volume-title := $volume-metadata/title[@type='volume']
     let $volume-number := $volume-metadata/title[@type='volumenumber']
     let $sub-series-n := $volume-metadata/title[@type='sub-series']/@n
-    let $brief-title := 
-        if ($volume-number ne '') then 
+    let $brief-title :=
+        if ($volume-number ne '') then
             string-join(
                 (
-                $sub-series-n, 
-                $volume-number, 
+                $sub-series-n,
+                $volume-number,
                 replace($volume-title, '^The ', '')
-                ), 
+                ),
                 ', ')
-        else 
+        else
             string-join(
                 (
-                if (matches($sub-series-n, '[^\d–]')) then () else $sub-series-n, 
+                if (matches($sub-series-n, '[^\d–]')) then () else $sub-series-n,
                 replace($volume-title, '^The ', '')
-                ), 
+                ),
                 ', ')
     let $selected := if ($vol-id = $volume) then attribute selected {"selected"} else ()
     order by $vol-id
     return
-        <option>{ 
+        <option>{
             attribute value { "$app/historicaldocuments/" || $vol-id },
             $selected,
             $brief-title
@@ -58,8 +58,8 @@ function fh:administrations($node as node(), $model as map(*), $administration-i
         let $adminname := $admins/*:label
         let $admincode := $admins/*:value
         let $selected := if ($admincode = $administration-id) then attribute selected {"selected"} else ()
-        return 
-            element option { 
+        return
+            element option {
                 attribute value { "$app/historicaldocuments/" || $admincode },
                 $selected,
                 element label {$adminname/string()}
@@ -82,7 +82,7 @@ function fh:load-administration($node as node(), $model as map(*), $administrati
     else
         let $vols-in-admin := collection($config:FRUS_METADATA_COL)//volume[administration eq $administration-id]
         let $grouping-codes := doc($config:FRUS_CODE_TABLES_COL || '/grouping-code-table.xml')//item
-        let $groupings-in-use := 
+        let $groupings-in-use :=
             for $g in distinct-values($vols-in-admin/grouping[@administration/tokenize(., '\s+') = $administration-id]) order by index-of($grouping-codes/value, $g) return $g
         return
             map {
@@ -99,10 +99,10 @@ declare
 function fh:group-info($node as node(), $model as map(*)) {
     if (count($model?groupings-in-use) gt 1) then
         <p>Volumes are grouped into {
-            for $g at $n in $model?groupings-in-use 
+            for $g at $n in $model?groupings-in-use
             return (
                 <a href="#{$g}-volumes">{$model?grouping-codes[value=$g]/label/string()}</a>,
-                if ($n lt count($model?groupings-in-use)) then 
+                if ($n lt count($model?groupings-in-use)) then
                     concat(
                         if (count($model?groupings-in-use) gt 2) then ', ' else (),
                         if ($n = count($model?groupings-in-use) - 1) then ' and ' else ()
@@ -120,7 +120,7 @@ function fh:administration-name($node as node(), $model as map(*)) {
         case "pre-truman" return
             "Foreign Relations volumes covering the " || $model?admin/label/text() || " Period"
         case "nixon-ford" return
-            'Nixon-Ford Administrations' 
+            'Nixon-Ford Administrations'
         default return
             concat($model?admin/label, ' Administration')
 };
@@ -236,13 +236,13 @@ function fh:volume-availability-summary($node as node(), $model as map(*)) {
     let $ebook := if (fh:exists-ebook($volume-id)) then 'Ebook' else ()
     let $pdf := if (fh:exists-pdf($volume-id)) then 'PDF' else ()
     let $publication-status := $model?publication-status
-    let $not-published-status := 
-        if ($publication-status = 'published') then 
-            () 
-        else 
+    let $not-published-status :=
+        if ($publication-status = 'published') then
+            ()
+        else
             doc($config:FRUS_CODE_TABLES_COL || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
     return
-        if ($full-text or $ebook or $pdf or $not-published-status) then 
+        if ($full-text or $ebook or $pdf or $not-published-status) then
             <span style="font-style: italic; font-size: .9em; color: #606060">{
                 if ($full-text or $ebook or $pdf) then
                     concat(
@@ -250,7 +250,7 @@ function fh:volume-availability-summary($node as node(), $model as map(*)) {
                        string-join(($full-text, $ebook, $pdf), ', '),
                        ')'
                     )
-                else if ($not-published-status) then 
+                else if ($not-published-status) then
                     concat(
                         ' ('
                         ,
@@ -259,7 +259,7 @@ function fh:volume-availability-summary($node as node(), $model as map(*)) {
                         ,
                         ')'
                     )
-                else 
+                else
                     ()
             }</span>
         else ()
@@ -276,18 +276,21 @@ function fh:administration-group-code($node as node(), $model as map(*)) {
 declare
     %templates:wrap
 function fh:facets($node as node(), $model as map(*)) {
-    map {
-        "persons": 
-            if ($model?data/@type=('compilation', 'chapter', 'subchapter')) then
-                ()
-            else
-                distinct-values($model?data//tei:persName/@corresp),
-        "gloss": 
-            if ($model?data/@type=('compilation', 'chapter', 'subchapter')) then
-                ()
-            else
-                distinct-values($model?data//tei:gloss/@target)
-    }
+    if ($model?data/@xml:id = "index") then
+        ()
+    else
+        map {
+            "persons":
+                if ($model?data/@type=('compilation', 'chapter', 'subchapter')) then
+                    ()
+                else
+                    distinct-values($model?data//tei:persName/@corresp),
+            "gloss":
+                if ($model?data/@type=('compilation', 'chapter', 'subchapter')) then
+                    ()
+                else
+                    distinct-values($model?data//tei:gloss/@target)
+        }
 };
 
 declare
@@ -352,16 +355,16 @@ declare function fh:section-breadcrumb($node as node(), $model as map(*)) {
 declare function fh:breadcrumb-heading($model as map(*), $div as element()) {
     if ($div/@type eq 'document') then
         concat('Document ', $div/@n/string())
-    else if ($div instance of element(tei:pb)) then 
-        (: The following assumes that the pb is inside a document div. TODO: extend for pbs in front matter, etc.; 
+    else if ($div instance of element(tei:pb)) then
+        (: The following assumes that the pb is inside a document div. TODO: extend for pbs in front matter, etc.;
            consider adding a sidebar linking back to document(s) that fall on the pb :)
         (:
-        if ($div/ancestor::tei:div[@type eq 'document'][1]/tei:pb[1]/@n eq '1') then 
+        if ($div/ancestor::tei:div[@type eq 'document'][1]/tei:pb[1]/@n eq '1') then
             concat('Document ', $div/ancestor::tei:div[@type eq 'document'][1]/@n/string(), ', Page ', $div/@n/string())
-        else 
+        else
         :)
         concat('Page ', $div/@n/string())
-    else 
+    else
         (: strip footnotes off of chapter titles - an Eisenhower phenomenon :)
         toc:toc-head($model, $div/tei:head[1])
 };
@@ -380,7 +383,7 @@ declare function fh:recent-publications($node, $model) {
                 let $vol-id := $volume/@id
                 let $title := substring-after($volume/title[@type eq 'complete']/text(), 'Foreign Relations of the United States, ')
                 order by $vol-id
-                return 
+                return
                     <li><a href="$app/historicaldocuments/{$vol-id}">{$title}</a></li>
                 }
             </ol>
@@ -535,7 +538,7 @@ declare function fh:published-date-to-english($date as xs:date) {
     let $english-months := ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
     let $published-month := $english-months[xs:integer(month-from-date($date))]
     let $published-date := concat($published-month, ' ', day-from-date($date))
-    return 
+    return
         $published-date
 };
 
@@ -625,16 +628,16 @@ declare function fh:exists-pdf($vol-id) {
 };
 
 declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
-	if (fh:exists-volume-in-db($vol-id)) then 
+	if (fh:exists-volume-in-db($vol-id)) then
 	    fh:volume($vol-id)//tei:title[@type = $type][1]/text()
-    else 
+    else
         collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id]/title[@type eq $type]/text()
 };
 
 declare function fh:vol-title($vol-id as xs:string) {
-	if (fh:exists-volume-in-db($vol-id)) then 
+	if (fh:exists-volume-in-db($vol-id)) then
 	    fh:volume($vol-id)//tei:title[@type = 'complete']/text()
-    else 
+    else
         collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id]/title[@type eq 'complete']/text()
 };
 
