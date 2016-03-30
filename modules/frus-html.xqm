@@ -549,7 +549,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
     let $vol-ids := fh:volumes-with-ebooks()
     return
         <div id="catalog">
-            <p>The following {count($vol-ids)} volumes are currently available:</p>
+            <p>The following {count($vol-ids) + 1} volumes are currently available:</p>
             {
             for $vol-id in $vol-ids
             order by $vol-id
