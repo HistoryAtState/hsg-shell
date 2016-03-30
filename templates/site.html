@@ -17,31 +17,37 @@
                 <a href="$app/about-the-beta" data-template="app:insert-url-parameter">Learn about the beta</a>
             </div>
         </div>
-        <header class="hsg-custom" data-template="app:fix-links">
-            <div class="row">
-                <div class="col-sm-7">
-                    <a href="$app/">
-                        <img class="img-responsive" width="400" src="$app/resources/images/Office-of-the-Historian-logo_500x168.jpg" alt="Office of the Historian"/>
-                    </a>
-                </div>
-                <div class="col-sm-5">
-                    <div class="banner__search">
-                        <div class="searchbox">
-                            <form method="get" action="$app/search">
-                                <p class="form-group"><!-- Search: -->
-                                    <input type="text" size="15" name="q" placeholder="Search..." class="form-control" id="search-box"/>
-                                    <button type="submit" value="GO" class="search-button btn btn-default">
-                                        <i class="fa fa-search"/>
-                                    </button>
-                                </p>
-                            </form>
+
+        <header class="hsg-header" data-template="app:fix-links">
+            <section class="hsg-grid hsg-header-inner">
+                <div class="container hsg-header-content">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <a href="$app/">
+                                <img class="img-responsive" width="400" src="$app/resources/images/Office-of-the-Historian-logo_500x168.jpg" alt="Office of the Historian"/>
+                            </a>
                         </div>
-                    </div>
+                        <div class="col-sm-5">
+                            <div class="banner__search">
+                                <div class="searchbox">
+                                    <form method="get" action="$app/search">
+                                        <p class="form-group"><!-- Search: -->
+                                            <input type="text" size="15" name="q" placeholder="Search..." class="form-control" id="search-box"/>
+                                            <button type="submit" value="GO" class="search-button btn btn-default">
+                                                <i class="fa fa-search"/>
+                                            </button>
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
                 </div>
-            </div>
+            </section>
         </header>
-        <nav role="navigation" class="hsg-custom navbar navbar-default" data-template="app:fix-links">
-            <div class="container-fluid">
+
+        <nav role="navigation" class="hsg-nav navbar navbar-default" data-template="app:fix-links">
+            <div class="container hsg-nav-content">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Menu</span>
@@ -231,50 +237,64 @@
                 </div>
             </div>
         </nav>
-        <main id="content" class="hsg-custom"/>
-        <footer class="hsg-custom" data-template="app:fix-links">
-            <div class="hsg-footer-primary-section row">
-                <nav class="col-xs-12 col-sm-12 col-md-12">
-                    <ul class="col-xs-6 col-sm-3 col-md-3 col-lg-2 list-unstyled">
-                        <h4>Learn more</h4>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="$app/search">Search</a></li>
-                        <li><a href="$app/about/faq">FAQ</a></li>
-                    </ul>
 
-                    <ul class="col-xs-6 col-sm-3 col-md-3 col-lg-2 list-unstyled">
-                        <h4>Topics</h4>
-                        <li><a href="$app/historicaldocuments/">Historical Documents</a></li>
-                        <li><a href="$app/departmenthistory/">Department History</a></li>
-                        <li><a href="$app/countries/">Countries</a></li>
-                        <li><a href="$app/milestones/">Milestones of U.S. foreign relations</a></li>
-                        <li><a href="$app/education/">Resources for teachers</a></li>
-                    </ul>
-                    <ul class="col-xs-6 col-sm-3 col-md-3 col-lg-2 list-unstyled">
-                        <h4>Contact</h4>
-                        <li><a href="$app/about/">About Us</a></li>
-                        <li><a href="$app/about/contact-us">Contact Us</a></li>
-                    </ul>
-
-                    <ul class="col-xs-6 col-sm-3 col-md-3 col-lg-2 list-unstyled">
-                        <h4>Imprint</h4>
-                        <li><a href="http://www.state.gov/misc/87529.htm#privacy">Privacy Notice</a></li>
-                        <li><a href="http://www.state.gov/misc/152386.htm">External Link Policy</a></li>
-                        <li><a href="http://www.state.gov/misc/87529.htm#copyright">Copyright Info</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="hsg-footer-secondary-section row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <address>
-                        <h4>Office of the Historian, Bureau of Public Affairs<br /> <a href="http://www.state.gov">United States Department of State</a></h4>
-                        <p><a href="mailto:history@state.gov">history@state.gov</a></p>
-                        <p>Phone: 202-955-0200</p>
-                        <p>Fax: 202-955-0268</p>
-                    </address>
+        <div class="hsg-main">
+            <section class="hsg-grid hsg-main-inner">
+                <div class="container hsg-main-content">
+                    <main id="content" ></main>
                 </div>
-            </div>
+            </section>
+        </div>
+
+        <footer class="hsg-footer" data-template="app:fix-links">
+            <section class="hsg-grid hsg-footer-top">
+                <div class="container">
+                    <nav class="row">
+                        <ul class="hsg-footer-list">
+                            <h4>Learn more</h4>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="$app/search">Search</a></li>
+                            <li><a href="$app/about/faq">FAQ</a></li>
+                        </ul>
+
+                        <ul class="hsg-footer-list">
+                            <h4>Topics</h4>
+                            <li><a href="$app/historicaldocuments/">Historical Documents</a></li>
+                            <li><a href="$app/departmenthistory/">Department History</a></li>
+                            <li><a href="$app/countries/">Countries</a></li>
+                            <li><a href="$app/milestones/">Milestones of U.S. foreign relations</a></li>
+                            <li><a href="$app/education/">Resources for teachers</a></li>
+                        </ul>
+                        <ul class="hsg-footer-list">
+                            <h4>Contact</h4>
+                            <li><a href="$app/about/">About Us</a></li>
+                            <li><a href="$app/about/contact-us">Contact Us</a></li>
+                        </ul>
+
+                        <ul class="hsg-footer-list">
+                            <h4>Imprint</h4>
+                            <li><a href="http://www.state.gov/misc/87529.htm#privacy">Privacy Notice</a></li>
+                            <li><a href="http://www.state.gov/misc/152386.htm">External Link Policy</a></li>
+                            <li><a href="http://www.state.gov/misc/87529.htm#copyright">Copyright Info</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+            <section class="hsg-grid hsg-footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <address class="col-xs-12 col-sm-12 col-md-12">
+                            <h4>Office of the Historian, Bureau of Public Affairs<br /> <a href="http://www.state.gov">United States Department of State</a></h4>
+                            <p><a href="mailto:history@state.gov">history@state.gov</a></p>
+                            <p>Phone: 202-955-0200</p>
+                            <p>Fax: 202-955-0268</p>
+                        </address>
+                    </div>
+                </div>
+            </section>
         </footer>
+
         <script type="text/javascript" src="$app/resources/scripts/app.js" data-template="app:fix-this-link"/>
         <script type="text/javascript">
 
@@ -282,7 +302,7 @@
                 _gaq.push(['_setAccount', 'UA-23344799-1']);
                 _gaq.push(['_setDomainName', 'history.state.gov']);
                 _gaq.push(['_trackPageview']);
-                
+
                 (function() {{
                     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
                     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';

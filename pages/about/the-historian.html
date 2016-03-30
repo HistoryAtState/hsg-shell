@@ -2,7 +2,7 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="hsg-breadcrumb-wrapper">
                 <ol class="breadcrumb" data-template="app:fix-links">
                     <li>
                         <a href="$app">Home</a>
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="hsg-width-two-thirds">
                 <div id="content-inner" data-template="app:fix-links">
                     <h1>The Historian</h1>
                     <p>Dr. Stephen Randolph serves as The Historian of the U.S. Department of State.
@@ -46,28 +46,28 @@
                         published by Harvard University Press in 2007.</p>
                 </div>
             </div>
-            <aside class="col-md-3">
-                <div class="row">
-                    <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
-                        <h2>About</h2>
-                        <ul>
-                            <li>
-                                <a href="$app/about/contact-us">Contact Us</a>
-                            </li>
-                            <li>
-                                <a href="$app/about/faq">Frequently Asked Questions</a>
-                            </li>
-                            <li>
-                                <a href="$app/about/the-historian">The Historian</a>
-                            </li>
-                            <li>
-                                <a href="$app/about/hac">Historical Advisory Committee</a>
-                            </li>
-                            <li>
-                                <a href="$app/about/recent-publications">Recent Publications</a>
-                            </li>
-                        </ul>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">About</h2>
                     </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/contact-us">Contact Us</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/faq">Frequently Asked Questions</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/the-historian">The Historian</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/hac">Historical Advisory Committee</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/recent-publications">Recent Publications</a>
+                        </li>
+                    </ul>
                 </div>
             </aside>
         </div>

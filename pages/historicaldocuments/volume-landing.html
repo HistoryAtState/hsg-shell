@@ -2,7 +2,7 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="hsg-breadcrumb-wrapper">
                 <ol class="breadcrumb" data-template="app:fix-links">
                     <li>
                         <a href="$app">Home</a>
@@ -17,22 +17,88 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-md-offset-1" id="volume">
+            <div class="hsg-width-two-thirds" id="volume">
                 <div id="content-inner" data-template="app:fix-links">
                     <div data-template="pages:header"/>
                     <hr/>
-                    <div data-template="toc:table-of-contents" data-template-heading="false" data-template-highlight="false"/>
+                    <div data-template="toc:table-of-contents" data-template-heading="false"
+                         data-template-highlight="false"/>
                 </div>
             </div>
-            <aside class="col-md-offset-1 col-md-2">
-                <div id="links-panel" class="panel panel-default">
-                    <div class="panel-heading"><h4>Links</h4></div>
-                    <div class="list-group"><!--
-                        <a class="list-group-item" href="../modules/fo.xql?doc=${volume}" data-template="app:parse-params">
-                            <i class="glyphicon glyphicon-print"/> PDF</a>
-                        <a class="list-group-item" href="#">
-                            <i class="glyphicon glyphicon-book"/> Ebook</a>
-                        --></div>
+            <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>Browse official documents from the published Foreign Relations of the United States series.</p>
+                    </div>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level">Browse by Administration</h3>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/pre-truman">Pre-Truman Volumes</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/truman">Truman Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/eisenhower">Eisenhower Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/nixon-ford">Nixon Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/nixon-ford">Ford Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h3 class="hsg-sidebar-title">Related Resources</h3>
+                    </div>
+
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/about-frus">More about
+                                the <em>Foreign Relations</em> series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/ebooks">
+                                <em>Foreign Relations</em> Ebooks</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/other-electronic-resources">Other Electronic Resources for
+                                U.S. Foreign Relations</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975">Guide to Sources on
+                                Vietnam, 1969-1975</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em> Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign Relations</em> documents</a>
+                        </li>
+                    </ul>
                 </div>
             </aside>
         </div>

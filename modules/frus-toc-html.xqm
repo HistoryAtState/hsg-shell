@@ -57,7 +57,7 @@ declare function toc:prepare-sidebar-toc-list($nodes as node()*) {
 declare function toc:toc($model as map(*), $root as node()?, $show-heading as xs:boolean?, $highlight as xs:boolean?) {
     if ($root) then
         <div class="toc-inner">
-            { if ($show-heading) then <h2>{toc:volume-title($root, "volume")}</h2> else () }
+            { if ($show-heading) then <div><h2>{toc:volume-title($root, "volume")}</h2></div> else () }
             <ul>
             {
                 toc:toc-passthru(

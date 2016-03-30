@@ -12,6 +12,21 @@ declare variable $edu:EDUCATION_COL := '/db/apps/other-publications/education';
 declare variable $edu:INTRODUCTIONS_COL := $edu:EDUCATION_COL || '/introductions';
 declare variable $edu:MODULES_COL := $edu:EDUCATION_COL || '/modules';
 
+declare function edu:modules-sidebar($node, $model) {
+    <ul class="hsg-list-group">
+        {
+            let $ordered-modules :=
+                for $module in collection($edu:MODULES_COL)//module[published-status eq 'published']
+                return $module
+            for $module in $ordered-modules
+            let $tei-document-name := $module/tei-document-name/text()
+            let $title := $module/title/text()
+            return
+                <li class="hsg-list-group-item"><a href="$app/education/modules/{$tei-document-name}">{$title}</a></li>
+        }
+    </ul>
+};
+
 declare function edu:list-modules-brief($node, $model) {
     <ol>
         {

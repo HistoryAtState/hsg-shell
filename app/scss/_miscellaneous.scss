@@ -45,11 +45,21 @@
 .figure-floated {
   margin: 1em 2em 1em 0;
   text-align: center;
-  max-width: 30%;
+  min-width: 20%;
 }
 
 .heading {
   font-weight: 800;
   text-transform: uppercase;
   color: #911625;
+}
+
+.hsg-tag-list {
+  @extend .list-unstyled;
+  text-indent: -1.5em;
+  margin-left: 1.5em;
+}
+
+.hsg-font-italic {
+  font-style: $font-style-italic;
 }

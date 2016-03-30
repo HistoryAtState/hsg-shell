@@ -2,6 +2,10 @@
 
 $icon-font-path: "../fonts/";
 
+.carousel-item {
+  margin-left: 0;
+  margin-right: 0;
+}
 
 .carousel-caption {
   position: initial;
@@ -56,7 +60,7 @@ $icon-font-path: "../fonts/";
 }
 
 .nav {
-  @media (min-width: $grid-float-breakpoint) and (max-width: 991px){
+  @media (min-width: $grid-float-breakpoint) and (max-width: $screen-md-max){
     font-size: $small-font-size;
     > li > a {
       padding: 10px 14px;
@@ -146,8 +150,8 @@ $icon-font-path: "../fonts/";
 
 .breadcrumb {
   background-color: transparent;
-  padding: 5px 0px;
   font-size: inherit;
+  padding: 12px 0 0 0;
 }
 
 .breadcrumb li {
@@ -184,7 +188,6 @@ dd {
 /* Panels -------------- */
 
 .panel {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
   font-family: $font-serif;
 }
 
@@ -263,3 +266,28 @@ a.btn-primary {
   background-color: $btn-primary-bg;
 }
 
+/* Thumbnails */
+
+.hsg-thumbnail {
+  @extend .thumbnail;
+}
+
+a.thumbnail {
+  padding: $padding-large-vertical $padding-large-horizontal;
+  min-height: 185px;
+
+  &:hover,
+  &:focus,
+  &.active {
+    border-color: $color-cool-blue-lightest;
+    background-color: $color-cool-blue-lightest;
+  }
+}
+
+/* Blockquotes */
+
+blockquote {
+  font-style: normal;
+  font-size: $base-font-size;
+  margin-left: 4em;
+}

@@ -2,7 +2,7 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="hsg-breadcrumb-wrapper">
                 <ol class="breadcrumb" data-template="app:fix-links">
                     <li>
                         <a href="$app">Home</a>
@@ -20,11 +20,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-md-offset-1" id="volume">
+            <div class="hsg-width-two-thirds" id="volume">
                 <div id="content-inner" data-template="app:fix-links">
                     <div data-template="edu:module-introduction"/>
                 </div>
             </div>
+            <aside class="hsg-width-sidebar">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Education</h2>
+                    </div>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level">Curriculum Modules</h3>
+                    </div>
+                    <div class="hsg-panel" data-template="edu:modules-sidebar"/>
+                </div>
+            </aside>
         </div>
     </div>
 </div>

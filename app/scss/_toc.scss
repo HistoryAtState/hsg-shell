@@ -32,17 +32,30 @@
   animation-duration: 400ms;
 }
 
-#toc h2,
-#volume h2 {
-  background-color: #dddde8;
-  font-size: 1.2em;
-  line-height: 1.25;
-  margin-bottom: 1.25em;
-}
-
 #toc .highlight,
 #volume .highlight {
   background-color: #dddde8;
+}
+
+// TOC in sidebar
+
+.hsg-toc-sidebar .toc-inner {
+  > div {
+    @extend .hsg-panel-heading;
+    > h2 {
+      @extend .hsg-sidebar-title;
+    }
+  }
+  @extend .hsg-panel;
+  > ul {
+    @extend .hsg-list-group;
+  }
+  > ul ul {
+    margin:0;
+  }
+  li {
+    @extend .hsg-list-group-item;
+  }
 }
 
 .hi {

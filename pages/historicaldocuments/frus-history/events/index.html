@@ -2,7 +2,7 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="hsg-breadcrumb-wrapper">
                 <ol class="breadcrumb" data-template="app:fix-links">
                     <li>
                         <a href="$app">Home</a>
@@ -19,23 +19,25 @@
                 </ol>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+        <div class="row hsg-main">
+            <div class="hsg-width-two-thirds">
                 <div id="content-inner" data-template="app:fix-links">
                     <div data-template="frus-history:events"/>
                 </div>
             </div>
-            <aside class="col-md-3">
-                <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
-                    <h2>
-                        <em>FRUS</em> History Resources</h2>
-                    <p>Other resources about the history of the <em>Foreign 
-                        Relations of the United States</em> series.</p>
-                    <h3>
-                        <a href="$app/historicaldocuments/frus-history">Publications</a>
-                    </h3>
-                    <ul>
-                        <li>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title"><em>FRUS</em> History Resources</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>Other resources about the history of the <em>Foreign Relations of the United States</em> series.</p>
+                    </div>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level"><a href="$app/historicaldocuments/frus-history">Publications</a></h3>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
                             <a href="$app/historicaldocuments/frus-history">
                                 <img src="//s3.amazonaws.com/static.history.state.gov/frus-history/covers/frus-history.png" width="100px"/>
                                 <br/>
@@ -43,13 +45,13 @@
                             </a>
                         </li>
                     </ul>
-                    <h3>
-                        <a href="$app/historicaldocuments/frus-history/documents">Documents</a>
-                    </h3>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level"><a href="$app/historicaldocuments/frus-history/documents">Documents</a></h3>
+                    </div>
                     <ul data-template="frus-history:most-recent-documents"/>
-                    <h3>
-                        <a href="$app/historicaldocuments/frus-history/research">Research</a>
-                    </h3>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level"><a href="$app/historicaldocuments/frus-history/research">Research</a></h3>
+                    </div>
                     <ul data-template="frus-history:most-recent-articles"/>
                 </div>
             </aside>

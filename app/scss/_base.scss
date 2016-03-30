@@ -83,19 +83,16 @@ a:hover,
 a:active,
 a:focus {
   color: $color-primary-darkest;
-  // color: #030361;
 }
 
 input {
   height: 20px;
 }
 
-.section-heading {
+.heading-secondary {
   font-weight: 800;
   text-transform: uppercase;
   color: $color-secondary-darkest;
-  font-size: 1.25em;
-  line-height: 1.5;
 }
 
 p date {
@@ -104,4 +101,12 @@ p date {
 
 .article-container {
   margin: 0 0 2em 0;
+}
+
+
+/* Buttons */
+
+.hsg-link-button {
+  @extend .btn;
+  @extend .btn-primary;
 }

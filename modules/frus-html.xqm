@@ -557,13 +557,12 @@ declare function fh:frus-ebooks-catalog($node, $model) {
                 (
                 <div id="{$vol-id}">
                     <img src="//{$config:S3_DOMAIN}/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-                    <a href="$app/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'subseries'), fh:vol-title($vol-id, 'volumenumber'), fh:vol-title($vol-id, 'volume')), ', ')}</a>. 
-                        <br/>
-                        Ebook last updated: {xsl:format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), 'MMMM D, YYYY')}. 
-                        <ul class="buttons" style="text-align: right">
-                            <li><a href="{fh:epub-url($vol-id)}">EPUB ({ try {fh:epub-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.epub'}})</a></li>
-                            <li><a href="{fh:mobi-url($vol-id)}">Mobi ({ try {fh:mobi-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.mobi'}})</a></li>
-                        </ul>
+                    <a href="$app/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'subseries'), fh:vol-title($vol-id, 'volumenumber'), fh:vol-title($vol-id, 'volume')), ', ')}</a>.
+                    <p>Ebook last updated: {xsl:format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), 'MMMM D, YYYY')}</p>
+                    <ul class="hsg-ebook-list">
+                        <li><a class="hsg-link-button" href="{fh:epub-url($vol-id)}">EPUB ({ try {fh:epub-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.epub'}})</a></li>
+                        <li><a class="hsg-link-button" href="{fh:mobi-url($vol-id)}">Mobi ({ try {fh:mobi-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.mobi'}})</a></li>
+                    </ul>
                 </div>
                 ,
                 <hr class="space"/>
@@ -599,14 +598,13 @@ declare function fh:frus-history-ebook-entry($model as map(*)) {
     return
         <div id="frus-history">
             <img src="{$s3-base-url}/covers/{$vol-id}-thumb.png" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-            <a href="$app/historicaldocuments/{$vol-id}">{$book-title}{$preview-edition}</a>.
-                <br/>
-                Ebook last updated: {xsl:format-dateTime(xs:dateTime($last-updated), 'MMMM D, YYYY')}. 
-                <ul class="buttons" style="text-align: right">
-                    <li><a href="{$epub-url}">EPUB ({$epub-size})</a></li>
-                    <li><a href="{$mobi-url}">Mobi ({$mobi-size})</a></li>
-                    <li><a href="{$mobi-url}">PDF ({$pdf-size})</a></li>
-                </ul>
+            <a href="$app/historicaldocuments/{$vol-id}">{$book-title}{$preview-edition}</a>
+            <p>Ebook last updated: {xsl:format-dateTime(xs:dateTime($last-updated), 'MMMM D, YYYY')}.</p>
+            <ul class="hsg-ebook-list">
+                <li><a class="hsg-link-button" href="{$epub-url}">EPUB ({$epub-size})</a></li>
+                <li><a class="hsg-link-button" href="{$mobi-url}">Mobi ({$mobi-size})</a></li>
+                <li><a class="hsg-link-button" href="{$mobi-url}">PDF ({$pdf-size})</a></li>
+            </ul>
         </div>
 };
 

@@ -1,0 +1,174 @@
+/* HSG Custom Grid -------------- */
+
+.hsg-container {
+  @media (min-width: $screen-lg-min) {
+    width: $container-md;
+  }
+}
+
+// Bootstrap 'container' extended with hsg styles
+.container {
+  @extend .hsg-container;
+  @media screen and (min-width: $screen-md-min) {
+    width: $container-sm;
+  }
+  @media screen and (min-width: $screen-lg-min) {
+    width: $container-md;
+  }
+}
+
+.hsg-grid {
+  @media screen and (min-width: $screen-lg-min) {
+    width: $container-md;
+    max-width: 100%;
+    margin: 0 auto;
+    border: $default-border-style;
+  }
+}
+
+.hsg-header {
+  @media screen and (max-width: $screen-lg) {
+    background-color: $color-white;
+  }
+
+  .hsg-header-inner {
+    border-bottom: none !important;
+    @media screen and (min-width: $screen-lg-min) {
+      margin-top: $margin-horizontal-base;
+      background-color: $color-white;
+    }
+  }
+  .hsg-header-content {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+.hsg-main {
+  @media screen and (max-width: $screen-lg) {
+    background-color: $color-white;
+  }
+
+  .hsg-main-inner {
+    border-top: none !important;
+    @media screen and (min-width: $screen-lg-min) {
+      margin-bottom: $margin-horizontal-base;
+      background-color: $color-white;
+    }
+  }
+
+  .hsg-main-content {
+    padding-bottom: $padding-base-horizontal;
+  }
+}
+
+.hsg-nav {
+  background-color: transparent;
+  @media screen and (max-width: $screen-lg) {
+    background: $navbar-default-bg;
+  }
+  .hsg-nav-content {
+    @media screen and (min-width: $screen-lg-min) {
+      background-color: $navbar-default-bg;
+    }
+  }
+}
+
+footer {
+  font-family: $font-sans;
+
+  @media screen and (min-width: $screen-lg-min) {
+    margin: $margin-horizontal-base auto 0;
+    margin-bottom: $margin-horizontal-base;
+  }
+  h4 {
+    font-family: $font-serif;
+    line-height: $lead-line-height;
+  }
+}
+
+.hsg-footer-top {
+  background-color: $color-gray-lightest;
+  padding: $padding-base-vertical 0;
+
+  a {
+    display: block;
+    margin-top: 0;
+  }
+}
+.hsg-footer-bottom {
+  background-color: $color-gray-lighter;
+  padding: $padding-base-vertical 0;
+  address {
+    text-align: right;
+  }
+}
+
+.hsg-footer-list {
+  @extend .col-xs-6;
+  @extend .col-sm-3;
+  @extend .col-md-3;
+  @extend .col-lg-2;
+  @extend .list-unstyled;
+}
+
+// Frontpage
+.hsg-frontpage-sidebar {
+  @extend .row;
+  @extend .social-sidebar;
+  @extend .col-md-12;
+  @extend .col-lg-4;
+}
+
+.hsg-frontpage-section {
+  @extend .col-xs-12;
+  @extend .col-sm-6;
+  @extend .col-md-6;
+  @extend .col-lg-12;
+}
+
+/* Main Content Grid -------------- */
+
+.hsg-breadcrumb-wrapper {
+  @extend .col-md-12;
+}
+
+.hsg-width-one-whole {
+  @extend .col-md-12;
+  @extend .col-lg-12;
+}
+
+.hsg-width-two-thirds {
+  @extend .col-md-12;
+  @extend .col-lg-8;
+}
+
+.hsg-width-one-third {
+  @extend .col-md-12;
+  @extend .col-lg-4;
+}
+
+.hsg-thumbnail-wrapper {
+  @extend .col-xs-6;
+  @extend .col-sm-4;
+  @extend .col-md-4;
+}
+
+.hsg-navigation-title-wrapper {
+  @extend .col-xs-8;
+  @extend .col-sm-10;
+  @extend .col-md-12;
+  @extend .col-lg-12;
+}
+
+.hsg-width-main {
+  @extend .col.sm-12;
+  @extend .col-md-8;
+  @extend .col-lg-8;
+}
+
+.hsg-width-sidebar {
+  @extend .col-sm-12;
+  @extend .col-md-4;
+  @extend .col-lg-4;
+}

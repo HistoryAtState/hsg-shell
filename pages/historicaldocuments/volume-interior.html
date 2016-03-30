@@ -2,7 +2,7 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="hsg-breadcrumb-wrapper">
                 <ol class="breadcrumb" data-template="app:fix-links">
                     <li><a href="$app">Home</a></li>
                     <li><a href="$app/historicaldocuments">Historical Documents</a></li>
@@ -11,49 +11,43 @@
                 </ol>
             </div>
         </div>
-        <div class="row" data-template="pages:navigation">
-            <div class="col-md-1 hidden-sm hidden-xs">
-                <a title="previous page" data-template="pages:navigation-link" data-template-direction="previous" class="nav-prev page-nav">
-                    <i class="glyphicon glyphicon-chevron-left"/>
-                </a>
+
+        <div class="row">
+            <div class="hsg-navigation-wrapper">
+                <h2 class="hsg-navigation-title" id="navigation-title" data-template="pages:navigation-title"/>
             </div>
-            <div class="col-md-8 col-sm-10">
-                <div class="navigation-top row">
-                    <div class="col-xs-2 col-sm-1 hidden-md hidden-lg">
-                        <a title="previous page" data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
-                            <i class="glyphicon glyphicon-chevron-left"/>
-                        </a>
-                    </div>
-                    <div class="col-xs-8 col-sm-10 col-md-12 col-lg-12 col-title">
-                        <h5 id="navigation-title" data-template="pages:navigation-title"/>
-                    </div>
-                    <div class="col-xs-2 col-sm-1 hidden-md hidden-lg">
-                        <a title="next page" data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
-                            <i class="glyphicon glyphicon-chevron-right"/>
-                        </a>
-                    </div>
-                </div>
+        </div>
+        <div class="row" data-template="pages:navigation">
+            <a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
+                <i class="glyphicon glyphicon-chevron-left"/>
+            </a>
+            <a data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
+                <i class="glyphicon glyphicon-chevron-right"/>
+            </a>
+            <div class="hsg-width-main">
                 <div id="content-inner">
                     <div id="content-container" data-template="app:fix-links">
                         <div class="content" data-template="pages:view" data-template-base-path="frus"/>
                     </div>
                 </div>
             </div>
-            <div class="col-md-1 hidden-sm hidden-xs">
-                <a title="next page" data-template="pages:navigation-link" data-template-direction="next" class="nav-next page-nav">
-                    <i class="glyphicon glyphicon-chevron-right"/>
-                </a>
-            </div>
-            <aside class="col-lg-2 col-md-2 col-sm-2 hidden-xs" data-template="frus:facets">
-                <div id="person-panel" class="panel panel-default" data-template="app:hide-if-empty" data-template-property="persons">
-                    <div class="panel-heading"><h4>Persons</h4></div>
-                    <div class="list-group" data-template="frus:view-persons"/>
+
+            <aside class="hsg-width-sidebar">
+                <div id="toc" data-template="app:fix-links">
+                    <div class="hsg-toc-sidebar" data-template="toc:table-of-contents" data-template-heading="true" data-template-highlight="true"/>
                 </div>
-                <div id="gloss-panel" class="panel panel-default" data-template="app:hide-if-empty" data-template-property="gloss">
-                    <div class="panel-heading"><h4>Abbreviations &amp; Terms</h4></div>
-                    <div class="list-group" data-template="frus:view-gloss"/>
+            </aside>
+            <aside class="hsg-width-sidebar" data-template="frus:facets">
+                <div id="person-panel" class="hsg-panel" data-template="app:hide-if-empty" data-template-property="persons">
+                    <div class="hsg-panel-heading"><h4 class="hsg-sidebar-title">Persons</h4></div>
+                    <div class="hsg-list-group" data-template="frus:view-persons"/>
+                </div>
+                <div id="gloss-panel" class="hsg-panel" data-template="app:hide-if-empty" data-template-property="gloss">
+                    <div class="hsg-panel-heading"><h4 class="hsg-sidebar-title">Abbreviations &amp; Terms</h4></div>
+                    <div class="hsg-list-group" data-template="frus:view-gloss"/>
                 </div>
             </aside>
         </div>
+
     </div>
 </div>

@@ -1,30 +1,65 @@
 /* Side Navigation -------------- */
 
-#sections {
-  padding: 10px;
-}
-
 #sections select {
   display: block;
   width: 100%;
   margin-bottom: 1em;
 }
 
-#sections h2 {
-  font-size: 0.825em;
-  font-weight: 800;
-  text-transform: uppercase;
-  padding-left: 0;
-  color: #212121;
-  margin-top: 20px;
+// Red, uppercase heading for sidebar
+.section-heading {
+  @extend .heading-secondary;
+  font-size: 1em;
+  line-height: 1.5;
 }
 
-#sections ul {
-  margin-bottom: 20px;
-  list-style: none;
-  padding: 0;
+// Panel Box
+.hsg-panel {
+  @extend .panel;
+  @extend .panel-default;
 }
 
-#sections ul li {
-  padding: 10 0 0px 14px;
+// Top Heading Wrapper
+.hsg-panel-heading {
+  @extend .panel-heading;
+}
+
+// Top Heading
+.hsg-sidebar-title {
+  @extend .panel-title;
+  @extend .section-heading;
+}
+
+// Second Level Heading Wrapper (Subnavigation)
+.hsg-panel-heading-second-level {
+  @extend .panel-heading;
+  border-top: 1px solid $panel-default-border;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+// Second Level Heading (Subnavigation)
+.hsg-sidebar-title-second-level {
+  @extend .panel-title;
+}
+
+// Panel paragraphs or other elements
+.hsg-panel-body {
+  @extend .panel-body;
+}
+
+// Panel Lists (<ul>)
+.hsg-list-group {
+  @extend .list-group;
+}
+
+// Panel List Items (<li>)
+.hsg-list-group-item {
+  @extend .list-group-item;
+}
+
+// Well
+
+.hsg-well {
+  @extend .well;
 }

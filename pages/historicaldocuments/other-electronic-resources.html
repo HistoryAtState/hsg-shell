@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div class="row">
-        <div class="col-md-8 col-md-offset-1">
+        <div class="hsg-breadcrumb-wrapper">
             <ol class="breadcrumb" data-template="app:fix-links">
                 <li>
                     <a href="$app">Home</a>
@@ -15,8 +15,8 @@
             </ol>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-1" id="volume" data-template="app:fix-links">
+    <div class="row hsg-main">
+        <div class="hsg-width-two-thirds" id="volume" data-template="app:fix-links">
             <div id="content-inner">
                 <h1>Electronic Resources for U.S. Foreign Relations</h1>
                 <p>A growing number of primary source materials relating to U.S. foreign
@@ -24,7 +24,7 @@
                         list as a resource for the public and will continue to update it as more
                         resources are made available.</p>
                 <h2>Declassified Document Collections</h2>
-                <ul>
+                <ul class="list-unstyled">
                     <li>
                         <a href="http://www.foia.cia.gov">Central Intelligence Agency,
                             Freedom of Information Electronic Reading Room</a>
@@ -43,48 +43,48 @@
                     </li>
                 </ul>
                 <h2>Department of State Telegrams</h2>
-                <ul>
+                <ul class="list-unstyled">
                     <li>
                         <a href="http://aad.archives.gov/aad/series-list.jsp?cat=WR43">National Archives and Records Administration, Access to Archival
                             Databases</a>
                     </li>
                 </ul>
                 <h2>Public Papers of the Presidents of the United States</h2>
-                <ul>
+                <ul class="list-unstyled">
                     <li>
                         <a href="http://www.presidency.ucsb.edu/">University of California
                             at Santa Barbara American Presidency Project</a>
                     </li>
                 </ul>
                 <h2>Association of Southeast Asian Nations</h2>
-                <ul>
+                <ul class="list-unstyled">
                     <li>
                         <a href="http://www.asean.org/resources/category/documents-archive">Documents and Archive</a>
                     </li>
                 </ul>
                 <h2>Ford Presidency Materials</h2>
-                <ul>
+                <ul class="list-unstyled">
                     <li>
                         <a href="http://www.fordlibrarymuseum.gov/library/docs.asp">Ford
                             Library Electronic Resources</a>
                     </li>
                 </ul>
                 <h2>Nixon Presidency Materials</h2>
-                <ul>
+                <ul class="list-unstyled">
                     <li>
                         <a href="http://www.nixonlibrary.gov/virtuallibrary">Nixon Library
                             Electronic Resources</a>
                     </li>
                 </ul>
                 <h2>United Nations Materials</h2>
-                <ul>
+                <ul class="list-unstyled">
                     <li>
                         <a href="http://unyearbook.un.org/index.html">Yearbook of the United
                             Nations</a>
                     </li>
                 </ul>
                 <h2>Pre-1861 Resources</h2>
-                <ul>
+                <ul class="list-unstyled">
                     <li>
                         <a href="$app/historicaldocuments/pre-1861">Our list of resources for
                             research on pre-1861 topics in U.S. foreign relations.</a>
@@ -92,5 +92,81 @@
                 </ul>
             </div>
         </div>
+        <aside class="hsg-width-one-third">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the published Foreign Relations of the United States series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Browse by Administration</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/pre-truman">Pre-Truman Volumes</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/truman">Truman Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/eisenhower">Eisenhower Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Ford Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">More about
+                            the <em>Foreign Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> Ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other Electronic Resources for
+                            U.S. Foreign Relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975">Guide to Sources on
+                            Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em> Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
     </div>
 </div>

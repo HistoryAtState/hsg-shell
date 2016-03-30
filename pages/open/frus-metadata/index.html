@@ -2,7 +2,7 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="hsg-breadcrumb-wrapper">
                 <ol class="breadcrumb" data-template="app:fix-links">
                     <li>
                         <a href="$app">Home</a>
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="hsg-width-two-thirds">
                 <div id="content-inner" data-template="app:fix-links">
                     <h1>Bibliographic Metadata of the <em>Foreign Relations of the United States</em> Series</h1>
                     <p>The Office of the Historian is responsible, under law, for the preparation and publication of
@@ -31,6 +31,21 @@
                     <p>Visit the <a href="https://catalog.data.gov/dataset/bibliographical-metadata-of-the-foreign-relations-of-the-united-states-series">Data.gov catalog entry</a> for this dataset</p>
                 </div>
             </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Open Government Initiative</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/open/frus-metadata">Bibliographic Metadata of the <em>Foreign Relations of the United States</em> Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/open/frus-latest">Latest Volumes of <em>Foreign Relations of the United States</em> Series</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
         </div>
     </div>
 </div>

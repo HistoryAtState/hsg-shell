@@ -2,7 +2,7 @@
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div data-template="pages:load">
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="hsg-breadcrumb-wrapper">
                 <ol class="breadcrumb" data-template="app:fix-links">
                     <li>
                         <a href="$app">Home</a>
@@ -22,8 +22,8 @@
                 </ol>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+        <div class="row hsg-main">
+            <div class="hsg-width-two-thirds">
                 <div id="content-inner" data-template="app:fix-links">
                     <h1>
                         <span data-template="frus-history:document-title"/>
@@ -32,10 +32,11 @@
                     <p data-template="frus-history:document"/>
                 </div>
             </div>
-            <aside class="col-md-3">
-                <div id="sections" class="col-md-12 panel panel-default" data-template="app:fix-links">
-                    <h2>
-                        <em>FRUS</em> History Documents</h2>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title"><em>FRUS</em> History Documents</h2>
+                    </div>
                     <ul data-template="frus-history:document-list-full"/>
                 </div>
             </aside>
