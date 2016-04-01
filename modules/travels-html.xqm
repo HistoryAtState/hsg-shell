@@ -130,7 +130,7 @@ declare function travels:by-person($node as node(), $model as map(*), $role as x
 };
 
 declare function travels:table($node as node(), $model as map(*), $results-to-display as node()*, $suppress as xs:string*) as node(){
-    <table>
+    <table class="hsg-table-default">
         <thead>
             <tr>
                 {if ($suppress = 'name') then () else <th>Name</th>}

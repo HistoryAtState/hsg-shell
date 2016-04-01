@@ -111,7 +111,7 @@ declare function ssh:bibls-filtered-count($node, $model) {
 };
 
 declare function ssh:bibls-to-table($bibls as element()+, $cols-to-exclude as xs:string*) {
-    <table class="table table-striped table-bordered">
+    <table class="hsg-table-bordered">
         <thead>{
             for $head in ('Region', 'Subject', 'Title', 'Date', 'Citation', 'Pages')[not(. = $cols-to-exclude)]
             return

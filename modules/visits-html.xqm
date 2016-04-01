@@ -79,7 +79,7 @@ declare function visits:visits-from-country-table($node, $model, $country-id as 
 };
 
 declare function visits:visits-table($node, $model, $results-to-display as node()*, $suppress as xs:string*) {
-    <table>
+    <table class="hsg-table-default">
         <thead>
             <tr>
                 <th>Visitor</th>

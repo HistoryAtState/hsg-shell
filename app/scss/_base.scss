@@ -110,3 +110,19 @@ p date {
   @extend .btn;
   @extend .btn-primary;
 }
+
+/* Table */
+
+.hsg-table-default {
+  @extend .table;
+  @extend .table-responsive;
+  @extend .table-hover;
+}
+
+.hsg-table-bordered {
+  @extend .table;
+  @extend .table-striped;
+  @extend .table-bordered;
+  @extend .table-responsive;
+}
+
