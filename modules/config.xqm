@@ -83,6 +83,7 @@ declare variable $config:SECRETARY_BIOS_COL := "/db/apps/other-publications/secr
 declare variable $config:MILESTONES_COL := "/db/apps/milestones/chapters";
 declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education/introductions";
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
+declare variable $config:VIETNAM_GUIDE_COL := "/db/apps/other-publications/vietnam-guide";
 declare variable $config:HAC_COL := "/db/apps/hac";
 declare variable $config:HIST_DOCS :=  "/db/apps/hsg-shell/pages/historicaldocuments";
 declare variable $config:TWITTER_COL := "/db/apps/twitter/data/HistoryAtState";
@@ -287,6 +288,15 @@ declare variable $config:PUBLICATIONS :=
             },
             "title": "History of the Foreign Relations Series",
             "base-path": function($document-id, $section-id) { "frus-history" }
+        },
+        "vietnam-guide": map {
+            "collection": $config:VIETNAM_GUIDE_COL,
+            "select-document": function($document-id) { doc($config:VIETNAM_GUIDE_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:VIETNAM_GUIDE_COL || '/' || $document-id || '.xml') },
+            "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd",
+            "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
+            "title": "Guide to Sources on Vietnam, 1969-1975"
         }
     };
 
@@ -303,7 +313,8 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:CONFERENCES_ARTICLES_COL: "conferences",
         $config:MILESTONES_COL: "milestones",
         $config:FRUS_HISTORY_ARTICLES_COL: "articles",
-        $config:SECRETARY_BIOS_COL: "people"
+        $config:SECRETARY_BIOS_COL: "people",
+        $config:VIETNAM_GUIDE_COL: "vietnam-guide"
     };
 
 (:~
