@@ -181,6 +181,9 @@ declare variable $config:PUBLICATIONS :=
         "departmenthistory": map {
             "title": "Department History"
         },
+        "diplomatic-couriers": map {
+            "title": "U.S. Diplomatic Couriers - Department History"
+        },
         "people": map {
             "collection": $config:SECRETARY_BIOS_COL,
             "select-document": function($document-id) { doc($config:SECRETARY_BIOS_COL || '/' || $document-id || '.xml') },

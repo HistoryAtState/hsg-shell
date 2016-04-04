@@ -915,10 +915,12 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
             default return
                 let $page := 
                     switch ($fragments[1]) 
+                        case "diplomatic-couriers" return 'departmenthistory/diplomatic-couriers.html'
                         case "wwi" return 'departmenthistory/wwi.html'
                         default return 'departmenthistory/index.html'
                 let $link := 
                     switch ($fragments[1]) 
+                        case "diplomatic-couriers" return 'diplomatic-couriers'
                         case "wwi" return 'wwi'
                         default return 'departmenthistory'
                 return
