@@ -92,6 +92,11 @@ declare function travels:is-person-or-country-id($id as xs:string, $role as xs:s
             'country'
 };
 
+declare function travels:person-or-country-breadcrumb($node as node(), $model as map(*), $role as xs:string, $person-or-country-id as xs:string) {
+    let $label := travels:person-or-country-title($node, $model, $role, $person-or-country-id)
+    return <li><a href="$app/departmenthistory/travels/{$role}/{$person-or-country-id}">{$label}</a></li>
+};
+
 declare function travels:person-or-country-title($node as node(), $model as map(*), $role as xs:string, $person-or-country-id as xs:string) {
     if (travels:is-person-or-country-id($person-or-country-id, $role) = 'person') then
         if ($role = 'president') then
