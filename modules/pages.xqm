@@ -34,6 +34,7 @@ declare
     %templates:default("ignore", "false")
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?,
     $view as xs:string, $ignore as xs:boolean) {
+    console:log("loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id ),
     let $content := map {
         "data":
             if (exists($publication-id) and exists($document-id)) then

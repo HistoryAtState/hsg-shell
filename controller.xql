@@ -19,7 +19,7 @@ declare variable $application-url := concat(
     $exist:controller
 );
 
-(: 
+(:
 console:log('request:get-uri(): ' || request:get-uri())
 ,
 console:log('nginx-request-uri: ' || request:get-header('nginx-request-uri'))
@@ -36,7 +36,7 @@ else if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <redirect url="{request:get-uri()}/"/>
     </dispatch>
-    
+
 (: handle request for landing page, e.g., http://history.state.gov/ :)
 else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq '' and request:get-header('nginx-request-uri') eq '/beta')) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -62,7 +62,7 @@ else if (contains($exist:path, "/resources/") or contains($exist:path, "/bower_c
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller}/{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
     </dispatch>
-    
+
 (: handle requests for static resource: robots.txt :)
 else if ($exist:path = "/robots.txt") then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -156,7 +156,7 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                 case "frus-history" return
                     if ($fragments[2]) then
                         switch ($fragments[2])
-                            case "documents" return 
+                            case "documents" return
                                 if ($fragments[3]) then
                                     let $page := "historicaldocuments/frus-history/documents/document.html"
                                     let $document-id := $fragments[3]
@@ -251,12 +251,12 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                         let $page := "historicaldocuments/frus-history/index.html"
                         return
                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/{$page}">
-                                    <add-parameter name="publication-id" value="frus-history-monograph"/>
-                                    <add-parameter name="document-id" value="frus-history"/>
-                                </forward>
+                                <forward url="{$exist:controller}/pages/{$page}"/>
                                 <view>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
+                                    <forward url="{$exist:controller}/modules/view.xql">
+                                        <add-parameter name="publication-id" value="frus-history-monograph"/>
+                                        <add-parameter name="document-id" value="frus-history"/>
+                                    </forward>
                                 </view>
                         		<error-handler>
                         			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -265,16 +265,15 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                             </dispatch>
                 case "guide-to-sources-on-vietnam-1969-1975" return
                     let $page := "historicaldocuments/vietnam-guide.html"
-                    let $publication-id := "vietnam-guide"
-                    let $document-id := "guide-to-sources-on-vietnam-1969-1975"
                     return
                         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                             <forward url="{$exist:controller}/pages/{$page}">
-                                <add-parameter name="publication-id" value="{$publication-id}"/>
-                                <add-parameter name="document-id" value="{$document-id}"/>
                             </forward>
                             <view>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
+                                <forward url="{$exist:controller}/modules/view.xql">
+                                    <add-parameter name="publication-id" value="vietnam-guide"/>
+                                    <add-parameter name="document-id" value="guide-to-sources-on-vietnam-1969-1975"/>
+                                </forward>
                             </view>
                     		<error-handler>
                     			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
@@ -302,10 +301,10 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                             			<forward url="{$exist:controller}/modules/view.xql"/>
                             		</error-handler>
                                 </dispatch>
-                        else 
+                        else
                             let $page := "historicaldocuments/volume-landing.html"
                             let $document-id := $fragments[1]
-                            return 
+                            return
                                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                     <forward url="{$exist:controller}/pages/{$page}"/>
                                     <view>
@@ -321,7 +320,7 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                 </dispatch>
                     else
                         if ($fragments[1] = ("about-frus", "citing-frus", "ebooks", "other-electronic-resources", "status-of-the-series")) then
-                            let $page := "historicaldocuments/" || $fragments[1] || ".html" 
+                            let $page := "historicaldocuments/" || $fragments[1] || ".html"
                             return
                                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                     <forward url="{$exist:controller}/pages/{$page}"/>
@@ -351,7 +350,7 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                 </dispatch>
         (: section landing page :)
         else (: if (not($fragments[1])) then :)
-            let $page := 'historicaldocuments/index.html' 
+            let $page := 'historicaldocuments/index.html'
             return
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                     <forward url="{$exist:controller}/pages/{$page}"/>
@@ -482,8 +481,8 @@ else if (matches($exist:path, '^/countries/?')) then
                     			<forward url="{$exist:controller}/modules/view.xql"/>
                     		</error-handler>
                         </dispatch>
-        else 
-            let $page := 'countries/index.html' 
+        else
+            let $page := 'countries/index.html'
             return
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                     <forward url="{$exist:controller}/pages/{$page}"/>
@@ -574,11 +573,11 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                     			<forward url="{$exist:controller}/modules/view.xql"/>
                     		</error-handler>
                         </dispatch>
-            
+
             case "people" return
                 if ($fragments[2]) then
                     switch ($fragments[2])
-                        case "secretaries" return 
+                        case "secretaries" return
                             let $page := 'departmenthistory/people/secretaries.html'
                             return
                                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -593,7 +592,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                             			<forward url="{$exist:controller}/modules/view.xql"/>
                             		</error-handler>
                                 </dispatch>
-                        case "principals-chiefs" return 
+                        case "principals-chiefs" return
                             let $page := 'departmenthistory/people/principals-chiefs.html'
                             return
                                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -609,7 +608,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                             		</error-handler>
                                 </dispatch>
                         case "by-name" return
-                            if ($fragments[3]) then 
+                            if ($fragments[3]) then
                                 let $page := 'departmenthistory/people/by-name/letter.html'
                                 let $letter := $fragments[3]
                                 return
@@ -626,7 +625,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 			<forward url="{$exist:controller}/modules/view.xql"/>
                                 		</error-handler>
                                     </dispatch>
-                            else 
+                            else
                                 let $page := 'departmenthistory/people/by-name/index.html'
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -642,7 +641,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 		</error-handler>
                                     </dispatch>
                         case "by-year" return
-                            if ($fragments[3]) then 
+                            if ($fragments[3]) then
                                 let $page := 'departmenthistory/people/by-year/year.html'
                                 let $year := $fragments[3]
                                 return
@@ -659,7 +658,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 			<forward url="{$exist:controller}/modules/view.xql"/>
                                 		</error-handler>
                                     </dispatch>
-                            else 
+                            else
                                 let $page := 'departmenthistory/people/by-year/index.html'
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -673,8 +672,8 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 			<forward url="{$exist:controller}/modules/view.xql"/>
                                 		</error-handler>
                                     </dispatch>
-                        case "principalofficers" return 
-                            if ($fragments[3]) then 
+                        case "principalofficers" return
+                            if ($fragments[3]) then
                                 let $page := 'departmenthistory/people/principalofficers/by-role-id.html'
                                 let $role-id := $fragments[3]
                                 return
@@ -691,7 +690,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 			<forward url="{$exist:controller}/modules/view.xql"/>
                                 		</error-handler>
                                     </dispatch>
-                            else 
+                            else
                                 let $page := 'departmenthistory/people/principalofficers/index.html'
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -709,7 +708,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                         case "chiefsofmission" return
                             if ($fragments[3]) then
                                 switch ($fragments[3])
-                                    case "by-country" return 
+                                    case "by-country" return
                                         let $page := 'departmenthistory/people/chiefsofmission/countries-list.html'
                                         return
                                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -717,14 +716,14 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                                 <view>
                                                     <forward url="{$exist:controller}/modules/view.xql">
                                                         <add-parameter name="publication-id" value="people"/>
-                                                    </forward>    
+                                                    </forward>
                                                 </view>
                                         		<error-handler>
                                         			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
                                         			<forward url="{$exist:controller}/modules/view.xql"/>
                                         		</error-handler>
                                             </dispatch>
-                                    case "by-organization" return 
+                                    case "by-organization" return
                                         let $page := 'departmenthistory/people/chiefsofmission/international-organizations-list.html'
                                         return
                                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -739,7 +738,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                         			<forward url="{$exist:controller}/modules/view.xql"/>
                                         		</error-handler>
                                             </dispatch>
-                                    default return 
+                                    default return
                                         let $page := 'departmenthistory/people/chiefsofmission/by-role-or-country-id.html'
                                         let $role-or-country-id := $fragments[3]
                                         return
@@ -771,7 +770,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 			<forward url="{$exist:controller}/modules/view.xql"/>
                                 		</error-handler>
                                     </dispatch>
-                        default return 
+                        default return
                             let $page := 'departmenthistory/people/person.html'
                             let $person-id := $fragments[2]
                             return
@@ -789,7 +788,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                             			<forward url="{$exist:controller}/modules/view.xql"/>
                             		</error-handler>
                                 </dispatch>
-                else 
+                else
                     let $page := 'departmenthistory/people/index.html'
                     return
                         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -873,7 +872,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 			<forward url="{$exist:controller}/modules/view.xql"/>
                                 		</error-handler>
                                     </dispatch>
-                        default return 
+                        default return
                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                 <forward url="{$exist:controller}/pages/error-page.html">
                                 </forward>
@@ -937,13 +936,13 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                     		</error-handler>
                         </dispatch>
             default return
-                let $page := 
-                    switch ($fragments[1]) 
+                let $page :=
+                    switch ($fragments[1])
                         case "diplomatic-couriers" return 'departmenthistory/diplomatic-couriers.html'
                         case "wwi" return 'departmenthistory/wwi.html'
                         default return 'departmenthistory/index.html'
-                let $link := 
-                    switch ($fragments[1]) 
+                let $link :=
+                    switch ($fragments[1])
                         case "diplomatic-couriers" return 'diplomatic-couriers'
                         case "wwi" return 'wwi'
                         default return 'departmenthistory'
@@ -1068,7 +1067,7 @@ else if (matches($exist:path, '^/about/?')) then
                         		</error-handler>
                             </dispatch>
                 default return
-                    let $page := 
+                    let $page :=
                         switch ($fragments[1])
                             case "contact-us" return 'about/contact-us.html'
                             case "the-historian" return 'about/the-historian.html'
@@ -1145,7 +1144,7 @@ else if (matches($exist:path, '^/milestones/?')) then
                     			<forward url="{$exist:controller}/modules/view.xql"/>
                     		</error-handler>
                         </dispatch>
-                else 
+                else
                     let $chapter-id := $fragments[1]
                     let $page := 'milestones/chapter/index.html'
                     return
@@ -1241,7 +1240,7 @@ else if (matches($exist:path, '^/conferences/?')) then
 (: handle requests for developer section :)
 else if (matches($exist:path, '^/developer/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/developer/'), '/')[. ne '']
-    let $page := 
+    let $page :=
         if ($fragments[1]) then
             switch ($fragments[1])
                 case "catalog" return 'developer/catalog.html'
@@ -1263,7 +1262,7 @@ else if (matches($exist:path, '^/developer/?')) then
 (: handle requests for open section :)
 else if (matches($exist:path, '^/open/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/open/'), '/')[. ne '']
-    let $choice := 
+    let $choice :=
         if ($fragments[1]) then
             switch ($fragments[1])
                 case "frus-latest" return <choice page="pages/open/frus-latest/index.html" mode="html"/>
@@ -1418,7 +1417,7 @@ else if (matches($exist:path, '^/education/?')) then
 (: handle search requests :)
 else if (matches($exist:path, '^/search/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
-    let $page := 
+    let $page :=
         if ($fragments[1]) then
             switch ($fragments[1])
                 case "select-volumes" return 'search/select-volumes.html'
