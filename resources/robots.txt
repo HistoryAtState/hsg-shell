@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /*pg_
+Disallow: /search
+Crawl-delay: 20

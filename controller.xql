@@ -63,6 +63,12 @@ else if (contains($exist:path, "/resources/") or contains($exist:path, "/bower_c
         <forward url="{$exist:controller}/{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
     </dispatch>
     
+(: handle requests for static resource: robots.txt :)
+else if ($exist:path = "/robots.txt") then
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <forward url="{$exist:controller}/resources/robots.txt"/>
+    </dispatch>
+
 (: handle requests for ajax services :)
 else if (ends-with($exist:resource, ".xql")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
