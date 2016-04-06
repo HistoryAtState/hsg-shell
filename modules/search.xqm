@@ -12,6 +12,8 @@ import module namespace functx = "http://www.functx.com";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
+declare variable $search:MAX_HITS_SHOWN := 1000;
+
 (: Maps search categories to publication ids, see $config:PUBLICATIONS :)
 declare variable $search:SECTIONS := map {
     "documents": "frus",
@@ -134,6 +136,22 @@ function search:select-volumes-link($node, $model) {
         app:fix-this-link($link, $model)
 };
 
+declare %private function search:filter-results($out, $in, $count as xs:int) {
+    if ($count >= $search:MAX_HITS_SHOWN or empty($in)) then
+        $out
+    else
+        search:filter-results(($out, head($in)[@xml:id][not(tei:div/@xml:id)]), tail($in), $count + 1)
+};
+
+declare %private function search:filter($hits) {
+    let $limited := subsequence($hits, 1, $search:MAX_HITS_SHOWN)[@xml:id][not(tei:div/@xml:id)]
+    return
+        if (count($limited) < $search:MAX_HITS_SHOWN and count($hits) >= $search:MAX_HITS_SHOWN) then
+            search:filter-results($limited, subsequence($hits, $search:MAX_HITS_SHOWN), count($limited))
+        else
+            $limited
+};
+
 declare 
     %templates:default("start", 0)
     %templates:default("perpage", 10)
@@ -144,7 +162,10 @@ declare
     :)
 function search:load-results($node, $model, $q as xs:string, $within as xs:string*, $start as xs:integer, $perpage as xs:integer?) {
     let $start-time := util:system-time()
-    let $hits := search:get-sections($within)//tei:div[@xml:id][not(tei:div/@xml:id)][ft:query(., $q)]
+    let $hits := search:get-sections($within)//tei:div[ft:query(., $q)]
+    let $hit-count := count($hits)
+    let $hits := search:filter($hits)
+    (: let $hits := $hits[not(tei:div/@xml:id)][@xml:id] :)
     let $end-time := util:system-time()
     let $ordered-hits :=
         for $hit in $hits
@@ -152,15 +173,14 @@ function search:load-results($node, $model, $q as xs:string, $within as xs:strin
         return $hit
     let $adjusted-start := $start + 1
     let $adjusted-length := $perpage - 1
-    let $hit-count := count($hits)
     let $effective-end := min(($start + $perpage, $hit-count))
     let $window := subsequence($ordered-hits, $adjusted-start, $adjusted-length)
-    let $results := map { "results": $window }
     let $page-count := ceiling($hit-count div $perpage) cast as xs:integer
     let $max-pages := 10
     let $max-pages-to-either-side := round($max-pages div 2) cast as xs:integer
     let $current-page := floor($effective-end div $perpage) cast as xs:integer
     let $query-info :=  map { 
+        "results": $window,
         "query-info": map {
             "q": $q,
             "within": $within,
@@ -187,7 +207,7 @@ function search:load-results($node, $model, $q as xs:string, $within as xs:strin
                     $current-page to ($current-page + $max-pages-to-either-side - 1) 
             )
     }
-    let $html := templates:process($node/*, map:new(($model, $results, $query-info)))
+    let $html := templates:process($node/*, map:new(($model, $query-info)))
     return
         $html
 };
@@ -283,6 +303,16 @@ declare
 function search:result-count($node, $model) {
     $model?query-info?result-count
 };
+
+declare
+    %templates:wrap
+function search:message-limited($node as node(), $model as map(*)) {
+    if ($model?query-info?result-count > $search:MAX_HITS_SHOWN) then
+        " (Display limited to " || $search:MAX_HITS_SHOWN || " results)"
+    else
+        ()
+};
+
 
 declare 
     %templates:wrap 
