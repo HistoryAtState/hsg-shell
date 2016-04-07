@@ -126,3 +126,10 @@ p date {
   @extend .table-responsive;
 }
 
+/* Lists */
+.hsg-list-unstyled {
+  @extend .list-unstyled;
+  ul {
+    list-style-type: inherit;
+  }
+}

@@ -31,7 +31,7 @@ declare function ssh:bibls-count($node, $model) {
 };
 
 declare function ssh:region-subject-list($node, $model) {
-    <ul>{
+    <ul class="hsg-list-unstyled">{
         for $region in $ssh:REGIONS 
         let $regional-subject-entries := $ssh:BIBLS[tei:term[@type = 'region'] = $region]/tei:term[@type = 'subject']
         order by $region 
