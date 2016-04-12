@@ -84,6 +84,9 @@ declare variable $config:MILESTONES_COL := "/db/apps/milestones/chapters";
 declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education/introductions";
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
 declare variable $config:VIETNAM_GUIDE_COL := "/db/apps/other-publications/vietnam-guide";
+declare variable $config:VIEWS_FROM_EMBASSY_COL := "/db/apps/other-publications/views-from-the-embassy";
+declare variable $config:VISITS_COL := "/db/apps/visits/data";
+declare variable $config:TRAVELS_COL := "/db/apps/travels";
 declare variable $config:HAC_COL := "/db/apps/hac";
 declare variable $config:HIST_DOCS :=  "/db/apps/hsg-shell/pages/historicaldocuments";
 declare variable $config:TWITTER_COL := "/db/apps/twitter/data/HistoryAtState";
@@ -314,7 +317,8 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:MILESTONES_COL: "milestones",
         $config:FRUS_HISTORY_ARTICLES_COL: "articles",
         $config:SECRETARY_BIOS_COL: "people",
-        $config:VIETNAM_GUIDE_COL: "vietnam-guide"
+        $config:VIETNAM_GUIDE_COL: "vietnam-guide",
+        $config:VIEWS_FROM_EMBASSY_COL: "views-from-the-embassy"
     };
 
 (:~

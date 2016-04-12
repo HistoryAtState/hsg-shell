@@ -3,6 +3,7 @@ xquery version "3.0";
 module namespace search = "http://history.state.gov/ns/site/hsg/search";
 
 import module namespace kwic="http://exist-db.org/xquery/kwic";
+import module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
@@ -15,15 +16,85 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare variable $search:MAX_HITS_SHOWN := 1000;
 
 (: Maps search categories to publication ids, see $config:PUBLICATIONS :)
+(: To be done: pocom, travels, visits :)
 declare variable $search:SECTIONS := map {
     "documents": "frus",
-    "department": ("short-history", "people", "buildings"),
+    "department": (
+        "short-history", 
+        "people", 
+        "buildings", 
+        (: "views-from-the-embassy", :)
+        map {
+            "id": "pocom",
+            "query": function($query as xs:string) {
+                collection($pocom:PEOPLE-COL)//persName[ft:query(., $query)]
+            }
+        },
+        map {
+            "id": "visits",
+            "query": function($query as xs:string) {
+                collection($config:VISITS_COL)//visit[ft:query(visitor, $query)]
+                |
+                collection($config:VISITS_COL)//visit[ft:query(description, $query)]
+                |
+                collection($config:VISITS_COL)//visit[ft:query(from, $query)]
+            }
+        },
+        map {
+            "id": "travels",
+            "query": function($query as xs:string) {
+                collection($config:TRAVELS_COL)//trip[ft:query(name, $query)]
+                |
+                collection($config:TRAVELS_COL)//trip[ft:query(country, $query)]
+                |
+                collection($config:TRAVELS_COL)//trip[ft:query(remarks, $query)]
+                |
+                collection($config:TRAVELS_COL)//trip[ft:query(locale, $query)]
+            }
+        }
+    ),
     "milestones": "milestones",
     "countries": ("countries", "archives"),
     "conferences": "conferences",
     "edu": "education",
     "frus-history": "frus-history-monograph",
     "about": ("hac", "faq")
+};
+
+declare variable $search:DISPLAY := map {
+    "persName": map {
+        "title": function($name) {
+            string-join(
+                ($name/forename, $name/surname, $name/genName),
+                ' '
+            )
+        },
+        "link": function($name) {
+            let $link := "departmenthistory/people/" || $name/ancestor::person/id
+            return
+                <a href="$app/{$link}">{$link}</a>
+        }
+    },
+    "visit": map {
+        "title": function($visit) {
+            "Visits By Foreign Leaders: " || string-join($visit/visitor, ", ")
+        },
+        "link": function($visit) {
+            let $link := "departmenthistory/visits/" || year-from-date($visit/start-date)
+            return
+                <a href="$app/{$link}">{$link}</a>
+        }
+    },
+    "trip": map {
+        "title": function($trip) {
+            "Travels: " || string-join($trip/name, ", ")
+        },
+        "link": function($trip) {
+            let $link := "departmenthistory/travels/" || $trip/@role || "/" || $trip/@who
+            return
+                <a href="$app/{$link}">{$link}</a>
+        }
+    }
 };
 
 declare function search:load-sections($node, $model) {
@@ -136,20 +207,27 @@ function search:select-volumes-link($node, $model) {
         app:fix-this-link($link, $model)
 };
 
-declare %private function search:filter-results($out, $in, $count as xs:int) {
-    if ($count >= $search:MAX_HITS_SHOWN or empty($in)) then
+declare %private function search:filter-results($out, $in) {
+    if (count($out) = $search:MAX_HITS_SHOWN or empty($in)) then
         $out
     else
-        search:filter-results(($out, head($in)[@xml:id][not(tei:div/@xml:id)]), tail($in), $count + 1)
+        let $head := head($in)
+        return
+            typeswitch($head)
+                case element(tei:div) return
+                    search:filter-results(($out, $head[@xml:id][not(tei:div/@xml:id)]), tail($in))
+                default return
+                    search:filter-results(($out, $head), tail($in))
 };
 
 declare %private function search:filter($hits) {
-    let $limited := subsequence($hits, 1, $search:MAX_HITS_SHOWN)[@xml:id][not(tei:div/@xml:id)]
+    search:filter-results($hits, subsequence($hits, $search:MAX_HITS_SHOWN))
+    (: let $limited := subsequence($hits, 1, $search:MAX_HITS_SHOWN)[@xml:id][not(tei:div/@xml:id)]
     return
         if (count($limited) < $search:MAX_HITS_SHOWN and count($hits) >= $search:MAX_HITS_SHOWN) then
-            search:filter-results($limited, subsequence($hits, $search:MAX_HITS_SHOWN), count($limited))
+            search:filter-results($limited, subsequence($hits, $search:MAX_HITS_SHOWN))
         else
-            $limited
+            $limited :)
 };
 
 declare 
@@ -162,10 +240,10 @@ declare
     :)
 function search:load-results($node, $model, $q as xs:string, $within as xs:string*, $start as xs:integer, $perpage as xs:integer?) {
     let $start-time := util:system-time()
-    let $hits := search:get-sections($within)//tei:div[ft:query(., $q)]
+    let $hits := 
+        search:query-sections($within, $q)
     let $hit-count := count($hits)
     let $hits := search:filter($hits)
-    (: let $hits := $hits[not(tei:div/@xml:id)][@xml:id] :)
     let $end-time := util:system-time()
     let $ordered-hits :=
         for $hit in $hits
@@ -187,7 +265,7 @@ function search:load-results($node, $model, $q as xs:string, $within as xs:strin
             "start": $adjusted-start,
             "end": $effective-end,
             "perpage": $perpage,
-            "result-count": $hit-count,
+            "result-count": count($hits),
             "query-duration": seconds-from-duration($end-time - $start-time),
             "page-count": $page-count,
             "current-page": $current-page
@@ -212,29 +290,49 @@ function search:load-results($node, $model, $q as xs:string, $within as xs:strin
         $html
 };
 
-declare %private function search:get-sections($sections as xs:string*) {
+declare %private function search:query-sections($sections as xs:string*, $query as xs:string) {
     if (exists($sections) and $sections != "") then
         for $section in $sections
-        let $category := $search:SECTIONS?($section)
-        return
-            collection($config:PUBLICATIONS?($category)?collection)
+        for $category in $search:SECTIONS?($section)
+        return 
+            search:query-section($category, $query)
     else
-        map:for-each($search:SECTIONS, function($section, $category) {
-            collection($config:PUBLICATIONS?($category)?collection)
+        map:for-each($search:SECTIONS, function($section, $categories) {
+            for $category in $categories
+            return
+                search:query-section($category, $query)
         })
+};
+
+declare function search:query-section($category, $query as xs:string) {
+    typeswitch($category)
+        case xs:string return
+            collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
+        default return
+            $category?query($query)
 };
 
 declare function search:result-heading($node, $model) {
     let $result := $model?result
-    let $publication-id := $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))
-    let $document-id := substring-before(util:document-name($result), '.xml')
-    let $section-id := $result/@xml:id
-    let $publication-config := map:get($config:PUBLICATIONS, $publication-id)
-    let $section-heading := $publication-config?select-section($document-id, $section-id)/tei:head[1] ! functx:remove-elements-deep(., 'note')
-    let $document-heading := $publication-config?select-document($document-id)//tei:title[@type='volume']
-    let $result-heading := ($section-heading || ' (' || $document-heading || ')')
     return
-        $result-heading
+        typeswitch ($result)
+            case element(tei:div) return
+                let $publication-id := $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))
+                let $document-id := substring-before(util:document-name($result), '.xml')
+                let $section-id := $result/@xml:id
+                let $publication-config := map:get($config:PUBLICATIONS, $publication-id)
+                let $section-heading := $publication-config?select-section($document-id, $section-id)/tei:head[1] ! functx:remove-elements-deep(., 'note')
+                let $document-heading := $publication-config?select-document($document-id)//tei:title[@type='volume']
+                let $result-heading := ($section-heading || ' (' || $document-heading || ')')
+                return
+                    $result-heading
+            default return
+                let $display := $search:DISPLAY?(local-name($result))
+                return
+                    if (exists($display)) then
+                        $display?title($result)
+                    else
+                        "unknown title"
 };
 
 declare function search:result-summary($node, $model) {
@@ -251,15 +349,25 @@ declare function search:result-summary($node, $model) {
 
 declare function search:result-link($node, $model) {
     let $result := $model?result
-    let $publication-id := $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))
-    let $document-id := substring-before(util:document-name($result), '.xml')
-    let $section-id := $result/@xml:id
-    let $href := 
-        map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
-    (: display URL is currently hardcoded to hsg, TODO use actual server name, url structure, etc. :)
-    let $display := 'https://history.state.gov' || substring-after($href, '$app')
     return
-        app:fix-this-link(element a { attribute href { $href }, $node/@* except $node/@href, $display }, $model)
+        typeswitch ($result)
+            case element(tei:div) return
+                let $publication-id := $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))
+                let $document-id := substring-before(util:document-name($result), '.xml')
+                let $section-id := $result/@xml:id
+                let $href := 
+                    map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
+                (: display URL is currently hardcoded to hsg, TODO use actual server name, url structure, etc. :)
+                let $display := 'https://history.state.gov' || substring-after($href, '$app')
+                return
+                    app:fix-this-link(element a { attribute href { $href }, $node/@* except $node/@href, $display }, $model)
+            default return
+                let $display := $search:DISPLAY?(local-name($result))
+                return
+                    if (exists($display)) then
+                        $display?link($result)
+                    else
+                        ""
 };
 
 declare function search:trim-matches($node as element(), $keep as xs:integer) {
