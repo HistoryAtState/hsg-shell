@@ -64,9 +64,9 @@ else if (contains($exist:path, "/resources/") or contains($exist:path, "/bower_c
     </dispatch>
 
 (: handle requests for static resource: robots.txt :)
-else if ($exist:path = "/robots.txt") then
+else if ($exist:path = ("/robots.txt", "/opensearch.xml", "/favicon.ico")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/resources/robots.txt"/>
+        <forward url="{$exist:controller || "/resources" || $exist:path}"/>
     </dispatch>
 
 (: handle requests for ajax services :)
