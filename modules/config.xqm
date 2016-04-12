@@ -318,7 +318,9 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:FRUS_HISTORY_ARTICLES_COL: "articles",
         $config:SECRETARY_BIOS_COL: "people",
         $config:VIETNAM_GUIDE_COL: "vietnam-guide",
-        $config:VIEWS_FROM_EMBASSY_COL: "views-from-the-embassy"
+        $config:VIEWS_FROM_EMBASSY_COL: "views-from-the-embassy",
+        $config:COUNTRIES_ARTICLES_COL: "countries",
+        $config:ARCHIVES_ARTICLES_COL: "archives"
     };
 
 (:~

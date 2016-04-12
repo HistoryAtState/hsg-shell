@@ -221,13 +221,20 @@ declare %private function search:filter-results($out, $in) {
 };
 
 declare %private function search:filter($hits) {
-    search:filter-results($hits, subsequence($hits, $search:MAX_HITS_SHOWN))
-    (: let $limited := subsequence($hits, 1, $search:MAX_HITS_SHOWN)[@xml:id][not(tei:div/@xml:id)]
+    (:  Filter out matches which are in divs without xml:id or have a nested div.
+        Limit the result set to MAX_HITS_SHOWN. :)
+    let $limited :=
+        subsequence(
+            subsequence($hits, 1, $search:MAX_HITS_SHOWN * 2)[@xml:id][not(tei:div/@xml:id)]
+            |
+            subsequence($hits, 1, $search:MAX_HITS_SHOWN)[not(self::tei:div)],
+            1, $search:MAX_HITS_SHOWN
+        )
+    (: Reorder the remaining hits by score :)
+    for $hit in $limited
+    order by ft:score($hit)
     return
-        if (count($limited) < $search:MAX_HITS_SHOWN and count($hits) >= $search:MAX_HITS_SHOWN) then
-            search:filter-results($limited, subsequence($hits, $search:MAX_HITS_SHOWN))
-        else
-            $limited :)
+        $hit
 };
 
 declare 
@@ -265,7 +272,8 @@ function search:load-results($node, $model, $q as xs:string, $within as xs:strin
             "start": $adjusted-start,
             "end": $effective-end,
             "perpage": $perpage,
-            "result-count": count($hits),
+            "result-count": $hit-count,
+            "results-shown": count($hits),
             "query-duration": seconds-from-duration($end-time - $start-time),
             "page-count": $page-count,
             "current-page": $current-page
@@ -321,8 +329,13 @@ declare function search:result-heading($node, $model) {
                 let $document-id := substring-before(util:document-name($result), '.xml')
                 let $section-id := $result/@xml:id
                 let $publication-config := map:get($config:PUBLICATIONS, $publication-id)
-                let $section-heading := $publication-config?select-section($document-id, $section-id)/tei:head[1] ! functx:remove-elements-deep(., 'note')
-                let $document-heading := $publication-config?select-document($document-id)//tei:title[@type='volume']
+                let $section-heading := 
+                    if ($section-id) then
+                        $publication-config?select-section($document-id, $section-id)/tei:head[1] ! functx:remove-elements-deep(., 'note')
+                    else
+                        $result/tei:head[1] ! functx:remove-elements-deep(., 'note')
+                let $document := $publication-config?select-document($document-id)
+                let $document-heading := ($document//tei:title[@type='volume'], $document//tei:titleStmt/tei:title[@type = "short"])[1]
                 let $result-heading := ($section-heading || ' (' || $document-heading || ')')
                 return
                     $result-heading
@@ -416,7 +429,7 @@ declare
     %templates:wrap
 function search:message-limited($node as node(), $model as map(*)) {
     if ($model?query-info?result-count > $search:MAX_HITS_SHOWN) then
-        " (Display limited to " || $search:MAX_HITS_SHOWN || " results)"
+        " (Display limited to " || $model?query-info?results-shown || " results)"
     else
         ()
 };
