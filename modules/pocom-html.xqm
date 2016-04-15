@@ -702,6 +702,19 @@ function pocom:year-breadcrumb($node as node(), $model as map(*), $year as xs:in
 };
 
 declare function pocom:year($node as node(), $model as map(*), $year as xs:integer) {
+    let $yearStart := xs:date($year || "-01-01")
+    let $yearEnd := xs:date(($year + 1) || "-01-01")
+    let $roles-in-year :=
+        collection("/db/apps/pocom")//*[date >= $yearStart]/..
+            intersect
+        collection("/db/apps/pocom")//*[date < $yearEnd]/..
+    let $people-in-year-ids := $roles-in-year/person-id
+    let $people := collection("/db/apps/pocom")/person[id = $people-in-year-ids]
+    return
+        pocom:format-index($node, $model, $people, $year)
+};
+
+declare function pocom:year1($node as node(), $model as map(*), $year as xs:integer) {
     let $roles := collection($pocom:DATA-COL)//date/../..
     let $roles-in-year :=
         for $role in $roles
