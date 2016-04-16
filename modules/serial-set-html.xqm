@@ -50,12 +50,17 @@ declare function ssh:region-subject-list($node, $model) {
 
 declare function ssh:region-and-or-subject-name($node, $model) {
     let $region := request:get-parameter('region', ())
+    let $regionUrl := "$app/historicaldocuments/pre-1861/serial-set/browse?region=" || encode-for-uri($region)
+    let $regionElement := <li><a href="#{$regionUrl}">{$region}</a></li>
+
     let $subject := request:get-parameter('subject', ())
-    return
-        if ($region and $subject) then
-            concat($subject, ' (', $region, ')')
-        else 
-            $region
+    let $subjectElement :=
+        if ($subject) then
+            <li><a href="{$regionUrl}&amp;subject={encode-for-uri($subject)}">{$subject}</a></li>
+        else
+            ()
+
+    return ($regionElement, $subjectElement)
 };
 
 declare function ssh:region-and-subject-link($node, $model) {
