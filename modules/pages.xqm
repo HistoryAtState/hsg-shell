@@ -390,7 +390,7 @@ declare function pages:generate-title ($model, $content) {
         else
             ()
 
-    return string-join(($head, $title, "Office of the historian")[. ne ""], " - ")
+    return string-join(($head, $title, "Office of the Historian")[. ne ""], " - ")
 };
 
 declare
