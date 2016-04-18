@@ -24,7 +24,7 @@ declare function ssh:regions-count($node, $model) {
 
 declare function ssh:subjects-count($node, $model) {
     count($ssh:SUBJECTS)
-}; 
+};
 
 declare function ssh:bibls-count($node, $model) {
     count($ssh:BIBLS)
@@ -32,10 +32,10 @@ declare function ssh:bibls-count($node, $model) {
 
 declare function ssh:region-subject-list($node, $model) {
     <ul class="hsg-list-unstyled">{
-        for $region in $ssh:REGIONS 
+        for $region in $ssh:REGIONS
         let $regional-subject-entries := $ssh:BIBLS[tei:term[@type = 'region'] = $region]/tei:term[@type = 'subject']
-        order by $region 
-        return 
+        order by $region
+        return
             <li><a href="$app/historicaldocuments/pre-1861/serial-set/browse?region={encode-for-uri($region)}">{$region}</a> ({count($regional-subject-entries)})
                 <ul>{
                     for $subject in distinct-values($regional-subject-entries)
@@ -76,12 +76,12 @@ declare function ssh:region-and-subject-link($node, $model) {
 declare function ssh:bibls-filtered-table($node, $model) {
     let $region := request:get-parameter('region', ())
     let $subject := request:get-parameter('subject', ())
-    let $request-type := 
+    let $request-type :=
         if ($region and $subject) then
             'region-subject'
         else if ($region) then
             'region'
-        else 
+        else
             'all'
     let $bibls :=
         switch ($request-type)
@@ -106,12 +106,12 @@ declare function ssh:bibls-filtered-table($node, $model) {
 declare function ssh:bibls-filtered-count($node, $model) {
     let $region := request:get-parameter('region', ())
     let $subject := request:get-parameter('subject', ())
-    let $request-type := 
+    let $request-type :=
         if ($region and $subject) then
             'region-subject'
         else if ($region) then
             'region'
-        else 
+        else
             'all'
     let $bibls :=
         switch ($request-type)
@@ -133,7 +133,7 @@ declare function ssh:bibls-to-table($bibls as element()+, $cols-to-exclude as xs
                 <th>{ $head }</th>
         }</thead>
         <tbody>{
-            let $ordered-bibls := 
+            let $ordered-bibls :=
                 for $bibl in $bibls
                 let $date := $bibl/tei:date/@when/string()
                 let $year := substring($date, 1, 4)
@@ -175,4 +175,3 @@ declare function ssh:article($node, $model, $country-id as xs:string) {
     return
         pages:process-content($model?odd, $text)
 };
-
