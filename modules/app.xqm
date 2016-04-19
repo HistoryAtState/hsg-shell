@@ -6,6 +6,20 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 import module namespace templates="http://exist-db.org/xquery/templates";
 
+declare variable $app:APP_ROOT :=
+    let $nginx-request-uri := request:get-header('nginx-request-uri')
+    return
+        (: if request received from nginx :)
+        if ($nginx-request-uri) then 
+            if (starts-with($nginx-request-uri, '/beta')) then 
+                "/beta"
+            (: we must be out of beta! urls can assume root :) 
+            else
+                ""
+        (: otherwise we're in the eXist URL space :)
+        else 
+            request:get-context-path() || "/apps/hsg-shell";
+
 declare
     %templates:wrap
 function app:hide-if-empty($node as node(), $model as map(*), $property as xs:string) {
@@ -60,25 +74,12 @@ declare function app:nginx-request-uri($node as node(), $model as map(*)) {
 };
 
 declare function app:fix-href($href as xs:string*) {
-    let $nginx-request-uri := request:get-header('nginx-request-uri')
-    let $path-to-app := 
-        (: if request received from nginx :)
-        if ($nginx-request-uri) then 
-            if (starts-with($nginx-request-uri, '/beta')) then 
-                "/beta"
-            (: we must be out of beta! urls can assume root :) 
-            else
-                ""
-        (: otherwise we're in the eXist URL space :)
-        else 
-            request:get-context-path() || "/apps/hsg-shell"
-    return
+    replace(
         replace(
-            replace(
-                replace($href, "\$extern", "https://history.state.gov"),
-                "\$app",$path-to-app
-            ), "\$s3static", "https://" || $config:S3_DOMAIN
-        )
+            replace($href, "\$extern", "https://history.state.gov"),
+            "\$app", $app:APP_ROOT
+        ), "\$s3static", "https://" || $config:S3_DOMAIN
+    )
 };
 
 declare function app:fix-links($nodes as node()*) {
