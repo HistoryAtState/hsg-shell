@@ -5,6 +5,7 @@ module namespace tags = "http://history.state.gov/ns/site/hsg/tags-html";
 import module namespace frus="http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace app = "http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
@@ -218,3 +219,25 @@ declare function tags:ptr($node) {
     return
         <a href="$app/tags/{$target}">{$label}</a>
 };
+
+declare
+    %templates:wrap
+function tags:load-tags($node as node(), $model as map(*), $document-id as xs:string) {
+    let $tags := collection($tags:RESOURCES_COL)//link[. = 'http://history.state.gov/historicaldocuments/' || $document-id]/..
+    return
+        if ($tags) then
+            map { "tags": $tags }
+        else
+            ()
+};
+
+declare
+    %templates:wrap
+function tags:list-tags($node as node(), $model as map(*)) {
+    for $tag in $model?tags//tag/@id
+    let $label := collection($tags:TAXONOMY_COL)//tag[id = $tag]/label
+    return
+        <li class="hsg-list-group-item"><a href="{$app:APP_ROOT}/tags/{$tag/@id}">{$label/text()}</a></li>
+};
+
+
