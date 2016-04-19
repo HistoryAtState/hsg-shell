@@ -673,12 +673,39 @@ declare function fh:mobi-size($vol-id) {
         app:bytes-to-readable($size)
 };
 
-declare function fh:mobi-url($vol-id) {
-	concat('//', $config:S3_DOMAIN, '/frus/', $vol-id, '/ebook/', $vol-id, '.mobi')
+declare
+    %templates:wrap
+function fh:epub-size($node as node(), $model as map(*), $document-id as xs:string) {
+    fh:epub-size($document-id)
 };
 
-declare function fh:epub-url($vol-id) {
-	concat('//', $config:S3_DOMAIN, '/frus/', $vol-id, '/ebook/', $vol-id, '.epub')
+declare
+    %templates:wrap
+function fh:mobi-size($node as node(), $model as map(*), $document-id as xs:string) {
+    fh:mobi-size($document-id)
+};
+
+
+declare function fh:mobi-url($document-id as xs:string) {
+	concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/ebook/', $document-id, '.mobi')
+};
+
+declare function fh:epub-url($document-id as xs:string) {
+	concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/ebook/', $document-id, '.epub')
+};
+
+declare 
+    %templates:wrap
+function fh:epub-href($node as node(), $model as map(*), $document-id as xs:string) {
+    attribute href { fh:epub-url($document-id) },
+    templates:process($node/node(), $model)
+};
+
+declare 
+    %templates:wrap
+function fh:mobi-href($node as node(), $model as map(*), $document-id as xs:string) {
+    attribute href { fh:mobi-url($document-id) },
+    templates:process($node/node(), $model)
 };
 
 declare function fh:isbn-link($node as node(), $model as map(*)) {
