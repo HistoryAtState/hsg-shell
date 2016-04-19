@@ -21,11 +21,30 @@
                 <div id="content-inner" data-template="app:fix-links">
                     <div data-template="pages:header"/>
                     <hr/>
-                    <div data-template="toc:table-of-contents" data-template-heading="false"
-                         data-template-highlight="false"/>
+                    <div data-template="toc:table-of-contents" data-template-heading="false" data-template-highlight="false"/>
                 </div>
             </div>
             <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Ways to Explore</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <form action="$app/search" method="GET" class="form-inline">
+                            <p>Search inside this volume</p>
+                            <div class="input-group">
+                                <input type="text" name="q" class="form-control"/>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="glyphicon glyphicon-search"/>
+                                        <span class="sr-only">Search</span>
+                                    </button>
+                                </span>
+                            </div>
+                            <input type="hidden" name="volume-id" data-template="frus:volume-id-value"/>
+                        </form>
+                    </div>
+                </div>
                 <div class="hsg-panel" data-template="app:fix-links">
                     <div class="hsg-panel-heading">
                         <h2 class="hsg-sidebar-title">Historical Documents</h2>
@@ -63,12 +82,10 @@
                         </li>
                     </ul>
                 </div>
-
                 <div id="sections" class="hsg-panel" data-template="app:fix-links">
                     <div class="hsg-panel-heading">
                         <h3 class="hsg-sidebar-title">Related Resources</h3>
                     </div>
-
                     <ul class="hsg-list-group">
                         <li class="hsg-list-group-item">
                             <a href="$app/historicaldocuments/about-frus">More about

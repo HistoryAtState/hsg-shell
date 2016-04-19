@@ -230,6 +230,13 @@ function fh:volume-title($node as node(), $model as map(*)) {
 
 declare
     %templates:wrap
+function fh:volume-id-value($node as node(), $model as map(*)) {
+    attribute value { $model?document-id }
+};
+
+
+declare
+    %templates:wrap
 function fh:volume-availability-summary($node as node(), $model as map(*)) {
     let $volume-id := $model?vol-id
     let $full-text := if (fh:exists-volume-in-db($volume-id)) then 'Full Text' else ()
