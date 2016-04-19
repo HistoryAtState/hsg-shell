@@ -44,6 +44,12 @@
                             <input type="hidden" name="volume-id" data-template="frus:volume-id-value"/>
                         </form>
                     </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            Browse the <a href="http://bookstore.gpo.gov/catalog/international-foreign-affairs/foreign-relations-united-states-series-frus">U.S. Government Bookstore (GPO)</a>
+                        </li>
+                        <li class="hsg-list-group-item" data-template="frus:isbn-link"/>
+                    </ul>
                 </div>
                 <div class="hsg-panel" data-template="app:fix-links">
                     <div class="hsg-panel-heading">
@@ -86,9 +92,9 @@
                     <div class="hsg-panel-heading">
                         <h3 class="hsg-sidebar-title">Tags</h3>
                     </div>
-                    <div class="hsg-panel-body">
+                    <div class="hsg-panel-body" data-template="app:fix-links">
                         <p>
-                            <em>This volume has been tagged with the following entries from the <a href="/tags">Subject Taxonomy of the History of U.S. Foreign Relations</a>. Follow the links to find more resources on each subject:</em>
+                            <em>This volume has been tagged with the following entries from the <a href="$app/tags">Subject Taxonomy of the History of U.S. Foreign Relations</a>. Follow the links to find more resources on each subject:</em>
                         </p>
                     </div>
                     <ul class="hsg-list-group" data-template="tags:list-tags"/>

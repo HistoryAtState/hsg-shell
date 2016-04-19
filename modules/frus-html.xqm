@@ -680,3 +680,20 @@ declare function fh:mobi-url($vol-id) {
 declare function fh:epub-url($vol-id) {
 	concat('//', $config:S3_DOMAIN, '/frus/', $vol-id, '/ebook/', $vol-id, '.epub')
 };
+
+declare function fh:isbn-link($node as node(), $model as map(*)) {
+    let $isbns := root($model?data)//tei:idno[@type = ('isbn-10','isbn-13')]/text()
+    return
+        if (exists($isbns)) then
+            <li class="hsg-list-group-item">
+            Search your library for this volume via WorldCat
+            {
+                for $isbn at $count in $isbns
+                return
+                    <a href="http://www.worldcat.org/search?q=isbn%3A{$isbn}">[{$count}]</a>
+            }
+            </li>
+        else
+            ()
+};
+
