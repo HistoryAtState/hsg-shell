@@ -55,3 +55,46 @@
 .banner__search {
   text-align: right;
 }
+
+// Search results page
+
+.hsg-search-section {
+  margin-bottom: 4rem;
+  .pagination {
+    margin: 0;
+  }
+}
+
+.hsg-search-inputs {
+  @extend .c-inputs-stacked;
+  margin: 2rem 0;
+  .hsg-search-input-label {
+    @extend .c-input;
+    @extend .c-checkbox;
+  }
+}
+.hsg-search-help {
+  margin: 0 0 2rem 0;
+}
+
+.hsg-search-result-message {
+  margin-top: 4rem;
+  font-size: $h2-font-size;
+  margin-bottom: 0.5rem;
+  .hsg-search-query {
+    color: $color-primary;
+  }
+}
+
+.hsg-search-result {
+  padding: 0 0 4rem 0;
+  border-bottom: $default-border-style;
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.hsg-search-result-heading {
+  padding-top: 2rem;
+  font-size: $h4-font-size;
+}

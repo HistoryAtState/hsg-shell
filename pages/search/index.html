@@ -15,118 +15,124 @@
     <div class="row">
         <div class="hsg-width-one-whole">
             <div id="content-inner" data-template="app:fix-links">
-                <p class="text-warning">This search feature is currently under construction. Regardless of selections below, all searches are restricted to FRUS documents only. To perform this search on the non-beta version of history.state.gov at the following link:</p>
-                <p>
-                    <a data-template="app:non-beta-link" role="button" class="btn btn-default btn-primary"/>
-                </p>
-                <p>Read these <a href="$app/search/tips">tips and caveats</a> to understand the limitations of this search engine and how to make the most of its scope, phrase, boolean, wildcard, and proximity options.</p>
-                <form method="get" action="$app/search">
-                    <p class="form-group">
-                        <input type="text" name="q" placeholder="Search..." class="form-control" id="q" data-template="templates:form-control"/>
+                <section class="hsg-search-section">
+                    <p class="text-warning">This search feature is currently under construction. Regardless of selections below, all searches are restricted to FRUS documents only. To perform this search on the non-beta version of history.state.gov at the following link:</p>
+                    <p>
+                        <a data-template="app:non-beta-link" role="button" class="hsg-link-button"/>
                     </p>
-                    <div data-template="search:load-sections">
-                        <p>To limit your results to certain parts of the website, check the appropriate box(es), and then click “Search”:</p>
-                        <div class="c-inputs-stacked">
-                            <label class="c-input c-checkbox" data-template="templates:each" data-template-from="sections" data-template-to="section">
-                                <input type="checkbox" name="within">
+                </section>
+
+                <section class="hsg-search-section">
+                    <p>Read these <a href="$app/search/tips">tips and caveats</a> to understand the limitations of this search engine and how to make the most of its scope, phrase, boolean, wildcard, and proximity options.</p>
+                    <form method="get" action="$app/search">
+                        <p class="form-group">
+                            <input type="text" name="q" placeholder="Search..." class="form-control" id="q" data-template="templates:form-control"/>
+                        </p>
+                        <div data-template="search:load-sections">
+                            <p>To limit your results to certain parts of the website, check the appropriate box(es), and then click “Search”:</p>
+                            <div class="hsg-search-inputs">
+                                <label class="hsg-search-input-label" data-template="templates:each" data-template-from="sections" data-template-to="section">
+                                    <input type="checkbox" name="within">
                                     <span data-template="search:section-id-value-attribute"/>
                                     <span data-template="app:if-parameter-set" data-template-param="within">
                                         <span data-template="search:within-highlight-attribute"/>
                                     </span>
                                     <span data-template="search:section-label"/>
-                                </input>
-                            </label>
-                        </div>
-                    </div>
-                    <div data-template="search:load-volumes-within">
-                        <div data-template="app:if-parameter-set" data-template-param="volume-id">
-                            <p>Restrict search to the following <em>Foreign Relations</em> volume<span data-template="app:if-parameter-set" data-template-param="within">
-                                    <span data-template="search:plural-if-within-multiple-volumes"/>
-                                </span>:</p>
-                            <div class="c-inputs-stacked" data-template="templates:each" data-template-from="volumes" data-template-to="volume">
-                                <label class="c-input c-checkbox">
-                                    <input type="checkbox" name="within" checked="checked">
-                                        <span data-template="search:volume-id-value-attribute"/>
-                                        <span data-template="search:volume-title"/>
                                     </input>
                                 </label>
                             </div>
                         </div>
-                    </div>
-                    <div data-template="app:if-parameter-set" data-template-param="volume-id">
-                        <p>
-                            <a href="$app/search">Clear these checkboxes</a>, 
-                            or <a href="$app/search/select-volumes" data-template="search:select-volumes-link">
-                            change selection</a> of <em>Foreign Relations</em> volumes within which to search</p>
-                    </div>
-                    <div data-template="app:if-parameter-unset" data-template-param="volume-id">
-                        <div data-template="app:if-parameter-set" data-template-param="q">
-                            <div data-template="app:if-parameter-set" data-template-param="within">
-                                <p>
-                                    <a href="$app/search">Reset this search</a> or 
-                                    <a href="$app/search/select-volumes">choose <em>Foreign Relations</em> volumes</a>
-                                </p>
+                        <div data-template="search:load-volumes-within">
+                            <div data-template="app:if-parameter-set" data-template-param="volume-id">
+                                <p>Restrict search to the following <em>Foreign Relations</em> volume<span data-template="app:if-parameter-set" data-template-param="within">
+                                    <span data-template="search:plural-if-within-multiple-volumes"/>
+                                </span>:</p>
+                                <div class="hsg-search-inputs" data-template="templates:each" data-template-from="volumes" data-template-to="volume">
+                                    <label class="hsg-search-input-label">
+                                        <input type="checkbox" name="within" checked="checked">
+                                        <span data-template="search:volume-id-value-attribute"/>
+                                        <span data-template="search:volume-title"/>
+                                        </input>
+                                    </label>
+                                </div>
                             </div>
-                            <div data-template="app:if-parameter-unset" data-template-param="within">
-                                <p>
-                                    <a href="$app/search/select-volumes" data-template="search:select-volumes-link">Restrict 
-                                    this search to specific <em>Foreign Relations</em> volumes</a>
+                        </div>
+                        <div data-template="app:if-parameter-set" data-template-param="volume-id">
+                            <p class="hsg-search-help">
+                                <a href="$app/search">Clear these checkboxes</a>,
+                                or <a href="$app/search/select-volumes" data-template="search:select-volumes-link">
+                                change selection</a> of <em>Foreign Relations</em> volumes within which to search</p>
+                        </div>
+                        <div data-template="app:if-parameter-unset" data-template-param="volume-id">
+                            <div data-template="app:if-parameter-set" data-template-param="q">
+                                <div data-template="app:if-parameter-set" data-template-param="within">
+                                    <p>
+                                        <a href="$app/search">Reset this search</a> or
+                                        <a href="$app/search/select-volumes">choose <em>Foreign Relations</em> volumes</a>
+                                    </p>
+                                </div>
+                                <div data-template="app:if-parameter-unset" data-template-param="within">
+                                    <p class="hsg-search-help">
+                                        <a href="$app/search/select-volumes" data-template="search:select-volumes-link">Restrict
+                                            this search to specific <em>Foreign Relations</em> volumes</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div data-template="app:if-parameter-unset" data-template-param="q">
+                                <p class="hsg-search-help">
+                                    <a href="$app/search/select-volumes">Select specific <em>Foreign Relations</em> volumes to search</a>
                                 </p>
                             </div>
                         </div>
-                        <div data-template="app:if-parameter-unset" data-template-param="q">
-                            <p>
-                                <a href="$app/search/select-volumes">Select specific <em>Foreign Relations</em> volumes to search</a>
+                        <button class="hsg-link-button" type="submit" value="Search">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
+                        </button>
+                    </form>
+                </section>
+
+                <section class="hsg-search-section">
+                    <div data-template="app:if-parameter-set" data-template-param="q">
+                        <div data-template="search:load-results">
+                            <h1 class="hsg-search-result-message">Results for keyword search <span class="hsg-search-query"><span data-template="search:q"/></span>, sorted by relevance.</h1>
+                            <p>Displaying <span data-template="search:start"/>–<span data-template="search:end"/> of
+                                <span data-template="search:result-count"/> results<span data-template="search:message-limited"/>. (Results returned in <span data-template="search:query-duration"/>s.)
                             </p>
-                        </div>
-                    </div>
-                    <button class="btn btn-default btn-primary" type="submit" value="Search">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
-                    </button>
-                </form>
-                <div data-template="app:if-parameter-set" data-template-param="q">
-                    <div data-template="search:load-results">
-                        <p>Results for keyword search <strong>
-                                <span data-template="search:q"/>
-                            </strong>, sorted by relevance. Displaying <span data-template="search:start"/>–<span data-template="search:end"/> of 
-                            <span data-template="search:result-count"/> results<span data-template="search:message-limited"/>. (Results returned in <span data-template="search:query-duration"/>s.)</p>
-                        <div data-template="templates:each" data-template-from="results" data-template-to="result">
-                            <div>
-                                <h3>
+                            <div class="hsg-search-result" data-template="templates:each" data-template-from="results" data-template-to="result">
+                                <h3 class="hsg-search-result-heading">
                                     <span data-template="search:result-heading"/>
                                 </h3>
-                                <p>
+                                <p class="hsg-search-result-summary">
                                     <span data-template="search:result-summary"/>
                                 </p>
-                                <p>
+                                <p class="hsg-search-result-link">
                                     <a href="#" data-template="search:result-link"/>
                                 </p>
                             </div>
+                            <nav>
+                                <ul class="pagination">
+                                    <li>
+                                        <span data-template="search:disabled-class-attribute-for-previous"/>
+                                        <a href="$app/search" aria-label="Previous" data-template="search:previous-page-link">
+                                            <span aria-hidden="true">«</span>
+                                        </a>
+                                    </li>
+                                    <li data-template="templates:each" data-template-from="pages" data-template-to="page">
+                                        <span data-template="search:active-class-attribute-for-current"/>
+                                        <a href="$app/search" data-template="search:page-link">
+                                            <span data-template="search:page-label"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <span data-template="search:disabled-class-attribute-for-next"/>
+                                        <a href="$app/search" aria-label="Next" data-template="search:next-page-link">
+                                            <span aria-hidden="true">»</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
-                        <nav>
-                            <ul class="pagination">
-                                <li>
-                                    <span data-template="search:disabled-class-attribute-for-previous"/>
-                                    <a href="$app/search" aria-label="Previous" data-template="search:previous-page-link">
-                                        <span aria-hidden="true">«</span>
-                                    </a>
-                                </li>
-                                <li data-template="templates:each" data-template-from="pages" data-template-to="page">
-                                    <span data-template="search:active-class-attribute-for-current"/>
-                                    <a href="$app/search" data-template="search:page-link">
-                                        <span data-template="search:page-label"/>
-                                    </a>
-                                </li>
-                                <li>
-                                    <span data-template="search:disabled-class-attribute-for-next"/>
-                                    <a href="$app/search" aria-label="Next" data-template="search:next-page-link">
-                                        <span aria-hidden="true">»</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>
