@@ -411,7 +411,7 @@ declare function search:milestone-chunk(
             if ($node is $ms1) then
                 $node
             else if ( some $n in $node/descendant::* satisfies ($n is $ms1 or $n is $ms2) ) then
-                element { name($node) }
+                element { QName(namespace-uri($node), name($node)) }
                     {
                     $node/@*,
                     for $i in $node/node()
