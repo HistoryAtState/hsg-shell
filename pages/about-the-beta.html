@@ -17,83 +17,53 @@
             <div class="hsg-width-two-thirds">
                 <div id="content-inner" data-template="app:fix-links">
                     <h1>About the Beta</h1>
-                    <p>The Office of the Historian is working on a new version of 
-                        <a href="https://history.state.gov">history.state.gov</a>. In order to gather feedback
-                        before the website is officially released, we are sharing the new site in “beta”—or preview form—at
-                        <a href="https://history.state.gov/beta">history.state.gov/beta</a>. Please have a 
+                    <p>The Office of the Historian is pleased to present a new version of our public website,
+                        <a href="https://history.state.gov">history.state.gov</a>. In order to gather feedback and work our any remaining kinks, we are sharing the new site in “beta”—or preview form. Please have a 
                         look around and send us your suggestions via email at 
                         <a href="mailto:history@state.gov">history@state.gov</a> or on Twitter at 
                         <a href="https://twitter.com/HistoryAtState">@HistoryAtState</a>.</p>
-                    <p>Please forgive our warts during this period. Certain features are incomplete and known to 
-                        contain bugs. The data here is not updated as regularly as the main site. So please visit the 
-                        original version of the site for its content.</p>
-                    <div data-template="templates:if-parameter-set" data-template-param="url">
-                        <blockquote>
-                            <p>Note: If you wish to visit the non-beta version of the 
-                        previous page, please select 
-                        the following link:</p>
-                            <p class="text-center">
-                                <a data-template="app:non-beta-link" role="button" class="btn btn-default"/>
-                            </p>
-                        </blockquote>
-                    </div>
-                    <div data-template="templates:if-parameter-unset" data-template-param="url">
-                        <blockquote>
-                            <p>Note: If, while using this “beta” version of our site, you wish to return to the 
-                            non-beta version of any page, just click on the “Learn about the beta” ribbon, and you 
-                            will be presented with a link beneath this notice.</p>
-                        </blockquote>
-                    </div>
-                    <h2>Features Currently on Display</h2>
+                    <h2>Features of the New Version</h2>
                     <ul>
-                        <li>A mobile device-friendly “responsive” design: Adapts to the size of your device and
-                            is readable on any screen size, from smart phone to tablet and desktop. (On a computer, 
+                        <li>
+                            <strong>A mobile device-friendly “responsive” design:</strong> Adapts to the size of your device and
+                            is readable on any screen size, from smart phone to desktop. (On a computer, 
                             try making your browser window smaller, or, on a mobile device, try changing your screen’s
                             orientation; notice how the elements of the page adapt to the new size.) The new design
                             is aligned with <a href="https://playbook.cio.gov/designstandards/">U.S. Web Design 
                                 Standards</a>.
                         </li>
-                        <li>More fluid reading experience: Quickly advance forward or backward in publications
-                            such as the <em>Foreign Relations</em> series. To try this out, visit <a 
-                                href="$app/historicaldocuments/frus1969-76v17/d116">this document</a> and select the 
-                            “previous” or “next” arrows to the left and right of the document.
+                        <li>
+                            <strong>A fluid reading experience:</strong> Quickly advance forward or backward in publications
+                            such as the <em>Foreign Relations</em> series. To try this out, visit <a href="$app/historicaldocuments/frus1969-76v17/d116">this document</a> and select the 
+                            “previous” or “next” arrows to the left and right of the document window.
                         </li>
-                        <li>Security: Your connection to the beta site—and all of history.state.gov—is now encrypted. 
+                        <li>
+                            <strong>Improved security:</strong> Your connection to the beta site—and all of history.state.gov—is now encrypted. 
                             This setting, called HSTS, forces all connections to the site to use a secure, HTTPS 
                             connection, ensuring the integrity of the pages you visit and preventing others from
                             tracking which pages you visit or what terms you search for. For more on this standard
-                            and its adoption by U.S. Government websites, see <a 
-                                href="https://https.cio.gov/">https.cio.gov</a>.
+                            and its adoption by U.S. Government websites, see <a href="https://https.cio.gov/">https.cio.gov</a>.
                         </li>
-                        <li>A more stable, better performing server, with all code and data
-                            available for all to download, developed in the open: We have rewritten
+                        <li>
+                            <strong>Improved stability and performance:</strong> We have rewritten
                             the entire site from scratch with the goal of delivering results faster
-                            and sustaining increasing loads much better. All code and datasets on
-                            this site can be accessed from <a
-                                href="https://github.com/HistoryAtState">our HistoryAtState GitHub
-                                repository</a> and that of the core web application, <a
-                                href="https://github.com/eXistSolutions/hsg-shell"
-                                >hsg-shell</a> and deployment. At that link you can follow our
-                            progress, fork our code, file issues, send us your pull requests. The <a
-                                href="https://github.com/joewiz/hsg-project">hsg-project</a>
+                            and sustaining heavier traffic. The new site is also running on multiple
+                            servers in multiple data centers for improved performance under load.</li>
+                        <li>
+                            <strong>Open data, open source code:</strong> All of the content and code on this site is
+                            available for anyone to download. The core data repositories 
+                            are available at <a href="https://github.com/HistoryAtState">HistoryAtState</a> on GitHub. The web application is available at the <a href="https://github.com/eXistSolutions/hsg-shell">hsg-shell</a> repository. Follow our
+                            progress, fork our code, file issues, and send us your pull requests. The <a href="https://github.com/joewiz/hsg-project">hsg-project</a>
                             repository contains all instructions to install a complete copy of the
                             site on your own computer.</li>
                     </ul>
                     <h2>Known Issues</h2>
-                    <p>Before the new site replaces the old one, we will be addressing the following
-                        known issues. (A fuller list of issues is on the GitHub project site, <a
-                            href="https://github.com/eXistSolutions/hsg-shell/issues"
-                        >hsg-shell</a>.) Until then, please use the button at the top of this page
-                        to reach the current site for these features.</p>
+                    <p>In the coming weeks we will be addressing the following notable known issues. 
+                        </p>
                     <ul>
-                        <li>The site-wide search is limited to the <em>Foreign Relations</em> series.</li>
-                        <li>Links to ebooks and PDFs of <em>Foreign Relations</em> volumes from each
-                            volume’s landing page are not yet available. Ebooks can be accessed
-                            from the main <a href="$app/historicaldocuments/ebooks">ebooks</a>
-                            page.</li>
-                        <li>The OPDS ebook catalog API and atom feeds are not yet implemented.</li>
                         <li>The photo gallery from the Southeast Asia conference is not yet implemented.</li>
                     </ul>
+                    <p>Follow our progress on this and other issues at <a href="https://github.com/eXistSolutions/hsg-shell/issues">our GitHub issue tracker</a>.</p>
                     <h2>Features Planned for Future Releases</h2>
                     <p>Besides these features, we are laying the foundation for new resources on the history
                         of U.S. foreign relations and the Department of State:</p>
@@ -105,28 +75,28 @@
                             names have changed over time.</li>
                         <li>Chronological sorting of search results from the <em>Foreign Relations</em> series.</li>
                     </ul>
-                    <p>Thank you for your interest in this beta, and please return for updates.</p>
+                    <p>Thank you for your interest in our website, and please return for updates.</p>
                     <p>
-                        <em>Last Updated: March 11, 2016.</em>
+                        <em>Last Updated: April 20, 2016.</em>
                     </p>
                 </div>
             </div>
             <aside class="hsg-width-one-third">
-                <div class="row">
-                    <div id="sections" class="hsg-panel" data-template="app:fix-links">
-                        <h2>Related Links</h2>
-                        <ul>
-                            <li>
-                                <a href="$app/about/contact-us">How to Contact Us</a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/HistoryAtState">@HistoryAtState on Twitter</a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/HistoryAtState">HistoryAtState on GitHub</a>
-                            </li>
-                        </ul>
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h3 class="hsg-sidebar-title">Related Links</h3>
                     </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/contact-us">How to Contact Us</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="https://twitter.com/HistoryAtState">@HistoryAtState on Twitter</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="https://github.com/HistoryAtState">HistoryAtState on GitHub</a>
+                        </li>
+                    </ul>
                 </div>
             </aside>
         </div>
