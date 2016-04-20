@@ -10,14 +10,14 @@ declare variable $app:APP_ROOT :=
     let $nginx-request-uri := request:get-header('nginx-request-uri')
     return
         (: if request received from nginx :)
-        if ($nginx-request-uri) then 
-            if (starts-with($nginx-request-uri, '/beta')) then 
+        if ($nginx-request-uri) then
+            if (starts-with($nginx-request-uri, '/beta')) then
                 "/beta"
-            (: we must be out of beta! urls can assume root :) 
+            (: we must be out of beta! urls can assume root :)
             else
                 ""
         (: otherwise we're in the eXist URL space :)
-        else 
+        else
             request:get-context-path() || "/apps/hsg-shell";
 
 declare
@@ -31,7 +31,7 @@ function app:hide-if-empty($node as node(), $model as map(*), $property as xs:st
 };
 
 declare function app:if-parameter-set($node as node(), $model as map(*), $param as xs:string) as item()* {
-    let $param := request:get-parameter($param, ()) 
+    let $param := request:get-parameter($param, ())
     return
         if (exists($param) and string-join($param) != "") then
             templates:process($node/node(), $model)
@@ -57,7 +57,7 @@ function app:fix-links($node as node(), $model as map(*)) {
 declare function app:fix-this-link($node as node(), $model as map(*)) {
     app:fix-links(
         templates:process(
-            element { node-name($node) } { $node/@* except $node/@data-template, $node/node() }, 
+            element { node-name($node) } { $node/@* except $node/@data-template, $node/node() },
             $model
         )
     )
@@ -88,8 +88,8 @@ declare function app:fix-links($nodes as node()*) {
         typeswitch($node)
             case element(a) | element(link) return
                 (: skip links with @data-template attributes; otherwise we can run into duplicate @href errors :)
-                if ($node/@data-template) then 
-                    $node 
+                if ($node/@data-template) then
+                    $node
                 else
                     let $href := app:fix-href($node/@href)
                     return
@@ -105,8 +105,8 @@ declare function app:fix-links($nodes as node()*) {
                     }
             case element(option) return
                 (: skip links with @data-template attributes; otherwise we can run into duplicate @value errors :)
-                if ($node/@data-template) then 
-                    $node 
+                if ($node/@data-template) then
+                    $node
                 else
                     let $value := app:fix-href($node/@value)
                     return
@@ -115,8 +115,8 @@ declare function app:fix-links($nodes as node()*) {
                         }
             case element(form) return
                 (: skip links with @data-template attributes; otherwise we can run into duplicate @value errors :)
-                if ($node/@data-template) then 
-                    $node 
+                if ($node/@data-template) then
+                    $node
                 else
                     let $action := app:fix-href($node/@action)
                     return
@@ -215,16 +215,18 @@ declare function app:not-yet-available-pages($node as node(), $model as map(*)) 
 };
 
 
-declare function app:bytes-to-readable($bytes as xs:integer) {
-    if ($bytes gt 1000000) then
+declare function app:bytes-to-readable($bytes as xs:integer?) {
+    if (empty($bytes)) then
+        "unknown"
+    else if ($bytes gt 1000000) then
         concat((round($bytes div 10000) div 100), 'mb')
-    else if ($bytes gt 1000) then 
+    else if ($bytes gt 1000) then
         concat(round($bytes div 1000), 'kb')
     else ()
 };
 
 declare function app:year-from-date($date) {
-    if ($date castable as xs:date) then 
+    if ($date castable as xs:date) then
         year-from-date($date)
     else if (matches($date, '^\d{4}-\d{2}$')) then
         replace($date, '^(\d{4})-\d{2}$', '$1')
@@ -235,25 +237,25 @@ declare function app:year-from-date($date) {
 declare function app:date-to-english($date as xs:string) as xs:string {
     let $english-months := ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
     return
-        if ($date castable as xs:date) then 
+        if ($date castable as xs:date) then
             let $month-num := month-from-date($date)
             let $month := $english-months[$month-num]
             let $year := year-from-date($date)
             let $day := day-from-date($date)
-            return 
+            return
                 concat($month, ' ', $day, ', ', $year)
         else if (matches($date, '^\d{4}-\d{2}$')) then
             let $year := substring($date, 1, 4)
             let $month-num := xs:integer(substring($date, 6, 2))
             let $month := $english-months[$month-num]
-            return 
+            return
                 concat($month, ' ', $year)
-        else 
+        else
             $date
 };
 
 declare %templates:wrap function app:load-most-recent-tweets($node as node(), $model as map(*), $how-many as xs:integer) {
-    let $ordered-tweets := 
+    let $ordered-tweets :=
         for $tweet in collection($config:TWITTER_COL)/tweet
         order by $tweet/date
         return $tweet
@@ -285,7 +287,7 @@ declare function app:format-relative-date($created as xs:dateTime) as xs:string 
     let $same-day := if (current-dateTime() - $created le xs:dayTimeDuration('P1D')) then true() else false()
     return
         if ($same-day) then
-            let $duration := current-dateTime() - $created 
+            let $duration := current-dateTime() - $created
             return
                 if (hours-from-duration($duration) ge 1) then concat(hours-from-duration($duration), 'h')
                 else if (minutes-from-duration($duration) ge 1) then concat(minutes-from-duration($duration), 'm')
@@ -296,12 +298,12 @@ declare function app:format-relative-date($created as xs:dateTime) as xs:string 
             let $day := $tokens[1]
             let $month := $tokens[2]
             let $month := concat(upper-case(substring($month, 1, 1)), lower-case(substring($month, 2, 2)))
-            return 
+            return
                 concat($day, ' ', $month)
 };
 
 declare %templates:wrap function app:load-most-recent-tumblr-posts($node as node(), $model as map(*), $how-many as xs:integer) {
-    let $ordered-posts := 
+    let $ordered-posts :=
         for $post in collection($config:TUMBLR_COL)/post
         order by $post/date
         return $post
@@ -405,14 +407,14 @@ declare function app:carousel-item-href-attribute($node as node(), $model as map
 };
 
 declare function app:non-beta-link($node as node(), $model as map(*)) {
-    let $url := 'https://history.state.gov' || 
+    let $url := 'https://history.state.gov' ||
         (
-            request:get-parameter('url', ()), 
-            substring-after(request:get-uri(), '/hsg-shell') || 
+            request:get-parameter('url', ()),
+            substring-after(request:get-uri(), '/hsg-shell') ||
                 (
-                    if (request:get-query-string() ne '') then 
-                        ('?' || request:get-query-string()) 
-                    else 
+                    if (request:get-query-string() ne '') then
+                        ('?' || request:get-query-string())
+                    else
                         ()
                 )
         )[1]
@@ -421,30 +423,30 @@ declare function app:non-beta-link($node as node(), $model as map(*)) {
 };
 
 declare function app:insert-url-parameter($node as node(), $model as map(*)) {
-    element a { attribute href { 
+    element a { attribute href {
         concat(
-            app:fix-this-link($node, $model)/@href, 
-            if (ends-with(request:get-uri(), '/about-the-beta')) then 
+            app:fix-this-link($node, $model)/@href,
+            if (ends-with(request:get-uri(), '/about-the-beta')) then
                 ()
-            else 
+            else
                 concat(
-                    '?url=', 
+                    '?url=',
                     encode-for-uri(
                         concat(
                             if (starts-with(request:get-uri(), '/beta/exist/apps/hsg-shell')) then
-                                substring-after(request:get-uri(), '/beta/exist/apps/hsg-shell') 
+                                substring-after(request:get-uri(), '/beta/exist/apps/hsg-shell')
                             else if (starts-with(request:get-uri(), '/exist/apps/hsg-shell')) then
-                                substring-after(request:get-uri(), '/exist/apps/hsg-shell') 
-                            else 
+                                substring-after(request:get-uri(), '/exist/apps/hsg-shell')
+                            else
                                 request:get-uri()
                             ,
-                            if (request:get-query-string() ne '') then 
-                                ('?' || request:get-query-string()) 
-                            else 
+                            if (request:get-query-string() ne '') then
+                                ('?' || request:get-query-string())
+                            else
                                 ()
                         )
                     )
                 )
         )
-    }, $node/@* except $node/@href, $node/node() } 
+    }, $node/@* except $node/@href, $node/node() }
 };
