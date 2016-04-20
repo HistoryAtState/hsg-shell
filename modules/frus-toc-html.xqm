@@ -84,6 +84,12 @@ declare function toc:toc-inner($model as map(*), $root as node(), $show-heading 
 declare function toc:toc-passthru($model as map(*), $node as item()*, $current as element()?) {
     (: Process immediate descendant divs, excluding nested ones :)
     let $divs := $node//tei:div[@xml:id] except $node//tei:div//tei:div
+    let $divs :=
+        (: in the sidebar table of contents, limit display to ancestors of the current div :)
+        if ($current) then
+            $divs intersect $current/ancestor-or-self::tei:div
+        else
+            $divs
 (:    let $divs := $node//tei:div[empty(ancestor::tei:div) or ancestor::tei:div[1] is $node]:)
     return
         $divs ! toc:toc-div($model, ., $current)
@@ -107,8 +113,11 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
         {
             let $href := attribute href { toc:href($node) }
             let $highlight := if ($node is $current) then 'highlight' else ()
+            (: .toc-link would trigger an ajax call, so only use this if we're not showing a 
+                reduced toc :)
+            let $tocLink := if ($current) then () else 'toc-link'
             return
-                <a class="{string-join(('toc-link', $highlight), ' ')}" id="toc-{$node/@xml:id}">
+                <a class="{string-join(($tocLink, $highlight), ' ')}" id="toc-{$node/@xml:id}">
                 {
                     $href,
                     toc:toc-head($model, $node/tei:head[1])
