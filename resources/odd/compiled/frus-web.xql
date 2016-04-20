@@ -324,10 +324,13 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(name) return
                     html:inline($config, ., ("tei-name"), .)
                 case element(note) return
-                    if (@rend = 'inline') then
-                        html:paragraph($config, ., ("tei-note1"), .)
+                    if ($parameters?omit-notes) then
+                        html:omit($config, ., ("tei-note1"), .)
                     else
-                        ext-html:note($config, ., ("tei-note2"), ., "foot", @n/string())
+                        if (@rend = 'inline') then
+                            html:paragraph($config, ., ("tei-note2"), .)
+                        else
+                            ext-html:note($config, ., ("tei-note3"), ., "foot", @n/string())
                 case element(num) return
                     html:inline($config, ., ("tei-num"), .)
                 case element(opener) return

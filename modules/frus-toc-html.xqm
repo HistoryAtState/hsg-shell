@@ -9,6 +9,7 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
@@ -31,7 +32,7 @@ function toc:table-of-contents-sidebar($node as node(), $model as map(*), $docum
     let $head := ($toc/h2/node(), 'Table of Contents')[1]
     let $list := toc:prepare-sidebar-toc-list($toc/ul)
     return
-        if ($toc) then 
+        if ($toc) then
             <aside class="hsg-width-sidebar">
                 <div class="hsg-panel">
                     <div class="hsg-panel-heading">
@@ -98,26 +99,24 @@ declare function toc:volume-title($node as node(), $type as xs:string) as text()
 
 (: handles divs for TOCs :)
 declare function toc:toc-div($model as map(*), $node as element(tei:div), $current as element()?) {
-    let $sections-to-suppress := ('toc')
-    let $type := $node/tei:div/@type/string()
-    return
     (: we only show certain divs :)
-    if (not($node/@xml:id = $sections-to-suppress) and not($node/@type = 'document')) then
+    for $node in $node[@xml:id != 'toc'][@type != 'document']
+    let $child-docs := $node/tei:div[@type = 'document']
+    return
         <li>
-            {
+        {
             let $href := attribute href { toc:href($node) }
             let $highlight := if ($node is $current) then 'highlight' else ()
             return
                 <a class="{string-join(('toc-link', $highlight), ' ')}" id="toc-{$node/@xml:id}">
                 {
                     $href,
-                    toc:toc-head($model, $node/tei:head[1]) 
+                    toc:toc-head($model, $node/tei:head[1])
                 }
                 </a>
             ,
-            
-            if ($type = 'document') then
-                let $child-docs := $node/tei:div[@type = 'document']
+
+            if ($child-docs) then
                 let $first := $child-docs[1]/@n
                 let $last := $child-docs[last()]/@n
                 let $document :=
@@ -134,42 +133,27 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
                 }
                 </ul>
             else ()
-            }
+        }
         </li>
-    else 
-        ()
-};
-
-declare function toc:remove-nodes-deep($nodes as node()*, $nodes-to-remove as node()*) {
-    $nodes ! (
-        if (some $rn in $nodes-to-remove satisfies . is $rn) then
-            ()
-        else
-            typeswitch (.)
-                case element() return
-                    element {local-name(.)} {toc:remove-nodes-deep(./node(), $nodes-to-remove)}
-                default return
-                    .
-    )
 };
 
 (: handles heads for TOCs :)
 declare function toc:toc-head($model as map(*), $node as element(tei:head)) {
-    let $head-sans-note := if ($node//tei:note) then toc:remove-nodes-deep($node, $node//tei:note) else $node
-    return
-        (: Check if we're called via tei-simple pm or templating :)
-        if (exists($model?apply-children)) then
-            $model?apply-children($model, $node, $head-sans-note/node())
-        else
-            $model?odd($head-sans-note/node(), ())
-(:        pmu:process(odd:get-compiled($config:odd-source, $model?odd, $config:odd-compiled), $head-sans-note/node(), :)
-(:            $config:odd-compiled, "web", "../generated", $config:module-config):)
+    (: Check if we're called via tei-simple pm or templating :)
+    if (exists($model?apply-children)) then
+        let $params := map:put($model?parameters, "omit-notes", true())
+        return
+            $model?apply-children(
+                map:merge(($model, $params)),
+                $node, $node/node())
+    else
+        $model?odd($node/node(), map { "omit-notes": true() })
 };
 
 (: construct link to a FRUS div :)
 declare function toc:href($node as element(tei:div)) {
     let $publication-id := map:get($config:PUBLICATION-COLLECTIONS, util:collection-name($node))
-    let $document-id := 
+    let $document-id :=
         (: TODO replace substring/util:document-name with root($node)/@xml:id when volumes conform to this :)
         substring-before(util:document-name($node), '.xml')
     let $section-id := $node/@xml:id
@@ -189,14 +173,15 @@ declare function toc:href($publication-id as xs:string, $document-id as xs:strin
  : Generate table of contents for divs. Called via tei-simple pm.
  :)
 declare function toc:document-list($config as map(*), $node as element(tei:div), $class) {
+    let $headConfig := map:merge(($config, map { "parameters": map:put($config?parameters, "omit-notes", true())}))
     let $head := $node/tei:head[1]
-    let $head-sans-notes := toc:remove-nodes-deep($head, $head//tei:note)
     let $child-documents-to-show := $node/tei:div[@type='document']
+    (: let $child-documents-to-show := subsequence($node/tei:div[@type='document'], 1, 20) :)
     let $has-inner-sections := $node/tei:div[@type != 'document']
     return
         <div class="{$class}">
             <h3>{
-                $config?apply-children($config, $node, $head-sans-notes)
+                $config?apply-children($headConfig, $node, $head/node())
                 ,
                 for $note in $head//tei:note
                 return
@@ -206,9 +191,9 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                 for $note in $head//tei:note
                 return
                     <p>{
-                        if ($note/@n) then 
-                            <sup>{concat($note/@n, '. ')}</sup> 
-                        else 
+                        if ($note/@n) then
+                            <sup>{concat($note/@n, '. ')}</sup>
+                        else
                             ()
                         ,
                         if ($note) then $config?apply($config, $note/node()) else ()
@@ -225,28 +210,29 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
             ,
             for $document in $child-documents-to-show
             let $docnumber := $document/@n
-            let $docid := $document/@xml:id
             let $doctitle := $document/tei:head[1]
-            let $doctitle-sans-note := toc:remove-nodes-deep($doctitle, $doctitle//tei:note)
-            let $docsource := $document//tei:note[@type='source'][1]
-            let $docdateline := subsequence($document//tei:dateline, 1, 1)
-            let $docsummary := $document//tei:note[@type='summary']
             let $href := toc:href($document)
             return
                 (
                 <hr class="list"/>,
                 <h4><a href="{$href}" class="section-link">{
                 	(: show a bracketed document number for volumes that don't use document numbers :)
-                	if (not(starts-with($document/tei:head, concat($docnumber, '.')))) then 
-                		concat('[', $docnumber, '] ') 
-                	else 
+                	if (not(starts-with($doctitle, concat($docnumber, '.')))) then
+                		concat('[', $docnumber, '] ')
+                	else
                 		()
-                	, 
-                	if ($doctitle-sans-note) then $config?apply($config, $doctitle-sans-note) else ()
+                	,
+                	if ($doctitle) then $config?apply($headConfig, $doctitle/node()) else ()
                 }</a></h4>,
-                if ($docdateline) then <p class="dateline">{$config?apply($config, $docdateline)}</p> else (),
-                if ($docsummary) then <p class="summary">{$config?apply($config, $docsummary/node())}</p> else (),
-                if ($docsource) then <p class="sourcenote">{$config?apply-children($config, $node, $docsource/node())}</p> else ()
+                for $docdateline in $document//tei:dateline[1]
+                return
+                    <p class="dateline">{$config?apply($config, $docdateline)}</p>,
+                for $docsummary in $document//tei:note[@type='summary']
+                return
+                    <p class="summary">{$config?apply($config, $docsummary/node())}</p>,
+                for $docsource in $document//tei:note[@type='source'][1]
+                return
+                    <p class="sourcenote">{$config?apply-children($config, $node, $docsource/node())}</p>
                 )
             ,
             if ($has-inner-sections) then
@@ -263,6 +249,6 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                 </div>
                 )
             else ()
-            }
+        }
         </div>
 };

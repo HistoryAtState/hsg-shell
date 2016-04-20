@@ -138,6 +138,7 @@
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="note">
+                    <model predicate="$parameters?omit-notes" behaviour="omit"/>
                     <model predicate="@rend = 'inline'" behaviour="paragraph">
                         <outputRendition>font-size: smaller;</outputRendition>
                     </model>
