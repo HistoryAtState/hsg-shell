@@ -17,6 +17,7 @@
 .hsg-panel {
   @extend .panel;
   @extend .panel-default;
+  font-size: $small-font-size;
 }
 
 // Top Heading Wrapper
