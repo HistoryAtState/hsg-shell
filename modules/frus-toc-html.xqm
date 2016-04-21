@@ -87,7 +87,7 @@ declare function toc:toc-passthru($model as map(*), $node as item()*, $current a
     let $divs :=
         (: in the sidebar table of contents, limit display to ancestors of the current div :)
         if ($current) then
-            $divs intersect $current/ancestor-or-self::tei:div
+            $divs intersect ($current/ancestor-or-self::tei:div, $node//tei:div[@xml:id][not(ancestor::tei:div)])
         else
             $divs
 (:    let $divs := $node//tei:div[empty(ancestor::tei:div) or ancestor::tei:div[1] is $node]:)
