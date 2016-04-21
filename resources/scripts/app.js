@@ -57,7 +57,7 @@ $(document).ready(function() {
                         // $(".breadcrumb .section").html(data.breadcrumbSection);
                     }
                     if (data.persons) {
-                        $("#person-panel .list-group").replaceWith(data.persons).show();
+                        $("#person-panel .hsg-list-group").replaceWith(data.persons).show();
                         initNavigation("#person-panel a");
                         $('#person-panel a').tooltip({placement: "auto top"});
                         $("#person-panel").show();
@@ -65,7 +65,7 @@ $(document).ready(function() {
                         $("#person-panel").hide();
                     }
                     if (data.gloss) {
-                        $("#gloss-panel .list-group").replaceWith(data.gloss);
+                        $("#gloss-panel .hsg-list-group").replaceWith(data.gloss);
                         initNavigation("#gloss-panel a");
                         $('#gloss-panel a').tooltip({placement: "auto top"});
                         $("#gloss-panel").show();
