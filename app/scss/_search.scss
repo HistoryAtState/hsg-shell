@@ -43,15 +43,6 @@
   }
 }
 
-.fa-search {
-  font-size: 16px;
-}
-
-.fa-search {
-  font-size: 14px;
-  line-height: 1.428;
-}
-
 .banner__search {
   text-align: right;
 }
@@ -97,4 +88,12 @@
 .hsg-search-result-heading {
   padding-top: 2rem;
   font-size: $h4-font-size;
+}
+
+// Search Icon
+.hsg-search-button-icon {
+  @extend .glyphicon;
+  @extend .glyphicon-search;
+  padding-right: 0 !important;
+  line-height: 1.27em;
 }
