@@ -14,6 +14,8 @@ import module namespace console="http://exist-db.org/xquery/console" at "java:or
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 
+declare variable $toc:ENTRIES_PER_PAGE := 30;
+
 declare
     %templates:wrap
 function toc:table-of-contents($node as node(), $model as map(*), $document-id as xs:string, $heading as xs:boolean?, $highlight as xs:boolean?) {
@@ -182,10 +184,13 @@ declare function toc:href($publication-id as xs:string, $document-id as xs:strin
  : Generate table of contents for divs. Called via tei-simple pm.
  :)
 declare function toc:document-list($config as map(*), $node as element(tei:div), $class) {
+    let $start := xs:integer(request:get-parameter("start", 1))
     let $headConfig := map:merge(($config, map { "parameters": map:put($config?parameters, "omit-notes", true())}))
     let $head := $node/tei:head[1]
-    let $child-documents-to-show := $node/tei:div[@type='document']
-    (: let $child-documents-to-show := subsequence($node/tei:div[@type='document'], 1, 20) :)
+    let $child-documents := $node/tei:div[@type='document']
+    let $child-document-count := count($child-documents)
+    (: let $child-documents-to-show := $node/tei:div[@type='document'] :)
+    let $child-documents-to-show := subsequence($child-documents, $start, $toc:ENTRIES_PER_PAGE)
     let $has-inner-sections := $node/tei:div[@type != 'document']
     return
         <div class="{$class}">
@@ -207,57 +212,94 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                         ,
                         if ($note) then $config?apply($config, $note/node()) else ()
                     }</p>
-            ,
-            (: for example of chapter div without no documents but a child paragraph, see frus1952-54v08/comp3
-                for an example of a subchapter div with a table, see frus1945Malta/ch8subch44 :)
-            let $child-nodes := $node/node()
-            let $first-head := if ($node/tei:head) then index-of($child-nodes, $node/tei:head[1]) else 1
-            let $first-div := if ($node/tei:div) then index-of($child-nodes, $node/tei:div[1]) else 1
-            let $nodes-to-render := subsequence($child-nodes, $first-head + 1, $first-div - $first-head - 1)
-            return
-                if ($nodes-to-render) then $config?apply($config, $nodes-to-render) else ()
-            ,
-            for $document in $child-documents-to-show
-            let $docnumber := $document/@n
-            let $doctitle := $document/tei:head[1]
-            let $href := toc:href($document)
-            return
-                (
-                <hr class="list"/>,
-                <h4><a href="{$href}" class="section-link">{
-                	(: show a bracketed document number for volumes that don't use document numbers :)
-                	if (not(starts-with($doctitle, concat($docnumber, '.')))) then
-                		concat('[', $docnumber, '] ')
-                	else
-                		()
-                	,
-                	if ($doctitle) then $config?apply($headConfig, $doctitle/node()) else ()
-                }</a></h4>,
-                for $docdateline in $document//tei:dateline[1]
-                return
-                    <p class="dateline">{$config?apply($config, $docdateline)}</p>,
-                for $docsummary in $document//tei:note[@type='summary']
-                return
-                    <p class="summary">{$config?apply($config, $docsummary/node())}</p>,
-                for $docsource in $document//tei:note[@type='source'][1]
-                return
-                    <p class="sourcenote">{$config?apply-children($config, $node, $docsource/node())}</p>
-                )
-            ,
-            if ($has-inner-sections) then
-                (
-                <hr/>
                 ,
-                <div>
-                    <h4>Contents</h4>
-                    <div style="padding-left: 1em">
-                        <div class="toc-inner">
-                            <ul>{ toc:toc-inner($config, $node, false()) }</ul>
+                (: for example of chapter div without no documents but a child paragraph, see frus1952-54v08/comp3
+                    for an example of a subchapter div with a table, see frus1945Malta/ch8subch44 :)
+                let $child-nodes := $node/node()
+                let $first-head := if ($node/tei:head) then index-of($child-nodes, $node/tei:head[1]) else 1
+                let $first-div := if ($node/tei:div) then index-of($child-nodes, $node/tei:div[1]) else 1
+                let $nodes-to-render := subsequence($child-nodes, $first-head + 1, $first-div - $first-head - 1)
+                return
+                    if ($nodes-to-render) then $config?apply($config, $nodes-to-render) else ()
+                ,
+                toc:paginate($child-document-count, $start)
+                ,
+                for $document in $child-documents-to-show
+                let $docnumber := $document/@n
+                let $doctitle := $document/tei:head[1]
+                let $href := toc:href($document)
+                return
+                    <div>
+                        <hr class="list"/>
+                        <h4>
+                            <a href="{$href}" class="section-link">
+                            {
+                            	(: show a bracketed document number for volumes that don't use document numbers :)
+                            	if (not(starts-with($doctitle, concat($docnumber, '.')))) then
+                            		concat('[', $docnumber, '] ')
+                            	else
+                            		()
+                            	,
+                            	if ($doctitle) then $config?apply($headConfig, $doctitle/node()) else ()
+                            }
+                            </a>
+                        </h4>
+                        {
+                            for $docdateline in $document//tei:dateline[1]
+                            return
+                                <p class="dateline">{$config?apply($config, $docdateline)}</p>,
+                            for $docsummary in $document//tei:note[@type='summary']
+                            return
+                                <p class="summary">{$config?apply($config, $docsummary/node())}</p>,
+                            for $docsource in $document//tei:note[@type='source'][1]
+                            return
+                                <p class="sourcenote">{$config?apply-children($config, $node, $docsource/node())}</p>
+                        }
+                    </div>
+                ,
+                toc:paginate($child-document-count, $start)
+                ,
+                if ($has-inner-sections) then
+                    (
+                    <hr/>
+                    ,
+                    <div>
+                        <h4>Contents</h4>
+                        <div style="padding-left: 1em">
+                            <div class="toc-inner">
+                                <ul>{ toc:toc-inner($config, $node, false()) }</ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                )
-            else ()
+                    )
+                else ()
         }
         </div>
 };
+
+declare function toc:paginate($child-document-count as xs:int, $start as xs:int) {
+    if ($child-document-count > $toc:ENTRIES_PER_PAGE) then
+        <ul class="pagination">
+            <li class="{if ($start <= $toc:ENTRIES_PER_PAGE) then 'disabled' else ()}">
+                <a href="?start={if ($start > 1) then $start - $toc:ENTRIES_PER_PAGE else 1}">
+                    <i class="glyphicon glyphicon-backward"/>
+                </a>
+            </li>
+        {
+            for $page in 0 to ($child-document-count idiv $toc:ENTRIES_PER_PAGE -
+                (if ($child-document-count mod $toc:ENTRIES_PER_PAGE = 0) then 1 else 0))
+            return
+                <li class="{if ($start idiv $toc:ENTRIES_PER_PAGE = $page) then 'active' else ()}">
+                    <a href="?start={$page * $toc:ENTRIES_PER_PAGE + 1}">{$page + 1}</a>
+                </li>
+        }
+            <li class="{if ($start + $toc:ENTRIES_PER_PAGE > $child-document-count) then 'disabled' else ()}">
+                <a href="?start={if ($start + $toc:ENTRIES_PER_PAGE < $child-document-count) then $start + $toc:ENTRIES_PER_PAGE else $start}">
+                    <i class="glyphicon glyphicon-forward"/>
+                </a>
+            </li>
+        </ul>
+    else
+        ()
+};
+
