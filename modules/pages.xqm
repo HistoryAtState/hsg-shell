@@ -222,9 +222,9 @@ declare function pages:process-content($odd as function(*), $xml as element()*, 
 (:        pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", :)
 (:            $config:module-config, $parameters):)
     let $content := pages:clean-footnotes($html)
-    let $class := if ($html//*[@class = ('margin-note')]) then "margin-right" else ()
+    (: let $class := if ($html//*[@class = ('margin-note')]) then "margin-right" else () :)
     return
-        <div class="content {$class}">
+        <div class="content">
             {
             $content
             ,
@@ -332,18 +332,18 @@ declare function pages:get-next($div as element()) {
     else if ($div/tei:div[@xml:id]) then
         $div/tei:div[@xml:id][1]
     else
-        $div/following::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
+        ($div/following::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[1]
 };
 
 declare function pages:get-previous($div as element()?) {
     if ($div/self::tei:pb) then
         $div/preceding::tei:pb[1]
-    else if ($div/preceding-sibling::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][not(tei:div/@type)]) then
-        $div/preceding-sibling::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
+    else if (($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[not(tei:div/@type)]) then
+        ($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[1]
     else
         (
             $div/ancestor::tei:div[@type = ('compilation', 'chapter', 'subchapter', 'section', 'part')][tei:div/@type][1],
-            $div/preceding::tei:div[@xml:id][not(@xml:id = $config:IGNORED_DIVS)][1]
+            ($div/preceding::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[1]
         )[1]
 };
 
