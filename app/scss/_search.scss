@@ -24,7 +24,7 @@
   border: none !important;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  background: whitesmoke;
+  background: $color-gray-lightest;
   width: auto;
 }
 
@@ -96,4 +96,13 @@
   @extend .glyphicon-search;
   padding-right: 0 !important;
   line-height: 1.27em;
+}
+
+// Search button in sidebar
+
+.hsg-sidebar-search-btn {
+  @extend .btn;
+  @extend .btn-default;
+  background-color: $color-gray-lightest;
+  border-left: none;
 }
