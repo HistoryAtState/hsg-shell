@@ -149,9 +149,11 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
 };
 
 (: handles heads for TOCs :)
-declare function toc:toc-head($model as map(*), $node as element(tei:head)) {
+declare function toc:toc-head($model as map(*), $node as element(tei:head)?) {
+    if (empty($node)) then
+        ()
     (: Check if we're called via tei-simple pm or templating :)
-    if (exists($model?apply-children)) then
+    else if (exists($model?apply-children)) then
         let $params := map:put($model?parameters, "omit-notes", true())
         return
             $model?apply-children(
@@ -173,11 +175,9 @@ declare function toc:href($node as element(tei:div)) {
 };
 
 declare function toc:href($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string*, $fragment as xs:string*) {
-    concat(
         map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
         ,
         if ($fragment) then concat('#', $fragment) else ()
-    )
 };
 
 (:~
