@@ -727,6 +727,9 @@ display: block;
             <elementSpec ident="term" mode="add">
                 <model behaviour="inline"/>
             </elementSpec>
+            <elementSpec ident="placeName" mode="add">
+                <model behaviour="inline"/>
+            </elementSpec>
             <elementSpec ident="frus:attachment" mode="add">
                 <model behaviour="section" cssClass="attachment"/>
             </elementSpec>

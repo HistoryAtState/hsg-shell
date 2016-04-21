@@ -259,22 +259,21 @@ declare function model:apply($config as map(*), $input as node()*) {
                                             else
                                                 html:block($config, ., ("tei-head8"), .)
                 case element(hi) return
-                    if (@rend = 'strong') then
-                        html:inline($config, ., ("tei-hi1"), .)
-                    else
-                        if (@rend = 'italic') then
+                    switch (@rend)
+                        case 'strong' return
+                            html:inline($config, ., ("tei-hi1"), .)
+                        case 'italic' return
                             html:inline($config, ., ("tei-hi2"), .)
-                        else
-                            if (@rend = 'smallcaps') then
-                                html:inline($config, ., ("tei-hi3"), .)
+                        case 'smallcaps' return
+                            html:inline($config, ., ("tei-hi3"), .)
+                        default return
+                            if (@rendition) then
+                                html:inline($config, ., css:get-rendition(., ("tei-hi4")), .)
                             else
-                                if (@rendition) then
-                                    html:inline($config, ., css:get-rendition(., ("tei-hi4")), .)
+                                if (not(@rendition)) then
+                                    html:inline($config, ., ("tei-hi5"), .)
                                 else
-                                    if (not(@rendition)) then
-                                        html:inline($config, ., ("tei-hi5"), .)
-                                    else
-                                        $config?apply($config, ./node())
+                                    $config?apply($config, ./node())
                 case element(imprimatur) return
                     html:block($config, ., ("tei-imprimatur"), .)
                 case element(item) return
@@ -524,6 +523,8 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:inline($config, ., ("tei-gloss"), .)
                 case element(term) return
                     html:inline($config, ., ("tei-term"), .)
+                case element(placeName) return
+                    html:inline($config, ., ("tei-placeName"), .)
                 case element(frus:attachment) return
                     html:section($config, ., ("tei-frus:attachment", "attachment"), .)
                 case element(exist:match) return
@@ -548,9 +549,9 @@ declare function model:apply-children($config as map(*), $node as element(), $co
         typeswitch(.)
             case element() return
                 if (. is $node) then
-                    $config?apply($config, ./node())
+                    model:apply($config, ./node())
                 else
-                    $config?apply($config, .)
+                    model:apply($config, .)
             default return
                 html:escapeChars(.)
     )
