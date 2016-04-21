@@ -9,7 +9,7 @@
 // Red, uppercase heading for sidebar
 .section-heading {
   @extend .heading-secondary;
-  font-size: 1em;
+  font-size: 1.5rem;
   line-height: 1.5;
 }
 
@@ -42,6 +42,7 @@
 // Second Level Heading (Subnavigation)
 .hsg-sidebar-title-second-level {
   @extend .panel-title;
+  font-size: 1.5rem;
 }
 
 // Panel paragraphs or other elements
