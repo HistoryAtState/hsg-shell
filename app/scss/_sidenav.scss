@@ -18,6 +18,10 @@
   @extend .panel;
   @extend .panel-default;
   font-size: $small-font-size;
+
+  .hsg-ebook-list {
+    text-align: left;
+  }
 }
 
 // Top Heading Wrapper
