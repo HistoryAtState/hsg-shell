@@ -1,11 +1,11 @@
-/* Navigation -------------- */
+/* Document Navigation -------------- */
 
 .navigation-top {
   margin-bottom: 1em;
   border: none;
 
   h5 {
-    @extend .section-heading;
+    @extend .heading-secondary;
     padding: 0 10px 10px 0;
   }
   .page-nav {
@@ -30,12 +30,12 @@
 }
 
 .hsg-navigation-title {
-  @extend .section-heading;
+  @extend .heading-secondary;
 
 }
 
 .navigation-title {
-  @extend .section-heading;
+  @extend .heading-secondary;
   padding: 0 10px 10px 0;
 }
 

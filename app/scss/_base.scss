@@ -7,7 +7,6 @@ html {
 
 body {
   font-family: $font-serif;
-  //line-height: 1.428;
   line-height: $base-line-height;
   font-weight: $font-normal;
   font-size:   $base-font-size;
@@ -93,6 +92,8 @@ input {
   font-weight: 800;
   text-transform: uppercase;
   color: $color-secondary-darkest;
+  font-size: 1.5rem;
+  line-height: 1.5;
 }
 
 p date {
