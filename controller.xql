@@ -31,12 +31,8 @@ console:log('nginx-request-uri: ' || request:get-header('nginx-request-uri'))
 console:log('exist:path: ' || $exist:path)
 ,
 :)
-if (matches($exist:path, '^/resouces/wdd/?')) then
-     <dispatch xmlns="http://exist.sourceforge.net/NS/exist"></dispatch>
-else if (matches($exist:path, '^/design/?')) then
-     <dispatch xmlns="http://exist.sourceforge.net/NS/exist"></dispatch>
 
-else if ($exist:path eq '') then
+if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <redirect url="{local:get-uri()}/"/>
     </dispatch>
