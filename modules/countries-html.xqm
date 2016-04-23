@@ -24,7 +24,7 @@ declare %templates:wrap function ch:load-countries($node as node(), $model as ma
 };
 
 declare %templates:wrap function ch:article-title($node as node(), $model as map(*)) {
-    root($model?data)//tei:title[@type='short']/string()
+    root($model?article)//tei:title[@type='short']/string()
 };
 
 declare function ch:article-href-value-attribute($node as node(), $model as map(*)) {
