@@ -410,7 +410,10 @@ function pages:app-root($node as node(), $model as map(*)) {
         let $title :=
             (: use static override when defined in page template :)
             if ($content//div[@id="static-title"]) then
-                $content//div[@id="static-title"]/string()
+                string-join(
+                    ($content//div[@id="static-title"]/string(), "Office of the Historian")[. ne ""],
+                    " - "
+                )
             else
                 pages:generate-title($model, $content)
 
