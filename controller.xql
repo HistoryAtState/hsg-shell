@@ -19,6 +19,10 @@ declare variable $application-url := concat(
     $exist:controller
 );
 
+declare function local:get-uri() {
+    (request:get-header("nginx-request-uri"), request:get-uri())[1]
+};
+
 (:
 console:log('request:get-uri(): ' || request:get-uri())
 ,
@@ -27,18 +31,18 @@ console:log('nginx-request-uri: ' || request:get-header('nginx-request-uri'))
 console:log('exist:path: ' || $exist:path)
 ,
 :)
-(: redirect requests for app root ('') to '/' :)
 if (matches($exist:path, '^/resouces/wdd/?')) then
      <dispatch xmlns="http://exist.sourceforge.net/NS/exist"></dispatch>
 else if (matches($exist:path, '^/design/?')) then
      <dispatch xmlns="http://exist.sourceforge.net/NS/exist"></dispatch>
+
 else if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <redirect url="{request:get-uri()}/"/>
+        <redirect url="{local:get-uri()}/"/>
     </dispatch>
 
 (: handle request for landing page, e.g., http://history.state.gov/ :)
-else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq '' and request:get-header('nginx-request-uri') eq '/beta')) then
+else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq '' and request:get-header('nginx-request-uri') eq '/')) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller}/pages/index.html"/>
         <view>
@@ -53,7 +57,7 @@ else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq ''
 (: strip trailing slash :)
 else if (ends-with($exist:path, "/")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <redirect url="{replace(request:get-uri(), '/$', '')}"/>
+        <redirect url="{replace(local:get-uri(), '/$', '')}"/>
     </dispatch>
 
 (: TODO: remove bower_components once grunt/gulp integration is added :)
