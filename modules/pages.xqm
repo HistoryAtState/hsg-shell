@@ -397,9 +397,16 @@ function pages:navigation-link($node as node(), $model as map(*), $direction as 
 declare
     %templates:wrap
 function pages:app-root($node as node(), $model as map(*)) {
+    let $root :=
+        if (request:get-header("nginx-request-uri")) then (
+            ""
+            (: replace(request:get-header("nginx-request-uri"), "^(\w+://[^/]+).*$", "$1") :)
+        ) else
+            request:get-context-path() || substring-after($config:app-root, "/db")
+    return
     element { node-name($node) } {
         $node/@*,
-        attribute data-app { request:get-context-path() || substring-after($config:app-root, "/db") },
+        attribute data-app { $root },
         let $content := templates:process($node/*, $model)
         let $titleGenerated := $content//div[@class="page-title"]
         let $title :=
