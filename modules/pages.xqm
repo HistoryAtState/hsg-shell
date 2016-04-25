@@ -470,7 +470,32 @@ function pages:section-link($node, $model) {
 };
 
 (: Page title for about/hac/*
-TODO Refactor with function pages:faq-title() and create a page title module :)
+TODO Refactor with functions pages:faq-title() & pages:hac-title() and create a page title module :)
+declare
+    %templates:wrap
+function pages:conference-title($node, $model) {
+    element a {
+        $node/@*,
+        if ($model?data instance of element(tei:div)) then
+            concat($model?data/tei:head[1]/string(), ' - Conferences')
+        else
+            concat(root($model?data)//tei:title[@type = 'short']/string(), ' - Conferences')
+    }
+};
+
+(: Page title for about/hac/*
+TODO Refactor with functions pages:faq-title() & pages:hac-title() and create a page title module :)
+declare
+    %templates:wrap
+function pages:conference-subpage-title($node, $model) {
+    element a {
+        $node/@*,
+        concat($model?data/tei:head[1]/string(), ' - ', root($model?data)//tei:title[@type = 'short']/string(), ' - Conferences')
+    }
+};
+
+(: Page title for about/hac/*
+TODO Refactor with function pages:faq-title() & pages:conference-title() and create a page title module :)
 declare
     %templates:wrap
 function pages:hac-title($node, $model) {
@@ -484,7 +509,7 @@ function pages:hac-title($node, $model) {
 };
 
 (: Page title for about/faq/*
-TODO Refactor with function pages:hac-title() and create a page title module:)
+TODO Refactor with function pages:hac-title() & pages:conference-title() and create a page title module:)
 declare
     %templates:wrap
 function pages:faq-title($node, $model) {
