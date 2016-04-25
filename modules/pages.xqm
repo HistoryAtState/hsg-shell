@@ -469,6 +469,20 @@ function pages:section-link($node, $model) {
     }
 };
 
+(: Page title for about/hac/*
+TODO Refactor with function pages:faq-title() and create a page title module :)
+declare
+    %templates:wrap
+function pages:hac-title($node, $model) {
+    element a {
+        $node/@*,
+        if ($model?data instance of element(tei:div)) then
+            concat($model?data/tei:head[1]/string(), ' - Historical Advisory Committee - About Us')
+        else
+            concat(root($model?data)//tei:title[@type = 'short']/string(), ' - Historical Advisory Committee - About Us')
+    }
+};
+
 (: Page title for about/faq/*
 TODO Refactor with function pages:hac-title() and create a page title module:)
 declare
