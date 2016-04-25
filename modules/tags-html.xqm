@@ -235,7 +235,7 @@ declare
     %templates:wrap
 function tags:list-tags($node as node(), $model as map(*)) {
     for $tag in $model?tags//tag/@id
-    let $label := collection($tags:TAXONOMY_COL)//tag[id = $tag]/label
+    let $label := collection($tags:TAXONOMY_COL)//id[. = $tag]/../label
     order by $tag
     return
         <li class="hsg-list-group-item"><a href="{$app:APP_ROOT}/tags/{$tag}" title="Resources tagged {$label}">{$label/text()}</a></li>
