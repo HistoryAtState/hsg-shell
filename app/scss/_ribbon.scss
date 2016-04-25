@@ -1,7 +1,7 @@
 // Ribbon ---------- //
 
 .ribbon-container {
-  @media screen and (min-width: $xs-screen) {
+  @media screen and (min-width: $xs-screen-min) {
     position: absolute;
     top: 0;
     right: 0;
@@ -9,6 +9,13 @@
     width: 200px;
     height: 200px;
     z-index: 10;
+  }
+}
+
+// Extra padding to make way for the ribbon container in mobile portrait view
+.hsg-header {
+  @media screen and (max-width: $xs-screen) {
+    padding-top: 15px;
   }
 }
 
@@ -40,7 +47,7 @@
     }
   }
 
-  @media screen and (min-width: $xs-screen) {
+  @media screen and (min-width: $xs-screen-min) {
     /* top right corner */
     position: absolute;
     z-index: 11;

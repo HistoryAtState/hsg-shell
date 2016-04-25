@@ -248,7 +248,7 @@ dd {
 .btn {
   font-family: $font-sans;
   @extend .btn-block;
-  @media (min-width: $xs-screen) {
+  @media (min-width: $xs-screen-min) {
     width: auto;
     display: inline-block;
   }
