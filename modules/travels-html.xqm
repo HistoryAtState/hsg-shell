@@ -160,15 +160,15 @@ declare function travels:table($node as node(), $model as map(*), $results-to-di
                             if (not($start castable as xs:date)) then 
                                 'date error'
                             else if ($item/start-date = $item/end-date) then
-                                xsl:format-date($start, "MMMM D, YYYY")
+                                xsl:format-date($start, "MMMM D, YYYY", 'en', (), 'US')
                             else if (empty($end)) then 
-                                xsl:format-date($start, "MMMM D, YYYY") 
+                                xsl:format-date($start, "MMMM D, YYYY", 'en', (), 'US') 
                             else if (year-from-date($start) eq year-from-date($end) and month-from-date($start) eq month-from-date($end)) then 
-                                concat(xsl:format-date($start, "MMMM D"), '–', xsl:format-date($end, "D, YYYY"))
+                                concat(xsl:format-date($start, "MMMM D", 'en', (), 'US'), '–', xsl:format-date($end, "D, YYYY", 'en', (), 'US'))
                             else if (year-from-date($start) eq year-from-date($end)) then
-                                concat(xsl:format-date($start, "MMMM D"), '–', xsl:format-date($end, "MMMM D, YYYY"))
+                                concat(xsl:format-date($start, "MMMM D", 'en', (), 'US'), '–', xsl:format-date($end, "MMMM D, YYYY", 'en', (), 'US'))
                             else 
-                                concat(xsl:format-date($start, "MMMM D, YYYY"), '–', xsl:format-date($end, "MMMM D, YYYY"))
+                                concat(xsl:format-date($start, "MMMM D, YYYY", 'en', (), 'US'), '–', xsl:format-date($end, "MMMM D, YYYY", 'en', (), 'US'))
                         return $date
                     }</td>
                 </tr> 
