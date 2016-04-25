@@ -469,6 +469,20 @@ function pages:section-link($node, $model) {
     }
 };
 
+(: Page title for about/faq/*
+TODO Refactor with function pages:hac-title() and create a page title module:)
+declare
+    %templates:wrap
+function pages:faq-title($node, $model) {
+    element a {
+        $node/@*,
+        if ($model?data instance of element(tei:div)) then
+            concat($model?data/tei:head[1]/string(), ' - FAQs - About Us')
+        else
+            concat(root($model?data)//tei:title[@type = 'short']/string(), ' - FAQs - About Us')
+    }
+};
+
 declare function pages:deep-section-breadcrumbs($node, $model, $truncate as xs:boolean?) {
     if ($model?data instance of element(tei:div)) then
         for $div in $model?data/ancestor-or-self::tei:div[@xml:id]
