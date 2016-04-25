@@ -32,7 +32,7 @@ function fh:volumes($node as node(), $model as map(*), $volume as xs:string?) {
         else
             string-join(
                 (
-                if (matches($sub-series-n, '[^\d–]')) then () else $sub-series-n,
+                if (matches($sub-series-n, '[^\dâ€“]')) then () else $sub-series-n,
                 replace($volume-title, '^The ', '')
                 ),
                 ', ')
@@ -673,6 +673,13 @@ declare function fh:mobi-size($vol-id) {
         app:bytes-to-readable($size)
 };
 
+declare function fh:pdf-size($vol-id) {
+    let $pdf:= (doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/pdf/resources.xml'))//filename[ends-with(., '.pdf')]/parent::resource)[1]
+    let $size := $pdf//size
+    return
+        app:bytes-to-readable($size)
+};
+
 declare
     %templates:wrap
 function fh:epub-size($node as node(), $model as map(*), $document-id as xs:string) {
@@ -685,9 +692,19 @@ function fh:mobi-size($node as node(), $model as map(*), $document-id as xs:stri
     fh:mobi-size($document-id)
 };
 
+declare
+    %templates:wrap
+function fh:pdf-size($node as node(), $model as map(*), $document-id as xs:string) {
+    fh:pdf-size($document-id)
+};
+
 
 declare function fh:mobi-url($document-id as xs:string) {
 	concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/ebook/', $document-id, '.mobi')
+};
+
+declare function fh:pdf-url($document-id as xs:string) {
+	concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/pdf/', $document-id, '.pdf')
 };
 
 declare function fh:epub-url($document-id as xs:string) {
@@ -708,6 +725,13 @@ function fh:mobi-href($node as node(), $model as map(*), $document-id as xs:stri
     templates:process($node/node(), $model)
 };
 
+declare 
+    %templates:wrap
+function fh:pdf-href($node as node(), $model as map(*), $document-id as xs:string) {
+    attribute href { fh:pdf-url($document-id) },
+    templates:process($node/node(), $model)
+};
+
 declare function fh:isbn-link($node as node(), $model as map(*)) {
     let $isbns := root($model?data)//tei:idno[@type = ('isbn-10','isbn-13')]/text()
     return
@@ -723,4 +747,3 @@ declare function fh:isbn-link($node as node(), $model as map(*)) {
         else
             ()
 };
-
