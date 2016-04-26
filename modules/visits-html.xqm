@@ -53,6 +53,14 @@ declare function visits:country-or-year-title($node, $model, $country-or-year as
         'Visits By Foreign Leaders of ' || collection('/db/apps/gsh/data/countries-old')//country[id = $country-or-year]/label
 };
 
+declare function visits:country-or-year-page-title($node, $model, $country-or-year as xs:string) {
+    if (visits:is-country-or-year($country-or-year) = 'year') then
+        $country-or-year
+    else
+        collection('/db/apps/gsh/data/countries-old')//country[id = $country-or-year]/label
+};
+
+
 declare function visits:country-or-year-breadcrumb($node, $model, $country-or-year as xs:string) {
     <li><a href="$app/departmenthistory/visits/{$country-or-year}">{
         if (visits:is-country-or-year($country-or-year) = 'year') then
