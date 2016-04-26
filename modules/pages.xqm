@@ -564,3 +564,14 @@ declare function pages:deep-section-breadcrumbs($node, $model, $truncate as xs:b
             }
         }
 };
+
+declare function pages:deep-section-page-title($node, $model) {
+    if ($model?data instance of element(tei:div)) then
+        for $div in $model?data/ancestor-or-self::tei:div[1]
+        return concat($div/tei:head/string(), ' - ', pages:section-category($node, $model))
+    else ()
+};
+
+declare function pages:section-category($node, $model) {
+    root($model?data)//tei:title[@type = 'short']/string()
+};
