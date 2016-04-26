@@ -459,7 +459,7 @@ function pages:education-module-title ($node, $model) {
 
 
 (: Page title for countries/archives/article
-TODO Adapt and move function to modules/countries-html.xqm:)
+TODO Create a page title module or adapt and move function to modules/countries-html.xqm:)
 declare
     %templates:wrap
 function pages:archive-title ($node, $model) {
