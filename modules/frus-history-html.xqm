@@ -21,6 +21,13 @@ declare function fhh:monograph-title($node, $model) {
     let $title := $model?odd($doc//tei:title[@type='complete'], ())
     return
         <h2 class="navigation-title">{$title}</h2>
+
+(: Page title for Monograph sections, same content as <h1> heading :)
+declare function fhh:monograph-page-title($node, $model, $section-id) {
+    let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
+    let $section := $doc/id($section-id)/tei:head
+return
+    pages:process-content($model?odd, $section)
 };
 
 declare function fhh:monograph-editors($node, $model) {
