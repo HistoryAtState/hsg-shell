@@ -446,6 +446,18 @@ function pages:document-link($node, $model) {
     }
 };
 
+(: Page title for education/module.html
+TODO: Create a page title module :)
+declare
+    %templates:wrap
+function pages:education-module-title ($node, $model) {
+    element a {
+        $node/@*,
+        concat(root($model?data)//tei:title[@type = 'short']/string(), ' - Curriculum Modules - Education Resources')
+    }
+};
+
+
 (: Page title for countries/archives/article
 TODO Adapt and move function to modules/countries-html.xqm:)
 declare
