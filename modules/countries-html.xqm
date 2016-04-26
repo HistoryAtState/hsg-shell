@@ -78,3 +78,12 @@ declare function ch:list($node, $model) {
             </ul>
         </div>
 };
+
+(: Page title for countries/archives/article
+TODO Create a page title module or adapt and move function to modules/countries-html.xqm:)
+declare
+    %templates:wrap
+function ch:archive-title ($node, $model) {
+    concat(root($model?data)//tei:title[@type = 'short']/string(), ' - Archives - Countries')
+};
+

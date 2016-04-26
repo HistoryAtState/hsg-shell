@@ -446,17 +446,6 @@ function pages:document-link($node, $model) {
     }
 };
 
-(: Page title for countries/archives/article
-TODO Create a page title module or adapt and move function to modules/countries-html.xqm:)
-declare
-    %templates:wrap
-function pages:archive-title ($node, $model) {
-    element a {
-        $node/@*,
-        concat(root($model?data)//tei:title[@type = 'short']/string(), ' - Archives - Countries')
-    }
-};
-
 declare
     %templates:wrap
 function pages:section-link($node, $model) {
