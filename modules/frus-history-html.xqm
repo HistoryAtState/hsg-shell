@@ -21,6 +21,7 @@ declare function fhh:monograph-title($node, $model) {
     let $title := $model?odd($doc//tei:title[@type='complete'], ())
     return
         <h2 class="navigation-title">{$title}</h2>
+};
 
 (: Page title for Monograph sections, same content as <h1> heading :)
 declare function fhh:monograph-page-title($node, $model, $section-id) {
