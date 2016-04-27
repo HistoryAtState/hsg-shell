@@ -196,6 +196,22 @@ function pocom:role-or-country-label($node as node(), $model as map(*), $role-or
             concat('Chiefs of Mission for ', $country/label/string())
 };
 
+declare
+    %templates:wrap
+function pocom:role-or-country-pagetitle($node as node(), $model as map(*), $role-or-country-id as xs:string, $form as xs:string) {
+    let $role := collection($pocom:DATA-COL)//id[. = $role-or-country-id]/..
+    let $country := collection($pocom:OLD-COUNTRIES-COL)//id[. = $role-or-country-id]/..
+    return
+        if ($role) then
+        if ($form = 'plural') then
+            $role/names/plural/string()
+        else
+            $role/names/singular/string()
+        else
+            $country/label/string()
+};
+
+
 declare function pocom:chief-role-href($role-id) {
     '$app/departmenthistory/people/chiefsofmission/' || $role-id
 };
@@ -348,6 +364,13 @@ declare
 function pocom:person-breadcrumb($node as node(), $model as map(*), $person-id as xs:string) {
     <a class="section" href="{pocom:person-href($person-id)}">{pocom:person-name-by-id($person-id)}</a>
 };
+
+declare
+%templates:wrap
+function pocom:person-page-title($node as node(), $model as map(*), $person-id as xs:string) {
+pocom:person-name-by-id($person-id)
+};
+
 
 declare
     %templates:wrap

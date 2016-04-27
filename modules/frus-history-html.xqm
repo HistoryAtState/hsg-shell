@@ -23,6 +23,14 @@ declare function fhh:monograph-title($node, $model) {
         <h2 class="navigation-title">{$title}</h2>
 };
 
+(: Page title for Monograph sections, same content as <h1> heading :)
+declare function fhh:monograph-page-title($node, $model, $section-id) {
+    let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
+    let $section := $doc/id($section-id)/tei:head
+return
+    pages:process-content($model?odd, $section)
+};
+
 declare function fhh:monograph-editors($node, $model) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
     let $editors := $doc//tei:titlePage//tei:name
@@ -69,6 +77,13 @@ declare function fhh:document-breadcrumb($node as node(), $model as map(*), $doc
     let $title := $doc//tei:title[@type='short']
     return
         <a href="$app/historicaldocuments/frus-history/documents/{$document-id}">{$title/string()}</a>
+};
+
+declare function fhh:document-page-title($node as node(), $model as map(*), $document-id as xs:string) {
+    let $doc := doc($fhh:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml")
+    let $title := $doc//tei:title[@type='complete']
+return
+    $title
 };
 
 declare function fhh:most-recent-documents($node, $model) {

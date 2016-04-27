@@ -27,6 +27,10 @@ declare %templates:wrap function ch:article-title($node as node(), $model as map
     root($model?article)//tei:title[@type='short']/string()
 };
 
+declare %templates:wrap function ch:page-title($node as node(), $model as map(*)) {
+    concat(root($model?data)//tei:title[@type='short']/string(), ' - Countries')
+};
+
 declare function ch:article-href-value-attribute($node as node(), $model as map(*)) {
     let $article-id := substring-before(util:document-name($model?article), '.xml')
     return
@@ -74,3 +78,12 @@ declare function ch:list($node, $model) {
             </ul>
         </div>
 };
+
+(: Page title for countries/archives/article
+TODO Create a page title module or adapt and move function to modules/countries-html.xqm:)
+declare
+    %templates:wrap
+function ch:archive-title ($node, $model) {
+    concat(root($model?data)//tei:title[@type = 'short']/string(), ' - Archives - Countries')
+};
+

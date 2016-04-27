@@ -58,6 +58,17 @@ declare function ssh:region-and-or-subject-name($node, $model) {
             $region
 };
 
+declare function ssh:region-and-or-subject-page-title($node, $model) {
+    let $region := request:get-parameter('region', ())
+    let $subject := request:get-parameter('subject', ())
+    return
+        if ($region and $subject) then
+            concat($subject, ' - ', $region)
+        else
+            $region
+};
+
+
 declare function ssh:region-and-subject-link($node, $model) {
     let $region := request:get-parameter('region', ())
     let $regionUrl := "$app/historicaldocuments/pre-1861/serial-set/browse?region=" || encode-for-uri($region)

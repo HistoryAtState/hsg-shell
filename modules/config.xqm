@@ -280,6 +280,9 @@ declare variable $config:PUBLICATIONS :=
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Education Resources"
         },
+        "education-modules": map {
+            "title": "Curriculum Modules - Education Resources"
+        },
         "frus-history-monograph": map {
             "collection": $config:FRUS_HISTORY_MONOGRAPH_COL,
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml') },

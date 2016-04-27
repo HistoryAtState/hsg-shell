@@ -100,3 +100,11 @@ declare function edu:module-introduction($node, $model, $document-id as xs:strin
             {$intro-body}
         </div>
 };
+
+(: Page title for education/module.html
+TODO: Create a page title module :)
+declare
+    %templates:wrap
+function edu:education-module-title ($node, $model) {
+    concat(root($model?data)//tei:title[@type = 'short']/string(), ' - ', map:get($config:PUBLICATIONS, 'education-modules')?title)
+};

@@ -32,9 +32,10 @@ declare variable $pages:EXIDE :=
 declare
     %templates:default("view", "div")
     %templates:default("ignore", "false")
-function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?,
-    $view as xs:string, $ignore as xs:boolean) {
-    console:log("loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id ),
+function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?,
+        $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean) {
+    let $log := console:log("loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id )
+
     let $content := map {
         "data":
             if (exists($publication-id) and exists($document-id)) then
@@ -45,43 +46,15 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         "section-id": $section-id,
         "view": $view,
         "base-path":
-            if (exists($publication-id)) then
-                (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
-                if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
-                    map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
-                else ()
+            (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
+            if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
+                map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
             else (),
         "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
     }
-    let $html := templates:process($node/*, map:new(($model, $content)))
-    (: without an entry in $config:PUBLICATIONS and a publication-id parameter from controller.xql,
-     : only the stock "Office of the Historian" title will appear in the <title> element :)
-    let $title :=
-        if ($publication-id) then
-            map:get($config:PUBLICATIONS, $publication-id)?title
-        else
-            ($html//(h1|h2|h3))[1]
-    let $head :=
-        if ($section-id) then
-            if ($content?data instance of element(tei:div)) then
-                $content?data/tei:head
-            else
-                root($content?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
-        (: we can't trust pages:load-xml for the purposes of finding a document's title, since it returns the document's first descendant div :)
-        (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
-        else if ($publication-id and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'select-document')) then
-            map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
-        (: allow for pages that don't have an entry in $config:PUBLICATIONS at all :)
-        else
-            ()
-    let $log := console:log("pages:load: Page title: " || $title)
+
     return
-        (
-            $html,
-            <div class="page-title" style="display:none">{
-                string-join(($head, $title, "Office of the Historian")[. ne ''], " - ")
-            }</div>
-        )
+        templates:process($node/*, map:new(($model, $content)))
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
@@ -92,7 +65,7 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
     $view as xs:string, $ignore as xs:boolean?) {
     console:log("pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
     let $block :=
-    	if ($view = "div") then
+        if ($view = "div") then
             if ($section-id) then (
                 map:get($config:PUBLICATIONS, $publication-id)?select-section($document-id, $section-id)
             ) else
@@ -394,6 +367,32 @@ function pages:navigation-link($node as node(), $model as map(*), $direction as 
         <a href="#" style="visibility: hidden;">{$node/@class, $node/node()}</a>
 };
 
+declare function pages:generate-title ($model, $content) {
+    (: without an entry in $config:PUBLICATIONS and a publication-id parameter from controller.xql,
+     : only the stock "Office of the Historian" title will appear in the <title> element :)
+    let $title :=
+        if ($model?publication-id) then
+            map:get($config:PUBLICATIONS, $model?publication-id)?title
+        else
+            ($content//(h1|h2|h3))[1]
+
+    let $head :=
+        if ($model?section-id) then
+            if ($model?data instance of element(tei:div)) then
+                $model?data/tei:head
+            else
+                root($model?data)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+        (: we can't trust pages:load-xml for the purposes of finding a document's title, since it returns the document's first descendant div :)
+        (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
+        else if ($model?publication-id and map:contains(map:get($config:PUBLICATIONS, $model?publication-id), 'select-document')) then
+            map:get($config:PUBLICATIONS, $model?publication-id)?select-document($model?document-id)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
+        (: allow for pages that don't have an entry in $config:PUBLICATIONS at all :)
+        else
+            ()
+
+    return string-join(($head, $title, "Office of the Historian")[. ne ""], " - ")
+};
+
 declare
     %templates:wrap
 function pages:app-root($node as node(), $model as map(*)) {
@@ -408,12 +407,17 @@ function pages:app-root($node as node(), $model as map(*)) {
         $node/@*,
         attribute data-app { $root },
         let $content := templates:process($node/*, $model)
-        let $titleGenerated := $content//div[@class="page-title"]
         let $title :=
-            if ($titleGenerated) then
-                $titleGenerated/string()
+            (: use static override when defined in page template :)
+            if ($content//div[@id="static-title"]) then
+                string-join(
+                    ($content//div[@id="static-title"]/string(), "Office of the Historian")[. ne ""],
+                    " - "
+                )
             else
-                string-join(($content//(h1|h2|h3)[1], "Office of the Historian"), " - ")
+                pages:generate-title($model, $content)
+
+        let $log := console:log("pages:app-root -> title: " || $title)
         return (
             <head>
                 { $content/self::head/* }
@@ -454,6 +458,59 @@ function pages:section-link($node, $model) {
     }
 };
 
+(: Page title for conferences/*
+TODO Refactor and create a page title module :)
+declare
+    %templates:wrap
+function pages:conference-title($node, $model) {
+    element a {
+        $node/@*,
+        if ($model?data instance of element(tei:div)) then
+            concat($model?data/tei:head[1]/string(), ' - Conferences')
+        else
+            concat(root($model?data)//tei:title[@type = 'short']/string(), ' - Conferences')
+    }
+};
+
+(: Page title for conferences/**/*
+TODO Refactor and create a page title module :)
+declare
+    %templates:wrap
+function pages:conference-subpage-title($node, $model) {
+    element a {
+        $node/@*,
+        concat($model?data/tei:head[1]/string(), ' - ', root($model?data)//tei:title[@type = 'short']/string(), ' - Conferences')
+    }
+};
+
+(: Page title for about/hac/*
+TODO Refactor and create a page title module :)
+declare
+    %templates:wrap
+function pages:hac-title($node, $model) {
+    element a {
+        $node/@*,
+        if ($model?data instance of element(tei:div)) then
+            concat($model?data/tei:head[1]/string(), ' - Historical Advisory Committee - About Us')
+        else
+            concat(root($model?data)//tei:title[@type = 'short']/string(), ' - Historical Advisory Committee - About Us')
+    }
+};
+
+(: Page title for about/faq/*
+TODO Refactor and create a page title module:)
+declare
+    %templates:wrap
+function pages:faq-title($node, $model) {
+    element a {
+        $node/@*,
+        if ($model?data instance of element(tei:div)) then
+            concat($model?data/tei:head[1]/string(), ' - FAQs - About Us')
+        else
+            concat(root($model?data)//tei:title[@type = 'short']/string(), ' - FAQs - About Us')
+    }
+};
+
 declare function pages:deep-section-breadcrumbs($node, $model, $truncate as xs:boolean?) {
     if ($model?data instance of element(tei:div)) then
         for $div in $model?data/ancestor-or-self::tei:div[@xml:id]
@@ -483,4 +540,15 @@ declare function pages:deep-section-breadcrumbs($node, $model, $truncate as xs:b
                 root($model?data)//tei:title[@type = 'complete']/string()
             }
         }
+};
+
+declare function pages:deep-section-page-title($node, $model) {
+    if ($model?data instance of element(tei:div)) then
+        for $div in $model?data/ancestor-or-self::tei:div[1]
+        return concat($div/tei:head/string(), ' - ', pages:section-category($node, $model))
+    else ()
+};
+
+declare function pages:section-category($node, $model) {
+    root($model?data)//tei:title[@type = 'short']/string()
 };
