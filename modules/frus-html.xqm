@@ -711,6 +711,18 @@ declare function fh:epub-url($document-id as xs:string) {
 	concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/ebook/', $document-id, '.epub')
 };
 
+declare
+    %templates:wrap
+function fh:if-media-exists($node as node(), $model as map(*), $document-id as xs:string, $suffix as xs:string) {
+    let $subcol := if ($suffix = (".pdf")) then "pdf" else "ebook"
+    return
+        if (exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $document-id, '/', $subcol, '/resources.xml'))//filename[ends-with(., $suffix)])) then
+            templates:process($node/node(), $model)
+        else
+            ()
+};
+
+
 declare 
     %templates:wrap
 function fh:epub-href($node as node(), $model as map(*), $document-id as xs:string) {
