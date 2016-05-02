@@ -2,15 +2,14 @@
 
 ## Prerequisites
 
-You need to have *ant*, *git* and *nodeJS* installed.
-*[gulp](http://gulpjs.com/)* needs to be installed globally.
+You need to have *ant*, *git* and *nodeJS* (version 4 or 5) installed.
 
 #### For Mac OS X
 
 With **[homebrew](http://brew.sh#install)** installed, do
 
     brew update && brew upgrade
-    brew install ant git node
+    brew install ant git node4-lts
 
 #### Install global node packages
 
