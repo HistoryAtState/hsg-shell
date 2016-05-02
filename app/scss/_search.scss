@@ -57,13 +57,14 @@
 }
 
 .hsg-search-inputs {
-  @extend .c-inputs-stacked;
+  // @extend .c-inputs-stacked;
   margin: 2rem 0;
   .hsg-search-input-label {
-    @extend .c-input;
-    @extend .c-checkbox;
+    // @extend .c-input;
+    // @extend .c-checkbox;
   }
 }
+
 .hsg-search-help {
   margin: 0 0 2rem 0;
 }
