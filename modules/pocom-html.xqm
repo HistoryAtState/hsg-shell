@@ -732,7 +732,10 @@ declare function pocom:year($node as node(), $model as map(*), $year as xs:integ
             intersect
         collection("/db/apps/pocom")//*[date < $yearEnd]/..
     let $people-in-year-ids := $roles-in-year/person-id
-    let $people := collection("/db/apps/pocom")/person[id = $people-in-year-ids]
+    let $people := 
+        for $person in collection("/db/apps/pocom")/person[id = $people-in-year-ids]
+        order by $person/id
+        return $person
     return
         pocom:format-index($node, $model, $people, $year)
 };
