@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var historySupport = !!(window.history && window.history.pushState);
-    var appRoot = $("html").data("app");
+    var appRoot = $("html").attr("data-app");
 
     //make sure the mobile menu is hidden when window is resized
     $( window ).resize(function() {
@@ -82,12 +82,14 @@ $(document).ready(function() {
                     }
                     highlightToc(data.tocCurrent);
                     if (data.next) {
-                        $(".nav-next").attr("href", data.next).css("visibility", "");
+                        var root = $(".nav-next").attr("href").replace(/^(.*)\/[^\/]+$/, "$1");
+                        $(".nav-next").attr("href", root + "/" + data.next).css("visibility", "");
                     } else {
                         $(".nav-next").css("visibility", "hidden");
                     }
                     if (data.previous) {
-                        $(".nav-prev").attr("href", data.previous).css("visibility", "");
+                        var root = $(".nav-prev").attr("href").replace(/^(.*)\/[^\/]+$/, "$1");
+                        $(".nav-prev").attr("href", root + "/" + data.previous).css("visibility", "");
                     } else {
                         $(".nav-prev").css("visibility", "hidden");
                     }
