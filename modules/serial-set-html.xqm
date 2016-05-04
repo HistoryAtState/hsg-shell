@@ -173,16 +173,12 @@ declare function ssh:bibls-to-table($bibls as element()+, $cols-to-exclude as xs
     </table>
 };
 
-declare function ssh:article-title($node, $model, $country-id as xs:string) {
-    let $doc := doc($ssh:ARCHIVES_ARTICLES_COL || '/' || $country-id || '.xml')
-    let $title := $doc//tei:title[@type='complete']/string()
+declare function ssh:introduction($node, $model) {
+    let $doc := $ssh:SERIAL_SET_DOC
+    let $text := $doc/id('introduction')/tei:head/following-sibling::node()
+    (: quick hack to get this material up; TODO add proper publication configuration for serial set document :)
+    let $odd := $config:PUBLICATIONS?frus?transform
+    let $html-with-bad-links := $odd($text,map {})
     return
-        $title
-};
-
-declare function ssh:article($node, $model, $country-id as xs:string) {
-    let $doc := doc($ssh:ARCHIVES_ARTICLES_COL || '/' || $country-id || '.xml')
-    let $text := $doc//tei:body
-    return
-        pages:process-content($model?odd, $text)
+        $html-with-bad-links
 };
