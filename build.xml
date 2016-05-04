@@ -5,11 +5,13 @@
     <property name="project.version" value="${package(version)}"/>
     <property name="project.app" value="hsg-shell"/>
     <property name="build.dir" value="build"/>
+    <property environment="env"/>
     <target name="xar">
         <mkdir dir="${build.dir}"/>
         <echo message="Calling npm start..."/>
         <exec executable="${npm}" outputproperty="npm.output">
             <arg line="start"/>
+            <env key="PATH" value="${env.PATH}:${node.PATH}"/>
         </exec>
         <echo message="${npm.output}"/>
         <echo message="Creating xar package..."/>
