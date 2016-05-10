@@ -50,8 +50,24 @@ To create an up-to-date build package to install in eXistDB, this should do
 
 ## Development
 
-`gulp build` builds the resource folder with fonts, optimized images, vendor javascript libraries and compiled styles
+`gulp build` builds the resource folder with fonts, optimized images, scripts and compiled styles
 
-`gulp deploy` sends the resource folder to a local existDB - you may have to edit the credentials in gulpfile.js
+`gulp deploy` sends the resource folder to a local existDB
 
-`gulp watch` will upload the build files whenever the SCSS or JS source files change
+`gulp watch` will upload the build files whenever a source file changes
+
+**NOTE:** For the deploy and watch task you may have to edit the DB credentials in `gulpfile.js`.
+
+## Build
+
+`ant` builds XAR file after running npm install bower install and gulp (build)
+
+### Production
+
+If `NODE_ENV` environment variable is set to **production** the XAR is build with
+minified and concatenated styles and scripts. This build will then include
+google-analytics and DAP tracking.
+
+`NODE_ENV=production ant` for a single test
+
+`export NODE_ENV` in the login script on a production server
