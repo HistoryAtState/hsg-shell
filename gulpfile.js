@@ -114,16 +114,7 @@ gulp.task('scripts:concat', ['scripts:build'], function () {
       .pipe(gulp.dest('resources/scripts'));
 })
 
-gulp.task('scripts:copy', function () {
-    return gulp.src([
-            'bower_components/jquery/dist/*.js',
-            'bower_components/jquery-touchswipe/*.js',
-            'bower_components/bootstrap-sass/assets/javascripts/bootstrap{.min,}.js'
-        ])
-        .pipe(gulp.dest('resources/scripts/vendor'))
-})
-
-gulp.task('scripts:deploy', ['scripts:copy', 'scripts:concat'], function () {
+gulp.task('scripts:deploy', ['scripts:concat'], function () {
     return gulp.src('resources/scripts/*.js', {base: '.'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
