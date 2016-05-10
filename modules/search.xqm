@@ -252,18 +252,19 @@ $volume-id as xs:string*, $start as xs:integer, $perpage as xs:integer?) {
     let $start-time := util:system-time()
     let $hits :=
         search:query-sections($within, $volume-id, $q)
-    let $hit-count := count($hits)
     let $hits := search:filter($hits)
     let $end-time := util:system-time()
     let $ordered-hits :=
         for $hit in $hits
         order by ft:score($hit) descending
         return $hit
+    let $hit-count := count($ordered-hits)
     let $adjusted-start := $start + 1
-    let $adjusted-length := $perpage - 1
+    let $adjusted-length := $perpage
     let $effective-end := min(($start + $perpage, $hit-count))
     let $window := subsequence($ordered-hits, $adjusted-start, $adjusted-length)
-    let $page-count := ceiling($hit-count div $perpage) cast as xs:integer
+    let $reminder := if ($hit-count mod $perpage > 0) then 1 else 0
+    let $page-count := ceiling($hit-count div $perpage) cast as xs:integer + $reminder
     let $max-pages := 10
     let $max-pages-to-either-side := round($max-pages div 2) cast as xs:integer
     let $current-page := floor($effective-end div $perpage) cast as xs:integer
@@ -486,7 +487,7 @@ declare function search:page-label($node, $model) {
     $model?page
 };
 
-declare function search:page-link($node, $model) {
+declare function search:page-link($node, $model, $volume-id) {
     app:fix-this-link(
         element a {
             attribute href {
@@ -495,6 +496,7 @@ declare function search:page-link($node, $model) {
                     (
                         ('?q=' || encode-for-uri($model?query-info?q)),
                         ($model?query-info?within[. ne ''] ! ('within=' || .)),
+                        $volume-id ! ("volume-id=" || .),
                         (if ($model?page eq 1) then () else 'start=' || (($model?page - 1) * $model?query-info?perpage))
                     ),
                     '&amp;')
@@ -505,7 +507,7 @@ declare function search:page-link($node, $model) {
         , $model)
 };
 
-declare function search:previous-page-link($node, $model) {
+declare function search:previous-page-link($node, $model, $volume-id) {
     app:fix-this-link(
         element a {
             attribute href {
@@ -514,6 +516,7 @@ declare function search:previous-page-link($node, $model) {
                     (
                         ('?q=' || encode-for-uri($model?query-info?q)),
                         ($model?query-info?within[. ne ''] ! ('within=' || .)),
+                        $volume-id ! ("volume-id=" || .),
                         (if ($model?query-info?current-page eq 1) then () else 'start=' || (($model?query-info?current-page - 2) * $model?query-info?perpage))
                     ),
                     '&amp;')
@@ -524,7 +527,7 @@ declare function search:previous-page-link($node, $model) {
         , $model)
 };
 
-declare function search:next-page-link($node, $model) {
+declare function search:next-page-link($node, $model, $volume-id) {
     app:fix-this-link(
         element a {
             attribute href {
@@ -533,6 +536,7 @@ declare function search:next-page-link($node, $model) {
                     (
                         ('?q=' || encode-for-uri($model?query-info?q)),
                         ($model?query-info?within[. ne ''] ! ('within=' || .)),
+                        $volume-id ! ("volume-id=" || .),
                         (if ($model?query-info?current-page eq 1) then () else 'start=' || ($model?query-info?current-page * $model?query-info?perpage))
                     ),
                     '&amp;')
