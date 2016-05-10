@@ -108,7 +108,8 @@ gulp.task('scripts:concat', ['scripts:build'], function () {
     return gulp.src([
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/jquery-touchswipe/jquery.touchSwipe.min.js',
-            'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
+            'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+            'resources/scripts/app.min.js'
         ])
       .pipe(concat('app.all.js'))
       .pipe(gulp.dest('resources/scripts'));
