@@ -6,7 +6,7 @@ resources/css
 resources/fonts
 resources/scripts/app.all.js
 resources/scripts/app.min.js
-templates
+/templates
 
 # IDE
 .idea
