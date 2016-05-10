@@ -4,11 +4,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta data-template="config:app-meta"/>
         <link rel="shortcut icon" href="$app/resources/images/favicon.ico"/>
+        <!-- @if PRODUCTION=true -->
+        <link rel="stylesheet" type="text/css" href="$app/resources/css/all.css"/>
+        <!-- @endif -->
+        <!-- @if PRODUCTION=false -->
         <link rel="stylesheet" type="text/css" href="$app/resources/css/main.css"/>
         <link rel="stylesheet" type="text/css" data-template="pages:styles" data-template-odd="frus.odd"/>
-        <script type="text/javascript" src="$app/bower_components/jquery/dist/jquery.js"/>
-        <script type="text/javascript" src="$app/bower_components/jquery-touchswipe/jquery.touchSwipe.js"/>
-        <script type="text/javascript" src="$app/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"/>
+        <!-- @endif -->
     </head>
     <body id="body"><!-- remove after beta -->
         <div class="ribbon-container">
@@ -296,22 +298,28 @@
             </section>
         </footer>
 
-        <script type="text/javascript" src="$app/resources/scripts/app.js" data-template="app:fix-this-link"/>
+        <!-- @if PRODUCTION=false -->
+        <script type="text/javascript" src="$app/bower_components/jquery/dist/jquery.js" data-template="app:fix-this-link"/>
+        <script type="text/javascript" async="async" src="$app/bower_components/jquery-touchswipe/jquery.touchSwipe.js" data-template="app:fix-this-link"/>
+        <script type="text/javascript" async="async" src="$app/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js" data-template="app:fix-this-link"/>
+        <script type="text/javascript" async="async" src="$app/resources/scripts/app.js" data-template="app:fix-this-link"/>
+        <!-- @endif -->
+        <!-- @if PRODUCTION=true -->
+        <script type="text/javascript" async="async" src="$app/resources/scripts/app.all.js" data-template="app:fix-this-link"/>
         <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-23344799-1']);
+          _gaq.push(['_setDomainName', 'history.state.gov']);
+          _gaq.push(['_trackPageview']);
 
-                var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', 'UA-23344799-1']);
-                _gaq.push(['_setDomainName', 'history.state.gov']);
-                _gaq.push(['_trackPageview']);
-
-                (function() {{
-                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                }})();
-
-            </script>
-            <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
-            <script language="javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=DOS" id="_fed_an_ua_tag"></script>
+          (function() {{
+              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          }})();
+        </script>
+        <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
+        <script async="async" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=DOS" id="_fed_an_ua_tag"></script>
+        <!-- @endif -->
     </body>
 </html>
