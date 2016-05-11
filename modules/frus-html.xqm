@@ -713,14 +713,24 @@ declare function fh:epub-url($document-id as xs:string) {
 
 declare
     %templates:wrap
-function fh:if-media-exists($node as node(), $model as map(*), $document-id as xs:string, $suffix as xs:string) {
+function fh:if-media-exists($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?, $suffix as xs:string) {
     let $subcol := if ($suffix = (".pdf")) then "pdf" else "ebook"
     return
-        if (exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $document-id, '/', $subcol, '/resources.xml'))//filename[ends-with(., $suffix)])) then
+        if (fh:media-exists($document-id, $section-id, $suffix)) then
             templates:process($node/node(), $model)
         else
             ()
 };
+
+declare function fh:media-exists($document-id as xs:string, $section-id as xs:string?, $suffix as xs:string) {
+    let $subcol := if ($suffix = (".pdf")) then "pdf" else "ebook"
+    return
+        if ($section-id) then
+            exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $document-id, '/', $subcol, '/resources.xml'))//s3-key[. = "frus/" || $document-id || "/" || $subcol || "/"|| $section-id || $suffix])
+        else
+            exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $document-id, '/', $subcol, '/resources.xml'))//filename[. = $document-id || $suffix])
+};
+
 
 
 declare 
@@ -739,8 +749,8 @@ function fh:mobi-href($node as node(), $model as map(*), $document-id as xs:stri
 
 declare 
     %templates:wrap
-function fh:pdf-href($node as node(), $model as map(*), $document-id as xs:string) {
-    attribute href { fh:pdf-url($document-id) },
+function fh:pdf-href($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
+    attribute href { fh:pdf-url($document-id, $section-id) },
     templates:process($node/node(), $model)
 };
 

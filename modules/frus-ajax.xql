@@ -71,6 +71,11 @@ return
                 <li class="section-breadcrumb">{fh:section-breadcrumb(<n/>, $model)}</li>
             else
                 pages:deep-section-breadcrumbs(<n/>, $model, true())
+        let $mediaLink := 
+            if (fh:media-exists($volume, $id, ".pdf")) then
+                fh:pdf-url($volume, $id)
+            else
+                ()
         let $head :=
             if ($id) then
                 if ($xml instance of element(tei:div)) then
@@ -114,6 +119,7 @@ return
                             fh:get-persons($xml, distinct-values($xml//tei:persName/@corresp))
                     return
                         if ($persons) then <div class="list-group">{$persons}</div> else (),
+                "pdf": $mediaLink,
                 "gloss":
                     let $gloss :=
                         if ($xml/@type=('compilation', 'chapter', 'subchapter')) then

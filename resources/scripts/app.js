@@ -69,6 +69,9 @@ $(document).ready(function() {
                                 showContent($(this), "fadeIn", "fadeOut");
                             });
                     }
+                    if (data.pdf) {
+                        $("#media-download .hsg-link-button").attr("href", data.pdf);
+                    }
                     highlightToc(data.tocCurrent);
                     if (data.next) {
                         var root = $(".nav-next").attr("href").replace(/^(.*)\/[^\/]+$/, "$1");
