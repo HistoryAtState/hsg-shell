@@ -703,8 +703,11 @@ declare function fh:mobi-url($document-id as xs:string) {
 	concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/ebook/', $document-id, '.mobi')
 };
 
-declare function fh:pdf-url($document-id as xs:string) {
-	concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/pdf/', $document-id, '.pdf')
+declare function fh:pdf-url($document-id as xs:string, $section-id as xs:string?) {
+    if ($section-id) then
+        concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/pdf/', $section-id, '.pdf')
+    else
+        concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/pdf/', $document-id, '.pdf')
 };
 
 declare function fh:epub-url($document-id as xs:string) {
