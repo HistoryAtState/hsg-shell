@@ -83,6 +83,7 @@ $(document).ready(function() {
                         $(".nav-prev").css("visibility", "hidden");
                     }
                     showContent(container, animIn, animOut, id);
+                    ga('send', 'pageview');
                 }
             });
         });
