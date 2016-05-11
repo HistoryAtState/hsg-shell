@@ -241,7 +241,7 @@ declare %private function search:filter($hits) {
 
 declare
     %templates:default("start", 1)
-    %templates:default("perpage", 10)
+    %templates:default("per-page", 10)
     %templates:default("within", "")
     (:
     declare variable $search:SORTBY := 'relevance';
