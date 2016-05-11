@@ -7,17 +7,6 @@ $(document).ready(function() {
         $( ".collapse").collapse("hide");
     });
 
-    function resize() {
-        // if ($(window).width() > 768) {
-        //     var wh = ($(window).height()) / 2;
-        //     $(".page-nav").css("top", wh);
-        //     $(".nav-prev").css("left", $("#content-inner").offset().left);
-        //     $(".nav-next").css("left", $("#content-inner").offset().left + $("#content-inner").width() - 60);
-        //     var tw = $(".toc").width();
-        //     $(".toc").css("max-width", tw);
-        // }
-    }
-
     function getFontSize() {
         var size = $("#content-inner").css("font-size");
         return parseInt(size.replace(/^(\d+)px/, "$1"));
@@ -159,13 +148,6 @@ $(document).ready(function() {
         });
     }
 
-    function isMobile() {
-      try{ document.createEvent("TouchEvent"); return true; }
-      catch(e){ return false; }
-    }
-
-    resize();
-
     // select volume or administration from dropdown
     $("#select-volume, #select-administration, #select-country, #select-chapter").change(function(ev) {
         window.location = $(this).val();
@@ -188,7 +170,7 @@ $(document).ready(function() {
         };
         console.log("popstate: %s", params.url);
         load(params);
-    }).on("resize", resize);
+    });
 
     $("#collapse-sidebar").click(function(ev) {
         $("#sidebar").toggleClass("hidden");
@@ -197,32 +179,7 @@ $(document).ready(function() {
         } else {
             $("#right-panel").addClass("col-md-12").removeClass("col-md-9 col-md-offset-3");
         }
-        resize();
     });
-
-    if (isMobile()) {
-        $("#content-container").swipe({
-            swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-                var nav;
-                if (direction === "left") {
-                    nav = $(".nav-next").get(0);
-                } else if (direction === "right") {
-                    nav = $(".nav-prev").get(0);
-                } else {
-                    return;
-                }
-                var params = {
-                    url: nav.pathname.replace(new RegExp("^" + appRoot + "(.*)$"), "$1")
-                };
-                if (historySupport) {
-                    history.pushState(null, null, nav.href);
-                }
-                load(params, nav.className.split(" ")[0]);
-            },
-            preventDefaultEvents: false,
-            allowPageScroll: "vertical"
-        });
-    }
 
     initNavigation("#content .page-nav, .content .section-link, #toc .toc-link, #person-panel a, #gloss-panel a");
     initContent();

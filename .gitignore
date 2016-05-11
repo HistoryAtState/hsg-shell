@@ -4,7 +4,9 @@ node_modules
 bower_components
 resources/css
 resources/fonts
-resources/scripts/vendor
+resources/scripts/app.all.js
+resources/scripts/app.min.js
+/templates
 
 # IDE
 .idea

@@ -8,7 +8,26 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     imagemin = require('gulp-imagemin'),
     sourcemaps = require('gulp-sourcemaps'),
-    del = require('del')
+    del = require('del'),
+    preprocess = require('gulp-preprocess'),
+    autoprefixer = require('gulp-autoprefixer'),
+    concat = require('gulp-concat')
+
+var AUTOPREFIXER_BROWSERS = [
+  'ie >= 10',
+  'ie_mob >= 10',
+  'ff >= 30',
+  'chrome >= 34',
+  'safari >= 7',
+  'opera >= 23',
+  'ios >= 7',
+  'android >= 4.4',
+  'bb >= 10'
+];
+
+var PRODUCTION = (!!process.env.NODE_ENV || process.env.NODE_ENV === 'production')
+
+console.log('Production? %s', PRODUCTION)
 
 exist.defineMimeTypes({
     'application/xml': ['odd']
@@ -28,9 +47,10 @@ var targetConfiguration = {
 
 gulp.task('clean', function() {
     return del([
-        'build/**/*',
-        'resources/css/main.css',
-        'resources/fonts/*'
+      'templates/**/*',
+      'build/**/*',
+      'resources/css/main.css',
+      'resources/fonts/*'
     ]);
 });
 
@@ -84,16 +104,17 @@ gulp.task('scripts:build', function () {
         .pipe(gulp.dest('resources/scripts'))
 })
 
-gulp.task('scripts:copy', function () {
+gulp.task('scripts:concat', ['scripts:build'], function () {
     return gulp.src([
-            'bower_components/jquery/dist/*.js',
-            'bower_components/jquery-touchswipe/*.js',
-            'bower_components/bootstrap-sass/assets/javascripts/bootstrap{.min,}.js'
+            'bower_components/jquery/dist/jquery.min.js',
+            'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+            'resources/scripts/app.min.js'
         ])
-        .pipe(gulp.dest('resources/scripts/vendor'))
+      .pipe(concat('app.all.js'))
+      .pipe(gulp.dest('resources/scripts'));
 })
 
-gulp.task('scripts:deploy', ['scripts:copy'], function () {
+gulp.task('scripts:deploy', ['scripts:concat'], function () {
     return gulp.src('resources/scripts/*.js', {base: '.'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
@@ -104,23 +125,29 @@ gulp.task('scripts:watch', function () {
 })
 
 // styles //
-
-/**
- * TODO: minify
- */
-
 gulp.task('styles:build', ['clean'], function () {
     var compiler = sass({
-        sourceMapEmbed: true,
-        sourceMapContents: true
+        sourceMapEmbed: !PRODUCTION,
+        sourceMapContents: !PRODUCTION,
+        outputStyle: PRODUCTION ? 'compressed' : 'expanded'
     })
     compiler.on('error', sass.logError)
     return gulp.src('app/scss/main.scss')
         .pipe(compiler)
+        .pipe(autoprefixer(AUTOPREFIXER_BROWSERS))
         .pipe(gulp.dest('resources/css'))
 })
 
-gulp.task('styles:deploy', ['styles:build'], function () {
+gulp.task('styles:concat', ['styles:build'], function () {
+    return gulp.src([
+            'resources/css/main.css',
+            'resources/odd/compiled/frus.css'
+        ])
+      .pipe(concat('all.css'))
+      .pipe(gulp.dest('resources/css'));
+})
+
+gulp.task('styles:deploy', ['styles:build', 'styles:concat'], function () {
     return gulp.src('resources/css/*.css', {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
@@ -159,7 +186,14 @@ gulp.task('modules:watch', function () {
 // templates //
 
 var templatesPath = 'templates/**/*.html';
-gulp.task('templates:deploy', function () {
+
+gulp.task('templates:build', function () {
+    return gulp.src('app/' + templatesPath, {base: 'app/templates'})
+        .pipe(preprocess({context: { PRODUCTION: PRODUCTION }}))
+        .pipe(gulp.dest('templates'))
+})
+
+gulp.task('templates:deploy', ['templates:build'], function () {
     return gulp.src(templatesPath, {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
@@ -200,7 +234,7 @@ gulp.task('other:watch', function () {
 gulp.task('watch', ['styles:watch', 'scripts:watch', 'images:watch', 'templates:watch',
                     'pages:watch', 'odd:watch', 'other:watch', 'modules:watch'])
 
-gulp.task('build', ['fonts:copy', 'images:optimize', 'styles:build'])
+gulp.task('build', ['fonts:copy', 'images:optimize', 'styles:concat', 'templates:build', 'scripts:concat'])
 
 gulp.task('deploy', ['build'], function () {
     return gulp.src([

@@ -19,7 +19,6 @@
   ],
   "dependencies": {
     "jquery": "^2.2.0",
-    "jquery-touchswipe": "^1.6.15",
     "bootstrap-sass": "^3.3.6",
     "font-awesome": "^4.5.0",
     "animate.css": "^3.5.1"
