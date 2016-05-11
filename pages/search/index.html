@@ -91,6 +91,9 @@
                             <p>Displaying <span data-template="search:start"/>–<span data-template="search:end"/> of
                                 <span data-template="search:result-count"/> results<span data-template="search:message-limited"/>. (Results returned in <span data-template="search:query-duration"/>s.)
                             </p>
+                            <nav>
+                                <ul class="pagination" data-template="search:paginate" data-template-per-page="10" data-template-max-pages="10" data-template-min-hits="1"/>
+                            </nav>
                             <div class="hsg-search-result" data-template="templates:each" data-template-from="results" data-template-to="result">
                                 <h3 class="hsg-search-result-heading">
                                     <span data-template="search:result-heading"/>
@@ -103,26 +106,7 @@
                                 </p>
                             </div>
                             <nav>
-                                <ul class="pagination">
-                                    <li>
-                                        <span data-template="search:disabled-class-attribute-for-previous"/>
-                                        <a href="$app/search" aria-label="Previous" data-template="search:previous-page-link">
-                                            <span aria-hidden="true">«</span>
-                                        </a>
-                                    </li>
-                                    <li data-template="templates:each" data-template-from="pages" data-template-to="page">
-                                        <span data-template="search:active-class-attribute-for-current"/>
-                                        <a href="$app/search" data-template="search:page-link">
-                                            <span data-template="search:page-label"/>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span data-template="search:disabled-class-attribute-for-next"/>
-                                        <a href="$app/search" aria-label="Next" data-template="search:next-page-link">
-                                            <span aria-hidden="true">»</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <ul class="pagination" data-template="search:paginate" data-template-per-page="10" data-template-max-pages="10" data-template-min-hits="1"/>
                             </nav>
                         </div>
                     </div>

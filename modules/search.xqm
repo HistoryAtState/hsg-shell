@@ -240,7 +240,7 @@ declare %private function search:filter($hits) {
 };
 
 declare
-    %templates:default("start", 0)
+    %templates:default("start", 1)
     %templates:default("perpage", 10)
     %templates:default("within", "")
     (:
@@ -248,7 +248,7 @@ declare
     declare variable $search:SORTORDER := 'descending';
     :)
 function search:load-results($node, $model, $q as xs:string, $within as xs:string*,
-$volume-id as xs:string*, $start as xs:integer, $perpage as xs:integer?) {
+$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
     let $start-time := util:system-time()
     let $hits :=
         search:query-sections($within, $volume-id, $q)
@@ -259,43 +259,19 @@ $volume-id as xs:string*, $start as xs:integer, $perpage as xs:integer?) {
         order by ft:score($hit) descending
         return $hit
     let $hit-count := count($ordered-hits)
-    let $adjusted-start := $start + 1
-    let $adjusted-length := $perpage
-    let $effective-end := min(($start + $perpage, $hit-count))
-    let $window := subsequence($ordered-hits, $adjusted-start, $adjusted-length)
-    let $reminder := if ($hit-count mod $perpage > 0) then 1 else 0
-    let $page-count := ceiling($hit-count div $perpage) cast as xs:integer + $reminder
-    let $max-pages := 10
-    let $max-pages-to-either-side := round($max-pages div 2) cast as xs:integer
-    let $current-page := floor($effective-end div $perpage) cast as xs:integer
+    let $window := subsequence($ordered-hits, $start, $per-page)
     let $query-info :=  map {
         "results": $window,
         "query-info": map {
             "q": $q,
             "within": $within,
-            "start": $adjusted-start,
-            "end": $effective-end,
-            "perpage": $perpage,
+            "start": $start,
+            "end": $start + count($window) - 1,
+            "perpage": $per-page,
             "result-count": $hit-count,
             "results-shown": count($hits),
-            "query-duration": seconds-from-duration($end-time - $start-time),
-            "page-count": $page-count,
-            "current-page": $current-page
-        },
-        "pages":
-            (
-                if ($current-page - $max-pages-to-either-side le 0) then
-                    (1 to $current-page - 1)
-                else
-                    ($current-page - $max-pages-to-either-side) to ($current-page - 1)
-                ,
-                if ($page-count = 1) then
-                    1
-                else if ($current-page + $max-pages-to-either-side ge $page-count) then
-                    ($current-page to $page-count - 1)
-                else
-                    $current-page to ($current-page + $max-pages-to-either-side - 1)
-            )
+            "query-duration": seconds-from-duration($end-time - $start-time)
+        }
     }
     let $html := templates:process($node/*, map:new(($model, $query-info)))
     return
@@ -462,91 +438,6 @@ declare function search:end($node, $model) {
     $model?query-info?end
 };
 
-declare function search:disabled-class-attribute-for-previous($node, $model) {
-    if ($model?query-info?start eq 1) then
-        attribute class {"disabled"}
-    else
-        ()
-};
-
-declare function search:disabled-class-attribute-for-next($node, $model) {
-    if (($model?query-info?current-page + 1) eq $model?pages[last()]) then
-        attribute class {"disabled"}
-    else
-        ()
-};
-
-declare function search:active-class-attribute-for-current($node, $model) {
-    if ($model?query-info?current-page = $model?page) then
-        attribute class {"active"}
-    else
-        ()
-};
-
-declare function search:page-label($node, $model) {
-    $model?page
-};
-
-declare function search:page-link($node, $model, $volume-id) {
-    app:fix-this-link(
-        element a {
-            attribute href {
-                $node/@href ||
-                string-join(
-                    (
-                        ('?q=' || encode-for-uri($model?query-info?q)),
-                        ($model?query-info?within[. ne ''] ! ('within=' || .)),
-                        $volume-id ! ("volume-id=" || .),
-                        (if ($model?page eq 1) then () else 'start=' || (($model?page - 1) * $model?query-info?perpage))
-                    ),
-                    '&amp;')
-            },
-            $node/@* except $node/@href,
-            $node/node()
-        }
-        , $model)
-};
-
-declare function search:previous-page-link($node, $model, $volume-id) {
-    app:fix-this-link(
-        element a {
-            attribute href {
-                $node/@href ||
-                string-join(
-                    (
-                        ('?q=' || encode-for-uri($model?query-info?q)),
-                        ($model?query-info?within[. ne ''] ! ('within=' || .)),
-                        $volume-id ! ("volume-id=" || .),
-                        (if ($model?query-info?current-page eq 1) then () else 'start=' || (($model?query-info?current-page - 2) * $model?query-info?perpage))
-                    ),
-                    '&amp;')
-            },
-            $node/@* except $node/@href,
-            $node/node()
-        }
-        , $model)
-};
-
-declare function search:next-page-link($node, $model, $volume-id) {
-    app:fix-this-link(
-        element a {
-            attribute href {
-                $node/@href ||
-                string-join(
-                    (
-                        ('?q=' || encode-for-uri($model?query-info?q)),
-                        ($model?query-info?within[. ne ''] ! ('within=' || .)),
-                        $volume-id ! ("volume-id=" || .),
-                        (if ($model?query-info?current-page eq 1) then () else 'start=' || ($model?query-info?current-page * $model?query-info?perpage))
-                    ),
-                    '&amp;')
-            },
-            $node/@* except $node/@href,
-            $node/node()
-        }
-        , $model)
-};
-
 declare
     %templates:wrap
 function search:select-volumes($node as node(), $model as map(*), $volume-id as xs:string*) {
@@ -560,4 +451,75 @@ function search:select-volumes($node as node(), $model as map(*), $volume-id as 
             </input>
             <span class="c-indicator">{ fh:vol-title($vol-id) }</span>
         </label>
+};
+
+(:~
+ : Create a bootstrap pagination element to navigate through the hits.
+ :)
+declare
+    %templates:default('start', 1)
+    %templates:default("per-page", 10)
+    %templates:default("min-hits", 0)
+    %templates:default("max-pages", 10)
+function search:paginate($node as node(), $model as map(*), $start as xs:int, $per-page as xs:int, $min-hits as xs:int,
+    $max-pages as xs:int, $volume-id as xs:string*) {
+    if ($min-hits < 0 or $model?query-info?result-count >= $min-hits) then
+        element { node-name($node) } {
+            $node/@*,
+            let $params :=
+                    string-join(
+                        (
+                            ('&amp;q=' || encode-for-uri($model?query-info?q)),
+                            ($model?query-info?within[. ne ''] ! ('within=' || .)),
+                            $volume-id ! ("volume-id=" || .),
+                            "per-page=" || $per-page
+                        ),
+                        '&amp;'
+                    )
+            let $count := xs:integer(ceiling($model?query-info?result-count) div $per-page) + (if ($model?query-info?result-count mod $per-page = 0) then 0 else 1)
+            return (
+                if ($start = 1) then (
+                    <li class="disabled">
+                        <a><i class="glyphicon glyphicon-fast-backward"/></a>
+                    </li>,
+                    <li class="disabled">
+                        <a><i class="glyphicon glyphicon-backward"/></a>
+                    </li>
+                ) else (
+                    <li>
+                        <a href="?start=1{$params}"><i class="glyphicon glyphicon-fast-backward"/></a>
+                    </li>,
+                    <li>
+                        <a href="?start={max( ($start - $per-page, 1 ) ) }{$params}"><i class="glyphicon glyphicon-backward"/></a>
+                    </li>
+                ),
+                let $startPage := xs:integer(ceiling($start div $per-page))
+                let $lowerBound := max(($startPage - ($max-pages idiv 2), 1))
+                let $upperBound := min(($lowerBound + $max-pages - 1, $count))
+                let $lowerBound := max(($upperBound - $max-pages + 1, 1))
+                for $i in $lowerBound to $upperBound
+                return
+                    if ($i = ceiling($start div $per-page)) then
+                        <li class="active"><a href="?start={max( (($i - 1) * $per-page + 1, 1) )}{$params}">{$i}</a></li>
+                    else
+                        <li><a href="?start={max( (($i - 1) * $per-page + 1, 1)) }{$params}">{$i}</a></li>,
+                if ($start + $per-page - 1 < $model?query-info?result-count) then (
+                    <li>
+                        <a href="?start={$start + $per-page}{$params}"><i class="glyphicon glyphicon-forward"/></a>
+                    </li>,
+                    <li>
+                        <a href="?start={max( (($count - 1) * $per-page + 1, 1))}{$params}"><i class="glyphicon glyphicon-fast-forward"/></a>
+                    </li>
+                ) else (
+                    <li class="disabled">
+                        <a><i class="glyphicon glyphicon-forward"/></a>
+                    </li>,
+                    <li class="disabled">
+                        <a><i class="glyphicon glyphicon-fast-forward"/></a>
+                    </li>
+                )
+            )
+        }
+    else
+        ()
 };
