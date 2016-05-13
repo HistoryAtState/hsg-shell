@@ -57,11 +57,10 @@
 }
 
 .hsg-search-inputs {
-  // @extend .c-inputs-stacked;
+  @extend .c-inputs-stacked;
   margin: 2rem 0;
   .hsg-search-input-label {
-    // @extend .c-input;
-    // @extend .c-checkbox;
+    @extend .c-input;
   }
 }
 
