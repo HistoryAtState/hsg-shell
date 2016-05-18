@@ -20,10 +20,10 @@
   .ribbon,
   .ribbon a,
   a.page-nav,
-  aside,
+  aside:not(.hsg-print),
   select,
   #content > .row > .hsg-breadcrumb-wrapper {
-    display: none !important;
+    display: none;
   }
   body {
     font-size: ($base-font-size * 0.8);
