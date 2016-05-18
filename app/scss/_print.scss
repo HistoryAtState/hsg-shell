@@ -34,10 +34,16 @@
   .carousel-image img {
     width: 80% !important;
   }
-  .tei-graphic {
-    max-width: 100%;
-    width: 80%;
+  .figure-floated .tei-graphic {
+    width: 80% !important;
   }
+  #appendix-a .tei-graphic {
+    width: 70% !important;
+  }
+  .tei-graphic {
+    width: 30%;
+  }
+
   a {
     word-wrap: break-word;
     color: $color-base;
