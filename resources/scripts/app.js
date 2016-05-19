@@ -95,7 +95,7 @@ $(document).ready(function() {
     function initContent() {
         $(".content .note").popover({
             html: true,
-            trigger: "hover",
+            trigger: "hover click",
             placement: "auto bottom",
             viewport: "#content-container",
             content: function() {
@@ -111,7 +111,7 @@ $(document).ready(function() {
         $(".content .alternate").each(function() {
             $(this).popover({
                 content: $(this).find(".altcontent").html(),
-                trigger: "hover",
+                trigger: "hover click",
                 html: true
             });
         });
