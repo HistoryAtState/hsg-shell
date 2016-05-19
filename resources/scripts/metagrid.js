@@ -10,7 +10,7 @@ $(document).ready(function () {
             $("#metagrid").show();
 
             $.each(data[0], function (index, value) {
-                $('<li><span class="hsg-external-link"></span>').attr({
+                $('<li><span class="hsg-external-link" aria-hidden="true"></span>').attr({
                     class: 'metagrid hsg-list-group-item'
                 }).append('<a>').appendTo('#metagrid-container');
                 $('#metagrid-container li:last-child a').attr({
