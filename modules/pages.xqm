@@ -16,7 +16,15 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
-declare variable $pages:app-root := request:get-context-path() || substring-after($config:app-root, "/db");
+declare variable $pages:app-root := 
+    let $nginx-request-uri := request:get-header('nginx-request-uri')
+    return
+        (: if request received from nginx :)
+        if ($nginx-request-uri) then
+            ""
+        (: otherwise we're in the eXist URL space :)
+        else
+            request:get-context-path() || substring-after($config:app-root, "/db");
 
 declare variable $pages:EXIDE :=
     let $pkg := collection(repo:get-root())//expath:package[@name = "http://exist-db.org/apps/eXide"]
