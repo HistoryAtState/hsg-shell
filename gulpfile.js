@@ -96,7 +96,10 @@ gulp.task('images:watch', function () {
 
 gulp.task('scripts:build', function () {
     // minified version of js is used in production only
-    return gulp.src('resources/scripts/app.js')
+    return gulp.src([
+            'resources/scripts/app.js',
+            'resources/scripts/metagrid.js'
+        ])
         .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write())
