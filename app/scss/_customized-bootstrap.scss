@@ -60,7 +60,7 @@ $icon-font-path: "../fonts/";
 }
 
 .nav {
-  @media (min-width: $grid-float-breakpoint) and (max-width: $screen-md-max){
+  @media (min-width: $grid-float-breakpoint) and (max-width: $screen-md-max) {
     font-size: $small-font-size;
     > li > a {
       padding: 10px 14px;
@@ -140,7 +140,6 @@ $icon-font-path: "../fonts/";
 
 /* Table -------------- */
 
-
 /* override bootstrap, which makes tables full width. TODO: modify bootstrap base style */
 .table {
   width: inherit;
@@ -184,7 +183,6 @@ dd {
   margin: 0 0 $margin-vertical-base 1.5em;
 }
 
-
 /* Panels -------------- */
 
 .panel {
@@ -216,7 +214,7 @@ dd {
 /* Selectbar in dynamic content pages */
 
 #content-inner {
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     .form-group {
       margin-bottom: 15px;
     }
@@ -241,7 +239,6 @@ dd {
     }
   }
 }
-
 
 /* Buttons */
 
@@ -293,6 +290,11 @@ blockquote {
 }
 
 /* External Links */
+/* Only for use on empty elements. Icon classes should only be used
+on elements that contain no text content and have no child elements.
+Don't mix with other classes.
+<span class="hsg-external-link" aria-hidden="true"></span>
+*/
 .hsg-external-link {
   @extend .glyphicon;
   @extend .glyphicon-new-window;
