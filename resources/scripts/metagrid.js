@@ -17,11 +17,11 @@ $(document).ready(function () {
             $.each(data[0], function (index, value) {
                 $('<li><span class="hsg-external-link" aria-hidden="true"></span>').attr({
                     class: 'metagrid hsg-list-group-item'
-                }).append('<a>').attr({
-                    target: '_blank'
-                }).appendTo('#metagrid-container');
+                }).append('<a>').appendTo('#metagrid-container');
                 $('#metagrid-container li:last-child a').attr({
-                    title: value.short_description, href: value.url
+                    title: value.short_description,
+                    href: value.url,
+                    target: '_blank'
                 }).text(index);
             });
         }
