@@ -1458,10 +1458,11 @@ else if (matches($exist:path, '^/api/v1/?')) then
         </dispatch>
 
 (: handle services requests :)
-else if (matches($exist:path, '^/services/?')) then
+else if (matches($exist:path, '^/services/.+?') and substring-after($exist:path, '/services/') = ('volume-ids', 'volume-images')) then
     let $fragments := tokenize(substring-after($exist:path, '/services/'), '/')[. ne '']
     let $xql := switch ($fragments[1])
         case "volume-ids" return 'volume-ids.xql'
+        case "volume-images" return 'volume-images.xql'
         default return ()
     return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
