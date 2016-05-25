@@ -37,6 +37,13 @@ declare variable $pages:EXIDE :=
     return
         replace($path, "/+", "/");
 
+    declare variable $pages:rewrite-notice := <p>
+    Notice to readers: <br />
+    This article has been removed pending review to ensure it meets our standards
+    for accuracy and clarity. The revised article will be posted as soon as it is ready. <br />
+    In the meantime, we apologize for any inconvenience, and we thank you for your patience.
+</p>;
+
 declare
     %templates:default("view", "div")
     %templates:default("ignore", "false")
@@ -170,9 +177,16 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
     let $log := console:log("pages:view: view: " || $view || " heading-offset: " || $heading-offset)
     let $xml :=
         if ($view = "div") then
-            pages:get-content($model?data)
+            if ($model?data[@subtype='removed-pending-rewrite']) then
+                <tei:div>
+                    { $model?data/tei:head }
+                    { $pages:rewrite-notice }
+                </tei:div>
+            else
+                pages:get-content($model?data)
         else
             $model?data//*:body/*
+
     return
         if ($xml instance of element(tei:pb)) then
             let $href := concat('//', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
