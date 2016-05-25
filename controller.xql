@@ -1457,6 +1457,18 @@ else if (matches($exist:path, '^/api/v1/?')) then
             <!--TODO Maybe add an error handler, but not the default one. -->
         </dispatch>
 
+(: handle services requests :)
+else if (matches($exist:path, '^/services/?')) then
+    let $fragments := tokenize(substring-after($exist:path, '/services/'), '/')[. ne '']
+    let $xql := switch ($fragments[1])
+        case "volume-ids" return 'volume-ids.xql'
+        default return ()
+    return
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/modules/{$xql}"/>
+            <!--TODO Maybe add an error handler, but not the default one. -->
+        </dispatch>
+
 (: fallback: return 404 :)
 else
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
