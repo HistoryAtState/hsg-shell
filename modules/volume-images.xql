@@ -66,7 +66,7 @@ declare function local:dispatch-query() {
             return
               <results>
                  <summary>
-                    <volumes>{$hitcount}</volumes>
+                    <images>{$hitcount}</images>
                     <time>{$runtime} seconds</time>
                     <datetime-retrieved>{current-dateTime()}</datetime-retrieved>
                  </summary>
