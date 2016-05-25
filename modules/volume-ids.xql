@@ -12,7 +12,7 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 declare option output:method "xml";
 
 let $start-time := util:system-time()
-let $hits := for $x in xmldb:get-child-resources($config:FRUS_VOLUMES_COL) order by $x return replace($x, '.xml', '')
+let $hits := for $x in xmldb:get-child-resources($config:FRUS_METADATA_COL) order by $x return replace($x, '.xml', '')
 let $hitcount := count($hits)
 let $end-time := util:system-time()
 let $runtime := (($end-time - $start-time) div xs:dayTimeDuration('PT1S'))
@@ -25,7 +25,7 @@ return
         </summary>
         <volume-ids>{
             for $hit in $hits
-                return
-                    <volume-id>{$hit}</volume-id>
+            return
+                <volume-id>{$hit}</volume-id>
         }</volume-ids>
     </results>
