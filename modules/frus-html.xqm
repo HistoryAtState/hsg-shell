@@ -418,28 +418,28 @@ declare function fh:next-year($node, $model) {
 
 declare function fh:volumes-published-this-year($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year ge $this-year]
+    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year eq $this-year]
     return
         fh:list-published-volumes($volumes)
 };
 
 declare function fh:volumes-published-this-year-count($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year ge $this-year]
+    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year eq $this-year]
     return
         count($volumes)
 };
 
 declare function fh:volumes-published-last-year($node, $model) {
     let $last-year := xs:string(year-from-date(current-date()) - 1)
-    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year ge $last-year]
+    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year eq $last-year]
     return
         fh:list-published-volumes($volumes)
 };
 
 declare function fh:volumes-published-last-year-count($node, $model) {
     let $last-year := xs:string(year-from-date(current-date()) - 1)
-    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year ge $last-year]
+    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year eq $last-year]
     return
         count($volumes)
 };
