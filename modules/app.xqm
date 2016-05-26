@@ -369,6 +369,17 @@ declare function app:carousel-image-alt-attribute($node as node(), $model as map
         attribute alt { $image-alt }
 };
 
+declare function app:carousel-image-dimension-attributes($node as node(), $model as map(*)) {
+    let $item := $model?carousel-item
+    let $image-height := $item/image-height
+    let $image-width := $item/image-width
+    return
+        (
+            attribute height { $image-height },
+            attribute width { $image-width }
+        )
+};
+
 declare function app:carousel-div-class-attribute($node as node(), $model as map(*)) {
     let $item := $model?carousel-item
     let $n := index-of($model?carousel-items, $item) - 1
