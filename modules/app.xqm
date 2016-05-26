@@ -357,8 +357,7 @@ declare function app:carousel-list-class-attribute($node as node(), $model as ma
 
 declare function app:carousel-image-src-attribute($node as node(), $model as map(*)) {
     let $item := $model?carousel-item
-    let $vol-id := replace($item/image, '\.(png|jpg)', '')
-    let $image-src := '//' || $config:S3_DOMAIN || '/frus/' || $vol-id || '/covers/' || $vol-id || '.jpg'
+    let $image-src := $item/image
     return
         attribute src { $image-src }
 };
@@ -368,6 +367,17 @@ declare function app:carousel-image-alt-attribute($node as node(), $model as map
     let $image-alt := $item/image-description
     return
         attribute alt { $image-alt }
+};
+
+declare function app:carousel-image-dimension-attributes($node as node(), $model as map(*)) {
+    let $item := $model?carousel-item
+    let $image-height := $item/image-height
+    let $image-width := $item/image-width
+    return
+        (
+            attribute height { $image-height },
+            attribute width { $image-width }
+        )
 };
 
 declare function app:carousel-div-class-attribute($node as node(), $model as map(*)) {
