@@ -37,13 +37,6 @@ declare variable $pages:EXIDE :=
     return
         replace($path, "/+", "/");
 
-    declare variable $pages:rewrite-notice := <p>
-    Notice to readers: <br />
-    This article has been removed pending review to ensure it meets our standards
-    for accuracy and clarity. The revised article will be posted as soon as it is ready. <br />
-    In the meantime, we apologize for any inconvenience, and we thank you for your patience.
-</p>;
-
 declare
     %templates:default("view", "div")
     %templates:default("ignore", "false")
@@ -180,7 +173,10 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
             if ($model?data[@subtype='removed-pending-rewrite']) then
                 <tei:div>
                     { $model?data/tei:head }
-                    { $pages:rewrite-notice }
+                    <tei:p>Notice to readers: This article has been removed pending review to ensure 
+                        it meets our standards for accuracy and clarity. The revised article will be 
+                        posted as soon as it is ready. In the meantime, we apologize for any 
+                        inconvenience, and we thank you for your patience.</tei:p>
                 </tei:div>
             else
                 pages:get-content($model?data)
