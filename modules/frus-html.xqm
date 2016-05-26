@@ -329,10 +329,16 @@ declare function fh:get-gloss($root as element(), $ids as xs:string*) {
     for $idref in $ids
     let $id := substring($idref, 2)
     let $term := $terms/id($id)
-(:    let $term := $terms//tei:term[@xml:id = $id]:)
+    let $termText := $term/../following-sibling::text()
+    let $termDescription := normalize-space(string-join($termText))
+    (: Special case, when term description is in a sibling element like a <persName> tag :)
+    let $persName := $term/../following-sibling::*
     order by $term
     return
-        <a href="terms{$idref}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($term/../following-sibling::text()))}">{$term/text()}</a>
+        <a href="terms{$idref}" class="list-group-item" data-toggle="tooltip" title="{
+        if ($persName) then $persName/text()
+        else ($termDescription)
+        }">{$term/text()}</a>
 };
 
 declare function fh:volume-breadcrumb($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
