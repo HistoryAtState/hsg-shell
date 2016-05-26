@@ -7,6 +7,7 @@ import module namespace app="http://history.state.gov/ns/site/hsg/templates" at 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
+import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
@@ -309,12 +310,12 @@ function fh:view-persons($node as node(), $model as map(*)) {
 declare function fh:get-persons($root as element(), $ids as xs:string*) {
     let $persons := $root/ancestor-or-self::tei:TEI/id("persons")
     for $idref in $ids
-    let $id := substring($idref, 2)
-    let $name := $persons/id($id)
-(:    let $name := $persons//tei:persName[@xml:id = $id]:)
-    order by $name
+        let $id := substring($idref, 2)
+        let $persName := $persons/id($id)
+        let $persDescription := $persons/id($id)/../../text()
+        order by $persName
     return
-        <a href="persons{$idref}" class="list-group-item" data-toggle="tooltip" title="{normalize-space(string-join($name/..//text()))}">{$name/string()}</a>
+        <a href="persons{$idref}" class="list-group-item" data-toggle="tooltip" title="{$persDescription}">{$persName/string()}</a>
 };
 
 declare
