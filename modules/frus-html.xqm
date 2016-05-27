@@ -806,14 +806,3 @@ function fh:show-if-tei-document ($node as node(), $model as map(*)) {
     else
         attribute style { "display: none" }
 };
-
-declare
-    %templates:wrap
-function fh:show-if ($rule) {
-    return function ($node, $model) {
-        if ($rule($node, $model)) then
-            templates:process($node/node(), $model)
-        else
-            attribute data-hidden { "true" }
-    }
-}
