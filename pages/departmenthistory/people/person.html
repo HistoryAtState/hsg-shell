@@ -19,6 +19,10 @@
             </div>
         </div>
         <div data-template="pocom:show-biography">
+            
+            <!-- Templating note: The pocom:show-biography template only returns the following div if a biography is found. 
+                Otherwise, the next one is shown. -->
+            
             <div class="row">
                 <div class="hsg-width-two-thirds">
                     <div id="content-inner">
@@ -88,11 +92,18 @@
                     </div>
                 </aside>
             </div>
+            
+            <!-- Templating note: The pocom:show-biography template only returns the following div if a biography is NOT found. -->
+            
             <div class="row">
                 <div class="hsg-width-two-thirds" data-template="app:fix-links">
                     <h1 data-template="pocom:person-name-birth-death"/>
                     <div data-template="pocom:person-entry"/>
                 </div>
+                
+                <!-- Metagrid Widget -->
+                <aside id="metagrid-wrapper" class="hsg-width-one-third hsg-print" data-template="app:fix-links"/>
+                
                 <aside class="hsg-width-one-third">
                     <div id="sections" class="hsg-panel" data-template="app:fix-links">
                         <div class="hsg-panel-heading">
