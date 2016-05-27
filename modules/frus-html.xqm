@@ -796,3 +796,24 @@ function fh:hide-download-if-empty($node as node(), $model as map(*), $document-
     else
         attribute style { "display: none" }
 };
+
+declare
+    %templates:wrap
+function fh:show-if-tei-document ($node as node(), $model as map(*)) {
+    (: searchable volumes must have a tei:text node :)
+    if (root($model?data)//tei:text) then
+        templates:process($node/node(), $model)
+    else
+        attribute style { "display: none" }
+};
+
+declare
+    %templates:wrap
+function fh:show-if ($rule) {
+    return function ($node, $model) {
+        if ($rule($node, $model)) then
+            templates:process($node/node(), $model)
+        else
+            attribute data-hidden { "true" }
+    }
+}
