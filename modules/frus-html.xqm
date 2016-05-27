@@ -787,3 +787,13 @@ declare function fh:isbn-link($node as node(), $model as map(*)) {
         else
             ()
 };
+
+declare
+    %templates:wrap
+function fh:hide-download-if-empty($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
+    if (fh:media-exists($document-id, $section-id, "pdf") or fh:media-exists($document-id, $section-id, "epub") or fh:media-exists($document-id, $section-id, "mobi")) then
+        ()
+    else
+        attribute style { "display: none" },
+    templates:process($node/node(), $model)
+};
