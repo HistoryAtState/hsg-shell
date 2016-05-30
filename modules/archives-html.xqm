@@ -51,3 +51,11 @@ declare function archives:list($node, $model) {
             </ul>
         </div>
 };
+
+(: Page title for countries/archives/article:)
+declare
+    %templates:wrap
+function archives:archive-pagetitle ($node, $model) {
+    concat(root($model?data)//tei:title[@type = 'short']/string(), ' - Archives - Countries')
+};
+};
