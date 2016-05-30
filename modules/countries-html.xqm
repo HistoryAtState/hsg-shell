@@ -29,6 +29,11 @@ declare %templates:wrap function ch:article-title($node as node(), $model as map
 
 declare %templates:wrap function ch:page-title($node as node(), $model as map(*)) {
     concat(root($model?data)//tei:title[@type='short']/string(), ' - Countries')
+(: Main heading with complete article title :)
+declare
+    %templates:wrap
+function ch:article-heading($node as node(), $model as map(*)) {
+    root($model?data)//tei:title[@type='complete']/string()
 };
 
 declare function ch:article-href-value-attribute($node as node(), $model as map(*)) {
