@@ -58,4 +58,10 @@ declare
 function archives:archive-pagetitle ($node, $model) {
     concat(root($model?data)//tei:title[@type = 'short']/string(), ' - Archives - Countries')
 };
+
+(: Headline for countries/archives/article :)
+declare
+    %templates:wrap
+function archives:archive-title($node, $model) {
+    root($model?data)//tei:title[@type = 'complete']/string()
 };
