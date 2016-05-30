@@ -620,7 +620,7 @@ declare function fh:frus-history-ebook-entry($model as map(*)) {
             <ul class="hsg-ebook-list">
                 <li><a class="hsg-link-button" href="{$epub-url}">EPUB ({$epub-size})</a></li>
                 <li><a class="hsg-link-button" href="{$mobi-url}">Mobi ({$mobi-size})</a></li>
-                <li><a class="hsg-link-button" href="{$mobi-url}">PDF ({$pdf-size})</a></li>
+                <li><a class="hsg-link-button" href="{$pdf-url}">PDF ({$pdf-size})</a></li>
             </ul>
         </div>
 };
