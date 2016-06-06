@@ -801,7 +801,7 @@ declare
     %templates:wrap
 function fh:show-if-tei-document ($node as node(), $model as map(*)) {
     (: searchable volumes must have a tei:text node :)
-    if (root($model?data)//tei:text) then
+    if (root($model?data)//tei:body/tei:div) then
         templates:process($node/node(), $model)
     else
         attribute style { "display: none" }
