@@ -67,8 +67,9 @@ declare function pmf:ref($config as map(*), $node as element(), $class as xs:str
             "$app" || $target
         else
             $target
+    let $content := if ($node/node()) then $config?apply-children($config, $node, .) else $href
     return
-        <a href="{$href}">{$config?apply-children($config, $node, .)}</a>
+        <a href="{$href}">{$content}</a>
 };
 
 declare function pmf:note($config as map(*), $node as element(), $class as xs:string+, $content, $place, $label) {
