@@ -806,3 +806,44 @@ function fh:show-if-tei-document ($node as node(), $model as map(*)) {
     else
         attribute style { "display: none" }
 };
+
+(:
+    Returns the publication-status of a document as a string
+:)
+declare function fh:publication-status ($document-id) {
+    collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/publication-status/string()
+};
+
+(:
+    Render frus landing header
+    If publication-status is "under-declassification", then replace content with "Note to Readers".
+    Todo: Treat further publication statuses.
+:)
+declare function fh:header ($node as node(), $model as map(*)) {
+    let $publication-status := fh:publication-status($model?document-id)
+    return
+    if ($publication-status eq 'under-declassification') then
+        (
+            pages:header($node, map {
+                "data": <tei:TEI>
+                            <tei:teiHeader>
+                                <tei:fileDesc>
+                                    <tei:titleStmt>{ $model?data//tei:title }</tei:titleStmt>
+                                </tei:fileDesc>
+                            </tei:teiHeader>
+                        </tei:TEI>,
+                "publication-id": $model?publication-id,
+                "document-id": $model?document-id,
+                "section-id": $model?section-id,
+                "view": $model?view,
+                "base-path": $model?base-path,
+                "odd": $model?odd
+            }),
+            <p><strong>Note to Readers:</strong> This volume has not yet been published.  As indicated on the
+            <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a> page,
+            the current status of this volume is "Being Researched or Prepared."</p>
+        )
+    else
+        (pages:header($node, $model),
+        <hr/>)
+};
