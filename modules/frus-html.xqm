@@ -312,7 +312,9 @@ declare function fh:get-persons($root as element(), $ids as xs:string*) {
     for $idref in $ids
         let $id := substring($idref, 2)
         let $persName := $persons/id($id)
-        let $persDescription := $persons/id($id)/../../text()
+        let $persDescription := $persons/id($id)/../../string() (: text() doesn't work as input-parameter in replace()! :)
+     (: Todo: Filter unwanted characters from description.
+        let $filteredPersDesc := replace($persDescription, "/^(, )?([^.]+)\.$/", "$2") :)
         order by $persName
     return
         <a href="persons{$idref}" class="list-group-item" data-toggle="tooltip" title="{$persDescription}">{$persName/string()}</a>
