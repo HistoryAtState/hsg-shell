@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
-    // perhaps the regexp could be more strict and accept only lowercase characters and hyphen?
-    // something like:
-    // var personId = window.location.href.match(/\/departmenthistory\/people\/([a-z\-]+)$/i);
     var personId = window.location.href.match(/\/departmenthistory\/people\/([^/#]+)$/i);
+    if (!personID) {
+        return;
+    };
 
     $.getJSON('https://api.metagrid.ch/widget/history-state/person/' + personId[1] + '.json?lang=en&include=true&jsoncallback=?', function (data) {
         if (data[0]) {
