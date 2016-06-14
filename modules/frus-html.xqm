@@ -819,6 +819,15 @@ declare function fh:publication-status ($document-id) {
 };
 
 (:~
+ : Get the URL of a referenced document
+ : @param $document-id The document ID
+ : @return Returns the URL of an external link as a string
+ :)
+declare function fh:location-url ($document-id) {
+    collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/location[@loc="madison"]/string()
+};
+
+(:~
  :  Render frus volume landing header:
  :  Replace content (except for the document title) with a notice, if the publication-status is "under-declassification".
  :  Show an external link to the referenced document, if the status is "published", but no TEI document is available.
@@ -829,29 +838,40 @@ declare function fh:publication-status ($document-id) {
  :)
 declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
     let $publication-status := fh:publication-status($model?document-id)
-    return
-    if ($publication-status eq 'under-declassification') then
-        (
-            pages:header($node, map {
-                "data": <tei:TEI>
+    let $externalLink := fh:location-url ($model?document-id)
+    let $log := console:log($externalLink)
+    let $header :=  pages:header($node, map {
+                            "data": <tei:TEI>
                             <tei:teiHeader>
-                                <tei:fileDesc>
-                                    <tei:titleStmt>{ $model?data//tei:title }</tei:titleStmt>
-                                </tei:fileDesc>
+                            <tei:fileDesc>
+                            <tei:titleStmt>{ $model?data//tei:title }</tei:titleStmt>
+                            </tei:fileDesc>
                             </tei:teiHeader>
-                        </tei:TEI>,
-                "publication-id": $model?publication-id,
-                "document-id": $model?document-id,
-                "section-id": $model?section-id,
-                "view": $model?view,
-                "base-path": $model?base-path,
-                "odd": $model?odd
-            }),
-            <p><strong>Note to Readers:</strong> This volume has not yet been published.  As indicated on the
-            <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a> page,
-            the current status of this volume is "Being Researched or Prepared."</p>
-        )
-    else
-        (pages:header($node, $model),
-        <hr/>)
+                            </tei:TEI>,
+                            "publication-id": $model?publication-id,
+                            "document-id": $model?document-id,
+                            "section-id": $model?section-id,
+                            "view": $model?view,
+                            "base-path": $model?base-path,
+                            "odd": $model?odd
+                        })
+    return
+        if ($publication-status eq 'under-declassification') then
+            (
+                $header,
+                <p><strong>Note to Readers:</strong> This volume has not yet been published.  As indicated on the
+                <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a> page,
+                the current status of this volume is "Being Researched or Prepared."</p>
+            )
+        else if (
+                (root($model?data)//tei:body/tei:div) and 'published' ) then
+                (pages:header($node, $model),
+                <hr/>
+            )
+        else
+            (
+                $header,
+                <p>This volume is available at the following location: <br/>
+                <a href="{$externalLink}" title="Opens an external link to the University of Wisconsin-Madison" target="_blank">University of Wisconsin-Madison</a></p>
+            )
 };
