@@ -823,7 +823,7 @@ declare function fh:publication-status ($document-id) {
     If publication-status is "under-declassification", then replace content with "Note to Readers".
     Todo: Treat further publication statuses.
 :)
-declare function fh:header ($node as node(), $model as map(*)) {
+declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
     let $publication-status := fh:publication-status($model?document-id)
     return
     if ($publication-status eq 'under-declassification') then
