@@ -818,11 +818,15 @@ declare function fh:publication-status ($document-id) {
     collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/publication-status/string()
 };
 
-(:
-    Render frus landing header
-    If publication-status is "under-declassification", then replace content with "Note to Readers".
-    Todo: Treat further publication statuses.
-:)
+(:~
+ :  Render frus volume landing header:
+ :  Replace content (except for the document title) with a notice, if the publication-status is "under-declassification".
+ :  Show an external link to the referenced document, if the status is "published", but no TEI document is available.
+ :  @param $node
+ :  @param $model
+ :  @return The header of the document as HTML
+ :  Todo: Treat further publication statuses.
+ :)
 declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
     let $publication-status := fh:publication-status($model?document-id)
     return
