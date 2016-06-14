@@ -809,9 +809,11 @@ function fh:show-if-tei-document ($node as node(), $model as map(*)) {
         attribute style { "display: none" }
 };
 
-(:
-    Returns the publication-status of a document as a string
-:)
+(:~
+ : Get the publication status of a document
+ : @param $document-id The document ID
+ : @return Returns the publication-status of a document as a string
+ :)
 declare function fh:publication-status ($document-id) {
     collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/publication-status/string()
 };
