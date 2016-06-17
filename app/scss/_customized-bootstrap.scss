@@ -315,7 +315,7 @@ a[href ^='https://']:after {
 .hsg-external-link {
   @extend .glyphicon;
   @extend .hsg-glyphicon-new-window;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   margin-left: 0.5rem;
   color: $hsg-link-color-default;
   &:hover {
