@@ -290,18 +290,36 @@ blockquote {
 }
 
 /* External Links */
-/* Only for use on empty elements. Icon classes should only be used
-on elements that contain no text content and have no child elements.
-Don't mix with other classes.
-<span class="hsg-external-link" aria-hidden="true"></span>
-*/
+
+// Override Bootstrap glyphicon-new-window with "after" instead of "before"
+.hsg-glyphicon-new-window {
+  &:after {
+    content: "\e164";
+  }
+}
+
+// Filter external links
+a[href ^='http://']:after,
+a[href ^='https://']:after {
+  @extend .hsg-external-link;
+}
+
+// Exclude these external links from being displayed with an icon:
+// Footer links and social media sidebar links
+.hsg-footer a:after,
+.hsg-frontpage-sidebar a:after {
+  display: none;
+}
+
+// External link icon
 .hsg-external-link {
   @extend .glyphicon;
-  @extend .glyphicon-new-window;
-  font-size: 1.1rem;
-  margin-right: .5rem;
+  @extend .hsg-glyphicon-new-window;
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
   color: $hsg-link-color-default;
   &:hover {
     color: $hsg-link-color-hover;
   }
 }
+
