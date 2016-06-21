@@ -419,6 +419,26 @@ function search:message-limited($node as node(), $model as map(*)) {
         ()
 };
 
+(:~
+ : Display the search result summary
+ : @param $node
+ : @param $model
+ : @return Returns HTML
+ :)
+declare
+    %templates:wrap
+function search:result-summary($node as node(), $model as map(*)) {
+    let $log := $model?query-info?result-count
+    return
+        if ($model?query-info?result-count > 0) then
+            <p>
+                Displaying {search:start($node, $model)} – {search:end($node, $model)}
+                of {search:result-count($node, $model)} results {search:message-limited($node, $model)}
+                (Results returned in {search:query-duration($node, $model)}s.)
+            </p>
+        else
+            <p>No results were found.</p>
+};
 
 declare
     %templates:wrap
