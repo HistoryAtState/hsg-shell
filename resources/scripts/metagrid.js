@@ -1,6 +1,9 @@
 $(document).ready(function () {
 
     var personId = window.location.href.match(/\/departmenthistory\/people\/([^/#]+)$/i);
+    if (!personId) {
+        return;
+    };
 
     $.getJSON('https://api.metagrid.ch/widget/history-state/person/' + personId[1] + '.json?lang=en&include=true&jsoncallback=?', function (data) {
         if (data[0]) {
