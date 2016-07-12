@@ -425,7 +425,7 @@ function search:message-limited($node as node(), $model as map(*)) {
  : @param $model
  : @return Returns HTML
  :)
-declare function search:result-summary($node as node(), $model as map(*)) {
+declare function search:result-count-summary($node as node(), $model as map(*)) {
     if ($model?query-info?result-count > 0) then
         <p>
             Displaying {search:start($node, $model)} – {search:end($node, $model)}
