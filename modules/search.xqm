@@ -184,7 +184,9 @@ declare function search:load-volumes-within($node, $model) {
         $html
 };
 
-declare function search:volume-id-value-attribute($node, $model) {
+declare
+    %templates:wrap
+function search:volume-id-value-attribute($node, $model) {
     let $volume-id := $model?volume/id
     return
         attribute value { $volume-id }

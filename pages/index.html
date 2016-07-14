@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
-    <div id="static-title" class="hidden"></div>
+    <div id="static-title" class="hidden"/>
     <div class="row">
         <div class="hsg-width-two-thirds" data-template="app:load-carousel-items">
             <h2 class="section-heading">Latest News</h2>
             <section class="carousel-item" data-template="templates:each" data-template-from="carousel-items" data-template-to="carousel-item">
                 <div data-template="app:fix-links">
                     <div class="carousel-image">
-                        <a>
-                            <span data-template="app:carousel-item-href-attribute"/>
-                            <img class="img-responsive">
-                                <span data-template="app:carousel-image-src-attribute"/>
-                                <span data-template="app:carousel-image-alt-attribute"/>
-                                <span data-template="app:carousel-image-dimension-attributes"/>
-                            </img>
+                        <a><span data-template="app:carousel-item-href-attribute"/>
+                            <img class="img-responsive"><span data-template="app:carousel-image-src-attribute"/><span data-template="app:carousel-image-alt-attribute"/><span data-template="app:carousel-image-dimension-attributes"/></img>
                         </a>
                     </div>
                     <div class="carousel-teaser">
                         <h3 class="carousel-title">
-                            <a>
-                                <span data-template="app:carousel-item-href-attribute"/>
+                            <a><span data-template="app:carousel-item-href-attribute"/>
                                 <span data-template="app:carousel-item-heading"/>
                             </a>
                         </h3>
@@ -38,8 +32,7 @@
                             <span data-template="app:tweet-html"/>
                         </p>
                         <p class="post-meta">
-                            <a>
-                                <span data-template="app:tweet-href"/>
+                            <a><span data-template="app:tweet-href-attribute"/>
                                 <span data-template="app:tweet-date"/>
                             </a>
                         </p>
@@ -54,8 +47,7 @@
                             <span data-template="app:tumblr-post-title"/>
                         </p>
                         <p class="post-meta">
-                            <a>
-                                <span data-template="app:tumblr-post-href"/>
+                            <a><span data-template="app:tumblr-post-href-attribute"/>
                                 <span data-template="app:tumblr-post-date"/>
                             </a>
                         </p>

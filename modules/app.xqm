@@ -279,7 +279,7 @@ declare function app:tweet-date($node as node(), $model as map(*)) {
     app:format-relative-date(xs:dateTime($model?tweet/date))
 };
 
-declare function app:tweet-href($node as node(), $model as map(*)) {
+declare function app:tweet-href-attribute($node as node(), $model as map(*)) {
     attribute href { $model?tweet/url/string() }
 };
 
@@ -323,7 +323,7 @@ declare function app:tumblr-post-date($node as node(), $model as map(*)) {
     app:format-relative-date(xs:dateTime($model?post/date))
 };
 
-declare function app:tumblr-post-href($node as node(), $model as map(*)) {
+declare function app:tumblr-post-href-attribute($node as node(), $model as map(*)) {
     attribute href { $model?post/url/string() }
 };
 
