@@ -376,7 +376,7 @@ declare function search:trim-matches($node as element(), $keep as xs:integer) {
         if (count($matches) le $keep) then
             $node
         else
-            search:milestone-chunk($node/node()[1], subsequence($matches, $keep, 1), $node)
+            search:milestone-chunk($node/element()[1], subsequence($matches, $keep, 1), $node)
 };
 
 declare function search:milestone-chunk(
