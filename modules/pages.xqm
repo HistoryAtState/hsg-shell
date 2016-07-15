@@ -330,7 +330,7 @@ declare function pages:get-previous($div as element()?) {
     if ($div/self::tei:pb) then
         $div/preceding::tei:pb[1]
     else if (($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[not(tei:div/@type)]) then
-        ($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[1]
+        ($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[last()]
     else
         (
             $div/ancestor::tei:div[@type = ('compilation', 'chapter', 'subchapter', 'section', 'part')][tei:div/@type][1],
