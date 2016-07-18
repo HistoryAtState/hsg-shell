@@ -221,13 +221,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                     else
                         html:inline($config, ., ("tei-g2"), .)
                 case element(gap) return
-                    if (desc) then
-                        html:inline($config, ., ("tei-gap1"), .)
-                    else
-                        if (@extent) then
-                            html:inline($config, ., ("tei-gap2"), @extent)
-                        else
-                            html:inline($config, ., ("tei-gap3"), .)
+                    (
+                        html:omit($config, ., ("tei-gap"), .)
+                    )
+
                 case element(graphic) return
                     html:graphic($config, ., ("tei-graphic"), ., xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri ||
                             "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")), (), (), @scale, desc)
@@ -259,21 +256,22 @@ declare function model:apply($config as map(*), $input as node()*) {
                                             else
                                                 html:block($config, ., ("tei-head8"), .)
                 case element(hi) return
-                    switch (@rend)
-                        case 'strong' return
-                            html:inline($config, ., ("tei-hi1"), .)
-                        case 'italic' return
+                    if (@rend = 'strong') then
+                        html:inline($config, ., ("tei-hi1"), .)
+                    else
+                        if (@rend = 'italic') then
                             html:inline($config, ., ("tei-hi2"), .)
-                        case 'smallcaps' return
-                            html:inline($config, ., ("tei-hi3"), .)
-                        default return
-                            if (@rendition) then
-                                html:inline($config, ., css:get-rendition(., ("tei-hi4")), .)
+                        else
+                            if (@rend = 'smallcaps') then
+                                html:inline($config, ., ("tei-hi3"), .)
                             else
-                                if (not(@rendition)) then
-                                    html:inline($config, ., ("tei-hi5"), .)
+                                if (@rendition) then
+                                    html:inline($config, ., css:get-rendition(., ("tei-hi4")), .)
                                 else
-                                    $config?apply($config, ./node())
+                                    if (not(@rendition)) then
+                                        html:inline($config, ., ("tei-hi5"), .)
+                                    else
+                                        $config?apply($config, ./node())
                 case element(imprimatur) return
                     html:block($config, ., ("tei-imprimatur"), .)
                 case element(item) return
@@ -549,9 +547,9 @@ declare function model:apply-children($config as map(*), $node as element(), $co
         typeswitch(.)
             case element() return
                 if (. is $node) then
-                    model:apply($config, ./node())
+                    $config?apply($config, ./node())
                 else
-                    model:apply($config, .)
+                    $config?apply($config, .)
             default return
                 html:escapeChars(.)
     )
