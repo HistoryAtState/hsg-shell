@@ -296,7 +296,11 @@ display: block;
                 <elementSpec mode="change" ident="label"><!-- Silly rule to avoid class 'label' -->
                     <model predicate="@foo='baz'" behaviour="inline"/>
                     <model behaviour="inline"/>
-                </elementSpec><!-- Elements not in TEI Simple -->
+                </elementSpec>
+                <elementSpec ident="gap" mode="change">
+                    <model behaviour="omit"/>
+                </elementSpec>
+                <!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
                     <model behaviour="inline"/>
                 </elementSpec>
