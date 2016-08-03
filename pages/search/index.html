@@ -26,12 +26,10 @@
                             <p>To limit your results to certain parts of the website, check the appropriate box(es), and then click “Search”:</p>
                             <div class="hsg-search-inputs">
                                 <label class="hsg-search-input-label" data-template="templates:each" data-template-from="sections" data-template-to="section">
-                                    <input type="checkbox" name="within"><span data-template="search:section-id-value-attribute"/>
-                                    <span data-template="app:if-parameter-set" data-template-param="within"><span data-template="search:within-highlight-attribute"/>
-                                    </span>
+                                    <input type="checkbox" name="within"><span data-template="search:section-id-value-attribute"/><span data-template="app:if-parameter-set" data-template-param="within"><span data-template="search:within-highlight-attribute"/></span>
                                     <span data-template="search:section-label"/>
-                                    </input>
-                                </label>
+                                </input>
+                            </label>
                             </div>
                         </div>
                         <div data-template="search:load-volumes-within">
@@ -41,7 +39,7 @@
                                 </span>:</p>
                                 <div class="hsg-search-inputs" data-template="templates:each" data-template-from="volumes" data-template-to="volume">
                                     <label class="hsg-search-input-label">
-                                        <input type="checkbox" name="within" checked="checked" data-template="search:volume-id-value-attribute"/>
+                                        <input type="checkbox" name="within" checked="checked" data-template="search:volume-id-value-attribute">
                                             <span data-template="search:volume-title"/>
                                         </input>
                                     </label>
@@ -79,9 +77,9 @@
                             <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
                         </button>
                     </form>
-                </section>
+                </section> 
 
-                <section class="hsg-search-section">
+                <section class="hsg-search-section"> 
                     <div data-template="app:if-parameter-set" data-template-param="q">
                         <div data-template="search:load-results">
                             <h1 class="hsg-search-result-message">Results for keyword search <span class="hsg-search-query"><span data-template="search:q"/></span>, sorted by relevance.</h1>
