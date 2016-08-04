@@ -20,37 +20,43 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: $h1-font-size-sm;
+  font-size: $h1-font-size-xs;
   font-weight: $font-bold;
-  @media screen and (min-device-width: $screen-sm-min) {
+  @media screen and (min-width: $screen-xs-min) {
+    font-size: $h1-font-size-sm;
+  }
+  @media screen and (min-width: $screen-sm-min) {
     font-size: $h1-font-size;
   }
 }
 
 h2 {
-  font-size: $h2-font-size-sm;
-  @media screen and (min-device-width: $screen-sm-min) {
+  font-size: $h2-font-size-xs;
+  @media screen and (min-width: $screen-xs-min) {
+    font-size: $h2-font-size-sm;
+  }
+  @media screen and (min-width: $screen-sm-min) {
     font-size: $h2-font-size;
   }
 }
 
 h3 {
   font-size: $h3-font-size-sm;
-  @media screen and (min-device-width: $screen-sm-min) {
+  @media screen and (min-width: $screen-sm-min) {
     font-size: $h3-font-size;
   }
 }
 
 h4 {
   font-size: $h4-font-size-sm;
-  @media screen and (min-device-width: $screen-sm-min) {
+  @media screen and (min-width: $screen-sm-min) {
     font-size: $h4-font-size;
   }
 }
 
 h5 {
   font-size: $h5-font-size-sm;
-  @media screen and (min-device-width: $screen-sm-min) {
+  @media screen and (min-width: $screen-sm-min) {
     font-size: $h5-font-size;
   }
 }
