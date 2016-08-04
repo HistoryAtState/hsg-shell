@@ -16,3 +16,21 @@
 .attachment {
     margin-top: 4em;
 }
+
+.tei-graphic {
+  @extend .img-responsive;
+}
+
+// Fix container's spacing for graphics only in /historicaldocuments/frus-history/appendix-a
+#appendix-a .tei-figure2,
+#appendix-a .tei-figure3 {
+  padding-top: 4rem;
+}
+
+#appendix-a .tei-figure3 {
+  padding-bottom: 4rem;
+  @media screen and (min-width: $screen-sm-min) {
+    padding-bottom: 0;
+  }
+}
+
