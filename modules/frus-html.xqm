@@ -829,7 +829,7 @@ declare function fh:location-url ($document-id) {
     let $worldcat-link := $external-link[@loc="worldcat"]/string()
     return
         if ($madison-link) then (
-            <a href="{$madison-link}" title="Opens an external link to the University of Wisconsin-Madison" target="_blank" class="">University of Wisconsin-Madison</a>
+            <a href="{$madison-link}" title="Opens an external link to the University of Wisconsin-Madison" target="_blank" class="hsg-block">University of Wisconsin-Madison</a>
          )
          else (
             <a href="{$worldcat-link}" title="Opens an external link to the WorldCat" target="_blank" class="hsg-block">WorldCat</a>
