@@ -251,7 +251,7 @@ function fh:volume-availability-summary($node as node(), $model as map(*)) {
             doc($config:FRUS_CODE_TABLES_COL || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
     return
         if ($full-text or $ebook or $pdf or $not-published-status) then
-            <span style="font-style: italic; font-size: .9em; color: #606060">{
+            <span class="hsg-status-notice">{
                 if ($full-text or $ebook or $pdf) then
                     concat(
                        ' (Published and available in ',

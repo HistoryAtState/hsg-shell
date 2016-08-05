@@ -57,3 +57,9 @@
 .hsg-font-italic {
   font-style: $font-style-italic;
 }
+
+.hsg-status-notice {
+  @extend .hsg-font-italic;
+  font-size: inherit;
+  color: $color-gray;
+}
