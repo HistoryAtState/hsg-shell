@@ -821,10 +821,19 @@ declare function fh:publication-status ($document-id) {
 (:~
  : Get the URL of a referenced document
  : @param $document-id The document ID
- : @return Returns the URL of an external link as a string
+ : @return Returns the URL of an external link as HTML
  :)
 declare function fh:location-url ($document-id) {
-    collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/location[@loc="madison"]/string()
+    for $external-link in collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/location
+    let $madison-link := $external-link[@loc="madison"]/string()
+    let $worldcat-link := $external-link[@loc="worldcat"]/string()
+    return
+        if ($madison-link) then (
+            <a href="{$madison-link}" title="Opens an external link to the University of Wisconsin-Madison" target="_blank" class="">University of Wisconsin-Madison</a>
+         )
+         else (
+            <a href="{$worldcat-link}" title="Opens an external link to the WorldCat" target="_blank" class="hsg-block">WorldCat</a>
+         )
 };
 
 (:~
@@ -872,6 +881,9 @@ declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
             (
                 $header,
                 <p>This volume is available at the following location: <br/>
-                <a href="{$externalLink}" title="Opens an external link to the University of Wisconsin-Madison" target="_blank">University of Wisconsin-Madison</a></p>
+                {
+                    $externalLink
+                }
+                </p>
             )
 };
