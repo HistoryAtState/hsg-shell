@@ -9,8 +9,12 @@ body {
   font-family: $font-serif;
   line-height: $base-line-height;
   font-weight: $font-normal;
-  font-size:   $base-font-size;
+  font-size:   $small-font-size;
   background:  $color-white url("//s3.amazonaws.com/static.history.state.gov/images/background.gif") repeat-x scroll 0 0;
+  @media screen and (min-width: $screen-xs-min) {
+    font-size: $base-font-size;
+  }
+
 }
 
 h1, h2, h3, h4, h5, h6 {
