@@ -851,9 +851,9 @@ declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
     let $log := console:log($externalLink)
     let $not-published-status :=
         if ($publication-status = 'published') then
-        ()
+            ()
         else
-        doc($config:FRUS_CODE_TABLES_COL || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
+            doc($config:FRUS_CODE_TABLES_COL || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
     let $header :=  pages:header($node, map {
                             "data": <tei:TEI>
                             <tei:teiHeader>
@@ -870,20 +870,19 @@ declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
                             "odd": $model?odd
                         })
     return
-        if ($not-published-status) then
-            (
+        if ($not-published-status) then (
                 $header,
                 <p><strong>Note to Readers:</strong> This volume has not yet been published.  As indicated on the
                 <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a> page,
                 the current status of this volume is "{$not-published-status}".</p>
             )
-        else if (root($model?data)//tei:body/tei:div) then
-            (pages:header($node, $model),<hr/>)
-        else
-            (
-                $header,
-                <p>This volume is available at the following location: <br/>
-                {$externalLink}
-                </p>
-            )
+        else if (root($model?data)//tei:body/tei:div) then (
+            pages:header($node, $model), <hr/>
+        )
+            else (
+                    $header,
+                    <p>This volume is available at the following location: <br/>
+                    {$externalLink}
+                    </p>
+                )
 };
