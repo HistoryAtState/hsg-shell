@@ -843,7 +843,6 @@ declare function fh:location-url ($document-id) {
  :  @param $node
  :  @param $model
  :  @return The header of the document as HTML
- :  Todo: Treat further publication statuses.
  :)
 declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
     let $publication-status := fh:publication-status($model?document-id)
