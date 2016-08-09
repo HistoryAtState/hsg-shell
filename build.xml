@@ -12,6 +12,7 @@
         <exec executable="${npm}" outputproperty="npm.output">
             <arg line="start"/>
             <env key="PATH" value="${env.PATH}:${node.PATH}"/>
+            <env key="NODE_ENV" value="${NODE_ENV}"/>
         </exec>
         <echo message="${npm.output}"/>
         <echo message="Creating xar package..."/>
