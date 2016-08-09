@@ -887,8 +887,7 @@ declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
         )
             else (
                 $header,
-                <p>This volume is available at the following location: <br/>
-                {$externalLink}
-                </p>
+                <p>This volume is available at the following location{if (count($externalLink) gt 1) then 's' else ()}:</p>,
+                if ($externalLink) then <ul>{$externalLink ! <li>{.}</li>}</ul> else ()
             )
 };
