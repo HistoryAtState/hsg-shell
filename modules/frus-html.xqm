@@ -801,6 +801,15 @@ function fh:hide-download-if-empty($node as node(), $model as map(*), $document-
 
 declare
     %templates:wrap
+function fh:hide-tags-if-empty($node as node(), $model as map(*)) {
+    if (exists($model?tags)) then 
+        templates:process($node/node(), $model)
+    else
+        attribute style { "display: none" }
+};
+
+declare
+    %templates:wrap
 function fh:show-if-tei-document ($node as node(), $model as map(*)) {
     (: searchable volumes must have a tei:text node :)
     if (root($model?data)//tei:body/tei:div) then
@@ -871,7 +880,7 @@ declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
             $header,
             <p><strong>Note to Readers:</strong> This volume has not yet been published.  As indicated on the
             <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a> page,
-            the current status of this volume is "{$not-published-status}".</p>
+            the current status of this volume is “{$not-published-status}”.</p>
         )
         else if (root($model?data)//tei:body/tei:div) then (
             pages:header($node, $model), <hr/>
