@@ -880,7 +880,7 @@ declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
             $header,
             <p><strong>Note to Readers:</strong> This volume has not yet been published.  As indicated on the
             <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a> page,
-            the current status of this volume is “{$not-published-status}”.</p>
+            the current status of this volume is “{$not-published-status}.”</p>
         )
         else if (root($model?data)//tei:body/tei:div) then (
             pages:header($node, $model), <hr/>
