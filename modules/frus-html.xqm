@@ -839,9 +839,9 @@ declare function fh:location-url ($document-id) {
             if ($link) then
                 switch ($external-link/@loc)
                     case "madison" return
-                        <a href="{$link}" title="Opens an external link to the University of Wisconsin-Madison" target="_blank" class="hsg-block">University of Wisconsin-Madison</a>
+                        <a href="{$link}" title="Opens an external link to the University of Wisconsin-Madison" target="_blank">University of Wisconsin-Madison</a>
                     case "worldcat" return
-                        <a href="{$link}" title="Opens an external link to WorldCat" target="_blank" class="hsg-block">WorldCat</a>
+                        <a href="{$link}" title="Opens an external link to WorldCat" target="_blank">WorldCat</a>
                     default return ()
             else()
 };
