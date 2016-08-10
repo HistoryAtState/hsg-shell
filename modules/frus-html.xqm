@@ -835,12 +835,15 @@ declare function fh:publication-status ($document-id) {
 declare function fh:location-url ($document-id) {
     for $external-link in collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/location
         let $link := $external-link/string()
-        return switch ($external-link/@loc)
-            case "madison" return
-                <a href="{$link}" title="Opens an external link to the University of Wisconsin-Madison" target="_blank" class="hsg-block">University of Wisconsin-Madison</a>
-            case "worldcat" return
-                <a href="{$link}" title="Opens an external link to WorldCat" target="_blank" class="hsg-block">WorldCat</a>
-            default return ()
+        return
+            if ($link) then
+                switch ($external-link/@loc)
+                    case "madison" return
+                        <a href="{$link}" title="Opens an external link to the University of Wisconsin-Madison" target="_blank" class="hsg-block">University of Wisconsin-Madison</a>
+                    case "worldcat" return
+                        <a href="{$link}" title="Opens an external link to WorldCat" target="_blank" class="hsg-block">WorldCat</a>
+                    default return ()
+            else()
 };
 
 (:~
