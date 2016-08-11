@@ -35,7 +35,6 @@ function toc:table-of-contents-sidebar($node as node(), $model as map(*), $docum
     let $list := toc:prepare-sidebar-toc-list($toc/ul)
     return
         if ($toc) then
-            <aside class="hsg-width-sidebar">
                 <div class="hsg-panel">
                     <div class="hsg-panel-heading">
                         <h2 class="hsg-sidebar-title">{$head}</h2>
@@ -44,7 +43,6 @@ function toc:table-of-contents-sidebar($node as node(), $model as map(*), $docum
                         $list
                     }
                 </div>
-            </aside>
         else ()
 };
 
