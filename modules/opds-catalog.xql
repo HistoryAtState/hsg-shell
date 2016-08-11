@@ -16,7 +16,7 @@ import module namespace tags="http://history.state.gov/ns/site/hsg/tags-html" at
 declare option output:method "xml";
 
 declare variable $opds:opds-path := 'api/v1/catalog';
-declare variable $opds:server-url := substring-before(request:get-url(), $opds:opds-path);
+declare variable $opds:server-url := substring-before(request:get-parameter('xql-application-url', ''), $opds:opds-path);
 declare variable $opds:opds-base-url := $opds:server-url || $opds:opds-path;
 declare variable $opds:feed-author-name {'Office of the Historian'};
 declare variable $opds:opds-search-url {concat($opds:server-url, 'opensearch.xml')};
@@ -115,9 +115,9 @@ declare function opds:ebook-entries($vol-ids) {
             opds:link('application/pdf', 'http://opds-spec.org/acquisition', fh:epub-url($vol-id), concat($title, ' (PDF)'))
         else ()
     let $cover-image-link :=
-        opds:link('image/jpeg', 'http://opds-spec.org/image', concat('//s3.amazonaws.com/static.history.state.gov/frus/', $vol-id, '/covers/', $vol-id, '.jpg'), concat('Cover of ', $title))
+        opds:link('image/jpeg', 'http://opds-spec.org/image', concat('https://s3.amazonaws.com/static.history.state.gov/frus/', $vol-id, '/covers/', $vol-id, '.jpg'), concat('Cover of ', $title))
     let $cover-image-thumbnail-link :=
-        opds:link('image/jpeg', 'http://opds-spec.org/image/thumbnail', concat('//s3.amazonaws.com/static.history.state.gov/frus/', $vol-id, '/covers/', $vol-id, '-thumb.jpg'), concat('Thumbnail-sized cover of ', $title))
+        opds:link('image/jpeg', 'http://opds-spec.org/image/thumbnail', concat('https://s3.amazonaws.com/static.history.state.gov/frus/', $vol-id, '/covers/', $vol-id, '-thumb.jpg'), concat('Thumbnail-sized cover of ', $title))
     let $links := ($epub-mobi-links, $pdf-link, $cover-image-link, $cover-image-thumbnail-link)
     return
         opds:entry(
@@ -164,7 +164,7 @@ declare function opds:recent() {
         opds:search-link()
         )
 
-    let $all-volumes := collection($config:FRUS_VOLUMES_COL)
+    let $all-volumes := collection($config:FRUS_METADATA_COL)
     let $selected-volumes :=
         for $volume in $all-volumes/volume[@id = $opds:frus-ebook-volume-ids][publication-status eq 'published']
         order by $volume/published-year descending
@@ -271,7 +271,7 @@ declare function opds:browse() {
 declare function opds:search() {
     let $taxonomy := collection($tags:TAXONOMY_COL)/taxonomy
     let $q := request:get-parameter('q', ())[1]
-    let $tag-hits := $taxonomy//label[ft:query(., $q)]/..
+    let $tag-hits := if ($q) then $taxonomy//label[ft:query(., $q)]/.. else ()
     let $tag-hit-ids := $tag-hits/id
     return
     
@@ -371,6 +371,7 @@ let $end-time := util:system-time()
 let $runtime := (($end-time - $start-time) div xs:dayTimeDuration('PT1S'))
 return
     switch($operation)
+    (: TODO Add an error handler appropriate for this API - with error codes, redirects. We currently let bad requests through without raising errors. :)
     case 'all' return opds:all()
     case 'recent' return opds:recent()
     case 'browse' return opds:browse()

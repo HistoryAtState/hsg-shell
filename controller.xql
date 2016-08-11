@@ -1457,8 +1457,10 @@ else if (matches($exist:path, '^/api/v1/?')) then
         default return 'opds-catalog.xql'
     return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/modules/{$xql}"/>
-            <!--TODO Maybe add an error handler, but not the default one. -->
+            <forward url="{$exist:controller}/modules/{$xql}">
+                <add-parameter name="xql-application-url" value="{local:get-url()}"/>
+            </forward>
+            <!--TODO Add an error handler appropriate for this API - with error codes, redirects. We currently let bad requests through without raising errors. -->
         </dispatch>
 
 (: handle services requests :)
