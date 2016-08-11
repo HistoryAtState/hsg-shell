@@ -8,16 +8,20 @@ declare variable $exist:controller external;
 declare variable $exist:prefix external;
 declare variable $exist:root external;
 
-declare variable $application-url := concat(
-    request:get-scheme(),
-    '://',
-    request:get-server-name(),
-    let $server-port := request:get-server-port()
-        return if ($server-port = 80) then '' else concat(":", string($server-port)),
-    request:get-context-path(),
-    $exist:prefix,
-    $exist:controller
-);
+declare function local:get-url() {
+    concat(
+        request:get-scheme(),
+        '://',
+        request:get-server-name(),
+        let $server-port := request:get-server-port()
+        return 
+            if ($server-port = (80, 443)) then 
+                ()
+            else 
+                concat(":", string($server-port)),
+        local:get-uri()
+        )
+};
 
 declare function local:get-uri() {
     (request:get-header("nginx-request-uri"), request:get-uri())[1]
@@ -1279,7 +1283,7 @@ else if (matches($exist:path, '^/open/?')) then
                     then <add-parameter name="xql-feed" value="{$choice/@xql-feed}"/>
                     else () }
                 {if($choice/@mode = 'xml')
-                    then <add-parameter name="xql-application-url" value="{$application-url}"/>
+                    then <add-parameter name="xql-application-url" value="{local:get-url()}"/>
                     else () }
             </forward>
             {if($choice/@mode = 'html') then (

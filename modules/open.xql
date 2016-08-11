@@ -14,7 +14,7 @@ import module namespace app="http://history.state.gov/ns/site/hsg/templates" at 
 
 declare option output:method "xml";
 
-declare variable $application-url := request:get-parameter('xql-application-url', '..');
+declare variable $application-url := request:get-parameter('xql-application-url', '');
 
 
 declare function open:frus-latest() {
@@ -34,7 +34,7 @@ declare function open:frus-latest() {
    
    let $last-n-volumes := subsequence($volumes, 1, $n)
    
-   let $feed-id := 'http://history.state.us/atom/frus-metadata-v1'
+   let $feed-id := 'http://history.state.gov/atom/frus-metadata-v1'
    
    let $author := 'Office of the Historian, Bureau of Public Affairs, United States Department of State'
    
@@ -111,16 +111,18 @@ declare function open:frus-latest() {
                     else ()
                     )
             
-            let $entry-created := $volume/created-datetime/text()
-            let $entry-modified := $volume/modified-datetime/text()
+            let $entry-created := $volume/created-datetime/string()
+            let $entry-modified := $volume/last-modified-datetime/string()
+            
+            let $link := concat(substring-before($application-url, '/open'), '/historicaldocuments/', $id)
             
             order by $published-date descending, $volume/@id
             
             return
                 <entry xmlns="http://www.w3.org/2005/Atom">
                     <title>{$volume-title}</title>
-                    <id>{$id}</id>
-                    <link type="text/html" href="{concat($application-url, '/historicaldocuments/', $id)}"/>
+                    <id>{$link}</id>
+                    <link type="text/html" href="{$link}"/>
                     {(: <link type="text/xml" href="{$file}"/> :) ()}
                     <author><name>{$author}</name></author>
                     <published>{$entry-created}</published>
@@ -139,7 +141,7 @@ declare function open:frus-latest() {
         <feed xmlns="http://www.w3.org/2005/Atom">
             <title>{$title}</title>
             <subtitle>The {$n} most recently published volumes in the Foreign Relations of the United States series, sorted by year of publication.</subtitle>
-            <link href="{concat($application-url, '/open/frus-latest.xml')}" rel="self" />
+            <link href="{concat(substring-before($application-url, '/open'), '/open/frus-latest.xml')}" rel="self" />
             <id>{$feed-id}</id>
             <updated>{
                 let $dates :=
