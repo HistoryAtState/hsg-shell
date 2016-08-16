@@ -22,7 +22,7 @@ declare variable $search:SECTIONS := map {
         "short-history",
         "people",
         "buildings",
-        (: "views-from-the-embassy", :)
+        "views-from-the-embassy",
         map {
             "id": "pocom",
             "query": function($query as xs:string) {

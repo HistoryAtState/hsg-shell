@@ -303,6 +303,13 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Guide to Sources on Vietnam, 1969-1975"
+        },
+        "views-from-the-embassy": map {
+            "collection": $config:VIEWS_FROM_EMBASSY_COL,
+            "select-document": function($document-id) { doc($config:VIEWS_FROM_EMBASSY_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:VIEWS_FROM_EMBASSY_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/departmenthistory/wwi" },
+            "title": "World War I and the Department - Department History"
         }
     };
 
