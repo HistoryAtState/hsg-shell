@@ -16,7 +16,6 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare variable $search:MAX_HITS_SHOWN := 1000;
 
 (: Maps search categories to publication ids, see $config:PUBLICATIONS :)
-(: To be done: pocom, travels, visits :)
 declare variable $search:SECTIONS := map {
     "documents": "frus",
     "department": (
@@ -43,6 +42,7 @@ declare variable $search:SECTIONS := map {
         map {
             "id": "travels",
             "query": function($query as xs:string) {
+                (
                 collection($config:TRAVELS_COL)//trip[ft:query(name, $query)]
                 |
                 collection($config:TRAVELS_COL)//trip[ft:query(country, $query)]
@@ -50,6 +50,7 @@ declare variable $search:SECTIONS := map {
                 collection($config:TRAVELS_COL)//trip[ft:query(remarks, $query)]
                 |
                 collection($config:TRAVELS_COL)//trip[ft:query(locale, $query)]
+                )/parent::trips
             }
         }
     ),
@@ -69,30 +70,33 @@ declare variable $search:DISPLAY := map {
                 ' '
             )
         },
-        "link": function($name) {
-            let $link := "departmenthistory/people/" || $name/ancestor::person/id
-            return
-                <a href="$app/{$link}">{$link}</a>
+        "summary": (),
+        "href": function($name) {
+            "$app/departmenthistory/people/" || $name/ancestor::person/id
         }
     },
     "visit": map {
         "title": function($visit) {
             "Visits By Foreign Leaders: " || string-join($visit/visitor, ", ")
         },
-        "link": function($visit) {
-            let $link := "departmenthistory/visits/" || year-from-date($visit/start-date)
-            return
-                <a href="$app/{$link}">{$link}</a>
+        "summary": (),
+        "href": function($visit) {
+            "$app/departmenthistory/visits/" || year-from-date($visit/start-date)
         }
     },
-    "trip": map {
-        "title": function($trip) {
-            "Travels: " || string-join($trip/name, ", ")
+    "trips": map {
+        "title": function($trips) {
+            "Travels: " || string-join($trips/trip[1]/name, ", ")
         },
-        "link": function($trip) {
-            let $link := "departmenthistory/travels/" || $trip/@role || "/" || $trip/@who
+        "summary": function($trips) {
+            let $expanded := util:expand($trips)
+            let $trips-with-hits := $expanded//exist:match/ancestor::trip
+            let $count := count($trips-with-hits)
             return
-                <a href="$app/{$link}">{$link}</a>
+                <p>{$count || ' matching trip' || (if ($count gt 1) then 's' else ())}</p>
+        },
+        "href": function($trips) {
+            "$app/departmenthistory/travels/" || $trips/trip[1]/@role || "/" || $trips/trip[1]/@who
         }
     }
 };
@@ -252,8 +256,7 @@ declare
 function search:load-results($node, $model, $q as xs:string, $within as xs:string*,
 $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
     let $start-time := util:system-time()
-    let $hits :=
-        search:query-sections($within, $volume-id, $q)
+    let $hits := search:query-sections($within, $volume-id, $q)
     let $hits := search:filter($hits)
     let $end-time := util:system-time()
     let $ordered-hits :=
@@ -341,6 +344,16 @@ declare function search:result-summary($node, $model) {
     return
         if ($result/@xml:id = 'index') then
             '[Back of book index: too many hits to display]'
+        (: see if we've defined a custom function for displaying result summaries :)
+        else if (map:contains($search:DISPLAY, local-name($result))) then
+            let $summary := $search:DISPLAY?(local-name($result))?summary
+            return
+                typeswitch ($summary)
+                    case function(*) return $summary($result)
+                    default return
+                        let $trimmed-hit := search:trim-matches(util:expand($result), $matches-to-highlight)
+                        return
+                            kwic:summarize($trimmed-hit, <config xmlns="" width="60"/>)/*
         else
             let $trimmed-hit := search:trim-matches(util:expand($result), $matches-to-highlight)
             return
@@ -349,25 +362,25 @@ declare function search:result-summary($node, $model) {
 
 declare function search:result-link($node, $model) {
     let $result := $model?result
-    return
+    let $href :=
         typeswitch ($result)
             case element(tei:div) return
                 let $publication-id := $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))
                 let $document-id := substring-before(util:document-name($result), '.xml')
                 let $section-id := $result/@xml:id
-                let $href :=
-                    map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
-                (: display URL is currently hardcoded to hsg, TODO use actual server name, url structure, etc. :)
-                let $display := 'https://history.state.gov' || substring-after($href, '$app')
                 return
-                    app:fix-this-link(element a { attribute href { $href }, $node/@* except $node/@href, $display }, $model)
+                    map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
             default return
                 let $display := $search:DISPLAY?(local-name($result))
                 return
                     if (exists($display)) then
-                        $display?link($result)
+                        $display?href($result)
                     else
-                        ""
+                        "https://history.state.gov"
+    (: display URL is currently hardcoded to hsg, TODO use actual server name, url structure, etc. :)
+    let $display := 'https://history.state.gov' || substring-after($href, '$app')
+    return
+        <a href="{$href}">{$display}</a>
 };
 
 declare function search:trim-matches($node as element(), $keep as xs:integer) {

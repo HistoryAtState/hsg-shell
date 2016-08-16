@@ -275,7 +275,7 @@ declare variable $config:PUBLICATIONS :=
             "collection": $config:EDUCATION_COL,
             "select-document": function($document-id) { doc($config:EDUCATION_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:EDUCATION_COL || '/' || $document-id || '.xml')/id($section-id) },
-            "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
+            "html-href": function($document-id, $section-id) { "$app/education/modules/" || string-join(($document-id, $section-id), '#') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Education Resources"
@@ -314,7 +314,7 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:SHORT_HISTORY_COL: "short-history",
         $config:FAQ_COL: "faq",
         $config:HAC_COL: "hac",
-        $config:EDUCATION_COL: "edu",
+        $config:EDUCATION_COL: "education",
         $config:FRUS_HISTORY_MONOGRAPH_COL: "frus-history-monograph",
         $config:CONFERENCES_ARTICLES_COL: "conferences",
         $config:MILESTONES_COL: "milestones",
