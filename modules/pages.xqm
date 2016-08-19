@@ -107,8 +107,8 @@ declare function pages:volume-to-tei($volume as element()) {
             <tei:fileDesc>
                 <tei:titleStmt>
                     <tei:title type="complete">{$volume/title[@type="complete"]/node()}</tei:title>
-                    <tei:title type="subseries">{$volume/title[@type="sub-series"]/node()}</tei:title>
-                    <tei:title type="volumenumber">{$volume/title[@type="volumenumber"]/node()}</tei:title>
+                    <tei:title type="sub-series">{$volume/title[@type="sub-series"]/node()}</tei:title>
+                    <tei:title type="volume-number">{$volume/title[@type="volume-number"]/node()}</tei:title>
                     <tei:title type="volume">{$volume/title[@type="volume"]/node()}</tei:title>
                     {
                         for $editor in $volume/editor[. ne '']
@@ -124,12 +124,12 @@ declare function pages:volume-to-tei($volume as element()) {
                             <tei:head>Overview</tei:head>
                             {$volume/summary/*}
                         </tei:div>
-                    else if ($volume/location[. ne '']) then
+                    else if ($volume/external-location[. ne '']) then
                         <tei:div>
                             <tei:p>This volume is available at the following location:</tei:p>
                             <tei:list>
                             {
-                                $volume/location[. ne ''] !
+                                $volume/external-location[. ne ''] !
                                     <tei:item>{console:log(serialize(<ref target="{.}">University of Wisconsin-Madison</ref>)), if (./@loc = 'madison') then <tei:ref target="{.}">University of Wisconsin-Madison</tei:ref> else ()}</tei:item>
                             }
                             </tei:list>

@@ -169,7 +169,7 @@ declare function open:frus-metadata() {
                 return
                     <summary xmlns="http://history.state.gov/ns/1.0">{$html}</summary>
             else ()
-            let $locations := $volume/location[. ne ''][./@loc = ('db', 'madison', 'worldcat')]
+            let $locations := $volume/external-location[. ne ''][./@loc = ('db', 'madison', 'worldcat')]
             let $media := $volume/media/@type/string()
             let $published-year := xs:string($volume/published-year[. ne ''])
             let $coverage := xs:string($volume/coverage[. ne ''][1])
@@ -183,9 +183,9 @@ declare function open:frus-metadata() {
                     for $location in $locations 
                     return 
                         if ($location/@loc = ('madison', 'worldcat')) then 
-                            <location loc="{$location/@loc}">{$location/text()}</location>
+                            <external-location loc="{$location/@loc}">{$location/text()}</external-location>
                         else
-                            <location loc="db">{concat($application-url, '/historicaldocuments/', $location)}</location>
+                            <external-location loc="db">{concat($application-url, '/historicaldocuments/', $location)}</external-location>
                     ,
                     <media>{$media}</media>,
                     <published>{$published-year}</published>,

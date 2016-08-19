@@ -19,7 +19,7 @@ function fh:volumes($node as node(), $model as map(*), $volume as xs:string?) {
     let $vol-id := substring-before(util:document-name($vol), '.xml')
     let $volume-metadata := $config:FRUS_METADATA/volume[@id = $vol-id]
     let $volume-title := $volume-metadata/title[@type='volume']
-    let $volume-number := $volume-metadata/title[@type='volumenumber']
+    let $volume-number := $volume-metadata/title[@type='volume-number']
     let $sub-series-n := $volume-metadata/title[@type='sub-series']/@n
     let $brief-title :=
         if ($volume-number ne '') then
@@ -150,7 +150,7 @@ declare
 function fh:volumes-by-administration($node as node(), $model as map(*)) {
     if (count($model?groupings-in-use) le 1 and $model?admin-id ne "pre-truman") then
         for $vols in $model?vols-in-admin
-        group by $subseries := normalize-space($vols/title[@type='sub-series'])
+        group by $sub-series := normalize-space($vols/title[@type='sub-series'])
         order by $vols[1]/title[@type='sub-series']/@n
         return
             (: TODO: bug in templates.xql forces us to call templates:process manually :)
@@ -187,7 +187,7 @@ declare
     %templates:wrap
 function fh:volumes-by-group($node as node(), $model as map(*)) {
     for $g-vols in $model?volumes
-    group by $subseries := normalize-space($g-vols/title[@type='sub-series'])
+    group by $sub-series := normalize-space($g-vols/title[@type='sub-series'])
     order by $g-vols[1]/title[@type='sub-series']/@n
     return
         (: TODO: bug in templates.xql forces us to call templates:process manually :)
@@ -209,7 +209,7 @@ declare
     %templates:wrap
 function fh:series-volumes($node as node(), $model as map(*)) {
     for $vol in $model?volumes
-    let $title := string-join(for $title in ($vol/title[@type='volume'], $vol/title[@type='volumenumber'])[. ne ''] return $title, ', ')
+    let $title := string-join(for $title in ($vol/title[@type='volume'], $vol/title[@type='volume-number'])[. ne ''] return $title, ', ')
     let $vol-id := $vol/@id
     let $publication-status := $vol/publication-status
     order by $vol-id
@@ -576,7 +576,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
                 (
                 <div id="{$vol-id}">
                     <img src="https://{$config:S3_DOMAIN}/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-                    <a href="$app/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'subseries'), fh:vol-title($vol-id, 'volumenumber'), fh:vol-title($vol-id, 'volume')), ', ')}</a>.
+                    <a href="$app/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'sub-series'), fh:vol-title($vol-id, 'volume-number'), fh:vol-title($vol-id, 'volume')), ', ')}</a>.
                     <p>Ebook last updated: {format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), '[MNn] [D], [Y0001]', 'en', (), 'US')}</p>
                     <ul class="hsg-ebook-list">
                         <li><a class="hsg-link-button" href="{fh:epub-url($vol-id)}">EPUB ({ try {fh:epub-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.epub'}})</a></li>
@@ -833,7 +833,7 @@ declare function fh:publication-status ($document-id) {
  : @return Returns the URL of an external link as HTML
  :)
 declare function fh:location-url ($document-id) {
-    for $external-link in collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/location
+    for $external-link in collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/external-location
         let $link := $external-link/string()
         return
             if ($link) then
