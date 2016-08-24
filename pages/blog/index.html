@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Blog</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/blog">Blog</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Blog</h1>
+                    <p>To do</p>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Blog</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/blog/archive">Archive</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

@@ -1263,6 +1263,49 @@ else if (matches($exist:path, '^/developer/?')) then
     		</error-handler>
         </dispatch>
 
+
+(: handle requests for blog section; logic modeled on "open" section :)
+else if (matches($exist:path, '^/blog/?')) then
+    let $fragments := tokenize(substring-after($exist:path, '/blog/'), '/')[. ne '']
+    let $choice :=
+        if ($fragments[1]) then
+            switch ($fragments[1])
+                case "archive" return <choice page="pages/blog/archive/index.html" mode="html"/>
+                (: case "frus-latest.xml" return <choice page="modules/open.xql" mode="xml" xql-feed="latest"/> :)
+                default return <choice page="error-page.html" mode="html"/>
+        else
+            <choice page="pages/blog/index.html" mode="html"/>
+    return
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/{$choice/@page}">
+                {
+                    if ($choice/@xql-feed) then 
+                        <add-parameter name="xql-feed" value="{$choice/@xql-feed}"/>
+                    else 
+                        () 
+                    ,
+                    if ($choice/@mode = 'xml') then 
+                        <add-parameter name="xql-application-url" value="{local:get-url()}"/>
+                    else 
+                        () 
+                }
+            </forward>
+            {
+                if ($choice/@mode = 'html') then 
+                    (
+                        <view>
+                            <forward url="{$exist:controller}/modules/view.xql"/>
+                        </view>,
+                		<error-handler>
+                			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                			<forward url="{$exist:controller}/modules/view.xql"/>
+                		</error-handler>
+                    ) 
+                else 
+                    ()
+            }
+        </dispatch>
+        
 (: handle requests for open section :)
 else if (matches($exist:path, '^/open/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/open/'), '/')[. ne '']
