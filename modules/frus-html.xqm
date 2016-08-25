@@ -753,21 +753,21 @@ declare function fh:media-exists($document-id as xs:string, $section-id as xs:st
 
 
 
-declare 
+declare
     %templates:wrap
 function fh:epub-href-attribute($node as node(), $model as map(*), $document-id as xs:string) {
     attribute href { fh:epub-url($document-id) },
     templates:process($node/node(), $model)
 };
 
-declare 
+declare
     %templates:wrap
 function fh:mobi-href-attribute($node as node(), $model as map(*), $document-id as xs:string) {
     attribute href { fh:mobi-url($document-id) },
     templates:process($node/node(), $model)
 };
 
-declare 
+declare
     %templates:wrap
 function fh:pdf-href-attribute($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
     attribute href { fh:pdf-url($document-id, $section-id) },
@@ -802,7 +802,7 @@ function fh:hide-download-if-empty($node as node(), $model as map(*), $document-
 declare
     %templates:wrap
 function fh:hide-tags-if-empty($node as node(), $model as map(*)) {
-    if (exists($model?tags)) then 
+    if (exists($model?tags)) then
         templates:process($node/node(), $model)
     else
         attribute style { "display: none" }

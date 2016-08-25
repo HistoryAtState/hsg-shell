@@ -16,7 +16,7 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
-declare variable $pages:app-root := 
+declare variable $pages:app-root :=
     let $nginx-request-uri := request:get-header('nginx-request-uri')
     return
         (: if request received from nginx :)
@@ -173,9 +173,9 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
             if ($model?data[@subtype='removed-pending-rewrite']) then
                 <tei:div>
                     { $model?data/tei:head }
-                    <tei:p>Notice to readers: This article has been removed pending review to ensure 
-                        it meets our standards for accuracy and clarity. The revised article will be 
-                        posted as soon as it is ready. In the meantime, we apologize for any 
+                    <tei:p>Notice to readers: This article has been removed pending review to ensure
+                        it meets our standards for accuracy and clarity. The revised article will be
+                        posted as soon as it is ready. In the meantime, we apologize for any
                         inconvenience, and we thank you for your patience.</tei:p>
                 </tei:div>
             else

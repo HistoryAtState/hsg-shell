@@ -30,7 +30,7 @@ declare function edu:modules-sidebar($node, $model) {
 declare function edu:list-modules-brief($node, $model) {
     <ol>
         {
-            let $ordered-modules := 
+            let $ordered-modules :=
                 for $module in collection($edu:MODULES_COL)//module[published-status eq 'published']
                 order by xs:integer($module/year-published) descending
                 return $module
@@ -38,15 +38,15 @@ declare function edu:list-modules-brief($node, $model) {
             let $title := $module/title/text()
             let $year-published := $module/year-published/text()
             let $punctuation :=
-                if ($module = $ordered-modules[position() eq last() - 1]) then 
-                    '; and' 
-                else if ($module = $ordered-modules[last()]) then 
-                    '.' 
-                else 
+                if ($module = $ordered-modules[position() eq last() - 1]) then
+                    '; and'
+                else if ($module = $ordered-modules[last()]) then
+                    '.'
+                else
                     ';'
             return
-                <li><strong>{$title}</strong> ({$year-published}){$punctuation}</li>    
-        }        
+                <li><strong>{$title}</strong> ({$year-published}){$punctuation}</li>
+        }
     </ol>
 };
 
@@ -59,15 +59,15 @@ declare function edu:list-modules-full($node, $model) {
     let $text := $tei-intro//tei:body/tei:div[1]/tei:p[1]
     let $description := pages:process-content($model?odd, $text)
     let $availability-status := $module/availability-status
-    let $availability-message := 
+    let $availability-message :=
         <span class="availability-info">{
             if ($availability-status eq 'available') then
                 <a href="http://videodirect.state.gov/">Available for mail order</a>
-            else 
+            else
                 'Sorry, this title is out of print'
         }</span>
     order by $year-published descending
-    return 
+    return
         <div>
             <h3><a href="$app/education/modules/{$tei-document-name}">{$title}</a></h3>
             {$description}
@@ -84,16 +84,16 @@ declare function edu:module-introduction($node, $model, $document-id as xs:strin
     let $intro-body := pages:process-content($model?odd, $text)
     let $file := $module//file
     let $file-name := $file/name/text()
-    let $file-label := $file/label/text()        
+    let $file-label := $file/label/text()
     let $availability-status := $module/availability-status
-    let $availability-message := 
+    let $availability-message :=
         <span class="availability-info">{
             if ($availability-status eq 'available') then
                 <a href="http://videodirect.state.gov/">Available for mail order</a>
-            else 
+            else
                 'This title is out of print'
         }</span>
-    return 
+    return
         <div>
             <h2>{$longtitle/string()}</h2><hr />
             <p>{$availability-message}. Download the <a href="{concat('$s3static/', 'edu-modules/', $file-name)}">{$file-label}</a>.</p>

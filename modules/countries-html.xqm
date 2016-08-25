@@ -13,7 +13,7 @@ declare variable $ch:RDCR_COL := '/db/apps/rdcr';
 declare variable $ch:RDCR_ARTICLES_COL := $ch:RDCR_COL || '/articles';
 
 declare %templates:wrap function ch:load-countries($node as node(), $model as map(*)) {
-    let $ordered-articles := 
+    let $ordered-articles :=
         for $c in collection($ch:RDCR_ARTICLES_COL)/tei:TEI
         order by util:document-name($c)
         return $c
@@ -62,7 +62,7 @@ function ch:dropdown($node as node(), $model as map(*), $document-id as xs:strin
     let $brief-title := $c//tei:title[@type='short']/string()
     order by $article-id
     return
-        <option>{ 
+        <option>{
             attribute value { app:fix-href("$app/countries/" || $article-id) },
             $selected,
             $brief-title
@@ -85,7 +85,7 @@ declare function ch:list($node, $model) {
                 let $itemid := replace(util:document-name($item), '.xml', '')
                 order by $item
                 return
-                   <li> 
+                   <li>
                        <a href="$app/countries/{$itemid}">{$item/string()}</a>
                    </li>
                 }

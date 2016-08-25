@@ -1,6 +1,6 @@
 xquery version "3.0";
 
-(: 
+(:
     "Open goverment" atom feed for latest volumes.
 :)
 
@@ -21,84 +21,84 @@ declare function open:frus-latest() {
    let $serialize := util:declare-option('exist:serialize', 'method=xml media-type=text/xml indent=yes')
 
    let $title := 'Foreign Relations of the United States: Latest Volumes'
-   
+
    (: Note that RFC 4287 http://tools.ietf.org/html/rfc4287 was used to create these mappings to the Atom standard. :)
-   
+
    let $n := xs:integer(request:get-parameter('n', '10'))
-   
+
    (: create a list of all volumes sorted by the publication date :)
    let $volumes :=
       for $volume in collection($config:FRUS_METADATA_COL)/volume[publication-status eq 'published']
       order by $volume/published-year descending
       return $volume
-   
+
    let $last-n-volumes := subsequence($volumes, 1, $n)
-   
+
    let $feed-id := 'http://history.state.gov/atom/frus-metadata-v1'
-   
+
    let $author := 'Office of the Historian, Bureau of Public Affairs, United States Department of State'
-   
-   let $entries := 
+
+   let $entries :=
         for $volume in $last-n-volumes
             let $id := string($volume/@id)
             let $volume-title := normalize-space($volume/title[@type="complete"]/text())
-                        
+
         (: Mapping to the atom:author Element
         atom:feed elements MUST contain one or more atom:author elements
-        
+
         http://tools.ietf.org/html/rfc4287#section-4.2.1
-        
+
         The "atom:author" element is a Person construct that indicates the
            author of the entry or feed.
-           
+
            TODO - should the editors be part of the author field?
            <editor role="primary"/>
         :)
-        
-                        
+
+
         (: Mapping to the atom:published Element
             from http://tools.ietf.org/html/rfc4287#section-4.2.9
-              4.2.9. The 
+              4.2.9. The
               The "atom:published" element is a Date construct indicating an
               instant in time associated with an event early in the life cycle of
               the entry.
         :)
-        
+
             let $published-date := if ($volume/published-date ne '') then $volume/published-date/text() else $volume/published-year/text()
-        
+
         (: Mapping to the "atom:rights" Element
            The following text was taken from http://www.whitehouse.gov/copyright :)
-           
+
             let $rights := 'Pursuant to federal law, government-produced materials appearing on this site are not copyright protected.'
             let $coverage := $volume/coverage/text()
             let $from := $volume/coverage[@type='from']/text()
             let $file := concat($application-url, (:$style:web-path-to-app,:) '/data/', $id, '.xml')
-                        
+
         (: Mapping to the  The "atom:summary" Element
            http://tools.ietf.org/html/rfc4287#section-4.2.13
-        
+
            The "atom:summary" element is a Text construct that conveys a short
            summary, abstract, or excerpt of an entry.
-        
+
            atomSummary = element atom:summary { atomTextConstruct }
-        
+
            It is not advisable for the atom:summary element to duplicate
            atom:title or atom:content because Atom Processors might assume there
            is a useful summary when there is none.
-           
+
            Note that we have decided to keep the summary plain-text because this text is used
            as hover text in many systems.
-           
+
            We have also decided to use only the first TEI paragraph.
-           
+
            Note that if you use multiple paragraphs you might want to use the following:
-           
+
            let $summary := normalize-space(string-join($volume/summary/tei:p/text(), ' '))
         :)
-        
+
             let $summary := data($volume/summary/tei:p[1])
-            
-            let $editors := 
+
+            let $editors :=
                 concat(
                     if ( count($volume/editor[@role='primary']) gt 1 ) then
                         concat('Editors: ', string-join($volume/editor[@role='primary'], ', '), '. ')
@@ -110,14 +110,14 @@ declare function open:frus-latest() {
                         concat('General Editor: ', $volume/editor[@role='general']/text())
                     else ()
                     )
-            
+
             let $entry-created := $volume/created-datetime/string()
             let $entry-modified := $volume/last-modified-datetime/string()
-            
+
             let $link := concat(substring-before($application-url, '/open'), '/historicaldocuments/', $id)
-            
+
             order by $published-date descending, $volume/@id
-            
+
             return
                 <entry xmlns="http://www.w3.org/2005/Atom">
                     <title>{$volume-title}</title>
@@ -136,7 +136,7 @@ declare function open:frus-latest() {
                         )
                     }</summary>
                 </entry>
-   
+
    return
         <feed xmlns="http://www.w3.org/2005/Atom">
             <title>{$title}</title>
@@ -157,7 +157,7 @@ declare function open:frus-latest() {
 declare function open:frus-metadata() {
     let $serialize := util:declare-option('exist:serialize', 'method=xml media-type=text/xml indent=yes')
 
-    let $volumes := 
+    let $volumes :=
         for $volume in collection($config:FRUS_METADATA_COL)/volume[publication-status eq 'published']
             let $titles := $volume/title[. ne '']
             let $raw-summary := $volume/summary
@@ -175,14 +175,14 @@ declare function open:frus-metadata() {
             let $coverage := xs:string($volume/coverage[. ne ''][1])
             let $lengths := $volume/length/span[. ne '']
             order by string($volume/@id)
-            return 
+            return
                 <volume xmlns="http://history.state.gov/ns/1.0">{$volume/@*}
                     {
                     for $title in $titles return
                         element title { $title/@*, $title/text() },
-                    for $location in $locations 
-                    return 
-                        if ($location/@loc = ('madison', 'worldcat')) then 
+                    for $location in $locations
+                    return
+                        if ($location/@loc = ('madison', 'worldcat')) then
                             <external-location loc="{$location/@loc}">{$location/text()}</external-location>
                         else
                             <external-location loc="db">{concat($application-url, '/historicaldocuments/', $location)}</external-location>
@@ -190,10 +190,10 @@ declare function open:frus-metadata() {
                     <media>{$media}</media>,
                     <published>{$published-year}</published>,
                     <coverage>{$coverage}</coverage>,
-                    if ($lengths) then 
+                    if ($lengths) then
                     <length>{
                         for $length in $lengths
-                        return 
+                        return
                             element span { $length/@*, $length/text() }
                     }</length>
                     else (),
@@ -209,7 +209,7 @@ declare function open:frus-metadata() {
                     'Dump of FRUS Volume Metadata from Volume Manager
     Report Version: 1.0
     Report Last Updated: '
-                    , 
+                    ,
                     let $dates :=
                         for $volume in xmldb:get-child-resources($config:FRUS_METADATA_COL)
                         return xmldb:last-modified($config:FRUS_METADATA_COL, $volume)

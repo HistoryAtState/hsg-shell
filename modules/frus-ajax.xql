@@ -71,7 +71,7 @@ return
                 <li class="section-breadcrumb">{fh:section-breadcrumb(<n/>, $model)}</li>
             else
                 pages:deep-section-breadcrumbs(<n/>, $model, true())
-        let $mediaLink := 
+        let $mediaLink :=
             if (fh:media-exists($volume, $id, ".pdf")) then
                 fh:pdf-url($volume, $id)
             else

@@ -54,10 +54,10 @@ declare function travels:secretaries($node as node(), $model as map(*)) {
             let $name := pocom:person-name-first-last($node, $model, $person-id)
             let $secretary-role := doc($pocom:POSITIONS-PRINCIPALS-COL || '/secretary.xml')//principal[person-id = $person-id][1]
             let $startyear := app:year-from-date($secretary-role/started/date)
-            let $endyear := 
+            let $endyear :=
                 if ($secretary-role/following-sibling::principal[@treatAsConsecutive]) then
                     app:year-from-date($secretary-role/following-sibling::principal[@treatAsConsecutive][last()]/ended/date)
-                else 
+                else
                     app:year-from-date($secretary-role/ended/date)
            let $years := concat($startyear, '–', $endyear)
            order by $secretary-role/started/date
@@ -80,12 +80,12 @@ declare function travels:secretaries-destinations($node as node(), $model as map
 };
 
 declare function travels:is-person-or-country-id($id as xs:string, $role as xs:string) {
-    if ($role = 'president') then 
+    if ($role = 'president') then
         if (collection($travels:PRESIDENTS_COL)//id = $id) then
             'person'
         else
             'country'
-    else 
+    else
         if (collection($travels:SECRETARY_TRAVELS_COL)//@who = $id) then
             'person'
         else
@@ -116,9 +116,9 @@ declare function travels:person-or-country-travels($node as node(), $model as ma
 
 declare function travels:by-country($node as node(), $model as map(*), $role as xs:string, $country-id as xs:string) {
     let $collection := if ($role = 'president') then $travels:PRESIDENT_TRAVELS_COL else $travels:SECRETARY_TRAVELS_COL
-    let $trips := 
-        for $trip in collection($collection)//trip[country/@id eq $country-id] 
-        order by $trip/start-date 
+    let $trips :=
+        for $trip in collection($collection)//trip[country/@id eq $country-id]
+        order by $trip/start-date
         return $trip
     return
         travels:table($node, $model, $trips, 'country')
@@ -126,9 +126,9 @@ declare function travels:by-country($node as node(), $model as map(*), $role as 
 
 declare function travels:by-person($node as node(), $model as map(*), $role as xs:string, $person-id as xs:string) {
     let $collection := if ($role = 'president') then $travels:PRESIDENT_TRAVELS_COL else $travels:SECRETARY_TRAVELS_COL
-    let $trips := 
-        for $trip in collection($collection)//trip[@who eq $person-id] 
-        order by $trip/start-date 
+    let $trips :=
+        for $trip in collection($collection)//trip[@who eq $person-id]
+        order by $trip/start-date
         return $trip
     return
         travels:table($node, $model, $trips, 'name')
@@ -156,22 +156,22 @@ declare function travels:table($node as node(), $model as map(*), $results-to-di
                     <td>{
                         let $start := if ($item/start-date castable as xs:date) then xs:date($item/start-date/text()) else $item/start-date/text()
                         let $end := if ($item/end-date castable as xs:date) then xs:date($item/end-date/text()) else $item/end-date/text()
-                        let $date := 
-                            if (not($start castable as xs:date)) then 
+                        let $date :=
+                            if (not($start castable as xs:date)) then
                                 'date error'
                             else if ($item/start-date = $item/end-date) then
                                 format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US')
-                            else if (empty($end)) then 
-                                format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US') 
-                            else if (year-from-date($start) eq year-from-date($end) and month-from-date($start) eq month-from-date($end)) then 
+                            else if (empty($end)) then
+                                format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US')
+                            else if (year-from-date($start) eq year-from-date($end) and month-from-date($start) eq month-from-date($end)) then
                                 concat(format-date($start, "[MNn] [D]", 'en', (), 'US'), '–', format-date($end, "[D], [Y0001]", 'en', (), 'US'))
                             else if (year-from-date($start) eq year-from-date($end)) then
                                 concat(format-date($start, "[MNn] [D]", 'en', (), 'US'), '–', format-date($end, '[MNn] [D], [Y0001]', 'en', (), 'US'))
-                            else 
+                            else
                                 concat(format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US'), '–', format-date($end, '[MNn] [D], [Y0001]', 'en', (), 'US'))
                         return $date
                     }</td>
-                </tr> 
+                </tr>
         }</tbody>
     </table>
 };

@@ -1,6 +1,6 @@
 xquery version "3.0";
 
-(: 
+(:
     FRUS volume-id API
 :)
 
@@ -49,13 +49,13 @@ declare function opds:link($type, $rel, $href, $title) {
 
 declare function opds:navigation-link($rel, $href, $title) {
     let $type := 'application/atom+xml;profile=opds-catalog;kind=navigation'
-    return 
+    return
         opds:link($type, $rel, $href, $title)
 };
 
 declare function opds:acquisition-link($rel, $href, $title) {
     let $type := 'application/atom+xml;profile=opds-catalog;kind=acquisition'
-    return 
+    return
         opds:link($type, $rel, $href, $title)
 };
 declare function opds:search-link() {
@@ -63,7 +63,7 @@ declare function opds:search-link() {
     let $rel := 'search'
     let $href := $opds:opds-search-url
     let $title := 'Search Office of the Historian ebooks'
-    return 
+    return
         opds:link($type, $rel, $href, $title)
 };
 
@@ -75,10 +75,10 @@ declare function opds:entry($title, $id, $updated, $summary, $content, $link) {
         element updated {$updated},
         element summary { attribute type {'text'}, $summary},
         (: NOTE: I'm suppressing the content element since ShuBooks won't show summary when content is present :)
-        (:         
-        if ($summary = $content or $content = '' or empty($content)) then 
+        (:
+        if ($summary = $content or $content = '' or empty($content)) then
             ()
-        else 
+        else
             element content {$content},
         :)
         $link
@@ -93,7 +93,7 @@ declare function opds:ebook-entries($vol-ids) {
     let $id := $vol-id
     let $updated := xs:dateTime(fh:ebook-last-updated($vol-id))
     let $summary:= normalize-space(fh:vol-title($vol-id))
-    let $content := 
+    let $content :=
         ()
         (: NOTE: I'm suppressing the volume summary for now since the <content> element causes ShuBooks to not show the <summary> element. :)
         (:
@@ -104,14 +104,14 @@ declare function opds:ebook-entries($vol-ids) {
             else ()
         :)
     let $epub-mobi-links :=
-        if (fh:exists-ebook($vol-id)) then 
+        if (fh:exists-ebook($vol-id)) then
             (
             opds:link('application/epub+zip', 'http://opds-spec.org/acquisition', fh:epub-url($vol-id), concat($title, ' (EPUB)')),
             opds:link('application/x-mobipocket-ebook', 'http://opds-spec.org/acquisition', fh:mobi-url($vol-id), concat($title, ' (Mobi)'))
             )
         else ()
     let $pdf-link :=
-        if (fh:exists-pdf($vol-id)) then 
+        if (fh:exists-pdf($vol-id)) then
             opds:link('application/pdf', 'http://opds-spec.org/acquisition', fh:epub-url($vol-id), concat($title, ' (PDF)'))
         else ()
     let $cover-image-link :=
@@ -136,13 +136,13 @@ declare function opds:all() {
     let $feed-updated := current-dateTime()
     let $feed-author-name := $opds:feed-author-name
     let $feed-author-uri := $opds:server-url
-    let $feed-links := 
+    let $feed-links :=
         (
         opds:acquisition-link('self', $feed-id, $feed-title),
         opds:acquisition-link('start', $opds:opds-base-url, 'Home'),
         opds:search-link()
         )
-    let $vol-ids := 
+    let $vol-ids :=
         for $vol-id in $opds:frus-ebook-volume-ids
         order by $vol-id
         return $vol-id
@@ -157,7 +157,7 @@ declare function opds:recent() {
     let $feed-updated := current-dateTime()
     let $feed-author-name := $opds:feed-author-name
     let $feed-author-uri := $opds:server-url
-    let $feed-links := 
+    let $feed-links :=
         (
         opds:acquisition-link('self', $feed-id, $feed-title),
         opds:acquisition-link('start', $opds:opds-base-url, 'Home'),
@@ -190,7 +190,7 @@ declare function opds:tag-not-found-error($tag-requested as xs:string) {
             <div>
                 <h1>Error 404 (Not Found)</h1>
                 <p>
-                    No resource with tag, "{$tag-requested}", was found.  
+                    No resource with tag, "{$tag-requested}", was found.
                     Please check the value of the tag URL parameter, or follow a valid link from <a href="/api/v1/catalog">the catalog root</a>.
                 </p>
             </div>
@@ -207,8 +207,8 @@ declare function opds:browse() {
         if ($tag-requested and not($tag-exists)) then
             opds:tag-not-found-error($tag-requested)
         else
-        
-        
+
+
     let $tag := if ($tag-requested) then $tag-exists/.. else $taxonomy
 
     let $feed-id := concat($opds:opds-base-url, '/browse', if ($tag-requested) then concat('?tag=', $tag-requested) else ())
@@ -216,7 +216,7 @@ declare function opds:browse() {
     let $feed-updated := current-dateTime()
     let $feed-author-name := $opds:feed-author-name
     let $feed-author-uri := $opds:server-url
-    let $feed-links := 
+    let $feed-links :=
         (
         opds:acquisition-link('self', $feed-id, $feed-title),
         opds:acquisition-link('start', $opds:opds-base-url, 'Home'),
@@ -224,14 +224,14 @@ declare function opds:browse() {
         )
 
     let $sub-tags := $tag/(category | tag)
-    
-    let $tag-entries := 
+
+    let $tag-entries :=
         for $tag in $sub-tags
         let $title := $tag/label/string()
         let $id := $tag/id/string()
         let $updated := current-dateTime()
         let $vols-with-this-tag := tags:resources('frus')[.//tag/@id = $tag//id]
-        let $vols-with-this-tag := 
+        let $vols-with-this-tag :=
             for $vol in $vols-with-this-tag
             let $link := $vol/link
             let $vol-id := substring-after($link, 'historicaldocuments/')
@@ -250,7 +250,7 @@ declare function opds:browse() {
                 $content,
                 $links
                 )
-    
+
     let $vols-with-this-tag := tags:resources('frus')[.//tag/@id = $tag-requested]
     let $vol-ids :=
         for $vol in $vols-with-this-tag
@@ -260,9 +260,9 @@ declare function opds:browse() {
             $vol-id
     let $vol-ids :=  $vol-ids[. = $opds:frus-ebook-volume-ids]
     let $volume-entries := opds:ebook-entries($vol-ids)
-    
+
     let $entries := ($tag-entries, $volume-entries)
-    
+
     return
         opds:feed($feed-id, $feed-title, $feed-updated, $feed-author-name, $feed-author-uri, $feed-links, $entries)
 };
@@ -274,26 +274,26 @@ declare function opds:search() {
     let $tag-hits := if ($q) then $taxonomy//label[ft:query(., $q)]/.. else ()
     let $tag-hit-ids := $tag-hits/id
     return
-    
+
     let $feed-id := concat($opds:opds-base-url, '/search?q=', $q)
     let $feed-title := concat('Search ebooks for "', $q, '"')
     let $feed-updated := current-dateTime()
     let $feed-author-name := $opds:feed-author-name
     let $feed-author-uri := $opds:server-url
-    let $feed-links := 
+    let $feed-links :=
         (
         opds:acquisition-link('self', $feed-id, $feed-title),
         opds:acquisition-link('start', $opds:opds-base-url, 'Home'),
         opds:search-link()
         )
 
-    let $entries := 
+    let $entries :=
         for $tag in $tag-hits
         let $title := $tag/label/string()
         let $id := $tag/id/string()
         let $updated := current-dateTime()
         let $vols-with-this-tag := tags:resources('frus')[.//tag/@id = $tag//id]
-        let $vols-with-this-tag := 
+        let $vols-with-this-tag :=
             for $vol in $vols-with-this-tag
             let $link := $vol/link
             let $vol-id := substring-after($link, 'historicaldocuments/')
@@ -313,7 +313,7 @@ declare function opds:search() {
                 $content,
                 $links
                 )
-    
+
     return
         opds:feed($feed-id, $feed-title, $feed-updated, $feed-author-name, $feed-author-uri, $feed-links, $entries)
 };
@@ -324,13 +324,13 @@ declare function opds:catalog() {
     let $feed-updated := current-dateTime()
     let $feed-author-name := $opds:feed-author-name
     let $feed-author-uri := $opds:server-url
-    let $feed-links := 
+    let $feed-links :=
         (
         opds:acquisition-link('self', $feed-id, $feed-title),
         opds:navigation-link('start', $feed-id, 'Foreign Relations of the United States'),
         opds:search-link()
         )
-    let $entries := 
+    let $entries :=
         (
         opds:entry(
             'All Volumes',

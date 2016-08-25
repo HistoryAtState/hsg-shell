@@ -113,7 +113,7 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
         {
             let $href := attribute href { toc:href($node) }
             let $highlight := if ($node is $current) then 'highlight' else ()
-            (: .toc-link would trigger an ajax call, so only use this if we're not showing a 
+            (: .toc-link would trigger an ajax call, so only use this if we're not showing a
                 reduced toc :)
             let $tocLink := if ($current) then () else 'toc-link'
             return
@@ -300,4 +300,3 @@ declare function toc:paginate($child-document-count as xs:int, $start as xs:int)
     else
         ()
 };
-

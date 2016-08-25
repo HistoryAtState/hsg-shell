@@ -15,7 +15,7 @@ declare variable $visits:DATA_COL := '/db/apps/visits/data';
 
 declare function visits:years($node, $model) {
     <ul>{
-        let $years := 
+        let $years :=
             distinct-values(
                 for $date in collection($visits:DATA_COL)//(start-date | end-date)
                 let $year := year-from-date($date)
@@ -23,7 +23,7 @@ declare function visits:years($node, $model) {
                 )
         for $year in $years
         order by $year
-        return 
+        return
             <li><a href="$app/departmenthistory/visits/{$year}">{$year}</a></li>
     }</ul>
 };
@@ -40,9 +40,9 @@ declare function visits:countries($node, $model) {
 };
 
 declare function visits:is-country-or-year($country-or-year) {
-    if (matches($country-or-year, '^\d{4}')) then 
-        'year' 
-    else 
+    if (matches($country-or-year, '^\d{4}')) then
+        'year'
+    else
         'country'
 };
 
@@ -78,7 +78,7 @@ declare function visits:country-or-year-table($node, $model, $country-or-year as
 };
 
 declare function visits:visits-in-year-table($node, $model, $year as xs:integer) {
-    let $visits := 
+    let $visits :=
         for $visit in collection($visits:DATA_COL)//visit[year-from-date(start-date) eq $year]
         order by $visit/start-date
         return $visit
@@ -87,7 +87,7 @@ declare function visits:visits-in-year-table($node, $model, $year as xs:integer)
 };
 
 declare function visits:visits-from-country-table($node, $model, $country-id as xs:string) {
-    let $visits := 
+    let $visits :=
         for $visit in collection($visits:DATA_COL)//visit[from/@id eq $country-id]
         order by $visit/start-date
         return $visit
@@ -115,22 +115,22 @@ declare function visits:visits-table($node, $model, $results-to-display as node(
                     <td>{
                         let $start := if ($item/start-date castable as xs:date) then xs:date($item/start-date) else $item/start-date
                         let $end := if ($item/end-date castable as xs:date) then xs:date($item/end-date) else $item/end-date
-                        let $date := 
-                            if (not($start castable as xs:date)) then 
+                        let $date :=
+                            if (not($start castable as xs:date)) then
                                 'date error'
                             else if ($item/start-date = $item/end-date) then
                                 format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US')
-                            else if (empty($end)) then 
-                                format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US') 
-                            else if (year-from-date($start) eq year-from-date($end) and month-from-date($start) eq month-from-date($end)) then 
+                            else if (empty($end)) then
+                                format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US')
+                            else if (year-from-date($start) eq year-from-date($end) and month-from-date($start) eq month-from-date($end)) then
                                 concat(format-date($start, "[MNn] [D]", 'en', (), 'US'), '–', format-date($end, "[D], [Y0001]", 'en', (), 'US'))
                             else if (year-from-date($start) eq year-from-date($end)) then
                                 concat(format-date($start, "[MNn] [D]", 'en', (), 'US'), '–', format-date($end, '[MNn] [D], [Y0001]', 'en', (), 'US'))
-                            else 
+                            else
                                 concat(format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US'), '–', format-date($end, '[MNn] [D], [Y0001]', 'en', (), 'US'))
                         return $date
                     }</td>
-                </tr> 
+                </tr>
         }</tbody>
     </table>
 };

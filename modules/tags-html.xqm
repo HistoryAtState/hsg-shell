@@ -18,7 +18,7 @@ declare function tags:resources($collection) {
 };
 
 declare function tags:count-resources($node, $model, $collection as xs:string) {
-    count(tags:resources($collection))    
+    count(tags:resources($collection))
 };
 
 declare function tags:count-resource-tags($node, $model) {
@@ -87,14 +87,14 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
     let $secretary-bios-resources := collection($tags:RESOURCES_COL || 'secretary-bios')
     let $secretary-bios-tags := $secretary-bios-resources//tag
     let $tagged-secretary-bios := $secretary-bios-tags[@id = $tag-id]/ancestor::study
-    return 
+    return
         if ($tag-id-exists) then
             <div>
                 <h2>{$tag/label/string()}</h2>
                 {if ($tag/definition) then <p>{tags:typeswitch($tag/definition)}</p> else ()}
                 {
                 (:
-                if ($child-tags) then 
+                if ($child-tags) then
                     <div>
                         <h3>Tags within {$tag/label/string()}:</h3>
                         <ul class="list-unstyled">{
@@ -149,17 +149,17 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                         </div>
                     else ()
                     )
-                else 
+                else
                     let $descendant-tag-ids := $child-tags//id
                     let $matching-resource-tags := ($milestones-resources, $frus-resources)//tag[@id = $descendant-tag-ids]
                     let $matching-resources := $matching-resource-tags/ancestor::study
                     return
-                        if ($matching-resources) then 
+                        if ($matching-resources) then
                             <div>
                                 <p>No resources have been specifically identified as “{$tag/label/string()},” but {count($matching-resources)} resources beneath this level in the taxonomy have been tagged with {count(distinct-values($matching-resource-tags/@id))} distinct tags. Please dig deeper:</p>
                                 {tags:descend($tag, $tag/id, false())}
                             </div>
-                        else 
+                        else
                             <p>No resources have been tagged {$tag/label/string()}.  Please select another tag from the list on the left.</p>
                 }
             </div>
@@ -188,12 +188,12 @@ declare function tags:taxonomy-to-html-list($taxonomy-node) {
 
 declare function tags:recurse($node) {
     for $child in $node/node()
-    return 
+    return
         tags:typeswitch($child)
 };
 
 declare function tags:typeswitch($nodes) {
-    for $node in $nodes 
+    for $node in $nodes
     return
         typeswitch ($node)
             case text() return $node
@@ -240,5 +240,3 @@ function tags:list-tags($node as node(), $model as map(*)) {
     return
         <li class="hsg-list-group-item"><a href="{$app:APP_ROOT}/tags/{$tag}" title="Resources tagged {$label}">{$label/text()}</a></li>
 };
-
-

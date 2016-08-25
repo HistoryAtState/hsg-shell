@@ -1,7 +1,7 @@
 (:~
  : Transform a given source into a standalone document using
  : the specified odd.
- : 
+ :
  : @author Wolfgang Meier
  :)
 xquery version "3.0";
@@ -19,17 +19,17 @@ declare option output:method "xml";
 declare option output:html-version "5.0";
 declare option output:media-type "text/xml";
 
-declare variable $local:CONFIG := 
+declare variable $local:CONFIG :=
     <fop version="1.0">
         <!-- Strict user configuration -->
         <strict-configuration>false</strict-configuration>
-        
+
         <!-- Strict FO validation -->
         <strict-validation>false</strict-validation>
-        
+
         <!-- Base URL for resolving relative URLs -->
         <base>./</base>
-        
+
         <!-- Font Base URL for resolving relative font URLs -->
         <!--font-base>{substring-before(request:get-url(), "/modules")}/resources/fonts/</font-base>
         <renderers>

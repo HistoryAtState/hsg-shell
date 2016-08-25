@@ -22,7 +22,7 @@ function archives:dropdown($node as node(), $model as map(*), $country-id as xs:
     let $brief-title := $c//tei:title[@type='short']/string()
     order by $article-id
     return
-        <option>{ 
+        <option>{
             attribute value { "$app/countries/archives/" || $article-id },
             $selected,
             $brief-title
@@ -44,7 +44,7 @@ declare function archives:list($node, $model) {
                 let $itemid := replace(util:document-name($item), '.xml', '')
                 order by $item
                 return
-                   <li> 
+                   <li>
                        <a href="$app/countries/archives/{$itemid}">{$item/string()}</a>
                    </li>
                 }

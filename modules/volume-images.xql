@@ -1,21 +1,21 @@
 xquery version "1.0";
 
-(: 
+(:
     FRUS volume images API
 :)
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace s3="http://s3.amazonaws.com/doc/2006-03-01/";
 declare namespace httpclient="http://exist-db.org/xquery/httpclient";
-declare namespace functx = "http://www.functx.com"; 
+declare namespace functx = "http://www.functx.com";
 
 import module namespace aws_config = "http://history.state.gov/ns/xquery/aws_config" at '/db/apps/s3/modules/aws_config.xqm';
 import module namespace bucket = 'http://www.xquery.co.uk/modules/connectors/aws/s3/bucket' at '/db/apps/s3/modules/xaws/modules/uk/co/xquery/www/modules/connectors/aws-exist/s3/bucket.xq';
 
-declare function functx:substring-after-last-match 
+declare function functx:substring-after-last-match
   ( $arg as xs:string? ,
     $regex as xs:string )  as xs:string {
-       
+
    replace($arg,concat('^.*',$regex),'')
  } ;
 
@@ -34,7 +34,7 @@ declare function local:contents-to-resources($contents) {
         </resource>
 };
 
-(: provide this function a directory like 'frus/frus1964-68v12/ebook/' and it will update 
+(: provide this function a directory like 'frus/frus1964-68v12/ebook/' and it will update
 the existing cache of that directory's contents :)
 declare function local:update-leaf-directory($directory as xs:string) {
     let $bucket := 'static.history.state.gov'
@@ -44,7 +44,7 @@ declare function local:update-leaf-directory($directory as xs:string) {
     let $prefix := $directory
     let $list := bucket:list($aws_config:AWS-ACCESS-KEY, $aws_config:AWS-SECRET-KEY, $bucket, $delimiter, (), (), $prefix)
     let $contents := $list/httpclient:body/s3:ListBucketResult/s3:Contents[s3:Key ne $prefix]
-    let $resources := 
+    let $resources :=
         <resources prefix="{$prefix}">{
             local:contents-to-resources($contents)
         }</resources>
@@ -62,7 +62,7 @@ declare function local:dispatch-query() {
             let $hitcount := count($hits)
             let $end-time := util:system-time()
             let $runtime := (($end-time - $start-time) div xs:dayTimeDuration('PT1S'))
-        
+
             return
               <results>
                  <summary>
@@ -76,7 +76,7 @@ declare function local:dispatch-query() {
                           <image>{$hit/string()}</image>
                  }</images>
               </results>
-        else 
+        else
             <error>missing volume parameter</error>
 };
 

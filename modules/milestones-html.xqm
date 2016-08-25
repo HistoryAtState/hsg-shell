@@ -14,7 +14,7 @@ declare variable $milestones:MILESTONES_COL := '/db/apps/milestones';
 declare variable $milestones:MILESTONES_CHAPTERS_COL := $milestones:MILESTONES_COL || '/chapters';
 
 declare %templates:wrap function milestones:load-periods($node as node(), $model as map(*)) {
-    let $ordered-articles := 
+    let $ordered-articles :=
         for $c in collection($milestones:MILESTONES_CHAPTERS_COL)/tei:TEI
         order by util:document-name($c)
         return $c
@@ -62,7 +62,7 @@ function milestones:dropdown($node as node(), $model as map(*), $document-id as 
     let $brief-title := $c//tei:title[@type='short']/string()
     order by $period-id
     return
-        <option>{ 
+        <option>{
             attribute value { app:fix-href("$app/milestones/" || $period-id) },
             $selected,
             $brief-title
@@ -88,7 +88,7 @@ declare function milestones:list($node, $model) {
                     let $itemid := $item/@xml:id
                     let $url := concat("$app/milestones/", $docid, '/', $itemid)
                     return
-                       <li> 
+                       <li>
                            <a href="{$url}">{data($title)}</a>
                        </li>
                     }
