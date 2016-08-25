@@ -71,7 +71,7 @@ declare function edu:list-modules-full($node, $model) {
         <div>
             <h3><a href="$app/education/modules/{$tei-document-name}">{$title}</a></h3>
             {$description}
-            <p>Published in {$year-published}.  {$availability-message}.  The full introduction and curriculum materials are <a href="{concat('$app/modules/', $tei-document-name)}">available online</a>.</p>
+            <p>Published in {$year-published}.  {$availability-message}.  The full introduction and curriculum materials are <a href="{concat('$app/education/modules/', $tei-document-name)}">available online</a>.</p>
             <hr />
         </div>
 };
