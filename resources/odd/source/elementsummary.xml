@@ -7,7 +7,7 @@
 elements are allowed for in the header. The following table
 	shows the usage of all elements in six existing corpora, and
 	classifies them 11 usage groups. There are
-15 elements 
+15 elements
 listed which are <_0:emph xmlns:_0="http://www.tei-c.org/ns/1.0">not</_0:emph> allowed in TEI Simple, but should be transformed
 to another element.</p>
     <table>
