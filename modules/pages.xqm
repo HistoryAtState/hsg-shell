@@ -130,7 +130,7 @@ declare function pages:volume-to-tei($volume as element()) {
                             <tei:list>
                             {
                                 $volume/external-location[. ne ''] !
-                                    <tei:item>{console:log(serialize(<ref target="{.}">University of Wisconsin-Madison</ref>)), if (./@loc = 'madison') then <tei:ref target="{.}">University of Wisconsin-Madison</tei:ref> else ()}</tei:item>
+                                    <tei:item>{if (./@loc = 'madison') then <tei:ref target="{.}">University of Wisconsin-Madison</tei:ref> else ()}</tei:item>
                             }
                             </tei:list>
                         </tei:div>

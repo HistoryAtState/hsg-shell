@@ -854,9 +854,9 @@ declare function fh:location-url ($document-id) {
  :  @param $model
  :  @return The header of the document as HTML
  :)
-declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
+declare function fh:render-volume-landing($node as node(), $model as map(*)) {
     let $publication-status := fh:publication-status($model?document-id)
-    let $externalLink := fh:location-url ($model?document-id)
+    let $externalLink := fh:location-url($model?document-id)
     let $log := console:log($externalLink)
     let $not-published-status :=
         if ($publication-status = 'published') then
@@ -890,7 +890,12 @@ declare function fh:render-volume-landing ($node as node(), $model as map(*)) {
         )
             else (
                 $header,
-                <p>This volume is available at the following location{if (count($externalLink) gt 1) then 's' else ()}:</p>,
-                if ($externalLink) then <ul>{$externalLink ! <li>{.}</li>}</ul> else ()
+                if ($externalLink) then 
+                    (
+                    <p>This volume is available at the following location{if (count($externalLink) gt 1) then 's' else ()}:</p>
+                    ,
+                    <ul>{$externalLink ! <li>{.}</li>}</ul>
+                    )
+                else ()
             )
 };
