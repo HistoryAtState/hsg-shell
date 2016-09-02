@@ -857,7 +857,6 @@ declare function fh:location-url ($document-id) {
 declare function fh:render-volume-landing($node as node(), $model as map(*)) {
     let $publication-status := fh:publication-status($model?document-id)
     let $externalLink := fh:location-url($model?document-id)
-    let $log := console:log($externalLink)
     let $not-published-status :=
         if ($publication-status = 'published') then
             ()
