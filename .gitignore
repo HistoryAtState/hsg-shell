@@ -8,6 +8,6 @@ resources/fonts
 resources/scripts/app.all.js
 resources/scripts/app.min.js
 /templates
-
 # IDE
 .idea
+.DS_Store
