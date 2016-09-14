@@ -28,11 +28,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eXistSolutions/hsg-shell.git"
+    "url": "git+https://github.com/HistoryAtState/hsg-shell.git"
   },
   "author": "eXistSolutions",
   "bugs": {
-    "url": "https://github.com/eXistSolutions/hsg-shell/issues"
+    "url": "https://github.com/HistoryAtState/hsg-shell/issues"
   },
-  "homepage": "https://github.com/eXistSolutions/hsg-shell#readme"
+  "homepage": "https://github.com/HistoryAtState/hsg-shell#readme"
 }

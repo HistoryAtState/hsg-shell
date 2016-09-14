@@ -21,7 +21,7 @@ After node is installed just run
 
 1. Clone the repository
 
-    `git clone https://github.com/eXistSolutions/hsg-shell.git`
+    `git clone https://github.com/HistoryAtState/hsg-shell.git`
 
 1. Install dependencies for the front-end and automation tasks (`npm` & `bower`),
     Build and copy javascripts, fonts, css and images into the *resources* folder (`gulp`) and
