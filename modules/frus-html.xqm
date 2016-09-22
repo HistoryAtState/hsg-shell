@@ -310,12 +310,23 @@ function fh:view-persons($node as node(), $model as map(*)) {
 declare function fh:get-persons($root as element(), $ids as xs:string*) {
     let $persons := $root/ancestor-or-self::tei:TEI/id("persons")
     for $idref in $ids
-        let $id := substring($idref, 2)
-        let $persName := $persons/id($id)
-        let $persDescription := $persons/id($id)/../../string() (: text() doesn't work as input-parameter in replace()! :)
-     (: Todo: Filter unwanted characters from description.
-        let $filteredPersDesc := replace($persDescription, "/^(, )?([^.]+)\.$/", "$2") :)
-        order by $persName
+    let $id := substring($idref, 2)
+    let $persName := $persons/id($id)
+    let $following := 
+        if ($persName/parent::tei:hi) then
+            $persName/parent::tei:hi/following-sibling::node() 
+        else 
+            $persName/following-sibling::node()
+    let $persDescription := 
+        normalize-space(
+            string-join(
+                (
+                    replace(subsequence($following, 1, 1), '^\s*,?\s+', ''),
+                    subsequence($following, 2)
+                )
+            )
+        )
+    order by $persName
     return
         <a href="persons{$idref}" class="list-group-item" data-toggle="tooltip" title="{$persDescription}">{$persName/string()}</a>
 };
@@ -331,16 +342,23 @@ declare function fh:get-gloss($root as element(), $ids as xs:string*) {
     for $idref in $ids
     let $id := substring($idref, 2)
     let $term := $terms/id($id)
-    let $termText := $term/../following-sibling::text()
-    let $termDescription := normalize-space(string-join($termText))
-    (: Special case, when term description is in a sibling element like a <persName> tag :)
-    let $persName := $term/../following-sibling::*
+    let $following := 
+        if ($term/parent::tei:hi) then
+            $term/parent::tei:hi/following-sibling::node() 
+        else 
+            $term/following-sibling::node()
+    let $termDescription := 
+        normalize-space(
+            string-join(
+                (
+                    replace(subsequence($following, 1, 1), '^\s*,?\s+', ''),
+                    subsequence($following, 2)
+                )
+            )
+        )
     order by $term
     return
-        <a href="terms{$idref}" class="list-group-item" data-toggle="tooltip" title="{
-        if ($persName) then $persName/text()
-        else ($termDescription)
-        }">{$term/text()}</a>
+        <a href="terms{$idref}" class="list-group-item" data-toggle="tooltip" title="{$termDescription}">{$term/string()}</a>
 };
 
 declare function fh:volume-breadcrumb($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
