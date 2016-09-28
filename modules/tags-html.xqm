@@ -223,7 +223,7 @@ declare function tags:ptr($node) {
 declare
     %templates:wrap
 function tags:load-tags($node as node(), $model as map(*), $document-id as xs:string) {
-    let $tags := collection($tags:RESOURCES_COL)//link[. = 'http://history.state.gov/historicaldocuments/' || $document-id]/..
+    let $tags := collection($tags:RESOURCES_COL)//link[. = 'https://history.state.gov/historicaldocuments/' || $document-id]/..
     return
         if ($tags) then
             map { "tags": $tags }
