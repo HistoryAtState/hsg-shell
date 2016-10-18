@@ -100,9 +100,7 @@ gulp.task('scripts:build', function () {
             'resources/scripts/app.js',
             'resources/scripts/metagrid.js'
         ])
-        .pipe(sourcemaps.init())
         .pipe(uglify())
-        .pipe(sourcemaps.write())
         .pipe(concat('app.min.js'))
         .pipe(gulp.dest('resources/scripts'))
 })
