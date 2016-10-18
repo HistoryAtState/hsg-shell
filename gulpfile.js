@@ -25,7 +25,7 @@ var AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
-var PRODUCTION = (!!process.env.NODE_ENV || process.env.NODE_ENV === 'production')
+var PRODUCTION = (!!process.env.NODE_ENV && process.env.NODE_ENV === 'production')
 
 console.log('Production? %s', PRODUCTION)
 
@@ -100,10 +100,8 @@ gulp.task('scripts:build', function () {
             'resources/scripts/app.js',
             'resources/scripts/metagrid.js'
         ])
-        .pipe(sourcemaps.init())
         .pipe(uglify())
-        .pipe(sourcemaps.write())
-        .pipe(rename('app.min.js'))
+        .pipe(concat('app.min.js'))
         .pipe(gulp.dest('resources/scripts'))
 })
 
