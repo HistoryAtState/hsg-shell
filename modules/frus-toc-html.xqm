@@ -249,7 +249,7 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                             for $docsummary in $document//tei:note[@type='summary']
                             return
                                 <p class="summary">{$config?apply($config, $docsummary/node())}</p>,
-                            for $docsource in $document//tei:note[@type='source'][1]
+                            for $docsource in ($document//tei:note[@type='source'])[1]
                             return
                                 <p class="sourcenote">{$config?apply-children($config, $node, $docsource/node())}</p>
                         }
