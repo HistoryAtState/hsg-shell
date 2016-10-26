@@ -243,15 +243,18 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                             </a>
                         </h4>
                         {
-                            for $docdateline in $document//tei:dateline[1]
+                            (: some documents have child attachments; only the primary document's information should be shown in the document list :)
+                            let $docdateline := ($document//tei:dateline)[1]
+                            let $docsummary := ($document//tei:note[@type='summary'])[1]
+                            let $docsource := ($document//tei:note[@type='source'])[1]
                             return
-                                <p class="dateline">{$config?apply($config, $docdateline)}</p>,
-                            for $docsummary in $document//tei:note[@type='summary']
-                            return
-                                <p class="summary">{$config?apply($config, $docsummary/node())}</p>,
-                            for $docsource in ($document//tei:note[@type='source'])[1]
-                            return
-                                <p class="sourcenote">{$config?apply-children($config, $node, $docsource/node())}</p>
+                                (
+                                    (: the ODD puts datelines in a <div class="tei-dateline"> - right-aligned :)
+                                    $docdateline ! $config?apply($config, .),
+                                    (: prevent formatting the following as footnotes by descending to the child node :)
+                                    $docsummary ! <p class="summary">{$config?apply($config, ./node())}</p>,
+                                    $docsource ! <p class="sourcenote">{$config?apply($config, ./node())}</p>
+                                )
                         }
                     </div>
                 ,
