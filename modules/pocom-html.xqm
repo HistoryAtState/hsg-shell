@@ -139,23 +139,28 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
     let $principalslisting :=
         <ul>
             {
-            for $principal in ($role//principal, $role//chief)
-            let $person-id := $principal/person-id
-            let $name := pocom:person-name-first-last($node, $model, $person-id)
-            let $startdate :=
-                (
-                $principal/started/date,
-                $principal/appointed/date
-                )[. ne ''][1]
-            let $startyear := app:year-from-date($startdate)
-            let $endyear := app:year-from-date($principal/ended/date)
-            let $years := if (string($startyear) = string($endyear)) then $startyear else concat($startyear, '–', $endyear)
-            let $note := $principal/note/text()
-                (: If we want to show the note in this list add this before the </li>:
-                 :     {if ($note) then (<ul><li><em>{$note}</em></li></ul>) else ''}
-                 :)
+            for $principal in $role//(principal | chief | mission-note)
             return
-                <li><a href="{pocom:person-href($person-id)}">{$name}</a> ({$years})</li>
+                if ($principal/self::principal or $principal/self::chief) then
+                    let $person-id := $principal/person-id
+                    let $name := pocom:person-name-first-last($node, $model, $person-id)
+                    let $startdate :=
+                        (
+                        $principal/started/date,
+                        $principal/appointed/date
+                        )[. ne ''][1]
+                    let $startyear := app:year-from-date($startdate)
+                    let $endyear := app:year-from-date($principal/ended/date)
+                    let $years := if (string($startyear) = string($endyear)) then $startyear else concat($startyear, '–', $endyear)
+                    let $note := $principal/note/text()
+                        (: If we want to show the note in this list add this before the </li>:
+                         :     {if ($note) then (<ul><li><em>{$note}</em></li></ul>) else ''}
+                         :)
+                    return
+                        <li><a href="{pocom:person-href($person-id)}">{$name}</a> ({$years})</li>
+                else (: if ($chief-entry/self::mission-note) then :)
+                    <li style="background-color: #dddde8; margin-bottom: .5em; padding: .75em 0 .75em 1.5em;">{$principal/text/string()}</li>
+
             }
         </ul>
     let $description := $role/description
@@ -273,7 +278,9 @@ declare function pocom:chiefs-by-role-or-country-id($node as node(), $model as m
     let $role := collection($pocom:DATA-COL)//id[. = $role-or-country-id]/..
     let $country := collection($pocom:OLD-COUNTRIES-COL)//id[. = $role-or-country-id]/..
     return
-        if ($role) then
+        if ($role instance of element(org-mission)) then
+            pocom:principal-officers-by-role-id($node, $model, $role-or-country-id)
+        else if ($role instance of element(principal-position)) then
             pocom:principal-officers-by-role-id($node, $model, $role-or-country-id)
         else
             pocom:chiefs-by-country-id($node, $model, $role-or-country-id)
@@ -314,8 +321,8 @@ declare function pocom:chiefs-by-country-id($node as node(), $model as map(*), $
                         <li><a href="{pocom:person-href($chief-id)}">{$name-birth-death}</a>
                             <ul><li>{$position-label} {$territory-name}, {if ($start-date-english = $end-date-english) then $start-date-english else concat($start-date-english, '–', $end-date-english)}</li></ul>
                         </li>
-            else (: if ($chief-entry/self::mission-note) then :)
-                <li style="background-color: #dddde8; margin-bottom: .5em; padding: .75em 0 .75em 1.5em;">{$chief-entry/text/string()}</li>
+                else (: if ($chief-entry/self::mission-note) then :)
+                    <li style="background-color: #dddde8; margin-bottom: .5em; padding: .75em 0 .75em 1.5em;">{$chief-entry/text/string()}</li>
             }
         </ul>
     let $other-nominee-listing :=
