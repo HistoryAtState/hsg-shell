@@ -498,7 +498,21 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                     let $roles := $pocom:DATA//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
                     for $role in $roles
                     let $contemporary-territory-id := $role/contemporary-territory-id
-                    let $title := concat(pocom:role-label($node, $model, $role/role-title-id, 'singular'), if ($contemporary-territory-id) then concat(', ', gsh:territory-id-to-short-name($contemporary-territory-id)) else ())
+                    let $title := 
+                        string-join(
+                            (
+                                pocom:role-label($node, $model, $role/role-title-id, 'singular'), 
+                                if ($contemporary-territory-id) then 
+                                    (
+                                        gsh:territory-id-to-short-name($contemporary-territory-id), 
+                                        (: fall back on original country ID in case it's different than GSH's country ID :) 
+                                        collection($pocom:OLD-COUNTRIES-COL)/country[id = $contemporary-territory-id]/label
+                                    )[1]
+                                else
+                                    ()
+                            ),
+                            ", "
+                        )
                     let $years :=
                         for $date in ($role/started/date, $role/ended/date)
                         return
@@ -575,7 +589,15 @@ declare function pocom:format-role($person, $role) {
     let $roleclass := root($role)/*/name()
     let $current-territory-id := root($role)/*/territory-id
     let $contemporary-territory-id := $role/contemporary-territory-id
-    let $whereserved := if ($contemporary-territory-id) then (gsh:territory-id-to-short-name($contemporary-territory-id), (: fall back on original country ID in case it's different than GSH's country ID :) collection($pocom:OLD-COUNTRIES-COL)/country[id = $contemporary-territory-id]/label)[1] else ()
+    let $whereserved := 
+        if ($contemporary-territory-id) then 
+            (
+                gsh:territory-id-to-short-name($contemporary-territory-id), 
+                (: fall back on original country ID in case it's different than GSH's country ID :) 
+                collection($pocom:OLD-COUNTRIES-COL)/country[id = $contemporary-territory-id]/label
+            )[1] 
+        else 
+            ()
     let $persName := $person/persName
     let $name := concat($persName/forename, ' ', $persName/surname, if ($persName/genName) then concat(' ', $persName/genName) else ())
     let $birth-death := concat(if ($person/birth ne '') then $person/birth else '?', '–', if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death)
