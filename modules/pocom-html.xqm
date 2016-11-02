@@ -593,6 +593,11 @@ declare function pocom:format-role($person, $role) {
                 if ($started/date ne '') then (normalize-space(concat('Entry on Duty: ', $started/note, ' ', app:date-to-english($started/date))), <br/>) else (),
                 if ($ended/date ne '') then normalize-space(concat('Termination of Appointment: ', $ended/note, ' ', app:date-to-english($ended/date) )) else ()
                 )
+            else if ($role-title-id = ('charge-daffaires-ad-interim')) then
+                (
+                if ($started/date ne '') then (normalize-space(concat('Began Service: ', $started/note, ' ', app:date-to-english($started/date))), <br/>) else (),
+                if ($ended/date ne '') then normalize-space(concat('Ended Service: ', $ended/note, ' ', app:date-to-english($ended/date) )) else ()
+                )
             else (: if ($roleclass = ('country-mission', 'org-mission')) then :)
                 (
                 if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', app:date-to-english($appointed/date))), <br/>) else (),
