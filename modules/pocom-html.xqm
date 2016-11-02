@@ -613,6 +613,7 @@ declare function pocom:format-role($person, $role) {
     let $rolesubtype := $roleinfo/category
     let $roleclass := root($role)/*/name()
     let $current-territory-id := root($role)/*/territory-id
+    let $current-org-mission-id := root($role)/*/id
     let $contemporary-territory-id := $role/contemporary-territory-id
     let $whereserved := 
         if ($contemporary-territory-id) then 
@@ -669,7 +670,7 @@ declare function pocom:format-role($person, $role) {
                 if ($roleclass eq 'country-mission') then
                     <a href="{pocom:chief-country-href($current-territory-id)}">{concat($roletitle, ' (', $whereserved, ')')}</a>
                 else if ($roleclass eq 'org-mission') then
-                    <a href="{pocom:chief-role-href($role-title-id)}">{$roletitle}</a>
+                    <a href="{pocom:chief-role-href($current-org-mission-id)}">{$roletitle, (: handle cda-ad-interm chiefs to int'l orgs :) if ($role-title-id = 'charge-daffaires-ad-interim') then concat(" (", root($role)/org-mission/names/singular, ")") else ()}</a>
                 else (: if ($roleclasss eq 'principal-position') then :)
                     <a href="{pocom:principal-role-href($role-title-id)}">{$roletitle}</a>
             }</strong>
