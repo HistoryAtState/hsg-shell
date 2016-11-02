@@ -562,9 +562,9 @@ declare function pocom:summarize-other-concurrent-appointments($id as xs:string,
             return
                 concat(if ($excluded-id) then 'Also accredited to ' else 'Accredited to ', $countries, '; resident at ', $resident-at, '.')
         else
-            let $resident-at := gsh:locale-id-to-short-name($doc/resident-at/locale-id)
+            let $orgs := pocom:join-with-and($intl-org-appointments ! root(.)/org-mission/names/singular)
             return
-                concat('Resident at ', $resident-at, '.')
+                concat('Also accredited as ', $orgs, '.')
 };
 
 declare function pocom:format-role($person, $role) {
