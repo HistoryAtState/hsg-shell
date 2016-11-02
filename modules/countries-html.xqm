@@ -74,7 +74,7 @@ function ch:dropdown($node as node(), $model as map(*), $document-id as xs:strin
 (: Borrowed two-column from pocom:chiefs-countries-list() :)
 declare function ch:list($node, $model) {
     let $titles := collection($ch:RDCR_ARTICLES_COL)//tei:title[@type='short']
-    let $letters := distinct-values($titles/substring(upper-case(.), 1, 1))
+    let $letters := for $letter in distinct-values($titles/substring(upper-case(.), 1, 1)) order by $letter return $letter
     let $count := count($letters)
     let $cutoff := xs:integer(ceiling($count div 2))
     let $first-half := $letters[position() = (1 to $cutoff)]
