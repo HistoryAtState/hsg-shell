@@ -436,7 +436,23 @@ declare function pocom:format-roles($person) {
         for $group in $concurrent-appointments
         let $concurrent-roles := $roles[id = $group/chief-id]
         return
-            <group>{pocom:sort-roles($concurrent-roles) ! (: preserve all info needed to reconstruct position description with dept:format-role() :) element {root(.)/*/name()} {./preceding::territory-id, element {./name()} {./*, <note auto-generated="yes">{pocom:summarize-other-concurrent-appointments($group/id, ./id)}</note>}}}</group>
+            <group>
+                {
+                    pocom:sort-roles($concurrent-roles) ! 
+                        (: preserve all info needed to reconstruct position description with dept:format-role() :) 
+                        element { root(.)/*/name() } 
+                            {
+                                (: country chief :) ./preceding::territory-id | (: int'l org chief :) root(.)/*/id,
+                                element { ./name() } 
+                                    {
+                                        ./*, 
+                                        <note auto-generated="yes">
+                                            { pocom:summarize-other-concurrent-appointments($group/id, ./id) }
+                                        </note>
+                                    }
+                            }
+                }
+            </group>
     let $non-concurrent := pocom:sort-roles($roles[not(id = $concurrent-appointments/chief-id)])
     let $full-listing := pocom:sort-roles(($concurrent-groups, $non-concurrent))
     for $item in $full-listing
@@ -536,12 +552,18 @@ declare function pocom:summarize-concurrent-appointments($id as xs:string) {
 
 declare function pocom:summarize-other-concurrent-appointments($id as xs:string, $excluded-id as xs:string?) {
     let $doc := collection($pocom:CONCURRENT-APPOINTMENTS-COL)/concurrent-appointments[id = $id]
-    let $appointments := collection($pocom:MISSIONS-COUNTRIES-COL)//chief[id = $doc/chief-id[not(. = $excluded-id)]]
-    let $countries := pocom:join-with-and($appointments/contemporary-territory-id ! gsh:territory-id-to-short-name(.))
-    let $resident-at := gsh:locale-id-to-short-name($doc/resident-at/locale-id)
-    let $complete-summary := concat(if ($excluded-id) then 'Also accredited to ' else 'Accredited to ', $countries, '; resident at ', $resident-at, '.')
+    let $country-appointments := collection($pocom:MISSIONS-COUNTRIES-COL)//chief[id = $doc/chief-id[not(. = $excluded-id)]]
+    let $intl-org-appointments := collection($pocom:MISSIONS-ORGS-COL)//chief[id = $doc/chief-id[not(. = $excluded-id)]]
     return
-        $complete-summary
+        if ($country-appointments) then
+            let $countries := pocom:join-with-and($country-appointments/contemporary-territory-id ! gsh:territory-id-to-short-name(.))
+            let $resident-at := gsh:locale-id-to-short-name($doc/resident-at/locale-id)
+            return
+                concat(if ($excluded-id) then 'Also accredited to ' else 'Accredited to ', $countries, '; resident at ', $resident-at, '.')
+        else
+            let $resident-at := gsh:locale-id-to-short-name($doc/resident-at/locale-id)
+            return
+                concat('Resident at ', $resident-at, '.')
 };
 
 declare function pocom:format-role($person, $role) {
