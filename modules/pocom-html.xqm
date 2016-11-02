@@ -497,6 +497,8 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                 <ul>{
                     let $roles := $pocom:DATA//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
                     for $role in $roles
+                    let $role-class := root($role)/*/name()
+                    let $role-title-id := $role/role-title-id
                     let $contemporary-territory-id := $role/contemporary-territory-id
                     let $title := 
                         string-join(
@@ -513,8 +515,28 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                             ),
                             ", "
                         )
+                    let $start-date := 
+                        (: TODO: Confer with Evan Duncan about the following logic for determining term of service
+                        (--: For Principal Officers, use appointment date as the start of service, when it is available in the data :--)
+                        if ($role-class = 'principal-position') then
+                            ($role/appointed/date, $role/started/date)[. ne ''][1]
+                        else
+                        :)
+                        (: For now, we know that Career Ambassadors, at least, are appointed and have no entry on duty, so we'll use this. :)
+                        if ($role-title-id = 'career-ambassador') then 
+                            ($role/appointed/date, $role/started/date)[. ne ''][1]
+                        else
+                            (: For Chiefs of Mission, do not use the appointment date, only start date :)
+                            $role/started/date
+                    let $end-date :=
+                        (: Career Ambassador is a permanent marker of distinguished service, so do not supply/suggest an end date :)
+                        if ($role-title-id = 'career-ambassador') then 
+                            ()
+                        (: All other positions will either show the end date or will show a hyphen to indicate that position will end but has not yet :)
+                        else
+                            $role/ended/date
                     let $years :=
-                        for $date in ($role/started/date, $role/ended/date)
+                        for $date in ($start-date, $end-date)
                         return
                             if ($date castable as xs:date) then
                                 year-from-date(xs:date($date))
@@ -526,7 +548,10 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                             let $start-year := min($years)
                             let $end-year := max($years)
                             return
-                                if ($start-year ne $end-year) then concat($start-year, '–', $end-year) else $start-year
+                                if ($start-year ne $end-year) then 
+                                    concat($start-year, '–', $end-year) 
+                                else 
+                                    $start-year
                         else if ($role[not(.//date castable as xs:date)]/note) then
                             string-join($role[not(.//date castable as xs:date)]/note/text(), '; ')
                         else
