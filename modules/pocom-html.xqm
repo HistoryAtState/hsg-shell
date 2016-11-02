@@ -239,7 +239,7 @@ declare function pocom:international-organizations-list($node as node(), $model 
 };
 
 declare function pocom:chiefs-countries-list($node as node(), $model as map(*)) {
-    let $countries := collection($pocom:OLD-COUNTRIES-COL)//country[not(iso2 = ("aw", "bm", "bt", "ky", "xa", "cw", "hk", "kp", "kr", "xj", "qr", "tw", "xd", "us"))] (: suppress dependencies and usa :)
+    let $countries := collection($pocom:OLD-COUNTRIES-COL)//country[not(iso2 = ("aw", "bm", "bt", "ky", "xa", "cw", "hk", "kp", "kr", "xj", "qr", "tw", "xd", "us", "an", "ps"))] (: suppress dependencies and usa :)
     let $letters := for $letter in distinct-values($countries/substring(label, 1, 1)) order by $letter return $letter
     let $count := count($letters)
     let $first-half := $letters[position() = (1 to xs:integer($count div 2))]
