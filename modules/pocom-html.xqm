@@ -242,8 +242,9 @@ declare function pocom:chiefs-countries-list($node as node(), $model as map(*)) 
     let $countries := collection($pocom:OLD-COUNTRIES-COL)//country[not(iso2 = ("aw", "bm", "bt", "ky", "xa", "cw", "hk", "kp", "kr", "xj", "qr", "tw", "xd", "us", "an", "ps"))] (: suppress dependencies and usa :)
     let $letters := for $letter in distinct-values($countries/substring(label, 1, 1)) order by $letter return $letter
     let $count := count($letters)
-    let $first-half := $letters[position() = (1 to xs:integer($count div 2))]
-    let $second-half := $letters[position() = ((xs:integer($count div 2) to $count))]
+    let $cutoff := xs:integer(ceiling($count div 2))
+    let $first-half := $letters[position() = (1 to $cutoff)]
+    let $second-half := $letters[position() = (($cutoff + 1 to $count))]
     return
         <div class="row">
             {
