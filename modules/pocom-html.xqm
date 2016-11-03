@@ -135,40 +135,76 @@ declare function pocom:principal-officers($node as node(), $model as map(*)) {
 };
 
 declare function pocom:principal-officers-by-role-id($node as node(), $model as map(*), $role-id as xs:string) {
-    let $role := collection($pocom:DATA-COL)//id[. = $role-id]/..
-    let $principalslisting :=
+    let $position := collection($pocom:DATA-COL)//id[. = $role-id]/..
+    let $role-class := $position/name()
+    let $listing :=
         <ul>
             {
-            for $principal in $role//(principal | chief | mission-note)
+            for $entry in $position//(principal | chief | mission-note)
             return
-                if ($principal/self::principal or $principal/self::chief) then
-                    let $person-id := $principal/person-id
+                if ($entry/self::principal or $entry/self::chief) then
+                    let $role := $entry
+                    let $role-title-id := $role/role-title-id
+                    let $person-id := $role/person-id
                     let $name := pocom:person-name-first-last($node, $model, $person-id)
-                    let $startdate :=
-                        (
-                        $principal/started/date,
-                        $principal/appointed/date
-                        )[. ne ''][1]
-                    let $startyear := app:year-from-date($startdate)
-                    let $endyear := app:year-from-date($principal/ended/date)
-                    let $years := if (string($startyear) = string($endyear)) then $startyear else concat($startyear, '–', $endyear)
-                    let $note := $principal/note/text()
+                    let $start-date := 
+                        (: TODO: Confer with Evan Duncan about the following logic for determining term of service
+                        (--: For Principal Officers, use appointment date as the start of service, when it is available in the data :--)
+                        if ($role-class = 'principal-position') then
+                            ($role/appointed/date, $role/started/date)[. ne ''][1]
+                        else
+                        :)
+                        (: For now, we know that Career Ambassadors, at least, are appointed and have no entry on duty, so we'll use this. :)
+                        if ($role-title-id = 'career-ambassador') then 
+                            ($role/appointed/date, $role/started/date)[. ne ''][1]
+                        else
+                            (: For Chiefs of Mission, do not use the appointment date, only start date :)
+                            $role/started/date
+                    let $end-date :=
+                        (: Career Ambassador is a permanent marker of distinguished service, so do not supply/suggest an end date :)
+                        if ($role-title-id = 'career-ambassador') then 
+                            ()
+                        (: All other positions will either show the end date or will show a hyphen to indicate that position will end but has not yet :)
+                        else
+                            $role/ended/date
+                    let $years :=
+                        for $date in ($start-date, $end-date)
+                        return
+                            if ($date castable as xs:date) then
+                                year-from-date(xs:date($date))
+                            else if (matches($date, '^\d{4}-\d{2}$')) then
+                                xs:integer(substring($date, 1, 4))
+                            else ()
+                    let $years-summary :=
+                        if (exists($years)) then
+                            let $start-year := min($years)
+                            let $end-year := max($years)
+                            return
+                                if ($start-year ne $end-year) then 
+                                    concat($start-year, '–', $end-year) 
+                                else 
+                                    $start-year
+                        else if ($role[not(.//date castable as xs:date)]/note) then
+                            string-join($role[not(.//date castable as xs:date)]/note/text(), '; ')
+                        else
+                            'no date on record'
+                    let $note := $role/note/text()
                         (: If we want to show the note in this list add this before the </li>:
                          :     {if ($note) then (<ul><li><em>{$note}</em></li></ul>) else ''}
                          :)
                     return
-                        <li><a href="{pocom:person-href($person-id)}">{$name}</a> ({$years})</li>
+                        <li><a href="{pocom:person-href($person-id)}">{$name}</a> ({$years-summary})</li>
                 else (: if ($chief-entry/self::mission-note) then :)
-                    <li style="background-color: #dddde8; margin-bottom: .5em; padding: .75em 0 .75em 1.5em;">{$principal/text/string()}</li>
+                    <li style="background-color: #dddde8; margin-bottom: .5em; padding: .75em 0 .75em 1.5em;">{$entry/text/string()}</li>
 
             }
         </ul>
-    let $description := $role/description
+    let $description := $position/description
     return
         (
             if ($description) then <div style="font-style: italic">{$description/node()}</div> else ()
             ,
-            $principalslisting
+            $listing
         )
 };
 
