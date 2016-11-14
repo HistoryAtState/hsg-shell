@@ -149,9 +149,9 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
                     let $name := pocom:person-name-first-last($node, $model, $person-id)
                     let $start-date := 
                         (: TODO: Confer with Evan Duncan about the following logic for determining term of service
-                           Prefer started-date, but use appointed-date for Principal Officers if it's all we have
+                           Prefer started-date, but use appointed-date for Principal Officers and Chiefs to Int'l Orgs if it's all we have
                         :)
-                        if ($role-class = 'principal-position') then
+                        if ($role-class = ('principal-position', 'org-mission')) then
                             ($role/started/date, $role/appointed/date)[. ne ''][1]
                         else
                             (: For Chiefs of Mission, do not use the appointment date, only start date :)
@@ -549,9 +549,9 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                         )
                     let $start-date := 
                         (: TODO: Confer with Evan Duncan about the following logic for determining term of service
-                           Prefer started-date, but use appointed-date for Principal Officers if it's all we have
+                           Prefer started-date, but use appointed-date for Principal Officers and Chiefs to Int'l Orgs if it's all we have
                         :)
-                        if ($role-class = 'principal-officer') then 
+                        if ($role-class = ('principal-position', 'org-mission')) then
                             ($role/appointed/date, $role/started/date)[. ne ''][1]
                         else
                             (: For Chiefs of Mission, do not use the appointment date, only start date :)
@@ -593,7 +593,7 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                         else false()
                     order by $years[1]
                     return
-                        <li>{if ($event-is-relevant) then attribute style { 'font-weight: bold' } else ()}{$title} ({$years-summary})</li>
+                        <li>{$role-class} {if ($event-is-relevant) then attribute style { 'font-weight: bold' } else ()}{$title} ({$years-summary})</li>
                 }</ul>
             </li>
     }</ul>
