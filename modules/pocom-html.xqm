@@ -593,7 +593,7 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                         else false()
                     order by $years[1]
                     return
-                        <li>{$role-class} {if ($event-is-relevant) then attribute style { 'font-weight: bold' } else ()}{$title} ({$years-summary})</li>
+                        <li>{if ($event-is-relevant) then attribute style { 'font-weight: bold' } else ()}{$title} ({$years-summary})</li>
                 }</ul>
             </li>
     }</ul>
