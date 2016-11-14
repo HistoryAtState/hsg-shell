@@ -149,14 +149,10 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
                     let $name := pocom:person-name-first-last($node, $model, $person-id)
                     let $start-date := 
                         (: TODO: Confer with Evan Duncan about the following logic for determining term of service
-                        (--: For Principal Officers, use appointment date as the start of service, when it is available in the data :--)
-                        if ($role-class = 'principal-position') then
-                            ($role/appointed/date, $role/started/date)[. ne ''][1]
-                        else
+                           Prefer started-date, but use appointed-date for Principal Officers if it's all we have
                         :)
-                        (: For now, we know that Career Ambassadors, at least, are appointed and have no entry on duty, so we'll use this. :)
-                        if ($role-title-id = 'career-ambassador') then 
-                            ($role/appointed/date, $role/started/date)[. ne ''][1]
+                        if ($role-class = 'principal-position') then
+                            ($role/started/date, $role/appointed/date)[. ne ''][1]
                         else
                             (: For Chiefs of Mission, do not use the appointment date, only start date :)
                             $role/started/date
@@ -553,13 +549,9 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                         )
                     let $start-date := 
                         (: TODO: Confer with Evan Duncan about the following logic for determining term of service
-                        (--: For Principal Officers, use appointment date as the start of service, when it is available in the data :--)
-                        if ($role-class = 'principal-position') then
-                            ($role/appointed/date, $role/started/date)[. ne ''][1]
-                        else
+                           Prefer started-date, but use appointed-date for Principal Officers if it's all we have
                         :)
-                        (: For now, we know that Career Ambassadors, at least, are appointed and have no entry on duty, so we'll use this. :)
-                        if ($role-title-id = 'career-ambassador') then 
+                        if ($role-class = 'principal-officer') then 
                             ($role/appointed/date, $role/started/date)[. ne ''][1]
                         else
                             (: For Chiefs of Mission, do not use the appointment date, only start date :)
