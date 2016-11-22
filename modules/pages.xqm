@@ -412,7 +412,6 @@ declare function pages:generate-title ($model, $content) {
 };
 
 declare
-    %templates:wrap
 function pages:app-root($node as node(), $model as map(*)) {
     let $root :=
         if (request:get-header("nginx-request-uri")) then (
