@@ -111,7 +111,7 @@ declare function open:frus-latest() {
                     else ()
                     )
 
-            let $entry-created := $volume/created-datetime/string()
+            let $entry-created := $volume/last-modified-datetime/string()
             let $entry-modified := $volume/last-modified-datetime/string()
 
             let $link := concat(substring-before($application-url, '/open'), '/historicaldocuments/', $id)
