@@ -58,7 +58,7 @@ declare function tags:descend($taxonomy-level, $tag, $show-even-if-empty) {
             if ($hit-count ge 1 or ($hit-count = 0 and $show-even-if-empty)) then
                 <li>
                     {
-                    let $item := <span>{$highlight}<a href="$app/tags/{$entry/id}">{$entry/label/string()}</a> ({$hit-count})</span>
+                    let $item := <span>{$highlight}<a href="$app/tags/{$entry/id}">{$entry/label/string()}</a> ({format-number($hit-count, '#,###.')})</span>
                     return
                         if ($highlight) then $item else $item/node()
                     ,
@@ -92,21 +92,6 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
             <div>
                 <h2>{$tag/label/string()}</h2>
                 {if ($tag/definition) then <p>{tags:typeswitch($tag/definition)}</p> else ()}
-                {
-                (:
-                if ($child-tags) then
-                    <div>
-                        <h3>Tags within {$tag/label/string()}:</h3>
-                        <ul class="list-unstyled">{
-                            for $child in $child-tags
-                            return
-                                <li><a href="$app/tags/{$child/id}">{$child/label/string()}</a></li>
-                        }</ul>
-                    </div>
-                else ()
-                :)
-                ''
-                }
                 {
                 if ($tagged-secretary-bios or $tagged-milestone-essays or $tagged-volumes) then
                     (
@@ -148,6 +133,13 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                             }</ul>
                         </div>
                     else ()
+                    ,
+                    if ($child-tags) then
+                        <div>
+                            <h3>Additional subjects within {$tag/label/string()} ({count($child-tags)}):</h3>
+                            { tags:descend($tag, $tag/id, false()) }
+                        </div>
+                    else ()
                     )
                 else
                     let $descendant-tag-ids := $child-tags//id
@@ -160,7 +152,7 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                                 {tags:descend($tag, $tag/id, false())}
                             </div>
                         else
-                            <p>No resources have been tagged {$tag/label/string()}.  Please select another tag from the list on the left.</p>
+                            <p>No resources have been tagged {$tag/label/string()}.</p>
                 }
             </div>
     else
