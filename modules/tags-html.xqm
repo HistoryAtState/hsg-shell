@@ -78,13 +78,13 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
     let $tag-id-exists := collection($tags:TAXONOMY_COL)//id[. = $tag-id]
     let $tag := $tag-id-exists/..
     let $child-tags := $tag/(tag | category)
-    let $milestones-resources := collection($tags:RESOURCES_COL || 'milestones')
+    let $milestones-resources := collection($tags:RESOURCES_COL || '/milestones')
     let $milestone-tags := $milestones-resources//tag
     let $tagged-milestone-essays := $milestone-tags[@id = $tag-id]/ancestor::study
     let $frus-resources := collection($tags:RESOURCES_COL || '/frus')
     let $volume-tags := $frus-resources//tag
     let $tagged-volumes := $volume-tags[@id = $tag-id]/ancestor::study
-    let $secretary-bios-resources := collection($tags:RESOURCES_COL || 'secretary-bios')
+    let $secretary-bios-resources := collection($tags:RESOURCES_COL || '/secretary-bios')
     let $secretary-bios-tags := $secretary-bios-resources//tag
     let $tagged-secretary-bios := $secretary-bios-tags[@id = $tag-id]/ancestor::study
     return
