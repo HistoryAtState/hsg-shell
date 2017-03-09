@@ -62,7 +62,7 @@ function pocom:person-name-birth-death($node as node(), $model as map(*), $perso
                 $person/birth ! 
                     (
                         if (. ne '') then 
-                            if (./@certainty eq 'low') 
+                            if (./@precision eq 'low') 
                                 then concat('c. ', .) 
                             else 
                                 . 
@@ -433,7 +433,7 @@ function pocom:birth-date($node as node(), $model as map(*), $person-id as xs:st
         $person/birth ! 
             (
                 if (. ne '') then 
-                    if (./@certainty='low') then 
+                    if (./@precision='low') then 
                         concat("c. ", .) 
                     else 
                         ./string()
