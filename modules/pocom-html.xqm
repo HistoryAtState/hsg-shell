@@ -467,19 +467,26 @@ function pocom:person-entry($node as node(), $model as map(*), $person-id as xs:
             for $state-code in $person/residence/state-id[. ne '']
             let $state-name := doc($pocom:CODE-TABLES-COL || '/us-state-codes.xml')//item[value = $state-code]/label
             return $state-name
-        let $career := (doc($pocom:CODE-TABLES-COL || '/career-appointee-codes.xml')//item[value = $person/career-type]/label/string(), '(Unknown career type)')[1]
+        let $career := 
+            if ($person/career-type = 'pre-1915') then 
+                ()
+            else
+                (doc($pocom:CODE-TABLES-COL || '/career-appointee-codes.xml')//item[value = $person/career-type]/label/string(), '(Unknown career type)')[1]
         let $formatted-roles := pocom:format-roles($person)
         return
             <div>
                 {
-                    $career
+                    if ($career) then
+                        ($career, <br/>)
+                    else 
+                        ()
                     ,
                     if (empty($residence)) then
                         ()
                     else if (count($residence) gt 1) then
-                        (<br/>, concat('States of Residence: ', string-join($residence, ', ')) )
+                        concat('States of Residence: ', string-join($residence, ', '))
                     else
-                        (<br/>, concat('State of Residence: ', $residence) )
+                        concat('State of Residence: ', $residence)
                     ,
                     <ol>{$formatted-roles}</ol>
                 }
@@ -546,7 +553,7 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
         let $person-id := $person/id
         let $url := concat('$app/departmenthistory/people/', $person-id)
         let $name-birth-death := pocom:person-name-birth-death($node, $model, $person-id)
-        let $career-indicator := if ($person/career-type = ('fso', 'both')) then '*' else ()
+        let $career-indicator := if ($person/career-type = ('career', 'both')) then '*' else ()
         return
             <li>{$career-indicator}<a href="{$url}">{$name-birth-death}</a>
                 <ul>{
@@ -608,7 +615,7 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                         else
                             'no date on record'
                     let $event-is-relevant :=
-                        if (exists($dates)) then
+                        if (exists($years)) then
                             let $start-year := min($years)
                             let $end-year := max($years)
                             return
