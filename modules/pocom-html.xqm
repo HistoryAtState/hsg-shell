@@ -57,17 +57,32 @@ function pocom:person-name-birth-death($node as node(), $model as map(*), $perso
     let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
     return
         if ($person) then
-            let $namebase := $person/persName
-            let $dates := concat($person/birth, '–', $person/death)
-            let $birth-death :=
-                concat(
-                    if ($person/birth ne '') then $person/birth else '?',
-                    '–',
-                    if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death
+            let $names := $person/persName ! (./forename, ./surname, ./genName)
+            let $birth := 
+                $person/birth ! 
+                    (
+                        if (. ne '') then 
+                            if (./@certainty eq 'low') 
+                                then concat('c. ', .) 
+                            else 
+                                . 
+                        else 
+                            '?'
+                    )
+            let $death := 
+                $person/death ! 
+                    (
+                        if (./@type eq 'unknown' and . eq '') then 
+                            '?' 
+                        else 
+                            ./string()
                     )
             return
                 string-join(
-                    ($namebase/forename, $namebase/surname, $namebase/genName, '(' || $birth-death || ')'),
+                    (
+                        $names, 
+                        '(' || $birth || '–' || $death || ')'
+                    ),
                     ' '
                 )
         else (
@@ -364,13 +379,11 @@ declare function pocom:chiefs-by-country-id($node as node(), $model as map(*), $
             for $chief in $other-nominees
             let $chief-id := $chief/person-id
             let $person := $people-collection/person[id = $chief-id]
-            let $persName := $person/persName
-            let $name := concat($persName/forename, ' ', $persName/surname, if ($persName/genName) then concat(' ', $persName/genName) else ())
-            let $birth-death := concat(if ($person/birth ne '') then $person/birth else '?', '–', if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death)
+            let $name-birth-death := pocom:person-name-birth-death($node, $model, $chief-id)
             let $note := $chief/note
             let $position-label := $positions-collection/role[id eq $chief/role-title-id]/names/singular/string()
             return
-                <li><a href="{pocom:person-href($chief-id)}">{data($name)} ({$birth-death})</a>
+                <li><a href="{pocom:person-href($chief-id)}">{$name-birth-death}</a>
                     <ul><li>{concat($position-label, if ($note) then concat(': ', $note) else ())}</li></ul>
                 </li>
             }
@@ -417,7 +430,16 @@ declare
 function pocom:birth-date($node as node(), $model as map(*), $person-id as xs:string) {
     let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
     return
-        $person/birth/string()
+        $person/birth ! 
+            (
+                if (. ne '') then 
+                    if (./@certainty='low') then 
+                        concat("c. ", .) 
+                    else 
+                        ./string()
+                else 
+                    '?'
+            )
 };
 
 declare
@@ -425,10 +447,13 @@ declare
 function pocom:death-date($node as node(), $model as map(*), $person-id as xs:string) {
     let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
     return
-        if ($person/death and $person/death ne '') then
-            if ($person/death/@type eq 'unknown' and $person/death eq '') then 'Died ?' else 'Died ' || $person/death/string()
-        else
-            ()
+        $person/death ! 
+            (
+                if (./@type eq 'unknown' and . eq '') then 
+                    'Died ?' 
+                else 
+                    'Died ' || .
+            )
 };
 
 declare
@@ -442,19 +467,26 @@ function pocom:person-entry($node as node(), $model as map(*), $person-id as xs:
             for $state-code in $person/residence/state-id[. ne '']
             let $state-name := doc($pocom:CODE-TABLES-COL || '/us-state-codes.xml')//item[value = $state-code]/label
             return $state-name
-        let $career := (doc($pocom:CODE-TABLES-COL || '/career-appointee-codes.xml')//item[value = $person/career-type]/label/string(), '(Unknown career type)')[1]
+        let $career := 
+            if ($person/career-type = 'pre-1915') then 
+                ()
+            else
+                (doc($pocom:CODE-TABLES-COL || '/career-appointee-codes.xml')//item[value = $person/career-type]/label/string(), '(Unknown career type)')[1]
         let $formatted-roles := pocom:format-roles($person)
         return
             <div>
                 {
-                    $career
+                    if ($career) then
+                        ($career, <br/>)
+                    else 
+                        ()
                     ,
                     if (empty($residence)) then
                         ()
                     else if (count($residence) gt 1) then
-                        (<br/>, concat('States of Residence: ', string-join($residence, ', ')) )
+                        concat('States of Residence: ', string-join($residence, ', '))
                     else
-                        (<br/>, concat('State of Residence: ', $residence) )
+                        concat('State of Residence: ', $residence)
                     ,
                     <ol>{$formatted-roles}</ol>
                 }
@@ -520,12 +552,10 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
         for $person in $people
         let $person-id := $person/id
         let $url := concat('$app/departmenthistory/people/', $person-id)
-        let $namebase := $person/persName
-        let $name := concat($namebase/surname, ', ', $namebase/forename, if ($namebase/genName ne '') then concat(', ', $namebase/genName) else ())
-        let $dates := concat(if ($person/birth ne '') then $person/birth else '?', '–', if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death)
-        let $career-indicator := if ($person/career-type = ('fso', 'both')) then '*' else ()
+        let $name-birth-death := pocom:person-name-birth-death($node, $model, $person-id)
+        let $career-indicator := if ($person/career-type = ('career', 'both')) then '*' else ()
         return
-            <li>{$career-indicator}<a href="{$url}">{$name}</a> ({$dates})
+            <li>{$career-indicator}<a href="{$url}">{$name-birth-death}</a>
                 <ul>{
                     let $roles := $pocom:DATA//person-id[. = $person-id][not(parent::concurrent-appointments)]/..
                     for $role in $roles
@@ -585,7 +615,7 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                         else
                             'no date on record'
                     let $event-is-relevant :=
-                        if (exists($dates)) then
+                        if (exists($years)) then
                             let $start-year := min($years)
                             let $end-year := max($years)
                             return
@@ -652,9 +682,6 @@ declare function pocom:format-role($person, $role) {
             )[1] 
         else 
             ()
-    let $persName := $person/persName
-    let $name := concat($persName/forename, ' ', $persName/surname, if ($persName/genName) then concat(' ', $persName/genName) else ())
-    let $birth-death := concat(if ($person/birth ne '') then $person/birth else '?', '–', if ($person/death/@type eq 'unknown' and $person/death eq '') then '?' else $person/death)
     let $appointed := $role/appointed
     let $started := $role/started
     let $ended := $role/ended
