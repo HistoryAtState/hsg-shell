@@ -8,6 +8,8 @@ resources/fonts
 resources/scripts/app.all.js
 resources/scripts/app.min.js
 /templates
+# local properties
+**/local.build.properties
 # IDE
 .idea
 .DS_Store
