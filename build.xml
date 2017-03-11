@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="xar" name="hsg-shell">
+    <property file="local.build.properties"/>
     <property file="build.properties"/>
     <xmlproperty file="expath-pkg.xml"/>
     <property name="project.version" value="${package(version)}"/>
