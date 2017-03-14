@@ -24,6 +24,8 @@
         <echo message="Calling gulp clean..."/>
         <exec executable="${gulp}" outputproperty="gulp.output">
             <arg line="clean"/>
+            <env key="PATH" value="${env.PATH}:${node.PATH}"/>
+            <env key="NODE_ENV" value="${NODE_ENV}"/>
         </exec>
         <echo message="${gulp.output}"/>
         <echo message="Deleting xar files..."/>
