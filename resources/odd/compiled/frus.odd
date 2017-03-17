@@ -191,7 +191,7 @@
                         </elementSpec>
             <elementSpec ident="div" mode="change">
                     <model output="web" predicate="$parameters?document-list and div[@type='question']" behaviour="document-list"/>
-                    <model output="web" predicate="$parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type])" behaviour="document-list"/>
+                    <model output="web" predicate="$parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type and not(@type = 'online-supplement')])" behaviour="document-list"/>
                     <model behaviour="block"/>
                 </elementSpec>
             <elementSpec mode="change" ident="docAuthor">
@@ -282,9 +282,7 @@ display: block;
                             <model behaviour="inline"/>
                         </elementSpec>
             <elementSpec ident="gap" mode="change">
-                    <modelSequence>
-                        <model behaviour="omit"/>
-                    </modelSequence>
+                    <model behaviour="omit"/>
                 </elementSpec>
             <elementSpec mode="change" ident="graphic">
                     <model behaviour="graphic">

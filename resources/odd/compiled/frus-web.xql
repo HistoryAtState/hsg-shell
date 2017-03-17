@@ -149,7 +149,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     if ($parameters?document-list and div[@type='question']) then
                         ext-html:document-list($config, ., ("tei-div1"))
                     else
-                        if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type])) then
+                        if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type and not(@type = 'online-supplement')])) then
                             ext-html:document-list($config, ., ("tei-div2"))
                         else
                             html:block($config, ., ("tei-div3"), .)
@@ -221,10 +221,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     else
                         html:inline($config, ., ("tei-g2"), .)
                 case element(gap) return
-                    (
-                        html:omit($config, ., ("tei-gap"), .)
-                    )
-
+                    html:omit($config, ., ("tei-gap"), .)
                 case element(graphic) return
                     html:graphic($config, ., ("tei-graphic"), ., xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri ||
                             "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")), (), (), @scale, desc)

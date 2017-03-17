@@ -219,7 +219,7 @@
                 </elementSpec>
                 <elementSpec ident="div" mode="change">
                     <model output="web" predicate="$parameters?document-list and div[@type='question']" behaviour="document-list"/>
-                    <model output="web" predicate="$parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type])" behaviour="document-list"/>
+                    <model output="web" predicate="$parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type and not(@type = 'online-supplement')])" behaviour="document-list"/>
                     <model behaviour="block"/>
                 </elementSpec>
                 <elementSpec ident="xhtml:object" mode="add">
