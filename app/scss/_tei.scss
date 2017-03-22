@@ -33,3 +33,16 @@
     padding-bottom: 0;
   }
 }
+
+// Lists with hanging indents in "persons"
+// (https://github.com/HistoryAtState/hsg-shell/issues/259)
+
+#persons {
+  .tei-list5.list {
+    padding-left: 0;
+    .tei-list5.list .tei-item {
+      margin-left: 2em;
+      text-indent: -2em;
+    }
+  }
+}
