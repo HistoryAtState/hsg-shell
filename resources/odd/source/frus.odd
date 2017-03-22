@@ -192,7 +192,7 @@
                     </model>
                     <model behaviour="list" predicate="ancestor::div[@xml:id='persons']" cssClass="list-person">
                         <param name="content">item</param>
-                        <outputRendition>list-style-type: none; text-indent: 0em; margin-left: 0; padding-left: 0</outputRendition>
+                        <outputRendition>list-style-type: none; margin-left: 2em; text-indent: -2em; padding-left: 0</outputRendition>
                     </model>
                     <model behaviour="list" cssClass="list">
                         <param name="content">item</param>
