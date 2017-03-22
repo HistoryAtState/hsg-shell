@@ -305,7 +305,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                                     if (label) then
                                         html:list($config, ., ("tei-list4", "labeled-list"), item)
                                     else
-                                        html:list($config, ., ("tei-list5", "list"), item)
+                                        if (ancestor::div[@xml:id='persons']) then
+                                            html:list($config, ., ("tei-list5", "list-person"), item)
+                                        else
+                                            html:list($config, ., ("tei-list6", "list"), item)
                 case element(listBibl) return
                     if (bibl) then
                         html:list($config, ., ("tei-listBibl1"), bibl)
