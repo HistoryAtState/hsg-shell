@@ -192,7 +192,6 @@
                     </model>
                     <model behaviour="list" predicate="ancestor::div[@xml:id='persons']" cssClass="list-person">
                         <param name="content">item</param>
-                        <outputRendition>list-style-type: none; text-indent: 0em; margin-left: 0; padding-left: 0</outputRendition>
                     </model>
                     <model behaviour="list" cssClass="list">
                         <param name="content">item</param>
@@ -306,13 +305,6 @@ display: block;
                 </elementSpec>
                 <!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
-                    <modelSequence predicate="@xml:id">
-                        <model behaviour="link">
-                            <param name="content"></param>
-                            <param name="link"></param>
-                        </model>
-                        <model behaviour="inline"/>
-                    </modelSequence>
                     <model behaviour="inline"/>
                 </elementSpec>
                 <elementSpec ident="gloss" mode="add">
