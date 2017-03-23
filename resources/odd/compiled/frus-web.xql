@@ -15,11 +15,11 @@ declare namespace skos='http://www.w3.org/2004/02/skos/core#';
 
 declare namespace frus='http://history.state.gov/frus/ns/1.0';
 
-import module namespace css="http://www.tei-c.org/tei-simple/xquery/css" at "xmldb:exist:///db/apps/tei-simple/content/css.xql";
+import module namespace css="http://www.tei-c.org/tei-simple/xquery/css" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/css.xql";
 
-import module namespace html="http://www.tei-c.org/tei-simple/xquery/functions" at "xmldb:exist:///db/apps/tei-simple/content/html-functions.xql";
+import module namespace html="http://www.tei-c.org/tei-simple/xquery/functions" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/html-functions.xql";
 
-import module namespace ext-html="http://history.state.gov/ns/site/hsg/pmf-html" at "xmldb:exist:///db/apps/tei-simple/content/../../hsg-shell/modules/ext-html.xql";
+import module namespace ext-html="http://history.state.gov/ns/site/hsg/pmf-html" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/../../hsg-shell/modules/ext-html.xql";
 
 (:~
 
@@ -305,7 +305,14 @@ declare function model:apply($config as map(*), $input as node()*) {
                                     if (label) then
                                         html:list($config, ., ("tei-list4", "labeled-list"), item)
                                     else
-                                        html:list($config, ., ("tei-list5", "list"), item)
+                                        if (ancestor::div[@xml:id='persons']) then
+                                            html:list($config, ., ("tei-list5", "list-person"), item)
+                                        else
+                                            if (ancestor::list) then
+                                                (: This is a nested list within a list :)
+                                                html:list($config, ., ("tei-list7", "hsg-nested-list"), item)
+                                            else
+                                                html:list($config, ., ("tei-list6", "hsg-list"), item)
                 case element(listBibl) return
                     if (bibl) then
                         html:list($config, ., ("tei-listBibl1"), bibl)
@@ -513,7 +520,14 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(xhtml:script) return
                     ext-html:passthrough($config, ., ("tei-xhtml:script"))
                 case element(persName) return
-                    html:inline($config, ., ("tei-persName"), .)
+                    if (@xml:id) then
+                        (
+                            html:link($config, ., ("tei-persName1"), (), ()),
+                            html:inline($config, ., ("tei-persName2"), .)
+                        )
+
+                    else
+                        html:inline($config, ., ("tei-persName"), .)
                 case element(gloss) return
                     html:inline($config, ., ("tei-gloss"), .)
                 case element(term) return
