@@ -192,11 +192,13 @@
                     </model>
                     <model behaviour="list" predicate="ancestor::div[@xml:id='persons']" cssClass="list-person">
                         <param name="content">item</param>
-                        <outputRendition>list-style-type: none; margin-left: 2em; text-indent: -2em; padding-left: 0</outputRendition>
                     </model>
-                    <model behaviour="list" cssClass="list">
+                    <model behaviour="list" cssClass="hsg-list">
                         <param name="content">item</param>
-                        <outputRendition>list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0</outputRendition>
+                    </model>
+                    <model behaviour="list" predicate="ancestor::list" cssClass="hsg-nested-list">
+                        <desc>This is a nested list within a list</desc>
+                        <param name="content">item</param>
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="head">
