@@ -308,13 +308,6 @@ display: block;
                 </elementSpec>
                 <!-- Elements not in TEI Simple -->
                 <elementSpec ident="persName" mode="add">
-                    <modelSequence predicate="@xml:id">
-                        <model behaviour="link">
-                            <param name="content"></param>
-                            <param name="link"></param>
-                        </model>
-                        <model behaviour="inline"/>
-                    </modelSequence>
                     <model behaviour="inline"/>
                 </elementSpec>
                 <elementSpec ident="gloss" mode="add">
