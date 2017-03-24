@@ -158,7 +158,11 @@
                         <outputRendition>text-indent: 0em;</outputRendition>
                     </model>
                 </elementSpec>
+                <elementSpec mode="change" ident="opener">
+                    <model behaviour="block"/>
+                </elementSpec>
                 <elementSpec mode="change" ident="dateline">
+                    <model predicate="@rendition = '#right'" behaviour="inline" useSourceRendition="true"/>
                     <model behaviour="block">
                         <outputRendition>text-align: right;</outputRendition>
                     </model>
