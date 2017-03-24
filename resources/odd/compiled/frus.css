@@ -51,7 +51,7 @@
 .tei-closer { text-align: right; margin-top: 1em; margin-left: 1em; }
 .tei-corr2:before { content: '['; }
 .tei-corr2:after { content: ']'; }
-.tei-dateline { text-align: right; }
+.tei-dateline2 { text-align: right; }
 .tei-del { text-decoration: line-through; }
 .tei-docTitle2 { font-size: larger; }
 .tei-figDesc:before { content: '[..'; }
@@ -75,6 +75,7 @@
 .tei-list4 { list-style-type: none; }
 .tei-list5 { list-style-type: none; margin-top: 1em; }
 .tei-note2 { font-size: smaller; }
+.tei-opener { margin-bottom: 1em; padding-bottom: 1em; }
 .tei-p1 { text-align: center; }
 .tei-p2 { text-indent: 0em; }
 .tei-p3 { text-indent: 0em; }
