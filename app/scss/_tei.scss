@@ -34,20 +34,46 @@
   }
 }
 
-// Lists with hanging indents in "persons"
-// (https://github.com/HistoryAtState/hsg-shell/issues/259)
- 
-   .list-person {
-    padding-left: 0;
-   }
-
-#persons {
-   .list-person.list {
-    padding-left: 0;
-     .list-person.list .tei-item {
-       margin-left: 2em;
-       text-indent: -2em;
-     }
-   }
+// General unordered tei lists without bullets
+.hsg-list {
+  list-style-type: none;
+  padding-left: 0;
+  .hsg-nested-list {
+    list-style-type: inherit;
+  }
 }
 
+// Lists with hanging indents in "persons"
+// (https://github.com/HistoryAtState/hsg-shell/issues/259)
+
+.list-person {
+  padding-left: 0;
+}
+
+#persons {
+  .tei-item .tei-item {
+    margin-left: 2em;
+    text-indent: -2em;
+  }
+}
+
+// No padding for terms list, because of empty wrapping list
+// historicaldocuments/frus1977-80v30/terms
+
+#terms {
+  .hsg-nested-list {
+    padding-left: 0;
+  }
+}
+
+// No padding for index list but padding for sub-sub-lists
+// historicaldocuments/frus1977-80v30/index
+
+#index {
+  .hsg-nested-list{
+    padding-left: 0;
+    .hsg-nested-list {
+      padding-left: 2em;
+    }
+  }
+}

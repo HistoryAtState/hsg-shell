@@ -308,7 +308,11 @@ declare function model:apply($config as map(*), $input as node()*) {
                                         if (ancestor::div[@xml:id='persons']) then
                                             html:list($config, ., ("tei-list5", "list-person"), item)
                                         else
-                                            html:list($config, ., ("tei-list6", "list"), item)
+                                            if (ancestor::list) then
+                                                (: This is a nested list within a list :)
+                                                html:list($config, ., ("tei-list6", "hsg-nested-list"), item)
+                                            else
+                                                html:list($config, ., ("tei-list7", "hsg-list"), item)
                 case element(listBibl) return
                     if (bibl) then
                         html:list($config, ., ("tei-listBibl1"), bibl)
