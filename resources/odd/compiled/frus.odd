@@ -391,11 +391,11 @@ display: block;
                     <model behaviour="list" predicate="ancestor::div[@xml:id='persons']" cssClass="list-person">
                         <param name="content">item</param>
                     </model>
-                    <model behaviour="list" cssClass="hsg-list">
-                        <param name="content">item</param>
-                    </model>
                     <model behaviour="list" predicate="ancestor::list" cssClass="hsg-nested-list">
                         <desc>This is a nested list within a list</desc>
+                        <param name="content">item</param>
+                    </model>
+                    <model behaviour="list" cssClass="hsg-list">
                         <param name="content">item</param>
                     </model>
                 </elementSpec>
@@ -714,13 +714,6 @@ display: block;
                     <model behaviour="passthrough"/>
                 </elementSpec>
             <elementSpec ident="persName" mode="add">
-                    <modelSequence predicate="@xml:id">
-                        <model behaviour="link">
-                            <param name="content"/>
-                            <param name="link"/>
-                        </model>
-                        <model behaviour="inline"/>
-                    </modelSequence>
                     <model behaviour="inline"/>
                 </elementSpec>
             <elementSpec ident="gloss" mode="add">
