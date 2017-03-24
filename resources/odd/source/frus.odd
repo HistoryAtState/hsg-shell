@@ -159,6 +159,9 @@
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="dateline">
+                    <!-- If there's a @rendition, assume the renditions are inline and pass rendition through -->
+                    <model predicate="@rendition" behaviour="inline" useSourceRendition="true"/>
+                    <!-- Otherwise, assume it's a plain old dateline, so make it a right-aligned block -->
                     <model behaviour="block">
                         <outputRendition>text-align: right;</outputRendition>
                     </model>
@@ -261,6 +264,12 @@
                         <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
                         <outputRendition>margin-left: 10px; margin-right: 10px;
                         </outputRendition>
+                    </model>
+                </elementSpec>
+                <elementSpec mode="change" ident="opener">
+                    <!-- Ensure that any child elements designated as floats have space beneath them; otherwise, following element may be on the same line as the opener -->
+                    <model behaviour="block">
+                        <outputRendition>margin-bottom: 1em; padding-bottom: 1em;</outputRendition>
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="closer">
