@@ -78,6 +78,7 @@ declare variable $config:CONFERENCES_COL := "/db/apps/conferences";
 declare variable $config:CONFERENCES_ARTICLES_COL := $config:CONFERENCES_COL || "/data";
 declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
 declare variable $config:COUNTRIES_ARTICLES_COL := "/db/apps/rdcr/articles";
+declare variable $config:COUNTRIES_ISSUES_COL := "/db/apps/rdcr/issues";
 declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
 declare variable $config:SECRETARY_BIOS_COL := "/db/apps/other-publications/secretary-bios";
 declare variable $config:MILESTONES_COL := "/db/apps/milestones/chapters";
