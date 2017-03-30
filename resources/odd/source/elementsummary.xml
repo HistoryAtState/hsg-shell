@@ -1,15 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.tei-c.org/ns/1.0" xmlns:XSL="http://www.w3.org/1999/XSL/Transform">
     <head>Summary</head>
-    <p>A total of 105 elements are selected for use in
-	the <gi>text</gi> part of a document; an additional
-44
-elements are allowed for in the header. The following table
-	shows the usage of all elements in six existing corpora, and
-	classifies them 11 usage groups. There are
-15 elements
-listed which are <_0:emph xmlns:_0="http://www.tei-c.org/ns/1.0">not</_0:emph> allowed in TEI Simple, but should be transformed
-to another element.</p>
+    <p>A total of 105 elements are selected for use in the <gi>text</gi> part of a document; an
+        additional 44 elements are allowed for in the header. The following table shows the usage of
+        all elements in six existing corpora, and classifies them 11 usage groups. There are 15
+        elements listed which are <_0:emph xmlns:_0="http://www.tei-c.org/ns/1.0">not</_0:emph>
+        allowed in TEI Simple, but should be transformed to another element.</p>
     <table>
         <row role="label">
             <cell>Element</cell>

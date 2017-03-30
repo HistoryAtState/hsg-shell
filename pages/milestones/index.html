@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
+<div data-template="templates:surround" data-template-with="templates/site.html"
+    data-template-at="content">
     <div data-template="pages:load">
         <div id="static-title" class="hidden">Milestones</div>
         <div class="row">
@@ -18,33 +19,46 @@
             <div class="hsg-width-two-thirds">
                 <div id="content-inner" data-template="app:fix-links">
                     <h1>Milestones in the History of U.S. Foreign Relations</h1>
-                    <p>“Milestones in the History of U.S. Foreign Relations” provides a general overview of the
-                    history of U.S. engagement with the world through short essays on important moments,
-                    or milestones, in the diplomatic history of the United States. The basic objective of these essays is to
-                    provide a clear, accurate, narrative account of the events being discussed, with a brief
-                    discussion of each event’s significance for U.S. foreign policy and diplomatic history. The
-                    publication is divided into 19 chapters covering time periods from 1750 until 2000,
-                    with brief introductions providing context for each period.</p>
+                    <p>“Milestones in the History of U.S. Foreign Relations” provides a general
+                        overview of the history of U.S. engagement with the world through short
+                        essays on important moments, or milestones, in the diplomatic history of the
+                        United States. The basic objective of these essays is to provide a clear,
+                        accurate, narrative account of the events being discussed, with a brief
+                        discussion of each event’s significance for U.S. foreign policy and
+                        diplomatic history. The publication is divided into 19 chapters covering
+                        time periods from 1750 until 2000, with brief introductions providing
+                        context for each period.</p>
                     <form class="form-inline">
                         <div class="form-group">
-                            <select data-template="milestones:load-periods" class="form-control" onchange="location = this.options[this.selectedIndex].value;">
+                            <select data-template="milestones:load-periods" class="form-control"
+                                onchange="location = this.options[this.selectedIndex].value;">
                                 <option value="#">Select a period:</option>
-                                <option data-template="templates:each" data-template-from="periods" data-template-to="period"><span data-template="milestones:period-href-value-attribute"/>
+                                <option data-template="templates:each" data-template-from="periods"
+                                    data-template-to="period">
+                                    <span data-template="milestones:period-href-value-attribute"/>
                                     <span data-template="milestones:period-title"/>
                                 </option>
                             </select>
                         </div>
                     </form>
-                    <p>The essays were drafted for the Office of the Historian website by many historians over many
-                    years, and we continue to revise and expand the existing periods. Most recently, the essays
-                    covering the <a href="$app/milestones/1961-1968">Kennedy and Johnson (1961–68)</a>, <a href="$app/milestones/1969-1976">Nixon and Ford (1969–76)</a>, <a href="$app/milestones/1977-1980">Carter (1977–80)</a>, <a href="$app/milestones/1981-1988">Reagan (1981–88)</a>, <a href="$app/milestones/1989-1992">Bush (1989–92)</a>, and <a href="$app/milestones/1993-2000">Clinton (1993–2000)</a> administrations were revised and
-                    expanded. These same essays were also enhanced with “tags,” or lists of the key people,
-                    places, and topics in the essay. The tags appear as links in the right sidebar of the essay
-                    and facilitate discovery of other other essays and resources, including volumes from the
-                        <em>Foreign Relations of the United States</em> series, on these subjects. The “tags”
-                    feature is still in progress, and over time the Office will extend the tags to all of the
-                    essays.</p>
-                    <p>To begin, select a period from the sidebar, or view a list of <a href="$app/milestones/all">all milestones</a>.</p>
+                    <p>The essays were drafted for the Office of the Historian website by many
+                        historians over many years, and we continue to revise and expand the
+                        existing periods. Most recently, the essays covering the <a
+                            href="$app/milestones/1961-1968">Kennedy and Johnson (1961–68)</a>, <a
+                            href="$app/milestones/1969-1976">Nixon and Ford (1969–76)</a>, <a
+                            href="$app/milestones/1977-1980">Carter (1977–80)</a>, <a
+                            href="$app/milestones/1981-1988">Reagan (1981–88)</a>, <a
+                            href="$app/milestones/1989-1992">Bush (1989–92)</a>, and <a
+                            href="$app/milestones/1993-2000">Clinton (1993–2000)</a> administrations
+                        were revised and expanded. These same essays were also enhanced with “tags,”
+                        or lists of the key people, places, and topics in the essay. The tags appear
+                        as links in the right sidebar of the essay and facilitate discovery of other
+                        other essays and resources, including volumes from the <em>Foreign Relations
+                            of the United States</em> series, on these subjects. The “tags” feature
+                        is still in progress, and over time the Office will extend the tags to all
+                        of the essays.</p>
+                    <p>To begin, select a period from the sidebar, or view a list of <a
+                            href="$app/milestones/all">all milestones</a>.</p>
                     <p style="text-align: right;">
                         <em>Last updated: November 1, 2013</em>
                     </p>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
     <ShortName>Office of the Historian</ShortName>
     <Description>Search Office of the Historian</Description>
@@ -6,6 +6,7 @@
     <OutputEncoding>UTF-8</OutputEncoding>
     <Image type="image/x-icon" width="16" height="16">https://history.state.gov/favicon.ico</Image>
     <Url type="text/html" template="https://history.state.gov/search?q={searchTerms}"/>
-    <Url type="application/atom+xml" template="https://history.state.gov/api/v1/catalog/search?q={searchTerms}"/>
+    <Url type="application/atom+xml"
+        template="https://history.state.gov/api/v1/catalog/search?q={searchTerms}"/>
     <Query role="example" searchTerms="nixon AND china"/>
 </OpenSearchDescription>

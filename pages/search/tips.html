@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
+<div data-template="templates:surround" data-template-with="templates/site.html"
+    data-template-at="content">
     <div id="static-title" class="hidden">Tips - Search</div>
     <div class="row">
         <div class="hsg-breadcrumb-wrapper">
@@ -20,116 +21,136 @@
         <div class="hsg-width-one-whole" data-template="app:fix-links">
             <div id="content-inner">
                 <h1>Search Tips</h1>
-                <p>By default, the search engine returns documents from the entire site* containing any of the
-                    search terms you enter. All searches are case-insensitive, so searching for “SALT” will
-                    return the same results as searching for “salt.” You can refine a query by (1) narrowing its
-                    scope to specific sections of the website or to specific <em>Foreign Relations</em> volumes
-                    and (2) using phrase, boolean, wildcard, and proximity operators in your search. Use the
-                    following techniques and syntax to improve your search results. Click on each example to
-                    pre-fill the search form with the parameters of your search, and then submit the search to
-                    see the results.</p>
-                <p>* Note that the search engine’s results are limited to the materials that the Office of the
-                    Historian has digitized. Please consult the full list of <em>Foreign Relations</em> volumes
-                        <a href="$app/historicaldocuments">by administration</a> to see which volumes have been
-                    digitized (indicated by the phrase, “full text,” next to each volume’s title), and consult
-                    the <a href="http://uwdc.library.wisc.edu/collections/FRUS">University of Wisconsin Madison
-                            <em>FRUS</em> collection</a> or a library near you for access to volumes not yet
-                    available here.</p>
+                <p>By default, the search engine returns documents from the entire site* containing
+                    any of the search terms you enter. All searches are case-insensitive, so
+                    searching for “SALT” will return the same results as searching for “salt.” You
+                    can refine a query by (1) narrowing its scope to specific sections of the
+                    website or to specific <em>Foreign Relations</em> volumes and (2) using phrase,
+                    boolean, wildcard, and proximity operators in your search. Use the following
+                    techniques and syntax to improve your search results. Click on each example to
+                    pre-fill the search form with the parameters of your search, and then submit the
+                    search to see the results.</p>
+                <p>* Note that the search engine’s results are limited to the materials that the
+                    Office of the Historian has digitized. Please consult the full list of
+                        <em>Foreign Relations</em> volumes <a href="$app/historicaldocuments">by
+                        administration</a> to see which volumes have been digitized (indicated by
+                    the phrase, “full text,” next to each volume’s title), and consult the <a
+                        href="http://uwdc.library.wisc.edu/collections/FRUS">University of Wisconsin
+                        Madison <em>FRUS</em> collection</a> or a library near you for access to
+                    volumes not yet available here.</p>
                 <div id="scope">
                     <h2>Scope</h2>
-                    <p>Beneath the keyword search field is a set of checkboxes. Selecting any of the checkboxes
-                        can narrow the scope of your search, resulting in a faster, more specific query. The
-                        default set of checkboxes contains the major content sections of the website: Historical
-                        Documents, Department History, Milestones, Countries, Conferences, Educational
-                        Resources, FRUS Sesquicentennial, and About (FAQ, Advisory Committee Minutes). You can
-                        also select specific <em>Foreign Relations</em> volumes. To search for articles about
-                        U.S. diplomatic history that relate to peace:</p>
+                    <p>Beneath the keyword search field is a set of checkboxes. Selecting any of the
+                        checkboxes can narrow the scope of your search, resulting in a faster, more
+                        specific query. The default set of checkboxes contains the major content
+                        sections of the website: Historical Documents, Department History,
+                        Milestones, Countries, Conferences, Educational Resources, FRUS
+                        Sesquicentennial, and About (FAQ, Advisory Committee Minutes). You can also
+                        select specific <em>Foreign Relations</em> volumes. To search for articles
+                        about U.S. diplomatic history that relate to peace:</p>
                     <blockquote>
-                        <a href="$app/search?q-fill=peace&amp;within=milestones&amp;within=department">peace</a> (with the “Department History” and “Milestones” checkboxes selected) </blockquote>
-                    <p>If no checkboxes are selected, the entire site will be searched. To achieve the best
-                        results, combine scope with the following search operators:</p>
+                        <a
+                            href="$app/search?q-fill=peace&amp;within=milestones&amp;within=department"
+                            >peace</a> (with the “Department History” and “Milestones” checkboxes
+                        selected) </blockquote>
+                    <p>If no checkboxes are selected, the entire site will be searched. To achieve
+                        the best results, combine scope with the following search operators:</p>
                 </div>
                 <div id="phrases">
                     <h2>Phrases</h2>
-                    <p>When you type your search terms into the box, the search engine will search for those
-                        terms, individually, anywhere in a document. To force the search engine to find fixed
-                        phrases (i.e., specific, ordered combinations of words), place the phrase in quotation
-                        marks. To locate documents which include both “peaceful” and “nuclear” anywhere in the
-                        text, use the following search:</p>
+                    <p>When you type your search terms into the box, the search engine will search
+                        for those terms, individually, anywhere in a document. To force the search
+                        engine to find fixed phrases (i.e., specific, ordered combinations of
+                        words), place the phrase in quotation marks. To locate documents which
+                        include both “peaceful” and “nuclear” anywhere in the text, use the
+                        following search:</p>
                     <blockquote>
                         <a href="$app/search?q-fill=peaceful+nuclear">peaceful nuclear</a>
                     </blockquote>
-                    <p>To locate documents which use the phrase “peaceful nuclear,” use this search:</p>
+                    <p>To locate documents which use the phrase “peaceful nuclear,” use this
+                        search:</p>
                     <blockquote>
-                        <a href="$app/search?q-fill=&#34;peaceful+nuclear&#34;">"peaceful nuclear"</a>
+                        <a href="$app/search?q-fill=&#34;peaceful+nuclear&#34;">"peaceful
+                            nuclear"</a>
                     </blockquote>
                 </div>
                 <div id="booleans">
                     <h2>Booleans</h2>
-                    <p>The search engine will allow you to perform Boolean searches (AND, OR, and NOT). Boolean
-                        operators must be in all caps.</p>
-                    <p>You can use Boolean operators with individual terms or with phrases enclosed in quotation
-                        marks. For example, to locate documents which include both the word “Kissinger” and the
-                        phrase “peaceful nuclear,” use this search:</p>
+                    <p>The search engine will allow you to perform Boolean searches (AND, OR, and
+                        NOT). Boolean operators must be in all caps.</p>
+                    <p>You can use Boolean operators with individual terms or with phrases enclosed
+                        in quotation marks. For example, to locate documents which include both the
+                        word “Kissinger” and the phrase “peaceful nuclear,” use this search:</p>
                     <blockquote>
-                        <a href="$app/search?q-fill=Kissinger+AND+&#34;peaceful+nuclear&#34;">Kissinger AND
-                            "peaceful nuclear"</a>
+                        <a href="$app/search?q-fill=Kissinger+AND+&#34;peaceful+nuclear&#34;"
+                            >Kissinger AND "peaceful nuclear"</a>
                     </blockquote>
-                    <p>To locate documents which include either “Rhodesia” or “Zimbabwe,” use this search:</p>
+                    <p>To locate documents which include either “Rhodesia” or “Zimbabwe,” use this
+                        search:</p>
                     <blockquote>
                         <a href="$app/search?q-fill=Rhodesia+OR+Zimbabwe">Rhodesia OR Zimbabwe</a>
                     </blockquote>
-                    <p>To locate documents which include the phrase “arms control” but exclude documents which
-                        also include the term “SALT,” use this search:</p>
+                    <p>To locate documents which include the phrase “arms control” but exclude
+                        documents which also include the term “SALT,” use this search:</p>
                     <blockquote>
-                        <a href="$app/search?q-fill=&#34;arms+control&#34;+NOT+SALT">"arms control" NOT SALT</a>
+                        <a href="$app/search?q-fill=&#34;arms+control&#34;+NOT+SALT">"arms control"
+                            NOT SALT</a>
                     </blockquote>
-                    <p>You can also use the plus (+) and minus (-) signs to include or exclude certain terms. To
-                        search for documents which must include the phrase “law of the sea” and may include the
-                        term “seabed,” use this search:</p>
+                    <p>You can also use the plus (+) and minus (-) signs to include or exclude
+                        certain terms. To search for documents which must include the phrase “law of
+                        the sea” and may include the term “seabed,” use this search:</p>
                     <blockquote>
-                        <a href="$app/search?q-fill=%2B&#34;law+of+the+sea&#34;+seabed">+"law of the sea" seabed</a>
+                        <a href="$app/search?q-fill=%2B&#34;law+of+the+sea&#34;+seabed">+"law of the
+                            sea" seabed</a>
                     </blockquote>
-                    <p>To search for documents which include “Korea” but not “DMZ,” use this search:</p>
+                    <p>To search for documents which include “Korea” but not “DMZ,” use this
+                        search:</p>
                     <blockquote>
                         <a href="$app/search?q-fill=Korea+-DMZ">Korea -DMZ</a>
                     </blockquote>
-                    <p>Finally, you can use parentheses to nest your searches. To find documents which include
-                        “Guatemala” or “El Salvador” and “Belize,” use this search:</p>
+                    <p>Finally, you can use parentheses to nest your searches. To find documents
+                        which include “Guatemala” or “El Salvador” and “Belize,” use this
+                        search:</p>
                     <blockquote>
-                        <a href="$app/search?q-fill=(Guatemala+OR+&#34;El+Salvador&#34;)+AND+Belize">(Guatemala OR
-                            "El Salvador") AND Belize</a>
+                        <a href="$app/search?q-fill=(Guatemala+OR+&#34;El+Salvador&#34;)+AND+Belize"
+                            >(Guatemala OR "El Salvador") AND Belize</a>
                     </blockquote>
                 </div>
                 <div id="wildcards">
                     <h2>Wildcards</h2>
-                    <p>If you are unsure about the spelling of a term or want to find variants of a term, you
-                        can use wildcards. The search engine supports two wildcard characters: ? and *.</p>
-                    <p>If you want to replace a single letter in your search term, use ? in your query. To find
-                        documents which include “text” or “test,” use this search:</p>
+                    <p>If you are unsure about the spelling of a term or want to find variants of a
+                        term, you can use wildcards. The search engine supports two wildcard
+                        characters: ? and *.</p>
+                    <p>If you want to replace a single letter in your search term, use ? in your
+                        query. To find documents which include “text” or “test,” use this
+                        search:</p>
                     <blockquote>
                         <a href="$app/search?q-fill=te?t">te?t</a>
                     </blockquote>
-                    <p>Note that the above search will not return hits for “Tet” or “teapot.” If you want to
-                        replace zero or more letters in your search term use * in your query. For example, to
-                        find documents which include “Vietnam” and “Vietnamese,” use this search:</p>
+                    <p>Note that the above search will not return hits for “Tet” or “teapot.” If you
+                        want to replace zero or more letters in your search term use * in your
+                        query. For example, to find documents which include “Vietnam” and
+                        “Vietnamese,” use this search:</p>
                     <blockquote>
                         <a href="$app/search?q-fill=Vietna*">Vietna*</a>
                     </blockquote>
-                    <p>Note that the above search will not return hits for “Viet Nam,” another spelling of the
-                        same country. You may have to try multiple variants of the same search to get all the
-                        results you need.</p>
+                    <p>Note that the above search will not return hits for “Viet Nam,” another
+                        spelling of the same country. You may have to try multiple variants of the
+                        same search to get all the results you need.</p>
                 </div>
                 <div id="proximity">
                     <h2>Proximity</h2>
-                    <p>If you are searching for common words, you can tell the search engine to only return
-                        documents in which the words are within a distance you define. To find documents which
-                        include “Cuba” and “submarine” within 10 words of each other, use this search:</p>
+                    <p>If you are searching for common words, you can tell the search engine to only
+                        return documents in which the words are within a distance you define. To
+                        find documents which include “Cuba” and “submarine” within 10 words of each
+                        other, use this search:</p>
                     <blockquote>
-                        <a href="$app/search?q-fill=&#34;Cuba+submarine&#34;~10">"Cuba submarine"~10</a>
+                        <a href="$app/search?q-fill=&#34;Cuba+submarine&#34;~10">"Cuba
+                            submarine"~10</a>
                     </blockquote>
-                    <p>We are aware that “keyword in context” summary of the results of proximity searches are
-                        not displaying correctly. The search results themselves, however, are reliable.</p>
+                    <p>We are aware that “keyword in context” summary of the results of proximity
+                        searches are not displaying correctly. The search results themselves,
+                        however, are reliable.</p>
                 </div>
             </div>
         </div>
