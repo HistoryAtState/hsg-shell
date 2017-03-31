@@ -140,10 +140,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(date) return
                     html:inline($config, ., ("tei-date"), .)
                 case element(dateline) return
-                    if (@rendition) then
-                        html:inline($config, ., css:get-rendition(., ("tei-dateline1")), .)
-                    else
-                        html:block($config, ., ("tei-dateline2"), .)
+                    html:block($config, ., ("tei-dateline"), .)
                 case element(del) return
                     html:inline($config, ., ("tei-del"), .)
                 case element(desc) return

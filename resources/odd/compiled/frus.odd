@@ -177,9 +177,7 @@
                     <model behaviour="inline"/>
                 </elementSpec>
             <elementSpec mode="change" ident="dateline">
-                    <!-- If there's a @rendition, assume the renditions are inline and pass rendition through -->
-                    <model predicate="@rendition" behaviour="inline" useSourceRendition="true"/>
-                    <!-- Otherwise, assume it's a plain old dateline, so make it a right-aligned block -->
+                    <!-- Override any rendition values and make all datelines right-aligned block -->
                     <model behaviour="block">
                         <outputRendition>text-align: right;</outputRendition>
                     </model>
@@ -431,11 +429,8 @@ display: block;
                             <model behaviour="inline"/>
                         </elementSpec>
             <elementSpec mode="change" ident="opener">
-                    <!-- Ensure that any child elements designated as floats have space beneath them; otherwise, following element may be on the same line as the opener -->
-                    <model behaviour="block">
-                        <outputRendition>margin-bottom: 1em; padding-bottom: 1em;</outputRendition>
-                    </model>
-                </elementSpec>
+                            <model behaviour="block"/>
+                        </elementSpec>
             <elementSpec mode="change" ident="orig">
                             <model behaviour="inline"/>
                         </elementSpec>
