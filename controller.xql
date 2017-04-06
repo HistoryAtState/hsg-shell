@@ -267,6 +267,33 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                         			<forward url="{$exist:controller}/modules/view.xql"/>
                         		</error-handler>
                             </dispatch>
+                case "quarterly-releases" return
+                    if ($fragments[2]) then
+                        let $page := "historicaldocuments/quarterly-releases/announcements/" || $fragments[2] || ".html"
+                        return
+                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                <forward url="{$exist:controller}/pages/{$page}"/>
+                                <view>
+                                    <forward url="{$exist:controller}/modules/view.xql"/>
+                                </view>
+                                <error-handler>
+                                    <forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                                    <forward url="{$exist:controller}/modules/view.xql"/>
+                                </error-handler>
+                            </dispatch>
+                    else
+                        let $page := "historicaldocuments/quarterly-releases/index.html"
+                        return
+                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                <forward url="{$exist:controller}/pages/{$page}"/>
+                                <view>
+                                    <forward url="{$exist:controller}/modules/view.xql"/>
+                                </view>
+                        		<error-handler>
+                        			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                        			<forward url="{$exist:controller}/modules/view.xql"/>
+                        		</error-handler>
+                            </dispatch>
                 case "guide-to-sources-on-vietnam-1969-1975" return
                     let $page := "historicaldocuments/vietnam-guide.html"
                     return
