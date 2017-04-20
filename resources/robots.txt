@@ -1,4 +1,6 @@
 User-agent: *
+Disallow: /cms
+Disallow: /exist
 Disallow: /*pg_
 Disallow: /search
 Crawl-delay: 20
