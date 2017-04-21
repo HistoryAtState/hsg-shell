@@ -111,7 +111,7 @@ declare function visits:visits-table($node, $model, $results-to-display as node(
                 <tr>
                     <td>{$item/visitor/string()}</td>
                     {if ($suppress = 'from') then () else <td>{$item/from/string()}</td>}
-                    <td>{$item/description/string()}</td>
+                    <td>{$item/description/node()}</td>
                     <td>{
                         let $start := if ($item/start-date castable as xs:date) then xs:date($item/start-date) else $item/start-date
                         let $end := if ($item/end-date castable as xs:date) then xs:date($item/end-date) else $item/end-date
