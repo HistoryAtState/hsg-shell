@@ -328,7 +328,7 @@ declare function fhh:article-description($node, $model, $article-id) {
 declare function fhh:article($node, $model, $article-id) {
     let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
     return
-        pages:process-content($model?odd, $article//tei:text/*)
+        pages:process-content($model?odd, $article//tei:text/*, map { "base-uri": "frus150" })
 };
 
 declare function fhh:events($node, $model) {

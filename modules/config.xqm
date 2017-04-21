@@ -177,7 +177,8 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_ARTICLES_COL || '/' || $document-id || '.xml')//tei:body },
             "html-href": function($document-id, $section-id) { "$app/frus-history/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) }
+            "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
+            "base-path": function($document-id, $section-id) { "frus150" }
         },
         "about": map {
             "title": "About Us"
