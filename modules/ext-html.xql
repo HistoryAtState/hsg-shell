@@ -56,10 +56,10 @@ declare function pmf:ref($config as map(*), $node as element(), $class as xs:str
         else if (matches($target, '^frus')) then
             (: pointer to location within that volume :)
             if (contains($target, '#')) then
-                toc:href($publication-id, substring-before($target, '#'), substring-after($target, '#'), ())
+                toc:href("frus", substring-before($target, '#'), substring-after($target, '#'), ())
             (: pointer to that volume's landing page :)
             else
-                toc:href($publication-id, $target, (), ())
+                toc:href("frus", $target, (), ())
         (: generic: pointer to location within document :)
         else if (starts-with($target, '#')) then
             toc:href($publication-id, $document-id, substring-after($target, '#'), ())
