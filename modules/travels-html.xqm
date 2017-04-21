@@ -104,7 +104,7 @@ declare function travels:person-or-country-title($node as node(), $model as map(
         else
             pocom:person-name-first-last($node, $model, $person-or-country-id)
     else
-        collection('/db/apps/gsh/data/countries-old')//country[id = $person-or-country-id]/label/string()
+        gsh:territory-id-to-short-name($person-or-country-id)
 };
 
 declare function travels:person-or-country-travels($node as node(), $model as map(*), $role as xs:string, $person-or-country-id as xs:string) {
