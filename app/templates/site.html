@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html data-template="pages:app-root" lang="en">
+    <!-- @if PRODUCTION=false -->
+    <!--
+        ********************************************************************************************
+        WARNING: Do NOT upload this file to the production server!
+        If you need to perform a hotfix on the production server, rebuild with `NODE_ENV=production`
+        ********************************************************************************************
+    -->
+    <!-- @endif -->
     <head data-template="app:fix-links">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta data-template="config:app-meta"/>
@@ -12,7 +20,8 @@
         <link rel="stylesheet" type="text/css" data-template="pages:styles" data-template-odd="frus.odd"/>
         <!-- @endif -->
     </head>
-    <body id="body"><!-- remove after beta -->
+    <body id="body">
+        <!-- remove after beta -->
         <div class="ribbon-container">
             <div class="ribbon" data-template="app:fix-links">
                 <a href="$app/about-the-beta">Learn about the beta</a>
@@ -32,7 +41,8 @@
                             <div class="banner__search">
                                 <div class="searchbox">
                                     <form method="get" action="$app/search">
-                                        <p class="form-group"><!-- Search: -->
+                                        <p class="form-group">
+                                            <!-- Search: -->
                                             <input type="text" size="15" name="q" placeholder="Search..." class="form-control" id="search-box"/>
                                             <button type="submit" value="GO" class="search-button btn btn-default">
                                                 <i class="hsg-search-button-icon"/>

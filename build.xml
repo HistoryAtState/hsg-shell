@@ -7,13 +7,24 @@
     <property name="project.app" value="hsg-shell"/>
     <property name="build.dir" value="build"/>
     <property environment="env"/>
+    <!-- Allow NODE_ENV to be passed in either as an environment variable or as a regular variable -->
+    <condition property="node-env-is-set-for-production" else="false">
+        <or>
+            <equals arg1="${env.NODE_ENV}" arg2="production"/>
+            <equals arg1="${NODE_ENV}" arg2="production"/>
+        </or>
+    </condition>
+    <!-- Create a new property that sets production mode based on whether either variation of NODE_ENV is set to production -->
+    <condition property="NODE_ENV.production" value="production">
+        <istrue value="${node-env-is-set-for-production}"/>
+    </condition>
     <target name="xar">
         <mkdir dir="${build.dir}"/>
-        <echo message="Calling npm start..."/>
+        <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
         <exec executable="${npm}" outputproperty="npm.output">
             <arg line="start"/>
             <env key="PATH" value="${env.PATH}:${node.PATH}"/>
-            <env key="NODE_ENV" value="${NODE_ENV}"/>
+            <env key="NODE_ENV" value="${NODE_ENV.production}"/>
         </exec>
         <echo message="${npm.output}"/>
         <echo message="Creating xar package..."/>
@@ -25,7 +36,6 @@
         <exec executable="${gulp}" outputproperty="gulp.output">
             <arg line="clean"/>
             <env key="PATH" value="${env.PATH}:${node.PATH}"/>
-            <env key="NODE_ENV" value="${NODE_ENV}"/>
         </exec>
         <echo message="${gulp.output}"/>
         <echo message="Deleting xar files..."/>
