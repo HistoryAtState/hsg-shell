@@ -35,7 +35,7 @@ declare function tags:tags-in-context-toc($node, $model, $tag-id as xs:string*) 
         <ul class="list-unstyled">{
             for $top-level in collection($tags:TAXONOMY_COL)/taxonomy/(tag | category)
             let $highlight := if ($top-level = $tag) then attribute class {'highlight'} else ()
-            let $hit-count := count((collection($tags:RESOURCES_COL || '/frus') | collection($tags:RESOURCES_COL || '/milestones') | collection($tags:RESOURCES_COL || '/secretary-bios'))//tag[@id  = $top-level//id])
+            let $hit-count := count((collection($tags:RESOURCES_COL || '/frus') | collection($tags:RESOURCES_COL || '/secretary-bios'))//tag[@id  = $top-level//id])
             return
                 <li>{
                     let $item := <span>{$highlight}<a href="$app/tags/{$top-level/id}">{$top-level/label/string()}</a> ({$hit-count})</span>
@@ -53,7 +53,7 @@ declare function tags:descend($taxonomy-level, $tag, $show-even-if-empty) {
         let $entries := $taxonomy-level/(tag | category)
         for $entry in $entries
         let $highlight := if ($entry = $tag) then attribute class {'highlight'} else ()
-        let $hit-count := count((collection($tags:RESOURCES_COL || '/frus') | collection($tags:RESOURCES_COL || '/milestones') | collection($tags:RESOURCES_COL || '/secretary-bios'))//tag[@id  = $entry//id])
+        let $hit-count := count((collection($tags:RESOURCES_COL || '/frus') | collection($tags:RESOURCES_COL || '/secretary-bios'))//tag[@id  = $entry//id])
         return
             if ($hit-count ge 1 or ($hit-count = 0 and $show-even-if-empty)) then
                 <li>
@@ -78,9 +78,6 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
     let $tag-id-exists := collection($tags:TAXONOMY_COL)//id[. = $tag-id]
     let $tag := $tag-id-exists/..
     let $child-tags := $tag/(tag | category)
-    let $milestones-resources := collection($tags:RESOURCES_COL || '/milestones')
-    let $milestone-tags := $milestones-resources//tag
-    let $tagged-milestone-essays := $milestone-tags[@id = $tag-id]/ancestor::study
     let $frus-resources := collection($tags:RESOURCES_COL || '/frus')
     let $volume-tags := $frus-resources//tag
     let $tagged-volumes := $volume-tags[@id = $tag-id]/ancestor::study
@@ -93,7 +90,7 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                 <h2>{$tag/label/string()}</h2>
                 {if ($tag/definition) then <p>{tags:typeswitch($tag/definition)}</p> else ()}
                 {
-                if ($tagged-secretary-bios or $tagged-milestone-essays or $tagged-volumes) then
+                if ($tagged-secretary-bios or $tagged-volumes) then
                     (
                     if ($tagged-secretary-bios) then
                         <div>
@@ -103,18 +100,6 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                                 let $url := concat('$app/departmenthistory/people/', $bio/secretary-bios-id)
                                 return
                                     <li><a href="{$url}">{$bio/title/string()}</a></li>
-                            }</ul>
-                        </div>
-                    else ()
-                    ,
-                    if ($tagged-milestone-essays) then
-                        <div>
-                            <h3>Milestone Essays ({count($tagged-milestone-essays)})</h3>
-                            <ul class="list-unstyled">{
-                                for $essay in $tagged-milestone-essays
-                                let $url := concat('$app/milestones/', $essay/milestone-grouping, '/', $essay/milestone-id)
-                                return
-                                    <li><a href="{$url}">{$essay/title/string()}</a></li>
                             }</ul>
                         </div>
                     else ()
@@ -143,7 +128,7 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                     )
                 else
                     let $descendant-tag-ids := $child-tags//id
-                    let $matching-resource-tags := ($milestones-resources, $frus-resources)//tag[@id = $descendant-tag-ids]
+                    let $matching-resource-tags := $frus-resources//tag[@id = $descendant-tag-ids]
                     let $matching-resources := $matching-resource-tags/ancestor::study
                     return
                         if ($matching-resources) then
