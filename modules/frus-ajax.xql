@@ -9,6 +9,7 @@ import module namespace fh="http://history.state.gov/ns/site/hsg/frus-html" at "
 import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace functx = "http://www.functx.com";
 
 declare option output:method "json";
 declare option output:media-type "application/json";
@@ -79,7 +80,7 @@ return
         let $head :=
             if ($id) then
                 if ($xml instance of element(tei:div)) then
-                    $xml/tei:head
+                    $xml/tei:head[1] ! functx:remove-elements-deep(., 'note')
                 else
                     root($xml)//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete']
             (: we can't trust pages:load-xml for the purposes of finding a document's title, since it returns the document's first descendant div :)
@@ -89,11 +90,12 @@ return
             (: allow for pages that don't have an entry in $config:PUBLICATIONS at all :)
             else
                 ()
-        let $title :=
+        let $publication-title :=
             if ($publication-id) then
                 map:get($config:PUBLICATIONS, $publication-id)?title
             else
                 ($html//(h1|h2|h3))[1]
+        let $doc-title := pages:title($xml/ancestor-or-self::tei:TEI)
         return
             map {
                 "doc": $doc,
@@ -105,8 +107,8 @@ return
                     if ($prev) then
                         $prev/@xml:id/string()
                     else (),
-                "title": pages:title($xml/ancestor-or-self::tei:TEI),
-                "windowTitle": string-join(($head, $title, "Office of the Historian")[. ne ''], " - "),
+                "title": $doc-title,
+                "windowTitle": normalize-space(string-join(($head, $doc-title, $publication-title, "Office of the Historian")[. ne ''], " - ")),
                 "toc": if ($toc) then toc:toc($model, $xml, true(), true()) else (),
                 "tocCurrent": $xml/ancestor-or-self::tei:div[@type != "document"][1]/@xml:id/string(),
                 (: "breadcrumbSection": fh:breadcrumb-heading($model, $xml), :)
