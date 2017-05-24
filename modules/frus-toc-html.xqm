@@ -230,7 +230,8 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                     <div>
                         <hr class="list"/>
                         <h4>
-                            <a href="{$href}" class="section-link">
+                            <!-- class="section-link" was triggering an extra ajax call -->
+                            <a href="{$href}">
                             {
                             	(: show a bracketed document number for volumes that don't use document numbers :)
                             	if (not(starts-with($doctitle, concat($docnumber, '.')))) then
