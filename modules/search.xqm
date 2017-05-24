@@ -143,7 +143,9 @@ declare function search:load-sections($node, $model) {
         $html
 };
 
-declare function search:section-id-value-attribute($node, $model) {
+declare
+%templates:wrap
+function search:section-id-value-attribute($node, $model) {
     let $section-id := $model?section/id
     return
         attribute value { $section-id }
@@ -183,6 +185,7 @@ declare function search:load-volumes-within($node, $model) {
                 </volume>
         )
     }
+    let $c:= console:log($node)
     let $html := templates:process($node/*, map:new(($model, $content)))
     return
         $html
@@ -192,11 +195,14 @@ declare
     %templates:wrap
 function search:volume-id-value-attribute($node, $model) {
     let $volume-id := $model?volume/id
+    let $volume-title := $model?volume/title
     return
-        attribute value { $volume-id }
+        (attribute value { $volume-id },
+        $volume-title/string())
 };
 
-declare function search:volume-title($node, $model) {
+declare 
+function search:volume-title($node, $model) {
     let $volume-title := $model?volume/title
     return
         $volume-title/string()
