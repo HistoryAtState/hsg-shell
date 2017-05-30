@@ -464,7 +464,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(time) return
                     html:inline($config, ., ("tei-time"), .)
                 case element(title) return
-                    html:inline($config, ., ("tei-title"), .)
+                    if (@level = 's') then
+                        html:inline($config, ., ("tei-title1"), .)
+                    else
+                        html:inline($config, ., ("tei-title2"), .)
                 case element(titlePage) return
                     html:block($config, ., css:get-rendition(., ("tei-titlePage")), .)
                 case element(titlePart) return

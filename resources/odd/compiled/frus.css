@@ -99,6 +99,7 @@
 .tei-supplied5:before { content:"{"; }
 .tei-supplied5:after { content:"}"; }
 .tei-text { max-width: 80%; margin: auto; font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif; }
+.tei-title1 { font-style: italic; }
 .tei-titlePage { text-align: center; }
 .tei-trailer { color: green; }
 .tei-unclear:after { content: ' [?] '; }
