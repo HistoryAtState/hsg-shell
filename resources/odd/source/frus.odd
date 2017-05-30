@@ -96,6 +96,9 @@
                     </modelSequence>
                 </elementSpec>
                 <elementSpec ident="title" mode="change">
+                    <model predicate="@level = 's'" behaviour="inline">
+                        <outputRendition>font-style: italic;</outputRendition>
+                    </model>
                     <model behaviour="inline"/>
                 </elementSpec>
                 <elementSpec ident="publicationStmt" mode="change">
