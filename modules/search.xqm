@@ -145,7 +145,7 @@ declare function search:load-sections($node, $model) {
 
 declare
     %templates:wrap
-function search:section-attributes($node, $model, $within as xs:string+) {
+function search:section-attributes($node, $model, $within as xs:string*) {
 (
     attribute value { search:section-id-value-attribute($node, $model)},
     if (exists($within) and string-join($within) != "") then
@@ -153,7 +153,6 @@ function search:section-attributes($node, $model, $within as xs:string+) {
     else (),
     search:section-label($node, $model)
 )
-</input>   
 };
 
 
