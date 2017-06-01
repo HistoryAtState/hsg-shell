@@ -144,7 +144,21 @@ declare function search:load-sections($node, $model) {
 };
 
 declare
-%templates:wrap
+function search:section-attributes($node, $model, $within as xs:string+) {
+<input type="checkbox" name="within">
+{
+    attribute value { search:section-id-value-attribute($node, $model)},
+    if (exists($within) and string-join($within) != "") then
+        search:within-highlight-attribute($node, $model, $within) 
+    else (),
+    search:section-label($node, $model)
+}
+</input>   
+};
+
+
+
+declare
 function search:section-id-value-attribute($node, $model) {
     let $section-id := $model?section/id
     return
@@ -176,7 +190,7 @@ declare function search:plural-if-within-multiple-volumes($node, $model, $within
 declare function search:load-volumes-within($node, $model) {
     let $content := map { "volumes":
         (
-            for $volume-id in request:get-parameter('volume-id', ())
+            for $volume-id in distinct-values(request:get-parameter('volume-id', ()))
             order by $volume-id
             return
                 <volume>
@@ -192,20 +206,23 @@ declare function search:load-volumes-within($node, $model) {
 };
 
 declare
-    %templates:wrap
+function search:volume-attributes($node, $model) {
+<input type="checkbox" name="within" checked="checked">
+{
+        attribute value { search:volume-id-value-attribute($node, $model)},
+        search:volume-title($node, $model)
+        }
+ </input>   
+};
+
+declare
 function search:volume-id-value-attribute($node, $model) {
-    let $volume-id := $model?volume/id
-    let $volume-title := $model?volume/title
-    return
-        (attribute value { $volume-id },
-        $volume-title/string())
+    $model?volume/id
 };
 
 declare 
 function search:volume-title($node, $model) {
-    let $volume-title := $model?volume/title
-    return
-        $volume-title/string()
+    $model?volume/title/string()
 };
 
 declare

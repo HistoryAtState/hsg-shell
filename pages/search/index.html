@@ -29,27 +29,19 @@
                                 appropriate box(es), and then click “Search”:</p>
                             <div class="hsg-search-inputs">
                                 <label class="hsg-search-input-label" data-template="templates:each" data-template-from="sections" data-template-to="section">
-                                    <input type="checkbox" name="within">
-                                        <span data-template="search:section-id-value-attribute"/>
-                                        <span data-template="app:if-parameter-set" data-template-param="within">
-                                            <span data-template="search:within-highlight-attribute"/>
-                                        </span>
-                                        <span data-template="search:section-label"/>
-                                    </input>
+                                    <input type="checkbox" name="within" data-template="search:section-attributes"/>
                                 </label>
                             </div>
                         </div>
                         <div data-template="search:load-volumes-within">
                             <div data-template="app:if-parameter-set" data-template-param="volume-id">
                                 <p>Restrict search to the following <em>Foreign Relations</em>
-                                        volume<span data-template="app:if-parameter-set" data-template-param="within">
+                                    volume<span data-template="app:if-parameter-set" data-template-param="within">
                                         <span data-template="search:plural-if-within-multiple-volumes"/>
                                     </span>:</p>
                                 <div class="hsg-search-inputs" data-template="templates:each" data-template-from="volumes" data-template-to="volume">
                                     <label class="hsg-search-input-label">
-                                        <input type="checkbox" name="within" checked="checked" data-template="search:volume-id-value-attribute">
-                                            <span data-template="search:volume-title"/>
-                                        </input>
+                                        <input type="checkbox" name="within" checked="checked" data-template="search:volume-attributes"/>
                                     </label>
                                 </div>
                             </div>
@@ -78,7 +70,7 @@
                             <div data-template="app:if-parameter-unset" data-template-param="q">
                                 <p class="hsg-search-help">
                                     <a href="$app/search/select-volumes">Select specific <em>Foreign
-                                            Relations</em> volumes to search</a>
+                                        Relations</em> volumes to search</a>
                                 </p>
                             </div>
                         </div>
@@ -87,7 +79,7 @@
                         </button>
                     </form>
                 </section>
-
+                
                 <section class="hsg-search-section">
                     <div data-template="app:if-parameter-set" data-template-param="q">
                         <div data-template="search:load-results">
