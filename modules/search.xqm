@@ -144,18 +144,17 @@ declare function search:load-sections($node, $model) {
 };
 
 declare
+    %templates:wrap
 function search:section-attributes($node, $model, $within as xs:string+) {
-<input type="checkbox" name="within">
-{
+(
     attribute value { search:section-id-value-attribute($node, $model)},
     if (exists($within) and string-join($within) != "") then
         search:within-highlight-attribute($node, $model, $within) 
     else (),
     search:section-label($node, $model)
-}
+)
 </input>   
 };
-
 
 
 declare
@@ -205,13 +204,12 @@ declare function search:load-volumes-within($node, $model) {
 };
 
 declare
+    %templates:wrap
 function search:volume-attributes($node, $model) {
-<input type="checkbox" name="within" checked="checked">
-{
-        attribute value { search:volume-id-value-attribute($node, $model)},
-        search:volume-title($node, $model)
-        }
- </input>   
+(
+    attribute value { search:volume-id-value-attribute($node, $model)},
+    search:volume-title($node, $model)
+)
 };
 
 declare

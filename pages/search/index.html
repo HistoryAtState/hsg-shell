@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround" data-template-with="templates/site.html"
-    data-template-at="content">
+<div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div id="static-title" class="hidden">Search</div>
     <div class="row">
         <div class="hsg-breadcrumb-wrapper">
@@ -23,31 +22,24 @@
                         phrase, boolean, wildcard, and proximity options.</p>
                     <form method="get" action="$app/search">
                         <p class="form-group">
-                            <input type="text" name="q" placeholder="Search..." class="form-control"
-                                id="q" data-template="templates:form-control"/>
+                            <input type="text" name="q" placeholder="Search..." class="form-control" id="q" data-template="templates:form-control"/>
                         </p>
                         <div data-template="search:load-sections">
                             <p>To limit your results to certain parts of the website, check the
                                 appropriate box(es), and then click “Search”:</p>
                             <div class="hsg-search-inputs">
-                                <label class="hsg-search-input-label" data-template="templates:each"
-                                    data-template-from="sections" data-template-to="section">
+                                <label class="hsg-search-input-label" data-template="templates:each" data-template-from="sections" data-template-to="section">
                                     <input type="checkbox" name="within" data-template="search:section-attributes"/>
                                 </label>
                             </div>
                         </div>
                         <div data-template="search:load-volumes-within">
-                            <div data-template="app:if-parameter-set"
-                                data-template-param="volume-id">
+                            <div data-template="app:if-parameter-set" data-template-param="volume-id">
                                 <p>Restrict search to the following <em>Foreign Relations</em>
-                                    volume<span data-template="app:if-parameter-set"
-                                        data-template-param="within">
-                                        <span
-                                            data-template="search:plural-if-within-multiple-volumes"
-                                        />
+                                    volume<span data-template="app:if-parameter-set" data-template-param="within">
+                                        <span data-template="search:plural-if-within-multiple-volumes"/>
                                     </span>:</p>
-                                <div class="hsg-search-inputs" data-template="templates:each"
-                                    data-template-from="volumes" data-template-to="volume">
+                                <div class="hsg-search-inputs" data-template="templates:each" data-template-from="volumes" data-template-to="volume">
                                     <label class="hsg-search-input-label">
                                         <input type="checkbox" name="within" checked="checked" data-template="search:volume-attributes"/>
                                     </label>
@@ -56,26 +48,20 @@
                         </div>
                         <div data-template="app:if-parameter-set" data-template-param="volume-id">
                             <p class="hsg-search-help">
-                                <a href="$app/search">Clear these checkboxes</a>, or <a
-                                    href="$app/search/select-volumes"
-                                    data-template="search:select-volumes-link"> change selection</a>
+                                <a href="$app/search">Clear these checkboxes</a>, or <a href="$app/search/select-volumes" data-template="search:select-volumes-link"> change selection</a>
                                 of <em>Foreign Relations</em> volumes within which to search</p>
                         </div>
                         <div data-template="app:if-parameter-unset" data-template-param="volume-id">
                             <div data-template="app:if-parameter-set" data-template-param="q">
-                                <div data-template="app:if-parameter-set"
-                                    data-template-param="within">
+                                <div data-template="app:if-parameter-set" data-template-param="within">
                                     <p>
-                                        <a href="$app/search">Reset this search</a> or <a
-                                            href="$app/search/select-volumes">choose <em>Foreign
+                                        <a href="$app/search">Reset this search</a> or <a href="$app/search/select-volumes">choose <em>Foreign
                                                 Relations</em> volumes</a>
                                     </p>
                                 </div>
-                                <div data-template="app:if-parameter-unset"
-                                    data-template-param="within">
+                                <div data-template="app:if-parameter-unset" data-template-param="within">
                                     <p class="hsg-search-help">
-                                        <a href="$app/search/select-volumes"
-                                            data-template="search:select-volumes-link">Restrict this
+                                        <a href="$app/search/select-volumes" data-template="search:select-volumes-link">Restrict this
                                             search to specific <em>Foreign Relations</em>
                                             volumes</a>
                                     </p>
@@ -97,17 +83,14 @@
                 <section class="hsg-search-section">
                     <div data-template="app:if-parameter-set" data-template-param="q">
                         <div data-template="search:load-results">
-                            <h1 class="hsg-search-result-message">Results for keyword search <span
-                                class="hsg-search-query"><span data-template="search:q"
-                                /></span>, sorted by relevance.</h1>
+                            <h1 class="hsg-search-result-message">Results for keyword search <span class="hsg-search-query">
+                                    <span data-template="search:q"/>
+                                </span>, sorted by relevance.</h1>
                             <p data-template="search:result-count-summary"/>
                             <nav>
-                                <ul class="pagination" data-template="search:paginate"
-                                    data-template-per-page="10" data-template-max-pages="10"
-                                    data-template-min-hits="1"/>
+                                <ul class="pagination" data-template="search:paginate" data-template-per-page="10" data-template-max-pages="10" data-template-min-hits="1"/>
                             </nav>
-                            <div class="hsg-search-result" data-template="templates:each"
-                                data-template-from="results" data-template-to="result">
+                            <div class="hsg-search-result" data-template="templates:each" data-template-from="results" data-template-to="result">
                                 <h3 class="hsg-search-result-heading">
                                     <span data-template="search:result-heading"/>
                                 </h3>
@@ -119,9 +102,7 @@
                                 </p>
                             </div>
                             <nav>
-                                <ul class="pagination" data-template="search:paginate"
-                                    data-template-per-page="10" data-template-max-pages="10"
-                                    data-template-min-hits="1"/>
+                                <ul class="pagination" data-template="search:paginate" data-template-per-page="10" data-template-max-pages="10" data-template-min-hits="1"/>
                             </nav>
                         </div>
                     </div>
