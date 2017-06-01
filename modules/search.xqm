@@ -199,7 +199,6 @@ declare function search:load-volumes-within($node, $model) {
                 </volume>
         )
     }
-    let $c:= console:log($node)
     let $html := templates:process($node/*, map:new(($model, $content)))
     return
         $html
