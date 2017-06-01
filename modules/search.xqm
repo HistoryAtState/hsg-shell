@@ -145,55 +145,28 @@ declare function search:load-sections($node, $model) {
 
 declare
     %templates:wrap
-function search:section-attributes($node, $model, $within as xs:string*) {
-(
-    attribute value { search:section-id-value-attribute($node, $model)},
-    if (exists($within) and string-join($within) != "") then
-        search:within-highlight-attribute($node, $model, $within) 
-    else (),
-    search:section-label($node, $model)
-)
-};
-
-
-declare
-function search:section-id-value-attribute($node, $model) {
+function search:section-checkbox-value-attribute-and-title($node, $model, $within as xs:string*) {
     let $section-id := $model?section/id
-    return
-        attribute value { $section-id }
-};
-
-declare function search:section-label($node, $model) {
     let $section-label := $model?section/label
     return
-        <span class="c-indicator">{$section-label/node()}</span>
+        (
+            attribute value { $section-id },
+            if (exists($within) and string-join($within) != "" and $section-id = $within) then
+                attribute checked { "checked" }
+            else (),
+            <span class="c-indicator">{ $section-label/string() }</span>
+        )
 };
 
-declare function search:within-highlight-attribute($node, $model, $within as xs:string+) {
-    let $section-id := $model?section/id
-    return
-        if ($section-id = $within) then
-            attribute checked { 'checked' }
-        else
-            ()
-};
-
-declare function search:plural-if-within-multiple-volumes($node, $model, $within as xs:string*) {
-    let $volume-searches := for $w in $within return if (matches($w, '^frus\d')) then $w else ()
-    return
-        if (count($volume-searches) gt 1) then 's' else ()
-};
-
-(: the volume-id parameter(s) are provided by controller.xql's parsing of any provided within parameter(s) :)
-declare function search:load-volumes-within($node, $model) {
+declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
     let $content := map { "volumes":
         (
-            for $volume-id in distinct-values(request:get-parameter('volume-id', ()))
-            order by $volume-id
+            for $v in $volume-id
+            order by $v
             return
                 <volume>
-                    <id>{$volume-id}</id>
-                    <title>{fh:vol-title($volume-id)}</title>
+                    <id>{$v}</id>
+                    <title>{fh:vol-title($v)}</title>
                 </volume>
         )
     }
@@ -204,31 +177,24 @@ declare function search:load-volumes-within($node, $model) {
 
 declare
     %templates:wrap
-function search:volume-attributes($node, $model) {
-(
-    attribute value { search:volume-id-value-attribute($node, $model)},
-    search:volume-title($node, $model)
-)
-};
-
-declare
-function search:volume-id-value-attribute($node, $model) {
-    $model?volume/id
-};
-
-declare 
-function search:volume-title($node, $model) {
+function search:volume-checkbox-value-attribute-and-title($node, $model) {
+    attribute value { $model?volume/id },
     $model?volume/title/string()
 };
 
 declare
     %templates:wrap
-function search:select-volumes-link($node, $model) {
-    let $volume-ids := request:get-parameter('volume-id', ())
-    let $q := request:get-parameter('q', ())
-    let $withins := string-join(((if ($q) then 'q=' || $q else ()),
-        $volume-ids ! concat('volume-id=', .)), '&amp;')
-    let $link := element a { attribute href {$node/@href || '?' || $withins}, $node/@* except $node/@href, $node/node() }
+function search:select-volumes-link($node, $model, $q as xs:string?, $volume-id as xs:string*) {
+    let $query-params :=
+        string-join(
+            (
+                $q ! ("q=" || .),
+                $volume-id ! ("volume-id=" || .)
+            ),
+            '&amp;'
+        )
+    let $query-string := $query-params ! ("?" || .)
+    let $link := element a { attribute href {$node/@href || $query-string}, $node/@* except $node/@href, $node/node() }
     return
         app:fix-this-link($link, $model)
 };
@@ -267,7 +233,6 @@ declare %private function search:filter($hits) {
 declare
     %templates:default("start", 1)
     %templates:default("per-page", 10)
-    %templates:default("within", "")
     (:
     declare variable $search:SORTBY := 'relevance';
     declare variable $search:SORTORDER := 'descending';
@@ -289,6 +254,7 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
         "query-info": map {
             "q": $q,
             "within": $within,
+            (: "volume-id": $volume-id, :)
             "start": $start,
             "end": $start + count($window) - 1,
             "perpage": $per-page,
@@ -302,12 +268,12 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
         $html
 };
 
-declare %private function search:query-sections($sections as xs:string*, $volumes as xs:string*,
+declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
     $query as xs:string) {
-    if (exists($volumes)) then
-        let $docs := for $v in $volumes return collection($config:FRUS_VOLUMES_COL)/id($v)
+    if (exists($volume-ids)) then
+        let $vols := for $volume-id in $volume-ids return collection($config:FRUS_VOLUMES_COL)/id($volume-id)
         return
-            $docs//tei:div[ft:query(., $query)]
+            $vols//tei:div[ft:query(., $query)]
     else if (exists($sections) and $sections != "") then
         for $section in $sections
         for $category in $search:SECTIONS?($section)

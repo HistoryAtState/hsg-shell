@@ -32,7 +32,7 @@
                             <div class="hsg-search-inputs">
                                 <label class="hsg-search-input-label" data-template="templates:each"
                                     data-template-from="sections" data-template-to="section">
-                                    <input type="checkbox" name="within" data-template="search:section-attributes"/>
+                                    <input type="checkbox" name="within" data-template="search:section-checkbox-value-attribute-and-title"/>
                                 </label>
                             </div>
                         </div>
@@ -40,16 +40,11 @@
                             <div data-template="app:if-parameter-set"
                                 data-template-param="volume-id">
                                 <p>Restrict search to the following <em>Foreign Relations</em>
-                                    volume<span data-template="app:if-parameter-set"
-                                        data-template-param="within">
-                                        <span
-                                            data-template="search:plural-if-within-multiple-volumes"
-                                        />
-                                    </span>:</p>
+                                    volume(s):</p>
                                 <div class="hsg-search-inputs" data-template="templates:each"
                                     data-template-from="volumes" data-template-to="volume">
                                     <label class="hsg-search-input-label">
-                                        <input type="checkbox" name="within" checked="checked" data-template="search:volume-attributes"/>
+                                        <input type="checkbox" name="volume-id" checked="checked" data-template="search:volume-checkbox-value-attribute-and-title"/>
                                     </label>
                                 </div>
                             </div>
@@ -67,7 +62,8 @@
                                     data-template-param="within">
                                     <p>
                                         <a href="$app/search">Reset this search</a> or <a
-                                            href="$app/search/select-volumes">choose <em>Foreign
+                                            href="$app/search/select-volumes"
+                                            data-template="search:select-volumes-link">choose <em>Foreign
                                                 Relations</em> volumes</a>
                                     </p>
                                 </div>
