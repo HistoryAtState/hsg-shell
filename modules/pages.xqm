@@ -130,7 +130,14 @@ declare function pages:volume-to-tei($volume as element()) {
                             <tei:list>
                             {
                                 $volume/external-location[. ne ''] !
-                                    <tei:item>{if (./@loc = 'madison') then <tei:ref target="{.}">University of Wisconsin-Madison</tei:ref> else ()}</tei:item>
+                                    <tei:item>
+                                        <tei:ref target="{.}">{
+                                            switch (./@loc)
+                                                case "madison" return "University of Wisconsin-Madison"
+                                                case "worldcat" return "WorldCat"
+                                                default return "Link"
+                                        }</tei:ref>
+                                    </tei:item>
                             }
                             </tei:list>
                         </tei:div>
