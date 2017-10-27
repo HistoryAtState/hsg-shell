@@ -13,6 +13,51 @@ import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare variable $visits:DATA_COL := '/db/apps/visits/data';
 
+declare function visits:load($node, $model, $country-or-year as xs:string) {
+    let $is-year := matches($country-or-year, '^\d{4}')
+    return
+        if ($is-year) then
+            let $page-title := $country-or-year
+            let $title := 'Visits By Foreign Leaders in ' || $country-or-year
+            let $breadcrumb := <li><a href="$app/departmenthistory/visits/{$country-or-year}">{$page-title}</a></li>
+            let $table := visits:visits-in-year-table($country-or-year cast as xs:integer)
+            return
+                map {
+                    "page-title": $page-title,
+                    "title": $title,
+                    "breadcrumb": $breadcrumb,
+                    "table": $table
+                }
+        else
+            let $page-title := collection('/db/apps/gsh/data/countries-old')//country[id eq $country-or-year]/label/string()
+            let $title := 'Visits By Foreign Leaders of ' || $page-title
+            let $breadcrumb := <li><a href="$app/departmenthistory/visits/{$country-or-year}">{$page-title}</a></li>
+            let $table := visits:visits-from-country-table($country-or-year)
+            return
+                map {
+                    "page-title": $page-title,
+                    "title": $title,
+                    "breadcrumb": $breadcrumb,
+                    "table": $table
+                }
+};
+
+declare function visits:page-title($node, $model) {
+    $model?page-title
+};
+
+declare function visits:title($node, $model) {
+    $model?title
+};
+
+declare function visits:breadcrumb($node, $model) {
+    $model?breadcrumb
+};
+
+declare function visits:table($node, $model) {
+    $model?table
+};
+
 declare function visits:years($node, $model) {
     <ul>{
         let $years :=
@@ -39,63 +84,25 @@ declare function visits:countries($node, $model) {
     }</ul>
 };
 
-declare function visits:is-country-or-year($country-or-year) {
-    if (matches($country-or-year, '^\d{4}')) then
-        'year'
-    else
-        'country'
-};
-
-declare function visits:country-or-year-title($node, $model, $country-or-year as xs:string) {
-    if (visits:is-country-or-year($country-or-year) = 'year') then
-        'Visits By Foreign Leaders in ' || $country-or-year
-    else
-        'Visits By Foreign Leaders of ' || collection('/db/apps/gsh/data/countries-old')//country[id = $country-or-year]/label
-};
-
-declare function visits:country-or-year-page-title($node, $model, $country-or-year as xs:string) {
-    if (visits:is-country-or-year($country-or-year) = 'year') then
-        $country-or-year
-    else
-        collection('/db/apps/gsh/data/countries-old')//country[id = $country-or-year]/label
-};
-
-
-declare function visits:country-or-year-breadcrumb($node, $model, $country-or-year as xs:string) {
-    <li><a href="$app/departmenthistory/visits/{$country-or-year}">{
-        if (visits:is-country-or-year($country-or-year) = 'year') then
-            $country-or-year
-         else
-            collection('/db/apps/gsh/data/countries-old')//country[id = $country-or-year]/label/text()
-    }</a></li>
-};
-
-declare function visits:country-or-year-table($node, $model, $country-or-year as xs:string) {
-    if (visits:is-country-or-year($country-or-year) = 'year') then
-        visits:visits-in-year-table($node, $model, $country-or-year cast as xs:integer)
-    else
-        visits:visits-from-country-table($node, $model, $country-or-year)
-};
-
-declare function visits:visits-in-year-table($node, $model, $year as xs:integer) {
+declare function visits:visits-in-year-table($year as xs:integer) {
     let $visits :=
         for $visit in collection($visits:DATA_COL)//visit[year-from-date(start-date) eq $year]
         order by $visit/start-date
         return $visit
     return
-        visits:visits-table($node, $model, $visits, ())
+        visits:visits-table($visits, ())
 };
 
-declare function visits:visits-from-country-table($node, $model, $country-id as xs:string) {
+declare function visits:visits-from-country-table($country-id as xs:string) {
     let $visits :=
         for $visit in collection($visits:DATA_COL)//visit[from/@id eq $country-id]
         order by $visit/start-date
         return $visit
     return
-        visits:visits-table($node, $model, $visits, 'from')
+        visits:visits-table($visits, 'from')
 };
 
-declare function visits:visits-table($node, $model, $results-to-display as node()*, $suppress as xs:string*) {
+declare function visits:visits-table($results-to-display as node()*, $suppress as xs:string*) {
     <table class="hsg-table-default">
         <thead>
             <tr>
@@ -118,7 +125,7 @@ declare function visits:visits-table($node, $model, $results-to-display as node(
                         let $date :=
                             if (not($start castable as xs:date)) then
                                 'date error'
-                            else if ($item/start-date = $item/end-date) then
+                            else if ($item/start-date eq $item/end-date) then
                                 format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US')
                             else if (empty($end)) then
                                 format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US')
