@@ -18,6 +18,71 @@ declare variable $travels:PRESIDENT_TRAVELS_COL := '/db/apps/travels/president-t
 declare variable $travels:SECRETARY_TRAVELS_COL := '/db/apps/travels/secretary-travels';
 declare variable $travels:PRESIDENTS_COL := '/db/apps/travels/presidents';
 
+
+declare function travels:load-secretary($node as node(), $model as map(*), $person-or-country-id as xs:string) {
+    let $matching-secretary := collection($travels:SECRETARY_TRAVELS_COL)//@who[. eq $person-or-country-id]/..
+    let $is-person-or-country-id := 
+        if ($matching-secretary) then
+            'person'
+        else
+            'country'
+    let $title :=
+        if ($is-person-or-country-id eq 'person') then
+            pocom:person-name-first-last($node, $model, $person-or-country-id)
+        else
+            gsh:territory-id-to-short-name($person-or-country-id)
+    let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
+    let $table := 
+        if ($is-person-or-country-id eq 'person') then
+            travels:by-person("secretary", $person-or-country-id)
+        else
+            travels:by-country("secretary", $person-or-country-id)
+    return
+        map {
+            "title": $title,
+            "breadcrumb": $breadcrumb,
+            "table": $table
+        }
+};
+
+declare function travels:load-president($node as node(), $model as map(*), $person-or-country-id as xs:string) {
+    let $matching-president := collection($travels:PRESIDENTS_COL)//president[id eq $person-or-country-id]
+    let $is-person-or-country-id := 
+            if ($matching-president) then
+                'person'
+            else
+                'country'
+    let $title :=
+        if ($is-person-or-country-id eq 'person') then
+            $matching-president/name/string()
+        else
+            gsh:territory-id-to-short-name($person-or-country-id)
+    let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
+    let $table := 
+        if ($is-person-or-country-id eq 'person') then
+            travels:by-person("president", $person-or-country-id)
+        else
+            travels:by-country("president", $person-or-country-id)
+    return
+        map {
+            "title": $title,
+            "breadcrumb": $breadcrumb,
+            "table": $table
+        }
+};
+
+declare function travels:breadcrumb($node as node(), $model as map(*)) {
+    $model?breadcrumb
+};
+
+declare function travels:title($node as node(), $model as map(*)) {
+    $model?title
+};
+
+declare function travels:table($node as node(), $model as map(*)) {
+    $model?table
+};
+
 declare function travels:presidents($node as node(), $model as map(*)) {
     <ul>
         {
@@ -52,7 +117,7 @@ declare function travels:secretaries($node as node(), $model as map(*)) {
             let $secretaries-who-travelled := for $x in xmldb:get-child-resources($travels:SECRETARY_TRAVELS_COL) return replace($x, '.xml$', '')
             for $person-id in $secretaries-who-travelled
             let $name := pocom:person-name-first-last($node, $model, $person-id)
-            let $secretary-role := doc($pocom:POSITIONS-PRINCIPALS-COL || '/secretary.xml')//principal[person-id = $person-id][1]
+            let $secretary-role := doc($pocom:POSITIONS-PRINCIPALS-COL || '/secretary.xml')//principal[person-id eq $person-id][1]
             let $startyear := app:year-from-date($secretary-role/started/date)
             let $endyear :=
                 if ($secretary-role/following-sibling::principal[@treatAsConsecutive]) then
@@ -71,7 +136,7 @@ declare function travels:secretaries-destinations($node as node(), $model as map
     <ul>
         {
             for $country in distinct-values(collection($travels:SECRETARY_TRAVELS_COL)//country)
-            let $country-id := collection($travels:SECRETARY_TRAVELS_COL)//country[. = $country][1]/@id/string()
+            let $country-id := collection($travels:SECRETARY_TRAVELS_COL)//country[. eq $country][1]/@id/string()
             order by $country
             return
                 <li><a href="$app/departmenthistory/travels/secretary/{$country-id}">{$country}</a></li>
@@ -79,99 +144,67 @@ declare function travels:secretaries-destinations($node as node(), $model as map
     </ul>
 };
 
-declare function travels:is-person-or-country-id($id as xs:string, $role as xs:string) {
-    if ($role = 'president') then
-        if (collection($travels:PRESIDENTS_COL)//id = $id) then
-            'person'
-        else
-            'country'
-    else
-        if (collection($travels:SECRETARY_TRAVELS_COL)//@who = $id) then
-            'person'
-        else
-            'country'
-};
-
-declare function travels:person-or-country-breadcrumb($node as node(), $model as map(*), $role as xs:string, $person-or-country-id as xs:string) {
-    let $label := travels:person-or-country-title($node, $model, $role, $person-or-country-id)
-    return <li><a href="$app/departmenthistory/travels/{$role}/{$person-or-country-id}">{$label}</a></li>
-};
-
-declare function travels:person-or-country-title($node as node(), $model as map(*), $role as xs:string, $person-or-country-id as xs:string) {
-    if (travels:is-person-or-country-id($person-or-country-id, $role) = 'person') then
-        if ($role = 'president') then
-            collection($travels:PRESIDENTS_COL)//president[id = $person-or-country-id]/name/string()
-        else
-            pocom:person-name-first-last($node, $model, $person-or-country-id)
-    else
-        gsh:territory-id-to-short-name($person-or-country-id)
-};
-
-declare function travels:person-or-country-travels($node as node(), $model as map(*), $role as xs:string, $person-or-country-id as xs:string) {
-    if (travels:is-person-or-country-id($person-or-country-id, $role) = 'country') then
-        travels:by-country($node, $model, $role, $person-or-country-id)
-    else
-        travels:by-person($node, $model, $role, $person-or-country-id)
-};
-
-declare function travels:by-country($node as node(), $model as map(*), $role as xs:string, $country-id as xs:string) {
-    let $collection := if ($role = 'president') then $travels:PRESIDENT_TRAVELS_COL else $travels:SECRETARY_TRAVELS_COL
+declare function travels:by-country($role as xs:string, $country-id as xs:string) as element(table) {
+    let $collection := if ($role eq 'president') then $travels:PRESIDENT_TRAVELS_COL else $travels:SECRETARY_TRAVELS_COL
     let $trips :=
         for $trip in collection($collection)//trip[country/@id eq $country-id]
         order by $trip/start-date
         return $trip
     return
-        travels:table($node, $model, $trips, 'country')
+        travels:travels-to-table($trips, 'country')
 };
 
-declare function travels:by-person($node as node(), $model as map(*), $role as xs:string, $person-id as xs:string) {
-    let $collection := if ($role = 'president') then $travels:PRESIDENT_TRAVELS_COL else $travels:SECRETARY_TRAVELS_COL
+declare function travels:by-person($role as xs:string, $person-id as xs:string) as element(table) {
+    let $collection := if ($role eq 'president') then $travels:PRESIDENT_TRAVELS_COL else $travels:SECRETARY_TRAVELS_COL
     let $trips :=
         for $trip in collection($collection)//trip[@who eq $person-id]
         order by $trip/start-date
         return $trip
     return
-        travels:table($node, $model, $trips, 'name')
+        travels:travels-to-table($trips, 'name')
 };
 
-declare function travels:table($node as node(), $model as map(*), $results-to-display as node()*, $suppress as xs:string*) as node(){
-    <table class="hsg-table-default">
-        <thead>
-            <tr>
-                {if ($suppress = 'name') then () else <th>Name</th>}
-                {if ($suppress = 'country') then () else <th>Country</th>}
-                <th>Locale</th>
-                <th>Remarks</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>{
-            for $item in $results-to-display
-            return
+declare function travels:travels-to-table($results-to-display as node()*, $suppress as xs:string*) as element(table) {
+    let $suppress-name := $suppress = "name"
+    let $suppress-country := $suppress = "country"
+    return
+        <table class="hsg-table-default">
+            <thead>
                 <tr>
-                    {if ($suppress = 'name') then () else <td>{if ($item/name) then $item/name/text() else pocom:person-name-first-last($node, $model, $item/@who)}</td>}
-                    {if ($suppress = 'country') then () else <td>{$item/country/text()}</td>}
-                    <td>{$item/locale/text()}</td>
-                    <td>{$item/remarks/text()}</td>
-                    <td>{
-                        let $start := if ($item/start-date castable as xs:date) then xs:date($item/start-date/text()) else $item/start-date/text()
-                        let $end := if ($item/end-date castable as xs:date) then xs:date($item/end-date/text()) else $item/end-date/text()
-                        let $date :=
-                            if (not($start castable as xs:date)) then
-                                'date error'
-                            else if ($item/start-date = $item/end-date) then
-                                format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US')
-                            else if (empty($end)) then
-                                format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US')
-                            else if (year-from-date($start) eq year-from-date($end) and month-from-date($start) eq month-from-date($end)) then
-                                concat(format-date($start, "[MNn] [D]", 'en', (), 'US'), '–', format-date($end, "[D], [Y0001]", 'en', (), 'US'))
-                            else if (year-from-date($start) eq year-from-date($end)) then
-                                concat(format-date($start, "[MNn] [D]", 'en', (), 'US'), '–', format-date($end, '[MNn] [D], [Y0001]', 'en', (), 'US'))
-                            else
-                                concat(format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US'), '–', format-date($end, '[MNn] [D], [Y0001]', 'en', (), 'US'))
-                        return $date
-                    }</td>
+                    {if ($suppress-name) then () else <th>Name</th>}
+                    {if ($suppress-country) then () else <th>Country</th>}
+                    <th>Locale</th>
+                    <th>Remarks</th>
+                    <th>Date</th>
                 </tr>
-        }</tbody>
-    </table>
+            </thead>
+            <tbody>{
+                for $item in $results-to-display
+                return
+                    <tr>
+                        {if ($suppress-name) then () else <td>{if ($item/name) then $item/name/text() else pocom:person-name-by-id($item/@who)}</td>}
+                        {if ($suppress-country) then () else <td>{$item/country/text()}</td>}
+                        <td>{$item/locale/text()}</td>
+                        <td>{$item/remarks/text()}</td>
+                        <td>{
+                            let $start := if ($item/start-date castable as xs:date) then xs:date($item/start-date/text()) else $item/start-date/text()
+                            let $end := if ($item/end-date castable as xs:date) then xs:date($item/end-date/text()) else $item/end-date/text()
+                            let $date :=
+                                if (not($start castable as xs:date)) then
+                                    'date error'
+                                else if ($item/start-date eq $item/end-date) then
+                                    format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US')
+                                else if (empty($end)) then
+                                    format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US')
+                                else if (year-from-date($start) eq year-from-date($end) and month-from-date($start) eq month-from-date($end)) then
+                                    concat(format-date($start, "[MNn] [D]", 'en', (), 'US'), '–', format-date($end, "[D], [Y0001]", 'en', (), 'US'))
+                                else if (year-from-date($start) eq year-from-date($end)) then
+                                    concat(format-date($start, "[MNn] [D]", 'en', (), 'US'), '–', format-date($end, '[MNn] [D], [Y0001]', 'en', (), 'US'))
+                                else
+                                    concat(format-date($start, '[MNn] [D], [Y0001]', 'en', (), 'US'), '–', format-date($end, '[MNn] [D], [Y0001]', 'en', (), 'US'))
+                            return $date
+                        }</td>
+                    </tr>
+            }</tbody>
+        </table>
 };

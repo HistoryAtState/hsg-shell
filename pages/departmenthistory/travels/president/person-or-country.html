@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="templates:surround" data-template-with="templates/site.html"
     data-template-at="content">
-    <div data-template="pages:load">
-        <div id="static-title" class="hidden"><span data-template="travels:person-or-country-title"
-                data-template-role="president"/> - Travels of the President - Travels - Department
-            History</div>
+    <div data-template="travels:load-president">
+        <div id="static-title" class="hidden"><span data-template="travels:title"/> - Travels of the
+            President - Travels - Department History</div>
         <div class="row">
             <div class="hsg-breadcrumb-wrapper">
                 <ol class="breadcrumb" data-template="app:fix-links">
@@ -21,8 +20,7 @@
                     <li>
                         <a href="$app/departmenthistory/travels/president">Presidents</a>
                     </li>
-                    <li data-template="travels:person-or-country-breadcrumb"
-                        data-template-role="president"/>
+                    <li data-template="travels:breadcrumb"/>
                 </ol>
             </div>
         </div>
@@ -30,11 +28,9 @@
             <div class="hsg-width-two-thirds">
                 <div id="content-inner" data-template="app:fix-links" class="lists">
                     <h1>
-                        <span data-template="travels:person-or-country-title"
-                            data-template-role="president"/>
+                        <span data-template="travels:title"/>
                     </h1>
-                    <table data-template="travels:person-or-country-travels"
-                        data-template-role="president"/>
+                    <table data-template="travels:table"/>
                 </div>
             </div>
             <aside class="hsg-width-one-third">

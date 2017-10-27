@@ -36,7 +36,7 @@ declare function pocom:person($person-id) {
 };
 
 declare function pocom:person-name-by-id($person-id as xs:string) {
-    let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
+    let $person := collection($pocom:PEOPLE-COL)/person[id eq $person-id]
     let $namebase := $person/persName
     return
         string-join(
