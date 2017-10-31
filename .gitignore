@@ -3,6 +3,7 @@ build/*
 .existdb.json
 node_modules
 bower_components
+package-lock.json
 resources/css
 resources/fonts
 resources/scripts/app.all.js
