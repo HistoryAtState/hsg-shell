@@ -21,7 +21,8 @@
                 <section class="hsg-search-section">
                     <p>Read these <a href="$app/search/tips">tips and caveats</a> to understand the
                         limitations of this search engine and how to make the most of its scope,
-                        phrase, boolean, wildcard, and proximity options.</p>
+                        phrase, boolean, wildcard, and proximity options.
+                    </p>
                     <form method="get" action="$app/search">
                         <p class="form-group">
                             <input type="text" name="q" placeholder="Search..." class="form-control"
@@ -55,7 +56,8 @@
                                 <a href="$app/search">Clear this search</a>, or <a
                                     href="$app/search/select-volumes"
                                     data-template="search:select-volumes-link"> change selection</a>
-                                of <em>Foreign Relations</em> volumes within which to search</p>
+                                of <em>Foreign Relations</em> volumes within which to search
+                            </p>
                         </div>
                         <div data-template="app:if-parameter-unset" data-template-param="volume-id">
                             <div data-template="app:if-parameter-set" data-template-param="q">
@@ -90,13 +92,15 @@
                         </button>
                     </form>
                 </section>
-                
+
                 <section class="hsg-search-section">
                     <div data-template="app:if-parameter-set" data-template-param="q">
                         <div data-template="search:load-results">
-                            <h1 class="hsg-search-result-message">Results for keyword search <span
-                                class="hsg-search-query"><span data-template="search:q"
-                                /></span>, sorted by relevance.</h1>
+                            <h1 class="hsg-search-result-message">Results for keyword search
+                                <span class="hsg-search-query">
+                                    <span data-template="search:q"/>
+                                </span>, sorted by relevance.
+                            </h1>
                             <p data-template="search:result-count-summary"/>
                             <nav>
                                 <ul class="pagination" data-template="search:paginate"
