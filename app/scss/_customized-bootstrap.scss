@@ -322,3 +322,7 @@ a[href ^='https://']:after {
     color: $hsg-link-color-hover;
   }
 }
+
+.form-control {
+  box-shadow: none;
+}
