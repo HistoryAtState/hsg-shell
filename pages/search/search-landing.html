@@ -17,6 +17,8 @@
 
     <div data-template="templates:include" data-template-path="pages/search/search-bar-include.html"/>
 
+    <div data-template="templates:include" data-template-path="pages/search/filter-querystring-include.html"/>
+
     <div class="row">
         <div class="hsg-width-one-whole">
             <div id="content-inner" data-template="app:fix-links">
@@ -25,7 +27,7 @@
                         <div data-template="search:load-sections">
                             <p>To limit your results to certain parts of the website, check the
                                 appropriate box(es), and then click “Search”:</p>
-                            <div class="hsg-search-inputs">
+                            <div class="hsg-search-inputs-vertical">
                                 <label class="hsg-search-input-label" data-template="templates:each"
                                     data-template-from="sections" data-template-to="section">
                                     <input type="checkbox" name="within" data-template="search:section-checkbox-value-attribute-and-title"/>
@@ -37,7 +39,7 @@
                                 data-template-param="volume-id">
                                 <p>Restrict search to the following <em>Foreign Relations</em>
                                     volume(s):</p>
-                                <div class="hsg-search-inputs" data-template="templates:each"
+                                <div class="hsg-search-inputs-vertical" data-template="templates:each"
                                     data-template-from="volumes" data-template-to="volume">
                                     <label class="hsg-search-input-label">
                                         <input type="checkbox" name="volume-id" checked="checked" data-template="search:volume-checkbox-value-attribute-and-title"/>

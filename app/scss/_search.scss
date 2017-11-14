@@ -63,17 +63,45 @@ input[type=search] {
 // Search results page
 
 .hsg-search-section {
-  margin-bottom: 4rem;
   .pagination {
     margin: 0;
   }
 }
 
-.hsg-search-inputs {
+.hsg-search-inputs-vertical {
   @extend .c-inputs-stacked;
   margin: 2rem 0;
   .hsg-search-input-label {
     @extend .c-input;
+  }
+}
+
+.hsg-search-inputs-horizontal {
+  margin-bottom: 1em;
+
+  .hsg-search-input {
+    cursor: pointer;
+    display: inline-block;
+    margin-right: $margin-horizontal-base;
+  }
+
+  input[type="checkbox"] {
+    cursor: pointer;
+    margin: 0;
+    width: 12px;
+    height: 14px;
+    position: relative;
+    left: 0;
+    vertical-align: middle;
+  }
+
+  label{
+    width: auto;
+    margin: 0 0 0 5px;
+    position: relative;
+    left: 0;
+    display: inline-block;
+    vertical-align: middle;
   }
 }
 
