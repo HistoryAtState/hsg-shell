@@ -1447,15 +1447,19 @@ else if (matches($exist:path, '^/education/?')) then
 
 (: handle search requests :)
 else if (matches($exist:path, '^/search/?')) then
+    let $search-query := request:get-parameter("q", ())
     let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
     let $page :=
-        if ($fragments[1]) then
+        (: If a search query is present, show the results template :)
+        if ( string-length($search-query) gt 0 ) then
+            'search/search-result.html'
+        else if ($fragments[1]) then
             switch ($fragments[1])
                 case "select-volumes" return 'search/select-volumes.html'
                 case "tips" return 'search/tips.html'
                 default return 'error-page.html'
         else
-            'search/index.html'
+            'search/search-landing.html'
     return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <forward url="{$exist:controller}/pages/{$page}"/>
