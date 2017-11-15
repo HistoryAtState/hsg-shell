@@ -92,6 +92,36 @@ $(document).ready(function() {
         });
     }
 
+    var searchForm = $('#searchForm');
+    var queryForm = $('#queryFilters');
+
+    /**
+     * return serialized values of checked filters in filterForm with name
+     * @param {String} name
+     * @returns {String}
+     */
+    function serializeFiltersByName (form, name) {
+        var filter = form.serialize();
+        if (filter === '') { return ''; }
+        return '&' + filter;
+    }
+
+    /**
+     * reload page with all filters added as GET-parameters
+     * @param {Event} event
+     */
+    function submitSearch (event) {
+        event.preventDefault();
+        var action = searchForm.serialize();
+        action += serializeFiltersByName(queryForm, 'match');
+        window.location.replace('?' + action);
+    }
+
+    if (searchForm.get(0)) {
+        searchForm.on('submit', submitSearch);
+        queryForm.find('input').on('change', submitSearch);
+    }
+
     function initContent() {
         $(".content .note").popover({
             html: true,
