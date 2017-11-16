@@ -68,54 +68,12 @@ input[type=search] {
   }
 }
 
-.hsg-search-inputs-vertical {
-  @extend .c-inputs-stacked;
-  margin: 2rem 0;
-  .hsg-search-input-label {
-    @extend .c-input;
-  }
-}
-
-.hsg-search-inputs-horizontal {
-  margin-bottom: 1em;
-
-  .hsg-search-input {
-    cursor: pointer;
-    display: inline-block;
-    margin-right: $margin-horizontal-base;
-  }
-
-  input[type="checkbox"] {
-    cursor: pointer;
-    margin: 0;
-    width: 12px;
-    height: 14px;
-    position: relative;
-    left: 0;
-    vertical-align: middle;
-  }
-
-  label{
-    width: auto;
-    margin: 0 0 0 5px;
-    position: relative;
-    left: 0;
-    display: inline-block;
-    vertical-align: middle;
-  }
-}
-
 .hsg-search-help {
   margin: 0 0 2rem 0;
 }
 
-.hsg-search-result-message {
-  margin-top: 4rem;
-  font-size: $h2-font-size;
-  margin-bottom: 0.5rem;
-  .hsg-search-query {
-    color: $color-primary;
-  }
+.hsg-search-query {
+  color: $color-primary;
 }
 
 .hsg-search-result {
@@ -146,6 +104,17 @@ input[type=search] {
   @extend .btn-default;
   background-color: $color-gray-lightest;
   border-left: none;
+}
+
+// Reset button in sidebar
+
+.hsg-sidebar-reset-btn {
+  @extend .btn;
+  @extend .btn-default;
+  background-color: $color-gray-lightest;
+  > span {
+    top: 2px;
+  }
 }
 
 // Text in searchbar button
