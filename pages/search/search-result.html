@@ -19,14 +19,28 @@
     <div data-template="templates:include" data-template-path="pages/search/filter-querystring-include.html"/>
 
     <div class="row">
-        <nav class="hsg-width-one-third">
-            <div class="hsg-search-inputs-vertical">
-                <label class="hsg-search-input-label" data-template="templates:each"
-                    data-template-from="sections" data-template-to="section">
-                    <input type="checkbox" name="within" data-template="search:section-checkbox-value-attribute-and-title"/>
-                </label>
-            </div>
-        </nav>
+        <!-- filter sidebar -->
+        <aside class="hsg-width-one-third">
+            <h2>Filter by</h2>
+            <form method="get" action="?" class="filter-form" id="formFilters">
+                <!-- filter sections -->
+                <div data-template="search:load-sections">
+                    <article class="filter-sidebar" >
+                        <h3 class="hsg-sidebar-title">Sections</h3>
+                        <div class="hsg-search-inputs-vertical">
+                            <label class="hsg-search-input-label" data-template="templates:each"
+                                   data-template-from="sections" data-template-to="section">
+                                <input type="checkbox" name="section" data-template="search:section-checkbox-value-attribute-and-title"/>
+                            </label>
+                        </div>
+                    </article>
+                </div>
+                <button class="hsg-sidebar-reset-btn" name="reset-filters" type="reset" value="reset_filters">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"/>
+                    Reset Filters
+                </button>
+            </form>
+        </aside>
 
         <div class="hsg-width-two-thirds">
             <div id="content-inner" data-template="app:fix-links">
@@ -34,11 +48,11 @@
                 <section class="hsg-search-section">
                     <div data-template="app:if-parameter-set" data-template-param="q">
                         <div data-template="search:load-results">
-                            <h1 class="hsg-search-result-message">Results for keyword search
+                            <h2>Results for keyword search
                                 <span class="hsg-search-query">
                                     <span data-template="search:q"/>
                                 </span>
-                            </h1>
+                            </h2>
                             <p data-template="search:result-count-summary"/>
                             <nav>
                                 <ul class="pagination" data-template="search:paginate"
@@ -65,9 +79,11 @@
                         </div>
                     </div>
 
-                    <button class="hsg-link-button hsg-main-search-button" type="submit" value="Search">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
-                    </button>
+                    <form  method="get" action="?" class="main-form">
+                        <button class="hsg-link-button hsg-main-search-button" type="submit" value="Search">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
+                        </button>
+                    </form>
                 </section>
             </div>
         </div>

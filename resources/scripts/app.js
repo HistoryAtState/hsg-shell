@@ -92,11 +92,16 @@ $(document).ready(function() {
         });
     }
 
+    //-------------- Search Filters --------------//
+
     var searchForm = $('#searchForm');
     var queryForm = $('#queryFilters');
+    var sectionFilter = $('#sectionFilter');
+    var formFilters = $('#formFilters');
+    var mainForm = $('form.main-form');
 
     /**
-     * return serialized values of checked filters in filterForm with name
+     * return serialized values of checked filters with name
      * @param {String} name
      * @returns {String}
      */
@@ -114,12 +119,30 @@ $(document).ready(function() {
         event.preventDefault();
         var action = searchForm.serialize();
         action += serializeFiltersByName(queryForm, 'match');
+        action += serializeFiltersByName(formFilters, 'section');
+        action += serializeFiltersByName(sectionFilter, 'within');
         window.location.replace('?' + action);
     }
 
-    if (searchForm.get(0)) {
-        searchForm.on('submit', submitSearch);
+    if (mainForm.get(0)) {
+        mainForm.on('submit', submitSearch);
     }
+
+    // Checkboxes and "reset" button
+    var filterInputs = formFilters.find('input');
+    var filterReset = formFilters.find('button[name="reset"]');
+
+    /**
+     * Reset all filters in assessment form
+     */
+    function resetFilter () {
+        filterInputs.attr('checked', false);
+        mainForm.submit();
+    }
+
+    filterReset.on('click', resetFilter);
+
+    //------------------------------------------//
 
     function initContent() {
         $(".content .note").popover({

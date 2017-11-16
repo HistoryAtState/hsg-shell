@@ -23,15 +23,18 @@
         <div class="hsg-width-one-whole">
             <div id="content-inner" data-template="app:fix-links">
                 <section class="hsg-search-section" role="search">
-                    <form method="get" action="$app/search" class="filter-form" id="sectionFilter">
+                    <form method="get" action="$app/search" class="filter-form main-form" id="sectionFilter">
                         <div data-template="search:load-sections">
                             <p>To limit your results to certain parts of the website, check the
                                 appropriate box(es), and then click “Search”:</p>
                             <div class="hsg-search-inputs-vertical">
-                                <label class="hsg-search-input-label" data-template="templates:each"
-                                    data-template-from="sections" data-template-to="section">
-                                    <input type="checkbox" name="within" data-template="search:section-checkbox-value-attribute-and-title"/>
-                                </label>
+                                <fieldset>
+                                    <legend class="sr-only">Select sections</legend>
+                                    <label class="hsg-search-input-label" data-template="templates:each"
+                                        data-template-from="sections" data-template-to="section">
+                                        <input type="checkbox" name="within" data-template="search:section-checkbox-value-attribute-and-title"/>
+                                    </label>
+                                </fieldset>
                             </div>
                         </div>
                         <div data-template="search:load-volumes-within">
