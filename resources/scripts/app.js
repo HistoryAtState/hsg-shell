@@ -119,7 +119,6 @@ $(document).ready(function() {
 
     if (searchForm.get(0)) {
         searchForm.on('submit', submitSearch);
-        queryForm.find('input').on('change', submitSearch);
     }
 
     function initContent() {
