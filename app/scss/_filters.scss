@@ -42,5 +42,10 @@
   &-sidebar {
     border-bottom: $default-border-style;
     margin-bottom: 2rem;
+
+    .hsg-sidebar-title {
+      border-bottom: none;
+      font-family: $font-sans;
+    }
   }
 }

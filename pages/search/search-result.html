@@ -25,48 +25,48 @@
             <form method="get" action="?" class="filter-form" id="formFilters">
                 <!-- filter sections -->
                 <div data-template="search:load-sections">
-                    <article class="filter-sidebar" >
-                        <h3 class="hsg-sidebar-title">Sections</h3>
-                        <div class="hsg-search-inputs-vertical">
+                    <fieldset class="filter-sidebar" >
+                        <legend class="hsg-sidebar-title">Sections</legend>
+                        <div class="hsg-search-inputs-vertical" id="collapse1">
                             <label class="hsg-search-input-label" data-template="templates:each"
                                    data-template-from="sections" data-template-to="section">
                                 <input type="checkbox" name="section" data-template="search:section-checkbox-value-attribute-and-title"/>
                             </label>
                         </div>
-                    </article>
+                    </fieldset>
                 </div>
 
                 <!-- filter date -->
                 <div>
-                    <article class="filter-sidebar" >
-                        <h3 class="hsg-sidebar-title">Date</h3>
-                    </article>
+                    <fieldset class="filter-sidebar" >
+                        <legend class="hsg-sidebar-title">Date</legend>
+                    </fieldset>
                 </div>
 
                 <!-- filter administrations -->
                 <div>
-                    <article class="filter-sidebar" >
-                        <h3 class="hsg-sidebar-title">Administrations</h3>
-                        <div class="hsg-search-inputs-vertical">
+                    <fieldset class="filter-sidebar" >
+                        <legend class="hsg-sidebar-title">Administrations</legend>
+                        <div class="hsg-search-inputs-vertical" id="collapse2">
                             <label class="hsg-search-input-label" data-template="templates:each"
                                    data-template-from="administration" data-template-to="administrations">
                                 <input type="checkbox" name="administrations"/>
                             </label>
                         </div>
-                    </article>
+                    </fieldset>
                 </div>
 
                 <!-- filter volumes -->
                 <div>
-                    <article class="filter-sidebar" >
-                        <h3 class="hsg-sidebar-title">Volumes</h3>
+                    <fieldset class="filter-sidebar" >
+                        <legend class="hsg-sidebar-title">Volumes</legend>
                         <div class="hsg-search-inputs-vertical">
                             <label class="hsg-search-input-label" data-template="templates:each"
                                    data-template-from="volume" data-template-to="volumes">
                                 <input type="checkbox" name="volumes"/>
                             </label>
                         </div>
-                    </article>
+                    </fieldset>
                 </div>
 
                 <button class="hsg-sidebar-reset-btn" name="reset-filters" type="reset" value="reset_filters">
