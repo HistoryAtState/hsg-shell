@@ -120,6 +120,12 @@ $(document).ready(function() {
         var action = searchForm.serialize();
         action += serializeFiltersByName(queryForm, 'match');
         action += serializeFiltersByName(formFilters, 'section');
+        action += serializeFiltersByName(formFilters, 'dateStart');
+        action += serializeFiltersByName(formFilters, 'dateEnd');
+        action += serializeFiltersByName(formFilters, 'timeStart');
+        action += serializeFiltersByName(formFilters, 'timeEnd');
+        action += serializeFiltersByName(formFilters, 'administration');
+        action += serializeFiltersByName(formFilters, 'volumes');
         action += serializeFiltersByName(sectionFilter, 'within');
         window.location.replace('?' + action);
     }
@@ -133,7 +139,7 @@ $(document).ready(function() {
     var filterReset = formFilters.find('button[name="reset"]');
 
     /**
-     * Reset all filters in assessment form
+     * Reset all filters in filter form
      */
     function resetFilter () {
         filterInputs.attr('checked', false);

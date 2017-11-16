@@ -35,6 +35,40 @@
                         </div>
                     </article>
                 </div>
+
+                <!-- filter date -->
+                <div>
+                    <article class="filter-sidebar" >
+                        <h3 class="hsg-sidebar-title">Date</h3>
+                    </article>
+                </div>
+
+                <!-- filter administrations -->
+                <div>
+                    <article class="filter-sidebar" >
+                        <h3 class="hsg-sidebar-title">Administrations</h3>
+                        <div class="hsg-search-inputs-vertical">
+                            <label class="hsg-search-input-label" data-template="templates:each"
+                                   data-template-from="administration" data-template-to="administrations">
+                                <input type="checkbox" name="administrations"/>
+                            </label>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- filter volumes -->
+                <div>
+                    <article class="filter-sidebar" >
+                        <h3 class="hsg-sidebar-title">Volumes</h3>
+                        <div class="hsg-search-inputs-vertical">
+                            <label class="hsg-search-input-label" data-template="templates:each"
+                                   data-template-from="volume" data-template-to="volumes">
+                                <input type="checkbox" name="volumes"/>
+                            </label>
+                        </div>
+                    </article>
+                </div>
+
                 <button class="hsg-sidebar-reset-btn" name="reset-filters" type="reset" value="reset_filters">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"/>
                     Reset Filters
