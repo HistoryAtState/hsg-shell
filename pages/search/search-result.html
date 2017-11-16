@@ -27,7 +27,7 @@
                 <div data-template="search:load-sections">
                     <fieldset class="filter-sidebar" >
                         <legend class="hsg-sidebar-title">Sections</legend>
-                        <div class="hsg-search-inputs-vertical" id="collapse1">
+                        <div class="hsg-search-inputs-vertical">
                             <label class="hsg-search-input-label" data-template="templates:each"
                                    data-template-from="sections" data-template-to="section">
                                 <input type="checkbox" name="section" data-template="search:section-checkbox-value-attribute-and-title"/>
@@ -47,10 +47,42 @@
                 <div>
                     <fieldset class="filter-sidebar" >
                         <legend class="hsg-sidebar-title">Administrations</legend>
-                        <div class="hsg-search-inputs-vertical" id="collapse2">
-                            <label class="hsg-search-input-label" data-template="templates:each"
-                                   data-template-from="administration" data-template-to="administrations">
-                                <input type="checkbox" name="administrations"/>
+                        <div class="hsg-search-inputs-vertical">
+                            <label class="hsg-search-input-label">
+                                <input type="checkbox" name="administration" value="pre_truman"/>
+                                Pre-Truman Volumes
+                            </label>
+                            <label class="hsg-search-input-label">
+                                <input type="checkbox" name="administration" value="truman"/>
+                                Truman Administration
+                            </label>
+                            <label class="hsg-search-input-label">
+                                <input type="checkbox" name="administration" value="eisenhower"/>
+                                Eisenhower Administration
+                            </label>
+                            <label class="hsg-search-input-label">
+                                <input type="checkbox" name="administration" value="kennedy"/>
+                                Kennedy Administration
+                            </label>
+                            <label class="hsg-search-input-label">
+                                <input type="checkbox" name="administration" value="johnson"/>
+                                Johnson Administration
+                            </label>
+                            <label class="hsg-search-input-label">
+                                <input type="checkbox" name="administration" value="nixon"/>
+                                Nixon Administration
+                            </label>
+                            <label class="hsg-search-input-label">
+                                <input type="checkbox" name="administration" value="ford"/>
+                                Ford Administration
+                            </label>
+                            <label class="hsg-search-input-label">
+                                <input type="checkbox" name="administration" value="carter"/>
+                                Carter Administration
+                            </label>
+                            <label class="hsg-search-input-label">
+                                <input type="checkbox" name="administration" value="reagan"/>
+                                Reagan Administration
                             </label>
                         </div>
                     </fieldset>
