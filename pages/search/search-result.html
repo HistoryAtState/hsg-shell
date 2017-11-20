@@ -24,28 +24,21 @@
             <h2>Filter by</h2>
             <form method="get" action="?" class="filter-form" id="formFilters">
                 <!-- filter sections -->
-                <div data-template="search:load-sections">
-                    <fieldset class="filter-sidebar" >
-                        <legend class="hsg-sidebar-title">Sections</legend>
-                        <div class="hsg-search-inputs-vertical">
-                            <label class="hsg-search-input-label" data-template="templates:each"
-                                   data-template-from="sections" data-template-to="section">
-                                <input type="checkbox" name="section" data-template="search:section-checkbox-value-attribute-and-title"/>
-                            </label>
-                        </div>
-                    </fieldset>
-                </div>
+                <fieldset class="filter-sidebar">
+                    <legend class="hsg-sidebar-title">Sections</legend>
+                    <div data-template="templates:include" data-template-path="pages/search/_filter-sections.html"/>
+                </fieldset>
 
                 <!-- filter date -->
                 <div>
-                    <fieldset class="filter-sidebar" >
+                    <fieldset class="filter-sidebar">
                         <legend class="hsg-sidebar-title">Date</legend>
                     </fieldset>
                 </div>
 
                 <!-- filter administrations -->
                 <div>
-                    <fieldset class="filter-sidebar" >
+                    <fieldset class="filter-sidebar">
                         <legend class="hsg-sidebar-title">Administrations</legend>
                         <div class="hsg-search-inputs-vertical">
                             <label class="hsg-search-input-label">

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="search:load-sections">
+    <div class="hsg-search-inputs-vertical">
+        <label id="entire-site-label" class="hsg-search-input-label">
+            <input id="entire-site-input" type="checkbox" name="within" value="entire_site"/>
+            <span class="c-indicator">Entire Office of The Historian Website</span>
+        </label>
+        <div class="filter-subsections">
+            <label class="hsg-search-input-label" data-template="templates:each"
+                   data-template-from="sections" data-template-to="section">
+                <input type="checkbox" name="within" data-template="search:section-checkbox-value-attribute-and-title"/>
+            </label>
+        </div>
+    </div>
+</div>

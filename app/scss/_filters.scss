@@ -27,7 +27,7 @@
     vertical-align: middle;
   }
 
-  label{
+  label {
     width: auto;
     margin: 0 0 0 5px;
     position: relative;
@@ -48,4 +48,8 @@
       font-family: $font-sans;
     }
   }
+}
+
+.filter-subsections {
+  margin-left: 2.7rem;
 }

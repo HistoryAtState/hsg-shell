@@ -24,62 +24,11 @@
             <div id="content-inner" data-template="app:fix-links">
                 <section class="hsg-search-section" role="search">
                     <form method="get" action="$app/search" class="filter-form main-form" id="sectionFilter">
-                        <div data-template="search:load-sections">
-                            <p>To limit your results to certain parts of the website, check the
-                                appropriate box(es), and then click “Search”:</p>
-                            <div class="hsg-search-inputs-vertical">
-                                <fieldset>
-                                    <legend class="sr-only">Select sections</legend>
-                                    <label class="hsg-search-input-label" data-template="templates:each"
-                                        data-template-from="sections" data-template-to="section">
-                                        <input type="checkbox" name="within" data-template="search:section-checkbox-value-attribute-and-title"/>
-                                    </label>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <div data-template="search:load-volumes-within">
-                            <div data-template="app:if-parameter-set"
-                                data-template-param="volume-id">
-                                <p>Restrict search to the following <em>Foreign Relations</em>
-                                    volume(s):</p>
-                                <div class="hsg-search-inputs-vertical" data-template="templates:each"
-                                    data-template-from="volumes" data-template-to="volume">
-                                    <label class="hsg-search-input-label">
-                                        <input type="checkbox" name="volume-id" checked="checked" data-template="search:volume-checkbox-value-attribute-and-title"/>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div data-template="app:if-parameter-set" data-template-param="volume-id">
-                            <p class="hsg-search-help">
-                                <a href="$app/search">Clear this search</a>, or <a
-                                    href="$app/search/select-volumes"
-                                    data-template="search:select-volumes-link"> change selection</a>
-                                of <em>Foreign Relations</em> volumes within which to search
-                            </p>
-                        </div>
-                        <div data-template="app:if-parameter-unset" data-template-param="volume-id">
-                            <div data-template="app:if-parameter-set" data-template-param="q">
-                                <div data-template="app:if-parameter-set"
-                                    data-template-param="within">
-                                    <p>
-                                        <a href="$app/search">Reset this search</a> or <a
-                                            href="$app/search/select-volumes"
-                                            data-template="search:select-volumes-link">choose <em>Foreign
-                                                Relations</em> volumes</a>
-                                    </p>
-                                </div>
-                                <div data-template="app:if-parameter-unset"
-                                    data-template-param="within">
-                                    <p class="hsg-search-help">
-                                        <a href="$app/search/select-volumes"
-                                            data-template="search:select-volumes-link">Restrict this
-                                            search to specific <em>Foreign Relations</em>
-                                            volumes</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <p>To limit your results to certain parts of the website, check the appropriate box(es), and then click “Search”:</p>
+                        <fieldset>
+                            <legend class="sr-only">Select sections</legend>
+                            <div data-template="templates:include" data-template-path="pages/search/_filter-sections.html"/>
+                        </fieldset>
                         <button class="hsg-link-button hsg-main-search-button" type="submit" value="Search">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
                         </button>
