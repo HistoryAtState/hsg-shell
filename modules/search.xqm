@@ -158,6 +158,16 @@ function search:section-checkbox-value-attribute-and-title($node, $model, $withi
         )
 };
 
+(: TODO: Apply more plausible condition, needs removing the general trigger name="within" attribute for all checkboxes :)
+declare
+    %templates:wrap
+    %templates:default("scope", "entire_site")
+function search:scope-checked($node, $model, $scope as xs:string*) {
+    if (index-of($scope, $node/@value/string()) > 0)
+    then attribute checked { 'checked' }
+    else ()
+};
+
 declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
     let $content := map { "volumes":
         (
@@ -238,7 +248,7 @@ declare
     declare variable $search:SORTORDER := 'descending';
     :)
 function search:load-results($node, $model, $q as xs:string, $within as xs:string*,
-$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
+$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $scope as xs:string*) {
     let $start-time := util:system-time()
     let $hits := search:query-sections($within, $volume-id, $q)
     let $hits := search:filter($hits)
@@ -260,7 +270,8 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
             "perpage": $per-page,
             "result-count": $hit-count,
             "results-shown": count($hits),
-            "query-duration": seconds-from-duration($end-time - $start-time)
+            "query-duration": seconds-from-duration($end-time - $start-time),
+            "scope": $scope
         }
     }
     let $html := templates:process($node/*, map:new(($model, $query-info)))
