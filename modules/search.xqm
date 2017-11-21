@@ -160,6 +160,48 @@ function search:section-checkbox-value-attribute-and-title($node, $model, $withi
         )
 };
 
+(:~
+ : Generates HTML attributes "value" and "id"
+ : @return  HTML attributes
+~:)
+declare
+    %templates:wrap
+function search:section-input-attributes($node, $model) {
+    let $section-id := $model?section/id
+    return
+        (
+            attribute value { $section-id },
+            attribute id { $section-id }
+        )
+};
+
+
+
+(:~
+ : Generates an HTML <label> attribute "for" and adds a span element containing the label text
+ : @return  HTML
+~:)
+declare
+    %templates:wrap
+function search:section-label($node, $model) {
+    let $section-id := $model?section/id
+    return
+        attribute for { $section-id },
+        search:sectionLabel($node, $model)
+};
+
+(:~
+ : Generates an HTML <span> element containing the section title
+ : @return  An HTML element containing a string
+~:)
+declare
+    %templates:replace
+function search:sectionLabel($node, $model) {
+    let $section-label := $model?section/label
+    return
+        <span class="c-indicator">{ $section-label/string() }</span>
+};
+
 (: TODO: Apply more plausible condition, needs removing the general trigger name="within" attribute for all checkboxes :)
 declare
     %templates:wrap
@@ -551,4 +593,7 @@ function search:paginate($node as node(), $model as map(*), $start as xs:int, $p
         }
     else
         ()
+};
+        templates:process($node/node(), $model)
+    }
 };
