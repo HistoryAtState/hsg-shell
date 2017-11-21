@@ -143,6 +143,8 @@ declare function search:load-sections($node, $model) {
         $html
 };
 
+(: TODO: Replace this "old" function in templates with modularized functions and fix the markup accordingly:
+<label> and <input> must not be nested! :)
 declare
     %templates:wrap
 function search:section-checkbox-value-attribute-and-title($node, $model, $within as xs:string*) {
@@ -162,10 +164,11 @@ function search:section-checkbox-value-attribute-and-title($node, $model, $withi
 declare
     %templates:wrap
     %templates:default("scope", "entire_site")
-function search:scope-checked($node, $model, $scope as xs:string*) {
-    if (index-of($scope, $node/@value/string()) > 0)
-    then attribute checked { 'checked' }
-    else ()
+function search:scope-checked($node, $model, $within as xs:string*) {
+    if (exists($within) and string-join($within) != "" )
+    then ()
+    else
+        attribute checked { 'checked' }
 };
 
 declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
@@ -248,7 +251,7 @@ declare
     declare variable $search:SORTORDER := 'descending';
     :)
 function search:load-results($node, $model, $q as xs:string, $within as xs:string*,
-$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $scope as xs:string*) {
+$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
     let $start-time := util:system-time()
     let $hits := search:query-sections($within, $volume-id, $q)
     let $hits := search:filter($hits)
@@ -270,8 +273,7 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $scope
             "perpage": $per-page,
             "result-count": $hit-count,
             "results-shown": count($hits),
-            "query-duration": seconds-from-duration($end-time - $start-time),
-            "scope": $scope
+            "query-duration": seconds-from-duration($end-time - $start-time)
         }
     }
     let $html := templates:process($node/*, map:new(($model, $query-info)))
