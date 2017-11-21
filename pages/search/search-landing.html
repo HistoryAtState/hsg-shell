@@ -23,16 +23,11 @@
         <div class="hsg-width-one-whole">
             <div id="content-inner" data-template="app:fix-links">
                 <section class="hsg-search-section" role="search">
-                    <form method="get" action="$app/search" class="filter-form main-form" id="sectionFilter">
-                        <p>To limit your results to certain parts of the website, check the appropriate box(es), and then click “Search”:</p>
-                        <fieldset>
-                            <legend class="sr-only">Select sections</legend>
-                            <div data-template="templates:include" data-template-path="pages/search/_filter-sections.html"/>
-                        </fieldset>
-                        <button class="hsg-link-button hsg-main-search-button" type="submit" value="Search">
-                            <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
-                        </button>
-                    </form>
+                    <p>To limit your results to certain parts of the website, check the appropriate box(es), and then click “Search”:</p>
+                    <div data-template="templates:include" data-template-path="pages/search/_filter-sections.html"/>
+                    <button class="hsg-link-button hsg-main-search-button" type="submit" value="Search">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
+                    </button>
                 </section>
             </div>
         </div>

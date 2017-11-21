@@ -99,7 +99,7 @@ $(document).ready(function() {
     var sectionFilter = $('#sectionFilter');
     var formFilters = $('#formFilters');
     var mainForm = $('form.main-form');
-
+    var mainButton = $('.hsg-main-search-button');
     /**
      * return serialized values of checked filters with name
      * @param {String} name
@@ -124,12 +124,14 @@ $(document).ready(function() {
         // action += serializeFiltersByName(formFilters, 'dateEnd');
         // action += serializeFiltersByName(formFilters, 'timeStart');
         // action += serializeFiltersByName(formFilters, 'timeEnd');
+        action += serializeFiltersByName(sectionFilter, 'scope');
         action += serializeFiltersByName(sectionFilter, 'within');
         window.location.replace('?' + action);
     }
 
     if (mainForm.get(0)) {
         mainForm.on('submit', submitSearch);
+        mainButton.on('click', submitSearch);
     }
 
     // Checkboxes and "reset" button

@@ -22,21 +22,20 @@
         <!-- filter sidebar -->
         <aside class="hsg-width-one-third">
             <h2>Filter by</h2>
-            <form method="get" action="?" class="filter-form" id="formFilters">
-                <!-- filter sections -->
+
+            <!-- filter sections -->
+            <h3 class="hsg-sidebar-title">Sections</h3>
+            <div data-template="templates:include" data-template-path="pages/search/_filter-sections.html"/>
+
+            <!-- filter date -->
+            <div>
                 <fieldset class="filter-sidebar">
-                    <legend class="hsg-sidebar-title">Sections</legend>
-                    <div data-template="templates:include" data-template-path="pages/search/_filter-sections.html"/>
+                    <legend class="hsg-sidebar-title">Date</legend>
                 </fieldset>
+            </div>
 
-                <!-- filter date -->
-                <div>
-                    <fieldset class="filter-sidebar">
-                        <legend class="hsg-sidebar-title">Date</legend>
-                    </fieldset>
-                </div>
-
-                <!-- filter administrations -->
+            <!-- filter administrations -->
+            <form method="get" action="?" class="filter-form" id="formFilters">
                 <div>
                     <fieldset class="filter-sidebar">
                         <legend class="hsg-sidebar-title">Administrations</legend>
