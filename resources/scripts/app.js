@@ -124,7 +124,7 @@ $(document).ready(function() {
         // action += serializeFiltersByName(formFilters, 'dateEnd');
         // action += serializeFiltersByName(formFilters, 'timeStart');
         // action += serializeFiltersByName(formFilters, 'timeEnd');
-        action += serializeFiltersByName(sectionFilter, 'scope');
+        // action += serializeFiltersByName(sectionFilter, 'scope');
         action += serializeFiltersByName(sectionFilter, 'within');
         window.location.replace('?' + action);
     }
