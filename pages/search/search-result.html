@@ -34,51 +34,11 @@
                 </fieldset>
             </div>
 
-            <!-- filter administrations -->
             <form method="get" action="?" class="filter-form" id="formFilters">
-                <div>
-                    <fieldset class="filter-sidebar">
-                        <legend class="hsg-sidebar-title">Administrations</legend>
-                        <div class="hsg-search-inputs-vertical">
-                            <label class="hsg-search-input-label">
-                                <input type="checkbox" name="administration" value="pre_truman"/>
-                                Pre-Truman Volumes
-                            </label>
-                            <label class="hsg-search-input-label">
-                                <input type="checkbox" name="administration" value="truman"/>
-                                Truman Administration
-                            </label>
-                            <label class="hsg-search-input-label">
-                                <input type="checkbox" name="administration" value="eisenhower"/>
-                                Eisenhower Administration
-                            </label>
-                            <label class="hsg-search-input-label">
-                                <input type="checkbox" name="administration" value="kennedy"/>
-                                Kennedy Administration
-                            </label>
-                            <label class="hsg-search-input-label">
-                                <input type="checkbox" name="administration" value="johnson"/>
-                                Johnson Administration
-                            </label>
-                            <label class="hsg-search-input-label">
-                                <input type="checkbox" name="administration" value="nixon"/>
-                                Nixon Administration
-                            </label>
-                            <label class="hsg-search-input-label">
-                                <input type="checkbox" name="administration" value="ford"/>
-                                Ford Administration
-                            </label>
-                            <label class="hsg-search-input-label">
-                                <input type="checkbox" name="administration" value="carter"/>
-                                Carter Administration
-                            </label>
-                            <label class="hsg-search-input-label">
-                                <input type="checkbox" name="administration" value="reagan"/>
-                                Reagan Administration
-                            </label>
-                        </div>
-                    </fieldset>
-                </div>
+
+            <!-- filter administrations -->
+            <h3 class="hsg-sidebar-title">Administrations</h3>
+            <div data-template="templates:include" data-template-path="pages/search/_filter-administrations.html"/>
 
                 <!-- filter volumes -->
                 <div>

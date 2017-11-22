@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="get" action="$app/search" class="filter-form main-form" id="administrationsFilter">
+    <fieldset class="filter-sidebar" data-template="search:load-administrations">
+        <legend class="sr-only">Select Administrations</legend>
+        <ul class="hsg-search-inputs-vertical">
+            <li data-template="templates:each" data-template-from="administrations" data-template-to="administration">
+                <input class="hsg-search-input" type="checkbox" name="administration" data-template="search:administration-input-attributes"/>
+                <label class="hsg-search-input-label" data-template="search:administration-label">
+                    <span data-template="search:administration-label-string"/>
+                </label>
+            </li>
+        </ul>
+    </fieldset>
+</form>

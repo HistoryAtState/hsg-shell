@@ -249,6 +249,97 @@ function search:select-volumes-link($node, $model, $q as xs:string?, $volume-id 
         app:fix-this-link($link, $model)
 };
 
+(: ================= Administrations ================= :)
+
+(:~
+ : Generates HTML attributes "value" and "id"
+ : @return  HTML attributes
+~:)
+declare
+%templates:wrap
+function search:administration-input-attributes($node, $model) {
+    let $administration-id := $model?administration/id
+    return
+        (
+            attribute value { $administration-id },
+            attribute id { $administration-id }
+        )
+};
+
+(:~
+ : Generates an HTML <label> attribute "for" and adds a label text
+ : @return  HTML
+~:)
+declare
+%templates:wrap
+function search:administration-label($node, $model) {
+    let $administration-id := $model?administration/id
+    return
+        attribute for { $administration-id },
+        search:administration-label-string($node, $model)
+};
+
+(:~
+ : The string containing the administration title
+ : @return  String
+~:)
+declare
+%templates:replace
+function search:administration-label-string($node, $model) {
+    $model?administration/label/string()
+};
+
+(:~
+ : Load the administrations
+ :)
+declare function search:load-administrations ($node, $model) {
+    let $content := map { "administrations":
+        (
+            <administration>
+                <id>pre_truman</id>
+                <label>Pre-Truman Volumes</label>
+            </administration>,
+            <administration>
+                <id>truman</id>
+                <label>Truman Administration</label>
+            </administration>,
+            <administration>
+                <id>eisenhower</id>
+                <label>Eisenhower Administration</label>
+            </administration>,
+            <administration>
+                <id>kennedy</id>
+                <label>Kennedy Administration</label>
+            </administration>,
+            <administration>
+                <id>johnson</id>
+                <label>Johnson Administration</label>
+            </administration>,
+            <administration>
+                <id>nixon</id>
+                <label>Nixon Administration</label>
+            </administration>,
+            <administration>
+                <id>ford</id>
+                <label>Ford Administration</label>
+            </administration>,
+            <administration>
+                <id>carter</id>
+                <label>Carter Administration</label>
+            </administration>,
+            <administration>
+                <id>reagan</id>
+                <label>Reagan Administration</label>
+            </administration>
+        )
+    }
+    let $html := templates:process($node/*, map:new(($model, $content)))
+    return
+        $html
+};
+
+(: ================= SEARCH RESULTS ================= :)
+
 declare %private function search:filter-results($out, $in) {
 
     if (count($out) = $search:MAX_HITS_SHOWN or empty($in)) then
