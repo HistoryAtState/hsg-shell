@@ -175,10 +175,8 @@ function search:section-input-attributes($node, $model) {
         )
 };
 
-
-
 (:~
- : Generates an HTML <label> attribute "for" and adds a span element containing the label text
+ : Generates an HTML <label> attribute "for" and adds a label text
  : @return  HTML
 ~:)
 declare
@@ -187,22 +185,19 @@ function search:section-label($node, $model) {
     let $section-id := $model?section/id
     return
         attribute for { $section-id },
-        search:sectionLabel($node, $model)
+        search:section-label-string($node, $model)
 };
 
 (:~
- : Generates an HTML <span> element containing the section title
- : @return  An HTML element containing a string
+ : The string containing the section title
+ : @return  String
 ~:)
 declare
     %templates:replace
-function search:sectionLabel($node, $model) {
-    let $section-label := $model?section/label
-    return
-        <span class="c-indicator">{ $section-label/string() }</span>
+function search:section-label-string($node, $model) {
+    $model?section/label/string()
 };
 
-(: TODO: Apply more plausible condition, needs removing the general trigger name="within" attribute for all checkboxes :)
 declare
     %templates:wrap
     %templates:default("scope", "entire_site")
