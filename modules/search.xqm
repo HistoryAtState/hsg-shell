@@ -594,6 +594,3 @@ function search:paginate($node as node(), $model as map(*), $start as xs:int, $p
     else
         ()
 };
-        templates:process($node/node(), $model)
-    }
-};
