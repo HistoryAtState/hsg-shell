@@ -4,10 +4,8 @@
         <legend class="sr-only">Select sections</legend>
             <ul class="hsg-search-inputs-vertical">
                 <li>
-                    <input id="entire-site-input" type="checkbox" name="scope" value="entire_site" data-template="search:scope-checked"/>
-                    <label id="entire-site-label" class="hsg-search-input-label">
-                        Entire Office of The Historian Website
-                    </label>
+                    <input id="entire-site-input" class="hsg-search-input" type="checkbox" name="within" value="entire_site"/>
+                    <label id="entire-site-label" for="entire-site-input" class="hsg-search-input-label">Entire Office of The Historian Website</label>
                 </li>
                 <ul class="filter-subsections">
                     <li data-template="templates:each" data-template-from="sections" data-template-to="section">

@@ -148,6 +148,13 @@ $(document).ready(function() {
 
     filterReset.on('click', resetFilter);
 
+    var sectionFilterForm = $('#sectionForm');
+    var sectionFilters = document.querySelectorAll('.filter-subsections .hsg-search-input');
+    var entireSiteFilter = $('#entire-site-input');
+
+    // "Search entire site" is checked per default
+    entireSiteFilter.attr('checked', true);
+
     //------------------------------------------//
 
     function initContent() {

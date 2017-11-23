@@ -198,16 +198,6 @@ function search:section-label-string($node, $model) {
     $model?section/label/string()
 };
 
-declare
-    %templates:wrap
-    %templates:default("scope", "entire_site")
-function search:scope-checked($node, $model, $within as xs:string*) {
-    if (exists($within) and string-join($within) != "" )
-    then ()
-    else
-        attribute checked { 'checked' }
-};
-
 declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
     let $content := map { "volumes":
         (
