@@ -148,12 +148,32 @@ $(document).ready(function() {
 
     filterReset.on('click', resetFilter);
 
-    var sectionFilterForm = $('#sectionForm');
-    var sectionFilters = document.querySelectorAll('.filter-subsections .hsg-search-input');
-    var entireSiteFilter = $('#entire-site-input');
+    /**
+     * Toggle activation of options "search entire site" or selected "sections"
+     */
+    var global = $('.global'),
+        sections = $('.section');
 
-    // "Search entire site" is checked per default
-    entireSiteFilter.attr('checked', true);
+    global.on("change", function() {
+        toggleAllSections(this.checked);
+    });
+
+    sections.on("change", function() {
+        if (allSelected()) {
+            global.prop('checked', true);
+            toggleAllSections(true)
+            return
+        }
+        global.prop('checked', false);
+    });
+
+    function toggleAllSections(state) {
+        sections.prop("checked", !state);
+    }
+
+    function allSelected() {
+        return sections.filter(':checked').size() === sections.size();
+    }
 
     //------------------------------------------//
 
