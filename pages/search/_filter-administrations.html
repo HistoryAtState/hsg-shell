@@ -4,9 +4,9 @@
         <legend class="sr-only">Select Administrations</legend>
         <ul class="hsg-search-inputs-vertical">
             <li data-template="templates:each" data-template-from="administrations" data-template-to="administration">
-                <input class="hsg-search-input" type="checkbox" name="administration" data-template="search:administration-input-attributes"/>
-                <label class="hsg-search-input-label" data-template="search:administration-label">
-                    <span data-template="search:administration-label-string"/>
+                <input class="hsg-search-input" type="checkbox" name="administration" data-template="search:section-input-attributes" data-template-section="administration" data-template-filter="administration"/>
+                <label class="hsg-search-input-label" data-template="search:section-label" data-template-section="administration">
+                    <span data-template="search:section-label-string" data-template-section="administration"/>
                 </label>
             </li>
         </ul>
