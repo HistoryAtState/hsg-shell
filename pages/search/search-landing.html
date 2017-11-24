@@ -2,15 +2,12 @@
 <div data-template="templates:surround" data-template-with="templates/site.html"
     data-template-at="content">
     <div id="static-title" class="hidden">Search</div>
+
     <div class="row">
         <div class="hsg-breadcrumb-wrapper">
             <ol class="breadcrumb" data-template="app:fix-links">
-                <li>
-                    <a href="$app">Home</a>
-                </li>
-                <li>
-                    <a href="$app/search">Search</a>
-                </li>
+                <li><a href="$app">Home</a></li>
+                <li><a href="$app/search">Search</a></li>
             </ol>
         </div>
     </div>
@@ -19,22 +16,22 @@
 
     <div data-template="templates:include" data-template-path="pages/search/_filter-querystring.html"/>
 
+    <div class="row">
+        <div class="hsg-width-one-whole" data-template="app:fix-links">
+            <p>To limit your results to certain parts of the website, check the appropriate box(es), and then click “Search”:</p>
+            <div data-template="templates:include" data-template-path="pages/search/_filter-sections.html"/>
+        </div>
+    </div>
 
     <div class="row">
         <div class="hsg-width-one-whole">
-            <div id="content-inner" data-template="app:fix-links">
-                <section class="hsg-search-section" role="search">
-                    <p>To limit your results to certain parts of the website, check the appropriate box(es), and then click “Search”:</p>
+            <div data-template="templates:include" data-template-path="pages/search/_filter-date.html"/>
+        </div>
+    </div>
 
-                    <div data-template="templates:include" data-template-path="pages/search/_filter-sections.html"/>
-
-                    <div data-template="templates:include" data-template-path="pages/search/_filter-date.html"/>
-
-                    <button class="hsg-link-button hsg-main-search-button" type="submit" value="Search">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"/>Search
-                    </button>
-                </section>
-            </div>
+    <div class="row">
+        <div class="hsg-width-one-whole">
+            <div data-template="templates:include" data-template-path="pages/search/_submit-search-button.html"/>
         </div>
     </div>
 </div>
