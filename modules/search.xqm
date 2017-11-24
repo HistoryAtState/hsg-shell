@@ -165,7 +165,7 @@ function search:search-section($node as node(), $model as map(*), $section as xs
 ~:)
 declare
     %templates:wrap
-function search:section-input-attributes($node as node(), $model as map(*)) {
+function search:filter-input-attributes($node as node(), $model as map(*)) {
     let $section := $model?sec
     let $filter := $model?filter
     let $section-id := $model($section)/id
@@ -184,7 +184,7 @@ function search:section-input-attributes($node as node(), $model as map(*)) {
 ~:)
 declare
     %templates:wrap
-function search:section-label($node as node(), $model as map(*)) {
+function search:label($node as node(), $model as map(*)) {
     let $section := $model?sec
     let $section-id := $model($section)/id
     return
@@ -211,7 +211,7 @@ function search:section-checked($node as node(), $model as map(*)) {
 ~:)
 declare
     %templates:replace
-function search:section-label-string($node as node(), $model as map(*)) {
+function search:label-string($node as node(), $model as map(*)) {
     let $section := $model?sec
     return $model($section)/label/string()
 };
