@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround" data-template-with="templates/site.html"
-    data-template-at="content">
+<div data-template="templates:surround" data-template-with="templates/site.html" data-template-at="content">
     <div id="static-title" class="hidden">Search</div>
 
     <div class="row">
         <div class="hsg-breadcrumb-wrapper">
             <ol class="breadcrumb" data-template="app:fix-links">
-                <li><a href="$app">Home</a></li>
-                <li><a href="$app/search">Search</a></li>
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/search">Search</a>
+                </li>
             </ol>
         </div>
     </div>
@@ -16,7 +19,7 @@
 
     <div data-template="templates:include" data-template-path="pages/search/_filter-querystring.html"/>
 
-    <div class="row">
+    <div class="row" data-template="search:search-filters">
         <div class="hsg-width-one-whole" data-template="app:fix-links">
             <p>To limit your results to certain parts of the website, check the appropriate box(es), and then click “Search”:</p>
             <div data-template="templates:include" data-template-path="pages/search/_filter-sections.html"/>

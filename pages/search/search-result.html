@@ -5,8 +5,12 @@
     <div class="row">
         <div class="hsg-breadcrumb-wrapper">
             <ol class="breadcrumb" data-template="app:fix-links">
-                <li><a href="$app">Home</a></li>
-                <li><a href="$app/search">Search</a></li>
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/search">Search</a>
+                </li>
             </ol>
         </div>
     </div>
@@ -15,7 +19,7 @@
 
     <div data-template="templates:include" data-template-path="pages/search/_filter-querystring.html"/>
 
-    <div class="row">
+    <div class="row" data-template="search:search-filters">
         <!-- filter sidebar -->
         <aside class="hsg-width-one-third">
             <h2>Filter by</h2>
@@ -37,8 +41,7 @@
                 <fieldset class="filter-sidebar" >
                     <h3 class="hsg-sidebar-title">Volumes</h3>
                     <div class="hsg-search-inputs-vertical">
-                        <label class="hsg-search-input-label" data-template="templates:each"
-                               data-template-from="volume" data-template-to="volumes">
+                        <label class="hsg-search-input-label" data-template="templates:each" data-template-from="volume" data-template-to="volumes">
                             <input type="checkbox" name="volumes"/>
                         </label>
                     </div>
@@ -66,12 +69,9 @@
                             </h2>
                             <p data-template="search:result-count-summary"/>
                             <nav>
-                                <ul class="pagination" data-template="search:paginate"
-                                    data-template-per-page="10" data-template-max-pages="10"
-                                    data-template-min-hits="1"/>
+                                <ul class="pagination" data-template="search:paginate" data-template-per-page="10" data-template-max-pages="10" data-template-min-hits="1"/>
                             </nav>
-                            <div class="hsg-search-result" data-template="templates:each"
-                                data-template-from="results" data-template-to="result">
+                            <div class="hsg-search-result" data-template="templates:each" data-template-from="results" data-template-to="result">
                                 <h3 class="hsg-search-result-heading">
                                     <span data-template="search:result-heading"/>
                                 </h3>
@@ -83,9 +83,7 @@
                                 </p>
                             </div>
                             <nav>
-                                <ul class="pagination" data-template="search:paginate"
-                                    data-template-per-page="10" data-template-max-pages="10"
-                                    data-template-min-hits="1"/>
+                                <ul class="pagination" data-template="search:paginate" data-template-per-page="10" data-template-max-pages="10" data-template-min-hits="1"/>
                             </nav>
                         </div>
                     </div>

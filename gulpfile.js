@@ -42,7 +42,7 @@ var exClient = exist.createClient({
 
 var targetConfiguration = {
     target: '/db/apps/hsg-shell/',
-    html5AsBinary: true
+    html5AsBinary: false
 }
 
 gulp.task('clean', function() {
@@ -76,6 +76,7 @@ gulp.task('fonts:deploy', ['fonts:copy'], function () {
  * Image optimization task will *overwrite* an existing image
  * with its optimized version
  */
+var imagePath = 'resources/images/**/*';
 gulp.task('images:optimize', function () {
     return gulp.src('resources/images/*')
         .pipe(imagemin({optimizationLevel: 5}))
@@ -244,6 +245,7 @@ gulp.task('deploy', ['build'], function () {
             templatesPath,
             pagesPath,
             modulesPath,
+            imagePath,
             otherPath
         ], {base: './'})
         .pipe(exClient.newer(targetConfiguration))

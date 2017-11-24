@@ -143,18 +143,38 @@ declare function search:load-sections($node, $model) {
         $html
 };
 
+declare
+    %templates:wrap
+function search:search-filters($node as node(), $model as map(*), $within as xs:string*, $administration as xs:string*) {
+(:  more options could be added to $filters  :)
+    let $filters := map {"within": $within, "administration": $administration}
+    return
+        map:new(($model, map {'filters': $filters}))
+};
+
+declare
+    %templates:wrap
+function search:search-section($node as node(), $model as map(*), $section as xs:string, $filter as xs:string) {
+    let $new := map {'sec': $section, 'filter': $filter}
+    return map:new(($model, $new))
+};
+
 (:~
  : Generates HTML attributes "value" and "id"
  : @return  HTML attributes
 ~:)
 declare
     %templates:wrap
-function search:section-input-attributes($node, $model) {
-    let $section-id := $model?section/id
+function search:section-input-attributes($node as node(), $model as map(*)) {
+    let $section := $model?sec
+    let $filter := $model?filter
+    let $section-id := $model($section)/id
+
     return
         (
             attribute value { $section-id },
-            attribute id { $section-id }
+            attribute id { $section-id }, 
+            if(search:section-checked($node, $model)='checked') then attribute checked {''} else ()
         )
 };
 
@@ -164,11 +184,25 @@ function search:section-input-attributes($node, $model) {
 ~:)
 declare
     %templates:wrap
-function search:section-label($node, $model) {
-    let $section-id := $model?section/id
+function search:section-label($node as node(), $model as map(*)) {
+    let $section := $model?sec
+    let $section-id := $model($section)/id
     return
         attribute for { $section-id },
-        search:section-label-string($node, $model)
+        templates:process($node/*, $model)
+};
+
+
+declare
+    %templates:wrap
+function search:section-checked($node as node(), $model as map(*)) {
+    let $section := $model?sec
+    let $filter := $model?filter
+    let $c:=console:log('sec fil ' || $section || $filter)
+    let $within := $model?filters($filter)
+    let $c:=console:log($within)
+    let $section-id := $model($section)/id
+    return if ($section-id = $within) then 'checked' else $within
 };
 
 (:~
@@ -177,8 +211,9 @@ function search:section-label($node, $model) {
 ~:)
 declare
     %templates:replace
-function search:section-label-string($node, $model) {
-    $model?section/label/string()
+function search:section-label-string($node as node(), $model as map(*)) {
+    let $section := $model?sec
+    return $model($section)/label/string()
 };
 
 declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
@@ -223,44 +258,6 @@ function search:select-volumes-link($node, $model, $q as xs:string?, $volume-id 
 };
 
 (: ================= Administrations ================= :)
-
-(:~
- : Generates HTML attributes "value" and "id"
- : @return  HTML attributes
-~:)
-declare
-%templates:wrap
-function search:administration-input-attributes($node, $model) {
-    let $administration-id := $model?administration/id
-    return
-        (
-            attribute value { $administration-id },
-            attribute id { $administration-id }
-        )
-};
-
-(:~
- : Generates an HTML <label> attribute "for" and adds a label text
- : @return  HTML
-~:)
-declare
-%templates:wrap
-function search:administration-label($node, $model) {
-    let $administration-id := $model?administration/id
-    return
-        attribute for { $administration-id },
-        search:administration-label-string($node, $model)
-};
-
-(:~
- : The string containing the administration title
- : @return  String
-~:)
-declare
-%templates:replace
-function search:administration-label-string($node, $model) {
-    $model?administration/label/string()
-};
 
 (:~
  : Load the administrations
