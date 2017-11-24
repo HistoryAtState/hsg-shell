@@ -121,11 +121,10 @@ $(document).ready(function() {
         var action = searchForm.serialize();
         action += serializeFiltersByName(queryForm, 'match');
         action += serializeFiltersByName(formFilters, 'section');
-        // action += serializeFiltersByName(formFilters, 'dateStart');
-        // action += serializeFiltersByName(formFilters, 'dateEnd');
-        // action += serializeFiltersByName(formFilters, 'timeStart');
-        // action += serializeFiltersByName(formFilters, 'timeEnd');
-        // action += serializeFiltersByName(sectionFilter, 'scope');
+        //action += serializeFiltersByName(dateFilter, 'start_date');
+        //action += serializeFiltersByName(dateFilter, 'end_date');
+        //action += serializeFiltersByName(dateFilter, 'start_time');
+        //action += serializeFiltersByName(dateFilter, 'end_time');
         action += serializeFiltersByName(sectionFilter, 'within');
         window.location.replace('?' + action);
     }
