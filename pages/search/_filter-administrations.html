@@ -2,11 +2,11 @@
 <form method="get" action="$app/search" class="filter-form main-form" id="administrationsFilter">
     <fieldset class="filter-sidebar" data-template="search:load-administrations">
         <legend class="sr-only">Select Administrations</legend>
-        <ul class="hsg-search-inputs-vertical">
+        <ul class="hsg-search-inputs-vertical" data-template="search:search-section" data-template-section="administration" data-template-filter="administration">
             <li data-template="templates:each" data-template-from="administrations" data-template-to="administration">
-                <input class="hsg-search-input" type="checkbox" name="administration" data-template="search:section-input-attributes" data-template-section="administration" data-template-filter="administration"/>
-                <label class="hsg-search-input-label" data-template="search:section-label" data-template-section="administration">
-                    <span data-template="search:section-label-string" data-template-section="administration"/>
+                <input class="hsg-search-input" type="checkbox" name="administration" data-template="search:section-input-attributes"/>
+                <label class="hsg-search-input-label" data-template="search:section-label">
+                    <span data-template="search:section-label-string"/>
                 </label>
             </li>
         </ul>

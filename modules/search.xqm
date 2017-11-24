@@ -152,19 +152,29 @@ function search:search-filters($node as node(), $model as map(*), $within as xs:
         map:new(($model, map {'filters': $filters}))
 };
 
+declare
+    %templates:wrap
+function search:search-section($node as node(), $model as map(*), $section as xs:string, $filter as xs:string) {
+    let $new := map {'sec': $section, 'filter': $filter}
+    return map:new(($model, $new))
+};
+
 (:~
  : Generates HTML attributes "value" and "id"
  : @return  HTML attributes
 ~:)
 declare
     %templates:wrap
-function search:section-input-attributes($node as node(), $model as map(*), $section as xs:string, $filter as xs:string) {
+function search:section-input-attributes($node as node(), $model as map(*)) {
+    let $section := $model?sec
+    let $filter := $model?filter
     let $section-id := $model($section)/id
+
     return
         (
             attribute value { $section-id },
-            attribute id { $section-id },
-            if(search:section-checked($node, $model, $section, $filter)='checked') then attribute checked {''} else ()
+            attribute id { $section-id }, 
+            if(search:section-checked($node, $model)='checked') then attribute checked {''} else ()
         )
 };
 
@@ -174,7 +184,8 @@ function search:section-input-attributes($node as node(), $model as map(*), $sec
 ~:)
 declare
     %templates:wrap
-function search:section-label($node as node(), $model as map(*), $section as xs:string) {
+function search:section-label($node as node(), $model as map(*)) {
+    let $section := $model?sec
     let $section-id := $model($section)/id
     return
         attribute for { $section-id },
@@ -184,7 +195,9 @@ function search:section-label($node as node(), $model as map(*), $section as xs:
 
 declare
     %templates:wrap
-function search:section-checked($node as node(), $model as map(*), $section as xs:string, $filter as xs:string) {
+function search:section-checked($node as node(), $model as map(*)) {
+    let $section := $model?sec
+    let $filter := $model?filter
     let $c:=console:log('sec fil ' || $section || $filter)
     let $within := $model?filters($filter)
     let $c:=console:log($within)
@@ -198,8 +211,9 @@ function search:section-checked($node as node(), $model as map(*), $section as x
 ~:)
 declare
     %templates:replace
-function search:section-label-string($node as node(), $model as map(*), $section as xs:string) {
-    $model($section)/label/string()
+function search:section-label-string($node as node(), $model as map(*)) {
+    let $section := $model?sec
+    return $model($section)/label/string()
 };
 
 declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
