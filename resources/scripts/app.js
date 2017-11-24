@@ -94,12 +94,13 @@ $(document).ready(function() {
 
     //-------------- Search Filters --------------//
 
-    var searchForm = $('#searchForm');
-    var queryForm = $('#queryFilters');
-    var sectionFilter = $('#sectionFilter');
-    var formFilters = $('#formFilters');
-    var mainForm = $('form.main-form');
-    var mainButton = $('.hsg-main-search-button');
+    var searchForm = $('#searchForm'),
+        queryForm = $('#queryFilters'),
+        sectionFilter = $('#sectionFilter'),
+        formFilters = $('#formFilters'),
+        mainForm = $('form.main-form'),
+        dateFilter = $('#dateFilter'),
+        mainButton = $('.hsg-main-search-button');
     /**
      * return serialized values of checked filters with name
      * @param {String} name
@@ -161,7 +162,7 @@ $(document).ready(function() {
     sections.on("change", function() {
         if (allSelected()) {
             global.prop('checked', true);
-            toggleAllSections(true)
+            toggleAllSections(true);
             return
         }
         global.prop('checked', false);

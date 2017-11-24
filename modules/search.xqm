@@ -143,23 +143,6 @@ declare function search:load-sections($node, $model) {
         $html
 };
 
-(: TODO: Replace this "old" function in templates with modularized functions and fix the markup accordingly:
-<label> and <input> must not be nested! :)
-declare
-    %templates:wrap
-function search:section-checkbox-value-attribute-and-title($node, $model, $within as xs:string*) {
-    let $section-id := $model?section/id
-    let $section-label := $model?section/label
-    return
-        (
-            attribute value { $section-id },
-            if (exists($within) and string-join($within) != "" and $section-id = $within) then
-                attribute checked { "checked" }
-            else (),
-            <span class="c-indicator">{ $section-label/string() }</span>
-        )
-};
-
 (:~
  : Generates HTML attributes "value" and "id"
  : @return  HTML attributes
