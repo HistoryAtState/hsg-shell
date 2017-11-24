@@ -1,107 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section>
+<section class="hsg-section">
     <form method="get" action="?" class="filter-form main-form" id="dateFilter">
-        <div class="hsg-panel">
-            <div class="hsg-panel-heading">
-                <h3 class="hsg-sidebar-title-second-level">From</h3>
-            </div>
-            <div class="hsg-panel-body">
-                <fieldset>
-                    <legend>Start Date</legend>
-                    <span class="hsg-form-hint" id="startDateHint">For example: 04 28 1986</span>
+        <div class="hsg-width-one-half">
+            <div class="hsg-panel">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title-second-level">From</h3>
+                </div>
+                <div class="hsg-panel-body">
+                    <fieldset>
+                        <legend class="h3">Start Date</legend>
+                        <span class="hsg-form-hint" id="startDateHint">For example: 04 28 1986</span>
 
-                    <div class="hsg-start-time">
-                        <div class="hsg-form-group hsg-form-group-month">
-                            <label for="start_date_1">Month</label>
-                            <input class="hsg-input-inline" placeholder="mm" aria-describedby="startDateHint" id="start_date_1" name="start_date" type="number" min="1" max="12" value=""/>
+                        <div class="hsg-start-date">
+                            <div class="hsg-form-group hsg-form-group-month">
+                                <label for="start_date_1">Month</label>
+                                <input class="hsg-input-inline" placeholder="mm" aria-describedby="startDateHint" id="start_date_1" name="start_date" type="number" min="1" max="12" step="1" value=""/>
+                            </div>
+                            <div class="hsg-form-group hsg-form-group-day">
+                                <label for="start_date_2">Day</label>
+                                <input class="hsg-input-inline" placeholder="dd" aria-describedby="startDateHint" id="start_date_2" name="start_date" type="number" min="1" max="31" step="1" value=""/>
+                            </div>
+                            <div class="hsg-form-group hsg-form-group-year">
+                                <label for="start_date_3">Year</label>
+                                <input class="hsg-input-inline" placeholder="yyyy" aria-describedby="startDateHint" id="start_date_3" name="start_date" type="number" min="1600" max="2025" step="1" value=""/>
+                            </div>
                         </div>
-                        <div class="hsg-form-group hsg-form-group-day">
-                            <label for="start_date_2">Day</label>
-                            <input class="hsg-input-inline" placeholder="dd" aria-describedby="startDateHint" id="start_date_2" name="start_date" type="number" min="1" max="31" value=""/>
-                        </div>
-                        <div class="hsg-form-group hsg-form-group-year">
-                            <label for="start_date_3">Year</label>
-                            <input class="hsg-input-inline" placeholder="yyyy" aria-describedby="startDateHint" id="start_date_3" name="start_date" type="number" min="1600" max="2025" value=""/>
-                        </div>
-                    </div>
-                </fieldset>
+                    </fieldset>
 
-                <fieldset>
-                    <legend>Start Time <span>(optional)</span></legend>
-                    <span class="hsg-form-hint" id="startTimeHint">For example: 04 28 1986</span>
-                    <div class="">
-                        <div class="hsg-form-group hsg-form-group-month">
-                            <label for="start_time_1">Hour</label>
-                            <input class="hsg-input-inline" placeholder="hh" aria-describedby="startTimeHint" id="start_time_1" name="start_time" type="number" min="0" max="12" value=""/>
+                    <fieldset>
+                        <legend class="h3">Start Time <span class="hsg-form-hint">(optional)</span></legend>
+                        <span class="hsg-form-hint" id="startTimeHint">For example: 04 28 1986</span>
+                        <div>
+                            <div class="hsg-form-group hsg-form-group-month">
+                                <label for="start_time_1">Hour</label>
+                                <input class="hsg-input-inline" placeholder="hh" aria-describedby="startTimeHint" id="start_time_1" name="start_time" type="number" min="0" max="12" step="1" value=""/>
+                            </div>
+                            <div class="hsg-form-group hsg-form-group-day">
+                                <label for="end_time_2">Minute</label>
+                                <input class="hsg-input-inline" placeholder="mm" aria-describedby="startTimeHint" id="start_time_2" name="start_time" type="number" min="0" max="60" step="1"  value=""/>
+                            </div>
+                            <div class="hsg-form-group hsg-time-input-group hsg-search-inputs-horizontal">
+                                <ul>
+                                    <li class="hsg-search-input">
+                                        <input type="radio" id="am_start_time_1" name="start_time" value=""/>
+                                        <label for="am_start_time_1">am</label>
+                                    </li>
+                                    <li class="hsg-search-input">
+                                        <input type="radio" id="pm_start_time_1" name="start_time" value=""/>
+                                        <label for="pm_start_time_1">pm</label>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="hsg-form-group hsg-form-group-day">
-                            <label for="end_time_2">Minute</label>
-                            <input class="hsg-input-inline" placeholder="mm" aria-describedby="startTimeHint" id="start_time_2" name="start_time" type="number" min="0" max="60" value=""/>
-                        </div>
-                        <ul class="hsg-search-inputs-vertical">
-                            <li>
-                                <input type="radio" id="am_start_time_1" value=""/>
-                                <label for="am_start_time_1">am</label>
-                            </li>
-                            <li>
-                                <input type="radio" id="pm_start_time_1" value=""/>
-                                <label for="pm_start_time_1">pm</label>
-                            </li>
-                        </ul>
-                    </div>
-                </fieldset>
+                    </fieldset>
+                </div>
             </div>
         </div>
 
-        <div class="hsg-panel">
-            <div class="hsg-panel-heading">
-                <h3 class="hsg-sidebar-title-second-level">To</h3>
-            </div>
-            <div class="hsg-panel-body">
-                <fieldset>
-                    <legend>Start Date</legend>
-                    <span class="hsg-form-hint" id="endDateHint">For example: 04 28 1986</span>
+        <div class="hsg-width-one-half">
+            <div class="hsg-panel">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title-second-level">To</h3>
+                </div>
+                <div class="hsg-panel-body">
+                    <fieldset>
+                        <legend class="h3">End Date</legend>
+                        <span class="hsg-form-hint" id="endDateHint">For example: 04 28 1986</span>
 
-                    <div class="hsg-start-time">
-                        <div class="hsg-form-group hsg-form-group-month">
-                            <label for="end_date_1">Month</label>
-                            <input class="hsg-input-inline" placeholder="mm" aria-describedby="endDateHint" id="end_date_1" name="end_date" type="number" min="1" max="12" value=""/>
+                        <div class="hsg-start-time">
+                            <div class="hsg-form-group hsg-form-group-month">
+                                <label for="end_date_1">Month</label>
+                                <input class="hsg-input-inline" placeholder="mm" aria-describedby="endDateHint" id="end_date_1" name="end_date" type="number" min="1" max="12" step="1" value=""/>
+                            </div>
+                            <div class="hsg-form-group hsg-form-group-day">
+                                <label for="end_date_2">Day</label>
+                                <input class="hsg-input-inline" placeholder="dd" aria-describedby="endDateHint" id="end_date_2" name="end_date" type="number" min="1" max="31" step="1" value=""/>
+                            </div>
+                            <div class="hsg-form-group hsg-form-group-year">
+                                <label for="end_date_3">Year</label>
+                                <input class="hsg-input-inline" placeholder="yyyy" aria-describedby="endDateHint" id="end_date_3" name="end_date" type="number" min="1600" max="2025" step="1" value=""/>
+                            </div>
                         </div>
-                        <div class="hsg-form-group hsg-form-group-day">
-                            <label for="end_date_2">Day</label>
-                            <input class="hsg-input-inline" placeholder="dd" aria-describedby="endDateHint" id="end_date_2" name="end_date" type="number" min="1" max="31" value=""/>
-                        </div>
-                        <div class="hsg-form-group hsg-form-group-year">
-                            <label for="end_date_3">Year</label>
-                            <input class="hsg-input-inline" placeholder="yyyy" aria-describedby="endDateHint" id="end_date_3" name="end_date" type="number" min="1600" max="2025" value=""/>
-                        </div>
-                    </div>
-                </fieldset>
+                    </fieldset>
 
-                <fieldset>
-                    <legend>Start Time <span>(optional)</span></legend>
-                    <span class="hsg-form-hint" id="endTimeHint">For example: 09:02 am</span>
-                    <div class="">
-                        <div class="hsg-form-group hsg-form-group-month">
-                            <label for="end_time_1">Hour</label>
-                            <input class="hsg-input-inline" placeholder="hh" aria-describedby="endTimeHint" id="end_time_1" name="end_time" type="number" min="0" max="12" value=""/>
+                    <fieldset>
+                        <legend class="h3">End Time <span class="hsg-form-hint">(optional)</span></legend>
+                        <span class="hsg-form-hint" id="endTimeHint">For example: 09:02 am</span>
+                        <div>
+                            <div class="hsg-form-group hsg-form-group-month">
+                                <label for="end_time_1">Hour</label>
+                                <input class="hsg-input-inline" placeholder="hh" aria-describedby="endTimeHint" id="end_time_1" name="end_time" type="number" min="0" max="12" step="1" value=""/>
+                            </div>
+                            <div class="hsg-form-group hsg-form-group-day">
+                                <label for="end_time_2">Minute</label>
+                                <input class="hsg-input-inline" placeholder="mm" aria-describedby="endTimeHint" id="end_time_2" name="end_time" type="number" min="0" max="60" step="1" value=""/>
+                            </div>
+                            <div class="hsg-form-group hsg-time-input-group hsg-search-inputs-horizontal">
+                                <ul>
+                                    <li class="hsg-search-input">
+                                        <input type="radio" id="am_end_time_1" name="end_time" value=""/>
+                                        <label for="am_end_time_1">am</label>
+                                    </li>
+                                    <li class="hsg-search-input">
+                                        <input type="radio" id="pm_end_time_1" name="end_time" value=""/>
+                                        <label for="pm_end_time_1">pm</label>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="hsg-form-group hsg-form-group-day">
-                            <label for="end_time_2">Minute</label>
-                            <input class="hsg-input-inline" placeholder="mm" aria-describedby="endTimeHint" id="end_time_2" name="end_time" type="number" min="0" max="60" value=""/>
-                        </div>
-                        <ul class="hsg-search-inputs-vertical">
-                            <li>
-                                <input type="radio" id="am_end_time_1" value=""/>
-                                <label for="am_end_time_1">am</label>
-                            </li>
-                            <li>
-                                <input type="radio" id="pm_end_time_1" value=""/>
-                                <label for="pm_end_time_1">pm</label>
-                            </li>
-                        </ul>
-                    </div>
-                </fieldset>
+                    </fieldset>
+                </div>
             </div>
         </div>
 
