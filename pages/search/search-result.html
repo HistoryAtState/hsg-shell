@@ -25,31 +25,27 @@
             <div data-template="templates:include" data-template-path="pages/search/_filter-sections.html"/>
 
             <!-- filter date -->
-            <div>
-                <fieldset class="filter-sidebar">
-                    <legend class="hsg-sidebar-title">Date</legend>
-                </fieldset>
-            </div>
-
-            <form method="get" action="?" class="filter-form" id="formFilters">
+            <h3 class="hsg-sidebar-title">Date</h3>
+            <div data-template="templates:include" data-template-path="pages/search/_filter-date.html"/>
 
             <!-- filter administrations -->
             <h3 class="hsg-sidebar-title">Administrations</h3>
             <div data-template="templates:include" data-template-path="pages/search/_filter-administrations.html"/>
 
-                <!-- filter volumes -->
-                <div>
-                    <fieldset class="filter-sidebar" >
-                        <legend class="hsg-sidebar-title">Volumes</legend>
-                        <div class="hsg-search-inputs-vertical">
-                            <label class="hsg-search-input-label" data-template="templates:each"
-                                   data-template-from="volume" data-template-to="volumes">
-                                <input type="checkbox" name="volumes"/>
-                            </label>
-                        </div>
-                    </fieldset>
-                </div>
+            <!-- filter volumes -->
+            <div>
+                <fieldset class="filter-sidebar" >
+                    <h3 class="hsg-sidebar-title">Volumes</h3>
+                    <div class="hsg-search-inputs-vertical">
+                        <label class="hsg-search-input-label" data-template="templates:each"
+                               data-template-from="volume" data-template-to="volumes">
+                            <input type="checkbox" name="volumes"/>
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
 
+            <form method="get" action="?" class="filter-form" id="formFilters">
                 <button class="hsg-sidebar-reset-btn" name="reset-filters" type="reset" value="reset_filters">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"/>
                     Reset Filters
