@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 module namespace search = "http://history.state.gov/ns/site/hsg/search";
 
@@ -7,11 +7,13 @@ import module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
+import module namespace fd="http://history.state.gov/ns/site/hsg/frus-dates" at "frus-dates.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace fh = "http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
 import module namespace functx = "http://www.functx.com";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
+declare namespace frus="http://history.state.gov/frus/ns/1.0";
 
 declare variable $search:MAX_HITS_SHOWN := 1000;
 
@@ -198,9 +200,7 @@ declare
 function search:section-checked($node as node(), $model as map(*)) {
     let $section := $model?sec
     let $filter := $model?filter
-    let $c:=console:log('sec fil ' || $section || $filter)
     let $within := $model?filters($filter)
-    let $c:=console:log($within)
     let $section-id := $model($section)/id
     return if ($section-id = $within) then 'checked' else $within
 };
@@ -399,7 +399,67 @@ declare %private function search:query-sections($sections as xs:string*, $volume
 };
 
 declare function search:query-section($category, $query as xs:string) {
+    
+let $start-date := string-join(
+(request:get-parameter("start-date3", '1865'),
+request:get-parameter("start-date1", '04'),
+request:get-parameter("start-date2", '28')), '-'
+)
+
+let $end-date := string-join(
+(request:get-parameter("end-date3", '1995'),
+request:get-parameter("end-date1", '05'),
+request:get-parameter("end-date2", '27')), '-'
+)
+
+let $start-time:=''
+let $end-time:=''
+
+(:let $q := request:get-parameter("q", ())[. ne ""]:)
+(:let $order-by := request:get-parameter("order-by", "date"):)
+(:let $start := request:get-parameter("start", 1) cast as xs:integer:)
+(:let $per-page := request:get-parameter("per-page", 10) cast as xs:integer:)
+let $query-start := util:system-time()
+let $timezone := 
+    (: We want to assume times supplied in a query are US Eastern, unless otherwise specified. 
+       The UTC offset for US Eastern changes depending on daylight savings time.
+       We could use fn:implicit-timezone(), but this depends upon the query context, which is set by the system/environment.
+       On the hsg production servers, this function returns +00:00, or UTC. 
+       So the following is a kludge to determine the UTC offset for US Eastern, sensitive to daylight savings time. :)
+    functx:duration-from-timezone(fn:format-dateTime(current-dateTime(), "[Z]", (), (), "America/New_York"))
+let $range-start := 
+    if ($start-date ne "") then
+        ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
+            => fd:normalize-low($timezone)
+    else
+        ()
+let $range-end := 
+    if ($end-date ne "") then
+        ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
+            => fd:normalize-high($timezone)
+    else if ($start-date ne "") then
+        ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
+            => fd:normalize-high($timezone)
+    else
+        ()
+        
+        let $log := console:log("starting search for " || " start-date=" || $start-date || 
+        " (range-start=" || $range-start || ") end-date=" || $end-date || " (range-end=" || $range-end || ") q=" || $query)
+
+    return
     typeswitch($category)
+        case xs:string return
+            switch ($category)
+                case "frus" return 
+            (console:log('frus again'), 
+(:          special treatment for frus dates  :)
+            
+            collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
+            [@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
+            
+            )
+                default return 
+            collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
         case xs:string return
             collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
         default return
