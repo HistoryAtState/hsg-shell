@@ -414,16 +414,18 @@ declare %private function search:query-sections($sections as xs:string*, $volume
 declare function search:query-section($category, $query as xs:string) {
     
 let $start-date := string-join(
-(request:get-parameter("start-date3", '1865'),
-request:get-parameter("start-date1", '04'),
-request:get-parameter("start-date2", '28')), '-'
+(request:get-parameter("start_date_3", '1865'),
+request:get-parameter("start_date_1", '04'),
+request:get-parameter("start_date_2", '28')), '-'
 )
 
 let $end-date := string-join(
-(request:get-parameter("end-date3", '1995'),
-request:get-parameter("end-date1", '05'),
-request:get-parameter("end-date2", '27')), '-'
+(request:get-parameter("end_date_3", '1995'),
+request:get-parameter("end_date_1", '05'),
+request:get-parameter("end_date_2", '27')), '-'
 )
+
+let $c:=console:log($start-date || ' -- ' || $end-date)
 
 let $start-time:=''
 let $end-time:=''
