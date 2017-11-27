@@ -175,6 +175,28 @@ $(document).ready(function() {
         return sections.filter(':checked').size() === sections.size();
     }
 
+    /**
+     * Toggle visibility of date component, if sections input "Historical Documents" or "Entire Site" is checked or not
+     */
+    var documentsInput = $('input#documents'),
+        dateComponent = $('.hsg-filter-date'),
+        sectionsInputs = $('#sectionFilter input');
+
+    sectionsInputs.on('change', function() {
+        toggleDateComponent();
+    });
+
+    function toggleDateComponent () {
+        if ( $( documentsInput ).is( ":checked" ) || global.is(":checked")) {
+            dateComponent.removeClass("hsg-hidden");
+            dateComponent.addClass("hsg-active");
+s        }
+        else {
+            dateComponent.addClass("hsg-hidden");
+            dateComponent.removeClass("hsg-active");
+        }
+    }
+
     //------------------------------------------//
 
     function initContent() {
