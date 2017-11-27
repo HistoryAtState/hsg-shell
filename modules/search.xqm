@@ -143,38 +143,51 @@ declare function search:load-sections($node, $model) {
         $html
 };
 
+(:~
+ : Extends the model with name attributes of filter inputs
+ : @return The merged map of filter names
+~:)
 declare
     %templates:wrap
-function search:search-filters($node as node(), $model as map(*), $within as xs:string*, $administration as xs:string*) {
+function search:filters($node as node(), $model as map(*), $within as xs:string*, $administration as xs:string*) {
 (:  more options could be added to $filters  :)
-    let $filters := map {"within": $within, "administration": $administration}
+    let $filters := map {
+        "within": $within,
+        "administration": $administration
+    }
     return
         map:new(($model, map {'filters': $filters}))
 };
 
+(:~
+ : Extends the model with the current filter component and the filter name
+ : @return The merged map
+~:)
 declare
     %templates:wrap
-function search:search-section($node as node(), $model as map(*), $section as xs:string, $filter as xs:string) {
-    let $new := map {'sec': $section, 'filter': $filter}
+function search:component($node as node(), $model as map(*), $component as xs:string, $filter as xs:string) {
+    let $new := map {
+        'component': $component,
+        'filter': $filter
+    }
     return map:new(($model, $new))
 };
 
 (:~
- : Generates HTML attributes "value" and "id"
+ : Generates HTML attributes "value" and "id" for the filter input
  : @return  HTML attributes
 ~:)
 declare
     %templates:wrap
 function search:filter-input-attributes($node as node(), $model as map(*)) {
-    let $section := $model?sec
+    let $component := $model?component
     let $filter := $model?filter
-    let $section-id := $model($section)/id
+    let $component-id := $model($component)/id
 
     return
         (
-            attribute value { $section-id },
-            attribute id { $section-id }, 
-            if(search:section-checked($node, $model)='checked') then attribute checked {''} else ()
+            attribute value { $component-id },
+            attribute id { $component-id }
         )
 };
 
@@ -185,35 +198,33 @@ function search:filter-input-attributes($node as node(), $model as map(*)) {
 declare
     %templates:wrap
 function search:label($node as node(), $model as map(*)) {
-    let $section := $model?sec
-    let $section-id := $model($section)/id
+    let $component := $model?component
+    let $component-id := $model($component)/id
     return
-        attribute for { $section-id },
+        attribute for { $component-id },
         templates:process($node/*, $model)
 };
 
 
 declare
     %templates:wrap
-function search:section-checked($node as node(), $model as map(*)) {
-    let $section := $model?sec
+function search:component-checked($node as node(), $model as map(*)) {
+    let $component := $model?component
     let $filter := $model?filter
-    let $c:=console:log('sec fil ' || $section || $filter)
     let $within := $model?filters($filter)
-    let $c:=console:log($within)
-    let $section-id := $model($section)/id
-    return if ($section-id = $within) then 'checked' else $within
+    let $component-id := $model($component)/id
+    return if ($component-id = $within) then 'checked' else $within
 };
 
 (:~
- : The string containing the section title
+ : The string containing the component title (label)
  : @return  String
 ~:)
 declare
     %templates:replace
 function search:label-string($node as node(), $model as map(*)) {
-    let $section := $model?sec
-    return $model($section)/label/string()
+    let $component := $model?component
+    return $model($component)/label/string()
 };
 
 declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
