@@ -183,7 +183,7 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
-aside #dateFilter .hsg-width-one-half {
+.hsg-search-results #dateFilter .hsg-width-one-half {
   padding: 0;
   width: 100%;
   @media screen and (min-width: $small-screen-min) and (max-width: 1199px)  {
@@ -198,5 +198,11 @@ aside #dateFilter .hsg-width-one-half {
   @media screen and (min-width: $large-screen-min)  {
     padding: 0;
     width: 100%;
+  }
+}
+
+.hsg-search-landing  {
+  .hsg-section {
+    margin-top: 2rem;
   }
 }
