@@ -352,6 +352,34 @@ declare %private function search:filter($hits) {
         $hit
 };
 
+(:~
+ : TODO: (This is a placeholder)
+ : Retrieve the number of hits of any filtered query and filter item (== of each input)
+ : @param $component The current filter component
+ : @param ...
+ : @return The number of hits
+~:)
+(:
+declare function search:number-of-filter-hits($component, $item, $hits) {
+
+};
+:)
+
+(:~
+ : TODO: (This is a placeholder)
+ : 1. Apply search:show-number-of-filter-hits() on each filter item (== on each input).
+ : 2. Only show hits, when „hits > 0“.
+ :
+ : Display the number of hits for any filtered query and filter item (with parameters $node, $model, $item, $hits)
+ : @return HTML
+~:)
+declare
+    %templates:replace
+function search:show-number-of-filter-hits($node, $model) {
+    <span class="hsg-badge-number">8</span>
+};
+
+
 declare
     %templates:default("start", 1)
     %templates:default("per-page", 10)
