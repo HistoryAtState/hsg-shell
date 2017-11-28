@@ -21,3 +21,14 @@
   border-radius: 10px;
   margin-left: 1rem;
 }
+
+.hsg-sort-button {
+  @extend .btn;
+  @extend .btn-default;
+  position: relative;
+  float: left;
+
+  i {
+    top: 3px;
+  }
+}
