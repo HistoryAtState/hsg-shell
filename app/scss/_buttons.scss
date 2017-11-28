@@ -1,3 +1,10 @@
+/* Buttons -------------- */
+
+.hsg-link-button {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
 .hsg-badge-number {
   display: inline-block;
   min-width: 10px;
