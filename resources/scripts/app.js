@@ -176,7 +176,7 @@ $(document).ready(function() {
     }
 
     /**
-     * Toggle visibility of date component, if sections input "Historical Documents" or "Entire Site" is checked or not
+     * Toggle visibility of date component, if sections input "Historical Documents" is checked or not
      */
     var documentsInput = $('input#documents'),
         dateComponent = $('.hsg-filter-date'),
@@ -187,7 +187,7 @@ $(document).ready(function() {
     });
 
     function toggleDateComponent () {
-        if ( $( documentsInput ).is( ":checked" ) || global.is(":checked")) {
+        if ( $( documentsInput ).is( ":checked" )) {
             dateComponent.removeClass("hsg-hidden");
             dateComponent.addClass("hsg-active");
 s        }
