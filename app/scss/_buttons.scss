@@ -1,0 +1,16 @@
+.hsg-badge-number {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: $font-bold;
+  font-family: $font-serif;
+  line-height: 1;
+  color: $color-white;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: text-top;
+  background-color: $color-primary;
+  border-radius: 10px;
+  margin-left: 1rem;
+}
