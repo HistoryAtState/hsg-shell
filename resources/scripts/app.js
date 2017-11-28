@@ -92,9 +92,10 @@ $(document).ready(function() {
         });
     }
 
-    //-------------- Search Filters --------------//
+    //-------------- Search Filters and Forms--------------//
 
     var searchForm = $('#searchForm'),
+        sortingForm = $('.sorting'),
         queryForm = $('#queryFilters'),
         sectionFilter = $('#sectionFilter'),
         formFilters = $('#formFilters'),
@@ -126,6 +127,12 @@ $(document).ready(function() {
         //action += serializeFiltersByName(dateFilter, 'start_time');
         //action += serializeFiltersByName(dateFilter, 'end_time');
         action += serializeFiltersByName(sectionFilter, 'within');
+
+        var currentActiveSorting = sortingForm.find('.active');
+        if (currentActiveSorting && currentActiveSorting.attr('id')) {
+            action += '&sort-by=' + currentActiveSorting.attr('id');
+        }
+
         window.location.replace('?' + action);
     }
 
