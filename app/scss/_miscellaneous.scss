@@ -103,3 +103,11 @@ html input[disabled] {
   max-height: 1000px;
   overflow: hidden;
 }
+
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 1px;
+}
