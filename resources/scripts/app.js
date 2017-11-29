@@ -127,6 +127,18 @@ $(document).ready(function() {
         action += '&' + volumesFilter.serialize();
         action += serializeFiltersByName(queryForm, 'match');
         action += serializeFiltersByName(formFilters, 'section');
+        //action += serializeFiltersByName(dateFilter, 'start_date');
+        //aggregate criteria from partial date controls (month day year) into single query param
+        if ($('#start_date_3').val()) {
+            var startDate = [$('#start_date_3').val().padStart(4, '0'), $('#start_date_1').val().padStart(2, '0'), $('#start_date_2').val().padStart(2, '0')];
+            action += '&start_date=' + startDate.join('-');
+        }
+        //action += serializeFiltersByName(dateFilter, 'end_date');
+        var endDate = [$('#end_date_3').val().padStart(4, '0'), $('#end_date_1').val().padStart(2, '0'), $('#end_date_2').val().padStart(2, '0')];
+        action += '&end_date=' + endDate.join('-');
+        console.log(action);
+        //action += serializeFiltersByName(dateFilter, 'start_time');
+        //action += serializeFiltersByName(dateFilter, 'end_time');
         action += serializeFiltersByName(sectionFilter, 'within');
 
         var currentActiveSorting = sortingForm.find('.active');
@@ -138,6 +150,19 @@ $(document).ready(function() {
     }
 
     if (mainForm.get(0)) {
+        
+        //TODO refactor and cover cases of empty day/month
+        //split aggregated date query and set up values for partial date controls
+        var startDate = mainForm.find('input[name="start_date"]').val();
+        var splitStartDate = startDate.split('-');
+        $('#start_date_3').val(splitStartDate[0]);
+        $('#start_date_1').val(splitStartDate[1]);
+        $('#start_date_2').val(splitStartDate[2]);
+        var endDate = mainForm.find('input[name="end_date"]').val();
+        var splitEndDate = endDate.split('-');
+        $('#end_date_3').val(splitEndDate[0]);
+        $('#end_date_1').val(splitEndDate[1]);
+        $('#end_date_2').val(splitEndDate[2]);
         mainForm.on('submit', submitSearch);
         mainButton.on('click', submitSearch);
     }
@@ -203,8 +228,12 @@ $(document).ready(function() {
         if (documentsInput.is( ":checked" ) && allSelectedButDocuments()) {
             dateComponent.removeClass("hsg-hidden");
             dateComponent.addClass("hsg-active");
+<<<<<<< HEAD
 s        }
 
+=======
+        }
+>>>>>>> feat(date filter) aggregate partial date controls (mm dd yyyy) into single query param and back; addresses #288
         else {
             dateComponent.addClass("hsg-hidden");
             dateComponent.removeClass("hsg-active");
