@@ -228,12 +228,7 @@ $(document).ready(function() {
         if (documentsInput.is( ":checked" ) && allSelectedButDocuments()) {
             dateComponent.removeClass("hsg-hidden");
             dateComponent.addClass("hsg-active");
-<<<<<<< HEAD
-s        }
-
-=======
         }
->>>>>>> feat(date filter) aggregate partial date controls (mm dd yyyy) into single query param and back; addresses #288
         else {
             dateComponent.addClass("hsg-hidden");
             dateComponent.removeClass("hsg-active");
