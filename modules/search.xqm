@@ -653,12 +653,13 @@ function search:select-volumes($node as node(), $model as map(*), $volume-id as 
     let $vol-id := substring-before(util:document-name($vol), '.xml')
     order by $vol-id
     return
-        <label class="hsg-search-input-label">
-            <input type="checkbox" name="volume-id" value="{$vol-id}">
-            { if ($vol-id = $volume-id) then attribute checked { "checked"} else () }
-            </input>
-            <span class="c-indicator">{ fh:vol-title($vol-id) }</span>
-        </label>
+        <li>
+            <input class="hsg-search-input section" type="checkbox" name="volume-id" id="{ $vol-id }" value="{ $vol-id }"/>
+            <label class="hsg-search-input-label truncate" for="{ $vol-id }">
+                { if ($vol-id = $volume-id) then attribute checked { "checked"} else () }
+                <span class="c-indicator">{ fh:vol-title($vol-id) }</span>
+            </label>
+        </li>
 };
 
 (:~

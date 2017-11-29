@@ -102,6 +102,7 @@ $(document).ready(function() {
         mainForm = $('form.main-form'),
         dateFilter = $('#dateFilter'),
         administrationsFilter = $('#administrationsFilter'),
+        volumesFilter = $('#volumesFilter'),
         mainButton = $('.hsg-main-search-button');
     /**
      * return serialized values of checked filters with name
@@ -123,6 +124,7 @@ $(document).ready(function() {
         var action = searchForm.serialize();
         action += '&' + administrationsFilter.serialize();
         action += '&' + dateFilter.serialize();
+        action += '&' + volumesFilter.serialize();
         action += serializeFiltersByName(queryForm, 'match');
         action += serializeFiltersByName(formFilters, 'section');
         action += serializeFiltersByName(sectionFilter, 'within');
