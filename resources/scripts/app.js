@@ -120,12 +120,9 @@ $(document).ready(function() {
     function submitSearch (event) {
         event.preventDefault();
         var action = searchForm.serialize();
+        action += '&' + dateFilter.serialize();
         action += serializeFiltersByName(queryForm, 'match');
         action += serializeFiltersByName(formFilters, 'section');
-        //action += serializeFiltersByName(dateFilter, 'start_date');
-        //action += serializeFiltersByName(dateFilter, 'end_date');
-        //action += serializeFiltersByName(dateFilter, 'start_time');
-        //action += serializeFiltersByName(dateFilter, 'end_time');
         action += serializeFiltersByName(sectionFilter, 'within');
 
         var currentActiveSorting = sortingForm.find('.active');
