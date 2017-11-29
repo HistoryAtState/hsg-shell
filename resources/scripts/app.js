@@ -179,6 +179,11 @@ $(document).ready(function() {
         return sections.filter(':checked').size() === sections.size();
     }
 
+    // Return all filters unchecked except for input "Historical Documents"
+    function allSelectedButDocuments() {
+        return sections.not(documentsInput).filter(':checked').size() === 0;
+    }
+
     /**
      * Toggle visibility of date component, if sections input "Historical Documents" is checked or not
      */
@@ -191,10 +196,11 @@ $(document).ready(function() {
     });
 
     function toggleDateComponent () {
-        if ( $( documentsInput ).is( ":checked" )) {
+        if (documentsInput.is( ":checked" ) && allSelectedButDocuments()) {
             dateComponent.removeClass("hsg-hidden");
             dateComponent.addClass("hsg-active");
 s        }
+
         else {
             dateComponent.addClass("hsg-hidden");
             dateComponent.removeClass("hsg-active");
