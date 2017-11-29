@@ -189,7 +189,8 @@ function search:filter-input-attributes($node as node(), $model as map(*)) {
     return
         (
             attribute value { $component-id },
-            attribute id { $component-id }
+            attribute id { $component-id },
+            if(search:component-checked($node, $model)='checked') then attribute checked {''} else ()
         )
 };
 
