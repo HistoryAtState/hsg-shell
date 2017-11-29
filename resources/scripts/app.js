@@ -123,7 +123,7 @@ $(document).ready(function() {
         event.preventDefault();
         var action = searchForm.serialize();
         action += '&' + administrationsFilter.serialize();
-        action += '&' + dateFilter.serialize();
+        //action += '&' + dateFilter.serialize();
         action += '&' + volumesFilter.serialize();
         action += serializeFiltersByName(queryForm, 'match');
         action += serializeFiltersByName(formFilters, 'section');
