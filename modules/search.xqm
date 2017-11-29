@@ -711,18 +711,41 @@ declare function search:end($node, $model) {
     $model?query-info?end
 };
 
+declare function search:trim-words($string as xs:string, $number as xs:integer) {
+    let $words := tokenize($string, "\s")
+    return
+        if (count($words) gt $number) then
+            (
+                subsequence($words, 1, ceiling($number div 2)) => string-join(" ")
+                , "…"
+                , $words[position() ge last() - floor($number div 2) + 1] => string-join(" ")
+            )
+            => string-join()
+        else
+            $string
+};
+
 declare
     %templates:wrap
 function search:select-volumes($node as node(), $model as map(*), $volume-id as xs:string*) {
-    for $vol in collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]
-    let $vol-id := substring-before(util:document-name($vol), '.xml')
+    let $vols-in-db := collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]/@xml:id
+    let $vols := collection("/db/apps/frus/bibliography")/volume[@id = $vols-in-db]
+
+    for $vol in $vols
+        let $vol-id := $vol/@id
+        let $title := 
+            ($vol/title[@type eq "sub-series"], $vol/title[@type eq "volume-number"], $vol/title[@type eq "volume"])[. ne ""]
+            => string-join(", ")
+            => normalize-space()
+            => search:trim-words(10)
     order by $vol-id
+
     return
         <li>
             <input class="hsg-search-input section" type="checkbox" name="volume-id" id="{ $vol-id }" value="{ $vol-id }"/>
             <label class="hsg-search-input-label truncate" for="{ $vol-id }">
                 { if ($vol-id = $volume-id) then attribute checked { "checked"} else () }
-                <span class="c-indicator">{ fh:vol-title($vol-id) }</span>
+                <span class="c-indicator">{ $title }</span>
             </label>
         </li>
 };
