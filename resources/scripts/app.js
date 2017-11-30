@@ -98,9 +98,10 @@ $(document).ready(function() {
         sortingForm = $('.sorting'),
         queryForm = $('#queryFilters'),
         sectionFilter = $('#sectionFilter'),
-        formFilters = $('#formFilters'),
+        formFilters = $('form.filter-form'),
         mainForm = $('form.main-form'),
         dateFilter = $('#dateFilter'),
+        dateFilterInputs = dateFilter.find('input[type=number]'),
         administrationsFilter = $('#administrationsFilter'),
         volumesFilter = $('#volumesFilter'),
         mainButton = $('.hsg-main-search-button');
@@ -122,10 +123,13 @@ $(document).ready(function() {
     function submitSearch (event) {
         event.preventDefault();
         var action = searchForm.serialize();
-        action += '&' + administrationsFilter.serialize();
-        action += '&' + volumesFilter.serialize();
+        if (administrationsFilter && administrationsFilter.serialize().length) {
+            action += '&' + administrationsFilter.serialize();
+        }
+        if (volumesFilter && volumesFilter.serialize().length) {
+            action += '&' + volumesFilter.serialize();
+        }
         action += serializeFiltersByName(queryForm, 'match');
-        action += serializeFiltersByName(formFilters, 'section');
         action += serializeFiltersByName(sectionFilter, 'within');
 
         //aggregate criteria from partial date controls (month day year) into single query param
@@ -137,16 +141,17 @@ $(document).ready(function() {
             ];
             action += '&start_date=' + startDate.join('-');
         }
+        if ($('#end_year').val()) {
+            var endDate = [
+                $('#end_year').val().padStart(4, '0'),
+                $('#end_month').val().padStart(2, '0'),
+                $('#end_day').val().padStart(2, '0')];
+            action += '&end_date=' + endDate.join('-');
 
-        var endDate = [
-            $('#end_year').val().padStart(4, '0'),
-            $('#end_month').val().padStart(2, '0'),
-            $('#end_day').val().padStart(2, '0')];
-        action += '&end_date=' + endDate.join('-');
-
-        var currentActiveSorting = sortingForm.find('.active');
-        if (currentActiveSorting && currentActiveSorting.attr('id')) {
-            action += '&sort-by=' + currentActiveSorting.attr('id');
+            var currentActiveSorting = sortingForm.find('.active');
+            if (currentActiveSorting && currentActiveSorting.attr('id')) {
+                action += '&sort-by=' + currentActiveSorting.attr('id');
+            }
         }
 
         window.location.replace('?' + action);
@@ -156,34 +161,40 @@ $(document).ready(function() {
 
         //TODO refactor and cover cases of empty day/month
         //split aggregated date query and set up values for partial date controls
-        var startDate = dateFilter.find('input[name="start_date"]').val(),
-            splitStartDate = startDate.split('-'),
-            endDate = dateFilter.find('input[name="end_date"]').val(),
-            splitEndDate = endDate.split('-');
+        var startDate = dateFilter.find('input[name="start_date"]').val();
+        if(startDate) {
+            var splitStartDate = startDate.split('-');
+            $('#start_year').val(splitStartDate[0]);
+            $('#start_month').val(splitStartDate[1]);
+            $('#start_day').val(splitStartDate[2]);
+        }
 
-        $('#start_year').val(splitStartDate[0]);
-        $('#start_month').val(splitStartDate[1]);
-        $('#start_day').val(splitStartDate[2]);
-        $('#end_year').val(splitEndDate[0]);
-        $('#end_month').val(splitEndDate[1]);
-        $('#end_day').val(splitEndDate[2]);
+        var endDate = dateFilter.find('input[name="end_date"]').val();
+        if(endDate) {
+            var splitEndDate = endDate.split('-');
+            $('#end_year').val(splitEndDate[0]);
+            $('#end_month').val(splitEndDate[1]);
+            $('#end_day').val(splitEndDate[2]);
+        }
 
         mainForm.on('submit', submitSearch);
         mainButton.on('click', submitSearch);
     }
 
-    // Checkboxes and "reset" button
-    var filterInputs = formFilters.find('input');
-    var filterReset = formFilters.find('button[name="reset"]');
+    // Reset filters (checkboxes)
+    var filterInputs = formFilters.find('input'),
+        dateReset = formFilters.find('#dateReset'),
+        filterReset = formFilters.find('#filterResetButton');
 
     /**
      * Reset all filters in filter form
      */
-    function resetFilter () {
+    function resetFilter (event) {
+        event.preventDefault();
         filterInputs.attr('checked', false);
-        mainForm.submit();
+        console.log("Date Filter", dateFilter.find("#start_hour").val());
+        dateFilterInputs.val(' ');
     }
-
     filterReset.on('click', resetFilter);
 
     /**

@@ -53,7 +53,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <input type="hidden" name="start_time" data-template="templates:form-control"/>
+                            <input type="hidden" name="start_time"/>
                         </div>
                     </fieldset>
                 </div>
@@ -84,7 +84,7 @@
                                 <input class="hsg-input-inline" placeholder="yyyy" aria-describedby="endDateHint" id="end_year" name="end_year" type="number" min="1600" max="2025" step="1" value=""/>
                             </div>
                         </div>
-                            <input type="hidden" name="end_date" data-template="templates:form-control"/>
+                        <input type="hidden" name="end_date" data-template="templates:form-control"/>
                     </fieldset>
 
                     <fieldset>
@@ -112,14 +112,14 @@
                                     </li>
                                 </ul>
                             </div>
-                            <input type="hidden" name="end_time" data-template="templates:form-control"/>
+                            <input type="hidden" name="end_time"/>
                         </div>
                     </fieldset>
                 </div>
             </div>
         </div>
 
-        <button class="hsg-sidebar-reset-btn" name="reset-filters" type="reset" value="reset_filters">
+        <button class="hsg-sidebar-reset-btn" id="dateReset" name="reset-filters" type="reset" value="reset_filters">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"/>
             Reset Date
         </button>
