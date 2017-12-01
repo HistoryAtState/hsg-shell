@@ -147,11 +147,11 @@ $(document).ready(function() {
                 $('#end_month').val().padStart(2, '0'),
                 $('#end_day').val().padStart(2, '0')];
             action += '&end_date=' + endDate.join('-');
+        }
 
-            var currentActiveSorting = sortingForm.find('.active');
-            if (currentActiveSorting && currentActiveSorting.attr('id')) {
-                action += '&sort-by=' + currentActiveSorting.attr('id');
-            }
+        var currentActiveSorting = sortingForm.find('.active');
+        if (currentActiveSorting && currentActiveSorting.attr('id')) {
+            action += '&sort-by=' + currentActiveSorting.attr('id');
         }
 
         window.location.replace('?' + action);
