@@ -240,26 +240,29 @@ $(document).ready(function() {
     }
 
     /**
-     * Toggle visibility of date component, if sections input "Historical Documents" is checked or not
+     * Toggle visibility of date/administrations/volumes components,
+     * if sections input "Historical Documents" is checked or not
      */
-    var documentsInput = $('input#documents'),
-        dateComponent = $('.hsg-filter-date'),
-        sectionsInputs = $('#sectionFilter input');
+    var documentsInput = $('input#documents'), // "Historical Documents" input in "filter by section"
+        sectionsInputs = $('#sectionFilter input'), // all inputs in "filter by section"
+        toggledComponents = $('.hsg-filter-toggle'); // components to be toggled
 
-    sectionsInputs.on('change', function() {
-        toggleDateComponent();
-    });
-
-    function toggleDateComponent () {
+    function toggleComponents () {
         if (documentsInput.is( ":checked" ) && allSelectedButDocuments()) {
-            dateComponent.removeClass("hsg-hidden");
-            dateComponent.addClass("hsg-active");
+            toggledComponents.removeClass("hsg-hidden");
+            toggledComponents.addClass("hsg-active");
+            console.log("Date: ", $('.hsg-filter-toggle').data());
         }
         else {
-            dateComponent.addClass("hsg-hidden");
-            dateComponent.removeClass("hsg-active");
+            toggledComponents.addClass("hsg-hidden");
+            toggledComponents.removeClass("hsg-active");
+            console.log("Date: ", $('.hsg-filter-toggle').data());
         }
     }
+
+    sectionsInputs.on('change', function() {
+        toggleComponents();
+    });
 
     //------------------------------------------//
 

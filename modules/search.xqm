@@ -742,7 +742,7 @@ function search:select-volumes($node as node(), $model as map(*), $volume-id as 
 
     return
         <li>
-            <input class="hsg-search-input section" type="checkbox" name="volume-id" id="{ $vol-id }" value="{ $vol-id }"/>
+            <input class="hsg-search-input" type="checkbox" name="volume-id" id="{ $vol-id }" value="{ $vol-id }"/>
             <label class="hsg-search-input-label truncate" for="{ $vol-id }">
                 { if ($vol-id = $volume-id) then attribute checked { "checked"} else () }
                 <span class="c-indicator">{ $title }</span>
