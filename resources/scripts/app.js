@@ -94,17 +94,18 @@ $(document).ready(function() {
 
     //-------------- Search Filters and Forms--------------//
 
-    var searchForm = $('#searchForm'),
-        sortingForm = $('.sorting'),
-        queryForm = $('#queryFilters'),
-        sectionFilter = $('#sectionFilter'),
-        formFilters = $('form.filter-form'),
-        mainForm = $('form.main-form'),
-        dateFilter = $('#dateFilter'),
-        dateFilterInputs = dateFilter.find('input[type=number]'),
-        administrationsFilter = $('#administrationsFilter'),
-        volumesFilter = $('#volumesFilter'),
-        mainButton = $('.hsg-main-search-button');
+    var mainForm = $('form.main-form'), // search bar inputs and submit buttons
+        searchForm = $('#searchForm'), // main searchbar form
+        formFilters = $('form.filter-form'), // all filter forms
+        sortingForm = $('.sorting'), // "sort-by" filter form
+        queryForm = $('#queryFilters'), // "refine-by" filter form
+        sectionFilter = $('#sectionFilter'), // "by-sections" filter form
+        dateFilter = $('#dateFilter'), // "by-date" filter form
+        dateFilterInputs = dateFilter.find('input[type=number]'), // inputs in "by-date" filter form
+        administrationsFilter = $('#administrationsFilter'), // "by-administrations" filter form
+        volumesFilter = $('#volumesFilter'), // "by-volumes" filter form
+        mainButton = $('.hsg-main-search-button'); // main search button
+
     /**
      * return serialized values of checked filters with name
      * @param {String} name
