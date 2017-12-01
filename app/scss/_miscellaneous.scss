@@ -75,7 +75,7 @@ html input[disabled] {
 }
 
 .hsg-hidden {
-  overflow: hidden;
+  display: none;
   max-height: 0;
   padding-top: 0;
   padding-bottom: 0;
@@ -100,8 +100,6 @@ html input[disabled] {
   -webkit-transition-timing-function: ease-in;
   -o-transition-timing-function: ease-in;
   transition-timing-function: ease-in;
-  max-height: 1000px;
-  overflow: hidden;
 }
 
 .truncate {
