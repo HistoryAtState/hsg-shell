@@ -178,8 +178,17 @@ $(document).ready(function() {
             $('#end_day').val(splitEndDate[2]);
         }
 
+        // submit the search form
         mainForm.on('submit', submitSearch);
         mainButton.on('click', submitSearch);
+
+        // add "enter/return" key to trigger submitting the search form
+        document.onkeydown=function(){
+            if(window.event.keyCode=='13'){
+                submitSearch();
+                return false;
+            }
+        }
     }
 
     // Reset filters (checkboxes)
