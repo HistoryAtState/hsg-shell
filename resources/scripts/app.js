@@ -123,7 +123,9 @@ $(document).ready(function() {
      */
     function submitSearch (event) {
         event.preventDefault();
+        var url = event.target.form ? event.target.form.action : '';
         var action = searchForm.serialize();
+        action += navigationSearchForm.serialize();
         if (administrationsFilter && administrationsFilter.serialize().length) {
             action += '&' + administrationsFilter.serialize();
         }
@@ -154,8 +156,7 @@ $(document).ready(function() {
         if (currentActiveSorting && currentActiveSorting.attr('id')) {
             action += '&sort-by=' + currentActiveSorting.attr('id');
         }
-
-        window.location.replace('?' + action);
+        window.location.replace(url + '?' + action);
     }
 
     if (mainForm.get(0)) {
