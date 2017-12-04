@@ -1448,10 +1448,14 @@ else if (matches($exist:path, '^/education/?')) then
 (: handle search requests :)
 else if (matches($exist:path, '^/search/?')) then
     let $search-query := request:get-parameter("q", ())
+    let $date-query := request:get-parameter("start_date", ())
+    let $c:=console:log($date-query)
     let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
     let $page :=
         (: If a search query is present, show the results template :)
-        if ( string-length($search-query) gt 0 ) then
+        if (string-length($search-query) gt 0) then
+            'search/search-result.html'
+        else if (string-length($date-query) gt 0) then
             'search/search-result.html'
         else if ($fragments[1]) then
             switch ($fragments[1])
