@@ -96,6 +96,7 @@ $(document).ready(function() {
 
     var mainForm = $('form.main-form'), // search bar inputs and submit buttons
         searchForm = $('#searchForm'), // main searchbar form
+        navigationSearchForm = $('#navigationSearchForm'), // searchbar form in navigation bar
         formFilters = $('form.filter-form'), // all filter forms
         sortingForm = $('.sorting'), // "sort-by" filter form
         queryForm = $('#queryFilters'), // "refine-by" filter form
