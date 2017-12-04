@@ -39,21 +39,21 @@
                             </div>
                             <div class="hsg-form-group hsg-form-group-day">
                                 <label for="start_minute">Minute</label>
-                                <input class="hsg-input-inline" placeholder="mm" aria-describedby="startTimeHint" id="start_minute" name="start_minute" type="number" min="0" max="60" step="1"  value=""/>
+                                <input class="hsg-input-inline" placeholder="mm" aria-describedby="startTimeHint" id="start_minute" name="start_minute" type="number" min="0" max="60" step="1" value=""/>
                             </div>
                             <div class="hsg-form-group hsg-time-input-group hsg-search-inputs-horizontal">
                                 <ul>
                                     <li class="hsg-search-input">
-                                        <input type="radio" id="start_time_am" name="start_time_am" value=""/>
+                                        <input type="radio" id="start_time_am" name="start_time_radio" value=""/>
                                         <label for="start_time_am">am</label>
                                     </li>
                                     <li class="hsg-search-input">
-                                        <input type="radio" id="start_time_pm" name="start_time_pm" value=""/>
+                                        <input type="radio" id="start_time_pm" name="start_time_radio" value=""/>
                                         <label for="start_time_pm">pm</label>
                                     </li>
                                 </ul>
                             </div>
-                            <input type="hidden" name="start_time"/>
+                            <input type="hidden" name="start_time" data-template="templates:form-control"/>
                         </div>
                     </fieldset>
                 </div>
@@ -94,25 +94,25 @@
                         <div>
                             <div class="hsg-form-group hsg-form-group-month">
                                 <label for="end_time_1">Hour</label>
-                                <input class="hsg-input-inline" placeholder="hh" aria-describedby="endTimeHint" id="end_time_1" name="end_hour" type="number" min="0" max="12" step="1" value=""/>
+                                <input class="hsg-input-inline" placeholder="hh" aria-describedby="endTimeHint" id="end_hour" name="end_hour" type="number" min="0" max="12" step="1" value=""/>
                             </div>
                             <div class="hsg-form-group hsg-form-group-day">
                                 <label for="end_time_2">Minute</label>
-                                <input class="hsg-input-inline" placeholder="mm" aria-describedby="endTimeHint" id="end_time_2" name="end_minute" type="number" min="0" max="60" step="1" value=""/>
+                                <input class="hsg-input-inline" placeholder="mm" aria-describedby="endTimeHint" id="end_minute" name="end_minute" type="number" min="0" max="60" step="1" value=""/>
                             </div>
                             <div class="hsg-form-group hsg-time-input-group hsg-search-inputs-horizontal">
                                 <ul>
                                     <li class="hsg-search-input">
-                                        <input type="radio" id="end_time_am" name="end_time_am" value=""/>
+                                        <input type="radio" id="end_time_am" name="end_time_radio" value=""/>
                                         <label for="end_time_am">am</label>
                                     </li>
                                     <li class="hsg-search-input">
-                                        <input type="radio" id="end_time_pm" name="end_time_pm" value=""/>
+                                        <input type="radio" id="end_time_pm" name="end_time_radio" value=""/>
                                         <label for="end_time_pm">pm</label>
                                     </li>
                                 </ul>
                             </div>
-                            <input type="hidden" name="end_time"/>
+                            <input type="hidden" name="end_time" data-template="templates:form-control"/>
                         </div>
                     </fieldset>
                 </div>

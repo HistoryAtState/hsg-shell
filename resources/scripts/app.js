@@ -152,6 +152,23 @@ $(document).ready(function() {
                 $('#end_day').val().padStart(2, '0')];
             action += '&end_date=' + endDate.join('-');
         }
+        
+        //aggregate criteria from partial time controls (hh mm) into single query param
+        if ($('#start_hour').val()) {
+            var startTime = [
+                $('#start_hour').val().padStart(2, '0'),
+                $('#start_minute').val().padStart(2, '0')
+            ];
+            console.log('start time ' + startTime)
+            action += '&start_time=' + startTime.join(':');
+        }
+        if ($('#end_hour').val()) {
+            var endTime = [
+                $('#end_hour').val().padStart(2, '0'),
+                $('#end_minute').val().padStart(2, '0')
+            ];
+            action += '&end_time=' + endTime.join(':');
+        }
 
         var currentActiveSorting = sortingForm.find('.active');
         if (currentActiveSorting && currentActiveSorting.attr('id')) {
@@ -179,6 +196,21 @@ $(document).ready(function() {
             $('#end_month').val(splitEndDate[1]);
             $('#end_day').val(splitEndDate[2]);
         }
+
+        var startTime = dateFilter.find('input[name="start_time"]').val();
+        if(startTime) {
+            var splitStartTime = startTime.split(':');
+            $('#start_hour').val(splitStartTime[0]);
+            $('#start_minute').val(splitStartTime[1]);
+        }
+        
+        var endTime = dateFilter.find('input[name="end_time"]').val();
+        if(endTime) {
+            var splitEndTime = endTime.split(':');
+            $('#end_hour').val(splitEndTime[0]);
+            $('#end_minute').val(splitEndTime[1]);
+        }
+
 
         // submit the search form
         mainForm.on('submit', submitSearch);
