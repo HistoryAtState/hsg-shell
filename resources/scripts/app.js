@@ -127,12 +127,14 @@ $(document).ready(function() {
         searchButton.on('click', submitNavbarSearch);
 
         // add "enter/return" key to trigger submitting the navbar search form
+/*
         searchInput.addEventListener('keydown', function (event) {
             var key = event.which;
             if(key == 13){
                 submitNavbarSearch(event);
             }
         });
+*/
     }
 
     /**
