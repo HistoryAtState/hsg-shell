@@ -183,12 +183,12 @@ $(document).ready(function() {
         mainButton.on('click', submitSearch);
 
         // add "enter/return" key to trigger submitting the search form
-        document.onkeydown=function(){
-            if(window.event.keyCode=='13'){
-                submitSearch();
-                return false;
+        document.addEventListener('keydown', function (event) {
+        var key = event.which;
+            if(key == 13){
+                submitSearch(event);
             }
-        }
+        });
     }
 
     // Reset filters (checkboxes)
