@@ -108,6 +108,34 @@ $(document).ready(function() {
         mainButton = $('.hsg-main-search-button'); // main search button
 
     /**
+     * Submit query from navigation search form, redirect to "search/"
+     * @param {Event} event
+     */
+    function submitNavbarSearch (event) {
+        event.preventDefault();
+        var url = navigationSearchForm.prop("action");
+        var action = navigationSearchForm.serialize();
+        window.location.replace(url + '?' + action);
+    }
+
+    var searchBarForm = document.getElementById('#navigationSearchForm');
+    var searchInput = document.getElementById('#search-box');
+    var searchButton = $('#navigationSearchForm .search-button');
+
+    if (navigationSearchForm.get(0)) {
+        navigationSearchForm.on('submit', submitNavbarSearch);
+        searchButton.on('click', submitNavbarSearch);
+
+        // add "enter/return" key to trigger submitting the navbar search form
+        searchInput.addEventListener('keydown', function (event) {
+            var key = event.which;
+            if(key == 13){
+                submitNavbarSearch(event);
+            }
+        });
+    }
+
+    /**
      * return serialized values of checked filters with name
      * @param {String} name
      * @returns {String}
@@ -126,7 +154,6 @@ $(document).ready(function() {
         event.preventDefault();
         var url = event.target.form ? event.target.form.action : '';
         var action = searchForm.serialize();
-        action += navigationSearchForm.serialize();
         if (administrationsFilter && administrationsFilter.serialize().length) {
             action += '&' + administrationsFilter.serialize();
         }
