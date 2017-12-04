@@ -175,6 +175,15 @@ function search:component($node as node(), $model as map(*), $component as xs:st
     return map:new(($model, $new))
 };
 
+
+declare
+    %templates:wrap
+function search:entire-site-check($node as node(), $model as map(*), $within as xs:string*) {
+    if (not(exists($within)) or $within='entire_site') then
+        attribute checked {'checked'}
+    else 
+        ()
+};
 (:~
  : Generates HTML attributes "value" and "id" for the filter input
  : @return  HTML attributes
