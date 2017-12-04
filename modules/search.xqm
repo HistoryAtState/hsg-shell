@@ -441,7 +441,7 @@ declare
     declare variable $search:SORTBY := 'relevance';
     declare variable $search:SORTORDER := 'descending';
     :)
-function search:load-results($node, $model, $q as xs:string, $within as xs:string*,
+function search:load-results($node as node(), $model as map(*), $q as xs:string, $within as xs:string*,
 $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
     let $start-time := util:system-time()
     let $hits := search:query-sections($within, $volume-id, $q)
@@ -488,27 +488,19 @@ declare %private function search:query-sections($sections as xs:string*, $volume
             for $category in $categories
             return
                 search:query-section($category, $query)
+ 
         })
 };
 
-declare function search:query-section($category, $query as xs:string) {
+declare function search:query-section($category, $query as xs:string*) {
+
+    let $start-date:=request:get-parameter('start_date', '')
+    let $end-date:=request:get-parameter('end_date', '')
+    let $start-time:=request:get-parameter('start_time', '')
+    let $end-time:=request:get-parameter('end_time', '')
     
-let $start-date := string-join(
-(request:get-parameter("start_year", '1865'),
-request:get-parameter("start_month", '04'),
-request:get-parameter("start_day", '28')), '-'
-)
+let $c:=console:log($start-date || ' -- ' || $end-date || ' : ' || $category || ' -- ' || $query)
 
-let $end-date := string-join(
-(request:get-parameter("end_year", '1995'),
-request:get-parameter("end_month", '05'),
-request:get-parameter("end_day", '27')), '-'
-)
-
-let $c:=console:log($start-date || ' -- ' || $end-date)
-
-let $start-time:=''
-let $end-time:=''
 
 (:let $q := request:get-parameter("q", ())[. ne ""]:)
 (:let $order-by := request:get-parameter("order-by", "date"):)
@@ -546,17 +538,23 @@ let $range-end :=
         case xs:string return
             switch ($category)
                 case "frus" return 
-            (console:log('frus again'), 
-(:          special treatment for frus dates  :)
-            
-            collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
-            [@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
-            
-            )
+                    (console:log('frus search'), 
+                    if ((string($range-start) ne '') and (string($query) ne '')) then 
+                        (console:log('query ' || $query),
+                        (: special treatment for frus dates  :)
+                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
+                            [@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
+                        )
+                    else if (string($range-start) ne '') then 
+                    (:  TODO doesn't wrk yet  :)
+                        (console:log('no query, just dates '),
+                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
+                        )
+                    else
+                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
+                    )
                 default return 
-            collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
-        case xs:string return
-            collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
+                    collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
         default return
             $category?query($query)
 };
@@ -778,6 +776,10 @@ function search:paginate($node as node(), $model as map(*), $start as xs:int, $p
                             ('&amp;q=' || encode-for-uri($model?query-info?q)),
                             ($model?query-info?within[. ne ''] ! ('within=' || .)),
                             $volume-id ! ("volume-id=" || .),
+                            "start_date=" || request:get-parameter('start_date', ''),
+                            "end_date=" || request:get-parameter('end_date', ''),
+                            "start_time=" || request:get-parameter('start_time', ''),
+                            "end_time=" || request:get-parameter('end_time', ''),
                             "per-page=" || $per-page
                         ),
                         '&amp;'
