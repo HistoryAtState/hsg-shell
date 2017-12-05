@@ -459,6 +459,7 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
             "q": $q,
             "within": $within,
             (: "volume-id": $volume-id, :)
+            "results-doc-ids": $hits/root()/tei:TEI/@xml:id/string(),
             "start": $start,
             "end": $start + count($window) - 1,
             "perpage": $per-page,
@@ -735,9 +736,14 @@ declare function search:trim-words($string as xs:string, $number as xs:integer) 
 declare
     %templates:wrap
 function search:select-volumes($node as node(), $model as map(*), $volume-id as xs:string*) {
-    let $vols-in-db := collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]/@xml:id
-    let $vols := collection("/db/apps/frus/bibliography")/volume[@id = $vols-in-db]
-
+    let $frus-volume-ids := $model?query-info?results-doc-ids
+    let $volume-ids := 
+        if (exists($frus-volume-ids)) then
+            $frus-volume-ids
+        else
+            (: full text volumes in the database :)
+            collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]/@xml:id
+    let $vols := collection("/db/apps/frus/bibliography")/volume[@id = $volume-ids]
     for $vol in $vols
         let $vol-id := $vol/@id
         let $title := 
