@@ -443,11 +443,11 @@ function search:show-number-of-filter-hits($node, $model) {
 declare
     %templates:replace
     %templates:default("sort-by", "")
-function search:sort-by($node as node(), $model as map(*), $sort-by) {
-        element { local-name($node) } {
-            $node/@*[local-name() != "href"],
-            attribute class { if ($node/@id eq $sort-by) then 'active' else () },
-            templates:process($node/node(), $model)
+function search:sort-by($node as node(), $model as map(*), $sort-by as xs:string) {
+    element { local-name($node) } {
+        $node/@*[local-name() != "href"],
+        attribute class { if ($node/@id eq $sort-by) then 'active' else () },
+        templates:process($node/node(), $model)
     }
 };
 
@@ -455,8 +455,8 @@ function search:sort-by($node as node(), $model as map(*), $sort-by) {
  : TODO: Replace strings in anchors with search:set-sort-by-value()
  : Set cases of sorting options and set a default value
 ~:)
-declare function search:set-sort-by-value($value) {
-    switch($value)
+declare function search:set-sort-by-value($sort-by as xs:string) {
+    switch($sort-by)
         case "date_asc" return "Dates (oldest first)"
         case "date_desc" return "Dates (most recent first)"
         default return "Relevance"
@@ -470,7 +470,7 @@ declare function search:set-sort-by-value($value) {
 declare
     %templates:wrap
     %templates:default("sort-by", "")
-function search:sort-by-value ($node as node(), $model as map(*), $sort-by) {
+function search:sort-by-value($node as node(), $model as map(*), $sort-by as xs:string) {
     let $value := search:set-sort-by-value($sort-by)
     return
         element { local-name($node) } {
