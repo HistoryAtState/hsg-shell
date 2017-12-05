@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section class="hsg-section">
+<section class="hsg-section" data-template="app:fix-links">
     <form method="get" action="$app/search" class="filter-form" id="sectionFilter">
         <fieldset data-template="search:load-sections">
             <legend class="sr-only">Select sections</legend>
@@ -12,7 +12,7 @@
                     <li data-template="templates:each" data-template-from="sections" data-template-to="section">
                         <input class="hsg-search-input section" type="checkbox" name="within" data-template="search:filter-input-attributes"/>
                         <label class="hsg-search-input-label" data-template="search:label">
-                            <span data-template="search:label-string"/>
+                            <span data-template="search:label-contents"/>
                         </label>
                     </li>
                 </ul>

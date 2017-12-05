@@ -1447,11 +1447,16 @@ else if (matches($exist:path, '^/education/?')) then
 
 (: handle search requests :)
 else if (matches($exist:path, '^/search/?')) then
-    let $search-query := request:get-parameter("q", ())
+    let $query := request:get-parameter("q", ())
+    let $start-date := request:get-parameter("start_date", ())
+    let $end-date := request:get-parameter("end_date", ())
+    let $start-time := request:get-parameter("start_time", ())
+    let $end-time := request:get-parameter("end_time", ())
+    let $log := console:log("q: " || $query || " start_date: " || $start-date || " end_date: " || $end-date || " start_time: " || $start-time || " end_time: " || $end-time)
     let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
     let $page :=
         (: If a search query is present, show the results template :)
-        if ( string-length($search-query) gt 0 ) then
+        if (string-length($query) gt 0 or string-length($start-date) gt 0 or string-length($end-date) gt 0) then
             'search/search-result.html'
         else if ($fragments[1]) then
             switch ($fragments[1])
@@ -1464,7 +1469,14 @@ else if (matches($exist:path, '^/search/?')) then
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <forward url="{$exist:controller}/pages/{$page}"/>
             <view>
-                <forward url="{$exist:controller}/modules/view.xql"/>
+                <forward url="{$exist:controller}/modules/view.xql">
+                    <add-parameter name="suppress-sitewide-search-field" value="true"/>
+                    <add-parameter name="query" value="{$query}"/>
+                    <add-parameter name="start-date" value="{$start-date}"/>
+                    <add-parameter name="end-date" value="{$end-date}"/>
+                    <add-parameter name="start-time" value="{$start-time}"/>
+                    <add-parameter name="end-time" value="{$end-time}"/>
+                </forward>
             </view>
     		<error-handler>
     			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
