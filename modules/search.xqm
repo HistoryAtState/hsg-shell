@@ -488,6 +488,46 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start
     let $query-start-time := util:system-time()
     let $hits := search:query-sections($within, $volume-id, $query, $start-date, $end-date, $start-time, $end-time)
     let $hits := search:filter($hits)
+    let $adjusted-sort-by := 
+        (: if no query string is provided, relevance sorting is essentially random, so we'll fall back date sorting :)
+        if (string-length($query) eq 0) then ($sort-by, "date_asc")[1] else "relevance"
+    let $ordered-hits := 
+        switch ($adjusted-sort-by)
+            case "date_asc" return
+                let $dated := $hits[@frus:doc-dateTime-min]
+                let $undated := $hits[not(@frus:doc-dateTime-min)]
+                return
+                    (
+                        for $hit in $dated
+                        order by $hit/@frus:doc-dateTime-min 
+                        return
+                            $hit
+                        ,
+                        for $hit in $undated
+                        order by ft:score($hit)
+                        return
+                            $hit
+                    )                            
+            case "date_desc" return
+                let $dated := $hits[@frus:doc-dateTime-min]
+                let $undated := $hits[not(@frus:doc-dateTime-min)]
+                return
+                    (
+                        for $hit in $dated
+                        order by $hit/@frus:doc-dateTime-min descending
+                        return
+                            $hit
+                        ,
+                        for $hit in $undated
+                        order by ft:score($hit)
+                        return
+                            $hit
+                    )
+            default (: case "relevance" :) return
+                for $hit in $hits
+                order by ft:score($hit)
+                return
+                    $hit
     let $query-end-time := util:system-time()
     let $hit-count := count($hits)
     let $window := subsequence($ordered-hits, $start, $per-page)
