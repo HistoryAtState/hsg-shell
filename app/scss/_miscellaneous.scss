@@ -109,3 +109,12 @@ html input[disabled] {
   text-overflow: ellipsis;
   padding-left: 1px;
 }
+
+.hideContent {
+  overflow: hidden;
+  height: 7em;
+}
+
+.showContent {
+  height: auto;
+}
