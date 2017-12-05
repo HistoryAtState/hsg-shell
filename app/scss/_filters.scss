@@ -45,6 +45,13 @@
   margin-left: 2.7rem;
 }
 
+.hsg-search-results aside {
+  @media (max-width: 1199px) {
+    border-bottom: $default-border-style;
+    padding-bottom: 3rem;
+  }
+}
+
 aside {
   .hsg-section {
       border-bottom: $default-border-style;
