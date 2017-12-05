@@ -6,7 +6,7 @@
         </div>
         <div class="btn-group">
             <button type="button" class="hsg-sort-button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="">
-                <span id="sort-by-label"/>
+                <span data-template="search:sort-by-value" id="sort-by-label"/>
                 <i class="glyphicon glyphicon-chevron-down"/>
             </button>
             <ul class="dropdown-menu dropdown-menu-right" id="sort-by">
@@ -21,6 +21,6 @@
                 </li>
             </ul>
         </div>
-        <input type="hidden" name="sorting" id="sorting" value="date_desc"/>
+        <input type="hidden" name="sorting" id="sorting" data-template="templates:form-control" value="relevance"/>
     </form>
 </div>
