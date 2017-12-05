@@ -639,7 +639,12 @@ declare function search:result-heading($node, $model) {
                     else
                         $result/tei:head[1] ! functx:remove-elements-deep(., 'note')
                 let $document := $publication-config?select-document($document-id)
-                let $document-heading := ($document//tei:title[@type='volume'], $document//tei:titleStmt/tei:title[@type = "short"])[1]
+                let $document-heading := 
+                    if ($document//tei:title[@type='volume']) then
+                        ($document//tei:title[@type eq "sub-series"], $document//tei:title[@type eq "volume-number"], $document//tei:title[@type eq "volume"])[. ne ""]
+                        => string-join(", ")
+                    else
+                        $document//tei:titleStmt/tei:title[@type = "short"]
                 let $result-heading := ($section-heading || ' (' || $document-heading || ')')
                 return
                     $result-heading
