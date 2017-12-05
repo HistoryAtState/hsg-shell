@@ -136,12 +136,19 @@ declare variable $search:DISPLAY := map {
             return
                 <div>
                     <dl class="dl-horizontal">
-                        <dt>Recorded Date</dt><dd>{$date-string}</dd>
-                        <dt>Recorded Location</dt><dd>{$placeName-string}</dd>
-                        <dt>Encoded Date</dt><dd><code>{serialize(element date {$date/@*})}</code></dd>
-                        <dt>Document ID</dt><dd>{$vol-id/string()}/{$doc-id/string()}</dd>
-                        { if ($score) then (<dt>Keyword Relevance</dt>, <dd>{$score}</dd>) else () }
+                        { 
+                            if ($doc/@subtype eq "historical-document") then 
+                                (
+                                    <dt>Recorded Date</dt>,<dd>{($date-string, <em>(None)</em>)[. ne ""][1]}</dd>,
+                                    <dt>Recorded Location</dt>,<dd>{($placeName-string, <em>(None)</em>)[. ne ""][1]}</dd>,
+                                    <dt>Encoded Date</dt>,<dd>{if ($date) then <code>{serialize(element date {$date/@*})}</code> else <em>(None)</em>}</dd>
+                                )
+                            else
+                                ()
+                        }
+                        <dt>Resource ID</dt><dd>{$vol-id/string()}/{$doc-id/string()}</dd>
                         { if ($has-matches) then (<dt>Keyword Results</dt>, <dd>{$kwic}</dd>) else () }
+                        { if ($score) then (<dt>Keyword Relevance</dt>, <dd>{$score}</dd>) else () }
                     </dl>
                 </div>
         },
