@@ -166,10 +166,6 @@ declare function search:load-sections($node, $model) {
                 <label>Department History</label>
             </section>,
             <section>
-                <id>milestones</id>
-                <label>Milestones</label>
-            </section>,
-            <section>
                 <id>countries</id>
                 <label>Countries</label>
             </section>,
