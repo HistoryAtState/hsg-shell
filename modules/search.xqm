@@ -847,24 +847,23 @@ declare
     %templates:default("min-hits", 0)
     %templates:default("max-pages", 10)
 function search:paginate($node as node(), $model as map(*), $start as xs:int, $per-page as xs:int, $min-hits as xs:int,
-    $max-pages as xs:int, $volume-id as xs:string*) {
+    $max-pages as xs:int) {
     if ($min-hits < 0 or $model?query-info?result-count >= $min-hits) then
         element { node-name($node) } {
             $node/@*,
             let $params :=
-                    string-join(
-                        (
-                            ('&amp;q=' || encode-for-uri($model?query-info?q)),
-                            ($model?query-info?within[. ne ''] ! ('within=' || .)),
-                            $volume-id ! ("volume-id=" || .),
-                            "start_date=" || request:get-parameter('start_date', ''),
-                            "end_date=" || request:get-parameter('end_date', ''),
-                            "start_time=" || request:get-parameter('start_time', ''),
-                            "end_time=" || request:get-parameter('end_time', ''),
-                            "per-page=" || $per-page
-                        ),
-                        '&amp;'
-                    )
+                string-join(
+                    (
+                        $model?query-info?q[. ne ""]          ! ("q=" || encode-for-uri(.)),
+                        $model?query-info?within[. ne ""]     ! ('within=' || .),
+                        $model?query-info?volume-id[. ne ""]  ! ("volume-id=" || .),
+                        $model?query-info?start-date[. ne ""] ! ("start_date=" || .),
+                        $model?query-info?end-date[. ne ""]   ! ("end_date=" || .),
+                        $model?query-info?start-time[. ne ""] ! ("start_time=" || .),
+                        $model?query-info?end-time[. ne ""]   ! ("end_time=" || .)
+                    ),
+                    '&amp;'
+                ) ! ("&amp;" || .)
             let $count := xs:integer(ceiling($model?query-info?result-count) div $per-page) + (if ($model?query-info?result-count mod $per-page = 0) then 0 else 1)
             return (
                 if ($start = 1) then (
