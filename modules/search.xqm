@@ -100,6 +100,58 @@ declare variable $search:DISPLAY := map {
         "href": function($trips) {
             "$app/departmenthistory/travels/" || $trips/trip[1]/@role || "/" || $trips/trip[1]/@who
         }
+    },
+    "frus": map {
+        "title": function($doc) {
+            let $heading := ($doc//tei:head)[1]
+            let $heading-string := 
+                if ($heading ne '') then 
+                    $heading//text()[not(./ancestor::tei:note)] 
+                        => string-join() 
+                        => normalize-space()
+                else 
+                    ()
+            let $heading-stripped := 
+                if (matches($heading-string, ('^' || $doc/@n || '\.'))) then 
+                    replace($heading-string, '^' || $doc/@n || '\.\s+(.+)$', '$1') 
+                else if (matches($heading-string, ('^No\. ' || $doc/@n || '[^\d]'))) then 
+                    replace($heading-string, '^No\. ' || $doc/@n || '(.+)$', '$1') 
+                else 
+                    $heading-string
+            return
+                $heading-stripped
+        },
+        "summary": function($doc) {
+            let $doc-id := $doc/@xml:id
+            let $vol-id := root($doc)/tei:TEI/@xml:id
+            let $dateline := ($doc//tei:dateline[.//tei:date])[1]
+            let $date := ($dateline//tei:date)[1]
+            let $date-string := $date//text()[not(./ancestor::tei:note)] => string-join() => normalize-space()
+            let $placeName := ($doc//tei:placeName)[1]
+            let $placeName-string := $placeName//text()[not(./ancestor::tei:note)] => string-join() => normalize-space()
+            let $matches-to-highlight := 5
+            let $trimmed-hit := search:trim-matches(util:expand($doc), $matches-to-highlight)
+            let $has-matches := $trimmed-hit//exist:match
+            let $kwic := if ($has-matches) then kwic:summarize($trimmed-hit, <config xmlns="" width="60"/>)/* else ()
+            let $score := ft:score($doc)
+            return
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>Recorded Date</dt><dd>{$date-string}</dd>
+                        <dt>Recorded Location</dt><dd>{$placeName-string}</dd>
+                        <dt>Encoded Date</dt><dd><code>{serialize(element date {$date/@*})}</code></dd>
+                        <dt>Document ID</dt><dd>{$vol-id/string()}/{$doc-id/string()}</dd>
+                        { if ($score) then (<dt>Keyword Relevance</dt>, <dd>{$score}</dd>) else () }
+                        { if ($has-matches) then (<dt>Keyword Results</dt>, <dd>{$kwic}</dd>) else () }
+                    </dl>
+                </div>
+        },
+        "href": function($doc) {
+            let $doc-id := $doc/@xml:id
+            let $vol-id := root($doc)/tei:TEI/@xml:id
+            return
+                "https://history.state.gov/historicaldocuments/" || $vol-id || "/" || $doc-id
+        }
     }
 };
 
@@ -604,11 +656,19 @@ declare function search:result-heading($node, $model) {
 declare function search:result-summary($node, $model) {
     let $matches-to-highlight := 10
     let $result := $model?result
+    let $publication-has-custom-function := map:contains($search:DISPLAY, $config:PUBLICATION-COLLECTIONS?(util:collection-name($result)))
+    let $element-name-has-custom-function := map:contains($search:DISPLAY, local-name($result))
+    let $log := console:log("publication has custom function: " || $publication-has-custom-function || " element name has custom function: " || $element-name-has-custom-function)
     return
         if ($result/@xml:id = 'index') then
             '[Back of book index: too many hits to display]'
-        (: see if we've defined a custom function for displaying result summaries :)
-        else if (map:contains($search:DISPLAY, local-name($result))) then
+        (: see if we've defined a custom function for this publication to display result summaries :)
+        else if ($publication-has-custom-function) then
+            let $summary := $search:DISPLAY?($config:PUBLICATION-COLLECTIONS?(util:collection-name($result)))?summary
+            return
+                $summary($result)
+        (: see if we've defined a custom function for this result's element name to display result summaries :)
+        else if ($element-name-has-custom-function) then
             let $summary := $search:DISPLAY?(local-name($result))?summary
             return
                 typeswitch ($summary)
@@ -623,7 +683,7 @@ declare function search:result-summary($node, $model) {
                 kwic:summarize($trimmed-hit, <config xmlns="" width="60"/>)/*
 };
 
-declare function search:result-link($node, $model) {
+declare function search:result-href-attribute($node, $model) {
     let $result := $model?result
     let $href :=
         typeswitch ($result)
@@ -640,10 +700,8 @@ declare function search:result-link($node, $model) {
                         $display?href($result)
                     else
                         "https://history.state.gov"
-    (: display URL is currently hardcoded to hsg, TODO use actual server name, url structure, etc. :)
-    let $display := 'https://history.state.gov' || substring-after($href, '$app')
     return
-        <a href="{$href}">{$display}</a>
+        attribute href { $href }
 };
 
 declare function search:trim-matches($node as element(), $keep as xs:integer) {
