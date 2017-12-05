@@ -56,10 +56,9 @@ declare variable $search:SECTIONS := map {
             }
         }
     ),
-    "milestones": "milestones",
+    "retired": ("milestones", "education"),
     "countries": ("countries", "archives"),
     "conferences": "conferences",
-    "edu": "education",
     "frus-history": "frus-history-monograph",
     "about": ("hac", "faq")
 };
@@ -100,6 +99,58 @@ declare variable $search:DISPLAY := map {
         "href": function($trips) {
             "$app/departmenthistory/travels/" || $trips/trip[1]/@role || "/" || $trips/trip[1]/@who
         }
+    },
+    "frus": map {
+        "title": function($doc) {
+            let $heading := ($doc//tei:head)[1]
+            let $heading-string := 
+                if ($heading ne '') then 
+                    $heading//text()[not(./ancestor::tei:note)] 
+                        => string-join() 
+                        => normalize-space()
+                else 
+                    ()
+            let $heading-stripped := 
+                if (matches($heading-string, ('^' || $doc/@n || '\.'))) then 
+                    replace($heading-string, '^' || $doc/@n || '\.\s+(.+)$', '$1') 
+                else if (matches($heading-string, ('^No\. ' || $doc/@n || '[^\d]'))) then 
+                    replace($heading-string, '^No\. ' || $doc/@n || '(.+)$', '$1') 
+                else 
+                    $heading-string
+            return
+                $heading-stripped
+        },
+        "summary": function($doc) {
+            let $doc-id := $doc/@xml:id
+            let $vol-id := root($doc)/tei:TEI/@xml:id
+            let $dateline := ($doc//tei:dateline[.//tei:date])[1]
+            let $date := ($dateline//tei:date)[1]
+            let $date-string := $date//text()[not(./ancestor::tei:note)] => string-join() => normalize-space()
+            let $placeName := ($doc//tei:placeName)[1]
+            let $placeName-string := $placeName//text()[not(./ancestor::tei:note)] => string-join() => normalize-space()
+            let $matches-to-highlight := 5
+            let $trimmed-hit := search:trim-matches(util:expand($doc), $matches-to-highlight)
+            let $has-matches := $trimmed-hit//exist:match
+            let $kwic := if ($has-matches) then kwic:summarize($trimmed-hit, <config xmlns="" width="60"/>)/* else ()
+            let $score := ft:score($doc)
+            return
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>Recorded Date</dt><dd>{$date-string}</dd>
+                        <dt>Recorded Location</dt><dd>{$placeName-string}</dd>
+                        <dt>Encoded Date</dt><dd><code>{serialize(element date {$date/@*})}</code></dd>
+                        <dt>Document ID</dt><dd>{$vol-id/string()}/{$doc-id/string()}</dd>
+                        { if ($score) then (<dt>Keyword Relevance</dt>, <dd>{$score}</dd>) else () }
+                        { if ($has-matches) then (<dt>Keyword Results</dt>, <dd>{$kwic}</dd>) else () }
+                    </dl>
+                </div>
+        },
+        "href": function($doc) {
+            let $doc-id := $doc/@xml:id
+            let $vol-id := root($doc)/tei:TEI/@xml:id
+            return
+                "https://history.state.gov/historicaldocuments/" || $vol-id || "/" || $doc-id
+        }
     }
 };
 
@@ -127,16 +178,16 @@ declare function search:load-sections($node, $model) {
                 <label>Conferences</label>
             </section>,
             <section>
-                <id>edu</id>
-                <label>Educational Resources</label>
-            </section>,
-            <section>
                 <id>frus-history</id>
                 <label>History of the <em>Foreign Relations</em> Series</label>
             </section>,
             <section>
                 <id>about</id>
                 <label>About (FAQ, Advisory Committee Minutes)</label>
+            </section>,
+            <section>
+                <id>retired</id>
+                <label>Retired Resources (Milestones)</label>
             </section>
         )
     }
@@ -229,14 +280,14 @@ function search:component-checked($node as node(), $model as map(*)) {
 };
 
 (:~
- : The string containing the component title (label)
- : @return  String
+ : The node(s) containing the component title (label)
+ : @return  Child element and/or text nodes of label
 ~:)
 declare
     %templates:replace
-function search:label-string($node as node(), $model as map(*)) {
+function search:label-contents($node as node(), $model as map(*)) {
     let $component := $model?component
-    return $model($component)/label/string()
+    return $model($component)/label/node()
 };
 
 declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
@@ -350,18 +401,12 @@ declare %private function search:filter-results($out, $in) {
 declare %private function search:filter($hits) {
     (:  Filter out matches which are in divs without xml:id or have a nested div.
         Limit the result set to MAX_HITS_SHOWN. :)
-    let $limited :=
-        subsequence(
-            subsequence($hits, 1, $search:MAX_HITS_SHOWN * 2)[@xml:id][not(tei:div/@xml:id)]
+    subsequence(
+        subsequence($hits, 1, $search:MAX_HITS_SHOWN * 2)[@xml:id][not(tei:div/@xml:id)]
             |
             subsequence($hits, 1, $search:MAX_HITS_SHOWN)[not(self::tei:div)],
-            1, $search:MAX_HITS_SHOWN
-        )
-    (: Reorder the remaining hits by score :)
-    for $hit in $limited
-    order by ft:score($hit)
-    return
-        $hit
+        1, $search:MAX_HITS_SHOWN
+    )
 };
 
 (:~
@@ -398,11 +443,11 @@ function search:show-number-of-filter-hits($node, $model) {
 declare
     %templates:replace
     %templates:default("sort-by", "")
-function search:sort-by($node as node(), $model as map(*), $sort-by) {
-        element { local-name($node) } {
-            $node/@*[local-name() != "href"],
-            attribute class { if ($node/@id eq $sort-by) then 'active' else () },
-            templates:process($node/node(), $model)
+function search:sort-by($node as node(), $model as map(*), $sort-by as xs:string) {
+    element { local-name($node) } {
+        $node/@*[local-name() != "href"],
+        attribute class { if ($node/@id eq $sort-by) then 'active' else () },
+        templates:process($node/node(), $model)
     }
 };
 
@@ -410,8 +455,8 @@ function search:sort-by($node as node(), $model as map(*), $sort-by) {
  : TODO: Replace strings in anchors with search:set-sort-by-value()
  : Set cases of sorting options and set a default value
 ~:)
-declare function search:set-sort-by-value($value) {
-    switch($value)
+declare function search:set-sort-by-value($sort-by as xs:string) {
+    switch($sort-by)
         case "date_asc" return "Dates (oldest first)"
         case "date_desc" return "Dates (most recent first)"
         default return "Relevance"
@@ -425,7 +470,7 @@ declare function search:set-sort-by-value($value) {
 declare
     %templates:wrap
     %templates:default("sort-by", "")
-function search:sort-by-value ($node as node(), $model as map(*), $sort-by) {
+function search:sort-by-value($node as node(), $model as map(*), $sort-by as xs:string) {
     let $value := search:set-sort-by-value($sort-by)
     return
         element { local-name($node) } {
@@ -437,34 +482,77 @@ function search:sort-by-value ($node as node(), $model as map(*), $sort-by) {
 declare
     %templates:default("start", 1)
     %templates:default("per-page", 10)
-    (:
-    declare variable $search:SORTBY := 'relevance';
-    declare variable $search:SORTORDER := 'descending';
-    :)
-function search:load-results($node as node(), $model as map(*), $q as xs:string, $within as xs:string*,
-$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
-    let $start-time := util:system-time()
-    let $hits := search:query-sections($within, $volume-id, $q)
+    %templates:default("sort-by", "relevance")
+function search:load-results($node as node(), $model as map(*), $query as xs:string*, $within as xs:string*,
+$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?, $sort-by as xs:string?) {
+    let $query-start-time := util:system-time()
+    let $hits := search:query-sections($within, $volume-id, $query, $start-date, $end-date, $start-time, $end-time)
     let $hits := search:filter($hits)
-    let $end-time := util:system-time()
-    let $ordered-hits :=
-        for $hit in $hits
-        order by ft:score($hit) descending
-        return $hit
-    let $hit-count := count($ordered-hits)
+    let $adjusted-sort-by := 
+        (: if no query string is provided, relevance sorting is essentially random, so we'll fall back on date sorting :)
+        if (string-length($query) eq 0) then 
+            if ($sort-by eq "date_desc") then $sort-by else "date_asc"
+        else 
+            $sort-by
+    let $ordered-hits := 
+        switch ($adjusted-sort-by)
+            case "date_asc" return
+                let $dated := $hits[@frus:doc-dateTime-min]
+                let $undated := $hits[not(@frus:doc-dateTime-min)]
+                return
+                    (
+                        for $hit in $dated
+                        order by $hit/@frus:doc-dateTime-min 
+                        return
+                            $hit
+                        ,
+                        for $hit in $undated
+                        order by ft:score($hit)
+                        return
+                            $hit
+                    )                            
+            case "date_desc" return
+                let $dated := $hits[@frus:doc-dateTime-min]
+                let $undated := $hits[not(@frus:doc-dateTime-min)]
+                return
+                    (
+                        for $hit in $dated
+                        order by $hit/@frus:doc-dateTime-min descending
+                        return
+                            $hit
+                        ,
+                        for $hit in $undated
+                        order by ft:score($hit)
+                        return
+                            $hit
+                    )
+            default (: case "relevance" :) return
+                for $hit in $hits
+                order by ft:score($hit)
+                return
+                    $hit
+    let $query-end-time := util:system-time()
+    let $hit-count := count($hits)
     let $window := subsequence($ordered-hits, $start, $per-page)
+    let $log := console:log("search:load-results has a window of " || count($window) || " hits")
     let $query-info :=  map {
         "results": $window,
         "query-info": map {
-            "q": $q,
+            "q": $query,
             "within": $within,
-            (: "volume-id": $volume-id, :)
+            "start-date": $start-date,
+            "end-date": $end-date,
+            "start-time": $start-time,
+            "end-time": $end-time,
+            "sort-by": $sort-by,
+            "volume-id": $volume-id,
+            "results-doc-ids": $hits/root()/tei:TEI/@xml:id/string(),
             "start": $start,
             "end": $start + count($window) - 1,
             "perpage": $per-page,
             "result-count": $hit-count,
             "results-shown": count($hits),
-            "query-duration": seconds-from-duration($end-time - $start-time)
+            "query-duration": seconds-from-duration($query-end-time - $query-start-time)
         }
     }
     let $html := templates:process($node/*, map:new(($model, $query-info)))
@@ -473,90 +561,91 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
 };
 
 declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
-    $query as xs:string) {
-    if (exists($volume-ids)) then
-        let $vols := for $volume-id in $volume-ids return collection($config:FRUS_VOLUMES_COL)/id($volume-id)
-        return
-            $vols//tei:div[ft:query(., $query)]
-    else if (exists($sections) and $sections != "") then
+    $query as xs:string, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?) {
+    if (exists($sections) and not($sections = ("", "entire_site"))) then
         for $section in $sections
         for $category in $search:SECTIONS?($section)
         return
-            search:query-section($category, $query)
+            search:query-section($category, $volume-ids, $query, $start-date, $end-date, $start-time, $end-time)
     else
-        map:for-each($search:SECTIONS, function($section, $categories) {
-            for $category in $categories
-            return
-                search:query-section($category, $query)
- 
-        })
+        map:for-each(
+            $search:SECTIONS, 
+            function($section, $categories) {
+                for $category in $categories
+                return
+                    search:query-section($category, $volume-ids, $query, $start-date, $end-date, $start-time, $end-time)
+            }
+        )
 };
 
-declare function search:query-section($category, $query as xs:string*) {
-
-    let $start-date:=request:get-parameter('start_date', '')
-    let $end-date:=request:get-parameter('end_date', '')
-    let $start-time:=request:get-parameter('start_time', '')
-    let $end-time:=request:get-parameter('end_time', '')
-    
-let $c:=console:log($start-date || ' -- ' || $end-date || ' : ' || $category || ' -- ' || $query)
-
-
-(:let $q := request:get-parameter("q", ())[. ne ""]:)
-(:let $order-by := request:get-parameter("order-by", "date"):)
-(:let $start := request:get-parameter("start", 1) cast as xs:integer:)
-(:let $per-page := request:get-parameter("per-page", 10) cast as xs:integer:)
-let $query-start := util:system-time()
-let $timezone := 
-    (: We want to assume times supplied in a query are US Eastern, unless otherwise specified. 
-       The UTC offset for US Eastern changes depending on daylight savings time.
-       We could use fn:implicit-timezone(), but this depends upon the query context, which is set by the system/environment.
-       On the hsg production servers, this function returns +00:00, or UTC. 
-       So the following is a kludge to determine the UTC offset for US Eastern, sensitive to daylight savings time. :)
-    functx:duration-from-timezone(fn:format-dateTime(current-dateTime(), "[Z]", (), (), "America/New_York"))
-let $range-start := 
-    if ($start-date ne "") then
-        ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
-            => fd:normalize-low($timezone)
-    else
-        ()
-let $range-end := 
-    if ($end-date ne "") then
-        ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
-            => fd:normalize-high($timezone)
-    else if ($start-date ne "") then
-        ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
-            => fd:normalize-high($timezone)
-    else
-        ()
-        
-        let $log := console:log("starting search for " || " start-date=" || $start-date || 
-        " (range-start=" || $range-start || ") end-date=" || $end-date || " (range-end=" || $range-end || ") q=" || $query)
-
+declare function search:query-section($category, $volume-ids as xs:string*, $query as xs:string*, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?) {
+    let $log := console:log($start-date || ' -- ' || $end-date || ' : ' || (if ($category instance of map(*)) then $category?id else $category) || ' -- ' || $query)
+    let $timezone := 
+        (: We want to assume times supplied in a query are US Eastern, unless otherwise specified. 
+           The UTC offset for US Eastern changes depending on daylight savings time.
+           We could use fn:implicit-timezone(), but this depends upon the query context, which is set by the system/environment.
+           On the hsg production servers, this function returns +00:00, or UTC. 
+           So the following is a kludge to determine the UTC offset for US Eastern, sensitive to daylight savings time. :)
+        functx:duration-from-timezone(fn:format-dateTime(current-dateTime(), "[Z]", (), (), "America/New_York"))
+    let $range-start := 
+        if ($start-date ne "") then
+            ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
+                => fd:normalize-low($timezone)
+        else
+            ()
+    let $range-end := 
+        if ($end-date ne "") then
+            ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
+                => fd:normalize-high($timezone)
+        (: if end-date is omitted, then treat the high end of the start day as the end :)
+        else if ($start-date ne "") then
+            $start-date
+                => fd:normalize-high($timezone)
+        else
+            ()
+    let $log := console:log("range-start: " || $range-start || " range-end: " || $range-end)
+    let $is-date-query := exists($range-start) and exists($range-end)
+    let $is-keyword-query := string-length($query) gt 0
     return
     typeswitch($category)
         case xs:string return
             switch ($category)
                 case "frus" return 
                     (console:log('frus search'), 
-                    if ((string($range-start) ne '') and (string($query) ne '')) then 
-                        (console:log('query ' || $query),
-                        (: special treatment for frus dates  :)
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
-                            [@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
+                    let $vols := 
+                        if (exists($volume-ids)) then 
+                            for $volume-id in $volume-ids 
+                            return 
+                                collection($config:FRUS_VOLUMES_COL)/id($volume-id)
+                        else
+                                collection($config:FRUS_VOLUMES_COL)
+                    let $hits :=
+                        if ($is-date-query and $is-keyword-query) then 
+                            (console:log('query ' || $query),
+                            (: dates + keyword  :)
+                            $vols//tei:div[ft:query(., $query)]
+                                [@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
+                            )
+                        else if ($is-date-query) then 
+                            (: dates  :)
+                            (console:log('no query, just dates ' || count($vols)),
+                            $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
+                            )
+                        else if ($is-keyword-query) then
+                            (: keyword  :)
+                            $vols//tei:div[ft:query(., $query)]
+                        else
+                            (: no parameters provided :)
+                            ()
+                    return
+                        (console:log(count($hits) || " hits"),
+                        $hits
                         )
-                    else if (string($range-start) ne '') then 
-                    (:  TODO doesn't wrk yet  :)
-                        (console:log('no query, just dates '),
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
-                        )
-                    else
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
                     )
                 default return 
                     collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
         default return
-            $category?query($query)
+            $category?query($query) 
 };
 
 declare function search:result-heading($node, $model) {
@@ -574,7 +663,12 @@ declare function search:result-heading($node, $model) {
                     else
                         $result/tei:head[1] ! functx:remove-elements-deep(., 'note')
                 let $document := $publication-config?select-document($document-id)
-                let $document-heading := ($document//tei:title[@type='volume'], $document//tei:titleStmt/tei:title[@type = "short"])[1]
+                let $document-heading := 
+                    if ($document//tei:title[@type='volume']) then
+                        ($document//tei:title[@type eq "sub-series"], $document//tei:title[@type eq "volume-number"], $document//tei:title[@type eq "volume"])[. ne ""]
+                        => string-join(", ")
+                    else
+                        $document//tei:titleStmt/tei:title[@type = "short"]
                 let $result-heading := ($section-heading || ' (' || $document-heading || ')')
                 return
                     $result-heading
@@ -590,11 +684,19 @@ declare function search:result-heading($node, $model) {
 declare function search:result-summary($node, $model) {
     let $matches-to-highlight := 10
     let $result := $model?result
+    let $publication-has-custom-function := map:contains($search:DISPLAY, $config:PUBLICATION-COLLECTIONS?(util:collection-name($result)))
+    let $element-name-has-custom-function := map:contains($search:DISPLAY, local-name($result))
+    let $log := console:log("publication has custom function: " || $publication-has-custom-function || " element name has custom function: " || $element-name-has-custom-function)
     return
         if ($result/@xml:id = 'index') then
             '[Back of book index: too many hits to display]'
-        (: see if we've defined a custom function for displaying result summaries :)
-        else if (map:contains($search:DISPLAY, local-name($result))) then
+        (: see if we've defined a custom function for this publication to display result summaries :)
+        else if ($publication-has-custom-function) then
+            let $summary := $search:DISPLAY?($config:PUBLICATION-COLLECTIONS?(util:collection-name($result)))?summary
+            return
+                $summary($result)
+        (: see if we've defined a custom function for this result's element name to display result summaries :)
+        else if ($element-name-has-custom-function) then
             let $summary := $search:DISPLAY?(local-name($result))?summary
             return
                 typeswitch ($summary)
@@ -609,7 +711,7 @@ declare function search:result-summary($node, $model) {
                 kwic:summarize($trimmed-hit, <config xmlns="" width="60"/>)/*
 };
 
-declare function search:result-link($node, $model) {
+declare function search:result-href-attribute($node, $model) {
     let $result := $model?result
     let $href :=
         typeswitch ($result)
@@ -626,10 +728,8 @@ declare function search:result-link($node, $model) {
                         $display?href($result)
                     else
                         "https://history.state.gov"
-    (: display URL is currently hardcoded to hsg, TODO use actual server name, url structure, etc. :)
-    let $display := 'https://history.state.gov' || substring-after($href, '$app')
     return
-        <a href="{$href}">{$display}</a>
+        attribute href { $href }
 };
 
 declare function search:trim-matches($node as element(), $keep as xs:integer) {
@@ -735,9 +835,14 @@ declare function search:trim-words($string as xs:string, $number as xs:integer) 
 declare
     %templates:wrap
 function search:select-volumes($node as node(), $model as map(*), $volume-id as xs:string*) {
-    let $vols-in-db := collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]/@xml:id
-    let $vols := collection("/db/apps/frus/bibliography")/volume[@id = $vols-in-db]
-
+    let $frus-volume-ids := $model?query-info?results-doc-ids
+    let $volume-ids := 
+        if (exists($frus-volume-ids)) then
+            $frus-volume-ids
+        else
+            (: full text volumes in the database :)
+            collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]/@xml:id
+    let $vols := collection("/db/apps/frus/bibliography")/volume[@id = $volume-ids]
     for $vol in $vols
         let $vol-id := $vol/@id
         let $title := 
@@ -766,24 +871,24 @@ declare
     %templates:default("min-hits", 0)
     %templates:default("max-pages", 10)
 function search:paginate($node as node(), $model as map(*), $start as xs:int, $per-page as xs:int, $min-hits as xs:int,
-    $max-pages as xs:int, $volume-id as xs:string*) {
+    $max-pages as xs:int, $sort-by as xs:string) {
     if ($min-hits < 0 or $model?query-info?result-count >= $min-hits) then
         element { node-name($node) } {
             $node/@*,
             let $params :=
-                    string-join(
-                        (
-                            ('&amp;q=' || encode-for-uri($model?query-info?q)),
-                            ($model?query-info?within[. ne ''] ! ('within=' || .)),
-                            $volume-id ! ("volume-id=" || .),
-                            "start_date=" || request:get-parameter('start_date', ''),
-                            "end_date=" || request:get-parameter('end_date', ''),
-                            "start_time=" || request:get-parameter('start_time', ''),
-                            "end_time=" || request:get-parameter('end_time', ''),
-                            "per-page=" || $per-page
-                        ),
-                        '&amp;'
-                    )
+                string-join(
+                    (
+                        $model?query-info?q[. ne ""]          ! ("q=" || encode-for-uri(.)),
+                        $model?query-info?within[not(. = ("", "entire_site"))]   ! ('within=' || .),
+                        $model?query-info?volume-id[. ne ""]  ! ("volume-id=" || .),
+                        $model?query-info?start-date[. ne ""] ! ("start_date=" || .),
+                        $model?query-info?end-date[. ne ""]   ! ("end_date=" || .),
+                        $model?query-info?start-time[. ne ""] ! ("start_time=" || .),
+                        $model?query-info?end-time[. ne ""]   ! ("end_time=" || .),
+                        $model?query-info?sort-by[. ne ""]   ! ("sort-by=" || .)
+                    ),
+                    '&amp;'
+                ) ! ("&amp;" || .)
             let $count := xs:integer(ceiling($model?query-info?result-count) div $per-page) + (if ($model?query-info?result-count mod $per-page = 0) then 0 else 1)
             return (
                 if ($start = 1) then (
