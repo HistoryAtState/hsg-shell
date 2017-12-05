@@ -666,7 +666,8 @@ declare function search:result-heading($node, $model) {
 declare function search:result-summary($node, $model) {
     let $matches-to-highlight := 10
     let $result := $model?result
-    let $publication-has-custom-function := map:contains($search:DISPLAY, $config:PUBLICATION-COLLECTIONS?(util:collection-name($result)))
+    let $publication-by-collection := map:contains($config:PUBLICATION-COLLECTIONS, util:collection-name($result))
+    let $publication-has-custom-function := if ($publication-by-collection) then map:contains($search:DISPLAY, $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))) else ()
     let $element-name-has-custom-function := map:contains($search:DISPLAY, local-name($result))
     let $log := console:log("publication has custom function: " || $publication-has-custom-function || " element name has custom function: " || $element-name-has-custom-function)
     return
