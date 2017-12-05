@@ -484,16 +484,16 @@ declare
     %templates:default("per-page", 10)
 function search:load-results($node as node(), $model as map(*), $q as xs:string*, $within as xs:string*,
 $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start-date as xs:string*, $end-date as xs:string*) {
-    let $start-time := util:system-time()
     let $hits := search:query-sections($within, $volume-id, $q, $start-date, $end-date)
     %templates:default("sort-by", "relevance")
+    let $query-start-time := util:system-time()
     let $hits := search:filter($hits)
-    let $end-time := util:system-time()
     let $ordered-hits :=
         for $hit in $hits
         order by ft:score($hit) descending
         return $hit
     let $hit-count := count($ordered-hits)
+    let $query-end-time := util:system-time()
     let $window := subsequence($ordered-hits, $start, $per-page)
     let $log := console:log("search:load-results has a window of " || count($window) || " hits")
     let $query-info :=  map {
@@ -508,7 +508,7 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start
             "perpage": $per-page,
             "result-count": $hit-count,
             "results-shown": count($hits),
-            "query-duration": seconds-from-duration($end-time - $start-time)
+            "query-duration": seconds-from-duration($query-end-time - $query-start-time)
         }
     }
     let $html := templates:process($node/*, map:new(($model, $query-info)))
