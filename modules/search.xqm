@@ -575,7 +575,7 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
         functx:duration-from-timezone(fn:format-dateTime(current-dateTime(), "[Z]", (), (), "America/New_York"))
     let $range-start := 
         if ($start-date ne "") then
-            ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
+             ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
                 => fd:normalize-low($timezone)
         else
             ()

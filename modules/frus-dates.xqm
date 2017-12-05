@@ -7,41 +7,49 @@ import module namespace functx="http://www.functx.com";
 declare variable $fd:app-base := "/exist/apps/frus-dates/";
 
 declare function fd:normalize-low($date as xs:string, $timezone as xs:dayTimeDuration) {
-    let $dateTime :=
-        if ($date castable as xs:dateTime) then 
-            adjust-dateTime-to-timezone(xs:dateTime($date), $timezone)
-        else if ($date castable as xs:date) then
-            let $adjusted-date := adjust-date-to-timezone(xs:date($date), $timezone)
-            return
-                substring($adjusted-date, 1, 10) || 'T00:00:00' || substring($adjusted-date, 11)
-        else if (matches($date, '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$')) then
-            adjust-dateTime-to-timezone(xs:dateTime($date || ':00'), $timezone)
-        else if (matches($date, '^\d{4}-\d{2}$')) then
-            adjust-dateTime-to-timezone(xs:dateTime($date || '-01T00:00:00'), $timezone)
-        else (: if (matches($date, '^\d{4}$')) then :)
-            adjust-dateTime-to-timezone(xs:dateTime($date || '-01-01T00:00:00'), $timezone)
-    return
-        $dateTime cast as xs:dateTime
+    try {
+        let $dateTime :=
+            if ($date castable as xs:dateTime) then 
+                adjust-dateTime-to-timezone(xs:dateTime($date), $timezone)
+            else if ($date castable as xs:date) then
+                let $adjusted-date := adjust-date-to-timezone(xs:date($date), $timezone)
+                return
+                    substring($adjusted-date, 1, 10) || 'T00:00:00' || substring($adjusted-date, 11)
+            else if (matches($date, '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$')) then
+                adjust-dateTime-to-timezone(xs:dateTime($date || ':00'), $timezone)
+            else if (matches($date, '^\d{4}-\d{2}$')) then
+                adjust-dateTime-to-timezone(xs:dateTime($date || '-01T00:00:00'), $timezone)
+            else (: if (matches($date, '^\d{4}$')) then :)
+                adjust-dateTime-to-timezone(xs:dateTime($date || '-01-01T00:00:00'), $timezone)
+        return
+            $dateTime cast as xs:dateTime
+    } catch * {
+        ()
+    }
 };
 
-declare function fd:normalize-high($date as xs:string, $timezone as xs:dayTimeDuration) as xs:dateTime {
-    let $dateTime :=
-        if ($date castable as xs:dateTime) then 
-            adjust-dateTime-to-timezone(xs:dateTime($date), $timezone)
-        else if ($date castable as xs:date) then
-            let $adjusted-date := adjust-date-to-timezone(xs:date($date), $timezone)
-            return
-                substring($adjusted-date, 1, 10) || 'T23:59:59' || substring($adjusted-date, 11)
-        else if (matches($date, '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$')) then
-            adjust-dateTime-to-timezone(xs:dateTime($date || ':59'), $timezone)
-        else if (matches($date, '^\d{4}-\d{2}$')) then
-            adjust-dateTime-to-timezone(xs:dateTime($date || '-' || functx:days-in-month($date || '-01') || 'T23:59:59'), $timezone)
-        else if (matches($date, '^\d{4}-\d{2}$')) then
-            adjust-dateTime-to-timezone(xs:dateTime($date || '-' || functx:days-in-month($date || '-01') || 'T23:59:59'), $timezone)
-        else (: if (matches($date, '^\d{4}$')) then :)
-            adjust-dateTime-to-timezone(xs:dateTime($date || '-12-31T23:59:59'), $timezone)
-    return
-        $dateTime cast as xs:dateTime
+declare function fd:normalize-high($date as xs:string, $timezone as xs:dayTimeDuration) as xs:dateTime? {
+    try {
+        let $dateTime :=
+            if ($date castable as xs:dateTime) then 
+                adjust-dateTime-to-timezone(xs:dateTime($date), $timezone)
+            else if ($date castable as xs:date) then
+                let $adjusted-date := adjust-date-to-timezone(xs:date($date), $timezone)
+                return
+                    substring($adjusted-date, 1, 10) || 'T23:59:59' || substring($adjusted-date, 11)
+            else if (matches($date, '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$')) then
+                adjust-dateTime-to-timezone(xs:dateTime($date || ':59'), $timezone)
+            else if (matches($date, '^\d{4}-\d{2}$')) then
+                adjust-dateTime-to-timezone(xs:dateTime($date || '-' || functx:days-in-month($date || '-01') || 'T23:59:59'), $timezone)
+            else if (matches($date, '^\d{4}-\d{2}$')) then
+                adjust-dateTime-to-timezone(xs:dateTime($date || '-' || functx:days-in-month($date || '-01') || 'T23:59:59'), $timezone)
+            else (: if (matches($date, '^\d{4}$')) then :)
+                adjust-dateTime-to-timezone(xs:dateTime($date || '-12-31T23:59:59'), $timezone)
+        return
+            $dateTime cast as xs:dateTime
+    } catch * {
+        ()
+    }
 };
 
 declare function fd:wrap-html($content as element(), $title as xs:string+) {

@@ -147,6 +147,18 @@ $(document).ready(function() {
         return '&' + filter;
     }
 
+    function adjustDateComponent(component, pad) {
+        try {
+            var c = parseInt(component);
+            if (c === 0) {
+                c = 1;
+            }
+            return c.toString().padStart(pad, '0');
+        } catch(e) {
+            return '01'.padStart(pad, '0');
+        }
+    }
+    
     /**
      * reload page with all filters added as GET-parameters
      * @param {Event} event
@@ -167,17 +179,18 @@ $(document).ready(function() {
         //aggregate criteria from partial date controls (month day year) into single query param
         if ($('#start_year').val()) {
             var startDate = [
-                $('#start_year').val().padStart(4, '0'),
-                $('#start_month').val().padStart(2, '0'),
-                $('#start_day').val().padStart(2, '0')
+                adjustDateComponent($('#start_year').val(), 4),
+                adjustDateComponent($('#start_month').val(), 2),
+                adjustDateComponent($('#start_day').val(), 2)
             ];
             action += '&start_date=' + startDate.join('-');
         }
         if ($('#end_year').val()) {
             var endDate = [
-                $('#end_year').val().padStart(4, '0'),
-                $('#end_month').val().padStart(2, '0'),
-                $('#end_day').val().padStart(2, '0')];
+                adjustDateComponent($('#end_year').val(), 4),
+                adjustDateComponent($('#end_month').val(), 2),
+                adjustDateComponent($('#end_day').val(), 2)
+            ];
             action += '&end_date=' + endDate.join('-');
         }
         
