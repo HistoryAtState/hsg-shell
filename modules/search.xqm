@@ -597,11 +597,13 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
         if ($end-date ne "") then
             ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
                 => fd:normalize-high($timezone)
-        else if ($end-date ne "") then
-            ($end-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
+        (: if end-date is omitted, then treat the high end of the start day as the end :)
+        else if ($start-date ne "") then
+            $start-date
                 => fd:normalize-high($timezone)
         else
             ()
+    let $log := console:log("range-start: " || $range-start || " range-end: " || $range-end)
     let $is-date-query := exists($range-start) and exists($range-end)
     let $is-keyword-query := string-length($query) gt 0
     return
