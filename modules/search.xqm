@@ -489,8 +489,11 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start
     let $hits := search:query-sections($within, $volume-id, $query, $start-date, $end-date, $start-time, $end-time)
     let $hits := search:filter($hits)
     let $adjusted-sort-by := 
-        (: if no query string is provided, relevance sorting is essentially random, so we'll fall back date sorting :)
-        if (string-length($query) eq 0) then ($sort-by, "date_asc")[1] else "relevance"
+        (: if no query string is provided, relevance sorting is essentially random, so we'll fall back on date sorting :)
+        if (string-length($query) eq 0) then 
+            if ($sort-by eq "date_desc") then $sort-by else "date_asc"
+        else 
+            $sort-by
     let $ordered-hits := 
         switch ($adjusted-sort-by)
             case "date_asc" return
