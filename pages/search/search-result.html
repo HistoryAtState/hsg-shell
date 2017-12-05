@@ -51,27 +51,27 @@
             <div id="content-inner" data-template="app:fix-links">
 
                 <section class="hsg-search-section">
-                            <h2>Results for keyword search
-                                <span class="hsg-search-query">
-                                    <span data-template="search:q"/>
-                                </span>
-                            </h2>
-                            <p data-template="search:result-count-summary"/>
-                            <nav>
-                                <ul class="pagination" data-template="search:paginate" data-template-per-page="10" data-template-max-pages="10" data-template-min-hits="1"/>
-                            </nav>
-                            <div class="hsg-search-result" data-template="templates:each" data-template-from="results" data-template-to="result">
-                                <h3 class="hsg-search-result-heading"><a><span data-template="search:result-href-attribute"/>
-                                    <span data-template="search:result-heading"/></a>
-                                </h3>
-                                <p class="hsg-search-result-summary">
-                                    <span data-template="search:result-summary"/>
-                                </p>
-                            </div>
-                            <nav>
-                                <ul class="pagination" data-template="search:paginate" data-template-per-page="10" data-template-max-pages="10" data-template-min-hits="1"/>
-                            </nav>
-
+                    <h2>Results for keyword search
+                        <span class="hsg-search-query">
+                            <span data-template="search:q"/>
+                        </span>
+                    </h2>
+                    <p data-template="search:result-count-summary"/>
+                    <nav>
+                        <ul class="pagination" data-template="search:paginate" data-template-per-page="10" data-template-max-pages="10" data-template-min-hits="1"/>
+                    </nav>
+                    <div class="hsg-search-result" data-template="templates:each" data-template-from="results" data-template-to="result">
+                        <h3 class="hsg-search-result-heading">
+                            <a><span data-template="search:result-href-attribute"/><span data-template="search:result-heading"/></a>
+                        </h3>
+                        <p class="hsg-search-result-summary">
+                            <span data-template="search:result-summary"/>
+                        </p>
+                    </div>
+                    <nav>
+                        <ul class="pagination" data-template="search:paginate" data-template-per-page="10" data-template-max-pages="10" data-template-min-hits="1"/>
+                    </nav>
+                    
                     <div data-template="templates:include" data-template-path="pages/search/_submit-search-button.html"/>
 
                 </section>
