@@ -56,10 +56,9 @@ declare variable $search:SECTIONS := map {
             }
         }
     ),
-    "milestones": "milestones",
+    "retired": ("milestones", "education"),
     "countries": ("countries", "archives"),
     "conferences": "conferences",
-    "edu": "education",
     "frus-history": "frus-history-monograph",
     "about": ("hac", "faq")
 };
@@ -179,16 +178,16 @@ declare function search:load-sections($node, $model) {
                 <label>Conferences</label>
             </section>,
             <section>
-                <id>edu</id>
-                <label>Educational Resources</label>
-            </section>,
-            <section>
                 <id>frus-history</id>
                 <label>History of the <em>Foreign Relations</em> Series</label>
             </section>,
             <section>
                 <id>about</id>
                 <label>About (FAQ, Advisory Committee Minutes)</label>
+            </section>,
+            <section>
+                <id>retired</id>
+                <label>Retired Resources (Milestones)</label>
             </section>
         )
     }
