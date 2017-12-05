@@ -219,4 +219,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 0;
     min-height: 40px;
   }
+  li, a {
+    cursor: pointer;
+  }
 }
