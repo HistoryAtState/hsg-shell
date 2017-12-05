@@ -401,18 +401,12 @@ declare %private function search:filter-results($out, $in) {
 declare %private function search:filter($hits) {
     (:  Filter out matches which are in divs without xml:id or have a nested div.
         Limit the result set to MAX_HITS_SHOWN. :)
-    let $limited :=
-        subsequence(
-            subsequence($hits, 1, $search:MAX_HITS_SHOWN * 2)[@xml:id][not(tei:div/@xml:id)]
+    subsequence(
+        subsequence($hits, 1, $search:MAX_HITS_SHOWN * 2)[@xml:id][not(tei:div/@xml:id)]
             |
             subsequence($hits, 1, $search:MAX_HITS_SHOWN)[not(self::tei:div)],
-            1, $search:MAX_HITS_SHOWN
-        )
-    (: Reorder the remaining hits by score :)
-    for $hit in $limited
-    order by ft:score($hit)
-    return
-        $hit
+        1, $search:MAX_HITS_SHOWN
+    )
 };
 
 (:~
