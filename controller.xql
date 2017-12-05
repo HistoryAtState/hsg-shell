@@ -1468,6 +1468,7 @@ else if (matches($exist:path, '^/search/?')) then
             <forward url="{$exist:controller}/pages/{$page}"/>
             <view>
                 <forward url="{$exist:controller}/modules/view.xql">
+                    <add-parameter name="suppress-sitewide-search-field" value="true"/>
                     <add-parameter name="query" value="{$query}"/>
                     <add-parameter name="start-date" value="{$start-date}"/>
                     <add-parameter name="end-date" value="{$end-date}"/>
