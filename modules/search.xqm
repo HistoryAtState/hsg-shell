@@ -280,14 +280,14 @@ function search:component-checked($node as node(), $model as map(*)) {
 };
 
 (:~
- : The string containing the component title (label)
- : @return  String
+ : The node(s) containing the component title (label)
+ : @return  Child element and/or text nodes of label
 ~:)
 declare
     %templates:replace
-function search:label-string($node as node(), $model as map(*)) {
+function search:label-contents($node as node(), $model as map(*)) {
     let $component := $model?component
-    return $model($component)/label/string()
+    return $model($component)/label/node()
 };
 
 declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
