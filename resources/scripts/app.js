@@ -426,4 +426,5 @@ $(document).ready(function() {
     initContent();
 
     $('[data-toggle="tooltip"]').tooltip({placement: "auto top"});
+    toggleComponents();
 });
