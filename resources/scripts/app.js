@@ -199,10 +199,8 @@ $(document).ready(function() {
             action += '&end_time=' + endTime.join(':');
         }
 
-        var currentActiveSorting = sortingForm.find('.active');
-        if (currentActiveSorting && currentActiveSorting.attr('id')) {
-            action += '&sort-by=' + currentActiveSorting.attr('id');
-        }
+        var currentActiveSorting = sortingForm.find('#sorting');
+        action += '&sort-by=' + currentActiveSorting.prop('value');
         window.location.replace(url + '?' + action);
     }
 
@@ -325,6 +323,15 @@ $(document).ready(function() {
 
     sectionsInputs.on('change', function() {
         toggleComponents();
+    });
+
+   //----------- sort-by ----- //
+   
+    $('#sort-by li').on('click', function(ev) {
+        ev.preventDefault();
+        var item = $(ev.target)
+        $('#sort-by-label').text(item.text());
+        $('#sorting').val(item.attr('id'));
     });
 
     //------------------------------------------//
