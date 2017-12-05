@@ -482,14 +482,11 @@ function search:sort-by-value($node as node(), $model as map(*), $sort-by as xs:
 declare
     %templates:default("start", 1)
     %templates:default("per-page", 10)
-    (:
-    declare variable $search:SORTBY := 'relevance';
-    declare variable $search:SORTORDER := 'descending';
-    :)
 function search:load-results($node as node(), $model as map(*), $q as xs:string*, $within as xs:string*,
 $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start-date as xs:string*, $end-date as xs:string*) {
     let $start-time := util:system-time()
     let $hits := search:query-sections($within, $volume-id, $q, $start-date, $end-date)
+    %templates:default("sort-by", "relevance")
     let $hits := search:filter($hits)
     let $end-time := util:system-time()
     let $ordered-hits :=
