@@ -871,7 +871,7 @@ declare
     %templates:default("min-hits", 0)
     %templates:default("max-pages", 10)
 function search:paginate($node as node(), $model as map(*), $start as xs:int, $per-page as xs:int, $min-hits as xs:int,
-    $max-pages as xs:int, $sort-by as xs:string) {
+    $max-pages as xs:int, $sort-by as xs:string?) {
     if ($min-hits < 0 or $model?query-info?result-count >= $min-hits) then
         element { node-name($node) } {
             $node/@*,
