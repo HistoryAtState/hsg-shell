@@ -230,3 +230,53 @@ input[type=number]::-webkit-outer-spin-button {
     cursor: pointer;
   }
 }
+
+// Display only the first 3 inputs of a list
+.truncate-filter {
+  &.showContent,
+  &.hideContent {
+    transition: height .3s ease;
+  }
+}
+.truncate-list {
+  &.showContent {
+    height: auto;
+  }
+
+  &.hideContent {
+    overflow: hidden;
+    height: 7em;
+  }
+}
+
+.c-link-more {
+    display: block;
+    margin: 1.6rem 0;
+    text-decoration: underline;
+
+  &:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    content: "\e114";
+    left: 5px;
+    font-size: 12px;
+    transform-origin: center center;
+    transition: transform .5s ease;
+  }
+}
+
+.c-link-more:after,
+.c-link-more:hover:after {
+  text-decoration: none;
+}
+
+.c-link-more.is-open {
+  &:after {
+    content: "\e113";
+  }
+}

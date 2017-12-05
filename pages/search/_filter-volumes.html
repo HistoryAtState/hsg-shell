@@ -3,7 +3,12 @@
     <form method="get" action="$app/search" class="filter-form" id="volumesFilter">
         <fieldset>
             <legend class="sr-only">Select Volumes</legend>
-            <ul class="hsg-search-inputs-vertical" data-template="search:select-volumes"/>
+            <div class="truncate-filter hideContent ">
+                <ul class="truncate-list hsg-search-inputs-vertical" data-template="search:select-volumes"/>
+            </div>
+            <div class="hsg-toggle">
+                <a href="#" class="c-link-more">Show more</a>
+            </div>
         </fieldset>
     </form>
 </section>
