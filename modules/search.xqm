@@ -441,10 +441,10 @@ declare
     declare variable $search:SORTBY := 'relevance';
     declare variable $search:SORTORDER := 'descending';
     :)
-function search:load-results($node as node(), $model as map(*), $q as xs:string, $within as xs:string*,
-$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
+function search:load-results($node as node(), $model as map(*), $q as xs:string*, $within as xs:string*,
+$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start-date as xs:string*, $end-date as xs:string*) {
     let $start-time := util:system-time()
-    let $hits := search:query-sections($within, $volume-id, $q)
+    let $hits := search:query-sections($within, $volume-id, $q, $start-date, $end-date)
     let $hits := search:filter($hits)
     let $end-time := util:system-time()
     let $ordered-hits :=
@@ -453,6 +453,7 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
         return $hit
     let $hit-count := count($ordered-hits)
     let $window := subsequence($ordered-hits, $start, $per-page)
+    let $log := console:log("search:load-results has a window of " || count($window) || " hits")
     let $query-info :=  map {
         "results": $window,
         "query-info": map {
@@ -474,31 +475,27 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?) {
 };
 
 declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
-    $query as xs:string) {
-    if (exists($volume-ids)) then
-        let $vols := for $volume-id in $volume-ids return collection($config:FRUS_VOLUMES_COL)/id($volume-id)
-        return
-            $vols//tei:div[ft:query(., $query)]
-    else if (exists($sections) and $sections != "") then
+    $query as xs:string, $start-date as xs:string*, $end-date as xs:string*) {
+    if (exists($sections) and $sections != "") then
         for $section in $sections
         for $category in $search:SECTIONS?($section)
         return
-            search:query-section($category, $query)
+            search:query-section($category, $volume-ids, $query, $start-date, $end-date)
     else
         map:for-each($search:SECTIONS, function($section, $categories) {
             for $category in $categories
             return
-                search:query-section($category, $query)
+                search:query-section($category, $volume-ids, $query, $start-date, $end-date)
  
         })
 };
 
-declare function search:query-section($category, $query as xs:string*) {
+declare function search:query-section($category, $volume-ids as xs:string*, $query as xs:string*, $start-date as xs:string*, $end-date as xs:string*) {
 
-    let $start-date:=request:get-parameter('start_date', '')
-    let $end-date:=request:get-parameter('end_date', '')
-    let $start-time:=request:get-parameter('start_time', '')
-    let $end-time:=request:get-parameter('end_time', '')
+(:    let $start-date:=request:get-parameter('start_date', ()):)
+(:    let $end-date:=request:get-parameter('end_date', ()):)
+    let $start-time:=request:get-parameter('start_time', ())
+    let $end-time:=request:get-parameter('end_time', ())
     
 let $c:=console:log($start-date || ' -- ' || $end-date || ' : ' || $category || ' -- ' || $query)
 
@@ -525,39 +522,55 @@ let $range-end :=
     if ($end-date ne "") then
         ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
             => fd:normalize-high($timezone)
-    else if ($start-date ne "") then
-        ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
+    else if ($end-date ne "") then
+        ($end-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
             => fd:normalize-high($timezone)
     else
         ()
         
-        let $log := console:log("starting search for " || " start-date=" || $start-date || 
-        " (range-start=" || $range-start || ") end-date=" || $end-date || " (range-end=" || $range-end || ") q=" || $query)
+let $log := console:log("starting search for " || " start-date=" || $start-date || 
+    " (range-start=" || $range-start || ") end-date=" || $end-date || " (range-end=" || $range-end || ") q=" || $query)
 
-    return
+return
     typeswitch($category)
         case xs:string return
             switch ($category)
                 case "frus" return 
                     (console:log('frus search'), 
-                    if ((string($range-start) ne '') and (string($query) ne '')) then 
-                        (console:log('query ' || $query),
-                        (: special treatment for frus dates  :)
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
-                            [@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
+                    let $vols := 
+                        if (exists($volume-ids)) then 
+                            for $volume-id in $volume-ids 
+                            return 
+                                collection($config:FRUS_VOLUMES_COL)/id($volume-id)
+                        else
+                                collection($config:FRUS_VOLUMES_COL)
+                    let $hits :=
+                        if ($range-start and $range-end and string-length($query) gt 0) then 
+                            (console:log('query ' || $query),
+                            (: dates + keyword  :)
+                            $vols//tei:div[ft:query(., $query)]
+                                [@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
+                            )
+                        else if ($range-start and $range-end) then 
+                            (: dates  :)
+                            (console:log('no query, just dates ' || count($vols)),
+                            $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
+                            )
+                        else if (string-length($query) gt 0) then
+                            (: keyword  :)
+                            $vols//tei:div[ft:query(., $query)]
+                        else
+                            (: no parameters provided :)
+                            ()
+                    return
+                        (console:log(count($hits) || " hits"),
+                        $hits
                         )
-                    else if (string($range-start) ne '') then 
-                    (:  TODO doesn't wrk yet  :)
-                        (console:log('no query, just dates '),
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
-                        )
-                    else
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
                     )
                 default return 
                     collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
         default return
-            $category?query($query)
+            $category?query($query) 
 };
 
 declare function search:result-heading($node, $model) {
