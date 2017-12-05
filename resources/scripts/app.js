@@ -113,13 +113,13 @@ $(document).ready(function() {
      */
     function submitNavbarSearch (event) {
         event.preventDefault();
+        event.stopPropagation();
         var url = navigationSearchForm.prop("action");
         var action = navigationSearchForm.serialize();
         window.location.replace(url + '?' + action);
     }
 
-    var searchBarForm = document.getElementById('#navigationSearchForm');
-    var searchInput = document.getElementById('#search-box');
+    var searchInput = $('#search-box');
     var searchButton = $('#navigationSearchForm .search-button');
 
     if (navigationSearchForm.get(0)) {
@@ -127,14 +127,13 @@ $(document).ready(function() {
         searchButton.on('click', submitNavbarSearch);
 
         // add "enter/return" key to trigger submitting the navbar search form
-/*
-        searchInput.addEventListener('keydown', function (event) {
+
+        searchInput.on('keydown', function (event) {
             var key = event.which;
-            if(key == 13){
+            if(key == 13) {
                 submitNavbarSearch(event);
             }
         });
-*/
     }
 
     /**
