@@ -182,18 +182,25 @@ $(document).ready(function() {
             action += '&end_date=' + endDate.join('-');
         }
         
+        var startTimePmSwitch = $('#start_time_pm').is(':checked')
         //aggregate criteria from partial time controls (hh mm) into single query param
         if ($('#start_hour').val()) {
+            var startHour = parseInt($('#start_hour').val());
+            if (startHour < 12 && startTimePmSwitch) { startHour+=12}
             var startTime = [
-                $('#start_hour').val().padStart(2, '0'),
+                startHour.toString().padStart(2, '0'),
                 $('#start_minute').val().padStart(2, '0')
             ];
             console.log('start time ' + startTime)
             action += '&start_time=' + startTime.join(':');
         }
+        
+        var endTimePmSwitch = $('#end_time_pm').is(':checked')
         if ($('#end_hour').val()) {
+            var endHour = parseInt($('#end_hour').val());
+            if (endHour < 12 && endTimePmSwitch) { endHour+=12}
             var endTime = [
-                $('#end_hour').val().padStart(2, '0'),
+                endHour.toString().padStart(2, '0'),
                 $('#end_minute').val().padStart(2, '0')
             ];
             action += '&end_time=' + endTime.join(':');
@@ -227,14 +234,20 @@ $(document).ready(function() {
         var startTime = dateFilter.find('input[name="start_time"]').val();
         if(startTime) {
             var splitStartTime = startTime.split(':');
-            $('#start_hour').val(splitStartTime[0]);
+            var startHour = parseInt(splitStartTime[0]);
+            if (startHour > 12) {startHour -= 12;}
+            $('#start_time_pm').prop('checked', true);
+            $('#start_hour').val(startHour);
             $('#start_minute').val(splitStartTime[1]);
         }
         
         var endTime = dateFilter.find('input[name="end_time"]').val();
         if(endTime) {
             var splitEndTime = endTime.split(':');
-            $('#end_hour').val(splitEndTime[0]);
+            var endHour = parseInt(splitEndTime[0]);
+            if (endHour > 12) {endHour -= 12;}
+            $('#end_time_pm').prop('checked', true);
+            $('#end_hour').val(endHour);
             $('#end_minute').val(splitEndTime[1]);
         }
 
