@@ -482,26 +482,27 @@ function search:sort-by-value($node as node(), $model as map(*), $sort-by as xs:
 declare
     %templates:default("start", 1)
     %templates:default("per-page", 10)
-function search:load-results($node as node(), $model as map(*), $q as xs:string*, $within as xs:string*,
-$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start-date as xs:string*, $end-date as xs:string*) {
-    let $hits := search:query-sections($within, $volume-id, $q, $start-date, $end-date)
     %templates:default("sort-by", "relevance")
+function search:load-results($node as node(), $model as map(*), $query as xs:string*, $within as xs:string*,
+$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?, $sort-by as xs:string?) {
     let $query-start-time := util:system-time()
+    let $hits := search:query-sections($within, $volume-id, $query, $start-date, $end-date, $start-time, $end-time)
     let $hits := search:filter($hits)
-    let $ordered-hits :=
-        for $hit in $hits
-        order by ft:score($hit) descending
-        return $hit
-    let $hit-count := count($ordered-hits)
     let $query-end-time := util:system-time()
+    let $hit-count := count($hits)
     let $window := subsequence($ordered-hits, $start, $per-page)
     let $log := console:log("search:load-results has a window of " || count($window) || " hits")
     let $query-info :=  map {
         "results": $window,
         "query-info": map {
-            "q": $q,
+            "q": $query,
             "within": $within,
-            (: "volume-id": $volume-id, :)
+            "start-date": $start-date,
+            "end-date": $end-date,
+            "start-time": $start-time,
+            "end-time": $end-time,
+            "sort-by": $sort-by,
+            "volume-id": $volume-id,
             "results-doc-ids": $hits/root()/tei:TEI/@xml:id/string(),
             "start": $start,
             "end": $start + count($window) - 1,
@@ -517,63 +518,47 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start
 };
 
 declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
-    $query as xs:string, $start-date as xs:string*, $end-date as xs:string*) {
-    if (exists($sections) and $sections != "") then
+    $query as xs:string, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?) {
+    if (exists($sections) and not($sections = ("", "entire_site"))) then
         for $section in $sections
         for $category in $search:SECTIONS?($section)
         return
-            search:query-section($category, $volume-ids, $query, $start-date, $end-date)
+            search:query-section($category, $volume-ids, $query, $start-date, $end-date, $start-time, $end-time)
     else
-        map:for-each($search:SECTIONS, function($section, $categories) {
-            for $category in $categories
-            return
-                search:query-section($category, $volume-ids, $query, $start-date, $end-date)
- 
-        })
+        map:for-each(
+            $search:SECTIONS, 
+            function($section, $categories) {
+                for $category in $categories
+                return
+                    search:query-section($category, $volume-ids, $query, $start-date, $end-date, $start-time, $end-time)
+            }
+        )
 };
 
-declare function search:query-section($category, $volume-ids as xs:string*, $query as xs:string*, $start-date as xs:string*, $end-date as xs:string*) {
-
-(:    let $start-date:=request:get-parameter('start_date', ()):)
-(:    let $end-date:=request:get-parameter('end_date', ()):)
-    let $start-time:=request:get-parameter('start_time', ())
-    let $end-time:=request:get-parameter('end_time', ())
-    
-let $c:=console:log($start-date || ' -- ' || $end-date || ' : ' || $category || ' -- ' || $query)
-
-
-(:let $q := request:get-parameter("q", ())[. ne ""]:)
-(:let $order-by := request:get-parameter("order-by", "date"):)
-(:let $start := request:get-parameter("start", 1) cast as xs:integer:)
-(:let $per-page := request:get-parameter("per-page", 10) cast as xs:integer:)
-let $query-start := util:system-time()
-let $timezone := 
-    (: We want to assume times supplied in a query are US Eastern, unless otherwise specified. 
-       The UTC offset for US Eastern changes depending on daylight savings time.
-       We could use fn:implicit-timezone(), but this depends upon the query context, which is set by the system/environment.
-       On the hsg production servers, this function returns +00:00, or UTC. 
-       So the following is a kludge to determine the UTC offset for US Eastern, sensitive to daylight savings time. :)
-    functx:duration-from-timezone(fn:format-dateTime(current-dateTime(), "[Z]", (), (), "America/New_York"))
-let $range-start := 
-    if ($start-date ne "") then
-        ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
-            => fd:normalize-low($timezone)
-    else
-        ()
-let $range-end := 
-    if ($end-date ne "") then
-        ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
-            => fd:normalize-high($timezone)
-    else if ($end-date ne "") then
-        ($end-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
-            => fd:normalize-high($timezone)
-    else
-        ()
-        
-let $log := console:log("starting search for " || " start-date=" || $start-date || 
-    " (range-start=" || $range-start || ") end-date=" || $end-date || " (range-end=" || $range-end || ") q=" || $query)
-
-return
+declare function search:query-section($category, $volume-ids as xs:string*, $query as xs:string*, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?) {
+    let $log := console:log($start-date || ' -- ' || $end-date || ' : ' || (if ($category instance of map(*)) then $category?id else $category) || ' -- ' || $query)
+    let $timezone := 
+        (: We want to assume times supplied in a query are US Eastern, unless otherwise specified. 
+           The UTC offset for US Eastern changes depending on daylight savings time.
+           We could use fn:implicit-timezone(), but this depends upon the query context, which is set by the system/environment.
+           On the hsg production servers, this function returns +00:00, or UTC. 
+           So the following is a kludge to determine the UTC offset for US Eastern, sensitive to daylight savings time. :)
+        functx:duration-from-timezone(fn:format-dateTime(current-dateTime(), "[Z]", (), (), "America/New_York"))
+    let $range-start := 
+        if ($start-date ne "") then
+            ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
+                => fd:normalize-low($timezone)
+        else
+            ()
+    let $range-end := 
+        if ($end-date ne "") then
+            ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
+                => fd:normalize-high($timezone)
+        else if ($end-date ne "") then
+            ($end-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
+                => fd:normalize-high($timezone)
+        else
+            ()
     let $is-date-query := exists($range-start) and exists($range-end)
     let $is-keyword-query := string-length($query) gt 0
     return

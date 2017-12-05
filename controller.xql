@@ -1450,7 +1450,9 @@ else if (matches($exist:path, '^/search/?')) then
     let $query := request:get-parameter("q", ())
     let $start-date := request:get-parameter("start_date", ())
     let $end-date := request:get-parameter("end_date", ())
-    let $c:=console:log("q: " || $query || " start_date: " || $start-date || " end_date: " || $end-date)
+    let $start-time := request:get-parameter("start_time", ())
+    let $end-time := request:get-parameter("end_time", ())
+    let $log := console:log("q: " || $query || " start_date: " || $start-date || " end_date: " || $end-date || " start_time: " || $start-time || " end_time: " || $end-time)
     let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
     let $page :=
         (: If a search query is present, show the results template :)
@@ -1472,6 +1474,8 @@ else if (matches($exist:path, '^/search/?')) then
                     <add-parameter name="query" value="{$query}"/>
                     <add-parameter name="start-date" value="{$start-date}"/>
                     <add-parameter name="end-date" value="{$end-date}"/>
+                    <add-parameter name="start-time" value="{$start-time}"/>
+                    <add-parameter name="end-time" value="{$end-time}"/>
                 </forward>
             </view>
     		<error-handler>
