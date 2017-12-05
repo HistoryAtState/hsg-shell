@@ -871,7 +871,7 @@ declare
     %templates:default("min-hits", 0)
     %templates:default("max-pages", 10)
 function search:paginate($node as node(), $model as map(*), $start as xs:int, $per-page as xs:int, $min-hits as xs:int,
-    $max-pages as xs:int) {
+    $max-pages as xs:int, $sort-by as xs:string) {
     if ($min-hits < 0 or $model?query-info?result-count >= $min-hits) then
         element { node-name($node) } {
             $node/@*,
@@ -884,7 +884,8 @@ function search:paginate($node as node(), $model as map(*), $start as xs:int, $p
                         $model?query-info?start-date[. ne ""] ! ("start_date=" || .),
                         $model?query-info?end-date[. ne ""]   ! ("end_date=" || .),
                         $model?query-info?start-time[. ne ""] ! ("start_time=" || .),
-                        $model?query-info?end-time[. ne ""]   ! ("end_time=" || .)
+                        $model?query-info?end-time[. ne ""]   ! ("end_time=" || .),
+                        $model?query-info?sort-by[. ne ""]   ! ("sort-by=" || .)
                     ),
                     '&amp;'
                 ) ! ("&amp;" || .)
