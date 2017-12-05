@@ -583,6 +583,9 @@ let $log := console:log("starting search for " || " start-date=" || $start-date 
     " (range-start=" || $range-start || ") end-date=" || $end-date || " (range-end=" || $range-end || ") q=" || $query)
 
 return
+    let $is-date-query := exists($range-start) and exists($range-end)
+    let $is-keyword-query := string-length($query) gt 0
+    return
     typeswitch($category)
         case xs:string return
             switch ($category)
@@ -596,18 +599,18 @@ return
                         else
                                 collection($config:FRUS_VOLUMES_COL)
                     let $hits :=
-                        if ($range-start and $range-end and string-length($query) gt 0) then 
+                        if ($is-date-query and $is-keyword-query) then 
                             (console:log('query ' || $query),
                             (: dates + keyword  :)
                             $vols//tei:div[ft:query(., $query)]
                                 [@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
                             )
-                        else if ($range-start and $range-end) then 
+                        else if ($is-date-query) then 
                             (: dates  :)
                             (console:log('no query, just dates ' || count($vols)),
                             $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
                             )
-                        else if (string-length($query) gt 0) then
+                        else if ($is-keyword-query) then
                             (: keyword  :)
                             $vols//tei:div[ft:query(., $query)]
                         else
