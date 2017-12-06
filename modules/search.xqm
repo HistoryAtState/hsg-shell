@@ -518,7 +518,7 @@ declare function search:sort($sort-by as xs:string, $query as xs:string*, $hits 
         switch ($adjusted-sort-by)
             case "date_asc" return
                 let $dated := $hits[@frus:doc-dateTime-min]
-                let $undated := $hits[not(@frus:doc-dateTime-min)]
+                let $undated := $hits except $dated
                 return
                     (
                         for $hit in $dated
@@ -533,7 +533,7 @@ declare function search:sort($sort-by as xs:string, $query as xs:string*, $hits 
                     )
             case "date_desc" return
                 let $dated := $hits[@frus:doc-dateTime-min]
-                let $undated := $hits[not(@frus:doc-dateTime-min)]
+                let $undated := $hits except $dated
                 return
                     (
                         for $hit in $dated
@@ -542,7 +542,7 @@ declare function search:sort($sort-by as xs:string, $query as xs:string*, $hits 
                             $hit
                         ,
                         for $hit in $undated
-                        order by ft:score($hit)
+                        order by ft:score($hit) descending
                         return
                             $hit
                     )
@@ -838,22 +838,22 @@ function search:load-volumes($node as node(), $model as map(*), $volume-id as xs
             (: full text volumes in the database :)
             collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]/@xml:id
     let $vols := collection("/db/apps/frus/bibliography")/volume[@id = $volume-ids]
-    
+
     let $volumes :=
         map { "volumes":
         (
     for $vol in $vols
         let $vol-id := $vol/@id
+        let $title := $vol/title[@type = ("sub-series", "volume-number", "volume")]
         let $title :=
-            ($vol/title[@type eq "sub-series"], $vol/title[@type eq "volume-number"], $vol/title[@type eq "volume"])[. ne ""]
-            => string-join(", ")
+            string-join($title[. != ''], ", ")
             => normalize-space()
             => search:trim-words(10)
     order by $vol-id
 
     return <volume><id>{$vol-id/string()}</id><label>{$title}</label></volume>
         )}
-        
+
     let $new := map:new(($model, $volumes))
 
  let $c:=console:log($new?volumes)
