@@ -363,27 +363,26 @@ $(document).ready(function() {
      * Truncate filter lists: show only 3 first inputs of a list
      * Toggle between show more / show less
      */
-
-    var toggle  = document.querySelector(".hsg-toggle");
-    var toggledList = document.querySelector(".truncate-filter");
-    var link = document.querySelector("div.hsg-toggle a.c-link-more");
+    var toggle  = $(".hsg-toggle");
+    var link = $("div.hsg-toggle a.c-link-more");
+    var toggledList = $("div.truncate-filter");
 
     function toggleClassNames () {
-        if(toggledList.classList.contains("hideContent")) {
-            toggledList.classList.remove("hideContent");
-            toggledList.classList.add("showContent");
-            link.innerText = "Show less";
-            link.classList.add("is-open");
+        if(toggledList.hasClass("hideContent")) {
+            toggledList.removeClass("hideContent");
+            toggledList.addClass("showContent");
+            link.text("Show less");
+            link.addClass("is-open");
         }
         else {
-            toggledList.classList.add("hideContent");
-            toggledList.classList.remove("showContent");
-            link.innerText = "Show more";
-            link.classList.remove("is-open");
+            toggledList.addClass("hideContent");
+            toggledList.removeClass("showContent");
+            link.text("Show more");
+            link.removeClass("is-open");
         }
     }
 
-    toggle.addEventListener("click", function(event) {
+    toggle.on("click", function(event) {
         toggleClassNames();
         event.preventDefault();
     });
