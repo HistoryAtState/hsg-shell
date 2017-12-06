@@ -39,18 +39,28 @@
             <p>Volume search is active only if the <b>Historical Documents</b> section is selected.</p>
             <div data-template="templates:include" data-template-path="pages/search/_filter-volumes.html"/>
 
-            <form method="get" action="?" class="filter-form" id="formFilters">
-                <button id="filterResetButton" class="hsg-sidebar-reset-btn" name="reset-filters" type="reset" value="reset_filters">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"/>
-                    Reset Filters
-                </button>
-            </form>
             <!-- filter administrations -->
 <!--
             <h3 class="hsg-sidebar-title">Administrations</h3>
             <p>Administrations search is active only if the <b>Historical Documents</b> section is selected.</p>
             <div data-template="templates:include" data-template-path="pages/search/_filter-administrations.html"/>
 -->
+
+            <!-- Reset filters / Apply filters  -->
+            <section class="row">
+                <form method="get" action="?" class="filter-form hsg-width-one-whole" id="formFilters">
+                    <button id="filterResetButton" class="hsg-sidebar-btn" name="reset-filters" type="reset" value="reset_filters">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"/>
+                        Reset Filters
+                    </button>
+
+                    <button id="filterApplyButton" class="hsg-sidebar-btn" name="apply-filters" type="submit">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"/>
+                        Apply Filters
+                    </button>
+                </form>
+            </section>
+
         </aside>
 
         <div class="hsg-width-two-thirds">
