@@ -194,7 +194,7 @@ $(document).ready(function() {
             action += '&end_date=' + endDate.join('-');
         }
         
-        var startTimePmSwitch = $('#start_time_pm').is(':checked')
+        var startTimePmSwitch = $('#start_time_pm').is(':checked');
         //aggregate criteria from partial time controls (hh mm) into single query param
         if ($('#start_hour').val()) {
             var startHour = parseInt($('#start_hour').val());
@@ -207,7 +207,7 @@ $(document).ready(function() {
             action += '&start_time=' + startTime.join(':');
         }
         
-        var endTimePmSwitch = $('#end_time_pm').is(':checked')
+        var endTimePmSwitch = $('#end_time_pm').is(':checked');
         if ($('#end_hour').val()) {
             var endHour = parseInt($('#end_hour').val());
             if (endHour < 12 && endTimePmSwitch) { endHour+=12}
@@ -252,7 +252,7 @@ $(document).ready(function() {
             $('#start_hour').val(startHour);
             $('#start_minute').val(splitStartTime[1]);
         }
-        
+
         var endTime = dateFilter.find('input[name="end_time"]').val();
         if(endTime) {
             var splitEndTime = endTime.split(':');
@@ -262,7 +262,6 @@ $(document).ready(function() {
             $('#end_hour').val(endHour);
             $('#end_minute').val(splitEndTime[1]);
         }
-
 
         // submit the search form
         mainForm.on('submit', submitSearch);
@@ -355,7 +354,7 @@ $(document).ready(function() {
      */
     $('#sort-by li').on('click', function(ev) {
         ev.preventDefault();
-        var item = $(ev.target)
+        var item = $(ev.target);
         $('#sort-by-label').text(item.text());
         $('#sorting').val(item.attr('id'));
     });
