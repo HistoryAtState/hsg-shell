@@ -105,7 +105,8 @@ $(document).ready(function() {
         dateFilterInputs = dateFilter.find('input[type=number]'), // inputs in "by-date" filter form
         administrationsFilter = $('#administrationsFilter'), // "by-administrations" filter form
         volumesFilter = $('#volumesFilter'), // "by-volumes" filter form
-        mainButton = $('.hsg-main-search-button'); // main search button
+        mainButton = $('.hsg-main-search-button'), // main search button
+        applyFiltersButton = $('#filterApplyButton'); // apply filters button in sidebar
 
     /**
      * Submit query from navigation search form, redirect to "search/"
@@ -194,7 +195,7 @@ $(document).ready(function() {
             action += '&end_date=' + endDate.join('-');
         }
         
-        var startTimePmSwitch = $('#start_time_pm').is(':checked')
+        var startTimePmSwitch = $('#start_time_pm').is(':checked');
         //aggregate criteria from partial time controls (hh mm) into single query param
         if ($('#start_hour').val()) {
             var startHour = parseInt($('#start_hour').val());
@@ -207,7 +208,7 @@ $(document).ready(function() {
             action += '&start_time=' + startTime.join(':');
         }
         
-        var endTimePmSwitch = $('#end_time_pm').is(':checked')
+        var endTimePmSwitch = $('#end_time_pm').is(':checked');
         if ($('#end_hour').val()) {
             var endHour = parseInt($('#end_hour').val());
             if (endHour < 12 && endTimePmSwitch) { endHour+=12}
@@ -252,7 +253,7 @@ $(document).ready(function() {
             $('#start_hour').val(startHour);
             $('#start_minute').val(splitStartTime[1]);
         }
-        
+
         var endTime = dateFilter.find('input[name="end_time"]').val();
         if(endTime) {
             var splitEndTime = endTime.split(':');
@@ -263,8 +264,8 @@ $(document).ready(function() {
             $('#end_minute').val(splitEndTime[1]);
         }
 
-
         // submit the search form
+        applyFiltersButton.on('click', submitSearch);
         mainForm.on('submit', submitSearch);
         mainButton.on('click', submitSearch);
 
@@ -350,11 +351,12 @@ $(document).ready(function() {
         toggleComponents();
     });
 
-   //----------- sort-by ----- //
-   
+    /**
+     *  sort-by filter
+     */
     $('#sort-by li').on('click', function(ev) {
         ev.preventDefault();
-        var item = $(ev.target)
+        var item = $(ev.target);
         $('#sort-by-label').text(item.text());
         $('#sorting').val(item.attr('id'));
     });
@@ -363,27 +365,26 @@ $(document).ready(function() {
      * Truncate filter lists: show only 3 first inputs of a list
      * Toggle between show more / show less
      */
-
-    var toggle  = document.querySelector(".hsg-toggle");
-    var toggledList = document.querySelector(".truncate-filter");
-    var link = document.querySelector("div.hsg-toggle a.c-link-more");
+    var toggle  = $(".hsg-toggle");
+    var link = $("div.hsg-toggle a.c-link-more");
+    var toggledList = $("div.truncate-filter");
 
     function toggleClassNames () {
-        if(toggledList.classList.contains("hideContent")) {
-            toggledList.classList.remove("hideContent");
-            toggledList.classList.add("showContent");
-            link.innerText = "Show less";
-            link.classList.add("is-open");
+        if(toggledList.hasClass("hideContent")) {
+            toggledList.removeClass("hideContent");
+            toggledList.addClass("showContent");
+            link.text("Show less");
+            link.addClass("is-open");
         }
         else {
-            toggledList.classList.add("hideContent");
-            toggledList.classList.remove("showContent");
-            link.innerText = "Show more";
-            link.classList.remove("is-open");
+            toggledList.addClass("hideContent");
+            toggledList.removeClass("showContent");
+            link.text("Show more");
+            link.removeClass("is-open");
         }
     }
 
-    toggle.addEventListener("click", function(event) {
+    toggle.on("click", function(event) {
         toggleClassNames();
         event.preventDefault();
     });

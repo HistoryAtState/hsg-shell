@@ -46,9 +46,30 @@
 }
 
 .hsg-search-results aside {
-  @media (max-width: 1199px) {
-    border-bottom: $default-border-style;
-    padding-bottom: 3rem;
+  border-bottom: $default-border-style;
+  padding-bottom: 2rem;
+
+  @media (min-width: 481px) {
+    padding-bottom: 2rem;
+  }
+  @media (min-width: 1200px) {
+    padding-bottom: 1rem;
+    border-bottom: none;
+  }
+}
+
+// Horizontally align main headings at top of columns on wide screens
+.hsg-search-results aside {
+  h2 {
+    margin-top: 0;
+  }
+}
+
+// Keep margin for second headline on small screens
+.hsg-search-section h2 {
+    margin-top: 20px;
+  @media screen and (min-width: 1200px) {
+    margin-top: 0;
   }
 }
 
@@ -56,8 +77,8 @@ aside {
   .hsg-section {
       border-bottom: $default-border-style;
     }
-  .hsg-section:not(:first-of-type):not(.hsg-hidden) {
-      padding: 0 0 2rem 0;
+  .hsg-section:not(.hsg-hidden) {
+      padding: 0 0 1.5rem 0;
   }
 
   .hsg-sidebar-title {
@@ -231,6 +252,11 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
+// Fix only for administrations filter checkboxes
+form#administrationsFilter div.truncate-filter {
+  padding-left: 1px;
+}
+
 // Display only the first 3 inputs of a list
 .truncate-filter {
   &.showContent,
@@ -251,20 +277,19 @@ input[type=number]::-webkit-outer-spin-button {
 
 .c-link-more {
     display: block;
-    margin: 1.6rem 0;
+    margin: .5rem 0 0 0;
     text-decoration: underline;
 
+  // arrow icon down (chevron)
   &:after {
     position: relative;
-    top: 1px;
     display: inline-block;
     font-family: 'Glyphicons Halflings';
-    font-style: normal;
+    font-size: 1rem;;
     font-weight: normal;
     line-height: 1;
     content: "\e114";
     left: 5px;
-    font-size: 12px;
     transform-origin: center center;
     transition: transform .5s ease;
   }
@@ -275,8 +300,10 @@ input[type=number]::-webkit-outer-spin-button {
   text-decoration: none;
 }
 
+// arrow icon up (chevron)
 .c-link-more.is-open {
   &:after {
     content: "\e113";
+    transition: transform .5s ease;
   }
 }

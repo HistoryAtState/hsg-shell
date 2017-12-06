@@ -112,7 +112,8 @@ html input[disabled] {
 
 .hideContent {
   overflow: hidden;
-  height: 7em;
+  max-height: 7em;
+  height: auto;
 }
 
 .showContent {
