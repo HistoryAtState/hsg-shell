@@ -584,7 +584,10 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
            We could use fn:implicit-timezone(), but this depends upon the query context, which is set by the system/environment.
            On the hsg production servers, this function returns +00:00, or UTC.
            So the following is a kludge to determine the UTC offset for US Eastern, sensitive to daylight savings time. :)
-        functx:duration-from-timezone(fn:format-dateTime(current-dateTime(), "[Z]", (), (), "America/New_York"))
+        (:functx:duration-from-timezone(fn:format-dateTime(current-dateTime(), "[Z]", (), (), "America/New_York")):)
+        (: hard code US Eastern time, since dev/prod servers had different implicit timezones, and this made testing impossible
+           better to be 1 hr off than ~5 hrs. :)
+        xs:dayTimeDuration("-PT5H")
     let $range-start :=
         if ($start-date ne "") then
              ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
