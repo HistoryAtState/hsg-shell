@@ -34,6 +34,14 @@
   }
 }
 
+.hsg-main-search-button {
+  float: right;
+  .glyphicon {
+    font-size: 12px;
+    top: 2px;
+  }
+}
+
 // Search button in sidebar
 
 .hsg-sidebar-search-btn {
@@ -51,6 +59,11 @@
   background-color: $color-gray-lightest;
   > span {
     top: 2px;
+  }
+
+  .glyphicon {
+    padding-right: 3px;
+    font-size: 12px;
   }
 }
 
