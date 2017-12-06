@@ -97,26 +97,6 @@ input[type=search] {
   line-height: 1.27em;
 }
 
-// Search button in sidebar
-
-.hsg-sidebar-search-btn {
-  @extend .btn;
-  @extend .btn-default;
-  background-color: $color-gray-lightest;
-  border-left: none;
-}
-
-// Reset button in sidebar
-
-.hsg-sidebar-reset-btn {
-  @extend .btn;
-  @extend .btn-default;
-  background-color: $color-gray-lightest;
-  > span {
-    top: 2px;
-  }
-}
-
 // Text in searchbar button
 .hsg-search-submit-text {
   position: absolute;

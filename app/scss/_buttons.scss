@@ -33,3 +33,23 @@
     margin-left: .2rem;
   }
 }
+
+// Search button in sidebar
+
+.hsg-sidebar-search-btn {
+  @extend .btn;
+  @extend .btn-default;
+  background-color: $color-gray-lightest;
+  border-left: none;
+}
+
+// Reset/Apply buttons in filter sidebar
+
+.hsg-sidebar-btn {
+  @extend .btn;
+  @extend .btn-default;
+  background-color: $color-gray-lightest;
+  > span {
+    top: 2px;
+  }
+}
