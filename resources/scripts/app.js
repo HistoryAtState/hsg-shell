@@ -350,8 +350,9 @@ $(document).ready(function() {
         toggleComponents();
     });
 
-   //----------- sort-by ----- //
-   
+    /**
+     *  sort-by filter
+     */
     $('#sort-by li').on('click', function(ev) {
         ev.preventDefault();
         var item = $(ev.target)
