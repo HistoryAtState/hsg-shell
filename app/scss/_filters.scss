@@ -252,13 +252,9 @@ input[type=number]::-webkit-outer-spin-button {
   }
 }
 
-// Fix only for administrations filter checkboxes
-form#administrationsFilter div.truncate-filter {
-  padding-left: 1px;
-}
-
 // Display only the first 3 inputs of a list
 .truncate-filter {
+  padding-left: 1px;
   &.showContent,
   &.hideContent {
     transition: height .3s ease;

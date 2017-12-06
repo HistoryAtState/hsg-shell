@@ -22,7 +22,7 @@
     <div data-template="search:load-results">
     <div class="row hsg-search-results" data-template="search:filters">
         <!-- filter sidebar -->
-        <aside class="hsg-width-one-third">
+        <aside class="hsg-width-one-third" data-template="app:fix-links">
             <h2>Filter by</h2>
 
             <!-- filter sections -->
@@ -48,7 +48,7 @@
 
             <!-- Reset filters / Apply filters  -->
             <section class="row">
-                <form method="get" action="?" class="filter-form hsg-width-one-whole" id="formFilters">
+                <form method="get" action="$app/search" class="filter-form hsg-width-one-whole" id="formFilters">
                     <button id="filterResetButton" class="hsg-sidebar-btn" name="reset-filters" type="reset" value="reset_filters">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"/>
                         Reset Filters

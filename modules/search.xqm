@@ -262,7 +262,7 @@ function search:filter-input-attributes($node as node(), $model as map(*)) {
 };
 
 (:~
- : Generates an HTML <label> attribute "for" and adds a label text
+ : Generates an HTML <label> attribute "for"
  : @return  HTML
 ~:)
 declare
@@ -275,6 +275,16 @@ function search:label($node as node(), $model as map(*)) {
         templates:process($node/*, $model)
 };
 
+(:~
+ : The node(s) containing the component title (label)
+ : @return  Child element and/or text nodes of label
+~:)
+declare
+%templates:replace
+function search:label-contents($node as node(), $model as map(*)) {
+    let $component := $model?component
+    return $model($component)/label/string()
+};
 
 declare
     %templates:wrap
@@ -289,25 +299,19 @@ function search:component-checked($node as node(), $model as map(*)) {
 };
 
 declare
-    %templates:wrap
-function search:component-hidden($node as node(), $model as map(*)) {
-    let $component := $model?component
-    return 
-        if (count($component) > 3) then 
-            attribute class {$node/@class || ' hideContent'} else ()
-};
-
-
-
-(:~
- : The node(s) containing the component title (label)
- : @return  Child element and/or text nodes of label
-~:)
-declare
-    %templates:replace
-function search:label-contents($node as node(), $model as map(*)) {
-    let $component := $model?component
-    return $model($component)/label/string()
+function search:component-hidden($node as node(), $model as map(*), $component as xs:string) {
+    let $c:=console:log('c ' ||$component)
+    let $c:=console:log($model($component))
+    return
+    element {$node/name()} {
+        attribute class {
+            if (count($model($component)) > 3) then 
+                $node/@class || ' hideContent'
+            else 
+                $node/@class
+        },
+        $node/@* except $node/@class, templates:process($node/*, $model)
+    }
 };
 
 declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
