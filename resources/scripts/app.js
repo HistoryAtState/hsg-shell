@@ -389,6 +389,21 @@ $(document).ready(function() {
         event.preventDefault();
     });
 
+    /**
+     * Check if class hideContent is present in the filter volumes list.
+     * If so, display the "show more" link, if not, hide the link
+     */
+    var volumeList = $('.truncate-filter');
+
+    function toggleShowMoreLink() {
+        if(volumeList.hasClass("hideContent")) {
+            toggle.removeClass('hsg-hidden');
+        }
+        else {
+            toggle.addClass('hsg-hidden');
+        }
+    }
+
     //------------------------------------------//
 
     function initContent() {
@@ -489,4 +504,5 @@ $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip({placement: "auto top"});
     toggleComponents();
+    toggleShowMoreLink();
 });

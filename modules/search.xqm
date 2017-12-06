@@ -298,7 +298,7 @@ function search:component-hidden($node as node(), $model as map(*), $component a
             if (count($model($component)) > 3) then 
                 $node/@class || ' hideContent'
             else 
-                ()
+                $node/@class
         },
         $node/@* except $node/@class, templates:process($node/*, $model)
     }
