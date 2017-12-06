@@ -289,14 +289,20 @@ function search:component-checked($node as node(), $model as map(*)) {
 };
 
 declare
-    %templates:wrap
-function search:component-hidden($node as node(), $model as map(*)) {
-    let $component := $model?component
-    return 
-        if (count($component) > 3) then 
-            attribute class {$node/@class || ' hideContent'} else ()
+function search:component-hidden($node as node(), $model as map(*), $component as xs:string) {
+    let $c:=console:log('c ' ||$component)
+    let $c:=console:log($model($component))
+    return
+    element {$node/name()} {
+        attribute class {
+            if (count($model($component)) > 3) then 
+                $node/@class || ' hideContent'
+            else 
+                ()
+        },
+        $node/@* except $node/@class, templates:process($node/*, $model)
+    }
 };
-
 
 
 (:~
