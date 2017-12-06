@@ -41,8 +41,6 @@ declare function fd:normalize-high($date as xs:string, $timezone as xs:dayTimeDu
                 adjust-dateTime-to-timezone(xs:dateTime($date || ':59'), $timezone)
             else if (matches($date, '^\d{4}-\d{2}$')) then
                 adjust-dateTime-to-timezone(xs:dateTime($date || '-' || functx:days-in-month($date || '-01') || 'T23:59:59'), $timezone)
-            else if (matches($date, '^\d{4}-\d{2}$')) then
-                adjust-dateTime-to-timezone(xs:dateTime($date || '-' || functx:days-in-month($date || '-01') || 'T23:59:59'), $timezone)
             else (: if (matches($date, '^\d{4}$')) then :)
                 adjust-dateTime-to-timezone(xs:dateTime($date || '-12-31T23:59:59'), $timezone)
         return
