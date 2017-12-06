@@ -205,10 +205,11 @@ declare function search:load-sections($node, $model) {
 ~:)
 declare
     %templates:wrap
-function search:filters($node as node(), $model as map(*), $within as xs:string*, $administration as xs:string*) {
+function search:filters($node as node(), $model as map(*), $within as xs:string*, $administration as xs:string*, $volume-id as xs:string*) {
 (:  more options could be added to $filters  :)
     let $filters := map {
         "within": $within,
+        "within-volumes": $volume-id,
         "administration": $administration
     }
     return
@@ -245,8 +246,11 @@ function search:entire-site-check($node as node(), $model as map(*), $within as 
 declare
     %templates:wrap
 function search:filter-input-attributes($node as node(), $model as map(*)) {
+    let $c:=console:log($model?component || ' : filter :' || $model?filter )
+    
     let $component := $model?component
     let $filter := $model?filter
+
     let $component-id := $model($component)/id
 
     return
@@ -277,10 +281,23 @@ declare
 function search:component-checked($node as node(), $model as map(*)) {
     let $component := $model?component
     let $filter := $model?filter
+    let $c:=console:log('bar' || $filter)
     let $within := $model?filters($filter)
+    let $c:=console:log($within)
     let $component-id := $model($component)/id
     return if ($component-id = $within) then 'checked' else $within
 };
+
+declare
+    %templates:wrap
+function search:component-hidden($node as node(), $model as map(*)) {
+    let $component := $model?component
+    return 
+        if (count($component) > 3) then 
+            attribute class {$node/@class || ' hideContent'} else ()
+};
+
+
 
 (:~
  : The node(s) containing the component title (label)
@@ -290,7 +307,7 @@ declare
     %templates:replace
 function search:label-contents($node as node(), $model as map(*)) {
     let $component := $model?component
-    return $model($component)/label/node()
+    return $model($component)/label/string()
 };
 
 declare function search:load-volumes-within($node, $model, $volume-id as xs:string*) {
@@ -676,7 +693,7 @@ declare function search:result-summary($node, $model) {
     let $publication-by-collection := map:contains($config:PUBLICATION-COLLECTIONS, util:collection-name($result))
     let $publication-has-custom-function := if ($publication-by-collection) then map:contains($search:DISPLAY, $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))) else ()
     let $element-name-has-custom-function := map:contains($search:DISPLAY, local-name($result))
-    let $log := console:log("publication has custom function: " || $publication-has-custom-function || " element name has custom function: " || $element-name-has-custom-function)
+(:    let $log := console:log("publication has custom function: " || $publication-has-custom-function || " element name has custom function: " || $element-name-has-custom-function):)
     return
         if ($result/@xml:id = 'index') then
             '[Back of book index: too many hits to display]'
@@ -824,7 +841,7 @@ declare function search:trim-words($string as xs:string, $number as xs:integer) 
 
 declare
     %templates:wrap
-function search:select-volumes($node as node(), $model as map(*), $volume-id as xs:string*) {
+function search:load-volumes($node as node(), $model as map(*), $volume-id as xs:string*) {
     let $frus-volume-ids := $model?query-info?results-doc-ids
     let $volume-ids := 
         if (exists($frus-volume-ids)) then
@@ -833,6 +850,10 @@ function search:select-volumes($node as node(), $model as map(*), $volume-id as 
             (: full text volumes in the database :)
             collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]/@xml:id
     let $vols := collection("/db/apps/frus/bibliography")/volume[@id = $volume-ids]
+    
+    let $volumes :=
+        map { "volumes":
+        (
     for $vol in $vols
         let $vol-id := $vol/@id
         let $title := 
@@ -842,13 +863,26 @@ function search:select-volumes($node as node(), $model as map(*), $volume-id as 
             => search:trim-words(10)
     order by $vol-id
 
+    return <volume><id>{$vol-id/string()}</id><label>{$title}</label></volume>
+        )}
+        
+    let $new := map:new(($model, $volumes))
+
+ let $c:=console:log($new?volumes)
+    return
+        $new
+};
+
+declare
+    %templates:wrap
+function search:volumes($node as node(), $model as map(*)) {
+    for $volume in $model?volume
     return
         <li>
-            <input class="hsg-search-input" type="checkbox" name="volume-id" id="{ $vol-id }" value="{ $vol-id }">
-                { if ($vol-id = $volume-id) then attribute checked { "checked"} else () }
+            <input class="hsg-search-input" type="checkbox" name="volume-id" id="{ $volume/id/string() }" value="{ $volume/id/string() }">
             </input>
-            <label class="hsg-search-input-label truncate" for="{ $vol-id }">
-                <span class="c-indicator">{ $title }</span>
+            <label class="hsg-search-input-label truncate" for="{ $volume }">
+                <span class="c-indicator">{ $volume/label/string() }</span>
             </label>
         </li>
 };
