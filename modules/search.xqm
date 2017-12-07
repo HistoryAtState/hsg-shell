@@ -473,6 +473,40 @@ function search:sort-by-value($node as node(), $model as map(*), $sort-by as xs:
         }
 };
 
+declare function search:get-range($start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?) as map(*) {
+    let $timezone :=
+        (: We want to assume times supplied in a query are US Eastern, unless otherwise specified.
+           The UTC offset for US Eastern changes depending on daylight savings time.
+           We could use fn:implicit-timezone(), but this depends upon the query context, which is set by the system/environment.
+           On the hsg production servers, this function returns +00:00, or UTC.
+           So the following is a kludge to determine the UTC offset for US Eastern, sensitive to daylight savings time. :)
+        (:functx:duration-from-timezone(fn:format-dateTime(current-dateTime(), "[Z]", (), (), "America/New_York")):)
+        (: hard code US Eastern time, since dev/prod servers had different implicit timezones, and this made testing impossible
+           better to be 1 hr off than ~5 hrs. :)
+        xs:dayTimeDuration("-PT5H")
+    let $range-start :=
+        if ($start-date ne "") then
+             ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
+                => fd:normalize-low($timezone)
+        else
+            ()
+    let $range-end :=
+        if ($end-date ne "") then
+            ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
+                => fd:normalize-high($timezone)
+        (: if end-date is omitted, then treat the high end of the start day as the end :)
+        else if ($start-date ne "") then
+            $start-date
+                => fd:normalize-high($timezone)
+        else
+            ()
+    return
+        map { 
+            "start": $range-start,
+            "end": $range-end
+        }
+};
+
 declare
     %templates:default("start", 1)
     %templates:default("per-page", 10)
@@ -480,7 +514,8 @@ declare
 function search:load-results($node as node(), $model as map(*), $query as xs:string*, $within as xs:string*,
 $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?, $sort-by as xs:string?) {
     let $query-start-time := util:system-time()
-    let $hits := search:query-sections($within, $volume-id, $query, $start-date, $end-date, $start-time, $end-time)
+    let $range := search:get-range($start-date, $end-date, $start-time, $end-time)
+    let $hits := search:query-sections($within, $volume-id, $query, $range?start, $range?end)
     let $hit-count := count($hits)
     let $hits := search:sort($sort-by, $query, $hits) => search:filter-results()
     let $query-end-time := util:system-time()
@@ -495,6 +530,8 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start
             "end-date": $end-date,
             "start-time": $start-time,
             "end-time": $end-time,
+            "range-start": $range?start,
+            "range-end": $range?end,
             "sort-by": $sort-by,
             "volume-id": $volume-id,
             "results-doc-ids": $hits/root()/tei:TEI/@xml:id/string(),
@@ -559,52 +596,25 @@ declare function search:sort($sort-by as xs:string, $query as xs:string*, $hits 
 
 
 declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
-    $query as xs:string, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?) {
+    $query as xs:string, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
     if (exists($sections) and not($sections = ("", "entire_site"))) then
         for $section in $sections
         for $category in $search:SECTIONS?($section)
         return
-            search:query-section($category, $volume-ids, $query, $start-date, $end-date, $start-time, $end-time)
+            search:query-section($category, $volume-ids, $query, $range-start, $range-end)
     else
         map:for-each(
             $search:SECTIONS,
             function($section, $categories) {
                 for $category in $categories
                 return
-                    search:query-section($category, $volume-ids, $query, $start-date, $end-date, $start-time, $end-time)
+                    search:query-section($category, $volume-ids, $query, $range-start, $range-end)
             }
         )
 };
 
-declare function search:query-section($category, $volume-ids as xs:string*, $query as xs:string*, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?) {
-    let $log := console:log($start-date || ' -- ' || $end-date || ' : ' || (if ($category instance of map(*)) then $category?id else $category) || ' -- ' || $query)
-    let $timezone :=
-        (: We want to assume times supplied in a query are US Eastern, unless otherwise specified.
-           The UTC offset for US Eastern changes depending on daylight savings time.
-           We could use fn:implicit-timezone(), but this depends upon the query context, which is set by the system/environment.
-           On the hsg production servers, this function returns +00:00, or UTC.
-           So the following is a kludge to determine the UTC offset for US Eastern, sensitive to daylight savings time. :)
-        (:functx:duration-from-timezone(fn:format-dateTime(current-dateTime(), "[Z]", (), (), "America/New_York")):)
-        (: hard code US Eastern time, since dev/prod servers had different implicit timezones, and this made testing impossible
-           better to be 1 hr off than ~5 hrs. :)
-        xs:dayTimeDuration("-PT5H")
-    let $range-start :=
-        if ($start-date ne "") then
-             ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
-                => fd:normalize-low($timezone)
-        else
-            ()
-    let $range-end :=
-        if ($end-date ne "") then
-            ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
-                => fd:normalize-high($timezone)
-        (: if end-date is omitted, then treat the high end of the start day as the end :)
-        else if ($start-date ne "") then
-            $start-date
-                => fd:normalize-high($timezone)
-        else
-            ()
-    let $log := console:log("range-start: " || $range-start || " range-end: " || $range-end)
+declare function search:query-section($category, $volume-ids as xs:string*, $query as xs:string*, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
+    let $log := console:log($range-start || ' -- ' || $range-end || ' : ' || (if ($category instance of map(*)) then $category?id else $category) || ' -- ' || $query)
     let $is-date-query := exists($range-start) and exists($range-end)
     let $is-keyword-query := string-length($query) gt 0
     return
@@ -773,14 +783,14 @@ declare function search:milestone-chunk(
 declare
     %templates:wrap
 function search:result-count($node, $model) {
-    $model?query-info?result-count
+    format-number($model?query-info?result-count, "#,###.##")
 };
 
 declare
     %templates:wrap
 function search:message-limited($node as node(), $model as map(*)) {
     if ($model?query-info?result-count > $search:MAX_HITS_SHOWN) then
-        " (display limited to " || $model?query-info?results-shown || " results)"
+        " (display limited to " || format-number($model?query-info?results-shown, "#,###.##") || " results)"
     else
         ()
 };
@@ -791,12 +801,20 @@ function search:message-limited($node as node(), $model as map(*)) {
  : @param $model
  : @return Returns HTML
  :)
-declare function search:result-count-summary($node as node(), $model as map(*)) {
+declare function search:results-summary($node as node(), $model as map(*)) {
     if ($model?query-info?result-count > 0) then
         <p>
-            Displaying {search:start($node, $model)} – {search:end($node, $model)}
-            of {search:result-count($node, $model)} results {search:message-limited($node, $model)}.
-            Results returned in {search:query-duration($node, $model)}s.
+            Displaying {search:start($node, $model)}–{search:end($node, $model)}
+            of {search:result-count($node, $model)} results 
+            {
+                (
+                    search:message-limited($node, $model),
+                    search:keyword-summary($node, $model), 
+                    search:scope-summary($node, $model), 
+                    search:date-summary($node, $model)
+                ) => string-join(" ")
+            }.
+            Search completed in {search:query-duration($node, $model)}s.
         </p>
     else
         <p>No results were found.</p>
@@ -808,16 +826,62 @@ function search:query-duration($node, $model) {
     $model?query-info?query-duration
 };
 
-declare function search:q($node, $model) {
-    $model?query-info?q
-};
-
 declare function search:start($node, $model) {
     $model?query-info?start
 };
 
 declare function search:end($node, $model) {
     $model?query-info?end
+};
+
+declare function search:pluralize($count as xs:integer, $singular-form as xs:string, $plural-form as xs:string) {
+    if ($count eq 1) then
+        $singular-form
+    else 
+        $plural-form
+};
+
+declare function search:keyword-summary($node, $model) {
+    let $q := $model?query-info?q => normalize-space()
+    return
+        if ($q ne "") then
+            "for keyword “" || $q || "”"
+        else
+            ()
+};
+
+declare function search:scope-summary($node, $model) {
+    let $sections-count := $model?query-info?within => count()
+    let $volumes-count := $model?query-info?volume-id => count()
+    return
+        if ($sections-count gt 0 or $volumes-count gt 0) then
+            (
+                "within "
+                ||
+                (
+                    if ($sections-count gt 0) then 
+                        ($sections-count || " " || search:pluralize($sections-count, "section", "sections")) 
+                    else 
+                        (),
+                    if ($volumes-count gt 0) then 
+                        ($volumes-count || " " || search:pluralize($volumes-count, "volume", "volumes"))
+                    else 
+                        ()
+                ) => string-join(" and ")
+            )
+        else
+            ()
+};
+
+declare function search:date-summary($node, $model) {
+    let $start := $model?query-info?range-start
+    let $end := $model?query-info?range-end
+    let $format := format-dateTime(?, "[MNn] [D], [Y] at [h]:[m][P]", "en", (), ())
+    return
+        if (exists($start) and exists($end)) then
+            "between " || $format($start) || " and " || $format($end)
+        else
+            ()
 };
 
 declare function search:trim-words($string as xs:string, $number as xs:integer) {
