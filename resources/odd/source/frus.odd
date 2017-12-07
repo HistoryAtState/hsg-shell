@@ -77,19 +77,19 @@
                             <param name="content">"Editors:"</param>
                             <outputRendition>font-weight: bold</outputRendition>
                         </model>
-                        <model predicate="count(editor[@role = 'primary']) eq 1" behaviour="block">
+                        <model predicate="count(editor[@role = 'primary'][. ne '']) eq 1" behaviour="block">
                             <param name="content">"Editor:"</param>
                             <outputRendition>font-weight: bold</outputRendition>
                         </model>
-                        <model predicate="editor[@role = 'primary']" behaviour="list-from-items">
+                        <model predicate="editor[@role = 'primary'][. ne '']" behaviour="list-from-items">
                             <param name="content">editor[@role="primary"]</param>
                             <outputRendition>list-style-type: none</outputRendition>
                         </model>
-                        <model predicate="editor[@role = 'general']" behaviour="block">
+                        <model predicate="editor[@role = 'general'][. ne '']" behaviour="block">
                             <param name="content">"General Editor:"</param>
                             <outputRendition>font-weight: bold</outputRendition>
                         </model>
-                        <model predicate="editor[@role = 'general']" behaviour="list-from-items">
+                        <model predicate="editor[@role = 'general'][. ne '']" behaviour="list-from-items">
                             <param name="content">editor[@role="general"]</param>
                             <outputRendition>list-style-type: none</outputRendition>
                         </model>
