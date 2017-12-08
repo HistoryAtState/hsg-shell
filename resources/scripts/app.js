@@ -159,7 +159,26 @@ $(document).ready(function() {
             return '01'.padStart(pad, '0');
         }
     }
-    
+
+    function getDateComponent(prefix) {
+        var year = $('#' + prefix + '_year').val();
+        if (year) {
+            var month = $('#' + prefix + '_month').val();
+            var day = $('#' + prefix + '_day').val();
+            if (month) {
+                if (day) {
+                    return adjustDateComponent(year, 4) + '-' + adjustDateComponent(month, 2) + '-' +
+                        adjustDateComponent(day, 2);
+                } else {
+                    return adjustDateComponent(year, 4) + '-' + adjustDateComponent(month, 2);
+                }
+            } else {
+                return adjustDateComponent(year, 4);
+            }
+        }
+        return null;
+    }
+
     /**
      * reload page with all filters added as GET-parameters
      * @param {Event} event
@@ -178,23 +197,16 @@ $(document).ready(function() {
         action += serializeFiltersByName(sectionFilter, 'within');
 
         //aggregate criteria from partial date controls (month day year) into single query param
-        if ($('#start_year').val()) {
-            var startDate = [
-                adjustDateComponent($('#start_year').val(), 4),
-                adjustDateComponent($('#start_month').val(), 2),
-                adjustDateComponent($('#start_day').val(), 2)
-            ];
-            action += '&start_date=' + startDate.join('-');
+        var startDate = getDateComponent('start');
+        if (startDate) {
+            action += '&start_date=' + startDate;
         }
-        if ($('#end_year').val()) {
-            var endDate = [
-                adjustDateComponent($('#end_year').val(), 4),
-                adjustDateComponent($('#end_month').val(), 2),
-                adjustDateComponent($('#end_day').val(), 2)
-            ];
-            action += '&end_date=' + endDate.join('-');
+
+        var endDate = getDateComponent('end');
+        if (endDate) {
+            action += '&end_date=' + endDate;
         }
-        
+
         var startTimePmSwitch = $('#start_time_pm').is(':checked');
         //aggregate criteria from partial time controls (hh mm) into single query param
         if ($('#start_hour').val()) {
@@ -207,7 +219,7 @@ $(document).ready(function() {
             console.log('start time ' + startTime)
             action += '&start_time=' + startTime.join(':');
         }
-        
+
         var endTimePmSwitch = $('#end_time_pm').is(':checked');
         if ($('#end_hour').val()) {
             var endHour = parseInt($('#end_hour').val());
