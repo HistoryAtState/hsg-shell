@@ -851,10 +851,13 @@ declare function search:keyword-summary($node, $model) {
 };
 
 declare function search:scope-summary($node, $model) {
-    let $sections-count := $model?query-info?within => count()
+    let $sections := $model?query-info?within
+    let $sections-count := $sections => count()
     let $volumes-count := $model?query-info?volume-id => count()
     return
-        if ($sections-count gt 0 or $volumes-count gt 0) then
+        if ($sections = "entire_site" or $sections-count eq 0) then
+            "across the entire Office of the Historian website"
+        else if ($sections-count gt 0 or $volumes-count gt 0) then
             (
                 "within "
                 ||
