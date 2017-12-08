@@ -260,8 +260,12 @@ $(document).ready(function() {
         if(startTime) {
             var splitStartTime = startTime.split(':');
             var startHour = parseInt(splitStartTime[0]);
-            if (startHour > 12) {startHour -= 12;}
-            $('#start_time_pm').prop('checked', true);
+            if (startHour > 12) {
+                startHour -= 12;
+                $('#start_time_pm').prop('checked', true);
+            } else {
+                $('#start_time_am').prop('checked', true);
+            }
             $('#start_hour').val(startHour);
             $('#start_minute').val(splitStartTime[1]);
         }
@@ -270,8 +274,12 @@ $(document).ready(function() {
         if(endTime) {
             var splitEndTime = endTime.split(':');
             var endHour = parseInt(splitEndTime[0]);
-            if (endHour > 12) {endHour -= 12;}
-            $('#end_time_pm').prop('checked', true);
+            if (endHour > 12) {
+                endHour -= 12;
+                $('#end_time_pm').prop('checked', true);
+            } else {
+                $('#end_time_am').prop('checked', true);
+            }
             $('#end_hour').val(endHour);
             $('#end_minute').val(splitEndTime[1]);
         }
