@@ -576,10 +576,10 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
             return
                 (
                     for $hit in $dated
-                    (:
                     order by $hit/@frus:doc-dateTime-min
-                    :)
+                    (:
                     order by sort:index("doc-dateTime-min-asc", $hit)
+                    :)
                     return
                         $hit
                     ,
@@ -594,10 +594,10 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
             return
                 (
                     for $hit in $dated
-                    (:
                     order by $hit/@frus:doc-dateTime-min descending
-                    :)
+                    (:
                     order by sort:index("doc-dateTime-min-desc", $hit)
+                    :)
                     return
                         $hit
                     ,
