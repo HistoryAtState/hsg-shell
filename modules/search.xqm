@@ -632,49 +632,58 @@ declare %private function search:query-sections($sections as xs:string*, $volume
 };
 
 declare function search:query-section($category, $volume-ids as xs:string*, $query as xs:string*, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
-    let $log := console:log($range-start || ' -- ' || $range-end || ' : ' || (if ($category instance of map(*)) then $category?id else $category) || ' -- ' || $query)
-    let $is-date-query := exists($range-start) and exists($range-end)
+    let $log := console:log("search:query-section starting: query: " || $query || " range-start: " || $range-start || " range-end: " || $range-end || " category: " || (if ($category instance of map(*)) then $category?id else $category))
+    let $is-date-query := exists($range-start)
     let $is-keyword-query := string-length($query) gt 0
-    return
-    typeswitch($category)
-        case xs:string return
-            switch ($category)
-                case "frus" return
-                    (console:log('frus search'),
-                    let $vols :=
-                        if (exists($volume-ids)) then
-                            for $volume-id in $volume-ids
-                            return
-                                collection($config:FRUS_VOLUMES_COL)/id($volume-id)
-                        else
-                                collection($config:FRUS_VOLUMES_COL)
-                    let $hits :=
-                        if ($is-date-query and $is-keyword-query) then
-                            (console:log('query ' || $query),
-                            (: dates + keyword  :)
-                            $vols//tei:div[ft:query(., $query)]
-                                [@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
-                            )
-                        else if ($is-date-query) then
-                            (: dates  :)
-                            (console:log('no query, just dates ' || count($vols)),
-                            $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
-                            )
-                        else if ($is-keyword-query) then
-                            (: keyword  :)
-                            $vols//tei:div[ft:query(., $query)]
-                        else
-                            (: no parameters provided :)
-                            ()
-                    return
-                        (console:log(count($hits) || " hits"),
-                        $hits
-                        )
-                    )
-                default return
-                    collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
-        default return
-            $category?query($query)
+    let $start := util:system-time()
+    let $hits :=
+        typeswitch($category)
+            case xs:string return
+                switch ($category)
+                    case "frus" return
+                        let $vols :=
+                            if (exists($volume-ids)) then
+                                for $volume-id in $volume-ids
+                                return
+                                    collection($config:FRUS_VOLUMES_COL)/id($volume-id)
+                            else
+                                    collection($config:FRUS_VOLUMES_COL)
+                        let $hits :=
+                            if ($is-date-query and $is-keyword-query) then
+                                (console:log('query ' || $query),
+                                (: dates + keyword  :)
+                                $vols//tei:div[ft:query(., $query)]
+                                    [@type = ("section", "document")]
+                                    [
+                                        (: only apply dates to dated documents; let undated fulltext hits through, e.g., undated documents or front/back-matter sections :)
+                                        if (@frus:doc-dateTime-min) then 
+                                            (@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end) 
+                                        else 
+                                            true()
+                                    ]
+                                )
+                            else if ($is-date-query) then
+                                (: dates  :)
+                                (console:log('no query, just dates ' || count($vols)),
+                                $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
+                                )
+                            else if ($is-keyword-query) then
+                                (: keyword  :)
+                                $vols//tei:div[ft:query(., $query)][@type = ("section", "document")]
+                            else
+                                (: no parameters provided :)
+                                ()
+                        return
+                            $hits
+                    default return
+                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
+            default return
+                $category?query($query)
+        let $end := util:system-time()
+        return
+            (console:log("search:query-section finished, found " || count($hits) || " hits in " || $end - $start),
+            $hits
+            )
 };
 
 declare function search:result-heading($node, $model) {
