@@ -835,7 +835,6 @@ declare function search:results-summary($node as node(), $model as map(*)) {
             of {search:result-count($node, $model)} results 
             {
                 (
-                    search:message-limited($node, $model),
                     search:keyword-summary($node, $model), 
                     search:scope-summary($node, $model), 
                     search:date-summary($node, $model)
