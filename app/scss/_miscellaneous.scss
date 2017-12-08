@@ -119,3 +119,18 @@ html input[disabled] {
 .showContent {
   height: auto;
 }
+
+/* adapted from https://standards.usa.gov/components/labels/ - code at https://github.com/18F/web-design-standards/blob/master/src/stylesheets/elements/_labels.scss */
+.hsg-label {
+  @extend .section-heading;
+  font-family: $font-sans;
+  color: $color-white;
+  background-color: $color-secondary-darkest;
+  border-radius: $label-border-radius;
+  margin-right: 0.5rem;
+  padding: 0.1rem 0.7rem;
+
+  &:only-of-type {
+    margin-right: 0;
+  }
+}
