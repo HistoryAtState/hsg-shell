@@ -224,8 +224,8 @@ declare
     %templates:wrap
 function search:component($node as node(), $model as map(*), $component as xs:string, $filter as xs:string) {
     let $new := map {
-        'component': $component,
-        'filter': $filter
+        "component": $component,
+        "filter": $filter
     }
     return map:new(($model, $new))
 };
@@ -246,7 +246,7 @@ function search:entire-site-check($node as node(), $model as map(*), $within as 
 declare
     %templates:wrap
 function search:filter-input-attributes($node as node(), $model as map(*)) {
-    let $c:=console:log($model?component || ' : filter :' || $model?filter )
+(:    let $c:=console:log($model?component || ' : filter :' || $model?filter ):)
     
     let $component := $model?component
     let $filter := $model?filter
@@ -291,18 +291,18 @@ declare
 function search:component-checked($node as node(), $model as map(*)) {
     let $component := $model?component
     let $filter := $model?filter
-    let $c:=console:log('bar' || $filter)
+(:    let $c:=console:log('bar' || $filter):)
     let $within := $model?filters($filter)
-    let $c:=console:log($within)
+(:    let $c:=console:log($within):)
     let $component-id := $model($component)/id
     return if ($component-id = $within) then 'checked' else $within
 };
 
 declare
 function search:component-hidden($node as node(), $model as map(*), $component as xs:string) {
-    let $c:=console:log('c ' ||$component)
+(:    let $c:=console:log('c ' ||$component)
     let $c:=console:log($model($component))
-    return
+    return:)
     element {$node/name()} {
         attribute class {
             if (count($model($component)) > 3) then 
@@ -931,7 +931,8 @@ declare function search:trim-words($string as xs:string, $number as xs:integer) 
 declare
     %templates:wrap
 function search:load-volumes($node as node(), $model as map(*), $volume-id as xs:string*) {
-    let $frus-volume-ids := $model?query-info?results-doc-ids
+    let $load-volumes-start := util:system-time()
+    let $frus-volume-ids := $model?query-info?results-vol-ids
     let $volume-ids :=
         if (exists($frus-volume-ids)) then
             $frus-volume-ids
@@ -954,10 +955,10 @@ function search:load-volumes($node as node(), $model as map(*), $volume-id as xs
 
     return <volume><id>{$vol-id/string()}</id><label>{$title}</label></volume>
         )}
-
+    let $load-volumes-end := util:system-time()
+    let $log := console:log("search:load-volumes: loaded " || count($vols) || " in " || $load-volumes-end - $load-volumes-start)
     let $new := map:new(($model, $volumes))
 
- let $c:=console:log($new?volumes)
     return
         $new
 };
