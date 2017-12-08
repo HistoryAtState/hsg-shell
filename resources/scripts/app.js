@@ -359,6 +359,7 @@ $(document).ready(function() {
         var item = $(ev.target);
         $('#sort-by-label').text(item.text());
         $('#sorting').val(item.attr('id'));
+        submitSearch(ev);
     });
 
     /**
