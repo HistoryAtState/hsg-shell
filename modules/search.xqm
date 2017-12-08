@@ -511,89 +511,107 @@ declare
     %templates:default("start", 1)
     %templates:default("per-page", 10)
     %templates:default("sort-by", "relevance")
-function search:load-results($node as node(), $model as map(*), $query as xs:string*, $within as xs:string*,
-$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer?, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?, $sort-by as xs:string?) {
+function search:load-results($node as node(), $model as map(*), $query as xs:string?, $within as xs:string*,
+$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?, $sort-by as xs:string) {
     let $query-start-time := util:system-time()
+    let $query := normalize-space($query)
+    let $adjusted-sort-by :=
+        (: if no query string is provided, relevance sorting is essentially random, so we'll force date sorting :)
+        (: TODO can we update the "sort-by" value in the returned page to show that the results are sorted as date_asc/desc? :)
+        if (string-length($query) eq 0 and $sort-by eq "relevance") then
+            "date_asc"
+        else
+            $sort-by
     let $range := search:get-range($start-date, $end-date, $start-time, $end-time)
-    let $hits := search:query-sections($within, $volume-id, $query, $range?start, $range?end)
+    let $range-start := $range?start
+    let $range-end := $range?end
+    let $query-sections-start := util:system-time()
+    let $hits := search:query-sections($within, $volume-id, $query, $range-start, $range-end)
+    let $query-sections-end := util:system-time()
+    let $query-sections-duration := console:log("query-sections-duration: " || $query-sections-end - $query-sections-start)
+    let $sorted-hits-start := util:system-time()
+    let $sorted-hits := search:sort($hits, $adjusted-sort-by)
+    let $sorted-hits-end := util:system-time()
+    let $sorted-hits-duration := console:log("sorted-hits-duration: " || $sorted-hits-end - $sorted-hits-start)
+    let $window := subsequence($sorted-hits, $start, $per-page)
+    let $end := $start + count($window) - 1
     let $hit-count := count($hits)
-    let $hits := search:sort($sort-by, $query, $hits) => search:filter-results()
+    let $results-vol-ids := $hits/root()/tei:TEI/@xml:id/string()
     let $query-end-time := util:system-time()
-    let $window := subsequence($hits, $start, $per-page)
-    let $log := console:log("search:load-results has a window of " || count($window) || " hits")
+    let $query-duration := seconds-from-duration($query-end-time - $query-start-time)
     let $query-info :=  map {
         "results": $window,
         "query-info": map {
             "q": $query,
             "within": $within,
+            "volume-id": $volume-id,
             "start-date": $start-date,
             "end-date": $end-date,
             "start-time": $start-time,
             "end-time": $end-time,
-            "range-start": $range?start,
-            "range-end": $range?end,
+            "range-start": $range-start,
+            "range-end": $range-end,
             "sort-by": $sort-by,
-            "volume-id": $volume-id,
-            "results-doc-ids": $hits/root()/tei:TEI/@xml:id/string(),
             "start": $start,
-            "end": $start + count($window) - 1,
+            "end": $end,
             "perpage": $per-page,
+            "results-doc-ids": $results-vol-ids,
             "result-count": $hit-count,
-            "results-shown": count($hits),
-            "query-duration": seconds-from-duration($query-end-time - $query-start-time)
+            "query-duration": $query-duration
         }
     }
+    let $templates-process-start := util:system-time()
     let $html := templates:process($node/*, map:new(($model, $query-info)))
+    let $templates-process-end := util:system-time()
+    let $log := console:log("templates-process-duration: ", $templates-process-end - $templates-process-start)
     return
         $html
 };
 
-declare function search:sort($sort-by as xs:string, $query as xs:string*, $hits as element()*) {
-    let $adjusted-sort-by :=
-        (: if no query string is provided, relevance sorting is essentially random, so we'll fall back on date sorting :)
-        if (string-length($query) eq 0) then
-            if ($sort-by eq "date_desc") then $sort-by else "date_asc"
-        else
-            $sort-by
-    return
-        switch ($adjusted-sort-by)
-            case "date_asc" return
-                let $dated := $hits[@frus:doc-dateTime-min]
-                let $undated := $hits except $dated
-                return
-                    (
-                        for $hit in $dated
-                        order by $hit/@frus:doc-dateTime-min
-                        return
-                            $hit
-                        ,
-                        for $hit in $undated
-                        order by ft:score($hit) descending
-                        return
-                            $hit
-                    )
-            case "date_desc" return
-                let $dated := $hits[@frus:doc-dateTime-min]
-                let $undated := $hits except $dated
-                return
-                    (
-                        for $hit in $dated
-                        order by $hit/@frus:doc-dateTime-min descending
-                        return
-                            $hit
-                        ,
-                        for $hit in $undated
-                        order by ft:score($hit) descending
-                        return
-                            $hit
-                    )
-            default (: case "relevance" :) return
-                for $hit in $hits
-                order by ft:score($hit) descending
-                return
-                    $hit
+declare function search:sort($hits as element()*, $sort-by as xs:string) {
+    switch ($sort-by)
+        case "date_asc" return
+            let $dated := $hits[@frus:doc-dateTime-min]
+            let $undated := $hits except $dated
+            return
+                (
+                    for $hit in $dated
+                    (:
+                    order by $hit/@frus:doc-dateTime-min
+                    :)
+                    order by sort:index("doc-dateTime-min-asc", $hit)
+                    return
+                        $hit
+                    ,
+                    for $hit in $undated
+                    order by ft:score($hit) descending
+                    return
+                        $hit
+                )
+        case "date_desc" return
+            let $dated := $hits[@frus:doc-dateTime-min]
+            let $undated := $hits except $dated
+            return
+                (
+                    for $hit in $dated
+                    (:
+                    order by $hit/@frus:doc-dateTime-min descending
+                    :)
+                    order by sort:index("doc-dateTime-min-desc", $hit)
+                    return
+                        $hit
+                    ,
+                    for $hit in $undated
+                    order by ft:score($hit) descending
+                    return
+                        $hit
+                )
+        default (: case "relevance" :) return
+            for $hit in $hits
+            order by ft:score($hit) descending
+            return
+                $hit
 };
-
 
 declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
     $query as xs:string, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
