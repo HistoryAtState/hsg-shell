@@ -107,6 +107,7 @@ $(document).ready(function() {
         volumesFilter = $('#volumesFilter'), // "by-volumes" filter form
         mainButton = $('.hsg-main-search-button'), // main search button
         applyFiltersButton = $('#filterApplyButton'); // apply filters button in sidebar
+        applyDateFiltersButton = $('#dateApply'); // apply date filter button in sidebar
 
     /**
      * Submit query from navigation search form, redirect to "search/"
@@ -266,6 +267,7 @@ $(document).ready(function() {
 
         // submit the search form
         applyFiltersButton.on('click', submitSearch);
+        applyDateFiltersButton.on('click', submitSearch);
         mainForm.on('submit', submitSearch);
         mainButton.on('click', submitSearch);
 

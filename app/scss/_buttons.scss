@@ -57,6 +57,7 @@
   @extend .btn;
   @extend .btn-default;
   background-color: $color-gray-lightest;
+  margin-top: 0;
   > span {
     top: 2px;
   }
