@@ -283,7 +283,7 @@ declare
 %templates:replace
 function search:label-contents($node as node(), $model as map(*)) {
     let $component := $model?component
-    return $model($component)/label/string()
+    return $model($component)/label/node()
 };
 
 declare
