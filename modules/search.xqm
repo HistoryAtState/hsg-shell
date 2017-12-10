@@ -522,21 +522,66 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-
             "date_asc"
         else
             $sort-by
-    let $range := search:get-range($start-date, $end-date, $start-time, $end-time)
-    let $range-start := $range?start
-    let $range-end := $range?end
-    let $query-sections-start := util:system-time()
-    let $hits := search:query-sections($within, $volume-id, $query, $range-start, $range-end)
-    let $query-sections-end := util:system-time()
-    let $query-sections-duration := console:log("query-sections-duration: " || $query-sections-end - $query-sections-start)
-    let $sorted-hits-start := util:system-time()
-    let $sorted-hits := search:sort($hits, $adjusted-sort-by)
-    let $sorted-hits-end := util:system-time()
-    let $sorted-hits-duration := console:log("sorted-hits-duration: " || $sorted-hits-end - $sorted-hits-start)
-    let $window := subsequence($sorted-hits, $start, $per-page)
+            
+    (: prepare a unique key for the present query, so we can cache the hits to improve the result of subsequent requests for the same query :)
+    let $normalized-query-string := 
+        (
+            let $params := map { "q": $query, "within": $within, "volume-id": $volume-id, "start-date": $start-date, "end-date": $end-date, "start-time": $start-time, "end-time": $end-time, "sort-by": $sort-by } 
+            for $param in map:keys($params)
+            let $val := map:get($params, $param)
+            order by $param
+            where not($val = "")
+            return
+                $param || "=" || $val => sort() => string-join(";")
+        )
+        => string-join("&amp;")
+    let $query-id := util:hash($normalized-query-string, "sha1")
+    let $cache-name := "hsg-search"
+    let $cache-key := "queries"
+    let $cache := cache:get($cache-name, $cache-key)
+    let $cache := if ($cache instance of map(*)) then $cache else map { "created": current-dateTime(), "purged": current-dateTime(), "queries": map { } }
+    
+    (: retrieve the hits from the cache, or populate the cache with the hits :)
+    let $cached-query := if (map:contains($cache?queries, $query-id)) then map:get($cache?queries, $query-id) else ()
+    let $results :=
+        if (exists($cached-query)) then
+            $cached-query
+        else
+            let $range := search:get-range($start-date, $end-date, $start-time, $end-time)
+            let $range-start := $range?start
+            let $range-end := $range?end
+            let $query-sections-start := util:system-time()
+            let $hits := search:query-sections($within, $volume-id, $query, $range-start, $range-end)
+            let $query-sections-end := util:system-time()
+            let $query-sections-duration := console:log("query-sections-duration: " || $query-sections-end - $query-sections-start)
+            let $sorted-hits-start := util:system-time()
+            let $sorted-hits := search:sort($hits, $adjusted-sort-by)
+            let $sorted-hits-end := util:system-time()
+            let $sorted-hits-duration := console:log("sorted-hits-duration: " || $sorted-hits-end - $sorted-hits-start)
+            let $results-doc-ids := $hits/root()/tei:TEI/@xml:id/string()
+            let $results := 
+                map { 
+                    "id": $query-id,
+                    "query": $normalized-query-string,
+                    "created": current-dateTime(),
+                    "hits": $sorted-hits,
+                    "results-doc-ids": $results-doc-ids,
+                    "range-start": $range-start,
+                    "range-end": $range-end
+                }
+            let $new-queries := map:put($cache?queries, $query-id, $results)
+            let $set-cache := cache:put($cache-name, $cache-key, map { "created": $cache?created, "purged": $cache?purged, "queries": $new-queries })
+            return
+                $results
+
+    let $hits := $results?hits
+    let $results-doc-ids := $results?results-doc-ids
+    let $range-start := $results?range-start
+    let $range-end := $results?range-end
+    
+    let $window := subsequence($hits, $start, $per-page)
     let $end := $start + count($window) - 1
     let $hit-count := count($hits)
-    let $results-doc-ids := $hits/root()/tei:TEI/@xml:id/string()
     let $query-end-time := util:system-time()
     let $query-duration := seconds-from-duration($query-end-time - $query-start-time)
     let $query-info :=  map {
@@ -551,7 +596,7 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-
             "end-time": $end-time,
             "range-start": $range-start,
             "range-end": $range-end,
-            "sort-by": $sort-by,
+            "sort-by": $adjusted-sort-by,
             "start": $start,
             "end": $end,
             "perpage": $per-page,
@@ -560,6 +605,23 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-
             "query-duration": $query-duration
         }
     }
+    
+    (: purge cache :)
+    let $cache-max-age := xs:dayTimeDuration("PT5M")
+    let $purge := 
+        if (current-dateTime() - $cache?purged gt $cache-max-age) then
+            (: until map:remove is fixed, we'll just blow away the cache :)
+            cache:clear()
+            (:
+            let $entries-to-purge := $cache?queries?*[?created + $cache-max-age gt current-dateTime()]?id
+            let $purged := map:remove($cache?queries, $entries-to-purge)
+            let $new := map:merge(($cache?created, map:entry("purged": current-dateTime()), $purged)
+            return
+                cache:put($cache-name, $cache-key, $new)
+            :)
+        else
+            ()
+    
     let $templates-process-start := util:system-time()
     let $html := templates:process($node/*, map:new(($model, $query-info)))
     let $templates-process-end := util:system-time()
@@ -576,7 +638,7 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
             return
                 (
                     for $hit in $dated
-                    order by sort:index("doc-dateTime-min-asc", $hit)
+                    order by sort:index("doc-dateTime-min-asc", $hit/@frus:doc-dateTime-min)
                     (:
                     order by $hit/@frus:doc-dateTime-min
                     :)
@@ -594,7 +656,7 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
             return
                 (
                     for $hit in $dated
-                    order by sort:index("doc-dateTime-min-desc", $hit)
+                    order by sort:index("doc-dateTime-min-desc", $hit/@frus:doc-dateTime-min)
                     (:
                     order by $hit/@frus:doc-dateTime-min descending
                     :)
@@ -652,15 +714,10 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
                             if ($is-date-query and $is-keyword-query) then
                                 (console:log('query ' || $query),
                                 (: dates + keyword  :)
-                                $vols//tei:div[ft:query(., $query)]
-                                    [@type = ("section", "document")]
-                                    [
-                                        (: only apply dates to dated documents; let undated fulltext hits through, e.g., undated documents or front/back-matter sections :)
-                                        if (@frus:doc-dateTime-min) then 
-                                            (@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end) 
-                                        else 
-                                            true()
-                                    ]
+                                let $dated := $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end][ft:query(., $query)]
+                                let $undated := $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query)][@type = ("section", "document")]
+                                return
+                                    ($dated, $undated)
                                 )
                             else if ($is-date-query) then
                                 (: dates  :)
