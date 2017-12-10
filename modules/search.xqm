@@ -234,7 +234,7 @@ function search:component($node as node(), $model as map(*), $component as xs:st
 declare
     %templates:wrap
 function search:entire-site-check($node as node(), $model as map(*), $within as xs:string*) {
-    if (not(exists($within)) or $within='entire_site') then
+    if (not(exists($within)) or $within='entire-site') then
         attribute checked {'checked'}
     else
         ()
@@ -364,7 +364,7 @@ declare function search:load-administrations ($node, $model) {
     let $content := map { "administrations":
         (
             <administration>
-                <id>pre_truman</id>
+                <id>pre-truman</id>
                 <label>Pre-Truman Volumes</label>
             </administration>,
             <administration>
@@ -451,8 +451,8 @@ function search:show-number-of-filter-hits($node, $model) {
 ~:)
 declare function search:set-sort-by-value($sort-by as xs:string) {
     switch($sort-by)
-        case "date_asc" return "Dates (oldest first)"
-        case "date_desc" return "Dates (most recent first)"
+        case "date-asc" return "Dates (oldest first)"
+        case "date-desc" return "Dates (most recent first)"
         default return "Relevance"
 };
 
@@ -517,9 +517,9 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-
     let $query := normalize-space($query)
     let $adjusted-sort-by :=
         (: if no query string is provided, relevance sorting is essentially random, so we'll force date sorting :)
-        (: TODO can we update the "sort-by" value in the returned page to show that the results are sorted as date_asc/desc? :)
+        (: TODO can we update the "sort-by" value in the returned page to show that the results are sorted as date-asc/desc? :)
         if (string-length($query) eq 0 and $sort-by eq "relevance") then
-            "date_asc"
+            "date-asc"
         else
             $sort-by
             
@@ -632,7 +632,7 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-
 
 declare function search:sort($hits as element()*, $sort-by as xs:string) {
     switch ($sort-by)
-        case "date_asc" return
+        case "date-asc" return
             let $dated := $hits[@frus:doc-dateTime-min]
             let $undated := $hits except $dated
             return
@@ -650,7 +650,7 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
                     return
                         $hit
                 )
-        case "date_desc" return
+        case "date-desc" return
             let $dated := $hits[@frus:doc-dateTime-min]
             let $undated := $hits except $dated
             return
@@ -677,7 +677,7 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
 
 declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
     $query as xs:string, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
-    if (exists($sections) and not($sections = ("", "entire_site"))) then
+    if (exists($sections) and not($sections = ("", "entire-site"))) then
         for $section in $sections
         for $category in $search:SECTIONS?($section)
         return
@@ -938,7 +938,7 @@ declare function search:scope-summary($node, $model) {
     let $sections-count := $sections => count()
     let $volumes-count := $model?query-info?volume-id => count()
     return
-        if ($sections = "entire_site" or $sections-count eq 0) then
+        if ($sections = "entire-site" or $sections-count eq 0) then
             "across the entire Office of the Historian website"
         else if ($sections-count gt 0 or $volumes-count gt 0) then
             (
@@ -1071,12 +1071,12 @@ function search:paginate($node as node(), $model as map(*), $start as xs:int, $p
                 string-join(
                     (
                         $model?query-info?q[. ne ""]          ! ("q=" || encode-for-uri(.)),
-                        $model?query-info?within[not(. = ("", "entire_site"))]   ! ('within=' || .),
+                        $model?query-info?within[not(. = ("", "entire-site"))]   ! ('within=' || .),
                         $model?query-info?volume-id[. ne ""]  ! ("volume-id=" || .),
-                        $model?query-info?start-date[. ne ""] ! ("start_date=" || .),
-                        $model?query-info?end-date[. ne ""]   ! ("end_date=" || .),
-                        $model?query-info?start-time[. ne ""] ! ("start_time=" || .),
-                        $model?query-info?end-time[. ne ""]   ! ("end_time=" || .),
+                        $model?query-info?start-date[. ne ""] ! ("start-date=" || .),
+                        $model?query-info?end-date[. ne ""]   ! ("end-date=" || .),
+                        $model?query-info?start-time[. ne ""] ! ("start-time=" || .),
+                        $model?query-info?end-time[. ne ""]   ! ("end-time=" || .),
                         $model?query-info?sort-by[. ne ""]   ! ("sort-by=" || .)
                     ),
                     '&amp;'

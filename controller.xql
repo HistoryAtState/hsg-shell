@@ -1448,11 +1448,11 @@ else if (matches($exist:path, '^/education/?')) then
 (: handle search requests :)
 else if (matches($exist:path, '^/search/?')) then
     let $query := request:get-parameter("q", ())
-    let $start-date := request:get-parameter("start_date", ())
-    let $end-date := request:get-parameter("end_date", ())
-    let $start-time := request:get-parameter("start_time", ())
-    let $end-time := request:get-parameter("end_time", ())
-    let $log := console:log("q: " || $query || " start_date: " || $start-date || " end_date: " || $end-date || " start_time: " || $start-time || " end_time: " || $end-time)
+    let $start-date := request:get-parameter("start-date", ())
+    let $end-date := request:get-parameter("end-date", ())
+    let $start-time := request:get-parameter("start-time", ())
+    let $end-time := request:get-parameter("end-time", ())
+    let $log := console:log("q: " || $query || " start-date: " || $start-date || " end-date: " || $end-date || " start-time: " || $start-time || " end-time: " || $end-time)
     let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
     let $page :=
         (: If a search query is present, show the results template :)

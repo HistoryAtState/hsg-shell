@@ -200,12 +200,12 @@ $(document).ready(function() {
         //aggregate criteria from partial date controls (month day year) into single query param
         var startDate = getDateComponent('start');
         if (startDate) {
-            action += '&start_date=' + startDate;
+            action += '&start-date=' + startDate;
         }
 
         var endDate = getDateComponent('end');
         if (endDate) {
-            action += '&end_date=' + endDate;
+            action += '&end-date=' + endDate;
         }
 
         var startTimePmSwitch = $('#start_time_pm').is(':checked');
@@ -218,7 +218,7 @@ $(document).ready(function() {
                 $('#start_minute').val().padStart(2, '0')
             ];
             console.log('start time ' + startTime)
-            action += '&start_time=' + startTime.join(':');
+            action += '&start-time=' + startTime.join(':');
         }
 
         var endTimePmSwitch = $('#end_time_pm').is(':checked');
@@ -229,7 +229,7 @@ $(document).ready(function() {
                 endHour.toString().padStart(2, '0'),
                 $('#end_minute').val().padStart(2, '0')
             ];
-            action += '&end_time=' + endTime.join(':');
+            action += '&end-time=' + endTime.join(':');
         }
 
         var currentActiveSorting = sortingForm.find('#sorting');
@@ -241,7 +241,7 @@ $(document).ready(function() {
 
         //TODO refactor and cover cases of empty day/month
         //split aggregated date query and set up values for partial date controls
-        var startDate = dateFilter.find('input[name="start_date"]').val();
+        var startDate = dateFilter.find('input[name="start-date"]').val();
         if(startDate) {
             var splitStartDate = startDate.split('-');
             $('#start_year').val(splitStartDate[0]);
@@ -257,7 +257,7 @@ $(document).ready(function() {
             $('#end_day').val(splitEndDate[2]);
         }
 
-        var startTime = dateFilter.find('input[name="start_time"]').val();
+        var startTime = dateFilter.find('input[name="start-time"]').val();
         if(startTime) {
             var splitStartTime = startTime.split(':');
             var startHour = parseInt(splitStartTime[0]);
@@ -271,7 +271,7 @@ $(document).ready(function() {
             $('#start_minute').val(splitStartTime[1]);
         }
 
-        var endTime = dateFilter.find('input[name="end_time"]').val();
+        var endTime = dateFilter.find('input[name="end-time"]').val();
         if(endTime) {
             var splitEndTime = endTime.split(':');
             var endHour = parseInt(splitEndTime[0]);
