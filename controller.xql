@@ -1452,7 +1452,7 @@ else if (matches($exist:path, '^/search/?')) then
             for $name in 
                 (: request:get-parameter-names() :)
                 ("q", "start-date", "end-date")
-            let $values := request:get-parameter($name, ()) ! normalize-space()
+            let $values := request:get-parameter($name, ()) ! normalize-space()[. ne ""]
             return 
                 if (exists($values)) then 
                     map:entry($name, $values)
