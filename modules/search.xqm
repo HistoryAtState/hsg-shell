@@ -463,8 +463,8 @@ declare function search:get-sort-by-label($sort-by as xs:string) {
 declare
     %templates:wrap
     %templates:default("sort-by", "relevance")
-function search:sort-by-label($node as node(), $model as map(*)) {
-    let $sort-by := $model?query-info?sort-by
+function search:sort-by-label($node as node(), $model as map(*), $sort-by as xs:string) {
+    let $sort-by := if (map:contains($model, "query-info")) then $model?query-info?sort-by else $sort-by
     let $label := search:get-sort-by-label($sort-by)
     return
         element { local-name($node) } {
