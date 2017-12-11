@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 import module namespace console="http://exist-db.org/xquery/console";
 
@@ -1447,20 +1447,28 @@ else if (matches($exist:path, '^/education/?')) then
 
 (: handle search requests :)
 else if (matches($exist:path, '^/search/?')) then
-    let $query := request:get-parameter("q", ())
-    let $start-date := request:get-parameter("start-date", ())
-    let $end-date := request:get-parameter("end-date", ())
-    let $start-time := request:get-parameter("start-time", ())
-    let $end-time := request:get-parameter("end-time", ())
-    let $log := console:log("q: " || $query || " start-date: " || $start-date || " end-date: " || $end-date || " start-time: " || $start-time || " end-time: " || $end-time)
+    let $params :=
+        map:merge(
+            for $name in 
+                (: request:get-parameter-names() :)
+                ("q", "start-date", "end-date")
+            let $values := request:get-parameter($name, ()) ! normalize-space()
+            return 
+                if (exists($values)) then 
+                    map:entry($name, $values)
+                else
+                    ()
+        )
+    (: let $log := console:log($params) :)
     let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
+    let $is-keyword := map:contains($params, "q")
+    let $is-date := map:contains($params, "start-date") or map:contains($params, "end-date")
     let $page :=
         (: If a search query is present, show the results template :)
-        if (string-length($query) gt 0 or string-length($start-date) gt 0 or string-length($end-date) gt 0) then
+        if ($is-keyword or $is-date) then
             'search/search-result.html'
         else if ($fragments[1]) then
             switch ($fragments[1])
-                case "select-volumes" return 'search/select-volumes.html'
                 case "tips" return 'search/tips.html'
                 default return 'error-page.html'
         else
@@ -1471,11 +1479,6 @@ else if (matches($exist:path, '^/search/?')) then
             <view>
                 <forward url="{$exist:controller}/modules/view.xql">
                     <add-parameter name="suppress-sitewide-search-field" value="true"/>
-                    <add-parameter name="query" value="{$query}"/>
-                    <add-parameter name="start-date" value="{$start-date}"/>
-                    <add-parameter name="end-date" value="{$end-date}"/>
-                    <add-parameter name="start-time" value="{$start-time}"/>
-                    <add-parameter name="end-time" value="{$end-time}"/>
                 </forward>
             </view>
     		<error-handler>
