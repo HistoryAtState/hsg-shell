@@ -907,6 +907,8 @@ declare function search:results-summary($node as node(), $model as map(*)) {
                     search:scope-summary($node, $model), 
                     search:date-summary($node, $model)
                 ) => string-join(" ")
+                || ", " 
+                || search:sort-by-summary($node, $model)
             }.
             Search completed in {search:query-duration($node, $model)}s.
         </p>
@@ -980,6 +982,14 @@ declare function search:date-summary($node, $model) {
         else
             ()
 };
+
+declare function search:sort-by-summary($node, $model) {
+    let $sort-by := $model?query-info?sort-by
+    let $label := search:get-sort-by-label($sort-by) => lower-case()
+    return
+        "sorted by " || $label
+};
+
 
 declare function search:trim-words($string as xs:string, $number as xs:integer) {
     let $words := tokenize($string, "\s")
