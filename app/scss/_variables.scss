@@ -95,10 +95,13 @@ $hsg-link-color-hover:       $color-primary-darkest;
 // Mobile First Breakpoints
 $xs-screen:         480px;
 $xs-screen-min:     481px;
-$small-screen:      601px;
-$sm-screen:         841px;
+$small-screen:      600px;
+$small-screen-min:  601px;
+$sm-screen:         840px;
+$sm-screen-min:     841px;
 $medium-screen:     961px;
-$large-screen:     1281px;
+$large-screen:     1280px;
+$large-screen-min: 1281px;
 $xlarge-screen:    1441px;
 $xxlarge-screen:   1601px;
 
@@ -109,10 +112,12 @@ $site-max-width:    1040px;
 $site-margins:      3rem;
 $article-max-width: 600px;
 $input-max-width:   46rem;
+$label-border-radius:    2px !default;
 $border-radius:     .3rem; //(3px)
 $box-shadow:        0 0 2px rgba(#000, 0.3);
 $focus-shadow:      0 0 3px $color-focus, 0 0 7px $color-focus;
 $grid-margins:      3rem;
+$input-control-size:     1.8rem;
 
 // Borders
 $default-border-style: 1px solid $color-gray-lighter;

@@ -63,3 +63,74 @@
   font-size: inherit;
   color: $color-gray;
 }
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+
+[type=checkbox]:disabled + label {
+  color: $color-gray-lighter;
+}
+
+.hsg-hidden {
+  display: none;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  -moz-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.hsg-active {
+  -moz-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -moz-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+}
+
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 1px;
+}
+
+.hideContent {
+  overflow: hidden;
+  max-height: 7em;
+  height: auto;
+}
+
+.showContent {
+  height: auto;
+}
+
+/* adapted from https://standards.usa.gov/components/labels/ - code at https://github.com/18F/web-design-standards/blob/master/src/stylesheets/elements/_labels.scss */
+.hsg-label {
+  @extend .section-heading;
+  font-family: $font-sans;
+  color: $color-white;
+  background-color: $color-secondary-darkest;
+  border-radius: $label-border-radius;
+  margin-right: 0.5rem;
+  padding: 0.1rem 0.7rem;
+
+  &:only-of-type {
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,94 @@
+/* Buttons -------------- */
+
+.hsg-link-button {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.hsg-badge-number {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: $font-bold;
+  font-family: $font-serif;
+  line-height: 1;
+  color: $color-white;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: text-top;
+  background-color: $color-primary;
+  border-radius: 10px;
+  margin-left: 1rem;
+}
+
+.hsg-sort-button {
+  @extend .btn;
+  @extend .btn-default;
+  position: relative;
+  float: left;
+
+  i {
+    font-size: 1rem;
+    margin-left: .2rem;
+  }
+}
+
+.hsg-main-search-button {
+  float: right;
+  .glyphicon {
+    font-size: 12px;
+    top: 2px;
+  }
+}
+
+// Search button in sidebar
+
+.hsg-sidebar-search-btn {
+  @extend .btn;
+  @extend .btn-default;
+  background-color: $color-gray-lightest;
+  border-left: none;
+}
+
+// Reset/Apply buttons in filter sidebar
+
+.hsg-sidebar-btn {
+  @extend .btn;
+  @extend .btn-default;
+  background-color: $color-gray-lightest;
+  margin-top: 0;
+  > span {
+    top: 2px;
+  }
+
+  .glyphicon {
+    padding-right: 3px;
+    font-size: 12px;
+  }
+}
+
+#filterResetButton,
+#filterApplyButton {
+  margin-top: 2rem;
+  @media (min-width: 481px) {
+    width: 40%;
+    max-width: 20rem;
+  }
+
+}
+
+#filterResetButton {
+  @media (min-width: 481px) {
+    float: left;
+  }
+}
+
+#filterApplyButton {
+  margin-top: 1.5rem !important;
+  @extend .hsg-link-button;
+  @media (min-width: 481px) {
+    margin-top: 2rem !important;
+    float: right;
+  }
+}

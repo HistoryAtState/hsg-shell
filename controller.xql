@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 import module namespace console="http://exist-db.org/xquery/console";
 
@@ -1447,20 +1447,39 @@ else if (matches($exist:path, '^/education/?')) then
 
 (: handle search requests :)
 else if (matches($exist:path, '^/search/?')) then
+    let $params :=
+        map:merge(
+            for $name in 
+                (: request:get-parameter-names() :)
+                ("q", "start-date", "end-date")
+            let $values := request:get-parameter($name, ()) ! normalize-space()[. ne ""]
+            return 
+                if (exists($values)) then 
+                    map:entry($name, $values)
+                else
+                    ()
+        )
+    (: let $log := console:log($params) :)
     let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
+    let $is-keyword := map:contains($params, "q")
+    let $is-date := map:contains($params, "start-date") or map:contains($params, "end-date")
     let $page :=
-        if ($fragments[1]) then
+        (: If a search query is present, show the results template :)
+        if ($is-keyword or $is-date) then
+            'search/search-result.html'
+        else if ($fragments[1]) then
             switch ($fragments[1])
-                case "select-volumes" return 'search/select-volumes.html'
                 case "tips" return 'search/tips.html'
                 default return 'error-page.html'
         else
-            'search/index.html'
+            'search/search-landing.html'
     return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <forward url="{$exist:controller}/pages/{$page}"/>
             <view>
-                <forward url="{$exist:controller}/modules/view.xql"/>
+                <forward url="{$exist:controller}/modules/view.xql">
+                    <add-parameter name="suppress-sitewide-search-field" value="true"/>
+                </forward>
             </view>
     		<error-handler>
     			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>

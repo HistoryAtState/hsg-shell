@@ -92,6 +92,343 @@ $(document).ready(function() {
         });
     }
 
+    //-------------- Search Filters and Forms--------------//
+
+    var mainForm = $('form.main-form'), // search bar inputs and submit buttons
+        searchForm = $('#searchForm'), // main searchbar form
+        navigationSearchForm = $('#navigationSearchForm'), // searchbar form in navigation bar
+        formFilters = $('form.filter-form'), // all filter forms
+        sortingForm = $('.sorting'), // "sort-by" filter form
+        queryForm = $('#queryFilters'), // "refine-by" filter form
+        sectionFilter = $('#sectionFilter'), // "by-sections" filter form
+        dateFilter = $('#dateFilter'), // "by-date" filter form
+        dateFilterInputs = dateFilter.find('input[type=number]'), // inputs in "by-date" filter form
+        administrationsFilter = $('#administrationsFilter'), // "by-administrations" filter form
+        volumesFilter = $('#volumesFilter'), // "by-volumes" filter form
+        mainButton = $('.hsg-main-search-button'), // main search button
+        applyFiltersButton = $('#filterApplyButton'); // apply filters button in sidebar
+        applyDateFiltersButton = $('#dateApply'); // apply date filter button in sidebar
+
+    /**
+     * Submit query from navigation search form, redirect to "search/"
+     * @param {Event} event
+     */
+    function submitNavbarSearch (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var url = navigationSearchForm.prop("action");
+        var action = navigationSearchForm.serialize();
+        window.location.replace(url + '?' + action);
+    }
+
+    var searchInput = $('#search-box');
+    var searchButton = $('#navigationSearchForm .search-button');
+
+    if (navigationSearchForm.get(0)) {
+        navigationSearchForm.on('submit', submitNavbarSearch);
+        searchButton.on('click', submitNavbarSearch);
+
+        // add "enter/return" key to trigger submitting the navbar search form
+
+        searchInput.on('keydown', function (event) {
+            var key = event.which;
+            if(key == 13) {
+                submitNavbarSearch(event);
+            }
+        });
+    }
+
+    /**
+     * return serialized values of checked filters with name
+     * @param {String} name
+     * @returns {String}
+     */
+    function serializeFiltersByName (form, name) {
+        var filter = form.serialize();
+        if (filter === '') { return ''; }
+        return '&' + filter;
+    }
+
+    function adjustDateComponent(component, pad) {
+        try {
+            var c = parseInt(component);
+            if (c === 0) {
+                c = 1;
+            }
+            return c.toString().padStart(pad, '0');
+        } catch(e) {
+            return '01'.padStart(pad, '0');
+        }
+    }
+
+    function getDateComponent(prefix) {
+        var year = $('#' + prefix + '_year').val();
+        if (year) {
+            var month = $('#' + prefix + '_month').val();
+            var day = $('#' + prefix + '_day').val();
+            if (month) {
+                if (day) {
+                    return adjustDateComponent(year, 4) + '-' + adjustDateComponent(month, 2) + '-' +
+                        adjustDateComponent(day, 2);
+                } else {
+                    return adjustDateComponent(year, 4) + '-' + adjustDateComponent(month, 2);
+                }
+            } else {
+                return adjustDateComponent(year, 4);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * reload page with all filters added as GET-parameters
+     * @param {Event} event
+     */
+    function submitSearch (event) {
+        event.preventDefault();
+        var url = event.target.form ? event.target.form.action : '';
+        var action = searchForm.serialize();
+        if (administrationsFilter && administrationsFilter.serialize().length) {
+            action += '&' + administrationsFilter.serialize();
+        }
+        if (volumesFilter && volumesFilter.serialize().length) {
+            action += '&' + volumesFilter.serialize();
+        }
+        action += serializeFiltersByName(queryForm, 'match');
+        action += serializeFiltersByName(sectionFilter, 'within');
+
+        //aggregate criteria from partial date controls (month day year) into single query param
+        var startDate = getDateComponent('start');
+        if (startDate) {
+            action += '&start-date=' + startDate;
+        }
+
+        var endDate = getDateComponent('end');
+        if (endDate) {
+            action += '&end-date=' + endDate;
+        }
+
+        var startTimePmSwitch = $('#start_time_pm').is(':checked');
+        //aggregate criteria from partial time controls (hh mm) into single query param
+        if ($('#start_hour').val()) {
+            var startHour = parseInt($('#start_hour').val());
+            if (startHour < 12 && startTimePmSwitch) { startHour+=12}
+            var startTime = [
+                startHour.toString().padStart(2, '0'),
+                $('#start_minute').val().padStart(2, '0')
+            ];
+            console.log('start time ' + startTime)
+            action += '&start-time=' + startTime.join(':');
+        }
+
+        var endTimePmSwitch = $('#end_time_pm').is(':checked');
+        if ($('#end_hour').val()) {
+            var endHour = parseInt($('#end_hour').val());
+            if (endHour < 12 && endTimePmSwitch) { endHour+=12}
+            var endTime = [
+                endHour.toString().padStart(2, '0'),
+                $('#end_minute').val().padStart(2, '0')
+            ];
+            action += '&end-time=' + endTime.join(':');
+        }
+
+        var currentActiveSorting = sortingForm.find('#sorting');
+        action += '&sort-by=' + currentActiveSorting.prop('value');
+        window.location.replace(url + '?' + action);
+    }
+
+    if (mainForm.get(0)) {
+
+        //TODO refactor and cover cases of empty day/month
+        //split aggregated date query and set up values for partial date controls
+        var startDate = dateFilter.find('input[name="start-date"]').val();
+        if(startDate) {
+            var splitStartDate = startDate.split('-');
+            $('#start_year').val(splitStartDate[0]);
+            $('#start_month').val(splitStartDate[1]);
+            $('#start_day').val(splitStartDate[2]);
+        }
+
+        var endDate = dateFilter.find('input[name="end-date"]').val();
+        if(endDate) {
+            var splitEndDate = endDate.split('-');
+            $('#end_year').val(splitEndDate[0]);
+            $('#end_month').val(splitEndDate[1]);
+            $('#end_day').val(splitEndDate[2]);
+        }
+
+        var startTime = dateFilter.find('input[name="start-time"]').val();
+        if(startTime) {
+            var splitStartTime = startTime.split(':');
+            var startHour = parseInt(splitStartTime[0]);
+            if (startHour > 12) {
+                startHour -= 12;
+                $('#start_time_pm').prop('checked', true);
+            } else {
+                $('#start_time_am').prop('checked', true);
+            }
+            $('#start_hour').val(startHour);
+            $('#start_minute').val(splitStartTime[1]);
+        }
+
+        var endTime = dateFilter.find('input[name="end-time"]').val();
+        if(endTime) {
+            var splitEndTime = endTime.split(':');
+            var endHour = parseInt(splitEndTime[0]);
+            if (endHour > 12) {
+                endHour -= 12;
+                $('#end_time_pm').prop('checked', true);
+            } else {
+                $('#end_time_am').prop('checked', true);
+            }
+            $('#end_hour').val(endHour);
+            $('#end_minute').val(splitEndTime[1]);
+        }
+
+        // submit the search form
+        applyFiltersButton.on('click', submitSearch);
+        applyDateFiltersButton.on('click', submitSearch);
+        mainForm.on('submit', submitSearch);
+        mainButton.on('click', submitSearch);
+
+        // add "enter/return" key to trigger submitting the search form
+        document.addEventListener('keydown', function (event) {
+        var key = event.which;
+            if(key == 13){
+                submitSearch(event);
+            }
+        });
+    }
+
+    // Reset filters (checkboxes)
+    var filterInputs = formFilters.find('input'),
+        dateReset = formFilters.find('#dateReset'),
+        filterReset = formFilters.find('#filterResetButton');
+
+    /**
+     * Reset all filters in filter form
+     */
+    function resetFilter (event) {
+        event.preventDefault();
+        filterInputs.attr('checked', false);
+        console.log("Date Filter", dateFilter.find("#start_hour").val());
+        dateFilterInputs.val(' ');
+    }
+    filterReset.on('click', resetFilter);
+
+    /**
+     * Toggle activation of options "search entire site" or selected "sections"
+     */
+    var global = $('.global'),
+        sections = $('.section');
+
+    global.on("change", function() {
+        toggleAllSections(this.checked);
+    });
+
+    sections.on("change", function() {
+        if (allSelected()) {
+            global.prop('checked', true);
+            toggleAllSections(true);
+            return
+        }
+        global.prop('checked', false);
+    });
+
+    function toggleAllSections(state) {
+        sections.prop("checked", !state);
+    }
+
+    function allSelected() {
+        return sections.filter(':checked').size() === sections.size();
+    }
+
+    // Return all filters unchecked except for input "Historical Documents"
+    function allSelectedButDocuments() {
+        return sections.not(documentsInput).filter(':checked').size() === 0;
+    }
+
+    /**
+     * Toggle visibility of date/administrations/volumes components,
+     * if sections input "Historical Documents" is checked or not
+     */
+    var documentsInput = $('input#documents'), // "Historical Documents" input in "filter by section"
+        sectionsInputs = $('#sectionFilter input'), // all inputs in "filter by section"
+        toggledComponents = $('.hsg-filter-toggle'); // components to be toggled
+
+    function toggleComponents () {
+        if (documentsInput.is( ":checked" ) && allSelectedButDocuments()) {
+            toggledComponents.removeClass("hsg-hidden");
+            toggledComponents.addClass("hsg-active");
+            console.log("Date: ", $('.hsg-filter-toggle').data());
+        }
+        else {
+            toggledComponents.addClass("hsg-hidden");
+            toggledComponents.removeClass("hsg-active");
+            console.log("Date: ", $('.hsg-filter-toggle').data());
+        }
+    }
+
+    sectionsInputs.on('change', function() {
+        toggleComponents();
+    });
+
+    /**
+     *  sort-by filter
+     */
+    $('#sort-by li').on('click', function(ev) {
+        ev.preventDefault();
+        var item = $(ev.target);
+        $('#sort-by-label').text(item.text());
+        $('#sorting').val(item.attr('id'));
+        submitSearch(ev);
+    });
+
+    /**
+     * Truncate filter lists: show only 3 first inputs of a list
+     * Toggle between show more / show less
+     */
+    var toggle  = $(".hsg-toggle");
+    var link = $("div.hsg-toggle a.c-link-more");
+    var toggledList = $("div.truncate-filter");
+
+    function toggleClassNames () {
+        if(toggledList.hasClass("hideContent")) {
+            toggledList.removeClass("hideContent");
+            toggledList.addClass("showContent");
+            link.text("Show less");
+            link.addClass("is-open");
+        }
+        else {
+            toggledList.addClass("hideContent");
+            toggledList.removeClass("showContent");
+            link.text("Show more");
+            link.removeClass("is-open");
+        }
+    }
+
+    toggle.on("click", function(event) {
+        toggleClassNames();
+        event.preventDefault();
+    });
+
+    /**
+     * Check if class hideContent is present in the filter volumes list.
+     * If so, display the "show more" link, if not, hide the link
+     */
+    var volumeList = $('.truncate-filter');
+
+    function toggleShowMoreLink() {
+        if(volumeList.hasClass("hideContent")) {
+            toggle.removeClass('hsg-hidden');
+        }
+        else {
+            toggle.addClass('hsg-hidden');
+        }
+    }
+
+    //------------------------------------------//
+
     function initContent() {
         $(".content .note").popover({
             html: true,
@@ -189,4 +526,6 @@ $(document).ready(function() {
     initContent();
 
     $('[data-toggle="tooltip"]').tooltip({placement: "auto top"});
+    toggleComponents();
+    toggleShowMoreLink();
 });

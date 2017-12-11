@@ -138,6 +138,12 @@ footer {
   @extend .col-lg-12;
 }
 
+.hsg-width-one-half {
+  @extend .col-xs-12;
+  @extend .col-md-6;
+  @extend .col-lg-6;
+}
+
 .hsg-width-two-thirds {
   @extend .col-md-12;
   @extend .col-lg-8;

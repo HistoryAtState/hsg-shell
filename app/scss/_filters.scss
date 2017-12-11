@@ -1,0 +1,305 @@
+/* Filters -------------- */
+
+// reset default list styles
+.hsg-search-inputs-vertical,
+.filter-subsections {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.hsg-search-inputs-vertical {
+  @extend .c-inputs-stacked;
+  margin: 1rem 0;
+  .hsg-search-input-label {
+    //@extend .c-input;
+    display: block;
+    cursor: pointer;
+    font-weight: $font-normal;
+  }
+}
+
+.hsg-search-inputs-horizontal {
+  margin-bottom: 1em;
+
+  .hsg-search-input {
+    cursor: pointer;
+    display: inline-block;
+    margin-right: $margin-horizontal-base;
+  }
+}
+
+// Elements in sidebar on search result page
+.filter {
+  &-sidebar {
+    border-bottom: $default-border-style;
+    margin-bottom: 2rem;
+
+    .hsg-sidebar-title {
+      border-bottom: none;
+      font-family: $font-sans;
+    }
+  }
+}
+
+.filter-subsections {
+  margin-left: 2.7rem;
+}
+
+.hsg-search-results aside {
+  border-bottom: $default-border-style;
+  padding-bottom: 2rem;
+
+  @media (min-width: 481px) {
+    padding-bottom: 2rem;
+  }
+  @media (min-width: 1200px) {
+    padding-bottom: 1rem;
+    border-bottom: none;
+  }
+}
+
+// Horizontally align main headings at top of columns on wide screens
+.hsg-search-results aside {
+  h2 {
+    margin-top: 0;
+  }
+}
+
+// Keep margin for second headline on small screens
+.hsg-search-section h2 {
+    margin-top: 20px;
+  @media screen and (min-width: 1200px) {
+    margin-top: 0;
+  }
+}
+
+aside {
+  .hsg-section {
+      border-bottom: $default-border-style;
+    }
+  .hsg-section:not(.hsg-hidden) {
+      padding: 0 0 1.5rem 0;
+  }
+
+  .hsg-sidebar-title {
+    margin: 1rem 0;
+  }
+}
+
+[type=checkbox],
+[type=radio] {
+  position: absolute;
+  left: -999em;
+}
+
+[type=checkbox]:checked + label::before,
+[type=radio]:checked + label::before {
+  background-color: $color-primary-darker;
+  box-shadow: 0 0 0 1px $color-primary-darker;
+}
+
+[type=checkbox] + label::before,
+[type=radio] + label::before {
+  cursor: pointer;
+  background: $color-white;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px $color-gray-lighter;
+  content: '\00a0';
+  display: inline-block;
+  height: $input-control-size;
+  line-height: $input-control-size;
+  margin-right: 0.6em;
+  text-indent: 0.15em;
+  vertical-align: middle\0;
+  width: $input-control-size;
+}
+
+// TODO: Fix background-image with svg instead of png for Firefox, works only in Webkit yet
+[type=checkbox]:checked + label::before,
+[type=checkbox]:checked:disabled + label::before {
+  background-image: url(../images/checked.png);
+  //background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 216 146'><path fill='#fff' d='M168.86 37.966l-11.08-11.08c-1.52-1.52-3.367-2.28-5.54-2.28-2.172 0-4.02.76-5.54 2.28L93.254 80.414 69.3 56.38c-1.52-1.522-3.367-2.282-5.54-2.282-2.172 0-4.02.76-5.54 2.28L47.14 67.46c-1.52 1.522-2.28 3.37-2.28 5.542 0 2.172.76 4.02 2.28 5.54l29.493 29.493 11.08 11.08c1.52 1.52 3.368 2.28 5.54 2.28 2.173 0 4.02-.76 5.54-2.28l11.082-11.08L168.86 49.05c1.52-1.52 2.283-3.37 2.283-5.54 0-2.174-.76-4.02-2.28-5.54z'></path></svg>");
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+// Date Filters
+
+.hsg-panel-body legend.h3 {
+  border-bottom: none;
+}
+
+.hsg-form-hint {
+    color: $color-gray-light;
+}
+
+.hsg-panel-body {
+  fieldset:not(:last-of-type) {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.hsg-form-group {
+  clear: none;
+  float: left;
+  label {
+    cursor: pointer;
+  }
+
+  &-day,
+  &-month,
+  &-year {
+    margin-right: 1.5rem;
+    width: 5rem;
+  }
+}
+.hsg-time-input-group {
+  position: absolute;
+  bottom: 15px;
+  left: 107px;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  border: $default-border-style;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: block;
+  font-size: $small-font-size;
+  height: 4.4rem;
+  line-height: 1.3;
+  margin: 0.2em 0;
+  max-width: 46rem;
+  padding: 1rem 0.4em;
+  width: 100%;
+  text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+[type=radio] + label::before {
+  border-radius: 100%;
+  box-shadow: 0 0 0 2px $color-white, 0 0 0 3px $color-gray-lighter;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  margin-right: 0.75em;
+  width: 1.4rem;
+}
+
+[type=radio]:checked + label::before {
+  box-shadow: 0 0 0 2px $color-white, 0 0 0 4px $color-primary-darker;
+}
+
+// Panels in date filter
+#dateFilter {
+  .hsg-width-one-half {
+    padding: 0;
+    width: 100%;
+    @media screen and (min-width: $small-screen-min) {
+      width: 48%;
+      float: left;
+      position: relative;
+      min-height: 1px;
+      &:first-of-type {
+        margin-right: 4%;
+      }
+    }
+  }
+}
+
+.hsg-search-results #dateFilter .hsg-width-one-half {
+  padding: 0;
+  width: 100%;
+  @media screen and (min-width: $small-screen-min) and (max-width: 1199px)  {
+    width: 48%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    &:first-of-type {
+      margin-right: 4%;
+    }
+  }
+  @media screen and (min-width: $large-screen-min)  {
+    padding: 0;
+    width: 100%;
+  }
+}
+
+.hsg-search-landing  {
+  .hsg-section {
+    margin-top: 2rem;
+  }
+}
+
+.sorting {
+  .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  .form-control-static {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+    min-height: 40px;
+  }
+  li, a {
+    cursor: pointer;
+  }
+}
+
+// Display only the first 3 inputs of a list
+.truncate-filter {
+  padding-left: 1px;
+  &.showContent,
+  &.hideContent {
+    transition: height .3s ease;
+  }
+}
+.truncate-list {
+  &.showContent {
+    height: auto;
+  }
+
+  &.hideContent {
+    overflow: hidden;
+    height: 7em;
+  }
+}
+
+.c-link-more {
+    display: block;
+    margin: .5rem 0 0 0;
+    text-decoration: underline;
+
+  // arrow icon down (chevron)
+  &:after {
+    position: relative;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-size: 1rem;;
+    font-weight: normal;
+    line-height: 1;
+    content: "\e114";
+    left: 5px;
+    transform-origin: center center;
+    transition: transform .5s ease;
+  }
+}
+
+.c-link-more:after,
+.c-link-more:hover:after {
+  text-decoration: none;
+}
+
+// arrow icon up (chevron)
+.c-link-more.is-open {
+  &:after {
+    content: "\e113";
+    transition: transform .5s ease;
+  }
+}

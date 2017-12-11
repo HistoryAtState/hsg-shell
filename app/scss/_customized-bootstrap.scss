@@ -138,6 +138,35 @@ $icon-font-path: "../fonts/";
   padding-left: 15px;
 }
 
+/* Dropdowns ---------- */
+
+.open .dropdown-menu {
+  margin-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  li {
+    padding-left: 0;
+    margin-bottom: 0;
+    font-family: $font-sans;
+  }
+  > li > a {
+    @media (max-width: $grid-float-breakpoint-max) {
+      color: $dropdown-link-color;
+      transition: color 0s;
+      line-height: 2em;
+      padding: 3px 20px;
+    }
+  }
+}
+.dropdown-menu {
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: $small-font-size;
+  a {
+    line-height: 2em !important;
+  }
+}
+
 /* Table -------------- */
 
 /* override bootstrap, which makes tables full width. TODO: modify bootstrap base style */
@@ -229,7 +258,7 @@ dd {
     cursor: pointer;
     display: table;
     > input {
-      margin: 4px 20px 0 0;
+      margin: 4px 15px 0 0;
       line-height: $base-line-height;
       height: 14px;
       display: table-cell;
@@ -321,4 +350,8 @@ a[href ^='https://']:after {
   &:hover {
     color: $hsg-link-color-hover;
   }
+}
+
+.form-control {
+  box-shadow: none;
 }

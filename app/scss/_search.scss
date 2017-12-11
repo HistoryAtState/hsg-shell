@@ -3,6 +3,11 @@
 // TODO: Refactor confusing wording for class ".searchbox"
 // and ID "#searchbox". Each is affecting either wrapper or input element.
 
+input[type=search] {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+}
+
 .searchbox {
   position: relative;
   margin-top: 10px;
@@ -12,20 +17,22 @@
   font-size: 0.825em;
 }
 
+// Searchbar in the navigation!
 #search-box {
   padding-right: 40px;
 }
 
 .search-button {
   position: absolute;
-  top: 1px;
-  right: 1px;
+  top: 0;
+  right: 0;
   z-index: 1;
-  border: none !important;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  background: $color-gray-lightest;
+  border: 1px solid $color-primary-darker;
+  background: $color-primary-darker;
   width: auto;
+  height: 100%;
 }
 
 @media (max-width: 767px) {
@@ -40,6 +47,12 @@
   }
   #search-box {
     width: 100%;
+    + .search-button {
+        border-color: $color-white;
+    }
+  }
+  #search-box.form-control {
+    border-color: $color-white;
   }
 }
 
@@ -50,17 +63,8 @@
 // Search results page
 
 .hsg-search-section {
-  margin-bottom: 4rem;
   .pagination {
     margin: 0;
-  }
-}
-
-.hsg-search-inputs {
-  @extend .c-inputs-stacked;
-  margin: 2rem 0;
-  .hsg-search-input-label {
-    @extend .c-input;
   }
 }
 
@@ -68,17 +72,12 @@
   margin: 0 0 2rem 0;
 }
 
-.hsg-search-result-message {
-  margin-top: 4rem;
-  font-size: $h2-font-size;
-  margin-bottom: 0.5rem;
-  .hsg-search-query {
-    color: $color-primary;
-  }
+.hsg-search-query {
+  color: $color-primary;
 }
 
 .hsg-search-result {
-  padding: 0 0 4rem 0;
+  padding: 0 0 1rem 0;
   border-bottom: $default-border-style;
   &:last-of-type {
     border-bottom: none;
@@ -98,11 +97,18 @@
   line-height: 1.27em;
 }
 
-// Search button in sidebar
+// Text in searchbar button
+.hsg-search-submit-text {
+  position: absolute;
+  left: -999em;
+  @media screen and (min-width: $xs-screen-min) {
+    position: static;
+  }
+}
 
-.hsg-sidebar-search-btn {
-  @extend .btn;
-  @extend .btn-default;
-  background-color: $color-gray-lightest;
-  border-left: none;
+.hsg-search-icon {
+  @extend .hsg-search-button-icon;
+  @media screen and (min-width: $xs-screen) {
+    display: none;
+  }
 }

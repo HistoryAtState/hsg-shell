@@ -155,7 +155,7 @@ declare function app:parse-params($node as node(), $model as map(*)) {
             if (matches($attr, "\$\{[^\}]+\}")) then
                 attribute { node-name($attr) } {
                     string-join(
-                        let $parsed := analyze-string($attr, "\$\{([^\}]+?)(?:\:([^\}]+))?\}")
+                        let $parsed := analyze-string($attr, "\$\{([^\}]+?)(?::([^\}]+))?\}")
                         for $token in $parsed/node()
                         return
                             typeswitch($token)
