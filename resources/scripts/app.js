@@ -249,7 +249,7 @@ $(document).ready(function() {
             $('#start_day').val(splitStartDate[2]);
         }
 
-        var endDate = dateFilter.find('input[name="end_date"]').val();
+        var endDate = dateFilter.find('input[name="end-date"]').val();
         if(endDate) {
             var splitEndDate = endDate.split('-');
             $('#end_year').val(splitEndDate[0]);
