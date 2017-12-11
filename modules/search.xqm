@@ -726,7 +726,7 @@ declare %private function search:query-sections($sections as xs:string*, $volume
 declare function search:query-section($category, $volume-ids as xs:string*, $query as xs:string*, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
     let $log := console:log("search:query-section starting: query: " || $query || " range-start: " || $range-start || " range-end: " || $range-end || " category: " || (if ($category instance of map(*)) then $category?id else $category))
     let $is-date-query := exists($range-start)
-    let $is-keyword-query := exists($q)
+    let $is-keyword-query := exists($query)
     let $start := util:system-time()
     let $hits :=
         typeswitch($category)
