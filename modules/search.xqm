@@ -106,9 +106,7 @@ declare variable $search:DISPLAY := map {
             let $heading := ($doc//tei:head)[1]
             let $heading-string :=
                 if ($heading ne '') then
-                    $heading//text()[not(./ancestor::tei:note)]
-                        => string-join()
-                        => normalize-space()
+                    normalize-space(string-join($heading//text()[not(./ancestor::tei:note)]))
                 else
                     ()
             let $heading-stripped :=
@@ -126,9 +124,9 @@ declare variable $search:DISPLAY := map {
             let $vol-id := root($doc)/tei:TEI/@xml:id
             let $dateline := ($doc//tei:dateline[.//tei:date])[1]
             let $date := ($dateline//tei:date)[1]
-            let $date-string := $date//text()[not(./ancestor::tei:note)] => string-join() => normalize-space()
+            let $date-string := normalize-space(string-join($date//text()[not(./ancestor::tei:note)]))
             let $placeName := ($doc//tei:placeName)[1]
-            let $placeName-string := $placeName//text()[not(./ancestor::tei:note)] => string-join() => normalize-space()
+            let $placeName-string := normalize-space(string-join($placeName//text()[not(./ancestor::tei:note)]))
             let $matches-to-highlight := 5
             let $trimmed-hit := search:trim-matches(util:expand($doc), $matches-to-highlight)
             let $has-matches := $trimmed-hit//exist:match
@@ -142,7 +140,9 @@ declare variable $search:DISPLAY := map {
                                 (
                                     <dt>Recorded Date</dt>,<dd>{($date-string, <em>(None)</em>)[. ne ""][1]}</dd>,
                                     <dt>Recorded Location</dt>,<dd>{($placeName-string, <em>(None)</em>)[. ne ""][1]}</dd>,
-                                    <dt>Encoded Date</dt>,<dd>{if ($date) then <code>{$date/(@when, @from, @to, @notBefore, @notAfter) ! serialize(., map {"method": "adaptive"}) => string-join(" ")}</code> else <em>(None)</em>}</dd>
+                                    <dt>Encoded Date</dt>,<dd>{if ($date) then <code>{$date/(@when, @from, @to, @notBefore, @notAfter) ! string-join(serialize(., <output:serialization-parameters xmlns:output="http://www.w3.org/2010/xslt-xquery-serialization">
+  <output:method>adaptive</output:method>
+</output:serialization-parameters>), " ")}</code> else <em>(None)</em>}</dd>
                                 )
                             else
                                 ()
@@ -486,18 +486,15 @@ declare function search:get-range($start-date as xs:string?, $end-date as xs:str
         xs:dayTimeDuration("-PT5H")
     let $range-start :=
         if ($start-date ne "") then
-             ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
-                => fd:normalize-low($timezone)
+             fd:normalize-low($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()), $timezone)
         else
             ()
     let $range-end :=
         if ($end-date ne "") then
-            ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
-                => fd:normalize-high($timezone)
+            fd:normalize-high($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()), $timezone)
         (: if end-date is omitted, then treat the high end of the start day as the end :)
         else if ($start-date ne "") then
-            $start-date
-                => fd:normalize-high($timezone)
+            fd:normalize-high($start-date, $timezone)
         else
             ()
     return
@@ -556,15 +553,14 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
 
     (: prepare a unique key for the present query, so we can cache the hits to improve the result of subsequent requests for the same query :)
     let $normalized-query-string := 
-        (
+        string-join(
             let $params := map { "q": $q, "within": $adjusted-within, "volume-id": $volume-id, "start-date": $start-date, "end-date": $end-date, "start-time": $start-time, "end-time": $end-time, "sort-by": $adjusted-sort-by } 
             for $param in map:keys($params)
             let $val := map:get($params, $param) ! normalize-space(.)[. ne ""]
             order by $param
             return
-                $param || "=" || $val => sort() => string-join(";")
-        )
-        => string-join("&amp;")
+                $param || "=" || string-join(sort($val), ";")
+        , "&amp;")
     let $query-id := util:hash($normalized-query-string, "sha1")
     let $cache-name := "hsg-search"
     let $cache-key := "queries"
@@ -791,8 +787,7 @@ declare function search:result-heading($node, $model) {
                 let $document := $publication-config?select-document($document-id)
                 let $document-heading :=
                     if ($document//tei:title[@type='volume']) then
-                        ($document//tei:title[@type eq "sub-series"], $document//tei:title[@type eq "volume-number"], $document//tei:title[@type eq "volume"])[. ne ""]
-                        => string-join(", ")
+                        string-join(($document//tei:title[@type eq "sub-series"], $document//tei:title[@type eq "volume-number"], $document//tei:title[@type eq "volume"])[. ne ""], ", ")
                     else
                         $document//tei:titleStmt/tei:title[@type = "short"]
                 let $result-heading := ($section-heading || ' (' || $document-heading || ')')
@@ -922,11 +917,11 @@ declare function search:results-summary($node as node(), $model as map(*)) {
             Displaying {search:start($node, $model)}–{search:end($node, $model)}
             of {search:result-count($node, $model)} results 
             {
-                (
+                string-join((
                     search:keyword-summary($node, $model), 
                     search:scope-summary($node, $model), 
                     search:date-summary($node, $model)
-                ) => string-join(" ")
+                ), " ")
                 || ", " 
                 || search:sort-by-summary($node, $model)
             }.
@@ -958,7 +953,7 @@ declare function search:pluralize($count as xs:integer, $singular-form as xs:str
 };
 
 declare function search:keyword-summary($node, $model) {
-    let $q := $model?query-info?q => normalize-space()
+    let $q := normalize-space($model?query-info?q)
     return
         if ($q ne "") then
             "for keyword “" || $q || "”"
@@ -968,8 +963,8 @@ declare function search:keyword-summary($node, $model) {
 
 declare function search:scope-summary($node, $model) {
     let $sections := $model?query-info?within
-    let $sections-count := $sections => count()
-    let $volumes-count := $model?query-info?volume-id => count()
+    let $sections-count := count($sections)
+    let $volumes-count := count($model?query-info?volume-id)
     return
         if ($sections = "entire-site" or $sections-count eq 0) then
             "across the entire Office of the Historian website"
@@ -977,7 +972,7 @@ declare function search:scope-summary($node, $model) {
             (
                 "within "
                 ||
-                (
+                string-join((
                     if ($sections-count gt 0) then 
                         ($sections-count || " " || search:pluralize($sections-count, "section", "sections")) 
                     else 
@@ -986,7 +981,7 @@ declare function search:scope-summary($node, $model) {
                         ($volumes-count || " " || search:pluralize($volumes-count, "volume", "volumes"))
                     else 
                         ()
-                ) => string-join(" and ")
+                ), " and ")
             )
         else
             ()
@@ -1005,7 +1000,7 @@ declare function search:date-summary($node, $model) {
 
 declare function search:sort-by-summary($node, $model) {
     let $sort-by := $model?query-info?sort-by
-    let $label := search:get-sort-by-label($sort-by) => lower-case()
+    let $label := lower-case(search:get-sort-by-label($sort-by))
     return
         "sorted by " || $label
 };
@@ -1015,12 +1010,11 @@ declare function search:trim-words($string as xs:string, $number as xs:integer) 
     let $words := tokenize($string, "\s")
     return
         if (count($words) gt $number) then
-            (
-                subsequence($words, 1, ceiling($number div 2)) => string-join(" ")
+            string-join((
+                string-join(subsequence($words, 1, ceiling($number div 2)), " ")
                 , "…"
-                , $words[position() ge last() - floor($number div 2) + 1] => string-join(" ")
-            )
-            => string-join()
+                , string-join($words[position() ge last() - floor($number div 2) + 1], " ")
+            ))
         else
             $string
 };
@@ -1051,9 +1045,7 @@ function search:load-volumes($node as node(), $model as map(*)) {
                 let $vol-id := $vol/@id/string()
                 let $title := $vol/title[@type = ("sub-series", "volume-number", "volume")]
                 let $title :=
-                    string-join($title[. != ''], ", ")
-                    => normalize-space()
-                    => search:trim-words(10)
+                    search:trim-words(normalize-space(string-join($title[. != ''], ", ")), 10)
                 order by $vol-id
                 return
                     <volume><id>{$vol-id}</id><label>{$title}</label></volume>
