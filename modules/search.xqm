@@ -141,7 +141,7 @@ declare variable $search:DISPLAY := map {
                                 (
                                     <dt>Recorded Date</dt>,<dd>{($date-string, <em>(None)</em>)[. ne ""][1]}</dd>,
                                     <dt>Recorded Location</dt>,<dd>{($placeName-string, <em>(None)</em>)[. ne ""][1]}</dd>,
-                                    <dt>Encoded Date</dt>,<dd>{if ($date) then <code>{serialize(element date {$date/@*})}</code> else <em>(None)</em>}</dd>
+                                    <dt>Encoded Date</dt>,<dd>{if ($date) then <code>{$date/(@when, @from, @to, @notBefore, @notAfter) ! serialize(., map {"method": "adaptive"}) => string-join(" ")}</code> else <em>(None)</em>}</dd>
                                 )
                             else
                                 ()
