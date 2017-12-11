@@ -205,15 +205,15 @@ declare function search:load-sections($node, $model) {
 ~:)
 declare
     %templates:wrap
-function search:filters($node as node(), $model as map(*), $within as xs:string*, $administration as xs:string*, $volume-id as xs:string*) {
+function search:filters($node as node(), $model as map(*), $administration as xs:string*) {
 (:  more options could be added to $filters  :)
     let $filters := map {
-        "within": $within,
-        "within-volumes": $volume-id,
+        "within": $model?query-info?within,
+        "within-volumes": $model?query-info?volume-id,
         "administration": $administration
     }
     return
-        map:new(($model, map {'filters': $filters}))
+        map:new(($model, map { "filters": $filters}))
 };
 
 (:~
@@ -233,11 +233,13 @@ function search:component($node as node(), $model as map(*), $component as xs:st
 
 declare
     %templates:wrap
-function search:entire-site-check($node as node(), $model as map(*), $within as xs:string*) {
-    if (not(exists($within)) or $within='entire-site') then
-        attribute checked {'checked'}
-    else
-        ()
+function search:entire-site-check($node as node(), $model as map(*)) {
+    let $within := $model?query-info?within
+    return
+        if ($within = "entire-site") then
+            attribute checked { "checked" }
+        else
+            ()
 };
 (:~
  : Generates HTML attributes "value" and "id" for the filter input
@@ -246,18 +248,15 @@ function search:entire-site-check($node as node(), $model as map(*), $within as 
 declare
     %templates:wrap
 function search:filter-input-attributes($node as node(), $model as map(*)) {
-(:    let $c:=console:log($model?component || ' : filter :' || $model?filter ):)
-    
+    (:let $c:=console:log($model?component || ' : filter :' || $model?filter ):)
     let $component := $model?component
     let $filter := $model?filter
-
     let $component-id := $model($component)/id
-
     return
         (
             attribute value { $component-id },
             attribute id { $component-id },
-            if(search:component-checked($node, $model)='checked') then attribute checked {''} else ()
+            if (search:component-checked($node, $model) = "checked") then attribute checked { "" } else ()
         )
 };
 
@@ -295,7 +294,7 @@ function search:component-checked($node as node(), $model as map(*)) {
     let $within := $model?filters($filter)
 (:    let $c:=console:log($within):)
     let $component-id := $model($component)/id
-    return if ($component-id = $within) then 'checked' else $within
+    return if ($component-id = $within) then "checked" else $within
 };
 
 declare
@@ -446,10 +445,10 @@ function search:show-number-of-filter-hits($node, $model) {
 
 
 (:~
- : TODO: Replace strings in anchors with search:set-sort-by-value()
+ : TODO: Replace strings in anchors with search:get-sort-by-value()
  : Set cases of sorting options and set a default value
 ~:)
-declare function search:set-sort-by-value($sort-by as xs:string) {
+declare function search:get-sort-by-label($sort-by as xs:string) {
     switch($sort-by)
         case "date-asc" return "Dates (oldest first)"
         case "date-desc" return "Dates (most recent first)"
@@ -457,19 +456,20 @@ declare function search:set-sort-by-value($sort-by as xs:string) {
 };
 
 (:~
- : TODO: Replace Strings in anchors with search:set-sort-by-value()
+ : TODO: Replace Strings in anchors with search:get-sort-by-value()
  : Get the currently selected value of the sorting option
  : @return A string
 ~:)
 declare
     %templates:wrap
-    %templates:default("sort-by", "")
-function search:sort-by-value($node as node(), $model as map(*), $sort-by as xs:string) {
-    let $value := search:set-sort-by-value($sort-by)
+    %templates:default("sort-by", "relevance")
+function search:sort-by-label($node as node(), $model as map(*)) {
+    let $sort-by := $model?query-info?sort-by
+    let $label := search:get-sort-by-label($sort-by)
     return
         element { local-name($node) } {
             $node/@*,
-            $value
+            $label
         }
 };
 
@@ -511,22 +511,32 @@ declare
     %templates:default("start", 1)
     %templates:default("per-page", 10)
     %templates:default("sort-by", "relevance")
-function search:load-results($node as node(), $model as map(*), $query as xs:string?, $within as xs:string*,
-$volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?, $sort-by as xs:string) {
+function search:load-results($node as node(), $model as map(*), $q as xs:string?, $within as xs:string*, $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?, $sort-by as xs:string?) {
     let $query-start-time := util:system-time()
-    let $query := normalize-space($query)
     let $adjusted-sort-by :=
-        (: if no query string is provided, relevance sorting is essentially random, so we'll force date sorting :)
-        (: TODO can we update the "sort-by" value in the returned page to show that the results are sorted as date-asc/desc? :)
-        if (string-length($query) eq 0 and $sort-by eq "relevance") then
+        (: if no query string is provided, relevance sorting is essentially random, so we'll apply date sorting to results :)
+        if (not($q) and $sort-by eq "relevance") then
             "date-asc"
+        (: in the absence of a sort-by parameter, apply relevance sorting :)
+        else if (not($sort-by)) then
+            "relevance"
         else
             $sort-by
-            
+    
+    (: the old frus-dates search didn't specify within=documents, so if an old URL is redirected here we'll need to catch these and categorize these as date searches :)
+    let $adjusted-within := 
+        if (not($within)) then
+            if ($start-date or $volume-id) then
+                "documents"
+            else
+                "entire-site"
+        else
+            $within
+
     (: prepare a unique key for the present query, so we can cache the hits to improve the result of subsequent requests for the same query :)
     let $normalized-query-string := 
         (
-            let $params := map { "q": $query, "within": $within, "volume-id": $volume-id, "start-date": $start-date, "end-date": $end-date, "start-time": $start-time, "end-time": $end-time, "sort-by": $sort-by } 
+            let $params := map { "q": $q, "within": $adjusted-within, "volume-id": $volume-id, "start-date": $start-date, "end-date": $end-date, "start-time": $start-time, "end-time": $end-time, "sort-by": $adjusted-sort-by } 
             for $param in map:keys($params)
             let $val := map:get($params, $param)
             order by $param
@@ -551,7 +561,7 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-
             let $range-start := $range?start
             let $range-end := $range?end
             let $query-sections-start := util:system-time()
-            let $hits := search:query-sections($within, $volume-id, $query, $range-start, $range-end)
+            let $hits := search:query-sections($adjusted-within, $volume-id, $q, $range-start, $range-end)
             let $query-sections-end := util:system-time()
             let $query-sections-duration := console:log("query-sections-duration: " || $query-sections-end - $query-sections-start)
             let $sorted-hits-start := util:system-time()
@@ -587,8 +597,8 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-
     let $query-info :=  map {
         "results": $window,
         "query-info": map {
-            "q": $query,
-            "within": $within,
+            "q": $q,
+            "within": $adjusted-within,
             "volume-id": $volume-id,
             "start-date": $start-date,
             "end-date": $end-date,
@@ -605,7 +615,8 @@ $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-
             "query-duration": $query-duration
         }
     }
-    
+    (: let $log := console:log($query-info?query-info) :)
+
     (: purge cache :)
     let $cache-max-age := xs:dayTimeDuration("PT5M")
     let $purge := 
@@ -676,7 +687,7 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
 };
 
 declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
-    $query as xs:string, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
+    $query as xs:string?, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
     if (exists($sections) and not($sections = ("", "entire-site"))) then
         for $section in $sections
         for $category in $search:SECTIONS?($section)
@@ -1063,7 +1074,7 @@ declare
     %templates:default("min-hits", 0)
     %templates:default("max-pages", 10)
 function search:paginate($node as node(), $model as map(*), $start as xs:int, $per-page as xs:int, $min-hits as xs:int,
-    $max-pages as xs:int, $sort-by as xs:string?) {
+    $max-pages as xs:int) {
     if ($min-hits < 0 or $model?query-info?result-count >= $min-hits) then
         element { node-name($node) } {
             $node/@*,
