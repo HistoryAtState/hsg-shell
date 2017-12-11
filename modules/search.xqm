@@ -511,11 +511,14 @@ declare
     %templates:default("start", 1)
     %templates:default("per-page", 10)
     %templates:default("sort-by", "relevance")
-function search:load-results($node as node(), $model as map(*), $q as xs:string?, $within as xs:string*, $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?, $sort-by as xs:string?) {
+function search:load-results($node as node(), $model as map(*), $q as xs:string?, $within as xs:string*, $volume-id as xs:string*, $start as xs:integer, $per-page as xs:integer, $start-date as xs:string?, $end-date as xs:string?, $start-time as xs:string?, $end-time as xs:string?, $sort-by as xs:string?, $order-by as xs:string?) {
     let $query-start-time := util:system-time()
     let $adjusted-sort-by :=
         (: if no query string is provided, relevance sorting is essentially random, so we'll apply date sorting to results :)
         if (not($q) and $sort-by eq "relevance") then
+            "date-asc"
+        (: catch unique values from the "order-by" parameter from the old frus-dates search engine :)
+        else if ($order-by eq "date") then
             "date-asc"
         (: in the absence of a sort-by parameter, apply relevance sorting :)
         else if (not($sort-by)) then
