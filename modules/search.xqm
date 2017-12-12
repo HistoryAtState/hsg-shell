@@ -18,6 +18,14 @@ declare namespace frus="http://history.state.gov/frus/ns/1.0";
 
 declare variable $search:MAX_HITS_SHOWN := 1000;
 
+declare variable $search:ft-query-options := 
+    <options>
+        <default-operator>and</default-operator>
+        <phrase-slop>0</phrase-slop>
+        <leading-wildcard>no</leading-wildcard>
+        <filter-rewrite>yes</filter-rewrite>
+    </options>;
+
 (: Maps search categories to publication ids, see $config:PUBLICATIONS :)
 declare variable $search:SECTIONS := map {
     "documents": "frus",
@@ -29,30 +37,30 @@ declare variable $search:SECTIONS := map {
         map {
             "id": "pocom",
             "query": function($query as xs:string) {
-                collection($pocom:PEOPLE-COL)//persName[ft:query(., $query)]
+                collection($pocom:PEOPLE-COL)//persName[ft:query(., $query, $search:ft-query-options)]
             }
         },
         map {
             "id": "visits",
             "query": function($query as xs:string) {
-                collection($config:VISITS_COL)//visit[ft:query(visitor, $query)]
+                collection($config:VISITS_COL)//visit[ft:query(visitor, $query, $search:ft-query-options)]
                 |
-                collection($config:VISITS_COL)//visit[ft:query(description, $query)]
+                collection($config:VISITS_COL)//visit[ft:query(description, $query, $search:ft-query-options)]
                 |
-                collection($config:VISITS_COL)//visit[ft:query(from, $query)]
+                collection($config:VISITS_COL)//visit[ft:query(from, $query, $search:ft-query-options)]
             }
         },
         map {
             "id": "travels",
             "query": function($query as xs:string) {
                 (
-                collection($config:TRAVELS_COL)//trip[ft:query(name, $query)]
+                collection($config:TRAVELS_COL)//trip[ft:query(name, $query, $search:ft-query-options)]
                 |
-                collection($config:TRAVELS_COL)//trip[ft:query(country, $query)]
+                collection($config:TRAVELS_COL)//trip[ft:query(country, $query, $search:ft-query-options)]
                 |
-                collection($config:TRAVELS_COL)//trip[ft:query(remarks, $query)]
+                collection($config:TRAVELS_COL)//trip[ft:query(remarks, $query, $search:ft-query-options)]
                 |
-                collection($config:TRAVELS_COL)//trip[ft:query(locale, $query)]
+                collection($config:TRAVELS_COL)//trip[ft:query(locale, $query, $search:ft-query-options)]
                 )/parent::trips
             }
         }
@@ -745,8 +753,8 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
                             if ($is-date-query and $is-keyword-query) then
                                 (console:log('query ' || $query),
                                 (: dates + keyword  :)
-                                let $dated := $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end][ft:query(., $query)]
-                                let $undated := $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query)][@type = ("section", "document")]
+                                let $dated := $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end][ft:query(., $query, $search:ft-query-options)]
+                                let $undated := $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query, $search:ft-query-options)][@type = ("section", "document")]
                                 return
                                     ($dated, $undated)
                                 )
@@ -757,14 +765,14 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
                                 )
                             else if ($is-keyword-query) then
                                 (: keyword  :)
-                                $vols//tei:div[ft:query(., $query)][@type = ("section", "document")]
+                                $vols//tei:div[ft:query(., $query, $search:ft-query-options)][@type = ("section", "document")]
                             else
                                 (: no parameters provided :)
                                 ()
                         return
                             $hits
                     default return
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query)]
+                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query, $search:ft-query-options)]
             default return
                 $category?query($query)
         let $end := util:system-time()
