@@ -93,8 +93,11 @@
                     <h2>Defaults</h2>
                     <ul>
                         <li>By default, the search engine returns documents from the entire
-                                site<sup>†</sup> containing <strong>any</strong> of the search terms
-                            you enter.</li>
+                                site<sup>†</sup> containing <strong>all</strong> of the search terms
+                            you enter. (Note: Before December 2017, the search engine’s default
+                            behavior was to return documents containing <strong>any</strong> of the
+                            terms. To perform that kind of search now, just place an <a
+                                href="#booleans">OR</a> boolean operator between each term.)</li>
                         <li>All keyword searches are <strong>case-insensitive</strong>, so searching
                             for “SALT” will return the same results as searching for “salt.”</li>
                         <li>You can refine a query by: <ol>
@@ -186,8 +189,8 @@
                             this search:</p>
                         <blockquote>
                             <a
-                                href="$app/search?q=Kissinger+AND+%22peaceful+nuclear%22&amp;sort-by=relevance"
-                                >Kissinger AND "peaceful nuclear"</a>
+                                href="$app/search?q=Kissinger+%22peaceful+nuclear%22&amp;sort-by=relevance"
+                                >Kissinger "peaceful nuclear"</a>
                         </blockquote>
                         <p>To locate documents which include either “Rhodesia” or “Zimbabwe,” use
                             this search:</p>
