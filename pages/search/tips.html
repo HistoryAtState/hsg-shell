@@ -18,6 +18,69 @@
         </div>
     </div>
     <div class="row">
+        <aside id="contents" class="hsg-width-one-third">
+            <div class="hsg-panel">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Contents</h2>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="#defaults">Defaults</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="#scope">Scope</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="#keywords">Searching with Keywords</a>
+                        <ul>
+                            <li class="hsg-list-group-item">
+                                <a href="#phrases">Phrases</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="#booleans">Booleans</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="#wildcards">Wildcards</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="#proximity">Proximity</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="#dates-filter">Filtering by Date and Time (Alpha Release)</a>
+                        <ul>
+                            <li class="hsg-list-group-item">
+                                <a href="#exact-date">Exact Date</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="#exact-date-time">Exact Date and Time</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="#date-range">Date Range</a>
+                            </li>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="#month-year">Month-Year</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="#single-year">Single Year</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="#year-range">Year Range</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="#date-time-range">Date and Time Range</a>
+                                </li>
+                            </ul>
+                        </ul>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="#volumes-filter">Filtering by Volume (Alpha Release)</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
         <div class="hsg-width-two-thirds" data-template="app:fix-links">
             <div id="content-inner">
                 <h1>Search Tips</h1>
@@ -206,100 +269,137 @@
                             themselves, however, are reliable.</p>
                     </div>
                 </div>
-                <div id="filtering">
-                    <h2>Filtering (Alpha Release)</h2>
+                <div id="dates-filter">
+                    <h2>Filtering By Date and Time (Alpha Release)</h2>
+                    <ul>
+                        <li>Date and time filters may be applied to searches within the Historical
+                            Documents (<em>Foreign Relations</em> series) section of the site. These
+                            filters will be active only if the Historical Documents section is
+                            checked.</li>
+                        <li>Exact dates or date-time ranges may be used in conjunction with keywords
+                            and/or volumes, or used alone by leaving the search box blank.</li>
+                        <li>Date and time filters may be used at the beginning of a search or to
+                            refine the results of a search.</li>
+                        <li>Per U.S. conventions, dates should be entered in Month-Date-Year format
+                            and time in 12-hour format, with “am” or “pm” selected.</li>
+                    </ul>
 
-                    <div id="dates-filter">
-                        <h3>Filtering By Date and Time</h3>
-                        <ul>
-                            <li>Date and time filters may be applied to searches within the
-                                Historical Documents (<em>Foreign Relations</em> series) section of
-                                the site. These filters will be active only if the Historical
-                                Documents section is checked.</li>
-                            <li>Exact dates or date-time ranges may be used in conjunction with
-                                keywords and/or volumes, or used alone by leaving the search box
-                                blank.</li>
-                            <li>Date and time filters may be used at the beginning of a search or to
-                                refine the results of a search.</li>
-                            <li>Per U.S. conventions, dates should be entered in Month-Date-Year
-                                format and time in 12-hour format, with “am” or “pm” selected.</li>
-                        </ul>
-
-                        <div id="exact-date">
-                            <h4>Exact Date</h4>
-                            <p>To search or filter results by an exact date, enter a single date
-                                into the “Start Date” set of fields. For example, a search for
-                                historical documents dated December 7, 1971 should be entered
-                                as:</p>
-                            <blockquote> ☑ Historical Documents<br/>
-                                <hr/>
-                                <table style="border-collapse: separate; border-spacing: 10px;">
-                                    <caption><strong>Start Date</strong></caption>
-                                    <thead>
-                                        <th>Month</th>
-                                        <th>Day</th>
-                                        <th>Year</th>
-                                    </thead>
-                                    <tr>
-                                        <td>12</td>
-                                        <td>07</td>
-                                        <td>1941</td>
-                                    </tr>
-                                </table>
-                                <hr/>
-                                <a
-                                    href="$app/search?q=&amp;within=documents&amp;start-date=1941-12-07&amp;sort-by=date-asc"
-                                    >live example</a>
-                            </blockquote>
-                        </div>
-                        <div id="exact-date-time">
-                            <h4>Exact Date and Time</h4>
-                            <p>To search or filter results by an exact date and time, enter a single
-                                date into the “Start Date” set of fields and a single time into the
-                                “Start Time” set of fields. For example, a search for historical
-                                documents created on December 7, 1971 at 8 p.m. should be entered
-                                as:</p>
-                            <blockquote> ☑ Historical Documents<br/>
-                                <hr/>
-                                <table style="border-collapse: separate; border-spacing: 10px;">
-                                    <caption><strong>Start Date</strong></caption>
-                                    <thead>
-                                        <th>Month</th>
-                                        <th>Day</th>
-                                        <th>Year</th>
-                                    </thead>
-                                    <tr>
-                                        <td>12</td>
-                                        <td>07</td>
-                                        <td>1941</td>
-                                    </tr>
-                                </table>
-                                <table style="border-collapse: separate; border-spacing: 10px;">
-                                    <caption><strong>Start Time</strong></caption>
-                                    <thead>
-                                        <th>Hour</th>
-                                        <th>Minute</th>
-                                        <th/>
-                                    </thead>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>00</td>
-                                        <td>◦ am ⦿ pm</td>
-                                    </tr>
-                                </table>
-                                <hr/>
-                                <a
-                                    href="$app/search?q=&amp;within=documents&amp;start-date=1941-12-07&amp;start-time=20:00&amp;sort-by=relevance"
-                                    >live example</a>
-                            </blockquote>
-                        </div>
-                        <div id="date-range">
-                            <h4>Date Range</h4>
-                            <p>To search or filter results by a date range, use the “Start Date” and
-                                “End Date” sets of fields. For example, a search for historical
-                                documents including the term “Cuba” and created between October 16,
-                                1962 and October 28, 1962 should be entered as:</p>
-                            <blockquote> Cuba*<br/>
+                    <div id="exact-date">
+                        <h3>Exact Date</h3>
+                        <p>To search or filter results by an exact date, enter a single date into
+                            the “Start Date” set of fields. For example, a search for historical
+                            documents dated December 7, 1971 should be entered as:</p>
+                        <blockquote> ☑ Historical Documents<br/>
+                            <hr/>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>Start Date</strong></caption>
+                                <thead>
+                                    <th>Month</th>
+                                    <th>Day</th>
+                                    <th>Year</th>
+                                </thead>
+                                <tr>
+                                    <td>12</td>
+                                    <td>07</td>
+                                    <td>1941</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <a
+                                href="$app/search?q=&amp;within=documents&amp;start-date=1941-12-07&amp;sort-by=date-asc"
+                                >live example</a>
+                        </blockquote>
+                    </div>
+                    <div id="exact-date-time">
+                        <h3>Exact Date and Time</h3>
+                        <p>To search or filter results by an exact date and time, enter a single
+                            date into the “Start Date” set of fields and a single time into the
+                            “Start Time” set of fields. For example, a search for historical
+                            documents created on December 7, 1971 at 8 p.m. should be entered
+                            as:</p>
+                        <blockquote> ☑ Historical Documents<br/>
+                            <hr/>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>Start Date</strong></caption>
+                                <thead>
+                                    <th>Month</th>
+                                    <th>Day</th>
+                                    <th>Year</th>
+                                </thead>
+                                <tr>
+                                    <td>12</td>
+                                    <td>07</td>
+                                    <td>1941</td>
+                                </tr>
+                            </table>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>Start Time</strong></caption>
+                                <thead>
+                                    <th>Hour</th>
+                                    <th>Minute</th>
+                                    <th/>
+                                </thead>
+                                <tr>
+                                    <td>8</td>
+                                    <td>00</td>
+                                    <td>◦ am ⦿ pm</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <a
+                                href="$app/search?q=&amp;within=documents&amp;start-date=1941-12-07&amp;start-time=20:00&amp;sort-by=relevance"
+                                >live example</a>
+                        </blockquote>
+                    </div>
+                    <div id="date-range">
+                        <h3>Date Range</h3>
+                        <p>To search or filter results by a date range, use the “Start Date” and
+                            “End Date” sets of fields. For example, a search for historical
+                            documents including the term “Cuba” and created between October 16, 1962
+                            and October 28, 1962 should be entered as:</p>
+                        <blockquote> Cuba*<br/>
+                            <hr/> ☑ Historical Documents<br/>
+                            <hr/>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>Start Date</strong></caption>
+                                <thead>
+                                    <th>Month</th>
+                                    <th>Day</th>
+                                    <th>Year</th>
+                                </thead>
+                                <tr>
+                                    <td>10</td>
+                                    <td>16</td>
+                                    <td>1962</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>End Date</strong></caption>
+                                <thead>
+                                    <th>Month</th>
+                                    <th>Day</th>
+                                    <th>Year</th>
+                                </thead>
+                                <tr>
+                                    <td>10</td>
+                                    <td>28</td>
+                                    <td>1962</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <a
+                                href="$app/search?q=Cuba*&amp;within=documents&amp;start-date=1962-10-16&amp;end-date=1962-10-28&amp;sort-by=date-asc"
+                                >live example</a>
+                        </blockquote>
+                        <div id="month-year">
+                            <h4>Month-Year</h4>
+                            <p>To search or filter results for all historical documents produced on
+                                any day during a particular month and year, use a date range search.
+                                For example, a search for historical documents including the terms
+                                “National Security Council” or “NSC” dated sometime in September
+                                1974 should be entered as:</p>
+                            <blockquote> “National Security Council” OR “NSC”<br/>
                                 <hr/> ☑ Historical Documents<br/>
                                 <hr/>
                                 <table style="border-collapse: separate; border-spacing: 10px;">
@@ -310,9 +410,9 @@
                                         <th>Year</th>
                                     </thead>
                                     <tr>
-                                        <td>10</td>
-                                        <td>16</td>
-                                        <td>1962</td>
+                                        <td>09</td>
+                                        <td>01</td>
+                                        <td>1974</td>
                                     </tr>
                                 </table>
                                 <hr/>
@@ -324,153 +424,25 @@
                                         <th>Year</th>
                                     </thead>
                                     <tr>
-                                        <td>10</td>
-                                        <td>28</td>
-                                        <td>1962</td>
+                                        <td>09</td>
+                                        <td>30</td>
+                                        <td>1974</td>
                                     </tr>
                                 </table>
                                 <hr/>
                                 <a
-                                    href="$app/search?q=Cuba*&amp;within=documents&amp;start-date=1962-10-16&amp;end-date=1962-10-28&amp;sort-by=date-asc"
+                                    href="$app/search?q=%22National+Security+Council%22+OR+%22NSC%22&amp;within=documents&amp;start-date=1974-09-01&amp;end-date=1974-09-30&amp;sort-by=date-asc"
                                     >live example</a>
                             </blockquote>
-                            <div id="month-year">
-                                <h5>Month-Year</h5>
-                                <p>To search or filter results for all historical documents produced
-                                    on any day during a particular month and year, use a date range
-                                    search. For example, a search for historical documents including
-                                    the terms “National Security Council” or “NSC” dated sometime in
-                                    September 1974 should be entered as:</p>
-                                <blockquote> “National Security Council” OR “NSC”<br/>
-                                    <hr/> ☑ Historical Documents<br/>
-                                    <hr/>
-                                    <table style="border-collapse: separate; border-spacing: 10px;">
-                                        <caption><strong>Start Date</strong></caption>
-                                        <thead>
-                                            <th>Month</th>
-                                            <th>Day</th>
-                                            <th>Year</th>
-                                        </thead>
-                                        <tr>
-                                            <td>09</td>
-                                            <td>01</td>
-                                            <td>1974</td>
-                                        </tr>
-                                    </table>
-                                    <hr/>
-                                    <table style="border-collapse: separate; border-spacing: 10px;">
-                                        <caption><strong>End Date</strong></caption>
-                                        <thead>
-                                            <th>Month</th>
-                                            <th>Day</th>
-                                            <th>Year</th>
-                                        </thead>
-                                        <tr>
-                                            <td>09</td>
-                                            <td>30</td>
-                                            <td>1974</td>
-                                        </tr>
-                                    </table>
-                                    <hr/>
-                                    <a
-                                        href="$app/search?q=%22National+Security+Council%22+OR+%22NSC%22&amp;within=documents&amp;start-date=1974-09-01&amp;end-date=1974-09-30&amp;sort-by=date-asc"
-                                        >live example</a>
-                                </blockquote>
-                            </div>
-                            <div id="single-year">
-                                <h5>Single Year</h5>
-                                <p>To search or filter results for all historical documents produced
-                                    during a particular year, use a date range search. For example,
-                                    a search for historical documents including the term “Russia“
-                                    and dated sometime in 1917 should be entered as:</p>
-                                <blockquote> Russia*<br/>
-                                    <hr/> ☑ Historical Documents<br/>
-                                    <hr/>
-                                    <table style="border-collapse: separate; border-spacing: 10px;">
-                                        <caption><strong>Start Date</strong></caption>
-                                        <thead>
-                                            <th>Month</th>
-                                            <th>Day</th>
-                                            <th>Year</th>
-                                        </thead>
-                                        <tr>
-                                            <td>01</td>
-                                            <td>01</td>
-                                            <td>1917</td>
-                                        </tr>
-                                    </table>
-                                    <hr/>
-                                    <table style="border-collapse: separate; border-spacing: 10px;">
-                                        <caption><strong>End Date</strong></caption>
-                                        <thead>
-                                            <th>Month</th>
-                                            <th>Day</th>
-                                            <th>Year</th>
-                                        </thead>
-                                        <tr>
-                                            <td>12</td>
-                                            <td>31</td>
-                                            <td>1917</td>
-                                        </tr>
-                                    </table>
-                                    <hr/>
-                                    <a
-                                        href="$app/search?q=Russia*&amp;within=documents&amp;start-date=1917-01-01&amp;end-date=1917-12-31&amp;sort-by=date-asc"
-                                        >live example</a>
-                                </blockquote>
-                            </div>
-                            <div id="year-range">
-                                <h5>Year Range</h5>
-                                <p>To search or filter results for all historical documents produced
-                                    during a particular range of years, use a date range search. For
-                                    example, a search for historical documents including the term
-                                    “union” dated sometime between 1861 and 1865 should be entered
-                                    as:</p>
-                                <blockquote> union<br/>
-                                    <hr/> ☑ Historical Documents<br/>
-                                    <hr/>
-                                    <table style="border-collapse: separate; border-spacing: 10px;">
-                                        <caption><strong>Start Date</strong></caption>
-                                        <thead>
-                                            <th>Month</th>
-                                            <th>Day</th>
-                                            <th>Year</th>
-                                        </thead>
-                                        <tr>
-                                            <td>01</td>
-                                            <td>01</td>
-                                            <td>1861</td>
-                                        </tr>
-                                    </table>
-                                    <hr/>
-                                    <table style="border-collapse: separate; border-spacing: 10px;">
-                                        <caption><strong>End Date</strong></caption>
-                                        <thead>
-                                            <th>Month</th>
-                                            <th>Day</th>
-                                            <th>Year</th>
-                                        </thead>
-                                        <tr>
-                                            <td>12</td>
-                                            <td>31</td>
-                                            <td>1865</td>
-                                        </tr>
-                                    </table>
-                                    <hr/>
-                                    <a
-                                        href="search?q=union&amp;within=documents&amp;start-date=1861-01-01&amp;end-date=1865-12-31&amp;sort-by=relevance"
-                                        >live example</a>
-                                </blockquote>
-                            </div>
                         </div>
-                        <div id="date-time-range">
-                            <h4>Date and Time Range</h4>
-                            <p>To search for all historical documents produced during a particular
-                                span of dates and times, use a date and time range search. For
-                                example, a search for all historical documents created or sent
-                                between noon on August 9, 1974 and 6:30 am on August 10, 1974 should
-                                be entered as:</p>
-                            <blockquote> ☑ Historical Documents<br/>
+                        <div id="single-year">
+                            <h4>Single Year</h4>
+                            <p>To search or filter results for all historical documents produced
+                                during a particular year, use a date range search. For example, a
+                                search for historical documents including the term “Russia“ and
+                                dated sometime in 1917 should be entered as:</p>
+                            <blockquote> Russia*<br/>
+                                <hr/> ☑ Historical Documents<br/>
                                 <hr/>
                                 <table style="border-collapse: separate; border-spacing: 10px;">
                                     <caption><strong>Start Date</strong></caption>
@@ -480,22 +452,9 @@
                                         <th>Year</th>
                                     </thead>
                                     <tr>
-                                        <td>08</td>
-                                        <td>09</td>
-                                        <td>1974</td>
-                                    </tr>
-                                </table>
-                                <table style="border-collapse: separate; border-spacing: 10px;">
-                                    <caption><strong>Start Time</strong></caption>
-                                    <thead>
-                                        <th>Hour</th>
-                                        <th>Minute</th>
-                                        <th/>
-                                    </thead>
-                                    <tr>
-                                        <td>12</td>
-                                        <td>00</td>
-                                        <td>◦ am ⦿ pm</td>
+                                        <td>01</td>
+                                        <td>01</td>
+                                        <td>1917</td>
                                     </tr>
                                 </table>
                                 <hr/>
@@ -507,50 +466,67 @@
                                         <th>Year</th>
                                     </thead>
                                     <tr>
-                                        <td>08</td>
-                                        <td>10</td>
-                                        <td>1974</td>
-                                    </tr>
-                                </table>
-                                <table style="border-collapse: separate; border-spacing: 10px;">
-                                    <caption><strong>End Time</strong></caption>
-                                    <thead>
-                                        <th>Hour</th>
-                                        <th>Minute</th>
-                                        <th/>
-                                    </thead>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>30</td>
-                                        <td>◦ am ⦿ pm</td>
+                                        <td>12</td>
+                                        <td>31</td>
+                                        <td>1917</td>
                                     </tr>
                                 </table>
                                 <hr/>
                                 <a
-                                    href="$app/search?q=&amp;within=documents&amp;start-date=1974-08-09&amp;end-date=1974-08-10&amp;start-time=12:00&amp;end-time=18:30&amp;sort-by=date-asc"
+                                    href="$app/search?q=Russia*&amp;within=documents&amp;start-date=1917-01-01&amp;end-date=1917-12-31&amp;sort-by=date-asc"
+                                    >live example</a>
+                            </blockquote>
+                        </div>
+                        <div id="year-range">
+                            <h4>Year Range</h4>
+                            <p>To search or filter results for all historical documents produced
+                                during a particular range of years, use a date range search. For
+                                example, a search for historical documents including the term
+                                “union” dated sometime between 1861 and 1865 should be entered
+                                as:</p>
+                            <blockquote> union<br/>
+                                <hr/> ☑ Historical Documents<br/>
+                                <hr/>
+                                <table style="border-collapse: separate; border-spacing: 10px;">
+                                    <caption><strong>Start Date</strong></caption>
+                                    <thead>
+                                        <th>Month</th>
+                                        <th>Day</th>
+                                        <th>Year</th>
+                                    </thead>
+                                    <tr>
+                                        <td>01</td>
+                                        <td>01</td>
+                                        <td>1861</td>
+                                    </tr>
+                                </table>
+                                <hr/>
+                                <table style="border-collapse: separate; border-spacing: 10px;">
+                                    <caption><strong>End Date</strong></caption>
+                                    <thead>
+                                        <th>Month</th>
+                                        <th>Day</th>
+                                        <th>Year</th>
+                                    </thead>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>31</td>
+                                        <td>1865</td>
+                                    </tr>
+                                </table>
+                                <hr/>
+                                <a
+                                    href="search?q=union&amp;within=documents&amp;start-date=1861-01-01&amp;end-date=1865-12-31&amp;sort-by=relevance"
                                     >live example</a>
                             </blockquote>
                         </div>
                     </div>
-
-                    <div id="volumes-filter">
-                        <h3>Filtering By Volume</h3>
-                        <ul>
-                            <li>Volumes filters may be applied to searches within the Historical
-                                Documents (<em>Foreign Relations</em> series) section of the
-                                site.</li>
-                            <li>Volumes may be used in conjunction with keywords and/or dates or
-                                used alone by leaving the search box blank.</li>
-                            <li>Volume filters may be used at the beginning of a search or to refine
-                                the results of a search.</li>
-                        </ul>
-                        <p>Taking the last example above, we can further refine the search results
-                            by checking one or more <em>Foreign Relations</em> volumes of interest.
-                            For example, a search for all historical documents created or sent
-                            between noon on August 9, 1974 and 6:30 am on August 10, 1974 and
-                            limited to the <em>1969–1976, Volume X, Vietnam, January 1973–July
-                                1975</em> and <em>1969–1976, Volume XXXV, National Security Policy,
-                                1973–1976</em> volumes should be entered as:</p>
+                    <div id="date-time-range">
+                        <h3>Date and Time Range</h3>
+                        <p>To search for all historical documents produced during a particular span
+                            of dates and times, use a date and time range search. For example, a
+                            search for all historical documents created or sent between noon on
+                            August 9, 1974 and 6:30 am on August 10, 1974 should be entered as:</p>
                         <blockquote> ☑ Historical Documents<br/>
                             <hr/>
                             <table style="border-collapse: separate; border-spacing: 10px;">
@@ -606,84 +582,95 @@
                                     <td>◦ am ⦿ pm</td>
                                 </tr>
                             </table>
-                            <hr/> ☑ 1969–1976, Vietnam, January 1973–July 1975, Volume X<br/> ☑
-                            1969–1976, National Security Policy, 1973–1976, Volume XXXV<br/>
                             <hr/>
                             <a
-                                href="$app/search?q=&amp;volume-id=frus1969-76v10&amp;volume-id=frus1969-76v35&amp;within=documents&amp;start-date=1974-08-09&amp;end-date=1974-08-10&amp;start-time=12:00&amp;end-time=18:30&amp;sort-by=date-asc"
+                                href="$app/search?q=&amp;within=documents&amp;start-date=1974-08-09&amp;end-date=1974-08-10&amp;start-time=12:00&amp;end-time=18:30&amp;sort-by=date-asc"
                                 >live example</a>
                         </blockquote>
                     </div>
                 </div>
+
+                <div id="volumes-filter">
+                    <h2>Filtering By Volume (Alpha Release)</h2>
+                    <ul>
+                        <li>Volumes filters may be applied to searches within the Historical
+                            Documents (<em>Foreign Relations</em> series) section of the site.</li>
+                        <li>Volumes may be used in conjunction with keywords and/or dates or used
+                            alone by leaving the search box blank.</li>
+                        <li>Volume filters may be used at the beginning of a search or to refine the
+                            results of a search.</li>
+                    </ul>
+                    <p>Taking the last example above, we can further refine the search results by
+                        checking one or more <em>Foreign Relations</em> volumes of interest. For
+                        example, a search for all historical documents created or sent between noon
+                        on August 9, 1974 and 6:30 am on August 10, 1974 and limited to the
+                            <em>1969–1976, Volume X, Vietnam, January 1973–July 1975</em> and
+                            <em>1969–1976, Volume XXXV, National Security Policy, 1973–1976</em>
+                        volumes should be entered as:</p>
+                    <blockquote> ☑ Historical Documents<br/>
+                        <hr/>
+                        <table style="border-collapse: separate; border-spacing: 10px;">
+                            <caption><strong>Start Date</strong></caption>
+                            <thead>
+                                <th>Month</th>
+                                <th>Day</th>
+                                <th>Year</th>
+                            </thead>
+                            <tr>
+                                <td>08</td>
+                                <td>09</td>
+                                <td>1974</td>
+                            </tr>
+                        </table>
+                        <table style="border-collapse: separate; border-spacing: 10px;">
+                            <caption><strong>Start Time</strong></caption>
+                            <thead>
+                                <th>Hour</th>
+                                <th>Minute</th>
+                                <th/>
+                            </thead>
+                            <tr>
+                                <td>12</td>
+                                <td>00</td>
+                                <td>◦ am ⦿ pm</td>
+                            </tr>
+                        </table>
+                        <hr/>
+                        <table style="border-collapse: separate; border-spacing: 10px;">
+                            <caption><strong>End Date</strong></caption>
+                            <thead>
+                                <th>Month</th>
+                                <th>Day</th>
+                                <th>Year</th>
+                            </thead>
+                            <tr>
+                                <td>08</td>
+                                <td>10</td>
+                                <td>1974</td>
+                            </tr>
+                        </table>
+                        <table style="border-collapse: separate; border-spacing: 10px;">
+                            <caption><strong>End Time</strong></caption>
+                            <thead>
+                                <th>Hour</th>
+                                <th>Minute</th>
+                                <th/>
+                            </thead>
+                            <tr>
+                                <td>6</td>
+                                <td>30</td>
+                                <td>◦ am ⦿ pm</td>
+                            </tr>
+                        </table>
+                        <hr/> ☑ 1969–1976, Vietnam, January 1973–July 1975, Volume X<br/> ☑
+                        1969–1976, National Security Policy, 1973–1976, Volume XXXV<br/>
+                        <hr/>
+                        <a
+                            href="$app/search?q=&amp;volume-id=frus1969-76v10&amp;volume-id=frus1969-76v35&amp;within=documents&amp;start-date=1974-08-09&amp;end-date=1974-08-10&amp;start-time=12:00&amp;end-time=18:30&amp;sort-by=date-asc"
+                            >live example</a>
+                    </blockquote>
+                </div>
             </div>
         </div>
-        <aside id="contents" class="hsg-width-one-third">
-            <div class="hsg-panel">
-                <div class="hsg-panel-heading">
-                    <h2 class="hsg-sidebar-title">Contents</h2>
-                </div>
-                <ul class="hsg-list-group">
-                    <li class="hsg-list-group-item">
-                        <a href="#defaults">Defaults</a>
-                    </li>
-                    <li class="hsg-list-group-item">
-                        <a href="#scope">Scope</a>
-                    </li>
-                    <li class="hsg-list-group-item">
-                        <a href="#keywords">Searching with Keywords</a>
-                        <ul>
-                            <li class="hsg-list-group-item">
-                                <a href="#phrases">Phrases</a>
-                            </li>
-                            <li class="hsg-list-group-item">
-                                <a href="#booleans">Booleans</a>
-                            </li>
-                            <li class="hsg-list-group-item">
-                                <a href="#wildcards">Wildcards</a>
-                            </li>
-                            <li class="hsg-list-group-item">
-                                <a href="#proximity">Proximity</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="hsg-list-group-item">
-                        <a href="#filtering">Filtering (Alpha Release)</a>
-                        <ul>
-                            <li class="hsg-list-group-item">
-                                <a href="#dates-filter">Filtering by Date and Time</a>
-                                <ul>
-                                    <li class="hsg-list-group-item">
-                                        <a href="#exact-date">Exact Date</a>
-                                    </li>
-                                    <li class="hsg-list-group-item">
-                                        <a href="#exact-date-time">Exact Date and Time</a>
-                                    </li>
-                                    <li class="hsg-list-group-item">
-                                        <a href="#date-range">Date Range</a>
-                                    </li>
-                                    <ul>
-                                        <li class="hsg-list-group-item">
-                                            <a href="#month-year">Month-Year</a>
-                                        </li>
-                                        <li class="hsg-list-group-item">
-                                            <a href="#single-year">Single Year</a>
-                                        </li>
-                                        <li class="hsg-list-group-item">
-                                            <a href="#year-range">Year Range</a>
-                                        </li>
-                                        <li class="hsg-list-group-item">
-                                            <a href="#date-time-range">Date and Time Range</a>
-                                        </li>
-                                    </ul>
-                                </ul>
-                            </li>
-                            <li class="hsg-list-group-item">
-                                <a href="#volumes-filter">Filtering by Volume</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </aside>
     </div>
 </div>
