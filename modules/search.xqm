@@ -278,9 +278,13 @@ declare
 function search:label($node as node(), $model as map(*)) {
     let $component := $model?component
     let $component-id := $model($component)/id
+    let $component-title := $model($component)/title
     return
-        attribute for { $component-id },
-        templates:process($node/*, $model)
+        (
+            attribute for { $component-id },
+            if ($component-title) then attribute title { $component-title } else (),
+            templates:process($node/*, $model)
+        )
 };
 
 (:~
@@ -1057,14 +1061,19 @@ function search:load-volumes($node as node(), $model as map(*)) {
                 let $ft-vol-ids := collection((:$config:FRUS_VOLUMES_COL:)"/db/apps/frus/volumes")/tei:TEI[.//tei:body/tei:div]/@xml:id
                 for $vol in collection("/db/apps/frus/bibliography")/volume[@id = $ft-vol-ids]
                 let $vol-id := $vol/@id/string()
-                let $title := $vol/title[@type = ("sub-series", "volume-number", "volume")]
-                let $title :=
-                    string-join($title[. != ''], ", ")
+                let $compact-title := 
+                    $vol/title[@type = ("sub-series", "volume-number", "volume")][. != '']
+                    => string-join(", ")
                     => normalize-space()
                     => search:trim-words(10)
+                let $complete-title := $vol/title[@type eq "complete"] => normalize-space()
                 order by $vol-id
                 return
-                    <volume><id>{$vol-id}</id><label>{$title}</label></volume>
+                    <volume>
+                        <id>{$vol-id}</id>
+                        <label>{$compact-title}</label>
+                        <title>{$complete-title}</title>
+                    </volume>
             let $new-volumes-entry := map { "volumes": $new-volumes }
             let $put := cache:put($cache-name, $cache-key, map:merge(($cache, $new-volumes-entry)))
             return
