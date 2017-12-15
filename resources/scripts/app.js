@@ -237,7 +237,7 @@ $(document).ready(function() {
         window.location.replace(url + '?' + action);
     }
 
-    if (mainForm.get(0)) {
+    if (searchForm.get(0)) {
 
         //TODO refactor and cover cases of empty day/month
         //split aggregated date query and set up values for partial date controls
