@@ -41,19 +41,15 @@ declare function pmf:document-list($config as map(*), $node as element(), $class
  : - extend to footnotes, e.g., #d3fn3, frus1948v01p1#d3fn1
  : - extend to persName id references - which should point to the persons div; terms; index references; etc.
  :)
-declare function pmf:ref($config as map(*), $node as element(), $class as xs:string+) {
-    let $docName := util:collection-name($node)
-    let $publication-id := $hsg-config:PUBLICATION-COLLECTIONS?($docName)
-    let $document-id := substring-before(util:document-name($node), '.xml')
-
+declare function pmf:ref($config as map(*), $node as element(), $class as xs:string+, $content) {
     (: ToDO: Quick fix not sure where the origin is from :)
     let $target := data($node/@target)
     let $href :=
         (: generic: catch http, mailto links :)
-        if (matches($target, '^http|mailto')) then
+        if (starts-with($target, 'http') or starts-with($target, 'mailto')) then
             $target
         (: FRUS-specific conventions: pointer to a (different) frus volume :)
-        else if (matches($target, '^frus')) then
+        else if (starts-with($target, 'frus')) then
             (: pointer to location within that volume :)
             if (contains($target, '#')) then
                 toc:href("frus", substring-before($target, '#'), substring-after($target, '#'), ())
@@ -62,12 +58,17 @@ declare function pmf:ref($config as map(*), $node as element(), $class as xs:str
                 toc:href("frus", $target, (), ())
         (: generic: pointer to location within document :)
         else if (starts-with($target, '#')) then
-            toc:href($publication-id, $document-id, substring-after($target, '#'), ())
+            let $docName := util:collection-name($node)
+            let $publication-id := $hsg-config:PUBLICATION-COLLECTIONS?($docName)
+            let $document-id := substring-before(util:document-name($node), '.xml')
+            return
+                toc:href($publication-id, $document-id, substring-after($target, '#'), ())
         else if (starts-with($target, "/")) then
             "$app" || $target
         else
             $target
-    let $content := if ($node/node()) then $config?apply-children($config, $node, .) else $href
+    let $content := if ($content) then $content else $href
+    (: let $content := if ($node/node()) then $config?apply-children($config, $node, .) else $href :)
     return
         <a href="{$href}">{$content}</a>
 };
