@@ -375,7 +375,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         (: If it is inside a paragraph then it is inline, otherwise it is block level :)
                         html:block($config, ., css:get-rendition(., ("tei-quote2")), .)
                 case element(ref) return
-                    ext-html:ref($config, ., ("tei-ref"))
+                    ext-html:ref($config, ., ("tei-ref"), .)
                 case element(reg) return
                     html:inline($config, ., ("tei-reg"), .)
                 case element(rhyme) return
@@ -491,19 +491,19 @@ declare function model:apply($config as map(*), $input as node()*) {
                             html:block($config, ., ("tei-titleStmt2"), "Editors:")
                         else
                             (),
-                        if (count(editor[@role = 'primary'][. ne '']) eq 1) then
+                        if (count(editor[@role = 'primary']) eq 1) then
                             html:block($config, ., ("tei-titleStmt3"), "Editor:")
                         else
                             (),
-                        if (editor[@role = 'primary'][. ne '']) then
+                        if (editor[@role = 'primary']) then
                             ext-html:list-from-items($config, ., ("tei-titleStmt4"), editor[@role="primary"], ())
                         else
                             (),
-                        if (editor[@role = 'general'][. ne '']) then
+                        if (editor[@role = 'general']) then
                             html:block($config, ., ("tei-titleStmt5"), "General Editor:")
                         else
                             (),
-                        if (editor[@role = 'general'][. ne '']) then
+                        if (editor[@role = 'general']) then
                             ext-html:list-from-items($config, ., ("tei-titleStmt6"), editor[@role="general"], ())
                         else
                             ()
