@@ -11,7 +11,10 @@ import module namespace fd="http://history.state.gov/ns/site/hsg/frus-dates" at 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace fh = "http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
 import module namespace functx = "http://www.functx.com";
+(:
 import module namespace sort="http://exist-db.org/xquery/sort" at "java:org.exist.xquery.modules.sort.SortModule";
+:)
+import module namespace memsort="http://exist-db.org/xquery/memsort" at "java:org.existdb.memsort.SortModule";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace frus="http://history.state.gov/frus/ns/1.0";
@@ -681,8 +684,9 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
             return
                 (
                     for $hit in $dated
-                    order by sort:index("doc-dateTime-min-asc", $hit/@frus:doc-dateTime-min)
+                    order by memsort:get("doc-dateTime-min", $hit) ascending empty greatest, ft:score($hit) descending
                     (:
+                    order by sort:index("doc-dateTime-min-asc", $hit/@frus:doc-dateTime-min)
                     order by $hit/@frus:doc-dateTime-min
                     :)
                     return
@@ -699,8 +703,9 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
             return
                 (
                     for $hit in $dated
-                    order by sort:index("doc-dateTime-min-desc", $hit/@frus:doc-dateTime-min)
+                    order by memsort:get("doc-dateTime-min", $hit) descending empty least, ft:score($hit) descending
                     (:
+                    order by sort:index("doc-dateTime-min-desc", $hit/@frus:doc-dateTime-min)
                     order by $hit/@frus:doc-dateTime-min descending
                     :)
                     return
