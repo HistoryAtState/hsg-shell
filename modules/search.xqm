@@ -26,7 +26,7 @@ declare variable $search:ft-query-options :=
         <filter-rewrite>yes</filter-rewrite>
     </options>;
 
-(: Maps search categories to publication ids, see $config:PUBLICATIONS :)
+(: Maps search sections to publication ids, see $config:PUBLICATIONS :)
 declare variable $search:SECTIONS := map {
     "documents": "frus",
     "department": (
@@ -788,6 +788,8 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
 
 declare function search:result-heading($node, $model) {
     let $result := $model?result
+    let $publication-has-custom-function := map:contains($search:DISPLAY, util:collection-name($result))
+    let $element-name-has-custom-function := map:contains($search:DISPLAY, local-name($result))
     return
         typeswitch ($result)
             case element(tei:div) return
@@ -811,19 +813,20 @@ declare function search:result-heading($node, $model) {
                 return
                     $result-heading
             default return
-                let $display := $search:DISPLAY?(local-name($result))
-                return
-                    if (exists($display)) then
-                        $display?title($result)
-                    else
-                        "unknown title"
+                (: see if we've defined a custom function for this publication to display result summaries :)
+                if ($publication-has-custom-function) then
+                    $search:DISPLAY?(util:collection-name($result))?title($result)
+                (: see if we've defined a custom function for this result's element name to display result summaries :)
+                else if ($element-name-has-custom-function) then
+                    $search:DISPLAY?(local-name($result))?title($result)
+                else
+                    $model?result => serialize()
 };
 
 declare function search:result-summary($node, $model) {
     let $matches-to-highlight := 10
     let $result := $model?result
-    let $publication-by-collection := map:contains($config:PUBLICATION-COLLECTIONS, util:collection-name($result))
-    let $publication-has-custom-function := if ($publication-by-collection) then map:contains($search:DISPLAY, $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))) else ()
+    let $publication-has-custom-function := map:contains($search:DISPLAY, util:collection-name($result))
     let $element-name-has-custom-function := map:contains($search:DISPLAY, local-name($result))
 (:    let $log := console:log("publication has custom function: " || $publication-has-custom-function || " element name has custom function: " || $element-name-has-custom-function):)
     return
@@ -831,15 +834,13 @@ declare function search:result-summary($node, $model) {
             '[Back of book index: too many hits to display]'
         (: see if we've defined a custom function for this publication to display result summaries :)
         else if ($publication-has-custom-function) then
-            let $summary := $search:DISPLAY?($config:PUBLICATION-COLLECTIONS?(util:collection-name($result)))?summary
-            return
-                $summary($result)
+            $search:DISPLAY?(util:collection-name($result))?summary($result)
         (: see if we've defined a custom function for this result's element name to display result summaries :)
         else if ($element-name-has-custom-function) then
-            let $summary := $search:DISPLAY?(local-name($result))?summary
+            let $summarize := $search:DISPLAY?(local-name($result))?summary
             return
-                typeswitch ($summary)
-                    case function(*) return $summary($result)
+                typeswitch ($summarize)
+                    case function(*) return $summarize($result)
                     default return
                         let $trimmed-hit := search:trim-matches(util:expand($result), $matches-to-highlight)
                         return
