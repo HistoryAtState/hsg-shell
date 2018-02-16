@@ -15,13 +15,14 @@ import module namespace functx = "http://www.functx.com";
 import module namespace sort="http://exist-db.org/xquery/sort" at "java:org.exist.xquery.modules.sort.SortModule";
 :)
 import module namespace memsort="http://exist-db.org/xquery/memsort" at "java:org.existdb.memsort.SortModule";
+import module namespace cache="http://exist-db.org/xquery/cache" at "java:org.exist.xquery.modules.cache.CacheModule";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace frus="http://history.state.gov/frus/ns/1.0";
 
 declare variable $search:MAX_HITS_SHOWN := 1000;
 
-declare variable $search:ft-query-options := 
+declare variable $search:ft-query-options :=
     <options>
         <default-operator>and</default-operator>
         <phrase-slop>0</phrase-slop>
