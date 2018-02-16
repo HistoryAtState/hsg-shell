@@ -676,43 +676,15 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
 declare function search:sort($hits as element()*, $sort-by as xs:string) {
     switch ($sort-by)
         case "date-asc" return
-            let $dated := $hits[@frus:doc-dateTime-min]
-            let $undated := $hits except $dated
+            for $hit in $hits
+            order by memsort:get("doc-dateTime-min", $hit) ascending empty greatest, ft:score($hit) descending
             return
-                (
-                    for $hit in $dated
-                    order by memsort:get("doc-dateTime-min", $hit) ascending empty greatest, ft:score($hit) descending
-                    (:
-                    order by sort:index("doc-dateTime-min-asc", $hit/@frus:doc-dateTime-min)
-                    order by $hit/@frus:doc-dateTime-min
-                    :)
-                    return
-                        $hit
-                    ,
-                    for $hit in $undated
-                    order by ft:score($hit) descending
-                    return
-                        $hit
-                )
+                $hit
         case "date-desc" return
-            let $dated := $hits[@frus:doc-dateTime-min]
-            let $undated := $hits except $dated
+            for $hit in $hits
+            order by memsort:get("doc-dateTime-min", $hit) descending empty least, ft:score($hit) descending
             return
-                (
-                    for $hit in $dated
-                    order by memsort:get("doc-dateTime-min", $hit) descending empty least, ft:score($hit) descending
-                    (:
-                    order by sort:index("doc-dateTime-min-desc", $hit/@frus:doc-dateTime-min)
-                    order by $hit/@frus:doc-dateTime-min descending
-                    :)
-                    return
-                        $hit
-                    ,
-                    for $hit in $undated
-                    order by ft:score($hit) descending
-                    return
-                        $hit
-                )
+                $hit
         default (: case "relevance" :) return
             for $hit in $hits
             order by ft:score($hit) descending
