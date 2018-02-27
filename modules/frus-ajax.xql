@@ -38,6 +38,7 @@ let $publication-id :=
             switch ($volume)
                 case 'buildings' return 'buildings'
                 case 'short-history' return 'short-history'
+                case 'timeline' return 'timeline'
                 default return $publication
         default return $publication
 let $log := console:log("publication: " || $publication || ", volume: " || $volume)
