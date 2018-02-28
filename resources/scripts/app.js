@@ -2,6 +2,25 @@ $(document).ready(function() {
     var historySupport = !!(window.history && window.history.pushState);
     var appRoot = $("html").attr("data-app");
 
+    // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
+    if (!String.prototype.padStart) {
+        String.prototype.padStart = function padStart(targetLength,padString) {
+            targetLength = targetLength>>0; //truncate if number or convert non-number to 0;
+            padString = String((typeof padString !== 'undefined' ? padString : ' '));
+            if (this.length > targetLength) {
+                return String(this);
+            }
+            else {
+                targetLength = targetLength-this.length;
+                if (targetLength > padString.length) {
+                    padString += padString.repeat(targetLength/padString.length); //append to original to ensure we are longer than needed
+                }
+                return padString.slice(0,targetLength) + String(this);
+            }
+        };
+    }
+
     //make sure the mobile menu is hidden when window is resized
     $( window ).resize(function() {
         $( ".collapse").collapse("hide");
@@ -292,9 +311,9 @@ $(document).ready(function() {
         mainButton.on('click', submitSearch);
 
         // add "enter/return" key to trigger submitting the search form
-        document.addEventListener('keydown', function (event) {
-        var key = event.which;
-            if(key == 13){
+        $(document).on('keydown', function (event) {
+            var key = event.which;
+            if(key == 13) {
                 submitSearch(event);
             }
         });
@@ -311,7 +330,7 @@ $(document).ready(function() {
     function resetFilter (event) {
         event.preventDefault();
         filterInputs.attr('checked', false);
-        console.log("Date Filter", dateFilter.find("#start_hour").val());
+        //console.log("Date Filter", dateFilter.find("#start_hour").val());
         dateFilterInputs.val(' ');
     }
     filterReset.on('click', resetFilter);
@@ -360,12 +379,12 @@ $(document).ready(function() {
         if (documentsInput.is( ":checked" ) && allSelectedButDocuments()) {
             toggledComponents.removeClass("hsg-hidden");
             toggledComponents.addClass("hsg-active");
-            console.log("Date: ", $('.hsg-filter-toggle').data());
+            //console.log("Date: ", $('.hsg-filter-toggle').data());
         }
         else {
             toggledComponents.addClass("hsg-hidden");
             toggledComponents.removeClass("hsg-active");
-            console.log("Date: ", $('.hsg-filter-toggle').data());
+            //console.log("Date: ", $('.hsg-filter-toggle').data());
         }
     }
 
@@ -509,7 +528,7 @@ $(document).ready(function() {
         var params = {
             url: window.location.pathname.replace(new RegExp("^" + appRoot + "(.*)$"), "$1")
         };
-        console.log("popstate: %s", params.url);
+        //console.log("popstate: %s", params.url);
         load(params);
     });
 
