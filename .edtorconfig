@@ -1,0 +1,9 @@
+# EditorConfig http://EditorConfig.org
+
+[*.{js,less,css}]
+indent_style = space
+indent_size = 2
+
+[*.{htm,html,xml,xql,xqm,json,odd}]
+indent_style = space
+indent_size = 4
