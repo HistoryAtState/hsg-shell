@@ -18,7 +18,36 @@
     <condition property="NODE_ENV.production" value="production">
         <istrue value="${node-env-is-set-for-production}"/>
     </condition>
-    <target name="xar">
+
+    <!-- Check if git file is present -->
+    <available file=".git" type="dir" property="git.present"/>
+
+    <!-- Retrieve current git HEAD hash -->
+    <target name="git.revision" description="Store git revision in ${repository.version}" if="git.present">
+        <exec executable="git" outputproperty="git.revision" failifexecutionfails="false" errorproperty="">
+            <arg value="describe"/>
+            <arg value="--tags"/>
+            <arg value="--always"/>
+            <arg value="HEAD"/>
+        </exec>
+        <condition property="repository.version" value="${git.revision}" else="unknown">
+            <and>
+                <isset property="git.revision"/>
+                <length string="${git.revision}" trim="yes" length="0" when="greater"/>
+            </and>
+        </condition>
+        <echo message="git HEAD is at ${repository.version}"/>
+    </target>
+
+    <!-- Retrieve current git branch -->
+    <target name="git.branch" description="Store git branch in ${repository.branch}" if="git.present">
+        <exec executable="git" outputproperty="git.branch" failifexecutionfails="false" errorproperty="">
+            <arg line="rev-parse --abbrev-ref HEAD"/>
+        </exec>
+        <echo message="Current branch: ${git.branch}"/>
+    </target>
+
+    <target name="xar" depends="git.branch,git.revision" description="main target to create application XAR file">
         <mkdir dir="${build.dir}"/>
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
         <exec executable="${npm}" outputproperty="npm.output">
@@ -28,8 +57,8 @@
         </exec>
         <echo message="${npm.output}"/>
         <echo message="Creating xar package..."/>
-        <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar"
-            excludes="${build.dir}/** node_modules/** package.json gulpfile.js .*"/>
+        <zip basedir="." destfile="${build.dir}/${app.name}-${app.version}-${git.branch}-${git.revision}.xar"
+            excludes="${build.dir}/** node_modules/** package.json gulpfile.js .editorconfig .* *.properties"/>
     </target>
 
     <target name="clean">
