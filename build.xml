@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="xar" name="hsg-shell">
-    <property file="local.build.properties"/>
-    <property file="build.properties"/>
+    <xmlproperty file="build.properties.local.xml" semanticAttributes="true" keepRoot="false"/>
+    <xmlproperty file="build.properties.xml" semanticAttributes="true" keepRoot="false"/>
     <xmlproperty file="expath-pkg.xml"/>
-    <property name="project.version" value="${package(version)}"/>
-    <property name="project.app" value="hsg-shell"/>
     <property name="build.dir" value="build"/>
     <property environment="env"/>
+
     <!-- Allow NODE_ENV to be passed in either as an environment variable or as a regular variable -->
     <condition property="node-env-is-set-for-production" else="false">
         <or>
@@ -14,6 +13,7 @@
             <equals arg1="${NODE_ENV}" arg2="production"/>
         </or>
     </condition>
+
     <!-- Create a new property that sets production mode based on whether either variation of NODE_ENV is set to production -->
     <condition property="NODE_ENV.production" value="production">
         <istrue value="${node-env-is-set-for-production}"/>
@@ -31,6 +31,7 @@
         <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar"
             excludes="${build.dir}/** node_modules/** package.json gulpfile.js .*"/>
     </target>
+
     <target name="clean">
         <echo message="Calling gulp clean..."/>
         <exec executable="${gulp}" outputproperty="gulp.output">

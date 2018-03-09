@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <app>
+        <name>hsg-shell</name>
+        <description>history.state.gov 3.0 shell</description>
+        <version>0.3</version>
+        <website>https://history.state.gov/</website>
+        <status>beta</status>
+        <permissions>rw-rw-r--</permissions>
+    </app>
+    <exist>
+        <dir>/usr/local/existdb/exist</dir>
+    </exist>
+    <npm>/usr/local/bin/npm</npm>
+    <gulp>gulp</gulp>
+    <node.PATH>/usr/local/opt/node@4/bin:/usr/local/bin</node.PATH>
+</root>
