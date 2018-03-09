@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <exist>
+    <dir>enter-path-to-your-existDB-instance</dir>
+  </exist>
+</root>

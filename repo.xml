@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <meta xmlns="http://exist-db.org/xquery/repo">
-    <description>history.state.gov 3.0 shell</description>
-    <author/>
-    <website/>
-    <status>alpha</status>
+    <description>@description@</description>
+    <website>@website@</website>
+    <status>@status@</status>
     <license>GNU-LGPL</license>
     <copyright>true</copyright>
     <type>application</type>
     <target>hsg-shell</target>
     <prepare>pre-install.xql</prepare>
     <finish>post-install.xql</finish>
-    <permissions xmlns:repo="http://exist-db.org/xquery/repo" password="" user="hsg" group="hsg"
-        mode="rw-rw-r--"/>
+    <permissions xmlns:repo="http://exist-db.org/xquery/repo" password="" user="hsg" group="hsg" mode="@permissions@"/>
 </meta>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://expath.org/ns/pkg" name="http://history.state.gov/ns/site/hsg"
-    abbrev="hsg-shell" version="0.2" spec="1.0">
-    <title>history.state.gov 3.0 shell</title>
-    <dependency package="http://exist-db.org/apps/shared"/>
+<package xmlns="http://expath.org/ns/pkg" name="@url@" abbrev="@name@" version="@version@" spec="1.0">
+    <title>@name@</title>
+    <dependency package="http://exist-db.org/apps/shared" semver-min="0.4.2"/>
     <dependency package="http://www.tei-c.org/tei-simple"/>
-    <dependency package="http://www.functx.com"/>
+    <dependency package="http://www.functx.com" semver-min="1.0"/>
+    <dependency package="http://exist-db.org/xquery/memsort" semver-min="1.0-SNAPSHOT"/>
+    <dependency package="http://existsolutions.com/apps/tei-publisher-lib" semver-min="2.2.0"/>
 </package>
