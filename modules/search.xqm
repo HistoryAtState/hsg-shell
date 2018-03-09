@@ -1036,6 +1036,7 @@ function search:load-volumes($node as node(), $model as map(*)) {
                 let $compact-title := 
                     search:trim-words(normalize-space(string-join($vol/title[@type = ("sub-series", "volume-number", "volume")][. != ''], ", ")), 10)
                 let $complete-title := normalize-space($vol/title[@type eq "complete"])
+
                 order by $vol-id
                 return
                     <volume>
