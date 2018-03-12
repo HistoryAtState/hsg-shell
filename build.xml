@@ -47,8 +47,40 @@
         <echo message="Current branch: ${git.branch}"/>
     </target>
 
-    <target name="xar" depends="git.branch,git.revision" description="main target to create application XAR file">
+    <target name="clean">
+        <echo message="Deleting xar files..."/>
+        <delete>
+            <fileset dir="${build.dir}"/>
+        </delete>
         <mkdir dir="${build.dir}"/>
+    </target>
+
+    <target name="copy" depends="git.branch,git.revision" >
+        <copy todir="${build.dir}/${app.name}-${app.version}-${git.branch}-${git.revision}">
+            <fileset dir="${basedir}"
+                     excludes="${build.dir}/** node_modules/** bower-components/** package.json gulpfile.js .editorconfig .* *.properties expath-pkg.xml.tmpl repo.xml.tmpl"/>
+        </copy>
+        <antcall target="apply-filters"/>
+    </target>
+
+    <target name="apply-filters">
+        <copy todir="${build.dir}/${app.name}-${app.version}-${git.branch}-${git.revision}" overwrite="true" verbose="true">
+            <fileset file="expath-pkg.xml.tmpl"/>
+            <fileset file="repo.xml.tmpl"/>
+            <filterset>
+                <filter token="name" value="${app.name}"/>
+                <filter token="version" value="${app.version}"/>
+                <filter token="url" value="${app.url}"/>
+                <filter token="description" value="${app.description}"/>
+                <filter token="website" value="${app.website}"/>
+                <filter token="status" value="${app.status}"/>
+                <filter token="permissions" value="${app.permissions}"/>
+            </filterset>
+            <globmapper from="*.tmpl" to="*"/>
+        </copy>
+    </target>
+
+    <target name="xar" depends="clean, copy, git.branch, git.revision" description="main target to create application XAR file">
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
         <exec executable="${npm}" outputproperty="npm.output">
             <arg line="start"/>
@@ -56,12 +88,15 @@
             <env key="NODE_ENV" value="${NODE_ENV.production}"/>
         </exec>
         <echo message="${npm.output}"/>
-        <echo message="Creating xar package..."/>
-        <zip basedir="." destfile="${build.dir}/${app.name}-${app.version}-${git.branch}-${git.revision}.xar"
-            excludes="${build.dir}/** node_modules/** package.json gulpfile.js .editorconfig .* *.properties"/>
+        <antcall target="apply-filters"/>
+        <zip basedir="${build.dir}/${app.name}-${app.version}-${git.branch}-${git.revision}"
+             destfile="${build.dir}/${app.name}-${app.version}-${git.branch}-${git.revision}.xar"
+             excludes="${build.dir}/** node_modules/** package.json gulpfile.js .editorconfig .* *.properties expath-pkg.xml.tmpl repo.xml.tmpl"/>
+        <echo message="Deleting build files..."/>
+        <delete dir="${build.dir}/${app.name}-${app.version}-${git.branch}-${git.revision}" excludes="/${app.name}-${app.version}-${git.branch}-${git.revision}.xar"/>
     </target>
 
-    <target name="clean">
+    <target name="gulp-clean">
         <echo message="Calling gulp clean..."/>
         <exec executable="${gulp}" outputproperty="gulp.output">
             <arg line="clean"/>
