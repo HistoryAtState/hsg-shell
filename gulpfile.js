@@ -48,7 +48,6 @@ var targetConfiguration = {
 gulp.task('clean', function() {
     return del([
       'templates/**/*',
-      'build/**/*',
       'resources/css/main.css',
       'resources/fonts/*'
     ]);
