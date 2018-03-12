@@ -137,6 +137,7 @@ $(document).ready(function() {
         event.stopPropagation();
         var url = navigationSearchForm.prop("action");
         var action = navigationSearchForm.serialize();
+        history.pushState({}, '', window.location.href);
         window.location.replace(url + '?' + action);
     }
 
@@ -253,6 +254,7 @@ $(document).ready(function() {
 
         var currentActiveSorting = sortingForm.find('#sorting');
         action += '&sort-by=' + currentActiveSorting.prop('value');
+        history.pushState({}, '', window.location.href);
         window.location.replace(url + '?' + action);
     }
 
