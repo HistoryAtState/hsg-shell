@@ -15,15 +15,15 @@
         </or>
     </condition>
     <!-- Create a new property that sets production mode based on whether either variation of NODE_ENV is set to production -->
-    <condition property="NODE_ENV.production" value="production">
+    <condition property="NODE_ENV.production" value="production" else="development">
         <istrue value="${node-env-is-set-for-production}"/>
     </condition>
     <target name="xar">
         <mkdir dir="${build.dir}"/>
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
         <exec executable="${npm}" outputproperty="npm.output">
-            <arg line="start"/>
-            <env key="PATH" value="${env.PATH}:${node.PATH}"/>
+            <arg line="start"/>            
+            <env key="PATH" value="${node.PATH}:${env.PATH}"/>
             <env key="NODE_ENV" value="${NODE_ENV.production}"/>
         </exec>
         <echo message="${npm.output}"/>
@@ -35,7 +35,7 @@
         <echo message="Calling gulp clean..."/>
         <exec executable="${gulp}" outputproperty="gulp.output">
             <arg line="clean"/>
-            <env key="PATH" value="${env.PATH}:${node.PATH}"/>
+            <env key="PATH" value="${node.PATH}:${env.PATH}"/>
         </exec>
         <echo message="${gulp.output}"/>
         <echo message="Deleting xar files..."/>
