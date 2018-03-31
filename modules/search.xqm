@@ -559,7 +559,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
     
     (: the old frus-dates search didn't specify within=documents, so if an old URL is redirected here we'll need to catch these and categorize these as date searches :)
     let $adjusted-within := 
-        if (not($within)) then
+        if (empty($within)) then
             if ($start-date or $volume-id) then
                 "documents"
             else
