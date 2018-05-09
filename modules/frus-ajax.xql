@@ -38,6 +38,7 @@ let $publication-id :=
             switch ($volume)
                 case 'buildings' return 'buildings'
                 case 'short-history' return 'short-history'
+                case 'timeline' return 'timeline'
                 default return $publication
         default return $publication
 let $log := console:log("publication: " || $publication || ", volume: " || $volume)
@@ -100,11 +101,15 @@ return
             map {
                 "doc": $doc,
                 "next":
-                    if ($next) then
+                    if ($next and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'url-fragment')) then
+                        map:get($config:PUBLICATIONS, $publication-id)?url-fragment($next)
+                    else if ($next) then
                         $next/@xml:id/string()
                     else (),
                 "previous":
-                    if ($prev) then
+                    if ($prev and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'url-fragment')) then
+                        map:get($config:PUBLICATIONS, $publication-id)?url-fragment($prev)
+                    else if ($prev) then
                         $prev/@xml:id/string()
                     else (),
                 "title": $doc-title,

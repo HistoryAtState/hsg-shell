@@ -79,6 +79,7 @@ declare variable $config:CONFERENCES_ARTICLES_COL := $config:CONFERENCES_COL || 
 declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
 declare variable $config:COUNTRIES_ARTICLES_COL := "/db/apps/rdcr/articles";
 declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
+declare variable $config:ADMINISTRATIVE_TIMELINE_COL := "/db/apps/administrative-timeline/timeline";
 declare variable $config:SECRETARY_BIOS_COL := "/db/apps/other-publications/secretary-bios";
 declare variable $config:MILESTONES_COL := "/db/apps/milestones/chapters";
 declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education/introductions";
@@ -254,6 +255,17 @@ declare variable $config:PUBLICATIONS :=
             "title": "Short History - Department History",
             "base-path": function($document-id, $section-id) { "short-history" }
         },
+        "timeline": map {
+            "collection": $config:ADMINISTRATIVE_TIMELINE_COL,
+            "select-document": function($document-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml')/id('chapter_' || $section-id) },
+            "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, substring-after($section-id, 'chapter_')), '/') },
+            "url-fragment": function($div) { if (starts-with($div/@xml:id, 'chapter_')) then substring-after($div/@xml:id, 'chapter_') else $div/@xml:id/string() },
+            "odd": "frus.odd",
+            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:new(($parameters, map:entry("document-list", true())))) },
+            "title": "Administrative Timeline - Department History",
+            "base-path": function($document-id, $section-id) { "timeline" }
+        },
         "faq": map {
             "collection": $config:FAQ_COL,
             "select-document": function($document-id) { doc($config:FAQ_COL || '/' || $document-id || '.xml') },
@@ -320,6 +332,7 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:FRUS_METADATA_COL: "frus",
         $config:BUILDINGS_COL: "buildings",
         $config:SHORT_HISTORY_COL: "short-history",
+        $config:ADMINISTRATIVE_TIMELINE_COL: "timeline",
         $config:FAQ_COL: "faq",
         $config:HAC_COL: "hac",
         $config:EDUCATION_COL: "education",

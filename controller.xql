@@ -533,6 +533,41 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/departmenthistory/'), '/')[. ne '']
     return
         switch ($fragments[1])
+            case "timeline" return
+                if ($fragments[2]) then
+                    let $page := 'departmenthistory/timeline/section.html'
+                    let $section-id := $fragments[2]
+                    return
+                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                            <forward url="{$exist:controller}/pages/{$page}"/>
+                            <view>
+                                <forward url="{$exist:controller}/modules/view.xql">
+                                    <add-parameter name="publication-id" value="timeline"/>
+                                    <add-parameter name="document-id" value="timeline"/>
+                                    <add-parameter name="section-id" value="{$section-id}"/>
+                                </forward>
+                            </view>
+                    		<error-handler>
+                    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                    			<forward url="{$exist:controller}/modules/view.xql"/>
+                    		</error-handler>
+                        </dispatch>
+                else
+                    let $page := 'departmenthistory/timeline/index.html'
+                    return
+                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                            <forward url="{$exist:controller}/pages/{$page}"/>
+                            <view>
+                                <forward url="{$exist:controller}/modules/view.xql">
+                                    <add-parameter name="publication-id" value="timeline"/>
+                                    <add-parameter name="document-id" value="timeline"/>
+                                </forward>
+                            </view>
+                    		<error-handler>
+                    			<forward url="{$exist:controller}/pages/error-page.html" method="get"/>
+                    			<forward url="{$exist:controller}/modules/view.xql"/>
+                    		</error-handler>
+                        </dispatch>
             case "short-history" return
                 if ($fragments[2]) then
                     let $page := 'departmenthistory/short-history/section.html'
