@@ -126,8 +126,8 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
             ,
 
             if ($descendant-docs) then
-                let $first := $child-docs[1]/@n
-                let $last := $child-docs[last()]/@n
+                let $first := $descendant-docs[1]/@n
+                let $last := $descendant-docs[last()]/@n
                 let $document :=
                     if ($first = $last) then
                         concat(' ', $first)
