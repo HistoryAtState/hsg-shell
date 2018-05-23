@@ -325,6 +325,7 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                             <add-parameter name="publication-id" value="frus"/>
                                             <add-parameter name="document-id" value="{$document-id}"/>
                                             <add-parameter name="section-id" value="{$section-id}"/>
+                                            <add-parameter name="requested-url" value="{local:get-url()}"/>
                                         </forward>
                                     </view>
                             		<error-handler>

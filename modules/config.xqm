@@ -106,7 +106,18 @@ declare variable $config:PUBLICATIONS :=
         "frus": map {
             "collection": $config:FRUS_VOLUMES_COL,
             "select-document": function($document-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml') },
-            "select-section": function($document-id, $section-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "select-section": function($document-id, $section-id) { 
+                let $node := doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml')/id($section-id) 
+                return
+                    if ($node instance of element(tei:note)) then
+                        let $parent-doc := $node/ancestor::tei:div[1]
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, $section-id || "$", $parent-doc/@xml:id || "#fn:" || util:node-id($node))
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    else
+                        $node
+            },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform":
