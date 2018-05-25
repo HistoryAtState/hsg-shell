@@ -109,10 +109,27 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { 
                 let $node := doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml')/id($section-id) 
                 return
-                    if ($node instance of element(tei:note)) then
+                    (: most requests will be for divs :)
+                    if ($node instance of element(tei:div)) then
+                        $node
+                    (: catch requests for TEI/@xml:id :)
+                    else if ($node instance of element(tei:TEI)) then
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, "/" || $document-id || "$", "")
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    (: catch requests for footnotes :)
+                    else if ($node instance of element(tei:note)) then
                         let $parent-doc := $node/ancestor::tei:div[1]
                         let $requested-url := request:get-parameter("requested-url", ())
                         let $new-url := replace($requested-url, $section-id || "$", $parent-doc/@xml:id || "#fn:" || util:node-id($node))
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    (: catch requests for index cross-references :)
+                    else if ($node instance of element(tei:item)) then
+                        let $parent-doc := $node/ancestor::tei:div[1]
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, $section-id || "$", $parent-doc/@xml:id || "#" || $node/@xml:id)
                         return
                             response:redirect-to(xs:anyURI($new-url))
                     else
@@ -310,7 +327,41 @@ declare variable $config:PUBLICATIONS :=
         "frus-history-monograph": map {
             "collection": $config:FRUS_HISTORY_MONOGRAPH_COL,
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml') },
-            "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "select-section": function($document-id, $section-id) { 
+                let $target-section-id :=
+                    (: catch xlink requests :)
+                    if (starts-with($section-id, "range(")) then
+                        substring-before(substring-after($section-id, "range("), ",")
+                    else
+                        $section-id
+                let $node := doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml')/id($target-section-id)
+                return
+                    (: most requests will be for divs :)
+                    if ($node instance of element(tei:div)) then
+                        $node
+                    (: catch requests for TEI/@xml:id :)
+                    else if ($node instance of element(tei:TEI)) then
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, "/" || $document-id || "$", "")
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    (: catch requests for footnotes :)
+                    else if ($node instance of element(tei:note)) then
+                        let $parent-doc := $node/ancestor::tei:div[1]
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, $section-id || "$", $parent-doc/@xml:id || "#fn:" || util:node-id($node))
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    (: catch requests for index cross-references and anchors :)
+                    else if ($node instance of element(tei:item) or $node instance of element(tei:anchor)) then
+                        let $parent-doc := $node/ancestor::tei:div[1]
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, $section-id, $parent-doc/@xml:id || "#" || $node/@xml:id, "q")
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    else
+                        $node
+             },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) {
