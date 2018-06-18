@@ -727,23 +727,20 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
                                     collection($config:FRUS_VOLUMES_COL)/id($volume-id)
                             else
                                     collection($config:FRUS_VOLUMES_COL)
+                        let $div-type-scope := ("section", "document")
                         let $hits :=
                             if ($is-date-query and $is-keyword-query) then
-                                (console:log('query ' || $query),
                                 (: dates + keyword  :)
-                                let $dated := $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end][ft:query(., $query, $search:ft-query-options)]
-                                let $undated := $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query, $search:ft-query-options)][@type = ("section", "document")]
+                                let $dated := $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end][ft:query(., $query, $search:ft-query-options)][@type = $div-type-scope]
+                                let $undated := $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query, $search:ft-query-options)][@type = $div-type-scope]
                                 return
                                     ($dated, $undated)
-                                )
                             else if ($is-date-query) then
                                 (: dates  :)
-                                (console:log('no query, just dates ' || count($vols)),
-                                $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
-                                )
+                                $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end][@type = $div-type-scope]
                             else if ($is-keyword-query) then
                                 (: keyword  :)
-                                $vols//tei:div[ft:query(., $query, $search:ft-query-options)][@type = ("section", "document")]
+                                $vols//tei:div[ft:query(., $query, $search:ft-query-options)][@type = $div-type-scope]
                             else
                                 (: no parameters provided :)
                                 ()
