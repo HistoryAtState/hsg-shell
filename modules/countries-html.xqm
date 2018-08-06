@@ -11,6 +11,7 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 declare variable $ch:RDCR_COL := '/db/apps/rdcr';
 declare variable $ch:RDCR_ARTICLES_COL := $ch:RDCR_COL || '/articles';
+declare variable $ch:RDCR_ISSUES_COL := $ch:RDCR_COL || '/issues';
 
 declare %templates:wrap function ch:load-countries($node as node(), $model as map(*)) {
     let $ordered-articles :=
@@ -108,4 +109,26 @@ declare function ch:list($node, $model) {
                     </div>
             }
         </div>
+};
+
+declare
+    %templates:wrap
+function ch:issues-list($node as node(), $model as map(*), $document-id as xs:string?) {
+    for $c in collection($ch:RDCR_ISSUES_COL)/tei:TEI
+    let $article-id := substring-before(util:document-name($c), '.xml')
+    let $brief-title := $c//tei:title[@type='short']/string()
+    order by $brief-title
+    return
+        <li><a>{
+            attribute href { app:fix-href("$app/countries/issues/" || $article-id) },
+            $brief-title
+        }</a></li>
+};
+
+
+(: Page title :)
+declare
+    %templates:wrap
+function ch:issues-page-title($node as node(), $model as map(*)) {
+    concat(root($model?data)//tei:title[@type='short']/string(), ' - Issues - Countries')
 };

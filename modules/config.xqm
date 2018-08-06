@@ -78,6 +78,7 @@ declare variable $config:CONFERENCES_COL := "/db/apps/conferences";
 declare variable $config:CONFERENCES_ARTICLES_COL := $config:CONFERENCES_COL || "/data";
 declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
 declare variable $config:COUNTRIES_ARTICLES_COL := "/db/apps/rdcr/articles";
+declare variable $config:COUNTRIES_ISSUES_COL := "/db/apps/rdcr/issues";
 declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
 declare variable $config:ADMINISTRATIVE_TIMELINE_COL := "/db/apps/administrative-timeline/timeline";
 declare variable $config:SECRETARY_BIOS_COL := "/db/apps/other-publications/secretary-bios";
@@ -189,6 +190,16 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Countries",
+            "base-path": function($document-id, $section-id) { "countries" }
+        },
+        "countries-issues": map {
+            "collection": $config:COUNTRIES_ISSUES_COL,
+            "select-document": function($document-id) { doc($config:COUNTRIES_ISSUES_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:COUNTRIES_ISSUES_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/countries/issues/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd",
+            "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
+            "title": "Issues Relevant to U.S. Foreign Policy",
             "base-path": function($document-id, $section-id) { "countries" }
         },
         "archives": map {
@@ -406,6 +417,7 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:VIETNAM_GUIDE_COL: "vietnam-guide",
         $config:VIEWS_FROM_EMBASSY_COL: "views-from-the-embassy",
         $config:COUNTRIES_ARTICLES_COL: "countries",
+        $config:COUNTRIES_ISSUES_COL: "countries-issues",
         $config:ARCHIVES_ARTICLES_COL: "archives"
     };
 

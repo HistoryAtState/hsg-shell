@@ -419,14 +419,15 @@ else if (matches($exist:path, '^/countries/?')) then
                         </dispatch>
                 case "issues" return
                     if ($fragments[2]) then
-                        let $resource := $fragments[2]
-                        let $page := 'countries/issues/resource.html'
+                        let $document-id := $fragments[2]
+                        let $page := 'countries/issues/article.html'
                         return
                             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                                 <forward url="{$exist:controller}/pages/{$page}"/>
                                 <view>
                                     <forward url="{$exist:controller}/modules/view.xql">
-                                        <add-parameter name="resource" value="{$resource}"/>
+                                        <add-parameter name="publication-id" value="countries-issues"/>
+                                        <add-parameter name="document-id" value="{$document-id}"/>
                                     </forward>
                                 </view>
                         		<error-handler>
