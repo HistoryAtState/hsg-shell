@@ -223,8 +223,8 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(gap) return
                     html:omit($config, ., ("tei-gap"), .)
                 case element(graphic) return
-                    html:graphic($config, ., ("tei-graphic"), ., xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri ||
-                            "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")), (), (), @scale, desc)
+                    html:graphic($config, ., ("tei-graphic"), ., if (matches(@url, '^https?://')) then @url else ( xs:anyURI('//static.history.state.gov/' || $parameters?base-uri ||
+                            "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")) ), (), (), @scale, desc)
                 case element(group) return
                     html:block($config, ., ("tei-group"), .)
                 case element(handShift) return
