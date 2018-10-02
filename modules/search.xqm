@@ -38,6 +38,7 @@ declare variable $search:SECTIONS := map {
         "people",
         "buildings",
         "views-from-the-embassy",
+        "timeline",
         map {
             "id": "pocom",
             "query": function($query as xs:string) {
@@ -70,9 +71,9 @@ declare variable $search:SECTIONS := map {
         }
     ),
     "retired": ("milestones", "education"),
-    "countries": ("countries", "archives"),
+    "countries": ("countries", "archives", "countries-issues"),
     "conferences": "conferences",
-    "frus-history": "frus-history-monograph",
+    "frus-history": ("frus-history-monograph", "frus-history-articles"),
     "about": ("hac", "faq")
 };
 
@@ -747,7 +748,7 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
                         return
                             $hits
                     default return
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query, $search:ft-query-options)]
+                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query, $search:ft-query-options)][@xml:id]
             default return
                 $category?query($query)
         let $end := util:system-time()

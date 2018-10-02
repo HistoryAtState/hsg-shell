@@ -211,7 +211,7 @@ declare variable $config:PUBLICATIONS :=
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "World Wide Diplomatic Archives Indes"
         },
-        "articles": map {
+        "frus-history-articles": map {
             "collection": $config:FRUS_HISTORY_ARTICLES_COL,
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_ARTICLES_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_ARTICLES_COL || '/' || $document-id || '.xml')//tei:body },
@@ -299,7 +299,7 @@ declare variable $config:PUBLICATIONS :=
             "select-document": function($document-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml')/id('chapter_' || $section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, substring-after($section-id, 'chapter_')), '/') },
-            "url-fragment": function($div) { if (starts-with($div/@xml:id, 'chapter_')) then substring-after($div/@xml:id, 'chapter_') else $div/@xml:id/string() },
+            "url-fragment": function($div) { let $id := if ($div/@xml:id) then $div/@xml:id else $div/ancestor::tei:div[@xml:id][1]/@xml:id return if (starts-with($id, 'chapter_')) then substring-after($id, 'chapter_') else $id/string() },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:new(($parameters, map:entry("document-list", true())))) },
             "title": "Administrative Timeline - Department History",
@@ -412,7 +412,7 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:FRUS_HISTORY_MONOGRAPH_COL: "frus-history-monograph",
         $config:CONFERENCES_ARTICLES_COL: "conferences",
         $config:MILESTONES_COL: "milestones",
-        $config:FRUS_HISTORY_ARTICLES_COL: "articles",
+        $config:FRUS_HISTORY_ARTICLES_COL: "frus-history-articles",
         $config:SECRETARY_BIOS_COL: "people",
         $config:VIETNAM_GUIDE_COL: "vietnam-guide",
         $config:VIEWS_FROM_EMBASSY_COL: "views-from-the-embassy",
