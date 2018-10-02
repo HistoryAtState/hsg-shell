@@ -68,7 +68,7 @@ declare variable $config:S3_BUCKET := "static.history.state.gov";
 
 declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $config:S3_BUCKET || "/";
 
-declare variable $config:S3_DOMAIN := "s3.amazonaws.com/" || $config:S3_BUCKET;
+declare variable $config:S3_DOMAIN := $config:S3_BUCKET;
 
 declare variable $config:ARCHIVES_COL := "/db/apps/wwdai";
 declare variable $config:ARCHIVES_ARTICLES_COL := $config:ARCHIVES_COL || "/articles";
@@ -78,7 +78,9 @@ declare variable $config:CONFERENCES_COL := "/db/apps/conferences";
 declare variable $config:CONFERENCES_ARTICLES_COL := $config:CONFERENCES_COL || "/data";
 declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
 declare variable $config:COUNTRIES_ARTICLES_COL := "/db/apps/rdcr/articles";
+declare variable $config:COUNTRIES_ISSUES_COL := "/db/apps/rdcr/issues";
 declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
+declare variable $config:ADMINISTRATIVE_TIMELINE_COL := "/db/apps/administrative-timeline/timeline";
 declare variable $config:SECRETARY_BIOS_COL := "/db/apps/other-publications/secretary-bios";
 declare variable $config:MILESTONES_COL := "/db/apps/milestones/chapters";
 declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education/introductions";
@@ -105,7 +107,35 @@ declare variable $config:PUBLICATIONS :=
         "frus": map {
             "collection": $config:FRUS_VOLUMES_COL,
             "select-document": function($document-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml') },
-            "select-section": function($document-id, $section-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "select-section": function($document-id, $section-id) { 
+                let $node := doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml')/id($section-id) 
+                return
+                    (: most requests will be for divs :)
+                    if ($node instance of element(tei:div)) then
+                        $node
+                    (: catch requests for TEI/@xml:id :)
+                    else if ($node instance of element(tei:TEI)) then
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, "/" || $document-id || "$", "")
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    (: catch requests for footnotes :)
+                    else if ($node instance of element(tei:note)) then
+                        let $parent-doc := $node/ancestor::tei:div[1]
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, $section-id || "$", $parent-doc/@xml:id || "#fn:" || util:node-id($node))
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    (: catch requests for index cross-references :)
+                    else if ($node instance of element(tei:item)) then
+                        let $parent-doc := $node/ancestor::tei:div[1]
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, $section-id || "$", $parent-doc/@xml:id || "#" || $node/@xml:id)
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    else
+                        $node
+            },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform":
@@ -160,6 +190,16 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Countries",
+            "base-path": function($document-id, $section-id) { "countries" }
+        },
+        "countries-issues": map {
+            "collection": $config:COUNTRIES_ISSUES_COL,
+            "select-document": function($document-id) { doc($config:COUNTRIES_ISSUES_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:COUNTRIES_ISSUES_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "html-href": function($document-id, $section-id) { "$app/countries/issues/" || string-join(($document-id, $section-id), '/') },
+            "odd": "frus.odd",
+            "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
+            "title": "Issues Relevant to U.S. Foreign Policy",
             "base-path": function($document-id, $section-id) { "countries" }
         },
         "archives": map {
@@ -254,6 +294,17 @@ declare variable $config:PUBLICATIONS :=
             "title": "Short History - Department History",
             "base-path": function($document-id, $section-id) { "short-history" }
         },
+        "timeline": map {
+            "collection": $config:ADMINISTRATIVE_TIMELINE_COL,
+            "select-document": function($document-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml')/id('chapter_' || $section-id) },
+            "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, substring-after($section-id, 'chapter_')), '/') },
+            "url-fragment": function($div) { if (starts-with($div/@xml:id, 'chapter_')) then substring-after($div/@xml:id, 'chapter_') else $div/@xml:id/string() },
+            "odd": "frus.odd",
+            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:new(($parameters, map:entry("document-list", true())))) },
+            "title": "Administrative Timeline - Department History",
+            "base-path": function($document-id, $section-id) { "timeline" }
+        },
         "faq": map {
             "collection": $config:FAQ_COL,
             "select-document": function($document-id) { doc($config:FAQ_COL || '/' || $document-id || '.xml') },
@@ -287,7 +338,41 @@ declare variable $config:PUBLICATIONS :=
         "frus-history-monograph": map {
             "collection": $config:FRUS_HISTORY_MONOGRAPH_COL,
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml') },
-            "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "select-section": function($document-id, $section-id) { 
+                let $target-section-id :=
+                    (: catch xlink requests :)
+                    if (starts-with($section-id, "range(")) then
+                        substring-before(substring-after($section-id, "range("), ",")
+                    else
+                        $section-id
+                let $node := doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml')/id($target-section-id)
+                return
+                    (: most requests will be for divs :)
+                    if ($node instance of element(tei:div)) then
+                        $node
+                    (: catch requests for TEI/@xml:id :)
+                    else if ($node instance of element(tei:TEI)) then
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, "/" || $document-id || "$", "")
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    (: catch requests for footnotes :)
+                    else if ($node instance of element(tei:note)) then
+                        let $parent-doc := $node/ancestor::tei:div[1]
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, $section-id || "$", $parent-doc/@xml:id || "#fn:" || util:node-id($node))
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    (: catch requests for index cross-references and anchors :)
+                    else if ($node instance of element(tei:item) or $node instance of element(tei:anchor)) then
+                        let $parent-doc := $node/ancestor::tei:div[1]
+                        let $requested-url := request:get-parameter("requested-url", ())
+                        let $new-url := replace($requested-url, $section-id, $parent-doc/@xml:id || "#" || $node/@xml:id, "q")
+                        return
+                            response:redirect-to(xs:anyURI($new-url))
+                    else
+                        $node
+             },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) {
@@ -320,6 +405,7 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:FRUS_METADATA_COL: "frus",
         $config:BUILDINGS_COL: "buildings",
         $config:SHORT_HISTORY_COL: "short-history",
+        $config:ADMINISTRATIVE_TIMELINE_COL: "timeline",
         $config:FAQ_COL: "faq",
         $config:HAC_COL: "hac",
         $config:EDUCATION_COL: "education",
@@ -331,6 +417,7 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:VIETNAM_GUIDE_COL: "vietnam-guide",
         $config:VIEWS_FROM_EMBASSY_COL: "views-from-the-embassy",
         $config:COUNTRIES_ARTICLES_COL: "countries",
+        $config:COUNTRIES_ISSUES_COL: "countries-issues",
         $config:ARCHIVES_ARTICLES_COL: "archives"
     };
 

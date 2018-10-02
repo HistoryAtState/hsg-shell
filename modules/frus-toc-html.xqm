@@ -107,7 +107,7 @@ declare function toc:volume-title($node as node(), $type as xs:string) as text()
 declare function toc:toc-div($model as map(*), $node as element(tei:div), $current as element()?) {
     (: we only show certain divs :)
     for $node in $node[@xml:id != 'toc'][@type != 'document']
-    let $child-docs := $node/tei:div[@type = 'document']
+    let $descendant-docs := $node//tei:div[@type = 'document']
     return
         <li>
         {
@@ -125,9 +125,9 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
                 </a>
             ,
 
-            if ($child-docs) then
-                let $first := $child-docs[1]/@n
-                let $last := $child-docs[last()]/@n
+            if ($descendant-docs) then
+                let $first := $descendant-docs[1]/@n
+                let $last := $descendant-docs[last()]/@n
                 let $document :=
                     if ($first = $last) then
                         concat(' ', $first)
@@ -135,13 +135,17 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
                         concat('s ', $first, '-', $last)
                 return
                     concat(' (Document', $document, ')')
-            else if ($node/tei:div) then
+            else 
+                ()
+            ,
+            if ($node/tei:div/@xml:id) then
                 <ul>
                 {
                     toc:toc-passthru($model, $node, $current)
                 }
                 </ul>
-            else ()
+            else 
+                ()
         }
         </li>
 };

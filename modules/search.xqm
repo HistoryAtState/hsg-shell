@@ -11,14 +11,18 @@ import module namespace fd="http://history.state.gov/ns/site/hsg/frus-dates" at 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace fh = "http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
 import module namespace functx = "http://www.functx.com";
+(:
 import module namespace sort="http://exist-db.org/xquery/sort" at "java:org.exist.xquery.modules.sort.SortModule";
+:)
+import module namespace memsort="http://exist-db.org/xquery/memsort" at "java:org.existdb.memsort.SortModule";
+import module namespace cache="http://exist-db.org/xquery/cache" at "java:org.exist.xquery.modules.cache.CacheModule";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace frus="http://history.state.gov/frus/ns/1.0";
 
 declare variable $search:MAX_HITS_SHOWN := 1000;
 
-declare variable $search:ft-query-options := 
+declare variable $search:ft-query-options :=
     <options>
         <default-operator>and</default-operator>
         <phrase-slop>0</phrase-slop>
@@ -114,9 +118,7 @@ declare variable $search:DISPLAY := map {
             let $heading := ($doc//tei:head)[1]
             let $heading-string :=
                 if ($heading ne '') then
-                    $heading//text()[not(./ancestor::tei:note)]
-                        => string-join()
-                        => normalize-space()
+                    normalize-space(string-join($heading//text()[not(./ancestor::tei:note)]))
                 else
                     ()
             let $heading-stripped :=
@@ -134,9 +136,9 @@ declare variable $search:DISPLAY := map {
             let $vol-id := root($doc)/tei:TEI/@xml:id
             let $dateline := ($doc//tei:dateline[.//tei:date])[1]
             let $date := ($dateline//tei:date)[1]
-            let $date-string := $date//text()[not(./ancestor::tei:note)] => string-join() => normalize-space()
+            let $date-string := normalize-space(string-join($date//text()[not(./ancestor::tei:note)]))
             let $placeName := ($doc//tei:placeName)[1]
-            let $placeName-string := $placeName//text()[not(./ancestor::tei:note)] => string-join() => normalize-space()
+            let $placeName-string := normalize-space(string-join($placeName//text()[not(./ancestor::tei:note)]))
             let $matches-to-highlight := 5
             let $trimmed-hit := search:trim-matches(util:expand($doc), $matches-to-highlight)
             let $has-matches := $trimmed-hit//exist:match
@@ -150,7 +152,9 @@ declare variable $search:DISPLAY := map {
                                 (
                                     <dt>Recorded Date</dt>,<dd>{($date-string, <em>(None)</em>)[. ne ""][1]}</dd>,
                                     <dt>Recorded Location</dt>,<dd>{($placeName-string, <em>(None)</em>)[. ne ""][1]}</dd>,
-                                    <dt>Encoded Date</dt>,<dd>{if ($date) then <code>{$date/(@when, @from, @to, @notBefore, @notAfter) ! serialize(., map {"method": "adaptive"}) => string-join(" ")}</code> else <em>(None)</em>}</dd>
+                                    <dt>Encoded Date</dt>,<dd>{if ($date) then <code>{$date/(@when, @from, @to, @notBefore, @notAfter) ! string-join(serialize(., <output:serialization-parameters xmlns:output="http://www.w3.org/2010/xslt-xquery-serialization">
+  <output:method>adaptive</output:method>
+</output:serialization-parameters>), " ")}</code> else <em>(None)</em>}</dd>
                                 )
                             else
                                 ()
@@ -498,18 +502,15 @@ declare function search:get-range($start-date as xs:string?, $end-date as xs:str
         xs:dayTimeDuration("-PT5H")
     let $range-start :=
         if ($start-date ne "") then
-             ($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()))
-                => fd:normalize-low($timezone)
+             fd:normalize-low($start-date || (if ($start-time ne "") then ("T" || $start-time) else ()), $timezone)
         else
             ()
     let $range-end :=
         if ($end-date ne "") then
-            ($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()))
-                => fd:normalize-high($timezone)
+            fd:normalize-high($end-date || (if ($end-time ne "") then ("T" || $end-time) else ()), $timezone)
         (: if end-date is omitted, then treat the high end of the start day as the end :)
         else if ($start-date ne "") then
-            $start-date
-                => fd:normalize-high($timezone)
+            fd:normalize-high($start-date, $timezone)
         else
             ()
     return
@@ -558,7 +559,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
     
     (: the old frus-dates search didn't specify within=documents, so if an old URL is redirected here we'll need to catch these and categorize these as date searches :)
     let $adjusted-within := 
-        if (not($within)) then
+        if (empty($within)) then
             if ($start-date or $volume-id) then
                 "documents"
             else
@@ -568,15 +569,14 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
 
     (: prepare a unique key for the present query, so we can cache the hits to improve the result of subsequent requests for the same query :)
     let $normalized-query-string := 
-        (
+        string-join(
             let $params := map { "q": $q, "within": $adjusted-within, "volume-id": $volume-id, "start-date": $start-date, "end-date": $end-date, "start-time": $start-time, "end-time": $end-time, "sort-by": $adjusted-sort-by } 
             for $param in map:keys($params)
             let $val := map:get($params, $param) ! normalize-space(.)[. ne ""]
             order by $param
             return
-                $param || "=" || $val => sort() => string-join(";")
-        )
-        => string-join("&amp;")
+                $param || "=" || string-join(sort($val), ";")
+        , "&amp;")
     let $query-id := util:hash($normalized-query-string, "sha1")
     let $cache-name := "hsg-search"
     let $cache-key := "queries"
@@ -676,41 +676,15 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
 declare function search:sort($hits as element()*, $sort-by as xs:string) {
     switch ($sort-by)
         case "date-asc" return
-            let $dated := $hits[@frus:doc-dateTime-min]
-            let $undated := $hits except $dated
+            for $hit in $hits
+            order by memsort:get("doc-dateTime-min", $hit) ascending empty greatest, ft:score($hit) descending
             return
-                (
-                    for $hit in $dated
-                    order by sort:index("doc-dateTime-min-asc", $hit/@frus:doc-dateTime-min)
-                    (:
-                    order by $hit/@frus:doc-dateTime-min
-                    :)
-                    return
-                        $hit
-                    ,
-                    for $hit in $undated
-                    order by ft:score($hit) descending
-                    return
-                        $hit
-                )
+                $hit
         case "date-desc" return
-            let $dated := $hits[@frus:doc-dateTime-min]
-            let $undated := $hits except $dated
+            for $hit in $hits
+            order by memsort:get("doc-dateTime-min", $hit) descending empty least, ft:score($hit) descending
             return
-                (
-                    for $hit in $dated
-                    order by sort:index("doc-dateTime-min-desc", $hit/@frus:doc-dateTime-min)
-                    (:
-                    order by $hit/@frus:doc-dateTime-min descending
-                    :)
-                    return
-                        $hit
-                    ,
-                    for $hit in $undated
-                    order by ft:score($hit) descending
-                    return
-                        $hit
-                )
+                $hit
         default (: case "relevance" :) return
             for $hit in $hits
             order by ft:score($hit) descending
@@ -753,23 +727,20 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
                                     collection($config:FRUS_VOLUMES_COL)/id($volume-id)
                             else
                                     collection($config:FRUS_VOLUMES_COL)
+                        let $div-type-scope := ("section", "document")
                         let $hits :=
                             if ($is-date-query and $is-keyword-query) then
-                                (console:log('query ' || $query),
                                 (: dates + keyword  :)
-                                let $dated := $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end][ft:query(., $query, $search:ft-query-options)]
-                                let $undated := $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query, $search:ft-query-options)][@type = ("section", "document")]
+                                let $dated := $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end][ft:query(., $query, $search:ft-query-options)][@type = $div-type-scope]
+                                let $undated := $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query, $search:ft-query-options)][@type = $div-type-scope]
                                 return
                                     ($dated, $undated)
-                                )
                             else if ($is-date-query) then
                                 (: dates  :)
-                                (console:log('no query, just dates ' || count($vols)),
-                                $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end]
-                                )
+                                $vols//tei:div[@frus:doc-dateTime-min ge $range-start and @frus:doc-dateTime-max le $range-end][@type = $div-type-scope]
                             else if ($is-keyword-query) then
                                 (: keyword  :)
-                                $vols//tei:div[ft:query(., $query, $search:ft-query-options)][@type = ("section", "document")]
+                                $vols//tei:div[ft:query(., $query, $search:ft-query-options)][@type = $div-type-scope]
                             else
                                 (: no parameters provided :)
                                 ()
@@ -805,8 +776,7 @@ declare function search:result-heading($node, $model) {
                 let $document := $publication-config?select-document($document-id)
                 let $document-heading :=
                     if ($document//tei:title[@type='volume']) then
-                        ($document//tei:title[@type eq "sub-series"], $document//tei:title[@type eq "volume-number"], $document//tei:title[@type eq "volume"])[. ne ""]
-                        => string-join(", ")
+                        string-join(($document//tei:title[@type eq "sub-series"], $document//tei:title[@type eq "volume-number"], $document//tei:title[@type eq "volume"])[. ne ""], ", ")
                     else
                         $document//tei:titleStmt/tei:title[@type = "short"]
                 let $result-heading := ($section-heading || ' (' || $document-heading || ')')
@@ -935,11 +905,11 @@ declare function search:results-summary($node as node(), $model as map(*)) {
             Displaying {search:start($node, $model)}–{search:end($node, $model)}
             of {search:result-count($node, $model)} results 
             {
-                (
+                string-join((
                     search:keyword-summary($node, $model), 
                     search:scope-summary($node, $model), 
                     search:date-summary($node, $model)
-                ) => string-join(" ")
+                ), " ")
                 || ", " 
                 || search:sort-by-summary($node, $model)
             }.
@@ -971,7 +941,7 @@ declare function search:pluralize($count as xs:integer, $singular-form as xs:str
 };
 
 declare function search:keyword-summary($node, $model) {
-    let $q := $model?query-info?q => normalize-space()
+    let $q := normalize-space($model?query-info?q)
     return
         if ($q ne "") then
             "for keyword “" || $q || "”"
@@ -981,8 +951,8 @@ declare function search:keyword-summary($node, $model) {
 
 declare function search:scope-summary($node, $model) {
     let $sections := $model?query-info?within
-    let $sections-count := $sections => count()
-    let $volumes-count := $model?query-info?volume-id => count()
+    let $sections-count := count($sections)
+    let $volumes-count := count($model?query-info?volume-id)
     return
         if ($sections = "entire-site" or $sections-count eq 0) then
             "across the entire Office of the Historian website"
@@ -990,7 +960,7 @@ declare function search:scope-summary($node, $model) {
             (
                 "within "
                 ||
-                (
+                string-join((
                     if ($sections-count gt 0) then 
                         ($sections-count || " " || search:pluralize($sections-count, "section", "sections")) 
                     else 
@@ -999,7 +969,7 @@ declare function search:scope-summary($node, $model) {
                         ($volumes-count || " " || search:pluralize($volumes-count, "volume", "volumes"))
                     else 
                         ()
-                ) => string-join(" and ")
+                ), " and ")
             )
         else
             ()
@@ -1018,7 +988,7 @@ declare function search:date-summary($node, $model) {
 
 declare function search:sort-by-summary($node, $model) {
     let $sort-by := $model?query-info?sort-by
-    let $label := search:get-sort-by-label($sort-by) => lower-case()
+    let $label := lower-case(search:get-sort-by-label($sort-by))
     return
         "sorted by " || $label
 };
@@ -1028,12 +998,11 @@ declare function search:trim-words($string as xs:string, $number as xs:integer) 
     let $words := tokenize($string, "\s")
     return
         if (count($words) gt $number) then
-            (
-                subsequence($words, 1, ceiling($number div 2)) => string-join(" ")
+            string-join((
+                string-join(subsequence($words, 1, ceiling($number div 2)), " ")
                 , "…"
-                , $words[position() ge last() - floor($number div 2) + 1] => string-join(" ")
-            )
-            => string-join()
+                , string-join($words[position() ge last() - floor($number div 2) + 1], " ")
+            ))
         else
             $string
 };
@@ -1063,11 +1032,8 @@ function search:load-volumes($node as node(), $model as map(*)) {
                 for $vol in collection("/db/apps/frus/bibliography")/volume[@id = $ft-vol-ids]
                 let $vol-id := $vol/@id/string()
                 let $compact-title := 
-                    $vol/title[@type = ("sub-series", "volume-number", "volume")][. != '']
-                    => string-join(", ")
-                    => normalize-space()
-                    => search:trim-words(10)
-                let $complete-title := $vol/title[@type eq "complete"] => normalize-space()
+                    search:trim-words(normalize-space(string-join($vol/title[@type = ("sub-series", "volume-number", "volume")][. != ''], ", ")), 10)
+                let $complete-title := normalize-space($vol/title[@type eq "complete"])
                 order by $vol-id
                 return
                     <volume>

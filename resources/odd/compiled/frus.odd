@@ -287,8 +287,8 @@ display: block;
                 </elementSpec>
             <elementSpec mode="change" ident="graphic">
                     <model behaviour="graphic">
-                        <param name="url">xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri ||
-                            "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png"))</param>
+                        <param name="url">if (matches(@url, '^https?://')) then @url else ( xs:anyURI('//static.history.state.gov/' || $parameters?base-uri || 
+                            "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")) )</param>
                         <param name="scale">@scale</param>
                         <param name="title">desc</param>
                     </model>
