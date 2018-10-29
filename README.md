@@ -9,7 +9,7 @@ You need to have *ant*, *git* and *nodeJS* (version 4 or 5) installed.
 With **[homebrew](http://brew.sh#install)** installed, do
 
     brew update && brew upgrade
-    brew install ant git node@4
+    brew install ant git node@6
 
 ### Install global node packages
 
