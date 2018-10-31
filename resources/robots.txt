@@ -4,3 +4,5 @@ Disallow: /exist
 Disallow: /*pg_
 Disallow: /search
 Crawl-delay: 20
+User-Agent: LinkChecker
+Allow: /exist
