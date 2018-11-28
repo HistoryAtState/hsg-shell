@@ -57,7 +57,7 @@ declare function local:dispatch-query() {
     let $vol-id := request:get-parameter('volume', ())
     return
         if ($vol-id) then
-            let $s3-directory := concat('https://s3.amazonaws.com/static.history.state.gov/frus/', $vol-id)
+            let $s3-directory := concat('https://static.history.state.gov/frus/', $vol-id)
             let $hits := local:update-leaf-directory(concat('frus/', $vol-id, '/'))//filename[not(ends-with(., '.txt'))]
             let $hitcount := count($hits)
             let $end-time := util:system-time()

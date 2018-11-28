@@ -221,7 +221,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         else
                             html:inline($config, ., ("tei-gap3"), .)
                 case element(graphic) return
-                    html:graphic($config, ., ("tei-graphic"), ., xs:anyURI('//s3.amazonaws.com/static.history.state.gov/' || $parameters?base-uri || 
+                    html:graphic($config, ., ("tei-graphic"), ., xs:anyURI('https://static.history.state.gov/' || $parameters?base-uri || 
                             "/" || @url || (if (matches(@url, "^.*\.[^\.]+$")) then "" else ".png")), (), (), @scale, desc)
                 case element(group) return
                     html:block($config, ., ("tei-group"), .)

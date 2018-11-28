@@ -248,7 +248,7 @@
                     <modelSequence>
                         <model output="web" behaviour="link">
                             <param name="content">concat('[Page ', @n, ']')</param>
-                            <param name="link">@xml:id</param><!--<param name="link">concat('//s3.amazonaws.com/static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
+                            <param name="link">@xml:id</param><!--<param name="link">concat('https://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
                             <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
                         </model>
                         <model output="print" behaviour="omit"/>
@@ -288,7 +288,7 @@
                 </elementSpec>
                 <elementSpec mode="change" ident="graphic">
                     <model behaviour="graphic">
-                        <param name="url">if (matches(@url, '^https?://')) then @url else ( xs:anyURI('//static.history.state.gov/' || $parameters?base-uri || 
+                        <param name="url">if (matches(@url, '^https?://')) then @url else ( xs:anyURI('https://static.history.state.gov/' || $parameters?base-uri || 
                             "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")) )</param>
                         <param name="scale">@scale</param>
                         <param name="title">desc</param>

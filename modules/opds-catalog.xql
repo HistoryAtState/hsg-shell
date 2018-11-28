@@ -115,9 +115,9 @@ declare function opds:ebook-entries($vol-ids) {
             opds:link('application/pdf', 'http://opds-spec.org/acquisition', fh:epub-url($vol-id), concat($title, ' (PDF)'))
         else ()
     let $cover-image-link :=
-        opds:link('image/jpeg', 'http://opds-spec.org/image', concat('https://s3.amazonaws.com/static.history.state.gov/frus/', $vol-id, '/covers/', $vol-id, '.jpg'), concat('Cover of ', $title))
+        opds:link('image/jpeg', 'http://opds-spec.org/image', concat('https://static.history.state.gov/frus/', $vol-id, '/covers/', $vol-id, '.jpg'), concat('Cover of ', $title))
     let $cover-image-thumbnail-link :=
-        opds:link('image/jpeg', 'http://opds-spec.org/image/thumbnail', concat('https://s3.amazonaws.com/static.history.state.gov/frus/', $vol-id, '/covers/', $vol-id, '-thumb.jpg'), concat('Thumbnail-sized cover of ', $title))
+        opds:link('image/jpeg', 'http://opds-spec.org/image/thumbnail', concat('https://static.history.state.gov/frus/', $vol-id, '/covers/', $vol-id, '-thumb.jpg'), concat('Thumbnail-sized cover of ', $title))
     let $links := ($epub-mobi-links, $pdf-link, $cover-image-link, $cover-image-thumbnail-link)
     return
         opds:entry(
