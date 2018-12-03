@@ -117,13 +117,7 @@ function fh:group-info($node as node(), $model as map(*)) {
 declare
     %templates:wrap
 function fh:administration-name($node as node(), $model as map(*)) {
-    switch ($model?admin-id)
-        case "pre-truman" return
-            "Foreign Relations volumes covering the " || $model?admin/label/text() || " Period"
-        case "nixon-ford" return
-            'Nixon-Ford Administrations'
-        default return
-            concat($model?admin/label, ' Administration')
+    $model?admin/label/string()
 };
 
 declare
