@@ -72,7 +72,8 @@
                     <modelSequence>
                         <model behaviour="heading">
                             <param name="content">title[@type="complete"]</param>
-                        </model><!-- Singular vs. plural for "editor(s)" -->
+                        </model>
+                        <!-- Singular vs. plural for "editor(s)" -->
                         <model predicate="count(editor[@role = 'primary']) gt 1" behaviour="block">
                             <param name="content">"Editors:"</param>
                             <outputRendition>font-weight: bold</outputRendition>
@@ -110,7 +111,7 @@
                             <param name="content">pubPlace</param>
                         </model>
                         <model behaviour="block">
-                            <param name="content">date</param>
+                            <param name="content">date[@type="publication-date"]</param>
                         </model>
                     </modelSequence>
                 </elementSpec>
