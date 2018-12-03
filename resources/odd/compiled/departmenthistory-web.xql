@@ -349,7 +349,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         (: If it is inside a paragraph then it is inline, otherwise it is block level :)
                         html:block($config, ., css:get-rendition(., ("tei-quote2")), .)
                 case element(ref) return
-                    ext-html:ref($config, ., ("tei-ref"))
+                    ext-html:ref($config, ., ("tei-ref"), .)
                 case element(reg) return
                     html:inline($config, ., ("tei-reg"), .)
                 case element(rhyme) return

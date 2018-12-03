@@ -223,7 +223,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(gap) return
                     html:omit($config, ., ("tei-gap"), .)
                 case element(graphic) return
-                    html:graphic($config, ., ("tei-graphic"), ., if (matches(@url, '^https?://')) then @url else ( xs:anyURI('//static.history.state.gov/' || $parameters?base-uri ||
+                    html:graphic($config, ., ("tei-graphic"), ., if (matches(@url, '^https?://')) then @url else ( xs:anyURI('https://static.history.state.gov/' || $parameters?base-uri || 
                             "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")) ), (), (), @scale, desc)
                 case element(group) return
                     html:block($config, ., ("tei-group"), .)
@@ -491,19 +491,19 @@ declare function model:apply($config as map(*), $input as node()*) {
                             html:block($config, ., ("tei-titleStmt2"), "Editors:")
                         else
                             (),
-                        if (count(editor[@role = 'primary']) eq 1) then
+                        if (count(editor[@role = 'primary'][. ne '']) eq 1) then
                             html:block($config, ., ("tei-titleStmt3"), "Editor:")
                         else
                             (),
-                        if (editor[@role = 'primary']) then
+                        if (editor[@role = 'primary'][. ne '']) then
                             ext-html:list-from-items($config, ., ("tei-titleStmt4"), editor[@role="primary"], ())
                         else
                             (),
-                        if (editor[@role = 'general']) then
+                        if (editor[@role = 'general'][. ne '']) then
                             html:block($config, ., ("tei-titleStmt5"), "General Editor:")
                         else
                             (),
-                        if (editor[@role = 'general']) then
+                        if (editor[@role = 'general'][. ne '']) then
                             ext-html:list-from-items($config, ., ("tei-titleStmt6"), editor[@role="general"], ())
                         else
                             ()
@@ -513,7 +513,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     (
                         html:block($config, ., ("tei-publicationStmt1"), publisher),
                         html:block($config, ., ("tei-publicationStmt2"), pubPlace),
-                        html:block($config, ., ("tei-publicationStmt3"), date)
+                        html:block($config, ., ("tei-publicationStmt3"), date[@type="publication-date"])
                     )
 
                 case element(xhtml:object) return
