@@ -116,6 +116,27 @@ function fh:group-info($node as node(), $model as map(*)) {
 
 declare
     %templates:wrap
+function fh:pre-presidential-admin-subseries-note($node as node(), $model as map(*)) {
+    if ($model?admin-id = ("lincoln", "johnson-a", "grant", "hayes", "garfield", "arthur", "cleveland-22", "harrison", "cleveland-24", "mckinley", "roosevelt-t", "taft", "wilson", "harding", "coolidge", "hoover", "roosevelt-fd")) then
+        templates:process($node/node(), $model)
+    else
+        ()
+};
+
+declare
+function fh:admin-search-href($node as node(), $model as map(*)) {
+    let $admin-id := $model?admin-id
+    let $president-n := index-of(doc("/db/apps/frus/code-tables/administration-code-table.xml")//value, $admin-id) + 14
+    let $president := doc("/db/apps/travels/presidents/presidents.xml")//president[@n = $president-n]
+    let $start := $president/took-office-date
+    let $end := $president/left-office-date
+    let $href := app:fix-href("$app/search?within=documents&amp;start-date=" || $start || "&amp;end-date=" || $end || "&amp;sort=date-asc")
+    return
+        element a { attribute href { $href }, templates:process($node/node(), $model) }
+};
+
+declare
+    %templates:wrap
 function fh:administration-name($node as node(), $model as map(*)) {
     $model?admin/label/string()
 };
