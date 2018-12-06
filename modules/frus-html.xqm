@@ -609,7 +609,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
                 (
                 <div id="{$vol-id}">
                     <img src="https://{$config:S3_DOMAIN}/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-                    <a href="$app/historicaldocuments/{$vol-id}"><em>{fh:vol-title($vol-id, 'series')}</em>, {string-join((fh:vol-title($vol-id, 'sub-series'), fh:vol-title($vol-id, 'volume-number'), fh:vol-title($vol-id, 'volume')), ', ')}</a>.
+                    <a href="$app/historicaldocuments/{$vol-id}">{let $series := fh:vol-title($vol-id, 'series') return if ($series) then (<em>{fh:vol-title($vol-id, 'series')}</em>, ", ") else (), string-join((fh:vol-title($vol-id, 'sub-series'), fh:vol-title($vol-id, 'volume-number'), fh:vol-title($vol-id, 'volume')), ', ')}</a>.
                     <p>Ebook last updated: {format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), '[MNn] [D], [Y0001]', 'en', (), 'US')}</p>
                     <ul class="hsg-ebook-list">
                         <li><a class="hsg-link-button" href="{fh:epub-url($vol-id)}">EPUB ({ try {fh:epub-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.epub'}})</a></li>
@@ -678,9 +678,9 @@ declare function fh:exists-pdf($vol-id) {
 
 declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
 	if (fh:exists-volume-in-db($vol-id)) then
-	    fh:volume($vol-id)//tei:title[@type = $type][1]/text()
+	    fh:volume($vol-id)//tei:title[@type = $type][1]/node()
     else
-        collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id]/title[@type eq $type]/text()
+        collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id]/title[@type eq $type]/node()
 };
 
 declare function fh:vol-title($vol-id as xs:string) {
