@@ -114,13 +114,12 @@ function fh:group-info($node as node(), $model as map(*)) {
     else()
 };
 
-declare
-    %templates:wrap
-function fh:pre-presidential-admin-subseries-note($node as node(), $model as map(*)) {
-    if ($model?admin-id = ("lincoln", "johnson-a", "grant", "hayes", "garfield", "arthur", "cleveland-22", "harrison", "cleveland-24", "mckinley", "roosevelt-t", "taft", "wilson", "harding", "coolidge", "hoover", "roosevelt-fd")) then
-        templates:process($node/node(), $model)
+declare function fh:administration-listing-note($node as node(), $model as map(*)) {
+    if ($model?admin-id = ("lincoln", "johnson-a", "grant", "hayes", "garfield", "arthur", "cleveland-22", "harrison", "cleveland-24", "mckinley", "roosevelt-t", "taft", "wilson", "harding", "coolidge", "hoover", "roosevelt-fd", "truman", "kennedy")) then
+        templates:process($node/p[@id = "pre-administration-based-subseries-note"], $model)
     else
         ()
+        (: templates:process($node/p[@id = "administration-based-subseries-note"], $model) :)
 };
 
 declare
