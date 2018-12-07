@@ -2490,19 +2490,19 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                             <group xmlns="http://relaxng.org/ns/structure/1.0">
                                 <group>
                                     <ref name="titleStmt"/>
-                                    <optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="editionStmt"/>
-                                    </optional>
-                                    <optional>
+                                    </rng:optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="extent"/>
-                                    </optional>
+                                    </rng:optional>
                                     <ref name="publicationStmt"/>
-                                    <optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="seriesStmt"/>
-                                    </optional>
-                                    <optional>
+                                    </rng:optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="notesStmt"/>
-                                    </optional>
+                                    </rng:optional>
                                 </group>
                                 <zeroOrMore>
                                     <ref name="sourceDesc"/>
@@ -2582,9 +2582,9 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                         </classes>
                         <content>
                             <group xmlns="http://relaxng.org/ns/structure/1.0">
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="desc"/>
-                                </optional>
+                                </rng:optional>
                                 <oneOrMore>
                                     <choice>
                                         <ref name="char"/>
@@ -2677,19 +2677,19 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                             <group xmlns="http://relaxng.org/ns/structure/1.0">
                                 <group>
                                     <ref name="titleStmt"/>
-                                    <optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="editionStmt"/>
-                                    </optional>
-                                    <optional>
+                                    </rng:optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="extent"/>
-                                    </optional>
+                                    </rng:optional>
                                     <ref name="publicationStmt"/>
-                                    <optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="seriesStmt"/>
-                                    </optional>
-                                    <optional>
+                                    </rng:optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="notesStmt"/>
-                                    </optional>
+                                    </rng:optional>
                                 </group>
                                 <oneOrMore>
                                     <ref name="sourceDesc"/>
@@ -2731,9 +2731,9 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                         </classes>
                         <content>
                             <group xmlns="http://relaxng.org/ns/structure/1.0">
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="glyphName"/>
-                                </optional>
+                                </rng:optional>
                                 <zeroOrMore>
                                     <ref name="model.descLike"/>
                                 </zeroOrMore>
@@ -2913,7 +2913,7 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                         </classes>
                         <content>
                             <group xmlns="http://relaxng.org/ns/structure/1.0">
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <choice>
                                         <group>
                                             <choice>
@@ -2966,7 +2966,7 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                                             <ref name="idno"/>
                                         </group>
                                     </choice>
-                                </optional>
+                                </rng:optional>
                                 <zeroOrMore>
                                     <ref name="availability"/>
                                 </zeroOrMore>
@@ -3016,18 +3016,18 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                                         <ref name="model.pLike"/>
                                     </oneOrMore>
                                     <group>
-                                        <optional>
+                                        <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                             <ref name="msContents"/>
-                                        </optional>
-                                        <optional>
+                                        </rng:optional>
+                                        <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                             <ref name="physDesc"/>
-                                        </optional>
-                                        <optional>
+                                        </rng:optional>
+                                        <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                             <ref name="history"/>
-                                        </optional>
-                                        <optional>
+                                        </rng:optional>
+                                        <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                             <ref name="additional"/>
-                                        </optional>
+                                        </rng:optional>
                                         <zeroOrMore>
                                             <ref name="msPart"/>
                                         </zeroOrMore>
@@ -3045,18 +3045,18 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                             <group xmlns="http://relaxng.org/ns/structure/1.0">
                                 <group>
                                     <ref name="model.placeNamePart_sequenceOptional"/>
-                                    <optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="institution"/>
-                                    </optional>
-                                    <optional>
+                                    </rng:optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="repository"/>
-                                    </optional>
+                                    </rng:optional>
                                     <zeroOrMore>
                                         <ref name="collection"/>
                                     </zeroOrMore>
-                                    <optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="idno"/>
-                                    </optional>
+                                    </rng:optional>
                                 </group>
                                 <zeroOrMore>
                                     <choice>
@@ -3169,12 +3169,12 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                             <memberOf key="att.typed"/>
                         </classes>
                         <content>
-                            <optional xmlns="http://relaxng.org/ns/structure/1.0">
+                            <rng:optional xmlns="http://relaxng.org/ns/structure/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                 <choice>
                                     <ref name="model.biblLike"/>
                                     <ref name="model.ptrLike"/>
                                 </choice>
-                            </optional>
+                            </rng:optional>
                         </content>
                         <constraintSpec ident="targetorcontent1" scheme="isoschematron">
                             <constraint>
@@ -3305,9 +3305,9 @@ relatedItem element must be empty</sch:report>
                                 <zeroOrMore>
                                     <ref name="model.teiHeaderPart"/>
                                 </zeroOrMore>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="revisionDesc"/>
-                                </optional>
+                                </rng:optional>
                             </group>
                         </content>
                         <attList>
@@ -3395,9 +3395,9 @@ relatedItem element must be empty</sch:report>
                                     <ref name="model.pLike"/>
                                 </oneOrMore>
                                 <group>
-                                    <optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <ref name="summary"/>
-                                    </optional>
+                                    </rng:optional>
                                     <oneOrMore>
                                         <ref name="typeNote"/>
                                     </oneOrMore>
@@ -3466,9 +3466,9 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                         </classes>
                         <content>
                             <group xmlns="http://relaxng.org/ns/structure/1.0">
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="front"/>
-                                </optional>
+                                </rng:optional>
                                 <oneOrMore>
                                     <choice>
                                         <ref name="model.graphicLike"/>
@@ -3476,9 +3476,9 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                         <ref name="surfaceGrp"/>
                                     </choice>
                                 </oneOrMore>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="back"/>
-                                </optional>
+                                </rng:optional>
                             </group>
                         </content>
                     </elementSpec>
@@ -4109,7 +4109,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                     </choice>
                                 </zeroOrMore>
                                 <group>
-                                    <optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <choice>
                                             <group>
                                                 <group>
@@ -4136,10 +4136,10 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                                 </zeroOrMore>
                                             </group>
                                         </choice>
-                                    </optional>
+                                    </rng:optional>
                                 </group>
                                 <group>
-                                    <optional>
+                                    <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                         <group>
                                             <ref name="model.divBottomPart"/>
                                         </group>
@@ -4149,7 +4149,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                                 <ref name="model.global"/>
                                             </choice>
                                         </zeroOrMore>
-                                    </optional>
+                                    </rng:optional>
                                 </group>
                             </group>
                         </content>
@@ -4201,7 +4201,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                 <zeroOrMore>
                                     <ref name="model.global"/>
                                 </zeroOrMore>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <group>
                                         <group>
                                             <ref name="model.divTop"/>
@@ -4213,8 +4213,8 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                             </choice>
                                         </zeroOrMore>
                                     </group>
-                                </optional>
-                                <optional>
+                                </rng:optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <group>
                                         <group>
                                             <ref name="model.divGenLike"/>
@@ -4226,7 +4226,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                             </choice>
                                         </zeroOrMore>
                                     </group>
-                                </optional>
+                                </rng:optional>
                                 <group>
                                     <choice>
                                         <oneOrMore>
@@ -4264,7 +4264,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                                     <ref name="model.global"/>
                                                 </zeroOrMore>
                                             </oneOrMore>
-                                            <optional>
+                                            <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                                 <choice>
                                                     <oneOrMore>
                                                         <group>
@@ -4293,7 +4293,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                                         </group>
                                                     </oneOrMore>
                                                 </choice>
-                                            </optional>
+                                            </rng:optional>
                                         </group>
                                     </choice>
                                 </group>
@@ -4373,12 +4373,12 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                         <ref name="model.global"/>
                                     </zeroOrMore>
                                 </oneOrMore>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="trailer"/>
                                     <zeroOrMore>
                                         <ref name="model.global"/>
                                     </zeroOrMore>
-                                </optional>
+                                </rng:optional>
                             </group>
                         </content>
                         <attList/>
@@ -4712,7 +4712,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                         <ref name="model.global"/>
                                     </choice>
                                 </zeroOrMore>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <choice>
                                         <group>
                                             <oneOrMore>
@@ -4753,7 +4753,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                                             <ref name="model.global"/>
                                         </zeroOrMore>
                                     </zeroOrMore>
-                                </optional>
+                                </rng:optional>
                             </group>
                         </content>
                         <constraintSpec ident="abstractModel-structure-l" scheme="isoschematron">
@@ -4983,12 +4983,12 @@ border-bottom: solid 1pt blue;
                                 <zeroOrMore>
                                     <ref name="model.global"/>
                                 </zeroOrMore>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="front"/>
                                     <zeroOrMore>
                                         <ref name="model.global"/>
                                     </zeroOrMore>
-                                </optional>
+                                </rng:optional>
                                 <choice>
                                     <ref name="body"/>
                                     <ref name="group"/>
@@ -4996,12 +4996,12 @@ border-bottom: solid 1pt blue;
                                 <zeroOrMore>
                                     <ref name="model.global"/>
                                 </zeroOrMore>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="back"/>
                                     <zeroOrMore>
                                         <ref name="model.global"/>
                                     </zeroOrMore>
-                                </optional>
+                                </rng:optional>
                             </group>
                         </content>
                         <attList/>
@@ -5069,7 +5069,7 @@ border-bottom: solid 1pt blue;
                                         </choice>
                                     </zeroOrMore>
                                 </group>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <choice>
                                         <group>
                                             <ref name="model.div1Like"/>
@@ -5093,7 +5093,7 @@ border-bottom: solid 1pt blue;
                                         </group>
                                     </choice>
                                     <group>
-                                        <optional>
+                                        <rng:optional>
                                             <group>
                                                 <ref name="model.divBottom"/>
                                             </group>
@@ -5103,9 +5103,9 @@ border-bottom: solid 1pt blue;
                                                     <ref name="model.global"/>
                                                 </choice>
                                             </zeroOrMore>
-                                        </optional>
+                                        </rng:optional>
                                     </group>
-                                </optional>
+                                </rng:optional>
                             </group>
                         </content>
                         <attList/>
@@ -5503,12 +5503,12 @@ border-bottom: solid 1pt blue;
                                         </zeroOrMore>
                                     </oneOrMore>
                                     <group>
-                                        <optional>
+                                        <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                             <ref name="headLabel"/>
-                                        </optional>
-                                        <optional>
+                                        </rng:optional>
+                                        <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                             <ref name="headItem"/>
-                                        </optional>
+                                        </rng:optional>
                                         <oneOrMore>
                                             <ref name="label"/>
                                             <zeroOrMore>
@@ -6333,12 +6333,12 @@ border-bottom: solid 1pt blue;
                                 <zeroOrMore>
                                     <ref name="model.global"/>
                                 </zeroOrMore>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="speaker"/>
                                     <zeroOrMore>
                                         <ref name="model.global"/>
                                     </zeroOrMore>
-                                </optional>
+                                </rng:optional>
                                 <oneOrMore>
                                     <choice>
                                         <ref name="lg"/>
@@ -6583,9 +6583,9 @@ border-bottom: solid 1pt blue;
                                         <oneOrMore>
                                             <ref name="model.resourceLike"/>
                                         </oneOrMore>
-                                        <optional>
+                                        <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                             <ref name="text"/>
-                                        </optional>
+                                        </rng:optional>
                                     </group>
                                     <ref name="text"/>
                                 </choice>
@@ -6659,12 +6659,12 @@ border-bottom: solid 1pt blue;
                                 <zeroOrMore>
                                     <ref name="model.global"/>
                                 </zeroOrMore>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="front"/>
                                     <zeroOrMore>
                                         <ref name="model.global"/>
                                     </zeroOrMore>
-                                </optional>
+                                </rng:optional>
                                 <choice>
                                     <ref name="body"/>
                                     <ref name="group"/>
@@ -6672,20 +6672,20 @@ border-bottom: solid 1pt blue;
                                 <zeroOrMore>
                                     <ref name="model.global"/>
                                 </zeroOrMore>
-                                <optional>
+                                <rng:optional xmlns:rng="http://relaxng.org/ns/structure/1.0">
                                     <ref name="back"/>
                                     <zeroOrMore>
                                         <ref name="model.global"/>
                                     </zeroOrMore>
-                                </optional>
+                                </rng:optional>
                             </group>
                         </content>
                         <_0:constraintSpec xmlns:_0="http://www.tei-c.org/ns/1.0" ident="headeronlyelement" scheme="isoschematron">
-                            <_0:constraint>
+                            <constraint>
                                 <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:att | tei:biblFull | tei:biblScope | tei:biblStruct | tei:change | tei:charDecl | tei:charProp | tei:editor | tei:editorialDecl | tei:email | tei:encodingDesc | tei:extent | tei:fileDesc | tei:gi | tei:glyph | tei:glyphName | tei:idno | tei:imprint | tei:keywords | tei:licence | tei:listChange | tei:listPerson | tei:localName | tei:monogr | tei:msDesc | tei:msIdentifier | tei:person | tei:physDesc | tei:profileDesc | tei:publicationStmt | tei:relatedItem | tei:repository | tei:resp | tei:respStmt | tei:sourceDesc | tei:tag | tei:teiHeader | tei:term | tei:textClass | tei:textDesc | tei:titleStmt | tei:typeDesc | tei:val | tei:value">
                                     <report test="ancestor::tei:text">Error:  The element <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/> is not permitted outside the header</report>
                                 </rule>
-                            </_0:constraint>
+                            </constraint>
                         </_0:constraintSpec>
                         <attList/>
                         <model behaviour="body">
