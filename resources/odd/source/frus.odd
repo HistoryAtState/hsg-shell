@@ -288,12 +288,15 @@
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="graphic">
-                    <model behaviour="graphic">
+                    <model behaviour="graphic" useSourceRendition="true">
                         <param name="url">if (matches(@url, '^https?://')) then @url else ( xs:anyURI('https://static.history.state.gov/' || $parameters?base-uri || 
                             "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")) )</param>
                         <param name="scale">@scale</param>
-                        <param name="title">desc</param>
+                        <param name="title">(../desc, ../figDesc) => head() => normalize-space()</param>
                     </model>
+                </elementSpec>
+                <elementSpec ident="figDesc" mode="change">
+                    <model behaviour="omit"/>
                 </elementSpec>
                 <elementSpec mode="change" ident="figure">
                     <model predicate="@rend='smallfloatinline'" behaviour="block" cssClass="float-left figure-floated"/>
