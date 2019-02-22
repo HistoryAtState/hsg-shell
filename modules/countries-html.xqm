@@ -16,7 +16,7 @@ declare variable $ch:RDCR_ISSUES_COL := $ch:RDCR_COL || '/issues';
 declare %templates:wrap function ch:load-countries($node as node(), $model as map(*)) {
     let $ordered-articles :=
         for $c in collection($ch:RDCR_ARTICLES_COL)/tei:TEI
-        order by util:document-name($c)
+        order by $c//tei:title[@type='short']
         return $c
     let $content := map { "articles": $ordered-articles }
     let $html := templates:process($node/*, map:new(($model, $content)))
@@ -61,7 +61,7 @@ function ch:dropdown($node as node(), $model as map(*), $document-id as xs:strin
     let $article-id := substring-before(util:document-name($c), '.xml')
     let $selected := if ($document-id = $article-id) then attribute selected {"selected"} else ()
     let $brief-title := $c//tei:title[@type='short']/string()
-    order by $article-id
+    order by $brief-title
     return
         <option>{
             attribute value { app:fix-href("$app/countries/" || $article-id) },
