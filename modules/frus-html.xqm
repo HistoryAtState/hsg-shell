@@ -223,7 +223,14 @@ declare
     %templates:wrap
 function fh:series-volumes($node as node(), $model as map(*)) {
     for $vol in $model?volumes
-    let $title := string-join(for $title in ($vol/title[@type='volume'], $vol/title[@type='volume-number'])[. ne ''] return $title, ', ')
+    let $title := 
+        string-join(
+            (
+                ($vol/title[@type='volume'], $vol/title[@type='volume-number'])[. ne ''], 
+                $vol/title[@type='sub-series']
+            )[1], 
+            ', '
+        )
     let $vol-id := $vol/@id
     let $publication-status := $vol/publication-status
     order by $vol-id
