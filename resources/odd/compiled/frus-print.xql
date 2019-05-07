@@ -23,7 +23,7 @@ import module namespace ext-fo="http://history.state.gov/ns/site/hsg/pmf-fo" at 
 declare function model:transform($options as map(*), $input as node()*) {
         
     let $config :=
-        map:new(($options,
+        map:merge(($options,
             map {
                 "output": ["fo","print"],
                 "odd": "/db/apps/hsg-shell/resources/odd/compiled/frus.odd",

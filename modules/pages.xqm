@@ -62,7 +62,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     }
 
     return
-        templates:process($node/*, map:new(($model, $content)))
+        templates:process($node/*, map:merge(($model, $content)))
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {

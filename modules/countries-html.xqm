@@ -19,7 +19,7 @@ declare %templates:wrap function ch:load-countries($node as node(), $model as ma
         order by $c//tei:title[@type='short']
         return $c
     let $content := map { "articles": $ordered-articles }
-    let $html := templates:process($node/*, map:new(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content)))
     return
         $html
 };

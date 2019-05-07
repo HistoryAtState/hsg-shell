@@ -21,7 +21,7 @@ import module namespace fo="http://www.tei-c.org/tei-simple/xquery/functions/fo"
 declare function model:transform($options as map(*), $input as node()*) {
         
     let $config :=
-        map:new(($options,
+        map:merge(($options,
             map {
                 "output": ["fo","print"],
                 "odd": "/db/apps/hsg-shell/resources/odd/compiled/teisimple.odd",

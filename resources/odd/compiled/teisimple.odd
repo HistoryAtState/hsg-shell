@@ -433,23 +433,23 @@ belongs, but this <sch:name/> element has no textual content.</sch:assert>
                         <classes/>
                         <constraintSpec ident="renditionpointer" scheme="isoschematron">
                             <constraint>
-                                <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@rendition]">
+                                <sch:rule xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" context="tei:*[@rendition]">
                                     <let name="results" value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
-                                    <assert test="every $x in $results satisfies $x"> Error: Each of
+                                    <sch:assert test="every $x in $results satisfies $x"> Error: Each of
                                        the rendition values in "<value-of select="@rendition"/>"
                                        must point to a local ID or to a token in the Simple scheme
-                                          (<value-of select="$results"/>)</assert>
-                                </rule>
+                                          (<value-of select="$results"/>)</sch:assert>
+                                </sch:rule>
                             </constraint>
                         </constraintSpec>
                         <constraintSpec ident="corresppointer" scheme="isoschematron">
                             <constraint>
-                                <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@corresp]">
+                                <sch:rule xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" context="tei:*[@corresp]">
                                     <let name="results" value="for $t in        tokenize(normalize-space(@corresp),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
-                                    <report test="some $x in $results  satisfies $x"> Error: Every
+                                    <sch:report test="some $x in $results  satisfies $x"> Error: Every
                                        local pointer in "<value-of select="@corresp"/>" must point to
-                                       an ID in this document (<value-of select="$results"/>)</report>
-                                </rule>
+                                       an ID in this document (<value-of select="$results"/>)</sch:report>
+                                </sch:rule>
                             </constraint>
                         </constraintSpec>
                         <attList>
@@ -751,12 +751,12 @@ belongs, but this <sch:name/> element has no textual content.</sch:assert>
                             <attDef ident="target" usage="opt">
                                 <constraintSpec ident="validtarget" scheme="isoschematron">
                                     <constraint>
-                                        <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@target]">
+                                        <sch:rule xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" context="tei:*[@target]">
                                             <let name="results" value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
-                                            <report test="some $x in $results  satisfies $x"> Error: Every
+                                            <sch:report test="some $x in $results  satisfies $x"> Error: Every
                                        local pointer in "<value-of select="@target"/>" must point to
-                                       an ID in this document (<value-of select="$results"/>)</report>
-                                        </rule>
+                                       an ID in this document (<value-of select="$results"/>)</sch:report>
+                                        </sch:rule>
                                     </constraint>
                                 </constraintSpec>
                                 <datatype maxOccurs="unbounded">
@@ -1767,8 +1767,8 @@ The element indicated by @spanTo (<sch:value-of select="@spanTo"/>) must follow 
                         </content>
                         <constraintSpec ident="quotationContents" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="not(@marks) and not (tei:p)">
-On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @marks attribute should be used, or a paragraph of description provided</report>
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="not(@marks) and not (tei:p)">
+On <sch:name/>, either the @marks attribute should be used, or a paragraph of description provided</sch:report>
                             </constraint>
                         </constraintSpec>
                         <attList>
@@ -2054,7 +2054,7 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                             <memberOf key="att.edition"/>
                         </classes>
                         <content>
-                            <empty xmlns="http://relaxng.org/ns/structure/1.0"/>
+                            <rng:empty xmlns="http://relaxng.org/ns/structure/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
                         </content>
                         <attList>
                             <attDef ident="length" usage="opt">
@@ -2308,7 +2308,7 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                             <memberOf key="att.pointing"/>
                         </classes>
                         <content>
-                            <empty xmlns="http://relaxng.org/ns/structure/1.0"/>
+                            <rng:empty xmlns="http://relaxng.org/ns/structure/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
                         </content>
                         <attList>
                             <attDef ident="scheme" usage="opt">
@@ -3068,7 +3068,7 @@ On <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>, either the @mar
                         </content>
                         <constraintSpec scheme="isoschematron" ident="msId_minimal">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="not(parent::tei:msPart) and       (local-name(*[1])='idno' or       local-name(*[1])='altIdentifier' or       normalize-space(.)='')">An msIdentifier must contain either a repository or location of some type, or a manuscript name</report>
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="not(parent::tei:msPart) and       (local-name(*[1])='idno' or       local-name(*[1])='altIdentifier' or       normalize-space(.)='')">An msIdentifier must contain either a repository or location of some type, or a manuscript name</sch:report>
                             </constraint>
                         </constraintSpec>
                     </elementSpec>
@@ -3423,7 +3423,7 @@ relatedItem element must be empty</sch:report>
                         </content>
                     </elementSpec>
                     <p>Elements which are only intended to be used in the header are banned from the
-                        <gi>text</gi>, using a Schematron rule.</p>
+                        <_0:gi xmlns:_0="http://www.tei-c.org/ns/1.0">text</_0:gi>, using a Schematron rule.</p>
                     <elementSpec module="transcr" ident="damage">
                         <classes>
                             <memberOf key="att.global"/>
@@ -3444,17 +3444,17 @@ relatedItem element must be empty</sch:report>
                             <memberOf key="att.spanning"/>
                         </classes>
                         <content>
-                            <empty xmlns="http://relaxng.org/ns/structure/1.0"/>
+                            <rng:empty xmlns="http://relaxng.org/ns/structure/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
                         </content>
                         <constraintSpec ident="spanTo" scheme="isoschematron">
                             <constraint>
-                                <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="@spanTo">
-The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/> is required.</assert>
+                                <sch:assert xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="@spanTo">
+The @spanTo attribute of <sch:name/> is required.</sch:assert>
                             </constraint>
                         </constraintSpec>
                         <constraintSpec ident="spanTo_fr" scheme="isoschematron" xml:lang="fr">
                             <constraint>
-                                <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="@spanTo">L'attribut spanTo est requis.</assert>
+                                <sch:assert xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="@spanTo">L'attribut spanTo est requis.</sch:assert>
                             </constraint>
                         </constraintSpec>
                     </elementSpec>
@@ -3555,7 +3555,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                             <memberOf key="att.transcriptional"/>
                         </classes>
                         <content>
-                            <empty xmlns="http://relaxng.org/ns/structure/1.0"/>
+                            <rng:empty xmlns="http://relaxng.org/ns/structure/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
                         </content>
                         <attList>
                             <attDef ident="target">
@@ -3709,7 +3709,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                             <memberOf key="att.transcriptional"/>
                         </classes>
                         <content>
-                            <empty xmlns="http://relaxng.org/ns/structure/1.0"/>
+                            <rng:empty xmlns="http://relaxng.org/ns/structure/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
                         </content>
                         <attList>
                             <attDef ident="target">
@@ -3876,16 +3876,16 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                         </content>
                         <constraintSpec ident="abstractModel-structure-p" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="(ancestor::tei:p or ancestor::tei:ab)          and not(parent::tei:exemplum         |parent::tei:item         |parent::tei:note         |parent::tei:q         |parent::tei:quote         |parent::tei:remarks         |parent::tei:said         |parent::tei:sp         |parent::tei:stage         |parent::tei:cell         |parent::tei:figure)">
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="(ancestor::tei:p or ancestor::tei:ab)          and not(parent::tei:exemplum         |parent::tei:item         |parent::tei:note         |parent::tei:q         |parent::tei:quote         |parent::tei:remarks         |parent::tei:said         |parent::tei:sp         |parent::tei:stage         |parent::tei:cell         |parent::tei:figure)">
         Abstract model violation: ab may not contain paragraphs or other ab elements.
-      </report>
+      </sch:report>
                             </constraint>
                         </constraintSpec>
                         <constraintSpec ident="abstractModel-structure-l" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:l or ancestor::tei:lg">
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:l or ancestor::tei:lg">
         Abstract model violation: Lines may not contain higher-level divisions such as p or ab.
-      </report>
+      </sch:report>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -4042,7 +4042,7 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                             <memberOf key="att.typed"/>
                         </classes>
                         <content>
-                            <empty xmlns="http://relaxng.org/ns/structure/1.0"/>
+                            <rng:empty xmlns="http://relaxng.org/ns/structure/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
                         </content>
                         <attList/>
                         <model behaviour="anchor">
@@ -4182,9 +4182,9 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                         </content>
                         <constraintSpec mode="add" ident="noEmptyBibl" scheme="isoschematron">
                             <constraint>
-                                <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="child::* or child::text()[normalize-space()]" role="ERROR">
-                Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" may not be empty.
-            </assert>
+                                <sch:assert xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="child::* or child::text()[normalize-space()]" role="ERROR">
+                Element "<sch:name/>" may not be empty.
+            </sch:assert>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -4521,15 +4521,15 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                         </content>
                         <constraintSpec ident="choiceSize" scheme="isoschematron" mode="add">
                             <constraint>
-                                <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="count(*) &gt; 1" role="ERROR">
-                    Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" must have at least two child
-		    elements.</assert>
+                                <sch:assert xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="count(*) &gt; 1" role="ERROR">
+                    Element "<sch:name/>" must have at least two child
+		    elements.</sch:assert>
                             </constraint>
                         </constraintSpec>
                         <constraintSpec ident="choiceContent" scheme="isoschematron" mode="add">
                             <constraint>
-                                <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))" role="ERROR">
-                    Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" must have corresponding corr/sic, expand/abbr, reg/orig </assert>
+                                <sch:assert xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))" role="ERROR">
+                    Element "<sch:name/>" must have corresponding corr/sic, expand/abbr, reg/orig </sch:assert>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -4758,16 +4758,16 @@ The @spanTo attribute of <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematr
                         </content>
                         <constraintSpec ident="abstractModel-structure-l" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:l">
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:l">
         Abstract model violation: Lines may not contain higher-level structural elements such as div.
-      </report>
+      </sch:report>
                             </constraint>
                         </constraintSpec>
                         <constraintSpec ident="abstractModel-structure-p" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:p or ancestor::tei:ab and not(ancestor::tei:floatingText)">
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:p or ancestor::tei:ab and not(ancestor::tei:floatingText)">
         Abstract model violation: p and ab may not contain higher-level structural elements such as div.
-      </report>
+      </sch:report>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -5379,9 +5379,9 @@ border-bottom: solid 1pt blue;
                         </content>
                         <constraintSpec ident="abstractModel-structure-l" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:l[not(.//tei:note//tei:l[. = current()])]">
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:l[not(.//tei:note//tei:l[. = current()])]">
         Abstract model violation: Lines may not contain lines or lg elements.
-      </report>
+      </sch:report>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -5468,9 +5468,9 @@ border-bottom: solid 1pt blue;
                         </constraintSpec>
                         <constraintSpec ident="abstractModel-structure-l" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:l[not(.//tei:note//tei:lg[. = current()])]">
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:l[not(.//tei:note//tei:lg[. = current()])]">
         Abstract model violation: Lines may not contain line groups.
-      </report>
+      </sch:report>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -5622,7 +5622,7 @@ border-bottom: solid 1pt blue;
                             <memberOf key="att.breaking"/>
                         </classes>
                         <content>
-                            <empty xmlns="http://relaxng.org/ns/structure/1.0"/>
+                            <rng:empty xmlns="http://relaxng.org/ns/structure/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
                         </content>
                         <attList/>
                         <model behaviour="inline"/>
@@ -5779,16 +5779,16 @@ border-bottom: solid 1pt blue;
                         </content>
                         <constraintSpec ident="abstractModel-p" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="(ancestor::tei:p or ancestor::tei:ab)          and not(parent::tei:exemplum                |parent::tei:item                |parent::tei:note                |parent::tei:q                |parent::tei:quote                |parent::tei:remarks                |parent::tei:said                |parent::tei:sp                |parent::tei:stage                |parent::tei:cell                |parent::tei:figure)">
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="(ancestor::tei:p or ancestor::tei:ab)          and not(parent::tei:exemplum                |parent::tei:item                |parent::tei:note                |parent::tei:q                |parent::tei:quote                |parent::tei:remarks                |parent::tei:said                |parent::tei:sp                |parent::tei:stage                |parent::tei:cell                |parent::tei:figure)">
         Abstract model violation: Paragraphs may not contain other paragraphs or ab elements.
-      </report>
+      </sch:report>
                             </constraint>
                         </constraintSpec>
                         <constraintSpec ident="abstractModel-structure-l" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:l[not(.//tei:note//tei:p[. = current()])]">
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="ancestor::tei:l[not(.//tei:note//tei:p[. = current()])]">
         Abstract model violation: Lines may not contain higher-level structural elements such as div, p, or ab.
-      </report>
+      </sch:report>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -5810,7 +5810,7 @@ border-bottom: solid 1pt blue;
                         </content>
                         <constraintSpec ident="pbposition" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())">please make sure pb elements are not at the start or end of mixed content </report>
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())">please make sure pb elements are not at the start or end of mixed content </sch:report>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -6010,9 +6010,9 @@ border-bottom: solid 1pt blue;
                         </content>
                         <constraintSpec scheme="isoschematron" ident="refAtts">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="@target and @cRef">Only one of the
-	attributes @target' and @cRef' may be supplied on <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>
-                                </report>
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="@target and @cRef">Only one of the
+	attributes @target' and @cRef' may be supplied on <sch:name/>
+                                </sch:report>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -6250,8 +6250,8 @@ border-bottom: solid 1pt blue;
                         </content>
                         <constraintSpec ident="noNestedS" scheme="isoschematron">
                             <constraint>
-                                <report xmlns="http://purl.oclc.org/dsdl/schematron" test="tei:s">You may not nest one s element within
-      another: use seg instead</report>
+                                <sch:report xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="tei:s">You may not nest one s element within
+      another: use seg instead</sch:report>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -6471,8 +6471,8 @@ border-bottom: solid 1pt blue;
                         </content>
                         <constraintSpec ident="substContents1" scheme="isoschematron">
                             <constraint>
-                                <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="child::tei:add and child::tei:del">
-                                    <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/> must have at least one child add and at least one child del</assert>
+                                <sch:assert xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="child::tei:add and child::tei:del">
+                                    <sch:name/> must have at least one child add and at least one child del</sch:assert>
                             </constraint>
                         </constraintSpec>
                         <attList/>
@@ -6682,9 +6682,9 @@ border-bottom: solid 1pt blue;
                         </content>
                         <_0:constraintSpec xmlns:_0="http://www.tei-c.org/ns/1.0" ident="headeronlyelement" scheme="isoschematron">
                             <constraint>
-                                <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:att | tei:biblFull | tei:biblScope | tei:biblStruct | tei:change | tei:charDecl | tei:charProp | tei:editor | tei:editorialDecl | tei:email | tei:encodingDesc | tei:extent | tei:fileDesc | tei:gi | tei:glyph | tei:glyphName | tei:idno | tei:imprint | tei:keywords | tei:licence | tei:listChange | tei:listPerson | tei:localName | tei:monogr | tei:msDesc | tei:msIdentifier | tei:person | tei:physDesc | tei:profileDesc | tei:publicationStmt | tei:relatedItem | tei:repository | tei:resp | tei:respStmt | tei:sourceDesc | tei:tag | tei:teiHeader | tei:term | tei:textClass | tei:textDesc | tei:titleStmt | tei:typeDesc | tei:val | tei:value">
-                                    <report test="ancestor::tei:text">Error:  The element <sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/> is not permitted outside the header</report>
-                                </rule>
+                                <sch:rule xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" context="tei:att | tei:biblFull | tei:biblScope | tei:biblStruct | tei:change | tei:charDecl | tei:charProp | tei:editor | tei:editorialDecl | tei:email | tei:encodingDesc | tei:extent | tei:fileDesc | tei:gi | tei:glyph | tei:glyphName | tei:idno | tei:imprint | tei:keywords | tei:licence | tei:listChange | tei:listPerson | tei:localName | tei:monogr | tei:msDesc | tei:msIdentifier | tei:person | tei:physDesc | tei:profileDesc | tei:publicationStmt | tei:relatedItem | tei:repository | tei:resp | tei:respStmt | tei:sourceDesc | tei:tag | tei:teiHeader | tei:term | tei:textClass | tei:textDesc | tei:titleStmt | tei:typeDesc | tei:val | tei:value">
+                                    <sch:report test="ancestor::tei:text">Error:  The element <sch:name/> is not permitted outside the header</sch:report>
+                                </sch:rule>
                             </constraint>
                         </_0:constraintSpec>
                         <attList/>

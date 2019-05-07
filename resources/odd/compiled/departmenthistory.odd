@@ -68,9 +68,9 @@
             <elementSpec mode="change" ident="bibl">
                             <constraintSpec mode="add" ident="noEmptyBibl" scheme="isoschematron">
                                 <constraint>
-                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="child::* or child::text()[normalize-space()]" role="ERROR">
-                Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" may not be empty.
-            </assert>
+                                    <sch:assert xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="child::* or child::text()[normalize-space()]" role="ERROR">
+                Element "<sch:name/>" may not be empty.
+            </sch:assert>
                                 </constraint>
                             </constraintSpec>
                             <model predicate="parent::listBibl" behaviour="listItem"/>
@@ -121,15 +121,15 @@
             <elementSpec mode="change" ident="choice">
                             <constraintSpec ident="choiceSize" scheme="isoschematron" mode="add">
                                 <constraint>
-                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="count(*) &gt; 1" role="ERROR">
-                    Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" must have at least two child
-		    elements.</assert>
+                                    <sch:assert xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="count(*) &gt; 1" role="ERROR">
+                    Element "<sch:name/>" must have at least two child
+		    elements.</sch:assert>
                                 </constraint>
                             </constraintSpec>
                             <constraintSpec ident="choiceContent" scheme="isoschematron" mode="add">
                                 <constraint>
-                                    <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))" role="ERROR">
-                    Element "<sch:name xmlns:sch="http://purl.oclc.org/dsdl/schematron"/>" must have corresponding corr/sic, expand/abbr, reg/orig </assert>
+                                    <sch:assert xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sch="http://purl.oclc.org/dsdl/schematron" test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))" role="ERROR">
+                    Element "<sch:name/>" must have corresponding corr/sic, expand/abbr, reg/orig </sch:assert>
                                 </constraint>
                             </constraintSpec>
                             <model output="plain" predicate="sic and corr" behaviour="inline">

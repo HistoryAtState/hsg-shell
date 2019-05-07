@@ -149,7 +149,7 @@ function fh:volumes-by-administration-group($node as node(), $model as map(*)) {
         order by index-of($model?grouping-codes/value, $grouping)
         return
             (: TODO: bug in templates.xql forces us to call templates:process manually :)
-            templates:process($node/node(), map:new(($model,
+            templates:process($node/node(), map:merge(($model,
                 map {
                     "group": $grouping/string(),
                     "volumes": $vols
@@ -168,7 +168,7 @@ function fh:volumes-by-administration($node as node(), $model as map(*)) {
         order by $vols[1]/title[@type='sub-series']/@n
         return
             (: TODO: bug in templates.xql forces us to call templates:process manually :)
-            templates:process($node/node(), map:new(($model,
+            templates:process($node/node(), map:merge(($model,
                 map {
                     "series-title": $vols[1]/title[@type='sub-series']/string(),
                     "volumes": $vols
@@ -187,7 +187,7 @@ function fh:volumes-pre-truman($node as node(), $model as map(*)) {
         let $voltext := $vol/title[@type="complete"]
         order by $vol-id
         return
-            templates:process($node/node(), map:new(($model,
+            templates:process($node/node(), map:merge(($model,
                 map {
                     "title": $voltext/string(),
                     "vol-id": $vol-id
@@ -205,7 +205,7 @@ function fh:volumes-by-group($node as node(), $model as map(*)) {
     order by $g-vols[1]/title[@type='sub-series']/@n
     return
         (: TODO: bug in templates.xql forces us to call templates:process manually :)
-        templates:process($node/node(), map:new(($model,
+        templates:process($node/node(), map:merge(($model,
             map {
                 "series-title": $g-vols[1]/title[@type='sub-series']/string(),
                 "volumes": $g-vols
@@ -235,7 +235,7 @@ function fh:series-volumes($node as node(), $model as map(*)) {
     let $publication-status := $vol/publication-status
     order by $vol-id
     return
-        templates:process($node/node(), map:new(($model,
+        templates:process($node/node(), map:merge(($model,
             map {
                 "title": $title,
                 "vol-id": $vol-id,

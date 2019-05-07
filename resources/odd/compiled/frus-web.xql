@@ -29,7 +29,7 @@ import module namespace ext-html="http://history.state.gov/ns/site/hsg/pmf-html"
 declare function model:transform($options as map(*), $input as node()*) {
         
     let $config :=
-        map:new(($options,
+        map:merge(($options,
             map {
                 "output": ["web"],
                 "odd": "/db/apps/hsg-shell/resources/odd/compiled/frus.odd",
@@ -114,10 +114,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:cell($config, ., css:get-rendition(., ("tei-cell")), ., ())
                 case element(choice) return
                     if (sic and corr) then
-                        html:alternate($config, ., ("tei-choice4"), ., corr[1], sic[1])
+                        html:alternate($config, ., ("tei-choice1"), ., corr[1], sic[1])
                     else
                         if (abbr and expan) then
-                            html:alternate($config, ., ("tei-choice5"), ., expan[1], abbr[1])
+                            html:alternate($config, ., ("tei-choice1"), ., expan[1], abbr[1])
                         else
                             if (orig and reg) then
                                 html:alternate($config, ., ("tei-choice6"), ., reg[1], orig[1])
@@ -152,7 +152,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type and not(@type = 'online-supplement')])) then
                             ext-html:document-list($config, ., ("tei-div2"))
                         else
-                            html:block($config, ., ("tei-div3"), .)
+                            html:block($config, ., ("tei-div2"), .)
                 case element(docAuthor) return
                     if (ancestor::teiHeader) then
                         (: Omit if located in teiHeader. :)
@@ -198,7 +198,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         if (head or @rendition='simple:display') then
                             html:block($config, ., ("tei-figure2"), .)
                         else
-                            html:inline($config, ., ("tei-figure3"), .)
+                            html:inline($config, ., ("tei-figure2"), .)
                 case element(floatingText) return
                     html:block($config, ., ("tei-floatingText"), .)
                 case element(foreign) return
@@ -234,36 +234,36 @@ declare function model:apply($config as map(*), $input as node()*) {
                         html:block($config, ., ("tei-head1"), .)
                     else
                         if (parent::table) then
-                            html:block($config, ., ("tei-head2"), .)
+                            html:block($config, ., ("tei-head1"), .)
                         else
                             if (parent::list/@type = ('participants', 'to', 'from', 'subject')) then
-                                html:block($config, ., ("tei-head3"), .)
+                                html:block($config, ., ("tei-head1"), .)
                             else
                                 if (parent::list) then
-                                    html:block($config, ., ("tei-head4"), .)
+                                    html:block($config, ., ("tei-head1"), .)
                                 else
                                     if (parent::div and @type='shortened-for-running-head') then
-                                        html:omit($config, ., ("tei-head5"), .)
+                                        html:omit($config, ., ("tei-head1"), .)
                                     else
                                         if (ancestor::frus:attachment) then
-                                            html:heading($config, ., ("tei-head6"), ., count(ancestor::div intersect ancestor::frus:attachment//div))
+                                            html:heading($config, ., ("tei-head1"), ., count(ancestor::div intersect ancestor::frus:attachment//div))
                                         else
                                             if (parent::div) then
                                                 html:heading($config, ., ("tei-head7"), ., count(ancestor::div) + (if ($parameters?heading-offset) then $parameters?heading-offset else 0))
                                             else
-                                                html:block($config, ., ("tei-head8"), .)
+                                                html:block($config, ., ("tei-head2"), .)
                 case element(hi) return
                     if (@rend = 'strong') then
                         html:inline($config, ., ("tei-hi1"), .)
                     else
                         if (@rend = 'italic') then
-                            html:inline($config, ., ("tei-hi2"), .)
+                            html:inline($config, ., ("tei-hi1"), .)
                         else
                             if (@rend = 'smallcaps') then
-                                html:inline($config, ., ("tei-hi3"), .)
+                                html:inline($config, ., ("tei-hi1"), .)
                             else
                                 if (@rendition) then
-                                    html:inline($config, ., css:get-rendition(., ("tei-hi4")), .)
+                                    html:inline($config, ., css:get-rendition(., ("tei-hi1")), .)
                                 else
                                     if (not(@rendition)) then
                                         html:inline($config, ., ("tei-hi5"), .)
@@ -296,23 +296,23 @@ declare function model:apply($config as map(*), $input as node()*) {
                             html:list($config, ., ("tei-list1"), item)
                         else
                             if (@type = ('participants', 'to', 'from', 'subject')) then
-                                html:list($config, ., ("tei-list2"), item)
+                                html:list($config, ., ("tei-list1"), item)
                             else
                                 if (parent::list/@type = ('participants', 'to', 'from', 'subject')) then
                                     (: This is a nested list within a list-item :)
-                                    html:list($config, ., ("tei-list3"), item)
+                                    html:list($config, ., ("tei-list1"), item)
                                 else
                                     if (label) then
-                                        html:list($config, ., ("tei-list4", "labeled-list"), item)
+                                        html:list($config, ., ("tei-list1", "labeled-list"), item)
                                     else
                                         if (ancestor::div[@xml:id='persons']) then
-                                            html:list($config, ., ("tei-list5", "list-person"), item)
+                                            html:list($config, ., ("tei-list1", "list-person"), item)
                                         else
                                             if (ancestor::list) then
                                                 (: This is a nested list within a list :)
                                                 html:list($config, ., ("tei-list6", "hsg-nested-list"), item)
                                             else
-                                                html:list($config, ., ("tei-list7", "hsg-list"), item)
+                                                html:list($config, ., ("tei-list2", "hsg-list"), item)
                 case element(listBibl) return
                     if (bibl) then
                         html:list($config, ., ("tei-listBibl1"), bibl)
@@ -331,7 +331,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         if (@rend = 'inline') then
                             html:paragraph($config, ., ("tei-note2"), .)
                         else
-                            ext-html:note($config, ., ("tei-note3"), ., "foot", @n/string())
+                            ext-html:note($config, ., ("tei-note2"), ., "foot", @n/string())
                 case element(num) return
                     html:inline($config, ., ("tei-num"), .)
                 case element(opener) return
@@ -345,7 +345,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         if (@rend = 'flushleft') then
                             html:paragraph($config, ., css:get-rendition(., ("tei-p2")), .)
                         else
-                            html:paragraph($config, ., css:get-rendition(., ("tei-p3")), .)
+                            html:paragraph($config, ., css:get-rendition(., ("tei-p2")), .)
                 case element(pb) return
                     (
                         html:link($config, ., ("tei-pb1"), concat('[Page ', @n, ']'), @xml:id)
@@ -366,7 +366,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         if (ancestor::p or ancestor::cell) then
                             html:inline($config, ., css:get-rendition(., ("tei-q2")), .)
                         else
-                            html:block($config, ., css:get-rendition(., ("tei-q3")), .)
+                            html:block($config, ., css:get-rendition(., ("tei-q2")), .)
                 case element(quote) return
                     if (ancestor::p and empty(descendant::p|descendant::div)) then
                         (: If it is inside a paragraph then it is inline, otherwise it is block level; no extra quote marks around :)
@@ -425,15 +425,15 @@ declare function model:apply($config as map(*), $input as node()*) {
                         html:inline($config, ., ("tei-supplied1"), .)
                     else
                         if (@reason='damage') then
-                            html:inline($config, ., ("tei-supplied2"), .)
+                            html:inline($config, ., ("tei-supplied1"), .)
                         else
                             if (@reason='illegible' or not(@reason)) then
-                                html:inline($config, ., ("tei-supplied3"), .)
+                                html:inline($config, ., ("tei-supplied1"), .)
                             else
                                 if (@reason='omitted') then
                                     html:inline($config, ., ("tei-supplied4"), .)
                                 else
-                                    html:inline($config, ., ("tei-supplied5"), .)
+                                    html:inline($config, ., ("tei-supplied2"), .)
                 case element(table) return
                     if (.//row/@rendition or .//cell/@rendition) then
                         html:table($config, ., css:get-rendition(., ("tei-table1")), .)
@@ -492,19 +492,19 @@ declare function model:apply($config as map(*), $input as node()*) {
                         else
                             (),
                         if (count(editor[@role = 'primary'][. ne '']) eq 1) then
-                            html:block($config, ., ("tei-titleStmt3"), "Editor:")
+                            html:block($config, ., ("tei-titleStmt2"), "Editor:")
                         else
                             (),
                         if (editor[@role = 'primary'][. ne '']) then
-                            ext-html:list-from-items($config, ., ("tei-titleStmt4"), editor[@role="primary"], ())
+                            ext-html:list-from-items($config, ., ("tei-titleStmt2"), editor[@role="primary"], ())
                         else
                             (),
                         if (editor[@role = 'general'][. ne '']) then
-                            html:block($config, ., ("tei-titleStmt5"), "General Editor:")
+                            html:block($config, ., ("tei-titleStmt2"), "General Editor:")
                         else
                             (),
                         if (editor[@role = 'general'][. ne '']) then
-                            ext-html:list-from-items($config, ., ("tei-titleStmt6"), editor[@role="general"], ())
+                            ext-html:list-from-items($config, ., ("tei-titleStmt2"), editor[@role="general"], ())
                         else
                             ()
                     )
@@ -513,7 +513,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     (
                         html:block($config, ., ("tei-publicationStmt1"), publisher),
                         html:block($config, ., ("tei-publicationStmt2"), pubPlace),
-                        html:block($config, ., ("tei-publicationStmt3"), date[@type="publication-date"])
+                        html:block($config, ., ("tei-publicationStmt2"), date[@type="publication-date"])
                     )
 
                 case element(xhtml:object) return

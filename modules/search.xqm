@@ -207,7 +207,7 @@ declare function search:load-sections($node, $model) {
             </section>
         )
     }
-    let $html := templates:process($node/*, map:new(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content)))
     return
         $html
 };
@@ -226,7 +226,7 @@ function search:filters($node as node(), $model as map(*), $administration as xs
         "administration": $administration
     }
     return
-        map:new(($model, map { "filters": $filters}))
+        map:merge(($model, map { "filters": $filters}))
 };
 
 (:~
@@ -240,7 +240,7 @@ function search:component($node as node(), $model as map(*), $component as xs:st
         "component": $component,
         "filter": $filter
     }
-    return map:new(($model, $new))
+    return map:merge(($model, $new))
 };
 
 
@@ -342,7 +342,7 @@ declare function search:load-volumes-within($node, $model, $volume-id as xs:stri
                 </volume>
         )
     }
-    let $html := templates:process($node/*, map:new(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content)))
     return
         $html
 };
@@ -417,7 +417,7 @@ declare function search:load-administrations ($node, $model) {
             </administration>
         )
     }
-    let $html := templates:process($node/*, map:new(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content)))
     return
         $html
 };
@@ -530,7 +530,7 @@ function search:landing-page($node as node(), $model as map(*), $within as xs:st
             "sort-by": $sort-by
         }
     }
-    let $html := templates:process($node/*, map:new(($model, $query-info)))
+    let $html := templates:process($node/*, map:merge(($model, $query-info)))
     return
         $html
 };
@@ -666,7 +666,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
             ()
     
     let $templates-process-start := util:system-time()
-    let $html := templates:process($node/*, map:new(($model, $query-info)))
+    let $html := templates:process($node/*, map:merge(($model, $query-info)))
     let $templates-process-end := util:system-time()
     let $log := console:log("templates-process-duration: ", $templates-process-end - $templates-process-start)
     return
@@ -1058,7 +1058,7 @@ function search:load-volumes($node as node(), $model as map(*)) {
     
     let $load-volumes-end := util:system-time()
     let $log := console:log("search:load-volumes: loaded " || count($volumes?*) || " in " || $load-volumes-end - $load-volumes-start)
-    let $new := map:new(($model, $volumes))
+    let $new := map:merge(($model, $volumes))
 
     return
         $new
