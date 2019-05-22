@@ -36,7 +36,7 @@ declare function open:frus-latest() {
 
    let $feed-id := 'http://history.state.gov/atom/frus-metadata-v1'
 
-   let $author := 'Office of the Historian, Bureau of Public Affairs, United States Department of State'
+   let $author := 'Office of the Historian, Foreign Service Institute, United States Department of State'
 
    let $entries :=
         for $volume in $last-n-volumes
