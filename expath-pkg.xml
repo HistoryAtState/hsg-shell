@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package xmlns="http://expath.org/ns/pkg" name="http://history.state.gov/ns/site/hsg"
-    abbrev="hsg-shell" version="0.3" spec="1.0">
+    abbrev="hsg-shell" version="1.0.0" spec="1.0">
     <title>history.state.gov 3.0 shell</title>
     <dependency package="http://exist-db.org/apps/shared"/>
     <dependency package="http://www.tei-c.org/tei-simple"/>
