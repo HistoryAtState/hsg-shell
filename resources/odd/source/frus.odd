@@ -173,24 +173,21 @@
                         <model behaviour="heading" cssClass="listHead">
                             <param name="content">head/node()</param>
                             <param name="level">4</param>
+                            <desc>Headline for lists, level 4 will transform to html:h4 element</desc>
                         </model>
-                        <model behaviour="list" cssClass="list">
+                        <model behaviour="list" cssClass="list hsg-list-default">
                             <param name="content">item</param>
-                            <outputRendition>list-style-type: none; text-indent: -1em; margin-left: 1em; padding-left: 0</outputRendition>
                         </model>
                     </modelSequence>
-                    <model predicate="@rend = 'bulleted'" behaviour="list">
+                    <model predicate="@rend = 'bulleted'" behaviour="list" cssClass="hsg-list-disc">
                         <param name="content">item</param>
-                        <outputRendition>list-style-type: disc;</outputRendition>
                     </model>
-                    <model predicate="@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
+                    <model predicate="@type = ('participants', 'to', 'from', 'subject')" behaviour="list" cssClass="hsg-list-default">
                         <param name="content">item</param>
-                        <outputRendition>list-style-type: none;</outputRendition>
                     </model>
                     <model predicate="parent::list/@type = ('participants', 'to', 'from', 'subject')" behaviour="list">
                         <param name="content">item</param>
                         <desc>This is a nested list within a list-item</desc>
-                        <outputRendition>list-style-type: none; margin-top: 1em;</outputRendition>
                     </model>
                     <model predicate="label" behaviour="list" cssClass="labeled-list">
                         <param name="content">item</param>
@@ -302,9 +299,7 @@
                     <model predicate="@rend='smallfloatinline'" behaviour="block" cssClass="float-left figure-floated"/>
                     <model predicate="head or @rendition='simple:display'" behaviour="block"/>
                     <model behaviour="inline">
-                        <outputRendition>
-display: block;
-</outputRendition>
+                        <outputRendition>display: block;</outputRendition>
                     </model>
                 </elementSpec>
                 <elementSpec mode="change" ident="label"><!-- Silly rule to avoid class 'label' -->

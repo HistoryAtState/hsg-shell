@@ -30,3 +30,14 @@
     keep-with-previous.within-page: always;
     space-after: 1em;
 }
+
+.hsg-list-default {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 1em;
+    font-size: inherit;
+}
+
+.hsg-list-disc {
+    list-style-type: disc;
+}
