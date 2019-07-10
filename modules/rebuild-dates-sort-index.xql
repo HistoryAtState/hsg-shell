@@ -51,7 +51,10 @@ else
                         "doc-dateTime-min",
                         collection("/db/apps/frus/volumes")//tei:div,
                         function($div) {
-                            $div/@frus:doc-dateTime-min/xs:dateTime(.)
+                            if ($div/@frus:doc-dateTime-min castable as xs:dateTime) then
+                                $div/@frus:doc-dateTime-min cast as xs:dateTime
+                            else
+                                ()
                         }
                     ),
                     map { "result": "ok", "duration": util:system-time() - $start-time }
