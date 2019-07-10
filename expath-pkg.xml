@@ -5,4 +5,5 @@
     <dependency package="http://exist-db.org/apps/shared"/>
     <dependency package="http://www.tei-c.org/tei-simple"/>
     <dependency package="http://www.functx.com"/>
+    <dependency package="http://exist-db.org/xquery/memsort"/>
 </package>
