@@ -4,14 +4,27 @@
 
 You need to have *ant*, *git* and *nodeJS* (version 10.0.0 or higher) installed.
 
-### For Mac OS X
+### hsg-project users
 
-**Note: Installation via homebrew is deprecated since the support for latest node.js versions has been stopped.** 
+All instructions are at https://github.com/HistoryAtState/hsg-project/wiki/Setup.
 
-With **[homebrew](http://brew.sh#install)** installed, do
+### For other macOS users
+
+With **[homebrew](http://brew.sh#install)** installed, run:
 
     brew update && brew upgrade
-    brew install ant git node@6
+    brew install ant git node@10
+
+And follow homebrew's instructions to ensure that node 10's executables are 
+run:
+
+> If you need to have node@10 first in your PATH run:
+
+    echo 'export PATH="/usr/local/opt/node@10/bin:$PATH"' >> ~/.bash_profile
+
+Then:
+
+    source ~/.bash_profile
 
 ### Install global node packages
 
@@ -23,23 +36,21 @@ After node is installed just run
 
 1. Clone the repository
 
-    `git clone https://github.com/HistoryAtState/hsg-shell.git`
+        git clone https://github.com/HistoryAtState/hsg-shell.git
 
-1. Install dependencies for the front-end and automation tasks (`npm` & `bower`),
-    Build and copy javascripts, fonts, css and images into the *resources* folder (`gulp`) and
-    generate the *.xar-package* inside the *build* directory
+1. Build the application package
 
-    `ant`
+        ant
 
-1. Switch to the exist Dashboard
+1. Switch to the eXist Dashboard
 
-1. Install the package `build/hsg-shell-x.y.xar` with the Package Manager
+1. Install the package `build/hsg-shell-x.y.z.xar` with the Package Manager
 
 1. Click on the *history.state.gov* icon on the eXist Dashboard
 
 ## Update
 
-To create an up-to-date build package to install in eXistDB, this should do
+To create an up-to-date build package to install in eXist-db, this should do
 
     git pull && ant
 
@@ -88,7 +99,7 @@ deleting the entire `node_modules` folder from the project and then running `npm
 2. npm: `npm -v` => Should output at least `v6.9.0`
 3. gulp: `gulp -v` => Should output at least `CLI version: 2.2.0, Local version: 4.0.2`
 
-Now, with a running existdb you're ready to run either `ant` or `gulp` to test if your update was successful.
+Now, with a running eXist-db you're ready to run either `ant` or `gulp` to test if your update was successful.
 
 ### Production
 
