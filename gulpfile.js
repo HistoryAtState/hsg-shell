@@ -56,7 +56,9 @@ gulp.task('clean', function() {
 
 // fonts //
 
-gulp.task('fonts:copy', gulp.series('clean', function () {
+let fontPath = 'resources/fonts/';
+
+gulp.task('fonts:copy', gulp.series(function () {
     return gulp.src([
             'bower_components/bootstrap-sass/assets/fonts/**/*',
             'bower_components/font-awesome/fonts/*'
@@ -127,7 +129,7 @@ gulp.task('scripts:watch', function () {
 });
 
 // styles //
-gulp.task('styles:build', gulp.series('clean', function () {
+gulp.task('styles:build', gulp.series(function () {
     let compiler = sass({
         sourceMapEmbed: !PRODUCTION,
         sourceMapContents: !PRODUCTION,
@@ -236,7 +238,7 @@ gulp.task('other:watch', function () {
 
 // gulp.task('watch', ['styles:watch', 'scripts:watch', 'images:watch', 'templates:watch', 'pages:watch', 'odd:watch', 'other:watch', 'modules:watch'])
 
-gulp.task('build', gulp.series('fonts:copy', 'images:optimize', 'styles:concat', 'templates:build', 'scripts:concat'));
+gulp.task('build', gulp.series('clean', gulp.parallel('fonts:copy', 'images:optimize', 'styles:concat', 'templates:build', 'scripts:concat')));
 
 gulp.task('deploy', gulp.series('build', function () {
     return gulp.src([
@@ -245,7 +247,8 @@ gulp.task('deploy', gulp.series('build', function () {
             pagesPath,
             modulesPath,
             imagePath,
-            otherPath
+            otherPath,
+            fontPath
         ], {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))

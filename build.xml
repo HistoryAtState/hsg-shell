@@ -29,7 +29,7 @@
         <echo message="${npm.output}"/>
         <echo message="Creating xar package..."/>
         <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar"
-            excludes="${build.dir}/** node_modules/** package.json gulpfile.js .*"/>
+            excludes="${build.dir}/** node_modules/** bower_components/** package.json gulpfile.js  .* example.local.build.properties npm-shrinkwrap.json"/>
     </target>
     <target name="clean">
         <echo message="Calling gulp clean..."/>
