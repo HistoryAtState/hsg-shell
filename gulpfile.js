@@ -39,7 +39,6 @@ if (fs.existsSync('./local.node-exist.json')) {
 
 let exClient = exist.createClient(localConnectionOptions);
 
-
 const targetConfiguration = {
     target: '/db/apps/hsg-shell/',
     html5AsBinary: false
@@ -78,7 +77,7 @@ gulp.task('fonts:deploy', gulp.series('fonts:copy', function () {
  * Image optimization task will *overwrite* an existing image
  * with its optimized version
  */
-var imagePath = 'resources/images/**/*';
+let imagePath = 'resources/images/**/*';
 gulp.task('images:optimize', function () {
     return gulp.src('resources/images/*')
         .pipe(imagemin({optimizationLevel: 5}))
@@ -235,8 +234,6 @@ gulp.task('other:watch', function () {
 });
 
 // general //
-
-// gulp.task('watch', ['styles:watch', 'scripts:watch', 'images:watch', 'templates:watch', 'pages:watch', 'odd:watch', 'other:watch', 'modules:watch'])
 
 gulp.task('build', gulp.series('clean', gulp.parallel('fonts:copy', 'images:optimize', 'styles:concat', 'templates:build', 'scripts:concat')));
 
