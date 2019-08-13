@@ -11,6 +11,7 @@ resources/scripts/app.min.js
 /templates
 # local properties
 **/local.build.properties
+!example.local.build.properties
 # IDE
 .idea
 .DS_Store

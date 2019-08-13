@@ -1,7 +1,8 @@
 'use strict';
 
-var gulp = require('gulp'),
-    exist = require('gulp-exist'),
+const gulp = require('gulp'),
+    fs = require('fs'),
+    exist = require('@existdb/gulp-exist'),
     watch = require('gulp-watch'),
     sass = require('gulp-sass'),
     uglify = require('gulp-uglify'),
@@ -13,7 +14,7 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     concat = require('gulp-concat')
 
-var AUTOPREFIXER_BROWSERS = [
+const AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
   'ie_mob >= 10',
   'ff >= 30',
@@ -25,25 +26,23 @@ var AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
-var PRODUCTION = (!!process.env.NODE_ENV && process.env.NODE_ENV === 'production')
+const PRODUCTION = (!!process.env.NODE_ENV && process.env.NODE_ENV === 'production');
 
-console.log('Production? %s', PRODUCTION)
+console.log('Production? %s', PRODUCTION);
 
-exist.defineMimeTypes({
-    'application/xml': ['odd']
-})
+let localConnectionOptions = {};
 
-var exClient = exist.createClient({
-    host: 'localhost',
-    port: '8080',
-    path: '/exist/xmlrpc',
-    basic_auth: { user: 'admin', pass: '' }
-})
+if (fs.existsSync('./local.node-exist.json')) {
+  localConnectionOptions = require('./local.node-exist.json');
+  console.log('read from localConnectionOptions', localConnectionOptions)
+}
 
-var targetConfiguration = {
+let exClient = exist.createClient(localConnectionOptions);
+
+const targetConfiguration = {
     target: '/db/apps/hsg-shell/',
     html5AsBinary: false
-}
+};
 
 gulp.task('clean', function() {
     return del([
@@ -56,19 +55,21 @@ gulp.task('clean', function() {
 
 // fonts //
 
-gulp.task('fonts:copy', ['clean'], function () {
+let fontPath = 'resources/fonts/';
+
+gulp.task('fonts:copy', gulp.series(function () {
     return gulp.src([
             'bower_components/bootstrap-sass/assets/fonts/**/*',
             'bower_components/font-awesome/fonts/*'
         ])
         .pipe(gulp.dest('resources/fonts'))
-})
+}));
 
-gulp.task('fonts:deploy', ['fonts:copy'], function () {
+gulp.task('fonts:deploy', gulp.series('fonts:copy', function () {
     return gulp.src('resources/fonts/*', {base: '.'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
-})
+}));
 
 // images //
 
@@ -76,22 +77,22 @@ gulp.task('fonts:deploy', ['fonts:copy'], function () {
  * Image optimization task will *overwrite* an existing image
  * with its optimized version
  */
-var imagePath = 'resources/images/**/*';
+let imagePath = 'resources/images/**/*';
 gulp.task('images:optimize', function () {
     return gulp.src('resources/images/*')
         .pipe(imagemin({optimizationLevel: 5}))
         .pipe(gulp.dest('resources/images'))
-})
+});
 
 gulp.task('images:deploy', function () {
     return gulp.src('resources/images/*', {base: '.'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
-})
+});
 
 gulp.task('images:watch', function () {
-    gulp.watch('app/images/*', ['images:deploy'])
-})
+    gulp.watch('app/images/*', gulp.series('images:deploy'))
+});
 
 // scripts //
 
@@ -104,9 +105,9 @@ gulp.task('scripts:build', function () {
         .pipe(uglify())
         .pipe(concat('app.min.js'))
         .pipe(gulp.dest('resources/scripts'))
-})
+});
 
-gulp.task('scripts:concat', ['scripts:build'], function () {
+gulp.task('scripts:concat', gulp.series('scripts:build', function () {
     return gulp.src([
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
@@ -114,142 +115,142 @@ gulp.task('scripts:concat', ['scripts:build'], function () {
         ])
       .pipe(concat('app.all.js'))
       .pipe(gulp.dest('resources/scripts'));
-})
+}));
 
-gulp.task('scripts:deploy', ['scripts:concat'], function () {
+gulp.task('scripts:deploy', gulp.series('scripts:concat', function () {
     return gulp.src('resources/scripts/*.js', {base: '.'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
-})
+}));
 
 gulp.task('scripts:watch', function () {
-    gulp.watch('resources/scripts/*.js', ['scripts:deploy'])
-})
+    gulp.watch('resources/scripts/*.js', gulp.series('scripts:deploy'))
+});
 
 // styles //
-gulp.task('styles:build', ['clean'], function () {
-    var compiler = sass({
+gulp.task('styles:build', gulp.series(function () {
+    let compiler = sass({
         sourceMapEmbed: !PRODUCTION,
         sourceMapContents: !PRODUCTION,
         outputStyle: PRODUCTION ? 'compressed' : 'expanded'
-    })
-    compiler.on('error', sass.logError)
+    });
+
+    compiler.on('error', sass.logError);
     return gulp.src('app/scss/main.scss')
         .pipe(compiler)
         .pipe(autoprefixer(AUTOPREFIXER_BROWSERS))
         .pipe(gulp.dest('resources/css'))
-})
+}));
 
-gulp.task('styles:concat', ['styles:build'], function () {
+gulp.task('styles:concat', gulp.series('styles:build', function () {
     return gulp.src([
             'resources/css/main.css',
             'resources/odd/compiled/frus.css'
         ])
       .pipe(concat('all.css'))
       .pipe(gulp.dest('resources/css'));
-})
+}));
 
-gulp.task('styles:deploy', ['styles:build', 'styles:concat'], function () {
+gulp.task('styles:deploy', gulp.series('styles:build', 'styles:concat', function () {
     return gulp.src('resources/css/*.css', {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
-})
+}));
 
 gulp.task('styles:watch', function () {
-    gulp.watch('app/scss/**/*.scss', ['styles:deploy'])
-})
+    gulp.watch('app/scss/**/*.scss', gulp.series('styles:deploy'))
+});
 
 // pages //
 
-var pagesPath = 'pages/**/*.html';
+let pagesPath = 'pages/**/*.html';
 gulp.task('pages:deploy', function () {
     return gulp.src(pagesPath, {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
-})
+});
 
 gulp.task('pages:watch', function () {
-    gulp.watch(pagesPath, ['pages:deploy'])
-})
+    gulp.watch(pagesPath, gulp.series('pages:deploy'))
+});
 
 // modules //
 
-var modulesPath = 'modules/*';
+let modulesPath = 'modules/*';
 gulp.task('modules:deploy', function () {
     return gulp.src(modulesPath, {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
-})
+});
 
 gulp.task('modules:watch', function () {
-    gulp.watch(modulesPath, ['modules:deploy'])
-})
+    gulp.watch(modulesPath, gulp.series('modules:deploy'))
+});
 
 // templates //
 
-var templatesPath = 'templates/**/*.html';
+let templatesPath = 'templates/**/*.html';
 
 gulp.task('templates:build', function () {
     return gulp.src('app/' + templatesPath, {base: 'app/templates'})
         .pipe(preprocess({context: { PRODUCTION: PRODUCTION }}))
         .pipe(gulp.dest('templates'))
-})
+});
 
-gulp.task('templates:deploy', ['templates:build'], function () {
+gulp.task('templates:deploy', gulp.series('templates:build', function () {
     return gulp.src(templatesPath, {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
-})
+}));
 
 gulp.task('templates:watch', function () {
-    gulp.watch(templatesPath, ['templates:deploy'])
-})
+    gulp.watch(templatesPath, gulp.series('templates:deploy'))
+});
 
 // odd files //
 
-var oddPath = 'resources/odd/**/*';
+let oddPath = 'resources/odd/**/*';
 gulp.task('odd:deploy', function () {
     return gulp.src(oddPath, {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
-})
+});
 
 gulp.task('odd:watch', function () {
-    gulp.watch(oddPath, ['odd:deploy'])
-})
+    gulp.watch(oddPath, gulp.series('odd:deploy'))
+});
 
 // files in project root //
 
-var otherPath = '*{.xpr,.xqr,.xql,.xml,.xconf}';
+let otherPath = '*{.xpr,.xqr,.xql,.xml,.xconf}';
 gulp.task('other:deploy', function () {
     return gulp.src(otherPath, {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
-})
+});
 
 gulp.task('other:watch', function () {
-    gulp.watch(otherPath, ['other:deploy'])
-})
+    gulp.watch(otherPath, gulp.series('other:deploy'))
+});
 
 // general //
 
-gulp.task('watch', ['styles:watch', 'scripts:watch', 'images:watch', 'templates:watch',
-                    'pages:watch', 'odd:watch', 'other:watch', 'modules:watch'])
+gulp.task('build', gulp.series('clean', gulp.parallel('fonts:copy', 'images:optimize', 'styles:concat', 'templates:build', 'scripts:concat')));
 
-gulp.task('build', ['fonts:copy', 'images:optimize', 'styles:concat', 'templates:build', 'scripts:concat'])
-
-gulp.task('deploy', ['build'], function () {
+gulp.task('deploy', gulp.series('build', function () {
     return gulp.src([
             'resources/**/*', // odd, styles, fonts, scripts
-            'bower_components/**/*',
             templatesPath,
             pagesPath,
             modulesPath,
             imagePath,
-            otherPath
+            otherPath,
+            fontPath
         ], {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
-})
+}));
 
-gulp.task('default', ['build'])
+gulp.task('watch', gulp.series('deploy', gulp.parallel('styles:watch', 'scripts:watch', 'images:watch', 'templates:watch', 'pages:watch', 'odd:watch', 'other:watch', 'modules:watch')));
+
+gulp.task('default', gulp.series('build'));
