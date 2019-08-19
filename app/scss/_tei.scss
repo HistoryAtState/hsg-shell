@@ -94,3 +94,16 @@
 .hsg-list-disc {
   list-style-type: disc;
 }
+
+// Font-styles for 'tei:hi' elements
+// Override falsely set 'tei-hi1' classes which contain font-weight strong rule!
+.font {
+  &-italic {
+    font-style: italic;
+    font-weight: inherit !important;
+  }
+  &-smallcaps {
+    font-variant: small-caps;
+    font-weight: inherit !important;
+  }
+}

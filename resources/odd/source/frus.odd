@@ -128,16 +128,16 @@
                     <model predicate="@rend = 'strong'" behaviour="inline">
                         <outputRendition>font-weight: bold;</outputRendition>
                     </model>
-                    <model predicate="@rend = 'italic'" behaviour="inline">
+                    <model predicate="@rend = 'italic'" behaviour="inline" cssClass="font-italic">
                         <outputRendition>font-style: italic;</outputRendition>
                     </model>
-                    <model predicate="@rend = 'smallcaps'" behaviour="inline">
+                    <model predicate="@rend = 'smallcaps'" behaviour="inline" cssClass="font-smallcaps">
                         <outputRendition>font-variant: small-caps;</outputRendition>
                     </model>
-                    <model predicate="@rendition" behaviour="inline" useSourceRendition="true">
+                    <model predicate="@rendition" behaviour="inline" useSourceRendition="true" cssClass="font-italic">
                         <outputRendition>font-style: italic;</outputRendition>
                     </model>
-                    <model predicate="not(@rendition)" behaviour="inline">
+                    <model predicate="not(@rendition)" behaviour="inline" cssClass="font-italic">
                         <outputRendition>font-style: italic;</outputRendition>
                     </model>
                 </elementSpec>
