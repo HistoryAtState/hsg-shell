@@ -12,8 +12,8 @@ import module namespace memsort="http://exist-db.org/xquery/memsort" at "java:or
  : 
  : Logic:
  : 1. If another instance of the job is already running, it it skipped. This requires dba privileges to check, so the query must be chowned by a dba user and 
- : 2. If the job has never been run before, it is run.
- : 3. If the job has been run before, it only runs again if.
+ : 2. If the job has never been run before, or if the database has just restarted (thus clearing the in-memory memsort index), it is run.
+ : 3. If the job has been run before, it only runs again if:
  :    a. A "$wait-after-last-db-write" period has passed since the last modification to the collection (e.g., 10m). This allows batch uploads to complete before the reindex is started.
  :    b. A "$max-reindex-interval" period since the last reindexing has passed (e.g., 60m). This prevents reindexing from occuring too frequently.
  : 4. If the job runs and is successful, the completed time is recorded in the database.
@@ -33,16 +33,24 @@ else
     let $collection := "/db/apps/frus/volumes"
     let $last-reindexed := $status/last-reindexed[. ne ""] ! (. cast as xs:dateTime)
     let $last-modified := (xmldb:get-child-resources($collection) ! xmldb:last-modified($collection, .)) => max()
+    let $startup-time := current-dateTime() - system:get-uptime()
     let $wait-after-last-db-write := xs:dayTimeDuration("PT10M")
     let $max-reindex-interval := xs:dayTimeDuration("PT1H")
     
     (: conditions for reindexing :)
-    let $needs-reindexing := empty($last-reindexed) or $last-modified gt $last-reindexed
+    let $needs-reindexing := 
+        (: never indexed :)
+        empty($last-reindexed) 
+        (: resources have been added or edited :)
+        or $last-modified gt $last-reindexed
     let $db-has-cooled-down := current-dateTime() - $last-modified gt $wait-after-last-db-write
     let $max-reindex-interval-has-passed := current-dateTime() - $last-reindexed ge $max-reindex-interval
     let $ready-to-reindex := empty($last-reindexed) or ($db-has-cooled-down and $max-reindex-interval-has-passed)
+    let $force-reindex-now := 
+        (: the database has restarted and index needs to be rebuilt right away :)
+        $last-reindexed lt $startup-time
     return
-        if ($needs-reindexing and $ready-to-reindex) then
+        if (($needs-reindexing and $ready-to-reindex) or $force-reindex-now) then
             let $log := console:log("hsg rebuild-dates-sort-index.xql job starting.")
             let $start-time := util:system-time()
             let $reindex := 
