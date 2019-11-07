@@ -14,4 +14,5 @@ sm:chmod(xs:anyURI($target || "/modules/frus-ajax.xql"), "rwsr-xr-x"),
 sm:chmod(xs:anyURI($target || "/modules/fo.xql"), "rwsr-xr-x"),
 sm:chmod(xs:anyURI($target || "/modules/rebuild.xql"), "rwsr-xr-x"),
 sm:chown(xs:anyURI($target || "/modules/rebuild-dates-sort-index.xql"), "admin"),
-sm:chmod(xs:anyURI($target || "/modules/rebuild-dates-sort-index.xql"), "rwsr-xr-x")
+sm:chmod(xs:anyURI($target || "/modules/rebuild-dates-sort-index.xql"), "rwsr-xr-x"),
+util:eval(xs:anyURI($target || "/modules/rebuild.xql"))
