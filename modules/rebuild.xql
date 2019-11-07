@@ -24,7 +24,7 @@ declare variable $module-config := doc($odd-source || "/configuration.xml")/*;
             for $source in ("frus.odd", "departmenthistory.odd")
             for $module in ("web")
             for $file in pmu:process-odd(
-                doc(odd:get-compiled($odd-source, $source, $odd-compiled)),
+                doc(odd:compile($odd-source, $source, $odd-compiled)),
                 $odd-compiled,
                 $module,
                 "../generated",
