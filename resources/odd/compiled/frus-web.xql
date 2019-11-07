@@ -15,11 +15,11 @@ declare namespace skos='http://www.w3.org/2004/02/skos/core#';
 
 declare namespace frus='http://history.state.gov/frus/ns/1.0';
 
-import module namespace css="http://www.tei-c.org/tei-simple/xquery/css" at "xmldb:exist:///db/apps/tei-simple/content/css.xql";
+import module namespace css="http://www.tei-c.org/tei-simple/xquery/css" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/css.xql";
 
-import module namespace html="http://www.tei-c.org/tei-simple/xquery/functions" at "xmldb:exist:///db/apps/tei-simple/content/html-functions.xql";
+import module namespace html="http://www.tei-c.org/tei-simple/xquery/functions" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/html-functions.xql";
 
-import module namespace ext-html="http://history.state.gov/ns/site/hsg/pmf-html" at "xmldb:exist:///db/apps/tei-simple/content/../../hsg-shell/modules/ext-html.xql";
+import module namespace ext-html="http://history.state.gov/ns/site/hsg/pmf-html" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/../../hsg-shell/modules/ext-html.xql";
 
 (:~
 
@@ -257,16 +257,16 @@ declare function model:apply($config as map(*), $input as node()*) {
                         html:inline($config, ., ("tei-hi1"), .)
                     else
                         if (@rend = 'italic') then
-                            html:inline($config, ., ("tei-hi1"), .)
+                            html:inline($config, ., ("tei-hi1", "font-italic"), .)
                         else
                             if (@rend = 'smallcaps') then
-                                html:inline($config, ., ("tei-hi1"), .)
+                                html:inline($config, ., ("tei-hi1", "font-smallcaps"), .)
                             else
                                 if (@rendition) then
-                                    html:inline($config, ., css:get-rendition(., ("tei-hi1")), .)
+                                    html:inline($config, ., css:get-rendition(., ("tei-hi1", "font-italic")), .)
                                 else
                                     if (not(@rendition)) then
-                                        html:inline($config, ., ("tei-hi5"), .)
+                                        html:inline($config, ., ("tei-hi5", "font-italic"), .)
                                     else
                                         $config?apply($config, ./node())
                 case element(imprimatur) return
@@ -287,16 +287,17 @@ declare function model:apply($config as map(*), $input as node()*) {
                 case element(list) return
                     if (head) then
                         (
+                            (: Headline for lists, level 4 will transform to html:h4 element :)
                             html:heading($config, ., ("tei-list1", "listHead"), head/node(), 4),
-                            html:list($config, ., ("tei-list2", "list"), item)
+                            html:list($config, ., ("tei-list2", "list", "hsg-list-default"), item)
                         )
 
                     else
                         if (@rend = 'bulleted') then
-                            html:list($config, ., ("tei-list1"), item)
+                            html:list($config, ., ("tei-list1", "hsg-list-disc"), item)
                         else
                             if (@type = ('participants', 'to', 'from', 'subject')) then
-                                html:list($config, ., ("tei-list1"), item)
+                                html:list($config, ., ("tei-list1", "hsg-list-default"), item)
                             else
                                 if (parent::list/@type = ('participants', 'to', 'from', 'subject')) then
                                     (: This is a nested list within a list-item :)
