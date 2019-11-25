@@ -245,7 +245,7 @@
                 <elementSpec ident="pb" mode="change">
                     <modelSequence>
                         <model output="web" behaviour="link">
-                            <param name="content">concat('[Page ', @n, ']')</param>
+                            <param name="content">concat('[', switch (@type) case 'facsimile' return 'Facsimile ' case 'typeset' return 'Typeset ' default return '', 'Page ', @n, ']')</param>
                             <param name="link">@xml:id</param><!--<param name="link">concat('https://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
                             <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
                         </model>
