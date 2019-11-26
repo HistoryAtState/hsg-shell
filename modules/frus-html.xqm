@@ -418,7 +418,23 @@ declare function fh:breadcrumb-heading($model as map(*), $div as element()) {
             concat('Document ', $div/ancestor::tei:div[@type eq 'document'][1]/@n/string(), ', Page ', $div/@n/string())
         else
         :)
-        concat('Page ', $div/@n/string())
+        concat(
+            switch ($div/@type) 
+                (: for facsimile pbs, we can reliably determine the parent document :)
+                case "facsimile" return 
+                    let $next-sibling := $div/following-sibling::element()[1]
+                    let $ancestor-div := $div/ancestor::tei:div[1]
+                    return
+                        if ($next-sibling/self::tei:div/@n) then
+                            "Document " || $next-sibling/@n || " Facsimile "
+                        else if ($ancestor-div/@n) then
+                            "Document " || $ancestor-div/@n || " Facsimile "
+                        else
+                            "Facsimile "
+                default return (), 
+            'Page ', 
+            $div/@n/string()
+        )
     else
         (: strip footnotes off of chapter titles - an Eisenhower phenomenon :)
         toc:toc-head($model, $div/tei:head[1])
