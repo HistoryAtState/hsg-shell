@@ -349,7 +349,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                             html:paragraph($config, ., css:get-rendition(., ("tei-p2")), .)
                 case element(pb) return
                     (
-                        html:link($config, ., ("tei-pb1"), concat('[Page ', @n, ']'), @xml:id)
+                        html:link($config, ., ("tei-pb1"), concat('[', switch (@type) case 'facsimile' return 'Facsimile ' case 'typeset' return 'Typeset ' default return '', 'Page ', @n, ']'), @xml:id)
                     )
 
                 case element(pc) return
