@@ -82,7 +82,7 @@
                             <param name="content">"Editor:"</param>
                             <outputRendition>font-weight: bold</outputRendition>
                         </model>
-                        <model predicate="editor[@role = 'primary'][. ne '']" behaviour="list-from-items">
+                        <model predicate="editor[@role = 'primary'][. ne '']" behaviour="list-from-items"  cssClass="hsg-list-editors">
                             <param name="content">editor[@role="primary"]</param>
                             <outputRendition>list-style-type: none</outputRendition>
                         </model>
@@ -90,7 +90,7 @@
                             <param name="content">"General Editor:"</param>
                             <outputRendition>font-weight: bold</outputRendition>
                         </model>
-                        <model predicate="editor[@role = 'general'][. ne '']" behaviour="list-from-items">
+                        <model predicate="editor[@role = 'general'][. ne '']" behaviour="list-from-items" cssClass="hsg-list-editors">
                             <param name="content">editor[@role="general"]</param>
                             <outputRendition>list-style-type: none</outputRendition>
                         </model>
