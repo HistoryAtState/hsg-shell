@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This is an example build.properties.xml. Enter the the correct values and rename the file to build.properties.local.xml -->
+
+<root>
+    <app>
+        <name>hsg-shell</name>
+        <url>http://history.state.gov/ns/site/hsg</url>
+        <title>history.state.gov 3.0 shell</title>
+        <version>2.1.0</version>
+    </app>
+    <npm>/usr/local/opt/node@10/bin/npm</npm>
+    <gulp>/usr/local/bin/gulp</gulp>
+    <node>
+        <path>/usr/local/opt/node@10/bin:/usr/local/bin</path>
+    </node>
+    <trigger>
+        <provider-url>
+            <dev>failover:tcp://10.0.1.114:61616</dev>
+            <prod>failover:tcp://10.0.1.131:61616</prod>
+        </provider-url>
+        <destination>
+            <dev>dynamicTopics/hsg-replication</dev>
+            <prod>dynamicTopics/hsg-replication</prod>
+        </destination>
+    </trigger>
+</root>

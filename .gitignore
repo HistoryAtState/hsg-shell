@@ -10,8 +10,9 @@ resources/scripts/app.all.js
 resources/scripts/app.min.js
 /templates
 # local properties
-**/local.build.properties
-!example.local.build.properties
+local.node-exist.json
+build.properties.local.xml
+!build.properties.local.example.xml
 # IDE
 .idea
 .DS_Store

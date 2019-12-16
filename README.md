@@ -73,7 +73,26 @@ To create an up-to-date build package to install in eXist-db, this should do
 
 ## Build
 
-`ant` builds XAR file after running npm install bower install and gulp (build)
+`ant` 
+
+1. Single `xar` file: This will build a XAR file after running npm install bower install and gulp (build).  
+    ```shell
+    ant
+    ```
+
+2. DEV environment:   
+   This will build XAR files for development servers after running npm install bower install and gulp (build).  
+   The replication triggers for the producer server are enabled in  `collection.xconf` and point to the dev server's replication service IP.
+    ```shell
+    ant xar-dev
+    ```
+
+3. PROD environment:  
+    This will build XAR files for production servers after running npm install bower install and gulp (build) 
+    Same as in 2. but for PROD destination
+    ```shell
+    ant xar-prod
+    ```
 
 ## How to update Node and other build & development tools
 
