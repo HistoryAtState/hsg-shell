@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="xar" name="hsg-shell">
-    <property file="local.build.properties"/>
-    <property file="build.properties"/>
+    <xmlproperty file="build.properties.local.xml" semanticAttributes="true" keepRoot="false"/>
+    <xmlproperty file="build.properties.xml" semanticAttributes="true" keepRoot="false"/>
     <xmlproperty file="expath-pkg.xml"/>
-    <property name="project.version" value="${package(version)}"/>
-    <property name="project.app" value="hsg-shell"/>
     <property name="build.dir" value="build"/>
     <property environment="env"/>
+    <property name="files-to-be-excluded" value="${build.dir}/**,**/*.tmpl,node_modules/**,package.json,gulpfile.js,.idea/**,.* example.local.build.properties,npm-shrinkwrap.json"/>
+    
     <!-- Allow NODE_ENV to be passed in either as an environment variable or as a regular variable -->
     <condition property="node-env-is-set-for-production" else="false">
         <or>
@@ -14,35 +14,191 @@
             <equals arg1="${NODE_ENV}" arg2="production"/>
         </or>
     </condition>
+    
     <!-- Create a new property that sets production mode based on whether either variation of NODE_ENV is set to production -->
     <condition property="NODE_ENV.production" value="production" else="development">
         <istrue value="${node-env-is-set-for-production}"/>
     </condition>
-    <target name="xar">
-        <mkdir dir="${build.dir}"/>
-        <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
-        <exec executable="${npm}" outputproperty="npm.output">
-            <arg line="start"/>            
-            <env key="PATH" value="${node.PATH}:${env.PATH}"/>
-            <env key="NODE_ENV" value="${NODE_ENV.production}"/>
-        </exec>
-        <echo message="${npm.output}"/>
-        <echo message="Creating xar package..."/>
-        <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar"
-            excludes="${build.dir}/** node_modules/** package.json gulpfile.js .idea/** .* example.local.build.properties npm-shrinkwrap.json"/>
-    </target>
+    
     <target name="clean">
         <echo message="Calling gulp clean..."/>
         <exec executable="${gulp}" outputproperty="gulp.output">
             <arg line="clean"/>
-            <env key="PATH" value="${node.PATH}:${env.PATH}"/>
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
         </exec>
         <echo message="${gulp.output}"/>
+    
         <echo message="Deleting xar files..."/>
-        <delete>
-            <fileset dir="${build.dir}">
-                <include name="*.xar"/>
+        <delete dir="${build.dir}"/>
+        <mkdir dir="${build.dir}"/>
+    </target>
+    
+    <target name="run-npm">
+        <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
+        <exec executable="${npm}" outputproperty="npm.output">
+            <arg line="start"/>
+            <env key="PATH" value="${node.path}:${env.PATH}"/>
+            <env key="NODE_ENV" value="${NODE_ENV.production}"/>
+        </exec>
+        <echo message="${npm.output}"/>
+    </target>
+    
+    <target name="copy" depends="run-npm">
+        <echo message="Copying the files to the build folder..."/>
+        <copy todir="${build.dir}/${app.name}-${app.version}">
+            <fileset dir="${basedir}">
+                <exclude name="${build.dir}/**"/>
             </fileset>
-        </delete>
+        </copy>
+    </target>
+    
+    <target name="apply-filters">
+        <echo message="Apply values to expath-pgk.xml..."/>
+        <copy todir="${build.dir}/${app.name}-${app.version}" overwrite="true" verbose="true">
+            <fileset file="expath-pkg.xml.tmpl"/>
+            <filterset>
+                <filter token="name" value="${app.name}"/>
+                <filter token="version" value="${app.version}"/>
+                <filter token="url" value="${app.url}"/>
+                <filter token="title" value="${app.title}"/>
+            </filterset>
+            <globmapper from="*.tmpl" to="*"/>
+        </copy>
+    </target>
+    
+    <target name="apply-filters-to-producer-dev">
+        <echo message="Apply DEV values to collection.xconf..."/>
+        <copy todir="${build.dir}/${app.name}-${app.version}" overwrite="true" verbose="true">
+            <fileset file="collection.xconf.tmpl"/>
+            <fileset file="expath-pkg.xml.tmpl"/>
+            <filterset>
+                <filter token="provider-url" value="${trigger.provider-url.dev}"/>
+                <filter token="destination" value="${trigger.destination.dev}"/>
+                <filter token="name" value="${app.name}"/>
+                <filter token="version" value="${app.version}"/>
+                <filter token="url" value="${app.url}"/>
+                <filter token="title" value="${app.title}"/>
+            </filterset>
+            <globmapper from="*.tmpl" to="*"/>
+        </copy>
+    </target>
+    
+    <target name="apply-filters-to-producer-prod">
+        <echo message="Apply PROD values to collection.xconf..."/>
+        <copy todir="${build.dir}/${app.name}-${app.version}" overwrite="true" verbose="true">
+            <fileset file="collection.xconf.tmpl"/>
+            <fileset file="expath-pkg.xml.tmpl"/>
+            <filterset>
+                <filter token="provider-url" value="${trigger.provider-url.prod}"/>
+                <filter token="destination" value="${trigger.destination.prod}"/>
+                <filter token="name" value="${app.name}"/>
+                <filter token="version" value="${app.version}"/>
+                <filter token="url" value="${app.url}"/>
+                <filter token="title" value="${app.title}"/>
+            </filterset>
+            <globmapper from="*.tmpl" to="*"/>
+        </copy>
+    </target>
+    
+    
+    <target name="xar-dev" depends="clean" description="target to create application XAR files for DEV environment">
+        <antcall target="copy"/>
+        <antcall target="apply-filters"/>
+        <echo message="------------------------------------------------------------"/>
+        <echo message="Creating DEV 'consumer' xar package..."/>
+        <echo message="------------------------------------------------------------"/>
+        
+        <zip basedir="${build.dir}/${app.name}-${app.version}" destfile="${build.dir}/${app.name}-${app.version}-consumer-dev.xar">
+            <exclude name="${build.dir}/**"/>
+            <exclude name="**/*.tmpl"/>
+            <exclude name="node_modules/**"/>
+            <exclude name="package.json"/>
+            <exclude name="bower.json"/>
+            <exclude name=".idea/**"/>
+            <exclude name="npm-shrinkwrap.json"/>
+            <exclude name="build.properties.local.xml"/>
+            <exclude name="local.node-exist.json"/>
+            <exclude name="collection.xconf"/>
+        </zip>
+        
+        <antcall target="apply-filters-to-producer-dev"/>
+        
+        <echo message="------------------------------------------------------------"/>
+        <echo message="Creating DEV 'producer' xar package containing triggers..."/>
+        <echo message="------------------------------------------------------------"/>
+        
+        <zip basedir="${build.dir}/${app.name}-${app.version}" destfile="${build.dir}/${app.name}-${app.version}-producer-dev.xar">
+            <exclude name="**/*.tmpl"/>
+            <exclude name="node_modules/**"/>
+            <exclude name="package.json"/>
+            <exclude name="bower.json"/>
+            <exclude name=".idea/**"/>
+            <exclude name="npm-shrinkwrap.json"/>
+            <exclude name="build.properties.local.xml"/>
+            <exclude name="local.node-exist.json"/>
+        </zip>
+        <delete dir="${build.dir}/${app.name}-${app.version}"/>
+    </target>
+    
+    <target name="xar-prod" depends="clean" description="target to create application XAR files for PROD environment">
+        <antcall target="copy"/>
+        <antcall target="apply-filters"/>
+        
+        <echo message="------------------------------------------------------------"/>
+        <echo message="Creating PROD 'consumer' xar package..."/>
+        <echo message="------------------------------------------------------------"/>
+        
+        <zip basedir="${build.dir}/${app.name}-${app.version}" destfile="${build.dir}/${app.name}-${app.version}-consumer.xar">
+            <exclude name="${build.dir}/**"/>
+            <exclude name="**/*.tmpl"/>
+            <exclude name="node_modules/**"/>
+            <exclude name="package.json"/>
+            <exclude name="bower.json"/>
+            <exclude name=".idea/**"/>
+            <exclude name="npm-shrinkwrap.json"/>
+            <exclude name="build.properties.local.xml"/>
+            <exclude name="local.node-exist.json"/>
+            <exclude name="collection.xconf"/>
+        </zip>
+        
+        <antcall target="apply-filters-to-producer-prod"/>
+        
+        <echo message="------------------------------------------------------------"/>
+        <echo message="Creating PROD 'producer' xar package containing triggers..."/>
+        <echo message="------------------------------------------------------------"/>
+        
+        <zip basedir="${build.dir}/${app.name}-${app.version}" destfile="${build.dir}/${app.name}-${app.version}-producer.xar">
+            <exclude name="${build.dir}/**"/>
+            <exclude name="**/*.tmpl"/>
+            <exclude name="node_modules/**"/>
+            <exclude name="package.json"/>
+            <exclude name="bower.json"/>
+            <exclude name=".idea/**"/>
+            <exclude name="npm-shrinkwrap.json"/>
+            <exclude name="build.properties.local.xml"/>
+            <exclude name="local.node-exist.json"/>
+        </zip>
+        <delete dir="${build.dir}/${app.name}-${app.version}"/>
+    </target>
+    
+    <target name="xar" depends="clean" description="main target to create application XAR files">
+        <antcall target="copy"/>
+        <antcall target="apply-filters"/>
+        <echo message="------------------------------------------------------------"/>
+        <echo message="Creating xar package..."/>
+        <echo message="------------------------------------------------------------"/>
+        
+        <zip basedir="${build.dir}/${app.name}-${app.version}" destfile="${build.dir}/${app.name}-${app.version}.xar">
+            <exclude name="**/*.tmpl"/>
+            <exclude name="node_modules/**"/>
+            <exclude name="package.json"/>
+            <exclude name="bower.json"/>
+            <exclude name=".idea/**"/>
+            <exclude name="npm-shrinkwrap.json"/>
+            <exclude name="build.properties.local.xml"/>
+            <exclude name="local.node-exist.json"/>
+            <exclude name="collection.xconf"/>
+        </zip>
+        <delete dir="${build.dir}/${app.name}-${app.version}"/>
     </target>
 </project>
