@@ -338,6 +338,15 @@ declare %templates:wrap function app:load-carousel-items($node as node(), $model
         $html
 };
 
+(: workaround bug in templates:each :)
+declare function app:each($node as node(), $model as map(*), $from as xs:string, $to as xs:string) {
+    for $item in $model($from)
+    return
+        element { node-name($node) } {
+            $node/@*, templates:process($node/node(), map:merge(($model, map:entry($to, $item))))
+        }
+};
+
 declare function app:carousel-list-slide-to-count-attribute($node as node(), $model as map(*)) {
     let $item := $model?carousel-item
     let $n := index-of($model?carousel-items, $item) - 1
