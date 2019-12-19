@@ -257,11 +257,10 @@ declare function app:date-to-english($date as xs:string) as xs:string {
 declare %templates:wrap function app:load-most-recent-tweets($node as node(), $model as map(*), $how-many as xs:integer) {
     let $ordered-tweets :=
         for $tweet in collection($config:TWITTER_COL)/tweet
-        order by $tweet/date
+        order by $tweet/date descending
         return $tweet
-    let $tweets-to-show := subsequence($ordered-tweets, count($ordered-tweets) - $how-many + 1)
-    let $newest-on-top := reverse($tweets-to-show)
-    let $content := map { "tweets": $newest-on-top }
+    let $tweets-to-show := subsequence($ordered-tweets, 1, $how-many)
+    let $content := map { "tweets": $tweets-to-show }
     let $html := templates:process($node/*, map:merge(($model, $content)))
     return
         $html
