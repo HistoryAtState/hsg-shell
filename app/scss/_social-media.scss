@@ -34,6 +34,10 @@
   margin-bottom: 0.2em;
 }
 
+.post-body img {
+  max-width: 100%;
+}
+
 .post-meta {
   text-align: right;
   font-size: $small-font-size;
