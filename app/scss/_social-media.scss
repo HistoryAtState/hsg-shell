@@ -1,16 +1,18 @@
 .social-sidebar {
   border: none;
+
   h2 {
    margin-left: $margin-horizontal-base;
   }
   @media screen and (min-width: $screen-lg-min) {
-    padding: 0 2.5rem;
+    padding: 0 0 0 1.5rem;
     border-left: $default-border-style;
+
     h2 {
       margin-left: 0;
     }
     section {
-      padding-left: 0;
+      padding: 0;
     }
   }
 }
