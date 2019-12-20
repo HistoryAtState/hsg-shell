@@ -24,23 +24,28 @@
   margin-top: 2rem;
   padding-bottom: 2rem;
   border-bottom: $default-border-style;
-}
 
-.post:last-child {
-  border-bottom: none;
-}
+  &:last-child {
+    border-bottom: none;
+  }
 
-.post-body {
-  margin-bottom: 0.2em;
-}
+  &-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
 
-.post-body img {
-  max-width: 100%;
-}
+  &-meta {
+    text-align: right;
+    font-size: $small-font-size;
+    font-family: $font-sans;
+    margin-bottom: 0.2em;
+  }
 
-.post-meta {
-  text-align: right;
-  font-size: $small-font-size;
-  font-family: $font-sans;
-  margin-bottom: 0.2em;
+  &-body {
+    margin-bottom: 0.2em;
+
+    img {
+      max-width: 100%;
+    }
+  }
 }
