@@ -52,6 +52,7 @@
         <copy todir="${build.dir}/${app.name}-${app.version}">
             <fileset dir="${basedir}">
                 <exclude name="${build.dir}/**"/>
+                <exclude name="node_modules/**"/>
             </fileset>
         </copy>
     </target>
