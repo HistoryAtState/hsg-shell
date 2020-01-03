@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 module namespace ch = "http://history.state.gov/ns/site/hsg/countries-html";
 
@@ -45,7 +45,6 @@ function ch:article-title($node as node(), $model as map(*)) {
     root($model?article)//tei:title[@type='short']/string()
 };
 
-
 declare function ch:article-href-value-attribute($node as node(), $model as map(*)) {
     let $article-id := substring-before(util:document-name($model?article), '.xml')
     return
@@ -58,53 +57,73 @@ function ch:dropdown($node as node(), $model as map(*), $document-id as xs:strin
     <option value="">Choose one</option>
     ,
     for $c in collection($ch:RDCR_ARTICLES_COL)/tei:TEI
-    let $article-id := substring-before(util:document-name($c), '.xml')
+    let $article-id := $c => util:document-name() => substring-before(".xml")
     let $selected := if ($document-id = $article-id) then attribute selected {"selected"} else ()
     let $brief-title := $c//tei:title[@type='short']/string()
-    order by $brief-title
+    let $reverse-the := 
+        if (starts-with($t, "The ")) then
+            replace($t, "^(The) (.+?)(\*?)$", "$2, $1$3")
+        else
+            $t/string()
+    order by $reverse-the
     return
         <option>{
             attribute value { app:fix-href("$app/countries/" || $article-id) },
             $selected,
-            $brief-title
+            $reverse-the
         }</option>
     ,
     <option value="{app:fix-href('$app/countries/all')}">... view all</option>
 };
 
-(: Borrowed two-column from pocom:chiefs-countries-list() :)
+(: Original two-column routine borrowed from pocom:chiefs-countries-list() :)
 declare function ch:list($node, $model) {
-    let $titles := collection($ch:RDCR_ARTICLES_COL)//tei:title[@type='short']
-    let $letters := for $letter in distinct-values($titles/substring(upper-case(.), 1, 1)) order by $letter return $letter
-    let $count := count($letters)
-    let $cutoff := xs:integer(ceiling($count div 2))
-    let $first-half := $letters[position() = (1 to $cutoff)]
-    let $second-half := $letters[position() = (($cutoff + 1 to $count))]
+    let $title-maps := 
+        for $title in collection($ch:RDCR_ARTICLES_COL)//tei:title[@type='short']
+        let $sort-title := 
+            (
+                if (starts-with($title, "The ")) then
+                    replace($title, "^(The) (.+?)(\*?)$", "$2, $1$3")
+                else
+                    $title
+            )
+            => normalize-space()
+        return
+            map {
+                "title": $title,
+                "sort-title": $sort-title,
+                "letter": $sort-title => substring(1, 1) => upper-case(),
+                "article-id": $title => util:document-name() => substring-before(".xml")
+            }
+    let $letter-groups := 
+        for $title-map in $title-maps
+        group by $letter := $title-map?letter
+        order by $letter
+        return 
+            <div>
+                <h3>{$letter}</h3>
+                <ul>
+                    {
+                        for $t in $title-map
+                        order by $t?sort-title
+                        return
+                           <li>
+                               <a href="$app/countries/{$t?article-id}">{$t?sort-title}</a>
+                           </li>
+                    }
+                </ul>
+            </div>
+    let $count := count($letter-groups)
     return
         <div class="row">
             {
-                for $group in (1, 2) (: feels kludgy, but better than old version; TODO: replace with group-by? :)
+                for $letter-group at $n in $letter-groups
+                group by $half := if ($n div $count le .5) then 1 else 2
+                order by $half
                 return
                     <div class="col-md-6">
                         {
-                            let $letter-group := if ($group = 1) then $first-half else $second-half
-                            for $letter in $letter-group
-                            order by lower-case($letter)
-                            return
-                                <div>
-                                    <h3>{$letter}</h3>
-                                    <ul>
-                                        {
-                                        for $item in collection($ch:RDCR_ARTICLES_COL)//tei:title[@type='short'][starts-with(., $letter)]
-                                        let $itemid := replace(util:document-name($item), '.xml', '')
-                                        order by $item
-                                        return
-                                           <li>
-                                               <a href="$app/countries/{$itemid}">{$item/string()}</a>
-                                           </li>
-                                        }
-                                    </ul>
-                                </div>
+                            $letter-group
                         }
                     </div>
             }
