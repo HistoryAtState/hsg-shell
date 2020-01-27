@@ -39,7 +39,11 @@
     "webdriverio": "~4.10.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "wdio wdio.conf.js",
+    "test-dev": "./node_modules/.bin/wdio wdio.conf.js --suite prod",
+    "test-dev-producer": "./node_modules/.bin/wdio wdio.conf.js --suite prod_producer",
+    "test-prod": "./node_modules/.bin/wdio wdio.conf.js --suite prod",
+    "test-prod-producer": "./node_modules/.bin/wdio wdio.conf.js --suite prod_producer",
     "update": "npm update && bower update && gulp",
     "start": "npm install --quiet && bower install --quiet && gulp"
   },

@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" timestamp="2020-01-27T18:12:19" time="10.112" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=relevance&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" name="within_entire_site_should_return_search_results" time="0.003">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=department&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.9898975109347175-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.9898975109347175-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"Travels: Madeleine Korbel Albright"}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" timestamp="2020-01-27T18:12:29" time="2.595" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=relevance&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" name="within_department_should_return_search_results" time="0.001">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.3124347967030312-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.3124347967030312-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"Contents (1969–1976, Volume XVII, China, 1969–1972)"}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" timestamp="2020-01-27T18:12:32" time="6.355" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=relevance&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" name="within_documents_should_return_search_results" time="0.001">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-02-01&end-date=1946-03-31&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.9341905813619926-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.9341905813619926-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"The Joint Chiefs of Staff to Lieutenant General Albert C. Wedemeyer (1946, Volume X, The Far East: China)"}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" timestamp="2020-01-27T18:12:38" time="5.988" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=relevance&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" name="within_documents_start_date_1946_02_01_end_date_1946_03_31_should_return_search_results" time="0.001">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946&end-date=1946-03-31&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.19347784301471438-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.19347784301471438-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"The Secretary of State to the Embassy in China (1946, Volume X, The Far East: China)"}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" timestamp="2020-01-27T18:12:44" time="4.091" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=relevance&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" name="within_documents_start_date_1946_end_date_1946_03_31_should_return_search_results" time="0.002">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-02&end-date=1946-03-31&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.06259181613631504-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.06259181613631504-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"The Joint Chiefs of Staff to Lieutenant General Albert C. Wedemeyer (1946, Volume X, The Far East: China)"}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" timestamp="2020-01-27T18:12:48" time="3.972" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=relevance&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" name="within_documents_start_date_1946_02_end_date_1946_03_31_should_return_search_results" time="0.001">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&end-date=1946-01-31&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.37498224131500657-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.37498224131500657-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"Contents (1969–1976, Volume XVII, China, 1969–1972)"}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" timestamp="2020-01-27T18:12:52" time="4.713" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=relevance&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" name="within_documents_end_date_1946_01_31_should_return_search_results" time="0">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-02-01&end-date=1946&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.7702429902973673-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.7702429902973673-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"The Joint Chiefs of Staff to Lieutenant General Albert C. Wedemeyer (1946, Volume X, The Far East: China)"}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" timestamp="2020-01-27T18:12:57" time="3.537" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=relevance&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" name="within_documents_start_date_1946_02_01_end_date_1946_should_return_search_results" time="0.001">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-02-01&end-date=1946-03&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.40488034622460156-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.40488034622460156-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"The Joint Chiefs of Staff to Lieutenant General Albert C. Wedemeyer (1946, Volume X, The Far East: China)"}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" timestamp="2020-01-27T18:13:01" time="3.947" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=relevance&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" name="within_documents_start_date_1946_02_01_end_date_1946_03_should_return_search_results" time="0.001">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-01-02&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.6351041609461183-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.6351041609461183-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"The Chargé in China (Robertson) to the Secretary of State (1946, Volume X, The Far East: China)"}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" timestamp="2020-01-27T18:13:05" time="3.093" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=relevance&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_relevance" name="within_documents_start_date_1946_01_02_should_return_search_results" time="0.002">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=entire-site&sort-by=date-asc"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}","type":"RuntimeError","seleniumStack":{"type":"NoSuchElement","message":"An element could not be located on the page using the given search parameters.","orgStatusMessage":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}\n  (Session info: chrome=79.0.3945.130)\n  (Driver info: chromedriver=2.38.552518 (183d19265345f54ce39cbb94cf81ba5f15905011),platform=Mac OS X 10.14.6 x86_64)"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/screenshot - {}
+RESULT: null
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=department&sort-by=date-asc"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}","type":"RuntimeError","seleniumStack":{"type":"NoSuchElement","message":"An element could not be located on the page using the given search parameters.","orgStatusMessage":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}\n  (Session info: chrome=79.0.3945.130)\n  (Driver info: chromedriver=2.38.552518 (183d19265345f54ce39cbb94cf81ba5f15905011),platform=Mac OS X 10.14.6 x86_64)"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/screenshot - {}
+RESULT: null
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&sort-by=date-asc"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}","type":"RuntimeError","seleniumStack":{"type":"NoSuchElement","message":"An element could not be located on the page using the given search parameters.","orgStatusMessage":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}\n  (Session info: chrome=79.0.3945.130)\n  (Driver info: chromedriver=2.38.552518 (183d19265345f54ce39cbb94cf81ba5f15905011),platform=Mac OS X 10.14.6 x86_64)"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/screenshot - {}
+RESULT: null
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-02-01&end-date=1946-03-31&sort-by=date-asc"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}","type":"RuntimeError","seleniumStack":{"type":"NoSuchElement","message":"An element could not be located on the page using the given search parameters.","orgStatusMessage":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}\n  (Session info: chrome=79.0.3945.130)\n  (Driver info: chromedriver=2.38.552518 (183d19265345f54ce39cbb94cf81ba5f15905011),platform=Mac OS X 10.14.6 x86_64)"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/screenshot - {}
+RESULT: null
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946&end-date=1946-03-31&sort-by=date-asc"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}","type":"RuntimeError","seleniumStack":{"type":"NoSuchElement","message":"An element could not be located on the page using the given search parameters.","orgStatusMessage":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}\n  (Session info: chrome=79.0.3945.130)\n  (Driver info: chromedriver=2.38.552518 (183d19265345f54ce39cbb94cf81ba5f15905011),platform=Mac OS X 10.14.6 x86_64)"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/screenshot - {}
+RESULT: null
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-02&end-date=1946-03-31&sort-by=date-asc"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}","type":"RuntimeError","seleniumStack":{"type":"NoSuchElement","message":"An element could not be located on the page using the given search parameters.","orgStatusMessage":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}\n  (Session info: chrome=79.0.3945.130)\n  (Driver info: chromedriver=2.38.552518 (183d19265345f54ce39cbb94cf81ba5f15905011),platform=Mac OS X 10.14.6 x86_64)"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/screenshot - {}
+RESULT: null
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&end-date=1946-01-31&sort-by=date-asc"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}","type":"RuntimeError","seleniumStack":{"type":"NoSuchElement","message":"An element could not be located on the page using the given search parameters.","orgStatusMessage":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}\n  (Session info: chrome=79.0.3945.130)\n  (Driver info: chromedriver=2.38.552518 (183d19265345f54ce39cbb94cf81ba5f15905011),platform=Mac OS X 10.14.6 x86_64)"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/screenshot - {}
+RESULT: null
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-02-01&end-date=1946&sort-by=date-asc"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}","type":"RuntimeError","seleniumStack":{"type":"NoSuchElement","message":"An element could not be located on the page using the given search parameters.","orgStatusMessage":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}\n  (Session info: chrome=79.0.3945.130)\n  (Driver info: chromedriver=2.38.552518 (183d19265345f54ce39cbb94cf81ba5f15905011),platform=Mac OS X 10.14.6 x86_64)"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/screenshot - {}
+RESULT: null
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-02-01&end-date=1946-03&sort-by=date-asc"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}","type":"RuntimeError","seleniumStack":{"type":"NoSuchElement","message":"An element could not be located on the page using the given search parameters.","orgStatusMessage":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}\n  (Session info: chrome=79.0.3945.130)\n  (Driver info: chromedriver=2.38.552518 (183d19265345f54ce39cbb94cf81ba5f15905011),platform=Mac OS X 10.14.6 x86_64)"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/screenshot - {}
+RESULT: null
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-01-02&sort-by=date-asc"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"message":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}","type":"RuntimeError","seleniumStack":{"type":"NoSuchElement","message":"An element could not be located on the page using the given search parameters.","orgStatusMessage":"no such element: Unable to locate element: {\"method\":\"css selector\",\"selector\":\".hsg-search-result > h3 > a\"}\n  (Session info: chrome=79.0.3945.130)\n  (Driver info: chromedriver=2.38.552518 (183d19265345f54ce39cbb94cf81ba5f15905011),platform=Mac OS X 10.14.6 x86_64)"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/screenshot - {}
+RESULT: null
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1946-01-02&end-date=1945-01-01&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":"#content-inner > section > p"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.3649122837189205-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.3649122837189205-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"No results were found."}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-section"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.3649122837189205-2"}}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" timestamp="2020-01-27T18:13:08" time="1.875" tests="1" failures="0" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=date-asc&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" name="before_all_hook" time="50.407">
+      <error message="An element could not be located on the page using the given search parameters (&quot;.hsg-search-result > h3 > a&quot;)."/>
+      <system-err>
+        <![CDATA[
+Error: An element could not be located on the page using the given search parameters (".hsg-search-result > h3 > a").
+    at getText() - index.js:312:3
+]]>
+      </system-err>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" timestamp="2020-01-27T18:13:10" time="0.668" tests="1" failures="0" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=date-asc&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" name="before_all_hook" time="49.738">
+      <error message="An element could not be located on the page using the given search parameters (&quot;.hsg-search-result > h3 > a&quot;)."/>
+      <system-err>
+        <![CDATA[
+Error: An element could not be located on the page using the given search parameters (".hsg-search-result > h3 > a").
+    at getText() - index.js:312:3
+]]>
+      </system-err>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" timestamp="2020-01-27T18:13:10" time="1.462" tests="1" failures="0" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=date-asc&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" name="before_all_hook" time="48.276">
+      <error message="An element could not be located on the page using the given search parameters (&quot;.hsg-search-result > h3 > a&quot;)."/>
+      <system-err>
+        <![CDATA[
+Error: An element could not be located on the page using the given search parameters (".hsg-search-result > h3 > a").
+    at getText() - index.js:312:3
+]]>
+      </system-err>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" timestamp="2020-01-27T18:13:12" time="2.387" tests="1" failures="0" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=date-asc&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" name="before_all_hook" time="45.89">
+      <error message="An element could not be located on the page using the given search parameters (&quot;.hsg-search-result > h3 > a&quot;)."/>
+      <system-err>
+        <![CDATA[
+Error: An element could not be located on the page using the given search parameters (".hsg-search-result > h3 > a").
+    at getText() - index.js:312:3
+]]>
+      </system-err>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" timestamp="2020-01-27T18:13:14" time="2.303" tests="1" failures="0" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=date-asc&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" name="before_all_hook" time="43.587">
+      <error message="An element could not be located on the page using the given search parameters (&quot;.hsg-search-result > h3 > a&quot;)."/>
+      <system-err>
+        <![CDATA[
+Error: An element could not be located on the page using the given search parameters (".hsg-search-result > h3 > a").
+    at getText() - index.js:312:3
+]]>
+      </system-err>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" timestamp="2020-01-27T18:13:16" time="2.468" tests="1" failures="0" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=date-asc&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" name="before_all_hook" time="41.119">
+      <error message="An element could not be located on the page using the given search parameters (&quot;.hsg-search-result > h3 > a&quot;)."/>
+      <system-err>
+        <![CDATA[
+Error: An element could not be located on the page using the given search parameters (".hsg-search-result > h3 > a").
+    at getText() - index.js:312:3
+]]>
+      </system-err>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" timestamp="2020-01-27T18:13:19" time="1.436" tests="1" failures="0" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=date-asc&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" name="before_all_hook" time="39.683">
+      <error message="An element could not be located on the page using the given search parameters (&quot;.hsg-search-result > h3 > a&quot;)."/>
+      <system-err>
+        <![CDATA[
+Error: An element could not be located on the page using the given search parameters (".hsg-search-result > h3 > a").
+    at getText() - index.js:312:3
+]]>
+      </system-err>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" timestamp="2020-01-27T18:13:20" time="2.403" tests="1" failures="0" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=date-asc&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" name="before_all_hook" time="37.28">
+      <error message="An element could not be located on the page using the given search parameters (&quot;.hsg-search-result > h3 > a&quot;)."/>
+      <system-err>
+        <![CDATA[
+Error: An element could not be located on the page using the given search parameters (".hsg-search-result > h3 > a").
+    at getText() - index.js:312:3
+]]>
+      </system-err>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" timestamp="2020-01-27T18:13:23" time="2.339" tests="1" failures="0" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=date-asc&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" name="before_all_hook" time="34.941">
+      <error message="An element could not be located on the page using the given search parameters (&quot;.hsg-search-result > h3 > a&quot;)."/>
+      <system-err>
+        <![CDATA[
+Error: An element could not be located on the page using the given search parameters (".hsg-search-result > h3 > a").
+    at getText() - index.js:312:3
+]]>
+      </system-err>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" timestamp="2020-01-27T18:13:25" time="3.619" tests="1" failures="0" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with valid parameters and sorted by &quot;&amp;sort-by=date-asc&quot;"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_valid_parameters_and_sorted_by_sort_by_date_asc" name="before_all_hook" time="31.322">
+      <error message="An element could not be located on the page using the given search parameters (&quot;.hsg-search-result > h3 > a&quot;)."/>
+      <system-err>
+        <![CDATA[
+Error: An element could not be located on the page using the given search parameters (".hsg-search-result > h3 > a").
+    at getText() - index.js:312:3
+]]>
+      </system-err>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_invalid_parameters" timestamp="2020-01-27T18:13:29" time="4.494" tests="2" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with invalid parameters"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_invalid_parameters" name="within_documents_start_date_1946_01_02_end_date_1945_01_01_should_display_the_search_page" time="0.001"/>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_invalid_parameters" name="within_documents_start_date_1946_01_02_end_date_1945_01_01_should_not_return_any_search_results" time="0.049">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":"#content-inner > section > p"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.3649122837189205-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.3649122837189205-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"No results were found."}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=china&within=documents&start-date=1000-01-02&end-date=1000-01-01&sort-by=relevance"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":"#content-inner > section > p"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.34450456684373654-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.34450456684373654-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"No results were found."}
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":".hsg-search-section"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.34450456684373654-2"}}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Filtering_search_result_for_query_search_q_china_with_invalid_parameters" timestamp="2020-01-27T18:13:33" time="2.836" tests="2" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="10b32eb64d18e0cb4b3020298786e7f7"/>
+      <property name="suiteName" value="Filtering search result for query &quot;search?q=china&quot; with invalid parameters"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search_filter_results.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_invalid_parameters" name="within_documents_start_date_1000_01_02_end_date_1000_01_01_should_display_the_search_page" time="0.001"/>
+    <testcase classname="chrome.Filtering_search_result_for_query_search_q_china_with_invalid_parameters" name="within_documents_start_date_1000_01_02_end_date_1000_01_01_should_not_return_any_search_results" time="0.026">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element - {"using":"css selector","value":"#content-inner > section > p"}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":{"ELEMENT":"0.34450456684373654-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308/element/0.34450456684373654-1/text - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":"No results were found."}
+COMMAND: DELETE http://127.0.0.1:9515/session/d459b1c64eabbb6a514a4621eaab1308 - {}
+RESULT: {"sessionId":"d459b1c64eabbb6a514a4621eaab1308","status":0,"value":null}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

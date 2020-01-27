@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Searching_on_home_page" timestamp="2020-01-27T18:13:39" time="7.052" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="180db2b3a307da7ef4057d1f7bd95688"/>
+      <property name="suiteName" value="Searching on home page"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Searching_on_home_page" name="should_have_results" time="0.043">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/1a7af72ab663faa523278969cad62f5c/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"1a7af72ab663faa523278969cad62f5c","status":0,"value":{"ELEMENT":"0.8996793113361199-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/1a7af72ab663faa523278969cad62f5c/element/0.8996793113361199-1/text - {}
+RESULT: {"sessionId":"1a7af72ab663faa523278969cad62f5c","status":0,"value":"Travels: Barack Obama"}
+COMMAND: POST http://127.0.0.1:9515/session/1a7af72ab663faa523278969cad62f5c/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=Washington"}
+RESULT: {"sessionId":"1a7af72ab663faa523278969cad62f5c","status":0,"value":null}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Searching_for" timestamp="2020-01-27T18:13:46" time="0.319" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="180db2b3a307da7ef4057d1f7bd95688"/>
+      <property name="suiteName" value="Searching for"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Searching_for" name="Washington_should_have_results" time="0.046">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/1a7af72ab663faa523278969cad62f5c/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"1a7af72ab663faa523278969cad62f5c","status":0,"value":{"ELEMENT":"0.9389960474576926-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/1a7af72ab663faa523278969cad62f5c/element/0.9389960474576926-1/text - {}
+RESULT: {"sessionId":"1a7af72ab663faa523278969cad62f5c","status":0,"value":"Travels: Barack Obama"}
+COMMAND: POST http://127.0.0.1:9515/session/1a7af72ab663faa523278969cad62f5c/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/search?q=United%20Nations"}
+RESULT: {"sessionId":"1a7af72ab663faa523278969cad62f5c","status":0,"value":null}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+  <testsuite name="Searching_for" timestamp="2020-01-27T18:13:46" time="6.264" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="180db2b3a307da7ef4057d1f7bd95688"/>
+      <property name="suiteName" value="Searching for"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/search/prod_search.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Searching_for" name="United_Nations_should_have_results" time="0.094">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/1a7af72ab663faa523278969cad62f5c/element - {"using":"css selector","value":".hsg-search-result > h3 > a"}
+RESULT: {"sessionId":"1a7af72ab663faa523278969cad62f5c","status":0,"value":{"ELEMENT":"0.7307825618260833-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/1a7af72ab663faa523278969cad62f5c/element/0.7307825618260833-1/text - {}
+RESULT: {"sessionId":"1a7af72ab663faa523278969cad62f5c","status":0,"value":"Travels: William J. Clinton"}
+COMMAND: DELETE http://127.0.0.1:9515/session/1a7af72ab663faa523278969cad62f5c - {}
+RESULT: {"sessionId":"1a7af72ab663faa523278969cad62f5c","status":0,"value":null}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Department_History_pages" timestamp="2020-01-27T18:11:19" time="8.697" tests="0" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="7d3fc357a384be394632dbeeac13f32d"/>
+      <property name="suiteName" value="Department History pages: "/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/departmenthistory/prod_departmenthistory_titles.spec.js"/>
+    </properties>
+  </testsuite>
+  <testsuite name="Each_Department_History_subpage_should_be_displayed_and_subsequently" timestamp="2020-01-27T18:11:19" time="8.697" tests="10" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="7d3fc357a384be394632dbeeac13f32d"/>
+      <property name="suiteName" value="Each &quot;Department History&quot; subpage should be displayed and subsequently"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/departmenthistory/prod_departmenthistory_titles.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Each_Department_History_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Department_History" time="1.226">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":{"ELEMENT":"0.40857901805047914-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element/0.40857901805047914-1/text - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":"Department History"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Department_History_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Administrative_Timeline_of_the_Department_of_State" time="0.261">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/timeline"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":{"ELEMENT":"0.735069940432266-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element/0.735069940432266-1/text - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":"Administrative Timeline of the Department of State"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Department_History_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Biographies_of_the_Secretaries_of_State" time="1.912">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/people/secretaries"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":{"ELEMENT":"0.706831805161386-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element/0.706831805161386-1/text - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":"Biographies of the Secretaries of State"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Department_History_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Principal_Officers_and_Chiefs_of_Mission" time="0.349">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/people/principals-chiefs"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":{"ELEMENT":"0.48708617176419033-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element/0.48708617176419033-1/text - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":"Principal Officers and Chiefs of Mission"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Department_History_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Travels_Abroad_of_the_Secretary_of_State" time="0.946">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/travels/secretary"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":{"ELEMENT":"0.521428626605009-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element/0.521428626605009-1/text - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":"Travels Abroad of the Secretary of State"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Department_History_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Travels_Abroad_of_the_President" time="0.443">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/travels/president"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":{"ELEMENT":"0.7556920864162602-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element/0.7556920864162602-1/text - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":"Travels Abroad of the President"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Department_History_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Visits_by_Foreign_Leaders" time="2.602">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/visits"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":{"ELEMENT":"0.7240398760387421-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element/0.7240398760387421-1/text - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":"Visits by Foreign Leaders"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Department_History_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_World_War_I_and_the_Department" time="0.278">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/wwi"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":{"ELEMENT":"0.5640468217420669-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element/0.5640468217420669-1/text - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":"World War I and the Department"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Department_History_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Buildings_of_the_Department_of_State" time="0.422">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/buildings"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":{"ELEMENT":"0.7496013247174225-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element/0.7496013247174225-1/text - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":"Buildings of the Department of State"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Department_History_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_U_S_Diplomatic_Couriers" time="0.248">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/diplomatic-couriers"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":{"ELEMENT":"0.18564914213686023-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4/element/0.18564914213686023-1/text - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":"U.S. Diplomatic Couriers"}
+COMMAND: DELETE http://127.0.0.1:9515/session/ca32cfc4ea0ce82d3a33406e2e3148d4 - {}
+RESULT: {"sessionId":"ca32cfc4ea0ce82d3a33406e2e3148d4","status":0,"value":null}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

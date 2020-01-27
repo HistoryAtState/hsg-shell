@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="The_Countries_landing_page" timestamp="2020-01-27T18:11:03" time="1.64" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="de23b596511cec333757cb3a50e97d18"/>
+      <property name="suiteName" value="The &quot;Countries&quot; landing page"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/countries/prod_countries_landing.spec.js"/>
+    </properties>
+    <testcase classname="chrome.The_Countries_landing_page" name="should_display_a_select_input_for_choosing_countries" time="1.637">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/764e0d77a938083a570017e03191daa8/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/countries"}
+RESULT: {"sessionId":"764e0d77a938083a570017e03191daa8","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/764e0d77a938083a570017e03191daa8/element - {"using":"css selector","value":"select[data-template=\"countries:load-countries\"]"}
+RESULT: {"sessionId":"764e0d77a938083a570017e03191daa8","status":0,"value":{"ELEMENT":"0.5221059557014587-1"}}
+COMMAND: DELETE http://127.0.0.1:9515/session/764e0d77a938083a570017e03191daa8 - {}
+RESULT: {"sessionId":"764e0d77a938083a570017e03191daa8","status":0,"value":null}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

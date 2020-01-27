@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Short_history_pages" timestamp="2020-01-27T18:11:30" time="2.511" tests="0" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="3559f18a27d645433929b09426fc582f"/>
+      <property name="suiteName" value="Short-history pages: "/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/departmenthistory/prod_shorthistory_titles.spec.js"/>
+    </properties>
+  </testsuite>
+  <testsuite name="Each_Short_history_subpage_should_be_displayed_and_subsequently" timestamp="2020-01-27T18:11:30" time="2.511" tests="3" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="3559f18a27d645433929b09426fc582f"/>
+      <property name="suiteName" value="Each &quot;Short-history&quot; subpage should be displayed and subsequently"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/departmenthistory/prod_shorthistory_titles.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Each_Short_history_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_A_Short_History_of_the_Department_of_State" time="1.567">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/2869b6c567389b1c638351ccf8e48491/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/short-history"}
+RESULT: {"sessionId":"2869b6c567389b1c638351ccf8e48491","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/2869b6c567389b1c638351ccf8e48491/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"2869b6c567389b1c638351ccf8e48491","status":0,"value":{"ELEMENT":"0.9366666986018801-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/2869b6c567389b1c638351ccf8e48491/element/0.9366666986018801-1/text - {}
+RESULT: {"sessionId":"2869b6c567389b1c638351ccf8e48491","status":0,"value":"A Short History of the Department of State"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Short_history_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Foundations_of_Foreign_Affairs_1775_1823" time="0.365">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/2869b6c567389b1c638351ccf8e48491/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/short-history/foundations"}
+RESULT: {"sessionId":"2869b6c567389b1c638351ccf8e48491","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/2869b6c567389b1c638351ccf8e48491/element - {"using":"css selector","value":"#content-inner h3"}
+RESULT: {"sessionId":"2869b6c567389b1c638351ccf8e48491","status":0,"value":{"ELEMENT":"0.82833496875264-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/2869b6c567389b1c638351ccf8e48491/element/0.82833496875264-1/text - {}
+RESULT: {"sessionId":"2869b6c567389b1c638351ccf8e48491","status":0,"value":"Foundations of Foreign Affairs, 1775-1823"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Short_history_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Origins_of_a_Diplomatic_Tradition" time="0.577">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/2869b6c567389b1c638351ccf8e48491/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/departmenthistory/short-history/origins"}
+RESULT: {"sessionId":"2869b6c567389b1c638351ccf8e48491","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/2869b6c567389b1c638351ccf8e48491/element - {"using":"css selector","value":"#content-inner h2"}
+RESULT: {"sessionId":"2869b6c567389b1c638351ccf8e48491","status":0,"value":{"ELEMENT":"0.8626598440916169-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/2869b6c567389b1c638351ccf8e48491/element/0.8626598440916169-1/text - {}
+RESULT: {"sessionId":"2869b6c567389b1c638351ccf8e48491","status":0,"value":"Origins of a Diplomatic Tradition"}
+COMMAND: DELETE http://127.0.0.1:9515/session/2869b6c567389b1c638351ccf8e48491 - {}
+RESULT: {"sessionId":"2869b6c567389b1c638351ccf8e48491","status":0,"value":null}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+</testsuites>
