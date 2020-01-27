@@ -76,7 +76,7 @@ else if ($exist:path = ("/robots.txt", "/opensearch.xml", "/favicon.ico")) then
 (: handle requests for twitter test :)
 else if (ends-with($exist:path, "verify-results-of-twitter-jobs.xq")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="/twitter/tests/verify-results-of-twitter-jobs.xq"/>
+        <forward url="{$exist:controller}/tests/xquery/validate-results-of-twitter-jobs.xq"/>
     </dispatch>
 
 (: handle requests for ajax services :)
