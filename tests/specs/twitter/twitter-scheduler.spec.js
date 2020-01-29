@@ -8,7 +8,8 @@ describe('The Twitter job "download-recent-twitter-posts.xq"', () => {
   let state, prev, next;
 
   before(() => {
-    Page.open('verify-results-of-twitter-jobs.xq');
+    // Calling this script is forwarded by the hsg-shell controller
+    Page.open('validate-results-of-twitter-jobs.xq');
   });
 
   it('should return the state "NORMAL"', () => {
