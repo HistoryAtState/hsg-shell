@@ -144,8 +144,8 @@ If you have problems with installing or running Chromedriver, have a look at the
     process.env.WDIO_CHROME_BINARY = process.env.WDIO_CHROME_BINARY || 'path-to-your-local-binary'
     ```
 * Optional: Edit which test files or suites you would like to run.
-  Here is the part here to define the test suites:
-    ```json
+  Here is the part where to define the test suites:
+    ```
       suites: {
         dev: [
           './tests/specs/**/dev_*.js'
