@@ -130,16 +130,16 @@ google-analytics and DAP tracking.
 
 `export NODE_ENV` in the login script on a production server
 
-### Web Tests
+## Web Tests
 
-#### How to run local web tests
+### How to run local web tests
 
-##### 1. Install Chrome
+#### 1. Install Chrome
 Make sure you have Google Chrome >= 79 and all required node_modules installed (`npm install`).
 If you have problems with installing or running Chromedriver, have a look at these resources: [webdriver.io/docs/wdio-chromedriver-service.html](https://webdriver.io/docs/wdio-chromedriver-service.html), [stackoverflow](https://stackoverflow.com/questions/54940853/chrome-version-must-be-between-71-and-75-error-after-updating-to-chromedriver-2)
 
-##### 2. Edit configuration 
-* Edit the path to where your local Chrome binary is installed in the web test configuration `wdio.conf.js` at line: 
+#### 2. Edit configuration 
+* Edit the path to where your local Chrome binary is installed in the **web test configuration** **`wdio.conf.js`** at line: 
     ```javascript
     process.env.WDIO_CHROME_BINARY = process.env.WDIO_CHROME_BINARY || 'path-to-your-local-binary'
     ```
@@ -156,12 +156,13 @@ If you have problems with installing or running Chromedriver, have a look at the
       }
     ```
 
-##### 3. Run the web test
+#### 3. Run the web test
 Basic syntax of starting an entire test suite is 
 ```bash
 node_modules/.bin/wdio wdio.conf.js --suite name-of-the-testsuite
 ```
-for example: 
+for example (runs all development environment test that have been listed in the wdio configuration in `suites: {dev : ...}`): 
+
 ```bash
 node_modules/.bin/wdio wdio.conf.js --suite dev
 ```
