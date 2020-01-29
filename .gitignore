@@ -3,7 +3,6 @@ build/*
 .existdb.json
 node_modules
 bower_components
-package-lock.json
 resources/css
 resources/fonts
 resources/scripts/app.all.js
@@ -13,6 +12,7 @@ resources/scripts/app.min.js
 local.node-exist.json
 build.properties.local.xml
 !build.properties.local.example.xml
-# IDE
+
+# other local files
 .idea
 .DS_Store
