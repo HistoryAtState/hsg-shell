@@ -92,14 +92,15 @@ exports.config = {
     // grid with only 5 firefox instances available you can make sure that not more than
     // 5 instances get started at a time.
     maxInstances: 1,
-    //
     browserName: 'chrome',
     chromeOptions: {
-      args: ['headless',
+      args: [
+        'headless',
         'disable-gpu',
         '--window-size=1280,1024',
         'ignore-certificate-errors',
-        'ignore-urlfetcher-cert-requests'],
+        'ignore-urlfetcher-cert-requests'
+      ],
       binary: process.env.WDIO_CHROME_BINARY
     },
     acceptsSslCerts: true
@@ -129,7 +130,7 @@ exports.config = {
   bail: 0,
   //
   // Saves a screenshot to a given path if a command fails.
-  screenshotPath: './tests/errorShots/',
+  screenshotPath: './tests/reports/errorShots/',
   //
   // Set a base URL in order to shorten url command calls. If your `url` parameter starts
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
