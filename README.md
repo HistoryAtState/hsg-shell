@@ -185,3 +185,19 @@ and run this command with
 ```shell
 npm run-script test-dev
 ```
+
+This test runs in "headless" mode. It means the test will run in the background without opening a browser window.   
+If you want to observe all actions in the web test in a browser, just comment out the `headless` argument in the `wdio.conf.js`:
+
+```
+    chromeOptions: {
+      args: [
+      //'headless',
+        'disable-gpu',
+        '--window-size=1280,1024',
+        'ignore-certificate-errors',
+        'ignore-urlfetcher-cert-requests'
+      ],
+      binary: process.env.WDIO_CHROME_BINARY
+    },
+```
