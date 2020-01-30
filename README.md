@@ -201,3 +201,12 @@ chromeOptions: {
   binary: process.env.WDIO_CHROME_BINARY
 },
 ```
+
+#### 4. Further documentation
+This web test is configured to use the framework `Mocha` with `Chai` and activated Chai plugin `assert` (`global.assert = chai.assert;`) for assertions.
+
+Have a look at the documentation:  
+* General overview about "webdriver.io": [webdriver.io/docs/gettingstarted](https://webdriver.io/docs/gettingstarted.html)
+* Webdriver.io functions: [webdriver.io/docs/api](https://webdriver.io/docs/api.html)
+* List of all functions in the Chai Assertion library: [chaijs.com/api/assert](https://www.chaijs.com/api/assert/)
+* Overview about mocha.js: [mochajs.org](https://mochajs.org/)
