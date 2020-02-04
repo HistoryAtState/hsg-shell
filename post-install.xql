@@ -15,4 +15,5 @@ sm:chmod(xs:anyURI($target || "/modules/fo.xql"), "rwsr-xr-x"),
 sm:chmod(xs:anyURI($target || "/modules/rebuild.xql"), "rwsr-xr-x"),
 sm:chown(xs:anyURI($target || "/modules/rebuild-dates-sort-index.xql"), "admin"),
 sm:chmod(xs:anyURI($target || "/modules/rebuild-dates-sort-index.xql"), "rwsr-xr-x"),
+sm:chmod(xs:anyURI($target || "/tests/xquery/validate-results-of-twitter-jobs.xq"), "rwsr-xr-x"),
 util:eval(xs:anyURI($target || "/modules/rebuild.xql"))

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Milestones_pages" timestamp="2020-01-27T18:12:10" time="2.87" tests="0" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="b95d3ae24cfdb1250d4e934f2c2a5108"/>
+      <property name="suiteName" value="Milestones pages: "/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/milestones/prod_milestones_titles.spec.js"/>
+    </properties>
+  </testsuite>
+  <testsuite name="Each_Milestones_subpage_should_be_displayed_and_subsequently" timestamp="2020-01-27T18:12:10" time="2.87" tests="4" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="b95d3ae24cfdb1250d4e934f2c2a5108"/>
+      <property name="suiteName" value="Each &quot;Milestones&quot; subpage should be displayed and subsequently"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/milestones/prod_milestones_titles.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Each_Milestones_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Milestones_in_the_History_of_U_S_Foreign_Relations" time="1.648">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/milestones"}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":{"ELEMENT":"0.4631542460216507-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/element/0.4631542460216507-1/text - {}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":"Milestones in the History of U.S. Foreign Relations"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Milestones_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_All_Milestones" time="0.374">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/milestones/all"}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":{"ELEMENT":"0.79328398894896-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/element/0.79328398894896-1/text - {}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":"All Milestones"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Milestones_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Milestones_in_the_History_of_U_S_Foreign_Relations" time="0.263">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/milestones/1750-1775"}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":{"ELEMENT":"0.8072465565530784-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/element/0.8072465565530784-1/text - {}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":"Milestones in the History of U.S. Foreign Relations"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Milestones_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_1750_1775_Diplomatic_Struggles_in_the_Colonial_Period" time="0.578">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/milestones/1750-1775/foreword"}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":{"ELEMENT":"0.060324220929421246-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05/element/0.060324220929421246-1/text - {}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":"1750–1775: Diplomatic Struggles in the Colonial Period"}
+COMMAND: DELETE http://127.0.0.1:9515/session/57cdb3e3d95982ea9709528b1b433b05 - {}
+RESULT: {"sessionId":"57cdb3e3d95982ea9709528b1b433b05","status":0,"value":null}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

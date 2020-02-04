@@ -5,7 +5,7 @@
     <xmlproperty file="expath-pkg.xml"/>
     <property name="build.dir" value="build"/>
     <property environment="env"/>
-    <property name="files-to-be-excluded" value="${build.dir}/**,**/*.tmpl,node_modules/**,package.json,gulpfile.js,.idea/**,.* example.local.build.properties,npm-shrinkwrap.json"/>
+    <property name="files-to-be-excluded" value="${build.dir}/**,**/*.tmpl,node_modules/**,package.json,package-lock.json,gulpfile.js,.idea/**,.* example.local.build.properties,npm-shrinkwrap.json,tests/reports/**"/>
     
     <!-- Allow NODE_ENV to be passed in either as an environment variable or as a regular variable -->
     <condition property="node-env-is-set-for-production" else="false">
@@ -53,6 +53,7 @@
             <fileset dir="${basedir}">
                 <exclude name="${build.dir}/**"/>
                 <exclude name="node_modules/**"/>
+                <exclude name="tests/reports/**"/>
             </fileset>
         </copy>
     </target>
@@ -118,8 +119,10 @@
             <exclude name="**/*.tmpl"/>
             <exclude name="node_modules/**"/>
             <exclude name="package.json"/>
+            <exclude name="package-lock.json"/>
             <exclude name="bower.json"/>
             <exclude name=".idea/**"/>
+            <exclude name="tests/reports/**"/>
             <exclude name="npm-shrinkwrap.json"/>
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>
@@ -136,8 +139,10 @@
             <exclude name="**/*.tmpl"/>
             <exclude name="node_modules/**"/>
             <exclude name="package.json"/>
+            <exclude name="package-lock.json"/>
             <exclude name="bower.json"/>
             <exclude name=".idea/**"/>
+            <exclude name="tests/reports/**"/>
             <exclude name="npm-shrinkwrap.json"/>
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>
@@ -158,8 +163,10 @@
             <exclude name="**/*.tmpl"/>
             <exclude name="node_modules/**"/>
             <exclude name="package.json"/>
+            <exclude name="package-lock.json"/>
             <exclude name="bower.json"/>
             <exclude name=".idea/**"/>
+            <exclude name="tests/reports/**"/>
             <exclude name="npm-shrinkwrap.json"/>
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>
@@ -177,8 +184,10 @@
             <exclude name="**/*.tmpl"/>
             <exclude name="node_modules/**"/>
             <exclude name="package.json"/>
+            <exclude name="package-lock.json"/>
             <exclude name="bower.json"/>
             <exclude name=".idea/**"/>
+            <exclude name="tests/reports/**"/>
             <exclude name="npm-shrinkwrap.json"/>
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>
@@ -197,8 +206,10 @@
             <exclude name="**/*.tmpl"/>
             <exclude name="node_modules/**"/>
             <exclude name="package.json"/>
+            <exclude name="package-lock.json"/>
             <exclude name="bower.json"/>
             <exclude name=".idea/**"/>
+            <exclude name="tests/reports/**"/>
             <exclude name="npm-shrinkwrap.json"/>
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>

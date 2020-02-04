@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Education_pages" timestamp="2020-01-27T18:11:39" time="3.382" tests="0" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="9804ea040fdd9b77b031dd6758655805"/>
+      <property name="suiteName" value="Education pages: "/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/education/prod_education_titles.spec.js"/>
+    </properties>
+  </testsuite>
+  <testsuite name="Each_Education_subpage_should_be_displayed_and_subsequently" timestamp="2020-01-27T18:11:39" time="3.382" tests="9" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="9804ea040fdd9b77b031dd6758655805"/>
+      <property name="suiteName" value="Each &quot;Education&quot; subpage should be displayed and subsequently"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/education/prod_education_titles.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Each_Education_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Education" time="0.999">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/education"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":{"ELEMENT":"0.75092868630525-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element/0.75092868630525-1/text - {}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":"Education"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Education_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Curriculum_Modules" time="0.3">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/education/modules"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":{"ELEMENT":"0.8178277805526544-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element/0.8178277805526544-1/text - {}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":"Curriculum Modules"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Education_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Introduction" time="0.265">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/education/modules/documents-intro"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":{"ELEMENT":"0.11597619496304623-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element/0.11597619496304623-1/text - {}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":"Introduction"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Education_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Introduction" time="0.497">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/education/modules/border-vanishes-intro"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":{"ELEMENT":"0.20333681626879918-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element/0.20333681626879918-1/text - {}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":"Introduction"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Education_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Introduction" time="0.247">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/education/modules/media-intro"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":{"ELEMENT":"0.7257055424559085-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element/0.7257055424559085-1/text - {}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":"Introduction"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Education_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Introduction" time="0.274">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/education/modules/journey-shared-intro"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":{"ELEMENT":"0.9816474074085033-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element/0.9816474074085033-1/text - {}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":"Introduction"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Education_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Introduction" time="0.248">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/education/modules/sports-intro"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":{"ELEMENT":"0.3770677140201826-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element/0.3770677140201826-1/text - {}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":"Introduction"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Education_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Introduction" time="0.274">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/education/modules/history-diplomacy-intro"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":{"ELEMENT":"0.87777581911976-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element/0.87777581911976-1/text - {}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":"Introduction"}
+]]>
+      </system-out>
+    </testcase>
+    <testcase classname="chrome.Each_Education_subpage_should_be_displayed_and_subsequently" name="should_display_the_headline_Introduction" time="0.268">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/education/modules/terrorism-intro"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":null}
+COMMAND: POST http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element - {"using":"css selector","value":"#content-inner h1"}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":{"ELEMENT":"0.9338927432915873-1"}}
+COMMAND: GET http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180/element/0.9338927432915873-1/text - {}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":"Introduction"}
+COMMAND: DELETE http://127.0.0.1:9515/session/f7669087d572808532bede7e4a4cf180 - {}
+RESULT: {"sessionId":"f7669087d572808532bede7e4a4cf180","status":0,"value":null}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

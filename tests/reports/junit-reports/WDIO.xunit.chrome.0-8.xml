@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Requesting_a_non_existing_page" timestamp="2020-01-27T18:11:44" time="1.103" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="5d3ef2421adb0b4f35bef091331043db"/>
+      <property name="suiteName" value="Requesting a non existing page"/>
+      <property name="capabilities" value="chrome"/>
+      <property name="file" value="./tests/specs/error/prod_404.spec.js"/>
+    </properties>
+    <testcase classname="chrome.Requesting_a_non_existing_page" name="should_redirect_to_the_404_error_page" time="1.095">
+      <system-out>
+        <![CDATA[
+COMMAND: POST http://127.0.0.1:9515/session/8a602dfd711ad3879747b347e6f909f3/url - {"url":"http://localhost:8080/exist/apps/hsg-shell/asdfg"}
+RESULT: {"sessionId":"8a602dfd711ad3879747b347e6f909f3","status":0,"value":null}
+COMMAND: GET http://127.0.0.1:9515/session/8a602dfd711ad3879747b347e6f909f3/title - {}
+RESULT: {"sessionId":"8a602dfd711ad3879747b347e6f909f3","status":0,"value":"Page Not found - Office of the Historian"}
+COMMAND: DELETE http://127.0.0.1:9515/session/8a602dfd711ad3879747b347e6f909f3 - {}
+RESULT: {"sessionId":"8a602dfd711ad3879747b347e6f909f3","status":0,"value":null}
+]]>
+      </system-out>
+    </testcase>
+  </testsuite>
+</testsuites>
