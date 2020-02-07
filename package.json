@@ -34,12 +34,8 @@
     "gulp-watch": "^5.0.1",
     "mocha": "^7.0.1",
     "node-sass": "^4.13.1",
-    "wdio": "^4.0.0",
     "wdio-chromedriver-service": "^5.0.2",
-    "wdio-dot-reporter": "0.0.10",
-    "wdio-mocha-framework": "^0.6.4",
-    "wdio-spec-reporter": "^0.1.5",
-    "wdio-webdriver-service": "^1.0.1",
+    "webdriver": "^5.18.6",
     "webdriverio": "~5.18.6"
   },
   "scripts": {
