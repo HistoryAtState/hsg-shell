@@ -24,11 +24,11 @@ Page.prototype.scroll = function (selector) {
 };
 
 Page.prototype.getElement = function (selector) {
-  return browser.element(selector);
+  return browser.$(selector);
 };
 
 Page.prototype.getElements = function (selector) {
-  return browser.elements(selector);
+  return browser.$$(selector);
 };
 
 Page.prototype.isElementExisting = function (selector) {
@@ -67,7 +67,7 @@ Page.prototype.getTitle = function () {
 };
 
 Page.prototype.getElementText = function (selector) {
-  return browser.element(selector).getText();
+  return $(selector).getText();
 };
 
 Page.prototype.getElementAttribute = function (selector, attr) {
@@ -99,7 +99,7 @@ Page.prototype.waitForExist = function (selector, timeInMs) {
 };
 
 Page.prototype.getElementCount = function (selector) {
-  return browser.elements(selector).value.length;
+  return browser.$$(selector).value.length;
 };
 
 Page.prototype.searchAll = function (searchString) {

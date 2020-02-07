@@ -17,7 +17,7 @@ const subpages = {
 describe('The "Countries" landing page', function () {
   it('should display a select input for choosing countries', function () {
     Page.open(subpages.links.p1);
-    let select = Page.getElement('select[data-template="countries:load-countries"]');
+    let select = $('select[data-template="countries:load-countries"]');
     assert.exists(select);
   });
 
