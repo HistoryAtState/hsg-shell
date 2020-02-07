@@ -53,7 +53,9 @@
             <fileset dir="${basedir}">
                 <exclude name="${build.dir}/**"/>
                 <exclude name="node_modules/**"/>
+                <exclude name="tests/pageobjects/**"/>
                 <exclude name="tests/reports/**"/>
+                <exclude name="tests/specs/**"/>
             </fileset>
         </copy>
     </target>
