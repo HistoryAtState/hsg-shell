@@ -4,35 +4,35 @@ function Page() {
 }
 
 Page.prototype.setViewPortSize = function (size) {
-  browser.setViewportSize(size);
+  browser.setWindowSize(size);
 };
 
 Page.prototype.setMobileViewPortSize = function () {
-  browser.setViewportSize({width: 600, height: 800});
+  browser.setWindowSize({width: 600, height: 800});
 };
 
 Page.prototype.setDesktopViewPortSize = function () {
-  browser.setViewportSize({width: 1200, height: 800});
+  browser.setWindowSize({width: 1200, height: 800});
 };
 
 Page.prototype.scroll = function (selector) {
-  browser.scroll(selector);
+  $(selector).scrollIntoView()
 };
 
-  Page.prototype.click = function (selector) {
-  browser.click(selector);
+Page.prototype.click = function (selector) {
+  $(selector).click();
 };
 
 Page.prototype.getElement = function (selector) {
-  return browser.element(selector);
+  return browser.$(selector);
 };
 
 Page.prototype.getElements = function (selector) {
-  return browser.elements(selector);
+  return browser.$$(selector);
 };
 
 Page.prototype.isElementExisting = function (selector) {
-  return browser.isExisting(selector);
+  return $(selector).isExisting()
 };
 
 Page.prototype.isElementVisible = function (selector) {
@@ -67,11 +67,11 @@ Page.prototype.getTitle = function () {
 };
 
 Page.prototype.getElementText = function (selector) {
-  return browser.element(selector).getText();
+  return $(selector).getText();
 };
 
-Page.prototype.getElementAttribute = function (selector, attr) {
-  return browser.getAttribute(selector, attr);
+Page.prototype.getElementAttribute = function (selector, attributeName) {
+  return $(selector).getAttribute(attributeName);
 };
 
 Page.prototype.getUrl = function () {
@@ -79,7 +79,7 @@ Page.prototype.getUrl = function () {
 };
 
 Page.prototype.getCssProperty = function (selector, cssProperty) {
-  return browser.getCssProperty(selector, cssProperty);
+  return $(selector).getCSSProperty(cssProperty);
 };
 
 Page.prototype.openUrl = function (url) {
@@ -91,7 +91,7 @@ Page.prototype.pause = function (timeInMs) {
 };
 
 Page.prototype.waitForVisible = function (selector, timeInMs) {
-  browser.waitForVisible(selector, timeInMs);
+  $(selector).waitForDisplayed(timeInMs)
 };
 
 Page.prototype.waitForExist = function (selector, timeInMs) {
@@ -99,7 +99,7 @@ Page.prototype.waitForExist = function (selector, timeInMs) {
 };
 
 Page.prototype.getElementCount = function (selector) {
-  return browser.elements(selector).value.length;
+  return browser.$$(selector).value.length;
 };
 
 Page.prototype.searchAll = function (searchString) {

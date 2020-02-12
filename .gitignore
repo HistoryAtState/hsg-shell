@@ -1,6 +1,5 @@
 # artifacts
 build/*
-.existdb.json
 node_modules
 bower_components
 resources/css
@@ -10,7 +9,8 @@ resources/scripts/app.min.js
 /templates
 
 # test reports
-tests/reports
+tests/reports/errorShots/*
+tests/reports/junit-reports/*
 
 # local properties
 local.node-exist.json
@@ -18,5 +18,6 @@ build.properties.local.xml
 !build.properties.local.example.xml
 
 # other local files
-.idea
-.DS_Store
+.*
+!.gitignore
+!.existdb.json

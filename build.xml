@@ -53,7 +53,10 @@
             <fileset dir="${basedir}">
                 <exclude name="${build.dir}/**"/>
                 <exclude name="node_modules/**"/>
+                <exclude name="tests/pageobjects/**"/>
                 <exclude name="tests/reports/**"/>
+                <exclude name="tests/specs/**"/>
+                <exclude name="wdio*"/>
             </fileset>
         </copy>
     </target>
@@ -127,6 +130,7 @@
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>
             <exclude name="collection.xconf"/>
+            <exclude name="wdio*"/>
         </zip>
         
         <antcall target="apply-filters-to-producer-dev"/>
@@ -146,6 +150,7 @@
             <exclude name="npm-shrinkwrap.json"/>
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>
+            <exclude name="wdio*"/>
         </zip>
         <delete dir="${build.dir}/${app.name}-${app.version}"/>
     </target>
