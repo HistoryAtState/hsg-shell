@@ -37,9 +37,8 @@ describe('FRUS landing page: The first 3 tiles', function () {
     let tile0 = Page.getElementAttribute('#content-inner div article:nth-child(1) a img', 'src'),
       tile1 = Page.getElementAttribute('#content-inner div article:nth-child(2) a img', 'src'),
       tile2 = Page.getElementAttribute('#content-inner div article:nth-child(3) a img', 'src');
-
-    assert.include(tile0, images[0]);
-    assert.include(tile1, images[1]);
-    assert.include(tile2, images[2]);
+      assert.include(tile0, images[0]);
+      assert.include(tile1, images[1]);
+      assert.include(tile2, images[2]);
   });
 });
