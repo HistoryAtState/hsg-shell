@@ -6,7 +6,7 @@
         <name>hsg-shell</name>
         <url>http://history.state.gov/ns/site/hsg</url>
         <title>history.state.gov 3.0 shell</title>
-        <version>2.1.6</version>
+        <version>2.1.7</version>
     </app>
     <npm>/usr/local/opt/node@10/bin/npm</npm>
     <gulp>/usr/local/bin/gulp</gulp>
