@@ -14,7 +14,7 @@ declare function local:get-results() {
     let $report := $xml//scheduler:job[@name="XQuery: /db/apps/twitter/jobs/download-recent-twitter-posts.xq"]/scheduler:trigger
 
     let $expression-raw := data($report/expression)
-    let $expression := $expression-raw div 1000
+    let $expression := 600
     let $state-raw := data($report/state)
     let $start-raw := data($report/start)
     let $previous-raw := data($report/previous)
