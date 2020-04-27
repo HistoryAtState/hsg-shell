@@ -52,13 +52,15 @@ exports.config = {
       ],
       // all specs with prefix 'prod' (i.e. for the receiver server)
       prod: [
-        './tests/specs/**/prod_*.js'
+        './tests/specs/**/prod_*.js',
+        './tests/specs/replication/replication.spec.js'
       ],
       // the twitter test for replication (producer) server
       // + test suite 'prod'
       prod_producer: [
         './tests/specs/**/prod_*.js',
-        './tests/specs/twitter/twitter-scheduler.spec.js'
+        './tests/specs/twitter/twitter-scheduler.spec.js',
+        './tests/specs/replication/replication.spec.js'
       ]
     },
 
