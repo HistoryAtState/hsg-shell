@@ -3,6 +3,7 @@ xquery version "3.1";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "../../modules/app.xqm";
 import module namespace http = "http://expath.org/ns/http-client";
 
+declare option exist:serialize "method=html5 media-type=text/html";
 
 let $datetime := current-dateTime()
 let $xml := <root datetime="{$datetime}"/>
@@ -23,8 +24,8 @@ return
     <div>
         <h4>Replication Test Result</h4>
         <ul>
-            <li id="1861" value="{ $datetime-1861 }"/>
-            <li id="1991" value="{ $datetime-1991 }"/>
-            <li id="replication" value="{ $replication-successful }"/>
+            <li id="1861" value="{ $datetime-1861 }">{$datetime-1861}</li>
+            <li id="1991" value="{ $datetime-1991 }">{$datetime-1991}</li>
+            <li id="replication" value="{ $replication-successful }">{$replication-successful}</li>
         </ul>
     </div>

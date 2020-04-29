@@ -14,6 +14,6 @@ describe('The Replication test "validate-replication.xq"', () => {
 
   it('should show the same datetime for 1861 and 1991 server', () => {
     replication = Page.getElementText('#replication');
-    assert.equal(replication, 'replication');
+    assert.equal(replication, 'true');
   });
 });
