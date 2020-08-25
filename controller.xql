@@ -1252,6 +1252,7 @@ else if (matches($exist:path, '^/about/?')) then
                             case "contact-us" return 'about/contact-us.html'
                             case "the-historian" return 'about/the-historian.html'
                             case "recent-publications" return 'about/recent-publications.html'
+                            case "content-warning" return 'about/content-warning.html'
                             default return 'error-page.html'
                     return
                         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
