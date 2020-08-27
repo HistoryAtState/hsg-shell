@@ -121,7 +121,7 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                     ,
                     if ($child-tags) then
                         <div>
-                            <h3>Additional subjects within {$tag/label/string()} ({count($child-tags)}):</h3>
+                            <h3>Resources covering specific subjects within {$tag/label/string()}:</h3>
                             { tags:descend($tag, $tag/id, false()) }
                         </div>
                     else ()
