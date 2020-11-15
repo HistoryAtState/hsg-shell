@@ -880,7 +880,7 @@ declare function search:milestone-chunk(
 declare
     %templates:wrap
 function search:result-count($node, $model) {
-    format-number($model?query-info?result-count, "#,###.##")
+    format-number($model?query-info?result-count, "#,###")
 };
 
 declare
