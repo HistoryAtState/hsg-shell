@@ -47,19 +47,25 @@
     </target>
     
         
-    <target name="xar" depends="clean,run-npm" description="create xar file">
+    <target name="xar" depends="clean,run-npm,git.revision" description="create xar file">
         <echo message="Creating build folder..."/>
         <mkdir dir="${build.dir}"/>
         <copy todir="${basedir}" overwrite="true" verbose="true">        
             <fileset file="*.xml.tmpl"/>
-            <filterset>
-                <filter token="name" value="${app.name}"/>
-                <filter token="version" value="${app.version}"/>
-                <filter token="url" value="${app.url}"/>
-                <filter token="title" value="${app.title}"/>
-                <filter token="commit-id" value="${git.revision}"/>
-                <filter token="commit-time" value="${git.time}"/>
-            </filterset>
+            <filterchain>
+                <replacetokens>
+                    <token key="name" value="${app.name}"/>
+                    <token key="version" value="${app.version}"/>
+                    <token key="url" value="${app.url}"/>
+                    <token key="title" value="${app.title}"/>
+                    <token key="commit-id" value="${git.revision}"/>
+                    <token key="commit-time" value="${git.time}"/>
+                </replacetokens>
+                <tokenfilter>
+                    <!-- until we move template processing to XSLT, take care with reserved characters -->
+                    <replacestring from="&amp;" to="&amp;amp;"/>
+                </tokenfilter>
+            </filterchain>
             <globmapper from="*.tmpl" to="*"/>
         </copy>
 
@@ -87,4 +93,28 @@
             <exclude name="wdio*"/>         
         </zip>        
     </target>
+
+    <target name="git.revision" description="Store git revision in ${repository.version}" if="git.present">
+        <exec executable="git" outputproperty="git.revision" failifexecutionfails="false" errorproperty="">
+            <arg value="--git-dir=${git.repo.path}"/>
+            <arg value="rev-parse"/>            
+            <arg value="HEAD"/>
+        </exec>
+        <condition property="repository.version" value="${git.revision}" else="unknown">
+            <and>
+                <isset property="git.revision"/>
+                <length string="${git.revision}" trim="yes" length="0" when="greater"/>
+            </and>
+        </condition>
+        <echo>Git repo: ${repository.version}</echo>
+        
+        <exec executable="git" outputproperty="git.time" failifexecutionfails="false" errorproperty="">
+            <arg value="--git-dir=${git.repo.path}"/>
+            <arg value="show"/>
+            <arg value="-s"/>
+            <arg value="--format=%ct"/>
+            <arg value="${git.revision}"/>
+        </exec>
+        <echo>Git time: ${git.time}</echo>
+    </target>      
 </project>
