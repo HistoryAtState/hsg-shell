@@ -7,6 +7,8 @@ resources/fonts
 resources/scripts/app.all.js
 resources/scripts/app.min.js
 /templates
+expath-pkg.xml
+repo.xml
 
 # test reports
 tests/reports/errorShots/*
