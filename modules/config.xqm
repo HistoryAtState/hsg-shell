@@ -62,24 +62,6 @@ declare variable $config:FRUS_METADATA := collection($config:FRUS_METADATA_COL);
 
 declare variable $config:FRUS_CODE_TABLES_COL := "/db/apps/frus/code-tables";
 
-(:
-    Determine the application root collection from the current module load path.
-:)
-declare variable $config:app-root :=
-    let $rawPath := system:get-module-load-path()
-    let $modulePath :=
-        (: strip the xmldb: part :)
-        if (starts-with($rawPath, "xmldb:exist://")) then
-            if (starts-with($rawPath, "xmldb:exist://embedded-eXist-server")) then
-                substring($rawPath, 36)
-            else
-                substring($rawPath, 15)
-        else
-            $rawPath
-    return
-        substring-before($modulePath, "/modules")
-;
-
 declare variable $config:x-forwarded-host        := request:get-header("X-Forwarded-Host");
 declare variable $config:x-forwarded-proto       := request:get-header("X-Forwarded-Proto");
 declare variable $config:is-proxied              := not(empty($config:x-forwarded-host));
