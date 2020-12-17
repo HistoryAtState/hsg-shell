@@ -93,11 +93,9 @@ declare variable $config:proxy-url :=
 declare variable $config:S3_CACHE_COL := "/db/apps/s3/cache/";
 
 declare variable $config:S3_BUCKET := "static.history.state.gov.v2";
-(:declare variable $config:S3_BUCKET := "static.history.state.gov";:)
 
 declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $config:S3_BUCKET || "/";
 
-(:declare variable $config:S3_DOMAIN := $config:S3_BUCKET;:)
 declare variable $config:S3_DOMAIN := "test.static.history.state.gov";
 declare variable $config:S3_URL := $config:x-forwarded-proto || '://' || $config:S3_DOMAIN;
 
