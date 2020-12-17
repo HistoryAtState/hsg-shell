@@ -62,13 +62,44 @@ declare variable $config:FRUS_METADATA := collection($config:FRUS_METADATA_COL);
 
 declare variable $config:FRUS_CODE_TABLES_COL := "/db/apps/frus/code-tables";
 
+(:
+    Determine the application root collection from the current module load path.
+:)
+declare variable $config:app-root :=
+    let $rawPath := system:get-module-load-path()
+    let $modulePath :=
+        (: strip the xmldb: part :)
+        if (starts-with($rawPath, "xmldb:exist://")) then
+            if (starts-with($rawPath, "xmldb:exist://embedded-eXist-server")) then
+                substring($rawPath, 36)
+            else
+                substring($rawPath, 15)
+        else
+            $rawPath
+    return
+        substring-before($modulePath, "/modules")
+;
+
+declare variable $config:x-forwarded-host        := request:get-header("X-Forwarded-Host");
+declare variable $config:x-forwarded-proto       := request:get-header("X-Forwarded-Proto");
+declare variable $config:is-proxied              := not(empty($config:x-forwarded-host));
+declare variable $config:is-proxied-path-to-root := request:get-context-path() || substring-after($config:is-proxied, "gov/") || "/";
+declare variable $config:exist-path-to-root      := request:get-context-path() || substring-after($config:app-root, "/db");
+declare variable $config:proxy-url :=
+    if ($config:is-proxied)
+    then ($config:x-forwarded-proto || "://" || substring-before($config:x-forwarded-host,":"))
+    else ($config:exist-path-to-root);
+
 declare variable $config:S3_CACHE_COL := "/db/apps/s3/cache/";
 
-declare variable $config:S3_BUCKET := "static.history.state.gov";
+declare variable $config:S3_BUCKET := "static.history.state.gov.v2";
+(:declare variable $config:S3_BUCKET := "static.history.state.gov";:)
 
 declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $config:S3_BUCKET || "/";
 
-declare variable $config:S3_DOMAIN := $config:S3_BUCKET;
+(:declare variable $config:S3_DOMAIN := $config:S3_BUCKET;:)
+declare variable $config:S3_DOMAIN := "test.static.history.state.gov";
+declare variable $config:S3_URL := $config:x-forwarded-proto || '://' || $config:S3_DOMAIN;
 
 declare variable $config:ARCHIVES_COL := "/db/apps/wwdai";
 declare variable $config:ARCHIVES_ARTICLES_COL := $config:ARCHIVES_COL || "/articles";
