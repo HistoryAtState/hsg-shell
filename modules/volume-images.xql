@@ -6,7 +6,6 @@ xquery version "1.0";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace s3="http://s3.amazonaws.com/doc/2006-03-01/";
-declare namespace httpclient="http://exist-db.org/xquery/httpclient";
 declare namespace functx = "http://www.functx.com";
 
 import module namespace aws_config = "http://history.state.gov/ns/xquery/aws_config" at '/db/apps/s3/modules/aws_config.xqm';
@@ -43,7 +42,7 @@ declare function local:update-leaf-directory($directory as xs:string) {
     let $max-keys := ()
     let $prefix := $directory
     let $list := bucket:list($aws_config:AWS-ACCESS-KEY, $aws_config:AWS-SECRET-KEY, $bucket, $delimiter, (), (), $prefix)
-    let $contents := $list/httpclient:body/s3:ListBucketResult/s3:Contents[s3:Key ne $prefix]
+    let $contents := $list[2]/s3:ListBucketResult/s3:Contents[s3:Key ne $prefix]
     let $resources :=
         <resources prefix="{$prefix}">{
             local:contents-to-resources($contents)
@@ -57,12 +56,10 @@ declare function local:dispatch-query() {
     let $vol-id := request:get-parameter('volume', ())
     return
         if ($vol-id) then
-            let $s3-directory := concat('https://static.history.state.gov/frus/', $vol-id)
             let $hits := local:update-leaf-directory(concat('frus/', $vol-id, '/'))//filename[not(ends-with(., '.txt'))]
             let $hitcount := count($hits)
             let $end-time := util:system-time()
             let $runtime := (($end-time - $start-time) div xs:dayTimeDuration('PT1S'))
-
             return
               <results>
                  <summary>
