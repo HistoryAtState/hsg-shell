@@ -78,7 +78,7 @@ declare function app:fix-href($href as xs:string*) {
         replace(
             replace($href, "\$extern", "https://history.state.gov"),
             "\$app", $app:APP_ROOT
-        ), "\$s3static", "https://" || $config:S3_DOMAIN
+        ), "\$s3static", $config:S3_URL
     )
 };
 
