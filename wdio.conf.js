@@ -39,15 +39,13 @@ exports.config = {
         // 'path/to/excluded/files'
     ],
     suites: {
-      // no specific specs for 'dev' yet,
-      // 'prod' test also apply here
-      dev: [
-        './tests/specs/**/prod_*.js'
+      uat: [
+        './tests/specs/**/uat_*.js'
       ],
       // no specific specs for 'dev' yet,
       // 'prod' test also apply here
-      dev_producer: [
-        './tests/specs/**/prod_*.js',
+      uat_producer: [
+        './tests/specs/**/uat_*.js',
         './tests/specs/twitter/twitter-scheduler.spec.js'
       ],
       // all specs with prefix 'prod' (i.e. for the receiver server)
