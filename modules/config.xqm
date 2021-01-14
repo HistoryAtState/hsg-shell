@@ -78,7 +78,7 @@ declare variable $config:S3_BUCKET := "static.history.state.gov.v2";
 
 declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $config:S3_BUCKET || "/";
 
-declare variable $config:S3_DOMAIN := "test.static.history.state.gov";
+declare variable $config:S3_DOMAIN := "static.test.history.state.gov";
 declare variable $config:S3_URL := 'https://' || $config:S3_DOMAIN;
 
 declare variable $config:ARCHIVES_COL := "/db/apps/wwdai";
