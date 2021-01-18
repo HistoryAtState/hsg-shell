@@ -45,8 +45,11 @@ declare function pmf:ref($config as map(*), $node as element(), $class as xs:str
     (: ToDO: Quick fix not sure where the origin is from :)
     let $target := data($node/@target)
     let $href :=
+        if (starts-with($target, 'https://s3.amazonaws.com/static.history.state.gov') or starts-with($target, 'https://static.history.state.gov')) then
+            $hsg-config:S3_URL || '/' || substring-after($target, 'gov/')
+
         (: generic: catch http, mailto links :)
-        if (starts-with($target, 'http') or starts-with($target, 'mailto')) then
+        else if (starts-with($target, 'http') or starts-with($target, 'mailto')) then
             $target
         (: FRUS-specific conventions: pointer to a (different) frus volume :)
         else if (starts-with($target, 'frus')) then
