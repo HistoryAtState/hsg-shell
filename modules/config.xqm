@@ -77,9 +77,11 @@ declare variable $config:S3_CACHE_COL := "/db/apps/s3/cache/";
 declare variable $config:S3_BUCKET := "static.history.state.gov.v2";
 
 declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $config:S3_BUCKET || "/";
-
 declare variable $config:S3_DOMAIN := "static.test.history.state.gov";
 declare variable $config:S3_URL := 'https://' || $config:S3_DOMAIN;
+
+declare variable $config:DOMAIN_1861 := 'https://hsg-dev-backend1.hsg';
+declare variable $config:DOMAIN_1991 := 'https://hsg-dev-backend2.hsg';
 
 declare variable $config:ARCHIVES_COL := "/db/apps/wwdai";
 declare variable $config:ARCHIVES_ARTICLES_COL := $config:ARCHIVES_COL || "/articles";
