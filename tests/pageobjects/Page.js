@@ -2,7 +2,7 @@ function Page() {
   this.title = 'Office of the Historian';
   this.regex = /(\<|\/)[a-z]*>/gi;
   this.s3_Prod = 'https://static.history.state.gov';
-  this.s3_UAT = 'https://test.static.history.state.gov';
+  this.s3_UAT = 'https://static.test.history.state.gov';
 }
 
 Page.prototype.setViewPortSize = function (size) {
