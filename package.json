@@ -19,7 +19,7 @@
     "bower": "^1.8.8",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "chromedriver": "^79.0.3",
+    "chromedriver": "^86.0.0",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
