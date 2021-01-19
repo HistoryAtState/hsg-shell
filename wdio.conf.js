@@ -46,7 +46,8 @@ exports.config = {
       // 'prod' test also apply here
       uat_producer: [
         './tests/specs/**/uat_*.js',
-        './tests/specs/twitter/twitter-scheduler.spec.js'
+        './tests/specs/twitter/twitter-scheduler.spec.js',
+        './tests/specs/replication/replication.spec.js'
       ],
       // all specs with prefix 'prod' (i.e. for the receiver server)
       prod: [
