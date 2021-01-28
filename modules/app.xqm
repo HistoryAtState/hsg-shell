@@ -267,11 +267,7 @@ declare %templates:wrap function app:load-most-recent-tweets($node as node(), $m
 };
 
 declare function app:tweet-html($node as node(), $model as map(*)) {
-    let $nodes := $model?tweet/html/node()
-    for $node in $nodes
-        (: re-add space character after each inline-element (text-nodes and anchors) :)
-        return
-            ($node, ' ')
+    $model?tweet/html/node()
 };
 
 declare function app:tweet-date($node as node(), $model as map(*)) {
