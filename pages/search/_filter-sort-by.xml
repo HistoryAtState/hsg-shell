@@ -5,7 +5,8 @@
             <p class="form-control-static">Sort by:</p>
         </div>
         <div class="btn-group">
-            <button type="button" class="hsg-sort-button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="">
+            <button type="button" class="hsg-sort-button dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="">
                 <span data-template="search:sort-by-label" id="sort-by-label"/>
                 <i class="glyphicon glyphicon-chevron-down"/>
             </button>
@@ -21,6 +22,7 @@
                 </li>
             </ul>
         </div>
-        <input type="hidden" name="sort-by" id="sorting" data-template="templates:form-control" value="relevance"/>
+        <input type="hidden" name="sort-by" id="sorting" data-template="templates:form-control"
+            value="relevance"/>
     </form>
 </div>

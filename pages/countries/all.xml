@@ -22,9 +22,8 @@
             <div class="hsg-width-two-thirds">
                 <div id="content-inner" data-template="app:fix-links" class="lists">
                     <h1>All Countries</h1>
-                    <p>An asterisk indicates former countries, previously recognized by the
-                        United States, that have been dissolved or superseded by other
-                        states.</p>
+                    <p>An asterisk indicates former countries, previously recognized by the United
+                        States, that have been dissolved or superseded by other states.</p>
                     <div data-template="countries:list"/>
                 </div>
             </div>

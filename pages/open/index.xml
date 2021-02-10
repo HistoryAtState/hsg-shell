@@ -23,9 +23,9 @@
                         government. In keeping with this principle established in the Open
                         Government Directive, the Office of the Historian has adapted its
                         publications to open digital formats that can be accessed and consumed
-                        easily by the public, including third party developers. The Office
-                        of the Historian made the following submissions to data.gov, which remain up
-                        to date: <ol>
+                        easily by the public, including third party developers. The Office of the
+                        Historian made the following submissions to data.gov, which remain up to
+                        date: <ol>
                             <li>
                                 <a href="$app/open/frus-metadata">Bibliographic Metadata of the
                                         <em>Foreign Relations of the United States</em> Series</a>:
@@ -71,7 +71,8 @@
                                 are available for free download.</li>
                             <li>
                                 <a href="$app/developer/catalog">Office of the Historian Ebook
-                                    Catalog API</a>: This <a href="https://en.wikipedia.org/wiki/Application_programming_interface"
+                                    Catalog API</a>: This <a
+                                    href="https://en.wikipedia.org/wiki/Application_programming_interface"
                                     >Application Programming Interface</a> (API) enables third party
                                 web and app developers, as well as users of these applications, to
                                 embed the Office of the Historian ebook catalog. The API uses best
@@ -81,11 +82,12 @@
                                 interfaces.</li>
                         </ol>
                     </p>
-                    <p>For more information, see the <a 
-                        href="https://www.state.gov/open-government-initiative/">Open Government 
-                        Initiative</a>, <a href="https://www.state.gov/digital-government-strategy/">Digital 
-                            Government Strategy</a>, and <a href="https://www.state.gov/developer/">Developer
-                            Community</a> pages on the Department of State’s website.</p>
+                    <p>For more information, see the <a
+                            href="https://www.state.gov/open-government-initiative/">Open Government
+                            Initiative</a>, <a
+                            href="https://www.state.gov/digital-government-strategy/">Digital
+                            Government Strategy</a>, and <a href="https://www.state.gov/developer/"
+                            >Developer Community</a> pages on the Department of State’s website.</p>
                 </div>
             </div>
             <aside class="hsg-width-one-third">

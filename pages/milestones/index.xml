@@ -23,7 +23,7 @@
                         <h2>NOTE TO READERS</h2>
                         <p>This publication, “Milestones in the History of U.S. Foreign Relations,”
                             has been retired. The text remains online for reference purposes, but it
-                            is no longer being maintained or expanded.</p> 
+                            is no longer being maintained or expanded.</p>
                         <p>Why retire “Milestones”? In mid-2016 the Office of the Historian
                             completed a review of its online offerings and concluded that extensive
                             resources would be needed to revise and expand this publication to meet
@@ -55,8 +55,7 @@
                             <select data-template="milestones:load-periods" class="form-control"
                                 onchange="location = this.options[this.selectedIndex].value;">
                                 <option value="#">Select a period:</option>
-                                <option data-template="templates:each" data-template-from="periods"
-                                    data-template-to="period" xml:space="preserve"><span data-template="milestones:period-href-value-attribute"/>
+                                <option data-template="templates:each" data-template-from="periods" data-template-to="period" xml:space="preserve"><span data-template="milestones:period-href-value-attribute"/>
                                     <span data-template="milestones:period-title"/>
                                 </option>
                             </select>

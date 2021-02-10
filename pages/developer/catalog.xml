@@ -208,8 +208,9 @@
                             open standard for encoding catalogs. This format is <a
                                 href="http://opds-spec.org/catalogs/">widely used</a> by
                             organizations that distribute ebooks, and enjoys a growing ecosystem of
-                                <a href="https://en.wikipedia.org/wiki/OPDS#Comparison_of_OPDS_clients">client
-                                applications</a>. As an <a
+                                <a
+                                href="https://en.wikipedia.org/wiki/OPDS#Comparison_of_OPDS_clients"
+                                >client applications</a>. As an <a
                                 href="https://en.wikipedia.org/wiki/Atom_(standard)">Atom</a>-based
                             format, OPDS uses the <a
                                 href="https://en.wikipedia.org/wiki/Representational_state_transfer"

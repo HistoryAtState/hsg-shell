@@ -23,17 +23,18 @@
             <div class="hsg-width-two-thirds">
                 <div id="content-inner">
                     <h1 class="titleStmt1" data-template="frus:administration-name"/>
-                    <div data-template="frus:administration-listing-note"
-                                >
-                        <p id="pre-administration-based-subseries-note"><strong><em>Note</em></strong>: The volumes listed below contain at
-                        least one document from the period of this presidential administration; <a
-                            data-template="frus:admin-search-href">view and search within the
-                            available documents</a>. The <em>Foreign Relations</em> series was organized by
-                        year for the volumes covering 1861–1951, triennially for 1952–1963, and by
-                        presidential administration for 1964 onward—with some exceptions.</p>
+                    <div data-template="frus:administration-listing-note">
+                        <p id="pre-administration-based-subseries-note"
+                                ><strong><em>Note</em></strong>: The volumes listed below contain at
+                            least one document from the period of this presidential administration;
+                                <a data-template="frus:admin-search-href">view and search within the
+                                available documents</a>. The <em>Foreign Relations</em> series was
+                            organized by year for the volumes covering 1861–1951, triennially for
+                            1952–1963, and by presidential administration for 1964 onward—with some
+                            exceptions.</p>
                         <p id="administration-based-subseries-note"><a
-                            data-template="frus:admin-search-href">View and search within all
-                            available documents from the period of this administration</a>.</p>
+                                data-template="frus:admin-search-href">View and search within all
+                                available documents from the period of this administration</a>.</p>
                     </div>
                     <ol data-template="frus:volumes-pre-truman">
                         <li>
