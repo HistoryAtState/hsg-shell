@@ -30,12 +30,8 @@
                                 class="form-control"
                                 onchange="location = this.options[this.selectedIndex].value;">
                                 <option value="#">Select a country:</option>
-                                <option data-template="templates:each"
-                                    data-template-from="articles" data-template-to="article">
-                                    <span
-                                        data-template="countries:article-href-value-attribute"></span>
-                                    <span data-template="countries:article-title"></span>
-                                </option>
+                                <option data-template="templates:each" data-template-from="articles" data-template-to="article" xml:space="preserve"><span data-template="countries:article-href-value-attribute"></span><span data-template="countries:article-title"></span>
+                        </option>
                             </select>
                         </div>
                     </form>
