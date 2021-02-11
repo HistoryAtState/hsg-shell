@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html>
     <body>
-        <div data-template="templates:surround" data-template-with="templates/site.html"
+        <div data-template="templates:surround" data-template-with="templates/site.xml"
             data-template-at="content">
             <div class="row">
                 <div class="hsg-breadcrumb-wrapper">

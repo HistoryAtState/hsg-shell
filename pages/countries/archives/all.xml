@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround" data-template-with="templates/site.html"
+<div data-template="templates:surround" data-template-with="templates/site.xml"
     data-template-at="content">
     <div data-template="pages:load">
         <div id="static-title" class="hidden">All Archives - Archives - Countries</div>

@@ -1,4 +1,4 @@
-<div data-template="templates:surround" data-template-with="templates/site.html"
+<div data-template="templates:surround" data-template-with="templates/site.xml"
     data-template-at="content">
     <div data-template="pages:load">
         <div class="row">

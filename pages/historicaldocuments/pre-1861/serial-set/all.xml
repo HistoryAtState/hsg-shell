@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround" data-template-with="templates/site.html"
+<div data-template="templates:surround" data-template-with="templates/site.xml"
     data-template-at="content">
     <div id="static-title" class="hidden">All - U.S. foreign relations materials in the pre-1861
         U.S. Congressional Serial Set - Pre-1861 U.S. Foreign Relations Materials - Historical
