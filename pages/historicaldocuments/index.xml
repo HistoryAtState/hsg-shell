@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row hsg-main">
+        <div class="hsg-width-two-thirds" data-template="app:fix-links">
+            <section id="content-inner">
+                <h1>Historical Documents</h1>
+                <p>The <em>Foreign Relations of the United States</em> (FRUS) series presents the
+                    official documentary historical record of major U.S. foreign policy decisions
+                    and significant diplomatic activity.</p>
+                <p>Search <a href="$app/search?within=documents">within the volumes</a>, or browse
+                    volume titles by administration:</p>
+                <div class="row text-center">
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/lincoln">
+                            <img src="https://static.history.state.gov/images/alincoln.jpg"
+                                alt="Abraham Lincoln" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Abraham Lincoln Administration <br/>
+                                1861–1865</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/johnson-a">
+                            <img src="https://static.history.state.gov/images/ajohnson.jpg"
+                                alt="Andrew Johnson" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Andrew Johnson Administration <br/> 1865–1869</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/grant">
+                            <img src="https://static.history.state.gov/images/usgrant.jpg"
+                                alt="Ulysses S. Grant" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Ulysses S. Grant Administration <br/>
+                                1869–1877</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/hayes">
+                            <img src="https://static.history.state.gov/images/rhayes.jpg"
+                                alt="Rutherford B. Hayes" width="89" height="76"
+                                class="img-thumbnail"/>
+                            <div class="caption">Rutherford B. Hayes Administration <br/>
+                                1877–1881</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/garfield">
+                            <img src="https://static.history.state.gov/images/jgarfield.jpg"
+                                alt="James A. Garfield" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">James A. Garfield Administration <br/> 1881</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/arthur">
+                            <img src="https://static.history.state.gov/images/carthur.jpg"
+                                alt="Chester A. Arthur" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Chester A. Arthur Administration <br/>
+                                1881–1885</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/cleveland-22">
+                            <img src="https://static.history.state.gov/images/gcleveland.jpg"
+                                alt="Grover Cleveland" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Grover Cleveland Administration <br/>
+                                1885–1889</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/harrison">
+                            <img src="https://static.history.state.gov/images/bharrison.jpg"
+                                alt="Benjamin Harrison" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Benjamin Harrison Administration <br/>
+                                1889–1893</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/cleveland-24">
+                            <img src="https://static.history.state.gov/images/gcleveland.jpg"
+                                alt="Grover Cleveland" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Grover Cleveland Administration <br/>
+                                1893–1897</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/mckinley">
+                            <img src="https://static.history.state.gov/images/wmckinley.jpg"
+                                alt="William McKinley" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">William McKinley Administration <br/>
+                                1897–1901</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/roosevelt-t">
+                            <img src="https://static.history.state.gov/images/troosevelt.jpg"
+                                alt="Theodore Roosevelt" width="89" height="76"
+                                class="img-thumbnail"/>
+                            <div class="caption">Theodore Roosevelt Administration <br/>
+                                1901–1909</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/taft">
+                            <img src="https://static.history.state.gov/images/whtaft.jpg"
+                                alt="William Howard Taft" width="89" height="76"
+                                class="img-thumbnail"/>
+                            <div class="caption">William H. Taft Administration <br/>
+                                1909–1913</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/wilson">
+                            <img src="https://static.history.state.gov/images/wwilson.jpg"
+                                alt="Woodrow Wilson" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Woodrow Wilson Administration <br/> 1913–1921</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/harding">
+                            <img src="https://static.history.state.gov/images/wharding.jpg"
+                                alt="Warren G. Harding" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Warren G. Harding Administration <br/>
+                                1921–1923</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/coolidge">
+                            <img src="https://static.history.state.gov/images/ccoolidge.jpg"
+                                alt="Calvin Coolidge" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Calvin Coolidge Administration <br/>
+                                1923–1929</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/hoover">
+                            <img src="https://static.history.state.gov/images/hhoover.jpg"
+                                alt="Herbert C. Hoover" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Herbert C. Hoover Administration <br/>
+                                1929–1933</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/roosevelt-fd">
+                            <img src="https://static.history.state.gov/images/fdroosevelt.jpg"
+                                alt="Franklin D. Roosevelt" width="89" height="76"
+                                class="img-thumbnail"/>
+                            <div class="caption">Franklin D. Roosevelt Administration <br/>
+                                1933–1945</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="hsg-thumbnail" href="$app/historicaldocuments/truman">
+                            <img src="https://static.history.state.gov/images/truman.jpg"
+                                alt="Harry S. Truman" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Harry S. Truman Administration <br/>
+                                1945–1952</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="thumbnail" href="$app/historicaldocuments/eisenhower">
+                            <img src="https://static.history.state.gov/images/eisenhower.jpg"
+                                alt="Dwight D. Eisenhower" width="89" height="76"
+                                class="img-thumbnail"/>
+                            <div class="caption">Dwight D. Eisenhower Administration <br/>
+                                1953–1960</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="thumbnail" href="$app/historicaldocuments/kennedy">
+                            <img src="https://static.history.state.gov/images/jkennedy2.jpg"
+                                alt="John F. Kennedy" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">John F. Kennedy Administration <br/>
+                                1961–1963</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="thumbnail" href="$app/historicaldocuments/johnson">
+                            <img src="https://static.history.state.gov/images/ljohnson.jpg"
+                                alt="LBJ" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Lyndon B. Johnson Administration<br/>
+                                1964–1968</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="thumbnail" href="$app/historicaldocuments/nixon-ford">
+                            <img src="https://static.history.state.gov/images/rnixon2.jpg"
+                                alt="Richard Nixon" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Richard M. Nixon Administration<br/>
+                                1969–1974</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="thumbnail" href="$app/historicaldocuments/nixon-ford">
+                            <img src="https://static.history.state.gov/images/gford2.jpg"
+                                alt="Gerald Ford" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Gerald R. Ford Administration<br/> 1974–1976</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="thumbnail" href="$app/historicaldocuments/carter">
+                            <img src="https://static.history.state.gov/images/jcarter.jpg"
+                                alt="Jimmy Carter" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Jimmy Carter Administration<br/> 1977–1980</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="thumbnail" href="$app/historicaldocuments/reagan">
+                            <img src="https://static.history.state.gov/images/rreagan.jpg"
+                                alt="Ronald Reagan" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">Ronald Reagan Administration<br/> 1981–1988</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="thumbnail" href="$app/historicaldocuments/bush-ghw">
+                            <img src="https://static.history.state.gov/images/ghwbush.jpg"
+                                alt="George H.W. Bush" width="89" height="76" class="img-thumbnail"/>
+                            <div class="caption">George H.W. Bush Administration<br/>
+                                1989–1992</div>
+                        </a>
+                    </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="thumbnail" href="$app/historicaldocuments/clinton">
+                            <img src="https://static.history.state.gov/images/bclinton.jpg"
+                                alt="William J. Clinton" width="89" height="76"
+                                class="img-thumbnail"/>
+                            <div class="caption">William J. Clinton Administration<br/>
+                                1993–2000</div>
+                        </a>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <aside class="hsg-width-one-third">
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other
+                            Electronic resources for U.S. foreign relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                            >Guide to sources on Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

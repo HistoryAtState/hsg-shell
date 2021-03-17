@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory">Department History</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Department History</h1>
+                    <p>Since its creation in 1789, the Department of State has carried out a series
+                        of reorganizations and has created new offices and bureaus to deal with new
+                        diplomatic challenges.</p>
+                    <p>This portion of our website contains <a
+                            href="$app/departmenthistory/timeline">an Administrative Timeline of the
+                            Department of State</a>, <a
+                            href="$app/departmenthistory/people/secretaries">biographies of the
+                            Secretaries of State</a>, a database of <a
+                            href="$app/departmenthistory/people/principals-chiefs">Principal
+                            Officers and Chiefs of Mission</a>, and a history of <a
+                            href="$app/departmenthistory/buildings">the buildings of the Department
+                            of State</a>.</p>
+                    <p>The Department of State has grown significantly over the years. The first
+                        Secretary of State, Thomas Jefferson, oversaw a small staff of one chief
+                        clerk, three other clerks, a translator, and a messenger and only maintained
+                        two diplomatic posts, in London and Paris, as well as 10 consular posts. </p>
+                    <p>World War I (1914–1918) and World War II (1939–1945) brought vastly increased
+                        global responsibilities to the United States as it emerged as a preeminent
+                        power. New challenges after the end of the Cold War and the fall of the
+                        Soviet Union, included: <ul>
+                            <li>the newly independent states,</li>
+                            <li>the global economy,</li>
+                            <li>terrorism, and</li>
+                            <li>the security of the American overseas presence. </li>
+                        </ul>
+                    </p>
+                    <p>To address these changing global circumstances, the number of domestic and
+                        overseas employees (not counting local employees) grew to: <ul>
+                            <li>1,228 in 1900,</li>
+                            <li>1,968 in 1940,</li>
+                            <li>13,294 in 1960,</li>
+                            <li>and 15,751 in the year 2000.</li>
+                        </ul>
+                    </p>
+                    <p>The number of diplomatic posts increased from 41 in 1900 to 168 in 2004 and
+                        continues to grow.</p>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Department History</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline">Administrative Timeline of the
+                                Department of State</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/buildings">Buildings of the
+                                Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/people">People</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/secretaries">Biographies
+                                        of the Secretaries of State</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/principals-chiefs"
+                                        >Principal Officers and Chiefs of Mission</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/travels">Travels</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/secretary">Travels of
+                                        the Secretary</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/president">Travels of
+                                        the President</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/visits">Visits by Foreign Leaders</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/wwi">World War I and the Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/diplomatic-couriers">U.S. Diplomatic
+                                Couriers</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

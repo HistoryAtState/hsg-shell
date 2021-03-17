@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div id="static-title" class="hidden">About the Foreign Relations Series - Historical
+        Documents</div>
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                            Relations</em> Series</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row hsg-main">
+        <div class="hsg-width-two-thirds" data-template="app:fix-links">
+            <div id="content-inner">
+                <h1>About the <em>Foreign Relations of the United States</em> Series</h1>
+                <p>The <em>Foreign Relations of the United States</em> series presents the official
+                    documentary historical record of major U.S. foreign policy decisions and
+                    significant diplomatic activity. The series, which is produced by the Department
+                    of State's Office of the Historian, <a
+                        href="$app/historicaldocuments/frus-history">began in 1861</a> and now
+                    comprises more than 450 individual volumes. The volumes published over the last
+                    two decades increasingly contain declassified records from all the foreign
+                    affairs agencies.</p>
+                <p>
+                    <em>Foreign Relations</em> volumes contain documents from Presidential
+                    libraries, Departments of State and Defense, National Security Council, Central
+                    Intelligence Agency, Agency for International Development, and other foreign
+                    affairs agencies as well as the private papers of individuals involved in
+                    formulating U.S. foreign policy. In general, the editors choose documentation
+                    that illuminates policy formulation and major aspects and repercussions of its
+                    execution. Volumes published during the last three decades have expanded the
+                    scope of the series by including documents from a wider range of government
+                    agencies, particularly those involved with intelligence activity and covert
+                    actions.</p>
+                <p>Volumes in the series since 1952 are organized chronologically according to
+                    Presidential administrations, and geographically and topically within each
+                    subseries: 65 volumes cover the <a href="$app/historicaldocuments/nixon-ford"
+                        >Nixon and Ford administrations</a> (1969-1976), 32 cover the <a
+                        href="$app/historicaldocuments/carter">Carter administration</a>
+                    (1977-1980), and about 49 are scheduled for the <a
+                        href="$app/historicaldocuments/reagan">Reagan administration</a>
+                    (1981-1988). Volumes on the George H.W. Bush administration are now being <a
+                        href="$app/historicaldocuments/status-of-the-series">researched, annotated,
+                        and prepared for publication</a>.</p>
+                <p>Volumes may be purchased through the <a
+                        href="https://bookstore.gpo.gov/catalog/foreign-relations-united-states-series-frus"
+                        >U.S. Government Publishing Office</a> (202-512-1800). Recent volumes are
+                    also available <a href="$app/historicaldocuments/">online</a>. For further
+                    information please <a href="$app/about/contact-us">contact the Office of the
+                        Historian</a>.</p>
+            </div>
+        </div>
+
+        <aside class="hsg-width-one-third">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the <em>Foreign Relations of the United
+                            States</em> series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments">All Administrations</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other
+                            Electronic resources for U.S. foreign relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                            >Guide to sources on Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+
+        </aside>
+    </div>
+</div>

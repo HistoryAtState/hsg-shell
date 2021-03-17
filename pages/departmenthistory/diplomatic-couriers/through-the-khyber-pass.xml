@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Through the Khyber Pass - U.S. Diplomatic Couriers -
+            Department History</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory">Department History</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/diplomatic-couriers">U.S. Diplomatic
+                            Couriers</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/diplomatic-couriers/through-the-khyber-pass"
+                            >Through the Khyber Pass</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>U.S. Diplomatic Couriers: Through the Khyber Pass</h1>
+                    <!-- Start of Brightcove Player -->
+                    <div style="position: relative; display: block;">
+                        <div style="padding-top: 56.25%;">
+                            <video data-video-id="4262345725001" data-account="1705665025"
+                                data-player="HJ8lQG1Eg" data-embed="default"
+                                data-application-id="data-application-id" class="video-js"
+                                controls="controls"
+                                style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; width: 100%; height: 100%;"/>
+                            <script
+                                src="https://players.brightcove.net/1705665025/HJ8lQG1Eg_default/index.min.js"
+                            />
+                        </div>
+                    </div>
+                    <!-- End of Brightcove Player -->
+                    <div id="synopsis">
+                        <h2>Synopsis</h2>
+                        <p>In order to reach the U.S. Embassy in Afghanistan, the Diplomatic
+                            Couriers traveled by car through the Khyber Pass. This short documentary
+                            tells the story of the journey from Karachi, Pakistan, to Kabul,
+                            Afghanistan, with words and images from the Diplomatic Couriers and
+                            staff of that era.</p>
+                    </div>
+                    <div id="more-information">
+                        <h2>More information</h2>
+                        <dl>
+                            <dt>Released</dt>
+                            <dd>2016</dd>
+                            <dt>Length</dt>
+                            <dd>18:02</dd>
+                            <dt>Creator</dt>
+                            <dd>Rebecca A. Ross, Foreign Service Officer, U.S. Department of
+                                State</dd>
+                        </dl>
+                    </div>
+                    <div>
+                        <h2 id="transcript">Transcript</h2>
+                        <p><b>MS ROSS:</b> In 1918, the Diplomatic Courier Service was established
+                            to support the work of American diplomats by ensuring that classified
+                            messages and materials were delivered safely and securely to U.S.
+                            embassies and consulates around the world. In the 1950s, before the
+                            onset of the jet age, this small group of couriers traveled tens of
+                            thousands of miles per year, often spending months on the road. One of
+                            the trips they made was from Pakistan to Afghanistan through the Khyber
+                            Pass.</p>
+                        <p><b>MR VERREOS:</b> The most interesting travel that I had was while I was
+                            in Manila and detailed to Karachi, which at that time was the capital of
+                            Pakistan, and Karachi is where we served Afghanistan.</p>
+                        <p><b>MR COOPER:</b> Well, many couriers would agree with me that it was one
+                            of the most exciting trips we were taking at that time—just the mere
+                            fact that it was over the Khyber Pass.</p>
+                        <p><b>MR HOHMAN:</b> The Khyber Pass was an exciting, interesting,
+                            unsettling sort of a trip.</p>
+                        <p><b>MR COOPER:</b> At that time, we had a trunk route that went from
+                            Manila to Paris. I’d fly out to Karachi, making the usual stops on the
+                            way, and instead of continuing on to Paris, I would relieve a courier on
+                            the Karachi detail. He would continue on to Paris, and I would stay
+                            there for two months until I was relieved.</p>
+                        <p><b>MS DUNN:</b> And the trip left Manila to Bangkok, Bangkok to Karachi.
+                            And then Karachi then down to Ceylon, which is Sri Lanka now. And then
+                            they would come back to Karachi, then they would head north to Peshawar
+                            and then by car through the Khyber.</p>
+                        <p><b>MS DIECKMAN:</b> So we went from Hong Kong to Singapore, and I think I
+                            must have travelled then from Singapore to New Delhi, and from there
+                            taken a train to Peshawar, where I was to meet a courier in Peshawar for
+                            the rest of the trip to Kabul, which I didn’t know how that was all
+                            going to happen but I was assured that it was very easy and very
+                            interesting—(laughter)—and I would love it.</p>
+                        <p><b>MS DUNN: </b>During my tour, they always went by car, and there were
+                            always—there was always danger: flashfloods and bandits.</p>
+                        <p><b>MR HOHMAN:</b> The political circumstances were such that the air link
+                            had broken. We were using land transport. In an embassy, you’d have a
+                            carry-all vehicle to go through the Khyber Pass.</p>
+                        <p><b>MR VERREOS:</b> We would take the train from Karachi to Peshawar,
+                            overnight at the Dean’s Hotel, and the embassy in Kabul would send down
+                            their vehicle and driver who would meet us and pick us up in the morning
+                            —the next morning. And then from Peshawar, we would go through the
+                            Khyber Pass to go into Afghanistan.</p>
+                        <p><b>MR COOPER:</b> We traveled alone with an Afghan driver. We had two
+                            drivers I recall particularly, Abdul Ainan (ph) and Abdul Adjan (ph).
+                            Most of the time, we made it pretty much nonstop—first over the Khyber
+                            Pass and then over the Hindu Kush into Kabul.</p>
+                        <p><b>MR VERREOS:</b> The embassy had a specially built Ford. By using the
+                            motor of the car as a power source, they had lathes and welding
+                            apparatus to repair the axles that would be broken on the trip up to
+                            Kabul.</p>
+                        <p><b>MS DUNN:</b> And my driver was Abdul, an Afghan, and he’d brought the
+                            courier down from—the courier down from Kabul and dropped him off that
+                            morning. I almost fainted when he came in; it was Jim Verreos. “What are
+                            you doing here?” Then we started up, and dirt sides of the roads,
+                            camels, and trucks coming down with the bodies hanging on with their
+                            robes flapping in the wind. There’s not much greenery at all. If there
+                            was pavement, it’s covered with dirt. And then it just—and it kind of
+                            just goes over to the side, and it’s all just dirt. You could slide
+                            off.</p>
+                        <p><b>MR HOHMAN:</b> Going through the Khyber Pass, and there really wasn’t
+                            much space. It was a relatively narrow road. It was two-way traffic, but
+                            it was close two-way traffic, winding through upwards and of course
+                            downward.</p>
+                        <p><b>MS DIECKMAN:</b> The road was bumpy and dusty. And I looked to the
+                            right as we were driving along, and oh, my gosh, we were thousands of
+                            feet above any ground down there. And I thought, ooh, there’s no
+                            barricade or fence or lines in the road or anything. We just had to
+                            count on the driver. Well, he did this for a living, so we hoped that he
+                            remembered how to do it all. The mountains were absolutely wonderful.
+                            They were so high and so beautiful.</p>
+                        <p><b>MR COOPER:</b> On the—interesting: On the side of the road—I don’t
+                            know what kind of stone it is, probably granite—they had carved the
+                            crests of all the various British regiments that had served in this fort
+                            over the years, and their regimental crests were all carved on the stone
+                            along there. It was very interesting to see. The fort itself was up much
+                            higher.</p>
+                        <p><b>MS DUNN:</b> And of course, the Khyber Rifles up at the top.
+                            There—this was their armory or stronghold up on the—up at the top and
+                            that’s where they were stationed. It was something to see that you read
+                            about.</p>
+                        <p><b>MR VERREOS:</b> You got to this high point where the Pakistanis had
+                            set up their border control station, then you would show your exit
+                            papers to exit Pakistan, and it was a little wooden shack and there was
+                            one telephone pole. I’d say about 20 yards in front of that shack—this
+                            is really nice to look at—there was two posts and a wire fence and a
+                            gate, but on the other side there was nothing there. And you could walk
+                            around it, but they’d put that fence up, and this was the entry into
+                            Afghanistan. And I inquired. I said, “What’s this telephone pole doing
+                            here?” And they had in that Afghan office, they had a bunch of people
+                            down there writing down messages. That was the one phone line from Kabul
+                            to the border, but you couldn’t make a telephone call outside the
+                            country. You could call and send your message to the station there at
+                            the Pakistan-Kabul border, they would write it down, walk it across the
+                            border, put the money in, and they would then telephone New York or
+                            London or wherever they wanted to telephone, and pass the message
+                            on.</p>
+                        <p><b>MS DUNN:</b> So we start up and we get to the border, and I can’t get
+                            in. “Your visa has expired.” So Abdul said, “All right, no problem.
+                            We’ll start back.” Well, he’s careening down the Khyber back to the
+                            consulate in Peshawar, the Afghan consulate. We got there just before 12
+                            o’clock, they stamped my passport, and then I said, “Is there a ladies’
+                            room here?” And he says, “What’s a ladies’ room?” Well, then I had to go
+                            back to the staff house, scared them, and then we took off again.
+                            Anyway, we get through the Khyber, get through the border, and he
+                            says—Abdul says, “Notice the nice, smooth roads we have here in
+                            Afghanistan.” Well, a lot better than the dirt roads in the Khyber.</p>
+                        <p><b>MR VERREOS:</b> There was no paved road inside the Afghan side. A few
+                            hundred yards off, you could see the Kabul River, and it was green for
+                            about a hundred yards off of the river on each side, and after that was
+                            desert—rocky. In the far distance you could see the Hindu Kush
+                            Mountains, and we were headed toward those Hindu Kush Mountains, roughly
+                            following a course that followed the Kabul River. And my driver told me
+                            this was the regular caravan route, and he said, “It’s easy to follow,”
+                            and I said, “How come?” He said, “Well, I’ll try to point them out to
+                            you.” At different points along it there would be a small pile of rocks
+                            on this side and on that side, and your road was in between those.</p>
+                        <p><b>MS DIECKMAN:</b> And I was looking around for the road, and I didn’t
+                            see one, and so I asked. I said, “Where—what road are we taking?” And
+                            they said, “Road?” (Laughter.) But the driver apparently knew his way
+                            because we did get to Kabul.</p>
+                        <p><b>MR VERREOS:</b> On several trips, I encountered caravans, camel
+                            caravans coming or going along that route. On one of my trips, I got
+                            trapped. We were going through the Kabul River gorge, and there had been
+                            a tremendous rainstorm or something and there had been a washout of the
+                            road. And we came up to it; there were a whole bunch of camels and what
+                            have you in front, and the driver stopped. There was a small, about
+                            two-foot—two, three-foot wide section of the mountainside, and people
+                            could pass on foot. And I sent my driver up to see if he could negotiate
+                            with any cars that were trying to come this way that couldn’t come. We
+                            would trade—the occupants of the car that was, say, southbound would use
+                            the embassy car to go to down to Peshawar, and the courier—myself —could
+                            use his car to go up to Kabul. And he said there were two cars on the
+                            other side and none of them agreed to that. There was no sense in
+                            staying there. I asked him, “Is there any other way to get to Kabul?”
+                            And the driver said yes, there was. So I said, “Well, let’s try
+                            that.”</p>
+                        <p>So—and then we backed out of there, and it was hard because we had to
+                            move camels and what have you, and donkeys, in order to back out of that
+                            narrow part of the gorge. And once we got out of the narrow part he took
+                            off and found some small town on the side. Fortunately, the driver, who
+                            was Pakistani, spoke Afghan. He got me accommodations in a—at a vacant
+                            wooden shack, no bed or anything, just a wooden floor.</p>
+                        <p>The next morning we took off and we drove—finally got into Kabul.
+                            Meanwhile, Kabul had sent somebody down the regular road to find me, who
+                            reported he couldn’t find me and he reported back by radio. And finally,
+                            when I got up there they were a little pissed that I had moved instead
+                            of stayed there and waited for help. But you have to—my concern: I had
+                            the pouches; I’m not going to sit on a river gorge there hoping somebody
+                            might come. I felt it was my duty—just common sense. I was either going
+                            to go back to Peshawar or up to Kabul. And since my driver said there
+                            was a second way to Kabul, I preferred to take the second road to Kabul
+                            and accomplish my mission, which I did. But like I said, it was kind of
+                            a small adventure.</p>
+                        <p><b>MS DUNN:</b> And then we were going to start up the gorge, and we
+                            started out, and up, up, up, up, and the canyons—it’s just so deep. And
+                            there was a truck coming around the corner with more flapping robes, and
+                            he wants to know do I want to take a picture. Oh, no, no. (Laughter.)
+                            Oh, that was the scariest, scariest ride I ever had.</p>
+                        <p><b>MS DIECKMAN:</b> So we got to Kabul, and Kabul was a very busy place
+                            because we landed right about where the market was, which was very, very
+                            busy with a lot of people going up and down and around and about, and
+                            carrying things and buying things.</p>
+                        <p><b>MR COOPER:</b> Well, it could hardly be much more primitive. I
+                            remember all of the roofs of the houses, the roofs were made of mud. You
+                            got too much rain, you were in trouble. And I think I was told that
+                            there were only two buildings in Kabul that had corrugated tin roofs,
+                            and one of them was the American embassy, and I forget what the other
+                            one was.</p>
+                        <p><b>MS DIECKMAN:</b> The one thing I really noticed is that the women had
+                            so much cloth on. It went down to the floor and covered a lot of their
+                            head and all of their body, and it’s what you really noticed, it’s there
+                            is a woman in there. (Laughter.)</p>
+                        <p><b>MR HOHMAN:</b> I wandered around a little bit between the time we were
+                            ready to set off for the run to Jalalabad, but they told me not to
+                            wander around too much in the streets because people had a tendency to
+                            disappear. It was still a rough country.</p>
+                        <p>What was rather interesting is the various clothing that the Afghans were
+                            wearing, and quite often you’d see castoff American uniforms from the
+                            Second World War—coats, raincoats that they had; sometimes you’d see
+                            somebody wearing an Eisenhower jacket over a long, flowing robe.</p>
+                        <p><b>MS DUNN:</b> I was there a week. I thought it was very nice. We played
+                            golf—nine holes. The ball, you’d hit it and it’d hit a rock and then it
+                            would ricochet, and there was deep, deep grass. I don’t know how the
+                            caddies ever found the ball. Just to say we played golf in Kabul.</p>
+                        <p><b>MR COOPER:</b> We decided to climb up the mountain to where they have
+                            a cannon mounted. There was an old boy that used to fire that cannon off
+                            at noon every day. He was very proud of this gold watch that he would
+                            produce, and he’d mark it down and wait till noon, and then he’d light
+                            the fuse on the cannon, then it would go off. So I didn’t know how
+                            accurate his watch was. (Laughter.) Well, it pretty much established
+                            noon in Kabul. We called it “Kabul boom time.” (Laughter.)</p>
+                        <p><b>MS DUNN:</b> And even when I was there in '73, we stopped at a—along
+                            the Khyber, we stopped at a stronghold of some type, and the guy came
+                            out and he had bandoliers across his chest and a big rifle. And I
+                            thought, “Well, then not much has changed.”</p>
+                        <p><b>MR VERREOS:</b> Believe me, like I said, that was about the most
+                            interesting trip in the world.</p>
+                    </div>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Department History</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline">Administrative Timeline of the
+                                Department of State</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/buildings">Buildings of the
+                                Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/people">People</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/secretaries">Biographies
+                                        of the Secretaries of State</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/principals-chiefs"
+                                        >Principal Officers and Chiefs of Mission</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/travels">Travels</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/secretary">Travels of
+                                        the Secretary</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/president">Travels of
+                                        the President</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/visits">Visits by Foreign Leaders</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/wwi">World War I and the Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/diplomatic-couriers" class="highlight"
+                                >U.S. Diplomatic Couriers</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

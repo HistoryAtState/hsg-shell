@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">The Historian - About Us</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/about">About</a>
+                    </li>
+                    <li>
+                        <a href="$app/about/the-historian">The Historian</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>The Historian</h1>
+                    <p>Past directors of the Office of the Historian are listed below. (For the
+                        period before the director assumed the title of The Historian, the official
+                        listed headed the Department component responsible for the production of the
+                            <em>Foreign Relations</em> series.) For additional information, see <a
+                            href="$app/historicaldocuments/frus-history/appendix-d">Appendix D</a>
+                        of <em>Toward “Thorough, Accurate, and Reliable”: A History of the Foreign
+                            Relations of the United States Series</em>.</p>
+                    <ul>
+                        <li>1919–1924, Gaillard Hunt (<abbr
+                                title="Division of Publications (1921-1929)">DP</abbr>)</li>
+                        <li>1924, Harry Dwight (<abbr title="Division of Publications (1921-1929)"
+                                >DP</abbr>)</li>
+                        <li>1924–1931, Tyler Dennett (<abbr
+                                title="Division of Publications (1921-1929)">DP</abbr>; <abbr
+                                title="Office of the Historical Advisor (1929–1933)">HA</abbr>)</li>
+                        <li>1931–1933, Hunter Miller (<abbr
+                                title="Office of the Historical Advisor (1929–1933)">HA</abbr>)</li>
+                        <li>1933–1939, Cyril Wynne (<abbr
+                                title="Division of Research and Publications (1933–1946)"
+                            >RP</abbr>)</li>
+                        <li>1939–1946, E. Wilder Spaulding (<abbr
+                                title="Division of Research and Publications (1933–1946)"
+                            >RP</abbr>)</li>
+                        <li>1946–1962, George Bernard Noble (<abbr
+                                title="Division of Historical Policy Research (1946–1953)"
+                            >RE</abbr>; <abbr
+                                title="Historical Division (1953–1959), under the Bureau of Public Affairs (P)"
+                                >HD</abbr>; <abbr
+                                title="Historical Office (1959–1976), under the Bureau of Public Affairs (P; PA)"
+                                >HO</abbr>)</li>
+                        <li>1962–1974, William Franklin (<abbr
+                                title="Historical Office (1959–1976), under the Bureau of Public Affairs (P; PA)"
+                                >HO</abbr>)</li>
+                        <li>1975–1976, Fredrick Aandahl (acting) (<abbr
+                                title="Historical Office (1959–1976), under the Bureau of Public Affairs (P; PA)"
+                                >HO</abbr>)</li>
+                        <li>1976–1981, David Trask (<abbr
+                                title="Office of the Historian (1976–2019), under the Bureau of Public Affairs (PA)"
+                                >HO</abbr>)</li>
+                        <li>1981–2000, William Slany (<abbr
+                                title="Office of the Historian (1976–2019), under the Bureau of Public Affairs (PA)"
+                                >HO</abbr>)</li>
+                        <li>2001–2009, Marc Susser (<abbr
+                                title="Office of the Historian (1976–2019), under the Bureau of Public Affairs (PA)"
+                                >HO</abbr>)</li>
+                        <li>2009, John Campbell (acting) (<abbr
+                                title="Office of the Historian (1976–2019), under the Bureau of Public Affairs (PA)"
+                                >HO</abbr>)</li>
+                        <li>2009–2012, Edward Brynn (acting) (<abbr
+                                title="Office of the Historian (1976–2019), under the Bureau of Public Affairs (PA)"
+                                >HO</abbr>)</li>
+                        <li>2012–2017, Stephen Randolph (<abbr
+                                title="Office of the Historian (1976–2019), under the Bureau of Public Affairs (PA)"
+                                >HO</abbr>)</li>
+                        <li>2018–2019, Renée Goings and Adam Howard (co-directors <em>pro
+                                tempore</em>) (<abbr
+                                title="Office of the Historian (1976–2019), under the Bureau of Public Affairs (PA)"
+                                >HO</abbr>)</li>
+                        <li>2019–, Adam Howard (<abbr
+                                title="Office of the Historian (1976–2019), under the Bureau of Public Affairs (PA)"
+                                >HO</abbr>; <abbr
+                                title="Office of the Historian (2019–present), under the Foreign Service Institute (FSI)"
+                                >OH</abbr>; )</li>
+                    </ul>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">About</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/contact-us">Contact Us</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/faq">Frequently Asked Questions</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/the-historian">The Historian</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/hac">Historical Advisory Committee</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/recent-publications">Recent Publications</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/content-warning">Content Warning</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

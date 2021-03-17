@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div id="static-title" class="hidden">All - U.S. foreign relations materials in the pre-1861
+        U.S. Congressional Serial Set - Pre-1861 U.S. Foreign Relations Materials - Historical
+        Documents</div>
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/pre-1861">Pre-1861 U.S. foreign relations
+                        materials</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/pre-1861/serial-set">U.S. foreign relations
+                        materials in the pre-1861 U.S. Congressional Serial Set</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/pre-1861/serial-set/all">All</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="hsg-width-one-whole" id="volume" data-template="app:fix-links">
+            <div id="content-inner">
+                <h1>U.S. Congressional Serial Set: All Documents on U.S. foreign relations before
+                    1861</h1>
+                <p>
+                    <span data-template="serial-set:bibls-count"/> sources, in chronological
+                    order.</p>
+                <table data-template="serial-set:bibls-filtered-table"/>
+            </div>
+        </div>
+    </div>
+
+</div>

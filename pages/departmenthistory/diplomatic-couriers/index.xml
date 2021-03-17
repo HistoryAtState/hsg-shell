@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">U.S. Diplomatic Couriers - Department History</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory">Department History</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/diplomatic-couriers">U.S. Diplomatic
+                            Couriers</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>U.S. Diplomatic Couriers</h1>
+                    <p>In 1918, the Diplomatic Courier Service was established to support the work
+                        of U.S. diplomats by ensuring that classified messages and materials were
+                        delivered safely and securely to U.S. embassies and consulates around the
+                        world. In the 1950s, before the onset of the jet age, this small group of
+                        couriers traveled tens of thousands of miles per year, often spending months
+                        on the road.</p>
+                    <p>In the words of the couriers themselves, this documentary series chronicles
+                        three of the trips they made: <em>Through the Khyber Pass</em>, <em>Behind
+                            the Iron Curtain</em>, and <em>Into Moscow</em>. A fourth documentary,
+                            <em>Before the Jet Age</em>, describes the Diplomatic Courier Service
+                        itself during this era.</p>
+                    <ul>
+                        <li>
+                            <a
+                                href="$app/departmenthistory/diplomatic-couriers/through-the-khyber-pass"
+                                >Through the Khyber Pass</a>
+                        </li>
+                        <li>
+                            <a
+                                href="$app/departmenthistory/diplomatic-couriers/behind-the-iron-curtain"
+                                >Behind the Iron Curtain</a>
+                        </li>
+                        <li>
+                            <a href="$app/departmenthistory/diplomatic-couriers/into-moscow">Into
+                                Moscow</a>
+                        </li>
+                        <li>
+                            <a href="$app/departmenthistory/diplomatic-couriers/before-the-jet-age"
+                                >Before the Jet Age</a>
+                        </li>
+                    </ul>
+                    <div>
+                        <h2>2018 Centennial of the U.S. Diplomatic Couriers</h2>
+                        <p>The Diplomatic Courier Service marks its 100th anniversary in 2018. For
+                            more information about the history of the Diplomatic Courier Service, as
+                            well as the Department’s modern service, visit the links below:</p>
+                        <ul>
+                            <li>
+                                <a href="https://www.state.gov/diplomatic-couriers-history/"
+                                    >Diplomatic Couriers - History</a>
+                            </li>
+                            <li>
+                                <a href="https://www.state.gov/diplomatic-couriers/">Diplomatic
+                                    Couriers</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2>Diplomatic Immunity and the Vienna Convention on Diplomatic
+                            Relations</h2>
+                        <p>Over the years, Diplomatic Couriers have been protected by official
+                            diplomatic passports, letters of passage signed by the Secretary of
+                            State, and even foreign-issued diplomatic passes.</p>
+                        <p>Since 1961, official diplomatic correspondence has been protected under
+                            Article 27 of the <a
+                                href="https://treaties.un.org/pages/viewdetails.aspx?src=treaty&amp;mtdsg_no=iii-3&amp;chapter=3&amp;lang=en"
+                                >Vienna Convention on Diplomatic Relations</a>. The Vienna
+                            Convention underscores that official messages are inviolable, diplomatic
+                            bags cannot be opened or detained, and diplomatic couriers are “not
+                            liable to any form of arrest or detention.”  The Vienna Convention built
+                            on earlier efforts to codify diplomatic roles and immunities, most
+                            notably the Congress of Vienna in 1815 and the Havana Convention on
+                            Diplomatic Officers in 1928.</p>
+                    </div>
+                    <div>
+                        <h2>More Information</h2>
+                        <ul>
+                            <li><a href="https://www.state.gov/diplomatic-pouches/">Diplomatic
+                                    pouches and the Vienna Convention on Diplomatic Relations</a>
+                                (U.S. Department of State Office of Foreign Missions) </li>
+                            <li><a
+                                    href="https://en.wikipedia.org/wiki/Vienna_Convention_on_Diplomatic_Relations"
+                                    >Vienna Convention on Diplomatic Relations</a> (Wikipedia)</li>
+                            <li><a href="https://en.wikipedia.org/wiki/Congress_of_Vienna">Congress
+                                    of Vienna</a> (Wikipedia)</li>
+                        </ul>
+                        <p>For information on the U.S. Department of State and U.S. diplomacy during
+                            this time, visit <a
+                                href="$app/departmenthistory/short-history/containmentandcoldwar"
+                                >Containment and Cold War, 1945–1961</a>.</p>
+                    </div>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Department History</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline">Administrative Timeline of the
+                                Department of State</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/buildings">Buildings of the
+                                Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/people">People</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/secretaries">Biographies
+                                        of the Secretaries of State</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/principals-chiefs"
+                                        >Principal Officers and Chiefs of Mission</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/travels">Travels</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/secretary">Travels of
+                                        the Secretary</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/president">Travels of
+                                        the President</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/visits">Visits by Foreign Leaders</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/wwi">World War I and the Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/diplomatic-couriers" class="highlight"
+                                >U.S. Diplomatic Couriers</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

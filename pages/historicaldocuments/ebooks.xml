@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/ebooks">Ebooks</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row hsg-main" data-template="pages:load">
+        <div class="hsg-width-two-thirds" data-template="app:fix-links">
+            <div id="content-inner">
+                <h2>Ebooks</h2>
+                <p>The Office of the Historian offers ebook editions of a growing number of volumes
+                    from the <em>Foreign Relations of the United States</em> (<em>FRUS</em>) series.
+                    Far lighter and more portable than printed editions of <em>FRUS</em>, the ebook
+                    edition offers the full content of each volume and makes use of the full-text
+                    search and other reading features of most ebook devices and applications,
+                    including bookmarking and note-taking. Unlike the web-based edition of
+                        <em>FRUS</em>, the ebook edition, once downloaded, can be accessed even
+                    without internet connectivity.</p>
+                <p>These ebooks can be downloaded in a number of ways, either directly from this
+                    website or by using an ereader application that embeds our ebook catalog. For
+                    more information on reading our ebooks on your device, please see our <a
+                        href="#faq">FAQ</a> below.</p>
+                <p>The Office of the Historian has worked to ensure that our ebooks are error-free
+                    and work on a broad range of devices. Please email <a
+                        href="mailto:history_ebooks@state.gov?subject=FRUS%20Ebooks%20Feedback&amp;body=Your%20e-reader%3A%0A%0AVolume%3A%0A%0AComments%3A"
+                        >history_ebooks@state.gov</a> with any feedback.</p>
+                <div id="catalog" data-template="frus:frus-ebooks-catalog"/>
+                <div id="faq">
+                    <h3>FAQ</h3>
+                    <h4>Accessing Ebooks</h4>
+                    <ul id="tested-devices-and-apps">
+                        <li style="font-weight: bold; padding: .5em 0">Q: What e-reader devices and
+                            apps have <em>FRUS</em> ebooks been tested with?</li>
+                        <li>A: We have tested <em>FRUS</em> ebooks on a range of devices and apps:
+                            iOS applications include iBooks, ShuBook, MegaReader, Kobo, Bluefire
+                            Reader, Subtext, and the Kindle app. Kindle devices include the Keyboard
+                            and Fire models. Android apps include Bluefire and Alkido. We encourage
+                            users of other devices and apps to report their experiences.</li>
+                    </ul>
+                    <ul id="adding-ebooks-to-devices">
+                        <li style="font-weight: bold; padding: .5em 0">Q: How can I add a
+                                <em>FRUS</em> ebook to my device?</li>
+                        <li>A: Until <em>FRUS</em> ebooks are available through commercial ebook
+                            retailers, there are two primary methods for adding a <em>FRUS</em>
+                            ebook to your device: (1) “Side-loading” an ebook from this website onto
+                            your device or (2) Using an application that embeds our catalog and lets
+                            you browse and download directly from the application. It is important
+                            to understand what methods and apps are available on your device.</li>
+                    </ul>
+                    <h4 id="side-loading">“Side-loading” <em>FRUS</em> Ebooks</h4>
+                    <ul>
+                        <li style="font-weight: bold; padding: .5em 0">Q: How can I load “side-load”
+                            ebooks onto my device?</li>
+                        <li>A: Consult the instructions provided by your app developer or device
+                            manufacturer to “side-load” the ebook file into your e-reader.<br/>
+                            <ul style="list-style-type: disc; padding-above: .5em">
+                                <li>
+                                    <strong>iBooks (Apple iOS):</strong> Select “Can I download
+                                    books from other websites?” under “Managing your books and
+                                    iBookstore content” from the <a
+                                        href="https://support.apple.com/en-us/HT201478">iBooks:
+                                        Frequently Asked Questions</a>
+                                </li>
+                                <li>
+                                    <strong>Amazon Kindle:</strong> Search <a
+                                        href="https://www.amazon.com/gp/help/customer/display.html/?nodeId=200127470"
+                                        >Kindle Support</a> for “transferring” and select
+                                    instructions specific to your device/app</li>
+                                <li>
+                                    <strong>Barnes &amp; Noble Nook:</strong> Search <a
+                                        href="https://help.barnesandnoble.com/app/nook_support/list"
+                                        >Nook Support</a> for “sideloading” and select instructions
+                                    specific to your device/app</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h4 id="embedding-the-catalog">Embedding our Ebook Catalog in Apps</h4>
+                    <ul>
+                        <li style="font-weight: bold; padding: .5em 0">Q: How can I add the Office
+                            of the Historian’s ebook catalog to my favorite ebook app?</li>
+                        <li>A: A growing number of apps support the OPDS standard, allowing these
+                            apps to embed the Office of the Historian’s ebook catalog and offer
+                            browsing, downloading, and reading within the application. The Office of
+                            the Historian’s ebook catalog URL (an OPDS API) is <a
+                                href="https://history.state.gov/api/v1/catalog"
+                                >https://history.state.gov/api/v1/catalog</a>. To add our catalog to
+                            your OPDS-compliant ebook application, consult the directions, and enter
+                            this URL where directed. We have tested ShuBook and MegaReader on iOS
+                            and the IbisReader web application. Please submit your feedback about
+                            these or other applications to <a
+                                href="mailto:history_ebooks@state.gov?subject=FRUS%20EBooks%20Feedback&amp;body=Your%20e-reader%3A%0A%0AVolume%3A%0A%0AComments%3A"
+                                >history_ebooks@state.gov</a>.</li>
+                        <li>If you are a developer of ebook applications and would like to
+                            incorporate the Office of the Historian ebook catalog into your
+                            application, please see our <a href="$app/developer">Developer
+                                Resources</a> page.</li>
+                    </ul>
+                    <h4 id="citing-frus-ebooks">Citing <em>FRUS</em> EBooks</h4>
+                    <ul>
+                        <li style="font-weight: bold; padding: .5em 0">Q: Since ebooks do not have
+                            stable page numbers, how can I cite references to <em>FRUS</em>
+                            ebooks?</li>
+                        <li>A: Use document numbers rather than page numbers. Document numbers are
+                            persistent, media-neutral identifiers. For example, to cite <a
+                                href="$app/historicaldocuments/frus1969-76v32/d262">this
+                                memorandum</a> from the <em>SALT I, 1969-1972</em> volume, use:
+                                <blockquote style="font-style: normal; margin: 1em">U.S. Department
+                                of State, <em>Foreign Relations of the United States,
+                                    1969-1976,</em> Vol. XXXII, <em>SALT I, 1969-1972</em>
+                                (Washington, DC: U.S. Government Printing Office, 2010),
+                                    <strong>Doc. 262</strong>.</blockquote> rather than <blockquote
+                                style="font-style: normal; margin: 1em">U.S. Department of State,
+                                    <em>Foreign Relations of the United States, 1969-1976,</em> Vol.
+                                XXXII, <em>SALT I, 1969-1972</em> (Washington, DC: U.S. Government
+                                Printing Office, 2010), <strong>774-781</strong>.</blockquote>
+                        </li>
+                    </ul>
+                    <h4 id="known-issues">Known Issues</h4>
+                    <ul>
+                        <li style="font-weight: bold; padding: .5em 0">Issue: <em>FRUS</em> ebook
+                            footnote behavior on Kindle devices and the Kindle app.</li>
+                        <li>Description: Footnotes are hyperlinked in <em>FRUS</em> ebooks so that
+                            activating a footnote reference will navigate directly to the text of
+                            the footnote (and vice versa). On Kindle devices and apps, activating
+                            the hyperlink from the footnote text back to the footnote reference in
+                            the document will navigate to the content immediately following the
+                            reference.</li>
+                        <li style="font-weight: bold; padding: .5em 0">Issue: Indexes in pre-Johnson
+                            era <em>FRUS</em> refer to page numbers rather than document
+                            numbers</li>
+                        <li>In creating the <em>FRUS</em> ebook edition, we endeavored to maintain
+                            fidelity with the original printed edition. Representing original page
+                            numbers from printed editions in ebooks has proved to be difficult. For
+                            readers who need to cite material in this ebook, we recommend citing
+                            document numbers instead of page numbers. Document numbers are
+                            persistent, media-neutral identifiers. Please note that since the
+                            indexes in older <em>FRUS</em> volumes refer to page numbers rather than
+                            document numbers, we have found certain indexes cannot be used “as is”
+                            in ebook versions and so have been omitted from the ebook edition of
+                            pre-Johnson administration volumes. Volumes from the Johnson
+                            administration onward, whose indexes reference document numbers, are
+                            unaffected by this issue.</li>
+                    </ul>
+                    <h4 id="helpful-tips">Helpful Tips</h4>
+                    <ul>
+                        <li style="font-weight: bold; padding: .5em 0">Tip: Using bookmarks.</li>
+                        <li>Description: Many e-readers allow users to set multiple bookmarks and
+                            navigate to them quickly from an easily-accessible list of all the
+                            assigned bookmarks in a given ebook. <em>FRUS</em> ebook users can take
+                            advantage of this feature to place bookmarks on frequently-used
+                            resources, like the Persons, Source, and/or the Terms and Abbreviations
+                            lists that are located at the beginning of each volume. Many e-readers
+                            also allow you to jump back to a previous location, making it easy to
+                            take advantage of the information in a <em>FRUS</em> ebook’s front
+                            matter without losing your place in the volume.</li>
+                        <li style="font-weight: bold; padding: .5em 0">Tip: Using the table of
+                            contents.</li>
+                        <li>Description: In addition to a hyperlinked version of the table of
+                            contents listing chapters in the compilation that appears in the
+                            beginning pages of a printed <em>FRUS</em> volume, <em>FRUS</em> ebooks
+                            provide users with richly detailed lists of individual documents and
+                            their source notes at the beginning of each chapter and in the general
+                            table of contents accessible via the e-reader’s table of contents
+                            feature.</li>
+                        <li style="font-weight: bold; padding: .5em 0">Tip: Using full-text
+                            search.</li>
+                        <li>Description: Like the volumes accessible on <a href="$app"
+                                >history.state.gov</a>, <em>FRUS</em> ebooks are fully
+                            text-searchable. The features and behavior of the search engine depends
+                            on your e-reader device/app.</li>
+                    </ul>
+                    <h4 id="feedback">Providing Feedback or Other Questions</h4>
+                    <ul>
+                        <li style="font-weight: bold; padding: .5em 0">Q: How can I provide feedback
+                            or ask a question not answered here?</li>
+                        <li>A: We welcome your feedback or other questions not answered here. Please
+                            contact us at <a
+                                href="mailto:history_ebooks@state.gov?subject=FRUS%20EBooks%20Feedback&amp;body=Your%20e-reader%3A%0A%0AVolume%3A%0A%0AComments%3A"
+                                >history_ebooks@state.gov</a>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <aside class="hsg-width-one-third">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the <em>Foreign Relations of the United
+                            States</em> series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments">All Administrations</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other
+                            Electronic resources for U.S. foreign relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                            >Guide to sources on Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

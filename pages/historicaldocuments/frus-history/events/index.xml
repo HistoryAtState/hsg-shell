@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments">Historical Documents</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus-history">History of the <em>Foreign
+                                Relations</em> Series</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus-history/events">Events</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row hsg-main">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <div data-template="frus-history:events"/>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title"><em>FRUS</em> History Resources</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>Other resources about the history of the <em>Foreign Relations of the
+                                United States</em> series.</p>
+                    </div>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level">
+                            <a href="$app/historicaldocuments/frus-history">Publications</a>
+                        </h3>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/frus-history">
+                                <img
+                                    src="https://static.history.state.gov/frus-history/covers/frus-history.png"
+                                    width="100px"/>
+                                <br/> Toward “Thorough, Accurate, and Reliable”: A History of the
+                                    <em>Foreign Relations of the United States</em> Series </a>
+                        </li>
+                    </ul>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level">
+                            <a href="$app/historicaldocuments/frus-history/documents">Documents</a>
+                        </h3>
+                    </div>
+                    <ul data-template="frus-history:most-recent-documents"/>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level">
+                            <a href="$app/historicaldocuments/frus-history/research">Research</a>
+                        </h3>
+                    </div>
+                    <ul data-template="frus-history:most-recent-articles"/>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

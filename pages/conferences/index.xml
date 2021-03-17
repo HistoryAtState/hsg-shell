@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/conferences">Conferences</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Conferences</h1>
+                    <p>The Office of the Historian periodically hosts or co-hosts scholarly
+                        conferences on specific topics of interest related to the history of U.S.
+                        foreign relations. These conferences typically aim to bring together former
+                        diplomats and policymakers with respected scholars of U.S. foreign
+                        relations. The Office of the Historian has also been successful in including
+                        current policymakers in these conferences. These conferences are generally
+                        open to the public, although pre-registration might be required.</p>
+                    <h3>Past Conferences</h3>
+                    <ol>
+                        <li>
+                            <a href="$app/conferences/2012-national-security-policy-salt">National
+                                Security Policy and SALT I, 1969-1972</a>
+                            <br/>
+                            <em>Foreign Relations of the United States</em> Special Conference
+                            Series<br/>March 2-3, 2012 </li>
+                        <li>
+                            <a href="$app/conferences/2011-foreign-economic-policy">Foreign Economic
+                                Policy, 1973-1976</a>
+                            <br/>
+                            <em>Foreign Relations of the United States</em> Special Conference
+                            Series<br/>March 7, 2011 </li>
+                        <li>
+                            <a href="$app/conferences/2010-southeast-asia">The American Experience
+                                in Southeast Asia, 1946-1975</a>
+                            <br/> September 29–30, 2010 </li>
+                        <li>
+                            <a href="$app/conferences/2007-detente">U.S.-Soviet Relations in the Era
+                                of Détente, 1969-1976</a>
+                            <br/> October 22–23, 2007 </li>
+                        <li>
+                            <a href="$app/conferences/2006-china-cold-war">Transforming the Cold
+                                War: The United States and China, 1969-1980</a>
+                            <br/>September 25–27, 2006 </li>
+                    </ol>
+                    <p>The Office of the Historian also participates in other events and forums
+                        relating to the history of U.S. foreign relations and the <em>Foreign
+                            Relations of the United States series</em>. For example, see the
+                        Commemorating 150 Years of the <em>Foreign Relations of the United States
+                            series </em>
+                        <a href="$app/historicaldocuments/frus-history/events">Events</a> page.</p>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Conferences</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/conferences/2012-national-security-policy-salt">National
+                                Security Policy and SALT I, 1969-1972</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/conferences/2011-foreign-economic-policy">Foreign Economic
+                                Policy, 1973-1976</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/conferences/2010-southeast-asia">The American Experience
+                                in Southeast Asia, 1946-1975</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/conferences/2007-detente">U.S.-Soviet Relations in the Era
+                                of Détente, 1969-1976</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/conferences/2006-china-cold-war">Transforming the Cold
+                                War: The United States and China, 1969-1980</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

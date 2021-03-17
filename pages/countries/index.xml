@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/countries">Countries</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Countries</h1>
+                    <p>This section provides historical reference information on aspects of the
+                        United States’ relations with the countries of the world. The central
+                        component is a guide to matters of diplomatic recognition and the
+                        establishment and maintenance of diplomatic relations between the United
+                        States and states of the world, from 1776 to the present.</p>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <select data-template="countries:load-countries" class="form-control"
+                                onchange="location = this.options[this.selectedIndex].value;">
+                                <option value="#">Select a country:</option>
+                                <option data-template="templates:each" data-template-from="articles" data-template-to="article" xml:space="preserve"><span data-template="countries:article-href-value-attribute"/><span data-template="countries:article-title"/>
+                        </option>
+                            </select>
+                        </div>
+                    </form>
+                    <p>An asterisk indicates former countries, previously recognized by the United
+                        States, that have been dissolved or superseded by other states.</p>
+                    <p>This guide brings together information on these subjects from among diverse
+                        and widely scattered documentary and archival sources. The most significant
+                        categories of information provided for each individual country include: </p>
+                    <ol>
+                        <li>the date and circumstances under which the United States recognized, or
+                            was recognized by, each state;</li>
+                        <li>the date and mode by which the United States established diplomatic
+                            relations with each state;</li>
+                        <li>the date the United States established a physical diplomatic presence
+                            through a legation, embassy, or other mission in each country; </li>
+                        <li>and the dates and circumstances of any interruption or resumption of
+                            diplomatic relations. </li>
+                    </ol>
+                    <p>Over time, additional details will be added for each country, such as
+                        information on the United States consular presence.</p>
+                    <p>Finally, this section also provides historical information on some
+                        territorial entities that the United States has not recognized or with which
+                        it does not have diplomatic relations.</p>
+                    <p>Select an article from the list of <a href="$app/countries/all">all
+                            countries</a>.</p>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Countries</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>
+                            <a href="$app/countries/all">View a list of all countries</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Related Resources</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>
+                            <a href="$app/countries/archives">World Wide Diplomatic Archives
+                                Index</a>
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

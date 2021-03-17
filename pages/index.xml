@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div id="static-title" class="hidden"/>
+    <div class="row">
+        <div class="hsg-width-two-thirds" data-template="app:load-carousel-items">
+            <h2 class="section-heading">Latest News</h2>
+            <section class="carousel-item" data-template="app:each"
+                data-template-from="carousel-items" data-template-to="carousel-item">
+                <div data-template="app:fix-links">
+                    <div class="carousel-image">
+                        <a xml:space="preserve"><span data-template="app:carousel-item-href-attribute"/>
+                            <img class="img-responsive"><span data-template="app:carousel-image-src-attribute"/><span data-template="app:carousel-image-alt-attribute"/><span data-template="app:carousel-image-dimension-attributes"/></img>
+                        </a>
+                    </div>
+                    <div class="carousel-teaser">
+                        <h3 class="carousel-title">
+                            <a xml:space="preserve"><span data-template="app:carousel-item-href-attribute"/><span data-template="app:carousel-item-heading"/></a>
+                        </h3>
+                        <p data-template="app:carousel-item-description"/>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <aside class="hsg-frontpage-sidebar">
+            <h2 class="section-heading">Stay connected</h2>
+            <section class="hsg-frontpage-section">
+                <ul class="post-list" data-template="app:load-most-recent-tweets"
+                    data-template-how-many="3">
+                    <li class="post" data-template="app:each" data-template-from="tweets"
+                        data-template-to="tweet">
+                        <p class="post-body">
+                            <span data-template="app:tweet-html"/>
+                        </p>
+                        <p class="post-meta">
+                            <a xml:space="preserve"><span data-template="app:tweet-href-attribute"/>
+                                <span data-template="app:tweet-date"/>
+                            </a>
+                        </p>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+    </div>
+</div>

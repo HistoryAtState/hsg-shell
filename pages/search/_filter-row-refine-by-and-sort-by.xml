@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Filters "refine by" and "sort by" in one row -->
+<div class="row">
+    <div class="hsg-width-two-thirds">
+        <div data-template="templates:include"
+            data-template-path="pages/search/_filter-refine-by.html"/>
+    </div>
+    <div class="hsg-width-one-third">
+        <div data-template="templates:include"
+            data-template-path="pages/search/_filter-sort-by.html"/>
+    </div>
+</div>

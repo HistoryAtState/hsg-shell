@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div class="row" data-template="pages:load">
+        <div id="static-title" class="hidden"><span data-template="frus-history:article-title"/> -
+            Research - History of the Foreign Relations Series - Historical Documents</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments">Historical Documents</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus-history">History of the <em>Foreign
+                                Relations</em> Series</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus-history/research">Research</a>
+                    </li>
+                    <li>
+                        <a data-template="frus-history:article-breadcrumb"/>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row hsg-main">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links" itemscope="itemscope"
+                    itemtype="http://schema.org/Article">
+                    <h1 class="hsg-navigation-title">
+                        <span data-template="frus-history:article-title"/>
+                    </h1>
+                    <div data-template="frus-history:article-author"/>
+                    <p data-template="frus-history:article-description"/>
+                    <div data-template="frus-history:article"/>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title"><em>FRUS</em> Sesquicentennial Research</h2>
+                    </div>
+                    <ul data-template="frus-history:article-list-sidebar"/>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

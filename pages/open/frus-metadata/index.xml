@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Bibliographical Metadata of the Foreign Relations of
+            the United States Series - Open Government Initiative</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/open">Open Government Initiative</a>
+                    </li>
+                    <li>
+                        <a href="$app/open/frus-metadata">Bibliographic Metadata of the <em>Foreign
+                                Relations of the United States</em> Series</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Bibliographic Metadata of the <em>Foreign Relations of the United
+                            States</em> Series</h1>
+                    <p>The Office of the Historian is responsible, under law, for the preparation
+                        and publication of the official historical documentary record of U.S.
+                        foreign policy in the <a href="$app/historicaldocuments">Foreign Relations
+                            of the United States</a> series. This dataset is the raw bibliographic
+                        metadata for the nearly 500 volumes in the series published since 1861. Each
+                        record in the dataset contains a volume’s title, year of publication, years
+                        covered by the volume, summary, and links to sources for these volumes
+                        online or in print, among other metadata items.</p>
+                    <p>
+                        <a href="$app/open/frus-metadata.xml">Download the raw data</a> (XML,
+                        315K)</p>
+                    <p>Visit the <a
+                            href="https://catalog.data.gov/dataset/bibliographical-metadata-of-the-foreign-relations-of-the-united-states-series"
+                            >Data.gov catalog entry</a> for this dataset</p>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Open Government Initiative</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/open/frus-metadata">Bibliographic Metadata of the
+                                    <em>Foreign Relations of the United States</em> Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/open/frus-latest">Latest Volumes of <em>Foreign Relations
+                                    of the United States</em> Series</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

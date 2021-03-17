@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="frus:load-administration">
+        <div id="static-title" class="hidden"><span data-template="frus:administration-name"/> -
+            Historical Documents</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments">Historical Documents</a>
+                    </li>
+                    <li>
+                        <a href="#" data-template="frus:administration-name"/>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row hsg-main">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner">
+                    <h1 class="titleStmt1" data-template="frus:administration-name"/>
+                    <div data-template="frus:administration-listing-note">
+                        <p id="pre-administration-based-subseries-note"
+                                ><strong><em>Note</em></strong>: The volumes listed below contain at
+                            least one document from the period of this presidential administration;
+                                <a data-template="frus:admin-search-href">view and search within the
+                                available documents</a>. The <em>Foreign Relations</em> series was
+                            organized by year for the volumes covering 1861–1951, triennially for
+                            1952–1963, and by presidential administration for 1964 onward—with some
+                            exceptions.</p>
+                        <p id="administration-based-subseries-note"><a
+                                data-template="frus:admin-search-href">View and search within all
+                                available documents from the period of this administration</a>.</p>
+                    </div>
+                    <ol data-template="frus:volumes-pre-truman">
+                        <li>
+                            <a href="${vol-id}" data-template="app:parse-params">
+                                <span data-template="frus:volume-title"/>
+                            </a>
+                            <span data-template="frus:volume-availability-summary"/>
+                        </li>
+                    </ol>
+                    <p data-template="frus:group-info"/>
+                    <div data-template="frus:volumes-by-administration-group">
+                        <h2 id="${group}-volumes" data-template="app:parse-params">
+                            <span data-template="frus:administration-group-code"/> volumes</h2>
+                        <div data-template="frus:volumes-by-group">
+                            <h3 data-template="frus:series-title"/>
+                            <ol data-template="frus:series-volumes">
+                                <li>
+                                    <a href="${vol-id}" data-template="app:parse-params">
+                                        <span data-template="frus:volume-title"/>
+                                    </a>
+                                    <span data-template="frus:volume-availability-summary"/>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div data-template="frus:volumes-by-administration">
+                        <h3 data-template="frus:series-title"/>
+                        <ol data-template="frus:series-volumes">
+                            <li>
+                                <a href="${vol-id}" data-template="app:parse-params">
+                                    <span data-template="frus:volume-title"/>
+                                </a>
+                                <span data-template="frus:volume-availability-summary"/>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>Browse official documents from the <em>Foreign Relations of the United
+                                States</em> series.</p>
+                    </div>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford
+                                Administrations</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments">All Administrations</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h3 class="hsg-sidebar-title">Related Resources</h3>
+                    </div>
+
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                    Relations</em> series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                                Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/frus-history">History of the
+                                Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/ebooks">
+                                <em>Foreign Relations</em> ebooks</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/other-electronic-resources">Other
+                                Electronic resources for U.S. foreign relations</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                                >Guide to sources on Vietnam, 1969-1975</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/search/tips">Tips for searching the <em>Foreign
+                                    Relations</em> Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                    Relations</em> documents</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

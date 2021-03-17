@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Principal Officers and Chiefs of Mission - People -
+            Department History</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory">Department History</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/people">People</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/people/principals-chiefs">Principal Officers
+                            and Chiefs of Mission</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Principal Officers and Chiefs of Mission</h1>
+                    <div class="warning">
+                        <p>
+                            <strong>Note:</strong> The information presented here is for historical
+                            research and is not necessarily up-to-date. The Department of State
+                            maintains a list of current <a
+                                href="https://www.state.gov/biographies-list/">Senior Officials</a>
+                            and <a
+                                href="https://www.state.gov/resources-bureau-of-global-talent-management/#ambassadors"
+                                >Ambassadors</a>.</p>
+                    </div>
+                    <div class="contents">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="$app/departmenthistory/people/by-name">All Principal
+                                    Officers and Chiefs of Mission, Listed by Name</a>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory/people/by-year">All Principal
+                                    Officers and Chiefs of Mission, Listed by Year</a>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory/people/principalofficers">Principal
+                                    Officers, Listed By Title</a>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory/people/chiefsofmission/by-country"
+                                    >Chiefs of Mission, Listed by Country</a>
+                            </li>
+                            <li>
+                                <a
+                                    href="$app/departmenthistory/people/chiefsofmission/by-organization"
+                                    >Chiefs of Mission, Listed By International Organization</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h2 id="about">Introduction</h2>
+                    <p>This online resource continues a long tradition in the U.S. Department of
+                        State of making retrospective data about principal officers and chiefs of
+                        mission available to the public. The 1873 edition of the <em>Register of the
+                            Department of State</em> presented the names of all American diplomatic
+                        representatives who had served in each country with which the United States
+                        had relations from 1789 to 1873. The 1937 edition of the <em>Register</em>
+                        presented a cumulative listing of all of the principal officers of the
+                        Department of State from 1789 to 1936. The <em>Biographic Register</em> (as
+                        the <em>Register of the United States</em> was renamed) of 1957 presented an
+                        updated listing of principal diplomatic agents of the United States from
+                        1789 to 1956, together with a listing of the dates of service of Presidents
+                        of the United States and Secretaries of State. In 1973, the Department of
+                        State issued <a href="https://hdl.handle.net/2027/txu.059172130110486"
+                            >United States Chiefs of Mission, 1778−1973</a>, which presented in
+                        tabular format a comprehensive historical listing of all United States
+                        Ambassadors, Ministers, Ministers Resident, Chargés d’Affaires pro tempore,
+                        and diplomatic agents. The publication also included a listing of principal
+                        officers of the Department. The Department published <a
+                            href="https://www.hathitrust.org/usdocs_registry/catalog/7a062c55-8462-45a0-a679-4cce574a9c40"
+                            >United States Chiefs of Mission, 1973−1974 (Supplement)</a> in 1975
+                        with addenda and corrigenda to the 1973 edition. <a
+                            href="https://hdl.handle.net/2027/pur1.32754077529729">United States
+                            Chiefs of Mission, 1778−1982</a> brought the full text to its second
+                        edition.</p>
+                    <p><a
+                            href="https://www.hathitrust.org/usdocs_registry/catalog/d1433295-fdbd-4457-a683-bd877633aaa0"
+                            >Principal Officers of the Department of State and United States Chiefs
+                            of Mission, 1778−1986</a> issued by the Department of State in 1986,
+                        presented expanded listings based on previous Department publications and
+                        additional research and definition. Corrections were made to earlier
+                        listings, and information on major executive officers of the Department of
+                        State was greatly increased and rearranged. A revised edition, <a
+                            href="https://www.hathitrust.org/usdocs_registry/catalog/a0971723-6d86-4d54-8b81-f77b8c584fbd"
+                            >Principal Officers of the Department of State and United States Chiefs
+                            of Mission, 1778−1988</a>, was issued in 1988. The final print version
+                        of this publication was released in 1991, under the title <a
+                            href="https://hdl.handle.net/2027/pur1.32754062053008">Principal
+                            Officers of the Department of State and United States Chiefs of Mission,
+                            1778−1990</a>. The transfer of this material online has not changed our
+                        office’s intent: to document the history of U.S. representation abroad and
+                        the chief policymakers in the Department of State. To that end, we have
+                        provided a chronological listing of principal officers—essentially all
+                        Department officers at the level of Assistant Secretary or above—and Chiefs
+                        of Mission. (See below for a discussion of the term, “Chief of Mission.”)
+                        These two categories require Presidential or Secretarial designation, and,
+                        in some cases, the approval of the Senate. We have made an attempt to
+                        comprehensively list all people selected for these positions, even if they
+                        were not approved by the Senate, died before taking office, declined the
+                        position, or were otherwise unable to serve. For that reason, the pages
+                        which list our Chiefs of Mission by country are split into two categories:
+                        “Chiefs of Mission” lists those who held the office, and “Other Nominees”
+                        lists those who did not.</p>
+                    <h3 id="positions-included">Positions Included</h3>
+                    <p>This database includes officers of the Department who were Presidential
+                        appointees (appointed by the President with the advice and consent of the
+                        Senate) and chiefs of bureaus who hold rank equivalent to Assistant
+                        Secretary of State. These include: Secretaries, Deputy Secretaries, Under
+                        Secretaries, Deputy Under Secretaries, Assistant Secretaries, Counselors,
+                        Legal Advisers, Chiefs of Protocol, and certain administrators.</p>
+                    <p>Other positions have, from time to time, been included in the database based
+                        on their particular circumstances. The complete lists of heads of the United
+                        States Information Agency (USIA), for example, are included. USIA was
+                        incorporated into the Department in 1999. Other Chiefs of Mission of
+                        particular historical interest have also been included.</p>
+                    <h3 id="positions-excluded">Positions Excluded</h3>
+                    <p>This database does <em>not</em> include representatives, personal
+                        representatives, or special representatives of the President or Department
+                        of State; Chargés d’Affaires or Chargés d’Affaires ad interim (except under
+                        certain circumstances); individuals holding diplomatic commissions jointly
+                        with other representatives; special agents and other individuals on special
+                        missions; high commissioners; Chiefs of Mission in charge of special
+                        economic or aid missions; liaison officers; military governors or commanding
+                        officers of occupying forces or their political advisers; delegates to
+                        international conferences; or consular officers who held only consular
+                        commissions.</p>
+                    <h3 id="who-is-chief-of-mission">What is a Chief of Mission?</h3>
+                    <p>According to the <a href="http://uscode.house.gov/statutes/pl/96/465.pdf"
+                            >Foreign Affairs Act of 1980 (Public Law 96−465, Section 102(3) (22
+                            U.S.C. 3902))</a>, a Chief of Mission is “the principal officer in
+                        charge of a diplomatic mission of the United States or of a United States
+                        office abroad which is designated by the Secretary of State as diplomatic in
+                        nature, including any individual assigned under section 502(c) to be
+                        temporarily in charge of such a mission or office."</p>
+                    <p>The Chief of Mission is often—but not always—an Ambassador. There are
+                        currently three classes of diplomatic representation established by the <a
+                            href="https://2009-2017.state.gov/documents/organization/17843.pdf">1961
+                            Vienna Convention on Diplomatic Relations, Article 14</a>: ambassador or
+                        nuncio (accredited to the Head of State); envoy, minister, or internuncio
+                        (accredited to the Head of State); and chargé d’affaires (accredited to the
+                        Minister of Foreign Affairs). These classes have a much longer lineage.
+                        Although not a signatory, the United States followed Annex 17 to the
+                        Congress Treaty of Vienna (March 19, 1815), which established rank and
+                        precedence of diplomatic agents (Ambassadors, Envoys, and Chargés
+                        d’Affaires). The Proces-Verbal of the Conference of Aix-la-Chapelle
+                        (November 9, 1818), recognized Ministers Resident as an intermediate class
+                        between Ministers and Chargés d’Affaires.</p>
+                    <p>The United States first used the rank of Ambassador in 1893, when <a
+                            href="$app/departmenthistory/people/bayard-thomas-francis">Thomas F.
+                            Bayard</a> was appointed Ambassador to Great Britain on March 30 of that
+                        year.</p>
+                    <p>A “Chargé d’Affaires ad interim” refers to a diplomat temporarily acting for
+                        an absent Chief of Mission. This database tracks all Chargés d’Affaires and
+                        Chargés d’Affaires ad interim who served (1) for a continuous period of 12
+                        months or more, (2) at the establishment or ending of diplomatic relations
+                        with a country, or (3) at the closure or opening of an embassy.</p>
+                    <h3 id="database-contents">Database Contents</h3>
+                    <p>The type of information included for each entry varies based on the type of
+                        position. Entries will have some or all of these pieces of information:</p>
+                    <dl>
+                        <dt id="name">Name</dt>
+                        <dd>When possible, the full name of the appointee has been included.</dd>
+                        <dt id="years-of-birth-and-death">Years of birth and death</dt>
+                        <dt id="state-of-residence">State of residency</dt>
+                        <dd>The appointee’s state or territory of legal residence at the time of the
+                            appointment is taken from the commission, nomination, or a contemporary
+                            official record of legal residence. If the residence was omitted from
+                            these sources, the entry does not appear. Some officers changed their
+                            legal residence during their careers; in such cases multiple residences
+                            are listed.</dd>
+                        <dt id="career-status">Career status (in the Foreign Service)</dt>
+                        <dd>The determination of which Chiefs of Mission were to be denominated as
+                            “career” officers posed a number of problems to the early compilers of
+                            this work, and continues to pose definitional challenges today. How
+                            early could Chief of Mission appointments be said to be of a career
+                            nature in view of the fact that until 1946 officers of the Diplomatic
+                            Service had to resign from the career services to accept appointment as
+                            Ambassador or Minister? Should an officer who had retired as a Foreign
+                            Service officer after a long career be considered a “career” officer
+                            when later appointed to an Ambassadorship? And what of an officer who
+                            had resigned from the Foreign Service after a brief career who was later
+                            appointed Chief of Mission? At the time the scope and format of this
+                            publication were being planned, a dozen such questions were submitted to
+                            the then-Director General of the Foreign Service. It was determined not
+                            to attempt to categorize Chiefs of Mission as “career” or “non-career”
+                            before the passage of the Act to Improve the Foreign Service on February
+                            5, 1915 (38 Stat. 805), which restructured the Diplomatic and Consular
+                            Services. For Chiefs of Mission holding office as such at that date, it
+                            was decided to count as “career” those who had at least ten years of
+                            continuous diplomatic service under both Republican and Democratic
+                            administrations. For Chiefs of Mission appointed later, the term
+                            “career” was also applied to those who were at the time of appointment
+                            (or had previously been for at least five years) Foreign Service
+                            officers, Foreign Service information officers, or career officers in
+                            the Diplomatic or Consular Services. The term “career” was also applied
+                            to those few individuals who had served as diplomatic secretaries, who
+                            had then been commissioned before 1915 as Chiefs of Mission or as
+                            Presidential appointees in the Department of State, who were not serving
+                            as Chiefs of Mission in February 1915, but who were subsequently
+                            appointed or reappointed as such. The term “non-career” is used to
+                            designate all other appointees even though they may have been career
+                            officers in the civil or military services.</dd>
+                        <dt id="dates-of-service">Dates of service</dt>
+                        <dd>These dates are included on a position-by-position basis. Principal
+                            officers of the Department of State who are Presidential appointees have
+                            a date of appointment, date of entry on duty, and date of termination of
+                            appointment. Chiefs of Mission are considered to have entered on duty
+                            when they present their credentials to their host governments. An effort
+                            has been made to fix a date for the termination of the diplomatic
+                            mission of each representative vis-à-vis the host government and to
+                            describe briefly in each individual case (and as precisely as sometimes
+                            incomplete records permit) what action or event brought the mission to
+                            either a formal or a de facto close. In the nineteenth century it was
+                            customary for a Chief of Mission to present his own letter of recall; in
+                            current practice most missions terminate in actual fact with the
+                            departure of the Ambassador from his or her post. In all periods there
+                            have been special circumstances (e.g., death, declaration of war,
+                            severance of diplomatic relations) which have brought some diplomatic
+                            missions to an end. It should be emphasized that the effective date of a
+                            Chief of Mission's resignation frequently does not coincide with the
+                            date shown here for the termination of his or her mission abroad. For
+                            those who were designated by the Secretary of State, the date of
+                            appointment is the same as the date of entry on duty. For Chargés
+                            d’Affaires ad interim, dates of service are listed from and to the
+                            nearest month.</dd>
+                    </dl>
+                    <h3 id="key-terms">Key Terms</h3>
+                    <dl>
+                        <dt id="appointment">Appointment</dt>
+                        <dd>The date of appointment is that which appears upon the face of the
+                            Presidential commission issued to the appointee. It is frequently
+                            referred to as the date of commissioning or the date of attestation.
+                            Recess appointments are valid only until the end of the current session
+                            of the Senate. If the President wishes to keep a recess appointee in
+                            office, the President must re-nominate the appointee.</dd>
+                        <dt id="commission">Commission</dt>
+                        <dd>A document attesting that the appointee has been appointed as a
+                            principal officer of the Department of State or as a Chief of Mission.
+                            It is signed by the President and the Secretary of State and bears the
+                            impression of the Great Seal of the United States. “Commission” always
+                            connotes Presidential action.</dd>
+                        <dt id="designation">Designation</dt>
+                        <dd>This term covers chiefs of bureaus of the Department of State who are
+                            selected by the Secretary of State. Article II, Section 2 of the
+                            Constitution states that “the Congress may by law vest the Appointment
+                            of such inferior Officers, as they think proper, in the President alone,
+                            in the Courts of Law, or in the Heads of Departments.” “Designation”
+                            always connotes Secretarial action.</dd>
+                        <dt id="nomination">Nomination</dt>
+                        <dd>This is the date that the President sends to the Senate the name of a
+                            person whom he wishes to appoint to a high-level position. Article II,
+                            Section 2 of the Constitution states that the President, “by and with
+                            the Advice and Consent of the Senate, shall appoint Ambassadors, other
+                            public Ministers and Consuls, Judges of the supreme Court, and all other
+                            Officers of the United States, whose Appointments are not herein
+                            otherwise provided for, and which shall be established by Law.” Per <a
+                                href="https://www.rules.senate.gov/rules-of-the-senate">Senate Rule
+                                XXXI</a>, “Nominations neither confirmed nor rejected during the
+                            session at which they are made shall not be acted upon at any succeeding
+                            session without being again made to the Senate by the President; and if
+                            the Senate shall adjourn or take a recess for more than thirty days, all
+                            nominations pending and not finally acted upon at the time of taking
+                            such adjournment or recess shall be returned by the Secretary to the
+                            President, and shall not again be considered unless they shall again be
+                            made to the Senate by the President.”</dd>
+                    </dl>
+                    <h3 id="steps-in-appointment">Steps in Appointment</h3>
+                    <p>Nomination is the first step in the appointment process. The President
+                        submits the name of the person to be appointed to a high-level position to
+                        the Senate for approval by first the Foreign Relations Committee and then by
+                        the full Senate. Approval by the full Senate is called “confirmation.” The
+                        appointee is then commissioned. After taking the oath of office, he or she
+                        enters on duty. Chiefs of Mission, however, are considered to have entered
+                        on duty when they present their credentials to their host governments.</p>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Department History</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline">Administrative Timeline of the
+                                Department of State</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/buildings">Buildings of the
+                                Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/people">People</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/secretaries">Biographies
+                                        of the Secretaries of State</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/principals-chiefs"
+                                        >Principal Officers and Chiefs of Mission</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/travels">Travels</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/secretary">Travels of
+                                        the Secretary</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/president">Travels of
+                                        the President</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/visits">Visits by Foreign Leaders</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/wwi">World War I and the Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/diplomatic-couriers">U.S. Diplomatic
+                                Couriers</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

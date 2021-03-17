@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/quarterly-releases">Quarterly Releases</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/quarterly-releases/2016-q4">2016 Quarter 4</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row hsg-main" data-template="pages:load">
+        <div class="hsg-width-two-thirds" data-template="app:fix-links">
+            <div id="content-inner">
+
+                <h2>Quarterly Release of Newly Digitized <em>Foreign Relations </em>Volumes</h2>
+                <p>December 8, 2016</p>
+                <p>The Department of State today announces the release of newly digitized versions
+                    of twenty volumes from the <em>Foreign Relations of the United
+                    States</em> series, the official documentary record of U.S. foreign relations.
+                    These volumes cover events that took place between 1932 and 1939 and were
+                    originally published in print between 1947 and 1953. Collectively, these volumes
+                    cover U.S. foreign policy during critical international events that occurred in
+                    the years that preceded the Second World War. Documented in this release are the
+                    efforts of the United States in maintaining international order against the
+                    rising tide of fascism in Europe, including participation in lengthy
+                    multi-lateral arms limitation discussions in Geneva. Official U.S. recognition
+                    of the Soviet Union and formal bilateral relations through 1939 are treated in a
+                        special <em>Foreign Relations</em> volume that is included in this release.
+                    Foreign policy in Asia during the Far East Crisis and the militaristic expansion
+                    of Japan is also covered in these volumes.</p>
+                <p><em>Foreign Relations of the United States Diplomatic Papers,</em> 1932</p>
+                <ol>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1932v01">General, Volume I</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1932v02">The British Commonwealth,
+                            Europe, Near East and Africa, Volume II</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1932v03">The Far East, Volume III</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1932v04">The Far East, Volume IV</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1932v05">The American Republics,
+                            Volume V</a>
+                    </li>
+                </ol>
+                <p><em>Foreign Relations of the United States Diplomatic Papers,</em> 1933</p>
+                <ol>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1933v01">General, Volume I</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1933v02">The British Commonwealth,
+                            Europe, Near East and Africa, Volume II</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1933v03">The Far East, Volume III</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1933v04">The American Republics,
+                            Volume IV</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1933v05">The American Republics,
+                            Volume V</a>
+                    </li>
+                </ol>
+                <p>
+                    <em>Foreign Relations of the United States</em>
+                </p>
+                <ol>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1933-39">The Soviet Union,
+                            1933–1939</a>
+                    </li>
+                </ol>
+                <p><em>Foreign Relations of the United States Diplomatic Papers,</em> 1934</p>
+                <ol>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1934v01">General, the British
+                            Commonwealth, Volume I</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1934v02">Europe, Near East and Africa,
+                            Volume II</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1934v03">The Far East, Volume III</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1934v04">The American Republics,
+                            Volume IV</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1934v05">The American Republics,
+                            Volume V</a>
+                    </li>
+                </ol>
+                <p><em>Foreign Relations of the United States Diplomatic Papers,</em> 1935</p>
+                <ol>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1935v01">The Near East and Africa,
+                            Volume I</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1935v02">The British Commonwealth;
+                            Europe, Volume II</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1935v03">The Far East, Volume III</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1935v04">The American Republics,
+                            Volume IV</a>
+                    </li>
+                </ol>
+
+                <p>Today’s release is part of the Office of the Historian’s ongoing project, in
+                    partnership with the University of Wisconsin Digital Collections Center, to
+                    digitize the entire <em>Foreign Relations</em> series. The University graciously
+                    provided high quality scanned images of each printed book, which the Office
+                    further digitized to create a full text searchable edition. These volumes are
+                    available online and as free ebooks at the Office of the Historian’s website (<a
+                        href="$app/historicaldocuments"
+                        >https://history.state.gov/historicaldocuments</a>). This is the latest in a
+                    series of <a href="$app/historicaldocuments/quarterly-releases">quarterly
+                        releases</a>, which will continue until the  <em>FRUS</em> digital archive
+                    is complete.</p>
+            </div>
+        </div>
+
+        <aside class="hsg-width-one-third">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the <em>Foreign Relations of the United
+                            States</em> series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments">All Administrations</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other
+                            Electronic resources for U.S. foreign relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                            >Guide to sources on Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

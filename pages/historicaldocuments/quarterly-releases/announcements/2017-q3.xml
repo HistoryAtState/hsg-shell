@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/quarterly-releases">Quarterly Releases</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/quarterly-releases/2017-q2">2017 Quarter 3</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row hsg-main" data-template="pages:load">
+        <div class="hsg-width-two-thirds" data-template="app:fix-links">
+            <div id="content-inner">
+                <h2>Quarterly Release of Newly Digitized <em>Foreign Relations</em> Volumes</h2>
+                <p>September 6, 2017</p>
+                <p>The Department of State today announces the release of thirty-two volumes from
+                    the <em>Foreign Relations of the United States</em> series, the official
+                    documentary record of U.S. foreign relations. These thirty-two volumes cover
+                    events that took place between 1920 and 1941 and were originally published in
+                    print between 1935 and 1943.</p>
+                <p><em>Papers Relating to the Foreign Relations of the United States,</em>
+                    1920–1941</p>
+                <ol>
+                    <li><a href="$app/historicaldocuments/frus1920v01">Papers Relating to the
+                            Foreign Relations of the United States, 1920, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1920v02">Papers Relating to the
+                            Foreign Relations of the United States, 1920, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1920v03">Papers Relating to the
+                            Foreign Relations of the United States, 1920, Volume III</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1921v01">Papers Relating to the
+                            Foreign Relations of the United States, 1921, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1921v02">Papers Relating to the
+                            Foreign Relations of the United States, 1921, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1922v01">Papers Relating to the
+                            Foreign Relations of the United States, 1922, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1922v02">Papers Relating to the
+                            Foreign Relations of the United States, 1922, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1923v01">Papers Relating to the
+                            Foreign Relations of the United States, 1923, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1923v02">Papers Relating to the
+                            Foreign Relations of the United States, 1923, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1924v01">Papers Relating to the
+                            Foreign Relations of the United States, 1924, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1924v02">Papers Relating to the
+                            Foreign Relations of the United States, 1924, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1925v01">Papers Relating to the
+                            Foreign Relations of the United States, 1925, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1925v02">Papers Relating to the
+                            Foreign Relations of the United States, 1925, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1926v01">Papers Relating to the
+                            Foreign Relations of the United States, 1926, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1926v02">Papers Relating to the
+                            Foreign Relations of the United States, 1926, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1927v01">Papers Relating to the
+                            Foreign Relations of the United States, 1927, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1927v02">Papers Relating to the
+                            Foreign Relations of the United States, 1927, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1927v03">Papers Relating to the
+                            Foreign Relations of the United States, 1927, Volume III</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1928v01">Papers Relating to the
+                            Foreign Relations of the United States, 1928, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1928v02">Papers Relating to the
+                            Foreign Relations of the United States, 1928, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1928v03">Papers Relating to the
+                            Foreign Relations of the United States, 1928, Volume III</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1929v01">Papers Relating to the
+                            Foreign Relations of the United States, 1929, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1929v02">Papers Relating to the
+                            Foreign Relations of the United States, 1929, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1929v03">Papers Relating to the
+                            Foreign Relations of the United States, 1929, Volume III</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1930v01">Papers Relating to the
+                            Foreign Relations of the United States, 1930, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1930v02">Papers Relating to the
+                            Foreign Relations of the United States, 1930, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1930v03">Papers Relating to the
+                            Foreign Relations of the United States, 1930, Volume III</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1931v01">Papers Relating to the
+                            Foreign Relations of the United States, 1931, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1931v02">Papers Relating to the
+                            Foreign Relations of the United States, 1930, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1931v03">Papers Relating to the
+                            Foreign Relations of the United States, 1931, The Far East, Volume
+                            III</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1931-41v01">Papers Relating to the
+                            Foreign Relations of the United States, Japan, 1931–1941, Volume
+                        I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1931-41v02">Papers Relating to the
+                            Foreign Relations of the United States, Japan, 1931–1941, Volume
+                        II</a>.</li>
+
+                </ol>
+                <p>Today’s release is part of the Office of the Historian’s ongoing project, in
+                    partnership with the University of Wisconsin Digital Collections Center, to
+                    digitize the entire <em>Foreign Relations</em> series. The University graciously
+                    provided high quality scanned images of each printed book, which the Office
+                    further digitized to create a full text searchable edition. These volumes are
+                    available online and as free ebooks at the Office of the Historian’s website (<a
+                        href="$app/historicaldocuments"
+                        >https://history.state.gov/historicaldocuments</a>).</p>
+
+
+            </div>
+        </div>
+
+        <aside class="hsg-width-one-third">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the <em>Foreign Relations of the United
+                            States</em> series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments">All Administrations</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other
+                            Electronic resources for U.S. foreign relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                            >Guide to sources on Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

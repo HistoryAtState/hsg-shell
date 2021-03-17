@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Archives - Countries</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/countries">Countries</a>
+                    </li>
+                    <li>
+                        <a href="$app/countries/archives">Archives</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>World Wide Diplomatic Archives Index</h1>
+                    <p>The Office of the Historian has for many years provided researchers a guide
+                        to the accessibility of diplomatic archives around the world. This current
+                        list is based on information received from American diplomatic posts abroad,
+                        as well as web sources and communication with the archives themselves. The
+                        information provided here is subject to change so researchers are advised to
+                        contact the government or archive ahead of any planned visit. </p>
+                    <p>Select an article from the list of <a href="$app/countries/archives/all">all
+                            countries</a>.</p>
+                    <p>While access to the diplomatic records of many countries remains highly
+                        restricted, the news is better than ever before with many new countries
+                        establishing Freedom of Information Acts to foment better government
+                        transparency. </p>
+                    <p>The divide between the developed world and the developing world also affects
+                        the state of international archives. Problems of infrastructure inhibit the
+                        nature of information dissemination. The amount of information available on
+                        the internet varies from country to country and many National Archives and
+                        Ministries of Foreign Affairs are still in the process of developing
+                        workable websites.</p>
+                    <p>This site does not comment on the state of the records themselves. In
+                        addition to the loss of records as a result of changes of government and
+                        civil war, the climate has wreaked havoc upon some archives, particularly in
+                        tropical regions, whose documents, despite the best efforts of archivists,
+                        have been compromised by heat, humidity, flooding, and frequent power
+                        outages.</p>
+                    <p>In compiling this database, the Office of the Historian has tried to give
+                        researchers a starting place for their inquiries. We have not included
+                        anecdotal advice on how to approach any given archive. Countries that do not
+                        systematically declassify their documents may require personal contacts to
+                        gain access to records of interest. Additionally, compliance with laws that
+                        guide freedom of information may vary.</p>
+                    <p>For the most part, diplomatic records are held by the Ministry of Foreign
+                        Affairs (or a similar department) or have been transferred to a National
+                        Archive. If that is done systematically, it is usually apparent as to which
+                        records are available for viewing. When transfer is not systematic, it is up
+                        to the researcher to discover the location of the documents they wish to
+                        view as well as to make contact with the relevant archivist.</p>
+                    <p>The Office of the Historian would be happy to receive updated or missing
+                        information. Please <a href="$app/about/contact-us">contact us</a>.</p>
+                    <p>Other relevant websites with useful information on diplomatic archives
+                        include: </p>
+                    <ul>
+                        <li>
+                            <a
+                                href="http://www.unesco.org/new/en/communication-and-information/portals-and-platforms/unesco-archives-portal/"
+                                >UNESCOs archive portal</a>
+                        </li>
+                        <li>
+                            <a
+                                href="http://archivesmadeeasy.pbworks.com/w/page/24292744/LSE%20Archives"
+                                >Archives Made Easy based at the London School of Economics and
+                                Political Science</a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://europa.eu/european-union/about-eu/countries/member-countries_en"
+                                >EU Member Countries</a>
+                        </li>
+                        <li>
+                            <a href="http://africa-research.org/">Repositories of African
+                                Archives</a>
+                        </li>
+                        <li>
+                            <a href="https://www.ica.org/en">International Council on Archives</a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.diplomatie.gouv.fr/en/the-ministry-and-its-network/archives-and-heritage/colonne-droite/association-of-friends-of-the/article/association-des-amis-des-archives"
+                                >Association of Friends of the Diplomatic Archives</a>
+                        </li>
+                        <li>
+                            <a href="http://archiveswiki.historians.org/">Archives Wiki</a> created
+                            by the American Historical Association</li>
+                    </ul>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Archives</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>
+                            <a href="$app/countries/archives/all">List of all countries in the World
+                                Wide Diplomatic Archives Index</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Related Resources</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>
+                            <a href="$app/countries">Countries</a>
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

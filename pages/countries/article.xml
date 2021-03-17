@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden" data-template="countries:page-title"/>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/countries">Countries</a>
+                    </li>
+                    <li>
+                        <a class="section" href="." data-template="pages:document-link"/>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1 data-template="countries:article-heading"/>
+                    <div class="content" data-template="pages:view" data-template-heading-offset="1"
+                    />
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Countries</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/countries/all">View a list of all countries</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/countries">Countries</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h3 class="hsg-sidebar-title">Related Resources</h3>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>
+                            <a href="$app/countries/archives">World Wide Diplomatic Archives
+                                Index</a>
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

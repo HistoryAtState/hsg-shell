@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div class="row">
+        <div id="static-title" class="hidden">Other Electronic Resources for U.S. Foreign Relations
+            - Historical Documents</div>
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/other-electronic-resources">Other Electronic
+                        Resources</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row hsg-main">
+        <div class="hsg-width-two-thirds" id="volume" data-template="app:fix-links">
+            <div id="content-inner">
+                <h1>Electronic Resources for U.S. Foreign Relations</h1>
+                <p>A growing number of primary source materials relating to U.S. foreign relations
+                    are available online. The Office of the Historian maintains this list as a
+                    resource for the public and will continue to update it as more resources are
+                    made available.</p>
+                <h2>Declassified Document Collections</h2>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://www.foia.cia.gov">Central Intelligence Agency, Freedom of
+                            Information Electronic Reading Room</a>
+                    </li>
+                    <li>
+                        <a href="http://www.dod.mil/pubs/foi/rdroom.html">Department of Defense,
+                            Freedom of Information Electronic Reading Room</a>
+                    </li>
+                    <li>
+                        <a href="https://foia.state.gov/">Department of State, Freedom of
+                            Information Electronic Reading Room</a>
+                    </li>
+                    <li>
+                        <a href="https://nsarchive.gwu.edu/postings/briefing-books">National
+                            Security Archive, Electronic Briefing Books</a>
+                    </li>
+                </ul>
+                <h2>Department of State Telegrams</h2>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://aad.archives.gov/aad/series-list.jsp?cat=WR43">National
+                            Archives and Records Administration, Access to Archival Databases</a>
+                    </li>
+                </ul>
+                <h2>Public Papers of the Presidents of the United States</h2>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="http://www.presidency.ucsb.edu/">University of California at Santa
+                            Barbara American Presidency Project</a>
+                    </li>
+                </ul>
+                <h2>Association of Southeast Asian Nations</h2>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="http://asean.org/documents-archive-copy/">Documents and Archive</a>
+                    </li>
+                </ul>
+                <h2>Ford Presidency Materials</h2>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="http://www.fordlibrarymuseum.gov/collections-digital.aspx">Ford
+                            Library Electronic Resources</a>
+                    </li>
+                </ul>
+                <h2>Nixon Presidency Materials</h2>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://www.nixonlibrary.gov/virtuallibrary">Nixon Library
+                            Electronic Resources</a>
+                    </li>
+                </ul>
+                <h2>United Nations Materials</h2>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="https://unyearbook.un.org/">Yearbook of the United Nations</a>
+                    </li>
+                </ul>
+                <h2>Pre-1861 Resources</h2>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="$app/historicaldocuments/pre-1861">Our list of resources for
+                            research on pre-1861 topics in U.S. foreign relations.</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <aside class="hsg-width-one-third">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the <em>Foreign Relations of the United
+                            States</em> series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments">All Administrations</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other
+                            Electronic resources for U.S. foreign relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                            >Guide to sources on Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

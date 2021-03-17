@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+    <body>
+        <div data-template="templates:surround" data-template-with="templates/site.xml"
+            data-template-at="content">
+            <div class="row">
+                <div class="hsg-breadcrumb-wrapper">
+                    <ol class="breadcrumb" data-template="app:fix-links">
+                        <li>
+                            <a href="$app">Home</a>
+                        </li>
+                        <li>
+                            <a href="$app/historicaldocuments">Historical Documents</a>
+                        </li>
+                        <li>
+                            <a href="$app/historicaldocuments/quarterly-releases">Quarterly
+                                Releases</a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row hsg-main" data-template="pages:load">
+                <div class="hsg-width-two-thirds" data-template="app:fix-links">
+                    <div id="content-inner">
+                        <h2>Quarterly Releases</h2>
+                        <p>From 2016 to 2018, the Office of the Historian released newly digitized
+                            volumes in the <em>Foreign Relations of the United States</em> series on
+                            a quarterly basis. This initiative was carried out in partnership with
+                            the University of Wisconsin Digital Collections Center. The University
+                            graciously provided the Office with high quality scanned images of the
+                            series covering 1861–1960, and the Office then further digitized the
+                            text from these images and enriched the text to create a full text
+                            searchable edition.</p>
+                        <p>With the print volumes now complete, the Office has begun digitizing
+                            microfiche supplements from the series. Each volume undergoes two
+                            phases: first, a "preview edition" is prepared, containing the front
+                            matter booklet and PDFs of the documents; then, as resources allow, a
+                            full text edition is prepared, replacing the preview edition.</p>
+                        <h3>Recent Releases</h3>
+                        <p>The most recent releases are summarized in the list below, with a link
+                            leading to the full list of volumes included in the release and the
+                            announcement.</p>
+                        <ul>
+                            <li><strong><a
+                                        href="$app/historicaldocuments/quarterly-releases/2018-q4"
+                                        >December 6, 2018</a>:</strong> These volumes cover events
+                                that took place between 1861 and 1866 and were originally published
+                                in print between 1861 and 1867. This release completes the
+                                digitization of the printed volumes of the <em>Foreign
+                                    Relations</em> series.</li>
+                            <li><strong><a
+                                        href="$app/historicaldocuments/quarterly-releases/2018-q3"
+                                        >August 23, 2018</a>:</strong> These fifteen volumes cover
+                                events that took place between 1866 and 1873 and were originally
+                                published in print between 1868 and 1874.</li>
+                            <li><strong><a
+                                        href="$app/historicaldocuments/quarterly-releases/2018-q2"
+                                        >May 31, 2018</a>:</strong> These fifteen volumes cover
+                                events that took place between 1874 and 1887 and were originally
+                                published in print between 1875 and 1889.</li>
+                            <li><strong><a
+                                        href="$app/historicaldocuments/quarterly-releases/2018-q1"
+                                        >March 1, 2018</a>:</strong> These seventeen volumes cover
+                                events that took place between 1886 and 1899 and were originally
+                                published in print between 1889 and 1901.</li>
+                            <li><strong><a
+                                        href="$app/historicaldocuments/quarterly-releases/2017-q4"
+                                        >December 7, 2017</a>:</strong> These seventeen volumes
+                                cover events that took place between 1900 and 1911 and were
+                                originally published in print between 1902 and 1918.</li>
+                            <li><strong><a
+                                        href="$app/historicaldocuments/quarterly-releases/2017-q3"
+                                        >September 6, 2017</a>:</strong> These thirty-two volumes
+                                cover events that took place between 1920 and 1941 and were
+                                originally published in print between 1935 and 1943.</li>
+                            <li><strong><a
+                                        href="$app/historicaldocuments/quarterly-releases/2017-q2"
+                                        >June 15, 2017</a>:</strong> These sixteen volumes represent
+                                the second quarterly release on the United States and the First
+                                World War, documenting the search for peace and stability in the
+                                aftermath of the war. The volumes cover events in 1919 and were
+                                originally published between 1934 and 1947. This quarterly release
+                                also includes the new publication <a
+                                    href="$app/historicaldocuments/frus1951-54Iran"><em>Foreign
+                                        Relations of the United States</em>, Iran,
+                                1951–1954</a>.</li>
+                            <li><strong><a
+                                        href="$app/historicaldocuments/quarterly-releases/2017-q1"
+                                        >April 6, 2017</a>:</strong> A special release of sixteen
+                                volumes documenting World War I on the centennial of the U.S. entry
+                                into the war to commemorate that event and to honor those who served
+                                in that conflict. The volumes cover events between 1912 and 1918 and
+                                were originally published between 1919 and 1933.</li>
+                            <li><strong><a
+                                        href="$app/historicaldocuments/quarterly-releases/2016-q4"
+                                        >December 8, 2016</a>:</strong> Twenty volumes covering
+                                events that took place between 1932 and 1939, originally published
+                                between 1947 and 1953.</li>
+                            <li><strong><a
+                                        href="$app/historicaldocuments/quarterly-releases/2016-q3"
+                                        >August 26, 2016</a>:</strong> Twenty volumes covering
+                                events that took place between 1936 and 1939, originally published
+                                between 1953 and 1957</li>
+                        </ul>
+                    </div>
+                </div>
+                <aside class="hsg-width-one-third">
+                    <div class="hsg-panel" data-template="app:fix-links">
+                        <div class="hsg-panel-heading">
+                            <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                        </div>
+                        <div class="hsg-panel-body">
+                            <p>Browse official documents from the <em>Foreign Relations of the
+                                    United States</em> series.</p>
+                        </div>
+                        <div class="hsg-panel-heading-second-level">
+                            <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                        </div>
+                        <ul class="hsg-list-group">
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/kennedy">Kennedy
+                                    Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/johnson">Johnson
+                                    Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford
+                                    Administrations</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/clinton">Clinton
+                                    Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments">All Administrations</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                        <div class="hsg-panel-heading">
+                            <h3 class="hsg-sidebar-title">Related Resources</h3>
+                        </div>
+                        <ul class="hsg-list-group">
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                        Relations</em> series</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/status-of-the-series">Status of
+                                    the Series</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/frus-history">History of the
+                                    Series</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/ebooks">
+                                    <em>Foreign Relations</em> ebooks</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/other-electronic-resources">Other
+                                    Electronic resources for U.S. foreign relations</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a
+                                    href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                                    >Guide to sources on Vietnam, 1969-1975</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/search/tips">Tips for searching the <em>Foreign
+                                        Relations</em> Series</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/citing-frus">How to cite
+                                        <em>Foreign Relations</em> documents</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Open Government Initiative</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/open">Open Government Initiative</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Open Government Initiative</h1>
+                    <p>Transparency, participation, and collaboration are the foundation of open
+                        government. In keeping with this principle established in the Open
+                        Government Directive, the Office of the Historian has adapted its
+                        publications to open digital formats that can be accessed and consumed
+                        easily by the public, including third party developers. The Office of the
+                        Historian made the following submissions to data.gov, which remain up to
+                        date: <ol>
+                            <li>
+                                <a href="$app/open/frus-metadata">Bibliographic Metadata of the
+                                        <em>Foreign Relations of the United States</em> Series</a>:
+                                Raw bibliographic metadata for the nearly 500 volumes in the <em>
+                                    <a href="$app/historicaldocuments/">Foreign Relations of the
+                                        United States</a>
+                                </em> series published since 1861. Each record in the dataset
+                                contains a volume’s title, year of publication, years covered by the
+                                volume, summary, and links to sources for these volumes online or in
+                                print, among other metadata items. [<a
+                                    href="https://catalog.data.gov/dataset/bibliographical-metadata-of-the-foreign-relations-of-the-united-states-series"
+                                    >Data.gov catalog entry</a>]</li>
+                            <li>
+                                <a href="$app/open/frus-latest">Latest Volumes of <em>Foreign
+                                        Relations of the United States</em> Series</a>: This atom
+                                feed lists the ten most recently published volumes in the <a
+                                    href="$app/historicaldocuments/">Foreign Relations of the United
+                                    States</a> series. Each record in the dataset contains a
+                                volume’s title, year of publication, summary, and link to the online
+                                volumes. The feed is updated as soon as a new volume is published.
+                                    [<a
+                                    href="https://catalog.data.gov/dataset/latest-volumes-of-foreign-relations-of-the-united-states"
+                                    >Data.gov catalog entry</a>]</li>
+                        </ol>
+                    </p>
+                    <p>Building on this foundation and extending the focus beyond data, the Digital
+                        Government Strategy emphasized delivering better digital services to the
+                        American people government through mobile devices and providing automated
+                        services for third party web and app developers. The Office of the Historian
+                        made the following contributions to the Digital Government Strategy: <ol>
+                            <li>
+                                <a href="$app/historicaldocuments/ebooks">Ebook Editions of Office
+                                    of the Historian Publications</a>: The <em>Foreign Relations of
+                                    the United States</em> (<em>FRUS</em>) series, established in
+                                1861, was adapted to ebook. Far lighter and more portable than
+                                printed editions of <em>FRUS</em>, the ebook edition offers the full
+                                content of each volume and makes use of the full-text search and
+                                other reading features of most ebook devices and applications,
+                                including bookmarking and note-taking. Unlike the web-based edition
+                                of <em>FRUS</em>, the ebook edition, once downloaded, can be
+                                accessed even without internet connectivity. The ebooks were
+                                generated from the master digital files at no additional cost and
+                                are available for free download.</li>
+                            <li>
+                                <a href="$app/developer/catalog">Office of the Historian Ebook
+                                    Catalog API</a>: This <a
+                                    href="https://en.wikipedia.org/wiki/Application_programming_interface"
+                                    >Application Programming Interface</a> (API) enables third party
+                                web and app developers, as well as users of these applications, to
+                                embed the Office of the Historian ebook catalog. The API uses best
+                                practices and open standards, including the <a
+                                    href="http://opds-spec.org">Open Publication Distribution
+                                    System</a> (OPDS) format for ebook catalogs and REST
+                                interfaces.</li>
+                        </ol>
+                    </p>
+                    <p>For more information, see the <a
+                            href="https://www.state.gov/open-government-initiative/">Open Government
+                            Initiative</a>, <a
+                            href="https://www.state.gov/digital-government-strategy/">Digital
+                            Government Strategy</a>, and <a href="https://www.state.gov/developer/"
+                            >Developer Community</a> pages on the Department of State’s website.</p>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Open Government Initiative</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/open/frus-metadata">Bibliographic Metadata of the
+                                    <em>Foreign Relations of the United States</em> Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/open/frus-latest">Latest Volumes of <em>Foreign Relations
+                                    of the United States</em> Series</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div class="pull-right">
+    <form method="get" action="$app/search" class="sorting">
+        <div class="form-group">
+            <p class="form-control-static">Sort by:</p>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="hsg-sort-button dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="">
+                <span data-template="search:sort-by-label" id="sort-by-label"/>
+                <i class="glyphicon glyphicon-chevron-down"/>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right" id="sort-by">
+                <li>
+                    <a href="#" name="sort-by" id="relevance">Relevance</a>
+                </li>
+                <li>
+                    <a href="#" name="sort-by" id="date-asc">Dates (oldest first)</a>
+                </li>
+                <li>
+                    <a href="#" name="sort-by" id="date-desc">Dates (most recent first)</a>
+                </li>
+            </ul>
+        </div>
+        <input type="hidden" name="sort-by" id="sorting" data-template="templates:form-control"
+            value="relevance"/>
+    </form>
+</div>

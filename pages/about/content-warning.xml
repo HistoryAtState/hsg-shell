@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Contact Us - About Us</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/about">About</a>
+                    </li>
+                    <li>
+                        <a href="$app/about/content-warning">Content Warning</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Content Warning</h1>
+                    <p>Readers are advised that some of the historical primary sources included in
+                        the Office of the Historian’s printed and online publications may contain
+                        offensive language. The Office does not alter the language used in original
+                        primary source documents, except to excise information required by the
+                        law.</p>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">About</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/contact-us">Contact Us</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/faq">Frequently Asked Questions</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/the-historian">The Historian</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/hac">Historical Advisory Committee</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/recent-publications">Recent Publications</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/content-warning">Content Warning</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

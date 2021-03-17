@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section class="hsg-section hsg-filter-toggle hsg-hidden" data-template="app:fix-links">
+    <form method="get" action="$app/search" class="filter-form" id="volumesFilter">
+        <fieldset data-template="search:load-volumes">
+            <legend class="sr-only">Select Volumes</legend>
+            <div class="truncate-filter" data-template="search:component-hidden"
+                data-template-component="volumes">
+                <ul class="truncate-list hsg-search-inputs-vertical"
+                    data-template="search:component" data-template-component="volume"
+                    data-template-filter="within-volumes">
+                    <li data-template="templates:each" data-template-from="volumes"
+                        data-template-to="volume">
+                        <input class="hsg-search-input" type="checkbox" name="volume-id"
+                            data-template="search:filter-input-attributes"/>
+                        <label class="hsg-search-input-label truncate" data-template="search:label">
+                            <span data-template="search:label-contents"/>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="hsg-toggle">
+                <a href="#" class="c-link-more">Show more</a>
+            </div>
+        </fieldset>
+    </form>
+</section>

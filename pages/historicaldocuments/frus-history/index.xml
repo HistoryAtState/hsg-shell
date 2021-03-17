@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments">Historical Documents</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments/frus-history">History of the <em>Foreign
+                                Relations</em> Series</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row hsg-main">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>
+                        <span data-template="frus-history:monograph-title"/>
+                    </h1>
+                    <div data-template="frus-history:monograph-editors"/>
+                    <div data-template="frus-history:monograph-edition-info"/>
+                    <p>
+                        <em>Toward “Thorough, Accurate, and Reliable”</em> explores the evolution of
+                        the <em>Foreign Relations of the United States</em> documentary history
+                        series from its antecedents in the early republic through the early 21st
+                        century implementation of its current mandate, the 1991 <em>Foreign
+                            Relations</em> statute. This book traces how policymakers and an
+                        expanding array of stakeholders translated values like “security,”
+                        “legitimacy,” and “transparency” into practice as they debated how to
+                        balance the government’s obligation to protect sensitive information with
+                        its commitment to openness. Determining the “people’s right to know” has
+                        fueled lively discussion for over two centuries, and this work provides
+                        important, historically informed perspectives valuable to policymakers and
+                        engaged citizens as that conversation continues.</p>
+                    <hr/>
+                    <div class="toc-inner">
+                        <ul data-template="frus-history:monograph-toc"/>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Download this publication</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>
+                            <img class="img-responsive"
+                                alt="A History of the Foreign Relations of the United States Series E-Book"
+                                title="A History of the Foreign Relations of the United States Series E-Book"
+                                src="https://static.history.state.gov/frus-history/covers/frus-history.png"
+                                width="100px"/>
+                        </p>
+                        <p>Ebook editions last updated: March 24, 2015.</p>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a
+                                href="https://static.history.state.gov/frus-history/ebooks/frus-history.epub"
+                                >EPUB (853kb)</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a
+                                href="https://static.history.state.gov/frus-history/ebooks/frus-history.mobi"
+                                >Mobi (1.29mb)</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a
+                                href="https://static.history.state.gov/frus-history/ebooks/frus-history.pdf"
+                                >PDF (2.5mb)</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/ebooks">About ebooks</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title"><em>FRUS</em> History Resources</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>Other resources about the history of the <em>Foreign Relations of the
+                                United States</em> series.</p>
+                    </div>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level">
+                            <a href="$app/historicaldocuments/frus-history/documents">Documents</a>
+                        </h3>
+                    </div>
+                    <ul data-template="frus-history:most-recent-documents"/>
+
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level">
+                            <a href="$app/historicaldocuments/frus-history/research">Research</a>
+                        </h3>
+                    </div>
+                    <ul data-template="frus-history:most-recent-articles"/>
+
+                    <div data-template="frus-history:most-recent-events"/>
+                </div>
+
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h3 class="hsg-sidebar-title">Related Resources</h3>
+                    </div>
+
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                    Relations</em> series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                                Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/frus-history">History of the
+                                Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/ebooks">
+                                <em>Foreign Relations</em> ebooks</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/other-electronic-resources">Other
+                                Electronic resources for U.S. foreign relations</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                                >Guide to sources on Vietnam, 1969-1975</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/search/tips">Tips for searching the <em>Foreign
+                                    Relations</em> Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                    Relations</em> documents</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

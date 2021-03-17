@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+    <body>
+        <div data-template="templates:surround" data-template-with="templates/site.xml"
+            data-template-at="content">
+            <div data-template="pages:load">
+                <div id="static-title" class="hidden">World War I and the Department - Department
+                    History</div>
+                <div class="row">
+                    <div class="hsg-breadcrumb-wrapper">
+                        <ol class="breadcrumb" data-template="app:fix-links">
+                            <li>
+                                <a href="$app">Home</a>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory">Department History</a>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory/wwi">World War I and the
+                                    Department</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="hsg-width-two-thirds">
+                        <div id="content-inner" data-template="app:fix-links">
+                            <h1>World War I and the Department</h1>
+                            <p><a
+                                    href="https://static.history.state.gov/wwi/war-neutrality-and-humanitarian-relief/War%20Neutrality%20and%20Humanitarian%20Relief.pdf"
+                                    >“War, Neutrality, and Humanitarian Relief: The Expansion of
+                                    U.S. Diplomatic Activity during the Great War, 1914–1917”</a>
+                                describes how Department of State personnel, especially those
+                                serving in Europe, responded to the unprecedented challenges they
+                                faced as they attempted to protect U.S. citizens, facilitate
+                                humanitarian relief efforts, and represent the interests of
+                                belligerent states in enemy territory during the period of U.S.
+                                neutrality (August 1914–April 1917). This publication builds upon <a
+                                    href="https://static.history.state.gov/wwi/views-from-embassy-paris/Views%20from%20Embassy%20Paris%20WWI.pdf"
+                                    >“Views From the Embassy: The Role of the U.S. Diplomatic
+                                    Community in France, 1914,”</a> produced in 2014. The material
+                                in these publications differ substantially from documentation
+                                printed in the <em>Foreign Relations of the United States</em>
+                                volumes covering World War I, which focus upon high policy decisions
+                                and matters of international law rather than on-the-ground
+                                operations. The Office of the Historian wishes to thank Archivist
+                                David A. Langbart of the National Archives and Records
+                                Administration Textual Archives Services Division for his
+                                exceptional assistance in locating documents as well as sharing his
+                                expertise about Department procedures, operations, and personnel
+                                during the era covered by these studies. Readers may access
+                                    <em>Foreign Relations of the United States</em> volumes, such as
+                                the <a href="$app/historicaldocuments/frus1914Supp">1914</a>, <a
+                                    href="$app/historicaldocuments/frus1915Supp">1915</a>, <a
+                                    href="$app/historicaldocuments/frus1916Supp">1916</a>, and <a
+                                    href="$app/historicaldocuments/frus1917Supp01v01">1917</a>
+                                Supplemental volumes, and the Lansing Papers <a
+                                    href="$app/historicaldocuments/frus1914-20v01">Volume I</a> and
+                                    <a href="$app/historicaldocuments/frus1914-20v02">Volume II</a>,
+                                through the Office of the Historian <a
+                                    href="https://history.state.gov">website</a>.</p>
+                            <!-- CSS button -->
+                            <div style="text-align:center;">
+                                <p
+                                    style="-moz-box-shadow:inset 0px 1px 0px 0px #ffffff; -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff; box-shadow:inset 0px 1px 0px 0px #ffffff; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) ); background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% ); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf'); background-color:#ededed; -webkit-border-top-left-radius:6px; -moz-border-radius-topleft:6px; border-top-left-radius:6px; -webkit-border-top-right-radius:6px; -moz-border-radius-topright:6px; border-top-right-radius:6px; -webkit-border-bottom-right-radius:6px; -moz-border-radius-bottomright:6px; border-bottom-right-radius:6px; -webkit-border-bottom-left-radius:6px; -moz-border-radius-bottomleft:6px; border-bottom-left-radius:6px; text-indent:0; border:1px solid #dcdcdc; display:inline-block; color:#777777; font-size:15px; font-weight:bold; font-style:normal; height:50px; padding: 0 .5em; line-height:50px; text-decoration:none; text-shadow:1px 1px 0px #ffffff; margin-left: auto; margin-right: auto;">
+                                    <a style="text-decoration: none;"
+                                        href="https://static.history.state.gov/wwi/war-neutrality-and-humanitarian-relief/War%20Neutrality%20and%20Humanitarian%20Relief.pdf"
+                                        >Download PDF (2.8 MB)</a>
+                                </p>
+                                <hr />
+                            </div>
+                            <p>To mark the 2014 centenary of the First World War, the Office of the
+                                Historian and U.S. Embassy France produced a study about the role of
+                                the U.S. diplomatic corps stationed in France during 1914–1918. In
+                                contrast to the well known record of U.S. actions after the nation
+                                entered the war in April 1917, the stories of U.S. diplomats,
+                                consuls, and their family members—particularly during the early
+                                months of the crisis (August-December 1914)—were long forgotten,
+                                overshadowed by subsequent events of the tumultuous twentieth
+                                century. By researching U.S. Government and Government of France
+                                records, memoirs, personal papers, and newspaper archives, this
+                                study presents a fascinating account of how actions spearheaded by
+                                U.S. diplomats—and American citizens—significantly strengthened
+                                Franco-American relations in unique, unparalleled ways.</p>
+                            <p>We invite you to read <a
+                                    href="https://static.history.state.gov/wwi/views-from-embassy-paris/Views%20from%20Embassy%20Paris%20WWI.pdf"
+                                    >"Views From the Embassy: The Role of the U.S. Diplomatic
+                                    Community in France, 1914"</a> (PDF, 818 KB), which complements
+                                U.S. Embassy France’s <a
+                                    href="https://fr.usembassy.gov/news-events/ww1-centenary/">WWI
+                                    Centennial page</a>. Readers may view full copies of several
+                                documents referenced in “Views From the Embassy” through links on
+                                the Embassy’s WWI <a
+                                    href="https://cdn.knightlab.com/libs/timeline/latest/embed/index.html?source=0Aro0E4o5NdoydExZRXduMzgzR1VkRWZ6cmFlTG81d1E&amp;font=Bevan-PotanoSans&amp;maptype=toner&amp;lang=en-24hr&amp;height=650"
+                                    >Interactive Timeline</a>.</p>
+                            <p>The Office of the Historian is grateful to the following institutions
+                                that provided assistance for this project: The American Hospital in
+                                Paris; The American Chamber of Commerce in Paris; Columbia Center
+                                for Oral History Collection, Columbia University (Reminiscences of
+                                DeWitt Clinton Poole Jr.); Harvard University Archives, Harvard
+                                University (Robert &amp; Mildred Bliss Papers); Moorland-Springarn
+                                Research Center, Howard University (William H. Hunt Papers); The
+                                Sheridan Libraries Special Collections, The Johns Hopkins University
+                                (John Work Garrett Papers); Western Reserve Historical Society
+                                (Myron T. Herrick Papers); Bibliothèque nationale de France;
+                                National Archives of France (Archives of the Ministry of Foreign
+                                Affairs); Service historique de la défense; U.S. Library of
+                                Congress; and the U.S. National Archives (Archives of the Department
+                                of State).</p>
+                        </div>
+                    </div>
+                    <aside class="hsg-width-one-third">
+                        <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                            <div class="hsg-panel-heading">
+                                <h2 class="hsg-sidebar-title">Department History</h2>
+                            </div>
+                            <ul class="hsg-list-group">
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/timeline">Administrative
+                                        Timeline of the Department of State</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/buildings">Buildings of the
+                                        Department</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people">People</a>
+                                    <ul>
+                                        <li class="hsg-list-group-item">
+                                            <a href="$app/departmenthistory/people/secretaries"
+                                                >Biographies of the Secretaries of State</a>
+                                        </li>
+                                        <li class="hsg-list-group-item">
+                                            <a
+                                                href="$app/departmenthistory/people/principals-chiefs"
+                                                >Principal Officers and Chiefs of Mission</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels">Travels</a>
+                                    <ul>
+                                        <li class="hsg-list-group-item">
+                                            <a href="$app/departmenthistory/travels/secretary"
+                                                >Travels of the Secretary</a>
+                                        </li>
+                                        <li class="hsg-list-group-item">
+                                            <a href="$app/departmenthistory/travels/president"
+                                                >Travels of the President</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/visits">Visits by Foreign
+                                        Leaders</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/wwi">World War I and the
+                                        Department</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/diplomatic-couriers">U.S.
+                                        Diplomatic Couriers</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

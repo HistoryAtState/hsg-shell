@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Short History - Department History</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory">Department History</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/short-history">Short History</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner">
+                    <div id="content-container" data-template="app:fix-links">
+                        <h1>A Short History of the Department of State</h1>
+                        <div class="alert alert-danger" role="alert">
+                            <h2>NOTE TO READERS</h2>
+                            <p>This publication, “A Short History of the Department of State,” has
+                                been retired. The text remains online for reference purposes, but it
+                                is no longer being maintained or expanded.</p>
+                            <p>Why retire “A Short History”? In mid-2016 the Office of the Historian
+                                completed a review of its online offerings and concluded that
+                                extensive resources would be needed to revise and expand this
+                                publication to meet the Office’s standards for accuracy and
+                                comprehensiveness. At the same time, the events described in the “A
+                                Short History” essays are amply covered by numerous respected
+                                secondary sources. Rather than duplicate these efforts, the Office
+                                of the Historian has decided to focus its resources on areas where
+                                it is uniquely suited to make a contribution, such as coverage of <a
+                                    href="/departmenthistory/timeline">the Department of State’s
+                                    institutional history</a>. In keeping with the publication’s new
+                                status, it can now be found under “More Resources” in the site-wide
+                                menu.</p>
+                            <p style="text-align: right; font-style: italic">Notice posted on April
+                                8, 2018.</p>
+                        </div>
+                        <div class="toc" data-template="toc:table-of-contents"/>
+                    </div>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Department History</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline">Administrative Timeline of the
+                                Department of State</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/buildings">Buildings of the
+                                Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/people">People</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/secretaries">Biographies
+                                        of the Secretaries of State</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/principals-chiefs"
+                                        >Principal Officers and Chiefs of Mission</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/travels">Travels</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/secretary">Travels of
+                                        the Secretary</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/president">Travels of
+                                        the President</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/visits">Visits by Foreign Leaders</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/wwi">World War I and the Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/diplomatic-couriers">U.S. Diplomatic
+                                Couriers</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+    </div>
+</div>

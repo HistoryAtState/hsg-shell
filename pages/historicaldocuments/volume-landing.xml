@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments">Historical Documents</a>
+                    </li>
+                    <li>
+                        <a data-template="frus:volume-breadcrumb"/>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds" id="volume">
+                <div id="content-inner" data-template="app:fix-links">
+                    <div data-template="frus:render-volume-landing"/>
+                    <div data-template="toc:table-of-contents" data-template-heading="false"
+                        data-template-highlight="false"/>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Ways to Explore</h2>
+                    </div>
+                    <div class="hsg-panel-body" data-template="frus:show-if-tei-document">
+                        <form action="$app/search" method="GET">
+                            <p>Search inside this volume</p>
+                            <div class="input-group">
+                                <input type="text" name="q" class="form-control"/>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="hsg-sidebar-search-btn">
+                                        <i class="hsg-search-button-icon"/>
+                                        <span class="sr-only">Search</span>
+                                    </button>
+                                </span>
+                            </div>
+                            <input type="hidden" name="volume-id"
+                                data-template="frus:volume-id-value-attribute"/>
+                        </form>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item" data-template="frus:hide-download-if-empty"> Download:<br/>
+                            <ul class="hsg-ebook-list">
+                                <li data-template="frus:if-media-exists" data-template-suffix="epub">
+                                    <a data-template="frus:epub-href-attribute"
+                                        class="hsg-link-button">EPUB (<span
+                                            data-template="frus:epub-size"/>)</a>
+                                </li>
+                                <li data-template="frus:if-media-exists" data-template-suffix="mobi">
+                                    <a data-template="frus:mobi-href-attribute"
+                                        class="hsg-link-button">Mobi (<span
+                                            data-template="frus:mobi-size"/>)</a>
+                                </li>
+                                <li data-template="frus:if-media-exists" data-template-suffix="pdf">
+                                    <a data-template="frus:pdf-href-attribute"
+                                        class="hsg-link-button">PDF (<span
+                                            data-template="frus:pdf-size"/>)</a>
+                                </li>
+                            </ul>
+                            <a href="./ebooks">
+                                <em>(About ebooks)</em>
+                            </a>
+                        </li>
+                        <li class="hsg-list-group-item"> Browse the <a
+                                href="https://bookstore.gpo.gov/catalog/foreign-relations-united-states-series-frus"
+                                >U.S. Government Bookstore (GPO)</a>
+                        </li>
+                        <li class="hsg-list-group-item" data-template="frus:isbn-link"/>
+                    </ul>
+                </div>
+                <div data-template="tags:load-tags">
+                    <div class="hsg-panel" data-template="frus:hide-tags-if-empty">
+                        <div class="hsg-panel-heading">
+                            <h3 class="hsg-sidebar-title">Tags</h3>
+                        </div>
+                        <div class="hsg-panel-body" data-template="app:fix-links">
+                            <p>
+                                <em>This volume has been tagged with the following entries from the
+                                        <a href="$app/tags">Subject Taxonomy of the History of U.S.
+                                        Foreign Relations</a>. Follow the links to find more
+                                    resources on each subject:</em>
+                            </p>
+                        </div>
+                        <ul class="hsg-list-group" data-template="tags:list-tags"/>
+                    </div>
+                </div>
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>Browse official documents from the <em>Foreign Relations of the United
+                                States</em> series.</p>
+                    </div>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford
+                                Administrations</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments">All Administrations</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h3 class="hsg-sidebar-title">Related Resources</h3>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                    Relations</em> series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                                Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/frus-history">History of the
+                                Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/ebooks">
+                                <em>Foreign Relations</em> ebooks</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/other-electronic-resources">Other
+                                Electronic resources for U.S. foreign relations</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                                >Guide to sources on Vietnam, 1969-1975</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/search/tips">Tips for searching the <em>Foreign
+                                    Relations</em> Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                    Relations</em> documents</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

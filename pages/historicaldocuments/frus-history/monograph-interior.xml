@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden"><span
+                data-template="frus-history:monograph-page-title"/> - History of the Foreign
+            Relations Series - Historical Documents</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments">Historical Documents</a>
+                    </li>
+                    <li>
+                        <a data-template="frus:volume-breadcrumb"/>
+                    </li>
+                    <li class="section-breadcrumb">
+                        <a class="section" data-template="frus:section-breadcrumb"/>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="hsg-navigation-wrapper">
+                <h2 class="hsg-navigation-title" id="navigation-title"
+                    data-template="frus-history:monograph-title"/>
+            </div>
+        </div>
+        <div class="row" data-template="pages:navigation">
+            <a data-template="pages:navigation-link" data-template-direction="previous"
+                class="page-nav nav-prev">
+                <i class="glyphicon glyphicon-chevron-left"/>
+            </a>
+            <a data-template="pages:navigation-link" data-template-direction="next"
+                class="page-nav nav-next">
+                <i class="glyphicon glyphicon-chevron-right"/>
+            </a>
+            <div class="hsg-width-main">
+                <div id="content-inner">
+                    <div id="content-container" data-template="app:fix-links">
+                        <div class="content" data-template="pages:view"
+                            data-template-base-path="frus-history"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOC Sidebar -->
+            <aside class="hsg-width-sidebar" data-template="app:fix-links">
+                <div data-template="toc:table-of-contents-sidebar" data-template-heading="false"
+                    data-template-highlight="true"/>
+            </aside>
+        </div>
+    </div>
+</div>

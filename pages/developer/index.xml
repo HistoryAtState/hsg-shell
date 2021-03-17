@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/developer">Developer</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Developer Resources</h1>
+                    <div id="overview">
+                        <h2>Overview</h2>
+                        <p>In keeping with the goal of the Digital Government Strategy to deliver
+                            better digital services to the American people, the Office of the
+                            Historian has created its first public <a
+                                href="https://en.wikipedia.org/wiki/Application_programming_interface"
+                                >Application Programming Interface</a> (API) and has established
+                            this page to house information for developers. We invite developers to
+                            use our API and provide feedback.</p>
+                    </div>
+                    <div id="api">
+                        <h2>Ebook Catalog API</h2>
+                        <p>The <a href="$app/developer/catalog">Office of the Historian Ebook
+                                Catalog API</a> is a RESTful, OPDS-formatted catalog of the growing
+                            number of free ebooks from the <em>Foreign Relations of the United
+                                States</em> series. Use this API to embed our live, up-to-date,
+                            searchable, and browsable ebook catalog in your application and to
+                            locate download links to the ebooks and their cover images.</p>
+                    </div>
+                    <div id="github">
+                        <h2>Support</h2>
+                        <p>Developers are welcome to visit our organizational account <a
+                                href="https://github.com/HistoryAtState">on GitHub</a>. Requests or
+                            inquiries may be submitted as issues.</p>
+                    </div>
+                    <div id="credits">
+                        <h2>Technologies &amp; Standards</h2>
+                        <p>This website is powered by <a href="http://exist-db.org/">eXist-db</a>, a
+                            free, open source XML server and the open standard W3C technologies it
+                            supports, including XQuery 3.0, EXPath, and EXQuery.</p>
+                        <p>Our digitization initiatives center around the <a
+                                href="http://www.tei-c.org">Text Encoding Initiative</a> (TEI), an
+                            open, mature, XML-based standard used widely in libraries and the
+                            humanities. All our article- and book-length content is encoded as TEI.
+                            A single digital master TEI file can store an entire <em>FRUS</em>
+                            volume. We store this TEI in eXist-db and convert it to TEI into HTML or
+                            ebook forms using XQuery.</p>
+                        <p>Our ebook catalog API uses the Open Publication Distribution System
+                            (OPDS), an Atom XML-based standard for encoding ebook catalogs.</p>
+                    </div>
+                </div>
+            </div>
+            <aside>
+                <aside class="hsg-width-one-third">
+                    <div class="hsg-panel" data-template="app:fix-links">
+                        <div class="hsg-panel-heading">
+                            <h2 class="hsg-sidebar-title">Developer Resources</h2>
+                        </div>
+                        <ul class="hsg-list-group">
+                            <li class="hsg-list-group-item">
+                                <a href="$app/developer/catalog">Ebook Catalog API</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="https://exist-db.org/">eXist-db</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="http://www.tei-c.org">Text Encoding Initiative (TEI)</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="https://github.com/HistoryAtState">Project on GitHub</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </aside>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Tags</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/tags">Tags</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Tags</h1>
+                    <p>The Office of the Historian’s “Subject Taxonomy of the History of U.S.
+                        Foreign Relations” covers <span data-template="tags:tag-count"/> subjects,
+                        organized into three major sections: <a href="$app/tags/people">People</a>,
+                            <a href="$app/tags/places">Places</a>, and <a href="$app/tags/topics"
+                            >Topics</a>. Drill into one of these sections, or view <a
+                            href="$app/tags/all">the full taxonomy</a>.</p>
+                    <p>The taxonomy has been applied to a small but growing segment of the resources
+                        on the Office of the Historian’s website: <span
+                            data-template="tags:count-resources"
+                            data-template-collection="secretary-bios"/>
+                        <a href="$app/departmenthistory/people/secretaries"> biographies of the
+                            Secretaries of State</a> and <span data-template="tags:count-resources"
+                            data-template-collection="frus"/> volumes from the <a
+                            href="$app/historicaldocuments">
+                            <em>Foreign Relations of the United States</em>
+                        </a> series.</p>
+                    <p>With <span data-template="tags:count-resource-tags"/> tags applied to date,
+                        this growing resource exposes connections across the accumulated knowledge
+                        of the Office of the Historian.</p>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Tags</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/tags/people">People</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/tags/places">Places</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/tags/topics">Topics</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/tags/all">Full Taxonomy</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

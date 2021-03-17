@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Administrative Timeline - Department History</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory">Department History</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/timeline">Administrative Timeline</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner">
+                    <div id="content-container">
+                        <h1>Administrative Timeline of the Department of State</h1>
+                        <p>This annotated timeline encompasses principal events concerning
+                            Department of State administration from 1789 through the most recent
+                            update noted below, focusing on the establishment of new offices and
+                            changes in organization. Research Historian Evan Duncan compiled this
+                            timeline beginning in 2006. Research Historian Thomas Faith edited the
+                            document for publication. The events and annotations are derived from a
+                            variety of public documents including the <em>Federal Register</em>,
+                                <em>U.S. Statutes at Large</em>, Executive Orders, Departmental
+                            Orders, and Department of State periodicals such as the <em>Department
+                                of State Bulletin</em> and <em>State Magazine</em>. We invite
+                            questions and comments about this resource at <a
+                                href="mailto:history@state.gov">history@state.gov</a>.</p>
+                        <p>The Administrative Timeline of the Department of State is not yet
+                            searchable with the history.state.gov search engine. We are working to
+                            make this resource searchable, but in the meantime please browse the
+                            resource using the links to each period in the sidebar. We apologize for
+                            any inconvenience.</p>
+                        <div class="tei-closer">Last updated, May 9, 2018.</div>
+                    </div>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Periods</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1789-1899">1789–1899</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1900-1909">1900–1909</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1910-1919">1910–1919</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1920-1929">1920–1929</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1930-1939">1930–1939</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1940-1949">1940–1949</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1950-1959">1950–1959</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1960-1969">1960–1969</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1970-1979">1970–1979</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1980-1989">1980–1989</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/1990-1999">1990–1999</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/2000-2009">2000–2009</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/2010-2019">2010–present</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

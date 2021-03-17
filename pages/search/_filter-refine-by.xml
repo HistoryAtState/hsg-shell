@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div class="hsg-search-inputs-horizontal">
+    <form class="filter-form" id="queryFilters" action="?">
+        <div class="hsg-search-input">
+            <input id="exactPhrase" type="checkbox" name="match" value="exact_phrase"/>
+            <label for="exactPhrase" class="c-indicator">Exact Phrase</label>
+        </div>
+        <div class="hsg-search-input">
+            <input id="caseSensitive" type="checkbox" name="match" value="case_sensitive"/>
+            <label for="caseSensitive" class="c-indicator">Case Sensitive</label>
+        </div>
+        <div class="hsg-search-input">
+            <input id="punctuationSensitive" type="checkbox" name="match"
+                value="punctuation_sensitive"/>
+            <label for="punctuationSensitive" class="c-indicator">Punctuation Sensitive</label>
+        </div>
+    </form>
+</div>

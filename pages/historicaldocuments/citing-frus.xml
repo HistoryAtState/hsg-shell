@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/citing-frus">Citing the <em>Foreign
+                            Relations</em> series</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row hsg-main">
+        <div class="hsg-width-two-thirds" id="volume" data-template="app:fix-links">
+            <div id="content-inner">
+                <h1>Citing the <em>Foreign Relations</em> series</h1>
+                <p>The Office of the Historian offers the following general recommendations for
+                    citing documents in the <em>Foreign Relations of the United States</em> series.
+                    Your style guide may require different formatting of a citation, so you may need
+                    to adapt the elements of the sample citations below to a specific format.</p>
+                <h2>Cite document numbers rather than page numbers</h2>
+                <p>Every document in the <em>Foreign Relations</em> series since the 1955–57
+                    subseries has been assigned a sequential number unique within the volume. The
+                    advantage of citing a <em>Foreign Relations</em> document by its document number
+                    is that, unlike page numbers, the numbers are media neutral and remain
+                    consistent across different media: print, web, and ebook. An example of a
+                    citation to document number is as follows:</p>
+                <blockquote>
+                    <em>Foreign Relations of the United States</em>, 1969–1976, Volume XIX, Part 1,
+                    Korea, 1969–1972, eds. Daniel J. Lawler and Erin R. Mahan (Washington:
+                    Government Printing Office, 2010), Document 75.</blockquote>
+                <p>The components of this citation are as follows:</p>
+                <ol>
+                    <li>Series title: <em>Foreign Relations of the United States</em>
+                    </li>
+                    <li>Subseries title: 1969–1976</li>
+                    <li>Volume number: Volume XIX, Part 1</li>
+                    <li>Volume title: Korea, 1969–1972</li>
+                    <li>Editors (not to include the General Editor): Daniel J. Lawler and Erin R.
+                        Mahan</li>
+                    <li>City: Washington, D.C.</li>
+                    <li>Publisher: Government Printing Office</li>
+                    <li>Year published: 2010</li>
+                    <li>Location within the volume: Document 75</li>
+                </ol>
+                <h2>Cite volumes by URL</h2>
+                <p>Particularly if you consulted the web or ebook edition of a <em>Foreign
+                        Relations</em> volume, we recommend appending the canonic URL for the volume
+                    (or document) to your reference. This will allow readers to directly access the
+                    source. Taking the previous citation as an example, the following URL would be
+                    appended to the end of the citation, often including a date the material was
+                    accessed:</p>
+                <blockquote>
+                    <a href="$app/historicaldocuments/frus1969-76v19p1/d75"
+                        >https://history.state.gov/historicaldocuments/frus1969-76v19p1/d75</a>
+                    [accessed 27 Oct 2011]</blockquote>
+                <p>URLs to <em>Foreign Relations</em> documents always follow this structure: the
+                    Office of the Historian’s website domain (“https://history.state.gov”), section
+                    (“historicaldocuments”), volume identifier (“frus1969-76v19p1”), and document
+                    identifier (“d75”).</p>
+                <p>A scanned image of the original printed page (or scanned document, in the case of
+                    certain electronic-only volumes) is available for citation by URL. You can find
+                    these URLs in the right sidebar of each document, labeled "View Image." For
+                    example, the sidebar for document 75 contains links to the images of pages <a
+                        href="$app/historicaldocuments/frus1969-76v19p1/pg_190">190</a>, <a
+                        href="$app/historicaldocuments/frus1969-76v19p1/pg_191">191</a>, and <a
+                        href="$app/historicaldocuments/frus1969-76v19p1/pg_192">192</a>. Notice that
+                    in these page-number-based URLs, the document identifier (“d75”) is substituted
+                    with the page number identifier (“pg_190”, etc.).</p>
+                <p>Citations to ebook editions are no different for these examples.</p>
+                <h2>When citing a document number is not possible</h2>
+                <p>Since volumes before the 1955–57 subseries did not include document numbers,
+                    citations must reference page numbers:</p>
+                <blockquote>
+                    <em>Foreign Relations of the United States</em>, 1952–1954, General: Economic
+                    and Political Matters, Volume I, Part 1, eds. David M. Baehler, Herbert A. Fine,
+                    Ralph R. Goodwin, N. Stephen Kane, Ronald D. Landa, Lisle A. Rose, William F.
+                    Sanford, Jr., and Ilana M. Stern (Washington: Government Printing Office, 1983),
+                    798–800.</blockquote>
+                <p>Document numbers have been superimposed on the web and ebook edition of all these
+                    earlier volumes that have been digitized, so that every document has a unique
+                    URL. But take caution that readers of the print edition will not be able to
+                    locate a citation in these volumes by document number (e.g., the web edition of
+                    the above citation appears as “<a
+                        href="$app/historicaldocuments/frus1952-54v01p1/d221">Document 221</a>”). </p>
+                <h2>Variations in the titles of early <em>Foreign Relations</em> volumes</h2>
+                <p>Early editions of the <em>Foreign Relations</em> series used a variety of titles.
+                    For example:</p>
+                <blockquote>
+                    <em>Papers Relating to the Foreign Relations of the United States</em>, 1918,
+                    Russia, Volume III (Washington: Government Printing Office, 1932),
+                    51.</blockquote>
+                <blockquote>
+                    <em>Papers Relating to the Foreign Relations of the United States</em>, 1893
+                    (Washington: Government Printing Office, 1894), 452–453.</blockquote>
+                <blockquote>
+                    <em>Message of the President of the United States to the Two Houses of Congress
+                        at the Commencement of the Third Session of the Thirty-Seventh Congress</em>
+                    (Washington: Government Printing Office, 1862), 356–370.</blockquote>
+                <p>(For more information on the titles, see the discussion of the term “<em>Foreign
+                        Relations</em> series” in the <a
+                        href="$app/historicaldocuments/frus-history/terms">history of the
+                            <em>Foreign Relations</em> series</a>.)</p>
+                <p>Also, earlier volumes typically do not identify the editors, in which case the
+                    names of editors can not be included in a citation.</p>
+            </div>
+        </div>
+
+        <aside class="hsg-width-one-third">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the <em>Foreign Relations of the United
+                            States</em> series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments">All Administrations</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other
+                            Electronic resources for U.S. foreign relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                            >Guide to sources on Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

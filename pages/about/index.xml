@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">About Us</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/about">About</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>About Us</h1>
+                    <p>Download our brochure (<a
+                            href="https://static.history.state.gov/about/office-of-the-historian-brochure-2019.pdf"
+                            >PDF, 1.6mb</a>).</p>
+                    <div>
+                        <h2>Who We Are</h2>
+                        <p>The Office of the Historian is staffed by professional historians who are
+                            experts in the history of U.S. foreign policy and the Department of
+                            State and possess unparalleled research experience in classified and
+                            unclassified government records. The Office’s historians work closely
+                            with other federal government history offices, the academic historical
+                            community, and specialists across the globe. The Office is directed by
+                                <a href="$app/about/the-historian">The Historian of the U.S.
+                                Department of State</a>.</p>
+                    </div>
+                    <div>
+                        <h2>What We Do</h2>
+                        <p>The Office of the Historian is responsible, under law, for the
+                            preparation and publication of the official documentary history of U.S.
+                            foreign policy in the <em>Foreign Relations of the United States</em>
+                            series.</p>
+                        <p>In addition, the Office prepares policy-supportive historical studies for
+                            Department principals and other agencies. These studies provide
+                            essential background information, evaluate how and why policies evolved,
+                            identify precedents, and derive lessons learned. Department officers
+                            rely on institutional memory, collective wisdom, and personal experience
+                            to make decisions; rigorous historical analysis can sharpen, focus, and
+                            inform their choices. The Office of the Historian conducts an array of
+                            initiatives, ranging from briefing memos to multi-year research
+                            projects.</p>
+                        <p>The Office of the Historian also promotes the declassification of
+                            documents to ensure a complete and accurate understanding of the
+                            past.</p>
+                    </div>
+                    <div>
+                        <h2>
+                            <em>Foreign Relations of the United States</em>
+                        </h2>
+                        <p>The <em>Foreign Relations of the United States</em> (<em>FRUS</em>)
+                            series presents the official documentary historical record of major U.S.
+                            foreign policy decisions. The series began in 1861 and now comprises
+                            more than 480 individual volumes.</p>
+                        <p>
+                            <em>Foreign Relations</em> volumes contain documents from the
+                            Presidential libraries, Departments of State and Defense, National
+                            Security Council, Central Intelligence Agency, Agency for International
+                            Development, and other foreign affairs agencies as well as the private
+                            papers of individuals involved in implementing U.S. foreign policy.</p>
+                        <p>Learn more about the series and view the collection at our <a
+                                href="$app/historicaldocuments">Historical Documents</a> page.</p>
+                    </div>
+                    <div>
+                        <h2>Our Outreach Activities</h2>
+                        <p>The Office’s public outreach activities include presenting at and hosting
+                            scholarly conferences on key issues in the history of U.S. foreign
+                            policy, answering historical research questions, and consulting with
+                            scholars, educators, and students.</p>
+                    </div>
+                    <div>
+                        <h2>How to Access Our Materials</h2>
+                        <p>The Office maintains a public website at <a href="/"
+                                >history.state.gov</a>, which provides in-depth information to the
+                            public on the history of U.S. foreign policy. In addition to a <a
+                                href="$app/historicaldocuments">full text archive of the <em>Foreign
+                                    Relations</em> series</a>, the website includes valuable
+                            encyclopedic content on the history of <a href="$app/countries">U.S.
+                                relations with states around the world</a>, and a database of the <a
+                                href="$app/departmenthistory/people">Department’s principal officers
+                                and chiefs of mission</a>.</p>
+                        <p>In keeping with the Open Government Directive’s principle of
+                            transparency, participation, and collaboration as the cornerstone of an
+                            open government, all of the content and code on this site is available
+                            for free download. The core repositories are available at <a
+                                href="https://github.com/HistoryAtState">HistoryAtState</a> on
+                            GitHub. Follow our progress, fork our code, file issues, and send us
+                            your pull requests. The <a
+                                href="https://github.com/HistoryAtState/hsg-project">hsg-project</a>
+                            repository contains all instructions to install a complete copy of the
+                            history.state.gov website on your own computer. Please visit our <a
+                                href="$app/open">Open Government</a> page to learn more about our
+                            contributions to data.gov.</p>
+                    </div>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third" data-template="app:fix-links">
+                <div class="hsg-panel">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">About</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/contact-us">Contact Us</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/faq">Frequently Asked Questions</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/the-historian">The Historian</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/hac">Historical Advisory Committee</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/recent-publications">Recent Publications</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/content-warning">Content Warning</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="hsg-panel">
+                    <div class="hsg-panel-heading">
+                        <h3 class="hsg-sidebar-title">Related Links</h3>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="https://twitter.com/HistoryAtState">@HistoryAtState on
+                                Twitter</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="https://github.com/HistoryAtState">HistoryAtState on GitHub</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="countries:load-countries">
+        <div id="static-title" class="hidden">All Countries - Countries</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/countries">Countries</a>
+                    </li>
+                    <li>
+                        <a href="$app/countries/all">All Countries</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links" class="lists">
+                    <h1>All Countries</h1>
+                    <p>An asterisk indicates former countries, previously recognized by the United
+                        States, that have been dissolved or superseded by other states.</p>
+                    <div data-template="countries:list"/>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Countries</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>
+                            <a href="$app/countries">Countries</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h3 class="hsg-sidebar-title">Related Resources</h3>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>
+                            <a href="$app/countries/archives">World Wide Diplomatic Archives
+                                Index</a>
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

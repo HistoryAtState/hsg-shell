@@ -1,0 +1,120 @@
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/historicaldocuments">Historical Documents</a>
+                    </li>
+                    <li class="volume-breadcrumb">
+                        <a data-template="frus:volume-breadcrumb"/>
+                    </li>
+                    <li class="section-breadcrumb">
+                        <a data-template="frus:section-breadcrumb"/>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-navigation-wrapper">
+                <h2 class="hsg-navigation-title" id="navigation-title"
+                    data-template="pages:navigation-title"/>
+            </div>
+        </div>
+        <div class="row" data-template="pages:navigation">
+            <a data-template="pages:navigation-link" data-template-direction="previous"
+                class="page-nav nav-prev">
+                <i class="glyphicon glyphicon-chevron-left"/>
+            </a>
+            <a data-template="pages:navigation-link" data-template-direction="next"
+                class="page-nav nav-next">
+                <i class="glyphicon glyphicon-chevron-right"/>
+            </a>
+            <div class="hsg-width-main">
+                <div id="content-inner">
+                    <div id="content-container" data-template="app:fix-links">
+                        <div class="content" data-template="pages:view"
+                            data-template-base-path="frus"/>
+                    </div>
+                </div>
+            </div>
+            <aside class="hsg-width-sidebar">
+                <div id="media-download" data-template="frus:if-media-exists"
+                    data-template-suffix="pdf">
+                    <div class="hsg-panel">
+                        <div class="hsg-panel-heading">
+                            <h4 class="hsg-sidebar-title">Download</h4>
+                        </div>
+                        <div class="hsg-panel-body">
+                            <a data-template="frus:pdf-href-attribute" class="hsg-link-button">PDF
+                                    (<span data-template="frus:pdf-size"/>)</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="toc" data-template="app:fix-links">
+                    <div class="hsg-toc-sidebar" data-template="toc:table-of-contents"
+                        data-template-heading="true" data-template-highlight="true"/>
+                </div>
+                <div data-template="frus:facets">
+                    <div id="person-panel" class="hsg-panel" data-template="app:hide-if-empty"
+                        data-template-property="persons">
+                        <div class="hsg-panel-heading">
+                            <h4 class="hsg-sidebar-title">Persons</h4>
+                        </div>
+                        <div class="hsg-list-group" data-template="frus:view-persons"/>
+                    </div>
+                    <div id="gloss-panel" class="hsg-panel" data-template="app:hide-if-empty"
+                        data-template-property="gloss">
+                        <div class="hsg-panel-heading">
+                            <h4 class="hsg-sidebar-title">Abbreviations &amp; Terms</h4>
+                        </div>
+                        <div class="hsg-list-group" data-template="frus:view-gloss"/>
+                    </div>
+                </div>
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h3 class="hsg-sidebar-title">Related Resources</h3>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                    Relations</em> series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                                Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/frus-history">History of the
+                                Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/ebooks">
+                                <em>Foreign Relations</em> ebooks</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/other-electronic-resources">Other
+                                Electronic resources for U.S. foreign relations</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                                >Guide to sources on Vietnam, 1969-1975</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/search/tips">Tips for searching the <em>Foreign
+                                    Relations</em> Series</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                    Relations</em> documents</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

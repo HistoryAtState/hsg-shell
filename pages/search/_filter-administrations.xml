@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section class="hsg-section hsg-filter-toggle hsg-hidden">
+    <div data-template="search:load-administrations">
+        <form method="get" action="$app/search" class="filter-form" id="administrationsFilter">
+            <fieldset>
+                <legend class="sr-only">Select Administrations</legend>
+                <div class="truncate-filter hideContent">
+                    <ul class="truncate-list hsg-search-inputs-vertical"
+                        data-template="search:component" data-template-component="administration"
+                        data-template-filter="administration">
+                        <li data-template="templates:each" data-template-from="administrations"
+                            data-template-to="administration">
+                            <input class="hsg-search-input" type="checkbox" name="administration"
+                                data-template="search:filter-input-attributes"/>
+                            <label class="hsg-search-input-label" data-template="search:label">
+                                <span data-template="search:label-contents"/>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="hsg-toggle">
+                    <a href="#" class="c-link-more">Show more</a>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

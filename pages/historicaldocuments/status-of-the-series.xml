@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div id="static-title" class="hidden">Status of the Series - Historical Documents</div>
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row hsg-main">
+        <div class="hsg-width-two-thirds" data-template="app:fix-links">
+            <div id="content-inner">
+                <h1> Status of the <em>Foreign Relations of the United States</em> Series</h1>
+                <h2>Volumes Published in <span data-template="frus:current-year"/> (<span
+                        data-template="frus:volumes-published-this-year-count"/>)</h2>
+                <ol data-template="frus:volumes-published-this-year"/>
+                <h2>Volumes Published in <span data-template="frus:last-year"/> (<span
+                        data-template="frus:volumes-published-last-year-count"/>)</h2>
+                <ol data-template="frus:volumes-published-last-year"/>
+                <h2>Volumes Planned for Publication in <span data-template="frus:current-year"/>
+                        (<span data-template="frus:volumes-planned-for-publication-this-year-count"
+                    />)</h2>
+                <h3>Volumes in Production</h3>
+                <ol data-template="frus:volumes-planned-for-publication-this-year"/>
+                <h2>Volumes Planned for Publication in <span data-template="frus:next-year"/> and
+                    later</h2>
+                <h3>Volumes in Production (<span
+                        data-template="frus:volumes-planned-next-year-beyond-in-production-count"
+                    />)</h3>
+                <ol data-template="frus:volumes-planned-next-year-beyond-in-production"/>
+                <h3>Volumes Under Declassification Review (<span
+                        data-template="frus:volumes-planned-next-year-beyond-under-declassification-count"
+                    />)</h3>
+                <ol data-template="frus:volumes-planned-next-year-beyond-under-declassification"/>
+                <h3>Volumes Being Researched or Prepared (<span
+                        data-template="frus:volumes-planned-next-year-beyond-being-researched-or-prepared-count"
+                    />)</h3>
+                <ol
+                    data-template="frus:volumes-planned-next-year-beyond-being-researched-or-prepared"/>
+                <h3>Volumes Being Planned (<span
+                        data-template="frus:volumes-planned-next-year-beyond-being-planned-research-not-yet-begun-count"
+                    />)</h3>
+                <ol
+                    data-template="frus:volumes-planned-next-year-beyond-being-planned-research-not-yet-begun"
+                />
+            </div>
+        </div>
+
+        <aside class="hsg-width-one-third">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the <em>Foreign Relations of the United
+                            States</em> series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments">All Administrations</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other
+                            Electronic resources for U.S. foreign relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                            >Guide to sources on Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

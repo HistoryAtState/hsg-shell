@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div id="static-title" class="hidden">Tips - Search</div>
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/search">Search</a>
+                </li>
+                <li>
+                    <a href="$app/search/tips">Search Tips</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <aside id="contents" class="hsg-width-one-third">
+            <div class="hsg-panel">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Contents</h2>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="#defaults">Defaults</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="#scope">Scope</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="#keywords">Searching with Keywords</a>
+                        <ul>
+                            <li class="hsg-list-group-item">
+                                <a href="#phrases">Phrases</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="#booleans">Booleans</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="#wildcards">Wildcards</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="#proximity">Proximity</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="#dates-filter">Filtering by Date and Time</a>
+                        <ul>
+                            <li class="hsg-list-group-item">
+                                <a href="#exact-date">Exact Date</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="#exact-date-time">Exact Date and Time</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="#date-range">Date Range</a>
+                            </li>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="#month-year">Month-Year</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="#single-year">Single Year</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="#year-range">Year Range</a>
+                                </li>
+                            </ul>
+                            <li class="hsg-list-group-item">
+                                <a href="#date-time-range">Date and Time Range</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="#volumes-filter">Filtering by Volume</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <div class="hsg-width-two-thirds" data-template="app:fix-links">
+            <div id="content-inner">
+                <h1>Search Tips</h1>
+                <p>The Office of the Historian’s <a href="$app/search">search engine</a> contains
+                    several useful search options. Understanding the search engine’s defaults, as
+                    well as the following techniques and syntax, will help improve your search
+                    results. Example searches linked below will pre-fill the search form with the
+                    parameters of your search to see the results.</p>
+                <div id="defaults">
+                    <h2>Defaults</h2>
+                    <ul>
+                        <li>By default, the search engine returns documents from the entire
+                                site<sup>†</sup> containing <strong>all</strong> of the search terms
+                            you enter. (Note: Before December 2017, the search engine’s default
+                            behavior was to return documents containing <strong>any</strong> of the
+                            terms. To perform that kind of search now, just place an <a
+                                href="#booleans">OR</a> boolean operator between each term.)</li>
+                        <li>All keyword searches are <strong>case-insensitive</strong>, so searching
+                            for “SALT” will return the same results as searching for “salt.”</li>
+                        <li>You can refine a query by: <ol>
+                                <li>narrowing its scope to specific sections of the website;</li>
+                                <li>using phrase, boolean, wildcard, and proximity operators in your
+                                    keyword search; and</li>
+                                <li>filtering results by date and time ranges or specific
+                                        <em>Foreign Relations</em> volumes.</li>
+                            </ol></li>
+                    </ul>
+                    <p><sup>†</sup> Note that the search engine’s results are limited to the
+                        materials that the Office of the Historian has digitized. Please consult the
+                        full list of <em>Foreign Relations</em> volumes <a
+                            href="$app/historicaldocuments">by administration</a> to see which
+                        volumes have been digitized (indicated by the phrase, “full text,” next to
+                        each volume’s title). For early <em>FRUS</em> volumes not yet available
+                        here, we provide links to the <a
+                            href="https://uwdc.library.wisc.edu/collections/FRUS/">University of
+                            Wisconsin Madison <em>FRUS</em> collection</a>, or in some
+                        circumstances, WorldCat.</p>
+                </div>
+                <div id="scope">
+                    <h2>Scope</h2>
+                    <p>Beneath the keyword search field is a set of checkboxes, labeled “Filter by
+                        Section.” Selecting any of the checkboxes can narrow the scope of your
+                        search to specific sections of the website, resulting in a faster, more
+                        specific query. The default set of checkboxes contains the major content
+                        sections of the website:<br/>
+                        <ul>
+                            <li>Historical Documents <ul><li>Includes <em>Foreign Relations of the
+                                            United States</em> documents</li></ul></li>
+                            <li>Department History <ul><li>Includes Principal Officers and Chiefs of
+                                        Mission, Travels of the President and Secretary, Visits of
+                                        Foreign Leaders, etc.</li></ul></li>
+                            <li>Countries <ul><li>Includes Guide to the United States’ History of
+                                        Recognition, Diplomatic, and Consular Relations, by Country,
+                                        since 1776</li></ul></li>
+                            <li>Conferences <ul><li>Includes Transcripts of conferences held by the
+                                        Office of the Historian</li></ul></li>
+                            <li>History of the <em>Foreign Relations</em> Series</li>
+                            <li>About <ul><li>Includes FAQ, Advisory Committee
+                                Minutes</li></ul></li>
+                            <li>Retired Resources <ul><li>Includes Milestones,
+                                Education</li></ul></li>
+                        </ul>
+                    </p>
+                    <p>To search for articles about U.S. diplomatic history that relate to peace,
+                        you could select these two sections and enter the keyword “peace”:</p>
+                    <blockquote> ☑ Department History<br/> ☑ Retired Resources (Milestones)<br/>
+                        <hr/>
+                        <a
+                            href="$app/search?q=peace&amp;within=department&amp;within=retired&amp;sort-by=relevance"
+                            >peace</a></blockquote>
+                    <p>(Click on the link to try out this search.)</p>
+                    <p>If no scope checkboxes are selected, the entire site will be searched. To
+                        achieve the best results, combine scope with the following keyword search
+                        operators:</p>
+                </div>
+                <div id="keywords">
+                    <h2>Searching with Keywords</h2>
+                    <div id="phrases">
+                        <h3>Phrases</h3>
+                        <p>When you type your search terms into the box, the search engine will
+                            search for those terms, individually, anywhere in a document. To force
+                            the search engine to find fixed phrases (i.e., specific, ordered
+                            combinations of words), place the phrase in quotation marks. To locate
+                            documents which include both “peaceful” and “nuclear” anywhere in the
+                            text, use the following search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=peaceful+nuclear&amp;within=entire-site&amp;sort-by=relevance"
+                                >peaceful nuclear</a>
+                        </blockquote>
+                        <p>To locate documents which use the phrase “peaceful nuclear,” use this
+                            search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=%22peaceful+nuclear%22&amp;within=entire-site&amp;sort-by=relevance"
+                                >"peaceful nuclear"</a>
+                        </blockquote>
+                    </div>
+                    <div id="booleans">
+                        <h3>Booleans</h3>
+                        <p>The search engine will allow you to perform Boolean searches (AND, OR,
+                            and NOT). Boolean operators must be in all caps.</p>
+                        <p>You can use Boolean operators with individual terms or with phrases
+                            enclosed in quotation marks. For example, to locate documents which
+                            include both the word “Kissinger” and the phrase “peaceful nuclear,” use
+                            this search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=Kissinger+%22peaceful+nuclear%22&amp;sort-by=relevance"
+                                >Kissinger "peaceful nuclear"</a>
+                        </blockquote>
+                        <p>To locate documents which include either “Rhodesia” or “Zimbabwe,” use
+                            this search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=Rhodesia+OR+Zimbabwe&amp;within=entire-site&amp;sort-by=relevance"
+                                >Rhodesia OR Zimbabwe</a>
+                        </blockquote>
+                        <p>To locate documents which include the phrase “arms control” but exclude
+                            documents which also include the term “SALT,” use this search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=%22arms++control%22+NOT+SALT&amp;within=entire-site&amp;sort-by=relevance"
+                                >"arms control" NOT SALT</a>
+                        </blockquote>
+                        <p>You can also use the plus (+) and minus (-) signs to include or exclude
+                            certain terms. To search for documents which must include the phrase
+                            “law of the sea” and may include the term “seabed,” use this search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=%2B%22law+of+the+sea%22+seabed&amp;within=entire-site&amp;sort-by=relevance"
+                                >+"law of the sea" seabed</a>
+                        </blockquote>
+                        <p>To search for documents which include “Korea” but not “DMZ,” use this
+                            search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=Korea+-DMZ&amp;within=entire-site&amp;sort-by=relevance"
+                                >Korea -DMZ</a>
+                        </blockquote>
+                        <p>Finally, you can use parentheses to nest your searches. To find documents
+                            which include “Guatemala” or “El Salvador” and “Belize,” use this
+                            search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=(Guatemala+OR+%22El+Salvador%22)+AND+Belize&amp;within=entire-site&amp;sort-by=relevance"
+                                >(Guatemala OR "El Salvador") AND Belize</a>
+                        </blockquote>
+                    </div>
+                    <div id="wildcards">
+                        <h3>Wildcards</h3>
+                        <p>If you are unsure about the spelling of a term or want to find variants
+                            of a term, you can use wildcards. The search engine supports two
+                            wildcard characters: ? and *.</p>
+                        <p>If you want to replace a single letter in your search term, use ? in your
+                            query. To find documents which include “text” or “test,” use this
+                            search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=te%3Ft&amp;within=entire-site&amp;sort-by=relevance"
+                                >te?t</a>
+                        </blockquote>
+                        <p>Note that the above search will not return hits for “Tet” or “teapot.” If
+                            you want to replace zero or more letters in your search term use * in
+                            your query. For example, to find documents which include “Vietnam” and
+                            “Vietnamese,” use this search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=Vietna*&amp;within=entire-site&amp;sort-by=relevance*"
+                                >Vietna*</a>
+                        </blockquote>
+                        <p>Note that the above search will not return hits for “Viet Nam,” another
+                            spelling of the same country. You may have to try multiple variants of
+                            the same search to get all the results you need.</p>
+                    </div>
+                    <div id="proximity">
+                        <h3>Proximity</h3>
+                        <p>If you are searching for common words, you can tell the search engine to
+                            only return documents in which the words are within a distance you
+                            define. To find documents which include “Cuba” and “submarine” within 10
+                            words of each other, use this search:</p>
+                        <blockquote>
+                            <a
+                                href="$app/search?q=%22Cuba+submarine%22~10&amp;within=entire-site&amp;sort-by=relevance"
+                                >"Cuba submarine"~10</a>
+                        </blockquote>
+                        <p>We are aware that “keyword in context” summary of the results of
+                            proximity searches are not displaying correctly. The search results
+                            themselves, however, are reliable.</p>
+                    </div>
+                </div>
+                <div id="dates-filter">
+                    <h2>Filtering By Date and Time (Alpha Release)</h2>
+                    <ul>
+                        <li>Date and time filters may be applied to searches within the Historical
+                            Documents (<em>Foreign Relations</em> series) section of the site. These
+                            filters will be active only if the Historical Documents section is
+                            checked.</li>
+                        <li>Exact dates or date-time ranges may be used in conjunction with keywords
+                            and/or volumes, or used alone by leaving the search box blank.</li>
+                        <li>Date and time filters may be used at the beginning of a search or to
+                            refine the results of a search.</li>
+                        <li>Per U.S. conventions, dates should be entered in Month-Date-Year format
+                            and time in 12-hour format, with “am” or “pm” selected.</li>
+                    </ul>
+
+                    <div id="exact-date">
+                        <h3>Exact Date</h3>
+                        <p>To search or filter results by an exact date, enter a single date into
+                            the “Start Date” set of fields. For example, a search for historical
+                            documents dated December 7, 1941 should be entered as:</p>
+                        <blockquote> ☑ Historical Documents<br/>
+                            <hr/>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>Start Date</strong></caption>
+                                <thead>
+                                    <th>Month</th>
+                                    <th>Day</th>
+                                    <th>Year</th>
+                                </thead>
+                                <tr>
+                                    <td>12</td>
+                                    <td>07</td>
+                                    <td>1941</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <a
+                                href="$app/search?q=&amp;within=documents&amp;start-date=1941-12-07&amp;sort-by=date-asc"
+                                >live example</a>
+                        </blockquote>
+                    </div>
+                    <div id="exact-date-time">
+                        <h3>Exact Date and Time</h3>
+                        <p>To search or filter results by an exact date and time, enter a single
+                            date into the “Start Date” set of fields and a single time into the
+                            “Start Time” set of fields. For example, a search for historical
+                            documents created on December 7, 1941 at 8 p.m. should be entered
+                            as:</p>
+                        <blockquote> ☑ Historical Documents<br/>
+                            <hr/>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>Start Date</strong></caption>
+                                <thead>
+                                    <th>Month</th>
+                                    <th>Day</th>
+                                    <th>Year</th>
+                                </thead>
+                                <tr>
+                                    <td>12</td>
+                                    <td>07</td>
+                                    <td>1941</td>
+                                </tr>
+                            </table>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>Start Time</strong></caption>
+                                <thead>
+                                    <th>Hour</th>
+                                    <th>Minute</th>
+                                    <th/>
+                                </thead>
+                                <tr>
+                                    <td>8</td>
+                                    <td>00</td>
+                                    <td>◦ am ⦿ pm</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <a
+                                href="$app/search?q=&amp;within=documents&amp;start-date=1941-12-07&amp;start-time=20:00&amp;sort-by=relevance"
+                                >live example</a>
+                        </blockquote>
+                    </div>
+                    <div id="date-range">
+                        <h3>Date Range</h3>
+                        <p>To search or filter results by a date range, use the “Start Date” and
+                            “End Date” sets of fields. For example, a search for historical
+                            documents including the term “Cuba” and created between October 16, 1962
+                            and October 28, 1962 should be entered as:</p>
+                        <blockquote> Cuba*<br/>
+                            <hr/> ☑ Historical Documents<br/>
+                            <hr/>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>Start Date</strong></caption>
+                                <thead>
+                                    <th>Month</th>
+                                    <th>Day</th>
+                                    <th>Year</th>
+                                </thead>
+                                <tr>
+                                    <td>10</td>
+                                    <td>16</td>
+                                    <td>1962</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>End Date</strong></caption>
+                                <thead>
+                                    <th>Month</th>
+                                    <th>Day</th>
+                                    <th>Year</th>
+                                </thead>
+                                <tr>
+                                    <td>10</td>
+                                    <td>28</td>
+                                    <td>1962</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <a
+                                href="$app/search?q=Cuba*&amp;within=documents&amp;start-date=1962-10-16&amp;end-date=1962-10-28&amp;sort-by=date-asc"
+                                >live example</a>
+                        </blockquote>
+                        <div id="month-year">
+                            <h4>Month-Year</h4>
+                            <p>To search or filter results for all historical documents produced on
+                                any day during a particular month and year, use a date range search.
+                                For example, a search for historical documents including the terms
+                                “National Security Council” or “NSC” dated sometime in September
+                                1974 should be entered as:</p>
+                            <blockquote> "National Security Council" OR "NSC"<br/>
+                                <hr/> ☑ Historical Documents<br/>
+                                <hr/>
+                                <table style="border-collapse: separate; border-spacing: 10px;">
+                                    <caption><strong>Start Date</strong></caption>
+                                    <thead>
+                                        <th>Month</th>
+                                        <th>Day</th>
+                                        <th>Year</th>
+                                    </thead>
+                                    <tr>
+                                        <td>09</td>
+                                        <td>01</td>
+                                        <td>1974</td>
+                                    </tr>
+                                </table>
+                                <hr/>
+                                <table style="border-collapse: separate; border-spacing: 10px;">
+                                    <caption><strong>End Date</strong></caption>
+                                    <thead>
+                                        <th>Month</th>
+                                        <th>Day</th>
+                                        <th>Year</th>
+                                    </thead>
+                                    <tr>
+                                        <td>09</td>
+                                        <td>30</td>
+                                        <td>1974</td>
+                                    </tr>
+                                </table>
+                                <hr/>
+                                <a
+                                    href="$app/search?q=%22National+Security+Council%22+OR+%22NSC%22&amp;within=documents&amp;start-date=1974-09-01&amp;end-date=1974-09-30&amp;sort-by=date-asc"
+                                    >live example</a>
+                            </blockquote>
+                        </div>
+                        <div id="single-year">
+                            <h4>Single Year</h4>
+                            <p>To search or filter results for all historical documents produced
+                                during a particular year, use a date range search. For example, a
+                                search for historical documents including the term “Russia“ and
+                                dated sometime in 1917 should be entered as:</p>
+                            <blockquote> Russia*<br/>
+                                <hr/> ☑ Historical Documents<br/>
+                                <hr/>
+                                <table style="border-collapse: separate; border-spacing: 10px;">
+                                    <caption><strong>Start Date</strong></caption>
+                                    <thead>
+                                        <th>Month</th>
+                                        <th>Day</th>
+                                        <th>Year</th>
+                                    </thead>
+                                    <tr>
+                                        <td>01</td>
+                                        <td>01</td>
+                                        <td>1917</td>
+                                    </tr>
+                                </table>
+                                <hr/>
+                                <table style="border-collapse: separate; border-spacing: 10px;">
+                                    <caption><strong>End Date</strong></caption>
+                                    <thead>
+                                        <th>Month</th>
+                                        <th>Day</th>
+                                        <th>Year</th>
+                                    </thead>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>31</td>
+                                        <td>1917</td>
+                                    </tr>
+                                </table>
+                                <hr/>
+                                <a
+                                    href="$app/search?q=Russia*&amp;within=documents&amp;start-date=1917-01-01&amp;end-date=1917-12-31&amp;sort-by=date-asc"
+                                    >live example</a>
+                            </blockquote>
+                        </div>
+                        <div id="year-range">
+                            <h4>Year Range</h4>
+                            <p>To search or filter results for all historical documents produced
+                                during a particular range of years, use a date range search. For
+                                example, a search for historical documents including the term
+                                “union” dated sometime between 1861 and 1865 should be entered
+                                as:</p>
+                            <blockquote> union<br/>
+                                <hr/> ☑ Historical Documents<br/>
+                                <hr/>
+                                <table style="border-collapse: separate; border-spacing: 10px;">
+                                    <caption><strong>Start Date</strong></caption>
+                                    <thead>
+                                        <th>Month</th>
+                                        <th>Day</th>
+                                        <th>Year</th>
+                                    </thead>
+                                    <tr>
+                                        <td>01</td>
+                                        <td>01</td>
+                                        <td>1861</td>
+                                    </tr>
+                                </table>
+                                <hr/>
+                                <table style="border-collapse: separate; border-spacing: 10px;">
+                                    <caption><strong>End Date</strong></caption>
+                                    <thead>
+                                        <th>Month</th>
+                                        <th>Day</th>
+                                        <th>Year</th>
+                                    </thead>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>31</td>
+                                        <td>1865</td>
+                                    </tr>
+                                </table>
+                                <hr/>
+                                <a
+                                    href="search?q=union&amp;within=documents&amp;start-date=1861-01-01&amp;end-date=1865-12-31&amp;sort-by=relevance"
+                                    >live example</a>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div id="date-time-range">
+                        <h3>Date and Time Range</h3>
+                        <p>To search for all historical documents produced during a particular span
+                            of dates and times, use a date and time range search. For example, a
+                            search for all historical documents created or sent between noon on
+                            August 9, 1974 and 6:30 am on August 10, 1974 should be entered as:</p>
+                        <blockquote> ☑ Historical Documents<br/>
+                            <hr/>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>Start Date</strong></caption>
+                                <thead>
+                                    <th>Month</th>
+                                    <th>Day</th>
+                                    <th>Year</th>
+                                </thead>
+                                <tr>
+                                    <td>08</td>
+                                    <td>09</td>
+                                    <td>1974</td>
+                                </tr>
+                            </table>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>Start Time</strong></caption>
+                                <thead>
+                                    <th>Hour</th>
+                                    <th>Minute</th>
+                                    <th/>
+                                </thead>
+                                <tr>
+                                    <td>12</td>
+                                    <td>00</td>
+                                    <td>◦ am ⦿ pm</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>End Date</strong></caption>
+                                <thead>
+                                    <th>Month</th>
+                                    <th>Day</th>
+                                    <th>Year</th>
+                                </thead>
+                                <tr>
+                                    <td>08</td>
+                                    <td>10</td>
+                                    <td>1974</td>
+                                </tr>
+                            </table>
+                            <table style="border-collapse: separate; border-spacing: 10px;">
+                                <caption><strong>End Time</strong></caption>
+                                <thead>
+                                    <th>Hour</th>
+                                    <th>Minute</th>
+                                    <th/>
+                                </thead>
+                                <tr>
+                                    <td>6</td>
+                                    <td>30</td>
+                                    <td>◦ am ⦿ pm</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <a
+                                href="$app/search?q=&amp;within=documents&amp;start-date=1974-08-09&amp;end-date=1974-08-10&amp;start-time=12:00&amp;end-time=18:30&amp;sort-by=date-asc"
+                                >live example</a>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <div id="volumes-filter">
+                    <h2>Filtering By Volume (Alpha Release)</h2>
+                    <ul>
+                        <li>Volumes filters may be applied to searches within the Historical
+                            Documents (<em>Foreign Relations</em> series) section of the site.</li>
+                        <li>Volumes may be used in conjunction with keywords and/or dates or used
+                            alone by leaving the search box blank.</li>
+                        <li>Volume filters may be used at the beginning of a search or to refine the
+                            results of a search.</li>
+                    </ul>
+                    <p>Taking the last example above, we can further refine the search results by
+                        checking one or more <em>Foreign Relations</em> volumes of interest. For
+                        example, a search for all historical documents created or sent between noon
+                        on August 9, 1974 and 6:30 am on August 10, 1974 and limited to the
+                            <em>1969–1976, Volume X, Vietnam, January 1973–July 1975</em> and
+                            <em>1969–1976, Volume XXXV, National Security Policy, 1973–1976</em>
+                        volumes should be entered as:</p>
+                    <blockquote> ☑ Historical Documents<br/>
+                        <hr/>
+                        <table style="border-collapse: separate; border-spacing: 10px;">
+                            <caption><strong>Start Date</strong></caption>
+                            <thead>
+                                <th>Month</th>
+                                <th>Day</th>
+                                <th>Year</th>
+                            </thead>
+                            <tr>
+                                <td>08</td>
+                                <td>09</td>
+                                <td>1974</td>
+                            </tr>
+                        </table>
+                        <table style="border-collapse: separate; border-spacing: 10px;">
+                            <caption><strong>Start Time</strong></caption>
+                            <thead>
+                                <th>Hour</th>
+                                <th>Minute</th>
+                                <th/>
+                            </thead>
+                            <tr>
+                                <td>12</td>
+                                <td>00</td>
+                                <td>◦ am ⦿ pm</td>
+                            </tr>
+                        </table>
+                        <hr/>
+                        <table style="border-collapse: separate; border-spacing: 10px;">
+                            <caption><strong>End Date</strong></caption>
+                            <thead>
+                                <th>Month</th>
+                                <th>Day</th>
+                                <th>Year</th>
+                            </thead>
+                            <tr>
+                                <td>08</td>
+                                <td>10</td>
+                                <td>1974</td>
+                            </tr>
+                        </table>
+                        <table style="border-collapse: separate; border-spacing: 10px;">
+                            <caption><strong>End Time</strong></caption>
+                            <thead>
+                                <th>Hour</th>
+                                <th>Minute</th>
+                                <th/>
+                            </thead>
+                            <tr>
+                                <td>6</td>
+                                <td>30</td>
+                                <td>◦ am ⦿ pm</td>
+                            </tr>
+                        </table>
+                        <hr/> ☑ 1969–1976, Vietnam, January 1973–July 1975, Volume X<br/> ☑
+                        1969–1976, National Security Policy, 1973–1976, Volume XXXV<br/>
+                        <hr/>
+                        <a
+                            href="$app/search?q=&amp;volume-id=frus1969-76v10&amp;volume-id=frus1969-76v35&amp;within=documents&amp;start-date=1974-08-09&amp;end-date=1974-08-10&amp;start-time=12:00&amp;end-time=18:30&amp;sort-by=date-asc"
+                            >live example</a>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

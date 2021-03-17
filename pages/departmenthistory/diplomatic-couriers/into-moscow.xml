@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Into Moscow - U.S. Diplomatic Couriers - Department
+            History</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory">Department History</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/diplomatic-couriers">U.S. Diplomatic
+                            Couriers</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/diplomatic-couriers/into-moscow">Into
+                            Moscow</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>U.S. Diplomatic Couriers: Into Moscow</h1>
+                    <!-- Start of Brightcove Player -->
+                    <div style="position: relative; display: block;">
+                        <div style="padding-top: 56.25%;">
+                            <video data-video-id="5798847904001" data-account="1705665025"
+                                data-player="HJ8lQG1Eg" data-embed="default"
+                                data-application-id="data-application-id" class="video-js"
+                                controls="controls"
+                                style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; width: 100%; height: 100%;"/>
+                            <script
+                                src="https://players.brightcove.net/1705665025/HJ8lQG1Eg_default/index.min.js"
+                            />
+                        </div>
+                    </div>
+                    <!-- End of Brightcove Player -->
+                    <div id="synopsis">
+                        <h2>Synopsis</h2>
+                        <p>In the 1950s, Diplomatic Couriers traveled tens of thousands of miles per
+                            year, crossing borders both geographic and cultural. The United States
+                            and the USSR, once allied at the end of World War II, had become
+                            adversaries in what became known as the Cold War, as Soviet power crept
+                            further west across Europe. Events like the 1948 Communist coup in
+                            Czechoslovakia and the Soviet blockade of West Berlin in 1948–1949
+                            caused U.S officials to grow increasingly wary of the possibility that
+                            Western European leaders might deal with their security concerns by
+                            negotiating with Stalin and the Soviet Union.</p>
+                        <p>The Truman administration looked to military alliances and humanitarian
+                            assistance to bolster the security and prosperity of Western Europe and
+                            cement Euro-Atlantic ties. The <a href="$app/milestones/1945-1952/nato"
+                                >North Atlantic Treaty</a> signed in 1949 brought the United States,
+                            Canada, and much of Western Europe into a collective security alliance. 
+                            The <a href="$app/milestones/1945-1952/marshall-plan">Marshall Plan</a>,
+                            proposed by Secretary of State George C. Marshall, directed $12 billion
+                            toward the rebuilding of Western Europe, regenerating industrialization
+                            and bringing extensive investment into the region.</p>
+                        <p>The Soviet refusal either to participate in the Marshall Plan or to allow
+                            its satellite states in Eastern Europe to accept the economic assistance
+                            helped to reinforce the growing division between the East and the West
+                            in Europe. The U.S. Diplomatic Couriers felt acutely this division as
+                            they carried diplomatic pouches from behind the Iron Curtain in Western
+                            Germany to our missions in Budapest and Bucharest, and from Helsinki
+                            into the Soviet Union to support the U.S. Embassy in Moscow. The
+                            couriers traveled in pairs to ensure their own safety and the security
+                            of the diplomatic pouches.</p>
+                        <p>During this era, the U.S. Diplomatic Couriers provided service to the
+                            U.S. Embassy in Moscow from Helsinki. This “Helsinki Detail” was often a
+                            3- or 4-week detail during which the couriers would take turns
+                            collecting and delivering the diplomatic pouches from the mail hub in
+                            Frankfurt, Germany, up to Helsinki, Finland, then into the Soviet Union.
+                            Couriers traveled by air several times a week, carrying smaller pouches
+                            on Aeroflot or SAS flights directly into Moscow. In order to bring in
+                            larger loads, the couriers made monthly train trips through Leningrad
+                            into Moscow.  Depending on flight or train schedules, the couriers often
+                            spent several days off-duty in Moscow.</p>
+                        <p>In this short documentary, the U.S. Diplomatic Couriers talk about the
+                            journey and their personal impressions of what it was like to travel
+                            into Moscow during this era.</p>
+                    </div>
+                    <div id="more-information">
+                        <h2>More information</h2>
+                        <dl>
+                            <dt>Released</dt>
+                            <dd>2018</dd>
+                            <dt>Length</dt>
+                            <dd>26:12</dd>
+                            <dt>Creator</dt>
+                            <dd>Rebecca A. Ross, Foreign Service Officer, U.S. Department of
+                                State</dd>
+                        </dl>
+                    </div>
+                    <div id="transcript">
+                        <h2>Transcript</h2>
+                        <p>[MUSIC PLAYING]</p>
+                        <p><b>NARRATOR:</b> In 1918, the Diplomatic Courier Service was established
+                            to support the work of American diplomats by ensuring that classified
+                            messages and materials were delivered safely and securely to U.S.
+                            embassies and consulates around the world. Over the hundred year history
+                            of the courier service this core mission has not changed, and remains
+                            critical to the national security of the United States.</p>
+                        <p>Before the onset of the jet age, this small group of couriers traveled
+                            tens of thousands of miles per year, often spending months on the road.
+                            Following World War II, relations between the United States and the
+                            Soviet Union—once allies—were increasingly strained and grew into what
+                            became known as the Cold War.</p>
+                        <p>Even during these complicated times, a mutual respect for international
+                            conventions on diplomatic relations meant that the couriers were among
+                            the few still able to travel into the Soviet Union. Making the trip from
+                            Helsinki into Moscow several times a week, they brought the diplomatic
+                            pouch with classified correspondence from Washington, news from the
+                            West, and even personal mail.</p>
+                        <p>[MUSIC PLAYING]</p>
+                        <p><b>MR. JAMES VERREOS:</b> Some of the more interesting and funny things
+                            occurred, of course, especially on trips to Moscow. The Soviets were
+                            right on your back. You were almost never six feet away from somebody
+                            who was looking over your shoulder.</p>
+                        <p>We served the Soviet Union by what we called a satellite office in
+                            Helsinki.</p>
+                        <p><b>MR. ERNEST HOHMAN:</b> But Helsinki is very unique, there’s no
+                            question about it. You go there in the winter months and they have a
+                            sign that says, welcome to Santa Claus land. And that’s where, in a
+                            sense, you feel—a lot of ice and snow. But it’s a beautiful country.</p>
+                        <p><b>MR. KENNETH COOPER:</b> Every time I had the Helsinki detail it was
+                            always in December, January, or February. So I have probably a different
+                            perspective on this than the guys who did it in June, July, and August.
+                            But we had a lot of fun there in the meantime.</p>
+                        <p><b>MR. PHILIP OLIVARES:</b> Well, that detail was about a month. But we
+                            rotated on it, because I think there were about four or five of us in
+                            the mill on that. One man was traveling from Frankfurt by train up to
+                            Hamburg. From Hamburg they flew to Copenhagen, and then continued on to
+                            Stockholm, and then into Helsinki. And two guys would take it from
+                            Helsinki into Leningrad and into Moscow.</p>
+                        <p><b>MR. VERREOS:</b> We would station couriers in Helsinki for usually a
+                            two month period. And during those two months, all they would do would
+                            make the twice weekly trips into the Soviet Union with flights from
+                            Helsinki to Leningrad to Moscow and back and out. And then once a month,
+                            there was a train trip from Helsinki to Moscow delivering the
+                            non-classified pouches. By treaty, nothing could come in as just plain
+                            freight material, as you would say, commercial material.</p>
+                        <p>Anything that went in for the embassy had to be in a pouch. So when we’re
+                            moving furniture, for example, the non-classified pouch usually was one
+                            or two freight cars. The material would be stuck into the freight car,
+                            and the freight car would be closed, and a wire and lead seal and a tag
+                            would be placed on that freight car as if it were a bag.</p>
+                        <p><b>MR. DONOVAN KLINE:</b> On Helsinki detail, there were four couriers at
+                            a time, up there rotating. Once a month, we went to Moscow on a Russian
+                            a sleeper train out of Helsinki Station. We went to Viborg, and we
+                            passed through there with little or no problems at all. It was nighttime
+                            when we left—of course, saw nothing. It was pitch black. We would take
+                            in surface pouches with copies of Newsweek and Time.</p>
+                        <p><b>MR. VERREOS:</b> We were traveling soft class, because the class
+                            conscious Soviets didn’t have anything like first class and second
+                            class. They had soft class and hard class. Well, we were traveling soft
+                            class, so we would have a cabin. All we did was play cards and enjoy
+                            whatever food they had on the train. It wasn’t particularly what you’d
+                            call first class, but it was better than hard class, believe me.</p>
+                        <p><b>MR. COOPER:</b> I think we had one train trip a month. We flew in and
+                            out most of the time, on a Russian Ilyushin 12 and then later an
+                            Ilyushin 14 airplane. That was always kind of exciting. I remember one
+                            instance where I had something like 12 large bags, all under diplomatic
+                            seal. And we took up the whole center of the airplane. And I thought,
+                            surely Russian customs are going to dig in their heels on this. But they
+                            didn’t bat an eye.</p>
+                        <p><b>MR. KLINE:</b> The other trips were always flying in. And we flew in
+                            mostly on Aeroflot and FinnAir, depending on the day of the week, I
+                            think.</p>
+                        <p><b>MR. OLIVARES:</b> First time I flew a Saab, that was a funny
+                            experience. Looked like a DC-3 with a nose wheel. The stewardess would
+                            come and ask you, “Have you ever been on the Saab before?” And if you
+                            hadn’t, they’d give you a little booklet. They said, “Please do not be
+                            alarmed. When we land the pilot will feather the props to reverse the
+                            engines to slow down to assist on the braking.”</p>
+                        <p>But on doing so, a whole sheet of flame would come out of the exhaust
+                            things. Blue flame would go past, I mean you could see this. People, I
+                            remember seeing—I was pre-warned by the little booklet, but there was
+                            some guy who didn’t read English and didn’t know this, and he jumped out
+                            of his seat.</p>
+                        <p>They were funny, those flights. I remember on one of the Aeroflots,
+                            looking for my seatbelt. And the pilot happened to be coming on board.
+                            He was going down the aisle. He said, “No, don’t worry about that. You
+                            don’t need those.”</p>
+                        <p>We used to get these caviar sandwiches for breakfast. It was a soft roll
+                            with fresh caviar, not the tinned stuff. They took it for granted.</p>
+                        <p><b>MR. VERREOS:</b> Going to Moscow in those days—to get off the train
+                            and walk around the city was just depressive. The Russians were, the
+                            people were hungry to hear about America. A few of them would speak some
+                            English. A few of them spoke some German. Unfortunately, none of our
+                            couriers that I knew of spoke Russki—[SPEAKING RUSSIAN]. But whenever we
+                            were able to communicate, they were very, very friendly, the Russian
+                            people.</p>
+                        <p>Some KGB person was watching us. They knew that. And on a couple
+                            occasions, people at a party that had one or two vodkas too many would
+                            just flip the finger, knowing that the KGB would get it. Some were
+                            defiant, but there were very few.</p>
+                        <p><b>MR. OLIVARES:</b> Going into Moscow, it was a little difficult.
+                            Everything was black, brown. Nobody had any color on them at all. The
+                            city was so drab. It seems to me, most of my time in Moscow had to be in
+                            the wintertime. There was always snow on the streets, people shoveling
+                            it away, and everybody doing their duty. They just went about their life
+                            like a drudgery. There was no happiness or pleasure in their faces.
+                            Particularly when you got on the metro, which was very elaborate. The
+                            government decided this is going to be our showpiece, and it was. It was
+                            such a contrast with the people sitting in the metro.</p>
+                        <p><b>MR. KLINE:</b> First trip there, I was surprised by how wide the
+                            streets were there. They were really wide. There was more traffic there
+                            than I expected to see. A good bit of it was Russian trucks, but there
+                            were more cars than I ever expected to see. And we can go anywhere we
+                            wanted around town. I walked a long ways there, up to Red Square one
+                            day. Saw the mausoleum where the two stiffs were, Lenin and Stalin.</p>
+                        <p>It was interesting. People were lined up eight abreast outside to get in.
+                            When we got in, it was below ground. They had selective lighting with
+                            these mummies were. They looked very lifelike, both of them. Stalin was
+                            somewhat shorter than I expected. He was only about 5'3" or 4". Lenin
+                            looked exactly like all the pictures I’d ever seen of him—goatee, the
+                            whole thing. And he looked very natural.</p>
+                        <p>We were respectful. I wasn’t sad at all. The others were, because that’s
+                            why they were there. This was all they knew. This was their life since
+                            1917, and this was 1957—40 year anniversary that year. It was
+                            interesting, to say the least.</p>
+                        <p><b>MR. HOHMAN:</b> We had this “propisk” which allowed us to jump the
+                            line and get into the mausoleum to see Lenin and Stalin. Russians from
+                            outside of Moscow were allowed at least once a year to come to Moscow on
+                            their internal passport. And there were huge lines in all kinds of
+                            weather. One of the hotels that we had was near Red Square. And after
+                            dinner I walked over to where the mausoleum is for Lenin and Stalin, and
+                            watched the changing of the guard.</p>
+                        <p>And as I was watching, a man nudged up to me and said, “You American?”
+                            Yeah. He said, “That’s a nice coat you’re wearing.” He said, “You want
+                            to sell it to me?” I said, “No, it’s the only coat I’ve got.” He said,
+                            “Do you have any jeans?” I said, “Look, this is a sacred place. We’re
+                            right here for the changing of the guard. We’re in front of the
+                            mausoleum for Lenin and Stalin, and you want to do this?” He says, “Why
+                            not? What better place?” No, I didn’t sell them anything or give him
+                            anything. But I was really shocked about that situation, really. Yeah. I
+                            said, well, free enterprise. We’ve got it right here.</p>
+                        <p>But the whole Kremlin, we were allowed to see the museum and so on. And
+                            then across the way they had the GUM department store.</p>
+                        <p><b>MR. COOPER:</b> We got to go into the Kremlin at one time on some kind
+                            of an embassy tour. It was an unusual happening. We were shown a typical
+                            dining room in the Tsar’s palace. I think they wanted to impress us on
+                            how high on the hog the nobility lived as opposed to the peasants.</p>
+                        <p><b>MR. KLINE:</b> There weren’t that many tourists in Moscow in those
+                            days, outsiders. I went through St. Basil’s Cathedral on Red Square,
+                            which I found fascinating for several things. There were no church
+                            services being held in there, but it was quite pretty inside besides
+                            being beautiful outside. There was a store there called GUM, G-U-M. I
+                            don’t know what it stood for in Russian. I bought caviar there and
+                            hauled the caviar out to Helsinki where we had parties with it. And it
+                            was delicious beluga caviar, really delightful.</p>
+                        <p><b>MR. COOPER:</b> I did get to go to GUM, the big department store, one
+                            time. Sort of an exercise in futility. Huge lines at every counter.
+                            There was a shortage of everything.</p>
+                        <p><b>MR. HOHMAN:</b> The huge department store was a depressing sort of
+                            place. There were only limited things that we could really find of
+                            interest, even though we had a good exchange rate. Musical instruments
+                            were rather cheap, or some books—English books, because they didn’t
+                            recognize the copyrights. One of the interesting things was Russian
+                            caviar. The caviar was from virgin sturgeon, they said. That was the
+                            best tasting. There really wasn’t a heck of a lot to buy.</p>
+                        <p><b>MR. VERREOS:</b> In the men’s shoe department they had four sizes of
+                            shoes, and two colors—black and brown. Apparently they bought the size a
+                            little bigger so they could stuff paper or whatever in so that the shoe
+                            would fit. In 90% of the different stands, say in the women’s department
+                            for dresses or stockings and stuff like that, they would have on
+                            display. But they would have no product available to sell.</p>
+                        <p>You’d go down the big street on which the embassy was, to the various
+                            shops. You’d go to the shop that sold bread. And you look in there, and
+                            there is no bread. But there’d be a line of people going around the
+                            block. It was very depressing to see people there.</p>
+                        <p>The pricing situation was ridiculous. We could get seats to the Bolshoi
+                            in the first eight rows for what it cost you to buy an egg if there was
+                            one available in the market. I remember, it was 32 rubles for the seats
+                            at the Bolshoi, and it’s 32 or 34 rubles to buy an egg.</p>
+                        <p><b>MR. CELLA:</b> We spent the afternoon walking around Red Square. We’d
+                            always get tickets to go to the Bolshoi and Stanislavsky. I remember
+                            coming out of an intermission at the Bolshoi. I guess we were watching
+                            some big ballet. The best seats are the first row of that center
+                            balcony. And right in the first row of that sitting up above us was
+                            Khrushchev and Bulganin. Bulganin was the official head, and Khrushchev
+                            was the chairman. We were that close to them. The balcony is only like,
+                            that high from the ceiling of this room.</p>
+                        <p><b>MR. HOHMAN:</b> There is a great amusement area, Gorky Park. Very
+                            nice, with the Ferris wheel that they had there. It was a fun place. A
+                            lot of people with their children there, also. They had games, swings
+                            and so on, for them. Chess was a big game. Of course there were very
+                            skilled individuals using all these well-known moves, and then people
+                            surrounding these chess players, watching them. And they’re going, “Ooh,
+                            aah.”</p>
+                        <p>It was light and fun. Moscow generally, because of the lighting and
+                            because of the atmospheric conditions, the way the buildings weren’t
+                            properly maintained, had a drab atmosphere to it. This was a ray of
+                            sunshine, particularly during the spring and summer months.</p>
+                        <p>And a favorite among them was eating ice cream. Because I understand
+                            Micoyan, one of the Russian premiers, visited the United States and he
+                            liked ice cream. He brought ice cream machines back to Russia. And
+                            Russians, even you got four or five feet of snow out there, eating a
+                            cone of ice cream.</p>
+                        <p><b>MR. CELLA:</b> We used to stay in that place called the Amerikanski
+                            Dom, the American House, a good distance walk from the embassy.</p>
+                        <p><b>MR. OLIVARES:</b> That was a way from the embassy itself. It was about
+                            a mile down the road. There was a building with mostly the military air
+                            attache people, the staff, the sergeants and all that. But that was a
+                            big center of life for the Americans. That was—everybody, even the staff
+                            from the embassy went down there. And there was mostly bachelors in
+                            there.</p>
+                        <p><b>MR. VERREOS:</b> Over at Amerikanski Dom, the America House, which was
+                            about two, three miles away from the embassy, and it was on the Moscow
+                            River pretty much opposite the entry to Gorky Park. And Amerikanski Dom
+                            is where the single personnel lived. The girls that were so-called maids
+                            to do the cleaning service and the maids in the cafeteria in Amerikanski
+                            Dom were all striking beauties, believe me.</p>
+                        <p><b>MR. KLINE:</b> In the America House, Amerikanski Dome, we had two or
+                            three Russian women who served our meals at the restaurant there. One
+                            was called Tanya. And she spoke very good English. And her ears were
+                            wide open at all times, listening to the conversations around those
+                            tables. And we’d walk in and we’d say, “Do svidaniya, Tanya.”</p>
+                        <p><b>MR. CELLA:</b> In the Amerikanski Dom was a nice looking woman who
+                            worked there as a waitress and everything. Tanya, her name was. So I
+                            made a big spiel to her. And all she said was, her response was, “You
+                            want soup?” That’s all I heard after that. “Vince, do you want
+                            soup?”</p>
+                        <p><b>MR. HOHMAN:</b> We stayed initially at that time at the so-called
+                            Amerikanski Dom, which was a housing area separate from the embassy, but
+                            it was an embassy place. We had food there that was served by a Russian,
+                            a very, very interesting woman. And some of the fellas tried to date her
+                            and so on, and she would never budge and say, “Soup? Vince, soup? More
+                            soup for you?”</p>
+                        <p><b>MR. VERREOS:</b> The Amerikanski Dome, by the way, was the social
+                            center for all of the diplomatic personnel in Moscow. Every night at
+                            Amerikanski Dom we were showing some American movie. So we always had a
+                            lot of the diplomatic corps would be coming in to see the movie.</p>
+                        <p><b>MR. KLINE:</b> Once a week they held open house there for the Western
+                            foreign embassies—Brits, the Swedes, the Finns, whoever, you know,
+                            Germans, for bingo. One night there was a terrible noise out on the side
+                            of this building toward the Moscow River. And we all looked out and here
+                            it was, the Russians practicing for their Independence Day
+                            celebration—so-called Independence Day celebration—in November, on the
+                            anniversary of the Russian Revolution.</p>
+                        <p>They rolled tanks by us. They rolled cars by us. They rolled great big
+                            huge guns on flatbed trucks, and all kinds of stuff, making this
+                            clamorous noise for a couple of hours, practicing for the spontaneous
+                            demonstration that was going to be two weeks later in Red Square.</p>
+                        <p>[MUSIC PLAYING]</p>
+                        <p>Later on when we lost our space in Amerikanski Dom, we stayed in Russian
+                            hotels. And there were women overseers on each of the floors. I’m sure
+                            they kept sure that we didn’t go anyplace. Or if they did, they called
+                            somebody. I’m sure of that. I don’t think—well, I don’t know, but I
+                            don’t think I was followed up there. I may have been, who knows?</p>
+                        <p>I didn’t worry about it. They didn’t want an incident and we didn’t want
+                            one. They wanted their couriers outside treated well, and so they
+                            treated us. Now, I don’t know whether they followed us or not. They
+                            probably did, but I wasn’t looking for it and I wasn’t worried about it
+                            ’cause I wasn’t doing anything wrong.</p>
+                        <p><b>MR. OLIVARES:</b> Well, we knew in Moscow, definitely. I don’t know
+                            about the other countries behind the Curtain, but definitely in Russia
+                            you knew somebody was following you. Yeah. Wherever you went, somebody
+                            kept an eye on you. Because you stood out too, in those days. Your
+                            dress, for one thing. Nobody bothered you, of course. Most of them were
+                            rather surprised to meet an American. It was a far off place they’d
+                            heard of, but—Oh, Americans here?</p>
+                        <p>They couldn’t believe it. If you were a foreigner, they thought you were
+                            from the of their own satellite countries. They’d look at you and say,
+                            [SPEAKING RUSSIAN]—in their own language. And you say, No, Amerikanski.
+                            They couldn’t believe it. Those people? As much as we would say on this
+                            side, Russians? Communists here in New York?</p>
+                        <p>Your job was to take care of those pouches. But I don’t think we ever
+                            felt that somebody was threatening us or trying to steal them, but we
+                            always have to assume that. And that’s why you took care of them.</p>
+                        <p><b>MR. HOHMAN:</b> I know sometimes as a newcomer, we were tailed by the
+                            KGB and so on. They were all very curious as to what you were doing.
+                            They figured that you were more than just a diplomatic courier.
+                            Occasionally you were able to speak to some Russians, but it was very
+                            difficult to do so.</p>
+                        <p>I had an incident also, coming out of a hotel in Moscow where a young
+                            fellow got a hold of me, and he spoke English quite well. And it turns
+                            out that he was born in Brooklyn, New York. And I, having been born in
+                            New York, I was familiar with the area where he was located. And he said
+                            that as a teenager his father picked up the family and went to
+                            Russia.</p>
+                        <p>They were originally from Russia, the family. And there was this call out
+                            —Come back to Mother Russia and rebuild the country. You have your
+                            obligation, even though you’re an overseas Russian, and so on. So he did
+                            that, and took his entire family.</p>
+                        <p>This young fellow that I was talking to, he lived outside of the city of
+                            Moscow. But he said that they had the authority, they had to have
+                            internal passports and it gave the authority that at least once a year
+                            he could come to Moscow and he could be able to see the Lenin-Stalin
+                            mausoleum and so on, and other sites and places there. So he asked me if
+                            I would do a favor for him. And I said, “What’s the favor?” He says,
+                            “Help me get into the American Embassy.”</p>
+                        <p>I said, “Well, just walk into it.” He says, “No. There are militia guards
+                            out there and they would restrain me from coming in.” He said, “I’m
+                            trying to get back to the United States. I don’t like this country. They
+                            regard me as a traitor. I hardly speak Russian. And so speaking, I feel
+                            I’m an American from Brooklyn.” And he had a Brooklyn-ese type accent,
+                            too. Which surprised me, that he wasn’t able to get into the embassy. He
+                            said, “No, no. Militia guards won’t let me go in there. And he said,
+                            I’ve tried a couple of times and they stopped me.” And I said, “Well,
+                            I’m sorry. I can’t help you either.”</p>
+                        <p>So, whether a case of entrapment or so on, I don’t know. A very
+                            sympathetic sort of arrangement too, that he didn’t have access to go
+                            back to the place of his birth. Because it’s part of our basic nature to
+                            help others, even though they are strangers.</p>
+                        <p><b>MR. CELLA:</b> But it was fun, Moscow. You’d try to enjoy it, because
+                            we were in there a lot. I couldn’t wait to get back to Helsinki. That’s
+                            another thing. On a train, the difference—how you notice when you cross
+                            the border into Russia. There was just unending ending trees, roads with
+                            nobody on them. But then you’d come back and then cross the border into
+                            Finland—nice little houses with the smoke coming out of the chimneys.
+                            Everything nice and clean. Huge, huge difference.</p>
+                        <p>[MUSIC PLAYING]</p>
+                    </div>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Department History</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline">Administrative Timeline of the
+                                Department of State</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/buildings">Buildings of the
+                                Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/people">People</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/secretaries">Biographies
+                                        of the Secretaries of State</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/principals-chiefs"
+                                        >Principal Officers and Chiefs of Mission</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/travels">Travels</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/secretary">Travels of
+                                        the Secretary</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/president">Travels of
+                                        the President</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/visits">Visits by Foreign Leaders</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/wwi">World War I and the Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/diplomatic-couriers" class="highlight"
+                                >U.S. Diplomatic Couriers</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

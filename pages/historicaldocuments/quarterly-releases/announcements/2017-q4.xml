@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/quarterly-releases">Quarterly Releases</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/quarterly-releases/2017-q4">2017 Quarter 4</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row hsg-main" data-template="pages:load">
+        <div class="hsg-width-two-thirds" data-template="app:fix-links">
+            <div id="content-inner">
+                <h2>Quarterly Release of Newly Digitized <em>Foreign Relations</em> Volumes</h2>
+                <p>December 7, 2017</p>
+                <p>The Department of State today announces the release of newly digitized versions
+                    of seventeen volumes from the <em>Foreign Relations of the United States</em>
+                    series, the official documentary record of U.S. foreign relations. These volumes
+                    cover events that took place between 1900 and 1911 and were originally published
+                    in print between 1902 and 1918:</p>
+                <p><em>Papers Relating to the Foreign Relations of the United States,</em>
+                    1900–1911</p>
+                <ol>
+                    <li><a href="$app/historicaldocuments/frus1900">Papers Relating to the Foreign
+                            Relations of the United States, 1900</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1901">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 3, 1901</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1901China">Foreign Relations of the
+                            United States, 1901, Appendix, Affairs in China, Report of William W.
+                            Rockhill, Late Commissioner to China, with Accompanying
+                        Documents</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1902">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 2, 1902</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1902app1">Foreign Relations of the
+                            United States, 1902, Whaling and Sealing Claims Against Russia, On
+                            Account of Arrest and Seizure of the American Vessels “Cape Horn
+                            Pigeon,” “James Hamilton Lewis,” “C. H. White,” and “Kate and Anna,”
+                            Appendix I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1902app2">Foreign Relations of the
+                            United States, 1902, United States vs. Mexico, In the matter of the case
+                            of the Pious Fund of the Californias, Appendix II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1903">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 7, 1903</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1904">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 6, 1904</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1905">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 5, 1905</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1906p1">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 3, 1906, (In two parts), Part
+                        I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1906p2">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 3, 1906, (In two parts), Part
+                        II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1907p1">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 3, 1907, (In two parts), Part
+                        I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1907p2">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 3, 1907, (In two parts), Part
+                        II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1908">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 8, 1908</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1909">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 7, 1909 </a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1910">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 6, 1910</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1911">Papers Relating to the Foreign
+                            Relations of the United States, With the Annual Message of the President
+                            Transmitted to Congress December 7, 1911 </a>.</li>
+                </ol>
+                <p>Today’s release is part of the Office of the Historian’s ongoing project, in
+                    partnership with the University of Wisconsin Digital Collections Center, to
+                    digitize the entire <em>Foreign Relations</em> series. The University graciously
+                    provided high quality scanned images of each printed book, which the Office
+                    further digitized to create a full text searchable edition. These volumes are
+                    available online and as free ebooks at the Office of the Historian’s website (<a
+                        href="$app/historicaldocuments"
+                        >https://history.state.gov/historicaldocuments</a>). This is the latest in a
+                    series of quarterly releases, which will continue until the <em>FRUS</em>
+                    digital archive is complete.</p>
+
+
+            </div>
+        </div>
+
+        <aside class="hsg-width-one-third">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the <em>Foreign Relations of the United
+                            States</em> series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments">All Administrations</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other
+                            Electronic resources for U.S. foreign relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                            >Guide to sources on Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

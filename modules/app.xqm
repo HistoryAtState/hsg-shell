@@ -177,7 +177,7 @@ declare function app:parse-params($node as node(), $model as map(*)) {
 declare function app:available-pages($node as node(), $model as map(*)) {
     <ul>
         {
-        for $section in doc($config:app-root || '/templates/site.html')//div[@id = 'navbar-collapse-1']//a[starts-with(@href, '$app')][not(@class = 'dropdown-toggle')]/ancestor::li[2]
+        for $section in doc($config:app-root || '/templates/site.xml')//div[@id = 'navbar-collapse-1']//a[starts-with(@href, '$app')][not(@class = 'dropdown-toggle')]/ancestor::li[2]
         return
             <li>{
                 $section/a/string(),
@@ -197,7 +197,7 @@ declare function app:available-pages($node as node(), $model as map(*)) {
 declare function app:not-yet-available-pages($node as node(), $model as map(*)) {
     <ul>
         {
-        for $section in doc($config:app-root || '/templates/site.html')//div[@id = 'navbar-collapse-1']//a[starts-with(@href, '$extern')][not(@class = 'dropdown-toggle')]/ancestor::li[2]
+        for $section in doc($config:app-root || '/templates/site.xml')//div[@id = 'navbar-collapse-1']//a[starts-with(@href, '$extern')][not(@class = 'dropdown-toggle')]/ancestor::li[2]
         return
             <li>{
                 $section/a/string(),

@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Behind the Iron Curtain - U.S. Diplomatic Couriers -
+            Department History</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory">Department History</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/diplomatic-couriers">U.S. Diplomatic
+                            Couriers</a>
+                    </li>
+                    <li>
+                        <a href="$app/departmenthistory/diplomatic-couriers/behind-the-iron-curtain"
+                            >Behind the Iron Curtain</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>U.S. Diplomatic Couriers: Behind the Iron Curtain</h1>
+                    <!-- Start of Brightcove Player -->
+                    <div style="position: relative; display: block;">
+                        <div style="padding-top: 56.25%;">
+                            <video data-video-id="5793479057001" data-account="1705665025"
+                                data-player="HJ8lQG1Eg" data-embed="default"
+                                data-application-id="data-application-id" class="video-js"
+                                controls="controls"
+                                style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; width: 100%; height: 100%;"/>
+                            <script
+                                src="https://players.brightcove.net/1705665025/HJ8lQG1Eg_default/index.min.js"
+                            />
+                        </div>
+                    </div>
+                    <!-- End of Brightcove Player -->
+                    <div id="synopsis">
+                        <h2>Synopsis</h2>
+                        <p>In the 1950s, Diplomatic Couriers traveled tens of thousands of miles per
+                            year, crossing borders both geographic and cultural. The United States
+                            and the USSR, once allied at the end of World War II, had become
+                            adversaries in what became known as the Cold War, as Soviet power crept
+                            further west across Europe. Events like the 1948 Communist coup in
+                            Czechoslovakia and the Soviet blockade of West Berlin in 1948–1949
+                            caused U.S officials to grow increasingly wary of the possibility that
+                            Western European leaders might deal with their security concerns by
+                            negotiating with Stalin and the Soviet Union.</p>
+                        <p>The Truman administration looked to military alliances and humanitarian
+                            assistance to bolster the security and prosperity of Western Europe and
+                            cement Euro-Atlantic ties. The <a href="$app/milestones/1945-1952/nato"
+                                >North Atlantic Treaty</a> signed in in 1949 brought the United
+                            States, Canada, and much of Western Europe into a collective security
+                            alliance.  The <a href="$app/milestones/1945-1952/marshall-plan"
+                                >Marshall Plan</a>, proposed by Secretary of State George C.
+                            Marshall, directed $12 billion toward the rebuilding of Western Europe,
+                            regenerating industrialization and bringing extensive investment into
+                            the region.</p>
+                        <p>The Soviet refusal either to participate in the Marshall Plan or to allow
+                            its satellite states in Eastern Europe to accept the economic assistance
+                            helped to reinforce the growing division between the East and the West
+                            in Europe. The U.S. Diplomatic Couriers felt this division acutely as
+                            they carried diplomatic pouches from behind the Iron Curtain in Western
+                            Germany to our missions in Budapest and Bucharest, and from Helsinki
+                            into the Soviet Union to support the U.S. Embassy in Moscow. The
+                            couriers traveled in pairs to ensure their own safety and the security
+                            of the diplomatic pouches.</p>
+                        <p>In the mid-1950s, Diplomatic Couriers often used the route of the famed
+                            Orient Express train to deliver classified messages and material to U.S.
+                            missions behind the Iron Curtain. Though stationed in Frankfurt,
+                            Germany, the couriers held an apartment in Vienna which they used as a
+                            base for the “Vienna Detail,” a 3-day journey by train to Budapest and
+                            Bucharest and back. On this journey, the U.S. couriers were not the only
+                            diplomats on board. Because of the difficulty traveling behind the Iron
+                            Curtain, couriers from across Europe shared the passenger and sleeping
+                            cars and often spent their off-duty hours together.</p>
+                        <p>In this short documentary, the U.S. Diplomatic Couriers talk about the
+                            journey and their personal impressions of what it was like to travel
+                            further behind the Iron Curtain during this era.</p>
+                        <p>Note: The original Orient Express was a train route from Paris to Vienna
+                            established in the late 1880s by <i>Compagnie Internationale de
+                                Wagon-Lits</i>, an international hotel and travel logistics company.
+                            The route was later extended across the continent from London to
+                            Istanbul, and several connecting routes were added including the Simplon
+                            Orient Express, which reached into Italy, and the Arlberg Orient
+                            Express, which ran from Switzerland to Greece.</p>
+                        <p>During the early years of the Cold War, service continued behind the Iron
+                            Curtain; however, the trains that traveled these routes were not the
+                            famed luxury <i>Wagon-Lits</i>. Instead, both the trains’ rolling stock
+                            and on-board service were provided by national railways.</p>
+                    </div>
+                    <div id="more-information">
+                        <h2>More information</h2>
+                        <dl>
+                            <dt>Released</dt>
+                            <dd>2018</dd>
+                            <dt>Length</dt>
+                            <dd>23:32</dd>
+                            <dt>Creator</dt>
+                            <dd>Rebecca A. Ross, Foreign Service Officer, U.S. Department of
+                                State</dd>
+                        </dl>
+                    </div>
+                    <div id="transcript">
+                        <h2>Transcript</h2>
+                        <p><b>NARRATOR:</b> In 1918, the Diplomatic Courier Service was established
+                            to support the work of American diplomats by ensuring that classified
+                            messages and materials were delivered safely and securely to U.S.
+                            embassies and consulates around the world. Over the 100 year history of
+                            the Courier Service, this mission, critical to the national security of
+                            the United States, has not changed.</p>
+                        <p>In the 1950s, before the onset of the Jet Age, this small group of
+                            couriers traveled tens of thousands of miles per year, often spending
+                            months on the road. Following World War II, as tensions between former
+                            allies grew into the Cold War and the Soviets consolidated power on
+                            their Western border, it became increasingly difficult to reach our
+                            posts behind what became known as the Iron Curtain. Because of a
+                            continued mutual respect for international conventions on diplomatic
+                            relations, even during these complicated times, diplomatic couriers were
+                            among the few still able to travel across these borders. Each week, they
+                            took the Orient Express from Vienna to reach Budapest and Bucharest.</p>
+                        <p><b>MR. JAMES VERREOS:</b> Oh, the Orient Express. That was, of course, a
+                            fabled train ride. We never got to ride it all the way to Constantinople
+                            or Istanbul, but we would pick it up in Vienna and ride it in from
+                            Vienna to Budapest to Bucharest. Then we would turn around and come back
+                            out.</p>
+                        <p>Sometimes inside Europe, we’d take train travel because it was more
+                            effective and quicker than trying to take an airplane, especially when
+                            we were providing service to the Iron Curtain countries, which required
+                            two couriers to be on a trip for security reasons. We were carrying
+                            classified material.</p>
+                        <p>Top secret wasn’t always something that was written. In those days before
+                            the technology we have today, we had to have code machines, equipment
+                            that was highly classified.</p>
+                        <p>Outside of the Iron Curtain you traveled solo. For example, when
+                            delivering the pouches to Southeast Asia or Africa or South America, the
+                            courier went out on trips solo. However, trips to the Iron Curtain, we
+                            were always in pairs so that there was no possibility that the couriers
+                            would be unable to have control of their pouches.</p>
+                        <p><b>MR. KENNETH COOPER:</b> I think I’ve got the history right. The reason
+                            we’d make paired trips behind the Curtain goes back to immediate
+                            post-war. An American courier fell off the train, and he was killed, and
+                            his pouch disappeared for a while. And there was some, I think, a little
+                            suspicion that this was not an accident. Henceforth, the Americans
+                            decided it would be a paired trip, and I think the British did the
+                            same.</p>
+                        <p><b>MR. DONOVAN KLINE:</b> You have to have somebody with the pouches at
+                            all times. We’d get out and walk up and down the aisle in the
+                            Wagon-Lits, but that was as far as we ventured. On the same sleeping
+                            cars, there were other couriers from other nations—Italian, French,
+                            Russians. When they were outside of Russia, they traveled paired, just
+                            like we did behind the Iron Curtain.</p>
+                        <p>That’s one of the things about the Russians. They wanted the same
+                            treatment in the West that we were given behind the Iron Curtain, which
+                            was decent for the most part.</p>
+                        <p><b>MR. PHILIP OLIVARES:</b> Well, your job was to take care of those
+                            pouches. I don’t think we ever felt that somebody was threatening or was
+                            going to try to steal them, but we always have to assume that.</p>
+                        <p>In fact, I remember Jim Vandivier and I got off the train with our
+                            pouches. There was quite a load. We pulled over one of these baggage
+                            cars that was already half loaded, the porters said, and there were
+                            Russian pouches on that. There were two Russian couriers. So here were
+                            the four of us. He’s got the pouches, watching our own bags. There was
+                            only one baggage car. We tried to get a separate one, but they said no,
+                            and that was it. I thought how ironic—the four of us in this
+                            situation.</p>
+                        <p>We were stationed in Vienna. There were two of us then. Monday we would
+                            go into Budapest and spend the night, and then the next day on to
+                            Bucharest.</p>
+                        <p><b>MR. COOPER:</b> Vienna itself was a lot of fun, and so was Budapest.
+                            Except for the brief hiatus in Bucharest, which was dull as dishwater,
+                            the rest of it was fun.</p>
+                        <p><b>MR. ERNEST HOHMAN:</b> We used the Arlberg Orient Express, which came
+                            out of Paris but we picked it up in Vienna. It’s just a delightful city.
+                            It showed the grandeur that it had as part of the Austro-Hungarian
+                            empire, even though it was somewhat damaged from the rubble after the
+                            war.</p>
+                        <p>[MUSIC - JOHANN STRAUSS - “THE BLUE DANUBE”]</p>
+                        <p>The Austrians—one of the first things they thought was important to
+                            rebuild was the Opera House. And now to see the change, the
+                            transformation, the rebuilding that was going on there. Loved going to
+                            the opera.</p>
+                        <p>Of course, the Danube is not blue. It’s only in the eyes of a poet and a
+                            composer.</p>
+                        <p>[MUSIC PLAYING]</p>
+                        <p>[VOCALIZING]</p>
+                        <p><b>MR. KLINE:</b> I attended my first and only opera, sung in German,
+                            which I did not understand, and as a result never went to another opera
+                            in my life. [LAUGHS]</p>
+                        <p>We did a lot of eating and a lot of sightseeing. All of us did, because
+                            it was a fantastic city.</p>
+                        <p>I repeated that Vienna detail several times thereafter in later years. It
+                            was always enjoyable for me because we got out of the air for a while.
+                            It was restful. On those trains, all we did was sleep, eat, and play
+                            chess or pinochle or something like that.</p>
+                        <p><b>MR. VINCENT CELLA:</b> The courier would come down from Frankfurt
+                            every week or twice a week to give us the stuff to take in. Then we’d go
+                            shopping to get our food to take on the train, made sure we had enough
+                            wine or scotch and reading material, cards, et cetera. And we’d leave at
+                            night from the West Bahnhof in Vienna and made one stop, I guess it’s
+                            called the North Bahnhof. And then into the border, which on the
+                            Austrian side is Nickelsdorf. And it would stay there for some long
+                            time. So, even though Vienna is not that far from Budapest, it was an
+                            overnight trip.</p>
+                        <p><b>MR. VERREOS:</b> The train, the Orient Express, would set up a single
+                            sleeper car for the diplomatic couriers. That would be the British,
+                            Queen’s Messenger, King’s Messenger, the Italians, whoever—any courier
+                            from any nation that was making a trip would be on that train.</p>
+                        <p><b>MR. HOHMAN:</b> The other people in the sleeping compartments, they
+                            were all diplomatic couriers from various countries. There were Italians
+                            and the British and the French also, because the air travel was not
+                            possible, particularly during the winter months there.</p>
+                        <p>We usually dressed rather casually at that point. And the Italians would
+                            dress in their silk pajamas or a silk robe and so on.</p>
+                        <p>The English, which were the Queen’s Messengers, they were great
+                            storytellers, raconteurs, and had fantastic tales to tell.</p>
+                        <p><b>MR. COOPER:</b> The Queen’s Messenger was usually a very senior
+                            officer, an army officer or a military officer or sometimes civil
+                            servant. They traveled in pairs also, but their junior courier was
+                            usually a retired policeman, so there was a very distinct difference in
+                            rank. So when the Queen’s Messenger had his dinner, the number two
+                            courier would lay out a white tablecloth in this compartment and proceed
+                            to serve him his meal. We got a kick out of that.</p>
+                        <p><b>MR. OLIVARES:</b> The primary car for us was the old Wagon-Lits Cook.
+                            They handled all the sleeping cars. The first class car was practically
+                            all couriers. There was a dining car next to it, but the food was awful.
+                            We had to cook our own food, so we all carried a little alcohol stove
+                            we’d set up in a sleeping compartment and we’d cook on that.</p>
+                        <p><b>MR. VERREOS:</b> The ride in would leave early in the evening, and we
+                            would have dinner while we were on the train. We had developed an
+                            international society of couriers, and we’d set it up in advance so that
+                            the couriers from this country would bring in an entree, the couriers of
+                            the other country would bring in the salad, who would bring in the
+                            dessert, who would bring in the wine, and what have you. And we would
+                            just merely leave notes so that next week’s couriers—we didn’t know who
+                            they’d be, but you’d get into Vienna and say, hey, it’s this week, I
+                            would say, well, if Ken and I were on a trip, we got the note at the
+                            embassy we were supposed to provide the wine. We knew there’d be x
+                            number of couriers on board, and we’d bring that much on.</p>
+                        <p>Coming out was totally different. The train left Bucharest near midnight,
+                            so everybody was sacked in, and it was dawn by the time you arrived in
+                            Vienna.</p>
+                        <p><b>MR. CELLA:</b> We slept in one compartment on that portion of that
+                            trip. Then it would cross into Hungary, and that town was called
+                            Hegyeshalom. After they stopped there for a long time, we’d go into
+                            Budapest, and we’d arrive there in the morning.</p>
+                        <p><b>MR. KLINE:</b> We’d get off the train and have a full 24 hour period
+                            in Budapest where we could shop, look around. And the parliament
+                            building there was magnificent, especially from across the river where
+                            you could see it so plainly.</p>
+                        <p><b>MR. HOHMAN:</b> It was an interesting city. It was still showing war
+                            damage. The bridge across the Danube River was destroyed. It was laying
+                            there in the river itself. But, you see, it had a glamor to it yet, and
+                            it was trying to restore that. And it was and exciting and interesting
+                            city with a bit of the schmaltz that you had in Vienna, Austria too,
+                            with evening dinners that were excellent and violin music to go with
+                            it.</p>
+                        <p><b>MR. COOPER:</b> We’d have a layover sometimes, a day or so in
+                            Budapest, which was fun. It was still a lively city, and it was before
+                            the revolution.</p>
+                        <p><b>MR. OLIVARES:</b> Budapest itself—I loved the city. A lot of people
+                            consider it the Paris of Eastern Europe. It still had some damage,
+                            though, from World War II, actually. And then after the revolution, of
+                            course, it really got torn apart.</p>
+                        <p>In spite of communism and all the restrictions they imposed on their
+                            society, they were a really fun loving people. I remember going to a
+                            nightclub and seeing the people dancing and having a ball, and I
+                            thought, this can’t be. Everywhere else is usually so drab, like Moscow
+                            itself. To see those people enjoying themselves and having fun, they
+                            were a fun people.</p>
+                        <p><b>MR. VERREOS:</b> Hungary was the nicest place in the Iron Curtain for
+                            couriers. Even though you were always under surveillance by the local
+                            KGB—they were called AVOs in Hungary—they were less intrusive than they
+                            were in Moscow.</p>
+                        <p><b>MR. CELLA:</b> We spent the whole day and the night at the Hotel Duna,
+                            which was really a nice hotel right on the Danube. They had a nice
+                            restaurant, a little nice bar, and there was a guy there that we used to
+                            refer to as AVO Joe, and he would always befriend the couriers. And we
+                            were sure that he were being paid by the AVO just to keep an eye on the
+                            couriers, but we all sort of liked the guy. He was helpful, a funny old
+                            guy.</p>
+                        <p>And you enjoyed walking around Budapest, even though it was still pretty
+                            well shot because of the revolution. In fact, they did more damage, I
+                            think, during that time than they did during the war. What I always
+                            understood was that the Russian troops didn’t want to fight against the
+                            Hungarians, and the AVO were tougher on the Hungarian citizens than the
+                            Russian soldiers.</p>
+                        <p>The revolution started right in front of the Hotel Duna, and the two
+                            couriers were stuck in there for about a week. They were Woody Vest and
+                            Phil Olivares.</p>
+                        <p><b>MR. OLIVARES:</b> We got off the station. We went to the Duna Hotel.
+                            The Duna is the word for the Danube, of course. It was right on the
+                            river. It was quite a hotel. It’s an old fashioned hotel with the high
+                            ceilings and all that. We liked the place. And I remember Woody Vest and
+                            I, we went to see the opera. They were doing “Eugene Onegin.”</p>
+                        <p>We came back from the theater, and then we got into the elevator, and we
+                            heard some noise and such about. We thought something’s going on around
+                            town. I think we heard a shot or two, if I’m not mistaken. But I
+                            remember—and in the elevator was the New York Times correspondent and
+                            his wife.</p>
+                        <p>And we said, well, we asked him, I said, “You know what’s going on?” He
+                            said, “Oh, it seems to be a minor thing,” and all that. Well, [CHUCKLES]
+                            we went up to our rooms. The next morning, we got a call from the
+                            Legation saying “Stay put. You’re not going anyplace. Everything is
+                            closing down. We’re in the beginning of an insurrection.” And that’s
+                            when it started. And the shooting starts. And we just stayed put a
+                            couple of days. There was British couriers in there as well.</p>
+                        <p>There was some shooting. I think I walked out to see what was going on at
+                            one point. I walked a few feet, and I heard bullets whizzing by my ear,
+                            and I said, I better get back into the hotel. And then I realized it was
+                            really bad. And they even brought in a Russian soldier who had been hit
+                            by a sniper. One of the Hungarian insurgents was up on the roof.</p>
+                        <p>[GUNFIRE]</p>
+                        <p>The Legation wanted to evacuate most of the personnel. In fact, most of
+                            legations—the British, as well. They put us in Embassy cars with
+                            dependents, and we drove out of Budapest with the flag flying on the
+                            fenders like Ambassadors’ cars. But I remember the people applauding and
+                            clapping when they saw Americans and British flags. All around them were
+                            Russians.</p>
+                        <p>[MUSIC PLAYING]</p>
+                        <p>I remember, even in the hotel, the men behind the desk, the reception
+                            desk, kept saying, “Where are you Americans? Why don’t you help us?”
+                            They said, “Your Voice of America tells us to rise up, do something
+                            about it, and now we need your help.”</p>
+                        <p><b>RADIO COMMENTATOR:</b> [SPEAKING HUNGARIAN]</p>
+                        <p><b>RADIO COMMENTATOR:</b> [SPEAKING HUNGARIAN]</p>
+                        <p><b>MR. OLIVARES:</b> I felt so embarrassed by all of this, in a sense.
+                            Why aren’t we helping these people? And I felt a little guilty that we
+                            were like rats leaving this ship. There were applauding but we’re not
+                            really doing anything for them. We should be doing something for them,
+                            and we should have our tanks in here. But I know that’s not something
+                            for me to decide on.</p>
+                        <p>And I always felt a little guilty about that going out. We’re going out
+                            to safety, and these people got to be here and live with the Russians on
+                            top of them.</p>
+                        <p>[MUSIC PLAYING]</p>
+                        <p><b>MR. CELLA:</b> The longest part was when you got on the train the next
+                            morning to Bucharest because that was overnight from the morning to the
+                            next morning. After going all through the Ploiesti oil fields. Oh, you
+                            see them burning the gas off the top. It was really something. Yeah,
+                            that was pretty close to the end of the trip because they were up still
+                            in the mountains. Not long after that, you came down into Bucharest.
+                            You’d get in in the morning, and leave late at night. So you’d spend the
+                            whole day in Bucharest.</p>
+                        <p>For most of the time I was there, we stayed with the Military Attache, no
+                            matter who he was.</p>
+                        <p><b>MR. KLINE:</b> We would arrive in Bucharest early in the morning, six
+                            o’clock or so, something like that, and we would go to the Military
+                            Attache’s residence. He provided us with breakfast. They couldn’t get
+                            fruits and vegetables and stuff like that. We would carry oranges into
+                            them and give them oranges or bananas.</p>
+                        <p>The diplomatic colony there, the Western diplomatic colony, had a six
+                            hole golf course at a club that they had where they had a bar. And you
+                            could play six holes. And I did. I played six holes of golf there more
+                            than once. A place for the Western community to relax without anybody
+                            around spying on them. And I’m sure there was plenty of that behind the
+                            Iron Curtain at all times.</p>
+                        <p>I don’t know whether I was followed. I wasn’t looking for it. But we were
+                            briefed beforehand: “Don’t fraternize. Don’t get caught with any women
+                            behind the Iron Curtain, period.”</p>
+                        <p><b>MR. CELLA:</b> Well, we went out a lot of times to that diplomatic
+                            golf course, especially in the good weather. We would bring cigarettes
+                            and razorblades and instant coffee to pay for our golf lessons. And
+                            there was a little lake there where you could go out in a little boat to
+                            help spend the day because it wasn’t that long and we left again that
+                            night. We had to check in and get the pouches and leave to go back.</p>
+                        <p><b>MR. COOPER:</b> I found Bucharest a very uninteresting city. Now they
+                            were really behind the Curtain there. I can’t recall having any
+                            interaction at all. For their sake and our sake, it was better not to.
+                            That was my impression. Perhaps if I were to go back today, I’d be dead
+                            wrong.</p>
+                        <p><b>MR. HOHMAN:</b> Bucharest—yeah. We had time there too, and it’s a
+                            poorer country. It was a dictatorship for quite a while under Ceausescu.
+                            As we well know, the people were really dominated with the secret
+                            police, although the communist elite led a very gracious and a very
+                            luxurious lifestyle. I found it rather a poor city, by contrast even
+                            with Budapest which still had a glory aspect to it.</p>
+                        <p><b>MR. CELLA:</b> Going back it was a little different. We would get some
+                            food in Bucharest, buy bread and buy this and buy that at these little
+                            outlet stores. You know, you had to stand in line to buy some stuff. It
+                            was depressing, in a way—for the people, I mean.</p>
+                        <p>As we came back on that trip, we would leave in the night from Bucharest,
+                            get in the next night into Budapest. The train would stop in Budapest
+                            for quite a long time. You could see that red star in the foggy night
+                            mist. Not until the next morning we’d end up back in Vienna.</p>
+                        <p><b>MR. OLIVARES:</b> We’d enjoy those trips. I think we all did. I still
+                            think it’s a more civilized way to travel, by train. Train stations were
+                            fascinating in those days. They had all the excitement that airports
+                            took on. I remember in Europe, the railway stations themselves—they were
+                            big, cavernous affairs, mostly wrought iron and such. There was an aura
+                            about them all that fascinated me. I felt so proud to be part of all of
+                            that.</p>
+                        <p>[MUSIC PLAYING]</p>
+                    </div>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Department History</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline">Administrative Timeline of the
+                                Department of State</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/buildings">Buildings of the
+                                Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/people">People</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/secretaries">Biographies
+                                        of the Secretaries of State</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/people/principals-chiefs"
+                                        >Principal Officers and Chiefs of Mission</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/travels">Travels</a>
+                            <ul>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/secretary">Travels of
+                                        the Secretary</a>
+                                </li>
+                                <li class="hsg-list-group-item">
+                                    <a href="$app/departmenthistory/travels/president">Travels of
+                                        the President</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/visits">Visits by Foreign Leaders</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/wwi">World War I and the Department</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/diplomatic-couriers" class="highlight"
+                                >U.S. Diplomatic Couriers</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

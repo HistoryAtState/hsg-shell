@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div class="row" data-template="pages:load">
+        <div id="static-title" class="hidden">Historical Advisory Committee - About Us</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/about">About</a>
+                    </li>
+                    <li>
+                        <a href="$app/about/hac">Historical Advisory Committee</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-navigation-wrapper">
+                <h2 class="hsg-navigation-title" id="navigation-title"
+                    data-template="pages:navigation-title"/>
+            </div>
+        </div>
+
+        <div class="row" data-template="pages:navigation">
+            <div class="hsg-width-main">
+                <div id="content-inner">
+                    <div id="content-container" data-template="app:fix-links">
+                        <div class="toc" data-template="toc:table-of-contents"/>
+                    </div>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">About</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/contact-us">Contact Us</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/faq">Frequently Asked Questions</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/the-historian">The Historian</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/hac">Historical Advisory Committee</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/recent-publications">Recent Publications</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/content-warning">Content Warning</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

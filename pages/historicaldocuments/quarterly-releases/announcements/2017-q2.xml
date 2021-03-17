@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div class="row">
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb" data-template="app:fix-links">
+                <li>
+                    <a href="$app">Home</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments">Historical Documents</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/quarterly-releases">Quarterly Releases</a>
+                </li>
+                <li>
+                    <a href="$app/historicaldocuments/quarterly-releases/2017-q2">2017 Quarter 2</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row hsg-main" data-template="pages:load">
+        <div class="hsg-width-two-thirds" data-template="app:fix-links">
+            <div id="content-inner">
+                <h2>Quarterly Release of Newly Digitized <em>Foreign Relations</em> Volumes</h2>
+                <p>June 15, 2017</p>
+                <p>The Department of State today announces the release of seventeen volumes from the
+                        <em>Foreign Relations of the United States</em> series, the official
+                    documentary record of U.S. foreign relations. Sixteen of these volumes are newly
+                    digitized. These volumes cover events that took place in 1919 and were
+                    originally published in print between 1934 and 1947.</p>
+                <p>These sixteen volumes represent the Office of the Historian’s second quarterly
+                    release focusing on the United States and the First World War. On April 6, the
+                    Office released volumes dating from 1913‒1918, documenting the advent of war in
+                    Europe and the role of the United States in the conflict, first as a neutral
+                    power and then as combatant. Today’s release continues that story with the
+                    search for peace and stability in the aftermath of the war.</p>
+                <p><em>Papers Relating to the Foreign Relations of the United States,</em> 1919</p>
+                <ol>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv01">The Paris Peace
+                            Conference, 1919, Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv02">The Paris Peace
+                            Conference, 1919, Volume II</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv03">The Paris Peace
+                            Conference, 1919, Volume III</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv04">The Paris Peace
+                            Conference, 1919, Volume IV</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv05">The Paris Peace
+                            Conference, 1919, Volume V</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv06">The Paris Peace
+                            Conference, 1919, Volume VI</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv07">The Paris Peace
+                            Conference, 1919, Volume VII</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv08">The Paris Peace
+                            Conference, 1919, Volume VIII</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv09">The Paris Peace
+                            Conference, 1919, Volume IX</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv10">The Paris Peace
+                            Conference, 1919, Volume X</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv11">The Paris Peace
+                            Conference, 1919, Volume XI</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv12">The Paris Peace
+                            Conference, 1919, Volume XII</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Parisv13">The Paris Peace
+                            Conference, 1919, Volume XIII</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919Russia">Russia, 1919</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919v01">Volume I</a>.</li>
+                    <li><a href="$app/historicaldocuments/frus1919v02">Volume II</a>.</li>
+
+                </ol>
+                <p>Today’s release is part of the Office of the Historian’s ongoing project, in
+                    partnership with the University of Wisconsin Digital Collections Center, to
+                    digitize the entire <em>Foreign Relations</em> series. The University graciously
+                    provided high quality scanned images of each printed book, which the Office
+                    further digitized to create a full text searchable edition. These volumes are
+                    available online and as free ebooks at the Office of the Historian’s website (<a
+                        href="$app/historicaldocuments"
+                        >https://history.state.gov/historicaldocuments</a>).</p>
+                <p>This quarterly release also includes the new publication <em>Foreign Relations of
+                        the United States</em>, Iran, 1951–1954. This volume complements <a
+                        href="$app/historicaldocuments/frus1952-54v10"><em>Foreign Relations of the
+                            United States</em>, 1952–1954, Volume X, Iran, 1951–1954</a>, published
+                    in 1989, by providing documentation on the use of covert operations by the
+                    Truman and Eisenhower administrations. </p>
+                <p>
+                    <em>Foreign Relations of the United States</em>
+                </p>
+                <ol>
+                    <li>
+                        <a href="$app/historicaldocuments/frus1951-54Iran">Iran, 1951–1954</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <aside class="hsg-width-one-third">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Historical Documents</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the <em>Foreign Relations of the United
+                            States</em> series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments">All Administrations</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h3 class="hsg-sidebar-title">Related Resources</h3>
+                </div>
+
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
+                                Relations</em> series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/status-of-the-series">Status of the
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/frus-history">History of the Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/ebooks">
+                            <em>Foreign Relations</em> ebooks</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/other-electronic-resources">Other
+                            Electronic resources for U.S. foreign relations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975"
+                            >Guide to sources on Vietnam, 1969-1975</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
+                            Series</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
+                                Relations</em> documents</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>

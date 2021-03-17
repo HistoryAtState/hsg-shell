@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DO NOT APPLY FORMAT & INDENT IN OXYGEN WITHOUT TEMPORARILY CHANGING THE ROOT ELEMENT TO, E.G., "FOO" -->
+<html data-template="pages:app-root" lang="en">
+    <!-- @if PRODUCTION=false -->
+    <!--
+        ********************************************************************************************
+        WARNING: Do NOT upload this file to the production server!
+        If you need to perform a hotfix on the production server, rebuild with `NODE_ENV=production`
+        ********************************************************************************************
+    -->
+    <!-- @endif -->
+    <head data-template="app:fix-links">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta data-template="config:app-meta"/>
+        <link rel="shortcut icon" href="$app/resources/images/favicon.ico"/>
+        <!-- @if PRODUCTION=true -->
+        <link rel="stylesheet" type="text/css" href="$app/resources/css/all.css"/>
+        <!-- @endif -->
+        <!-- @if PRODUCTION=false -->
+        <link rel="stylesheet" type="text/css" href="$app/resources/css/main.css"/>
+        <link rel="stylesheet" type="text/css" data-template="pages:styles"
+            data-template-odd="frus.odd"/>
+        <!-- @endif -->
+    </head>
+    <body id="body">
+        <header class="hsg-header" data-template="app:fix-links">
+            <section class="hsg-grid hsg-header-inner">
+                <div class="container hsg-header-content">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <a href="$app/">
+                                <img class="img-responsive" width="400"
+                                    src="$app/resources/images/Office-of-the-Historian-logo_500x168.jpg"
+                                    alt="Office of the Historian"/>
+                            </a>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="banner__search" data-template="app:if-parameter-unset"
+                                data-template-param="suppress-sitewide-search-field">
+                                <div class="searchbox">
+                                    <form method="get" action="$app/search" class="main-form"
+                                        id="navigationSearchForm">
+                                        <p class="form-group">
+                                            <!-- Search: -->
+                                            <input type="text" size="15" name="q"
+                                                placeholder="Search..." class="form-control"
+                                                id="search-box"/>
+                                            <button type="submit"
+                                                class="hsg-link-button search-button btn">
+                                                <i class="hsg-search-button-icon"/>
+                                            </button>
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </header>
+
+        <nav role="navigation" class="hsg-nav navbar navbar-default" data-template="app:fix-links">
+            <div class="container hsg-nav-content">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Menu</span>
+                        <i class="fa fa-bars"/>
+                        <span class="toggle-text">Menu</span>
+                    </button>
+                    <!--<a data-template="config:app-title" class="navbar-brand" href="./index.html">App Title</a>-->
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="$app/" shape="rect">
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="$app/historicaldocuments" class="dropdown-toggle"
+                                data-toggle="dropdown" role="button" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span>Historical Documents</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="$app/historicaldocuments">
+                                        <em>Foreign Relations of the United States</em>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="$app/historicaldocuments/about-frus">About the
+                                            <em>Foreign Relations</em> Series</a>
+                                </li>
+                                <li>
+                                    <a href="$app/historicaldocuments/status-of-the-series">Current
+                                        Status of the <em>Foreign Relations</em> Series</a>
+                                </li>
+                                <li>
+                                    <a href="$app/historicaldocuments/frus-history">History of the
+                                            <em>Foreign Relations</em> Series</a>
+                                </li>
+                                <li>
+                                    <a href="$app/historicaldocuments/ebooks">Ebooks Initiative</a>
+                                </li>
+                                <li>
+                                    <a href="$app/historicaldocuments/quarterly-releases">Quarterly
+                                        Releases</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="index_nav" class="dropdown">
+                            <a href="$app/departmenthistory" class="dropdown-toggle"
+                                data-toggle="dropdown" role="button" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span>Department History</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="$app/departmenthistory">Overview</a>
+                                </li>
+                                <li>
+                                    <a href="$app/departmenthistory/timeline">Administrative
+                                        Timeline</a>
+                                </li>
+                                <li>
+                                    <a href="$app/departmenthistory/people/secretaries">Biographies
+                                        of the Secretaries of State</a>
+                                </li>
+                                <li>
+                                    <a href="$app/departmenthistory/people/principals-chiefs"
+                                        >Principal Officers and Chiefs of Mission</a>
+                                </li>
+                                <li>
+                                    <a href="$app/departmenthistory/travels/secretary">Travels of
+                                        the Secretary of State</a>
+                                </li>
+                                <li>
+                                    <a href="$app/departmenthistory/travels/president">Travels of
+                                        the President</a>
+                                </li>
+                                <li>
+                                    <a href="$app/departmenthistory/visits">Visits by Foreign Heads
+                                        of State</a>
+                                </li>
+                                <li>
+                                    <a href="$app/departmenthistory/wwi">World War I and the
+                                        Department</a>
+                                </li>
+                                <li>
+                                    <a href="$app/departmenthistory/buildings">Buildings of the
+                                        Department of State</a>
+                                </li>
+                                <li>
+                                    <a href="$app/departmenthistory/diplomatic-couriers">U.S.
+                                        Diplomatic Couriers</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="countries_nav" class="dropdown">
+                            <a href="$app/countries" class="dropdown-toggle" data-toggle="dropdown"
+                                role="button" aria-haspopup="true" aria-expanded="false">
+                                <span>Guide to Countries</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="$app/countries">Guide to Country Recognition and
+                                        Relations</a>
+                                </li>
+                                <li>
+                                    <a href="$app/countries/archives">World Wide Diplomatic Archives
+                                        Index</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="resources_nav" class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">
+                                <span>More Resources</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="$app/tags">Browse Resources by Subject Tag</a>
+                                </li>
+                                <li>
+                                    <a href="$app/conferences">Conferences</a>
+                                </li>
+                                <li>
+                                    <a href="$app/about/contact-us">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="$app/developer">Developer Resources &amp; APIs</a>
+                                </li>
+                                <li>
+                                    <a href="$app/education">Educational Resources</a>
+                                </li>
+                                <li>
+                                    <a href="$app/about/faq">Frequently Asked Questions</a>
+                                </li>
+                                <li>
+                                    <a href="$app/milestones">Key Milestones</a>
+                                </li>
+                                <li>
+                                    <a href="$app/open">Open Government Initiative</a>
+                                </li>
+                                <li>
+                                    <a href="$app/departmenthistory/short-history">A Short History
+                                        of the Department</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="$app/about" shape="rect">
+                                <span>About Us</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="hsg-main">
+            <section class="hsg-grid hsg-main-inner">
+                <div class="container hsg-main-content">
+                    <main id="content"/>
+                </div>
+            </section>
+        </div>
+
+        <footer class="hsg-footer" data-template="app:fix-links">
+            <section class="hsg-grid hsg-footer-top">
+                <div class="container">
+                    <nav class="row">
+                        <ul class="hsg-footer-list">
+                            <h4>Learn more</h4>
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="$app/search">Search</a>
+                            </li>
+                            <li>
+                                <a href="$app/about/faq">FAQ</a>
+                            </li>
+                        </ul>
+
+                        <ul class="hsg-footer-list">
+                            <h4>Topics</h4>
+                            <li>
+                                <a href="$app/historicaldocuments/">Historical Documents</a>
+                            </li>
+                            <li>
+                                <a href="$app/departmenthistory/">Department History</a>
+                            </li>
+                            <li>
+                                <a href="$app/countries/">Countries</a>
+                            </li>
+                        </ul>
+                        <ul class="hsg-footer-list">
+                            <h4>Contact</h4>
+                            <li>
+                                <a href="$app/about/">About Us</a>
+                            </li>
+                            <li>
+                                <a href="$app/about/contact-us">Contact Us</a>
+                            </li>
+                        </ul>
+
+                        <ul class="hsg-footer-list">
+                            <h4>Policies</h4>
+                            <li>
+                                <a href="https://www.state.gov/section-508-accessibility-statement/"
+                                    >Accessibility Statement</a>
+                            </li>
+                            <li>
+                                <a href="https://www.state.gov/privacy-policy/">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://www.state.gov/external-link-policy-and-disclaimers/"
+                                    >External Link Policy</a>
+                            </li>
+                            <li>
+                                <a href="https://www.state.gov/copyright-information/">Copyright
+                                    Information</a>
+                            </li>
+                            <li>
+                                <a href="$app/about/content-warning">Content Warning</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+            <section class="hsg-grid hsg-footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <address class="col-xs-12 col-sm-12 col-md-12">
+                            <h4>Office of the Historian, Foreign Service Institute <br/>
+                                <a href="http://www.state.gov">United States Department of
+                                State</a></h4>
+                            <p>
+                                <a href="mailto:history@state.gov">history@state.gov</a>
+                            </p>
+                            <p>Phone: 202-955-0200</p>
+                            <p>Fax: 202-955-0268</p>
+                        </address>
+                    </div>
+                </div>
+            </section>
+        </footer>
+
+        <!-- @if PRODUCTION=false -->
+        <script type="text/javascript" src="$app/bower_components/jquery/dist/jquery.js"
+            data-template="app:fix-this-link"/>
+        <script type="text/javascript"
+            src="$app/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"
+            data-template="app:fix-this-link"/>
+        <script type="text/javascript" async="async" src="$app/resources/scripts/app.js"
+            data-template="app:fix-this-link"/>
+        <script type="text/javascript" async="async" src="$app/resources/scripts/metagrid.js"
+            data-template="app:fix-this-link"/>
+        <!-- @endif -->
+        <!-- @if PRODUCTION=true -->
+        <script type="text/javascript" async="async" src="$app/resources/scripts/app.all.js"
+            data-template="app:fix-this-link"/>
+        <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount',
+            'UA-23344799-1']); _gaq.push(['_setDomainName', 'history.state.gov']);
+            _gaq.push(['_trackPageview']); (function() {{ var ga = document.createElement('script');
+            ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' ==
+            document.location.protocol ? 'https://ssl' : 'http://www') +
+            '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s); }})(); </script>
+        <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
+        <script type="text/javascript" async="async"
+            src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=DOS"
+            id="_fed_an_ua_tag"/>
+        <!-- @endif -->
+    </body>
+</html>

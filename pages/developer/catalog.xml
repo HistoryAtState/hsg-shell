@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/developer">Developer</a>
+                    </li>
+                    <li>
+                        <a href="$app/developer/catalog">Catalog</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-one-whole">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Office of the Historian Ebook Catalog API</h1>
+                    <div id="overview">
+                        <h2>Overview</h2>
+                        <p>To improve access to data and encourage innovation, the Office of the
+                            Historian Ebook Catalog is open to third party developers via an <a
+                                href="https://en.wikipedia.org/wiki/Application_programming_interface"
+                                >Application Programming Interface</a> (API). This browsable catalog
+                            contains all ebooks from the <a href="$app/historicaldocuments">
+                                <em>Foreign Relations of the United States</em>
+                            </a> (<em>FRUS</em>) series, the official documentary historical record
+                            of major U.S. foreign policy decisions and significant diplomatic
+                            activity. Use this API to embed our live, up-to-date, searchable, and
+                            browsable ebook catalog in your application and to locate download links
+                            to the ebooks and their cover images.</p>
+                        <p>Do you have feedback or requests about this API? Use our <a
+                                href="https://github.com/HistoryAtState/Feedback">feedback
+                                tracker</a> on GitHub to start the discussion.</p>
+                    </div>
+                    <div id="accessing-the-api">
+                        <h2>Accessing the API</h2>
+                        <p>The entry point to API is the following URI (no registration,
+                            authentication, or API key is required):</p>
+                        <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.2em; ">GET https://history.state.gov/api/v1/catalog</pre>
+                        <p>This request returns an XML response, using the Atom-based OPDS format
+                            (see <a href="#opds">below</a> for more information about the RESTful
+                            OPDS standard), which contains a single Atom &lt;feed&gt; element,
+                            metadata about the feed (including a link to an OpenSearch description
+                            document that allows keyword querying of the ebook catalog), and three
+                            Atom &lt;entry&gt; elements with OPDS navigation-type links to interior
+                            resources:</p>
+                        <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.2em; ">&lt;feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"&gt;
+    &lt;id&gt;https://history.state.gov/api/v1/catalog&lt;/id&gt;
+    &lt;title&gt;Office of the Historian Ebook Catalog&lt;/title&gt;
+    &lt;updated&gt;2013-05-22T03:10:12.659Z&lt;/updated&gt;
+    &lt;author&gt;
+        &lt;name&gt;Office of the Historian&lt;/name&gt;
+        &lt;uri&gt;https://history.state.gov/&lt;/uri&gt;
+    &lt;/author&gt;
+    &lt;link
+        type="application/atom+xml;profile=opds-catalog;kind=acquisition"
+        rel="self"
+        href="https://history.state.gov/api/v1/catalog"
+        title="Office of the Historian Ebook Catalog"/&gt;
+    &lt;link type="application/atom+xml;profile=opds-catalog;kind=navigation"
+        rel="start"
+        href="https://history.state.gov/api/v1/catalog"
+        title="Foreign Relations of the United States"/&gt;
+    &lt;link type="application/opensearchdescription+xml"
+        rel="search"
+        href="https://history.state.gov/opensearch.xml"
+        title="Search Office of the Historian ebooks"/&gt;
+    &lt;entry&gt;
+        &lt;title&gt;All Volumes&lt;/title&gt;
+        &lt;id&gt;all&lt;/id&gt;
+        &lt;updated&gt;2013-05-22T03:10:12.659Z&lt;/updated&gt;
+        &lt;summary type="text"&gt;
+            All Foreign Relations of the United States series ebooks
+        &lt;/summary&gt;
+        &lt;link type="application/atom+xml;profile=opds-catalog;kind=acquisition"
+            rel="subsection"
+            href="https://history.state.gov/api/v1/catalog/all"
+            title="Foreign Relations of the United States Ebook Catalog"/&gt;
+    &lt;/entry&gt;
+    &lt;entry&gt;
+        &lt;title&gt;Recently Published&lt;/title&gt;
+        &lt;id&gt;recent&lt;/id&gt;
+        &lt;updated&gt;2013-05-22T03:10:12.659Z&lt;/updated&gt;
+        &lt;summary type="text"&gt;10 Most Recently Published Volumes&lt;/summary&gt;
+        &lt;link type="application/atom+xml;profile=opds-catalog;kind=acquisition"
+            rel="http://opds-spec.org/sort/new"
+            href="https://history.state.gov/api/v1/catalog/recent"
+            title="10 Most Recently Published"/&gt;
+    &lt;/entry&gt;
+    &lt;entry&gt;
+        &lt;title&gt;Browse By Keywords&lt;/title&gt;
+        &lt;id&gt;browse&lt;/id&gt;
+        &lt;updated&gt;2013-05-22T03:10:12.659Z&lt;/updated&gt;
+        &lt;summary type="text"&gt;Browse By Keywords&lt;/summary&gt;
+        &lt;link type="application/atom+xml;profile=opds-catalog;kind=navigation"
+            rel="subsection"
+            href="https://history.state.gov/api/v1/catalog/browse"
+            title="Browse By Keywords"/&gt;
+    &lt;/entry&gt;
+&lt;/feed&gt;</pre>
+                        <p>While additional entries may be added in the future using the same
+                            self-describing format, the current entries are worth discussing. The
+                            three key URIs in the entries here are:</p>
+                        <ol>
+                            <li>All Volumes
+                                <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.1em; ">GET https://history.state.gov/api/v1/catalog/all</pre>
+                            </li>
+                            <li>Recently Published
+                                <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.1em; ">GET https://history.state.gov/api/v1/catalog/recent</pre>
+                            </li>
+                            <li>Browse by Keywords
+                                <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.1em; ">GET https://history.state.gov/api/v1/catalog/browse</pre>
+                            </li>
+                        </ol>
+                        <p>The /catalog/all “All Volumes” URI leads to a listing of all ebooks in
+                            the catalog, sorted in “series” order (chronologically by period covered
+                            and then by volume number). The /catalog/recent “Recently Published” URI
+                            leads to a listing of the ten most recently published ebooks, sorted in
+                            reverse chronological order. Both these URIs return an OPDS feed with
+                            links to the ebooks. An example ebook entry:</p>
+                        <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.2em; ">&lt;entry&gt;
+    &lt;title&gt;China, 1973–1976&lt;/title&gt;
+    &lt;id&gt;frus1969-76v18&lt;/id&gt;
+    &lt;updated&gt;2013-01-06T06:00:27Z&lt;/updated&gt;
+    &lt;summary type="text"&gt;
+        Foreign Relations of the United States, 1969–1976, Volume XVIII, China, 1973–1976
+    &lt;/summary&gt;
+    &lt;link type="application/epub+zip"
+        rel="http://opds-spec.org/acquisition"
+        href="https://static.history.state.gov/frus/frus1969-76v18/ebook/frus1969-76v18.epub"
+        title="China, 1973–1976 (EPUB)"/&gt;
+    &lt;link type="application/x-mobipocket-ebook"
+        rel="http://opds-spec.org/acquisition"
+        href="https://static.history.state.gov/frus/frus1969-76v18/ebook/frus1969-76v18.mobi"
+        title="China, 1973–1976 (Mobi)"/&gt;
+    &lt;link type="application/pdf"
+        rel="http://opds-spec.org/acquisition"
+        href="https://static.history.state.gov/frus/frus1969-76v18/ebook/frus1969-76v18.epub"
+        title="China, 1973–1976 (PDF)"/&gt;
+    &lt;link type="image/jpeg"
+        rel="http://opds-spec.org/image"
+        href="https://static.history.state.gov/frus/frus1969-76v18/covers/frus1969-76v18.jpg"
+        title="Cover of China, 1973–1976"/&gt;
+    &lt;link type="image/jpeg"
+        rel="http://opds-spec.org/image/thumbnail"
+        href="https://static.history.state.gov/frus/frus1969-76v18/covers/frus1969-76v18-thumb.jpg"
+        title="Thumbnail-sized cover of China, 1973–1976"/&gt;
+&lt;/entry&gt;</pre>
+                        <p>This OPDS entry element contains an ebook’s title, links to the EPUB,
+                            Mobi, and PDF editions of the volume, and links to the thumbnail- and
+                            full-sized cover images of the volume.</p>
+                        <p>The “Browse by Keywords” URI leads to the main feed for subject
+                            keyword-based browsing of the ebooks. The keywords belong to a rich
+                            subject taxonomy focusing on the history of U.S. foreign relations, and
+                            is organized into three main categories: People, Places, and Topics,
+                            with 500 subjects nested hierarchically inside. Browse the taxonomy by
+                            accessing the /catalog/browse URI with the “tag” parameter:</p>
+                        <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.1em; ">GET https://history.state.gov/api/v1/catalog/browse?tag={value}</pre>
+                        <p>If an invalid tag is passed to the browse URI, a 404 error will be
+                            returned. The results of a browse are returned as links to sub-topics in
+                            the keyword taxonomy and links to any books matching the current tag (in
+                            the same form as the China volume example above). An example keyword
+                            entry returned inside a query for the Human Rights tag is Refugees
+                            (here, we excerpt an entry element from the feed):</p>
+                        <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.2em; ">&lt;entry&gt;
+    &lt;title&gt;Refugees&lt;/title&gt;
+    &lt;id&gt;refugees&lt;/id&gt;
+    &lt;updated&gt;2013-05-22T04:03:53.436Z&lt;/updated&gt;
+    &lt;summary type="text"&gt;13 volumes&lt;/summary&gt;
+    &lt;link type="application/atom+xml;profile=opds-catalog;kind=navigation"
+        rel="subsection"
+        href="https://history.state.gov/api/v1/catalog/browse?tag=refugees"
+        title="Refugees"/&gt;
+&lt;/entry&gt;</pre>
+                        <p>Notice that the &lt;summary&gt; element provides a count of the number of
+                            ebook volumes that can be found by following the link to
+                            /catalog/browse?tag=refugees.</p>
+                        <p>Tags can also be searched using the search URI with a “q” parameter
+                            (note: this URI is exposed in the OpenSearch description document
+                            above):</p>
+                        <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.1em; ">GET https://history.state.gov/api/v1/catalog/search?q={value}</pre>
+                        <p>A “q” query parameter can be submitted as (Google-style) free text using
+                                <a href="http://lucene.apache.org/core/3_6_2/queryparsersyntax.html"
+                                >Lucene Query Syntax</a>, e.g.:</p>
+                        <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.1em; ">q=China+Nixon</pre>
+                        <pre style="padding-left: 1em; margin: 1.2em; line-height: 1.1em; ">q=for*</pre>
+                        <p>The first query searches the subject keywords for (“China” OR “Nixon”)
+                            and returns an OPDS feed with entries linking to the /catalog/browse
+                            entries for Richard M. Nixon and China. The second query uses the
+                            asterisk wildcard to return entries including President Gerald Ford, the
+                            topic of Foreign Aid, and Secretary John Forsyth.</p>
+                        <p>Again, all of these resources can be reached by navigating from this main
+                            catalog address, and since the entries may grow, we encourage developers
+                            to retain the main catalog address.</p>
+                        <p>Please link back to the ebooks files on this server, so that readers can
+                            always receive the most up-to-date version of an ebook.</p>
+                    </div>
+                    <div id="opds">
+                        <h2>An OPDS-based, RESTful API</h2>
+                        <p>This API delivers resources using the <a href="http://opds-spec.org/"
+                                >Open Publication Distribution System</a> (OPDS) Catalog 1.1, an
+                            open standard for encoding catalogs. This format is <a
+                                href="http://opds-spec.org/catalogs/">widely used</a> by
+                            organizations that distribute ebooks, and enjoys a growing ecosystem of
+                                <a
+                                href="https://en.wikipedia.org/wiki/OPDS#Comparison_of_OPDS_clients"
+                                >client applications</a>. As an <a
+                                href="https://en.wikipedia.org/wiki/Atom_(standard)">Atom</a>-based
+                            format, OPDS uses the <a
+                                href="https://en.wikipedia.org/wiki/Representational_state_transfer"
+                                >Representational State Transfer</a> (REST) architectural style, and
+                            designs resources around media types, links, and link relationships.
+                            This means that the API is largely self-describing. Furthermore, the API
+                            does not define any new link relationship (“rel”) values, limiting
+                            itself to those defined in the <a href="http://opds-spec.org/">OPDS
+                                spec</a>.</p>
+                        <p>To learn more about OPDS and the key concepts associated with this
+                            standard, visit the <a href="https://discover-opds.org/">Discover
+                                OPDS</a> site. The <a href="https://groups.google.com/group/openpub"
+                                >OPDS mailing list</a> is a helpful forum for asking questions and
+                            following the evolution of the standard.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

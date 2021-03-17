@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-with="templates/site.xml"
+    data-template-at="content">
+    <div data-template="pages:load">
+        <div id="static-title" class="hidden">Education Resources</div>
+        <div class="row">
+            <div class="hsg-breadcrumb-wrapper">
+                <ol class="breadcrumb" data-template="app:fix-links">
+                    <li>
+                        <a href="$app">Home</a>
+                    </li>
+                    <li>
+                        <a href="$app/education">Education</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds" id="volume">
+                <div id="content-inner" data-template="app:fix-links">
+                    <h1>Education</h1>
+                    <div class="alert alert-danger" role="alert">
+                        <h2>NOTE TO READERS</h2>
+                        <p>The educational materials described here have been retired. The original
+                            text of this section of the website remains online for reference
+                            purposes, but it is no longer being maintained or expanded, nor are the
+                            videos or other printed material available for distribution.</p>
+                        <p style="text-align: right; font-style: italic">Notice posted on October 2,
+                            2017.</p>
+                    </div>
+                    <p>Building on its long tradition of working with the academic community, the
+                        Office of the Historian has expanded its outreach efforts by producing <a
+                            href="$app/education/modules">quality teaching materials</a> on
+                        diplomacy for American middle and high school students. These include:</p>
+                    <ul data-template="edu:list-modules-brief"/>
+                    <p>Click <a href="$app/education/modules">here</a> for a full list.</p>
+                    <p>The Office of the Historian continues to expand its efforts to integrate
+                        teaching about American diplomacy into all the social studies disciplines
+                        through teacher workshops and training sessions at national conferences.</p>
+                    <p>The Office has also played a foundational role in the first Department of
+                        Education Teaching American History grant ever awarded on U.S. foreign
+                        policy.</p>
+                </div>
+            </div>
+            <aside class="hsg-width-one-third">
+                <div id="sections" class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">About</h2>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/contact-us">Contact Us</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/faq">Frequently Asked Questions</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/the-historian">The Historian</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/hac">Historical Advisory Committee</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/about/recent-publications">Recent Publications</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

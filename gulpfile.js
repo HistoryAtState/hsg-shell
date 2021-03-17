@@ -160,7 +160,7 @@ gulp.task('styles:watch', function () {
 
 // pages //
 
-let pagesPath = 'pages/**/*.html';
+let pagesPath = 'pages/**/*.xml';
 gulp.task('pages:deploy', function () {
     return gulp.src(pagesPath, {base: './'})
         .pipe(exClient.newer(targetConfiguration))
@@ -186,7 +186,7 @@ gulp.task('modules:watch', function () {
 
 // templates //
 
-let templatesPath = 'templates/**/*.html';
+let templatesPath = 'templates/**/*.xml';
 
 gulp.task('templates:build', function () {
     return gulp.src('app/' + templatesPath, {base: 'app/templates'})
