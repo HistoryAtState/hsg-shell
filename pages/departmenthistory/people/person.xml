@@ -37,13 +37,18 @@
                         </div>
                     </div>
                 </div>
-                <aside class="hsg-width-one-third hsg-print" data-template="app:fix-links">
-                    <div class="hsg-panel hsg-well">
-                        <p>Born <span data-template="pocom:birth-date"/>
-                            <br/>
-                            <span data-template="pocom:death-date"/>
-                        </p>
-                        <div data-template="pocom:person-entry"/>
+                <aside class="hsg-width-one-third hsg-print">
+                    <div id="pocom-data" class="hsg-panel">
+                        <div class="hsg-panel-heading">
+                            <h2 class="hsg-sidebar-title">From Principal Officers and Chiefs of Mission</h2>
+                        </div>
+                        <div class="hsg-panel-body" data-template="app:fix-links">
+                            <p>Born <span data-template="pocom:birth-date"/>
+                                <br/>
+                                <span data-template="pocom:death-date"/>
+                            </p>
+                            <div data-template="pocom:person-entry"/>
+                        </div>
                     </div>
                 </aside>
 

@@ -446,14 +446,14 @@ declare
     %templates:wrap
 function pocom:death-date($node as node(), $model as map(*), $person-id as xs:string) {
     let $person := collection($pocom:PEOPLE-COL)/person[id = $person-id]
+    let $death-date := $person/death
     return
-        $person/death ! 
-            (
-                if (./@type eq 'unknown' and . eq '') then 
-                    'Died ?' 
-                else 
-                    'Died ' || .
-            )
+        if ($death-date/@type eq "unknown") then 
+            "Died ?" 
+        else if ($death-date eq "") then
+            ()
+        else
+            "Died " || $death-date
 };
 
 declare
