@@ -65,7 +65,6 @@ declare variable $config:FRUS_CODE_TABLES_COL := "/db/apps/frus/code-tables";
 declare variable $config:x-forwarded-host        := request:get-header("X-Forwarded-Host");
 declare variable $config:x-forwarded-proto       := request:get-header("X-Forwarded-Proto");
 declare variable $config:is-proxied              := not(empty($config:x-forwarded-host));
-declare variable $config:is-proxied-path-to-root := request:get-context-path() || substring-after($config:is-proxied, "gov/") || "/";
 declare variable $config:exist-path-to-root      := request:get-context-path() || substring-after($config:app-root, "/db");
 declare variable $config:proxy-url :=
     if ($config:is-proxied)
