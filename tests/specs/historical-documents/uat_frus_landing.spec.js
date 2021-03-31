@@ -8,9 +8,9 @@ const Page  = require('../../pageobjects/Page'),
 
 
 const images = [
-  Page.s3_Prod + '/images/alincoln.jpg',
-  Page.s3_Prod + '/images/ajohnson.jpg',
-  Page.s3_Prod + '/images/usgrant.jpg'
+  Page.s3_UAT + '/images/alincoln.jpg',
+  Page.s3_UAT + '/images/ajohnson.jpg',
+  Page.s3_UAT + '/images/usgrant.jpg'
 ];
 
 describe('FRUS landing page: The first 3 tiles', function () {

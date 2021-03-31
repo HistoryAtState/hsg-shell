@@ -10,6 +10,7 @@ declare namespace functx = "http://www.functx.com";
 
 import module namespace aws_config = "http://history.state.gov/ns/xquery/aws_config" at '/db/apps/s3/modules/aws_config.xqm';
 import module namespace bucket = 'http://www.xquery.co.uk/modules/connectors/aws/s3/bucket' at '/db/apps/s3/modules/xaws/modules/uk/co/xquery/www/modules/connectors/aws-exist/s3/bucket.xq';
+import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 
 declare function functx:substring-after-last-match
   ( $arg as xs:string? ,
@@ -36,7 +37,7 @@ declare function local:contents-to-resources($contents) {
 (: provide this function a directory like 'frus/frus1964-68v12/ebook/' and it will update
 the existing cache of that directory's contents :)
 declare function local:update-leaf-directory($directory as xs:string) {
-    let $bucket := 'static.history.state.gov'
+    let $bucket := $config:S3_BUCKET
     let $delimiter := '/'
     let $marker := ()
     let $max-keys := ()

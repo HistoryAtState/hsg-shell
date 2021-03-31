@@ -630,7 +630,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
             return
                 (
                 <div id="{$vol-id}">
-                    <img src="https://{$config:S3_DOMAIN}/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
+                    <img src="{$config:S3_URL}/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
                     <a href="$app/historicaldocuments/{$vol-id}">{let $series := fh:vol-title($vol-id, 'series') return if ($series) then (<em>{fh:vol-title($vol-id, 'series')}</em>, ", ") else (), string-join((fh:vol-title($vol-id, 'sub-series'), fh:vol-title($vol-id, 'volume-number'), fh:vol-title($vol-id, 'volume')), ', ')}</a>.
                     <p>Ebook last updated: {format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), '[MNn] [D], [Y0001]', 'en', (), 'US')}</p>
                     <ul class="hsg-ebook-list">
@@ -655,7 +655,7 @@ declare function fh:frus-history-ebook-entry($model as map(*)) {
     let $preview-edition := if ($book//tei:sourceDesc/tei:p[1] = 'Preview Edition') then ' (Preview Edition)' else ()
     let $vol-id := 'frus-history'
     let $s3-resources-col := concat($config:HSG_S3_CACHE_COL, $vol-id)
-    let $s3-base-url := concat('https://', $config:S3_DOMAIN, '/', $vol-id)
+    let $s3-base-url := concat($config:S3_URL, '/', $vol-id)
     let $epub-filename := concat($vol-id, '.epub')
     let $mobi-filename := concat($vol-id, '.mobi')
     let $pdf-filename := concat($vol-id, '.pdf')
@@ -764,18 +764,18 @@ function fh:pdf-size($node as node(), $model as map(*), $document-id as xs:strin
 
 
 declare function fh:mobi-url($document-id as xs:string) {
-	concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/ebook/', $document-id, '.mobi')
+	concat($config:S3_URL, '/frus/', $document-id, '/ebook/', $document-id, '.mobi')
 };
 
 declare function fh:pdf-url($document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/pdf/', $section-id, '.pdf')
+        concat($config:S3_URL, '/frus/', $document-id, '/pdf/', $section-id, '.pdf')
     else
-        concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/pdf/', $document-id, '.pdf')
+        concat($config:S3_URL, '/frus/', $document-id, '/pdf/', $document-id, '.pdf')
 };
 
 declare function fh:epub-url($document-id as xs:string) {
-	concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/ebook/', $document-id, '.epub')
+	concat($config:S3_URL, '/frus/', $document-id, '/ebook/', $document-id, '.epub')
 };
 
 declare
