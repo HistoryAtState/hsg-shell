@@ -15,7 +15,7 @@ let $store-on-1861 := xmldb:store($target-col, $target-name, $xml)
 let $wait := util:wait(2000)
 let $replicated-xml := 
     http:send-request( 
-        <http:request method="get" href="{ $config:DOMAIN_1991 } || '/resource-name.xml?date={$datetime}" />
+        <http:request method="get" href="http://1991-test.hsg:8080/exist/apps/hsg-shell/resource-name.xml?date={$datetime}"/>
     )
 let $datetime-1861 := doc( $target-col || "/" || $target-name)//root/@datetime/string()
 let $datetime-1991 := $replicated-xml[2]/root/@datetime/string()

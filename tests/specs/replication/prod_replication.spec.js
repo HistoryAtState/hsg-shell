@@ -9,7 +9,7 @@ describe('The Replication test "validate-replication.xq"', () => {
 
   before(() => {
     // Calling this script is forwarded by the hsg-shell controller
-    Page.openUrl( Page.DOMAIN_1861_PROD + '/validate-replication');
+    Page.openUrl('https://1861.hsg/validate-replication');
   });
 
   it('should show the same datetime for 1861 and 1991 server', () => {

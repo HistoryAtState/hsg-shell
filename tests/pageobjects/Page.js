@@ -3,8 +3,6 @@ function Page() {
   this.regex = /(\<|\/)[a-z]*>/gi;
   this.s3_Prod = 'https://static.history.state.gov';
   this.s3_UAT = 'https://static.test.history.state.gov';
-  this.DOMAIN_1861_PROD = 'https://hsg-prod-backend1.hsg';
-  this.DOMAIN_1861_UAT = 'https://hsg-dev-backend1.hsg';
 }
 
 Page.prototype.setViewPortSize = function (size) {
