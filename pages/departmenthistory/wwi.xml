@@ -27,7 +27,7 @@
                         <div id="content-inner" data-template="app:fix-links">
                             <h1>World War I and the Department</h1>
                             <p><a
-                                    href="https://static.history.state.gov/wwi/war-neutrality-and-humanitarian-relief/War%20Neutrality%20and%20Humanitarian%20Relief.pdf"
+                                    href="$s3static/wwi/war-neutrality-and-humanitarian-relief/War%20Neutrality%20and%20Humanitarian%20Relief.pdf"
                                     >“War, Neutrality, and Humanitarian Relief: The Expansion of
                                     U.S. Diplomatic Activity during the Great War, 1914–1917”</a>
                                 describes how Department of State personnel, especially those
@@ -36,7 +36,7 @@
                                 humanitarian relief efforts, and represent the interests of
                                 belligerent states in enemy territory during the period of U.S.
                                 neutrality (August 1914–April 1917). This publication builds upon <a
-                                    href="https://static.history.state.gov/wwi/views-from-embassy-paris/Views%20from%20Embassy%20Paris%20WWI.pdf"
+                                    href="$s3static/wwi/views-from-embassy-paris/Views%20from%20Embassy%20Paris%20WWI.pdf"
                                     >“Views From the Embassy: The Role of the U.S. Diplomatic
                                     Community in France, 1914,”</a> produced in 2014. The material
                                 in these publications differ substantially from documentation
@@ -64,7 +64,7 @@
                                 <p
                                     style="-moz-box-shadow:inset 0px 1px 0px 0px #ffffff; -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff; box-shadow:inset 0px 1px 0px 0px #ffffff; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) ); background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% ); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf'); background-color:#ededed; -webkit-border-top-left-radius:6px; -moz-border-radius-topleft:6px; border-top-left-radius:6px; -webkit-border-top-right-radius:6px; -moz-border-radius-topright:6px; border-top-right-radius:6px; -webkit-border-bottom-right-radius:6px; -moz-border-radius-bottomright:6px; border-bottom-right-radius:6px; -webkit-border-bottom-left-radius:6px; -moz-border-radius-bottomleft:6px; border-bottom-left-radius:6px; text-indent:0; border:1px solid #dcdcdc; display:inline-block; color:#777777; font-size:15px; font-weight:bold; font-style:normal; height:50px; padding: 0 .5em; line-height:50px; text-decoration:none; text-shadow:1px 1px 0px #ffffff; margin-left: auto; margin-right: auto;">
                                     <a style="text-decoration: none;"
-                                        href="https://static.history.state.gov/wwi/war-neutrality-and-humanitarian-relief/War%20Neutrality%20and%20Humanitarian%20Relief.pdf"
+                                        href="$s3static/wwi/war-neutrality-and-humanitarian-relief/War%20Neutrality%20and%20Humanitarian%20Relief.pdf"
                                         >Download PDF (2.8 MB)</a>
                                 </p>
                                 <hr />
@@ -83,7 +83,7 @@
                                 U.S. diplomats—and American citizens—significantly strengthened
                                 Franco-American relations in unique, unparalleled ways.</p>
                             <p>We invite you to read <a
-                                    href="https://static.history.state.gov/wwi/views-from-embassy-paris/Views%20from%20Embassy%20Paris%20WWI.pdf"
+                                    href="$s3static/wwi/views-from-embassy-paris/Views%20from%20Embassy%20Paris%20WWI.pdf"
                                     >"Views From the Embassy: The Role of the U.S. Diplomatic
                                     Community in France, 1914"</a> (PDF, 818 KB), which complements
                                 U.S. Embassy France’s <a

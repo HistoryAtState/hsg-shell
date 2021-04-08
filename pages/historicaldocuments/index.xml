@@ -25,7 +25,7 @@
                 <div class="row text-center">
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/lincoln">
-                            <img src="https://static.history.state.gov/images/alincoln.jpg"
+                            <img src="$s3static/images/alincoln.jpg"
                                 alt="Abraham Lincoln" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Abraham Lincoln Administration <br/>
                                 1861–1865</div>
@@ -33,14 +33,14 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/johnson-a">
-                            <img src="https://static.history.state.gov/images/ajohnson.jpg"
+                            <img src="$s3static/images/ajohnson.jpg"
                                 alt="Andrew Johnson" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Andrew Johnson Administration <br/> 1865–1869</div>
                         </a>
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/grant">
-                            <img src="https://static.history.state.gov/images/usgrant.jpg"
+                            <img src="$s3static/images/usgrant.jpg"
                                 alt="Ulysses S. Grant" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Ulysses S. Grant Administration <br/>
                                 1869–1877</div>
@@ -48,7 +48,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/hayes">
-                            <img src="https://static.history.state.gov/images/rhayes.jpg"
+                            <img src="$s3static/images/rhayes.jpg"
                                 alt="Rutherford B. Hayes" width="89" height="76"
                                 class="img-thumbnail"/>
                             <div class="caption">Rutherford B. Hayes Administration <br/>
@@ -57,14 +57,14 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/garfield">
-                            <img src="https://static.history.state.gov/images/jgarfield.jpg"
+                            <img src="$s3static/images/jgarfield.jpg"
                                 alt="James A. Garfield" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">James A. Garfield Administration <br/> 1881</div>
                         </a>
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/arthur">
-                            <img src="https://static.history.state.gov/images/carthur.jpg"
+                            <img src="$s3static/images/carthur.jpg"
                                 alt="Chester A. Arthur" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Chester A. Arthur Administration <br/>
                                 1881–1885</div>
@@ -72,7 +72,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/cleveland-22">
-                            <img src="https://static.history.state.gov/images/gcleveland.jpg"
+                            <img src="$s3static/images/gcleveland.jpg"
                                 alt="Grover Cleveland" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Grover Cleveland Administration <br/>
                                 1885–1889</div>
@@ -80,7 +80,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/harrison">
-                            <img src="https://static.history.state.gov/images/bharrison.jpg"
+                            <img src="$s3static/images/bharrison.jpg"
                                 alt="Benjamin Harrison" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Benjamin Harrison Administration <br/>
                                 1889–1893</div>
@@ -88,7 +88,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/cleveland-24">
-                            <img src="https://static.history.state.gov/images/gcleveland.jpg"
+                            <img src="$s3static/images/gcleveland.jpg"
                                 alt="Grover Cleveland" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Grover Cleveland Administration <br/>
                                 1893–1897</div>
@@ -96,7 +96,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/mckinley">
-                            <img src="https://static.history.state.gov/images/wmckinley.jpg"
+                            <img src="$s3static/images/wmckinley.jpg"
                                 alt="William McKinley" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">William McKinley Administration <br/>
                                 1897–1901</div>
@@ -104,7 +104,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/roosevelt-t">
-                            <img src="https://static.history.state.gov/images/troosevelt.jpg"
+                            <img src="$s3static/images/troosevelt.jpg"
                                 alt="Theodore Roosevelt" width="89" height="76"
                                 class="img-thumbnail"/>
                             <div class="caption">Theodore Roosevelt Administration <br/>
@@ -113,7 +113,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/taft">
-                            <img src="https://static.history.state.gov/images/whtaft.jpg"
+                            <img src="$s3static/images/whtaft.jpg"
                                 alt="William Howard Taft" width="89" height="76"
                                 class="img-thumbnail"/>
                             <div class="caption">William H. Taft Administration <br/>
@@ -122,14 +122,14 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/wilson">
-                            <img src="https://static.history.state.gov/images/wwilson.jpg"
+                            <img src="$s3static/images/wwilson.jpg"
                                 alt="Woodrow Wilson" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Woodrow Wilson Administration <br/> 1913–1921</div>
                         </a>
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/harding">
-                            <img src="https://static.history.state.gov/images/wharding.jpg"
+                            <img src="$s3static/images/wharding.jpg"
                                 alt="Warren G. Harding" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Warren G. Harding Administration <br/>
                                 1921–1923</div>
@@ -137,7 +137,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/coolidge">
-                            <img src="https://static.history.state.gov/images/ccoolidge.jpg"
+                            <img src="$s3static/images/ccoolidge.jpg"
                                 alt="Calvin Coolidge" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Calvin Coolidge Administration <br/>
                                 1923–1929</div>
@@ -145,7 +145,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/hoover">
-                            <img src="https://static.history.state.gov/images/hhoover.jpg"
+                            <img src="$s3static/images/hhoover.jpg"
                                 alt="Herbert C. Hoover" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Herbert C. Hoover Administration <br/>
                                 1929–1933</div>
@@ -153,7 +153,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/roosevelt-fd">
-                            <img src="https://static.history.state.gov/images/fdroosevelt.jpg"
+                            <img src="$s3static/images/fdroosevelt.jpg"
                                 alt="Franklin D. Roosevelt" width="89" height="76"
                                 class="img-thumbnail"/>
                             <div class="caption">Franklin D. Roosevelt Administration <br/>
@@ -162,7 +162,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/truman">
-                            <img src="https://static.history.state.gov/images/truman.jpg"
+                            <img src="$s3static/images/truman.jpg"
                                 alt="Harry S. Truman" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Harry S. Truman Administration <br/>
                                 1945–1952</div>
@@ -170,7 +170,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="thumbnail" href="$app/historicaldocuments/eisenhower">
-                            <img src="https://static.history.state.gov/images/eisenhower.jpg"
+                            <img src="$s3static/images/eisenhower.jpg"
                                 alt="Dwight D. Eisenhower" width="89" height="76"
                                 class="img-thumbnail"/>
                             <div class="caption">Dwight D. Eisenhower Administration <br/>
@@ -179,7 +179,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="thumbnail" href="$app/historicaldocuments/kennedy">
-                            <img src="https://static.history.state.gov/images/jkennedy2.jpg"
+                            <img src="$s3static/images/jkennedy2.jpg"
                                 alt="John F. Kennedy" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">John F. Kennedy Administration <br/>
                                 1961–1963</div>
@@ -187,7 +187,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="thumbnail" href="$app/historicaldocuments/johnson">
-                            <img src="https://static.history.state.gov/images/ljohnson.jpg"
+                            <img src="$s3static/images/ljohnson.jpg"
                                 alt="LBJ" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Lyndon B. Johnson Administration<br/>
                                 1964–1968</div>
@@ -195,7 +195,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="thumbnail" href="$app/historicaldocuments/nixon-ford">
-                            <img src="https://static.history.state.gov/images/rnixon2.jpg"
+                            <img src="$s3static/images/rnixon2.jpg"
                                 alt="Richard Nixon" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Richard M. Nixon Administration<br/>
                                 1969–1974</div>
@@ -203,28 +203,28 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="thumbnail" href="$app/historicaldocuments/nixon-ford">
-                            <img src="https://static.history.state.gov/images/gford2.jpg"
+                            <img src="$s3static/images/gford2.jpg"
                                 alt="Gerald Ford" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Gerald R. Ford Administration<br/> 1974–1976</div>
                         </a>
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="thumbnail" href="$app/historicaldocuments/carter">
-                            <img src="https://static.history.state.gov/images/jcarter.jpg"
+                            <img src="$s3static/images/jcarter.jpg"
                                 alt="Jimmy Carter" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Jimmy Carter Administration<br/> 1977–1980</div>
                         </a>
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="thumbnail" href="$app/historicaldocuments/reagan">
-                            <img src="https://static.history.state.gov/images/rreagan.jpg"
+                            <img src="$s3static/images/rreagan.jpg"
                                 alt="Ronald Reagan" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">Ronald Reagan Administration<br/> 1981–1988</div>
                         </a>
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="thumbnail" href="$app/historicaldocuments/bush-ghw">
-                            <img src="https://static.history.state.gov/images/ghwbush.jpg"
+                            <img src="$s3static/images/ghwbush.jpg"
                                 alt="George H.W. Bush" width="89" height="76" class="img-thumbnail"/>
                             <div class="caption">George H.W. Bush Administration<br/>
                                 1989–1992</div>
@@ -232,7 +232,7 @@
                     </article>
                     <article class="hsg-thumbnail-wrapper">
                         <a class="thumbnail" href="$app/historicaldocuments/clinton">
-                            <img src="https://static.history.state.gov/images/bclinton.jpg"
+                            <img src="$s3static/images/bclinton.jpg"
                                 alt="William J. Clinton" width="89" height="76"
                                 class="img-thumbnail"/>
                             <div class="caption">William J. Clinton Administration<br/>
