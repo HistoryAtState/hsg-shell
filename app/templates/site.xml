@@ -35,22 +35,24 @@
                             </a>
                         </div>
                         <div class="col-sm-5">
-                            <div class="banner__search" data-template="app:if-parameter-unset"
+                            <div data-template="app:if-parameter-unset"
                                 data-template-param="suppress-sitewide-search-field">
-                                <div class="searchbox">
-                                    <form method="get" action="$app/search" class="main-form"
-                                        id="navigationSearchForm">
-                                        <p class="form-group">
-                                            <!-- Search: -->
-                                            <input type="text" size="15" name="q"
-                                                placeholder="Search..." class="form-control"
-                                                id="search-box"/>
-                                            <button type="submit"
-                                                class="hsg-link-button search-button btn">
-                                                <i class="hsg-search-button-icon"/>
-                                            </button>
-                                        </p>
-                                    </form>
+                                <div class="banner__search">
+                                    <div class="searchbox">
+                                        <form method="get" action="$app/search" class="main-form"
+                                            id="navigationSearchForm">
+                                            <p class="form-group">
+                                                <!-- Search: -->
+                                                <input type="text" size="15" name="q"
+                                                    placeholder="Search..." class="form-control"
+                                                    id="search-box"/>
+                                                <button type="submit"
+                                                    class="hsg-link-button search-button btn">
+                                                    <i class="hsg-search-button-icon"/>
+                                                </button>
+                                            </p>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -47,6 +47,6 @@
     color: $color-base;
   }
   a[href]:after {
-    content: " ";
+    display:none;
   }
 }
