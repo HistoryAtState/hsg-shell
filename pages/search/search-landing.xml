@@ -17,10 +17,10 @@
     </div>
 
     <div data-template="search:landing-page">
-        <div data-template="templates:include" data-template-path="pages/search/_search-bar.html"/>
+        <div data-template="templates:include" data-template-path="pages/search/_search-bar.xml"/>
 
         <div data-template="templates:include"
-            data-template-path="pages/search/_filter-row-sort-by.html"/>
+            data-template-path="pages/search/_filter-row-sort-by.xml"/>
 
         <div class="row" data-template="search:filters">
             <div class="hsg-width-one-whole">
@@ -28,7 +28,7 @@
                 <p>To limit your results to certain parts of the website, check the appropriate
                     box(es), and then click “Search”:</p>
                 <div data-template="templates:include"
-                    data-template-path="pages/search/_filter-sections.html"/>
+                    data-template-path="pages/search/_filter-sections.xml"/>
             </div>
         </div>
 
@@ -37,14 +37,14 @@
                 <h3>Filter by Date</h3>
                 <p>Date search is active only if the Historical Documents section is selected.</p>
                 <div data-template="templates:include"
-                    data-template-path="pages/search/_filter-date.html"/>
+                    data-template-path="pages/search/_filter-date.xml"/>
             </div>
         </div>
 
         <div class="row">
             <div class="hsg-width-one-whole" data-template="app:fix-links">
                 <div data-template="templates:include"
-                    data-template-path="pages/search/_submit-search-button.html"/>
+                    data-template-path="pages/search/_submit-search-button.xml"/>
             </div>
         </div>
     </div>
