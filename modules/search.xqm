@@ -47,11 +47,7 @@ declare variable $search:SECTIONS := map {
         map {
             "id": "visits",
             "query": function($query as xs:string) {
-                collection($config:VISITS_COL)//visit[ft:query(visitor, $query, $search:ft-query-options)]
-                |
-                collection($config:VISITS_COL)//visit[ft:query(description, $query, $search:ft-query-options)]
-                |
-                collection($config:VISITS_COL)//visit[ft:query(from, $query, $search:ft-query-options)]
+                collection($config:VISITS_COL)//visits[ft:query(., $query, $search:ft-query-options)]
             }
         },
         map {
