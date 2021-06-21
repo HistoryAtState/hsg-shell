@@ -57,15 +57,7 @@ declare variable $search:SECTIONS := map {
         map {
             "id": "travels",
             "query": function($query as xs:string) {
-                (
-                collection($config:TRAVELS_COL)//trip[ft:query(name, $query, $search:ft-query-options)]
-                |
-                collection($config:TRAVELS_COL)//trip[ft:query(country, $query, $search:ft-query-options)]
-                |
-                collection($config:TRAVELS_COL)//trip[ft:query(remarks, $query, $search:ft-query-options)]
-                |
-                collection($config:TRAVELS_COL)//trip[ft:query(locale, $query, $search:ft-query-options)]
-                )/parent::trips
+                collection($config:TRAVELS_COL)//trips[ft:query(., $query, $search:ft-query-options)]
             }
         }
     ),
