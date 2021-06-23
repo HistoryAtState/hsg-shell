@@ -14,7 +14,6 @@ import module namespace functx = "http://www.functx.com";
 (:
 import module namespace sort="http://exist-db.org/xquery/sort" at "java:org.exist.xquery.modules.sort.SortModule";
 :)
-import module namespace memsort="http://exist-db.org/xquery/memsort" at "java:org.existdb.memsort.SortModule";
 import module namespace cache="http://exist-db.org/xquery/cache" at "java:org.exist.xquery.modules.cache.CacheModule";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
@@ -665,12 +664,12 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
     switch ($sort-by)
         case "date-asc" return
             for $hit in $hits
-            order by memsort:get("doc-dateTime-min", $hit) ascending empty greatest, ft:score($hit) descending
+            order by ft:field($hit, "date-min") ascending empty greatest, ft:score($hit) descending
             return
                 $hit
         case "date-desc" return
             for $hit in $hits
-            order by memsort:get("doc-dateTime-min", $hit) descending empty least, ft:score($hit) descending
+            order by ft:field($hit, "date-min") descending empty least, ft:score($hit) descending
             return
                 $hit
         default (: case "relevance" :) return
@@ -702,6 +701,10 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
     let $log := console:log("search:query-section starting: query: " || $query || " range-start: " || $range-start || " range-end: " || $range-end || " category: " || (if ($category instance of map(*)) then $category?id else $category))
     let $is-date-query := exists($range-start)
     let $is-keyword-query := exists($query)
+    (: translate date ranges to the form used by Lucene index, cf. frus/volumes.xconf :)
+    let $range-start := translate($range-start, ':-', '')
+    let $range-end := translate($range-end, ':-', '')
+
     let $start := util:system-time()
     let $hits :=
         typeswitch($category)
@@ -716,18 +719,15 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
                             else
                                     collection($config:FRUS_VOLUMES_COL)
                         (: let $div-type-scope := ("section", "document") :)
-                        (: max search scope, set far in the future :)
-                        let $max-date := '2100-01-01T00:00:00-05:00'
-                        (: earliest date, set before any frus document :)
-                        let $min-date := '1600-01-01T00:00:00-05:00'
+                        
                         let $hits :=
                             if ($is-date-query and $is-keyword-query) then
                                 (: dates + keyword  :)
                                 let $dated :=
                                     $vols//tei:div[ft:query(., 
                                     $query || '
-                                      AND date-min:[' || $range-start || ' TO ' || $max-date || '] 
-                                      AND date-max:[' || $min-date || ' TO ' || $range-end || '] 
+                                      AND date-min:[' || $range-start || ' TO ' || $range-end || '] 
+                                      AND date-max:[' || $range-start || ' TO ' || $range-end || '] 
                                       AND within:documents', 
                                     $search:ft-query-options)]
                                 let $undated :=
@@ -737,10 +737,9 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
                             else if ($is-date-query) then
                                 (: dates  :)
                                 $vols//tei:div[ft:query(., $query || ' 
-                                    AND date-min:[' || $range-start || ' TO ' || $max-date || '] 
-                                    AND date-max:[' || $min-date || ' TO ' || $range-end || '] 
-                                    AND within:documents', $search:ft-query-options)]
-                                
+                                    AND date-min:[' || $range-start || ' TO ' || $range-end || '] 
+                                    AND date-max:[' || $range-start || ' TO ' || $range-end || '] 
+                                    AND within:documents', $search:ft-query-options)]                        
                             else if ($is-keyword-query) then
                                 (: keyword  :)
                                 $vols//tei:div[ft:query(., $query || ' AND within:documents', $search:ft-query-options)]
