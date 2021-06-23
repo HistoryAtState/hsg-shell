@@ -22,13 +22,13 @@ declare namespace frus="http://history.state.gov/frus/ns/1.0";
 
 declare variable $search:MAX_HITS_SHOWN := 1000;
 
-declare variable $search:ft-query-options :=
-    <options>
-        <default-operator>and</default-operator>
-        <phrase-slop>0</phrase-slop>
-        <leading-wildcard>no</leading-wildcard>
-        <filter-rewrite>yes</filter-rewrite>
-    </options>;
+declare variable $search:ft-query-options := map {
+    "default-operator": "and",
+    "phrase-slop": 0,
+    "leading-wildcard": "no",
+    "filter-rewrite": "yes",
+    "fields": ("date-min")
+};
 
 (: Maps search categories to publication ids, see $config:PUBLICATIONS :)
 declare variable $search:SECTIONS := map {
