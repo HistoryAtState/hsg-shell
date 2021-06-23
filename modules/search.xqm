@@ -701,9 +701,29 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
     let $log := console:log("search:query-section starting: query: " || $query || " range-start: " || $range-start || " range-end: " || $range-end || " category: " || (if ($category instance of map(*)) then $category?id else $category))
     let $is-date-query := exists($range-start)
     let $is-keyword-query := exists($query)
+
+    
+    let $volume-query := if (exists($volume-ids)) then 
+    ' AND (' || string-join(
+        for $volume-id in $volume-ids
+        return 'volume-id:' || $volume-id
+    , ' OR ') || ') '
+    else ()
+
+    let $frus-query := ' AND within:documents'
+
     (: translate date ranges to the form used by Lucene index, cf. frus/volumes.xconf :)
     let $range-start := translate($range-start, ':-', '')
     let $range-end := translate($range-end, ':-', '')
+
+    (: construct the part of the query that filters by date :)
+    let $date-query := if (exists($range-start)) then
+        '
+        AND date-min:[' || $range-start || ' TO ' || $range-end || '] 
+        AND date-max:[' || $range-start || ' TO ' || $range-end || '] 
+        '
+    else 
+        ()
 
     let $start := util:system-time()
     let $hits :=
@@ -711,38 +731,23 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
             case xs:string return
                 switch ($category)
                     case "frus" return
-                        let $vols :=
-                            if (exists($volume-ids)) then
-                                for $volume-id in $volume-ids
-                                return
-                                    collection($config:FRUS_VOLUMES_COL)/id($volume-id)
-                            else
-                                    collection($config:FRUS_VOLUMES_COL)
-                        (: let $div-type-scope := ("section", "document") :)
+                        let $vols := collection($config:FRUS_VOLUMES_COL)
                         
                         let $hits :=
                             if ($is-date-query and $is-keyword-query) then
                                 (: dates + keyword  :)
                                 let $dated :=
-                                    $vols//tei:div[ft:query(., 
-                                    $query || '
-                                      AND date-min:[' || $range-start || ' TO ' || $range-end || '] 
-                                      AND date-max:[' || $range-start || ' TO ' || $range-end || '] 
-                                      AND within:documents', 
-                                    $search:ft-query-options)]
+                                    $vols//tei:div[ft:query(., $query || $volume-query || $date-query || $frus-query, $search:ft-query-options)]
                                 let $undated :=
-                                    $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query || ' AND within:documents', $search:ft-query-options)]
+                                    $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query || $volume-query || $frus-query, $search:ft-query-options)]
                                 return
                                     ($dated, $undated)
                             else if ($is-date-query) then
                                 (: dates  :)
-                                $vols//tei:div[ft:query(., $query || ' 
-                                    AND date-min:[' || $range-start || ' TO ' || $range-end || '] 
-                                    AND date-max:[' || $range-start || ' TO ' || $range-end || '] 
-                                    AND within:documents', $search:ft-query-options)]                        
+                                $vols//tei:div[ft:query(., $query || $volume-query || $date-query || $frus-query, $search:ft-query-options)]                        
                             else if ($is-keyword-query) then
                                 (: keyword  :)
-                                $vols//tei:div[ft:query(., $query || ' AND within:documents', $search:ft-query-options)]
+                                $vols//tei:div[ft:query(., $query || $volume-query || $frus-query, $search:ft-query-options)]
                             else
                                 (: no parameters provided :)
                                 ()
