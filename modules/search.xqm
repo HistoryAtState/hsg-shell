@@ -1003,7 +1003,7 @@ declare function search:results-summary($node as node(), $model as map(*)) {
     if ($model?query-info?result-count > 0) then
         <p>
             Displaying {search:start($node, $model)}–{search:end($node, $model)}
-            of {search:result-count($node, $model)} results 
+            of <span class="search-count"  >{search:result-count($node, $model)}</span> results
             {
                 string-join((
                     search:keyword-summary($node, $model), 
@@ -1013,7 +1013,7 @@ declare function search:results-summary($node as node(), $model as map(*)) {
                 || ", " 
                 || search:sort-by-summary($node, $model)
             }.
-            Search completed in {search:query-duration($node, $model)}s.
+            Search completed in <span class="search-duration">{search:query-duration($node, $model)}</span>s.
         </p>
     else
         <p>No results were found.</p>
