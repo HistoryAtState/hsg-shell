@@ -587,7 +587,10 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
             let $sorted-hits := search:sort($hits, $adjusted-sort-by)
             let $sorted-hits-end := util:system-time()
             let $sorted-hits-duration := console:log("sorted-hits-duration: " || $sorted-hits-end - $sorted-hits-start)
-            let $vol-ids := ft:facets($hits, "volume-id", ())
+            let $vol-ids :=  
+                map:for-each(ft:facets($hits, "volume-id", ()), function($label, $count) {
+                    $label
+                })
             let $results := 
                 map { 
                     "id": $query-id,
@@ -1019,23 +1022,23 @@ function search:load-volumes($node as node(), $model as map(*)) {
     let $load-volumes-start := util:system-time()
     let $volume-ids := $model?query-info?results-vol-ids
     
-    let $cache-name := "hsg-search"
+    (: let $cache-name := "hsg-search"
     let $cache-key := "volumes-filter"
     let $cache := cache:get($cache-name, $cache-key)
     let $cache := if (exists($cache)) then $cache else map { "created": current-dateTime(), "purged": current-dateTime() }
-    let $volumes := if (map:contains($cache, "volumes")) then map:get($cache, "volumes") else ()
+    let $volumes := if (map:contains($cache, "volumes")) then map:get($cache, "volumes") else () :)
 
-    let $volumes :=
-        if (exists($volumes)) then
+    
+        (: if (exists($volumes)) then
             if (exists($volume-ids)) then
                 map { "volumes": $volumes[id = $volume-ids] }
             else
                 map { "volumes": $volumes }
-        else
+        else :)
             let $new-volumes := 
                 (: full text volumes in the database :)
-                let $ft-vol-ids := collection((:$config:FRUS_VOLUMES_COL:)"/db/apps/frus/volumes")/tei:TEI[.//tei:body/tei:div]/@xml:id
-                for $vol in collection("/db/apps/frus/bibliography")/volume[@id = $ft-vol-ids]
+                (: let $ft-vol-ids := collection($config:FRUS_VOLUMES_COL"/db/apps/frus/volumes")/tei:TEI[.//tei:body/tei:div]/@xml:id :)
+                for $vol in collection("/db/apps/frus/bibliography")/volume[@id = $volume-ids]
                 let $vol-id := $vol/@id/string()
                 let $compact-title := 
                     search:trim-words(normalize-space(string-join($vol/title[@type = ("sub-series", "volume-number", "volume")][. != ''], ", ")), 10)
@@ -1048,20 +1051,20 @@ function search:load-volumes($node as node(), $model as map(*)) {
                         <title>{$complete-title}</title>
                     </volume>
             let $new-volumes-entry := map { "volumes": $new-volumes }
-            let $put := cache:put($cache-name, $cache-key, map:merge(($cache, $new-volumes-entry)))
-            return
-                if (exists($volume-ids)) then
+            (: let $put := cache:put($cache-name, $cache-key, map:merge(($cache, $new-volumes-entry))) :)
+            (: return :)
+                (: if (exists($volume-ids)) then
                     map { "volumes": $new-volumes[id = $volume-ids] }
-                else
-                    $new-volumes-entry
-    
+                else :)
+                    (: $new-volumes-entry :)
+    let $volumes := $new-volumes-entry
     (: purge cache :)
-    let $cache-max-age := xs:dayTimeDuration("PT10M")
+    (: let $cache-max-age := xs:dayTimeDuration("PT10M")
     let $purge := 
         if (current-dateTime() - $cache?purged gt $cache-max-age) then
             cache:clear()
         else
-            ()
+            () :)
     
     let $load-volumes-end := util:system-time()
     let $log := console:log("search:load-volumes: loaded " || count($volumes?*) || " in " || $load-volumes-end - $load-volumes-start)
