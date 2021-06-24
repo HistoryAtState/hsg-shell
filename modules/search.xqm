@@ -587,14 +587,14 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
             let $sorted-hits := search:sort($hits, $adjusted-sort-by)
             let $sorted-hits-end := util:system-time()
             let $sorted-hits-duration := console:log("sorted-hits-duration: " || $sorted-hits-end - $sorted-hits-start)
-            let $results-doc-ids := $hits/root()/tei:TEI/@xml:id/string()
+            let $vol-ids := ft:facets($hits, "volume-id", ())
             let $results := 
                 map { 
                     "id": $query-id,
                     "query": $normalized-query-string,
                     "created": current-dateTime(),
                     "hits": $sorted-hits,
-                    "results-doc-ids": $results-doc-ids,
+                    "results-vol-ids": $vol-ids,
                     "range-start": $range-start,
                     "range-end": $range-end
                 }
@@ -604,7 +604,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
                 $results
 
     let $hits := $results?hits
-    let $results-doc-ids := $results?results-doc-ids
+    let $results-vol-ids := $results?results-vol-ids
     let $range-start := $results?range-start
     let $range-end := $results?range-end
     
@@ -629,7 +629,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
             "start": $start,
             "end": $end,
             "perpage": $per-page,
-            "results-doc-ids": $results-doc-ids,
+            "results-vol-ids": $results-vol-ids,
             "result-count": $hit-count,
             "query-duration": $query-duration
         }
@@ -1017,7 +1017,7 @@ declare
     %templates:wrap
 function search:load-volumes($node as node(), $model as map(*)) {
     let $load-volumes-start := util:system-time()
-    let $volume-ids := $model?query-info?results-doc-ids
+    let $volume-ids := $model?query-info?results-vol-ids
     
     let $cache-name := "hsg-search"
     let $cache-key := "volumes-filter"
