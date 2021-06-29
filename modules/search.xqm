@@ -26,7 +26,7 @@ declare variable $search:ft-query-options := map {
     "phrase-slop": 0,
     "leading-wildcard": "no",
     "filter-rewrite": "yes",
-    "fields": ("date-min")
+    "fields": ("date-min", "content")
 };
 
 (: Maps search categories to publication ids, see $config:PUBLICATIONS :)
@@ -127,9 +127,16 @@ declare variable $search:DISPLAY := map {
             let $placeName := ($doc//tei:placeName)[1]
             let $placeName-string := normalize-space(string-join($placeName//text()[not(./ancestor::tei:note)]))
             let $matches-to-highlight := 5
-            let $trimmed-hit := search:trim-matches(util:expand($doc), $matches-to-highlight)
-            let $has-matches := $trimmed-hit//exist:match
-            let $kwic := if ($has-matches) then kwic:summarize($trimmed-hit, <config xmlns="" width="60"/>)/* else ()
+
+            let $m := ft:highlight-field-matches($doc, 'content')
+            let $kwic :=
+                for $match in subsequence($m//exist:match, 1, $matches-to-highlight)
+                return 
+                
+                    (<span class="previous">...{search:left-context($match, 60)}</span>, 
+                    <span class="hi">{$match}</span>, 
+                    <span class="following">{search:right-context($match, 60)}...</span>)
+     
             let $score := ft:score($doc)
             return
                 <div>
@@ -147,7 +154,7 @@ declare variable $search:DISPLAY := map {
                                 ()
                         }
                         <dt>Resource ID</dt><dd>{$vol-id/string()}/{$doc-id/string()}</dd>
-                        { if ($has-matches) then (<dt>Keyword Results</dt>, <dd>{$kwic}</dd>) else () }
+                        { if (count($kwic)) then (<dt>Keyword Results</dt>, <dd>{$kwic}</dd>) else () }
                         { if ($score) then (<dt>Keyword Relevance</dt>, <dd>{$score}</dd>) else () }
                     </dl>
                 </div>
@@ -159,6 +166,17 @@ declare variable $search:DISPLAY := map {
                 "https://history.state.gov/historicaldocuments/" || $vol-id || "/" || $doc-id
         }
     }
+};
+
+declare function search:right-context($match, $length) {
+    let $c :=
+    substring(($match/following-sibling::text())[1], 1, $length)
+    return if ($c) then $c else ()
+};
+
+declare function search:left-context($match, $length) {
+    let $c := ($match/preceding-sibling::text())[last()]
+    return if ($c) then substring($c, string-length($c) - $length, $length) else ()
 };
 
 declare function search:load-sections($node, $model) {
@@ -740,24 +758,24 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
                             if ($is-date-query and $is-keyword-query) then
                                 (: dates + keyword  :)
                                 let $dated :=
-                                    $vols//tei:div[ft:query(., $query || $volume-query || $date-query || $frus-query, $search:ft-query-options)]
+                                    $vols//tei:div[ft:query(., 'content:(' || $query || ') ' || $volume-query || $date-query || $frus-query, $search:ft-query-options)]
                                 let $undated :=
-                                    $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query || $volume-query || $frus-query, $search:ft-query-options)]
+                                    $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., 'content:(' || $query || ') ' || $volume-query || $frus-query, $search:ft-query-options)]
                                 return
                                     ($dated, $undated)
                             else if ($is-date-query) then
                                 (: dates  :)
-                                $vols//tei:div[ft:query(., $query || $volume-query || $date-query || $frus-query, $search:ft-query-options)]                        
+                                $vols//tei:div[ft:query(., $volume-query || $date-query || $frus-query, $search:ft-query-options)]                        
                             else if ($is-keyword-query) then
                                 (: keyword  :)
-                                $vols//tei:div[ft:query(., $query || $volume-query || $frus-query, $search:ft-query-options)]
+                                $vols//tei:div[ft:query(., 'content:(' || $query || ') ' || $volume-query || $frus-query, $search:ft-query-options)]
                             else
                                 (: no parameters provided :)
                                 ()
                         return
                             $hits
                     default return
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., $query, $search:ft-query-options)]
+                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., 'content:(' || $query || ') ', $search:ft-query-options)]
             default return
                 $category?query($query)
         let $end := util:system-time()
