@@ -598,9 +598,13 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
             let $range := search:get-range($start-date, $end-date, $start-time, $end-time)
             let $range-start := $range?start
             let $range-end := $range?end
+
+                let $log := console:log("search:query-section starting")
             let $query-sections-start := util:system-time()
             let $hits := search:query-sections($adjusted-section, $volume-id, $q, $range-start, $range-end)
             let $query-sections-end := util:system-time()
+                let $log := console:log("search:query-section finished, found " || count($hits) || " hits in " || $query-sections-end - $query-sections-start)
+            
             let $query-sections-duration := console:log("query-sections-duration: " || $query-sections-end - $query-sections-start)
             let $sorted-hits-start := util:system-time()
             let $sorted-hits := search:sort($hits, $adjusted-sort-by)
@@ -704,7 +708,6 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
 declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
     $query as xs:string?, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
 
-(: categories may be multiple :)
     let $category := 
         for $section in $sections
             return 
@@ -743,6 +746,13 @@ declare %private function search:query-sections($sections as xs:string*, $volume
         '
     else 
         ()
+
+(: TODO cover undated documents for frus/date queries :)
+         (: let $dated :=
+                                    $vols//tei:div[ft:query(., $query-string, $query-options)]
+                                let $undated :=
+                                    $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query-string, $query-options)] :)
+                               
 
 (: should be else hsg-fulltext:* :)
     let $query-string := if (count(($fulltext-query, $date-query))) then string-join(($fulltext-query, $date-query), ' AND ') else ()
@@ -789,18 +799,13 @@ declare %private function search:query-sections($sections as xs:string*, $volume
             $facets
         ))
 
-    let $foo := serialize($query-options, <output:serialization-parameters xmlns:output="http://www.w3.org/2010/xslt-xquery-serialization">
+    (: let $foo := serialize($query-options, <output:serialization-parameters xmlns:output="http://www.w3.org/2010/xslt-xquery-serialization">
                                         <output:method>adaptive</output:method>
                                         </output:serialization-parameters>)
     let $log := console:log('query >>> ')
     let $log := console:log($query-string)
-    let $log := console:log($foo)
-
-(: let $hits :=  collection("/db/apps/frus/volumes")//tei:div[ft:query(., $query-string, $query-options)]
-    let $log := console:log("hits " || count($hits))
-    let $foo := for $h in $hits return  :)
-       (: console:log(<foo>{$h/@type/string()} {$h}</foo>) :)
-       (: if ($h/@type = ("section", "document")) then $h else () :)
+    let $log := console:log($foo) :)
+        let $log := console:log("search:query-section starting: query: " || $query-string || " range-start: " || $range-start || " range-end: " || $range-end || " category: "  || string-join($category, ' '))
 
     return
 (: 
@@ -830,7 +835,7 @@ declare %private function search:query-sections($sections as xs:string*, $volume
       - "hac" --- /db/apps/hac
       - "faq" --- /db/apps/other-publications/faq
  :)
-    
+
               ( 
                 collection("/db/apps/administrative-timeline/timeline")//tei:div[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/other-publications/buildings")//tei:div[ft:query(., $query-string, $query-options)],
@@ -857,45 +862,6 @@ declare %private function search:query-sections($sections as xs:string*, $volume
                 collection("/db/apps/milestones/chapters")//tei:div[ft:query(., $query-string, $query-options)]
              )
 };
-
-(: declare function search:query-section($query-string, $query-options, $category, $query as xs:string*, $range-start as xs:string?, $range-end as xs:string?) {
-    let $log := console:log("search:query-section starting: query: " || $query-string || " range-start: " || $range-start || " range-end: " || $range-end || " category: " || (if ($category instance of map(*)) then $category?id else $category))
-
-    let $is-date-query := exists($range-start)
-    let $is-keyword-query := exists($query)    let $start := util:system-time()
-    let $hits :=
-        typeswitch($category)
-            case xs:string return
-                switch ($category)
-                    case "frus" return
-                        let $vols := collection($config:FRUS_VOLUMES_COL)
-                        
-                        let $hits :=
-                            if ($is-date-query and $is-keyword-query) then
-                                (: dates + keyword  :)
-                                let $dated :=
-                                    $vols//tei:div[ft:query(., $query-string, $query-options)]
-                                let $undated :=
-                                    $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query-string, $query-options)]
-                                return
-                                    ($dated, $undated)
-                            else if ($query-string) then
-                                $vols//tei:div[ft:query(., $query-string, $query-options)]                        
-                            else
-                                (: no parameters provided :)
-                                ()
-                        return
-                            $hits
-                    default return
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., 'hsg-fulltext:(' || $query || ') ', $query-options)]
-            default return
-                $category?query($query)
-        let $end := util:system-time()
-        return
-            (console:log("search:query-section finished, found " || count($hits) || " hits in " || $end - $start),
-            $hits
-            )
-}; :)
 
 declare function search:result-heading($node, $model) {
     let $result := $model?result
