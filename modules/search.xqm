@@ -717,7 +717,9 @@ declare %private function search:query-sections($sections as xs:string*, $volume
            for $section in $sections
             return 
                 if (not($section = ("", "entire-site"))) then
-                    $search:SECTIONS?($section)
+                    for $pub in $search:SECTIONS?($section)
+                    return 
+                       if ($pub instance of map(*)) then $pub?id else $pub
                 else 
                     ()
 
@@ -752,11 +754,11 @@ declare %private function search:query-sections($sections as xs:string*, $volume
                             map { "hsg-category": $category }
                         else
                             ()
-                            (: ,
+                            ,
                         if (exists($publication)) then
                             map { "hsg-publication": $publication }
                         else
-                            () :)
+                            ()
                         ,
                         if ($date-capable) then
                             (
@@ -809,8 +811,7 @@ declare %private function search:query-sections($sections as xs:string*, $volume
 
 
               ( 
-                collection("/db/apps/administrative-timeline/timeline")//tei:div[ft:query(., $query-string, $query-options)]
-                ,
+                collection("/db/apps/administrative-timeline/timeline")//tei:div[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/frus/volumes")//tei:div[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/rdcr/articles")//tei:body[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/pocom/people")//persName[ft:query(., $query-string, $query-options)],
