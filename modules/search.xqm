@@ -743,7 +743,7 @@ declare %private function search:query-sections($sections as xs:string*, $volume
         ()
 
 (: should be else hsg-fulltext:* :)
-    let $query-string := if (count(($query, $date-query))) then string-join(($query, $date-query), ' AND ') else ()
+    let $query-string := if (count(($fulltext-query, $date-query))) then string-join(($fulltext-query, $date-query), ' AND ') else ()
 
     let $facets := map {
         "facets":
