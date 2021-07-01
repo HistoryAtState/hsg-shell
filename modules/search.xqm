@@ -25,8 +25,7 @@ declare variable $search:ft-query-options := map {
     "default-operator": "and",
     "phrase-slop": 0,
     "leading-wildcard": "no",
-    "filter-rewrite": "yes",
-    "fields": ("date-min", "content")
+    "filter-rewrite": "yes"
 };
 
 (: Maps search categories to publication ids, see $config:PUBLICATIONS :)
@@ -46,13 +45,13 @@ declare variable $search:SECTIONS := map {
         map {
             "id": "visits",
             "query": function($query as xs:string) {
-                collection($config:VISITS_COL)//visits[ft:query(., 'content:' || $query, $search:ft-query-options)]
+                collection($config:VISITS_COL)//visits[ft:query(., 'hsg-fulltext:' || $query, $search:ft-query-options)]
             }
         },
         map {
             "id": "travels",
             "query": function($query as xs:string) {
-                collection($config:TRAVELS_COL)//trips[ft:query(., 'content:'||$query, $search:ft-query-options)]
+                collection($config:TRAVELS_COL)//trips[ft:query(., 'hsg-fulltext:'||$query, $search:ft-query-options)]
             }
         }
     ),
@@ -128,7 +127,7 @@ declare variable $search:DISPLAY := map {
             let $placeName-string := normalize-space(string-join($placeName//text()[not(./ancestor::tei:note)]))
             let $matches-to-highlight := 5
 
-            let $m := ft:highlight-field-matches($doc, 'content')
+            let $m := ft:highlight-field-matches($doc, 'hsg-fulltext')
             let $kwic :=
                 for $match in subsequence($m//exist:match, 1, $matches-to-highlight)
                 return 
@@ -563,7 +562,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
             $sort-by
     
     (: the old frus-dates search didn't specify within=documents, so if an old URL is redirected here we'll need to catch these and categorize these as date searches :)
-    let $adjusted-within := 
+    let $adjusted-section := 
         if (empty($within)) then
             if ($start-date or $volume-id) then
                 "documents"
@@ -575,7 +574,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
     (: prepare a unique key for the present query, so we can cache the hits to improve the result of subsequent requests for the same query :)
     let $normalized-query-string := 
         string-join(
-            let $params := map { "q": $q, "within": $adjusted-within, "volume-id": $volume-id, "start-date": $start-date, "end-date": $end-date, "start-time": $start-time, "end-time": $end-time, "sort-by": $adjusted-sort-by } 
+            let $params := map { "q": $q, "within": $adjusted-section, "volume-id": $volume-id, "start-date": $start-date, "end-date": $end-date, "start-time": $start-time, "end-time": $end-time, "sort-by": $adjusted-sort-by } 
             for $param in map:keys($params)
             let $val := map:get($params, $param) ! normalize-space(.)[. ne ""]
             order by $param
@@ -589,16 +588,18 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
     let $cache := if ($cache instance of map(*)) then $cache else map { "created": current-dateTime(), "purged": current-dateTime(), "queries": map { } }
     
     (: retrieve the hits from the cache, or populate the cache with the hits :)
-    let $cached-query := if (map:contains($cache?queries, $query-id)) then map:get($cache?queries, $query-id) else ()
+    let $cached-query := 
+    (: if (map:contains($cache?queries, $query-id)) then map:get($cache?queries, $query-id) else  :)
+    ()
     let $results :=
-        if (exists($cached-query)) then
+        (: if (exists($cached-query)) then
             $cached-query
-        else
+        else :)
             let $range := search:get-range($start-date, $end-date, $start-time, $end-time)
             let $range-start := $range?start
             let $range-end := $range?end
             let $query-sections-start := util:system-time()
-            let $hits := search:query-sections($adjusted-within, $volume-id, $q, $range-start, $range-end)
+            let $hits := search:query-sections($adjusted-section, $volume-id, $q, $range-start, $range-end)
             let $query-sections-end := util:system-time()
             let $query-sections-duration := console:log("query-sections-duration: " || $query-sections-end - $query-sections-start)
             let $sorted-hits-start := util:system-time()
@@ -606,7 +607,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
             let $sorted-hits-end := util:system-time()
             let $sorted-hits-duration := console:log("sorted-hits-duration: " || $sorted-hits-end - $sorted-hits-start)
             let $vol-ids :=  
-                map:for-each(ft:facets($hits, "volume-id", ()), function($label, $count) {
+                map:for-each(ft:facets($hits, "frus-volume-id", ()), function($label, $count) {
                     $label
                 })
             let $results := 
@@ -638,7 +639,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
         "results": $window,
         "query-info": map {
             "q": $q,
-            "within": $adjusted-within,
+            "within": $adjusted-section,
             "volume-id": $volume-id,
             "start-date": $start-date,
             "end-date": $end-date,
@@ -685,12 +686,12 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
     switch ($sort-by)
         case "date-asc" return
             for $hit in $hits
-            order by ft:field($hit, "date-min") ascending empty greatest, ft:score($hit) descending
+            order by ft:field($hit, "hsg-date-min") ascending empty greatest, ft:score($hit) descending
             return
                 $hit
         case "date-desc" return
             for $hit in $hits
-            order by ft:field($hit, "date-min") descending empty least, ft:score($hit) descending
+            order by ft:field($hit, "hsg-date-min") descending empty least, ft:score($hit) descending
             return
                 $hit
         default (: case "relevance" :) return
@@ -702,55 +703,127 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
 
 declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
     $query as xs:string?, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
-    if (exists($sections) and not($sections = ("", "entire-site"))) then
-        for $section in $sections
-        for $category in $search:SECTIONS?($section)
-        return
-            search:query-section($category, $volume-ids, $query, $range-start, $range-end)
-    else
-        map:for-each(
-            $search:SECTIONS,
-            function($section, $categories) {
-                for $category in $categories
-                return
-                    search:query-section($category, $volume-ids, $query, $range-start, $range-end)
-            }
-        )
-};
 
-declare function search:query-section($category, $volume-ids as xs:string*, $query as xs:string*, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
-    let $log := console:log("search:query-section starting: query: " || $query || " range-start: " || $range-start || " range-end: " || $range-end || " category: " || (if ($category instance of map(*)) then $category?id else $category))
+(: categories may be multiple :)
+    let $category := 
+        for $section in $sections
+            return 
+                if (not($section = ("", "entire-site"))) then
+                    $section
+                else 
+                    ()
+
+    let $publication := 
+           for $section in $sections
+            return 
+                if (not($section = ("", "entire-site"))) then
+                    $search:SECTIONS?($section)
+                else 
+                    ()
+
+    let $date-capable := count($category) eq 1 and $category = "documents"
+
     let $is-date-query := exists($range-start)
     let $is-keyword-query := exists($query)
-    
-    let $volume-query := if (exists($volume-ids)) then 
-    ' AND (' || string-join(
-        for $volume-id in $volume-ids
-        return 'volume-id:' || $volume-id
-    , ' OR ') || ') '
-    else ()
 
-    let $fulltext-query := if (exists($query)) then 'content:(' || $query || ') ' else ()
-
-    let $frus-query := 'within:documents'
+    let $fulltext-query := if (exists($query)) then 'hsg-fulltext:(' || $query || ') ' else ()
 
     (: translate date ranges to the form used by Lucene index, cf. frus/volumes.xconf :)
-    let $range-start := translate($range-start, ':-', '')
-    let $range-end := translate($range-end, ':-', '')
+    (: let $range-start := translate($range-start, ':-', '')
+    let $range-end := translate($range-end, ':-', '') :)
 
     (: construct the part of the query that filters by date :)
-    let $date-query := if (exists($range-start)) then
+    let $date-query := if ($is-date-query) then
         '
-        date-min:[' || $range-start || ' TO ' || $range-end || '] 
+        hsg-date-min:[' || $range-start || ' TO ' || $range-end || '] 
         AND 
-        date-max:[' || $range-start || ' TO ' || $range-end || '] 
+        hsg-date-max:[' || $range-start || ' TO ' || $range-end || '] 
         '
     else 
         ()
 
-    let $query-string := if (count(($query, $volume-query, $date-query))) then string-join(($query, $volume-query, $date-query, $frus-query), ' AND ') else ()
+(: should be else hsg-fulltext:* :)
+    let $query-string := if (count(($query, $date-query))) then string-join(($query, $date-query), ' AND ') else ()
 
-    let $start := util:system-time()
+    let $facets := map {
+        "facets":
+                    map:merge((
+                        if (exists($category)) then
+                            map { "hsg-category": $category }
+                        else
+                            ()
+                            (: ,
+                        if (exists($publication)) then
+                            map { "hsg-publication": $publication }
+                        else
+                            () :)
+                        ,
+                        if ($date-capable) then
+                            (
+                                if (exists($volume-ids)) then 
+                                    map { "frus-volume-id": $volume-ids }
+                                else
+                                    (: (),
+                                if (exists($type)) then 
+                                    map { "frus-type": $type }
+                                else
+                                    (),
+                                if (exists($subtype)) then 
+                                    map { "frus-subtype": $subtype }
+                                else :)
+                                    ()
+                            )
+                        else
+                            ()
+                    ))
+    }
+
+    let $fields := map {"fields": ("hsg-date-min", "hsg-fulltext")}
+
+    let $query-options := 
+        map:merge((
+            $search:ft-query-options,
+            $fields,
+            $facets
+        ))
+
+    let $foo := serialize($query-options, <output:serialization-parameters xmlns:output="http://www.w3.org/2010/xslt-xquery-serialization">
+                                        <output:method>adaptive</output:method>
+                                        </output:serialization-parameters>)
+    let $log := console:log('query >>> ')
+    let $log := console:log($query-string)
+    let $log := console:log($foo)
+
+(: let $hits :=  collection("/db/apps/frus/volumes")//tei:div[ft:query(., $query-string, $query-options)]
+    let $log := console:log("hits " || count($hits))
+    let $foo := for $h in $hits return  :)
+       (: console:log(<foo>{$h/@type/string()} {$h}</foo>) :)
+       (: if ($h/@type = ("section", "document")) then $h else () :)
+
+    return
+
+    
+        (: for $category in $categories
+        return
+            search:query-section($query-string, $query-options, $category, $query, $range-start, $range-end) :)
+
+
+              ( 
+                collection("/db/apps/administrative-timeline/timeline")//tei:div[ft:query(., $query-string, $query-options)]
+                ,
+                collection("/db/apps/frus/volumes")//tei:div[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/rdcr/articles")//tei:body[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/pocom/people")//persName[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/travels")//trips[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/visits/data")//visit[ft:query(., $query-string, $query-options)]
+             )
+};
+
+(: declare function search:query-section($query-string, $query-options, $category, $query as xs:string*, $range-start as xs:string?, $range-end as xs:string?) {
+    let $log := console:log("search:query-section starting: query: " || $query-string || " range-start: " || $range-start || " range-end: " || $range-end || " category: " || (if ($category instance of map(*)) then $category?id else $category))
+
+    let $is-date-query := exists($range-start)
+    let $is-keyword-query := exists($query)    let $start := util:system-time()
     let $hits :=
         typeswitch($category)
             case xs:string return
@@ -762,20 +835,20 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
                             if ($is-date-query and $is-keyword-query) then
                                 (: dates + keyword  :)
                                 let $dated :=
-                                    $vols//tei:div[ft:query(., $query-string, $search:ft-query-options)]
+                                    $vols//tei:div[ft:query(., $query-string, $query-options)]
                                 let $undated :=
-                                    $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query-string, $search:ft-query-options)]
+                                    $vols//tei:div[not(@frus:doc-dateTime-min)][ft:query(., $query-string, $query-options)]
                                 return
                                     ($dated, $undated)
                             else if ($query-string) then
-                                $vols//tei:div[ft:query(., $query-string, $search:ft-query-options)]                        
+                                $vols//tei:div[ft:query(., $query-string, $query-options)]                        
                             else
                                 (: no parameters provided :)
                                 ()
                         return
                             $hits
                     default return
-                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., 'content:(' || $query || ') ', $search:ft-query-options)]
+                        collection($config:PUBLICATIONS?($category)?collection)//tei:div[ft:query(., 'hsg-fulltext:(' || $query || ') ', $query-options)]
             default return
                 $category?query($query)
         let $end := util:system-time()
@@ -783,7 +856,7 @@ declare function search:query-section($category, $volume-ids as xs:string*, $que
             (console:log("search:query-section finished, found " || count($hits) || " hits in " || $end - $start),
             $hits
             )
-};
+}; :)
 
 declare function search:result-heading($node, $model) {
     let $result := $model?result
