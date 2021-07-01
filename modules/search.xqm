@@ -803,20 +803,58 @@ declare %private function search:query-sections($sections as xs:string*, $volume
        (: if ($h/@type = ("section", "document")) then $h else () :)
 
     return
+(: 
 
+## SECTTIONS and PUBLICATIONS --- collection // element
+    * "documents": 
+      - "frus" --- db/apps/frus/volumes
+    * "department": 
+      - "short-history" --- /db/apps/other-publications/short-history
+      - "people" --- /db/apps/other-publications/people 
+      - "buildings", --- /db/apps/other-publications/buildings
+      - "views-from-the-embassy" --- /db/apps/other-publications/views-from-the-embassy 
+      - "pocom", --- /db/apps/pocom/people //persName
+      - "visits", --- /db/apps/visits/data //visits
+      - "travels" --- db/apps/travels //trips
+    * "retired": 
+      - "milestones" --- /db/apps/milestones/chapters
+      - "education" --- /db/apps/other-publications/education/introductions //body
+    * "countries": 
+      - "countries" --- /db/apps/rdcr/articles
+      - "archives" --- /db/apps/wwdai/articles
+    * "conferences": 
+      - "conferences" --- /db/apps/conferences/data
+    * "frus-history": 
+      - "frus-history-monograph" --- db/apps/frus-history/monograph
+    * "about": 
+      - "hac" --- /db/apps/hac
+      - "faq" --- /db/apps/other-publications/faq
+ :)
     
-        (: for $category in $categories
-        return
-            search:query-section($query-string, $query-options, $category, $query, $range-start, $range-end) :)
-
-
               ( 
                 collection("/db/apps/administrative-timeline/timeline")//tei:div[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/other-publications/buildings")//tei:div[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/other-publications/faq")//tei:div[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/other-publications/short-history")//tei:div[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/other-publications/views-from-the-embassy")//tei:div[ft:query(., $query-string, $query-options)],
+
+                collection("/db/apps/other-publications/education/introductions")//tei:body[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/other-publications/secretary-bios")//tei:body[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/other-publications/vietnam-guide")//tei:body[ft:query(., $query-string, $query-options)],
+
+                collection("/db/apps/hac")//tei:div[ft:query(., $query-string, $query-options)],
+
                 collection("/db/apps/frus/volumes")//tei:div[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/frus-history/monograph")//tei:div[ft:query(., $query-string, $query-options)],
+
                 collection("/db/apps/rdcr/articles")//tei:body[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/wwdai/articles")//tei:body[ft:query(., $query-string, $query-options)],
+
                 collection("/db/apps/pocom/people")//persName[ft:query(., $query-string, $query-options)],
+
                 collection("/db/apps/travels")//trips[ft:query(., $query-string, $query-options)],
-                collection("/db/apps/visits/data")//visit[ft:query(., $query-string, $query-options)]
+                collection("/db/apps/visits/data")//visit[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/milestones/chapters")//tei:div[ft:query(., $query-string, $query-options)]
              )
 };
 
