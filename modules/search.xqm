@@ -842,9 +842,9 @@ declare %private function search:query-sections($sections as xs:string*, $volume
                 collection("/db/apps/other-publications/faq")//tei:div[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/other-publications/short-history")//tei:div[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/other-publications/views-from-the-embassy")//tei:div[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/other-publications/secretary-bios")//tei:div[ft:query(., $query-string, $query-options)],
 
                 collection("/db/apps/other-publications/education/introductions")//tei:body[ft:query(., $query-string, $query-options)],
-                collection("/db/apps/other-publications/secretary-bios")//tei:body[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/other-publications/vietnam-guide")//tei:body[ft:query(., $query-string, $query-options)],
 
                 collection("/db/apps/hac")//tei:div[ft:query(., $query-string, $query-options)],
