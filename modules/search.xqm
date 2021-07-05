@@ -56,7 +56,7 @@ declare variable $search:SECTIONS := map {
         }
     ),
     "retired": ("milestones", "education"),
-    "countries": ("countries", "archives"),
+    "countries": ("countries-articles", "archives"),
     "conferences": "conferences",
     "frus-history": "frus-history-monograph",
     "about": ("hac", "faq")
