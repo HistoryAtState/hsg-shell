@@ -287,7 +287,7 @@
                 <elementSpec mode="change" ident="graphic">
                     <model behaviour="graphic" useSourceRendition="true">
                         <param name="url">
-                            if (matches(@url, '^https?://')) then @url else ( xs:anyURI('https://static.test.history.state.gov/' || $parameters?base-uri ||
+                            if (matches(@url, '^https?://')) then @url else ( xs:anyURI('https://static.history.state.gov/' || $parameters?base-uri ||
                             "/" || @url || (if (matches(@url, "^.*\.(jpg|png|gif)$")) then "" else ".png")) )
                         </param>
                         <param name="scale">@scale</param>

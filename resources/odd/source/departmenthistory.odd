@@ -243,7 +243,7 @@
                 </elementSpec>
                 <elementSpec mode="change" ident="graphic">
                     <model behaviour="graphic">
-                        <param name="url">xs:anyURI('https://static.test.history.state.gov/' || $parameters?base-uri ||
+                        <param name="url">xs:anyURI('https://static.history.state.gov/' || $parameters?base-uri ||
                             "/" || @url || (if (matches(@url, "^.*\.[^\.]+$")) then "" else ".png"))</param>
                         <param name="scale">@scale</param>
                         <param name="title">desc</param>
