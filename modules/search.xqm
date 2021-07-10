@@ -573,17 +573,23 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
     let $cached-query := 
     (: if (map:contains($cache?queries, $query-id)) then map:get($cache?queries, $query-id) else  :)
     ()
+
+    let $range := search:get-range($start-date, $end-date, $start-time, $end-time)
+    let $range-start := $range?start
+    let $range-end := $range?end
+
+    let $query-conf := search:prepare-query($adjusted-section, $volume-id, $q, $range-start, $range-end)
+
+
     let $results :=
         (: if (exists($cached-query)) then
             $cached-query
         else :)
-            let $range := search:get-range($start-date, $end-date, $start-time, $end-time)
-            let $range-start := $range?start
-            let $range-end := $range?end
 
                 let $log := console:log("search:query-section starting")
             let $query-sections-start := util:system-time()
-            let $hits := search:query-sections($adjusted-section, $volume-id, $q, $range-start, $range-end)
+
+            let $hits := search:query-sections($adjusted-section, $query-conf)
             let $query-sections-end := util:system-time()
                 let $log := console:log("search:query-section finished, found " || count($hits) || " hits in " || $query-sections-end - $query-sections-start)
             
@@ -623,6 +629,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
     let $query-duration := seconds-from-duration($query-end-time - $query-start-time)
     let $query-info :=  map {
         "results": $window,
+        "query-configuration": $query-conf,
         "query-info": map {
             "q": $q,
             "within": $adjusted-section,
