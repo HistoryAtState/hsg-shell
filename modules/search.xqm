@@ -126,13 +126,9 @@ declare variable $search:DISPLAY := map {
 
             let $m := ft:highlight-field-matches($doc, 'hsg-fulltext')
             let $kwic :=
-                for $match in subsequence($m//exist:match, 1, $matches-to-highlight)
-                return 
+                for $hit in subsequence($m//exist:match, 1, $matches-to-highlight) 
+                    return kwic:get-summary($m, $hit, <config width="40"/>)/child::*
                 
-                    (<span class="previous">...{search:left-context($match, 60)}</span>, 
-                    <span class="hi">{$match}</span>, 
-                    <span class="following">{search:right-context($match, 60)}...</span>)
-     
             let $score := ft:score($doc)
             return
                 <div>
@@ -162,17 +158,6 @@ declare variable $search:DISPLAY := map {
                 "https://history.state.gov/historicaldocuments/" || $vol-id || "/" || $doc-id
         }
     }
-};
-
-declare function search:right-context($match, $length) {
-    let $c :=
-    substring(($match/following-sibling::text())[1], 1, $length)
-    return if ($c) then $c else ()
-};
-
-declare function search:left-context($match, $length) {
-    let $c := ($match/preceding-sibling::text())[last()]
-    return if ($c) then substring($c, string-length($c) - $length, $length) else ()
 };
 
 declare function search:load-sections($node, $model) {
