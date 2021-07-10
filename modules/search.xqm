@@ -687,7 +687,7 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
                 $hit
 };
 
-declare %private function search:query-sections($sections as xs:string*, $volume-ids as xs:string*,
+declare %private function search:prepare-query($sections as xs:string*, $volume-ids as xs:string*, 
     $query as xs:string?, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
 
     let $category := 
@@ -772,74 +772,52 @@ declare %private function search:query-sections($sections as xs:string*, $volume
                     ))
     }
 
-    let $fields := map {"fields": ("hsg-date-min", "hsg-fulltext")}
+    let $fields := map {"fields": ("hsg-date-min", "hsg-fulltext", "hsg-url")}
+
+    let $log := console:log("search:query-section prepared: query: " || $query-string || " range-start: " || $range-start || " range-end: " || $range-end || " category: "  || string-join($category, ' '))
+
+    return map {
+        "fields": $fields,
+        "facets": $facets,
+        "query-string": $query-string
+    }
+
+};
+
+declare function search:query-sections($sections as xs:string*, $query-configuration as map(*)) {
+    let $query-string := $query-configuration?query-string
 
     let $query-options := 
         map:merge((
             $search:ft-query-options,
-            $fields,
-            $facets
+            $query-configuration?fields,
+            $query-configuration?facets
+        ))
+
+(: special case for querying frus due to limitations of immediately retrieving fields on large result sets :)
+    let $frus-query-options := 
+        map:merge((
+            $search:ft-query-options,
+            $query-configuration?facets
         ))
 
     (: let $foo := serialize($query-options, <output:serialization-parameters xmlns:output="http://www.w3.org/2010/xslt-xquery-serialization">
                                         <output:method>adaptive</output:method>
                                         </output:serialization-parameters>)
-    let $log := console:log('query >>> ')
-    let $log := console:log($query-string)
-    let $log := console:log($foo) :)
-        let $log := console:log("search:query-section starting: query: " || $query-string || " range-start: " || $range-start || " range-end: " || $range-end || " category: "  || string-join($category, ' '))
+    :)
 
     return
-(: 
-
-## SECTTIONS and PUBLICATIONS --- collection // element
-    * "documents": 
-      - "frus" --- db/apps/frus/volumes
-    * "department": 
-      - "short-history" --- /db/apps/other-publications/short-history
-      - "people" --- /db/apps/other-publications/people 
-      - "buildings", --- /db/apps/other-publications/buildings
-      - "views-from-the-embassy" --- /db/apps/other-publications/views-from-the-embassy 
-      - "pocom", --- /db/apps/pocom/people //persName
-      - "visits", --- /db/apps/visits/data //visits
-      - "travels" --- db/apps/travels //trips
-    * "retired": 
-      - "milestones" --- /db/apps/milestones/chapters
-      - "education" --- /db/apps/other-publications/education/introductions //body
-    * "countries": 
-      - "countries" --- /db/apps/rdcr/articles
-      - "archives" --- /db/apps/wwdai/articles
-    * "conferences": 
-      - "conferences" --- /db/apps/conferences/data
-    * "frus-history": 
-      - "frus-history-monograph" --- db/apps/frus-history/monograph
-    * "about": 
-      - "hac" --- /db/apps/hac
-      - "faq" --- /db/apps/other-publications/faq
- :)
-
               ( 
                 collection("/db/apps/administrative-timeline/timeline")//tei:div[ft:query(., $query-string, $query-options)],
-                collection("/db/apps/other-publications/buildings")//tei:div[ft:query(., $query-string, $query-options)],
-                collection("/db/apps/other-publications/faq")//tei:div[ft:query(., $query-string, $query-options)],
-                collection("/db/apps/other-publications/short-history")//tei:div[ft:query(., $query-string, $query-options)],
-                collection("/db/apps/other-publications/views-from-the-embassy")//tei:div[ft:query(., $query-string, $query-options)],
-                collection("/db/apps/other-publications/secretary-bios")//tei:div[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/other-publications")//tei:div[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/other-publications")//tei:body[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/conferences/data")//tei:div[ft:query(., $query-string, $query-options)],
-                
-                collection("/db/apps/other-publications/education/introductions")//tei:body[ft:query(., $query-string, $query-options)],
-                collection("/db/apps/other-publications/vietnam-guide")//tei:body[ft:query(., $query-string, $query-options)],
-
                 collection("/db/apps/hac")//tei:div[ft:query(., $query-string, $query-options)],
-
-                collection("/db/apps/frus/volumes")//tei:div[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/frus/volumes")//tei:div[ft:query(., $query-string, $frus-query-options)],
                 collection("/db/apps/frus-history/monograph")//tei:div[ft:query(., $query-string, $query-options)],
-
                 collection("/db/apps/rdcr/articles")//tei:body[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/wwdai/articles")//tei:body[ft:query(., $query-string, $query-options)],
-
                 collection("/db/apps/pocom/people")//persName[ft:query(., $query-string, $query-options)],
-
                 collection("/db/apps/travels")//trips[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/visits/data")//visit[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/milestones/chapters")//tei:div[ft:query(., $query-string, $query-options)]
