@@ -867,6 +867,7 @@ declare function search:result-summary($node, $model) {
     let $matches-to-highlight := 10
     let $result := $model?result
     let $publication-by-collection := map:contains($config:PUBLICATION-COLLECTIONS, util:collection-name($result))
+    let $pub-name := $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))
     let $publication-has-custom-function := if ($publication-by-collection) then map:contains($search:DISPLAY, $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))) else ()
     let $element-name-has-custom-function := map:contains($search:DISPLAY, local-name($result))
 (:    let $log := console:log("publication has custom function: " || $publication-has-custom-function || " element name has custom function: " || $element-name-has-custom-function):)
@@ -877,6 +878,19 @@ declare function search:result-summary($node, $model) {
         else if ($publication-has-custom-function) then
             let $summary := $search:DISPLAY?($config:PUBLICATION-COLLECTIONS?(util:collection-name($result)))?summary
             return
+                if ($pub-name eq "frus") then 
+                    let $conf := $model?query-configuration
+
+                    let $query-options := 
+                        map:merge((
+                            $search:ft-query-options,
+                            $conf?fields,
+                            $conf?facets
+                        ))
+
+                    let $hit := $result[ft:query(., $conf?query-string, $query-options)] 
+                    return $summary($hit)
+                else
                 $summary($result)
         (: see if we've defined a custom function for this result's element name to display result summaries :)
         else if ($element-name-has-custom-function) then
