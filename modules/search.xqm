@@ -36,24 +36,9 @@ declare variable $search:SECTIONS := map {
         "people",
         "buildings",
         "views-from-the-embassy",
-        map {
-            "id": "pocom",
-            "query": function($query as xs:string) {
-                collection($pocom:PEOPLE-COL)//persName[ft:query(., $query, $search:ft-query-options)]
-            }
-        },
-        map {
-            "id": "visits",
-            "query": function($query as xs:string) {
-                collection($config:VISITS_COL)//visits[ft:query(., 'hsg-fulltext:' || $query, $search:ft-query-options)]
-            }
-        },
-        map {
-            "id": "travels",
-            "query": function($query as xs:string) {
-                collection($config:TRAVELS_COL)//trips[ft:query(., 'hsg-fulltext:'||$query, $search:ft-query-options)]
-            }
-        }
+        "pocom",
+        "visits",
+        "travels"
     ),
     "retired": ("milestones", "education"),
     "countries": ("countries-articles", "archives"),
