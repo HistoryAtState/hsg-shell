@@ -60,6 +60,18 @@ declare variable $search:DISPLAY := map {
             "$app/departmenthistory/people/" || $name/ancestor::person/id
         }
     },
+    "body": map {
+        "title": function($body) {
+            string-join(
+                ($body/ancestor::tei:TEI//tei:titleStmt/tei:title)[1],
+                ' '
+            )
+        },
+        "summary": (),
+        "href": function($body) {
+            "$app" || ft:field($body, "hsg-url")
+        }
+    },
     "visit": map {
         "title": function($visit) {
             "Visits By Foreign Leaders: " || string-join($visit/visitor, ", ")
