@@ -70,7 +70,11 @@ declare function pmf:ref($config as map(*), $node as element(), $class as xs:str
             "$app" || $target
         else
             $target
-    let $content := if ($content) then $content/string() else $href
+    let $content :=
+        if ($content) then
+            $config?apply-children($config, $node, $content)
+        else
+            $href
     (: let $content := if ($node/node()) then $config?apply-children($config, $node, .) else $href :)
     return
         <a href="{$href}">{$content}</a>
