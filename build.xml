@@ -35,6 +35,80 @@
         <delete dir="${build.dir}"/>
     </target>
     
+    <!-- PREPARATION OF LOCAL BUILD PROPERTIES -->
+    <echo message="------------------------------------------------------------"/>
+    <echo message="Prepare local build properties and node version"/>
+    <echo message="------------------------------------------------------------"/>
+    
+    <!-- Retrieve local paths to binaries and store them -->
+    <target name="get-binary-paths">
+        <echo>Call target get-binary-paths</echo>
+        <exec executable="which" outputproperty="which.gulp">
+            <arg line="gulp"/>
+        </exec>
+        <echo>Path to gulp binary: ${which.gulp}</echo>
+        <property name="path.gulp" value="${which.gulp}"/>
+        
+        <exec executable="which" outputproperty="which.node">
+            <arg line="node"/>
+        </exec>
+        <echo>Path to node binary: ${which.node}</echo>
+        <property name="path.node" value="${which.node}"/>
+        
+        <exec executable="which" outputproperty="which.npm">
+            <arg line="npm"/>
+        </exec>
+        <echo>Path to npm binary: ${which.npm}</echo>
+        <property name="path.npm" value="${which.npm}"/>
+    </target>
+    
+    <!-- Replace tokens with current local paths to binaries in local build property file -->
+    <target name="copy-paths-to-local-build-properties" depends="get-binary-paths">
+        <echo message="Copy binary paths to build.properties.local.xml"/>
+        <property name="node-PATH" value="${node.PATH}"/>
+        <copy file="build.properties.xml" tofile="build.properties.local.xml" overwrite="yes">
+            <filterset>
+                <filter token="npm" value="${path.npm}"/>
+                <filter token="gulp" value="${path.gulp}"/>
+                <filter token="nodePath" value="${node.PATH}"/>
+            </filterset>
+        </copy>
+        
+        <echo>Copied ${path.npm}, ${path.gulp}, and ${node.PATH} to local.build.properties</echo>
+    </target>
+    
+    <!-- Call script "nvm use" in package.json to install the correct node version -->
+    <target name="install-project-specific-node-version">
+        <echo message="Install node version from nvmrc file..."/>
+        <exec executable="${npm}" outputproperty="npm.output" logError="true">
+            <arg line="run-script"/>
+            <arg line="nvm"/>
+            <env key="PATH" value="${node.PATH}:${env.PATH}"/>
+            <env key="NODE_ENV" value="${NODE_ENV}"/>
+        </exec>
+        <echo message="${npm.output}"/>
+    </target>
+    
+    <target name="prepare">
+        <echo message="Calling ant target 'copy-paths-to-local-build-properties'"/>
+        <antcall target="copy-paths-to-local-build-properties"/>
+    </target>
+    
+    <target name="node">
+        <echo message="Calling ant target 'install-project-specific-node-version'"/>
+        <!--
+            TODO: Check if file build.properties.local.xml has been generated and display error in case of failure
+            <condition property="build-file-has-been-prepared">
+                <resourcecontains resource="build.properties.local.xml" substring="bin"/>
+            </condition>
+            
+            <fail message="ERROR: The local build properties file has not been generated. Please run `ant prepare` (again)."
+                  unless="build-file-has-been-prepared"/>
+        -->
+        <antcall target="install-project-specific-node-version"/>
+    </target>
+    
+    <!-- / END PREPARATION -->
     
     <target name="run-npm">
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>

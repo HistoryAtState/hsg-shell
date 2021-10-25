@@ -8,10 +8,10 @@
         <title>history.state.gov 3.0 shell</title>
         <version>2.1.0</version>
     </app>
-    <npm>/usr/local/opt/node@10/bin/npm</npm>
-    <gulp>/usr/local/bin/gulp</gulp>
+    <npm>~/.nvm/versions/node/v10.16.0/bin/npm</npm>
+    <gulp>~/.nvm/versions/node/v10.16.0/bin/gulp</gulp>
     <node>
-        <path>/usr/local/opt/node@10/bin:/usr/local/bin</path>
+        <path>/usr/local/opt/node/bin:/usr/local/bin/node</path>
     </node>
     <trigger>
         <provider-url>
