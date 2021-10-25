@@ -3,7 +3,7 @@
 const gulp = require('gulp'),
     fs = require('fs'),
     exist = require('@existdb/gulp-exist'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-sass')(require('sass')),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     del = require('del'),
