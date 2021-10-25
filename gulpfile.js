@@ -3,14 +3,13 @@
 const gulp = require('gulp'),
     fs = require('fs'),
     exist = require('@existdb/gulp-exist'),
+    sass = require('gulp-sass')(require('sass')),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     del = require('del'),
     preprocess = require('gulp-preprocess'),
     autoprefixer = require('gulp-autoprefixer'),
     concat = require('gulp-concat');
-
-const sass = require('gulp-sass')(require('sass'));
 
 const AUTOPREFIXER_BROWSERS = [
   'ie >= 10',

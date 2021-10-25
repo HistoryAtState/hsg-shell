@@ -45,7 +45,8 @@
     "test-prod": "./node_modules/.bin/wdio wdio.conf.js --suite prod",
     "test-prod-producer": "./node_modules/.bin/wdio wdio.conf.js --suite prod_producer",
     "update": "npm update && bower update && gulp",
-    "start": "npm install --quiet && bower install --quiet && gulp"
+    "start": "npm install --quiet && bower install --quiet && gulp",
+    "nvm": "source ~/.nvm/nvm.sh && nvm use"
   },
   "repository": {
     "type": "git",
