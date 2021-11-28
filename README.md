@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-You need to have *ant*, *git* and *nodeJS* (version 10.0.0 or higher) installed.
+You need to have *ant*, *git*, Chrome, and *nodeJS* (version 10.0.0 or higher) installed.
 
 ### hsg-project users
 
@@ -25,6 +25,16 @@ run:
 Then:
 
     source ~/.bash_profile
+
+If you don't have Google Chrome installed then you can either:
+
+1. Install it with homebrew:
+    ```
+    brew install --cask google-chrome
+    ```
+
+2. Download and install it from Google:
+    https://www.google.com/chrome
 
 ### Install global node packages
 
