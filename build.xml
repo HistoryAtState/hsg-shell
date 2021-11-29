@@ -70,11 +70,10 @@
             <filterset>
                 <filter token="npm" value="${path.npm}"/>
                 <filter token="gulp" value="${path.gulp}"/>
-                <filter token="nodePath" value="${node.PATH}"/>
             </filterset>
         </copy>
         
-        <echo>Copied ${path.npm}, ${path.gulp}, and ${node.PATH} to local.build.properties</echo>
+        <echo>Copied ${path.npm} and ${path.gulp} to local.build.properties</echo>
     </target>
     
     <!-- Call script "nvm use" in package.json to install the correct node version -->
