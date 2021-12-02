@@ -273,7 +273,7 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                         <h4>Contents</h4>
                         <div style="padding-left: 1em">
                             <div class="toc-inner">
-                                <ul>{ toc:toc-inner($config, $node, false()) }</ul>
+                                <ul>{ toc:toc-inner($headConfig, $node, false()) }</ul>
                             </div>
                         </div>
                     </div>
