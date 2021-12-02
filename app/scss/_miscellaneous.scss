@@ -134,3 +134,23 @@ html input[disabled] {
     margin-right: 0;
   }
 }
+
+/* override default list styling since FRUS footnote labels may contain non-numeric values.
+ * by default, browsers only output leading numbers in li/@value, so in value="60a", the "a" was not shown. */
+.footnotes {
+  ol {
+    list-style: none;
+    padding-inline-start: 0px;
+    border-collapse: separate;
+    border-spacing: 0 $margin-vertical-base;
+  }
+  li {
+    display: table-row;
+  }   
+  li:before {
+    content: attr(value)".";
+    display: table-cell;
+    padding-right: 0.25rem;
+    text-align: right;
+  }
+}
