@@ -471,71 +471,31 @@ declare function config:app-meta($node as node(), $model as map(*)) as element()
  : See https://github.com/HistoryAtState/hsg-project/wiki/social-media-cards.
  :)
 declare 
-    (:  # Test plan
+(:  # Test plan
+
+    return values like "og:type": "website" can be considered to be shorthand for:
+    ```HTML
+    <meta property="og:type" content="website"/>
+    ```
     
-        return values like "og:type": "website" can be considered to be shorthand for:
-        ```HTML
-        <meta property="og:type" content="website"/>
-        ```
+    - WHEN calling config:open-graph()
+      - GIVEN default options, ($model?open-graph, $model?open-graph-keys) = ()
+        - THEN return includes        "og:type": "website"
+        - THEN return includes   "twitter:card": "summary"
+        - THEN return includes   "twitter:site": "@HistoryAtState"
+        - THEN return includes   "og:site_name": "Office of the Historian"
+        - THEN return includes "og:description": "Office of the Historian"
+        - THEN return includes       "og:image": "https://static.history.state.gov/images/avatar_big.jpg"
+                               "og:image:width": "400"
+                              "og:image:height": "400"
+                                 "og:image:alt": "Department of State heraldic shield"
+        - THEN return includes       "og:title": pages:generate-short-title()
+        - THEN return includes         "og:url": $request:get-url()
         
-        - WHEN calling config:open-graph()
-          - GIVEN default options, ($model?open-graph, $model?open-graph-keys) = ()
-            - THEN return includes        "og:type": "website"
-            - THEN return includes   "twitter:card": "summary"
-            - THEN return includes   "twitter:site": "@HistoryAtState"
-            - THEN return includes   "og:site_name": "Office of the Historian"
-            - THEN return includes "og:description": "Office of the Historian"
-            - THEN return includes       "og:image": "https://static.history.state.gov/images/avatar_big.jpg"
-                                   "og:image:width": "400"
-                                  "og:image:height": "400"
-                                     "og:image:alt": "Department of State heraldic shield"
-            - THEN return includes       "og:title": "Office of the Historian" //"Default" default!
-            
-            - GIVEN a HTML h1 heading "H1", ($node//h1))[1] = "H1"
-              - THEN return includes     "og:title": "H1"
-              - THEN no other "og:title" returned.
-              
-            - GIVEN an empty HTML h1 heading "H1", ($node//h1))[1] = "" //Empty String
-              - THEN return includes     "og:title": "Office of the Historian"
-              - THEN no other "og:title" returned.
-              
-            - GIVEN a HTML h2 heading "H2", ($node//h2))[1] = "H2"
-              - THEN return includes     "og:title": "H2"
-              - THEN no other "og:title" returned.
-              
-            - GIVEN an empty HTML h2 heading "H2", ($node//h2))[1] = "" //Empty String
-              - THEN return includes     "og:title": "Office of the Historian"
-              - THEN no other "og:title" returned.
-              
-            - GIVEN a HTML h3 heading "H3", ($node//h3))[1] = "H3"
-              - THEN return includes     "og:title": "H3"
-              - THEN no other "og:title" returned.
-              
-            - GIVEN an empty HTML h3 heading "H3", ($node//h3))[1] = "" //Empty String
-              - THEN return includes     "og:title": "Office of the Historian"
-              - THEN no other "og:title" returned.
-              
-            - GIVEN a publication ID, $model?publication-id = "frus"
-              AND a title,  map:get($config:PUBLICATIONS, $model?publication-id)?title = "Historical Documents"
-              - THEN return includes     "og:title": "Historical Documents"
-              - THEN no other "og:title" returned.
-              
-            - GIVEN a publication ID, $model?publication-id = "articles"
-              AND no title,  map:get($config:PUBLICATIONS, $model?publication-id)?title = ()
-              - THEN return includes     "og:title": "Office of the Historian"
-              - THEN no other "og:title" returned.
-              
-            - GIVEN a Static title "Static", $node/ancestor::*[last()]//div[@id="static-title"]/string() = "Static"
-              - THEN return includes     "og:title": "Static"
-              - THEN no other "og:title" returned.
-              
-            - GIVEN an empty static title, ($node//h1))[1] = "" //Empty String
-              - THEN return includes     "og:title": "Office of the Historian"
-              - THEN no other "og:title" returned.
-              
-              TODO(TFJH): complete testing plan
-        
-    :)
+          
+          TODO(TFJH): complete testing plan
+    
+:)
 function config:open-graph($node as node(), $model as map(*)) as element()* {};
 
 (:~
