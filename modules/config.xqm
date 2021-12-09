@@ -429,6 +429,11 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:COUNTRIES_ISSUES_COL: "countries-issues",
         $config:ARCHIVES_ARTICLES_COL: "archives"
     };
+    
+(: TODO(TFJH)
+   - [ ] Add $config:OPEN_GRAPH_KEYS
+   - [ ] Add $config:OPEN_GRAPH
+:)
 
 (:~
  : Resolve the given path using the current application context.
@@ -459,6 +464,10 @@ declare %templates:wrap function config:app-title($node as node(), $model as map
     $config:expath-descriptor/expath:title/text()
 };
 
+(: TODO(TFJH):
+     - [ ] Add $model?url
+     - [ ] Call config:open-graph()
+:)
 declare function config:app-meta($node as node(), $model as map(*)) as element()* {
     <meta xmlns="http://www.w3.org/1999/xhtml" name="description" content="{$config:repo-descriptor/repo:description/text()}"/>,
     for $author in $config:repo-descriptor/repo:author[fn:normalize-space(.) ne '']
@@ -479,7 +488,7 @@ declare
     ```
     
     - WHEN calling config:open-graph()
-      - GIVEN default options, ($model?open-graph, $model?open-graph-keys) = ()
+      - GIVEN default options, ($model?open-graph, $model?open-graph-keys) = (), $model?url = 'test-url'
         - THEN return includes        "og:type": "website"
         - THEN return includes   "twitter:card": "summary"
         - THEN return includes   "twitter:site": "@HistoryAtState"
@@ -490,13 +499,27 @@ declare
                               "og:image:height": "400"
                                  "og:image:alt": "Department of State heraldic shield"
         - THEN return includes       "og:title": pages:generate-short-title()
-        - THEN return includes         "og:url": $request:get-url()
+        - THEN return includes         "og:url": "test-url"
         
           
-          TODO(TFJH): complete testing plan
+      - GIVEN a specified set of open graph keys ("og:type", "twitter:card")
+        AND the default open graph map
+        - THEN return "og:type": "website"
+          AND    "twitter:card": "summary"
+          AND no other Open Graph metadata (metadata should only be produced when supplied with corresponding keys)
+      
+      - GIVEN a specified open graph map (map {"twitter:card": function($node, $model) {<meta property="twitter:card" content="summary_large_image"/>}})
+        AND the default set of open graph keys
+        - THEN return "twitter:card": "summary_large_image"
+          AND no other Open Graph metadata (metadata should only be produced when keys have corresponding functions)
+      
+      - GIVEN a specified open graph map (map {"made:up": function($node, $model) {<meta property="made:up" content="value"/>}})
+        AND a specified open graph key ("made:up")
+        - THEN return "made:up": "value"
+          AND no other Open Graph metadata
     
 :)
-function config:open-graph($node as node(), $model as map(*)) as element()* {};
+function config:open-graph($node as node(), $model as map(*)) as element()* { (: TODO(TFJH): write function!:) };
 
 (:~
  : For debugging: generates a table showing all properties defined
