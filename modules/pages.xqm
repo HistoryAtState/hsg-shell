@@ -426,49 +426,7 @@ declare function pages:generate-title ($model, $content) {
  : - The first H1, H2, or H3 title in the content: ($node/ancestor-or-self::*[last()]//(h1|h2|h3))[1]
  : - A fallback string of 'Office of the Historian'
  :)
-declare
-(:
-# Test Plan
-
-- WHEN calling generate-short-title()
-
-  - GIVEN empty argments
-    - THEN return "Office of the Historian"
-
-  - GIVEN an empty HTML h1 heading "H1", ($node//h1))[1] = "" //Empty String
-    - THEN return "Office of the Historian"
-
-  - GIVEN a HTML h1 heading "H1", ($node//h1))[1] = "H1"
-    - THEN return "H1"
-    
-  - GIVEN a HTML h2 heading "H2", ($node//h2))[1] = "H2"
-    - THEN return "H2"
-    
-  - GIVEN a HTML h3 heading "H3", ($node//h3))[1] = "H3"
-    - THEN return "H3"
-    
-  - GIVEN an empty HTML h2 heading "H2", ($node//h2))[1] = "" //Empty String
-    AND a following HTML h1 heading "H1", ($node//h1))[1] = "H1"
-    - THEN return "H1"
-    
-  - GIVEN a publication ID, $model?publication-id = "articles", with no associated title,  map:get($config:PUBLICATIONS, $model?publication-id)?title = ()
-    AND a HTML h3 heading "H3", ($node//h3))[1] = "H3"
-    - THEN return "H3"
-    
-  - GIVEN a publication ID, $model?publication-id = "frus", with an associated title,  map:get($config:PUBLICATIONS, $model?publication-id)?title = "Historical Documents"
-    AND a HTML h3 heading "H3", ($node//h3))[1] = "H3"
-    - THEN return "Historical Documents"
-    
-  - GIVEN an empty static title, ($node//h1))[1] = "" //Empty String
-    AND a publication ID with an associated title, $model?publication-id = "frus"
-    - THEN return "Historical Documents"
-    
-  - GIVEN a Static title "Static", $node/ancestor::*[last()]//div[@id="static-title"]/string() = "Static"
-    AND a publication ID with an associated title, $model?publication-id = "frus"
-    - THEN return "Static"
-
- :)
-function pages:generate-short-title($model, $content) as xs:string? {
+declare function pages:generate-short-title($model, $content) as xs:string? {
     (: TODO(TFJH): 
        - [ ] Write function
        - [ ] Replace in pages:app-root()

@@ -431,9 +431,13 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
     };
     
 (: TODO(TFJH)
-   - [ ] Add $config:OPEN_GRAPH_KEYS
-   - [ ] Add $config:OPEN_GRAPH
+   - [ ] Populate $config:OPEN_GRAPH_KEYS ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:url", "og:image")
+   - [ ] Populate $config:OPEN_GRAPH
 :)
+
+declare variable $config:OPEN_GRAPH_KEYS := ();
+    
+declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{};
 
 (:~
  : Resolve the given path using the current application context.
@@ -479,47 +483,7 @@ declare function config:app-meta($node as node(), $model as map(*)) as element()
  : This function creates Open Graph metadata for page templates.
  : See https://github.com/HistoryAtState/hsg-project/wiki/social-media-cards.
  :)
-declare 
-(:  # Test plan
-
-    return values like "og:type": "website" can be considered to be shorthand for:
-    ```HTML
-    <meta property="og:type" content="website"/>
-    ```
-    
-    - WHEN calling config:open-graph()
-      - GIVEN default options, ($model?open-graph, $model?open-graph-keys) = (), $model?url = 'test-url'
-        - THEN return includes        "og:type": "website"
-        - THEN return includes   "twitter:card": "summary"
-        - THEN return includes   "twitter:site": "@HistoryAtState"
-        - THEN return includes   "og:site_name": "Office of the Historian"
-        - THEN return includes "og:description": "Office of the Historian"
-        - THEN return includes       "og:image": "https://static.history.state.gov/images/avatar_big.jpg"
-                               "og:image:width": "400"
-                              "og:image:height": "400"
-                                 "og:image:alt": "Department of State heraldic shield"
-        - THEN return includes       "og:title": pages:generate-short-title()
-        - THEN return includes         "og:url": "test-url"
-        
-          
-      - GIVEN a specified set of open graph keys ("og:type", "twitter:card")
-        AND the default open graph map
-        - THEN return "og:type": "website"
-          AND    "twitter:card": "summary"
-          AND no other Open Graph metadata (metadata should only be produced when supplied with corresponding keys)
-      
-      - GIVEN a specified open graph map (map {"twitter:card": function($node, $model) {<meta property="twitter:card" content="summary_large_image"/>}})
-        AND the default set of open graph keys
-        - THEN return "twitter:card": "summary_large_image"
-          AND no other Open Graph metadata (metadata should only be produced when keys have corresponding functions)
-      
-      - GIVEN a specified open graph map (map {"made:up": function($node, $model) {<meta property="made:up" content="value"/>}})
-        AND a specified open graph key ("made:up")
-        - THEN return "made:up": "value"
-          AND no other Open Graph metadata
-    
-:)
-function config:open-graph($node as node(), $model as map(*)) as element()* { (: TODO(TFJH): write function!:) };
+declare function config:open-graph($node as node(), $model as map(*)) as element()* { (: TODO(TFJH): write function!:) };
 
 (:~
  : For debugging: generates a table showing all properties defined
