@@ -1,5 +1,11 @@
 xquery version "3.1";
 
+module namespace x="http://history.state.gov/ns/site/hsg/xqsuite-tests";
+import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
+
+declare namespace test="http://exist-db.org/xquery/xqsuite";
+
 (: XQsuite tests for module functions :)
 
 (:  
@@ -9,24 +15,55 @@ return values like "og:type": "website" can be considered to be shorthand for:
 ```HTML
 <meta property="og:type" content="website"/>
 ```
+:)
 
-## Should produce open-graph defaults (this essentially tests $config:OPEN_GRAPH and $config:OPEN_GRAPH_KEYS)
 
+(:
+## Should produce open-graph defaults (this essentially tests $config:OPEN_GRAPH and $config:OPEN_GRAPH_KEYS) :)
+
+declare
+    %test:name("Open Graph Defaults")
+(:
 - WHEN calling config:open-graph()
-  - GIVEN the default open graph map     $model?open-graph = $config:OPEN_GRAPH
-    AND the default open graph keys $model?open-graph-keys = $config:OPEN_GRAPH_KEYS
-    AND a test URL                              $model?url = 'test-url'
-    - THEN return includes        "og:type": "website"
-    - THEN return includes   "twitter:card": "summary"
-    - THEN return includes   "twitter:site": "@HistoryAtState"
-    - THEN return includes   "og:site_name": "Office of the Historian"
-    - THEN return includes "og:description": "Office of the Historian"
-    - THEN return includes       "og:image": "https://static.history.state.gov/images/avatar_big.jpg"
-                           "og:image:width": "400"
-                          "og:image:height": "400"
-                             "og:image:alt": "Department of State heraldic shield"
-    - THEN return includes       "og:title": pages:generate-short-title()
-    - THEN return includes         "og:url": "test-url"
+  - GIVEN the default open graph map
+    AND the default open graph keys
+    AND a test URL 'test-url'
+    - THEN return:
+                "og:type": "website"
+           "twitter:card": "summary"
+           "twitter:site": "@HistoryAtState"
+           "og:site_name": "Office of the Historian"
+         "og:description": "Office of the Historian"
+               "og:image": "https://static.history.state.gov/images/avatar_big.jpg"
+         "og:image:width": "400"
+        "og:image:height": "400"
+           "og:image:alt": "Department of State heraldic shield"
+               "og:title": pages:generate-short-title()
+                 "og:url": "test-url"
+:)
+    %test:assertEquals(
+        '<meta property="og:type" content="website"/>',
+        '<meta property="twitter:card" content="summary"/>',
+        '<meta property="twitter:site" content="@HistoryAtState"/>',
+        '<meta property="og:site_name" content="Office of the Historian"/>',
+        '<meta property="og:description" content="Office of the Historian"/>',
+        '<meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>',
+        '<meta property="og:image:width" content="400"/>',
+        '<meta property="og:image:height" content="400"/>',
+        '<meta property="og:image:alt" content="Department of State heraldic shield"/>',
+        '<meta property="og:title" content=pages:generate-short-title()/>',
+        '<meta property="og:url" content="test-url"/>'
+    )
+function x:open-graph-defaults() {
+    let $node:= ()
+    let $model:= map {
+             "open-graph": $config:OPEN_GRAPH,
+        "open-graph-keys": $config:OPEN_GRAPH_KEYS,
+                    "url": "test-url"
+    }
+    return config:open-graph()
+}
+(:
     
 ## Should produce metadata for specified open graph keys
 
