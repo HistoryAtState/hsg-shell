@@ -19,11 +19,8 @@ return values like "og:type": "website" can be considered to be shorthand for:
 
 
 (:
-## Should produce open-graph defaults (this essentially tests $config:OPEN_GRAPH and $config:OPEN_GRAPH_KEYS) :)
+## Should produce open-graph defaults (this essentially tests $config:OPEN_GRAPH and $config:OPEN_GRAPH_KEYS) 
 
-declare
-    %test:name("Open Graph Defaults")
-(:
 - WHEN calling config:open-graph()
   - GIVEN the default open graph map
     AND the default open graph keys
@@ -41,6 +38,8 @@ declare
                "og:title": pages:generate-short-title()
                  "og:url": "test-url"
 :)
+
+declare
     %test:assertEquals(
         '<meta property="og:type" content="website"/>',
         '<meta property="twitter:card" content="summary"/>',
@@ -61,17 +60,20 @@ function x:open-graph-defaults() {
         "open-graph-keys": $config:OPEN_GRAPH_KEYS,
                     "url": "test-url"
     }
-    return config:open-graph()
-}
+    return config:open-graph($node,$model)
+};
+
+
 (:
-    
 ## Should produce metadata for specified open graph keys
 
+- WHEN calling config:open-graph()
   - GIVEN a specified set of open graph keys ("og:type", "twitter:card")
     AND the default open graph map
     - THEN return "og:type": "website"
       AND    "twitter:card": "summary"
       AND no other Open Graph metadata (metadata should only be produced when supplied with corresponding keys)
+:)
 
 ## Should produce metadata for a specified open graph map
 

@@ -483,7 +483,7 @@ declare function config:app-meta($node as node(), $model as map(*)) as element()
  : This function creates Open Graph metadata for page templates.
  : See https://github.com/HistoryAtState/hsg-project/wiki/social-media-cards.
  :)
-declare function config:open-graph($node as node(), $model as map(*)) as element()* { (: TODO(TFJH): write function!:) };
+declare function config:open-graph($node as node()?, $model as map(*)?) as element()* { (: TODO(TFJH): write function!:) };
 
 (:~
  : For debugging: generates a table showing all properties defined

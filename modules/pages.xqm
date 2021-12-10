@@ -433,7 +433,7 @@ declare function pages:generate-short-title($model, $content) as xs:string? {
        - [ ] Replace in pages:generate-title() (remembering to suppress default "Office of the Historian" title to avoid duplication)
        - [ ] Use in config:open-graph()
      :)
-}
+};
 
 declare
 function pages:app-root($node as node(), $model as map(*)) {
