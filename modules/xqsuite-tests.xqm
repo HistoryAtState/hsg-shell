@@ -75,6 +75,21 @@ function x:open-graph-defaults() {
       AND no other Open Graph metadata (metadata should only be produced when supplied with corresponding keys)
 :)
 
+declare
+    %test:assertEquals(
+        '<meta property="og:type" content="website"/>',
+        '<meta property="twitter:card" content="summary"/>'
+    )
+function x:open-graph-with-keys() {
+    let $node:= ()
+    let $model:= map {
+             "open-graph": $config:OPEN_GRAPH,
+        "open-graph-keys": ("og:type", "twitter:card")
+    }
+    return config:open-graph($node, $model)
+};
+
+(:
 ## Should produce metadata for a specified open graph map
 
   - GIVEN a specified open graph map (map {"twitter:card": function($node, $model) {<meta property="twitter:card" content="summary_large_image"/>}})
