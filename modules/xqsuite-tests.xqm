@@ -92,11 +92,32 @@ function x:open-graph-with-keys() {
 (:
 ## Should produce metadata for a specified open graph map
 
-  - GIVEN a specified open graph map (map {"twitter:card": function($node, $model) {<meta property="twitter:card" content="summary_large_image"/>}})
+
+- WHEN calling config:open-graph()
+  - GIVEN a specified open graph map
     AND the default set of open graph keys
     - THEN return "twitter:card": "summary_large_image"
       AND no other Open Graph metadata (metadata should only be produced when keys have corresponding functions)
+:)
 
+declare
+    %test:assertEquals(
+        '<meta property="twitter:card" content="summary_large_image"/>'
+    ) 
+function x:open-graph-with-map() {
+    let $node:= ()
+    let $model:= map {
+        "open-graph": map {
+            "twitter:card": function($node, $model) {
+                <meta property="twitter:card" content="summary_large_image"/>
+            }
+        },
+        "open-graph-keys": $config:OPEN_GRAPH_KEYS
+    }
+    return config:open-graph($node, $model)
+};
+
+(:
 ## Should produce metadata for a combination of specified map and keys
 
   - GIVEN a specified open graph map (map {"made:up": function($node, $model) {<meta property="made:up" content="value"/>}})
