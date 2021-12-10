@@ -124,9 +124,22 @@ function x:open-graph-with-map() {
     AND a specified open graph key ("made:up")
     - THEN return "made:up": "value"
       AND no other Open Graph metadata
-    
 :)
 
+declare
+    %test:assertEquals(
+        '<meta property="made:up" content="value"/>'
+    ) 
+function x:open-graph-with-map-and-keys() {
+    let $node:= ()
+    let $model:= map {
+        "open-graph": map {
+            "made:up": function($node, $model) {<meta property="made:up" content="value"/>}
+        },
+        "open-graph-keys": "made:up"
+    }
+    return config:open-graph($node, $model)
+};
  
 (:
 # Testing plan for pages:load
