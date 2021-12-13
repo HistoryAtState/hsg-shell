@@ -251,8 +251,8 @@ declare %test:assertEquals("H1") function x:generate-short-title-H1-after-empty-
     - THEN return "H3"
 :)
 
-declare %test:assertEquals("H1") function x:generate-short-title-empty-publication-ID() {
-    let $node  := <div><H3>H3</H3></div>
+declare %test:assertEquals("H3") function x:generate-short-title-empty-publication-ID() {
+    let $node  := <div><h3>H3</h3></div>
     let $model := map { "publication-id": "articles"}
     return pages:generate-short-title($node, $model)
 };
@@ -264,7 +264,7 @@ declare %test:assertEquals("H1") function x:generate-short-title-empty-publicati
 :)
 
 declare %test:assertEquals("Historical Documents") function x:generate-short-title-publication-ID() {
-    let $node  := <div><H3>H3</H3></div>
+    let $node  := <div><h3>H3</h3></div>
     let $model := map { "publication-id": "frus"}
     return pages:generate-short-title($node, $model)
 };
