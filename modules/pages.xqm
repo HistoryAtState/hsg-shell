@@ -426,13 +426,19 @@ declare function pages:generate-title ($model, $content) {
  : - The first H1, H2, or H3 title in the content: ($node/ancestor-or-self::*[last()]//(h1|h2|h3))[1]
  : - A fallback string of 'Office of the Historian'
  :)
-declare function pages:generate-short-title($model, $content) as xs:string? {
+declare function pages:generate-short-title($node, $model) as xs:string? {
     (: TODO(TFJH): 
-       - [ ] Write function
+       - [x] Write function
        - [ ] Replace in pages:app-root()
        - [ ] Replace in pages:generate-title() (remembering to suppress default "Office of the Historian" title to avoid duplication)
        - [ ] Use in config:open-graph()
      :)
+    (
+        $node/ancestor-or-self::*[last()]//div[@id="static-title"]/string(),
+        if ($model?publication-id) then map:get($config:PUBLICATIONS, $model?publication-id)?title else (),
+        ($node/ancestor-or-self::*[last()]//(h1|h2|h3))[1],
+        'Office of the Historian'
+    )[. ne ''][1]
 };
 
 declare
