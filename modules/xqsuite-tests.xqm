@@ -161,37 +161,134 @@ function x:open-graph-with-map-and-keys() {
 
   - GIVEN empty argments
     - THEN return "Office of the Historian"
+:)
 
+declare
+    %test:assertEquals("Office of the Historian")
+function x:generate-short-title-default() {
+    pages:generate-short-title((),())
+};
+
+(:
   - GIVEN an empty HTML h1 heading "H1", ($node//h1))[1] = "" //Empty String
     - THEN return "Office of the Historian"
+:)
 
+declare
+    %test:assertEquals("Office of the Historian")
+function x:generate-short-title-empty-H1() {
+    let $node := 
+        (<div>
+            <h1/>
+            <p>Not a title</p>
+        </div>)
+    return pages:generate-short-title($node, ())
+};
+
+(:
   - GIVEN a HTML h1 heading "H1", ($node//h1))[1] = "H1"
     - THEN return "H1"
-    
-  - GIVEN a HTML h2 heading "H2", ($node//h2))[1] = "H2"
+:)
+
+declare %test:assertEquals("H1") function x:generate-short-title-H1() {
+    let $node :=
+        <div>
+            <h1>H1</h1>
+            <p>Not a title</p>
+        </div>
+    return pages:generate-short-title($node, ())
+};
+
+(:
+- GIVEN a HTML h2 heading "H2", ($node//h2))[1] = "H2"
     - THEN return "H2"
-    
+:)
+
+declare %test:assertEquals("H2") function x:generate-short-title-H2(){
+    let $node :=
+        <div>
+            <h2>H2</h2>
+            <p>Not a title</p>
+            <h1>H1</h1>
+        </div>
+    return pages:generate-short-title($node, ())
+};
+
+(:
   - GIVEN a HTML h3 heading "H3", ($node//h3))[1] = "H3"
     - THEN return "H3"
-    
+:)
+
+declare %test:assertEquals("H3") function x:generate-short-title-H3(){
+    let $node :=
+        <div>
+            <h3>H3</h3>
+            <p>Not a title</p>
+            <h1>H1</h1>
+        </div>
+    return pages:generate-short-title($node, ())
+};
+
+(: 
   - GIVEN an empty HTML h2 heading "H2", ($node//h2))[1] = "" //Empty String
     AND a following HTML h1 heading "H1", ($node//h1))[1] = "H1"
     - THEN return "H1"
-    
+:)
+
+declare %test:assertEquals("H1") function x:generate-short-title-H1-after-empty-H2(){
+    let $node :=
+        <div>
+            <h2/>
+            <p>Not a title</p>
+            <h1>H1</h1>
+        </div>
+    return pages:generate-short-title($node, ())
+};
+
+(:  
   - GIVEN a publication ID, $model?publication-id = "articles", with no associated title,  map:get($config:PUBLICATIONS, $model?publication-id)?title = ()
     AND a HTML h3 heading "H3", ($node//h3))[1] = "H3"
     - THEN return "H3"
-    
+:)
+
+declare %test:assertEquals("H1") function x:generate-short-title-empty-publication-ID() {
+    let $node  := <div><H3>H3</H3></div>
+    let $model := map { "publication-id": "articles"}
+    return pages:generate-short-title($node, $model)
+};
+
+(:    
   - GIVEN a publication ID, $model?publication-id = "frus", with an associated title,  map:get($config:PUBLICATIONS, $model?publication-id)?title = "Historical Documents"
     AND a HTML h3 heading "H3", ($node//h3))[1] = "H3"
     - THEN return "Historical Documents"
-    
+:)
+
+declare %test:assertEquals("Historical Documents") function x:generate-short-title-publication-ID() {
+    let $node  := <div><H3>H3</H3></div>
+    let $model := map { "publication-id": "frus"}
+    return pages:generate-short-title($node, $model)
+};
+
+(: 
   - GIVEN an empty static title, ($node//h1))[1] = "" //Empty String
     AND a publication ID with an associated title, $model?publication-id = "frus"
     - THEN return "Historical Documents"
-    
+:)
+
+declare %test:assertEquals("Historical Documents") function x:generate-short-title-empty-static() {
+    let $node  := <div><div id="static-title"></div></div>
+    let $model := map { "publication-id": "frus"}
+    return pages:generate-short-title($node, $model)
+};
+
+(: 
   - GIVEN a Static title "Static", $node/ancestor::*[last()]//div[@id="static-title"]/string() = "Static"
     AND a publication ID with an associated title, $model?publication-id = "frus"
     - THEN return "Static"
+:)
 
- :)
+declare %test:assertEquals("Static") function x:generate-short-title-static() {
+    let $node  := <div><div id="static-title">Static</div></div>
+    let $model := map { "publication-id": "frus"}
+    return pages:generate-short-title($node, $model)
+};
