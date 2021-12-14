@@ -435,8 +435,8 @@ declare function pages:generate-short-title($node, $model) as xs:string? {
      :)
     (
         $node/ancestor-or-self::*[last()]//div[@id="static-title"]/string(),
-        if ($model?publication-id) then map:get($config:PUBLICATIONS, $model?publication-id)?title else (),
-        ($node/ancestor-or-self::*[last()]//(h1|h2|h3))[1],
+        $config:PUBLICATIONS?($model?publication-id)?title,
+        $node/ancestor-or-self::*[last()]//(h1|h2|h3),
         'Office of the Historian'
     )[. ne ''][1]
 };
