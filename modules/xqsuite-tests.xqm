@@ -8,6 +8,26 @@ declare namespace test="http://exist-db.org/xquery/xqsuite";
 
 (: XQsuite tests for module functions :)
 
+(:
+# Helper functions
+
+## This function returns the $node when called from page:templates:
+:)
+
+declare function x:return-model($node as node()?, $model as map(*)?) as map(*)? {
+    $model
+};
+
+(:
+### And a test of x:return-model
+:)
+
+declare %test:assertEquals('frus') function x:test-return-model() {
+    let $node  := <div><div data-template="x:return-model"></div></div>
+    let $model := map { "publication-id": "frus"}
+    return x:return-model($node, $model)?publication-id
+};
+
 (:  
 # Test plan for config:open-graph
 
@@ -15,10 +35,7 @@ return values like "og:type": "website" can be considered to be shorthand for:
 ```HTML
 <meta property="og:type" content="website"/>
 ```
-:)
 
-
-(:
 ## Should produce open-graph defaults (this essentially tests $config:OPEN_GRAPH and $config:OPEN_GRAPH_KEYS) 
 
 - WHEN calling config:open-graph()
