@@ -3,6 +3,7 @@ xquery version "3.1";
 module namespace x="http://history.state.gov/ns/site/hsg/xqsuite-tests";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
+import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 
@@ -11,21 +12,29 @@ declare namespace test="http://exist-db.org/xquery/xqsuite";
 (:
 # Helper functions
 
-## This function returns the $node when called from page:templates:
+## return-model()
+
+This function returns the a zero argument function which returns the page template `$model` map; it returns a function rather than a map directly as template functions returning a map are intercepted by the HTML templating module:
 :)
 
-declare function x:return-model($node as node()?, $model as map(*)?) as map(*)? {
-    $model
+declare function x:return-model($node as node()?, $model as map(*)?) as function(*) {
+    function() {$model}
 };
 
 (:
-### And a test of x:return-model
+### Test
+
+- WHEN calling x:return-model()
+  - GIVEN an entry in $model ("publication-id": "frus")
+    - THEN calling the resulting function should return a map
+    - AND that map should have the entry given in the model
+
 :)
 
 declare %test:assertEquals('frus') function x:test-return-model() {
-    let $node  := <div><div data-template="x:return-model"></div></div>
+    let $node  := ()
     let $model := map { "publication-id": "frus"}
-    return x:return-model($node, $model)?publication-id
+    return x:return-model($node, $model)()?publication-id
 };
 
 (:  
