@@ -171,11 +171,52 @@ function x:open-graph-with-map-and-keys() {
 # Testing plan for pages:load
 
 ## Should add default open graph map and keys to $model if none are provided, and there is no static Open Graph
+
+- WHEN HTML templating function pages:load is called
+  - GIVEN no static Open Graph data in $node//*
+    AND no Open Graph keys
+    - THEN return the default set of keys from $config:OPEN_GRAPH_KEYS as $new-model?open-graph-keys
 ## Static Open Graph properties should replace corresponding entries in the open graph map
+
+- WHEN HTML templating function pages:load is called
+  - GIVEN a static Open Graph entry in $node//div[@id eq 'static-open-graph']/meta
+    AND @property 'og:description'
+    AND @content 'Custom hard-coded description goes here.'
+    AND no Open Graph keys
+    - THEN return $new-model?open-graph?og:description as a function which returns'Custom hard-coded description goes here.'
+    
 ## Should replace open graph keys with $open-graph-keys tokens
+
+- WHEN HTML templating function pages:load is called
+  - GIVEN no static Open Graph data in $node//*
+    AND Open Graph keys specified by the @data-template-open-graph-keys template parameter
+    - THEN return the specified set of keys as $new-model?open-graph-keys
+    
 ## Should remove open graph keys corresponding to $open-graph-keys-exclude
+
+- WHEN HTML templating function pages:load is called
+  - GIVEN no static Open Graph data in $node//*
+    AND no Open Graph keys
+    AND Open Graph keys specified by the @data-template-open-graph-keys-exclude template parameter
+    - THEN return the the default set of keys from $config:OPEN_GRAPH_KEYS excluding the sepcified keys as $new-model?open-graph-keys
+    
 ## Should add new open graph keys with $open-graph-keys-add
+
+- WHEN HTML templating function pages:load is called
+  - GIVEN no static Open Graph data in $node//*
+    AND no Open Graph keys
+    AND Open Graph keys specified by the @data-template-open-graph-keys-add template parameter
+    - THEN return the the default set of keys from $config:OPEN_GRAPH_KEYS in addition to the sepcified keys as $new-model?open-graph-keys
+    
 ## Should replace $open-graph-keys-exclude tokens in supplied $open-graph-keys with $open-graph-keys-add
+
+- WHEN HTML templating function pages:load is called
+  - GIVEN no static Open Graph data in $node//*
+    AND a set of Open Graph keys specified by the $open-graph-keys template parameter
+    AND a set of Open Graph keys specified by the $open
+    AND Open Graph keys specified by the @data-template-open-graph-keys-add template parameter
+    - THEN the set of keys is returned as $new-model?open-graph-keys
+      AND that set of keys includes the $graph-keys keys except for those specified
 
 
 :)
