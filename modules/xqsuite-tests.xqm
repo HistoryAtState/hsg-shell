@@ -179,7 +179,7 @@ function x:open-graph-with-map-and-keys() {
 :)
 
 declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:title og:description og:url og:image') function x:pages-load-add-default-open-graph-keys() {
-    let $node:= <div data-template="pages:load"><span data-template="x:return-model"/></div>
+    let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
             try {
@@ -214,6 +214,29 @@ declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:ti
   - GIVEN no static Open Graph data in $node//*
     AND Open Graph keys specified by the @data-template-open-graph-keys template parameter
     - THEN return the specified set of keys as $new-model?open-graph-keys
+:)
+
+declare %test:assertEquals('og:type og:description') function x:pages-load-add-open-graph-keys() {
+    let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config
+    }
+    let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), "og:type og:description", (), ())()
+    
+    return $new-model?open-graph-keys => string-join(' ')
+};
+
+(:
     
 ## Should remove open graph keys corresponding to $open-graph-keys-exclude
 
