@@ -300,9 +300,31 @@ declare %test:assertEquals('twitter:card twitter:site og:site_name og:title og:u
 - WHEN HTML templating function pages:load is called
   - GIVEN no static Open Graph data in $node//*
     AND no Open Graph keys
-    AND Open Graph keys specified by the @data-template-open-graph-keys-add template parameter
+    AND Open Graph keys specified by the @data-template-open-graph-keys-add template parameter ("made:up")
     - THEN return the the default set of keys from $config:OPEN_GRAPH_KEYS in addition to the sepcified keys as $new-model?open-graph-keys
+:)
+
+declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:title og:description og:url og:image made:up') function x:pages-load-add-open-graph-keys-add() {
+    let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config
+    }
+    let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), (), (), "made:up")()
     
+    return $new-model?open-graph-keys => string-join(' ')
+};
+
+(:  
 ## Should replace $open-graph-keys-exclude tokens in supplied $open-graph-keys with $open-graph-keys-add
 
 - WHEN HTML templating function pages:load is called
