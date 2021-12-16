@@ -599,3 +599,5 @@ declare function pages:deep-section-page-title($node, $model) {
 declare function pages:section-category($node, $model) {
     root($model?data)//tei:title[@type = 'short']/string()
 };
+
+declare function pages:suppress($node as node()?, $model as map(*)?) {};
