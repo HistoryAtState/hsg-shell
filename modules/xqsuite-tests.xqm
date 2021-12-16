@@ -236,7 +236,6 @@ declare %test:assertEquals('Custom hard-coded description goes here') function x
 };
 
 (:
-    
 ## Should replace open graph keys with $open-graph-keys tokens
 
 - WHEN HTML templating function pages:load is called
@@ -265,8 +264,7 @@ declare %test:assertEquals('og:type og:description') function x:pages-load-add-o
     return $new-model?open-graph-keys => string-join(' ')
 };
 
-(:
-    
+(: 
 ## Should remove open graph keys corresponding to $open-graph-keys-exclude
 
 - WHEN HTML templating function pages:load is called
@@ -274,7 +272,29 @@ declare %test:assertEquals('og:type og:description') function x:pages-load-add-o
     AND no Open Graph keys
     AND Open Graph keys specified by the @data-template-open-graph-keys-exclude template parameter
     - THEN return the the default set of keys from $config:OPEN_GRAPH_KEYS excluding the sepcified keys as $new-model?open-graph-keys
+:)
+
+declare %test:assertEquals('twitter:card twitter:site og:site_name og:title og:url og:image') function x:pages-load-add-open-graph-keys-exclude() {
+    let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config
+    }
+    let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), (), "og:type og:description", ())()
     
+    return $new-model?open-graph-keys => string-join(' ')
+};
+
+(:  
 ## Should add new open graph keys with $open-graph-keys-add
 
 - WHEN HTML templating function pages:load is called
