@@ -334,9 +334,27 @@ declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:ti
     AND Open Graph keys specified by the @data-template-open-graph-keys-add template parameter
     - THEN the set of keys is returned as $new-model?open-graph-keys
       AND that set of keys includes the $graph-keys keys except for those specified
-
-
 :)
+
+declare %test:assertEquals('twitter:card made:up') function x:pages-load-add-open-graph-keys-replace() {
+    let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config
+    }
+    let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), "og:type twitter:card", "og:type", "made:up")()
+    
+    return $new-model?open-graph-keys => string-join(' ')
+};
 
 (:
 # Test Plan for generate-short-title()
@@ -347,9 +365,7 @@ declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:ti
     - THEN return "Office of the Historian"
 :)
 
-declare
-    %test:assertEquals("Office of the Historian")
-function x:generate-short-title-default() {
+declare %test:assertEquals("Office of the Historian") function x:generate-short-title-default() {
     pages:generate-short-title((),())
 };
 
@@ -358,9 +374,7 @@ function x:generate-short-title-default() {
     - THEN return "Office of the Historian"
 :)
 
-declare
-    %test:assertEquals("Office of the Historian")
-function x:generate-short-title-empty-H1() {
+declare %test:assertEquals("Office of the Historian") function x:generate-short-title-empty-H1() {
     let $node := 
         (<div>
             <h1/>
