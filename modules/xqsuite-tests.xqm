@@ -207,6 +207,35 @@ declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:ti
     AND @content 'Custom hard-coded description goes here.'
     AND no Open Graph keys
     - THEN return $new-model?open-graph?og:description as a function which returns'Custom hard-coded description goes here.'
+:)
+
+declare %test:assertEquals('Custom hard-coded description goes here') function x:pages-load-add-open-graph-static() {
+    let $node := 
+        <div data-template="pages:load">
+            <div id="static-open-graph" data-template="pages:suppress">
+                <meta property="og:description" content="Custom hard-coded description goes here"/>
+            </div>
+            <div data-template="x:return-model"/>
+        </div>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config
+    }
+    let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), (), (), ())()
+    
+    return $new-model?open-graph?("og:description")((),())
+};
+
+(:
     
 ## Should replace open graph keys with $open-graph-keys tokens
 
