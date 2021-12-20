@@ -72,12 +72,12 @@ declare
         '<meta property="twitter:card" content="summary"/>',
         '<meta property="twitter:site" content="@HistoryAtState"/>',
         '<meta property="og:site_name" content="Office of the Historian"/>',
+        '<meta property="og:title" content="Office of the Historian"/>',
         '<meta property="og:description" content="Office of the Historian"/>',
         '<meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>',
         '<meta property="og:image:width" content="400"/>',
         '<meta property="og:image:height" content="400"/>',
         '<meta property="og:image:alt" content="Department of State heraldic shield"/>',
-        '<meta property="og:title" content=pages:generate-short-title()/>',
         '<meta property="og:url" content="test-url"/>'
     )
 function x:open-graph-defaults() {
@@ -179,7 +179,7 @@ function x:open-graph-with-map-and-keys() {
     - THEN return the default set of keys from $config:OPEN_GRAPH_KEYS as $new-model?open-graph-keys
 :)
 
-declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:title og:description og:url og:image') function x:pages-load-add-default-open-graph-keys() {
+declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url') function x:pages-load-add-default-open-graph-keys() {
     let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
@@ -247,7 +247,7 @@ declare %test:assertEquals('<meta property="og:description" content="Custom hard
     - THEN return $new-model?open-graph-keys including 'made:up'
 :)
 
-declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:url og:image') function x:pages-load-add-open-graph-keys-static() {
+declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url') function x:pages-load-add-open-graph-keys-static() {
     let $node := 
         <div data-template="pages:load">
             <div id="static-open-graph" data-template="pages:suppress">
@@ -312,7 +312,7 @@ declare %test:assertEquals('og:type og:description') function x:pages-load-add-o
     - THEN return the the default set of keys from $config:OPEN_GRAPH_KEYS excluding the sepcified keys as $new-model?open-graph-keys
 :)
 
-declare %test:assertEquals('twitter:card twitter:site og:site_name og:title og:url og:image') function x:pages-load-add-open-graph-keys-exclude() {
+declare %test:assertEquals('twitter:card twitter:site og:site_name og:title og:image og:url') function x:pages-load-add-open-graph-keys-exclude() {
     let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
@@ -342,7 +342,7 @@ declare %test:assertEquals('twitter:card twitter:site og:site_name og:title og:u
     - THEN return the the default set of keys from $config:OPEN_GRAPH_KEYS in addition to the sepcified keys as $new-model?open-graph-keys
 :)
 
-declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:url og:image') function x:pages-load-add-open-graph-keys-add() {
+declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url') function x:pages-load-add-open-graph-keys-add() {
     let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {

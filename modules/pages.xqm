@@ -42,7 +42,18 @@ declare
     %templates:default("ignore", "false")
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?,
         $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean, $open-graph-keys as xs:string?, $open-graph-keys-exclude as xs:string?, $open-graph-keys-add as xs:string?) {
+        
     let $log := console:log("loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id )
+    
+    let $static-open-graph := map:merge(
+        for $meta in $node//*[@id eq 'static-open-graph']/meta
+        return map{ string($meta/@property) : function($node as node()?, $model as map(*)?) {$meta}}
+    )
+    let $static-open-graph-keys := map:keys($static-open-graph)
+    
+    let $ogk as xs:string* := if ($open-graph-keys) then tokenize($open-graph-keys, '\s') else $config:OPEN_GRAPH_KEYS
+    let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
+    let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
 
     let $content := map {
         "data":
@@ -58,7 +69,9 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
             if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
                 map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
             else (),
-        "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
+        "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
+        "open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
+        "open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph))
     }
 
     return

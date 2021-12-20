@@ -5,7 +5,8 @@ xquery version "3.1";
  : within a module.
  :)
 module namespace config="http://history.state.gov/ns/site/hsg/config";
-import module namespace console="http://exist-db.org/xquery/console";
+
+import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 
 import module namespace pm-frus='http://www.tei-c.org/tei-simple/models/frus.odd/web/module' at "../resources/odd/compiled/frus-web-module.xql";
 
@@ -14,6 +15,8 @@ declare namespace templates="http://exist-db.org/xquery/templates";
 declare namespace expath="http://expath.org/ns/pkg";
 declare namespace repo="http://exist-db.org/xquery/repo";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
+declare namespace request="http://exist-db.org/xquery/request";
+declare namespace response="http://exist-db.org/xquery/response";
 
 (:
     Determine the application root collection from the current module load path.
@@ -431,13 +434,46 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
     };
     
 (: TODO(TFJH)
-   - [ ] Populate $config:OPEN_GRAPH_KEYS ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:url", "og:image")
-   - [ ] Populate $config:OPEN_GRAPH
+   - [x] Populate $config:OPEN_GRAPH_KEYS ()
+   - [x] Populate $config:OPEN_GRAPH
 :)
 
-declare variable $config:OPEN_GRAPH_KEYS := ();
+declare variable $config:OPEN_GRAPH_KEYS := ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:image", "og:url");
     
-declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{};
+declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
+    "twitter:card"  : function($node, $model) {
+            <meta property='twitter:card' content='summary'/>
+        },
+    "twitter:site"  : function($node, $model) {
+            <meta property='twitter:site' content='@HistoryAtState'/>
+        },
+    "og:site_name"  : function($node, $model) {
+            <meta property='og:site_name' content='Office of the Historian'/>
+        },
+    "og:image"      : function($node, $model) {
+            
+            for $img in $model?data//tei:graphic
+            return
+                <meta property="og:image" content="https://static.history.state.gov/{$model?base-path}/{$img/@url}"/>,
+            <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>,
+            <meta property="og:image:width" content="400"/>,
+            <meta property="og:image:height" content="400"/>,
+            <meta property="og:image:alt" content="Department of State heraldic shield"/>
+           
+        },
+    "og:type"       : function($node, $model) {
+            <meta property="og:type" content="website"/>
+        },
+    "og:title"      : function($node, $model) {
+            <meta property="og:title" content="{pages:generate-short-title($node, $model)}"/>
+        },
+    "og:description" : function($node, $model) {
+            <meta property="og:description" content="Office of the Historian"/>
+        },
+    "og:url"        : function($node, $model) {
+            <meta property="og:url" content="{$model?url}"/>
+        }
+    };
 
 (:~
  : Resolve the given path using the current application context.
@@ -469,11 +505,18 @@ declare %templates:wrap function config:app-title($node as node(), $model as map
 };
 
 (: TODO(TFJH):
-     - [ ] Add $model?url
-     - [ ] Call config:open-graph()
+     - [x] Add $model?url
+     - [x] Call config:open-graph()
 :)
 declare function config:app-meta($node as node(), $model as map(*)) as element()* {
     <meta xmlns="http://www.w3.org/1999/xhtml" name="description" content="{$config:repo-descriptor/repo:description/text()}"/>,
+    config:open-graph(
+        $node, 
+        map:merge(
+            ($model, map{"url": request:get-url()}),
+            map{"duplicates": "use-last"}
+        )
+    ),
     for $author in $config:repo-descriptor/repo:author[fn:normalize-space(.) ne '']
     return
         <meta xmlns="http://www.w3.org/1999/xhtml" name="creator" content="{$author/text()}"/>
@@ -483,7 +526,11 @@ declare function config:app-meta($node as node(), $model as map(*)) as element()
  : This function creates Open Graph metadata for page templates.
  : See https://github.com/HistoryAtState/hsg-project/wiki/social-media-cards.
  :)
-declare function config:open-graph($node as node()?, $model as map(*)?) as element()* { (: TODO(TFJH): write function!:) };
+declare function config:open-graph($node as node()?, $model as map(*)?) as element()* {
+  for $key in $model?open-graph-keys 
+  for $fn in $model?open-graph($key)
+  return $fn($node, $model)
+};
 
 (:~
  : For debugging: generates a table showing all properties defined
