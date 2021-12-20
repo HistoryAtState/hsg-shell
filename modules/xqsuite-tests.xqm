@@ -6,6 +6,7 @@ import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "p
 import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
+declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 (: XQsuite tests for module functions :)
 
@@ -394,6 +395,36 @@ declare %test:assertEquals('made:up twitter:card') function x:pages-load-add-ope
 };
 
 (:
+# Test Plan for generate-title()
+
+- WHEN calling generate-title()
+  - GIVEN no other title information
+    - Then return "Office of the Historian"
+:)
+
+declare %test:assertEquals('Office of the Historian') function x:generate-title-default() {
+    let $model := map {}
+    let $content := ()
+    return pages:generate-title($model, $content)
+};
+
+(:
+  - GIVEN a title 'frus' and head 'head'
+    - Then return "head - Historical Documents - Office of the Historian"
+:)
+
+declare %test:assertEquals('head - Historical Documents - Office of the Historian') function x:generate-title-with-head() {
+    let $model := map {
+        "publication-id": "frus",
+        "section-id": "x",
+        "data": <tei:div><tei:head>head</tei:head></tei:div>
+    }
+    let $content := ()
+    return pages:generate-title($model, $content)
+};
+
+(:
+
 # Test Plan for generate-short-title()
 
 - WHEN calling generate-short-title()
