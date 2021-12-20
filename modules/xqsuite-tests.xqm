@@ -209,7 +209,7 @@ declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:ti
     - THEN return $new-model?open-graph?og:description as a function which returns'Custom hard-coded description goes here.'
 :)
 
-declare %test:assertEquals('Custom hard-coded description goes here') function x:pages-load-add-open-graph-static() {
+declare %test:assertEquals('<meta property="og:description" content="Custom hard-coded description goes here"/>') function x:pages-load-add-open-graph-static() {
     let $node := 
         <div data-template="pages:load">
             <div id="static-open-graph" data-template="pages:suppress">
