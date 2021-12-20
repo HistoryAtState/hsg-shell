@@ -236,6 +236,43 @@ declare %test:assertEquals('<meta property="og:description" content="Custom hard
 };
 
 (:
+## Static Open Graph properties should add their keys to open-graph-keys
+
+- WHEN HTML templating function pages:load is called
+  - GIVEN a static Open Graph entry in $node//div[@id eq 'static-open-graph']/meta
+    AND @property 'made:up'
+    AND @content 'value'
+    AND no Open Graph keys
+    - THEN return $new-model?open-graph-keys including 'made:up'
+:)
+
+declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:url og:image') function x:pages-load-add-open-graph-keys-static() {
+    let $node := 
+        <div data-template="pages:load">
+            <div id="static-open-graph" data-template="pages:suppress">
+                <meta property="made:up" content="value"/>
+            </div>
+            <div data-template="x:return-model"/>
+        </div>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config
+    }
+    let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), (), (), ())()
+    
+    return $new-model?open-graph-keys => string-join(' ')
+};
+
+(:
 ## Should replace open graph keys with $open-graph-keys tokens
 
 - WHEN HTML templating function pages:load is called
@@ -304,7 +341,7 @@ declare %test:assertEquals('twitter:card twitter:site og:site_name og:title og:u
     - THEN return the the default set of keys from $config:OPEN_GRAPH_KEYS in addition to the sepcified keys as $new-model?open-graph-keys
 :)
 
-declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:title og:description og:url og:image made:up') function x:pages-load-add-open-graph-keys-add() {
+declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:url og:image') function x:pages-load-add-open-graph-keys-add() {
     let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
@@ -336,7 +373,7 @@ declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:ti
       AND that set of keys includes the $graph-keys keys except for those specified
 :)
 
-declare %test:assertEquals('twitter:card made:up') function x:pages-load-add-open-graph-keys-replace() {
+declare %test:assertEquals('made:up twitter:card') function x:pages-load-add-open-graph-keys-replace() {
     let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
