@@ -393,13 +393,8 @@ function pages:navigation-link($node as node(), $model as map(*), $direction as 
 };
 
 declare function pages:generate-title ($model, $content) {
-    (: without an entry in $config:PUBLICATIONS and a publication-id parameter from controller.xql,
-     : only the stock "Office of the Historian" title will appear in the <title> element :)
-    let $title :=
-        if ($model?publication-id) then
-            map:get($config:PUBLICATIONS, $model?publication-id)?title
-        else
-            ($content//(h1|h2|h3))[1]
+    (: Use generate-short-title; suppress default output as this will be suffixed below in any case. :)
+    let $title := pages:generate-short-title($content, $model)[. ne "Office of the Historian"]
 
     let $head :=
         if ($model?section-id) then
@@ -430,7 +425,7 @@ declare function pages:generate-short-title($node, $model) as xs:string? {
     (: TODO(TFJH): 
        - [x] Write function
        - [x] Replace in pages:app-root()
-       - [ ] Replace in pages:generate-title() (remembering to suppress default "Office of the Historian" title to avoid duplication)
+       - [x] Replace in pages:generate-title() (remembering to suppress default "Office of the Historian" title to avoid duplication)
        - [ ] Use in config:open-graph()
      :)
     (
