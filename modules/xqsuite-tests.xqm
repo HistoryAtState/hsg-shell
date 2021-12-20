@@ -527,3 +527,52 @@ declare %test:assertEquals("Static") function x:generate-short-title-static() {
     let $model := map { "publication-id": "frus"}
     return pages:generate-short-title($node, $model)
 };
+
+(:
+# Test plan for pages:app-root
+
+- When calling pages:app-root($node, $model)
+  - Given a node with a static title 'Static'
+    - Then return a $new-node/head/title = 'Static'
+:)
+
+declare %test:assertEquals("Static - Office of the Historian") function x:app-root-static() {
+    let $node := <div><div id="static-title">Static</div></div>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config
+    }
+    return pages:app-root($node, $model)/head/title/string()
+};
+
+(:
+  - Given a node with a H1 heading 'H1'
+    - Return 'H1'
+:)
+
+declare %test:assertEquals("H1 - Office of the Historian") function x:app-root-h1() {
+    let $node := <div><h1>H1</h1></div>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config
+    }
+    return pages:app-root($node, $model)/head/title/string()
+};

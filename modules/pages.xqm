@@ -429,7 +429,7 @@ declare function pages:generate-title ($model, $content) {
 declare function pages:generate-short-title($node, $model) as xs:string? {
     (: TODO(TFJH): 
        - [x] Write function
-       - [ ] Replace in pages:app-root()
+       - [x] Replace in pages:app-root()
        - [ ] Replace in pages:generate-title() (remembering to suppress default "Office of the Historian" title to avoid duplication)
        - [ ] Use in config:open-graph()
      :)
@@ -441,28 +441,20 @@ declare function pages:generate-short-title($node, $model) as xs:string? {
     )[. ne ''][1]
 };
 
-declare
-function pages:app-root($node as node(), $model as map(*)) {
-    let $root :=
+declare function pages:app-root($node as node(), $model as map(*)) {
+    let $root := try {
         if (request:get-header("nginx-request-uri")) then (
             ""
             (: replace(request:get-header("nginx-request-uri"), "^(\w+://[^/]+).*$", "$1") :)
         ) else
-            request:get-context-path() || substring-after($config:app-root, "/db")
+            request:get-context-path() || substring-after($config:app-root, "/db")}
+        catch err:XPDY0002 {()} (: required for local testing when there is no request :)
     return
     element { node-name($node) } {
         $node/@*,
         attribute data-app { $root },
         let $content := templates:process($node/*, $model)
-        let $title :=
-            (: use static override when defined in page template :)
-            if ($content//div[@id="static-title"]) then
-                string-join(
-                    ($content//div[@id="static-title"]/string(), "Office of the Historian")[. ne ""],
-                    " - "
-                )
-            else
-                pages:generate-title($model, $content)
+        let $title := string-join((pages:generate-short-title($node, $model)[. ne 'Office of the Historian'], "Office of the Historian"), " - ")
 
         let $log := console:log("pages:app-root -> title: " || $title)
         return (
