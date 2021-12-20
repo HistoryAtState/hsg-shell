@@ -435,12 +435,6 @@ declare function pages:generate-title ($model, $content) {
  : - A fallback string of 'Office of the Historian'
  :)
 declare function pages:generate-short-title($node, $model) as xs:string? {
-    (: TODO(TFJH): 
-       - [x] Write function
-       - [x] Replace in pages:app-root()
-       - [x] Replace in pages:generate-title() (remembering to suppress default "Office of the Historian" title to avoid duplication)
-       - [ ] Use in config:open-graph()
-     :)
     (
         $node/ancestor-or-self::*[last()]//div[@id="static-title"]/string(),
         $config:PUBLICATIONS?($model?publication-id)?title,

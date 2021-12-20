@@ -432,11 +432,6 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:COUNTRIES_ISSUES_COL: "countries-issues",
         $config:ARCHIVES_ARTICLES_COL: "archives"
     };
-    
-(: TODO(TFJH)
-   - [x] Populate $config:OPEN_GRAPH_KEYS ()
-   - [x] Populate $config:OPEN_GRAPH
-:)
 
 declare variable $config:OPEN_GRAPH_KEYS := ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:image", "og:url");
     
@@ -504,10 +499,6 @@ declare %templates:wrap function config:app-title($node as node(), $model as map
     $config:expath-descriptor/expath:title/text()
 };
 
-(: TODO(TFJH):
-     - [x] Add $model?url
-     - [x] Call config:open-graph()
-:)
 declare function config:app-meta($node as node(), $model as map(*)) as element()* {
     <meta xmlns="http://www.w3.org/1999/xhtml" name="description" content="{$config:repo-descriptor/repo:description/text()}"/>,
     config:open-graph(
