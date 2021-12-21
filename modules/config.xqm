@@ -504,7 +504,14 @@ declare function config:app-meta($node as node(), $model as map(*)) as element()
     config:open-graph(
         $node, 
         map:merge(
-            ($model, map{"url": request:get-url()}),
+            (
+                map{
+                    "open-graph-keys": $config:OPEN_GRAPH_KEYS,
+                    "open-graph": $config:OPEN_GRAPH,
+                    "url": request:get-url()
+                },
+                $model
+            ),
             map{"duplicates": "use-last"}
         )
     ),
