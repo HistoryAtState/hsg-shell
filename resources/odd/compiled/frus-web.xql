@@ -36,7 +36,7 @@ declare function model:transform($options as map(*), $input as node()*) {
                 "apply": model:apply#2,
                 "apply-children": model:apply-children#3
             }
-        ))
+        ),  map{"duplicates": "use-last"})
     
     return (
         html:prepare($config, $input),

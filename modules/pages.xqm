@@ -45,9 +45,9 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         
     let $log := console:log("loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id )
     
-    let $static-open-graph := map:merge(
+    let $static-open-graph := map:merge((
         for $meta in $node//*[@id eq 'static-open-graph']/meta
-        return map{ string($meta/@property) : function($node as node()?, $model as map(*)?) {$meta}}
+        return map{ string($meta/@property) : function($node as node()?, $model as map(*)?) {$meta}}),  map{"duplicates": "use-last"}
     )
     let $static-open-graph-keys := map:keys($static-open-graph)
     
@@ -71,11 +71,11 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
             else (),
         "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
         "open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
-        "open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph))
+        "open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"})
     }
 
     return
-        templates:process($node/*, map:merge(($model, $content)))
+        templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {

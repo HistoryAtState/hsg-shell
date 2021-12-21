@@ -1679,7 +1679,8 @@ else if (matches($exist:path, '^/search/?')) then
                 if (exists($values)) then 
                     map:entry($name, $values)
                 else
-                    ()
+                    (),
+            map{"duplicates": "use-last"}
         )
     (: let $log := console:log($params) :)
     let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']

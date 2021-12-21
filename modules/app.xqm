@@ -268,7 +268,7 @@ declare %templates:wrap function app:load-most-recent-tweets($node as node(), $m
         return $tweet
     let $tweets-to-show := subsequence($ordered-tweets, 1, $how-many)
     let $content := map { "tweets": $tweets-to-show }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };
@@ -312,7 +312,7 @@ declare %templates:wrap function app:load-most-recent-tumblr-posts($node as node
     let $posts-to-show := subsequence($ordered-posts, count($ordered-posts) - $how-many + 1)
     let $newest-on-top := reverse($posts-to-show)
     let $content := map { "posts": $newest-on-top }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };
@@ -336,7 +336,7 @@ declare %templates:wrap function app:load-carousel-items($node as node(), $model
     let $carousel-items := collection($config:CAROUSEL_COL || '/data/entries')/topic[id = $carousel-ids]
     let $ordered-carousel-items := for $item in $carousel-items order by index-of($carousel-ids, $item/id) return $item
     let $content := map { "carousel-items": $ordered-carousel-items }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };
@@ -346,7 +346,7 @@ declare function app:each($node as node(), $model as map(*), $from as xs:string,
     for $item in $model($from)
     return
         element { node-name($node) } {
-            $node/@*, templates:process($node/node(), map:merge(($model, map:entry($to, $item))))
+            $node/@*, templates:process($node/node(), map:merge(($model, map:entry($to, $item)),  map{"duplicates": "use-last"}))
         }
 };
 

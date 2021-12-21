@@ -31,7 +31,7 @@ declare %templates:wrap function ch:load-countries($node as node(), $model as ma
                 "article-id": $article => util:document-name() => substring-before(".xml")
             }
     let $content := map { "articles": $ordered-articles }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };
