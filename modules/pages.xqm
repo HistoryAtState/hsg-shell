@@ -55,16 +55,6 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
     let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
 
-    let $static-open-graph := map:merge(
-        for $meta in $node//*[@id eq 'static-open-graph']/meta
-        return map{ string($meta/@property) : function($node as node()?, $model as map(*)?) {$meta}}
-    )
-    let $static-open-graph-keys := map:keys($static-open-graph)
-    
-    let $ogk as xs:string* := if ($open-graph-keys) then tokenize($open-graph-keys, '\s') else $config:OPEN_GRAPH_KEYS
-    let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
-    let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
-
 
 
     let $last-modified := 
@@ -100,7 +90,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                 response:set-status-code(304),
                 app:set-last-modified($last-modified)
             )
-        else
+        else    let $content := map {
             let $content := map {
                 "data":
                     if (exists($publication-id) and exists($document-id)) then
@@ -130,7 +120,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                         )
                     else
                         (),
-                    templates:process($node/*, map:merge(($model, $content)))
+                    templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
                 )
 };
 
