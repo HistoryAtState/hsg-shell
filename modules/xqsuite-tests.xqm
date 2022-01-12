@@ -1304,5 +1304,252 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Historical Documents`:   `$app/historicaldocuments`
       `Foreign Relations of the United States, 1981-1988, Volume XI, START I`:  `$app/historicaldocuments/frus1981-88v11`
       `Persons`:    `$app/historicaldocuments/frus1981-88v11/persons`
+
+### Page template historicaldocuments/frus-history/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/frus-history`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+
+#### Page template historicaldocuments/frus-history/monograph-interior.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/frus-history/foreword`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `Toward “Thorough, Accurate, and Reliable”: A History of the <em>Foreign Relations of the United States</em> Series`:  `$app/historicaldocuments/frus-history`
+      `Foreword`:   `$app/historicaldocuments/frus-history/foreword`
+
+#### Page template historicaldocuments/frus-history/documents/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/frus-history/documents`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+      `Documents`:  `$app/historicaldocuments/frus-history/documents`
+
+##### Page template historicaldocuments/frus-history/documents/document.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/frus-history/documents/2002-08-19-athens-02867`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+      `Documents`:  `$app/historicaldocuments/frus-history/documents`
+      `Telegram From Embassy Athens, 2002`: `$app/historicaldocuments/frus-history/documents/2002-08-19-athens-02867`
+
+#### Page template historicaldocuments/frus-history/events/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/frus-history/events`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+      `Events`: `$app/historicaldocuments/frus-history/events`
+
+#### Page template historicaldocuments/frus-history/research/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/frus-history/research`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+      `Research`:   `$app/historicaldocuments/frus-history/research`
+
+#### Page template historicaldocuments/frus-history/research/article.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/frus-history/research/a-good-years-work`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+      `Research`:   `$app/historicaldocuments/frus-history/research`
+      `A Good Year's Work`: `$app/historicaldocuments/frus-history/research/a-good-years-work`
+
+### Page template historicaldocuments/pre-1861/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/pre-1861`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
+
+#### Page template historicaldocuments/pre-1861/serial-set/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/pre-1861/serial-set`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
+      `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
+
+##### Page template historicaldocuments/pre-1861/serial-set/all.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/pre-1861/serial-set/all`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
+      `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
+      `All`:        `$app/historicaldocuments/pre-1861/serial-set/all`
+
+##### Page template historicaldocuments/pre-1861/serial-set/browse.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe&subject=France`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
+      `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
+      `Europe`:     `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe`
+      `France`:     `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe&subject=France`
+
+### Page template historicaldocuments/quarterly-releases/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/quarterly-releases`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `Quarterly Releases`: $app/historicaldocuments/quarterly-releases
+
+#### Page template historicaldocuments/quarterly-releases/announcements/2016-q3.xml
+
+There are a number of other page templates in this format: it seems excessive to test them all!
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/quarterly-releases/2016-q3`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `Quarterly Releases`: $app/historicaldocuments/quarterly-releases
+      `2016 Quarter 3`: `$app/historicaldocuments/quarterly-releases/2016-q3`
+      
+## Page template historicaldocuments/milestones/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/milestones`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Milestones`: `$app/milestones`
+
+### Page template historicaldocuments/milestones/all.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/milestones/all`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Milestones`: `$app/milestones`
+      `All`:        `$app/milestones/all`
+      
+### Page template historicaldocuments/milestones/chapter/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/milestones/1977-1980`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Milestones`: `$app/milestones`
+      `1977-1980`:  `$app/milestones/1977-1980`
+      
+### Page template historicaldocuments/milestones/chapter/article.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/milestones/1977-1980/china-policy`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Milestones`: `$app/milestones`
+      `1977-1980`:  `$app/milestones/1977-1980`
+      `China Policy`:   `$app/milestones/1977-1980/china-policy`
+      
+## Page template open/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/open`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Open Government Initiative`: `$app/open`
+      
+### Page template $app/open/frus-latest/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/open/frus-latest`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Open Government Initiative`: `$app/open`
+      `Latest Volumes of <em>Foreign Relations of the United States</em> Series`:   `$app/open/frus-latest`
+      
+### Page template open/frus-metadata/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/open/frus-metadata`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Open Government Initiative`: `$app/open`
+      `Bibliographic Metadata of the <em>Foreign Relations of the United States</em> Series`:   `$app/open/frus-metadata`
+      
+## Page template search/search-landing.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/search`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Search`:     `$app/search`
+            
+### Page template search/search-result.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/search?q=taft`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Search`:     `$app/search`
+      
+### Page template search/tips.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/search/tips`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Search`:     `$app/search`
+      `Search Tips`:    `$app/search/tips`
+      
+## Page template tags/index.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/tags`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Tags`:       `$app/tags`
+      
+### Page template tags/all.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/tags/all`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Tags`:       `$app/tags`
+      `All Tags`:   `$app/tags/all`
+      
+### Page template tags/browse.xml
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/tags/clay-henry`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Tags`:       `$app/tags`
+      `Clay, Henry`:    `$app/tags/clay-henry`
       
 :)
