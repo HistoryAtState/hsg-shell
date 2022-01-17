@@ -1,173 +1,16 @@
 xquery version "3.1";
 
-module namespace x="http://history.state.gov/ns/site/hsg/xqsuite-tests";
-import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
-import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
+module namespace x="http://history.state.gov/ns/site/hsg/tests/test-pages";
+(:import module namespace t="http://history.state.gov/ns/site/hsg/xqsuite" at "../xqsuite.xqm";:)
+import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "../pages.xqm";
+import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
 import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
-
-(: XQsuite tests for module functions :)
-
-(:
-# Helper functions
-
-## return-model()
-
-This function returns the a zero argument function which returns the page template `$model` map; it returns a function rather than a map directly as template functions returning a map are intercepted by the HTML templating module:
-:)
-
-declare function x:return-model($node as node()?, $model as map(*)?) as function(*) {
-    function() {$model}
-};
-
-(:
-### Test
-
-- WHEN calling x:return-model()
-  - GIVEN an entry in $model ("publication-id": "frus")
-    - THEN calling the resulting function should return a map
-    - AND that map should have the entry given in the model
-
-:)
-
-declare %test:assertEquals('frus') function x:test-return-model() {
-    let $node  := ()
-    let $model := map { "publication-id": "frus"}
-    return x:return-model($node, $model)()?publication-id
-};
-
-(:  
-# Test plan for config:open-graph
-
-return values like "og:type": "website" can be considered to be shorthand for:
-```HTML
-<meta property="og:type" content="website"/>
-```
-
-## Should produce open-graph defaults (this essentially tests $config:OPEN_GRAPH and $config:OPEN_GRAPH_KEYS) 
-
-- WHEN calling config:open-graph()
-  - GIVEN the default open graph map
-    AND the default open graph keys
-    AND a test URL 'test-url'
-    - THEN return:
-                "og:type": "website"
-           "twitter:card": "summary"
-           "twitter:site": "@HistoryAtState"
-           "og:site_name": "Office of the Historian"
-         "og:description": "Office of the Historian"
-               "og:image": "https://static.history.state.gov/images/avatar_big.jpg"
-         "og:image:width": "400"
-        "og:image:height": "400"
-           "og:image:alt": "Department of State heraldic shield"
-               "og:title": pages:generate-short-title()
-                 "og:url": "test-url"
-:)
-
-declare
-    %test:assertEquals(
-        '<meta property="og:type" content="website"/>',
-        '<meta property="twitter:card" content="summary"/>',
-        '<meta property="twitter:site" content="@HistoryAtState"/>',
-        '<meta property="og:site_name" content="Office of the Historian"/>',
-        '<meta property="og:title" content="Office of the Historian"/>',
-        '<meta property="og:description" content="Office of the Historian"/>',
-        '<meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>',
-        '<meta property="og:image:width" content="400"/>',
-        '<meta property="og:image:height" content="400"/>',
-        '<meta property="og:image:alt" content="Department of State heraldic shield"/>',
-        '<meta property="og:url" content="test-url"/>'
-    )
-function x:open-graph-defaults() {
-    let $node:= ()
-    let $model:= map {
-             "open-graph": $config:OPEN_GRAPH,
-        "open-graph-keys": $config:OPEN_GRAPH_KEYS,
-                    "url": "test-url"
-    }
-    return config:open-graph($node,$model)
-};
+declare namespace t="http://history.state.gov/ns/site/hsg/xqsuite";
 
 
-(:
-## Should produce metadata for specified open graph keys
-
-- WHEN calling config:open-graph()
-  - GIVEN a specified set of open graph keys ("og:type", "twitter:card")
-    AND the default open graph map
-    - THEN return "og:type": "website"
-      AND    "twitter:card": "summary"
-      AND no other Open Graph metadata (metadata should only be produced when supplied with corresponding keys)
-:)
-
-declare
-    %test:assertEquals(
-        '<meta property="og:type" content="website"/>',
-        '<meta property="twitter:card" content="summary"/>'
-    )
-function x:open-graph-with-keys() {
-    let $node:= ()
-    let $model:= map {
-             "open-graph": $config:OPEN_GRAPH,
-        "open-graph-keys": ("og:type", "twitter:card")
-    }
-    return config:open-graph($node, $model)
-};
-
-(:
-## Should produce metadata for a specified open graph map
-
-
-- WHEN calling config:open-graph()
-  - GIVEN a specified open graph map
-    AND the default set of open graph keys
-    - THEN return "twitter:card": "summary_large_image"
-      AND no other Open Graph metadata (metadata should only be produced when keys have corresponding functions)
-:)
-
-declare
-    %test:assertEquals(
-        '<meta property="twitter:card" content="summary_large_image"/>'
-    ) 
-function x:open-graph-with-map() {
-    let $node:= ()
-    let $model:= map {
-        "open-graph": map {
-            "twitter:card": function($node, $model) {
-                <meta property="twitter:card" content="summary_large_image"/>
-            }
-        },
-        "open-graph-keys": $config:OPEN_GRAPH_KEYS
-    }
-    return config:open-graph($node, $model)
-};
-
-(:
-## Should produce metadata for a combination of specified map and keys
-
-  - GIVEN a specified open graph map (map {"made:up": function($node, $model) {<meta property="made:up" content="value"/>}})
-    AND a specified open graph key ("made:up")
-    - THEN return "made:up": "value"
-      AND no other Open Graph metadata
-:)
-
-declare
-    %test:assertEquals(
-        '<meta property="made:up" content="value"/>'
-    ) 
-function x:open-graph-with-map-and-keys() {
-    let $node:= ()
-    let $model:= map {
-        "open-graph": map {
-            "made:up": function($node, $model) {<meta property="made:up" content="value"/>}
-        },
-        "open-graph-keys": "made:up"
-    }
-    return config:open-graph($node, $model)
-};
- 
 (:
 # Testing plan for pages:load
 
@@ -180,7 +23,7 @@ function x:open-graph-with-map-and-keys() {
 :)
 
 declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url') function x:pages-load-add-default-open-graph-keys() {
-    let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
+    let $node := <div data-template="pages:load"><span data-template="t:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
             try {
@@ -216,7 +59,7 @@ declare %test:assertEquals('<meta property="og:description" content="Custom hard
             <div id="static-open-graph" data-template="pages:suppress">
                 <meta property="og:description" content="Custom hard-coded description goes here"/>
             </div>
-            <div data-template="x:return-model"/>
+            <div data-template="t:return-model"/>
         </div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
@@ -253,7 +96,7 @@ declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_na
             <div id="static-open-graph" data-template="pages:suppress">
                 <meta property="made:up" content="value"/>
             </div>
-            <div data-template="x:return-model"/>
+            <div data-template="t:return-model"/>
         </div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
@@ -283,7 +126,7 @@ declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_na
 :)
 
 declare %test:assertEquals('og:type og:description') function x:pages-load-add-open-graph-keys() {
-    let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
+    let $node := <div data-template="pages:load"><span data-template="t:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
             try {
@@ -313,7 +156,7 @@ declare %test:assertEquals('og:type og:description') function x:pages-load-add-o
 :)
 
 declare %test:assertEquals('twitter:card twitter:site og:site_name og:title og:image og:url') function x:pages-load-add-open-graph-keys-exclude() {
-    let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
+    let $node := <div data-template="pages:load"><span data-template="t:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
             try {
@@ -343,7 +186,7 @@ declare %test:assertEquals('twitter:card twitter:site og:site_name og:title og:i
 :)
 
 declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url') function x:pages-load-add-open-graph-keys-add() {
-    let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
+    let $node := <div data-template="pages:load"><span data-template="t:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
             try {
@@ -375,7 +218,7 @@ declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_na
 :)
 
 declare %test:assertEquals('made:up twitter:card') function x:pages-load-add-open-graph-keys-replace() {
-    let $node := <div data-template="pages:load"><span data-template="x:return-model"/></div>
+    let $node := <div data-template="pages:load"><span data-template="t:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
             try {
@@ -621,7 +464,7 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
   - GIVEN a URL `$app/about`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
-      `About`:      `$app/about`
+      `About`:      `$app/about` 
       
 ### Page template about/contact-us.xml
 
