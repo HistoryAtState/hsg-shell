@@ -40,6 +40,13 @@ console:log('exist:path: ' || $exist:path)
 ,
 :)
 
+let $if-modified-since := request:get-header("If-Modified-Since")
+return
+    if ($if-modified-since) then
+        request:set-attribute("if-modified-since", $if-modified-since)
+    else
+        (),
+
 if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <redirect url="{local:get-uri()}/"/>
