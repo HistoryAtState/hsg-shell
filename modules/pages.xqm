@@ -44,6 +44,11 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean) {
     let $log := console:log("loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id )
 
+    let $last-modified := 
+        if (exists($publication-id) and exists($document-id)) then
+            pages:last-modified($publication-id, $document-id, $section-id)
+        else 
+            ()
     let $content := map {
         "data":
             if (exists($publication-id) and exists($document-id)) then
@@ -54,7 +59,8 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         "section-id": $section-id,
         "view": $view,
         "base-path":
-            (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
+            (: allow for pages that do not have $config:PUBLICATIONS?select-document defined :)
+            (: ... TODO: I do not see any such cases in config:PUBLICATIONS! Check if OK to remove this entry? - JW :)
             if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
                 map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
             else (),
@@ -62,7 +68,20 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     }
 
     return
-        templates:process($node/*, map:merge(($model, $content)))
+        (
+            if (exists($last-modified)) then
+                request:set-attribute("hsgshell.last-modified", $last-modified)
+            else
+                (),
+            templates:process($node/*, map:merge(($model, $content)))
+        )
+};
+
+declare function pages:last-modified($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
+    if ($section-id) then
+        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified($document-id, $section-id)
+    else
+        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified($document-id)
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
