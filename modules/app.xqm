@@ -151,6 +151,10 @@ function app:handle-error($node as node(), $model as map(*), $code as xs:int?) {
             ()
 };
 
+declare function app:set-last-modified($last-modified as xs:dateTime) {
+    response:set-header("Last-Modified", format-dateTime($last-modified, "[FNn,*-3], [D01] [MNn,*-3] [Y0001] [H01]:[m01]:[s01] [Z0000]"))
+};
+
 declare function app:uri($node as node(), $model as map(*)) {
     <code>{request:get-attribute("hsg-shell.path")}</code>
 };

@@ -56,4 +56,12 @@ let $lookup := function($functionName as xs:string, $arity as xs:int) {
  :)
 let $content := request:get-data()
 return
-    templates:apply($content, $lookup, (), $config)
+    (
+        templates:apply($content, $lookup, (), $config),
+        let $last-modified := request:get-attribute("hsgshell.last-modified")
+        return
+            if (exists($last-modified)) then
+                app:set-last-modified($last-modified)
+            else
+                ()
+    )

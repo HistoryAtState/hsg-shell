@@ -118,6 +118,19 @@ declare variable $config:PUBLICATIONS :=
     map {
         "frus": map {
             "collection": $config:FRUS_VOLUMES_COL,
+            "document-last-modified": function($document-id) { 
+                (
+                    xmldb:last-modified($config:FRUS_VOLUMES_COL, $document-id || '.xml'),
+                    (: for volumes that we do not have as TEI yet, fall back on volume metadata :)
+                    xmldb:last-modified($config:FRUS_METADATA_COL, $document-id || '.xml')
+                )[1]
+            },
+            "section-last-modified": function($document-id, $section-id) {
+                (
+                    xmldb:last-modified($config:FRUS_VOLUMES_COL, $document-id || '.xml'),
+                    xmldb:last-modified($config:FRUS_METADATA_COL, $document-id || '.xml')
+                )[1]
+            },
             "select-document": function($document-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { 
                 let $node := doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml')/id($section-id) 
@@ -158,6 +171,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "buildings": map {
             "collection": $config:BUILDINGS_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:BUILDINGS_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:BUILDINGS_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:BUILDINGS_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:BUILDINGS_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
@@ -174,6 +189,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "conferences": map {
             "collection": $config:CONFERENCES_ARTICLES_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:CONFERENCES_ARTICLES_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:CONFERENCES_ARTICLES_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:CONFERENCES_ARTICLES_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:CONFERENCES_ARTICLES_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/conferences/" || string-join(($document-id, $section-id), '/') },
@@ -196,6 +213,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "countries": map {
             "collection": $config:COUNTRIES_ARTICLES_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:COUNTRIES_ARTICLES_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:COUNTRIES_ARTICLES_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:COUNTRIES_ARTICLES_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:COUNTRIES_ARTICLES_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/countries/" || string-join(($document-id, $section-id), '/') },
@@ -206,6 +225,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "countries-issues": map {
             "collection": $config:COUNTRIES_ISSUES_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:COUNTRIES_ISSUES_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:COUNTRIES_ISSUES_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:COUNTRIES_ISSUES_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:COUNTRIES_ISSUES_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/countries/issues/" || string-join(($document-id, $section-id), '/') },
@@ -216,6 +237,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "archives": map {
             "collection": $config:ARCHIVES_ARTICLES_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:ARCHIVES_ARTICLES_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:ARCHIVES_ARTICLES_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:ARCHIVES_ARTICLES_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:ARCHIVES_ARTICLES_COL || '/' || $document-id || '.xml')//tei:body },
             "html-href": function($document-id, $section-id) { "$app/countries/" || string-join(($document-id, $section-id), '/') },
@@ -225,6 +248,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "articles": map {
             "collection": $config:FRUS_HISTORY_ARTICLES_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:FRUS_HISTORY_ARTICLES_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:FRUS_HISTORY_ARTICLES_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_ARTICLES_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_ARTICLES_COL || '/' || $document-id || '.xml')//tei:body },
             "html-href": function($document-id, $section-id) { "$app/frus-history/" || string-join(($document-id, $section-id), '/') },
@@ -243,6 +268,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "people": map {
             "collection": $config:SECRETARY_BIOS_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:SECRETARY_BIOS_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:SECRETARY_BIOS_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:SECRETARY_BIOS_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:SECRETARY_BIOS_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/people/" || string-join(($document-id, $section-id), '/') },
@@ -288,6 +315,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "milestones": map {
             "collection": $config:MILESTONES_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:MILESTONES_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:MILESTONES_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:MILESTONES_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:MILESTONES_COL|| '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/milestones/" || string-join(($document-id, $section-id), '/') },
@@ -298,6 +327,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "short-history": map {
             "collection": $config:SHORT_HISTORY_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:SHORT_HISTORY_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:SHORT_HISTORY_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
@@ -308,6 +339,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "timeline": map {
             "collection": $config:ADMINISTRATIVE_TIMELINE_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:ADMINISTRATIVE_TIMELINE_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:ADMINISTRATIVE_TIMELINE_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml')/id('chapter_' || $section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, substring-after($section-id, 'chapter_')), '/') },
@@ -319,6 +352,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "faq": map {
             "collection": $config:FAQ_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:FAQ_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:FAQ_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:FAQ_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:FAQ_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
@@ -328,6 +363,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "hac": map {
             "collection": $config:HAC_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:HAC_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:HAC_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:HAC_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:HAC_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
@@ -337,6 +374,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "education": map {
             "collection": $config:EDUCATION_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:EDUCATION_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:EDUCATION_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:EDUCATION_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:EDUCATION_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/education/modules/" || string-join(($document-id, $section-id), '#') },
@@ -349,6 +388,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "frus-history-monograph": map {
             "collection": $config:FRUS_HISTORY_MONOGRAPH_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:FRUS_HISTORY_MONOGRAPH_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:FRUS_HISTORY_MONOGRAPH_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_MONOGRAPH_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { 
                 let $target-section-id :=
@@ -395,6 +436,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "vietnam-guide": map {
             "collection": $config:VIETNAM_GUIDE_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:VIETNAM_GUIDE_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:VIETNAM_GUIDE_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:VIETNAM_GUIDE_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:VIETNAM_GUIDE_COL || '/' || $document-id || '.xml') },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
@@ -404,6 +447,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "views-from-the-embassy": map {
             "collection": $config:VIEWS_FROM_EMBASSY_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:VIEWS_FROM_EMBASSY_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:VIEWS_FROM_EMBASSY_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:VIEWS_FROM_EMBASSY_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:VIEWS_FROM_EMBASSY_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/wwi" },
