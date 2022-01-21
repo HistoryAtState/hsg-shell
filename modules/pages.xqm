@@ -63,7 +63,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $if-modified-since := try { request:get-attribute("if-modified-since") => parse-ietf-date() } catch * { () }
     let $should-return-304 := 
         if (exists($last-modified) and exists($if-modified-since)) then
-            $if-modified-since gt $last-modified
+            $if-modified-since ge $last-modified
         else
             ()
     return
