@@ -49,32 +49,48 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
             pages:last-modified($publication-id, $document-id, $section-id)
         else 
             ()
-    let $content := map {
-        "data":
-            if (exists($publication-id) and exists($document-id)) then
-                pages:load-xml($publication-id, $document-id, $section-id, $view, $ignore)
-            else (),
-        "publication-id": $publication-id,
-        "document-id": $document-id,
-        "section-id": $section-id,
-        "view": $view,
-        "base-path":
-            (: allow for pages that do not have $config:PUBLICATIONS?select-document defined :)
-            (: ... TODO: I do not see any such cases in config:PUBLICATIONS! Check if OK to remove this entry? - JW :)
-            if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
-                map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
-            else (),
-        "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
-    }
-
+    let $if-modified-since := try { request:get-attribute("if-modified-since") => parse-ietf-date() } catch * { () }
+    let $should-return-304 := 
+        if (exists($last-modified) and exists($if-modified-since)) then
+            $if-modified-since gt $last-modified
+        else
+            ()
     return
-        (
-            if (exists($last-modified)) then
-                request:set-attribute("hsgshell.last-modified", $last-modified)
-            else
-                (),
-            templates:process($node/*, map:merge(($model, $content)))
-        )
+        (: if the "If-Modified-Since" header in the client request is later than the 
+         : last-modified date, then halt further processing of the templates and simply
+         : return a 304 response. :)
+        if ($should-return-304) then
+            (
+                response:set-status-code(304),
+                app:set-last-modified($last-modified)
+            )
+        else
+            let $content := map {
+                "data":
+                    if (exists($publication-id) and exists($document-id)) then
+                        pages:load-xml($publication-id, $document-id, $section-id, $view, $ignore)
+                    else (),
+                "publication-id": $publication-id,
+                "document-id": $document-id,
+                "section-id": $section-id,
+                "view": $view,
+                "base-path":
+                    (: allow for pages that do not have $config:PUBLICATIONS?select-document defined :)
+                    (: ... TODO: I do not see any such cases in config:PUBLICATIONS! Check if OK to remove this entry? - JW :)
+                    if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
+                        map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
+                    else (),
+                "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
+            }
+        
+            return
+                (
+                    if (exists($last-modified)) then
+                        request:set-attribute("hsgshell.last-modified", $last-modified)
+                    else
+                        (),
+                    templates:process($node/*, map:merge(($model, $content)))
+                )
 };
 
 declare function pages:last-modified($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
