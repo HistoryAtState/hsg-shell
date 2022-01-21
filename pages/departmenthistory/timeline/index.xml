@@ -33,8 +33,7 @@
                                 <em>U.S. Statutes at Large</em>, Executive Orders, Departmental
                             Orders, and Department of State periodicals such as the <em>Department
                                 of State Bulletin</em> and <em>State Magazine</em>. We invite
-                            questions and comments about this resource at <a
-                                href="mailto:history@state.gov">history@state.gov</a>.</p>
+                            questions and comments about this resource at <a href="mailto:history@state.gov">history@state.gov</a>.</p>
                         <p>The Administrative Timeline of the Department of State is not yet
                             searchable with the history.state.gov search engine. We are working to
                             make this resource searchable, but in the meantime please browse the
@@ -87,7 +86,10 @@
                             <a href="$app/departmenthistory/timeline/2000-2009">2000–2009</a>
                         </li>
                         <li class="hsg-list-group-item">
-                            <a href="$app/departmenthistory/timeline/2010-2019">2010–present</a>
+                            <a href="$app/departmenthistory/timeline/2010-2019">2010–2019</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/2020-2029">2020–present</a>
                         </li>
                     </ul>
                 </div>
