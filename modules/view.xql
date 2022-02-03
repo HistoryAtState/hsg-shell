@@ -59,9 +59,13 @@ return
     (
         templates:apply($content, $lookup, (), $config),
         let $last-modified := request:get-attribute("hsgshell.last-modified")
+        let $created := request:get-attribute("hsgshell.created")
         return
-            if (exists($last-modified)) then
-                app:set-last-modified($last-modified)
+            if (exists($last-modified) and exists($created)) then
+                (
+                    app:set-last-modified($last-modified),
+                    app:set-created($created)
+                )
             else
                 ()
     )

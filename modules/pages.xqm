@@ -61,6 +61,12 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
             $if-modified-since ge $last-modified
         else
             ()
+    let $created := 
+        if (exists($publication-id) and exists($document-id)) then
+            (: No need to truncate creation date; it'll be serialized in view.xql :)
+            pages:created($publication-id, $document-id, $section-id)
+        else 
+            ()
     return
         (: if the "If-Modified-Since" header in the client request is later than the 
          : last-modified date, then halt further processing of the templates and simply
@@ -91,8 +97,11 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         
             return
                 (
-                    if (exists($last-modified)) then
-                        request:set-attribute("hsgshell.last-modified", $last-modified)
+                    if (exists($last-modified) and exists($created)) then
+                        (
+                            request:set-attribute("hsgshell.last-modified", $last-modified),
+                            request:set-attribute("hsgshell.created", $created)
+                        )
                     else
                         (),
                     templates:process($node/*, map:merge(($model, $content)))
@@ -104,6 +113,13 @@ declare function pages:last-modified($publication-id as xs:string, $document-id 
         map:get($config:PUBLICATIONS, $publication-id)?section-last-modified($document-id, $section-id)
     else
         map:get($config:PUBLICATIONS, $publication-id)?document-last-modified($document-id)
+};
+
+declare function pages:created($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
+    if ($section-id) then
+        map:get($config:PUBLICATIONS, $publication-id)?section-created($document-id, $section-id)
+    else
+        map:get($config:PUBLICATIONS, $publication-id)?document-created($document-id)
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
