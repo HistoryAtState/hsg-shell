@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 module namespace app="http://history.state.gov/ns/site/hsg/templates";
 
@@ -151,8 +151,18 @@ function app:handle-error($node as node(), $model as map(*), $code as xs:int?) {
             ()
 };
 
+declare function app:format-http-date($dateTime as xs:dateTime) as xs:string {
+    $dateTime
+    => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
+    => format-dateTime("[FNn,*-3], [D01] [MNn,*-3] [Y0001] [H01]:[m01]:[s01] [Z0000]", "en", (), ())
+};
+
 declare function app:set-last-modified($last-modified as xs:dateTime) {
-    response:set-header("Last-Modified", format-dateTime(adjust-dateTime-to-timezone($last-modified, xs:dayTimeDuration("PT0H")), "[FNn,*-3], [D01] [MNn,*-3] [Y0001] [H01]:[m01]:[s01] [Z0000]", "en", (), ()))
+    response:set-header("Last-Modified", app:format-http-date($last-modified))
+};
+
+declare function app:set-created($created as xs:dateTime) {
+    response:set-header("Created", app:format-http-date($created))
 };
 
 declare function app:uri($node as node(), $model as map(*)) {
