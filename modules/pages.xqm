@@ -47,6 +47,12 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $last-modified := 
         if (exists($publication-id) and exists($document-id)) then
             pages:last-modified($publication-id, $document-id, $section-id)
+            (: For the purpose of comparing the resource's last modified date with the If-Modified-Since
+             : header supplied by the client, we must truncate any milliseconds from the last modified date.
+             : This is because HTTP-date is only specific to the second.
+             : @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1 :)
+            => format-dateTime("[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][Z]")
+            => xs:dateTime()
         else 
             ()
     let $if-modified-since := try { request:get-attribute("if-modified-since") => parse-ietf-date() } catch * { () }
