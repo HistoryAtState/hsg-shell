@@ -163,14 +163,14 @@ declare function pocom:principal-officers-by-role-id($node as node(), $model as 
                     let $person-id := $role/person-id
                     let $name := pocom:person-name-first-last($node, $model, $person-id)
                     let $start-date := 
-                        (: TODO: Confer with Evan Duncan about the following logic for determining term of service
-                           Prefer started-date, but use appointed-date for Principal Officers and Chiefs to Int'l Orgs if it's all we have
+                        (: TODO: Confer with Josh Botts about the following logic for determining term of service
+                           Prefer started-date/arrived-date, but use appointed-date for Principal Officers and Chiefs to Int'l Orgs if it's all we have
                         :)
                         if ($role-class = ('principal-position', 'org-mission')) then
-                            ($role/started/date, $role/appointed/date)[. ne ''][1]
+                            ($role/started/date, $role/arrived/date, $role/appointed/date)[. ne ''][1]
                         else
-                            (: For Chiefs of Mission, do not use the appointment date, only start date :)
-                            $role/started/date
+                            (: For Chiefs of Mission, do not use the appointment date :)
+                            ($role/started/date, $role/arrived/date)[. ne ''][1]
                     let $end-date :=
                         (: Career Ambassador is a permanent marker of distinguished service, so do not supply/suggest an end date :)
                         if ($role-title-id = 'career-ambassador') then 
@@ -354,6 +354,7 @@ declare function pocom:chiefs-by-country-id($node as node(), $model as map(*), $
                     let $startdate :=
                         (
                         $chief/started/date,
+                        $chief/arrived/date,
                         $chief/appointed/date
                         )[. ne ''][1]
                     let $start-date-english := if ($startdate) then app:date-to-english($startdate) else ()
@@ -578,14 +579,14 @@ declare function pocom:format-index($node as node(), $model as map(*), $people a
                             ", "
                         )
                     let $start-date := 
-                        (: TODO: Confer with Evan Duncan about the following logic for determining term of service
-                           Prefer started-date, but use appointed-date for Principal Officers and Chiefs to Int'l Orgs if it's all we have
+                        (: TODO: Confer with Josh Botts about the following logic for determining term of service
+                           Prefer started-date/arrived-date, but use appointed-date for Principal Officers and Chiefs to Int'l Orgs if it's all we have
                         :)
                         if ($role-class = ('principal-position', 'org-mission')) then
-                            ($role/appointed/date, $role/started/date)[. ne ''][1]
+                            ($role/appointed/date, $role/arrived/date, $role/started/date)[. ne ''][1]
                         else
-                            (: For Chiefs of Mission, do not use the appointment date, only start date :)
-                            $role/started/date
+                            (: For Chiefs of Mission, do not use the appointment date :)
+                            ($role/appointed/date, $role/arrived/date)[. ne ''][1]
                     let $end-date :=
                         (: Career Ambassador is a permanent marker of distinguished service, so do not supply/suggest an end date :)
                         if ($role-title-id = 'career-ambassador') then 
@@ -683,11 +684,13 @@ declare function pocom:format-role($person, $role) {
         else 
             ()
     let $appointed := $role/appointed
+    let $arrived := $role/arrived
     let $started := $role/started
     let $ended := $role/ended
     let $startdate :=
         (
         $started/date,
+        $arrived/date,
         $appointed/date
         )[. ne ''][1]
     let $dates :=
@@ -700,11 +703,13 @@ declare function pocom:format-role($person, $role) {
             else if ($role-title-id = ('charge-daffaires-ad-interim')) then
                 (
                 if ($started/date ne '') then (normalize-space(concat('Began Service: ', $started/note, ' ', app:date-to-english($started/date))), <br/>) else (),
+                if ($arrived/date ne '') then (normalize-space(concat('Assumed Charge: ', $arrived/note, ' ', app:date-to-english($arrived/date))), <br/>) else (),
                 if ($ended/date ne '') then normalize-space(concat('Ended Service: ', $ended/note, ' ', app:date-to-english($ended/date) )) else ()
                 )
             else (: if ($roleclass = ('country-mission', 'org-mission')) then :)
                 (
                 if ($appointed/date ne '') then (normalize-space(concat('Appointed: ', $appointed/note, ' ', app:date-to-english($appointed/date))), <br/>) else (),
+                if ($arrived/date ne '') then (normalize-space(concat('Assumed Charge: ', $arrived/note, ' ', app:date-to-english($arrived/date))), <br/>) else (),
                 if ($started/date ne '') then (normalize-space(concat('Presentation of Credentials: ', $started/note, ' ', app:date-to-english($started/date))), <br/>) else (),
                 if ($ended/date ne '') then normalize-space(concat('Termination of Mission: ', $ended/note, ' ', app:date-to-english($ended/date) )) else ()
                 )
