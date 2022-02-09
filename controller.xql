@@ -106,7 +106,9 @@ else if (ends-with($exist:path, "resource-name.xml")) then
 (: handle requests for validate-replication:)
 else if (ends-with($exist:path, "validate-replication")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/tests/xquery/validate-replication.xq"/>
+        <forward url="{$exist:controller}/tests/xquery/validate-replication.xq">
+            <set-header name="Cache-Control" value="no-store"/>
+        </forward>
     </dispatch>
    
    
