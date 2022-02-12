@@ -19,7 +19,7 @@ const subpages = {
     p2: 'Introduction',
     p3: 'Original Foreword',
     p4: 'The Period of the Continental Congress',
-    p5: "Carpenters\' Hall, Philadelphia\nSept. 5, 1774—Oct. 26, 1774",
+    p5: "Carpenters’ Hall, Philadelphia\nSept. 5, 1774—Oct. 26, 1774",
     p6: 'Pennsylvania State House (Independence Hall), Philadelphia\nIntermittingly from May 10, 1775 to March 1, 1781'
   }
 };
