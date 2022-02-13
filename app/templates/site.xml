@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- @if PRODUCTION=false -->
 <!-- DO NOT APPLY FORMAT & INDENT IN OXYGEN WITHOUT TEMPORARILY CHANGING THE ROOT ELEMENT TO, E.G., "FOO" -->
+<!-- @endif -->
 <html data-template="pages:app-root" lang="en">
     <!-- @if PRODUCTION=false -->
     <!--
