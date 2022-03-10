@@ -1,14 +1,14 @@
 xquery version "3.1";
 
 module namespace x="http://history.state.gov/ns/site/hsg/tests/test-pages";
-(:import module namespace t="http://history.state.gov/ns/site/hsg/xqsuite" at "../xqsuite.xqm";:)
+import module namespace t="http://history.state.gov/ns/site/hsg/xqsuite" at "../xqsuite.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "../pages.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
 import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
-declare namespace t="http://history.state.gov/ns/site/hsg/xqsuite";
+(:declare namespace t="http://history.state.gov/ns/site/hsg/xqsuite";:)
 
 
 (:
