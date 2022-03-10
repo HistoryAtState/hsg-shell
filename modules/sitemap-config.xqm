@@ -189,7 +189,6 @@ function site:sitemap-page-template($page-template as element(site:page-template
   return 
     <u:url>
       <u:loc>{$url}</u:loc>
-      {for $filepath in distinct-values($filepaths) return <filepath>{$filepath}</filepath>}
       <u:lastmod>{$lastmod}</u:lastmod>
     </u:url>
 };
