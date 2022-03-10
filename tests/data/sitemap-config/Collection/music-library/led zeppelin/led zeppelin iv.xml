@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="8">
+   <name>led zeppelin iv</name>
+   <artist>led zeppelin</artist>
+   <track>
+      <metadata key="Track ID" type="integer">3426</metadata>
+      <metadata key="Name" type="string">Black Dog</metadata>
+      <metadata key="Artist" type="string">Led Zeppelin</metadata>
+      <metadata key="Composer" type="string">John Paul Jones</metadata>
+      <metadata key="Album" type="string">Led Zeppelin IV</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">31609247</metadata>
+      <metadata key="Total Time" type="integer">296560</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">8</metadata>
+      <metadata key="Year" type="integer">1971</metadata>
+      <metadata key="Date Modified" type="date">2008-02-02T21:50:34Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T23:51:44Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">59</metadata>
+      <metadata key="Play Date" type="integer">3725711338</metadata>
+      <metadata key="Play Date UTC" type="date">2022-01-22T15:48:58Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">3642</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">8590AAD3A1316E70</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3428</metadata>
+      <metadata key="Name" type="string">Rock &amp; Roll</metadata>
+      <metadata key="Artist" type="string">Led Zeppelin</metadata>
+      <metadata key="Composer" type="string">John Bonham/John Paul Jones</metadata>
+      <metadata key="Album" type="string">Led Zeppelin IV</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26709452</metadata>
+      <metadata key="Total Time" type="integer">220840</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">8</metadata>
+      <metadata key="Year" type="integer">1971</metadata>
+      <metadata key="Date Modified" type="date">2008-02-02T21:50:40Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T23:52:39Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">69</metadata>
+      <metadata key="Play Date" type="integer">3725711559</metadata>
+      <metadata key="Play Date UTC" type="date">2022-01-22T15:52:39Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1182</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">AC47038D159AE905</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3430</metadata>
+      <metadata key="Name" type="string">The Battle Of Evermore</metadata>
+      <metadata key="Artist" type="string">Led Zeppelin</metadata>
+      <metadata key="Composer" type="string">Jimmy Page</metadata>
+      <metadata key="Album" type="string">Led Zeppelin IV</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">36030070</metadata>
+      <metadata key="Total Time" type="integer">351466</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">8</metadata>
+      <metadata key="Year" type="integer">1971</metadata>
+      <metadata key="Date Modified" type="date">2008-01-22T22:54:16Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T23:53:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">29</metadata>
+      <metadata key="Play Date" type="integer">3725711911</metadata>
+      <metadata key="Play Date UTC" type="date">2022-01-22T15:58:31Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2016-01-22T15:56:17Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">904</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Battle Of Evermore</metadata>
+      <metadata key="Persistent ID" type="string">FD4A2F89F82940D5</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3432</metadata>
+      <metadata key="Name" type="string">Stairway To Heaven</metadata>
+      <metadata key="Artist" type="string">Led Zeppelin</metadata>
+      <metadata key="Composer" type="string">Jimmy Page</metadata>
+      <metadata key="Album" type="string">Led Zeppelin IV</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">47448722</metadata>
+      <metadata key="Total Time" type="integer">481533</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">8</metadata>
+      <metadata key="Year" type="integer">1971</metadata>
+      <metadata key="Date Modified" type="date">2008-01-22T22:55:19Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T23:54:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">19</metadata>
+      <metadata key="Play Date" type="integer">3725712394</metadata>
+      <metadata key="Play Date UTC" type="date">2022-01-22T16:06:34Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2021-05-11T09:26:04Z</metadata>
+      <metadata key="Rating" type="integer">80</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">827</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">C16FF7B121A2C37A</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3434</metadata>
+      <metadata key="Name" type="string">Misty Mountain Hop</metadata>
+      <metadata key="Artist" type="string">Led Zeppelin</metadata>
+      <metadata key="Composer" type="string">John Paul Jones</metadata>
+      <metadata key="Album" type="string">Led Zeppelin IV</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">30884662</metadata>
+      <metadata key="Total Time" type="integer">278760</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">8</metadata>
+      <metadata key="Year" type="integer">1971</metadata>
+      <metadata key="Date Modified" type="date">2008-01-22T22:55:55Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T23:55:21Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">32</metadata>
+      <metadata key="Play Date" type="integer">3725712673</metadata>
+      <metadata key="Play Date UTC" type="date">2022-01-22T16:11:13Z</metadata>
+      <metadata key="Rating" type="integer">80</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1067</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">54AFD7D9BF8AF918</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3436</metadata>
+      <metadata key="Name" type="string">Four Sticks</metadata>
+      <metadata key="Artist" type="string">Led Zeppelin</metadata>
+      <metadata key="Composer" type="string">Jimmy Page</metadata>
+      <metadata key="Album" type="string">Led Zeppelin IV</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29323929</metadata>
+      <metadata key="Total Time" type="integer">284373</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">8</metadata>
+      <metadata key="Year" type="integer">1971</metadata>
+      <metadata key="Date Modified" type="date">2008-01-22T22:56:29Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T23:55:57Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">26</metadata>
+      <metadata key="Play Date" type="integer">3725712957</metadata>
+      <metadata key="Play Date UTC" type="date">2022-01-22T16:15:57Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">906</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">5F7CE0B03F82A43C</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3438</metadata>
+      <metadata key="Name" type="string">Going To California</metadata>
+      <metadata key="Artist" type="string">Led Zeppelin</metadata>
+      <metadata key="Composer" type="string">Jimmy Page</metadata>
+      <metadata key="Album" type="string">Led Zeppelin IV</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">20100543</metadata>
+      <metadata key="Total Time" type="integer">215600</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">8</metadata>
+      <metadata key="Year" type="integer">1971</metadata>
+      <metadata key="Date Modified" type="date">2008-01-22T22:56:54Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T23:56:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">31</metadata>
+      <metadata key="Play Date" type="integer">3725713174</metadata>
+      <metadata key="Play Date UTC" type="date">2022-01-22T16:19:34Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">544</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">4C2550BB55BDAC00</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3440</metadata>
+      <metadata key="Name" type="string">When The Levee Breaks</metadata>
+      <metadata key="Artist" type="string">Led Zeppelin</metadata>
+      <metadata key="Composer" type="string">John Paul Jones/John Bonham/Memphis Minnie</metadata>
+      <metadata key="Album" type="string">Led Zeppelin IV</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">47889882</metadata>
+      <metadata key="Total Time" type="integer">427760</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">8</metadata>
+      <metadata key="Year" type="integer">1971</metadata>
+      <metadata key="Date Modified" type="date">2008-01-22T22:57:42Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T23:56:56Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">44</metadata>
+      <metadata key="Play Date" type="integer">3725713601</metadata>
+      <metadata key="Play Date UTC" type="date">2022-01-22T16:26:41Z</metadata>
+      <metadata key="Rating" type="integer">100</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1437</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">655D3935A1A8510B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+</album>
