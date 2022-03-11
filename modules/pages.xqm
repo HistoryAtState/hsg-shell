@@ -90,7 +90,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                 response:set-status-code(304),
                 app:set-last-modified($last-modified)
             )
-        else    let $content := map {
+        else
             let $content := map {
                 "data":
                     if (exists($publication-id) and exists($document-id)) then
@@ -106,7 +106,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                     if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
                         map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
                     else (),
-                "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
+                "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
         		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
         		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"})
             }
