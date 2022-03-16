@@ -182,7 +182,19 @@ function site:sitemap-page-template($page-template as element(site:page-template
     for $file in $files
     let $col := util:collection-name($file)
     let $doc := util:document-name($file)
-    let $date as xs:dateTime := xmldb:last-modified($col, $doc)
+    let $date as xs:dateTime? := 
+      try {
+        xmldb:last-modified($col, $doc)
+      } catch * {
+        util:log('ERROR',('Collection: ', $col)),
+        util:log('ERROR',('Filename: ', $doc)),
+        util:log('ERROR',('Error code: ', $err:code)),
+        util:log('ERROR',('Error description: ', $err:description)),
+        util:log('ERROR',('Error value(s): ', $err:value)),
+        util:log('ERROR',('Error in module: ', $err:module)),
+        util:log('ERROR',('Error line no: ', $err:line-number)),
+        util:log('ERROR',('Addition info: ', $err:additional))
+      }
     order by $date descending
     return $date
   )[1]
@@ -280,7 +292,12 @@ function site:config-src-child-collections($child-cols as attribute(child-collec
         'urls': map{
           replace($parent-url, '(.*)/$', '$1')||'/'||$child-collection: map:merge((
             map{'filepath': $parent-filepath||'/'||$child-collection},
-            if ($key-label) then map{'keys': map{$key-label: $child-collection}} else ()
+            if ($key-label) 
+            then map{'keys': map:merge((
+              $parent-urls?($parent-url)?keys,
+              map{$key-label: $child-collection}
+            ))} 
+            else (map{'keys': $parent-urls?($parent-url)?keys})
           ))
         }
       }
@@ -306,7 +323,12 @@ function site:config-step-src-collection($collection as attribute(collection), $
           'urls': map{
             $parent-url||'/'||$filename: map:merge((
               map{'filepath': $parent-filepath||$filename.ext},
-              if ($key-label) then map{'keys': map{$key-label: $filename}} else ()
+              if ($key-label) 
+              then map{'keys': map:merge((
+                $parent-urls?($parent-url)?keys,
+                map{$key-label: $filename}
+              ))} 
+              else (map{'keys': $parent-urls?($parent-url)?keys})
             ))
           }
         }
@@ -341,7 +363,12 @@ function site:config-step-src-xq($xq as attribute(xq), $state as map(*)) as map(
               'filepath': base-uri($source),
               'xq': string($xq)
             },
-            if ($key-label) then map{'keys': map{$key-label: string($source)}} else ()
+            if ($key-label) 
+            then map{'keys': map:merge((
+              $parent-urls?($parent-url)?keys,
+              map{$key-label: string($source)}
+            ))} 
+            else (map{'keys': $parent-urls?($parent-url)?keys})
           ))
         }
       }

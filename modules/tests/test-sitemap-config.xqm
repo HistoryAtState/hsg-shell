@@ -193,10 +193,23 @@ declare %test:assertEquals(".//track/metadata[@key='Name']") function x:test-con
   return site:get-config($x:sample/site:root/site:step[@value eq 'music']/site:step[@value eq 'tracks']/site:step[@key eq 'trackName'], $state)?urls?('/music/tracks/Hotwax')?xq
 };
 
-declare %test:assertEquals(913) function x:test-build-map-count(){
-  let $urls := site:build-map($x:sample/*)//u:url
-  return count($urls)
- };
+declare %test:assertEquals("beck") function x:test-config-step-album-key-artist(){
+  let $state:= map{
+  'config': map {
+    "urls": map {
+        "/music/beck": map {
+            "filepath": "/db/apps/hsg-shell/tests/data/sitemap-config/Collection/music-library/beck",
+            "keys": map {
+                "artist": "beck"
+            }
+        }
+    }
+}
+}
+let $sample := $x:sample/site:root/site:step[@value eq 'music']/site:step[@key eq 'artist']/site:step[@key eq 'album']
+
+return site:get-config($sample, $state)?urls?('/music/beck/odelay')?keys?artist
+};
 
 declare %test:assertEquals('urlset') function x:test-build-map-root(){
   site:build-map($x:sample/site:root) => local-name()
