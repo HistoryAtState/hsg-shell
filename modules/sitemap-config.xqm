@@ -460,14 +460,23 @@ declare function site:state-config-merge($state, $config) as map(*){
   ), map{'duplicates':'use-last'})
 };
 
-declare function site:eval-avt($avt as xs:string, $cache-flag as xs:boolean, $external-variable) as xs:string? {
+declare function site:eval-avt($avt as node(), $cache-flag as xs:boolean, $external-variable) as xs:string? {
 (:
   eval-avt takes an attribute value-like string (with embedded values in {curly braces}) and evaluates them.
   It does this by embedding the string in a node tree as element content, evaluating, then taking the 
   string result.
 :)
 
-  let $tmp as xs:string := 'declare namespace site="http://ns.evolvedbinary.com/sitemap"; <tmp>'||$avt||'</tmp>'
+  let $declarations as xs:string* :=
+    for $prefix in in-scope-prefixes(($avt/ancestor-or-self::*[. instance of element()])[1])[not(. = ('', 'xml'))]
+    return concat("declare namespace ", $prefix, "='", namespace-uri-for-prefix($prefix, ($avt/ancestor-or-self::*[. instance of element()])[1]), "'; ")
+
+  let $tmp as xs:string := concat(
+    string-join($declarations),
+    "<tmp>",
+    $avt,
+    "</tmp>"
+ )
     
   return util:eval($tmp, $cache-flag, $external-variable) ! string(.)
   
