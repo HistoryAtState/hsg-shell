@@ -354,8 +354,15 @@ function site:config-step-src-xq($xq as attribute(xq), $state as map(*)) as map(
         else if ($xq/../@doc)
           then 'doc("'||resolve-uri($xq/../@doc, $parent-filepath||'/')||'")/'
         else $parent-context
-      let $sources := util:eval($context||$xq)
+      let $sources := util:eval($context||$xq, false(), ('site:keys', $parent-urls?($parent-url)?keys))
       for $source in $sources
+        let $keys := 
+          if ($key-label) 
+          then map:merge((
+            $parent-urls?($parent-url)?keys,
+            map{$key-label: string($source)}
+          ))
+          else $parent-urls?($parent-url)?keys
       return map{
         'urls': map{
           $parent-url||'/'||encode-for-uri($source): map:merge((
@@ -363,12 +370,7 @@ function site:config-step-src-xq($xq as attribute(xq), $state as map(*)) as map(
               'filepath': base-uri($source),
               'xq': string($xq)
             },
-            if ($key-label) 
-            then map{'keys': map:merge((
-              $parent-urls?($parent-url)?keys,
-              map{$key-label: string($source)}
-            ))} 
-            else (map{'keys': $parent-urls?($parent-url)?keys})
+            map{'keys': $keys}
           ))
         }
       }
