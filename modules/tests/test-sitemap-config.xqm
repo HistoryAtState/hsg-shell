@@ -150,6 +150,7 @@ declare %test:assertEquals('/db/apps/hsg-shell/tests/data/sitemap-config/Collect
   return site:get-config($x:sample/site:root/site:step[@value eq 'music']/site:step[@key eq 'artist']/site:step[@key eq 'album']/site:step[@key eq 'trackNo'], $state)?urls?('/music/beck/odelay/2')?filepath
 
 };
+
 declare %test:assertEquals(".//track/metadata[@key='Track Number']") function x:test-config-step-trackNo-urls-xq(){
   let $state:= map{
     'config': map{
@@ -210,6 +211,15 @@ let $sample := $x:sample/site:root/site:step[@value eq 'music']/site:step[@key e
 
 return site:get-config($sample, $state)?urls?('/music/beck/odelay')?keys?artist
 };
+
+declare %test:assertEquals('pages/artist/morcheeba.xml') function x:test-eval-avt(){
+  let $page-template as element(site:page-template):= $x:sample/site:root/site:step[@value eq 'music']/site:step[@key eq 'artist']/site:page-template
+  let $key := map{
+    'artist': 'morcheeba'
+  }
+  return site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $key))
+};
+
 
 declare %test:assertEquals('urlset') function x:test-build-map-root(){
   site:build-map($x:sample/site:root) => local-name()

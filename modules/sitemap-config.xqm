@@ -174,7 +174,8 @@ function site:sitemap-page-template($page-template as element(site:page-template
   (:let $log1 := util:log('error', "state is: "||serialize($state, map{'method':'adaptive', 'indent': true()})):)
   for $url in $state?config?urls!map:keys(.)
   let $filepaths := distinct-values($state?config?urls?($url)?filepath)
-  let $files := (doc(resolve-uri($page-template/@href, base-uri($page-template))),
+  let $page-template-href := site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $state?config?urls?($url)?keys))
+  let $files := (doc(resolve-uri($page-template-href, base-uri($page-template))),
     for $filepath in $filepaths
     return if (doc-available($filepath)) then doc($filepath) else collection($filepath)
   )
@@ -457,4 +458,17 @@ declare function site:state-config-merge($state, $config) as map(*){
         ), map{'duplicates':'use-last'})
     }
   ), map{'duplicates':'use-last'})
+};
+
+declare function site:eval-avt($avt as xs:string, $cache-flag as xs:boolean, $external-variable) as xs:string? {
+(:
+  eval-avt takes an attribute value-like string (with embedded values in {curly braces}) and evaluates them.
+  It does this by embedding the string in a node tree as element content, evaluating, then taking the 
+  string result.
+:)
+
+  let $tmp as xs:string := 'declare namespace site="http://ns.evolvedbinary.com/sitemap"; <tmp>'||$avt||'</tmp>'
+    
+  return util:eval($tmp, $cache-flag, $external-variable) ! string(.)
+  
 };

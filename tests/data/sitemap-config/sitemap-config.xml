@@ -16,7 +16,7 @@
           <src collection="."/>
         </config>
       </step>
-      <page-template href="pages/artist.xml">
+      <page-template href="pages/artist/{$site:key?artist}.xml">
         <with-param name="artist" keyval="artist"/>
       </page-template>
       <config>
