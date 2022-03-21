@@ -16,7 +16,7 @@
     <ignore/>
   </path>
   <step value="robots.txt opensearch.xml favicon.ico" key="path">
-    <fwd url="/resources/{site:key?path}"/>
+    <fwd url="/resources/{$site:key?path}"/>
   </step>
   <step value="historicaldocuments">
     <step value="pre-1861">
@@ -64,7 +64,7 @@
     </step>
     <step value="quarterly-releases">
       <step key="announcement">
-        <page-template href="pages/historicaldocuments/quarterly-releases/announcements/{site:key?announcement}.xml"/>
+        <page-template href="pages/historicaldocuments/quarterly-releases/announcements/{$site:key?announcement}.xml"/>
         <config>
           <src collection="/db/apps/hsg-shell/pages/historicaldocuments/quarterly-releases/announcements"/>
         </config>
