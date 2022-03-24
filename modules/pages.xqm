@@ -55,27 +55,85 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
     let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
 
-    let $content := map {
-        "data":
-            if (exists($publication-id) and exists($document-id)) then
-                pages:load-xml($publication-id, $document-id, $section-id, $view, $ignore)
-            else (),
-        "publication-id": $publication-id,
-        "document-id": $document-id,
-        "section-id": $section-id,
-        "view": $view,
-        "base-path":
-            (: allow for pages that don't have $config:PUBLICATIONS?select-document defined :)
-            if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
-                map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
-            else (),
-        "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
-        "open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
-        "open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"})
-    }
-
+    let $last-modified := 
+        if (exists($publication-id) and exists($document-id)) then
+            pages:last-modified($publication-id, $document-id, $section-id)
+        else 
+            ()
+    let $if-modified-since := try { request:get-attribute("if-modified-since") => parse-ietf-date() } catch * { () }
+    let $should-return-304 := 
+        if (exists($last-modified) and exists($if-modified-since)) then
+            $if-modified-since ge 
+                $last-modified
+                (: For the purpose of comparing the resource's last modified date with the If-Modified-Since
+                 : header supplied by the client, we must truncate any milliseconds from the last modified date.
+                 : This is because HTTP-date is only specific to the second.
+                 : @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1 :)
+                => format-dateTime("[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][Z]")
+                => xs:dateTime()
+        else
+            ()
+    let $created := 
+        if (exists($publication-id) and exists($document-id)) then
+            (: No need to truncate creation date; it'll be serialized in view.xql :)
+            pages:created($publication-id, $document-id, $section-id)
+        else 
+            ()
     return
-        templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
+        (: if the "If-Modified-Since" header in the client request is later than the 
+         : last-modified date, then halt further processing of the templates and simply
+         : return a 304 response. :)
+        if ($should-return-304) then
+            (
+                response:set-status-code(304),
+                app:set-last-modified($last-modified)
+            )
+        else
+            let $content := map {
+                "data":
+                    if (exists($publication-id) and exists($document-id)) then
+                        pages:load-xml($publication-id, $document-id, $section-id, $view, $ignore)
+                    else (),
+                "publication-id": $publication-id,
+                "document-id": $document-id,
+                "section-id": $section-id,
+                "view": $view,
+                "base-path":
+                    (: allow for pages that do not have $config:PUBLICATIONS?select-document defined :)
+                    (: ... TODO: I do not see any such cases in config:PUBLICATIONS! Check if OK to remove this entry? - JW :)
+                    if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
+                        map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
+                    else (),
+                "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
+        		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
+        		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"})
+            }
+        
+            return
+                (
+                    if (exists($last-modified) and exists($created)) then
+                        (
+                            request:set-attribute("hsgshell.last-modified", $last-modified),
+                            request:set-attribute("hsgshell.created", $created)
+                        )
+                    else
+                        (),
+					templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
+                )
+};
+
+declare function pages:last-modified($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
+    if ($section-id) then
+        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified($document-id, $section-id)
+    else
+        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified($document-id)
+};
+
+declare function pages:created($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
+    if ($section-id) then
+        map:get($config:PUBLICATIONS, $publication-id)?section-created($document-id, $section-id)
+    else
+        map:get($config:PUBLICATIONS, $publication-id)?document-created($document-id)
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
