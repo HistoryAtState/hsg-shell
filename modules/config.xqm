@@ -5,7 +5,8 @@ xquery version "3.1";
  : within a module.
  :)
 module namespace config="http://history.state.gov/ns/site/hsg/config";
-import module namespace console="http://exist-db.org/xquery/console";
+
+import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 
 import module namespace pm-frus='http://www.tei-c.org/tei-simple/models/frus.odd/web/module' at "../resources/odd/compiled/frus-web-module.xql";
 
@@ -14,6 +15,8 @@ declare namespace templates="http://exist-db.org/xquery/templates";
 declare namespace expath="http://expath.org/ns/pkg";
 declare namespace repo="http://exist-db.org/xquery/repo";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
+declare namespace request="http://exist-db.org/xquery/request";
+declare namespace response="http://exist-db.org/xquery/response";
 
 (:
     Determine the application root collection from the current module load path.
@@ -175,7 +178,7 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform":
                 (: Called to transform content based on the odd using tei simple pm :)
-                function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())))) },
+                function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Historical Documents",
             "base-path": function($document-id, $section-id) { "frus/" || $document-id }
         },
@@ -209,7 +212,7 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:CONFERENCES_ARTICLES_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/conferences/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())))) },
+            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())), map{"duplicates": "use-last"})) },
             "title": "Conferences",
             "base-path": function($document-id, $section-id) { "conferences" }
         },
@@ -300,7 +303,7 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform":
                 (: Called to transform content based on the odd using tei simple pm :)
-                function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())))) },
+                function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "People - Department History",
             "base-path": function($document-id, $section-id) { "secretaries" }
         },
@@ -361,7 +364,7 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:SHORT_HISTORY_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())))) },
+            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Short History - Department History",
             "base-path": function($document-id, $section-id) { "short-history" }
         },
@@ -376,7 +379,7 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, substring-after($section-id, 'chapter_')), '/') },
             "url-fragment": function($div) { if (starts-with($div/@xml:id, 'chapter_')) then substring-after($div/@xml:id, 'chapter_') else $div/@xml:id/string() },
             "odd": "frus.odd",
-            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())))) },
+            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Administrative Timeline - Department History",
             "base-path": function($document-id, $section-id) { "timeline" }
         },
@@ -390,7 +393,7 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:FAQ_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())))) },
+            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "FAQ - About Us"
         },
         "hac": map {
@@ -403,7 +406,7 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:HAC_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
-            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())))) },
+            "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Historical Advisory Committee - About Us"
         },
         "education": map {
@@ -467,7 +470,7 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) {
-                pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true()))))
+                pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"}))
             },
             "title": "History of the Foreign Relations Series",
             "base-path": function($document-id, $section-id) { "frus-history" }
@@ -520,6 +523,43 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:ARCHIVES_ARTICLES_COL: "archives"
     };
 
+declare variable $config:OPEN_GRAPH_KEYS := ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:image", "og:url");
+    
+declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
+    "twitter:card"  : function($node, $model) {
+            <meta property='twitter:card' content='summary'/>
+        },
+    "twitter:site"  : function($node, $model) {
+            <meta property='twitter:site' content='@HistoryAtState'/>
+        },
+    "og:site_name"  : function($node, $model) {
+            <meta property='og:site_name' content='Office of the Historian'/>
+        },
+    "og:image"      : function($node, $model) {
+            
+            for $img in $model?data//tei:graphic
+            return
+                <meta property="og:image" content="https://static.history.state.gov/{$model?base-path}/{$img/@url}"/>,
+            <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>,
+            <meta property="og:image:width" content="400"/>,
+            <meta property="og:image:height" content="400"/>,
+            <meta property="og:image:alt" content="Department of State heraldic shield"/>
+           
+        },
+    "og:type"       : function($node, $model) {
+            <meta property="og:type" content="website"/>
+        },
+    "og:title"      : function($node, $model) {
+            <meta property="og:title" content="{pages:generate-short-title($node, $model)}"/>
+        },
+    "og:description" : function($node, $model) {
+            <meta property="og:description" content="Office of the Historian"/>
+        },
+    "og:url"        : function($node, $model) {
+            <meta property="og:url" content="{$model?url}"/>
+        }
+    };
+
 (:~
  : Resolve the given path using the current application context.
  : If the app resides in the file system,
@@ -551,9 +591,33 @@ declare %templates:wrap function config:app-title($node as node(), $model as map
 
 declare function config:app-meta($node as node(), $model as map(*)) as element()* {
     <meta xmlns="http://www.w3.org/1999/xhtml" name="description" content="{$config:repo-descriptor/repo:description/text()}"/>,
-    for $author in $config:repo-descriptor/repo:author
+    config:open-graph(
+        $node, 
+        map:merge(
+            (
+                map{
+                    "open-graph-keys": $config:OPEN_GRAPH_KEYS,
+                    "open-graph": $config:OPEN_GRAPH,
+                    "url": request:get-url()
+                },
+                $model
+            ),
+            map{"duplicates": "use-last"}
+        )
+    ),
+    for $author in $config:repo-descriptor/repo:author[fn:normalize-space(.) ne '']
     return
         <meta xmlns="http://www.w3.org/1999/xhtml" name="creator" content="{$author/text()}"/>
+};
+
+(:~
+ : This function creates Open Graph metadata for page templates.
+ : See https://github.com/HistoryAtState/hsg-project/wiki/social-media-cards.
+ :)
+declare function config:open-graph($node as node()?, $model as map(*)?) as element()* {
+  for $key in $model?open-graph-keys 
+  for $fn in $model?open-graph($key)
+  return $fn($node, $model)
 };
 
 (:~

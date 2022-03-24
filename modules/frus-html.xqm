@@ -154,7 +154,7 @@ function fh:volumes-by-administration-group($node as node(), $model as map(*)) {
                     "group": $grouping/string(),
                     "volumes": $vols
                 }
-            )))
+            ),  map{"duplicates": "use-last"}))
     else
         ()
 };
@@ -173,7 +173,7 @@ function fh:volumes-by-administration($node as node(), $model as map(*)) {
                     "series-title": $vols[1]/title[@type='sub-series']/string(),
                     "volumes": $vols
                 }
-            )))
+            ),  map{"duplicates": "use-last"}))
     else
         ()
 };
@@ -192,7 +192,7 @@ function fh:volumes-pre-truman($node as node(), $model as map(*)) {
                     "title": $voltext/string(),
                     "vol-id": $vol-id
                 }
-            )))
+            ),  map{"duplicates": "use-last"}))
     else
         ()
 };
@@ -210,7 +210,7 @@ function fh:volumes-by-group($node as node(), $model as map(*)) {
                 "series-title": $g-vols[1]/title[@type='sub-series']/string(),
                 "volumes": $g-vols
             }
-        )))
+        ),  map{"duplicates": "use-last"}))
 };
 
 declare
@@ -241,7 +241,7 @@ function fh:series-volumes($node as node(), $model as map(*)) {
                 "vol-id": $vol-id,
                 "publication-status": $publication-status
             }
-        )))
+        ),  map{"duplicates": "use-last"}))
 };
 
 declare

@@ -159,7 +159,7 @@ declare function toc:toc-head($model as map(*), $node as element(tei:head)?) {
         let $params := map:put($model?parameters, "omit-notes", true())
         return
             $model?apply-children(
-                map:merge(($model, $params)),
+                map:merge(($model, $params),  map{"duplicates": "use-last"}),
                 $node, $node/node())
     else
         $model?odd($node/node(), map { "omit-notes": true() })
@@ -187,7 +187,7 @@ declare function toc:href($publication-id as xs:string, $document-id as xs:strin
  :)
 declare function toc:document-list($config as map(*), $node as element(tei:div), $class) {
     let $start := xs:integer(request:get-parameter("start", 1))
-    let $headConfig := map:merge(($config, map { "parameters": map:put($config?parameters, "omit-notes", true())}))
+    let $headConfig := map:merge(($config, map { "parameters": map:put($config?parameters, "omit-notes", true())}),  map{"duplicates": "use-last"})
     let $head := $node/tei:head[1]
     let $child-documents := $node/tei:div[@type='document']
     let $child-document-count := count($child-documents)

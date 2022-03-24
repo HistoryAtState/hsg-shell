@@ -41,8 +41,19 @@ declare
     %templates:default("view", "div")
     %templates:default("ignore", "false")
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?,
-        $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean) {
+        $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean, $open-graph-keys as xs:string?, $open-graph-keys-exclude as xs:string?, $open-graph-keys-add as xs:string?) {
+        
     let $log := console:log("loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id )
+    
+    let $static-open-graph := map:merge((
+        for $meta in $node//*[@id eq 'static-open-graph']/meta
+        return map{ string($meta/@property) : function($node as node()?, $model as map(*)?) {$meta}}),  map{"duplicates": "use-last"}
+    )
+    let $static-open-graph-keys := map:keys($static-open-graph)
+    
+    let $ogk as xs:string* := if ($open-graph-keys) then tokenize($open-graph-keys, '\s') else $config:OPEN_GRAPH_KEYS
+    let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
+    let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
 
     let $last-modified := 
         if (exists($publication-id) and exists($document-id)) then
@@ -93,7 +104,9 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                     if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
                         map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
                     else (),
-                "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
+                "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
+        		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
+        		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"})
             }
         
             return
@@ -105,7 +118,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                         )
                     else
                         (),
-                    templates:process($node/*, map:merge(($model, $content)))
+					templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
                 )
 };
 
@@ -451,13 +464,8 @@ function pages:navigation-link($node as node(), $model as map(*), $direction as 
 };
 
 declare function pages:generate-title ($model, $content) {
-    (: without an entry in $config:PUBLICATIONS and a publication-id parameter from controller.xql,
-     : only the stock "Office of the Historian" title will appear in the <title> element :)
-    let $title :=
-        if ($model?publication-id) then
-            map:get($config:PUBLICATIONS, $model?publication-id)?title
-        else
-            ($content//(h1|h2|h3))[1]
+    (: Use generate-short-title; suppress default output as this will be suffixed below in any case. :)
+    let $title := pages:generate-short-title($content, $model)[. ne "Office of the Historian"]
 
     let $head :=
         if ($model?section-id) then
@@ -476,28 +484,37 @@ declare function pages:generate-title ($model, $content) {
     return string-join(($head, $title, "Office of the Historian")[. ne ""], " - ")
 };
 
-declare
-function pages:app-root($node as node(), $model as map(*)) {
-    let $root :=
+(: The short title does not include super-section titles, in contrast to the full title.
+ : 
+ : The short title is populated by the first non-empty value from the following list:
+ : - A pre-defined static title on the page template: `$node/ancestor-or-self::*[last()]//div[@id="static-title"]/string()`
+ : - The title defined by publication-id: `if ($model?publication-id) then map:get($config:PUBLICATIONS, $model?publication-id)?title else ()`
+ : - The first H1, H2, or H3 title in the content: ($node/ancestor-or-self::*[last()]//(h1|h2|h3))[1]
+ : - A fallback string of 'Office of the Historian'
+ :)
+declare function pages:generate-short-title($node, $model) as xs:string? {
+    (
+        $node/ancestor-or-self::*[last()]//div[@id="static-title"]/string(),
+        $config:PUBLICATIONS?($model?publication-id)?title,
+        $node/ancestor-or-self::*[last()]//(h1|h2|h3),
+        'Office of the Historian'
+    )[. ne ''][1]
+};
+
+declare function pages:app-root($node as node(), $model as map(*)) {
+    let $root := try {
         if (request:get-header("nginx-request-uri")) then (
             ""
             (: replace(request:get-header("nginx-request-uri"), "^(\w+://[^/]+).*$", "$1") :)
         ) else
-            request:get-context-path() || substring-after($config:app-root, "/db")
+            request:get-context-path() || substring-after($config:app-root, "/db")}
+        catch err:XPDY0002 {()} (: required for local testing when there is no request :)
     return
     element { node-name($node) } {
         $node/@*,
         attribute data-app { $root },
         let $content := templates:process($node/*, $model)
-        let $title :=
-            (: use static override when defined in page template :)
-            if ($content//div[@id="static-title"]) then
-                string-join(
-                    ($content//div[@id="static-title"]/string(), "Office of the Historian")[. ne ""],
-                    " - "
-                )
-            else
-                pages:generate-title($model, $content)
+        let $title := string-join((pages:generate-short-title($node, $model)[. ne 'Office of the Historian'], "Office of the Historian"), " - ")
 
         let $log := console:log("pages:app-root -> title: " || $title)
         return (
@@ -634,3 +651,5 @@ declare function pages:deep-section-page-title($node, $model) {
 declare function pages:section-category($node, $model) {
     root($model?data)//tei:title[@type = 'short']/string()
 };
+
+declare function pages:suppress($node as node()?, $model as map(*)?) {};
