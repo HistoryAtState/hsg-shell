@@ -328,7 +328,9 @@ function site:config-step-src-collection($collection as attribute(collection), $
     let $key-label as xs:string? := $collection/(ancestor::site:step[1])[@key]/string(@key)
     for $parent-url in $parent-urls ! map:keys(.)
       let $parent-filepath := resolve-uri($collection, replace($parent-urls?($parent-url)?filepath, '(.*)/$', '$1')||'/')
-      let $filepaths := collection($parent-filepath) ! base-uri(.)
+      let $filepaths := 
+        for $resource in xmldb:get-child-resources($parent-filepath)
+        return resolve-uri($resource, $parent-filepath||'/')
       for $filepath in $filepaths
         let $filename.ext := substring-after($filepath, $parent-filepath)
         let $filename := replace($filename.ext, '(.*?)(\.[^.]+)?$', '$1')
