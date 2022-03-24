@@ -222,6 +222,8 @@ declare
   %site:mode('sitemap')
   %site:match('step')
 function site:sitemap-step($step as element(), $state as map(*)?){
+  let $_ := site:log(("processing step: ", $step/@value, $step/@key))
+  return
     site:process(
       $step/*,
       'sitemap',
