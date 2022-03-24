@@ -63,8 +63,7 @@ declare function site:mode-on-no-match($mode-name as xs:string) as function(*)? 
 declare function site:mode-templates($mode-name as xs:string)as map(xs:string, function(*)) {
   map:merge((
     for $f in inspect:module-functions()
-    let $f-x := inspect:inspect-function($f)
-    where $f-x/annotation[@name eq "site:mode"][value = $mode-name]
+    let $f-x := inspect:inspect-function($f)[annotation[@name eq "site:mode"][value = $mode-name]]
     return for $match in $f-x/annotation[@name eq "site:match"]/value
       return map{ $match: $f}
   ))
