@@ -356,9 +356,9 @@ function site:config-step-src-xq($xq as attribute(xq), $state as map(*)) as map(
     for $parent-url in $parent-urls ! map:keys(.)
       let $parent-filepath := $parent-urls?($parent-url)?filepath
       let $parent-context := 
-        if (doc-available($parent-filepath))
-          then 'doc("'||$parent-filepath||'")/'
-        else 'collection("'||$parent-filepath||'")/'
+        if (xmldb:collection-available($parent-filepath))
+          then 'collection("'||$parent-filepath||'")/'
+        else 'doc("'||$parent-filepath||'")/'
       let $context := 
         if ($xq/../@collection)
           then 'collection("'||resolve-uri($xq/../@collection, $parent-filepath||'/')||'")/'
