@@ -229,6 +229,20 @@ let $sample := $x:sample/site:root/site:step[@value eq 'music']/site:step[@key e
 return site:get-config($sample, $state)?urls?('/music/beck/odelay')?keys?artist
 };
 
+declare %test:assertEquals('/db/apps/hsg-shell/tests/data/sitemap-config/Collection/world-factbook/country-data.xml') function x:test-config-step-region-filepath(){
+  let $state := map {
+    "config": map {
+        "urls": map {
+            "/world": map {
+                "filepath": "/db/apps/hsg-shell/tests/data/sitemap-config"
+            }
+        }
+    }
+  }
+  let $sample := $x:sample/site:root/site:step[@value='world']/site:step[@key='region']
+  return distinct-values(site:get-config($sample, $state)?urls?('/world/Africa')?filepath)
+};
+
 declare %test:assertEquals('pages/artist/morcheeba.xml') function x:test-eval-avt(){
   let $page-template as element(site:page-template):= $x:sample/site:root/site:step[@value eq 'music']/site:step[@key eq 'artist']/site:page-template
   let $key := map{

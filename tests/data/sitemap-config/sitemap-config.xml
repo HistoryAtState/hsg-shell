@@ -62,5 +62,14 @@
     </step>
     <page-template href="pages/search.xml"/>
   </step>
+  <step value="world">
+    <step key="region">
+      <page-template href="pages/search.xml"/>
+      <config>
+        <src doc="/db/apps/hsg-shell/tests/data/sitemap-config/Collection/world-factbook/country-data.xml" xq="data/country/region"/>
+      </config>
+    </step>
+    <page-template href="pages/search.xml"/>
+  </step>
   <ignore/>
 </root>

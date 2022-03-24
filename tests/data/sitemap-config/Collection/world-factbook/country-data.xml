@@ -1,0 +1,3366 @@
+<data id="countries111">
+   <documentation>
+      <para>The figures are taken from the latest CIA world factbook. Each country has
+				information giving it's name, region within the world, population, GDP (in millions of
+				US dollars) and the age and gender distribution of the population.</para>
+      <para>Some countries will have no GDP figures and some may have no population figures
+				(where this is no indigent population). The CIA definition of a country is relatively
+				liberal.</para>
+      <para>The ranges within the age distribution are percentages. The total is the percentage
+				of the population within that range. The male and female attributes give the 
+				percentage of that particular range for each gender.</para>
+   </documentation>
+   <country>
+      <region>Africa</region>
+      <name>Algeria</name>
+      <gdp>274500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27.8" male="0.5118" female="0.4882"/>
+         <group range="15-24 years:" total="18.9" male="0.512" female="0.488"/>
+         <group range="25-54 years:" total="42.4" male="0.5053" female="0.4947"/>
+         <group range="55-64 years:" total="5.9" male="0.5096" female="0.4904"/>
+         <group range="65 years and over:" total="5" male="0.4567" female="0.5433"/>
+      </age-distribution>
+      <population>38087812</population>
+      <area>2381741</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Angola</name>
+      <gdp>126200</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="43.9" male="0.5099" female="0.4901"/>
+         <group range="15-24 years:" total="20.1" male="0.5088" female="0.4912"/>
+         <group range="25-54 years:" total="29.1" male="0.5036" female="0.4964"/>
+         <group range="55-64 years:" total="4" male="0.4859" female="0.5141"/>
+         <group range="65 years and over:" total="2.9" male="0.4626" female="0.5374"/>
+      </age-distribution>
+      <population>18565269</population>
+      <area>1246700</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Benin</name>
+      <gdp>15510</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="44.4" male="0.5102" female="0.4898"/>
+         <group range="15-24 years:" total="19.9" male="0.5087" female="0.4913"/>
+         <group range="25-54 years:" total="29.5" male="0.5024" female="0.4976"/>
+         <group range="55-64 years:" total="3.5" male="0.4145" female="0.5855"/>
+         <group range="65 years and over:" total="2.7" male="0.4026" female="0.5974"/>
+      </age-distribution>
+      <population>9877292</population>
+      <area>112622</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Botswana</name>
+      <gdp>31490</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="33.5" male="0.5093" female="0.4907"/>
+         <group range="15-24 years:" total="21.9" male="0.4951" female="0.5049"/>
+         <group range="25-54 years:" total="36.4" male="0.523" female="0.477"/>
+         <group range="55-64 years:" total="4.2" male="0.4417" female="0.5583"/>
+         <group range="65 years and over:" total="3.9" male="0.4021" female="0.5979"/>
+      </age-distribution>
+      <population>2127825</population>
+      <area>581730</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Burkina Faso</name>
+      <gdp>24030</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="45.7" male="0.5012" female="0.4988"/>
+         <group range="15-24 years:" total="20" male="0.503" female="0.497"/>
+         <group range="25-54 years:" total="28.7" male="0.5072" female="0.4928"/>
+         <group range="55-64 years:" total="3.1" male="0.4084" female="0.5916"/>
+         <group range="65 years and over:" total="2.5" male="0.3841" female="0.6159"/>
+      </age-distribution>
+      <population>17812961</population>
+      <area>274200</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Burundi</name>
+      <gdp>5489</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="45.8" male="0.5027" female="0.4973"/>
+         <group range="15-24 years:" total="19.7" male="0.4991" female="0.5009"/>
+         <group range="25-54 years:" total="28.3" male="0.4953" female="0.5047"/>
+         <group range="55-64 years:" total="3.7" male="0.451" female="0.549"/>
+         <group range="65 years and over:" total="2.5" male="0.4003" female="0.5997"/>
+      </age-distribution>
+      <population>10888321</population>
+      <area>27830</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Cameroon</name>
+      <gdp>50320</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="40.3" male="0.5045" female="0.4955"/>
+         <group range="15-24 years:" total="20.4" male="0.5051" female="0.4949"/>
+         <group range="25-54 years:" total="31.6" male="0.5053" female="0.4947"/>
+         <group range="55-64 years:" total="4.3" male="0.4732" female="0.5268"/>
+         <group range="65 years and over:" total="3.4" male="0.4568" female="0.5432"/>
+      </age-distribution>
+      <population>20549221</population>
+      <area>475440</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Cape Verde</name>
+      <gdp>2188</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="31.9" male="0.5025" female="0.4975"/>
+         <group range="15-24 years:" total="22.1" male="0.4999" female="0.5001"/>
+         <group range="25-54 years:" total="36.6" male="0.4829" female="0.5171"/>
+         <group range="55-64 years:" total="4.1" male="0.4134" female="0.5866"/>
+         <group range="65 years and over:" total="5.3" male="0.3766" female="0.6234"/>
+      </age-distribution>
+      <population>531046</population>
+      <area>4033</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Central African Republic</name>
+      <gdp>3847</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="40.9" male="0.5032" female="0.4968"/>
+         <group range="15-24 years:" total="20.3" male="0.5025" female="0.4975"/>
+         <group range="25-54 years:" total="31.3" male="0.4992" female="0.5008"/>
+         <group range="55-64 years:" total="3.8" male="0.4274" female="0.5726"/>
+         <group range="65 years and over:" total="3.7" male="0.3971" female="0.6029"/>
+      </age-distribution>
+      <population>5166510</population>
+      <area>622984</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Chad</name>
+      <gdp>21340</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="45.6" male="0.507" female="0.493"/>
+         <group range="15-24 years:" total="20.3" male="0.4828" female="0.5172"/>
+         <group range="25-54 years:" total="27.3" male="0.4505" female="0.5495"/>
+         <group range="55-64 years:" total="3.8" male="0.4366" female="0.5634"/>
+         <group range="65 years and over:" total="2.9" male="0.4183" female="0.5817"/>
+      </age-distribution>
+      <population>11193452</population>
+      <area>1284000</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Comoros</name>
+      <gdp>872</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="42.2" male="0.4982" female="0.5018"/>
+         <group range="15-24 years:" total="18.6" male="0.4833" female="0.5167"/>
+         <group range="25-54 years:" total="31.3" male="0.4741" female="0.5259"/>
+         <group range="55-64 years:" total="4.1" male="0.4468" female="0.5532"/>
+         <group range="65 years and over:" total="3.7" male="0.4792" female="0.5208"/>
+      </age-distribution>
+      <population>752288</population>
+      <area>2235</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Congo, Democratic Republic of the</name>
+      <gdp>27530</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="43.9" male="0.5036" female="0.4964"/>
+         <group range="15-24 years:" total="21.2" male="0.5013" female="0.4987"/>
+         <group range="25-54 years:" total="28.8" male="0.4988" female="0.5012"/>
+         <group range="55-64 years:" total="3.5" male="0.4662" female="0.5338"/>
+         <group range="65 years and over:" total="2.6" male="0.4192" female="0.5808"/>
+      </age-distribution>
+      <population>75507308</population>
+      <area>2344858</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Congo, Republic of the</name>
+      <gdp>19270</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="45.3" male="0.5035" female="0.4965"/>
+         <group range="15-24 years:" total="20.5" male="0.502" female="0.498"/>
+         <group range="25-54 years:" total="28" male="0.5025" female="0.4975"/>
+         <group range="55-64 years:" total="3.4" male="0.4398" female="0.5602"/>
+         <group range="65 years and over:" total="2.8" male="0.4095" female="0.5905"/>
+      </age-distribution>
+      <population>4492689</population>
+      <area>342000</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Cote d'Ivoire</name>
+      <gdp>39640</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="39.3" male="0.5042" female="0.4958"/>
+         <group range="15-24 years:" total="21.1" male="0.5036" female="0.4964"/>
+         <group range="25-54 years:" total="32.1" male="0.5134" female="0.4866"/>
+         <group range="55-64 years:" total="4.4" male="0.5008" female="0.4992"/>
+         <group range="65 years and over:" total="3.1" male="0.4905" female="0.5095"/>
+      </age-distribution>
+      <population>22400835</population>
+      <area>322463</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Djibouti</name>
+      <gdp>2377</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="34.3" male="0.501" female="0.499"/>
+         <group range="15-24 years:" total="22" male="0.4712" female="0.5288"/>
+         <group range="25-54 years:" total="35.7" male="0.4169" female="0.5831"/>
+         <group range="55-64 years:" total="4.6" male="0.4789" female="0.5211"/>
+         <group range="65 years and over:" total="3.4" male="0.4492" female="0.5508"/>
+      </age-distribution>
+      <population>792198</population>
+      <area>23200</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Egypt</name>
+      <gdp>537800</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="32.5" male="0.5114" female="0.4886"/>
+         <group range="15-24 years:" total="18.2" male="0.5133" female="0.4867"/>
+         <group range="25-54 years:" total="38.1" male="0.507" female="0.493"/>
+         <group range="55-64 years:" total="6.5" male="0.4993" female="0.5007"/>
+         <group range="65 years and over:" total="4.7" male="0.4496" female="0.5504"/>
+      </age-distribution>
+      <population>85294388</population>
+      <area>1001450</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Equatorial Guinea</name>
+      <gdp>28030</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="41.3" male="0.5083" female="0.4917"/>
+         <group range="15-24 years:" total="19.4" male="0.5088" female="0.4912"/>
+         <group range="25-54 years:" total="31.1" male="0.493" female="0.507"/>
+         <group range="55-64 years:" total="4.2" male="0.4307" female="0.5693"/>
+         <group range="65 years and over:" total="4.1" male="0.4283" female="0.5717"/>
+      </age-distribution>
+      <population>704001</population>
+      <area>28051</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Eritrea</name>
+      <gdp>4412</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="41.7" male="0.5025" female="0.4975"/>
+         <group range="15-24 years:" total="19.8" male="0.4993" female="0.5007"/>
+         <group range="25-54 years:" total="31" male="0.4943" female="0.5057"/>
+         <group range="55-64 years:" total="3.8" male="0.4226" female="0.5774"/>
+         <group range="65 years and over:" total="3.7" male="0.442" female="0.558"/>
+      </age-distribution>
+      <population>6233682</population>
+      <area>117600</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Ethiopia</name>
+      <gdp>103100</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="44.6" male="0.5003" female="0.4997"/>
+         <group range="15-24 years:" total="19.8" male="0.4969" female="0.5031"/>
+         <group range="25-54 years:" total="28.9" male="0.498" female="0.502"/>
+         <group range="55-64 years:" total="3.9" male="0.4883" female="0.5117"/>
+         <group range="65 years and over:" total="2.8" male="0.4524" female="0.5476"/>
+      </age-distribution>
+      <population>93877025</population>
+      <area>1104300</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Gabon</name>
+      <gdp>26710</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="42.2" male="0.5022" female="0.4978"/>
+         <group range="15-24 years:" total="20.3" male="0.5005" female="0.4995"/>
+         <group range="25-54 years:" total="29.6" male="0.4991" female="0.5009"/>
+         <group range="55-64 years:" total="4.1" male="0.4896" female="0.5104"/>
+         <group range="65 years and over:" total="3.9" male="0.4223" female="0.5777"/>
+      </age-distribution>
+      <population>1640286</population>
+      <area>267667</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Gambia, The</name>
+      <gdp>3495</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="39.6" male="0.5017" female="0.4983"/>
+         <group range="15-24 years:" total="21.2" male="0.4936" female="0.5064"/>
+         <group range="25-54 years:" total="32.1" male="0.4893" female="0.5107"/>
+         <group range="55-64 years:" total="3.9" male="0.487" female="0.513"/>
+         <group range="65 years and over:" total="3.2" male="0.474" female="0.526"/>
+      </age-distribution>
+      <population>1883051</population>
+      <area>11295</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Ghana</name>
+      <gdp>83180</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="38.9" male="0.5022" female="0.4978"/>
+         <group range="15-24 years:" total="18.9" male="0.4975" female="0.5025"/>
+         <group range="25-54 years:" total="33.5" male="0.4857" female="0.5143"/>
+         <group range="55-64 years:" total="4.6" male="0.4867" female="0.5133"/>
+         <group range="65 years and over:" total="4" male="0.4668" female="0.5332"/>
+      </age-distribution>
+      <population>25199609</population>
+      <area>238533</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Guinea</name>
+      <gdp>12250</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="42.4" male="0.5053" female="0.4947"/>
+         <group range="15-24 years:" total="19.4" male="0.5048" female="0.4952"/>
+         <group range="25-54 years:" total="30.3" male="0.5011" female="0.4989"/>
+         <group range="55-64 years:" total="4.4" male="0.4745" female="0.5255"/>
+         <group range="65 years and over:" total="3.5" male="0.4408" female="0.5592"/>
+      </age-distribution>
+      <population>11176026</population>
+      <area>245857</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Guinea-Bissau</name>
+      <gdp>1902</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="40.2" male="0.499" female="0.501"/>
+         <group range="15-24 years:" total="20.2" male="0.4962" female="0.5038"/>
+         <group range="25-54 years:" total="31.8" male="0.4948" female="0.5052"/>
+         <group range="55-64 years:" total="4.7" male="0.3652" female="0.6348"/>
+         <group range="65 years and over:" total="3.2" male="0.3917" female="0.6083"/>
+      </age-distribution>
+      <population>1660870</population>
+      <area>36125</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Kenya</name>
+      <gdp>76070</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="42.5" male="0.5015" female="0.4985"/>
+         <group range="15-24 years:" total="19.1" male="0.5004" female="0.4996"/>
+         <group range="25-54 years:" total="32.1" male="0.5045" female="0.4955"/>
+         <group range="55-64 years:" total="3.6" male="0.45" female="0.55"/>
+         <group range="65 years and over:" total="2.7" male="0.4408" female="0.5592"/>
+      </age-distribution>
+      <population>44037656</population>
+      <area>580367</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Lesotho</name>
+      <gdp>3945</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="33.4" male="0.5019" female="0.4981"/>
+         <group range="15-24 years:" total="20.6" male="0.4749" female="0.5251"/>
+         <group range="25-54 years:" total="35.8" male="0.4892" female="0.5108"/>
+         <group range="55-64 years:" total="4.9" male="0.5335" female="0.4665"/>
+         <group range="65 years and over:" total="5.4" male="0.4984" female="0.5016"/>
+      </age-distribution>
+      <population>1936181</population>
+      <area>30355</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Liberia</name>
+      <gdp>2693</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="44.1" male="0.5031" female="0.4969"/>
+         <group range="15-24 years:" total="17.6" male="0.4871" female="0.5129"/>
+         <group range="25-54 years:" total="31" male="0.4995" female="0.5005"/>
+         <group range="55-64 years:" total="4.3" male="0.4942" female="0.5058"/>
+         <group range="65 years and over:" total="3" male="0.5014" female="0.4986"/>
+      </age-distribution>
+      <population>3989703</population>
+      <area>111369</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Libya</name>
+      <gdp>87910</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27.7" male="0.5116" female="0.4884"/>
+         <group range="15-24 years:" total="19" male="0.521" female="0.479"/>
+         <group range="25-54 years:" total="44.9" male="0.5237" female="0.4763"/>
+         <group range="55-64 years:" total="4.5" male="0.5152" female="0.4848"/>
+         <group range="65 years and over:" total="3.9" male="0.5107" female="0.4893"/>
+      </age-distribution>
+      <population>6002347</population>
+      <area>1759540</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Madagascar</name>
+      <gdp>21370</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="41.4" male="0.5043" female="0.4957"/>
+         <group range="15-24 years:" total="20.6" male="0.5011" female="0.4989"/>
+         <group range="25-54 years:" total="30.8" male="0.5004" female="0.4996"/>
+         <group range="55-64 years:" total="4.1" male="0.4754" female="0.5246"/>
+         <group range="65 years and over:" total="3.1" male="0.4541" female="0.5459"/>
+      </age-distribution>
+      <population>22599098</population>
+      <area>587041</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Malawi</name>
+      <gdp>14580</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="44.9" male="0.5011" female="0.4989"/>
+         <group range="15-24 years:" total="20.5" male="0.4995" female="0.5005"/>
+         <group range="25-54 years:" total="28.3" male="0.5057" female="0.4943"/>
+         <group range="55-64 years:" total="3.6" male="0.4511" female="0.5489"/>
+         <group range="65 years and over:" total="2.7" male="0.427" female="0.573"/>
+      </age-distribution>
+      <population>16777547</population>
+      <area>118484</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Mali</name>
+      <gdp>17350</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="47.8" male="0.5019" female="0.4981"/>
+         <group range="15-24 years:" total="18.9" male="0.475" female="0.525"/>
+         <group range="25-54 years:" total="26.6" male="0.4667" female="0.5333"/>
+         <group range="55-64 years:" total="3.7" male="0.5026" female="0.4974"/>
+         <group range="65 years and over:" total="3" male="0.5028" female="0.4972"/>
+      </age-distribution>
+      <population>15968882</population>
+      <area>1240192</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Mauritania</name>
+      <gdp>7615</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="40.1" male="0.5019" female="0.4981"/>
+         <group range="15-24 years:" total="20" male="0.4885" female="0.5115"/>
+         <group range="25-54 years:" total="32" male="0.4622" female="0.5378"/>
+         <group range="55-64 years:" total="4.4" male="0.4501" female="0.5499"/>
+         <group range="65 years and over:" total="3.5" male="0.4243" female="0.5757"/>
+      </age-distribution>
+      <population>3437610</population>
+      <area>1030700</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Mauritius</name>
+      <gdp>20260</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="21.6" male="0.5104" female="0.4896"/>
+         <group range="15-24 years:" total="15.8" male="0.5056" female="0.4944"/>
+         <group range="25-54 years:" total="44.6" male="0.499" female="0.501"/>
+         <group range="55-64 years:" total="10.3" male="0.4729" female="0.5271"/>
+         <group range="65 years and over:" total="7.7" male="0.4008" female="0.5992"/>
+      </age-distribution>
+      <population>1322238</population>
+      <area>2040</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Morocco</name>
+      <gdp>171000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27.4" male="0.5075" female="0.4925"/>
+         <group range="15-24 years:" total="18.3" male="0.4973" female="0.5027"/>
+         <group range="25-54 years:" total="41.4" male="0.4839" female="0.5161"/>
+         <group range="55-64 years:" total="6.6" male="0.5001" female="0.4999"/>
+         <group range="65 years and over:" total="6.2" male="0.4511" female="0.5489"/>
+      </age-distribution>
+      <population>32649130</population>
+      <area>446550</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Mozambique</name>
+      <gdp>26220</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="45.7" male="0.5025" female="0.4975"/>
+         <group range="15-24 years:" total="20.7" male="0.4828" female="0.5172"/>
+         <group range="25-54 years:" total="27" male="0.4681" female="0.5319"/>
+         <group range="55-64 years:" total="3.5" male="0.4716" female="0.5284"/>
+         <group range="65 years and over:" total="3" male="0.4599" female="0.5401"/>
+      </age-distribution>
+      <population>24096669</population>
+      <area>799380</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Namibia</name>
+      <gdp>16840</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="33.4" male="0.5047" female="0.4953"/>
+         <group range="15-24 years:" total="23.1" male="0.5054" female="0.4946"/>
+         <group range="25-54 years:" total="34.6" male="0.5175" female="0.4825"/>
+         <group range="55-64 years:" total="4.8" male="0.4526" female="0.5474"/>
+         <group range="65 years and over:" total="4.2" male="0.4386" female="0.5614"/>
+      </age-distribution>
+      <population>2182852</population>
+      <area>824292</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Niger</name>
+      <gdp>13530</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="50.1" male="0.5048" female="0.4952"/>
+         <group range="15-24 years:" total="18" male="0.4938" female="0.5062"/>
+         <group range="25-54 years:" total="26" male="0.4991" female="0.5009"/>
+         <group range="55-64 years:" total="3.2" male="0.5157" female="0.4843"/>
+         <group range="65 years and over:" total="2.6" male="0.5079" female="0.4921"/>
+      </age-distribution>
+      <population>16899327</population>
+      <area>1267000</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Nigeria</name>
+      <gdp>450500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="43.9" male="0.5117" female="0.4883"/>
+         <group range="15-24 years:" total="19.3" male="0.5113" female="0.4887"/>
+         <group range="25-54 years:" total="30" male="0.492" female="0.508"/>
+         <group range="55-64 years:" total="3.8" male="0.4585" female="0.5415"/>
+         <group range="65 years and over:" total="3" male="0.4595" female="0.5405"/>
+      </age-distribution>
+      <population>174507539</population>
+      <area>923768</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Rwanda</name>
+      <gdp>14910</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="42.6" male="0.5039" female="0.4961"/>
+         <group range="15-24 years:" total="19.2" male="0.4993" female="0.5007"/>
+         <group range="25-54 years:" total="32" male="0.5015" female="0.4985"/>
+         <group range="55-64 years:" total="3.8" male="0.4632" female="0.5368"/>
+         <group range="65 years and over:" total="2.4" male="0.4018" female="0.5982"/>
+      </age-distribution>
+      <population>12012589</population>
+      <area>26338</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Saint Helena, Ascension, and Tristan da Cunha</name>
+      <gdp>18</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17.5" male="0.51" female="0.49"/>
+         <group range="15-24 years:" total="11.5" male="0.509" female="0.491"/>
+         <group range="25-54 years:" total="46.2" male="0.4955" female="0.5045"/>
+         <group range="55-64 years:" total="12" male="0.5387" female="0.4613"/>
+         <group range="65 years and over:" total="12.7" male="0.5025" female="0.4975"/>
+      </age-distribution>
+      <population>7754</population>
+      <area>308</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Sao Tome and Principe</name>
+      <gdp>403</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="44.4" male="0.5086" female="0.4914"/>
+         <group range="15-24 years:" total="19.5" male="0.5067" female="0.4933"/>
+         <group range="25-54 years:" total="29.8" male="0.4884" female="0.5116"/>
+         <group range="55-64 years:" total="3.3" male="0.453" female="0.547"/>
+         <group range="65 years and over:" total="3.1" male="0.4574" female="0.5426"/>
+      </age-distribution>
+      <population>186817</population>
+      <area>964</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Senegal</name>
+      <gdp>26500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="43" male="0.5024" female="0.4976"/>
+         <group range="15-24 years:" total="20.6" male="0.497" female="0.503"/>
+         <group range="25-54 years:" total="29.9" male="0.4547" female="0.5453"/>
+         <group range="55-64 years:" total="3.7" male="0.4441" female="0.5559"/>
+         <group range="65 years and over:" total="2.9" male="0.4585" female="0.5415"/>
+      </age-distribution>
+      <population>13300410</population>
+      <area>196722</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Seychelles</name>
+      <gdp>2410</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="21.4" male="0.5126" female="0.4874"/>
+         <group range="15-24 years:" total="15" male="0.5224" female="0.4776"/>
+         <group range="25-54 years:" total="49.1" male="0.5233" female="0.4767"/>
+         <group range="55-64 years:" total="7.3" male="0.5206" female="0.4794"/>
+         <group range="65 years and over:" total="7.2" male="0.3788" female="0.6212"/>
+      </age-distribution>
+      <population>90846</population>
+      <area>455</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Sierra Leone</name>
+      <gdp>8376</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="41.9" male="0.4969" female="0.5031"/>
+         <group range="15-24 years:" total="19.2" male="0.4847" female="0.5153"/>
+         <group range="25-54 years:" total="31.2" male="0.4813" female="0.5187"/>
+         <group range="55-64 years:" total="4.1" male="0.4431" female="0.5569"/>
+         <group range="65 years and over:" total="3.7" male="0.437" female="0.563"/>
+      </age-distribution>
+      <population>5612685</population>
+      <area>71740</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Somalia</name>
+      <gdp>5896</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="44.5" male="0.4998" female="0.5002"/>
+         <group range="15-24 years:" total="18.8" male="0.505" female="0.495"/>
+         <group range="25-54 years:" total="31" male="0.516" female="0.484"/>
+         <group range="55-64 years:" total="3.3" male="0.4568" female="0.5432"/>
+         <group range="65 years and over:" total="2.4" male="0.3972" female="0.6028"/>
+      </age-distribution>
+      <population>10251568</population>
+      <area>637657</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>South Africa</name>
+      <gdp>578600</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="28.4" male="0.5015" female="0.4985"/>
+         <group range="15-24 years:" total="21" male="0.5063" female="0.4937"/>
+         <group range="25-54 years:" total="37.9" male="0.516" female="0.484"/>
+         <group range="55-64 years:" total="6.8" male="0.4319" female="0.5681"/>
+         <group range="65 years and over:" total="5.9" male="0.4019" female="0.5981"/>
+      </age-distribution>
+      <population>48601098</population>
+      <area>1219090</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>South Sudan</name>
+      <gdp>9664</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="46.5" male="0.5114" female="0.4886"/>
+         <group range="15-24 years:" total="19.5" male="0.5258" female="0.4742"/>
+         <group range="25-54 years:" total="28.9" male="0.481" female="0.519"/>
+         <group range="55-64 years:" total="3" male="0.5494" female="0.4506"/>
+         <group range="65 years and over:" total="2.2" male="0.5682" female="0.4318"/>
+      </age-distribution>
+      <population>11090104</population>
+      <area>644329</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Sudan</name>
+      <gdp>80430</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="42" male="0.5086" female="0.4914"/>
+         <group range="15-24 years:" total="19.8" male="0.5151" female="0.4849"/>
+         <group range="25-54 years:" total="31.1" male="0.4855" female="0.5145"/>
+         <group range="55-64 years:" total="3.7" male="0.5373" female="0.4627"/>
+         <group range="65 years and over:" total="3.3" male="0.5535" female="0.4465"/>
+      </age-distribution>
+   	<population>34847910</population>
+      <area>1861484</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Swaziland</name>
+      <gdp>6148</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="37.4" male="0.5057" female="0.4943"/>
+         <group range="15-24 years:" total="22.5" male="0.5055" female="0.4945"/>
+         <group range="25-54 years:" total="32.3" male="0.5082" female="0.4918"/>
+         <group range="55-64 years:" total="4.2" male="0.394" female="0.606"/>
+         <group range="65 years and over:" total="3.7" male="0.4089" female="0.5911"/>
+      </age-distribution>
+      <population>1403362</population>
+      <area>17364</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Tanzania</name>
+      <gdp>73500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="45" male="0.5044" female="0.4956"/>
+         <group range="15-24 years:" total="19.4" male="0.4996" female="0.5004"/>
+         <group range="25-54 years:" total="29.2" male="0.5006" female="0.4994"/>
+         <group range="55-64 years:" total="3.5" male="0.4299" female="0.5701"/>
+         <group range="65 years and over:" total="2.9" male="0.4332" female="0.5668"/>
+      </age-distribution>
+      <population>48261942</population>
+      <area>947300</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Togo</name>
+      <gdp>6899</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="40.8" male="0.5012" female="0.4988"/>
+         <group range="15-24 years:" total="20.2" male="0.4988" female="0.5012"/>
+         <group range="25-54 years:" total="31.6" male="0.4966" female="0.5034"/>
+         <group range="55-64 years:" total="4.1" male="0.4718" female="0.5282"/>
+         <group range="65 years and over:" total="3.2" male="0.4343" female="0.5657"/>
+      </age-distribution>
+      <population>7154237</population>
+      <area>56785</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Tunisia</name>
+      <gdp>104400</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="23.1" male="0.5163" female="0.4837"/>
+         <group range="15-24 years:" total="17.1" male="0.5026" female="0.4974"/>
+         <group range="25-54 years:" total="44.5" male="0.4875" female="0.5125"/>
+         <group range="55-64 years:" total="7.7" male="0.5072" female="0.4928"/>
+         <group range="65 years and over:" total="7.6" male="0.4904" female="0.5096"/>
+      </age-distribution>
+      <population>10835873</population>
+      <area>163610</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Uganda</name>
+      <gdp>50590</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="49.1" male="0.4984" female="0.5016"/>
+         <group range="15-24 years:" total="21.2" male="0.4971" female="0.5029"/>
+         <group range="25-54 years:" total="25.3" male="0.4997" female="0.5003"/>
+         <group range="55-64 years:" total="2.3" male="0.4697" female="0.5303"/>
+         <group range="65 years and over:" total="2.1" male="0.4446" female="0.5554"/>
+      </age-distribution>
+      <population>34758809</population>
+      <area>241038</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Western Sahara</name>
+      <gdp>906.5</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="38.7" male="0.5053" female="0.4947"/>
+         <group range="15-24 years:" total="19.8" male="0.5033" female="0.4967"/>
+         <group range="25-54 years:" total="33.3" male="0.4908" female="0.5092"/>
+         <group range="55-64 years:" total="4.6" male="0.4682" female="0.5318"/>
+         <group range="65 years and over:" total="3.6" male="0.439" female="0.561"/>
+      </age-distribution>
+      <population>538811</population>
+      <area>266000</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Zambia</name>
+      <gdp>23680</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="46.3" male="0.5021" female="0.4979"/>
+         <group range="15-24 years:" total="20" male="0.4996" female="0.5004"/>
+         <group range="25-54 years:" total="28.4" male="0.504" female="0.496"/>
+         <group range="55-64 years:" total="2.9" male="0.478" female="0.522"/>
+         <group range="65 years and over:" total="2.4" male="0.4299" female="0.5701"/>
+      </age-distribution>
+      <population>14222233</population>
+      <area>752618</area>
+   </country>
+   <country>
+      <region>Africa</region>
+      <name>Zimbabwe</name>
+      <gdp>6909</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="40.6" male="0.5051" female="0.4949"/>
+         <group range="15-24 years:" total="22.5" male="0.4879" female="0.5121"/>
+         <group range="25-54 years:" total="29.5" male="0.4883" female="0.5117"/>
+         <group range="55-64 years:" total="3.8" male="0.3645" female="0.6355"/>
+         <group range="65 years and over:" total="3.7" male="0.413" female="0.587"/>
+      </age-distribution>
+      <population>13182908</population>
+      <area>390757</area>
+   </country>
+   <country>
+      <region>Antarctica</region>
+      <name>Antarctica</name>
+      <area>14000000</area>
+   </country>
+   <country>
+      <region>Antarctica</region>
+      <name>Bouvet Island</name>
+      <area>49</area>
+   </country>
+   <country>
+      <region>Antarctica</region>
+      <name>French Southern and Antarctic Lands</name>
+   </country>
+   <country>
+      <region>Antarctica</region>
+      <name>Heard Island and McDonald Islands</name>
+      <area>412</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>American Samoa</name>
+      <gdp>575.3</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="25.8" male="0.4947" female="0.5053"/>
+         <group range="15-24 years:" total="21.2" male="0.4951" female="0.5049"/>
+         <group range="25-54 years:" total="41.3" male="0.5144" female="0.4856"/>
+         <group range="55-64 years:" total="7.3" male="0.4959" female="0.5041"/>
+         <group range="65 years and over:" total="4.5" male="0.463" female="0.537"/>
+      </age-distribution>
+      <population>54719</population>
+      <area>199</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Ashmore and Cartier Islands</name>
+      <area>5</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Australia</name>
+      <gdp>960700</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="18.2" male="0.513" female="0.487"/>
+         <group range="15-24 years:" total="13.5" male="0.513" female="0.487"/>
+         <group range="25-54 years:" total="42.2" male="0.5077" female="0.4923"/>
+         <group range="55-64 years:" total="11.8" male="0.4973" female="0.5027"/>
+         <group range="65 years and over:" total="14.4" male="0.4595" female="0.5405"/>
+      </age-distribution>
+      <population>22262501</population>
+      <area>7741220</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Christmas Island</name>
+      <population>1496</population>
+      <area>135</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Cocos (Keeling) Islands</name>
+      <population>596</population>
+      <area>14</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Cook Islands</name>
+      <gdp>183.2</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24.2" male="0.5309" female="0.4691"/>
+         <group range="15-24 years:" total="18.2" male="0.535" female="0.465"/>
+         <group range="25-54 years:" total="37.9" male="0.5038" female="0.4962"/>
+         <group range="55-64 years:" total="9.5" male="0.5316" female="0.4684"/>
+         <group range="65 years and over:" total="10.3" male="0.4887" female="0.5113"/>
+      </age-distribution>
+      <population>10447</population>
+      <area>236</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Coral Sea Islands</name>
+      
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Fiji</name>
+      <gdp>4307</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="28.6" male="0.5109" female="0.4891"/>
+         <group range="15-24 years:" total="17.6" male="0.5116" female="0.4884"/>
+         <group range="25-54 years:" total="41" male="0.5119" female="0.4881"/>
+         <group range="55-64 years:" total="7.4" male="0.5023" female="0.4977"/>
+         <group range="65 years and over:" total="5.4" male="0.4594" female="0.5406"/>
+      </age-distribution>
+      <population>896758</population>
+      <area>18274</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>French Polynesia</name>
+      <gdp>4718</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24.5" male="0.5143" female="0.4857"/>
+         <group range="15-24 years:" total="17.6" male="0.5159" female="0.4841"/>
+         <group range="25-54 years:" total="43.4" male="0.5134" female="0.4866"/>
+         <group range="55-64 years:" total="7.9" male="0.5154" female="0.4846"/>
+         <group range="65 years and over:" total="6.7" male="0.487" female="0.513"/>
+      </age-distribution>
+      <population>277293</population>
+      <area>4167</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Guam</name>
+      <gdp>2500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="26.8" male="0.5169" female="0.4831"/>
+         <group range="15-24 years:" total="16.9" male="0.5121" female="0.4879"/>
+         <group range="25-54 years:" total="39.6" male="0.511" female="0.489"/>
+         <group range="55-64 years:" total="8.9" male="0.502" female="0.498"/>
+         <group range="65 years and over:" total="7.9" male="0.4551" female="0.5449"/>
+      </age-distribution>
+      <population>160378</population>
+      <area>544</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Kiribati</name>
+      <gdp>624</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="33.1" male="0.5094" female="0.4906"/>
+         <group range="15-24 years:" total="21.2" male="0.5022" female="0.4978"/>
+         <group range="25-54 years:" total="36.7" male="0.4808" female="0.5192"/>
+         <group range="55-64 years:" total="5.2" male="0.458" female="0.542"/>
+         <group range="65 years and over:" total="3.8" male="0.3907" female="0.6093"/>
+      </age-distribution>
+      <population>103248</population>
+      <area>811</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Marshall Islands</name>
+      <gdp>133.5</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="37.8" male="0.5095" female="0.4905"/>
+         <group range="15-24 years:" total="17.7" male="0.5093" female="0.4907"/>
+         <group range="25-54 years:" total="36" male="0.5087" female="0.4913"/>
+         <group range="55-64 years:" total="5.4" male="0.5225" female="0.4775"/>
+         <group range="65 years and over:" total="3.1" male="0.4879" female="0.5121"/>
+      </age-distribution>
+      <population>69747</population>
+      <area>181</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Micronesia, Federated States of</name>
+      <gdp>238.1</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="33" male="0.5081" female="0.4919"/>
+         <group range="15-24 years:" total="20.6" male="0.5068" female="0.4932"/>
+         <group range="25-54 years:" total="37.2" male="0.4854" female="0.5146"/>
+         <group range="55-64 years:" total="6.1" male="0.5049" female="0.4951"/>
+         <group range="65 years and over:" total="3.1" male="0.435" female="0.565"/>
+      </age-distribution>
+      <population>106104</population>
+      <area>702</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Nauru</name>
+      <gdp>60</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="32.7" male="0.4486" female="0.5514"/>
+         <group range="15-24 years:" total="18.2" male="0.5164" female="0.4836"/>
+         <group range="25-54 years:" total="41.8" male="0.4939" female="0.5061"/>
+         <group range="55-64 years:" total="5.6" male="0.4045" female="0.5955"/>
+         <group range="65 years and over:" total="1.7" male="0.4367" female="0.5633"/>
+      </age-distribution>
+      <population>9434</population>
+      <area>21</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>New Caledonia</name>
+      <gdp>3158</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24.5" male="0.511" female="0.489"/>
+         <group range="15-24 years:" total="17.1" male="0.5102" female="0.4898"/>
+         <group range="25-54 years:" total="42.4" male="0.5026" female="0.4974"/>
+         <group range="55-64 years:" total="8" male="0.4951" female="0.5049"/>
+         <group range="65 years and over:" total="8" male="0.4479" female="0.5521"/>
+      </age-distribution>
+      <population>264022</population>
+      <area>18575</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>New Zealand</name>
+      <gdp>128500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="20.2" male="0.5126" female="0.4874"/>
+         <group range="15-24 years:" total="14.2" male="0.5116" female="0.4884"/>
+         <group range="25-54 years:" total="40.8" male="0.5003" female="0.4997"/>
+         <group range="55-64 years:" total="11.2" male="0.4903" female="0.5097"/>
+         <group range="65 years and over:" total="13.6" male="0.4593" female="0.5407"/>
+      </age-distribution>
+      <population>4365113</population>
+      <area>267710</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Niue</name>
+      <gdp>10.01</gdp>
+      <population>1269</population>
+      <area>260</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Norfolk Island</name>
+      <age-distribution>
+         <group range="0-14 years:"/>
+         <group range="15-64 years:"/>
+         <group range="65 years and over:"/>
+      </age-distribution>
+      <population>2182</population>
+      <area>36</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Northern Mariana Islands</name>
+      <gdp>900</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="26" male="0.5275" female="0.4725"/>
+         <group range="15-24 years:" total="15.3" male="0.5305" female="0.4695"/>
+         <group range="25-54 years:" total="46.1" male="0.4277" female="0.5723"/>
+         <group range="55-64 years:" total="8.7" male="0.5424" female="0.4576"/>
+         <group range="65 years and over:" total="3.9" male="0.4754" female="0.5246"/>
+      </age-distribution>
+      <population>51170</population>
+      <area>464</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Palau</name>
+      <gdp>164</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="21" male="0.5159" female="0.4841"/>
+         <group range="15-24 years:" total="17.6" male="0.4956" female="0.5044"/>
+         <group range="25-54 years:" total="46.8" male="0.6077" female="0.3923"/>
+         <group range="55-64 years:" total="7.9" male="0.3564" female="0.6436"/>
+         <group range="65 years and over:" total="6.6" male="0.2878" female="0.7122"/>
+      </age-distribution>
+      <population>21108</population>
+      <area>459</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Pitcairn Islands</name>
+      <population>48</population>
+      <area>47</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Samoa</name>
+      <gdp>1128</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="34.7" male="0.5159" female="0.4841"/>
+         <group range="15-24 years:" total="20" male="0.5133" female="0.4867"/>
+         <group range="25-54 years:" total="34.5" male="0.5206" female="0.4794"/>
+         <group range="55-64 years:" total="5.4" male="0.5046" female="0.4954"/>
+         <group range="65 years and over:" total="5.3" male="0.4394" female="0.5606"/>
+      </age-distribution>
+      <population>195476</population>
+      <area>2831</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Solomon Islands</name>
+      <gdp>1922</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="37.3" male="0.5148" female="0.4852"/>
+         <group range="15-24 years:" total="19.9" male="0.5131" female="0.4869"/>
+         <group range="25-54 years:" total="34.6" male="0.5099" female="0.4901"/>
+         <group range="55-64 years:" total="4.2" male="0.4905" female="0.5095"/>
+         <group range="65 years and over:" total="3.9" male="0.4871" female="0.5129"/>
+      </age-distribution>
+      <population>597248</population>
+      <area>28896</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Tokelau</name>
+      <gdp>1.5</gdp>
+      <age-distribution>
+         <group range="0-14 years:"/>
+         <group range="15-64 years:"/>
+         <group range="65 years and over:"/>
+      </age-distribution>
+      <population>1368</population>
+      <area>12</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Tonga</name>
+      <gdp>786</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="36.7" male="0.508" female="0.492"/>
+         <group range="15-24 years:" total="19.1" male="0.5122" female="0.4878"/>
+         <group range="25-54 years:" total="32.7" male="0.4997" female="0.5003"/>
+         <group range="55-64 years:" total="5.4" male="0.4776" female="0.5224"/>
+         <group range="65 years and over:" total="6.1" male="0.4627" female="0.5373"/>
+      </age-distribution>
+      <population>106322</population>
+      <area>747</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Tuvalu</name>
+      <gdp>37</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="30.2" male="0.5136" female="0.4864"/>
+         <group range="15-24 years:" total="21.2" male="0.5381" female="0.4619"/>
+         <group range="25-54 years:" total="35.5" male="0.4752" female="0.5248"/>
+         <group range="55-64 years:" total="7.9" male="0.4134" female="0.5866"/>
+         <group range="65 years and over:" total="5.3" male="0.421" female="0.579"/>
+      </age-distribution>
+      <population>10698</population>
+      <area>26</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>United States Pacific Island Wildlife Refuges</name>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Vanuatu</name>
+      <gdp>1237</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="38.4" male="0.5106" female="0.4894"/>
+         <group range="15-24 years:" total="19.6" male="0.4986" female="0.5014"/>
+         <group range="25-54 years:" total="33.7" male="0.4905" female="0.5095"/>
+         <group range="55-64 years:" total="4.8" male="0.51" female="0.49"/>
+         <group range="65 years and over:" total="3.5" male="0.5174" female="0.4826"/>
+      </age-distribution>
+      <population>261565</population>
+      <area>12189</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Wake Island</name>
+      <area>6.5</area>
+   </country>
+   <country>
+      <region>Australia-Oceania</region>
+      <name>Wallis and Futuna</name>
+      <gdp>60</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24.6" male="0.5223" female="0.4777"/>
+         <group range="15-24 years:" total="18.5" male="0.5196" female="0.4804"/>
+         <group range="25-54 years:" total="40" male="0.4944" female="0.5056"/>
+         <group range="55-64 years:" total="8.7" male="0.5116" female="0.4884"/>
+         <group range="65 years and over:" total="8.3" male="0.4694" female="0.5306"/>
+      </age-distribution>
+      <population>15507</population>
+      <area>142</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Anguilla</name>
+      <gdp>175.4</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="23.8" male="0.5131" female="0.4869"/>
+         <group range="15-24 years:" total="14.5" male="0.4929" female="0.5071"/>
+         <group range="25-54 years:" total="45.3" male="0.4552" female="0.5448"/>
+         <group range="55-64 years:" total="8.4" male="0.5104" female="0.4896"/>
+         <group range="65 years and over:" total="8" male="0.4899" female="0.5101"/>
+      </age-distribution>
+      <population>15754</population>
+      <area>91</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Antigua and Barbuda</name>
+      <gdp>1535</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="25.2" male="0.5079" female="0.4921"/>
+         <group range="15-24 years:" total="16.6" male="0.4934" female="0.5066"/>
+         <group range="25-54 years:" total="42.9" male="0.4578" female="0.5422"/>
+         <group range="55-64 years:" total="8.3" male="0.4556" female="0.5444"/>
+         <group range="65 years and over:" total="7" male="0.4316" female="0.5684"/>
+      </age-distribution>
+      <population>90156</population>
+      <area>442.6</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Aruba</name>
+      <gdp>2258</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="18.1" male="0.5021" female="0.4979"/>
+         <group range="15-24 years:" total="13.6" male="0.4994" female="0.5006"/>
+         <group range="25-54 years:" total="43.8" male="0.4847" female="0.5153"/>
+         <group range="55-64 years:" total="12.9" male="0.4462" female="0.5538"/>
+         <group range="65 years and over:" total="11.6" male="0.3936" female="0.6064"/>
+      </age-distribution>
+      <population>109153</population>
+      <area>180</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Bahamas, The</name>
+      <gdp>11040</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24" male="0.5073" female="0.4927"/>
+         <group range="15-24 years:" total="17.4" male="0.5068" female="0.4932"/>
+         <group range="25-54 years:" total="44.2" male="0.4972" female="0.5028"/>
+         <group range="55-64 years:" total="7.8" male="0.4406" female="0.5594"/>
+         <group range="65 years and over:" total="6.5" male="0.3826" female="0.6174"/>
+      </age-distribution>
+      <population>319031</population>
+      <area>13880</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Barbados</name>
+      <gdp>7091</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="18.8" male="0.5" female="0.5"/>
+         <group range="15-24 years:" total="13.9" male="0.5026" female="0.4974"/>
+         <group range="25-54 years:" total="45.9" male="0.4964" female="0.5036"/>
+         <group range="55-64 years:" total="11.5" male="0.4636" female="0.5364"/>
+         <group range="65 years and over:" total="10" male="0.3924" female="0.6076"/>
+      </age-distribution>
+      <population>288725</population>
+      <area>430</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Belize</name>
+      <gdp>2896</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="36.3" male="0.5102" female="0.4898"/>
+         <group range="15-24 years:" total="21.2" male="0.5094" female="0.4906"/>
+         <group range="25-54 years:" total="34.6" male="0.5046" female="0.4954"/>
+         <group range="55-64 years:" total="4.3" male="0.5002" female="0.4998"/>
+         <group range="65 years and over:" total="3.6" male="0.4745" female="0.5255"/>
+      </age-distribution>
+      <population>334297</population>
+      <area>22966</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>British Virgin Islands</name>
+      <gdp>853.4</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17.7" male="0.4912" female="0.5088"/>
+         <group range="15-24 years:" total="15" male="0.4791" female="0.5209"/>
+         <group range="25-54 years:" total="50.1" male="0.4746" female="0.5254"/>
+         <group range="55-64 years:" total="10" male="0.4997" female="0.5003"/>
+         <group range="65 years and over:" total="7.3" male="0.4865" female="0.5135"/>
+      </age-distribution>
+      <population>31912</population>
+      <area>151</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Cayman Islands</name>
+      <gdp>2250</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="18.8" male="0.5035" female="0.4965"/>
+         <group range="15-24 years:" total="12.9" male="0.4941" female="0.5059"/>
+         <group range="25-54 years:" total="45.2" male="0.4867" female="0.5133"/>
+         <group range="55-64 years:" total="12.8" male="0.4776" female="0.5224"/>
+         <group range="65 years and over:" total="10.3" male="0.4723" female="0.5277"/>
+      </age-distribution>
+      <population>53737</population>
+      <area>264</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Costa Rica</name>
+      <gdp>58600</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24.2" male="0.5113" female="0.4887"/>
+         <group range="15-24 years:" total="18.2" male="0.5094" female="0.4906"/>
+         <group range="25-54 years:" total="43.3" male="0.5019" female="0.4981"/>
+         <group range="55-64 years:" total="7.7" male="0.4915" female="0.5085"/>
+         <group range="65 years and over:" total="6.6" male="0.463" female="0.537"/>
+      </age-distribution>
+      <population>4695942</population>
+      <area>51100</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Cuba</name>
+      <gdp>114100</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17" male="0.514" female="0.486"/>
+         <group range="15-24 years:" total="14.1" male="0.5126" female="0.4874"/>
+         <group range="25-54 years:" total="46.8" male="0.5028" female="0.4972"/>
+         <group range="55-64 years:" total="10.2" male="0.4773" female="0.5227"/>
+         <group range="65 years and over:" total="12" male="0.4506" female="0.5494"/>
+      </age-distribution>
+      <population>11061886</population>
+      <area>110860</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Curacao</name>
+      <gdp>2838</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="20.6" male="0.5116" female="0.4884"/>
+         <group range="15-24 years:" total="15.4" male="0.5181" female="0.4819"/>
+         <group range="25-54 years:" total="38.5" male="0.478" female="0.522"/>
+         <group range="55-64 years:" total="12.6" male="0.4399" female="0.5601"/>
+         <group range="65 years and over:" total="13" male="0.4139" female="0.5861"/>
+      </age-distribution>
+      <population>146836</population>
+      <area>444</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Dominica</name>
+      <gdp>1035</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="22.6" male="0.5108" female="0.4892"/>
+         <group range="15-24 years:" total="17.6" male="0.5148" female="0.4852"/>
+         <group range="25-54 years:" total="40.9" male="0.509" female="0.491"/>
+         <group range="55-64 years:" total="8.7" male="0.5288" female="0.4712"/>
+         <group range="65 years and over:" total="10.3" male="0.4349" female="0.5651"/>
+      </age-distribution>
+      <population>73286</population>
+      <area>751</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Dominican Republic</name>
+      <gdp>98740</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="29" male="0.5088" female="0.4912"/>
+         <group range="15-24 years:" total="18.6" male="0.5103" female="0.4897"/>
+         <group range="25-54 years:" total="38.9" male="0.5115" female="0.4885"/>
+         <group range="55-64 years:" total="6.8" male="0.5031" female="0.4969"/>
+         <group range="65 years and over:" total="6.7" male="0.4618" female="0.5382"/>
+      </age-distribution>
+      <population>10219630</population>
+      <area>48670</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>El Salvador</name>
+      <gdp>45980</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="29.7" male="0.513" female="0.487"/>
+         <group range="15-24 years:" total="20.8" male="0.5007" female="0.4993"/>
+         <group range="25-54 years:" total="36.5" male="0.4579" female="0.5421"/>
+         <group range="55-64 years:" total="6.3" male="0.4545" female="0.5455"/>
+         <group range="65 years and over:" total="6.6" male="0.4451" female="0.5549"/>
+      </age-distribution>
+      <population>6108590</population>
+      <area>21041</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Grenada</name>
+      <gdp>1471</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="25" male="0.5148" female="0.4852"/>
+         <group range="15-24 years:" total="17.8" male="0.4949" female="0.5051"/>
+         <group range="25-54 years:" total="39.9" male="0.5143" female="0.4857"/>
+         <group range="55-64 years:" total="8.3" male="0.5153" female="0.4847"/>
+         <group range="65 years and over:" total="9.1" male="0.4533" female="0.5467"/>
+      </age-distribution>
+      <population>109590</population>
+      <area>344</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Guatemala</name>
+      <gdp>78420</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="37.4" male="0.5093" female="0.4907"/>
+         <group range="15-24 years:" total="22.2" male="0.5006" female="0.4994"/>
+         <group range="25-54 years:" total="31.3" male="0.4741" female="0.5259"/>
+         <group range="55-64 years:" total="5.1" male="0.4846" female="0.5154"/>
+         <group range="65 years and over:" total="4" male="0.4641" female="0.5359"/>
+      </age-distribution>
+      <population>14373472</population>
+      <area>108889</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Haiti</name>
+      <gdp>13130</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="35.3" male="0.5011" female="0.4989"/>
+         <group range="15-24 years:" total="21.4" male="0.4992" female="0.5008"/>
+         <group range="25-54 years:" total="34.4" male="0.4974" female="0.5026"/>
+         <group range="55-64 years:" total="4.9" male="0.4753" female="0.5247"/>
+         <group range="65 years and over:" total="4" male="0.4456" female="0.5544"/>
+      </age-distribution>
+      <population>9893934</population>
+      <area>27750</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Honduras</name>
+      <gdp>37670</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="36.1" male="0.5107" female="0.4893"/>
+         <group range="15-24 years:" total="21.2" male="0.5099" female="0.4901"/>
+         <group range="25-54 years:" total="34.4" male="0.5033" female="0.4967"/>
+         <group range="55-64 years:" total="4.5" male="0.4595" female="0.5405"/>
+         <group range="65 years and over:" total="3.8" male="0.4419" female="0.5581"/>
+      </age-distribution>
+      <population>8448465</population>
+      <area>112090</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Jamaica</name>
+      <gdp>25180</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="29.5" male="0.5084" female="0.4916"/>
+         <group range="15-24 years:" total="21.7" male="0.5014" female="0.4986"/>
+         <group range="25-54 years:" total="35.6" male="0.4909" female="0.5091"/>
+         <group range="55-64 years:" total="5.5" male="0.4883" female="0.5117"/>
+         <group range="65 years and over:" total="7.7" male="0.4475" female="0.5525"/>
+      </age-distribution>
+      <population>2909714</population>
+      <area>10991</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Montserrat</name>
+      <gdp>43.78</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="26.3" male="0.5203" female="0.4797"/>
+         <group range="15-24 years:" total="13.8" male="0.5105" female="0.4895"/>
+         <group range="25-54 years:" total="47.7" male="0.4722" female="0.5278"/>
+         <group range="55-64 years:" total="6" male="0.5" female="0.5"/>
+         <group range="65 years and over:" total="6.2" male="0.6082" female="0.3918"/>
+      </age-distribution>
+      <population>5189</population>
+      <area>102</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Navassa Island</name>
+      <area>5.4</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Nicaragua</name>
+      <gdp>19890</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="30.8" male="0.5096" female="0.4904"/>
+         <group range="15-24 years:" total="22.6" male="0.5005" female="0.4995"/>
+         <group range="25-54 years:" total="36.9" male="0.4727" female="0.5273"/>
+         <group range="55-64 years:" total="5.1" male="0.4654" female="0.5346"/>
+         <group range="65 years and over:" total="4.6" male="0.454" female="0.546"/>
+      </age-distribution>
+      <population>5788531</population>
+      <area>130370</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Panama</name>
+      <gdp>55800</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="28.1" male="0.5104" female="0.4896"/>
+         <group range="15-24 years:" total="17.4" male="0.5099" female="0.4901"/>
+         <group range="25-54 years:" total="39.9" male="0.506" female="0.494"/>
+         <group range="55-64 years:" total="7.2" male="0.4937" female="0.5063"/>
+         <group range="65 years and over:" total="7.4" male="0.4628" female="0.5372"/>
+      </age-distribution>
+      <population>3559408</population>
+      <area>75420</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Puerto Rico</name>
+      <gdp>64840</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="18.8" male="0.5121" female="0.4879"/>
+         <group range="15-24 years:" total="14.7" male="0.5071" female="0.4929"/>
+         <group range="25-54 years:" total="38.8" male="0.4758" female="0.5242"/>
+         <group range="55-64 years:" total="11.9" male="0.4548" female="0.5452"/>
+         <group range="65 years and over:" total="15.8" male="0.4348" female="0.5652"/>
+      </age-distribution>
+      <population>3674209</population>
+      <area>13790</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Saint Barthelemy</name>
+      <age-distribution>
+         <group range="0-14 years:" total="18.5" male="0.5132" female="0.4868"/>
+         <group range="15-24 years:" total="6.7" male="0.5275" female="0.4725"/>
+         <group range="25-54 years:" total="48" male="0.5455" female="0.4545"/>
+         <group range="55-64 years:" total="14.3" male="0.5386" female="0.4614"/>
+         <group range="65 years and over:" total="12.5" male="0.5" female="0.5"/>
+      </age-distribution>
+      <population>7298</population>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Saint Kitts and Nevis</name>
+      <gdp>890</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="22.3" male="0.4993" female="0.5007"/>
+         <group range="15-24 years:" total="15.7" male="0.4967" female="0.5033"/>
+         <group range="25-54 years:" total="45.4" male="0.5082" female="0.4918"/>
+         <group range="55-64 years:" total="8.8" male="0.5094" female="0.4906"/>
+         <group range="65 years and over:" total="7.7" male="0.4429" female="0.5571"/>
+      </age-distribution>
+      <population>51134</population>
+      <area>261</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Saint Lucia</name>
+      <gdp>2234</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="22.2" male="0.5141" female="0.4859"/>
+         <group range="15-24 years:" total="17.2" male="0.5038" female="0.4962"/>
+         <group range="25-54 years:" total="42.6" male="0.4808" female="0.5192"/>
+         <group range="55-64 years:" total="8.1" male="0.4638" female="0.5362"/>
+         <group range="65 years and over:" total="9.9" male="0.4521" female="0.5479"/>
+      </age-distribution>
+      <population>162781</population>
+      <area>616</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Saint Martin</name>
+      <gdp>561.5</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="26.8" male="0.4972" female="0.5028"/>
+         <group range="15-24 years:" total="11.3" male="0.5194" female="0.4806"/>
+         <group range="25-54 years:" total="47.4" male="0.4686" female="0.5314"/>
+         <group range="55-64 years:" total="8.1" male="0.4722" female="0.5278"/>
+         <group range="65 years and over:" total="6.3" male="0.4483" female="0.5517"/>
+      </age-distribution>
+      <population>31264</population>
+      <area>54.4</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Saint Vincent and the Grenadines</name>
+      <gdp>1301</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24" male="0.5041" female="0.4959"/>
+         <group range="15-24 years:" total="17.3" male="0.505" female="0.495"/>
+         <group range="25-54 years:" total="42.3" male="0.5194" female="0.4806"/>
+         <group range="55-64 years:" total="8.3" male="0.5115" female="0.4885"/>
+         <group range="65 years and over:" total="8.2" male="0.4578" female="0.5422"/>
+      </age-distribution>
+      <population>103220</population>
+      <area>389</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Sint Maarten</name>
+      <gdp>794.7</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="19.7" male="0.5183" female="0.4817"/>
+         <group range="15-24 years:" total="16.3" male="0.4904" female="0.5096"/>
+         <group range="25-54 years:" total="45.3" male="0.4873" female="0.5127"/>
+         <group range="55-64 years:" total="12.9" male="0.4853" female="0.5147"/>
+         <group range="65 years and over:" total="5.8" male="0.4793" female="0.5207"/>
+      </age-distribution>
+      <population>39689</population>
+      <area>34</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Trinidad and Tobago</name>
+      <gdp>27120</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="19.5" male="0.5105" female="0.4895"/>
+         <group range="15-24 years:" total="14.4" male="0.518" female="0.482"/>
+         <group range="25-54 years:" total="47.1" male="0.5177" female="0.4823"/>
+         <group range="55-64 years:" total="10.3" male="0.4966" female="0.5034"/>
+         <group range="65 years and over:" total="8.7" male="0.4307" female="0.5693"/>
+      </age-distribution>
+      <population>1225225</population>
+      <area>5128</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Turks and Caicos Islands</name>
+      <gdp>216</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="22.5" male="0.5092" female="0.4908"/>
+         <group range="15-24 years:" total="15.3" male="0.4832" female="0.5168"/>
+         <group range="25-54 years:" total="53.4" male="0.5107" female="0.4893"/>
+         <group range="55-64 years:" total="4.7" male="0.5478" female="0.4522"/>
+         <group range="65 years and over:" total="4.1" male="0.4437" female="0.5563"/>
+      </age-distribution>
+      <population>47754</population>
+      <area>948</area>
+   </country>
+   <country>
+      <region>Central America and Caribbean</region>
+      <name>Virgin Islands</name>
+      <gdp>1577</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="18.7" male="0.5065" female="0.4935"/>
+         <group range="15-24 years:" total="10.9" male="0.4522" female="0.5478"/>
+         <group range="25-54 years:" total="39.6" male="0.4574" female="0.5426"/>
+         <group range="55-64 years:" total="14.1" male="0.4754" female="0.5246"/>
+         <group range="65 years and over:" total="16.8" male="0.4535" female="0.5465"/>
+      </age-distribution>
+      <population>104737</population>
+      <area>1910</area>
+   </country>
+   <country>
+      <region>Central Asia</region>
+      <name>Kazakhstan</name>
+      <gdp>232300</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24.4" male="0.5033" female="0.4967"/>
+         <group range="15-24 years:" total="17.7" male="0.5078" female="0.4922"/>
+         <group range="25-54 years:" total="42.4" male="0.4853" female="0.5147"/>
+         <group range="55-64 years:" total="8.6" male="0.4352" female="0.5648"/>
+         <group range="65 years and over:" total="6.7" male="0.3426" female="0.6574"/>
+      </age-distribution>
+      <population>17736896</population>
+      <area>2724900</area>
+   </country>
+   <country>
+      <region>Central Asia</region>
+      <name>Kyrgyzstan</name>
+      <gdp>13470</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="29.6" male="0.511" female="0.489"/>
+         <group range="15-24 years:" total="20" male="0.5074" female="0.4926"/>
+         <group range="25-54 years:" total="39" male="0.4889" female="0.5111"/>
+         <group range="55-64 years:" total="6.5" male="0.4336" female="0.5664"/>
+         <group range="65 years and over:" total="4.9" male="0.3855" female="0.6145"/>
+      </age-distribution>
+      <population>5548042</population>
+      <area>199951</area>
+   </country>
+   <country>
+      <region>Central Asia</region>
+      <name>Russia</name>
+      <gdp>2509000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.7" male="0.5136" female="0.4864"/>
+         <group range="15-24 years:" total="12.4" male="0.5104" female="0.4896"/>
+         <group range="25-54 years:" total="45.8" male="0.4882" female="0.5118"/>
+         <group range="55-64 years:" total="13.1" male="0.4253" female="0.5747"/>
+         <group range="65 years and over:" total="13" male="0.3044" female="0.6956"/>
+      </age-distribution>
+      <population>142500482</population>
+      <area>17098242</area>
+   </country>
+   <country>
+      <region>Central Asia</region>
+      <name>Tajikistan</name>
+      <gdp>17610</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="33.7" male="0.5089" female="0.4911"/>
+         <group range="15-24 years:" total="20.9" male="0.5068" female="0.4932"/>
+         <group range="25-54 years:" total="37.9" male="0.493" female="0.507"/>
+         <group range="55-64 years:" total="4.3" male="0.4586" female="0.5414"/>
+         <group range="65 years and over:" total="3.3" male="0.4221" female="0.5779"/>
+      </age-distribution>
+      <population>7910041</population>
+      <area>143100</area>
+   </country>
+   <country>
+      <region>Central Asia</region>
+      <name>Turkmenistan</name>
+      <gdp>47550</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27.1" male="0.5062" female="0.4938"/>
+         <group range="15-24 years:" total="21.4" male="0.5032" female="0.4968"/>
+         <group range="25-54 years:" total="41.3" male="0.4948" female="0.5052"/>
+         <group range="55-64 years:" total="6.1" male="0.4722" female="0.5278"/>
+         <group range="65 years and over:" total="4.1" male="0.4351" female="0.5649"/>
+      </age-distribution>
+      <population>5113040</population>
+      <area>488100</area>
+   </country>
+   <country>
+      <region>Central Asia</region>
+      <name>Uzbekistan</name>
+      <gdp>103900</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="25.8" male="0.5123" female="0.4877"/>
+         <group range="15-24 years:" total="21.7" male="0.5056" female="0.4944"/>
+         <group range="25-54 years:" total="41.8" male="0.4962" female="0.5038"/>
+         <group range="55-64 years:" total="6" male="0.471" female="0.529"/>
+         <group range="65 years and over:" total="4.7" male="0.4271" female="0.5729"/>
+      </age-distribution>
+      <population>28661637</population>
+      <area>447400</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Brunei</name>
+      <gdp>21940</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="25" male="0.5157" female="0.4843"/>
+         <group range="15-24 years:" total="17.7" male="0.4933" female="0.5067"/>
+         <group range="25-54 years:" total="46.7" male="0.4899" female="0.5101"/>
+         <group range="55-64 years:" total="6.9" male="0.5167" female="0.4833"/>
+         <group range="65 years and over:" total="3.7" male="0.4878" female="0.5122"/>
+      </age-distribution>
+      <population>415717</population>
+      <area>5765</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Burma</name>
+      <gdp>89230</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27.1" male="0.5096" female="0.4904"/>
+         <group range="15-24 years:" total="18.8" male="0.5059" female="0.4941"/>
+         <group range="25-54 years:" total="42.5" male="0.4964" female="0.5036"/>
+         <group range="55-64 years:" total="6.5" male="0.4724" female="0.5276"/>
+         <group range="65 years and over:" total="5.1" male="0.4355" female="0.5645"/>
+      </age-distribution>
+      <population>55167330</population>
+      <area>676578</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Cambodia</name>
+      <gdp>36590</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="31.9" male="0.5026" female="0.4974"/>
+         <group range="15-24 years:" total="21.9" male="0.4958" female="0.5042"/>
+         <group range="25-54 years:" total="37.5" male="0.4846" female="0.5154"/>
+         <group range="55-64 years:" total="4.9" male="0.385" female="0.615"/>
+         <group range="65 years and over:" total="3.8" male="0.3763" female="0.6237"/>
+      </age-distribution>
+      <population>15205539</population>
+      <area>181035</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>China</name>
+      <gdp>12380000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17.4" male="0.5383" female="0.4617"/>
+         <group range="15-24 years:" total="16.1" male="0.526" female="0.474"/>
+         <group range="25-54 years:" total="46.5" male="0.5115" female="0.4885"/>
+         <group range="55-64 years:" total="10.9" male="0.5068" female="0.4932"/>
+         <group range="65 years and over:" total="9.1" male="0.4799" female="0.5201"/>
+      </age-distribution>
+      <population>1349585838</population>
+      <area>9596961</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Hong Kong</name>
+      <gdp>363700</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="11.4" male="0.5222" female="0.4778"/>
+         <group range="15-24 years:" total="11" male="0.5164" female="0.4836"/>
+         <group range="25-54 years:" total="49.2" male="0.4691" female="0.5309"/>
+         <group range="55-64 years:" total="14.5" male="0.4993" female="0.5007"/>
+         <group range="65 years and over:" total="13.9" male="0.469" female="0.531"/>
+      </age-distribution>
+      <population>7182724</population>
+      <area>1104</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Indonesia</name>
+      <gdp>1212000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27" male="0.5089" female="0.4911"/>
+         <group range="15-24 years:" total="17.1" male="0.5089" female="0.4911"/>
+         <group range="25-54 years:" total="42.2" male="0.5052" female="0.4948"/>
+         <group range="55-64 years:" total="7.2" male="0.471" female="0.529"/>
+         <group range="65 years and over:" total="6.4" male="0.4378" female="0.5622"/>
+      </age-distribution>
+      <population>251160124</population>
+      <area>1904569</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Japan</name>
+      <gdp>4617000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="13.5" male="0.5192" female="0.4808"/>
+         <group range="15-24 years:" total="9.8" male="0.5136" female="0.4864"/>
+         <group range="25-54 years:" total="38.5" male="0.4961" female="0.5039"/>
+         <group range="55-64 years:" total="14.4" male="0.4997" female="0.5003"/>
+         <group range="65 years and over:" total="23.9" male="0.4307" female="0.5693"/>
+      </age-distribution>
+      <population>127253075</population>
+      <area>377915</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Korea, North</name>
+      <gdp>40000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="22" male="0.5065" female="0.4935"/>
+         <group range="15-24 years:" total="16.5" male="0.5076" female="0.4924"/>
+         <group range="25-54 years:" total="44" male="0.4994" female="0.5006"/>
+         <group range="55-64 years:" total="8.2" male="0.4696" female="0.5304"/>
+         <group range="65 years and over:" total="9.3" male="0.3359" female="0.6641"/>
+      </age-distribution>
+      <population>24720407</population>
+      <area>120538</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Korea, South</name>
+      <gdp>1622000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.1" male="0.521" female="0.479"/>
+         <group range="15-24 years:" total="13.6" male="0.5312" female="0.4688"/>
+         <group range="25-54 years:" total="48.3" male="0.5089" female="0.4911"/>
+         <group range="55-64 years:" total="11.2" male="0.4937" female="0.5063"/>
+         <group range="65 years and over:" total="11.9" male="0.4085" female="0.5915"/>
+      </age-distribution>
+      <population>48955203</population>
+      <area>99720</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Laos</name>
+      <gdp>19160</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="36.1" male="0.5038" female="0.4962"/>
+         <group range="15-24 years:" total="21.2" male="0.4965" female="0.5035"/>
+         <group range="25-54 years:" total="34.2" male="0.4936" female="0.5064"/>
+         <group range="55-64 years:" total="4.7" male="0.4909" female="0.5091"/>
+         <group range="65 years and over:" total="3.7" male="0.4508" female="0.5492"/>
+      </age-distribution>
+      <population>6695166</population>
+      <area>236800</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Macau</name>
+      <gdp>42900</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14.7" male="0.5277" female="0.4723"/>
+         <group range="15-24 years:" total="15.3" male="0.509" female="0.491"/>
+         <group range="25-54 years:" total="51" male="0.449" female="0.551"/>
+         <group range="55-64 years:" total="10.5" male="0.5044" female="0.4956"/>
+         <group range="65 years and over:" total="8.5" male="0.4689" female="0.5311"/>
+      </age-distribution>
+      <population>583003</population>
+      <area>28.2</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Malaysia</name>
+      <gdp>492000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="29.4" male="0.5143" female="0.4857"/>
+         <group range="15-24 years:" total="17.2" male="0.5063" female="0.4937"/>
+         <group range="25-54 years:" total="41.2" male="0.5072" female="0.4928"/>
+         <group range="55-64 years:" total="7.1" male="0.5112" female="0.4888"/>
+         <group range="65 years and over:" total="5.1" male="0.472" female="0.528"/>
+      </age-distribution>
+      <population>29628392</population>
+      <area>329847</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Mongolia</name>
+      <gdp>15220</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27.1" male="0.5103" female="0.4897"/>
+         <group range="15-24 years:" total="19.7" male="0.5069" female="0.4931"/>
+         <group range="25-54 years:" total="44" male="0.499" female="0.501"/>
+         <group range="55-64 years:" total="5.2" male="0.4785" female="0.5215"/>
+         <group range="65 years and over:" total="4" male="0.4345" female="0.5655"/>
+      </age-distribution>
+      <population>3226516</population>
+      <area>1564116</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Papua New Guinea</name>
+      <gdp>18450</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="35.9" male="0.5088" female="0.4912"/>
+         <group range="15-24 years:" total="19.4" male="0.5067" female="0.4933"/>
+         <group range="25-54 years:" total="35.8" male="0.5183" female="0.4817"/>
+         <group range="55-64 years:" total="5.1" male="0.5064" female="0.4936"/>
+         <group range="65 years and over:" total="3.7" male="0.5327" female="0.4673"/>
+      </age-distribution>
+      <population>6431902</population>
+      <area>462840</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Paracel Islands</name>
+      
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Philippines</name>
+      <gdp>416700</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="34.3" male="0.5102" female="0.4898"/>
+         <group range="15-24 years:" total="19.1" male="0.5089" female="0.4911"/>
+         <group range="25-54 years:" total="36.6" male="0.5016" female="0.4984"/>
+         <group range="55-64 years:" total="5.6" male="0.462" female="0.538"/>
+         <group range="65 years and over:" total="4.3" male="0.4317" female="0.5683"/>
+      </age-distribution>
+      <population>105720644</population>
+      <area>300000</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Singapore</name>
+      <gdp>326700</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14" male="0.512" female="0.488"/>
+         <group range="15-24 years:" total="18.6" male="0.492" female="0.508"/>
+         <group range="25-54 years:" total="50" male="0.4886" female="0.5114"/>
+         <group range="55-64 years:" total="9.7" male="0.5001" female="0.4999"/>
+         <group range="65 years and over:" total="7.8" male="0.4513" female="0.5487"/>
+      </age-distribution>
+      <population>5460302</population>
+      <area>697</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Spratly Islands</name>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Taiwan</name>
+      <gdp>901900</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14.7" male="0.5174" female="0.4826"/>
+         <group range="15-24 years:" total="13.9" male="0.5141" female="0.4859"/>
+         <group range="25-54 years:" total="47.9" male="0.5008" female="0.4992"/>
+         <group range="55-64 years:" total="12.2" male="0.4906" female="0.5094"/>
+         <group range="65 years and over:" total="11.3" male="0.4705" female="0.5295"/>
+      </age-distribution>
+      <population>23299716</population>
+      <area>35980</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Thailand</name>
+      <gdp>646100</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="19.5" male="0.5119" female="0.4881"/>
+         <group range="15-24 years:" total="15.1" male="0.51" female="0.49"/>
+         <group range="25-54 years:" total="45.9" male="0.4934" female="0.5066"/>
+         <group range="55-64 years:" total="10.1" male="0.4785" female="0.5215"/>
+         <group range="65 years and over:" total="9.5" male="0.4514" female="0.5486"/>
+      </age-distribution>
+      <population>67448120</population>
+      <area>513120</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Timor-Leste</name>
+      <gdp>10630</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="43" male="0.5142" female="0.4858"/>
+         <group range="15-24 years:" total="19.6" male="0.5037" female="0.4963"/>
+         <group range="25-54 years:" total="29.2" male="0.4857" female="0.5143"/>
+         <group range="55-64 years:" total="4.7" male="0.514" female="0.486"/>
+         <group range="65 years and over:" total="3.5" male="0.4885" female="0.5115"/>
+      </age-distribution>
+   	<population>1172390</population>
+      <area>14874</area>
+   </country>
+   <country>
+      <region>East &amp; Southeast Asia</region>
+      <name>Vietnam</name>
+      <gdp>320500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24.9" male="0.5242" female="0.4758"/>
+         <group range="15-24 years:" total="19" male="0.5165" female="0.4835"/>
+         <group range="25-54 years:" total="44.1" male="0.4991" female="0.5009"/>
+         <group range="55-64 years:" total="6.6" male="0.4532" female="0.5468"/>
+         <group range="65 years and over:" total="5.5" male="0.3837" female="0.6163"/>
+      </age-distribution>
+      <population>92477857</population>
+      <area>331210</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Akrotiri</name>
+      <area>123</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Albania</name>
+      <gdp>25860</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="20.6" male="0.5272" female="0.4728"/>
+         <group range="15-24 years:" total="19.8" male="0.509" female="0.491"/>
+         <group range="25-54 years:" total="39.4" male="0.4754" female="0.5246"/>
+         <group range="55-64 years:" total="9.6" male="0.5013" female="0.4987"/>
+         <group range="65 years and over:" total="10.6" male="0.4721" female="0.5279"/>
+      </age-distribution>
+      <population>3011405</population>
+      <area>28748</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Andorra</name>
+      <gdp>3119</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.6" male="0.5118" female="0.4882"/>
+         <group range="15-24 years:" total="9" male="0.5214" female="0.4786"/>
+         <group range="25-54 years:" total="50.3" male="0.5157" female="0.4843"/>
+         <group range="55-64 years:" total="11.7" male="0.5404" female="0.4596"/>
+         <group range="65 years and over:" total="13.3" male="0.5009" female="0.4991"/>
+      </age-distribution>
+      <population>85293</population>
+      <area>468</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Austria</name>
+      <gdp>357800</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="13.9" male="0.5119" female="0.4881"/>
+         <group range="15-24 years:" total="11.9" male="0.5106" female="0.4894"/>
+         <group range="25-54 years:" total="43.4" male="0.5022" female="0.4978"/>
+         <group range="55-64 years:" total="12.3" male="0.4925" female="0.5075"/>
+         <group range="65 years and over:" total="18.5" male="0.4209" female="0.5791"/>
+      </age-distribution>
+      <population>8221646</population>
+      <area>83871</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Belarus</name>
+      <gdp>150300</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15" male="0.5145" female="0.4855"/>
+         <group range="15-24 years:" total="13" male="0.513" female="0.487"/>
+         <group range="25-54 years:" total="45.6" male="0.4889" female="0.5111"/>
+         <group range="55-64 years:" total="12.6" male="0.4391" female="0.5609"/>
+         <group range="65 years and over:" total="13.9" male="0.3137" female="0.6863"/>
+      </age-distribution>
+      <population>9625888</population>
+      <area>207600</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Belgium</name>
+      <gdp>420600</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.8" male="0.5103" female="0.4897"/>
+         <group range="15-24 years:" total="11.9" male="0.5108" female="0.4892"/>
+         <group range="25-54 years:" total="40.9" male="0.5053" female="0.4947"/>
+         <group range="55-64 years:" total="13.1" male="0.4951" female="0.5049"/>
+         <group range="65 years and over:" total="18.4" male="0.4185" female="0.5815"/>
+      </age-distribution>
+      <population>10444268</population>
+      <area>30528</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Bosnia and Herzegovina</name>
+      <gdp>32080</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14.4" male="0.5157" female="0.4843"/>
+         <group range="15-24 years:" total="13.2" male="0.5158" female="0.4842"/>
+         <group range="25-54 years:" total="46.9" male="0.5011" female="0.4989"/>
+         <group range="55-64 years:" total="12.8" male="0.4743" female="0.5257"/>
+         <group range="65 years and over:" total="12.7" male="0.3879" female="0.6121"/>
+      </age-distribution>
+      <population>3875723</population>
+      <area>51197</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Bulgaria</name>
+      <gdp>103700</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14" male="0.5127" female="0.4873"/>
+         <group range="15-24 years:" total="11" male="0.5133" female="0.4867"/>
+         <group range="25-54 years:" total="42.2" male="0.4963" female="0.5037"/>
+         <group range="55-64 years:" total="14.2" male="0.4627" female="0.5373"/>
+         <group range="65 years and over:" total="18.6" male="0.4036" female="0.5964"/>
+      </age-distribution>
+      <population>6981642</population>
+      <area>110879</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Croatia</name>
+      <gdp>79670</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14.8" male="0.5131" female="0.4869"/>
+         <group range="15-24 years:" total="12.3" male="0.511" female="0.489"/>
+         <group range="25-54 years:" total="41.6" male="0.495" female="0.505"/>
+         <group range="55-64 years:" total="14.2" male="0.4891" female="0.5109"/>
+         <group range="65 years and over:" total="17.1" male="0.3959" female="0.6041"/>
+      </age-distribution>
+      <population>4475611</population>
+      <area>56594</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Cyprus</name>
+      <gdp>23570</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.9" male="0.5145" female="0.4855"/>
+         <group range="15-24 years:" total="16.1" male="0.5436" female="0.4564"/>
+         <group range="25-54 years:" total="46.8" male="0.5225" female="0.4775"/>
+         <group range="55-64 years:" total="10.5" male="0.4766" female="0.5234"/>
+         <group range="65 years and over:" total="10.7" male="0.4347" female="0.5653"/>
+      </age-distribution>
+      <population>1155403</population>
+      <area>9251</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Czech Republic</name>
+      <gdp>286700</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="13.4" male="0.514" female="0.486"/>
+         <group range="15-24 years:" total="11.4" male="0.5119" female="0.4881"/>
+         <group range="25-54 years:" total="43.7" male="0.5084" female="0.4916"/>
+         <group range="55-64 years:" total="14.5" male="0.4824" female="0.5176"/>
+         <group range="65 years and over:" total="17" male="0.4014" female="0.5986"/>
+      </age-distribution>
+      <population>10162921</population>
+      <area>78867</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Denmark</name>
+      <gdp>208500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17.4" male="0.513" female="0.487"/>
+         <group range="15-24 years:" total="12.8" male="0.5104" female="0.4896"/>
+         <group range="25-54 years:" total="39.6" male="0.4999" female="0.5001"/>
+         <group range="55-64 years:" total="12.6" male="0.497" female="0.503"/>
+         <group range="65 years and over:" total="17.6" male="0.4444" female="0.5556"/>
+      </age-distribution>
+      <population>5556452</population>
+      <area>43094</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Dhekelia</name>
+      <area>130.8</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Estonia</name>
+      <gdp>28440</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.3" male="0.515" female="0.485"/>
+         <group range="15-24 years:" total="12.6" male="0.5118" female="0.4882"/>
+         <group range="25-54 years:" total="41.2" male="0.4791" female="0.5209"/>
+         <group range="55-64 years:" total="13" male="0.4305" female="0.5695"/>
+         <group range="65 years and over:" total="18" male="0.3298" female="0.6702"/>
+      </age-distribution>
+      <population>1266375</population>
+      <area>45228</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>European Union</name>
+      <gdp>15700000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.45" male="0.513" female="0.487"/>
+         <group range="15-24 years:" total="11.57" male="0.5111" female="0.4889"/>
+         <group range="25-54 years:" total="42.49" male="0.5037" female="0.4963"/>
+         <group range="55-64 years:" total="12.6" male="0.485" female="0.515"/>
+         <group range="65 years and over:" total="17.9" male="0.423" female="0.577"/>
+      </age-distribution>
+      <population>503824373</population>
+      <area>4324782</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Faroe Islands</name>
+      <gdp>1471</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="20.6" male="0.5199" female="0.4801"/>
+         <group range="15-24 years:" total="15.6" male="0.5169" female="0.4831"/>
+         <group range="25-54 years:" total="36.9" male="0.5406" female="0.4594"/>
+         <group range="55-64 years:" total="11.7" male="0.5194" female="0.4806"/>
+         <group range="65 years and over:" total="15.1" male="0.4811" female="0.5189"/>
+      </age-distribution>
+      <population>49709</population>
+      <area>1393</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Finland</name>
+      <gdp>198100</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.9" male="0.5087" female="0.4913"/>
+         <group range="15-24 years:" total="12.4" male="0.5105" female="0.4895"/>
+         <group range="25-54 years:" total="38.5" male="0.5092" female="0.4908"/>
+         <group range="55-64 years:" total="14.7" male="0.4928" female="0.5072"/>
+         <group range="65 years and over:" total="18.5" male="0.415" female="0.585"/>
+      </age-distribution>
+      <population>5266114</population>
+      <area>338145</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>France</name>
+      <gdp>2253000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="18.7" male="0.5117" female="0.4883"/>
+         <group range="15-24 years:" total="12" male="0.5111" female="0.4889"/>
+         <group range="25-54 years:" total="39.2" male="0.5018" female="0.4982"/>
+         <group range="55-64 years:" total="12.7" male="0.4849" female="0.5151"/>
+         <group range="65 years and over:" total="17.5" male="0.424" female="0.576"/>
+      </age-distribution>
+      <population>65951611</population>
+      <area>643801</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Germany</name>
+      <gdp>3194000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="13.2" male="0.5132" female="0.4868"/>
+         <group range="15-24 years:" total="10.9" male="0.5113" female="0.4887"/>
+         <group range="25-54 years:" total="42.2" male="0.5073" female="0.4927"/>
+         <group range="55-64 years:" total="13" male="0.4944" female="0.5056"/>
+         <group range="65 years and over:" total="20.7" male="0.4322" female="0.5678"/>
+      </age-distribution>
+      <population>81147265</population>
+      <area>357022</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Gibraltar</name>
+      <gdp>1275</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="20.2" male="0.5155" female="0.4845"/>
+         <group range="15-24 years:" total="16.6" male="0.5207" female="0.4793"/>
+         <group range="25-54 years:" total="37.5" male="0.4967" female="0.5033"/>
+         <group range="55-64 years:" total="11.4" male="0.4991" female="0.5009"/>
+         <group range="65 years and over:" total="14.3" male="0.4868" female="0.5132"/>
+      </age-distribution>
+      <population>29111</population>
+      <area>6.5</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Greece</name>
+      <gdp>280800</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14.2" male="0.5151" female="0.4849"/>
+         <group range="15-24 years:" total="9.9" male="0.5104" female="0.4896"/>
+         <group range="25-54 years:" total="43.7" male="0.4986" female="0.5014"/>
+         <group range="55-64 years:" total="12.4" male="0.4914" female="0.5086"/>
+         <group range="65 years and over:" total="19.8" male="0.4377" female="0.5623"/>
+      </age-distribution>
+      <population>10772967</population>
+      <area>131957</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Guernsey</name>
+      <gdp>2742</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14.8" male="0.5188" female="0.4812"/>
+         <group range="15-24 years:" total="12.2" male="0.507" female="0.493"/>
+         <group range="25-54 years:" total="42.4" male="0.5018" female="0.4982"/>
+         <group range="55-64 years:" total="13.1" male="0.4989" female="0.5011"/>
+         <group range="65 years and over:" total="17.5" male="0.4475" female="0.5525"/>
+      </age-distribution>
+      <population>65605</population>
+      <area>78</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Holy See (Vatican City)</name>
+      <population>836</population>
+      <area>0.44</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Hungary</name>
+      <gdp>196800</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14.9" male="0.5155" female="0.4845"/>
+         <group range="15-24 years:" total="12.1" male="0.5142" female="0.4858"/>
+         <group range="25-54 years:" total="41.7" male="0.5008" female="0.4992"/>
+         <group range="55-64 years:" total="14.2" male="0.458" female="0.542"/>
+         <group range="65 years and over:" total="17.1" male="0.3712" female="0.6288"/>
+      </age-distribution>
+      <population>9939470</population>
+      <area>93028</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Iceland</name>
+      <gdp>12950</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="20" male="0.5067" female="0.4933"/>
+         <group range="15-24 years:" total="14.8" male="0.5075" female="0.4925"/>
+         <group range="25-54 years:" total="41.1" male="0.504" female="0.496"/>
+         <group range="55-64 years:" total="11.2" male="0.507" female="0.493"/>
+         <group range="65 years and over:" total="12.9" male="0.4587" female="0.5413"/>
+      </age-distribution>
+      <population>315281</population>
+      <area>103000</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Ireland</name>
+      <gdp>191500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="21.3" male="0.5105" female="0.4895"/>
+         <group range="15-24 years:" total="12.2" male="0.5063" female="0.4937"/>
+         <group range="25-54 years:" total="44.7" male="0.5028" female="0.4972"/>
+         <group range="55-64 years:" total="10" male="0.5023" female="0.4977"/>
+         <group range="65 years and over:" total="11.9" male="0.457" female="0.543"/>
+      </age-distribution>
+      <population>4775982</population>
+      <area>70273</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Isle of Man</name>
+      <gdp>2719</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="16.5" male="0.527" female="0.473"/>
+         <group range="15-24 years:" total="11.9" male="0.5128" female="0.4872"/>
+         <group range="25-54 years:" total="40" male="0.4981" female="0.5019"/>
+         <group range="55-64 years:" total="12.9" male="0.5054" female="0.4946"/>
+         <group range="65 years and over:" total="18.7" male="0.4587" female="0.5413"/>
+      </age-distribution>
+      <population>86159</population>
+      <area>572</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Italy</name>
+      <gdp>1834000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="13.8" male="0.5112" female="0.4888"/>
+         <group range="15-24 years:" total="10" male="0.5025" female="0.4975"/>
+         <group range="25-54 years:" total="43.3" male="0.495" female="0.505"/>
+         <group range="55-64 years:" total="12.4" male="0.4844" female="0.5156"/>
+         <group range="65 years and over:" total="20.5" male="0.4261" female="0.5739"/>
+      </age-distribution>
+      <population>61482297</population>
+      <area>301340</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Jan Mayen</name>
+      <area>377</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Jersey</name>
+      <gdp>5100</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="16.3" male="0.5178" female="0.4822"/>
+         <group range="15-24 years:" total="14.9" male="0.5068" female="0.4932"/>
+         <group range="25-54 years:" total="41.6" male="0.4996" female="0.5004"/>
+         <group range="55-64 years:" total="12.1" male="0.4855" female="0.5145"/>
+         <group range="65 years and over:" total="15.1" male="0.4267" female="0.5733"/>
+      </age-distribution>
+      <population>95732</population>
+      <area>116</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Kosovo</name>
+      <gdp>13560</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="26.9" male="0.52" female="0.48"/>
+         <group range="15-24 years:" total="19.2" male="0.5265" female="0.4735"/>
+         <group range="25-54 years:" total="40.4" male="0.5271" female="0.4729"/>
+         <group range="55-64 years:" total="6.7" male="0.4844" female="0.5156"/>
+         <group range="65 years and over:" total="6.8" male="0.4211" female="0.5789"/>
+      </age-distribution>
+      <population>1847708</population>
+      <area>10887</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Latvia</name>
+      <gdp>37040</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="13.7" male="0.5112" female="0.4888"/>
+         <group range="15-24 years:" total="12.7" male="0.5099" female="0.4901"/>
+         <group range="25-54 years:" total="44.3" male="0.4955" female="0.5045"/>
+         <group range="55-64 years:" total="12.3" male="0.4369" female="0.5631"/>
+         <group range="65 years and over:" total="17" male="0.3248" female="0.6752"/>
+      </age-distribution>
+      <population>2178443</population>
+      <area>64589</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Liechtenstein</name>
+      <gdp>3200</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="16" male="0.5209" female="0.4791"/>
+         <group range="15-24 years:" total="11.8" male="0.5102" female="0.4898"/>
+         <group range="25-54 years:" total="44" male="0.497" female="0.503"/>
+         <group range="55-64 years:" total="13.3" male="0.5002" female="0.4998"/>
+         <group range="65 years and over:" total="14.9" male="0.4466" female="0.5534"/>
+      </age-distribution>
+      <population>37009</population>
+      <area>160</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Lithuania</name>
+      <gdp>64320</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="13.7" male="0.5135" female="0.4865"/>
+         <group range="15-24 years:" total="13.5" male="0.5108" female="0.4892"/>
+         <group range="25-54 years:" total="44.7" male="0.4976" female="0.5024"/>
+         <group range="55-64 years:" total="11.5" male="0.4465" female="0.5535"/>
+         <group range="65 years and over:" total="16.6" male="0.346" female="0.654"/>
+      </age-distribution>
+      <population>3515858</population>
+      <area>65300</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Luxembourg</name>
+      <gdp>42190</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="18.1" male="0.5156" female="0.4844"/>
+         <group range="15-24 years:" total="12.6" male="0.5093" female="0.4907"/>
+         <group range="25-54 years:" total="42.6" male="0.5011" female="0.4989"/>
+         <group range="55-64 years:" total="11.7" male="0.5017" female="0.4983"/>
+         <group range="65 years and over:" total="15.1" male="0.4165" female="0.5835"/>
+      </age-distribution>
+      <population>514862</population>
+      <area>2586</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Macedonia</name>
+      <gdp>22150</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="18.2" male="0.518" female="0.482"/>
+         <group range="15-24 years:" total="14.6" male="0.5154" female="0.4846"/>
+         <group range="25-54 years:" total="43.7" male="0.507" female="0.493"/>
+         <group range="55-64 years:" total="11.8" male="0.4849" female="0.5151"/>
+         <group range="65 years and over:" total="11.8" male="0.43" female="0.57"/>
+      </age-distribution>
+      <population>2087171</population>
+      <area>25713</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Malta</name>
+      <gdp>11140</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.4" male="0.5121" female="0.4879"/>
+         <group range="15-24 years:" total="13.1" male="0.5142" female="0.4858"/>
+         <group range="25-54 years:" total="40.7" male="0.5097" female="0.4903"/>
+         <group range="55-64 years:" total="14.2" male="0.4976" female="0.5024"/>
+         <group range="65 years and over:" total="16.5" male="0.4411" female="0.5589"/>
+      </age-distribution>
+      <population>411277</population>
+      <area>316</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Moldova</name>
+      <gdp>12560</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17.5" male="0.5158" female="0.4842"/>
+         <group range="15-24 years:" total="15.8" male="0.5147" female="0.4853"/>
+         <group range="25-54 years:" total="43.8" male="0.4965" female="0.5035"/>
+         <group range="55-64 years:" total="12.4" male="0.4571" female="0.5429"/>
+         <group range="65 years and over:" total="10.6" male="0.3744" female="0.6256"/>
+      </age-distribution>
+      <population>3619925</population>
+      <area>33851</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Monaco</name>
+      <gdp>5470</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="12.1" male="0.5115" female="0.4885"/>
+         <group range="15-24 years:" total="9.5" male="0.5185" female="0.4815"/>
+         <group range="25-54 years:" total="36.1" male="0.4954" female="0.5046"/>
+         <group range="55-64 years:" total="14.5" male="0.504" female="0.496"/>
+         <group range="65 years and over:" total="27.8" male="0.4467" female="0.5533"/>
+      </age-distribution>
+      <population>30500</population>
+      <area>2</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Montenegro</name>
+      <gdp>7288</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.4" male="0.4861" female="0.5139"/>
+         <group range="15-24 years:" total="12" male="0.4912" female="0.5088"/>
+         <group range="25-54 years:" total="46.9" male="0.5348" female="0.4652"/>
+         <group range="55-64 years:" total="12.1" male="0.4921" female="0.5079"/>
+         <group range="65 years and over:" total="13.6" male="0.3969" female="0.6031"/>
+      </age-distribution>
+      <population>653474</population>
+      <area>13812</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Netherlands</name>
+      <gdp>709500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17.2" male="0.5115" female="0.4885"/>
+         <group range="15-24 years:" total="12.2" male="0.5095" female="0.4905"/>
+         <group range="25-54 years:" total="41.1" male="0.5019" female="0.4981"/>
+         <group range="55-64 years:" total="13" male="0.5" female="0.5"/>
+         <group range="65 years and over:" total="16.6" male="0.4443" female="0.5557"/>
+      </age-distribution>
+      <population>16805037</population>
+      <area>41543</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Norway</name>
+      <gdp>278100</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17.7" male="0.5105" female="0.4895"/>
+         <group range="15-24 years:" total="13.4" male="0.51" female="0.49"/>
+         <group range="25-54 years:" total="40" male="0.5054" female="0.4946"/>
+         <group range="55-64 years:" total="12.5" male="0.5039" female="0.4961"/>
+         <group range="65 years and over:" total="16.4" male="0.439" female="0.561"/>
+      </age-distribution>
+      <population>4722701</population>
+      <area>323802</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Poland</name>
+      <gdp>802000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14.6" male="0.5143" female="0.4857"/>
+         <group range="15-24 years:" total="12.7" male="0.5101" female="0.4899"/>
+         <group range="25-54 years:" total="44.3" male="0.5027" female="0.4973"/>
+         <group range="55-64 years:" total="14.3" male="0.4707" female="0.5293"/>
+         <group range="65 years and over:" total="14" male="0.3835" female="0.6165"/>
+      </age-distribution>
+      <population>38383809</population>
+      <area>312685</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Portugal</name>
+      <gdp>245000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="16.1" male="0.5213" female="0.4787"/>
+         <group range="15-24 years:" total="11.5" male="0.5299" female="0.4701"/>
+         <group range="25-54 years:" total="42.5" male="0.5024" female="0.4976"/>
+         <group range="55-64 years:" total="11.7" male="0.4658" female="0.5342"/>
+         <group range="65 years and over:" total="18.1" male="0.409" female="0.591"/>
+      </age-distribution>
+      <population>10799270</population>
+      <area>92090</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Romania</name>
+      <gdp>274100</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14.8" male="0.5135" female="0.4865"/>
+         <group range="15-24 years:" total="12.3" male="0.5115" female="0.4885"/>
+         <group range="25-54 years:" total="45.2" male="0.5043" female="0.4957"/>
+         <group range="55-64 years:" total="12.7" male="0.4668" female="0.5332"/>
+         <group range="65 years and over:" total="14.9" male="0.4042" female="0.5958"/>
+      </age-distribution>
+      <population>21790479</population>
+      <area>238391</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>San Marino</name>
+      <gdp>1357</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="16.4" male="0.5327" female="0.4673"/>
+         <group range="15-24 years:" total="10.3" male="0.5083" female="0.4917"/>
+         <group range="25-54 years:" total="43.2" male="0.4738" female="0.5262"/>
+         <group range="55-64 years:" total="11.8" male="0.5007" female="0.4993"/>
+         <group range="65 years and over:" total="18.2" male="0.4449" female="0.5551"/>
+      </age-distribution>
+      <population>32448</population>
+      <area>61</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Serbia</name>
+      <gdp>79650</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="14.9" male="0.5159" female="0.4841"/>
+         <group range="15-24 years:" total="12.1" male="0.5149" female="0.4851"/>
+         <group range="25-54 years:" total="41.7" male="0.5035" female="0.4965"/>
+         <group range="55-64 years:" total="14.7" male="0.4801" female="0.5199"/>
+         <group range="65 years and over:" total="16.6" male="0.4092" female="0.5908"/>
+      </age-distribution>
+      <population>7243007</population>
+      <area>77474</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Slovakia</name>
+      <gdp>132400</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.6" male="0.5115" female="0.4885"/>
+         <group range="15-24 years:" total="13" male="0.511" female="0.489"/>
+         <group range="25-54 years:" total="45.2" male="0.5033" female="0.4967"/>
+         <group range="55-64 years:" total="13.1" male="0.4713" female="0.5287"/>
+         <group range="65 years and over:" total="13.1" male="0.3758" female="0.6242"/>
+      </age-distribution>
+      <population>5488339</population>
+      <area>49035</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Slovenia</name>
+      <gdp>57930</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="13.4" male="0.5155" female="0.4845"/>
+         <group range="15-24 years:" total="10.7" male="0.5117" female="0.4883"/>
+         <group range="25-54 years:" total="44.4" male="0.5048" female="0.4952"/>
+         <group range="55-64 years:" total="14.5" male="0.4945" female="0.5055"/>
+         <group range="65 years and over:" total="17.1" male="0.3965" female="0.6035"/>
+      </age-distribution>
+      <population>1992690</population>
+      <area>20273</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Spain</name>
+      <gdp>1407000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.3" male="0.5149" female="0.4851"/>
+         <group range="15-24 years:" total="9.9" male="0.5183" female="0.4817"/>
+         <group range="25-54 years:" total="46.5" male="0.5086" female="0.4914"/>
+         <group range="55-64 years:" total="11.1" male="0.4868" female="0.5132"/>
+         <group range="65 years and over:" total="17.3" male="0.4243" female="0.5757"/>
+      </age-distribution>
+      <population>47370542</population>
+      <area>505370</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Svalbard</name>
+      <gdp>6313</gdp>
+      <population>1970</population>
+      <area>62045</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Sweden</name>
+      <gdp>395800</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.4" male="0.515" female="0.485"/>
+         <group range="15-24 years:" total="13.2" male="0.5119" female="0.4881"/>
+         <group range="25-54 years:" total="38.7" male="0.5065" female="0.4935"/>
+         <group range="55-64 years:" total="12.5" male="0.4983" female="0.5017"/>
+         <group range="65 years and over:" total="20.2" male="0.4478" female="0.5522"/>
+      </age-distribution>
+      <population>9119423</population>
+      <area>450295</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Switzerland</name>
+      <gdp>362400</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.2" male="0.5147" female="0.4853"/>
+         <group range="15-24 years:" total="11.7" male="0.5095" female="0.4905"/>
+         <group range="25-54 years:" total="44" male="0.5026" female="0.4974"/>
+         <group range="55-64 years:" total="11.9" male="0.4975" female="0.5025"/>
+         <group range="65 years and over:" total="17.1" male="0.4313" female="0.5687"/>
+      </age-distribution>
+      <population>7996026</population>
+      <area>41277</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>Ukraine</name>
+      <gdp>344700</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="13.8" male="0.514" female="0.486"/>
+         <group range="15-24 years:" total="12.7" male="0.5103" female="0.4897"/>
+         <group range="25-54 years:" total="44.9" male="0.483" female="0.517"/>
+         <group range="55-64 years:" total="13.1" male="0.4292" female="0.5708"/>
+         <group range="65 years and over:" total="15.5" male="0.3278" female="0.6722"/>
+      </age-distribution>
+      <population>44573205</population>
+      <area>603550</area>
+   </country>
+   <country>
+      <region>Europe</region>
+      <name>United Kingdom</name>
+      <gdp>2323000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17.3" male="0.5126" female="0.4874"/>
+         <group range="15-24 years:" total="13" male="0.5106" female="0.4894"/>
+         <group range="25-54 years:" total="41.2" male="0.5083" female="0.4917"/>
+         <group range="55-64 years:" total="11.6" male="0.4929" female="0.5071"/>
+         <group range="65 years and over:" total="16.9" male="0.4437" female="0.5563"/>
+      </age-distribution>
+      <population>63395574</population>
+      <area>243610</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Armenia</name>
+      <gdp>18950</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17.4" male="0.5349" female="0.4651"/>
+         <group range="15-24 years:" total="18.5" male="0.512" female="0.488"/>
+         <group range="25-54 years:" total="45.7" male="0.4682" female="0.5318"/>
+         <group range="55-64 years:" total="8.5" male="0.3837" female="0.6163"/>
+         <group range="65 years and over:" total="9.9" male="0.3719" female="0.6281"/>
+      </age-distribution>
+      <population>2974184</population>
+      <area>29743</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Azerbaijan</name>
+      <gdp>98160</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="22.7" male="0.5361" female="0.4639"/>
+         <group range="15-24 years:" total="19" male="0.5145" female="0.4855"/>
+         <group range="25-54 years:" total="44.6" male="0.4855" female="0.5145"/>
+         <group range="55-64 years:" total="7.4" male="0.4587" female="0.5413"/>
+         <group range="65 years and over:" total="6.3" male="0.3819" female="0.6181"/>
+      </age-distribution>
+      <population>9590159</population>
+      <area>86600</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Bahrain</name>
+      <gdp>32440</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="20.2" male="0.508" female="0.492"/>
+         <group range="15-24 years:" total="15.9" male="0.5577" female="0.4423"/>
+         <group range="25-54 years:" total="56.3" male="0.657" female="0.343"/>
+         <group range="55-64 years:" total="5" male="0.6541" female="0.3459"/>
+         <group range="65 years and over:" total="2.6" male="0.476" female="0.524"/>
+      </age-distribution>
+      <population>1281332</population>
+      <area>760</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Gaza Strip</name>
+      <age-distribution>
+         <group range="0-14 years:" total="43.8" male="0.5138" female="0.4862"/>
+         <group range="15-24 years:" total="21.1" male="0.5123" female="0.4877"/>
+         <group range="25-54 years:" total="29.2" male="0.5132" female="0.4868"/>
+         <group range="55-64 years:" total="3.3" male="0.4936" female="0.5064"/>
+         <group range="65 years and over:" total="2.6" male="0.4055" female="0.5945"/>
+      </age-distribution>
+      <population>1763387</population>
+      <area>360</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Georgia</name>
+      <gdp>26400</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.5" male="0.5344" female="0.4656"/>
+         <group range="15-24 years:" total="14.4" male="0.5109" female="0.4891"/>
+         <group range="25-54 years:" total="42.1" male="0.4814" female="0.5186"/>
+         <group range="55-64 years:" total="11.9" male="0.4559" female="0.5441"/>
+         <group range="65 years and over:" total="16.1" male="0.3983" female="0.6017"/>
+      </age-distribution>
+      <population>4555911</population>
+      <area>69700</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Iran</name>
+      <gdp>997400</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="23.9" male="0.5127" female="0.4873"/>
+         <group range="15-24 years:" total="20.8" male="0.5144" female="0.4856"/>
+         <group range="25-54 years:" total="44.4" male="0.508" female="0.492"/>
+         <group range="55-64 years:" total="5.8" male="0.4897" female="0.5103"/>
+         <group range="65 years and over:" total="5.1" male="0.4697" female="0.5303"/>
+      </age-distribution>
+      <population>79853900</population>
+      <area>1648195</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Iraq</name>
+      <gdp>155400</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="37.6" male="0.5089" female="0.4911"/>
+         <group range="15-24 years:" total="19.7" male="0.5074" female="0.4926"/>
+         <group range="25-54 years:" total="35.4" male="0.5104" female="0.4896"/>
+         <group range="55-64 years:" total="4.2" male="0.4769" female="0.5231"/>
+         <group range="65 years and over:" total="3.1" male="0.4656" female="0.5344"/>
+      </age-distribution>
+      <population>31858481</population>
+      <area>438317</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Israel</name>
+      <gdp>247900</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27.5" male="0.5116" female="0.4884"/>
+         <group range="15-24 years:" total="15.7" male="0.5121" female="0.4879"/>
+         <group range="25-54 years:" total="37.7" male="0.5106" female="0.4894"/>
+         <group range="55-64 years:" total="8.8" male="0.485" female="0.515"/>
+         <group range="65 years and over:" total="10.3" male="0.439" female="0.561"/>
+      </age-distribution>
+      <population>7707042</population>
+      <area>20770</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Jordan</name>
+      <gdp>38670</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="34.9" male="0.5144" female="0.4856"/>
+         <group range="15-24 years:" total="20.1" male="0.5141" female="0.4859"/>
+         <group range="25-54 years:" total="35.8" male="0.5048" female="0.4952"/>
+         <group range="55-64 years:" total="4.2" male="0.483" female="0.517"/>
+         <group range="65 years and over:" total="4.9" male="0.4865" female="0.5135"/>
+      </age-distribution>
+      <population>6482081</population>
+      <area>89342</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Kuwait</name>
+      <gdp>165900</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="25.7" male="0.5203" female="0.4797"/>
+         <group range="15-24 years:" total="15.5" male="0.5493" female="0.4507"/>
+         <group range="25-54 years:" total="52.3" male="0.6366" female="0.3634"/>
+         <group range="55-64 years:" total="4.4" male="0.5826" female="0.4174"/>
+         <group range="65 years and over:" total="2.1" male="0.4896" female="0.5104"/>
+      </age-distribution>
+      <population>2695316</population>
+      <area>17818</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Lebanon</name>
+      <gdp>63690</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="22.5" male="0.5121" female="0.4879"/>
+         <group range="15-24 years:" total="18" male="0.5102" female="0.4898"/>
+         <group range="25-54 years:" total="41.9" male="0.4814" female="0.5186"/>
+         <group range="55-64 years:" total="8.4" male="0.4617" female="0.5383"/>
+         <group range="65 years and over:" total="9.2" male="0.4615" female="0.5385"/>
+      </age-distribution>
+      <population>4131583</population>
+      <area>10400</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Oman</name>
+      <gdp>90660</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="30.8" male="0.5128" female="0.4872"/>
+         <group range="15-24 years:" total="20.4" male="0.5243" female="0.4757"/>
+         <group range="25-54 years:" total="41.7" male="0.5911" female="0.4089"/>
+         <group range="55-64 years:" total="3.9" male="0.539" female="0.461"/>
+         <group range="65 years and over:" total="3.2" male="0.5078" female="0.4922"/>
+      </age-distribution>
+      <population>3154134</population>
+      <area>309500</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Qatar</name>
+      <gdp>189000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="12.5" male="0.5076" female="0.4924"/>
+         <group range="15-24 years:" total="14.4" male="0.7387" female="0.2613"/>
+         <group range="25-54 years:" total="68.9" male="0.8216" female="0.1784"/>
+         <group range="55-64 years:" total="3.3" male="0.7731" female="0.2269"/>
+         <group range="65 years and over:" total="0.8" male="0.6007" female="0.3993"/>
+      </age-distribution>
+      <population>2042444</population>
+      <area>11586</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Saudi Arabia</name>
+      <gdp>740500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="28.8" male="0.5122" female="0.4878"/>
+         <group range="15-24 years:" total="19.8" male="0.5354" female="0.4646"/>
+         <group range="25-54 years:" total="44.2" male="0.5766" female="0.4234"/>
+         <group range="55-64 years:" total="4.1" male="0.5501" female="0.4499"/>
+         <group range="65 years and over:" total="3" male="0.5199" female="0.4801"/>
+      </age-distribution>
+      <population>26939583</population>
+      <area>2149690</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Syria</name>
+      <gdp>107600</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="34.6" male="0.5126" female="0.4874"/>
+         <group range="15-24 years:" total="21.1" male="0.511" female="0.489"/>
+         <group range="25-54 years:" total="36.1" male="0.5085" female="0.4915"/>
+         <group range="55-64 years:" total="4.4" male="0.4931" female="0.5069"/>
+         <group range="65 years and over:" total="3.8" male="0.4592" female="0.5408"/>
+      </age-distribution>
+      <population>22457336</population>
+      <area>185180</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Turkey</name>
+      <gdp>1125000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="26.2" male="0.5115" female="0.4885"/>
+         <group range="15-24 years:" total="17.1" male="0.51" female="0.49"/>
+         <group range="25-54 years:" total="42.5" male="0.504" female="0.496"/>
+         <group range="55-64 years:" total="7.7" male="0.5029" female="0.4971"/>
+         <group range="65 years and over:" total="6.4" male="0.4571" female="0.5429"/>
+      </age-distribution>
+      <population>80694485</population>
+      <area>783562</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>United Arab Emirates</name>
+      <gdp>271200</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="20.5" male="0.5116" female="0.4884"/>
+         <group range="15-24 years:" total="14" male="0.594" female="0.406"/>
+         <group range="25-54 years:" total="61.6" male="0.7633" female="0.2367"/>
+         <group range="55-64 years:" total="3" male="0.7611" female="0.2389"/>
+         <group range="65 years and over:" total="0.9" male="0.6385" female="0.3615"/>
+      </age-distribution>
+      <population>5473972</population>
+      <area>83600</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>West Bank</name>
+      <gdp>8020</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="35.1" male="0.5132" female="0.4868"/>
+         <group range="15-24 years:" total="21.8" male="0.5124" female="0.4876"/>
+         <group range="25-54 years:" total="35.4" male="0.5146" female="0.4854"/>
+         <group range="55-64 years:" total="4" male="0.4969" female="0.5031"/>
+         <group range="65 years and over:" total="3.7" male="0.4163" female="0.5837"/>
+      </age-distribution>
+      <population>2676740</population>
+      <area>5860</area>
+   </country>
+   <country>
+      <region>Middle East</region>
+      <name>Yemen</name>
+      <gdp>57760</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="42.5" male="0.5092" female="0.4908"/>
+         <group range="15-24 years:" total="21.1" male="0.5072" female="0.4928"/>
+         <group range="25-54 years:" total="30.1" male="0.5114" female="0.4886"/>
+         <group range="55-64 years:" total="3.6" male="0.48" female="0.52"/>
+         <group range="65 years and over:" total="2.6" male="0.4729" female="0.5271"/>
+      </age-distribution>
+      <population>25408288</population>
+      <area>527968</area>
+   </country>
+   <country>
+      <region>North America</region>
+      <name>Bermuda</name>
+      <gdp>4500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="17.8" male="0.5051" female="0.4949"/>
+         <group range="15-24 years:" total="12.3" male="0.4994" female="0.5006"/>
+         <group range="25-54 years:" total="40.8" male="0.4972" female="0.5028"/>
+         <group range="55-64 years:" total="13.7" male="0.4763" female="0.5237"/>
+         <group range="65 years and over:" total="15.5" male="0.4175" female="0.5825"/>
+      </age-distribution>
+      <population>69467</population>
+      <area>54</area>
+   </country>
+   <country>
+      <region>North America</region>
+      <name>Canada</name>
+      <gdp>1446000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="15.6" male="0.5126" female="0.4874"/>
+         <group range="15-24 years:" total="13" male="0.514" female="0.486"/>
+         <group range="25-54 years:" total="41.8" male="0.5063" female="0.4937"/>
+         <group range="55-64 years:" total="13.2" male="0.4953" female="0.5047"/>
+         <group range="65 years and over:" total="16.4" male="0.4412" female="0.5588"/>
+      </age-distribution>
+      <population>34568211</population>
+      <area>9984670</area>
+   </country>
+   <country>
+      <region>North America</region>
+      <name>Clipperton Island</name>
+      <area>6</area>
+   </country>
+   <country>
+      <region>North America</region>
+      <name>Greenland</name>
+      <gdp>2133</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="21.9" male="0.5076" female="0.4924"/>
+         <group range="15-24 years:" total="16.9" male="0.5068" female="0.4932"/>
+         <group range="25-54 years:" total="43.1" male="0.5323" female="0.4677"/>
+         <group range="55-64 years:" total="10.2" male="0.5737" female="0.4263"/>
+         <group range="65 years and over:" total="7.9" male="0.5236" female="0.4764"/>
+      </age-distribution>
+      <population>57714</population>
+      <area>2166086</area>
+   </country>
+   <country>
+      <region>North America</region>
+      <name>Mexico</name>
+      <gdp>1758000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27.8" male="0.5107" female="0.4893"/>
+         <group range="15-24 years:" total="18.2" male="0.5031" female="0.4969"/>
+         <group range="25-54 years:" total="40.5" male="0.4782" female="0.5218"/>
+         <group range="55-64 years:" total="6.7" male="0.4614" female="0.5386"/>
+         <group range="65 years and over:" total="6.7" male="0.4475" female="0.5525"/>
+      </age-distribution>
+      <population>116220947</population>
+      <area>1964375</area>
+   </country>
+   <country>
+      <region>North America</region>
+      <name>Saint Pierre and Miquelon</name>
+      <gdp>48.3</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="16.8" male="0.5168" female="0.4832"/>
+         <group range="15-24 years:" total="8.6" male="0.513" female="0.487"/>
+         <group range="25-54 years:" total="44.4" male="0.499" female="0.501"/>
+         <group range="55-64 years:" total="13.8" male="0.5249" female="0.4751"/>
+         <group range="65 years and over:" total="16.5" male="0.4083" female="0.5917"/>
+      </age-distribution>
+      <population>5774</population>
+      <area>242</area>
+   </country>
+   <country>
+      <region>North America</region>
+      <name>United States</name>
+      <gdp>15660000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="20" male="0.5106" female="0.4894"/>
+         <group range="15-24 years:" total="13.8" male="0.5108" female="0.4892"/>
+         <group range="25-54 years:" total="40.6" male="0.5006" female="0.4994"/>
+         <group range="55-64 years:" total="12.1" male="0.4819" female="0.5181"/>
+         <group range="65 years and over:" total="13.5" male="0.4338" female="0.5662"/>
+      </age-distribution>
+      <population>316668567</population>
+      <area>9826675</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Argentina</name>
+      <gdp>746900</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="25.2" male="0.5117" female="0.4883"/>
+         <group range="15-24 years:" total="15.9" male="0.51" female="0.49"/>
+         <group range="25-54 years:" total="38.7" male="0.4982" female="0.5018"/>
+         <group range="55-64 years:" total="9" male="0.4846" female="0.5154"/>
+         <group range="65 years and over:" total="11.1" male="0.413" female="0.587"/>
+      </age-distribution>
+      <population>42610981</population>
+      <area>2780400</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Bolivia</name>
+      <gdp>54360</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="34.2" male="0.5095" female="0.4905"/>
+         <group range="15-24 years:" total="20.1" male="0.5061" female="0.4939"/>
+         <group range="25-54 years:" total="35.5" male="0.4856" female="0.5144"/>
+         <group range="55-64 years:" total="5.5" male="0.4687" female="0.5313"/>
+         <group range="65 years and over:" total="4.7" male="0.4423" female="0.5577"/>
+      </age-distribution>
+      <population>10461053</population>
+      <area>1098581</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Brazil</name>
+      <gdp>2362000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24.7" male="0.5096" female="0.4904"/>
+         <group range="15-24 years:" total="16.8" male="0.507" female="0.493"/>
+         <group range="25-54 years:" total="43.4" male="0.4955" female="0.5045"/>
+         <group range="55-64 years:" total="8" male="0.4712" female="0.5288"/>
+         <group range="65 years and over:" total="7.1" male="0.4241" female="0.5759"/>
+      </age-distribution>
+      <population>201009622</population>
+      <area>8514877</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Chile</name>
+      <gdp>319400</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="21.4" male="0.5105" female="0.4895"/>
+         <group range="15-24 years:" total="16.8" male="0.5103" female="0.4897"/>
+         <group range="25-54 years:" total="43.2" male="0.4963" female="0.5037"/>
+         <group range="55-64 years:" total="9.2" male="0.4691" female="0.5309"/>
+         <group range="65 years and over:" total="9.4" male="0.4165" female="0.5835"/>
+      </age-distribution>
+      <population>17216945</population>
+      <area>756102</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Colombia</name>
+      <gdp>500000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="26.2" male="0.5116" female="0.4884"/>
+         <group range="15-24 years:" total="18.4" male="0.5082" female="0.4918"/>
+         <group range="25-54 years:" total="41.4" male="0.4937" female="0.5063"/>
+         <group range="55-64 years:" total="7.7" male="0.4628" female="0.5372"/>
+         <group range="65 years and over:" total="6.3" male="0.4199" female="0.5801"/>
+      </age-distribution>
+      <population>45745783</population>
+      <area>1138910</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Ecuador</name>
+      <gdp>134700</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="29.5" male="0.5102" female="0.4898"/>
+         <group range="15-24 years:" total="18.8" male="0.5053" female="0.4947"/>
+         <group range="25-54 years:" total="38.4" male="0.4871" female="0.5129"/>
+         <group range="55-64 years:" total="6.7" male="0.4936" female="0.5064"/>
+         <group range="65 years and over:" total="6.6" male="0.4797" female="0.5203"/>
+      </age-distribution>
+      <population>15439429</population>
+      <area>283561</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Falkland Islands (Islas Malvinas)</name>
+      <gdp>164.5</gdp>
+      <population>3140</population>
+      <area>12173</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Guyana</name>
+      <gdp>6164</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="31.1" male="0.5091" female="0.4909"/>
+         <group range="15-24 years:" total="20.3" male="0.5156" female="0.4844"/>
+         <group range="25-54 years:" total="36.7" male="0.5049" female="0.4951"/>
+         <group range="55-64 years:" total="6.9" male="0.4299" female="0.5701"/>
+         <group range="65 years and over:" total="4.9" male="0.4098" female="0.5902"/>
+      </age-distribution>
+      <population>739903</population>
+      <area>214969</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Paraguay</name>
+      <gdp>41100</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27.6" male="0.5085" female="0.4915"/>
+         <group range="15-24 years:" total="20.9" male="0.5028" female="0.4972"/>
+         <group range="25-54 years:" total="38.5" male="0.5009" female="0.4991"/>
+         <group range="55-64 years:" total="6.7" male="0.5107" female="0.4893"/>
+         <group range="65 years and over:" total="6.3" male="0.465" female="0.535"/>
+      </age-distribution>
+      <population>6623252</population>
+      <area>406752</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Peru</name>
+      <gdp>325400</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="28.1" male="0.5087" female="0.4913"/>
+         <group range="15-24 years:" total="19.5" male="0.5001" female="0.4999"/>
+         <group range="25-54 years:" total="38.9" male="0.4827" female="0.5173"/>
+         <group range="55-64 years:" total="7" male="0.4902" female="0.5098"/>
+         <group range="65 years and over:" total="6.5" male="0.4749" female="0.5251"/>
+      </age-distribution>
+      <population>29849303</population>
+      <area>1285216</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>South Georgia and South Sandwich Islands</name>
+      <area>3903</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Suriname</name>
+      <gdp>6685</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="27.5" male="0.5096" female="0.4904"/>
+         <group range="15-24 years:" total="17.4" male="0.5105" female="0.4895"/>
+         <group range="25-54 years:" total="43.5" male="0.5088" female="0.4912"/>
+         <group range="55-64 years:" total="6" male="0.4819" female="0.5181"/>
+         <group range="65 years and over:" total="5.6" male="0.4342" female="0.5658"/>
+      </age-distribution>
+      <population>566846</population>
+      <area>163820</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Uruguay</name>
+      <gdp>53550</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="21.8" male="0.5086" female="0.4914"/>
+         <group range="15-24 years:" total="15.9" male="0.5067" female="0.4933"/>
+         <group range="25-54 years:" total="38.7" male="0.4914" female="0.5086"/>
+         <group range="55-64 years:" total="9.8" male="0.4698" female="0.5302"/>
+         <group range="65 years and over:" total="13.8" male="0.3985" female="0.6015"/>
+      </age-distribution>
+      <population>3324460</population>
+      <area>176215</area>
+   </country>
+   <country>
+      <region>South America</region>
+      <name>Venezuela</name>
+      <gdp>402100</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="29" male="0.5093" female="0.4907"/>
+         <group range="15-24 years:" total="18.8" male="0.5018" female="0.4982"/>
+         <group range="25-54 years:" total="39.4" male="0.4906" female="0.5094"/>
+         <group range="55-64 years:" total="7.1" male="0.4761" female="0.5239"/>
+         <group range="65 years and over:" total="5.6" male="0.4414" female="0.5586"/>
+      </age-distribution>
+      <population>28459085</population>
+      <area>912050</area>
+   </country>
+   <country>
+      <region>South Asia</region>
+      <name>Afghanistan</name>
+      <gdp>33550</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="43.2" male="0.5081" female="0.4919"/>
+         <group range="15-24 years:" total="21.6" male="0.51" female="0.49"/>
+         <group range="25-54 years:" total="28.9" male="0.5103" female="0.4897"/>
+         <group range="55-64 years:" total="3.8" male="0.4916" female="0.5084"/>
+         <group range="65 years and over:" total="2.5" male="0.4664" female="0.5336"/>
+      </age-distribution>
+      <population>31108077</population>
+      <area>652230</area>
+   </country>
+   <country>
+      <region>South Asia</region>
+      <name>Bangladesh</name>
+      <gdp>305500</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="33.6" male="0.5072" female="0.4928"/>
+         <group range="15-24 years:" total="18.8" male="0.4661" female="0.5339"/>
+         <group range="25-54 years:" total="37.2" male="0.4725" female="0.5275"/>
+         <group range="55-64 years:" total="5.6" male="0.5118" female="0.4882"/>
+         <group range="65 years and over:" total="4.8" male="0.4894" female="0.5106"/>
+      </age-distribution>
+      <population>163654860</population>
+      <area>143998</area>
+   </country>
+   <country>
+      <region>South Asia</region>
+      <name>Bhutan</name>
+      <gdp>4813</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="28.4" male="0.5104" female="0.4896"/>
+         <group range="15-24 years:" total="21" male="0.5099" female="0.4901"/>
+         <group range="25-54 years:" total="39.1" male="0.5376" female="0.4624"/>
+         <group range="55-64 years:" total="5.7" male="0.5359" female="0.4641"/>
+         <group range="65 years and over:" total="5.8" male="0.5259" female="0.4741"/>
+      </age-distribution>
+      <population>725296</population>
+      <area>38394</area>
+   </country>
+   <country>
+      <region>South Asia</region>
+      <name>British Indian Ocean Territory</name>
+      <area>54400</area>
+   </country>
+   <country>
+      <region>South Asia</region>
+      <name>India</name>
+      <gdp>4735000</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="29.3" male="0.5312" female="0.4688"/>
+         <group range="15-24 years:" total="18.2" male="0.5281" female="0.4719"/>
+         <group range="25-54 years:" total="40.2" male="0.5144" female="0.4856"/>
+         <group range="55-64 years:" total="6.8" male="0.5036" female="0.4964"/>
+         <group range="65 years and over:" total="5.6" male="0.4752" female="0.5248"/>
+      </age-distribution>
+      <population>1220800359</population>
+      <area>3287263</area>
+   </country>
+   <country>
+      <region>South Asia</region>
+      <name>Maldives</name>
+      <gdp>2945</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="21.2" male="0.51" female="0.49"/>
+         <group range="15-24 years:" total="24.9" male="0.5905" female="0.4095"/>
+         <group range="25-54 years:" total="45.4" male="0.6048" female="0.3952"/>
+         <group range="55-64 years:" total="4.3" male="0.5383" female="0.4617"/>
+         <group range="65 years and over:" total="4.1" male="0.4848" female="0.5152"/>
+      </age-distribution>
+      <population>393988</population>
+      <area>298</area>
+   </country>
+   <country>
+      <region>South Asia</region>
+      <name>Nepal</name>
+      <gdp>40490</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="33.5" male="0.5095" female="0.4905"/>
+         <group range="15-24 years:" total="22.5" male="0.4991" female="0.5009"/>
+         <group range="25-54 years:" total="34.1" male="0.4691" female="0.5309"/>
+         <group range="55-64 years:" total="5.4" male="0.487" female="0.513"/>
+         <group range="65 years and over:" total="4.4" male="0.4654" female="0.5346"/>
+      </age-distribution>
+      <population>30430267</population>
+      <area>147181</area>
+   </country>
+   <country>
+      <region>South Asia</region>
+      <name>Pakistan</name>
+      <gdp>514600</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="34.7" male="0.5137" female="0.4863"/>
+         <group range="15-24 years:" total="21.7" male="0.5162" female="0.4838"/>
+         <group range="25-54 years:" total="34.5" male="0.5198" female="0.4802"/>
+         <group range="55-64 years:" total="4.8" male="0.4949" female="0.5051"/>
+         <group range="65 years and over:" total="4.2" male="0.4717" female="0.5283"/>
+      </age-distribution>
+      <population>193238868</population>
+      <area>796095</area>
+   </country>
+   <country>
+      <region>South Asia</region>
+      <name>Sri Lanka</name>
+      <gdp>126200</gdp>
+      <age-distribution>
+         <group range="0-14 years:" total="24.9" male="0.5101" female="0.4899"/>
+         <group range="15-24 years:" total="15.3" male="0.5064" female="0.4936"/>
+         <group range="25-54 years:" total="42.6" male="0.488" female="0.512"/>
+         <group range="55-64 years:" total="9.1" male="0.4646" female="0.5354"/>
+         <group range="65 years and over:" total="8.1" male="0.4291" female="0.5709"/>
+      </age-distribution>
+      <population>21675648</population>
+      <area>65610</area>
+   </country>
+</data>
