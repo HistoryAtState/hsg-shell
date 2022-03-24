@@ -95,7 +95,7 @@ declare function site:process($item, $mode-name as xs:string, $state as map(*)?)
   
   let $modes as map(*) := map:merge((
       (
-        for $mode in ($state?mode!map:keys(.)[. ne $mode-name])
+        for $mode in ($state?mode ! map:keys(.)[. ne $mode-name])
         return map{$mode: $state?mode?($mode)}
       ),
       map{
@@ -118,7 +118,7 @@ declare function site:process($item, $mode-name as xs:string, $state as map(*)?)
   for $i in $item 
   let $s := $selector($i)
   let $result := if (exists($templates?($s))) then $templates?($s) else $on-no-match
-  return $result!.($i, $new-state)
+  return $result ! .($i, $new-state)
 };
 
 (: a convenience overload of process() :)
@@ -183,7 +183,7 @@ declare
   %site:mode('sitemap')
   %site:match('page-template')
 function site:sitemap-page-template($page-template as element(site:page-template), $state as map(*)?){
-  for $url in $state?config?urls!map:keys(.)
+  for $url in $state?config?urls ! map:keys(.)
   let $filepaths := distinct-values($state?config?urls?($url)?filepath)
   let $page-template-href := site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $state?config?urls?($url)?keys))
   let $files := (doc(resolve-uri($page-template-href, base-uri($page-template))),
@@ -278,7 +278,7 @@ function site:config-step-value($value as attribute(value), $state as map(*)) as
   else
     let $parent-urls as map(*)*:= $state?config?parent-urls
     let $urls := map:merge((
-      for $parent-url in $parent-urls!map:keys(.)
+      for $parent-url in $parent-urls ! map:keys(.)
       let $url := replace($parent-url, '(.*)/$', '$1')||'/'||$value
       return map{
         $url: $parent-urls($parent-url)
@@ -297,8 +297,8 @@ function site:config-src-child-collections($child-cols as attribute(child-collec
   then ()
   else
     let $parent-urls as map(*)*:= $state?config?parent-urls
-    let $key-label as xs:string? := $child-cols/ancestor::site:step[1]/@key!string(.)
-    for $parent-url in $parent-urls!map:keys(.)
+    let $key-label as xs:string? := $child-cols/(ancestor::site:step[1])[@key]/string(@key)
+    for $parent-url in $parent-urls ! map:keys(.)
       let $parent-filepath := resolve-uri($child-cols, replace($parent-urls?($parent-url)?filepath, '(.*)/$', '$1')||'/')
       let $child-collections := xmldb:get-child-collections($parent-filepath)
       for $child-collection in $child-collections
@@ -325,11 +325,10 @@ function site:config-step-src-collection($collection as attribute(collection), $
   then ()
   else
     let $parent-urls as map(*)*:= $state?config?parent-urls
-    let $key-label as xs:string? := $collection/ancestor::site:step[1]/@key!string(.)
-    let $value as xs:string? := $collection/ancestor::site:step[1]/@key!string(.)
-    for $parent-url in $parent-urls!map:keys(.)
+    let $key-label as xs:string? := $collection/(ancestor::site:step[1])[@key]/string(@key)
+    for $parent-url in $parent-urls ! map:keys(.)
       let $parent-filepath := resolve-uri($collection, replace($parent-urls?($parent-url)?filepath, '(.*)/$', '$1')||'/')
-      let $filepaths := collection($parent-filepath)!base-uri(.)
+      let $filepaths := collection($parent-filepath) ! base-uri(.)
       for $filepath in $filepaths
         let $filename.ext := substring-after($filepath, $parent-filepath)
         let $filename := replace($filename.ext, '(.*?)(\.[^.]+)?$', '$1')
@@ -353,8 +352,8 @@ declare
   %site:match('src/@xq')
 function site:config-step-src-xq($xq as attribute(xq), $state as map(*)) as map(*)*{
     let $parent-urls as map(*)*:= $state?config?parent-urls
-    let $key-label as xs:string? := $xq/ancestor::site:step[1]/@key!string(.)
-    for $parent-url in $parent-urls!map:keys(.)
+    let $key-label as xs:string? := $xq/(ancestor::site:step[1])[@key]/string(@key)
+    for $parent-url in $parent-urls ! map:keys(.)
       let $parent-filepath := $parent-urls?($parent-url)?filepath
       let $parent-context := 
         if (doc-available($parent-filepath))
