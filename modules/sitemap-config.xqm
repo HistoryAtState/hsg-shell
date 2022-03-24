@@ -6,6 +6,8 @@ import module namespace util="http://exist-db.org/xquery/util";
 
 declare namespace u="http://www.sitemaps.org/schemas/sitemap/0.9";
 
+declare variable $site:debug as xs:boolean := true();
+
 (: A helper function for running tests on annotations :)
 declare
   %site:mode-selector("test")
@@ -14,6 +16,13 @@ declare
 function site:hello-world($x as xs:string?) {
   let $y := ($x, "World")[1]
   return "Hello "||$y
+};
+
+(: A helper function for logging during development :)
+declare function site:log($message as xs:string*){
+    if ($site:debug) then
+        util:log('INFO', $message)
+    else ()
 };
 
 (: mode-selector() returns the selector function for a named mode; it looks this up using the 
@@ -157,21 +166,24 @@ declare
   %site:mode('sitemap')
   %site:match('root')
 function site:sitemap-root($root as element(), $state as map(*)){
-  <u:urlset>{
+  let $_ := site:log('Starting sitemap generation') 
+  let $result :=
+    <u:urlset>{
     site:process(
       $root/*,
       'sitemap',
       site:state-config-merge($state, site:get-config($root, $state))
     )
-  }
-  </u:urlset>
+    }
+    </u:urlset>
+  let $_ := site:log('Completed sitemap generation')
+  return $result
 };
 
 declare
   %site:mode('sitemap')
   %site:match('page-template')
 function site:sitemap-page-template($page-template as element(site:page-template), $state as map(*)?){
-  (:let $log1 := util:log('error', "state is: "||serialize($state, map{'method':'adaptive', 'indent': true()})):)
   for $url in $state?config?urls!map:keys(.)
   let $filepaths := distinct-values($state?config?urls?($url)?filepath)
   let $page-template-href := site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $state?config?urls?($url)?keys))
