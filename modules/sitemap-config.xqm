@@ -328,9 +328,7 @@ function site:config-step-src-collection($collection as attribute(collection), $
     let $key-label as xs:string? := $collection/(ancestor::site:step[1])[@key]/string(@key)
     for $parent-url in $parent-urls ! map:keys(.)
       let $parent-filepath := resolve-uri($collection, replace($parent-urls?($parent-url)?filepath, '(.*)/$', '$1')||'/')
-      let $filepaths := 
-        for $resource in xmldb:get-child-resources($parent-filepath)
-        return resolve-uri($resource, $parent-filepath||'/')
+      let $filepaths := site:get-urls-from-collection($parent-filepath)
       for $filepath in $filepaths
         let $filename.ext := substring-after($filepath, $parent-filepath)
         let $filename := replace($filename.ext, '(.*?)(\.[^.]+)?$', '$1')
@@ -356,39 +354,45 @@ function site:config-step-src-xq($xq as attribute(xq), $state as map(*)) as map(
     let $parent-urls as map(*)*:= $state?config?parent-urls
     let $key-label as xs:string? := $xq/(ancestor::site:step[1])[@key]/string(@key)
     for $parent-url in $parent-urls ! map:keys(.)
-      let $parent-filepath := $parent-urls?($parent-url)?filepath
-      let $parent-context := 
-        if (xmldb:collection-available($parent-filepath))
-          then 'collection("'||$parent-filepath||'")/'
-        else 'doc("'||$parent-filepath||'")/'
-      let $context := 
-        if ($xq/../@collection)
-          then 'collection("'||resolve-uri($xq/../@collection, $parent-filepath||'/')||'")/'
-        else if ($xq/../@child-collections) (: if we're just looking for what to be relative to, we don't actually need to look up the child collections :)
-          then 'collection("'||resolve-uri($xq/../@child-collections, $parent-filepath||'/')||'")/'
-        else if ($xq/../@doc)
-          then 'doc("'||resolve-uri($xq/../@doc, $parent-filepath||'/')||'")/'
-        else $parent-context
-      let $sources := util:eval($context||$xq, false(), ('site:keys', $parent-urls?($parent-url)?keys))
-      for $source in $sources
-        let $keys := 
-          if ($key-label) 
-          then map:merge((
-            $parent-urls?($parent-url)?keys,
-            map{$key-label: string($source)}
-          ))
-          else $parent-urls?($parent-url)?keys
+      let $parent-filepath := $parent-urls?($parent-url)?filepath   
+      let $contexts :=
+        (: contexts are any file URIs that the xquery is running over :)
+        if ($xq/../(@collection, @child-collections, @doc)) then $xq/../(
+          @collection!site:get-urls-from-collection(resolve-uri(., $parent-filepath||'/')),
+          @child-collections!site:get-urls-from-collection(resolve-uri(., $parent-filepath||'/')),
+          @doc!resolve-uri(., $parent-filepath||'/')
+        )
+        else if (xmldb:collection-available($parent-filepath)) then
+          site:get-urls-from-collection($parent-filepath)
+        else
+          $parent-filepath
+      for $context in $contexts
+      for $source in util:eval('doc("'||$context||'")/'||$xq, false(), ('site:keys', $parent-urls?($parent-url)?keys))
+      let $keys := 
+        if ($key-label) 
+        then map:merge((
+          $parent-urls?($parent-url)?keys,
+          map{$key-label: string($source)}
+        ))
+        else $parent-urls?($parent-url)?keys
       return map{
         'urls': map{
           $parent-url||'/'||encode-for-uri($source): map:merge((
             map{
-              'filepath': base-uri($source),
+              'filepath': $context,
               'xq': string($xq)
             },
             map{'keys': $keys}
           ))
         }
       }
+};
+
+declare function site:get-urls-from-collection($collection as xs:string) as xs:string* {
+  for $resource in xmldb:get-child-resources($collection)
+  return resolve-uri($resource, $collection||'/'),
+  for $sub-collection in xmldb:get-child-collections($collection)
+  return site:get-urls-from-collection(resolve-uri($sub-collection, $collection||'/'))
 };
 
 (:  config-merge is a mini-framework for merging (config) maps; it combines keys,

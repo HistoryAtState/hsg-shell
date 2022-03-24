@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
   <step value="music">
     <step key="artist">
@@ -51,6 +50,15 @@
       <page-template href="pages/search.xml">
         <with-param name="focus" value="album"/>
       </page-template>
+    </step>
+    <step value="by-year">
+      <step key="year">
+        <page-template href="pages/year.xml"/>
+        <config>
+          <src collection="Collection/music-library" xq="distinct-values(for $date in /album/track/metadata[@key eq 'Year'][not(. = '')] return xs:integer(substring($date, 1, 4)))"/>
+        </config>
+      </step>
+      <ignore/>
     </step>
     <page-template href="pages/search.xml"/>
   </step>
