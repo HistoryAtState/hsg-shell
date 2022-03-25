@@ -251,6 +251,10 @@ declare %test:assertEquals('pages/artist/morcheeba.xml') function x:test-eval-av
   return site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $key))
 };
 
+declare %test:assertEquals('/db/apps/hsg-shell/tests/data/sitemap-config/Collection/world-factbook/country-data.xml') function x:test-get-urls-from-collection-non-binary(){
+  site:get-urls-from-collection('/db/apps/hsg-shell/tests/data/sitemap-config/Collection/world-factbook')
+};
+
 
 declare %test:assertEquals('urlset') function x:test-build-map-root(){
   site:build-map($x:sample/site:root) => local-name()

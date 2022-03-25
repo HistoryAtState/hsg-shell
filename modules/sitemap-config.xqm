@@ -390,7 +390,8 @@ function site:config-step-src-xq($xq as attribute(xq), $state as map(*)) as map(
 
 declare function site:get-urls-from-collection($collection as xs:string) as xs:string* {
   for $resource in xmldb:get-child-resources($collection)
-  return resolve-uri($resource, $collection||'/'),
+  let $uri := resolve-uri($resource, $collection||'/')
+  return $uri[not(util:is-binary-doc(.))],
   for $sub-collection in xmldb:get-child-collections($collection)
   return site:get-urls-from-collection(resolve-uri($sub-collection, $collection||'/'))
 };
