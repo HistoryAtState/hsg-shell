@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
   <path match="/resources/|/bower_components/">
     <fwd url="{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
@@ -313,8 +312,8 @@
             <with-param name="publication-id" value="travels-president"/>
           </page-template>
           <config>
-            <src collection="/db/apps/trabels/president-travels" xq="trips/trip/@who)"/>
-            <src collection="/db/apps/trabels/president-travels" xq="distinct-values(trips/trip/country/@id)"/>
+            <src collection="/db/apps/travels/president-travels" xq="trips/trip/@who"/>
+            <src collection="/db/apps/travels/president-travels" xq="distinct-values(trips/trip/country/@id)"/>
           </config>
         </step>
         <page-template href="pages/departmenthistory/travels/president/index.xml">
