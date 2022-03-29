@@ -165,7 +165,9 @@ declare
   %site:mode('sitemap')
   %site:match('root')
 function site:sitemap-root($root as element(), $state as map(*)){
-  let $_ := site:log('Starting sitemap generation') 
+  let $_ := site:log('SMG: Starting sitemap generation')
+  let $_ := cache:destroy('last-modified')
+  let $_ := cache:create('last-modified', map{})
   let $result :=
     <u:urlset>{
     site:process(
@@ -175,7 +177,7 @@ function site:sitemap-root($root as element(), $state as map(*)){
     )
     }
     </u:urlset>
-  let $_ := site:log('Completed sitemap generation')
+  let $_ := site:log('SMG: Completed sitemap generation')
   return $result
 };
 
@@ -186,30 +188,7 @@ function site:sitemap-page-template($page-template as element(site:page-template
   for $url in distinct-values($state?config?urls ! map:keys(.))
   let $filepaths := distinct-values($state?config?urls?($url)?filepath)
   let $page-template-href := site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $state?config?urls?($url)?keys))
-  let $files := (doc(resolve-uri($page-template-href, base-uri($page-template))),
-    for $filepath in $filepaths
-    return if (doc-available($filepath)) then doc($filepath) else collection($filepath)
-  )
-  let $lastmod := (
-    for $file in $files
-    let $col := util:collection-name($file)
-    let $doc := util:document-name($file)
-    let $date as xs:dateTime? := 
-      try {
-        xmldb:last-modified($col, $doc)
-      } catch * {
-        util:log('ERROR',('Collection: ', $col)),
-        util:log('ERROR',('Filename: ', $doc)),
-        util:log('ERROR',('Error code: ', $err:code)),
-        util:log('ERROR',('Error description: ', $err:description)),
-        util:log('ERROR',('Error value(s): ', $err:value)),
-        util:log('ERROR',('Error in module: ', $err:module)),
-        util:log('ERROR',('Error line no: ', $err:line-number)),
-        util:log('ERROR',('Addition info: ', $err:additional))
-      }
-    order by $date descending
-    return $date
-  )[1]
+  let $lastmod :=  site:last-modified-from-urls((resolve-uri($page-template-href, base-uri($page-template)), $filepaths))
   return 
     <u:url>
       <u:loc>{$url}</u:loc>
@@ -217,11 +196,52 @@ function site:sitemap-page-template($page-template as element(site:page-template
     </u:url>
 };
 
+declare function site:last-modified-from-urls($urls as xs:string*) as xs:dateTime? {
+  (
+    for $url in $urls
+    let $date := site:last-modified-from-url($url)
+    order by $date descending
+    return $date
+  )[1]
+};
+
+declare function site:last-modified-from-url($url as xs:string) as xs:dateTime?{
+  let $cached as xs:dateTime? := cache:get('last-modified', $url)
+  return 
+    if (exists($cached)) 
+    then 
+      let $_ := site:log(('CACHE: found cached date for ', $url))
+      return $cached
+    else 
+      if (xmldb:collection-available($url))
+      then
+        let $urls := site:get-urls-from-collection($url)
+        return site:last-modified-from-urls($urls)
+      else
+        let $date as xs:dateTime? :=   try {
+          let $col-name := replace($url, '(.+)/.+', '$1')
+          let $doc-name := replace($url, '.+/(.+)', '$1')
+          return xmldb:last-modified($col-name, $doc-name)
+        }
+        catch * {
+          site:log(('Failure attempting to get last modified date of ', $url)),
+          site:log(('Error code: ', $err:code)),
+          site:log(('Error description: ', $err:description)),
+          site:log(('Error value(s): ', $err:value)),
+          site:log(('Error in module: ', $err:module)),
+          site:log(('Error line no: ', $err:line-number)),
+          site:log(('Addition info: ', $err:additional))
+        }
+        let $_ := site:log(('CACHE: putting date in cache for ', $url))
+        let $_ := if (exists($date)) then cache:put('last-modified', $url, $date) else ()
+        return $date
+};
+
 declare
   %site:mode('sitemap')
   %site:match('step')
 function site:sitemap-step($step as element(), $state as map(*)?){
-  let $_ := site:log(("processing step: ", $step/@value, $step/@key))
+  let $_ := site:log(("SMG: processing step: ", $step/@value, $step/@key))
   return
     site:process(
       $step/*,
