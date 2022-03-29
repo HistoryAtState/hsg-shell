@@ -272,7 +272,7 @@
           </page-template>
         </step>
         <step value="by-organization">
-          <page-template href="departmenthistory/people/chiefsofmission/international-organizations-list.xml">
+          <page-template href="pages/departmenthistory/people/chiefsofmission/international-organizations-list.xml">
             <with-param name="publication-id" value="people"/>
           </page-template>
         </step>
@@ -496,7 +496,7 @@
     <step value="catalog">
       <page-template href="pages/developer/catalog.xml"/>
     </step>
-    <page-template href="pages/developer/index.html"/>
+    <page-template href="pages/developer/index.xml"/>
   </step>
   <step value="open">
     <step value="frus-latest">
@@ -558,7 +558,7 @@
       <page-template href="pages/search/search-result.xml"/>
     </param>
     <step value="tips">
-      <page-template href="page/search/tips.xml">
+      <page-template href="pages/search/tips.xml">
         <with-param name="suppress-sitewide-search-field" value="true"/>
       </page-template>
     </step>
