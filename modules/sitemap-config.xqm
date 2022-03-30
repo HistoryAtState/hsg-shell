@@ -347,15 +347,15 @@ function site:config-step-src-collection($collection as attribute(collection), $
     let $parent-urls as map(*)*:= $state?config?parent-urls
     let $key-label as xs:string? := $collection/(ancestor::site:step[1])[@key]/string(@key)
     for $parent-url in $parent-urls ! map:keys(.)
-      let $parent-filepath := resolve-uri($collection, replace($parent-urls?($parent-url)?filepath, '(.*)/$', '$1')||'/')
+      let $parent-filepath := replace(resolve-uri($collection, replace($parent-urls?($parent-url)?filepath, '(.*)/$', '$1')||'/'), '(.*)/$', '$1')
       let $filepaths := site:get-urls-from-collection($parent-filepath)
       for $filepath in $filepaths
-        let $filename.ext := substring-after($filepath, $parent-filepath)
+        let $filename.ext := substring-after($filepath, $parent-filepath||'/')
         let $filename := replace($filename.ext, '(.*?)(\.[^.]+)?$', '$1')
         return map{
           'urls': map{
             $parent-url||'/'||$filename: map:merge((
-              map{'filepath': $parent-filepath||$filename.ext},
+              map{'filepath': $parent-filepath||'/'||$filename.ext},
               if ($key-label) 
               then map{'keys': map:merge((
                 $parent-urls?($parent-url)?keys,
