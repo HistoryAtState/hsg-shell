@@ -84,7 +84,7 @@ else if ($exist:path = ("/robots.txt", "/opensearch.xml", "/favicon.ico")) then
         <forward url="{$exist:controller || "/resources" || $exist:path}"/>
     </dispatch>
     
-else if (starts-with($exist:path, "sitemap")) then
+else if (starts-with($exist:path, "/sitemap")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller || "/resources/sitemaps" || $exist:path}"/>
     </dispatch>
