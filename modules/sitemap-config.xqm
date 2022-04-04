@@ -210,7 +210,6 @@ declare function site:last-modified-from-url($url as xs:string) as xs:dateTime?{
   return 
     if (exists($cached)) 
     then 
-      let $_ := site:log(('CACHE: found cached date for ', $url))
       return $cached
     else 
       if (xmldb:collection-available($url))
@@ -232,7 +231,6 @@ declare function site:last-modified-from-url($url as xs:string) as xs:dateTime?{
           site:log(('Error line no: ', $err:line-number)),
           site:log(('Addition info: ', $err:additional))
         }
-        let $_ := site:log(('CACHE: putting date in cache for ', $url))
         let $_ := if (exists($date)) then cache:put('last-modified', $url, $date) else ()
         return $date
 };
