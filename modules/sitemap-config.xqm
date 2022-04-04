@@ -185,9 +185,14 @@ declare
   %site:mode('sitemap')
   %site:match('page-template')
 function site:sitemap-page-template($page-template as element(site:page-template), $state as map(*)?){
-  for $url in distinct-values($state?config?urls ! map:keys(.))
-  let $filepaths := distinct-values($state?config?urls?($url)?filepath)
-  let $page-template-href := site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $state?config?urls?($url)?keys))
+  for $urls in $state?config?urls
+  group by $url := $urls ! map:keys(.)
+  let $filepaths := (
+    for $map in $urls?($url)
+    group by $filepath := $map?filepath
+    return $filepath
+  )
+  let $page-template-href := site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $urls?($url)?keys))
   let $lastmod :=  site:last-modified-from-urls((resolve-uri($page-template-href, base-uri($page-template)), $filepaths))
   return 
     <u:url>
