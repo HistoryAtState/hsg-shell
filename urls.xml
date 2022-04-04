@@ -17,6 +17,9 @@
   <step value="robots.txt opensearch.xml favicon.ico" key="path">
     <fwd url="/resources/{$site:key?path}"/>
   </step>
+  <step match="^sitemap" key="sitemap">
+    <fwd url="/resources/sitemaps/{$site:key?sitemap}"/>
+  </step>
   <step value="historicaldocuments">
     <step value="pre-1861">
       <step value="serial-set">
