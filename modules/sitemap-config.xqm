@@ -214,8 +214,7 @@ declare function site:last-modified-from-url($url as xs:string) as xs:dateTime?{
   let $cached as xs:dateTime? := cache:get('last-modified', $url)
   return 
     if (exists($cached)) 
-    then 
-      return $cached
+    then $cached
     else 
       if (xmldb:collection-available($url))
       then
