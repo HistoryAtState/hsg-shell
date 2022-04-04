@@ -55,8 +55,6 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
     let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
 
-
-
     let $last-modified := 
         if (exists($publication-id) and exists($document-id)) then
             pages:last-modified($publication-id, $document-id, $section-id)
