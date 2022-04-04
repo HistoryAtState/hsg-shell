@@ -165,20 +165,44 @@ declare
   %site:mode('sitemap')
   %site:match('root')
 function site:sitemap-root($root as element(), $state as map(*)){
+  let $sitemap-dir := '/db/apps/hsg-shell/resources/sitemaps'
   let $_ := site:log('SMG: Starting sitemap generation')
   let $_ := cache:destroy('last-modified')
+  let $_ := if (xmldb:collection-available($sitemap-dir)) then xmldb:remove($sitemap-dir) else ()
+  let $_ := xmldb:create-collection('/db/apps/hsg-shell/resources', 'sitemaps')
   let $_ := cache:create('last-modified', map{})
-  let $result :=
-    <u:urlset>{
+  let $urls :=
     site:process(
       $root/*,
       'sitemap',
       site:state-config-merge($state, site:get-config($root, $state))
     )
-    }
-    </u:urlset>
+  let $result := 
+    if (count($urls) lt 10000)
+    then
+      <u:urlset>
+        {$urls}
+      </u:urlset>
+    else
+    <u:sitemapindex>
+      {
+        for $url-group at $count in $urls
+        let $group := ($count - ($count mod 10000)) div 10000
+        group by $group
+        order by $group
+        let $sitemap := 
+          <u:urlset>
+            {$url-group}
+          </u:urlset>
+        let $_ := xmldb:store($sitemap-dir, 'sitemap'||$group||'.xml', $sitemap)
+        return
+          <u:sitemap>
+            <loc>sitemap{$group}.xml</loc>
+          </u:sitemap>
+      }
+    </u:sitemapindex>
   let $_ := site:log('SMG: Completed sitemap generation')
-  return $result
+  return xmldb:store($sitemap-dir, 'sitemap.xml', $result)
 };
 
 declare
