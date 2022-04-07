@@ -4,13 +4,19 @@
       <step key="album">
         <step key="trackNo">
           <page-template href="pages/track.xml">
+            <with-param name="artist" keyval="artist"/>
+            <with-param name="album" keyval="album"/>
             <with-param name="track" keyval="trackNo"/>
+            <with-param name="value" value="foo"/>
+            <with-param name="select" select="replace('buzz', 'uzz', 'ar')"/>
           </page-template>
           <config>
             <src xq=".//track/metadata[@key='Track Number']"/>
           </config>
         </step>
-        <page-template href="pages/album.xml"/>
+        <page-template href="pages/album.xml">
+          <with-param name="artist" keyval="artist"/>
+        </page-template>
         <config>
           <src collection="."/>
         </config>
