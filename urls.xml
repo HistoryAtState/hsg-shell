@@ -85,7 +85,7 @@
           <with-param name="publication-id" value="frus"/>
           <with-param name="document-id" keyval="frus-volume"/>
           <with-param name="section-id" keyval="section"/>
-          <with-param name="requested-url" select="local:get-url()"/>
+          <with-param name="requested-url" select="site:get-url()"/>
         </page-template>
         <config>
           <src xq=".//@xml:id"/>
@@ -511,13 +511,13 @@
     <step value="frus-latest.xml">
       <xq href="modules/open.xql">
         <with-param name="xql-feed" value="latest"/>
-        <with-param name="xql-application-url" select="local:get-url()"/>
+        <with-param name="xql-application-url" select="site:get-url()"/>
       </xq>
     </step>
     <step value="frus-metadata.xml">
       <xq href="modules/open.xql">
         <with-param name="xql-feed" value="metadata"/>
-        <with-param name="xql-application-url" select="local:get-url()"/>
+        <with-param name="xql-application-url" select="site:get-url()"/>
       </xq>
     </step>
     <page-template href="pages/open/index.xml"/>
@@ -573,11 +573,11 @@
     <step value="v1">
       <step value="catalog">
         <xq href="/modules/opds-catalog.xql">
-          <with-param name="xql-application-url" select="local:get-url()"/>
+          <with-param name="xql-application-url" select="site:get-url()"/>
         </xq>
       </step>
       <xq href="/modules/opds-catalog.xql">
-        <with-param name="xql-application-url" select="local:get-url()"/>
+        <with-param name="xql-application-url" select="site:get-url()"/>
       </xq>
     </step>
     <ignore/>

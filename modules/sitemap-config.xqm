@@ -545,4 +545,24 @@ declare function site:eval-avt($avt as node(), $cache-flag as xs:boolean, $exter
     
   return util:eval($tmp, $cache-flag, $external-variable) ! string(.)
   
+
+declare function site:get-url() {
+  (: imported from old controller.xql :)
+    concat(
+        request:get-scheme(),
+        '://',
+        request:get-server-name(),
+        let $server-port := request:get-server-port()
+        return 
+            if ($server-port = (80, 443)) then 
+                ()
+            else 
+                concat(":", string($server-port)),
+        site:get-uri()
+        )
+};
+
+declare function site:get-uri() {
+  (: imported from old controller.xql :)
+    (request:get-header("nginx-request-uri"), request:get-uri())[1]
 };
