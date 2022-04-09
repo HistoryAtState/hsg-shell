@@ -7,6 +7,7 @@ import module namespace util="http://exist-db.org/xquery/util";
 declare namespace u="http://www.sitemaps.org/schemas/sitemap/0.9";
 
 declare variable $site:debug as xs:boolean := true();
+declare variable $site:config as element(site:root) := doc('/db/apps/hsg-shell/urls.xml')/*;
 
 (: A helper function for running tests on annotations :)
 declare

@@ -12,6 +12,7 @@ declare namespace expath="http://expath.org/ns/pkg";
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
@@ -499,6 +500,42 @@ declare function pages:generate-short-title($node, $model) as xs:string? {
         $node/ancestor-or-self::*[last()]//(h1|h2|h3),
         'Office of the Historian'
     )[. ne ''][1]
+};
+
+(: Generate page breadcrumbs :)
+declare function pages:breadcrumb($node, $model){
+  pages:generate-breadcrumbs(substring-after(request:get-uri(), $app:APP_ROOT))
+};
+
+declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
+  <div class="hsg-breadcrumb-wrapper">
+    <ol class="breadcrumb">
+      {
+        site:call-with-parameters-for-uri-steps($uri, $site:config, pages:generate-breadcrumb-item#1)
+      }
+    </ol>
+  </div>
+};
+
+declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)*{
+  let $uri := $state?current-url
+  let $full-url := $app:APP_ROOT || $uri
+  let $parameters as map(*)? := $state?parameters
+  let $publication-id := $parameters?publication-id
+  let $page-template := $state?page-template
+  let $breadcrumb-title as function(*)? := $config:PUBLICATIONS?($publication-id)?breadcrumb-title
+  let $label := (
+    if (exists($breadcrumb-title)) then $breadcrumb-title($parameters) else (),
+    doc($page-template)//*[@id eq 'breadcrumb-title']/node(),
+    $config:PUBLICATIONS?($publication-id)?title,
+    "Home"[$uri eq '/'],
+    "Office of the Historian"
+  )[1]
+  return
+    <li>
+      <a href="{$full-url}">{$label(:, 
+    serialize($parameters, map{'method':'adaptive', 'indent':true()}):)}</a>
+    </li>
 };
 
 declare function pages:app-root($node as node(), $model as map(*)) {
