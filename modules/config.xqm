@@ -180,7 +180,45 @@ declare variable $config:PUBLICATIONS :=
                 (: Called to transform content based on the odd using tei simple pm :)
                 function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Historical Documents",
-            "base-path": function($document-id, $section-id) { "frus/" || $document-id }
+            "base-path": function($document-id, $section-id) { "frus/" || $document-id },
+            "breadcrumb-title":
+              function($parameters as map(*)) as xs:string? { 
+                let $document-id as xs:string? := $parameters?document-id
+                let $section-id as xs:string? := $parameters?section-id
+                return 
+                  if (exists($document-id)) then 
+                    if (exists($section-id)) then 
+                      (: Return the breadcrumb title for the section within the frus volume :)
+                      let $div := $config:PUBLICATIONS?frus?select-section($document-id, $section-id)
+                      return 
+                        if ($div/@type eq 'document') then
+                          concat('Document ', $div/@n/string()) 
+                        else (:$div/@type ne 'document':) (
+                          if ($div instance of element(tei:pb)) then 
+                            concat(
+                              (
+                                if ($div/@type eq "facsimile") then 
+                                  let $next-sibling := $div/following-sibling::element()[1]/self::tei:div/@n
+                                  let $ancestor-div := $div/ancestor::tei:div[1]/@n
+                                  let $parent-doc as attribute()? := ($next-sibling, $ancestor-div)[1]
+                                  return "Document "[exists($parent-doc)] || ($parent-doc) || " Facsimile "
+                                else ()
+                              ), 
+                              'Page ', 
+                              $div/@n/string()
+                            )
+                          else (:$div not instance of element(tei:pb):) (
+                            (: TODO(TFJH): strip footnotes off of chapter titles; e.g. /historicaldocuments/frus1894/ch25 :)
+                            $div/tei:head[1]
+                          )
+                        )
+                    else (: not exists($section-id) :) (
+                      (: Return the breadcrumb title for the frus volume :)
+                      let $doc := $config:PUBLICATIONS?frus?select-document($document-id)
+                      return ($doc//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete'])[1]/string()
+                    )
+                  else (: not exists($document-id) :) ()
+                }         
         },
         "buildings": map {
             "collection": $config:BUILDINGS_COL,

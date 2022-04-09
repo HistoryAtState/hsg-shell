@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
+   <div data-template="templates:surround" data-template-with="templates/site.xml" data-template-at="content">
       <div>
          <div class="row">
+            <div data-template="pages:breadcrumb"/>
             <div class="hsg-breadcrumb-wrapper">
                <ol class="breadcrumb" data-template="app:fix-links">
                   <li>
@@ -23,9 +22,7 @@
             <div class="hsg-width-two-thirds" id="volume">
                <div id="content-inner" data-template="app:fix-links">
                   <div data-template="frus:render-volume-landing"/>
-                  <div data-template="toc:table-of-contents"
-                       data-template-heading="false"
-                       data-template-highlight="false"/>
+                  <div data-template="toc:table-of-contents" data-template-heading="false" data-template-highlight="false"/>
                </div>
             </div>
             <aside class="hsg-width-one-third">
@@ -45,9 +42,7 @@
                               </button>
                            </span>
                         </div>
-                        <input type="hidden"
-                               name="volume-id"
-                               data-template="frus:volume-id-value-attribute"/>
+                        <input type="hidden" name="volume-id" data-template="frus:volume-id-value-attribute"/>
                      </form>
                   </div>
                   <ul class="hsg-list-group">
