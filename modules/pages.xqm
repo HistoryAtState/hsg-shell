@@ -56,6 +56,8 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
     let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
 
+
+
     let $last-modified := 
         if (exists($publication-id) and exists($document-id)) then
             pages:last-modified($publication-id, $document-id, $section-id)
@@ -519,7 +521,14 @@ declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
 
 declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)*{
   let $uri := $state?current-url
-  let $full-url := $app:APP_ROOT || $uri
+  let $app-root := 
+    try {$app:APP_ROOT} 
+    catch * {
+      (: Assume APP_ROOT is '/exist/apps/hsg-shell'; Needed for xqsuite testing, 
+         since there is no context for calls to e.g. request:get-header(). :)
+      '/exist/apps/hsg-shell'
+    }
+  let $full-url := $app-root || $uri
   let $parameters as map(*)? := $state?parameters
   let $publication-id := $parameters?publication-id
   let $page-template := $state?page-template

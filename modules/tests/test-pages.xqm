@@ -465,6 +465,15 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `About`:      `$app/about` 
+:)
+
+declare
+  %test:assertEquals('<div class="hsg-breadcrumb-wrapper"><ol class="breadcrumb"><li><a href="/exist/apps/hsg-shell/">Home</a></li><li><a href="/exist/apps/hsg-shell/about">About</a></li></ol></div>')
+function x:test-pages-breadcrumb-about() as element(div) {
+  pages:generate-breadcrumbs('/about')
+};
+
+(:
       
 ### Page template about/contact-us.xml
 
@@ -1146,8 +1155,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Home`:       `$app`
       `Historical Documents`:   `$app/historicaldocuments`
       `Foreign Relations of the United States, 1981-1988, Volume XI, START I`:  `$app/historicaldocuments/frus1981-88v11`
-      `Persons`:    `$app/historicaldocuments/frus1981-88v11/persons`
+      `Persons`:    `$app/historicaldocuments/frus1981-88v11/persons`  
+:)
 
+declare %test:assertEquals('<div class="hsg-breadcrumb-wrapper"><ol class="breadcrumb"><li><a href="/exist/apps/hsg-shell/">Home</a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments">Historical Documents</a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1981-88v11">Foreign Relations of the United States, 1981–1988, Volume XI,
+                    START I</a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1981-88v11/persons">Persons</a></li></ol></div>') function x:test-pages-breadcrumb-frus(){
+  pages:generate-breadcrumbs('/historicaldocuments/frus1981-88v11/persons')
+};
+
+(: footnotes in chapter titles to be suppressed :)
+
+declare %test:assertEquals('<div class="hsg-breadcrumb-wrapper"><ol class="breadcrumb"><li><a href="/exist/apps/hsg-shell/">Home</a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments">Historical Documents</a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1894">Papers Relating to the Foreign Relations of the United
+                    States, 1894, With the Annual Message of the President, Transmitted to Congress,
+                    December 3, 1894</a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1894/ch25">Friendly offices to Japanese in ChinaSee
+                            Senate Ex. Doc. No. 36, Fifty-third Congress, third
+                        session.</a></li></ol></div>') 
+function x:test-pages-breadcrumb-frus-footnote-in-head(){
+  pages:generate-breadcrumbs('/historicaldocuments/frus1894/ch25')
+};
+
+(: documents to be styled appropriately :)
+
+declare %test:assertEquals('<div class="hsg-breadcrumb-wrapper"><ol class="breadcrumb"><li><a href="/exist/apps/hsg-shell/">Home</a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments">Historical Documents</a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1952-54v07p1">Foreign Relations of the United States, 1952–1954, Germany
+                    and Austria, Volume VII, Part 1</a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1952-54v07p1/d379">Document 379</a></li></ol></div>')
+function x:test-pages-breadcrumb-frus-document-no(){
+  pages:generate-breadcrumbs('/historicaldocuments/frus1952-54v07p1/d379')
+};
+
+(:
 ### Page template historicaldocuments/frus-history/index.xml
 
 - WHEN building page breadcrumbs
