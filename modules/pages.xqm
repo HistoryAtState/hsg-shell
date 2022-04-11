@@ -542,8 +542,9 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
   )[1]
   return
     <li>
-      <a href="{$full-url}">{$label(:, 
-    serialize($parameters, map{'method':'adaptive', 'indent':true()}):)}</a>
+      <a href="{$full-url}">{" ", $label, " "
+      (:,  serialize($parameters, map{'method':'adaptive', 'indent':true()}):)
+      }</a>
     </li>
 };
 
