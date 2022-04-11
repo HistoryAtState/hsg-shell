@@ -5,22 +5,8 @@
         data-template-at="content">
       <div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/historicaldocuments">Historical Documents</a>
-                  </li>
-                  <li>
-                     <a href="$app/historicaldocuments/frus-history">History of the <em>Foreign
-                                Relations</em> Series</a>
-                  </li>
-                  <li>
-                     <a href="$app/historicaldocuments/frus-history/events">Events</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">Events</p>
             </div>
          </div>
          <div class="row hsg-main">

@@ -6,21 +6,8 @@
       <div>
          <div id="static-title" class="hidden">All Archives - Archives - Countries</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/countries">Countries</a>
-                  </li>
-                  <li>
-                     <a href="$app/countries/archives">Archives</a>
-                  </li>
-                  <li>
-                     <a href="$app/countries/archives">All Archives</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">All Archives</p>
             </div>
          </div>
          <div class="row">

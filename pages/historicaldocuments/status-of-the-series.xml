@@ -4,18 +4,8 @@
      data-template-at="content">
    <div id="static-title" class="hidden">Status of the Series - Historical Documents</div>
    <div class="row">
-      <div class="hsg-breadcrumb-wrapper">
-         <ol class="breadcrumb" data-template="app:fix-links">
-            <li>
-               <a href="$app">Home</a>
-            </li>
-            <li>
-               <a href="$app/historicaldocuments">Historical Documents</a>
-            </li>
-            <li>
-               <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a>
-            </li>
-         </ol>
+      <div data-template="pages:breadcrumb">
+         <p id="breadcrumb-title">Status of the Series</p>
       </div>
    </div>
    <div class="row hsg-main">

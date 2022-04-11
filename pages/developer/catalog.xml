@@ -4,19 +4,9 @@
         data-template-with="templates/site.xml"
         data-template-at="content">
       <div>
-         <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/developer">Developer</a>
-                  </li>
-                  <li>
-                     <a href="$app/developer/catalog">Catalog</a>
-                  </li>
-               </ol>
+          <div class="row">
+            <div data-template="pages:breadcrumb">
+              <p id="breadcrumb-title">Catalog</p>
             </div>
          </div>
          <div class="row">

@@ -5,19 +5,8 @@
    <div id="static-title" class="hidden">Pre-1861 U.S. foreign relations materials - Historical
         Documents</div>
    <div class="row">
-      <div class="hsg-breadcrumb-wrapper">
-         <ol class="breadcrumb" data-template="app:fix-links">
-            <li>
-               <a href="$app">Home</a>
-            </li>
-            <li>
-               <a href="$app/historicaldocuments">Historical Documents</a>
-            </li>
-            <li>
-               <a href="$app/historicaldocuments/pre-1861">Pre-1861 U.S. foreign relations
-                        materials</a>
-            </li>
-         </ol>
+      <div data-template="pages:breadcrumb">
+         <p id="breadcrumb-title">Pre-1861 U.S. foreign relations materials</p>
       </div>
    </div>
    <div class="row">

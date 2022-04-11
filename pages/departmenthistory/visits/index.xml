@@ -6,18 +6,8 @@
       <div>
          <div id="static-title" class="hidden">Visits by Foreign Leaders - Department History</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory">Department History</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory/visits">Visits by Foreign Leaders</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">Visits by Foreign Leaders</p>
             </div>
          </div>
          <div class="row">
