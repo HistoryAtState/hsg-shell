@@ -271,6 +271,6 @@ declare %test:assertEquals('3') function x:test-call-with-parameters-for-steps-a
   site:call-with-parameters-for-uri-steps('/music/beck/odelay/2', $x:sample/*, function($state){$state?parameters?artist})[. eq 'beck'] => count()
 };
 
-declare %test:assertEquals('pages/artist/beck.xml') function x:test-call-with-parameters-for-steps-page-template(){
+declare %test:assertEquals('/db/apps/hsg-shell/tests/data/sitemap-config/pages/artist/beck.xml') function x:test-call-with-parameters-for-steps-page-template(){
   site:call-with-parameters-for-uri-steps('/music/beck', $x:sample/*, function($state){$state?page-template})[2]
 };
