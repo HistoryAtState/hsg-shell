@@ -591,11 +591,13 @@ declare
   %site:match('page-template')
 function site:cwpfus-template($page-template as element(site:page-template), $state as map(*)) {
   let $params := map:merge(site:process($page-template/site:with-param, 'cwpfus', $state),map{'duplicates':'use-last'})
+  let $page-template.rel := site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $state?keys))
+  let $page-template.abs := resolve-uri($page-template.rel, base-uri($page-template))
   let $new.state := map:merge(
     (
       $state,
       map{'parameters': $params},
-      map{'page-template': site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $state?keys))}
+      map{'page-template': $page-template.abs}
     ), map{'duplicates': 'use-last'}
   )
   return $state?function($new.state)
