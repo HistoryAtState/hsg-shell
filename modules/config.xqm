@@ -183,13 +183,14 @@ declare variable $config:PUBLICATIONS :=
             "base-path": function($document-id, $section-id) { "frus/" || $document-id },
             "breadcrumb-title":
               function($parameters as map(*)) as xs:string? { 
+                let $publication-id as xs:string? := $parameters?publication-id
                 let $document-id as xs:string? := $parameters?document-id
                 let $section-id as xs:string? := $parameters?section-id
                 return 
                   if (exists($document-id)) then 
                     if (exists($section-id)) then 
                       (: Return the breadcrumb title for the section within the frus volume :)
-                      let $div := $config:PUBLICATIONS?frus?select-section($document-id, $section-id)
+                      let $div := $config:PUBLICATIONS?($publication-id)?select-section($document-id, $section-id)
                       return 
                         if ($div/@type eq 'document') then
                           concat('Document ', $div/@n/string()) 
@@ -214,11 +215,11 @@ declare variable $config:PUBLICATIONS :=
                         )
                     else (: not exists($section-id) :) (
                       (: Return the breadcrumb title for the frus volume :)
-                      let $doc := $config:PUBLICATIONS?frus?select-document($document-id)
+                      let $doc := $config:PUBLICATIONS?($publication-id)?select-document($document-id)
                       return ($doc//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete'])[1]/string()
                     )
                   else (: not exists($document-id) :) ()
-                }         
+              }        
         },
         "buildings": map {
             "collection": $config:BUILDINGS_COL,
@@ -511,7 +512,8 @@ declare variable $config:PUBLICATIONS :=
                 pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"}))
             },
             "title": "History of the Foreign Relations Series",
-            "base-path": function($document-id, $section-id) { "frus-history" }
+            "base-path": function($document-id, $section-id) { "frus-history" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {$config:PUBLICATIONS?frus?breadcrumb-title($parameters)}
         },
         "vietnam-guide": map {
             "collection": $config:VIETNAM_GUIDE_COL,
