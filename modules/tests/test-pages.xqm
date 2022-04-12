@@ -494,12 +494,37 @@ function x:test-pages-breadcrumb-with-elements() {
 #### Page template about/hac/section.xml
 
 - WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/hac`
+  - GIVEN a URL `$app/about/hac/members`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `About`:      `$app/about`
       `Historical Advisory Committee`:  `$app/about/hac`
       `Members`:    `/about/hac/members`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-hac-section(){
+  let $expected as element(div) := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/about"> About </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/about/hac"> Historical Advisory Committee </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/about/hac/members">  Members  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/about/hac/members')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
       
 #### Page template conferences/conference/section.xml
 
