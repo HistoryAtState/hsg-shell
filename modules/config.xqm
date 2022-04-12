@@ -253,7 +253,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())), map{"duplicates": "use-last"})) },
             "title": "Conferences",
-            "base-path": function($document-id, $section-id) { "conferences" }
+            "base-path": function($document-id, $section-id) { "conferences" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {$config:PUBLICATIONS?frus?breadcrumb-title($parameters)}
         },
         "status-of-the-series": map {
             "title": "Foreign Relations of the United States: Status of the Series - Historical Documents"

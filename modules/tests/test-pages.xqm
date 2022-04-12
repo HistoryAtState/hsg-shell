@@ -534,7 +534,32 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-hac-section(
       `Home`:       `$app`
       `Conferences`:    `$app/conferences`
       `Foreign Economic Policy, 1973-1976`: `$app/conferences/2011-foreign-economic-policy`
-      `Panel Discussion`:   `$app/conferences/2011-foreign-economic-policy/panel`
+      `Panel Discussion`:   `$app/conferences/2011-foreign-economic-policy/panel`      
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-conference-secion(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/conferences"> Conferences </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/conferences/2011-foreign-economic-policy">  Foreign Economic Policy, 1973-1976  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/conferences/2011-foreign-economic-policy/panel">  Panel Discussion  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/conferences/2011-foreign-economic-policy/panel')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 
 ### Page template countries/article.xml
 

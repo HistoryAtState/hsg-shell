@@ -8,19 +8,7 @@
               class="hidden"
               data-template="pages:conference-title"/>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/conferences">Conferences</a>
-                  </li>
-                  <li>
-                     <a href="." class="section" data-template="pages:document-link"/>
-                  </li>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div class="row">
             <div class="hsg-navigation-wrapper">
