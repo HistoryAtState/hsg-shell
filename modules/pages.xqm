@@ -534,10 +534,10 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
   let $page-template := $state?page-template
   let $breadcrumb-title as function(*)? := $config:PUBLICATIONS?($publication-id)?breadcrumb-title
   let $label := 
-      if (exists($breadcrumb-title)) 
-        then $breadcrumb-title($parameters) 
-      else if (doc($page-template)//*[@id eq 'breadcrumb-title'])
+      if (doc($page-template)//*[@id eq 'breadcrumb-title'])
         then doc($page-template)//*[@id eq 'breadcrumb-title']/node()
+      else if (exists($breadcrumb-title)) 
+        then $breadcrumb-title($parameters) 
       else if ($config:PUBLICATIONS?($publication-id)?title)
         then $config:PUBLICATIONS?($publication-id)?title/node()
       else if ($uri eq '/')
