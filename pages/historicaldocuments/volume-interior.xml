@@ -4,22 +4,6 @@
       <div>
          <div class="row">
             <div data-template="pages:breadcrumb"/>
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/historicaldocuments">Historical Documents</a>
-                  </li>
-                  <li class="volume-breadcrumb">
-                     <a data-template="frus:volume-breadcrumb"/>
-                  </li>
-                  <li class="section-breadcrumb">
-                     <a data-template="frus:section-breadcrumb"/>
-                  </li>
-               </ol>
-            </div>
          </div>
          <div class="row">
             <div class="hsg-navigation-wrapper">
