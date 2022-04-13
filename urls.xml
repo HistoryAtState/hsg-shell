@@ -176,9 +176,21 @@
         <with-param name="publication-id" value="archives"/>
       </page-template>
     </step>
+    <step key="country">
+      <page-template href="pages/countries/article.xml">
+        <with-param name="publication-id" value="countries"/>
+        <with-param name="document-id" keyval="country"/>
+      </page-template>
+      <config>
+        <src collection="articles"/>
+      </config>
+    </step>
     <page-template href="pages/countries/index.xml">
       <with-param name="publication-id" value="countries"/>
     </page-template>
+    <config>
+      <src collection="/db/apps/rdcr"/>
+    </config>
   </step>
   <step value="departmenthistory">
     <step value="timeline">

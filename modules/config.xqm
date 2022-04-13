@@ -290,7 +290,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Countries",
-            "base-path": function($document-id, $section-id) { "countries" }
+            "base-path": function($document-id, $section-id) { "countries" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {$config:PUBLICATIONS?frus?breadcrumb-title($parameters)}
         },
         "countries-issues": map {
             "collection": $config:COUNTRIES_ISSUES_COL,
@@ -304,7 +305,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Issues Relevant to U.S. Foreign Policy",
-            "base-path": function($document-id, $section-id) { "countries" }
+            "base-path": function($document-id, $section-id) { "countries" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {$config:PUBLICATIONS?frus?breadcrumb-title($parameters)}
         },
         "archives": map {
             "collection": $config:ARCHIVES_ARTICLES_COL,
@@ -317,7 +319,8 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/countries/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
-            "title": "World Wide Diplomatic Archives Indes"
+            "title": "World Wide Diplomatic Archives Index",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {$config:PUBLICATIONS?frus?breadcrumb-title($parameters)}
         },
         "articles": map {
             "collection": $config:FRUS_HISTORY_ARTICLES_COL,
@@ -481,7 +484,8 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/education/modules/" || string-join(($document-id, $section-id), '#') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
-            "title": "Education Resources"
+            "title": "Education Resources",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {$config:PUBLICATIONS?frus?breadcrumb-title($parameters)}
         },
         "education-modules": map {
             "title": "Curriculum Modules - Education Resources"

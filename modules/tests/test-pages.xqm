@@ -593,7 +593,29 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-conference-s
       `Home`:       `$app`
       `Countries`:  `$app/countries`
       `A Guide to the United States’ History of Recognition, Diplomatic, and Consular Relations, by Country, since 1776: Mali`: `$app/countries/mali`
+:)
 
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-country-article(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+            <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+            <a href="/exist/apps/hsg-shell/countries"> Countries </a>
+        </li>
+        <li>
+            <a href="/exist/apps/hsg-shell/countries/mali">  A Guide to the United States’ History of Recognition,
+                    Diplomatic, and Consular Relations, by Country, since 1776: Mali  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/countries/mali')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 #### Page template countries/issues/article.xml
 
 - WHEN building page breadcrumbs
@@ -603,7 +625,32 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-conference-s
       `Countries`:  `$app/countries`
       `Issues`:     `$app/countries/issues`
       `Issues Relevant to U.S. Foreign Diplomacy: Unification of Italian States`:   `$app/countries/issues/italian-unification`
-      
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-country-issue-article(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries"> Countries </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries/issues"> Issues </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries/issues/italian-unification">  Issues Relevant to U.S. Foreign Diplomacy: Unification of
+                    Italian States  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/countries/issues/italian-unification')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(: 
 #### Page template countries/archives/article.xml
 
 - WHEN building page breadcrumbs
@@ -613,7 +660,31 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-conference-s
       `Countries`:  `$app/countries`
       `Archives`:   `$app/countries/archives`
       `World Wide Diplomatic Archives Index: Angola`:   `$app/countries/archives/angola`
+:)
 
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-country-archive-article(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries"> Countries </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries/archives"> Archives </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries/archives/angola">  World Wide Diplomatic Archives Index: Angola  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/countries/archives/angola')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 #### Page template departmenthistory/buildings/section.xml
 
 - WHEN building page breadcrumbs
@@ -847,7 +918,32 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-timelin
       `Education`:  `$app/education`
       `Curriculum Modules`: `$app/education/modules`
       `Introduction to Curriculum Packet on `A History of Diplomacy`:   `$app/education/modules/history-diplomacy-intro`
+:)
 
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-education-module(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/education"> Education </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/education/modules"> Curriculum Modules </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/education/modules/history-diplomacy-intro">  Introduction to Curriculum Packet on “A History of
+                    Diplomacy”  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/education/modules/history-diplomacy-intro')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 ### Page template historicaldocuments/administrations.xml
 
 - WHEN building page breadcrumbs

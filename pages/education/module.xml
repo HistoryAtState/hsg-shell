@@ -8,22 +8,7 @@
               class="hidden"
               data-template="edu:education-module-title"/>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/education">Education</a>
-                  </li>
-                  <li>
-                     <a href="$app/education/modules">Curriculum Modules</a>
-                  </li>
-                  <li>
-                     <a class="section" href="#" data-template="pages:document-link"/>
-                  </li>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div class="row">
             <div class="hsg-width-two-thirds" id="volume">
