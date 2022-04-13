@@ -529,9 +529,19 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
       '/exist/apps/hsg-shell'
     }
   let $full-url := $app-root || $uri
-  let $parameters as map(*)? := $state?parameters
-  let $publication-id := $parameters?publication-id
   let $page-template := $state?page-template
+  let $parameters as map(*)? := 
+    map:merge(
+      (
+        $state?parameters,
+        for $param in doc($page-template)//*[@data-template eq 'pages:breadcrumb']/@*[starts-with(name(.), 'data-template-')]
+        return map{
+          name($param) => substring-after('data-template-'):
+          string($param)
+        }
+      ), map{'duplicates': 'use-last'}
+    )
+  let $publication-id := $parameters?publication-id
   let $breadcrumb-title as function(*)? := $config:PUBLICATIONS?($publication-id)?breadcrumb-title
   let $label := 
       if (doc($page-template)//*[@id eq 'breadcrumb-title'])

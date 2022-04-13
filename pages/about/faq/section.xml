@@ -6,21 +6,7 @@
       <div>
          <div id="static-title" class="hidden" data-template="pages:faq-title"/>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/about">About</a>
-                  </li>
-                  <li>
-                     <a href="$app/about/faq">Frequently Asked Questions</a>
-                  </li>
-                  <li data-template="pages:deep-section-breadcrumbs"
-                      data-template-truncate="true"/>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb" data-template-truncate="true"/>
          </div>
          <div class="row">
             <div class="hsg-navigation-wrapper">

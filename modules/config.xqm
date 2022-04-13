@@ -186,6 +186,7 @@ declare variable $config:PUBLICATIONS :=
                 let $publication-id as xs:string? := $parameters?publication-id
                 let $document-id as xs:string? := $parameters?document-id
                 let $section-id as xs:string? := $parameters?section-id
+                let $truncate as xs:boolean? := $parameters?truncate eq 'true'
                 return 
                   if (exists($document-id)) then 
                     if (exists($section-id)) then 
@@ -210,7 +211,16 @@ declare variable $config:PUBLICATIONS :=
                             )
                           else (:$div not instance of element(tei:pb):) (
                             (: TODO(TFJH): strip footnotes off of chapter titles; e.g. /historicaldocuments/frus1894/ch25 :)
-                            $div/tei:head[1]
+                            if ($truncate) then
+                             let $words := tokenize($div/tei:head/string(), '\s+')
+                             let $max-word-count := 8
+                             return
+                               if (count($words) gt $max-word-count) then
+                                 concat(string-join(subsequence($words, 1, $max-word-count), ' '), '...')
+                               else
+                                 $div/tei:head/string()
+                            else
+                             $div/tei:head/string()
                           )
                         )
                     else (: not exists($section-id) :) (
@@ -443,7 +453,8 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
-            "title": "FAQ - About Us"
+            "title": "FAQ - About Us",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {$config:PUBLICATIONS?frus?breadcrumb-title($parameters)}
         },
         "hac": map {
             "collection": $config:HAC_COL,
