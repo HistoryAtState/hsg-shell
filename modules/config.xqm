@@ -181,8 +181,8 @@ declare variable $config:PUBLICATIONS :=
                 function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Historical Documents",
             "base-path": function($document-id, $section-id) { "frus/" || $document-id },
-            "breadcrumb-title":
-              function($parameters as map(*)) as xs:string? { 
+            "breadcrumb-title": 
+              function($parameters as map(*)) as xs:string? {
                 let $publication-id as xs:string? := $parameters?publication-id
                 let $document-id as xs:string? := $parameters?document-id
                 let $section-id as xs:string? := $parameters?section-id
@@ -413,7 +413,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Short History - Department History",
-            "base-path": function($document-id, $section-id) { "short-history" }
+            "base-path": function($document-id, $section-id) { "short-history" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {$config:PUBLICATIONS?frus?breadcrumb-title($parameters)}
         },
         "timeline": map {
             "collection": $config:ADMINISTRATIVE_TIMELINE_COL,
@@ -428,7 +429,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Administrative Timeline - Department History",
-            "base-path": function($document-id, $section-id) { "timeline" }
+            "base-path": function($document-id, $section-id) { "timeline" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {$config:PUBLICATIONS?frus?breadcrumb-title($parameters)}
         },
         "faq": map {
             "collection": $config:FAQ_COL,

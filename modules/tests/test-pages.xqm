@@ -671,13 +671,62 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `Short History`:  `$app/departmenthistory/short-history`
       `Superpowers Collide, 1961-1981`: `$app/departmenthistory/short-history/superpowers`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-short-history-section(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/short-history"> Short History </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/short-history/superpowers">  Superpowers Collide, 1961-1981  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/short-history/superpowers')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
   - GIVEN a URL `$app/departmenthistory/short-history/cubanmissile`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Short History`:  `$app/departmenthistory/short-history`
-      `Superpowers Collide, 1961-1981`: `$app/departmenthistory/short-history/superpowers`
       `The Cuban Missile Crises`:   `$app/departmenthistory/short-history/cubanmissile`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-short-history-subsection(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/short-history"> Short History </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/short-history/cubanmissile">  The Cuban Missile Crises  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/short-history/cubanmissile')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 
 #### Page template departmenthistory/timeline/section.xml
 
@@ -688,7 +737,31 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `Administrative Timeline`:    `/$app/departmenthistory/timeline`
       `1970-1979`:  `/$app/departmenthistory/timeline/1970-1979`
+:)
 
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-timeline-section(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/timeline"> Administrative Timeline </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/timeline/1970-1979">  1970–1979  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/timeline/1970-1979')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 ##### Page template departmenthistory/travels/president/person-or-country.xml
 
 - WHEN building page breadcrumbs
@@ -838,7 +911,8 @@ function x:test-pages-breadcrumb-frus-history-section(){
       `Historical Documents`:   `$app/historicaldocuments`
       `Toward “Thorough, Accurate, and Reliable”: A History of the Foreign Relations of the United States Series`:   `$app/historicaldocuments/frus-history`
       `Research`:   `$app/historicaldocuments/frus-history/research`
-      `A Good Year's Work`: `$app/historicaldocuments/frus-history/research/a-good-years-work`:)
+      `A Good Year's Work`: `$app/historicaldocuments/frus-history/research/a-good-years-work`
+:)
 
 declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-history-articles(){
   let $expected := 
