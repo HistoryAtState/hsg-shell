@@ -836,9 +836,37 @@ function x:test-pages-breadcrumb-frus-history-section(){
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+      `Toward “Thorough, Accurate, and Reliable”: A History of the Foreign Relations of the United States Series`:   `$app/historicaldocuments/frus-history`
       `Research`:   `$app/historicaldocuments/frus-history/research`
-      `A Good Year's Work`: `$app/historicaldocuments/frus-history/research/a-good-years-work`
+      `A Good Year's Work`: `$app/historicaldocuments/frus-history/research/a-good-years-work`:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-history-articles(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">  Toward “Thorough, Accurate, and Reliable”: A History of the
+                        Foreign Relations of the United States Series  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/research"> Research </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/research/a-good-years-work">  A Good Year’s Work  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus-history/research/a-good-years-work')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 
 ##### Page template historicaldocuments/pre-1861/serial-set/browse.xml
 

@@ -320,7 +320,14 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/frus-history/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
-            "base-path": function($document-id, $section-id) { "frus150" }
+            "base-path": function($document-id, $section-id) { "frus150" },
+            "breadcrumb-title": 
+              function($parameters as map(*)) as xs:string? {
+                let $publication-id as xs:string? := $parameters?publication-id
+                let $document-id as xs:string? := $parameters?article-id
+                let $article := $config:PUBLICATIONS?($publication-id)?select-document($document-id)
+                return $article//tei:title[@type='short']/string()
+              }
         },
         "about": map {
             "title": "About Us"

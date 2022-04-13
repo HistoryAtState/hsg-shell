@@ -51,6 +51,7 @@
       <step value="research">
         <step key="article-id">
           <page-template href="pages/historicaldocuments/frus-history/research/article.xml">
+            <with-param name="publication-id" value="articles"/>
             <with-param name="article-id" keyval="article-id"/>
           </page-template>
           <config>
@@ -59,10 +60,24 @@
         </step>
         <page-template href="pages/historicaldocuments/frus-history/research/index.xml"/>
       </step>
+      <step key="section">
+        <page-template href="pages/historicaldocuments/frus-history/monograph-interior.xml">
+          <with-param name="publication-id" value="frus-history-monograph"/>
+          <with-param name="document-id" value="frus-history"/>
+          <with-param name="section-id" keyval="section"/>
+          <with-param name="requested-url" select="site:get-url()"/>
+        </page-template>
+        <config>
+          <src collection="/db/apps/frus-history/monograph"/>
+        </config>
+      </step>
       <page-template href="pages/historicaldocuments/frus-history/index.xml">
         <with-param name="publication-id" value="frus-history-monograph"/>
         <with-param name="document-id" value="frus-history"/>
       </page-template>
+      <config>
+        <src collection="/db/apps/frus-history/monograph"/>
+      </config>
     </step>
     <step value="quarterly-releases">
       <step key="announcement">
@@ -221,9 +236,9 @@
           <with-param name="publication-id" value="secretaries"/>
         </page-template>
       </step>
-      <step value="principles-chiefs">
+      <step value="principals-chiefs">
         <page-template href="pages/departmenthistory/people/principals-chiefs.xml">
-          <with-param name="publication-id" value="principles-chiefs"/>
+          <with-param name="publication-id" value="principals-chiefs"/>
         </page-template>
       </step>
       <step value="by-name">
