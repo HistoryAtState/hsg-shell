@@ -27,7 +27,9 @@
           <page-template href="pages/historicaldocuments/pre-1861/serial-set/all.xml"/>
         </step>
         <step value="browse">
-          <page-template href="pages/historicaldocuments/pre-1861/serial-set/browse.xml"/>
+          <page-template href="pages/historicaldocuments/pre-1861/serial-set/browse.xml">
+            <with-param name="publication-id" value="serial-set"/>
+          </page-template>
         </step>
         <page-template href="pages/historicaldocuments/pre-1861/serial-set/index.xml"/>
       </step>

@@ -1072,8 +1072,37 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-history
       `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
       `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
       `Europe`:     `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe`
+:)
+
+declare
+%test:pending('testing Url parameters not possible at this time; implement test when/if URI reimplemented')
+%test:assertEquals('true') function x:test-pages-breadcrumb-serial-set-region(){
+  let $expected := ''
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/pre-1861/serial-set/browse?region=Europe')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:   
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe&subject=France`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
+      `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
       `France`:     `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe&subject=France`
-   
+:)
+
+declare
+%test:pending('testing Url parameters not possible at this time; implement test when/if URI reimplemented')
+%test:assertEquals('true') function x:test-pages-breadcrumb-serial-set-subject(){
+  let $expected := ''
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/pre-1861/serial-set/browse?region=Europe&amp;subject=France')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(: 
 ### Page template milestones/chapter/index.xml
 
 - WHEN building page breadcrumbs

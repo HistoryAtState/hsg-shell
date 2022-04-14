@@ -533,6 +533,11 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
   let $parameters as map(*)? := 
     map:merge(
       (
+        let $param-names as xs:string* := try {request:get-parameter-names()} catch err:XPDY0002 {()}
+        for $param-name in $param-names
+        return map{
+          $param-name: request:get-parameter($param-name, '')
+        },
         $state?parameters,
         for $param in doc($page-template)//*[@data-template eq 'pages:breadcrumb']/@*[starts-with(name(.), 'data-template-')]
         return map{

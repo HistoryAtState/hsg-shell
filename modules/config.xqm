@@ -564,6 +564,16 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:VIEWS_FROM_EMBASSY_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/wwi" },
             "title": "World War I and the Department - Department History"
+        },
+        "serial-set": map{
+          "breadcrumb-title": function($parameters as map(*)) as xs:string* {
+            let $subject as xs:string? := $parameters?subject
+            let $region as xs:string? := $parameters?region
+            return
+              if (exists($subject)) then $subject
+              else if (exists($region)) then $region
+              else ()
+          }
         }
     };
 
