@@ -534,7 +534,7 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
     map:merge(
       (
         let $param-names as xs:string* := try {request:get-parameter-names()} catch err:XPDY0002 {()}
-        for $param-name in $param-names
+        for $param-name in $param-names[. = ('region', 'subject')] (: filter necessary to avoid e.g. section-id being over-written :)
         return map{
           $param-name: request:get-parameter($param-name, '')
         },
@@ -549,20 +549,20 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
   let $publication-id := $parameters?publication-id
   let $breadcrumb-title as function(*)? := $config:PUBLICATIONS?($publication-id)?breadcrumb-title
   let $label := 
-      if (doc($page-template)//*[@id eq 'breadcrumb-title'])
+      if ($uri eq '/')
+        then "Home"
+      else if (doc($page-template)//*[@id eq 'breadcrumb-title'])
         then doc($page-template)//*[@id eq 'breadcrumb-title']/node()
       else if (exists($breadcrumb-title)) 
         then $breadcrumb-title($parameters) 
       else if ($config:PUBLICATIONS?($publication-id)?title)
-        then $config:PUBLICATIONS?($publication-id)?title/node()
-      else if ($uri eq '/')
-        then "Home"
-      else
+        then $config:PUBLICATIONS?($publication-id)?title
+      else 
         "Office of the Historian"
   return
     <li>
       <a href="{$full-url}">{" ", $label, " "
-      (:,  serialize($parameters, map{'method':'adaptive', 'indent':true()}):)
+      (:,  serialize($state, map{'method':'adaptive', 'indent':true()}):)
       }</a>
     </li>
 };

@@ -964,10 +964,29 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-education-mo
       `Persons`:    `$app/historicaldocuments/frus1981-88v11/persons`  
 :)
 
-declare %test:assertEquals('<div class="hsg-breadcrumb-wrapper"><ol class="breadcrumb"><li><a href="/exist/apps/hsg-shell/">  Home  </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1981-88v11">  Foreign Relations of the United States, 1981–1988, Volume XI,
-                    START I  </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1981-88v11/persons">  Persons  </a></li></ol></div>')
+declare %test:assertEquals('true')
 function x:test-pages-breadcrumb-frus(){
-  pages:generate-breadcrumbs('/historicaldocuments/frus1981-88v11/persons')
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1981-88v11">  Foreign Relations of the United States, 1981–1988, Volume XI,
+                    START I  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1981-88v11/persons">  Persons  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus1981-88v11/persons')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+  
 };
 
 (: footnotes in chapter titles to be suppressed :)
@@ -1003,10 +1022,28 @@ function x:test-pages-breadcrumb-frus-document-no(){
       
 :)
 
-declare %test:assertEquals('<div class="hsg-breadcrumb-wrapper"><ol class="breadcrumb"><li><a href="/exist/apps/hsg-shell/">  Home  </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">  Toward “Thorough, Accurate, and Reliable”: A History of the
-                        Foreign Relations of the United States Series  </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/foreword">  Foreword  </a></li></ol></div>') 
+declare %test:assertEquals('true') 
 function x:test-pages-breadcrumb-frus-history-section(){
-  pages:generate-breadcrumbs('historicaldocuments/frus-history/foreword')
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">  Toward “Thorough, Accurate, and Reliable”: A History of the
+                        Foreign Relations of the United States Series  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/foreword">  Foreword  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus-history/foreword')
+  return if (deep-equal($expected, $result)) then 'true' else $result
 };
 
 (:
@@ -1077,7 +1114,16 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-history
 declare
 %test:pending('testing Url parameters not possible at this time; implement test when/if URI reimplemented')
 %test:assertEquals('true') function x:test-pages-breadcrumb-serial-set-region(){
-  let $expected := ''
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li><a href="/exist/apps/hsg-shell/">  Home  </a></li>
+            <li><a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a></li>
+            <li><a href="/exist/apps/hsg-shell/historicaldocuments/pre-1861"> Pre-1861 U.S. foreign relations materials </a></li>
+            <li><a href="/exist/apps/hsg-shell/historicaldocuments/pre-1861/serial-set"> U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set </a></li>
+            <li><a href="/exist/apps/hsg-shell/historicaldocuments/pre-1861/serial-set/browse">  France  </a></li>
+        </ol>
+    </div>
   let $result := pages:generate-breadcrumbs('/historicaldocuments/pre-1861/serial-set/browse?region=Europe')
   return if (deep-equal($expected, $result)) then 'true' else $result
 };
