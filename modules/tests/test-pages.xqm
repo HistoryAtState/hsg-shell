@@ -1058,6 +1058,36 @@ function x:test-pages-breadcrumb-frus-history-section(){
       `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
       `Documents`:  `$app/historicaldocuments/frus-history/documents`
       `Telegram From Embassy Athens, 2002`: `$app/historicaldocuments/frus-history/documents/2002-08-19-athens-02867`
+:)
+
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-frus-documents(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">  Toward “Thorough, Accurate, and Reliable”: A History of the
+                    Foreign Relations of the United States Series  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/documents"> Documents </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/documents/2002-08-19-athens-02867">  Telegram From Embassy Athens, 2002  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus-history/documents/2002-08-19-athens-02867')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 
 #### Page template historicaldocuments/frus-history/research/article.xml
 

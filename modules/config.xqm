@@ -568,6 +568,12 @@ declare variable $config:PUBLICATIONS :=
                 )
               }
         },
+        "frus-history-documents": map {
+          "select-document": function($document-id) { doc($config:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml") },
+          "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+              config:tei-short-breadcrumb-title($parameters?publication-id, $parameters?article-id)
+            }
+        },
         "vietnam-guide": map {
             "collection": $config:VIETNAM_GUIDE_COL,
             "document-last-modified": function($document-id) { xmldb:last-modified($config:VIETNAM_GUIDE_COL, $document-id || '.xml') },  
