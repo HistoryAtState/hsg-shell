@@ -40,6 +40,7 @@
         <step key="doc-id">
           <page-template href="pages/historicaldocuments/frus-history/documents/document.xml">
             <with-param name="document-id" keyval="doc-id"/>
+            <with-param name="publication-id" value="frus-history-documents"/>
           </page-template>
           <config>
             <src collection="/db/apps/frus-history/documents"/>

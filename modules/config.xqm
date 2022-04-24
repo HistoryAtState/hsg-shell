@@ -571,7 +571,7 @@ declare variable $config:PUBLICATIONS :=
         "frus-history-documents": map {
           "select-document": function($document-id) { doc($config:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml") },
           "breadcrumb-title": function($parameters as map(*)) as xs:string? {
-              config:tei-short-breadcrumb-title($parameters?publication-id, $parameters?article-id)
+              config:tei-short-breadcrumb-title($parameters?publication-id, $parameters?document-id)
             }
         },
         "vietnam-guide": map {
