@@ -374,7 +374,10 @@ declare variable $config:PUBLICATIONS :=
             "title": "Principal Officers and Chiefs of Mission Chronological Listing - Department History"
         },
         "people-by-role": map {
-            "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History"
+            "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                collection('/db/apps/pocom/positions-principals')/principal-position[id eq $parameters?role-id]/names/plural
+              }
         },
         "tags": map {
             "title": "Tags"

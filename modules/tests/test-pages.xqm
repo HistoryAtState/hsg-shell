@@ -756,7 +756,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `Principal Officers`:    `$app/departmenthistory`
       `Secretaries of State`:  `$app/departmenthistory/people/principalofficers/secretary`
+:)
 
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-pocom-role(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/principalofficers"> Principal Officers </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/principalofficers/secretary">  Secretaries of State  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/principalofficers/secretary')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 #### Page template departmenthistory/short-history/section.xml
 
 - WHEN building page breadcrumbs

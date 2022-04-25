@@ -8,24 +8,7 @@
             <span data-template="pocom:role-label" data-template-form="plural"/> - Principal Officers - People - Department
             History</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory">Department History</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory/people">People</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory/people/principalofficers">Principal
-                            Officers</a>
-                  </li>
-                  <li data-template="pocom:role-breadcrumb"/>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div class="row">
             <div class="hsg-width-two-thirds">
