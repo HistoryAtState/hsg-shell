@@ -135,6 +135,7 @@
     <step key="administration">
       <page-template href="pages/historicaldocuments/administrations.xml">
         <with-param name="administration-id" keyval="administration"/>
+        <with-param name="publication-id" value="frus-administration"/>
       </page-template>
       <config>
         <src doc="/db/apps/frus/code-tables/administration-code-table.xml" xq="/code-table/items/item/value"/>

@@ -952,6 +952,28 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-education-mo
       `Home`:       `$app`
       `Historical Documents`:   `$app/historicaldocuments`
       `Woodrow Wilson Administration (1913-1921)`:    `$app/historicaldocuments/wilson`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-administration(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments/wilson">  Woodrow Wilson Administration (1913–1921)  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/wilson')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 
 ### Page template historicaldocuments/volume-interior.xml
 

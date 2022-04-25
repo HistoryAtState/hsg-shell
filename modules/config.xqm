@@ -191,6 +191,15 @@ declare variable $config:PUBLICATIONS :=
                 )
               }        
         },
+        "frus-administration": map {
+          "select-section": function($administration-id) {
+              doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $administration-id]
+            },
+          "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+              let $admin := $config:PUBLICATIONS?frus-administration?select-section($parameters?administration-id)
+              return $admin/label/string()
+            }
+        },
         "buildings": map {
             "collection": $config:BUILDINGS_COL,
             "document-last-modified": function($document-id) { xmldb:last-modified($config:BUILDINGS_COL, $document-id || '.xml') },  
