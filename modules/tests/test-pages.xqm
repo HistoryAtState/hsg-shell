@@ -693,9 +693,34 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-country-arch
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Buildings`:  `$app/departmenthistory/buildings`
+      `Introduction`: `$app/departmenthistory/buildings/intro`
 
-Note that this page doesn't include a 'local' permalink breadcrumb.
+Note that this page didn't originally include a 'local' permalink breadcrumb.
+:)
 
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-building-section(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/buildings"> Buildings </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/buildings/intro">  Introduction  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/buildings/intro')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 #### Page template departmenthistory/people/person.xml
 
 - WHEN building page breadcrumbs

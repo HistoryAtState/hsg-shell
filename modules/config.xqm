@@ -212,7 +212,10 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Buildings - Department History",
-            "base-path": function($document-id, $section-id) { "buildings" }
+            "base-path": function($document-id, $section-id) { "buildings" },
+            "breadcrumb-title": function($parameters as map(*)) {
+                config:tei-full-breadcrumb-title-from-section('buildings', 'buildings', $parameters?section-id, false())
+              }
         },
         "historicaldocuments": map {
             "title": "Historical Documents"
