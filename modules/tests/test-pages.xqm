@@ -705,7 +705,31 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `People`:     `$app/departmenthistory/people`
       `Roger Hilsman Jr.`:  `$app/departmenthistory/people/hilsman-roger-jr`
+:)
 
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/hilsman-roger-jr">  Roger Hilsman Jr.  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/hilsman-roger-jr')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 ##### Page template departmenthistory/people/by-name/letter.xml
 
 - WHEN building page breadcrumbs
@@ -738,6 +762,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
       `Fiji`:       `$app/departmenthistory/people/chiefsofmission/fiji`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-country(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/chiefsofmission"> Chiefs of Mission </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/chiefsofmission/fiji">  Fiji  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/chiefsofmission/fiji')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
   - GIVEN a URL `$app/departmenthistory/people/chiefsofmission/representative-to-au`
     -THEN return a breadcrumb list:
       `Home`:       `$app`
@@ -745,6 +797,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
       `Representatives of the U.S.A. to the African Union`: `$app/departmenthistory/people/chiefsofmission/representative-to-au`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-org(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/chiefsofmission"> Chiefs of Mission </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/chiefsofmission/representative-to-au">  Representatives of the U.S.A. to the African Union  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/chiefsofmission/representative-to-au')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 
 ##### Page template departmenthistory/people/principalofficers/by-role-id.xml
 

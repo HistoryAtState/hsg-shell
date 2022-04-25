@@ -359,7 +359,20 @@ declare variable $config:PUBLICATIONS :=
                 (: Called to transform content based on the odd using tei simple pm :)
                 function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "People - Department History",
-            "base-path": function($document-id, $section-id) { "secretaries" }
+            "base-path": function($document-id, $section-id) { "secretaries" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                let $role as element(org-mission)? := collection('/db/apps/pocom/missions-orgs')/org-mission[id eq $parameters?role-or-country-id]
+                let $country as element(country)? := collection('/db/apps/gsh/data/countries-old')/country[id eq $parameters?role-or-country-id]
+                let $person as element(person)? := collection('/db/apps/pocom/people')/person[id eq $parameters?person-id]
+                return
+                  if (exists($role)) then
+                    $role/names/plural
+                  else if (exists($country)) then
+                    $country/label
+                  else if (exists($person)) then
+                    $person/persName/string-join((forename, surname, genName), ' ')
+                  else ()
+              }
         },
         "secretaries": map {
             "title": "Biographies of the Secretaries of State - Department History"
