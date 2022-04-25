@@ -7,20 +7,7 @@
          <span data-template="visits:page-title"/> - Visits by
             Foreign Leaders - Department History</div>
       <div class="row">
-         <div class="hsg-breadcrumb-wrapper">
-            <ol class="breadcrumb" data-template="app:fix-links">
-               <li>
-                  <a href="$app">Home</a>
-               </li>
-               <li>
-                  <a href="$app/departmenthistory">Department History</a>
-               </li>
-               <li>
-                  <a href="$app/departmenthistory/visits">Visits by Foreign Leaders</a>
-               </li>
-               <li data-template="visits:breadcrumb"/>
-            </ol>
-         </div>
+         <div data-template="pages:breadcrumb"/>
       </div>
       <div class="row">
          <div class="hsg-width-two-thirds">

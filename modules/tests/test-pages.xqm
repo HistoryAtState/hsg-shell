@@ -1089,12 +1089,64 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-timelin
       `Department History`:  `$app/departmenthistory`
       `Visits by Foreign Leaders`:  `$app/departmenthistory/visits`
       `Cuba`:       `$app/departmenthistory/visits/cuba`
+:)
+
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-visits-country(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/visits"> Visits by Foreign Leaders </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/visits/cuba">  Cuba  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/visits/cuba')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:     
   - GIVEN a URL `$app/departmenthistory/visits/1979`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Visits by Foreign Leaders`:  `$app/departmenthistory/visits`
       `1979`:       `$app/departmenthistory/visits/1979`
+:)
+
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-visits-year(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/visits"> Visits by Foreign Leaders </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/visits/1979">  1979  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/visits/1979')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:     
 
 #### Page template education/module.xml
 

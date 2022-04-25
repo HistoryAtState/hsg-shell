@@ -418,7 +418,16 @@ declare variable $config:PUBLICATIONS :=
             "title": "Travels of the Secretary of State - Department History"
         },
         "visits": map {
-            "title": "Visits of Foreign Leaders and Heads of State - Department History"
+            "title": "Visits of Foreign Leaders and Heads of State - Department History",
+            "breadcrumb-title": 
+              function($parameters as map(*)) as xs:string? {
+                let $key := $parameters?country-or-year
+                let $country as element()? := collection('/db/apps/gsh/data/countries-old')//country[id eq $key]
+                return if (exists($country)) then
+                  $country/label/string()
+                else (: $key is a year :)
+                  $key
+              }
         },
         "wwi": map {
             "title": "World War I - Department History"
