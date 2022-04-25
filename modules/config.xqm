@@ -381,7 +381,11 @@ declare variable $config:PUBLICATIONS :=
             "title": "Principal Officers and Chiefs of Mission - Department History"
         },
         "people-by-alpha": map {
-            "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History"
+            "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History",
+            "breadcrumb-title": 
+              function($parameters as map(*)) as xs:string? {
+                  "Starting with " || upper-case($parameters?letter)
+                }
         },
         "people-by-year": map {
             "title": "Principal Officers and Chiefs of Mission Chronological Listing - Department History",

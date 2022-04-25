@@ -740,7 +740,34 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-person(){
       `People`:     `$app/departmenthistory/people`
       `By Name`:    `$app/departmenthistory/people/by-name`
       `Starting with T`:    `$app/departmenthistory/people/by-name/t`
+:)
 
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-letter(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/by-name"> By Name </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/by-name/t">  Starting with T  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/by-name/t')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 ##### Page template departmenthistory/people/by-year/year.xml
 
 - WHEN building page breadcrumbs
