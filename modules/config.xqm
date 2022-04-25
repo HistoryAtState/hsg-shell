@@ -429,7 +429,12 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Milestones in the History of U.S. Foreign Relations",
-            "base-path": function($document-id, $section-id) { "milestones" }
+            "base-path": function($document-id, $section-id) { "milestones" },
+            "breadcrumb-title": function($parameters as map(*)) {
+                if (exists($parameters?section-id)) then
+                  $config:PUBLICATIONS?($parameters?publication-id)?select-section($parameters?document-id, $parameters?section-id)/tei:head[1]/string()
+                else $parameters?document-id
+              }
         },
         "short-history": map {
             "collection": $config:SHORT_HISTORY_COL,

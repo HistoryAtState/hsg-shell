@@ -1371,7 +1371,29 @@ declare
       `Home`:       `$app`
       `Milestones`: `$app/milestones`
       `1977-1980`:  `$app/milestones/1977-1980`
-      
+:)
+
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-milestone-chapter(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/milestones"> Milestones </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/milestones/1977-1980">  1977-1980  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/milestones/1977-1980')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:   
 ### Page template milestones/chapter/article.xml
 
 - WHEN building page breadcrumbs
@@ -1381,7 +1403,32 @@ declare
       `Milestones`: `$app/milestones`
       `1977-1980`:  `$app/milestones/1977-1980`
       `China Policy`:   `$app/milestones/1977-1980/china-policy`
-     
+:)
+
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-milestone-article(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/milestones"> Milestones </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/milestones/1977-1980">  1977-1980  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/milestones/1977-1980/china-policy">  China Policy  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/milestones/1977-1980/china-policy')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:     
 ### Page template tags/browse.xml
 
 - WHEN building page breadcrumbs
