@@ -403,7 +403,10 @@ declare variable $config:PUBLICATIONS :=
               }
         },
         "tags": map {
-            "title": "Tags"
+            "title": "Tags",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                collection('/db/apps/tags/taxonomy')//*[id eq $parameters?tag-id]/label/string()
+              }
         },
         "travels": map {
             "title": "Presidents and Secretaries of State Foreign Travels - Department History"

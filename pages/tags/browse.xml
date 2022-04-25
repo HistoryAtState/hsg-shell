@@ -5,19 +5,7 @@
         data-template-at="content">
       <div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/tags">Tags</a>
-                  </li>
-                  <li>
-                     <a href="$app/tags" data-template="tags:get-link"/>
-                  </li>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div class="row">
             <div class="hsg-width-two-thirds" id="volume">

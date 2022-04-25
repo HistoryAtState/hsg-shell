@@ -1464,3 +1464,23 @@ function x:test-pages-breadcrumb-milestone-article(){
       `Clay, Henry`:    `$app/tags/clay-henry`
       
 :)
+
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-tags(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/tags"> Tags </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/tags/clay-henry">  Clay, Henry  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/tags/clay-henry')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
