@@ -30,7 +30,7 @@
                </div>
             </div>
             <!-- TOC Sidebar -->
-            <aside class="hsg-width-one-third">
+            <aside class="hsg-width-sidebar">
                 <div class="hsg-panel" data-template="app:fix-links">
                     <div class="hsg-panel-heading">
                         <h2 class="hsg-sidebar-title">Periods</h2>
