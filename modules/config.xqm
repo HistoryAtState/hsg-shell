@@ -412,10 +412,16 @@ declare variable $config:PUBLICATIONS :=
             "title": "Presidents and Secretaries of State Foreign Travels - Department History"
         },
         "travels-president": map {
-            "title": "Travels of the President - Department History"
+            "title": "Travels of the President - Department History",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string?{
+                config:visits-breadcrumb-title($parameters?person-or-country-id, $config:TRAVELS_COL||"/president-travels")
+              }
         },
         "travels-secretary": map {
-            "title": "Travels of the Secretary of State - Department History"
+            "title": "Travels of the Secretary of State - Department History",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string?{
+                config:visits-breadcrumb-title($parameters?person-or-country-id, $config:TRAVELS_COL||"/secretary-travels")
+              }
         },
         "visits": map {
             "title": "Visits of Foreign Leaders and Heads of State - Department History",
@@ -868,4 +874,11 @@ return
        $div/tei:head/string()
     )
   )
+};
+
+declare function config:visits-breadcrumb-title($id as xs:string, $collection as xs:string) as xs:string? {
+  (
+    (collection($collection)//trip[@who eq $id])[1]/name, 
+    collection('/db/apps/gsh/data/territories')/territory[id eq $id]/short-form-name
+  )[1]/string()
 };
