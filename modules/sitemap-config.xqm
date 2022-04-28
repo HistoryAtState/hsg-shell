@@ -7,6 +7,7 @@ import module namespace util="http://exist-db.org/xquery/util";
 declare namespace u="http://www.sitemaps.org/schemas/sitemap/0.9";
 
 declare variable $site:debug as xs:boolean := true();
+declare variable $site:base-url := "https://history.state.gov/";
 
 (: A helper function for running tests on annotations :)
 declare
@@ -198,7 +199,7 @@ function site:sitemap-root($root as element(), $state as map(*)){
         let $_ := xmldb:store($sitemap-dir, 'sitemap'||$group||'.xml', $sitemap)
         return
           <sitemap xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-            <loc>sitemap{$group}.xml</loc>
+            <loc>{$site:base-url}sitemap{$group}.xml</loc>
           </sitemap>
       }
     </sitemapindex>
@@ -221,8 +222,8 @@ function site:sitemap-page-template($page-template as element(site:page-template
   let $lastmod :=  site:last-modified-from-urls((resolve-uri($page-template-href, base-uri($page-template)), $filepaths))
   return 
     <url xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      <loc xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{$url}</loc>
-      <lastmod xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{$lastmod}</lastmod>
+      <loc>{$site:base-url}{$url}</loc>
+      <lastmod>{$lastmod}</lastmod>
     </url>
 };
 
