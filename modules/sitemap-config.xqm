@@ -8,6 +8,7 @@ declare namespace u="http://www.sitemaps.org/schemas/sitemap/0.9";
 
 declare variable $site:debug as xs:boolean := true();
 declare variable $site:config as element(site:root) := doc('/db/apps/hsg-shell/urls.xml')/*;
+declare variable $site:base-url := "https://history.state.gov/";
 
 (: A helper function for running tests on annotations :)
 declare
@@ -178,30 +179,31 @@ function site:sitemap-root($root as element(), $state as map(*)){
       'sitemap',
       site:state-config-merge($state, site:get-config($root, $state))
     )
+  let $maxurls := 10000
   let $result := 
-    if (count($urls) lt 10000)
+    if (count($urls) lt $maxurls)
     then
-      <u:urlset>
+      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         {$urls}
-      </u:urlset>
+      </urlset>
     else
-    <u:sitemapindex>
+    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       {
         for $url-group at $count in $urls
-        let $group := ($count - ($count mod 10000)) div 10000
+        let $group := ($count - ($count mod $maxurls)) div $maxurls
         group by $group
         order by $group
         let $sitemap := 
-          <u:urlset>
+          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
             {$url-group}
-          </u:urlset>
+          </urlset>
         let $_ := xmldb:store($sitemap-dir, 'sitemap'||$group||'.xml', $sitemap)
         return
-          <u:sitemap>
-            <loc>sitemap{$group}.xml</loc>
-          </u:sitemap>
+          <sitemap xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            <loc>{$site:base-url}sitemap{$group}.xml</loc>
+          </sitemap>
       }
-    </u:sitemapindex>
+    </sitemapindex>
   let $_ := site:log('SMG: Completed sitemap generation')
   return xmldb:store($sitemap-dir, 'sitemap.xml', $result)
 };
@@ -220,10 +222,10 @@ function site:sitemap-page-template($page-template as element(site:page-template
   let $page-template-href := site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $urls?($url)?keys))
   let $lastmod :=  site:last-modified-from-urls((resolve-uri($page-template-href, base-uri($page-template)), $filepaths))
   return 
-    <u:url>
-      <u:loc>{$url}</u:loc>
-      <u:lastmod>{$lastmod}</u:lastmod>
-    </u:url>
+    <url xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <loc>{$site:base-url}{$url}</loc>
+      <lastmod>{$lastmod}</lastmod>
+    </url>
 };
 
 declare function site:last-modified-from-urls($urls as xs:string*) as xs:dateTime? {
