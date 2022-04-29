@@ -519,7 +519,11 @@ declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
   </div>
 };
 
-declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)*{
+declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)*{ 
+    <li>{pages:generate-breadcrumb-link($state)}</li>
+};
+
+declare function pages:generate-breadcrumb-link($state as map(*)) as element(a)*{
   let $uri := $state?current-url
   let $app-root := 
     try {$app:APP_ROOT} 
@@ -529,6 +533,12 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
       '/exist/apps/hsg-shell'
     }
   let $full-url := $app-root || $uri
+  return
+    <a href="{$full-url}">{" ", pages:generate-breadcrumb-label($state), " "}</a>
+};
+
+declare function pages:generate-breadcrumb-label($state as map(*)) {
+  let $uri := $state?current-url
   let $page-template := $state?page-template
   let $parameters as map(*)? := 
     map:merge(
@@ -559,12 +569,10 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
         then $config:PUBLICATIONS?($publication-id)?title
       else 
         "Office of the Historian"
-  return
-    <li>
-      <a href="{$full-url}">{" ", $label, " "
-      (:,  serialize($state, map{'method':'adaptive', 'indent':true()}):)
-      }</a>
-    </li>
+  return (
+    $label
+    (:,  serialize($state, map{'method':'adaptive', 'indent':true()}):)
+  )
 };
 
 declare function pages:app-root($node as node(), $model as map(*)) {
