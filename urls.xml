@@ -21,19 +21,11 @@
     <fwd url="/resources/sitemaps/{$site:key?sitemap}"/>
   </step>
   <step value="historicaldocuments">
-    <step value="pre-1861">
-      <step value="serial-set">
-        <step value="all">
-          <page-template href="pages/historicaldocuments/pre-1861/serial-set/all.xml"/>
-        </step>
-        <step value="browse">
-          <page-template href="pages/historicaldocuments/pre-1861/serial-set/browse.xml">
-            <with-param name="publication-id" value="serial-set"/>
-          </page-template>
-        </step>
-        <page-template href="pages/historicaldocuments/pre-1861/serial-set/index.xml"/>
-      </step>
-      <page-template href="pages/historicaldocuments/pre-1861/index.xml"/>
+    <step value="about-frus">
+      <page-template href="pages/historicaldocuments/about-frus.xml"/>
+    </step>
+    <step value="status-of-the-series">
+      <page-template href="pages/historicaldocuments/status-of-the-series.xml"/>
     </step>
     <step value="frus-history">
       <step value="documents">
@@ -82,6 +74,32 @@
         <src collection="/db/apps/frus-history/monograph"/>
       </config>
     </step>
+    <step value="ebooks">
+      <page-template href="pages/historicaldocuments/ebooks.xml"/>
+    </step>
+    <step value="other-electronic-resources">
+      <page-template href="pages/historicaldocuments/other-electronic-resources.xml"/>
+    </step>
+    <step value="guide-to-sources-on-vietnam-1969-1975">
+      <page-template href="pages/historicaldocuments/vietnam-guide.xml">
+        <with-param name="publication-id" value="vietnam-guide"/>
+        <with-param name="document-id" value="guide-to-sources-on-vietnam-1969-1975"/>
+      </page-template>
+    </step>
+    <step value="pre-1861">
+      <step value="serial-set">
+        <step value="all">
+          <page-template href="pages/historicaldocuments/pre-1861/serial-set/all.xml"/>
+        </step>
+        <step value="browse">
+          <page-template href="pages/historicaldocuments/pre-1861/serial-set/browse.xml">
+            <with-param name="publication-id" value="serial-set"/>
+          </page-template>
+        </step>
+        <page-template href="pages/historicaldocuments/pre-1861/serial-set/index.xml"/>
+      </step>
+      <page-template href="pages/historicaldocuments/pre-1861/index.xml"/>
+    </step>
     <step value="quarterly-releases">
       <step key="announcement">
         <page-template href="pages/historicaldocuments/quarterly-releases/announcements/{$site:key?announcement}.xml"/>
@@ -91,11 +109,8 @@
       </step>
       <page-template href="pages/historicaldocuments/quarterly-releases/index.xml"/>
     </step>
-    <step value="guide-to-sources-on-vietnam-1969-1975">
-      <page-template href="pages/historicaldocuments/vietnam-guide.xml">
-        <with-param name="publication-id" value="vietnam-guide"/>
-        <with-param name="document-id" value="guide-to-sources-on-vietnam-1969-1975"/>
-      </page-template>
+    <step value="citing-frus">
+      <page-template href="pages/historicaldocuments/citing-frus.xml"/>
     </step>
     <step match="^frus" key="frus-volume">
       <step key="section">
@@ -116,21 +131,6 @@
       <config>
         <src collection="/db/apps/frus/volumes"/>
       </config>
-    </step>
-    <step value="about-frus">
-      <page-template href="pages/historicaldocuments/about-frus.xml"/>
-    </step>
-    <step value="citing-frus">
-      <page-template href="pages/historicaldocuments/citing-frus.xml"/>
-    </step>
-    <step value="ebooks">
-      <page-template href="pages/historicaldocuments/ebooks.xml"/>
-    </step>
-    <step value="other-electronic-resources">
-      <page-template href="pages/historicaldocuments/other-electronic-resources.xml"/>
-    </step>
-    <step value="status-of-the-series">
-      <page-template href="pages/historicaldocuments/status-of-the-series.xml"/>
     </step>
     <step key="administration">
       <page-template href="pages/historicaldocuments/administrations.xml">
@@ -228,6 +228,9 @@
         <with-param name="publication-id" value="short-history"/>
         <with-param name="document-id" value="short-history"/>
       </page-template>
+      <config>
+        <section-nav-exclude/>
+      </config>
     </step>
     <step value="buildings">
       <step key="section">
@@ -270,6 +273,9 @@
         <page-template href="pages/departmenthistory/people/by-name/index.xml">
           <with-param name="publication-id" value="people-by-alpha"/>
         </page-template>
+        <config>
+          <section-nav-exclude/>
+        </config>
       </step>
       <step value="by-year">
         <step key="year">
@@ -284,6 +290,9 @@
         <page-template href="pages/departmenthistory/people/by-year/index.xml">
           <with-param name="publication-id" value="people-by-year"/>
         </page-template>
+        <config>
+          <section-nav-exclude/>
+        </config>
       </step>
       <step value="principalofficers">
         <step key="role">
@@ -298,6 +307,9 @@
         <page-template href="pages/departmenthistory/people/principalofficers/index.xml">
           <with-param name="publication-id" value="people"/>
         </page-template>
+        <config>
+          <section-nav-exclude/>
+        </config>
       </step>
       <step value="chiefsofmission">
         <step value="by-country">
@@ -323,6 +335,9 @@
         <page-template href="pages/departmenthistory/people/chiefsofmission/index.xml">
           <with-param name="publication-id" value="people"/>
         </page-template>
+        <config>
+          <section-nav-exclude/>
+        </config>
       </step>
       <step key="person">
         <page-template href="pages/departmenthistory/people/person.xml">
@@ -337,6 +352,9 @@
       <page-template href="pages/departmenthistory/people/index.xml">
         <with-param name="publication-id" value="people"/>
       </page-template>
+      <config>
+        <section-nav-skip/>
+      </config>
     </step>
     <step value="travels">
       <step value="president">
@@ -372,6 +390,9 @@
       <page-template href="pages/departmenthistory/travels/index.xml">
         <with-param name="publication-id" value="travels-secretary"/>
       </page-template>
+      <config>
+        <section-nav-skip/>
+      </config>
     </step>
     <step value="visits">
       <step key="id">
@@ -386,6 +407,11 @@
       </step>
       <page-template href="pages/departmenthistory/visits/index.xml">
         <with-param name="publication-id" value="visits"/>
+      </page-template>
+    </step>
+    <step value="wwi">
+      <page-template href="pages/departmenthistory/wwi.xml">
+        <with-param name="publication-id" value="wwi"/>
       </page-template>
     </step>
     <step value="diplomatic-couriers">
@@ -415,11 +441,6 @@
       </step>
       <page-template href="pages/departmenthistory/diplomatic-couriers/index.xml">
         <with-param name="publication-id" value="diplomatic-couriers"/>
-      </page-template>
-    </step>
-    <step value="wwi">
-      <page-template href="pages/departmenthistory/wwi.xml">
-        <with-param name="publication-id" value="wwi"/>
       </page-template>
     </step>
     <page-template href="pages/departmenthistory/index.xml">
