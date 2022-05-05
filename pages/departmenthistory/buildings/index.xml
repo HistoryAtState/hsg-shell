@@ -7,7 +7,7 @@
          <div id="static-title" class="hidden">Buildings - Department History</div>
          <div class="row">
             <div data-template="pages:breadcrumb">
-               <p id="breadcrumb-title">Buildings</p>
+               <p id="breadcrumb-title">Buildings of the Department</p>
             </div>
          </div>
          <div class="row">
