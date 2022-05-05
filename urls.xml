@@ -229,7 +229,7 @@
         <with-param name="document-id" value="short-history"/>
       </page-template>
       <config>
-        <section-nav-exclude/>
+        <exclude role="section-nav"/>
       </config>
     </step>
     <step value="buildings">
@@ -274,7 +274,7 @@
           <with-param name="publication-id" value="people-by-alpha"/>
         </page-template>
         <config>
-          <section-nav-exclude/>
+          <exclude role="section-nav"/>
         </config>
       </step>
       <step value="by-year">
@@ -291,7 +291,7 @@
           <with-param name="publication-id" value="people-by-year"/>
         </page-template>
         <config>
-          <section-nav-exclude/>
+          <exclude role="section-nav"/>
         </config>
       </step>
       <step value="principalofficers">
@@ -308,7 +308,7 @@
           <with-param name="publication-id" value="people"/>
         </page-template>
         <config>
-          <section-nav-exclude/>
+          <exclude role="section-nav"/>
         </config>
       </step>
       <step value="chiefsofmission">
@@ -336,7 +336,7 @@
           <with-param name="publication-id" value="people"/>
         </page-template>
         <config>
-          <section-nav-exclude/>
+          <exclude role="section-nav"/>
         </config>
       </step>
       <step key="person">
@@ -353,7 +353,7 @@
         <with-param name="publication-id" value="people"/>
       </page-template>
       <config>
-        <section-nav-skip/>
+        <skip role="section-nav"/>
       </config>
     </step>
     <step value="travels">
@@ -391,7 +391,7 @@
         <with-param name="publication-id" value="travels-secretary"/>
       </page-template>
       <config>
-        <section-nav-skip/>
+        <skip role="section-nav"/>
       </config>
     </step>
     <step value="visits">

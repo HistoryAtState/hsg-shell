@@ -575,6 +575,35 @@ declare function pages:generate-breadcrumb-label($state as map(*)) {
   )
 };
 
+declare function pages:section-nav($node as node(), $model as map(*)){
+  pages:generate-section-nav(substring-after(request:get-uri(), $app:APP_ROOT))
+};
+
+declare function pages:generate-section-nav($uri as xs:string) as element(div) {
+  let $site-section := '/' || (tokenize($uri,'/')[. ne ''])[1]
+  let $section-title := site:call-with-parameters-for-uri-steps($site-section, $site:config, pages:generate-breadcrumb-label#1)[2]
+  let $section-links := site:call-for-uri-step-children($site-section, $site:config, pages:generate-breadcrumb-link#1, map{'exclude-role': 'section-nav', 'skip-role': 'section-nav'})
+  return
+    <div id="sections" class="hsg-panel">
+      {
+        if ($section-title) then
+          <div class="hsg-panel-heading">
+            <h2 class="hsg-sidebar-title">{$section-title}</h2>
+          </div>
+        else ()
+      }{
+        if ($section-links) then
+          <ul class="hsg-list-group">
+            {
+              for $link in $section-links return
+              <li class="hsg-list-group-item">{$link}</li>
+            }
+          </ul>
+        else ($section-links)
+      }
+    </div>
+};
+
 declare function pages:app-root($node as node(), $model as map(*)) {
     let $root := try {
         if (request:get-header("nginx-request-uri")) then (
