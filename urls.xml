@@ -454,6 +454,9 @@
     </page-template>
   </step>
   <step value="about">
+    <step value="contact-us">
+      <page-template href="pages/about/contact-us.xml"/>
+    </step>
     <step value="faq">
       <step key="section">
         <page-template href="pages/about/faq/section.xml">
@@ -470,6 +473,9 @@
           <with-param name="document-id" value="faq"/>
       </page-template>
     </step>
+    <step value="the-historian">
+      <page-template href="pages/about/the-historian.xml"/>
+    </step>
     <step value="hac">
       <step key="section">
         <page-template href="pages/about/hac/section.xml">
@@ -485,12 +491,6 @@
         <with-param name="publication-id" value="hac"/>
           <with-param name="document-id" value="hac"/>
       </page-template>
-    </step>
-    <step value="contact-us">
-      <page-template href="pages/about/contact-us.xml"/>
-    </step>
-    <step value="the-historian">
-      <page-template href="pages/about/the-historian.xml"/>
     </step>
     <step value="recent-publications">
       <page-template href="pages/about/recent-publications.xml"/>

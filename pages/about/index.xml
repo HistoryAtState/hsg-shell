@@ -87,31 +87,7 @@
                </div>
             </div>
             <aside class="hsg-width-one-third" data-template="app:fix-links">
-               <div class="hsg-panel">
-                  <div class="hsg-panel-heading">
-                     <h2 class="hsg-sidebar-title">About</h2>
-                  </div>
-                  <ul class="hsg-list-group">
-                     <li class="hsg-list-group-item">
-                        <a href="$app/about/contact-us">Contact Us</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/about/faq">Frequently Asked Questions</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/about/the-historian">The Historian</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/about/hac">Historical Advisory Committee</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/about/recent-publications">Recent Publications</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/about/content-warning">Content Warning</a>
-                     </li>
-                  </ul>
-               </div>
+               <div data-template="pages:section-nav"/>
                <div class="hsg-panel">
                   <div class="hsg-panel-heading">
                      <h3 class="hsg-sidebar-title">Related Links</h3>
