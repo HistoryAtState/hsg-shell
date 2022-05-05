@@ -99,6 +99,9 @@
         <page-template href="pages/historicaldocuments/pre-1861/serial-set/index.xml"/>
       </step>
       <page-template href="pages/historicaldocuments/pre-1861/index.xml"/>
+      <config>
+        <exclude role="section-nav"/>
+      </config>
     </step>
     <step value="quarterly-releases">
       <step key="announcement">
@@ -108,6 +111,9 @@
         </config>
       </step>
       <page-template href="pages/historicaldocuments/quarterly-releases/index.xml"/>
+      <config>
+        <exclude role="section-nav"/>
+      </config>
     </step>
     <step value="citing-frus">
       <page-template href="pages/historicaldocuments/citing-frus.xml"/>
