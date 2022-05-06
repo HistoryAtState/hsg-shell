@@ -709,7 +709,7 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-building-sec
                 <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
             </li>
             <li>
-                <a href="/exist/apps/hsg-shell/departmenthistory/buildings"> Buildings </a>
+                <a href="/exist/apps/hsg-shell/departmenthistory/buildings"> Buildings of the Department </a>
             </li>
             <li>
                 <a href="/exist/apps/hsg-shell/departmenthistory/buildings/intro">  Introduction  </a>
@@ -1070,7 +1070,7 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-pres
                     <a href="/exist/apps/hsg-shell/departmenthistory/travels"> Presidential and Secretaries Travels Abroad </a>
                 </li>
                 <li>
-                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/president"> Presidents </a>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/president"> Travels of the President </a>
                 </li>
                 <li>
                     <a href="/exist/apps/hsg-shell/departmenthistory/travels/president/taft-william-howard">  William Howard Taft  </a>
@@ -1105,7 +1105,7 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-pres
                     <a href="/exist/apps/hsg-shell/departmenthistory/travels"> Presidential and Secretaries Travels Abroad </a>
                 </li>
                 <li>
-                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/president"> Presidents </a>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/president"> Travels of the President </a>
                 </li>
                 <li>
                     <a href="/exist/apps/hsg-shell/departmenthistory/travels/president/laos">  Laos  </a>
@@ -1143,7 +1143,7 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-secr
                     <a href="/exist/apps/hsg-shell/departmenthistory/travels"> Presidential and Secretaries Travels Abroad </a>
                 </li>
                 <li>
-                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary"> Secretaries </a>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary"> Travels of the Secretary </a>
                 </li>
                 <li>
                     <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary/root-elihu">  Elihu Root  </a>
@@ -1178,7 +1178,7 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-secr
                     <a href="/exist/apps/hsg-shell/departmenthistory/travels"> Presidential and Secretaries Travels Abroad </a>
                 </li>
                 <li>
-                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary"> Secretaries </a>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary"> Travels of the Secretary </a>
                 </li>
                 <li>
                     <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary/laos">  Laos  </a>
@@ -1439,8 +1439,7 @@ function x:test-pages-breadcrumb-frus-history-section(){
           <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
         </li>
         <li>
-          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">  Toward “Thorough, Accurate, and Reliable”: A History of the
-                        Foreign Relations of the United States Series  </a>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history"> History of the <em>Foreign Relations</em> Series </a>
         </li>
         <li>
           <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/foreword">  Foreword  </a>
@@ -1477,8 +1476,7 @@ function x:test-pages-breadcrumb-frus-documents(){
                 <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
             </li>
             <li>
-              <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">  Toward “Thorough, Accurate, and Reliable”: A History of the
-                        Foreign Relations of the United States Series  </a>
+              <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history"> History of the <em>Foreign Relations</em> Series </a>
             </li>
             <li>
                 <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/documents"> Documents </a>
@@ -1517,8 +1515,7 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-history
           <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
         </li>
         <li>
-          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">  Toward “Thorough, Accurate, and Reliable”: A History of the
-                        Foreign Relations of the United States Series  </a>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history"> History of the <em>Foreign Relations</em> Series </a>
         </li>
         <li>
           <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/research"> Research </a>
