@@ -861,17 +861,16 @@ return
         $div/@n/string()
       )
     else (:$div not instance of element(tei:pb):) (
-      (: TODO(TFJH): strip footnotes off of chapter titles; e.g. /historicaldocuments/frus1894/ch25 :)
       if ($truncate) then
-       let $words := tokenize($div/tei:head[1]/string(), '\s+')
+       let $words := tokenize($div/tei:head[1]/string-join((node() except tei:note) ! string()), '\s+')
        let $max-word-count := 8
        return
          if (count($words) gt $max-word-count) then
            concat(string-join(subsequence($words, 1, $max-word-count), ' '), '...')
          else
-           $div/tei:head[1]/string()
+           $div/tei:head[1]/string-join((node() except tei:note) ! string())
       else
-       $div/tei:head[1]/string() 
+       $div/tei:head[1]/string-join((node() except tei:note) ! string()) 
     )
   )
 };
