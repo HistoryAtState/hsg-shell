@@ -369,9 +369,9 @@ declare variable $config:PUBLICATIONS :=
                 let $person as element(person)? := collection('/db/apps/pocom/people')/person[id eq $parameters?person-id]
                 return
                   if (exists($role)) then
-                    $role/names/plural
+                    $role/names/plural/string()
                   else if (exists($country)) then
-                    $country/label
+                    $country/label/string()
                   else if (exists($person)) then
                     $person/persName/string-join((forename, surname, genName), ' ')
                   else ()
