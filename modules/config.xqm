@@ -369,9 +369,9 @@ declare variable $config:PUBLICATIONS :=
                 let $person as element(person)? := collection('/db/apps/pocom/people')/person[id eq $parameters?person-id]
                 return
                   if (exists($role)) then
-                    $role/names/plural
+                    $role/names/plural/string()
                   else if (exists($country)) then
-                    $country/label
+                    $country/label/string()
                   else if (exists($person)) then
                     $person/persName/string-join((forename, surname, genName), ' ')
                   else ()
@@ -861,17 +861,16 @@ return
         $div/@n/string()
       )
     else (:$div not instance of element(tei:pb):) (
-      (: TODO(TFJH): strip footnotes off of chapter titles; e.g. /historicaldocuments/frus1894/ch25 :)
       if ($truncate) then
-       let $words := tokenize($div/tei:head/string(), '\s+')
+       let $words := tokenize($div/tei:head[1]/string-join((node() except tei:note) ! string()), '\s+')
        let $max-word-count := 8
        return
          if (count($words) gt $max-word-count) then
            concat(string-join(subsequence($words, 1, $max-word-count), ' '), '...')
          else
-           $div/tei:head/string()
+           $div/tei:head[1]/string-join((node() except tei:note) ! string())
       else
-       $div/tei:head/string()
+       $div/tei:head[1]/string-join((node() except tei:note) ! string()) 
     )
   )
 };

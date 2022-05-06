@@ -1362,21 +1362,55 @@ function x:test-pages-breadcrumb-frus(){
 
 (: footnotes in chapter titles to be suppressed :)
 
-declare %test:assertEquals('<div class="hsg-breadcrumb-wrapper"><ol class="breadcrumb"><li><a href="/exist/apps/hsg-shell/">  Home  </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1894">  Papers Relating to the Foreign Relations of the United
-                    States, 1894, With the Annual Message of the President, Transmitted to Congress,
-                    December 3, 1894  </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1894/ch25">  Friendly offices to Japanese in ChinaSee
-                            Senate Ex. Doc. No. 36, Fifty-third Congress, third
-                        session.  </a></li></ol></div>') 
+declare %test:assertEquals('true') 
 function x:test-pages-breadcrumb-frus-footnote-in-head(){
-  pages:generate-breadcrumbs('/historicaldocuments/frus1894/ch25')
+    let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1894">  Papers Relating to the Foreign Relations of the United
+                    States, 1894, With the Annual Message of the President, Transmitted to Congress,
+                    December 3, 1894  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1894/ch25">  Friendly offices to Japanese in China  </a>
+                </li>
+            </ol>
+        </div>
+    let $result := pages:generate-breadcrumbs('/historicaldocuments/frus1894/ch25')
+    return if (deep-equal($expected, $result)) then 'true' else $result
 };
 
 (: documents to be styled appropriately; no footnotes in header :)
 
-declare %test:assertEquals('<div class="hsg-breadcrumb-wrapper"><ol class="breadcrumb"><li><a href="/exist/apps/hsg-shell/">  Home  </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1952-54v07p1">  Foreign Relations of the United States, 1952–1954, Germany
-                    and Austria, Volume VII, Part 1  </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/frus1952-54v07p1/d379">  Document 379  </a></li></ol></div>')
+declare %test:assertEquals('true')
 function x:test-pages-breadcrumb-frus-document-no(){
-  pages:generate-breadcrumbs('/historicaldocuments/frus1952-54v07p1/d379')
+    let $expected :=
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1952-54v07p1">  Foreign Relations of the United States, 1952–1954, Germany
+                    and Austria, Volume VII, Part 1  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1952-54v07p1/d379">  Document 379  </a>
+                </li>
+            </ol>
+        </div>
+    let $result := pages:generate-breadcrumbs('/historicaldocuments/frus1952-54v07p1/d379')
+    return if (deep-equal($expected, $result)) then 'true' else $result
 };
 
 (:
