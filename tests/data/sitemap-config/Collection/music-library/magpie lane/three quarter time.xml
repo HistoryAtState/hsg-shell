@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="13">
+   <name>three quarter time</name>
+   <artist>magpie lane</artist>
+   <track>
+      <metadata key="Track ID" type="integer">5342</metadata>
+      <metadata key="Name" type="string">Push About The Jorum / The Ploughman / Salt Of The Earth</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">9384631</metadata>
+      <metadata key="Total Time" type="integer">286733</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T16:22:11Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T14:21:41Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">6</metadata>
+      <metadata key="Play Date" type="integer">3663766703</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-05T16:58:23Z</metadata>
+      <metadata key="Normalization" type="integer">3236</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">C540FA7ABCB7841D</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5344</metadata>
+      <metadata key="Name" type="string">Belfast Mountains</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">10666406</metadata>
+      <metadata key="Total Time" type="integer">324720</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:22:43Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:22:12Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">9</metadata>
+      <metadata key="Play Date" type="integer">3716887062</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T11:37:42Z</metadata>
+      <metadata key="Normalization" type="integer">1436</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">4B6CC8B3245DD710</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5346</metadata>
+      <metadata key="Name" type="string">Sovay</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">13199507</metadata>
+      <metadata key="Total Time" type="integer">402613</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:23:20Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:22:45Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">7</metadata>
+      <metadata key="Play Date" type="integer">3716887465</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T11:44:25Z</metadata>
+      <metadata key="Normalization" type="integer">2336</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">60EE7F414A769328</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5348</metadata>
+      <metadata key="Name" type="string">Cheltenham Waltz / Rout Of The Blues</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">11527979</metadata>
+      <metadata key="Total Time" type="integer">351733</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:23:57Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:23:28Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">7</metadata>
+      <metadata key="Play Date" type="integer">3716887817</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T11:50:17Z</metadata>
+      <metadata key="Normalization" type="integer">3500</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">E22AB35394504034</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5350</metadata>
+      <metadata key="Name" type="string">Nobody's Jig / Kentish Cricketers</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">7672445</metadata>
+      <metadata key="Total Time" type="integer">221626</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:24:16Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:23:59Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">8</metadata>
+      <metadata key="Play Date" type="integer">3716888265</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T11:57:45Z</metadata>
+      <metadata key="Normalization" type="integer">4351</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">0DE2DBDB0A682F1B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5352</metadata>
+      <metadata key="Name" type="string">The Dancing</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">7506873</metadata>
+      <metadata key="Total Time" type="integer">229800</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T14:21:40Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:21:02Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Play Count" type="integer">8</metadata>
+      <metadata key="Play Date" type="integer">3716886463</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T11:27:43Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2017-09-13T19:02:01Z</metadata>
+      <metadata key="Normalization" type="integer">3528</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Dancing</metadata>
+      <metadata key="Persistent ID" type="string">522C51C5E083058D</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5354</metadata>
+      <metadata key="Name" type="string">New Garden Fields</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">9418586</metadata>
+      <metadata key="Total Time" type="integer">287746</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:24:38Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:24:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">7</metadata>
+      <metadata key="Play Date" type="integer">3716888553</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T12:02:33Z</metadata>
+      <metadata key="Normalization" type="integer">2925</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">C8CF4DFFED684379</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5356</metadata>
+      <metadata key="Name" type="string">One More Dance And Then / Not A Natural Dancer / Spirit Of The Dance</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">13438334</metadata>
+      <metadata key="Total Time" type="integer">376560</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">13</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:27:41Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:27:18Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3716962297</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-13T08:31:37Z</metadata>
+      <metadata key="Normalization" type="integer">4231</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">130A380CCDAF4DBA</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5358</metadata>
+      <metadata key="Name" type="string">Dance Around The Gallows Tree</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">8123882</metadata>
+      <metadata key="Total Time" type="integer">242826</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:25:06Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:24:49Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">6</metadata>
+      <metadata key="Play Date" type="integer">3716888796</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T12:06:36Z</metadata>
+      <metadata key="Normalization" type="integer">4110</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">7C45A24807F7FD3F</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5360</metadata>
+      <metadata key="Name" type="string">Blow Ye Winds</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">6383285</metadata>
+      <metadata key="Total Time" type="integer">194920</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:25:30Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:25:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3716889009</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T12:10:09Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2021-10-12T12:06:38Z</metadata>
+      <metadata key="Normalization" type="integer">3076</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">9ADFDFAB0BE3FF3B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5362</metadata>
+      <metadata key="Name" type="string">The Captain And His Whiskers</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">12173170</metadata>
+      <metadata key="Total Time" type="integer">371946</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:26:06Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:25:41Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3716961139</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-13T08:12:19Z</metadata>
+      <metadata key="Normalization" type="integer">1544</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Captain And His Whiskers</metadata>
+      <metadata key="Persistent ID" type="string">0143A8F90B61E00D</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5364</metadata>
+      <metadata key="Name" type="string">Lovely Elwina / Waterloo</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">9933034</metadata>
+      <metadata key="Total Time" type="integer">303560</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:26:37Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:26:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3716961443</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-13T08:17:23Z</metadata>
+      <metadata key="Normalization" type="integer">2969</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">FDF8282F76D75998</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">5366</metadata>
+      <metadata key="Name" type="string">Lord Bateman</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Three Quarter Time</metadata>
+      <metadata key="Genre" type="string">Traditional</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">15676830</metadata>
+      <metadata key="Total Time" type="integer">477226</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">2017</metadata>
+      <metadata key="Date Modified" type="date">2017-08-28T15:27:17Z</metadata>
+      <metadata key="Date Added" type="date">2017-08-28T13:26:48Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3716961920</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-13T08:25:20Z</metadata>
+      <metadata key="Normalization" type="integer">3540</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">50B4C551FCDC3940</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+</album>

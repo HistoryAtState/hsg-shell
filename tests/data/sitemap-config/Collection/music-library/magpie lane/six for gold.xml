@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="16">
+   <name>six for gold</name>
+   <artist>magpie lane</artist>
+   <track>
+      <metadata key="Track ID" type="integer">10719</metadata>
+      <metadata key="Name" type="string">The Jovial Cutler</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">36877553</metadata>
+      <metadata key="Total Time" type="integer">334800</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:44:49Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:44:20Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">8</metadata>
+      <metadata key="Play Date" type="integer">3717073707</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-14T15:28:27Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2021-10-14T15:34:19Z</metadata>
+      <metadata key="Normalization" type="integer">3254</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Jovial Cutler</metadata>
+      <metadata key="Persistent ID" type="string">85EBB5CB59FB129F</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10721</metadata>
+      <metadata key="Name" type="string">The Constant Lovers</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">24652030</metadata>
+      <metadata key="Total Time" type="integer">244786</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:45:09Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:44:50Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3717074482</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-14T15:41:22Z</metadata>
+      <metadata key="Normalization" type="integer">3426</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Constant Lovers</metadata>
+      <metadata key="Persistent ID" type="string">AE34E0EF579DD8F4</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10723</metadata>
+      <metadata key="Name" type="string">Round About The Maypoke / Asiatic</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">36283378</metadata>
+      <metadata key="Total Time" type="integer">308413</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:45:32Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:45:10Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">12</metadata>
+      <metadata key="Play Date" type="integer">3717074790</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-14T15:46:30Z</metadata>
+      <metadata key="Normalization" type="integer">3504</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">272007ACDB4999F3</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10725</metadata>
+      <metadata key="Name" type="string">John Reilly</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">24259122</metadata>
+      <metadata key="Total Time" type="integer">244880</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:45:49Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:45:33Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">15</metadata>
+      <metadata key="Play Date" type="integer">3716963122</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-13T08:45:22Z</metadata>
+      <metadata key="Normalization" type="integer">2054</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">1F3646841582E35B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10727</metadata>
+      <metadata key="Name" type="string">Juniper Gentle &amp; Rosemary</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">34159936</metadata>
+      <metadata key="Total Time" type="integer">292066</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:46:07Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:45:49Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">8</metadata>
+      <metadata key="Play Date" type="integer">3716799355</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T11:15:55Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Skip Date" type="date">2021-10-13T08:45:30Z</metadata>
+      <metadata key="Normalization" type="integer">8060</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">94293A67F2CC97FE</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10729</metadata>
+      <metadata key="Name" type="string">A-Begging I Will Go</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">30419224</metadata>
+      <metadata key="Total Time" type="integer">284053</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:46:25Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:46:08Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">28</metadata>
+      <metadata key="Play Date" type="integer">3717075176</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-14T15:52:56Z</metadata>
+      <metadata key="Normalization" type="integer">2864</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">EC2EDCE2D59740CF</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10731</metadata>
+      <metadata key="Name" type="string">O Once I Was A Shepard Boy</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">14486345</metadata>
+      <metadata key="Total Time" type="integer">132906</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:46:33Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:46:26Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">13</metadata>
+      <metadata key="Play Date" type="integer">3717075309</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-14T15:55:09Z</metadata>
+      <metadata key="Normalization" type="integer">3628</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">910680B1F0226869</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10733</metadata>
+      <metadata key="Name" type="string">Long Peggin' Awl</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">22838432</metadata>
+      <metadata key="Total Time" type="integer">218600</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:46:46Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:46:34Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">9</metadata>
+      <metadata key="Play Date" type="integer">3716963765</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-13T08:56:05Z</metadata>
+      <metadata key="Normalization" type="integer">2659</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">6AD3148452D60704</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10735</metadata>
+      <metadata key="Name" type="string">Stottycake Polka / Ganivelle</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Andy Turner_Frederic Paris</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">43882924</metadata>
+      <metadata key="Total Time" type="integer">392613</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:47:07Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:46:46Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">12</metadata>
+      <metadata key="Play Date" type="integer">3717157265</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-15T14:41:05Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Normalization" type="integer">2906</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">776678F95C3CBD1C</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10737</metadata>
+      <metadata key="Name" type="string">Bold William Taylor</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">25713943</metadata>
+      <metadata key="Total Time" type="integer">234000</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:47:19Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:47:08Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">9</metadata>
+      <metadata key="Play Date" type="integer">3716964392</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-13T09:06:32Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2021-10-15T14:41:19Z</metadata>
+      <metadata key="Normalization" type="integer">2400</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">F45FAD53A5AC1B4E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10739</metadata>
+      <metadata key="Name" type="string">Foggy Dew</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">36565346</metadata>
+      <metadata key="Total Time" type="integer">334800</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:47:36Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:47:20Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3717157615</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-15T14:46:55Z</metadata>
+      <metadata key="Normalization" type="integer">3489</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">DF9A6A77B09B18F4</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10741</metadata>
+      <metadata key="Name" type="string">I Saw A Maid In My Father's Garden</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">20348310</metadata>
+      <metadata key="Total Time" type="integer">178600</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:47:45Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:47:36Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">10</metadata>
+      <metadata key="Play Date" type="integer">3717157794</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-15T14:49:54Z</metadata>
+      <metadata key="Normalization" type="integer">3717</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">F20D59B7EE0067EC</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10743</metadata>
+      <metadata key="Name" type="string">Stokes Bay</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">22337265</metadata>
+      <metadata key="Total Time" type="integer">208173</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">13</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:47:55Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:47:45Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">10</metadata>
+      <metadata key="Play Date" type="integer">3717158002</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-15T14:53:22Z</metadata>
+      <metadata key="Normalization" type="integer">3511</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">3A3DADF614F10603</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10745</metadata>
+      <metadata key="Name" type="string">Argeers / Polka d'Auvergne</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">32952079</metadata>
+      <metadata key="Total Time" type="integer">268480</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">14</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:48:07Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:47:55Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">6</metadata>
+      <metadata key="Play Date" type="integer">3717158270</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-15T14:57:50Z</metadata>
+      <metadata key="Normalization" type="integer">5576</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">3CDBF021345D9665</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10747</metadata>
+      <metadata key="Name" type="string">Lazarus</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">21051930</metadata>
+      <metadata key="Total Time" type="integer">206253</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">15</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:48:16Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:48:08Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">6</metadata>
+      <metadata key="Play Date" type="integer">3717158476</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-15T15:01:16Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2021-10-13T09:23:09Z</metadata>
+      <metadata key="Normalization" type="integer">2784</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">F63EC3DDE8A8D731</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10749</metadata>
+      <metadata key="Name" type="string">My Old Hat That I Got On</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Composer" type="string">Traditional</metadata>
+      <metadata key="Album" type="string">Six For Gold</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">47459716</metadata>
+      <metadata key="Total Time" type="integer">416000</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">16</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">2002</metadata>
+      <metadata key="Date Modified" type="date">2011-12-18T11:48:35Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:48:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">9</metadata>
+      <metadata key="Play Date" type="integer">3717257565</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-16T18:32:45Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2016-08-02T14:24:43Z</metadata>
+      <metadata key="Normalization" type="integer">3732</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">323B24FBFA156FE0</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

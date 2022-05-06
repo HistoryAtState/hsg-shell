@@ -6,3 +6,5 @@ Disallow: /search
 Crawl-delay: 20
 User-Agent: LinkChecker
 Allow: /exist
+
+Sitemap: https://history.state.gov/sitemap.xml

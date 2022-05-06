@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="11">
+   <name>circus</name>
+   <artist>lenny kravitz</artist>
+   <track>
+      <metadata key="Track ID" type="integer">3712</metadata>
+      <metadata key="Name" type="string">Circus</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4611656</metadata>
+      <metadata key="Total Time" type="integer">288078</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:06:25Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">11</metadata>
+      <metadata key="Play Date" type="integer">3698321766</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:36:06Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">3584</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">3207D3C56643523F</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3714</metadata>
+      <metadata key="Name" type="string">God Is Love</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4262673</metadata>
+      <metadata key="Total Time" type="integer">266266</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:06:25Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3541687215</metadata>
+      <metadata key="Play Date UTC" type="date">2016-03-24T18:00:15Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Rating" type="integer">40</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">2960</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">552CA69A08A9726C</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3716</metadata>
+      <metadata key="Name" type="string">In My Life Today</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">6232089</metadata>
+      <metadata key="Total Time" type="integer">389355</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:06:25Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">10</metadata>
+      <metadata key="Play Date" type="integer">3482335819</metadata>
+      <metadata key="Play Date UTC" type="date">2014-05-07T18:30:19Z</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">6627</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">91345BF7E78BECC8</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3718</metadata>
+      <metadata key="Name" type="string">The Resurrection</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4296535</metadata>
+      <metadata key="Total Time" type="integer">268382</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:06:25Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3698323930</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T16:12:10Z</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">3249</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Name" type="string">Resurrection</metadata>
+      <metadata key="Persistent ID" type="string">06728A77D3BADA15</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3720</metadata>
+      <metadata key="Name" type="string">Thin Ice</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">5337227</metadata>
+      <metadata key="Total Time" type="integer">333426</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:06:25Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">10</metadata>
+      <metadata key="Play Date" type="integer">3482335167</metadata>
+      <metadata key="Play Date UTC" type="date">2014-05-07T18:19:27Z</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">4672</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">F1992E9F770D01E3</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3722</metadata>
+      <metadata key="Name" type="string">Tunnel Vision</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4149393</metadata>
+      <metadata key="Total Time" type="integer">259160</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:06:25Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3698322320</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:45:20Z</metadata>
+      <metadata key="Rating" type="integer">80</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">6121</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">825638740569BB88</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3724</metadata>
+      <metadata key="Name" type="string">Beyond The 7Th Sky</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4715520</metadata>
+      <metadata key="Total Time" type="integer">294635</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:50Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">25</metadata>
+      <metadata key="Play Date" type="integer">3698322061</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:41:01Z</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">4440</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">C5C7180292EEE84D</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3726</metadata>
+      <metadata key="Name" type="string">Can't Get You Off My Mind</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4381515</metadata>
+      <metadata key="Total Time" type="integer">273763</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:50Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3698322594</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:49:54Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1805</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">373A23E583A352D0</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3728</metadata>
+      <metadata key="Name" type="string">Don't Go And Put A Bullet In Y</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4194319</metadata>
+      <metadata key="Total Time" type="integer">262060</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:50Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3698323659</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T16:07:39Z</metadata>
+      <metadata key="Rating" type="integer">60</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1259</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">46F78539DE1868A0</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3730</metadata>
+      <metadata key="Name" type="string">Magdalene</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3658429</metadata>
+      <metadata key="Total Time" type="integer">228571</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:50Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3482334568</metadata>
+      <metadata key="Play Date UTC" type="date">2014-05-07T18:09:28Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">2061</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">1856A1030ED8D3BB</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3732</metadata>
+      <metadata key="Name" type="string">Rock And Roll Is Dead</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Circus</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3267230</metadata>
+      <metadata key="Total Time" type="integer">204120</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">11</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:50Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">15</metadata>
+      <metadata key="Play Date" type="integer">3698321478</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:31:18Z</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">3904</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">07CA18E90CC2F975</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

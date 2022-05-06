@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="12">
+   <name>a little bit off the top</name>
+   <artist>cosmotheka</artist>
+   <track>
+      <metadata key="Track ID" type="integer">11661</metadata>
+      <metadata key="Name" type="string">Wait Till The Work Comes Round</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">17227890</metadata>
+      <metadata key="Total Time" type="integer">165533</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:50:54Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:50:40Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3664175669</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T10:34:29Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2020-02-08T17:04:44Z</metadata>
+      <metadata key="Normalization" type="integer">3979</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">7D2E299CE5CE9B6E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11663</metadata>
+      <metadata key="Name" type="string">Let's All Go Mad</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Composer" type="string">Billy Williams</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">20658401</metadata>
+      <metadata key="Total Time" type="integer">207146</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:51:11Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:50:55Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">19</metadata>
+      <metadata key="Play Date" type="integer">3664175876</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T10:37:56Z</metadata>
+      <metadata key="Normalization" type="integer">1672</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">7C289DF183D28291</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11665</metadata>
+      <metadata key="Name" type="string">'Arry 'Arry 'Arry</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">25513187</metadata>
+      <metadata key="Total Time" type="integer">284813</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:51:33Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:51:12Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">23</metadata>
+      <metadata key="Play Date" type="integer">3664260316</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-11T10:05:16Z</metadata>
+      <metadata key="Normalization" type="integer">2642</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">10B3BAF6EE414CAA</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11667</metadata>
+      <metadata key="Name" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">24409606</metadata>
+      <metadata key="Total Time" type="integer">231680</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:51:50Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:51:34Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">19</metadata>
+      <metadata key="Play Date" type="integer">3664176392</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T10:46:32Z</metadata>
+      <metadata key="Normalization" type="integer">3239</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Sort Name" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">683F92D197104F2D</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11669</metadata>
+      <metadata key="Name" type="string">You Don't Want To Keep On Showing It</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">18613983</metadata>
+      <metadata key="Total Time" type="integer">172973</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:50:39Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:50:24Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3664026275</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-08T17:04:35Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-04-09T14:17:08Z</metadata>
+      <metadata key="Normalization" type="integer">3501</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">AFCF10E0326A62C6</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11671</metadata>
+      <metadata key="Name" type="string">Ragtime Waltz</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Composer" type="string">Billy Williams</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">17887472</metadata>
+      <metadata key="Total Time" type="integer">179306</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:52:02Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:51:51Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3664176572</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T10:49:32Z</metadata>
+      <metadata key="Normalization" type="integer">3483</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">A9234C2A71CB03C7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11673</metadata>
+      <metadata key="Name" type="string">The Other Department, Please</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Composer" type="string">Harry Fragson</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">19439268</metadata>
+      <metadata key="Total Time" type="integer">193466</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:53:19Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:53:09Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">18</metadata>
+      <metadata key="Play Date" type="integer">3664177797</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:09:57Z</metadata>
+      <metadata key="Normalization" type="integer">1432</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Sort Name" type="string">Other Department, Please</metadata>
+      <metadata key="Persistent ID" type="string">B3BA34B434547C0B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11675</metadata>
+      <metadata key="Name" type="string">Robin Redbreast</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">18635429</metadata>
+      <metadata key="Total Time" type="integer">178173</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:52:15Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:52:03Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3664176750</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T10:52:30Z</metadata>
+      <metadata key="Normalization" type="integer">2708</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">683C84C784E9AD75</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11677</metadata>
+      <metadata key="Name" type="string">'e Dunno Where 'e Are</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">24298579</metadata>
+      <metadata key="Total Time" type="integer">237240</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:52:31Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:52:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3664176987</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T10:56:27Z</metadata>
+      <metadata key="Normalization" type="integer">2549</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">9D3C335BF71BDBFE</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11679</metadata>
+      <metadata key="Name" type="string">Mrs. Carter</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">25453511</metadata>
+      <metadata key="Total Time" type="integer">261773</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:52:47Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:52:32Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3664177249</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:00:49Z</metadata>
+      <metadata key="Normalization" type="integer">2309</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">0F9FC1B75E8C3901</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11681</metadata>
+      <metadata key="Name" type="string">Riding On A Motor Car</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">8324401</metadata>
+      <metadata key="Total Time" type="integer">90506</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:52:53Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:52:48Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">18</metadata>
+      <metadata key="Play Date" type="integer">3664177339</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:02:19Z</metadata>
+      <metadata key="Normalization" type="integer">1679</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">CA6080D395997971</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11683</metadata>
+      <metadata key="Name" type="string">Little Billy's Wild Woodbines</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Composer" type="string">Billy Williams</metadata>
+      <metadata key="Album" type="string">A Little Bit Off The Top</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">27323658</metadata>
+      <metadata key="Total Time" type="integer">264066</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1974</metadata>
+      <metadata key="Date Modified" type="date">2014-02-17T16:53:08Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-17T16:52:54Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">19</metadata>
+      <metadata key="Play Date" type="integer">3664177603</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:06:43Z</metadata>
+      <metadata key="Normalization" type="integer">2270</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Little Bit Off The Top</metadata>
+      <metadata key="Persistent ID" type="string">F0141645B856AE69</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+</album>

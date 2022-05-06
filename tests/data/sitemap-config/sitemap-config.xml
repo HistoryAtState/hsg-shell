@@ -1,0 +1,75 @@
+<root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
+  <step value="music">
+    <step key="artist">
+      <step key="album">
+        <step key="trackNo">
+          <page-template href="pages/track.xml">
+            <with-param name="track" keyval="trackNo"/>
+          </page-template>
+          <config>
+            <src xq=".//track/metadata[@key='Track Number']"/>
+          </config>
+        </step>
+        <page-template href="pages/album.xml"/>
+        <config>
+          <src collection="."/>
+        </config>
+      </step>
+      <page-template href="pages/artist/{$site:key?artist}.xml">
+        <with-param name="artist" keyval="artist"/>
+      </page-template>
+      <config>
+        <src child-collections="Collection/music-library"/>
+      </config>
+    </step>
+    <step value="album">
+      <page-template href="pages/search.xml">
+        <with-param name="focus" value="album"/>
+      </page-template>
+    </step>
+    <step value="tracks">
+      <step key="trackName">
+        <page-template href="pages/track.xml">
+          <with-param name="trackName" keyval="trackName"/>
+        </page-template>
+        <config>
+          <src collection="Collection/music-library" xq=".//track/metadata[@key='Name']"/>
+        </config>
+      </step>
+      <step value="byID">
+        <step key="ID">
+          <page-template href="pages/track.xml">
+            <with-param name="trackID" keyval="ID"/>
+          </page-template>
+          <config>
+            <src collection="Collection/music-library" xq=".//track/metadata[@key='Track ID']"/>
+          </config>
+        </step>
+        <ignore/>
+      </step>
+      <page-template href="pages/search.xml">
+        <with-param name="focus" value="album"/>
+      </page-template>
+    </step>
+    <step value="by-year">
+      <step key="year">
+        <page-template href="pages/year.xml"/>
+        <config>
+          <src collection="Collection/music-library" xq="distinct-values(for $date in /album/track/metadata[@key eq 'Year'][not(. = '')] return xs:integer(substring($date, 1, 4)))"/>
+        </config>
+      </step>
+      <ignore/>
+    </step>
+    <page-template href="pages/search.xml"/>
+  </step>
+  <step value="world">
+    <step key="region">
+      <page-template href="pages/search.xml"/>
+      <config>
+        <src doc="/db/apps/hsg-shell/tests/data/sitemap-config/Collection/world-factbook/country-data.xml" xq="data/country/region"/>
+      </config>
+    </step>
+    <page-template href="pages/search.xml"/>
+  </step>
+  <ignore/>
+</root>

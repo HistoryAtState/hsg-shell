@@ -118,7 +118,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                         )
                     else
                         (),
-					templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
+                    templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
                 )
 };
 
