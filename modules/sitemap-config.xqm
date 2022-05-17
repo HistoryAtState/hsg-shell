@@ -204,6 +204,7 @@ function site:sitemap-root($root as element(), $state as map(*)){
           </sitemap>
       }
     </sitemapindex>
+  let $_ := cache:destroy('last-modified')
   let $_ := site:log('SMG: Completed sitemap generation')
   return xmldb:store($sitemap-dir, 'sitemap.xml', $result)
 };
