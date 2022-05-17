@@ -181,6 +181,9 @@ declare variable $config:PUBLICATIONS :=
                 function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Historical Documents",
             "base-path": function($document-id, $section-id) { "frus/" || $document-id },
+            "citation-meta": function($node as node()?, $model as map(*)?) as element(meta)* {
+                    config:tei-citation-meta($node, $model)
+                },
             "breadcrumb-title": 
               function($parameters as map(*)) as xs:string? {
                 config:tei-full-breadcrumb-title(
@@ -690,7 +693,7 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:ARCHIVES_ARTICLES_COL: "archives"
     };
 
-declare variable $config:OPEN_GRAPH_KEYS := ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:image", "og:url");
+declare variable $config:OPEN_GRAPH_KEYS := ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:image", "og:url", "citation");
     
 declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
     "twitter:card"  : function($node, $model) {
@@ -724,6 +727,12 @@ declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
         },
     "og:url"        : function($node, $model) {
             <meta property="og:url" content="{$model?url}"/>
+        },
+    "citation"      : function ($node, $model) {
+            let $citation-meta as function(*)? := $config:PUBLICATIONS?($model?publication-id)?citation-meta
+            return if(exists($citation-meta)) then
+                $citation-meta($node, $model)
+            else ()              
         }
     };
 
@@ -782,9 +791,9 @@ declare function config:app-meta($node as node(), $model as map(*)) as element()
  : See https://github.com/HistoryAtState/hsg-project/wiki/social-media-cards.
  :)
 declare function config:open-graph($node as node()?, $model as map(*)?) as element()* {
-  for $key in $model?open-graph-keys 
-  for $fn in $model?open-graph($key)
-  return $fn($node, $model)
+    for $key in $model?open-graph-keys 
+    for $fn in $model?open-graph($key)
+    return $fn($node, $model)
 };
 
 (:~
@@ -880,4 +889,65 @@ declare function config:visits-breadcrumb-title($id as xs:string, $collection as
     (collection($collection)//trip[@who eq $id])[1]/name, 
     collection('/db/apps/gsh/data/territories')/territory[id eq $id]/short-form-name
   )[1]/string()
+};
+
+declare function config:tei-citation-meta($node as node()?, $model as map(*)?) {
+    let $publication-id := $model?publication-id
+    let $section-id := $model?section-id
+    return if (exists($section-id)) then
+        config:tei-section-citation-meta($node, $model)
+    else 
+        config:tei-document-citation-meta($node, $model)
+};
+
+declare function config:tei-section-citation-meta($node as node()?, $model as map(*)?) as element(meta)* {
+    let $section := $config:PUBLICATIONS?($model?publication-id)?select-section($model?document-id, $model?section-id)
+    let $location := 
+        if ($section/@type eq 'document') then
+            <meta name="citation_firstpage" content="Document {$section/@n}"/>
+        else if ($section/self::tei:pb) then (
+            <meta name="citation_firstpage" content="{$section/replace(@n, '\[?(.+?)\]?', '$1')}"/>,
+            <meta name="citation_lastpage"  content="{$section/replace(@n, '\[?(.+?)\]?', '$1')}"/>
+        )
+        else (
+            <meta name="citation_firstpage" content="{($section//text()[normalize-space(.) ne ''])[1]/preceding::tei:pb[1]/replace(@n, '\[?(.+?)\]?', '$1')}"/>,
+            <meta name="citation_lastpage"  content="{($section//text()[normalize-space(.) ne ''])[last()]/preceding::tei:pb[1]/replace(@n, '\[?(.+?)\]?', '$1')}"/>
+        )
+    let $citation_title :=
+        <meta name="citation_title" content="{config:tei-full-breadcrumb-title($model?publication-id, $model?document-id, $model?section-id, false())}"/>
+    let $shared-citation := config:tei-shared-citation-meta($node, $model)
+    return
+        ($citation_title, $shared-citation, $location)
+};
+
+declare function config:tei-document-citation-meta($node as node()?, $model as map(*)?) {
+    let $citation_title :=
+        <meta name="citation_title" content="{config:tei-full-breadcrumb-title($model?publication-id, $model?document-id, $model?section-id, false())}"/>
+    let $shared-citation := config:tei-shared-citation-meta($node, $model)
+    return ($citation_title, $shared-citation)
+};
+
+declare function config:tei-shared-citation-meta($node as node()?, $model as map(*)?) as element(meta)* {
+    let $doc := $config:PUBLICATIONS?($model?publication-id)?select-document($model?document-id)
+    let $editors := 
+        for $editor in $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:editor[@role eq 'primary']
+        return
+            <meta name="citation_editor" content="{$editor}"/>
+    let $book_title := 
+        <meta name="citation_book_title" content="{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='volume']}"/>
+    let $series_title := 
+        <meta name="citation_series_title" content="{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='series']}"/>
+    let $volume := 
+        <meta name="citation_volume" content="{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='volume-number']}"/>
+    let $publisher :=
+        <meta name="citation_publisher" content="{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:publisher}"/>
+    let $date :=
+        let $pubdate := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type eq 'publication-date']
+        let $label as xs:string := if (matches($pubdate, '^\d{4}')) then 'citation_year' else 'citation_date'
+        return
+            <meta name="{$label}" content="{$pubdate}"/>
+    let $isbn := 
+        <meta name="citation_isbn" content="{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type eq 'isbn-13']}"/>
+    return ($editors, $book_title, $series_title, $volume, $publisher, $date, $isbn)
+        
 };
