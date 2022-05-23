@@ -181,6 +181,9 @@ declare variable $config:PUBLICATIONS :=
                 function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Historical Documents",
             "base-path": function($document-id, $section-id) { "frus/" || $document-id },
+            "open-graph": map{
+                    "og:type": function($node as node()?, $model as map(*)?) {'document'}
+                },
             "citation-meta": function($node as node()?, $model as map(*)?) as element(meta)* {
                     config:tei-citation-meta($node, $model)
                 },
@@ -402,7 +405,7 @@ declare variable $config:PUBLICATIONS :=
         "people-by-role": map {
             "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History",
             "breadcrumb-title": function($parameters as map(*)) as xs:string? {
-                collection('/db/apps/pocom/positions-principals')/principal-position[id eq $parameters?role-id]/names/plural
+                collection('/db/apps/pocom/positions-principals')/principal-position[id eq $parameters?role-id]/names/plural/string()
               }
         },
         "tags": map {
@@ -620,7 +623,13 @@ declare variable $config:PUBLICATIONS :=
             },
             "title": "History of the Foreign Relations Series",
             "base-path": function($document-id, $section-id) { "frus-history" },
-            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+            "open-graph": map{
+                    "og:type": function($node as node()?, $model as map(*)?) {'document'}
+                },
+            "citation-meta": function($node as node()?, $model as map(*)?) as element(meta)* {
+                    config:tei-citation-meta($node, $model)
+                },
+            "breadcrumb-title": function($parameters as map(*)) {
                 config:tei-full-breadcrumb-title(
                   $parameters?publication-id,
                   $parameters?document-id,
@@ -717,7 +726,12 @@ declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
            
         },
     "og:type"       : function($node, $model) {
-            <meta property="og:type" content="website"/>
+            <meta property="og:type" content="{
+                let $publication-id := $model?publication-id
+                let $pub.type := $config:PUBLICATIONS?($publication-id)?open-graph?("og:type")
+                return
+                    ($pub.type!.($node, $model), 'website')[1]
+            }"/>
         },
     "og:title"      : function($node, $model) {
             <meta property="og:title" content="{pages:generate-short-title($node, $model)}"/>
@@ -916,15 +930,20 @@ declare function config:tei-section-citation-meta($node as node()?, $model as ma
     let $citation_title :=
         <meta name="citation_title" content="{config:tei-full-breadcrumb-title($model?publication-id, $model?document-id, $model?section-id, false())}"/>
     let $shared-citation := config:tei-shared-citation-meta($node, $model)
+    let $citation-type :=
+        <meta name="DC.type" content="bookSection"/>
     return
-        ($citation_title, $shared-citation, $location)
+        ($citation-type, $citation_title, $shared-citation, $location)
 };
 
 declare function config:tei-document-citation-meta($node as node()?, $model as map(*)?) {
     let $citation_title :=
         <meta name="citation_title" content="{config:tei-full-breadcrumb-title($model?publication-id, $model?document-id, $model?section-id, false())}"/>
     let $shared-citation := config:tei-shared-citation-meta($node, $model)
-    return ($citation_title, $shared-citation)
+    let $citation-type :=
+        <meta name="DC.type" content="book"/>
+    return
+        ($citation-type, $citation_title, $shared-citation)
 };
 
 declare function config:tei-shared-citation-meta($node as node()?, $model as map(*)?) as element(meta)* {
