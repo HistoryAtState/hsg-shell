@@ -1,0 +1,51 @@
+<root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
+    <step value="countries">
+        <step key="country">
+            <ignore/>
+            <config>
+                <redirects>
+                    <redirect status="permanent">
+                        <old-url value="macedonia"/>
+                        <new-url value="north-macedonia"/>
+                    </redirect>
+                </redirects>
+            </config>
+        </step>
+        <ignore/>
+    </step>
+    <step value="people">
+        <step key="person">
+            <ignore/>
+            <config>
+                <redirects>
+                    <redirect>
+                        <old-url select="//person/old-ids/old-id/string(.)" key="old-id"/>
+                        <new-url select="//person[old-ids/old-id = $site:keys?old-id]/id/string(.)"/>
+                    </redirect>
+                </redirects>
+            </config>
+        </step>
+        <ignore/>
+        <config>
+            <src doc="people.xml"/>
+        </config>
+    </step>
+    <step value="publications">
+        <step value="short-history">
+            <step key="chapter">
+                <ignore/> 
+            </step>
+            <ignore/>
+        </step>
+        <ignore/>
+    </step>
+    <step value="departmenthistory">
+        <step value="short-history">
+            <redirect status="temporary">
+                <new-url value="/publications/short-history"/>
+            </redirect>
+        </step>
+        <ignore/>
+    </step>
+    <ignore/>
+</root>

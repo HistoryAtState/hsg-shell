@@ -81,7 +81,7 @@ declare function site:process($item, $mode-name as xs:string, $state as map(*)?)
   let $selector as function(*) := (
     $state?mode?($mode-name)?selector,
     site:mode-selector($mode-name),
-    function($item) {}
+    function($item) { site:local-name-selector($item) } (: Use local name selector by default:)
   )[1]
   
   let $templates as map(xs:string, function(*)) := (
@@ -92,7 +92,8 @@ declare function site:process($item, $mode-name as xs:string, $state as map(*)?)
   
   let $on-no-match as function(*) := (
     $state?mode?($mode-name)?on-no-match,
-    site:mode-on-no-match($mode-name)
+    site:mode-on-no-match($mode-name),
+    function($item, $state) { site:shallow-skip($item, $state) } (: Use shallow skip by default :)
   )[1]
   
   let $modes as map(*) := map:merge((
@@ -156,7 +157,7 @@ function site:shallow-skip($item, $state as map(*)){
 };
 
 declare
-  %site:on-no-match('config')
+  %site:on-no-match('config', 'redirects')
 function site:shallow-skip-with-attributes($item, $state as map(*)){
   for $i in $item/(node()|@*)
   return site:process($i, $state?current-mode, $state)
@@ -173,13 +174,8 @@ function site:sitemap-root($root as element(), $state as map(*)){
   let $_ := if (xmldb:collection-available($sitemap-dir)) then xmldb:remove($sitemap-dir) else ()
   let $_ := xmldb:create-collection('/db/apps/hsg-shell/resources', 'sitemaps')
   let $_ := cache:create('last-modified', map{})
-  let $urls :=
-    site:process(
-      $root/*,
-      'sitemap',
-      site:state-config-merge($state, site:get-config($root, $state))
-    )
-  let $maxurls := 10000
+  let $urls := site:process-with-config($root, $state)
+  let $maxurls := 100
   let $result := 
     if (count($urls) lt $maxurls)
     then
@@ -271,18 +267,7 @@ declare
   %site:match('step')
 function site:sitemap-step($step as element(), $state as map(*)?){
   let $_ := site:log(("SMG: processing step: ", $step/@value, $step/@key))
-  return
-    site:process(
-      $step/*,
-      'sitemap',
-      site:state-config-merge(
-        $state,
-        site:get-config(
-          $step,
-          $state
-        )
-      )
-    )
+  return site:process-with-config($step, $state)
 };
 
 (: convenience function for returning the config :)
@@ -396,6 +381,34 @@ function site:config-step-src-collection($collection as attribute(collection), $
         }
 };
 
+declare 
+  %site:mode('config')
+  %site:match('src/@doc')
+function site:config-step-src-doc($doc as attribute(doc), $state as map(*)) as map(*)*{
+  if ($doc/../@xq)
+  then ()
+  else
+    let $parent-urls as map(*)*:= $state?config?parent-urls
+    let $key-label as xs:string? := $doc/(ancestor::site:step[1])[@key]/string(@key)
+    for $parent-url in $parent-urls ! map:keys(.)
+        let $filepath := replace(resolve-uri($doc, replace($parent-urls?($parent-url)?filepath, '(.*)/$', '$1')||'/'), '(.*)/$', '$1')
+        let $filename.ext := tokenize($filepath, '/')[last()]
+        let $filename := replace($filename.ext, '(.*?)(\.[^.]+)?$', '$1')
+        return map{
+          'urls': map{
+            replace($parent-url, '(.*)/$', '$1')||'/'||$filename: map:merge((
+              map{'filepath': $filepath},
+              if ($key-label) 
+              then map{'keys': map:merge((
+                $parent-urls?($parent-url)?keys,
+                map{$key-label: $filename}
+              ))} 
+              else (map{'keys': $parent-urls?($parent-url)?keys})
+            ))
+          }
+        }
+};
+
 declare
   %site:mode('config')
   %site:match('src/@xq')
@@ -445,16 +458,18 @@ declare function site:get-urls-from-collection($collection as xs:string) as xs:s
   return site:get-urls-from-collection(resolve-uri($sub-collection, $collection||'/'))
 };
 
-(:  config-merge is a mini-framework for merging (config) maps; it combines keys,
-    looking for the key name annotation in one of the following functions: 
-    - site:config-merge-combine()
-    - site:config-merge-use-last()
-    - site:config-merge-use-first()
-    All of which follow similar behaviour correlating to the behaviour of
-    map:merge() options.  This a) allows for finer control of combining maps by key
-    and b) allows options such as 'combine' which are not supported by eXist's
-    xquery engine.
-:)
+(:
+ :  config-merge is a mini-framework for merging (config) maps; it combines keys,
+ :  looking for the key name annotation in one of the following functions: 
+ :  - site:config-merge-combine()
+ :  - site:config-merge-use-last()
+ :  - site:config-merge-use-first()
+ :  All of which follow similar behaviour correlating to the behaviour of
+ :  map:merge() options.  This a) allows for finer control of combining maps by key
+ :  and b) allows options such as 'combine' which are not supported by eXist's
+ :  xquery engine.
+ :)
+ 
 declare function site:config-merge($maps as map(*)*) as map(*)? {
   let $keys := distinct-values($maps ! map:keys(.))
   return map:merge((
@@ -724,4 +739,124 @@ declare function site:get-url() {
 declare function site:get-uri() {
   (: imported from old controller.xql :)
     (request:get-header("nginx-request-uri"), request:get-uri())[1]
+};
+
+declare function site:generate-redirects($cfg) {
+    site:process($cfg, 'redirects')
+};
+
+declare
+    %site:mode('redirects')
+    %site:match('root', 'step')
+function site:process-with-config($e as element(), $state as map(*)) {
+    let $conf := site:get-config($e, $state) 
+    let $new.state := site:state-config-merge($state, $conf)
+    return site:process($e/*, $state?current-mode, $new.state)
+};
+
+declare
+    %site:mode('redirects')
+    %site:match('redirect')
+function site:redirect($redirect as element(site:redirect), $state as map(*)) {
+    let $status as xs:string := xs:string(($redirect/@status, 'permanent')[1])
+    let $status-code := 
+        switch($status)
+        case 'permanent' return '301'
+        case 'temporary' return '302'
+        default return '301'
+    let $old-url as element(site:old-url)? := $redirect/site:old-url
+    return if ($old-url) then
+        let $new.state := site:state-config-merge($state, map{
+            'redirect-status': $status-code
+        })
+        return site:process($redirect/site:old-url, $state?current-mode, $new.state)
+    else
+        let $new.state := site:state-config-merge($state, map{
+            'redirect-status': $status-code,
+            'redirects': 
+                for $url in $state?config?urls ! map:keys(.) 
+                return map{'from': $url}
+        })
+        return site:process($redirect/site:new-url, $state?current-mode, $new.state)
+    
+};
+
+declare 
+    %site:mode('redirects')
+    %site:match('old-url/@value')
+function site:redirect-from-value($value as attribute(value), $state as map(*)) {
+    let $urls := $state?config?urls ! map:keys(.)
+    let $conf := map{'redirects': for $url in $urls return map{
+        'from': $url || '/' || $value,
+        'parent-path': $url
+    }}
+    return site:process($value/ancestor::site:redirect[1]/site:new-url, $state?current-mode, site:state-config-merge($state, $conf))
+};
+
+declare %site:mode('redirects') %site:match('old-url/@select')
+function site:redirect-from-select($select as attribute(select), $state as map(*)) {
+    let $urls := $state?config?urls ! map:keys(.)
+    let $conf := map{ 'redirects':
+        for $url in $urls
+            for $filepath in $state?config?urls?($url)?filepath
+                for $last in util:eval(
+                    ('doc("'||$filepath||'")'||$select),
+                    false(), 
+                    ('site:keys', $state?config?urls?($url)?keys)
+                )
+                let $key := if ($select/../@key) then map{'keys':map{$select/../@key: $last}} else ()
+                return map:merge((map{
+                    'from': concat($url, '/', $last),
+                    'parent-path': $url
+                }, $key))
+        }
+    return site:process($select/ancestor::site:redirect[1]/site:new-url, $state?current-mode, site:state-config-merge($state, $conf))
+};
+
+declare %site:mode('redirects') %site:match('old-url/@keyval')
+function site:redirect-from-keyval($keyval as attribute(keyval), $state as map(*)) {
+    let $urls := $state?config?urls ! map:keys(.)
+    let $conf := map{
+        'redirects':
+            for $url in $urls
+                let $keys := map:merge(($state?keys, $state?config?urls?($url)?keys), map{'duplicates':'use-last'})
+                return map{
+                    'from': $url || '/' || $keys?($keyval),
+                    'parent-path': $url
+                }
+    }
+    return site:process($select/ancestor::site:redirect[1]/site:new-url, $state?current-mode, site:state-config-merge($state, $conf))
+};
+
+declare %site:mode('redirects') %site:match('new-url/@value')
+function site:redirect-to-value($value as attribute(value), $state as map(*)) {
+    for $redirect in $state?config?redirects
+    return map {
+        'status':   $state?config?redirect-status,
+        'from'  :   $redirect?from,
+        'to'    :   resolve-uri($value, $redirect?parent-path || '/')
+    }
+};
+
+declare %site:mode('redirects') %site:match('new-url/@select')
+function site:redirect-to-select($select as attribute(select), $state as map(*)) {
+    for $redirect in $state?config?redirects
+    let $url := $state?config?urls?($redirect?parent-path)
+    let $filepath := $url?filepath
+    let $keys as map(*)* := map:merge((
+            $url?keys,
+            $redirect?keys
+        ), map{'duplicates': 'use-last'})
+    return map {
+        'status':   $state?config?redirect-status,
+        'from'  :   $redirect?from,
+        'to'    :   resolve-uri(
+                        util:eval(
+                             ('doc("'||$filepath||'")'||$select),
+                             false(), 
+                             (xs:QName('site:keys'), $keys)
+                         ),
+                         $redirect?parent-path || '/'
+                     )
+    }
 };
