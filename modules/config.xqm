@@ -48,14 +48,23 @@ declare variable $config:odd-source := $config:odd-root || "/source";
 
 declare variable $config:odd-compiled := $config:odd-root || "/compiled";
 
-declare variable $config:odd := "frus.odd";
+declare variable $config:default-odd := "frus.odd";
+
+declare variable $config:odd := $config:default-odd;
+
+declare variable $config:output := "transform";
+
+declare variable $config:output-root := $config:app-root || "/" || $config:output;
+
+(: declare variable $config:module-config := doc($config:odd-source || "/configuration.xml")/*; :)
+declare variable $config:module-config := doc($config:odd-root || "/configuration.xml")/*;
 
 (: Default transformation function: calls tei simple pm using frus.odd :)
+(:
 declare variable $config:odd-transform-default := function($xml, $parameters) {
     pm-frus:transform($xml, $parameters)
 };
-
-declare variable $config:module-config := doc($config:odd-source || "/configuration.xml")/*;
+:)
 
 declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes";
 
