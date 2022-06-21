@@ -42,29 +42,32 @@ declare variable $config:repo-descriptor := doc(concat($config:app-root, "/repo.
 
 declare variable $config:expath-descriptor := doc(concat($config:app-root, "/expath-pkg.xml"))/expath:package;
 
-declare variable $config:odd-root := $config:app-root || "/resources/odd";
-
-declare variable $config:odd-source := $config:odd-root || "/source";
-
-declare variable $config:odd-compiled := $config:odd-root || "/compiled";
-
 declare variable $config:default-odd := "frus.odd";
 
 declare variable $config:odd := $config:default-odd;
+
+declare variable $config:odd-root := $config:app-root || "/resources/odd";
+
+declare variable $config:odd-source := $config:odd-root || "/source";
 
 declare variable $config:output := "transform";
 
 declare variable $config:output-root := $config:app-root || "/" || $config:output;
 
-(: declare variable $config:module-config := doc($config:odd-source || "/configuration.xml")/*; :)
-declare variable $config:module-config := doc($config:odd-root || "/configuration.xml")/*;
-
 (: Default transformation function: calls tei simple pm using frus.odd :)
-(:
 declare variable $config:odd-transform-default := function($xml, $parameters) {
     pm-frus:transform($xml, $parameters)
 };
-:)
+
+declare variable $config:module-config := doc($config:odd-source || "/configuration.xml")/*;
+
+(:
+ : The default to use for determining the amount of content to be shown
+ : on a single page. Possible values: 'div' for showing entire divs (see
+ : the parameters below for further configuration), or 'page' to browse
+ : a document by actual pages determined by TEI pb elements.
+ :)
+declare variable $config:default-view := "body";
 
 declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes";
 
