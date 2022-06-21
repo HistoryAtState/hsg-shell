@@ -67,7 +67,7 @@ declare variable $config:module-config := doc($config:odd-source || "/configurat
  : the parameters below for further configuration), or 'page' to browse
  : a document by actual pages determined by TEI pb elements.
  :)
-declare variable $config:default-view := "body";
+declare variable $config:default-view := "div";
 
 declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes";
 
