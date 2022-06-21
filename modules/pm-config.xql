@@ -1,8 +1,8 @@
 xquery version "3.0";
 
-module namespace pm-config="http://www.tei-c.org/tei-simple/pm-config";
+module namespace pm-config="http://history.state.gov/ns/site/hsg/pm-config";
 
-import module namespace config="http://www.tei-c.org/tei-simple/config" at "config.xqm";
+import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util";
 
 declare variable $pm-config:web-transform := pm-config:process(?, ?, ?, "web");
