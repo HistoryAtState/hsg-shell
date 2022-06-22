@@ -46,7 +46,10 @@ declare
         '<meta property="og:image:width" content="400"/>',
         '<meta property="og:image:height" content="400"/>',
         '<meta property="og:image:alt" content="Department of State heraldic shield"/>',
-        '<meta property="og:url" content="test-url"/>'
+        '<meta property="og:url" content="test-url"/>',
+        '<meta name="DC.type" content="webpage"/>',
+        '<meta name="citation_public_url" content="test-url"/>',
+        '<meta name="accessDate" content="2022-06-22"/>'
     )
 function x:open-graph-defaults() {
     let $node:= ()

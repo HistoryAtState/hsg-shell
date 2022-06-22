@@ -184,7 +184,7 @@ declare variable $config:PUBLICATIONS :=
             "open-graph": map{
                     "og:type": function($node as node()?, $model as map(*)?) {'document'}
                 },
-            "citation-meta": function($node as node()?, $model as map(*)?) as element(meta)* {
+            "citation-meta": function($node as node()?, $model as map(*)?) as map(*) {
                     config:tei-citation-meta($node, $model)
                 },
             "breadcrumb-title": 
@@ -719,10 +719,10 @@ declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
             for $img in $model?data//tei:graphic
             return
                 <meta property="og:image" content="https://static.history.state.gov/{$model?base-path}/{$img/@url}"/>,
-            <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>,
-            <meta property="og:image:width" content="400"/>,
-            <meta property="og:image:height" content="400"/>,
-            <meta property="og:image:alt" content="Department of State heraldic shield"/>
+                <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>,
+                <meta property="og:image:width" content="400"/>,
+                <meta property="og:image:height" content="400"/>,
+                <meta property="og:image:alt" content="Department of State heraldic shield"/>
            
         },
     "og:type"       : function($node, $model) {
@@ -743,10 +743,16 @@ declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
             <meta property="og:url" content="{$model?url}"/>
         },
     "citation"      : function ($node, $model) {
-            let $citation-meta as function(*)? := $config:PUBLICATIONS?($model?publication-id)?citation-meta
-            return if(exists($citation-meta)) then
-                $citation-meta($node, $model)
-            else ()              
+            let $cls as array(*) :=
+                let $citation-meta as function(*)? := $config:PUBLICATIONS?($model?publication-id)?citation-meta
+                return if (exists($model?citation-meta)) then 
+                    array { $model?citation-meta }
+                else if (exists($citation-meta)) then
+                    array { $citation-meta($node, $model) }
+                else 
+                    array { config:default-citation-meta($node, $model) }
+            let $metas as element(meta)* := config:cls-to-html($cls)
+            return $metas
         }
     };
 
@@ -908,65 +914,251 @@ declare function config:visits-breadcrumb-title($id as xs:string, $collection as
 declare function config:tei-citation-meta($node as node()?, $model as map(*)?) {
     let $publication-id := $model?publication-id
     let $section-id := $model?section-id
+    let $doc := $config:PUBLICATIONS?($publication-id)?select-document($model?document-id)
+    let $section := $config:PUBLICATIONS?($publication-id)?select-section($model?document-id, $section-id)
     return if (exists($section-id)) then
-        config:tei-section-citation-meta($node, $model)
+        config:tei-section-citation-meta($node, $model, $doc, $section)
     else 
-        config:tei-document-citation-meta($node, $model)
+        config:tei-document-citation-meta($node, $model, $doc)
 };
 
-declare function config:tei-section-citation-meta($node as node()?, $model as map(*)?) as element(meta)* {
-    let $section := $config:PUBLICATIONS?($model?publication-id)?select-section($model?document-id, $model?section-id)
+declare function config:tei-section-citation-meta($node as node()?, $model as map(*)?) as map(*) {
+    let $publication-id := $model?publication-id
+    let $section-id := $model?section-id
+    let $doc := $config:PUBLICATIONS?($publication-id)?select-document($model?document-id)
+    let $section := $config:PUBLICATIONS?($publication-id)?select-section($model?document-id, $section-id)
+    return config:tei-section-citation-meta($node, $model, $doc, $section)
+};
+
+declare function config:tei-section-citation-meta($node as node()?, $model as map(*)?, $doc as document-node()?, $section as node()?) as map(*) {
     let $location := 
         if ($section/@type eq 'document') then
-            <meta name="citation_firstpage" content="Document {$section/@n}"/>
+            'Document '||$section/@n
         else if ($section/self::tei:pb) then (
-            <meta name="citation_firstpage" content="{$section/replace(@n, '\[?(.+?)\]?', '$1')}"/>,
-            <meta name="citation_lastpage"  content="{$section/replace(@n, '\[?(.+?)\]?', '$1')}"/>
+            $section/replace(@n, '\[?(.+?)\]?', '$1')
         )
         else (
-            <meta name="citation_firstpage" content="{($section//text()[normalize-space(.) ne ''])[1]/preceding::tei:pb[1]/replace(@n, '\[?(.+?)\]?', '$1')}"/>,
-            <meta name="citation_lastpage"  content="{($section//text()[normalize-space(.) ne ''])[last()]/preceding::tei:pb[1]/replace(@n, '\[?(.+?)\]?', '$1')}"/>
+            ($section//text()[normalize-space(.) ne ''])[1]/preceding::tei:pb[1]/replace(@n, '\[?(.+?)\]?', '$1') ||
+            '-' ||
+            ($section//text()[normalize-space(.) ne ''])[last()]/preceding::tei:pb[1]/replace(@n, '\[?(.+?)\]?', '$1')
         )
-    let $citation_title :=
-        <meta name="citation_title" content="{config:tei-full-breadcrumb-title($model?publication-id, $model?document-id, $model?section-id, false())}"/>
-    let $shared-citation := config:tei-shared-citation-meta($node, $model)
-    let $citation-type :=
-        <meta name="DC.type" content="bookSection"/>
-    return
-        ($citation-type, $citation_title, $shared-citation, $location)
+    let $citation_title := config:tei-full-breadcrumb-title($model?publication-id, $model?document-id, $model?section-id, false())
+    let $shared-citation := config:tei-shared-citation-meta($node, $model, $doc)
+    let $book_title := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='volume']/string(.)
+    return map:merge((
+        $shared-citation,
+        map { 'type': "chapter" },
+        if (exists($citation_title)) then map{ 'title': $citation_title } else (),
+        if (exists($book_title)) then map{'container-title': $book_title} else (),
+        if (exists($location)) then map{'page': $location} else ()
+    ), map{'duplicates':'use-last'})
 };
 
-declare function config:tei-document-citation-meta($node as node()?, $model as map(*)?) {
-    let $citation_title :=
-        <meta name="citation_title" content="{config:tei-full-breadcrumb-title($model?publication-id, $model?document-id, $model?section-id, false())}"/>
-    let $shared-citation := config:tei-shared-citation-meta($node, $model)
-    let $citation-type :=
-        <meta name="DC.type" content="book"/>
-    return
-        ($citation-type, $citation_title, $shared-citation)
+declare function config:tei-document-citation-meta($node as node()?, $model as map(*)?) as map(*) {
+    let $publication-id := $model?publication-id
+    let $doc := $config:PUBLICATIONS?($publication-id)?select-document($model?document-id)
+    return config:tei-document-citation-meta($node, $model, $doc)
 };
 
-declare function config:tei-shared-citation-meta($node as node()?, $model as map(*)?) as element(meta)* {
+declare function config:tei-document-citation-meta($node as node()?, $model as map(*)?, $doc as document-node()?) as map(*) {
+    let $citation_title :=
+        config:tei-full-breadcrumb-title($model?publication-id, $model?document-id, $model?section-id, false())
+    let $shared-citation := config:tei-shared-citation-meta($node, $model, $doc)
+    return map:merge((
+        $shared-citation,
+        map { 'type': "book" },
+        if (exists($citation_title)) then map{ 'title': $citation_title} else ()
+    ), map{'duplicates': 'use-last'})
+};
+
+declare function config:tei-shared-citation-meta($node as node()?, $model as map(*)?, $doc as document-node()?) as map(*) {
     let $doc := $config:PUBLICATIONS?($model?publication-id)?select-document($model?document-id)
     let $editors := 
         for $editor in $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:editor[@role eq 'primary']
-        return
-            <meta name="citation_editor" content="{$editor}"/>
-    let $book_title := 
-        <meta name="citation_book_title" content="{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='volume']}"/>
-    let $series_title := 
-        <meta name="citation_series_title" content="{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='series']}"/>
-    let $volume := 
-        <meta name="citation_volume" content="{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='volume-number']}"/>
-    let $publisher :=
-        <meta name="citation_publisher" content="{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:publisher}"/>
-    let $date :=
-        let $pubdate := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type eq 'publication-date']
-        let $label as xs:string := if (matches($pubdate, '^\d{4}')) then 'citation_year' else 'citation_date'
-        return
-            <meta name="{$label}" content="{$pubdate}"/>
-    let $isbn := 
-        <meta name="citation_isbn" content="{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type eq 'isbn-13']}"/>
-    return ($editors, $book_title, $series_title, $volume, $publisher, $date, $isbn)
+        let $name-parts := tokenize($editor, '\s')
+        return map{
+            'family':   $name-parts[last()],
+            'given':    string-join($name-parts[position() ne last()], ' ')
+        }
+    let $series_title :=    $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='series']/string(.)
+    let $series_number :=  $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='sub-series']/string(.)
+    let $volume :=     $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='volume-number']/string(.)
+    let $publisher := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:publisher/string(.)
+    let $issued :=  $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type eq 'publication-date']/string(.)
+    let $isbn := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type eq 'isbn-13']/string(.)
+    return map:merge((
+        config:default-citation-meta($node, $model),
+        if (exists($editors)) then map{'editor': array { $editors }} else (),
+        if (exists($series_title)) then map{'collection-title': $series_title} else (),
+        if (exists($series_number)) then map{'collection-number': $series_number} else (),
+        if (exists($volume)) then map{'volume':$volume} else (),
+        if (exists($publisher)) then map{'publisher': $publisher} else (),
+        if (exists($issued)) then map{'issued': map{'raw': $issued} } else (),
+        if (exists($isbn)) then map { 'ISBN': $isbn } else ()
+    ), map {'duplicates': 'use-last'})
         
+};
+
+declare function config:default-citation-meta($node as node()?, $model as map(*)) as map(*)? {
+    let $accessed := current-date()
+    return map:merge((
+        map{ 'id':  $model?local-uri },
+        map{ 'type':    'webpage'},
+        map{ 'accessed':    
+            map{
+                'date-parts':   array {
+                    array{
+                        year-from-date($accessed),
+                        month-from-date($accessed),
+                        day-from-date($accessed)
+                    }
+                }
+            }
+        },
+        map{ 'URL': $model?url }
+    ), map{'duplicates': 'use-last'})
+};
+
+declare %templates:wrap function config:csl-json($node as node(), $model as map(*)) as xs:string? {
+    if (exists($model?citation-meta)) then 
+        serialize(array { $model?citation-meta }, map{'method':'json'})
+    else
+        serialize(array { config:default-citation-meta($node, $model) }, map{'method':'json'})
+};
+
+declare variable $config:cls-to-zotero as map(xs:string, function(*)) := map {    
+    "ISBN":
+        function($value) as element(meta)*{
+            <meta name="citation_isbn" content="{$value}"/>
+        },
+    "volume":
+        function($value) as element(meta)*{
+            <meta name="citation_volume" content="{$value}"/>
+        },
+    "type":
+        function($value) as element(meta)*{
+            let $type-mapping := map{
+                "graphic": "artwork",
+                "song": "audioRecording",
+                "bill": "bill",
+                "post-weblog": "blogPost",
+                "book": "book",
+                "chapter": "bookSection",
+                "legal_case": "case",
+                "paper-conference": "conferencePaper",
+                "entry-dictionary": "dictionaryEntry",
+                "document": "document",
+                "entry-encyclopedia": "encyclopediaArticle",
+                "post": "forumPost",
+                "interview": "interview",
+                "article-journal": "journalArticle",
+                "personal_communication": "letter",
+                "article-magazine": "magazineArticle",
+                "manuscript": "manuscript",
+                "map": "map",
+                "article-newspaper": "newspaperArticle",
+                "patent": "patent",
+                "article": "preprint",
+                "speech": "presentation",
+                "report": "report",
+                "legislation": "statute",
+                "thesis": "thesis",
+                "broadcast": "tvBroadcast",
+                "motion_picture": "videoRecording",
+                "webpage": "webpage"
+            }
+            for $type in $type-mapping?($value)
+            return <meta name="DC.type" content="{$type}"/>
+        },
+    "editor":
+        function($editors) as element(meta)*{
+            (:eg "editor": [
+        			{
+        				"family": "Lawler",
+        				"given": "Daniel J."
+        			},
+        			{
+        				"family": "Mahan",
+        				"given": "Erin R."
+        			}
+        		]
+        		:)
+            for $editor in array:flatten($editors)
+            return <meta name="citation_editor" content="{config:cls-name($editor)}"/>
+        },
+    "publisher-place":
+        function($value) as element(meta)*{
+            <meta name="place" content="{$value}"/>
+        },
+    "publisher":
+        function($value) as element(meta)*{
+            <meta name="citation_publisher" content="{$value}"/>
+        },
+    "container-title":
+        function($value) as element(meta)*{
+            <meta name="citation_book_title" content="{$value}"/>
+        },
+    "title":
+        function($value) as element(meta)*{
+            <meta name="citation_title" content="{$value}"/>
+        },
+    "collection-number":
+        function($value) as element(meta)*{
+            <meta name="citation_series_number" content="{$value}"/>
+        },
+    "page":
+        function($value) as element(meta)*{
+            if (contains($value, '-')) then (
+                (: capture as page range :)
+                <meta name="citation_firstpage" content="{substring-before($value, '-')}"/>,
+                <meta name="citation_lastpage" content="{substring-after($value, '-')}"/>
+            )
+            else
+                (: capture as a single page/location reference :)
+                <meta name="citation_firstpage" content="{$value}"/>
+        },
+    "issued":
+        function($value) as element(meta)*{
+            <meta name="citation_date" content="{config:cls-date($value)}"/>
+        },
+    "URL":
+        function($value) as element(meta)*{
+            <meta name="citation_public_url" content="{$value}"/>
+        },
+    "accessed":
+        function($value) as element(meta)*{
+            <meta name="accessDate" content="{config:cls-date($value)}"/>
+        },
+    "collection-title":
+        function($value) as element(meta)*{
+            <meta name="citation_series_title" content="{$value}"/>
+        }
+};
+
+declare function config:cls-name($name as map(*)) {
+    string-join(($name?given, $name?family), ' ')
+};
+
+declare function config:cls-date($date as map(*)) {
+    if ($date?raw castable as xs:date or matches($date?raw, '\d{4}(-\d{2}(-\d{2})?)?')) then
+        $date?raw
+    else if (array:size($date?date-parts) eq 1) then
+        config:cls-date-parts($date?date-parts?1)
+    else ()  
+};
+
+declare function config:cls-date-parts($date as array(*)) {
+    let $d-seq := array:flatten($date)
+    let $year  := $d-seq[1]
+    let $month := $d-seq[2] ! format-number(., '00')
+    let $day   := $d-seq[3] ! format-number(., '00')
+    return string-join(($year, $month, $day), '-')
+};
+
+declare function config:cls-to-html($json as array(map(*))) as element(meta)* {
+    let $citation := $json?1
+    for $key in map:keys($citation)
+    let $value := $citation?($key)
+    let $lookup as function(*)? := $config:cls-to-zotero?($key)
+    return if (exists($lookup)) then $lookup($value) else ()
 };
