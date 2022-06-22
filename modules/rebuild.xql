@@ -19,9 +19,9 @@ declare option output:media-type "text/html";
                 for $module in ("web")
                 for $file in pmu:process-odd(
                         odd:get-compiled($config:odd-source, $source),
-                        $config:odd-source,
-                        $module,
                         $config:odd-compiled,
+                        $module,
+                        $config:odd-root || $config:odd-compiled,
                         $config:module-config)?("module")
                 return
                     <li>{ $file }</li>
