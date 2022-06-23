@@ -19,8 +19,6 @@ xquery version "3.1";
 
 module namespace nav="http://www.tei-c.org/tei-simple/navigation";
 
-import module namespace tei-nav="http://www.tei-c.org/tei-simple/navigation/tei" at "navigation-tei.xql";
-
 declare function nav:document-type($div as element()) {
     switch (namespace-uri($div))
         case "http://www.tei-c.org/ns/1.0" return
