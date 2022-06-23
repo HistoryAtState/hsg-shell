@@ -50,6 +50,8 @@ declare variable $config:odd-root := $config:app-root || "/resources/odd";
 
 declare variable $config:odd-source := $config:odd-root || "/source";
 
+declare variable $config:odd-compiled := $config:odd-root || "/compiled";
+
 declare variable $config:output := "transform";
 
 declare variable $config:output-root := $config:app-root || "/" || $config:output;
