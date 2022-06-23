@@ -4,7 +4,6 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 
 import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util";
 import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd";
-import module namespace tpu="http://www.tei-c.org/tei-publisher/util" at "util.xql";
 
 declare namespace expath="http://expath.org/ns/pkg";
 declare namespace output="http://www.w3.org/2010/xslt-xquery-serialization";
@@ -40,29 +39,20 @@ declare function local:get-line($src, $line as xs:int) {
         replace($lines[$line], "^\s*(.*?)", "$1")
 };
 
-let $odd := request:get-parameter("odd", ())
-let $odd :=
-    if ($odd) then
-        $odd
-    else
-        xmldb:get-child-resources($config:odd-root)[ends-with(., ".odd")]
+let $odd := xmldb:get-child-resources($config:odd-root)[ends-with(., ".odd")]
 let $result :=
     for $source in $odd
-    let $odd := doc($config:odd-root || "/" || $source)
-    let $pi := tpu:parse-pi($odd, ())
-    for $module in
-        if ($pi?output) then
-            tokenize($pi?output)
-        else
-            ("web", "print", "latex", "epub")
+    (: for $module in ("web", "print", "latex", epub") :)
+    for $module in ("web", "epub")
     return
         try {
             for $file in pmu:process-odd(
-                odd:get-compiled($config:odd-root, $source),
-                $config:output-root,
-                $module,
-                "../" || $config:output,
-                $config:module-config)?("module")
+                    odd:get-compiled($config:odd-source, $source),
+                    $config:output-root,
+                    $module,
+                    "../" || $config:output,
+                    $config:module-config)?("module")
+
             let $src := util:binary-to-string(util:binary-doc($file))
             let $compiled := util:compile-query($src, ())
             return

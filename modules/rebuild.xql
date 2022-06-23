@@ -21,7 +21,7 @@ declare option output:media-type "text/html";
                         odd:get-compiled($config:odd-source, $source),
                         $config:odd-compiled,
                         $module,
-                        $config:odd-root || $config:odd-compiled,
+                        $config:odd-compiled,
                         $config:module-config)?("module")
                 return
                     <li>{ $file }</li>

@@ -5,7 +5,7 @@
  :)
 xquery version "3.1";
 
-module namespace model = "http://www.tei-c.org/tei-simple/models/frus.odd/web";
+module namespace model = "http://www.tei-c.org/pm/models/frus/web/module";
 
 declare default element namespace "http://www.tei-c.org/ns/1.0";
 
