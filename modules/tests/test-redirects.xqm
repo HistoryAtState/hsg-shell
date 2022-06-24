@@ -16,7 +16,7 @@ declare variable $x:redirects as map(*)* := site:generate-redirects($x:site);
  :)
  
 declare %test:assertEquals("/countries/north-macedonia") function x:test-hard-coded-redirect-to(){
-    $x:redirects[.?from eq '/countries/macedonia']?to
+    $x:redirects?('/countries/macedonia')?to
 };
  
 (:
@@ -26,7 +26,7 @@ declare %test:assertEquals("/countries/north-macedonia") function x:test-hard-co
  :)
 
 declare %test:assertEquals("301") function x:test-hard-coded-redirect-status(){
-    $x:redirects[.?from eq '/countries/macedonia']?status
+    $x:redirects('/countries/macedonia')?status
 };
 
 (:
@@ -36,7 +36,7 @@ declare %test:assertEquals("301") function x:test-hard-coded-redirect-status(){
  :)
 
 declare %test:assertEquals("/people/james-makila") function x:test-calculated-redirect-to(){
-    $x:redirects[.?from eq '/people/jones-malika']?to
+    $x:redirects?('/people/jones-malika')?to
 };
 
 (:
@@ -46,7 +46,7 @@ declare %test:assertEquals("/people/james-makila") function x:test-calculated-re
  :)
 
 declare %test:assertEquals("301") function x:test-calculated-redirect-status(){
-    $x:redirects[.?from eq '/people/jones-malika']?status
+    $x:redirects?('/people/jones-malika')?status
 };
 
 (:
@@ -57,7 +57,7 @@ declare %test:assertEquals("301") function x:test-calculated-redirect-status(){
 
 declare %test:assertTrue function x:test-calculated-redirect-no-redirect(){
     exists($x:redirects) and
-    empty($x:redirects[.?from eq '/people/james-makila']?to)
+    empty($x:redirects?('/people/james-makila')?to)
 };
 
 (:
@@ -67,7 +67,7 @@ declare %test:assertTrue function x:test-calculated-redirect-no-redirect(){
  :)
 
 declare %test:assertEquals("/publications/short-history") function x:test-prefix-redirect-to(){
-    $x:redirects[.?from eq '/departmenthistory/short-history']?to
+    $x:redirects?('/departmenthistory/short-history')?to
 };
 
 (:
@@ -77,5 +77,5 @@ declare %test:assertEquals("/publications/short-history") function x:test-prefix
  :)
 
 declare %test:assertEquals("302") function x:test-prefix-redirect-status(){
-    $x:redirects[.?from eq '/departmenthistory/short-history']?status
+    $x:redirects?('/departmenthistory/short-history')?status
 };

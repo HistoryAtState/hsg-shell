@@ -742,7 +742,7 @@ declare function site:get-uri() {
 };
 
 declare function site:generate-redirects($cfg) {
-    site:process($cfg, 'redirects')
+    map:merge(site:process($cfg, 'redirects'), map{'duplicates':'use-last'})
 };
 
 declare
@@ -832,9 +832,10 @@ declare %site:mode('redirects') %site:match('new-url/@value')
 function site:redirect-to-value($value as attribute(value), $state as map(*)) {
     for $redirect in $state?config?redirects
     return map {
-        'status':   $state?config?redirect-status,
-        'from'  :   $redirect?from,
-        'to'    :   resolve-uri($value, $redirect?parent-path || '/')
+        $redirect?from: map{
+           'status':   $state?config?redirect-status,
+           'to'    :   resolve-uri($value, $redirect?parent-path || '/')
+       }
     }
 };
 
@@ -848,15 +849,16 @@ function site:redirect-to-select($select as attribute(select), $state as map(*))
             $redirect?keys
         ), map{'duplicates': 'use-last'})
     return map {
-        'status':   $state?config?redirect-status,
-        'from'  :   $redirect?from,
-        'to'    :   resolve-uri(
-                        util:eval(
-                             ('doc("'||$filepath||'")'||$select),
-                             false(), 
-                             (xs:QName('site:keys'), $keys)
-                         ),
-                         $redirect?parent-path || '/'
-                     )
+        $redirect?from: map{
+            'status':   $state?config?redirect-status,
+            'to'    :   resolve-uri(
+                            util:eval(
+                                 ('doc("'||$filepath||'")'||$select),
+                                 false(), 
+                                 (xs:QName('site:keys'), $keys)
+                             ),
+                             $redirect?parent-path || '/'
+                         )
+        }
     }
 };
