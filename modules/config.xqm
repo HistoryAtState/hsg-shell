@@ -1001,8 +1001,18 @@ declare function config:tei-shared-citation-meta($node as node()?, $model as map
 
 declare function config:default-citation-meta($node as node()?, $model as map(*)) as map(*)? {
     let $accessed := current-date()
+    let $url := (
+        $model?url,
+        try {request:get-url()}
+        catch err:XPDY0002 { 'test-url' } (: Some contexts e.g. xquery testing have no request context :)
+    )[1]
+    let $local-uri := (
+        $model?local-uri,
+        try {substring-after($url, $pages:app-root)}
+        catch err:XPDY0002 { 'test-path' } (: Some contexts e.g. xquery testing have no request context :)
+    )[1]
     return map:merge((
-        map{ 'id':  $model?local-uri },
+        map{ 'id':  $local-uri },
         map{ 'type':    'webpage'},
         map{ 'accessed':    
             map{
@@ -1015,7 +1025,7 @@ declare function config:default-citation-meta($node as node()?, $model as map(*)
                 }
             }
         },
-        map{ 'URL': $model?url }
+        map{ 'URL': $url }
     ), map{'duplicates': 'use-last'})
 };
 
