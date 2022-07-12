@@ -154,3 +154,8 @@ html input[disabled] {
     text-align: right;
   }
 }
+
+#hsg-cite-footer-button{
+  display: inline-block;
+  padding: $padding-large-vertical $padding-large-horizontal;
+}

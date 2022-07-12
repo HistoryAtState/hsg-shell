@@ -231,6 +231,14 @@
                 </div>
             </section>
         </div>
+        
+        <div class="hsg-cite-footer">
+            <section class="hsg-grid">
+                <div class="container">
+                    <strong><a href="#" id="hsg-cite-footer-button">Cite this resource</a></strong>
+                </div>
+            </section>
+        </div>
 
         <footer class="hsg-footer" data-template="app:fix-links">
             <section class="hsg-grid hsg-footer-top">
@@ -321,14 +329,19 @@
         <script type="text/javascript"
             src="$app/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"
             data-template="app:fix-this-link"/>
+        <script type="text/javascript"
+            src="$app/resources/scripts/citeproc.min.js"
+            data-template="app:fix-this-link"/>
         <script type="text/javascript" async="async" src="$app/resources/scripts/app.js"
             data-template="app:fix-this-link"/>
         <script type="text/javascript" async="async" src="$app/resources/scripts/metagrid.js"
             data-template="app:fix-this-link"/>
+        <script type="text/javascript" async="async" src="$app/resources/scripts/cite.js"
+            data-template="app:fix-this-link" id="cite-script"/>
         <!-- @endif -->
         <!-- @if PRODUCTION=true -->
         <script type="text/javascript" async="async" src="$app/resources/scripts/app.all.js"
-            data-template="app:fix-this-link"/>
+            data-template="app:fix-this-link" id="cite-script"/>
         <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount',
             'UA-23344799-1']); _gaq.push(['_setDomainName', 'history.state.gov']);
             _gaq.push(['_trackPageview']); (function() {{ var ga = document.createElement('script');
