@@ -1152,7 +1152,7 @@ declare function config:cls-name($name as map(*)) {
 declare function config:cls-date($date as map(*)) {
     if ($date?raw castable as xs:date or matches($date?raw, '\d{4}(-\d{2}(-\d{2})?)?')) then
         $date?raw
-    else if (array:size($date?date-parts) eq 1) then
+    else if ($date?date-parts!array:size(.) eq 1) then
         config:cls-date-parts($date?date-parts?1)
     else ()  
 };
