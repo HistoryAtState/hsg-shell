@@ -679,12 +679,12 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
     switch ($sort-by)
         case "date-asc" return
             for $hit in $hits
-            order by ft:field($hit, "hsg-date-min") ascending empty greatest, ft:score($hit) descending
+            order by ft:binary-field($hit, "hsg-date-min", "xs:dateTime") ascending empty greatest, ft:score($hit) descending
             return
                 $hit
         case "date-desc" return
             for $hit in $hits
-            order by ft:field($hit, "hsg-date-min") descending empty least, ft:score($hit) descending
+            order by ft:binary-field($hit, "hsg-date-min", "xs:dateTime") descending empty least, ft:score($hit) descending
             return
                 $hit
         default (: case "relevance" :) return
