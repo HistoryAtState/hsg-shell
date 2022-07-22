@@ -113,14 +113,13 @@ jQuery(function ($) {
     var citeproc = new CSL.Engine(options, styles[style]);
     var citationResult = citeproc.processCitationCluster(baseCitation(citationData.id), [], []);
     var citation_errors = citationResult[0].citation_errors;
-    var citation = citationResult[1][0][1]
     if (citation_errors.length) {
       citation_errors.forEach(function (err) {
         console.error(err);
       });
       cb(true, citation_errors);
     } else {
-      cb(false, citation);
+      cb(false, citeproc.makeBibliography()[1].join(''));
     }
   }
   function getCitation(style) {
@@ -164,7 +163,10 @@ jQuery(function ($) {
     );
     function copyToClipboard(textarea) {
       if (navigator.clipboard) {
-        navigator.clipboard.writeText(textarea.text())
+        navigator.clipboard.write([new ClipboardItem({
+          'text/plain': new Blob([getCitation(textarea.data('style')).text], { type: 'text/plain' }),
+          'text/html': new Blob([getCitation(textarea.data('style')).html], { type: 'text/html' }),
+        })]);
       } else {
         textarea.select();
         document.execCommand('copy');
@@ -178,7 +180,7 @@ jQuery(function ($) {
       btnAnchor.css('opacity', '1');
       $('.citation-text').each(function (i, textarea) {
         textarea = $(textarea);
-        textarea.text(getCitation(textarea.data('style')).text)
+        textarea.val(getCitation(textarea.data('style')).text.trim())
       });
       if (error) {
         btnAnchor.removeAttr('href');
@@ -195,10 +197,9 @@ jQuery(function ($) {
   function init(cb) {
     prepareCitations('en-US', function (error) {
       function prepareCitation(citation) {
-        var html = $('<div>').html(citation);
         return {
-          html: html,
-          text: html.text(),
+          html: citation,
+          text: $('<div>').html(citation).text(),
         };
       }
       if (error || citations.state !== 'ready') {
