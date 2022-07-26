@@ -24,7 +24,7 @@
                   </div>
                </div>
             </div>
-            <aside class="hsg-width-sidebar">
+            <aside class="hsg-width-sidebar" data-template="pages:sidebar">
                <div id="media-download" data-template="frus:if-media-exists" data-template-suffix="pdf">
                   <div class="hsg-panel">
                      <div class="hsg-panel-heading">
