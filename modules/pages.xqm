@@ -13,6 +13,7 @@ import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
+import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "sidebar.xqm";
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
@@ -768,4 +769,19 @@ declare function pages:section-category($node, $model) {
     root($model?data)//tei:title[@type = 'short']/string()
 };
 
+declare
+    %templates:wrap
+function pages:sidebar($node, $model){
+    (:
+     : function to generate sidebars on pages; eventually all sidebar content will be generated here,
+     : but for now we will recurse over existing content.
+     :)
+    side:info($node, $model),
+    templates:process($node/node(), $model)
+};
+
 declare function pages:suppress($node as node()?, $model as map(*)?) {};
+
+declare function pages:unless-sidebar($node, $model){
+    if ($node/ancestor::body/div[tokenize(@class, '\s') = 'hsg-main']//aside[@data-template eq 'pages:sidebar']) then () else $node
+};
