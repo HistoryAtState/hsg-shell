@@ -723,15 +723,15 @@ declare %private function search:prepare-query($sections as xs:string*, $volume-
     let $fulltext-query := if (exists($query)) then 'hsg-fulltext:(' || $query || ') ' else ()
 
     (: translate date ranges to the form used by Lucene index, cf. frus/volumes.xconf :)
-    (: let $range-start := translate($range-start, ':-', '')
-    let $range-end := translate($range-end, ':-', '') :)
+    let $range-start := translate($range-start, ':-', '')
+    let $range-end := translate($range-end, ':-', '')
 
     (: construct the part of the query that filters by date :)
     let $date-query := if ($is-date-query) then
         '
-        hsg-date-min:[' || $range-start || ' TO ' || $range-end || '] 
-        AND 
-        hsg-date-max:[' || $range-start || ' TO ' || $range-end || '] 
+        frus-search-date-min:[' || $range-start || ' TO ' || $range-end || ']
+        AND
+        frus-search-date-max:[' || $range-start || ' TO ' || $range-end || ']
         '
     else 
         ()
