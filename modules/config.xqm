@@ -1014,6 +1014,8 @@ declare function config:default-citation-meta($node as node()?, $model as map(*)
     return map:merge((
         map{ 'id':  $local-uri },
         map{ 'type':    'webpage'},
+        map{ 'title': pages:generate-short-title($node, $model)},
+        map{ 'collection-title': "Office of the Historian"},
         map{ 'accessed':    
             map{
                 'date-parts':   array {
