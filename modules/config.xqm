@@ -1033,9 +1033,9 @@ declare function config:default-citation-meta($node as node()?, $model as map(*)
 
 declare %templates:wrap function config:csl-json($node as node(), $model as map(*)) as xs:string? {
     if (exists($model?citation-meta)) then 
-        serialize(array { $model?citation-meta }, map{'method':'json'})
+        serialize(array { $model?citation-meta }, map{'method':'json'}) => normalize-space()
     else
-        serialize(array { config:default-citation-meta($node, $model) }, map{'method':'json'})
+        serialize(array { config:default-citation-meta($node, $model) }, map{'method':'json'}) => normalize-space()
 };
 
 declare variable $config:cls-to-zotero as map(xs:string, function(*)) := map {    
