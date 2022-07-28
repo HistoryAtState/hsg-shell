@@ -12,7 +12,7 @@
                   <div data-template="toc:table-of-contents" data-template-heading="false" data-template-highlight="false"/>
                </div>
             </div>
-            <aside class="hsg-width-one-third">
+            <aside data-template="pages:asides">
                <div class="hsg-panel" data-template="app:fix-links">
                   <div class="hsg-panel-heading">
                      <h2 class="hsg-sidebar-title">Ways to Explore</h2>
@@ -109,7 +109,6 @@
                      </li>
                   </ul>
                </div>
-               <div data-template="pages:section-nav"/>
             </aside>
          </div>
       </div>

@@ -24,7 +24,7 @@
                   </div>
                </div>
             </div>
-            <aside class="hsg-width-sidebar" data-template="pages:sidebar">
+            <aside data-template="pages:asides">
                <div id="media-download" data-template="frus:if-media-exists" data-template-suffix="pdf">
                   <div class="hsg-panel">
                      <div class="hsg-panel-heading">
@@ -53,7 +53,6 @@
                      <div class="hsg-list-group" data-template="frus:view-gloss"/>
                   </div>
                </div>
-               <div data-template="pages:section-nav"/>
             </aside>
          </div>
       </div>

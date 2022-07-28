@@ -576,35 +576,6 @@ declare function pages:generate-breadcrumb-label($state as map(*)) {
   )
 };
 
-declare function pages:section-nav($node as node(), $model as map(*)){
-  pages:generate-section-nav(substring-after(request:get-uri(), $app:APP_ROOT))
-};
-
-declare function pages:generate-section-nav($uri as xs:string) as element(div) {
-  let $site-section := '/' || (tokenize($uri,'/')[. ne ''])[1]
-  let $section-title := site:call-with-parameters-for-uri-steps($site-section, $site:config, pages:generate-breadcrumb-label#1)[2]
-  let $section-links := site:call-for-uri-step-children($site-section, $site:config, pages:generate-breadcrumb-link#1, map{'exclude-role': 'section-nav', 'skip-role': 'section-nav'})
-  return
-    <div id="sections" class="hsg-panel">
-      {
-        if ($section-title) then
-          <div class="hsg-panel-heading">
-            <h2 class="hsg-sidebar-title">{$section-title}</h2>
-          </div>
-        else ()
-      }{
-        if ($section-links) then
-          <ul class="hsg-list-group">
-            {
-              for $link in $section-links return
-              <li class="hsg-list-group-item">{$link}</li>
-            }
-          </ul>
-        else ($section-links)
-      }
-    </div>
-};
-
 declare function pages:app-root($node as node(), $model as map(*)) {
     let $root := try {
         if (request:get-header("nginx-request-uri")) then (
@@ -758,17 +729,23 @@ declare function pages:section-category($node, $model) {
 
 declare
     %templates:wrap
-function pages:sidebar($node, $model){
+function pages:asides($node, $model){
     (:
-     : function to generate sidebars on pages; eventually all sidebar content will be generated here,
+     : function to generate asides (e.g. sidebars) on pages; eventually all sidebar content will be generated here,
      : but for now we will recurse over existing content.
      :)
-    side:info($node, $model),
-    templates:process($node/node(), $model)
+    <aside class="hsg-aside--static hsg-width-sidebar">
+        {
+            let $nodes := $node/node()[not(@data-template eq 'pages:section-nav')]
+            let $processed := templates:process($nodes, $model)
+            return app:fix-links($processed)
+        }
+    </aside>,
+    side:section-nav($node, $model)
 };
 
 declare function pages:suppress($node as node()?, $model as map(*)?) {};
 
-declare function pages:unless-sidebar($node, $model){
-    if ($node/ancestor::body/div[tokenize(@class, '\s') = 'hsg-main']//aside[@data-template eq 'pages:sidebar']) then () else $node
+declare function pages:unless-asides($node, $model){
+    if ($node/ancestor::body/div[tokenize(@class, '\s') = 'hsg-main']//aside[@data-template eq 'pages:asides']) then () else $node
 };

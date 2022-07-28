@@ -20,9 +20,7 @@
                   <p>Up-to-date information on foreign travel by the Secretary of State is at <a href="https://www.state.gov/travels-with-the-secretary-of-state/">Travels With the Secretary</a>.</p>
                </div>
             </div>
-            <aside class="hsg-width-one-third">
-               <div data-template="pages:section-nav"/>
-            </aside>
+            <aside data-template="pages:asides"/>
          </div>
       </div>
    </div>
