@@ -96,6 +96,7 @@ gulp.task('images:watch', function () {
 gulp.task('scripts:build', function () {
     // minified version of js is used in production only
     return gulp.src([
+            'resources/scripts/footnote.js',
             'resources/scripts/app.js',
             'resources/scripts/metagrid.js'
         ])
