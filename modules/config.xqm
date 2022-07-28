@@ -626,7 +626,7 @@ declare variable $config:PUBLICATIONS :=
             "open-graph": map{
                     "og:type": function($node as node()?, $model as map(*)?) {'document'}
                 },
-            "citation-meta": function($node as node()?, $model as map(*)?) as element(meta)* {
+            "citation-meta": function($node as node()?, $model as map(*)?) as map(*)* {
                     config:tei-citation-meta($node, $model)
                 },
             "breadcrumb-title": function($parameters as map(*)) {
