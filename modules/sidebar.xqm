@@ -10,7 +10,7 @@ import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-c
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 
 declare function side:info($node, $model) {
-    <aside class="hsg-aside--info hsg-width-sidebar">
+    <aside class="hsg-aside--info">
         <div id="info" class="hsg-panel">
             <div class="hsg-panel-heading">
                 <h2 class="hsg-sidebar-title">Info</h2>
