@@ -18,7 +18,7 @@ declare function side:generate-section-nav($uri as xs:string) as element(div)? {
   let $section-title := site:call-with-parameters-for-uri-steps($site-section, $site:config, pages:generate-breadcrumb-label#1)[2]
   let $section-links := site:call-for-uri-step-children($site-section, $site:config, pages:generate-breadcrumb-link#1, map{'exclude-role': 'section-nav', 'skip-role': 'section-nav'})
   return if ($section-links) then
-    <aside id="sections" class="hsg-aside--section hsg-width-sidebar">
+    <aside id="sections" class="hsg-aside--section">
         <div class="hsg-panel">
           {
             if ($section-title) then
