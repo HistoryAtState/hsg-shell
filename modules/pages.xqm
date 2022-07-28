@@ -741,22 +741,27 @@ declare function pages:section-category($node, $model) {
     root($model?data)//tei:title[@type = 'short']/string()
 };
 
-declare
-    %templates:wrap
-function pages:asides($node, $model){
+declare function pages:asides($node, $model){
     (:
      : function to generate asides (e.g. sidebars) on pages; eventually all sidebar content will be generated here,
      : but for now we will recurse over existing content.
      :)
-    side:info($node, $model),
-    <aside class="hsg-aside--static hsg-width-sidebar">
+    let $static-asides :=
+    <aside class="hsg-aside--static">
         {
             let $nodes := $node/node()[not(@data-template eq 'pages:section-nav')]
             let $processed := templates:process($nodes, $model)
             return app:fix-links($processed)
         }
-    </aside>,
-    side:section-nav($node, $model)
+    </aside>
+    return
+        <div class="hsg-width-sidebar">
+            {
+                side:info($node, $model),
+				$static-asides,
+                side:section-nav($node, $model)
+            }
+        </div>
 };
 
 declare function pages:suppress($node as node()?, $model as map(*)?) {};
