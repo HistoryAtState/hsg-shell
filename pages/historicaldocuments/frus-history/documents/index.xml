@@ -26,7 +26,7 @@
                   <div data-template="frus-history:document-list"/>
                </div>
             </div>
-            <aside class="hsg-width-one-third">
+            <aside data-template="pages:asides">
                <div id="sections" class="hsg-panel" data-template="app:fix-links">
                   <div class="hsg-panel-heading">
                      <h2 class="hsg-sidebar-title">

@@ -25,9 +25,7 @@
                   </div>
                </div>
             </div>
-            <aside class="hsg-width-sidebar">
-               <div data-template="pages:section-nav"/>
-            </aside>
+            <aside data-template="pages:asides"/>
          </div>
       </div>
    </div>

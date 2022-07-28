@@ -130,7 +130,7 @@
                     available online and as free ebooks at the Office of the Historian’s website (<a href="$app/historicaldocuments">https://history.state.gov/historicaldocuments</a>).</p>
             </div>
          </div>
-         <aside class="hsg-width-one-third">
+         <aside data-template="pages:asides">
             <div class="hsg-panel" data-template="app:fix-links">
                <div class="hsg-panel-heading">
                   <h2 class="hsg-sidebar-title">Administrations</h2>
@@ -169,7 +169,6 @@
                   </li>
                </ul>
             </div>
-            <div data-template="pages:section-nav"/>
          </aside>
       </div>
    </div>

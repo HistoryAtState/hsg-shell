@@ -26,7 +26,7 @@
                      </div>
                   </div>
                </div>
-               <aside class="hsg-width-one-third hsg-print">
+               <aside class="hsg-print" data-template="pages:asides">
                   <div id="pocom-data" class="hsg-panel">
                      <div class="hsg-panel-heading">
                         <h2 class="hsg-sidebar-title">From Principal Officers and Chiefs of Mission</h2>
@@ -44,9 +44,6 @@
                <aside id="metagrid-wrapper"
                       class="hsg-width-one-third hsg-print"
                       data-template="app:fix-links"/>
-               <aside class="hsg-width-one-third">
-                  <div data-template="pages:section-nav"/>
-               </aside>
             </div>
             <!-- Templating note: The pocom:show-biography template only returns the following div if a biography is NOT found. -->
             <div class="row">
@@ -58,9 +55,7 @@
                <aside id="metagrid-wrapper"
                       class="hsg-width-one-third hsg-print"
                       data-template="app:fix-links"/>
-               <aside class="hsg-width-one-third">
-                  <div data-template="pages:section-nav"/>
-               </aside>
+               <aside data-template="pages:asides"/>
             </div>
          </div>
       </div>

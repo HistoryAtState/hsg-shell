@@ -232,7 +232,7 @@
             </section>
         </div>
         
-        <div class="hsg-cite-footer" data-template="pages:unless-sidebar">
+        <div class="hsg-cite-footer" data-template="pages:unless-asides">
             <section class="hsg-grid">
                 <div class="container">
                     <strong><a href="#" class="hsg-cite-button">Cite this resource</a></strong>
