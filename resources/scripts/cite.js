@@ -38,7 +38,6 @@ function baseCitation(id) {
   };
 }
 function updateState(state) {
-  console.log(citations.state, ' =>', state);
   citations.state = state;
 }
 jQuery(function ($) {
@@ -130,10 +129,10 @@ jQuery(function ($) {
     return citations[style];
   }
   function createUI() {
-    var btnAnchor = $('#hsg-cite-footer-button');
+    var btnAnchor = $('.hsg-cite-button');
     $('body').append(
       '<div id="citationDialog" class="modal fade in" tabindex="-1" role="dialog" style="display: none; padding-right: 12px;">' +
-      '  <div class="modal-dialog modal-lg" role="document">' +
+      '  <div class="modal-dialog" role="document">' +
       '    <div class="modal-content">' +
       '      <div class="modal-header">' +
       '        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span' +
@@ -142,14 +141,14 @@ jQuery(function ($) {
       '      </div>' +
       '      <div class="modal-body">' +
       '        <div class="row">' +
-      '          <div class="form-group col-md-6" style="margin-bottom: 0">' +
+      '          <div class="form-group col-sm-12">' +
       '            <label>Chicago Fullnote Bibliography</label>' +
-      '            <textarea data-style="chicago" class="form-control citation-text" rows="5"></textarea>' +
+      '            <div data-style="chicago" class="form-control citation-text" contenteditable readonly style="height:auto"/>' +
       '            <div class="text-right"><button style="margin-top: 8px" type="button" class="btn btn-primary copy-button" data-style="chicago">Copy</button></div>' +
       '          </div>' +
-      '          <div class="form-group col-md-6" style="margin-bottom: 0">' +
-      '            <label for="text-option1">Modern Language Association</label>' +
-      '            <textarea data-style="mla" class="form-control citation-text" rows="5"></textarea>' +
+      '          <div class="form-group col-sm-12">' +
+      '            <label>Modern Language Association</label>' +
+      '            <div data-style="mla" class="form-control citation-text" contenteditable readonly style="height:auto"/>' +
       '            <div class="text-right"><button style="margin-top: 8px" type="button" class="btn btn-primary copy-button" data-style="mla">Copy</button></div>' +
       '          </div>' +
       '        </div>' +
@@ -161,14 +160,24 @@ jQuery(function ($) {
       '  </div>' +
       '</div>'
     );
-    function copyToClipboard(textarea) {
+    function copyToClipboard(source) {
       if (navigator.clipboard) {
         navigator.clipboard.write([new ClipboardItem({
-          'text/plain': new Blob([getCitation(textarea.data('style')).text], { type: 'text/plain' }),
-          'text/html': new Blob([getCitation(textarea.data('style')).html], { type: 'text/html' }),
+          'text/plain': new Blob([getCitation(source.data('style')).text], { type: 'text/plain' }),
+          'text/html': new Blob([getCitation(source.data('style')).html], { type: 'text/html' }),
         })]);
       } else {
-        textarea.select();
+        var div = $(source).children('div');
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(div[0]);
+            range.select();
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(div[0]);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+        }
         document.execCommand('copy');
       }
     }
@@ -178,9 +187,9 @@ jQuery(function ($) {
     btnAnchor.css('opacity', '0.5');
     init(function (error) {
       btnAnchor.css('opacity', '1');
-      $('.citation-text').each(function (i, textarea) {
-        textarea = $(textarea);
-        textarea.val(getCitation(textarea.data('style')).text.trim())
+      $('.citation-text').each(function (i, source) {
+        source = $(source);
+        source.html(getCitation(source.data('style')).html)
       });
       if (error) {
         btnAnchor.removeAttr('href');
@@ -197,6 +206,7 @@ jQuery(function ($) {
   function init(cb) {
     prepareCitations('en-US', function (error) {
       function prepareCitation(citation) {
+        citation = citation.trim();
         return {
           html: citation,
           text: $('<div>').html(citation).text(),
