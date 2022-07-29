@@ -11,7 +11,7 @@ jQuery(function ($) {
     '        <div id="footnote"></div>' +
     '        <div id="link" class="text-right">' +
     '          <hr>' +
-    '          <a href="#">See all footnotes</a>' +
+    '          <a href="#">View footnotes</a>' +
     '        </div>' +
     '      </div>' +
     '    </div>' +
@@ -52,7 +52,20 @@ jQuery(function ($) {
       return document.getElementById(node.hash.substring(1));
     }
     function getFootnoteContent() {
-      return $(getFootnote(this)).html();
+      if (touchAvailable()) {
+        return $(getFootnote(this)).html();
+      }
+      var footnote = $(
+        '<div class="footnote-popover">' +
+        '  <button type="button" class="close footnote-close-button" aria-label="Close">' +
+        '    <span aria-hidden="true">×</span>' +
+        '  </button>' +
+        '  <div class="footnote-body" />' +
+        '</div>'
+      );
+      $('.footnote-close-button', footnote).click(hideAll);
+      $('.footnote-body', footnote).append($(getFootnote(this)).html());
+      return footnote;
     }
     var options = {
       content: getFootnoteContent,
@@ -65,7 +78,7 @@ jQuery(function ($) {
     });
     $('.modal-body #link a', footnoteModal).click(function(event) {
         footnoteModal.modal('hide');
-        $('.footnotes')[0].scrollIntoView();
+        document.getElementById($(this).data('footnote')).scrollIntoView();
         event.preventDefault();
     })
     footnotes
@@ -87,6 +100,7 @@ jQuery(function ($) {
           event.stopImmediatePropagation();
           $('.modal-body #footnote', footnoteModal).html(getFootnoteContent.call(this))
           footnoteModal.modal('show');
+          $('.modal-body #link a', footnoteModal).data('footnote', this.hash.substring(1));
         }
         $(event.target).closest('a').popover('hide');
       })
