@@ -184,9 +184,7 @@ jQuery(function ($) {
     $('.copy-button').click(function (e) {
       copyToClipboard($(this).parent().prev());
     });
-    btnAnchor.css('opacity', '0.5');
     init(function (error) {
-      btnAnchor.css('opacity', '1');
       $('.citation-text').each(function (i, source) {
         source = $(source);
         source.html(getCitation(source.data('style')).html)
