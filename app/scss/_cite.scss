@@ -1,36 +1,36 @@
 /* Citation component, modal dialog and trigger buttons */
 
-.modal-body__citation-group:not(:last-child) {
+.modal-body {
+  &__citation-group:not(:last-child) {
     margin-bottom: 4rem;
-}
-
-.modal-body__citation-wrapper {
+  }
+  &__citation-wrapper {
     display: flex;
     gap: 15px;
     align-items: flex-start;
     flex-direction: column;
     @media screen and (min-width: $screen-xs-min) {
-        flex-direction: row;
+     flex-direction: row;
     }
+  }
 }
 
 .citation-text {
-    flex: 1 auto;
-    //background-color: $color-gray-lightest;
-    padding: 8px;
-    border: $default-border-style;
-    border-radius: 4px;
-    height: auto;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+  flex: 1 auto;
+  padding: 8px;
+  border: $default-border-style;
+  border-radius: 4px;
+  height: auto;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .copied {
-    background-color: $color-gray-lightest;;
+  background-color: $color-gray-lightest;;
 }
 
 button.btn.btn-primary.close-button {
-    min-width: 60px
+  min-width: 60px
 }
 
 .hsg-cite-button {
