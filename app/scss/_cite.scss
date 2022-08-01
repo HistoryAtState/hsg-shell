@@ -64,7 +64,7 @@ button.btn.btn-primary.close-button {
   &__button:not(&--sidebar) {
     @extend .hsg-link-button;
     background-color: $color-white;
-    color: $color-primary;
+    color: $color-primary-darker;
     margin: 0 0 3rem 0;
     font-weight: 700;
 
