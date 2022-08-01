@@ -16,7 +16,7 @@ declare function side:info($node, $model) {
                 <h2 class="hsg-sidebar-title">Info</h2>
             </div>
             <ul class="hsg-list-group">
-                <li class="hsg-list-group-item"><a href="#" class="hsg-cite-button">Cite this resource</a></li>
+                <li class="hsg-list-group-item"><a href="#" class="hsg-cite__button--sidebar">Cite this resource</a></li>
             </ul>
         </div>
     </aside>
