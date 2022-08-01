@@ -131,30 +131,33 @@ jQuery(function ($) {
   function createUI() {
     var btnAnchor = $('.hsg-cite-button');
     $('body').append(
-      '<div id="citationDialog" class="modal fade in" tabindex="-1" role="dialog" style="display: none; padding-right: 12px;">' +
-      '  <div class="modal-dialog" role="document">' +
-      '    <div class="modal-content">' +
+      '<div id="citationDialog" class="modal fade in"  style="display: none; padding-right: 12px;">' +
+      '  <div class="modal-dialog">' +
+      '    <div class="modal-content" role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modalTitle1">' +
       '      <div class="modal-header">' +
-      '        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span' +
-      '            aria-hidden="true">×</span></button>' +
-      '        <h4 class="modal-title">Cite this resource</h4>' +
+      '        <button type="button" class="close" data-dismiss="modal" aria-label="Close modal">' +
+      '         <span aria-hidden="true">×</span>' +
+      '        </button>' +
+      '        <h4 class="modal-title" id="modalTitle1">Cite this resource</h4>' +
       '      </div>' +
       '      <div class="modal-body">' +
-      '        <div class="row">' +
-      '          <div class="form-group col-sm-12">' +
-      '            <label>Chicago Fullnote Bibliography</label>' +
-      '            <div data-style="chicago" class="form-control citation-text" contenteditable readonly style="height:auto"/>' +
-      '            <div class="text-right"><button style="margin-top: 8px" type="button" class="btn btn-primary copy-button" data-style="chicago">Copy</button></div>' +
+      '        <div class="modal-body__citation-group">' +
+      '          <label>Chicago Fullnote Bibliography</label>' +
+      '          <div class="modal-body__citation-wrapper">' +
+      '            <div data-style="chicago" id="text-chicago" class="citation-text" contenteditable readonly />' +
+      '            <button type="button" class="btn btn-primary copy-button" data-style="chicago" title="Copy chicago format to clipboard">Copy</button> ' +
       '          </div>' +
-      '          <div class="form-group col-sm-12">' +
-      '            <label>Modern Language Association</label>' +
-      '            <div data-style="mla" class="form-control citation-text" contenteditable readonly style="height:auto"/>' +
-      '            <div class="text-right"><button style="margin-top: 8px" type="button" class="btn btn-primary copy-button" data-style="mla">Copy</button></div>' +
+      '        </div>' +
+      '        <div class="modal-body__citation-group">' +
+      '          <label>Modern Language Association</label>' +
+      '          <div class="modal-body__citation-wrapper">' +
+      '            <div data-style="mla" id="text-mla" class="citation-text" contenteditable readonly />' +
+      '            <button data-style="mla" type="button" class="btn btn-primary copy-button" title="Copy mla format to clipboard">Copy</button>' +
       '          </div>' +
       '        </div>' +
       '      </div>' +
       '      <div class="modal-footer">' +
-      '        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button><span />' +
+      '        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close modal">Close</button>' +
       '      </div>' +
       '    </div>' +
       '  </div>' +
@@ -181,9 +184,31 @@ jQuery(function ($) {
         document.execCommand('copy');
       }
     }
+
     $('.copy-button').click(function (e) {
-      copyToClipboard($(this).parent().prev());
+      copyToClipboard($(this).prev());
+
+      var clickedCitationStyle = $(this).attr('data-style');
+
+      if(clickedCitationStyle == 'chicago') {
+        $('#text-chicago').addClass('copied');
+        $('#text-mla').removeClass('copied');
+      }
+
+      if(clickedCitationStyle == 'mla') {
+        $('#text-mla').addClass('copied');
+        $('#text-chicago').removeClass('copied');
+      }
     });
+
+    $('button[data-dismiss="modal"]').on('click', function (e) {
+      $('.citation-text').each(function (i) {
+        if ($(this).hasClass('copied')) {
+          $(this).removeClass('copied');
+        }
+      });
+    });
+
     init(function (error) {
       $('.citation-text').each(function (i, source) {
         source = $(source);
