@@ -129,7 +129,7 @@ jQuery(function ($) {
     return citations[style];
   }
   function createUI() {
-    var btnAnchor = $('.hsg-cite-button');
+    var btnAnchor = $('.hsg-cite__button');
     $('body').append(
       '<div id="citationDialog" class="modal fade in"  style="display: none; padding-right: 12px;">' +
       '  <div class="modal-dialog">' +
