@@ -1,17 +1,20 @@
 jQuery(function ($) {
+  $('body').append('<div id="touch-detector" />');
   $('body').append(
     '<div id="footnote-modal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">' +
-    '  <div class="modal-dialog" role="document">' +
-    '    <div class="modal-content">' +
-    '      <div class="modal-header">' +
-    '        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-    '        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Citation</h4>' +
-    '      </div>' +
-    '      <div class="modal-body">' +
-    '        <div id="footnote"></div>' +
-    '        <div id="link" class="text-right">' +
-    '          <hr>' +
-    '          <a href="#">View footnotes</a>' +
+    '  <div class="modal-dialog-container">' +
+    '    <div class="modal-dialog" role="document">' +
+    '      <div class="modal-content">' +
+    '        <div class="modal-header">' +
+    '          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+    '          <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Citation</h4>' +
+    '        </div>' +
+    '        <div class="modal-body">' +
+    '          <div id="footnote"></div>' +
+    '          <div id="link" class="text-right">' +
+    '            <hr>' +
+    '            <a href="#">View footnotes</a>' +
+    '          </div>' +
     '        </div>' +
     '      </div>' +
     '    </div>' +
@@ -24,9 +27,7 @@ jQuery(function ($) {
     footnoteModalSelector = '#footnote-modal',
     footnoteSelector = 'a.note[rel=footnote]';
   function touchAvailable() {
-    return ('ontouchstart' in window) ||
-      (navigator.maxTouchPoints > 0) ||
-      (navigator.msMaxTouchPoints > 0);
+    return $('#touch-detector').is(':visible');
   }
   function initFootnotes() {
     $(parentSelector).on('click', '.popover', function(event) {
