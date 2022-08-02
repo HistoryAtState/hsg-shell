@@ -77,9 +77,9 @@ jQuery(function ($) {
       show: false,
     });
     $('.modal-body #link a', footnoteModal).click(function(event) {
-        footnoteModal.modal('hide');
-        document.getElementById($(this).data('footnote')).scrollIntoView();
-        event.preventDefault();
+      footnoteModal.modal('hide');
+      $('.footnotes')[0].scrollIntoView();
+      event.preventDefault();
     })
     footnotes
       .popover(options)
@@ -100,7 +100,6 @@ jQuery(function ($) {
           event.stopImmediatePropagation();
           $('.modal-body #footnote', footnoteModal).html(getFootnoteContent.call(this))
           footnoteModal.modal('show');
-          $('.modal-body #link a', footnoteModal).data('footnote', this.hash.substring(1));
         }
         $(event.target).closest('a').popover('hide');
       })
