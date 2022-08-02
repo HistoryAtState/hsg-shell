@@ -7,12 +7,11 @@ jQuery(function ($) {
     '      <div class="modal-content">' +
     '        <div class="modal-header">' +
     '          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-    '          <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Citation</h4>' +
+    '          <h4 class="modal-title h2">Footnote</h4>' +
     '        </div>' +
     '        <div class="modal-body">' +
     '          <div id="footnote"></div>' +
-    '          <div id="link" class="text-right">' +
-    '            <hr>' +
+    '          <div id="link">' +
     '            <a href="#">View footnotes</a>' +
     '          </div>' +
     '        </div>' +
