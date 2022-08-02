@@ -15,7 +15,9 @@ describe('footnote popover', function () {
     this.beforeEach(function() {
       Page.open('historicaldocuments/frus-history/introduction');
       return Page.getElement('#touch-detector').then(function () {
-        browser.execute('$(\'#touch-detector\').hide()');
+        browser.execute(function() {
+          $('#touch-detector').hide();
+        });
       });
     });
     it('should have a footnote', function () {
@@ -32,6 +34,15 @@ describe('footnote popover', function () {
       footnoteLink.moveTo();
       Page.waitForVisible('.popover');
       assert.equal(Page.getElement('.popover').isDisplayed(), true);
+    });
+    it('footnote popover should not have the "back" link', function () {
+      const footnoteLink = Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]');
+      assert.equal(Page.getElement('.popover').isDisplayed(), false);
+      footnoteLink.scrollIntoView();
+      footnoteLink.moveTo();
+      Page.waitForVisible('.popover');
+      assert.equal(Page.getElement('.popover .footnote-body a.fn-back').isExisting(), true);
+      assert.equal(Page.getElement('.popover .footnote-body a.fn-back').isDisplayed(), false);
     });
     it('footnote popover should not disappear with the cursor on it', function () {
       assert.equal(Page.getElement('.popover').isDisplayed(), false);
@@ -126,6 +137,73 @@ describe('footnote popover', function () {
       footnoteLink.scrollIntoView();
       assert.equal(footnote.isDisplayedInViewport(), false);
       footnoteLink.click();
+      assert.equal(footnote.isDisplayedInViewport(), true);
+    });
+  });
+  describe('footnote popover looks and behavior on touch devices', function () {
+    this.beforeEach(function() {
+      Page.open('historicaldocuments/frus-history/introduction');
+      return Page.getElement('#touch-detector').then(function () {
+        browser.execute(function() {
+          $('#touch-detector').show();
+        });
+      });
+    });
+    it('footnote popover should appear on tap', function () {
+      const footnoteLink = Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]');
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), false);
+      footnoteLink.scrollIntoView();
+      footnoteLink.click();
+      Page.waitForVisible('#footnote-modal');
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), true);
+    });
+    it('footnote popover should not have the "back" link', function () {
+      const footnoteLink = Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]');
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), false);
+      footnoteLink.scrollIntoView();
+      footnoteLink.click();
+      Page.waitForVisible('#footnote-modal');
+      assert.equal(Page.getElement('#footnote-modal .modal-body #footnote a.fn-back').isExisting(), true);
+      assert.equal(Page.getElement('#footnote-modal .modal-body #footnote a.fn-back').isDisplayed(), false);
+    });
+    it('footnote popover should disappear when the user taps outside of it', function () {
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), false);
+      Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]').scrollIntoView();
+      Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]').click();
+      Page.waitForVisible('#footnote-modal');
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), true);
+      Page.getElement('body').click({ x: 5, y: 5 });
+      Page.pause(200);
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), false);
+    });
+    it('footnote popover should disappear when the user taps on the close button', function () {
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), false);
+      Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]').scrollIntoView();
+      Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]').click();
+      Page.waitForVisible('#footnote-modal');
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), true);
+      Page.getElement('#footnote-modal .modal-header button.close').click();
+      Page.pause(200);
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), false);
+    });
+    it('footnote popover should disappear when the user taps on "View footnotes"', function () {
+      let footnote = Page.getElement('.footnotes');
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), false);
+      Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]').scrollIntoView();
+      Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]').click();
+      Page.pause(200);
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), true);
+      Page.getElement('#footnote-modal .modal-body #link a').click();
+      Page.pause(200);
+      assert.equal(Page.getElement('#footnote-modal').isDisplayed(), false);
+    });
+    it('page should scroll to the footnotes section when the user taps on "View footnotes"', function () {
+      let footnote = Page.getElement('.footnotes');
+      Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]').scrollIntoView();
+      assert.equal(footnote.isDisplayedInViewport(), false);
+      Page.getElement('#content-inner a.note[href^="#fn\\:"][rel=footnote]').click();
+      Page.pause(200);
+      Page.getElement('#footnote-modal .modal-body #link a').click();
       assert.equal(footnote.isDisplayedInViewport(), true);
     });
   });
