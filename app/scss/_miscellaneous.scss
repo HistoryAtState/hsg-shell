@@ -155,6 +155,8 @@ html input[disabled] {
   }
 }
 
+// Mobile Customizations and Utilities
+
 #touch-detector {
   width: 0;
   height: 0;
@@ -165,43 +167,4 @@ html input[disabled] {
   #touch-detector {
     display: block;
   }
-}
-
-#footnote-modal .modal-dialog {
-  position: relative;
-  margin: 0 auto;
-  font-size: 125%;
-}
-
-#footnote-modal .modal-dialog-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-#footnote-modal .modal-dialog .modal-content {
-  border-radius: 0;
-}
-
-#footnote-modal .modal-dialog .modal-content .modal-header {
-  padding-bottom: 0;
-  border: none;
-}
-#footnote-modal #link {
-  padding-top: 15px;
-}
-
-#footnote-modal .modal-dialog .modal-content a.fn-back, .popover-content a.fn-back {
-  display: none;
-}
-
-#footnote-modal.modal.fade .modal-dialog {
-  -webkit-transform: translate(0, 30%);
-  transform: translate(0, 30%);
-}
-
-#footnote-modal.modal.in .modal-dialog {
-  -webkit-transform: translate(0, 0);
-  transform: translate(0, 0);
 }

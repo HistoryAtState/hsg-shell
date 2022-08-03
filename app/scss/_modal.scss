@@ -1,0 +1,26 @@
+// Bootstrap overrides and general customizations for modals
+
+// Bootstrap overrides for modal dialog on mobile screens
+@media (max-width: $xs-screen) {
+    .modal.in .modal-dialog {
+      margin: 0 !important;
+    }
+
+    .modal-content {
+      @media (max-width: $xs-screen) {
+        height: 100vh !important;
+        width: 100vw !important;
+        border-radius: 0 !important;
+        border: 0;
+      }
+    }
+  }
+
+
+  .modal-header .close {
+    opacity: 1;
+    text-shadow: none;
+    font-size: 36px;
+    margin-top: -6px;
+
+  }

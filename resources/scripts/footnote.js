@@ -12,7 +12,7 @@ jQuery(function ($) {
     '        <div class="modal-body">' +
     '          <div id="footnote"></div>' +
     '          <div id="link">' +
-    '            <a href="#">View footnotes</a>' +
+    '            <a href="#">View all footnotes</a>' +
     '          </div>' +
     '        </div>' +
     '      </div>' +
