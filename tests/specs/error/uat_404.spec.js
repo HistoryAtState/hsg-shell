@@ -8,6 +8,6 @@ const { assert } = require('chai');
 describe('Requesting a non existing page', () => {
   it('should redirect to the 404 error page', () => {
     Page.open('asdfg');
-    assert.include(Page.getTitle(), 'Page Not found');
+    assert.include(Page.getTitle(), 'An error has occurred - Office of the Historian');
   });
 });
