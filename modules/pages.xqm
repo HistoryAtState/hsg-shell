@@ -110,8 +110,21 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                     else (),
                 "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
         		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
-        		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"})
+        		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"}),
+        		"url":
+        		  try { request:get-url() } 
+        		  catch err:XPDY0002 { 'test-url' },  (: some contexts do not have a request object, e.g. xqsuite testing :)
+        		"local-uri":
+        		  try { substring-after(request:get-uri(), $app:APP_ROOT)} 
+        		  catch err:XPDY0002 { 'test-path' }  (: some contexts do not have a request object, e.g. xqsuite testing :)
             }
+            let $citation-meta :=
+                let $meta-fun := $config:PUBLICATIONS?($publication-id)?citation-meta
+                let $new.model := map:merge(($model, $content), map{'duplicates': 'use-last'})
+                return if (exists($meta-fun)) then
+                    $meta-fun($node, $new.model)
+                else
+                    config:default-citation-meta($node, $new.model)
         
             return
                 (
@@ -122,7 +135,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                         )
                     else
                         (),
-                    templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
+                    templates:process($node/*, map:merge(($model, $content, map{'citation-meta': $citation-meta}),  map{"duplicates": "use-last"}))
                 )
 };
 
@@ -588,13 +601,13 @@ declare function pages:app-root($node as node(), $model as map(*)) {
     element { node-name($node) } {
         $node/@*,
         attribute data-app { $root },
-        let $content := templates:process($node/*, $model)
+        let $content as node()* := templates:process($node/*, $model)
         let $title := string-join((pages:generate-short-title($node, $model)[. ne 'Office of the Historian'], "Office of the Historian"), " - ")
 
         let $log := console:log("pages:app-root -> title: " || $title)
         return (
             <head>
-                { $content/self::head/* }
+                {$content[self::head]/*}
                 <title>{$title}</title>
             </head>,
             $content/self::body
@@ -743,7 +756,8 @@ declare function pages:asides($node, $model){
     return
         <div class="hsg-width-sidebar">
             {
-                $static-asides,
+                side:info($node, $model),
+				$static-asides,
                 side:section-nav($node, $model)
             }
         </div>
