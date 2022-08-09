@@ -552,7 +552,6 @@ declare function pages:generate-breadcrumb-link($state as map(*)) as element(a)*
 };
 
 declare function pages:generate-breadcrumb-label($state as map(*)) {
-  (:let $_ := site:log((serialize($state, map{'method': 'adaptive', 'indent': true()}))):)
   let $uri := $state?current-url
   let $page-template := $state?page-template
   let $parameters as map(*)? := 
