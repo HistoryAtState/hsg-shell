@@ -8,20 +8,7 @@
             <span data-template="pocom:person-page-title"/> -
             People - Department History</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory">Department History</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory/people">People</a>
-                  </li>
-                  <li data-template="pocom:person-breadcrumb"/>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div data-template="pocom:show-biography">
 

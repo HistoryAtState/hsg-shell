@@ -27,7 +27,9 @@
           <page-template href="pages/historicaldocuments/pre-1861/serial-set/all.xml"/>
         </step>
         <step value="browse">
-          <page-template href="pages/historicaldocuments/pre-1861/serial-set/browse.xml"/>
+          <page-template href="pages/historicaldocuments/pre-1861/serial-set/browse.xml">
+            <with-param name="publication-id" value="serial-set"/>
+          </page-template>
         </step>
         <page-template href="pages/historicaldocuments/pre-1861/serial-set/index.xml"/>
       </step>
@@ -38,6 +40,7 @@
         <step key="doc-id">
           <page-template href="pages/historicaldocuments/frus-history/documents/document.xml">
             <with-param name="document-id" keyval="doc-id"/>
+            <with-param name="publication-id" value="frus-history-documents"/>
           </page-template>
           <config>
             <src collection="/db/apps/frus-history/documents"/>
@@ -51,6 +54,7 @@
       <step value="research">
         <step key="article-id">
           <page-template href="pages/historicaldocuments/frus-history/research/article.xml">
+            <with-param name="publication-id" value="articles"/>
             <with-param name="article-id" keyval="article-id"/>
           </page-template>
           <config>
@@ -59,10 +63,24 @@
         </step>
         <page-template href="pages/historicaldocuments/frus-history/research/index.xml"/>
       </step>
+      <step key="section">
+        <page-template href="pages/historicaldocuments/frus-history/monograph-interior.xml">
+          <with-param name="publication-id" value="frus-history-monograph"/>
+          <with-param name="document-id" value="frus-history"/>
+          <with-param name="section-id" keyval="section"/>
+          <with-param name="requested-url" select="site:get-url()"/>
+        </page-template>
+        <config>
+          <src collection="/db/apps/frus-history/monograph"/>
+        </config>
+      </step>
       <page-template href="pages/historicaldocuments/frus-history/index.xml">
         <with-param name="publication-id" value="frus-history-monograph"/>
         <with-param name="document-id" value="frus-history"/>
       </page-template>
+      <config>
+        <src collection="/db/apps/frus-history/monograph"/>
+      </config>
     </step>
     <step value="quarterly-releases">
       <step key="announcement">
@@ -85,7 +103,7 @@
           <with-param name="publication-id" value="frus"/>
           <with-param name="document-id" keyval="frus-volume"/>
           <with-param name="section-id" keyval="section"/>
-          <with-param name="requested-url" select="local:get-url()"/>
+          <with-param name="requested-url" select="site:get-url()"/>
         </page-template>
         <config>
           <src xq=".//@xml:id"/>
@@ -117,6 +135,7 @@
     <step key="administration">
       <page-template href="pages/historicaldocuments/administrations.xml">
         <with-param name="administration-id" keyval="administration"/>
+        <with-param name="publication-id" value="frus-administration"/>
       </page-template>
       <config>
         <src doc="/db/apps/frus/code-tables/administration-code-table.xml" xq="/code-table/items/item/value"/>
@@ -161,9 +180,21 @@
         <with-param name="publication-id" value="archives"/>
       </page-template>
     </step>
+    <step key="country">
+      <page-template href="pages/countries/article.xml">
+        <with-param name="publication-id" value="countries"/>
+        <with-param name="document-id" keyval="country"/>
+      </page-template>
+      <config>
+        <src collection="articles"/>
+      </config>
+    </step>
     <page-template href="pages/countries/index.xml">
       <with-param name="publication-id" value="countries"/>
     </page-template>
+    <config>
+      <src collection="/db/apps/rdcr"/>
+    </config>
   </step>
   <step value="departmenthistory">
     <step value="timeline">
@@ -221,9 +252,9 @@
           <with-param name="publication-id" value="secretaries"/>
         </page-template>
       </step>
-      <step value="principles-chiefs">
+      <step value="principals-chiefs">
         <page-template href="pages/departmenthistory/people/principals-chiefs.xml">
-          <with-param name="publication-id" value="principles-chiefs"/>
+          <with-param name="publication-id" value="principals-chiefs"/>
         </page-template>
       </step>
       <step value="by-name">
@@ -511,13 +542,13 @@
     <step value="frus-latest.xml">
       <xq href="modules/open.xql">
         <with-param name="xql-feed" value="latest"/>
-        <with-param name="xql-application-url" select="local:get-url()"/>
+        <with-param name="xql-application-url" select="site:get-url()"/>
       </xq>
     </step>
     <step value="frus-metadata.xml">
       <xq href="modules/open.xql">
         <with-param name="xql-feed" value="metadata"/>
-        <with-param name="xql-application-url" select="local:get-url()"/>
+        <with-param name="xql-application-url" select="site:get-url()"/>
       </xq>
     </step>
     <page-template href="pages/open/index.xml"/>
@@ -573,11 +604,11 @@
     <step value="v1">
       <step value="catalog">
         <xq href="/modules/opds-catalog.xql">
-          <with-param name="xql-application-url" select="local:get-url()"/>
+          <with-param name="xql-application-url" select="site:get-url()"/>
         </xq>
       </step>
       <xq href="/modules/opds-catalog.xql">
-        <with-param name="xql-application-url" select="local:get-url()"/>
+        <with-param name="xql-application-url" select="site:get-url()"/>
       </xq>
     </step>
     <ignore/>

@@ -8,7 +8,6 @@ import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
-(:declare namespace t="http://history.state.gov/ns/site/hsg/xqsuite";:)
 
 
 (:
@@ -465,51 +464,22 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `About`:      `$app/about` 
-      
-### Page template about/contact-us.xml
+:)
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/contact-us`
-    - THEN return the breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `Contact us`: `$app/about/contact-us`
+declare
+  %test:assertEquals('<div class="hsg-breadcrumb-wrapper"><ol class="breadcrumb"><li><a href="/exist/apps/hsg-shell/">  Home  </a></li><li><a href="/exist/apps/hsg-shell/about"> About </a></li></ol></div>')
+function x:test-pages-breadcrumb-about() as element(div) {
+  pages:generate-breadcrumbs('/about')
+};
 
-### Page template about/content-warning.xml
+(: Test results with mixed content (em elements) :)
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/contact-warning`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `Content Warning`: `$app/about/content-warning`
-      
-### Page template about/recent-publications.xml
+declare %test:assertEquals('<div class="hsg-breadcrumb-wrapper"><ol class="breadcrumb"><li><a href="/exist/apps/hsg-shell/">  Home  </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a></li><li><a href="/exist/apps/hsg-shell/historicaldocuments/about-frus"> About the <em>Foreign Relations</em> Series </a></li></ol></div>')
+function x:test-pages-breadcrumb-with-elements() {
+  pages:generate-breadcrumbs('/historicaldocuments/about-frus')
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/recent-publications`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `Recent Publications` `$app/about/recent-publications`
-      
-### Page template about/the-historian.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/the-historian`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `The Historian`:   `$app/about/the-historian`
-      
-### Page template about/faq/index.html
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/faq`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `Frequently Asked Questions`: `$app/about/faq`
+(:
 
 #### Page template about/faq/section.xml
 
@@ -520,42 +490,65 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `About`:      `$app/about`
       `Frequently Asked Questions`: `$app/about/faq`
       `Where can I find information about the Foreign...`: `$app/about/faq/what-is-frus`
+:)
 
-### Page template about/hac/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-faq-section(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/about"> About </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/about/faq"> Frequently Asked Questions </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/about/faq/what-is-frus">  Where can I find information about the Foreign...  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/about/faq/what-is-frus')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/hac`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `Historical Advisory Committee`:  `$app/about/hac`
-
+(:
 #### Page template about/hac/section.xml
 
 - WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/hac`
+  - GIVEN a URL `$app/about/hac/members`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `About`:      `$app/about`
       `Historical Advisory Committee`:  `$app/about/hac`
       `Members`:    `/about/hac/members`
-      
-## Page template conferences/index.xml
+:)
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/conferences`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Conferences`:    `$app/conferences`
-      
-### Page template conferences/conference/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-hac-section(){
+  let $expected as element(div) := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/about"> About </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/about/hac"> Historical Advisory Committee </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/about/hac/members">  Members  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/about/hac/members')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/conferences/2011-foreign-economic-policy`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Conferences`:    `$app/conferences`
-      `Foreign Economic Policy, 1973-1976`: `$app/conferences/2011-foreign-economic-policy`
+(:
       
 #### Page template conferences/conference/section.xml
 
@@ -565,24 +558,32 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `Home`:       `$app`
       `Conferences`:    `$app/conferences`
       `Foreign Economic Policy, 1973-1976`: `$app/conferences/2011-foreign-economic-policy`
-      `Panel Discussion`:   `$app/conferences/2011-foreign-economic-policy/panel`
+      `Panel Discussion`:   `$app/conferences/2011-foreign-economic-policy/panel`      
+:)
 
-## Page template countries/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-conference-secion(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/conferences"> Conferences </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/conferences/2011-foreign-economic-policy">  Foreign Economic Policy, 1973-1976  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/conferences/2011-foreign-economic-policy/panel">  Panel Discussion  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/conferences/2011-foreign-economic-policy/panel')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/countries`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Countries`:  `$app/countries`
-
-### Page template countries/all.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/countries/all`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Countries`:  `$app/countries`
-      `All Countries`:  `$app/countries/all`
+(:
 
 ### Page template countries/article.xml
 
@@ -592,16 +593,29 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `Home`:       `$app`
       `Countries`:  `$app/countries`
       `A Guide to the United States’ History of Recognition, Diplomatic, and Consular Relations, by Country, since 1776: Mali`: `$app/countries/mali`
+:)
 
-### Page template countries/issues/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-country-article(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+            <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+            <a href="/exist/apps/hsg-shell/countries"> Countries </a>
+        </li>
+        <li>
+            <a href="/exist/apps/hsg-shell/countries/mali">  A Guide to the United States’ History of Recognition,
+                    Diplomatic, and Consular Relations, by Country, since 1776: Mali  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/countries/mali')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/countries/issues`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Countries`:  `$app/countries`
-      `Issues`:     `$app/countries/issues`
-
+(:
 #### Page template countries/issues/article.xml
 
 - WHEN building page breadcrumbs
@@ -611,26 +625,32 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `Countries`:  `$app/countries`
       `Issues`:     `$app/countries/issues`
       `Issues Relevant to U.S. Foreign Diplomacy: Unification of Italian States`:   `$app/countries/issues/italian-unification`
-      
-### Page template countries/archives/index.xml
+:)
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/countries/archives`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Countries`:  `$app/countries`
-      `Archives`:   `$app/countries/archives`
-      
-#### Page template countries/archives/all.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-country-issue-article(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries"> Countries </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries/issues"> Issues </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries/issues/italian-unification">  Issues Relevant to U.S. Foreign Diplomacy: Unification of
+                    Italian States  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/countries/issues/italian-unification')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Countries`:  `$app/countries`
-      `Archives`:   `$app/countries/archives`
-      `All Archives`:   `$app/countries/archives/all`
-      
+(: 
 #### Page template countries/archives/article.xml
 
 - WHEN building page breadcrumbs
@@ -640,33 +660,31 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `Countries`:  `$app/countries`
       `Archives`:   `$app/countries/archives`
       `World Wide Diplomatic Archives Index: Angola`:   `$app/countries/archives/angola`
+:)
 
-## Page template departmenthistory/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-country-archive-article(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries"> Countries </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries/archives"> Archives </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/countries/archives/angola">  World Wide Diplomatic Archives Index: Angola  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/countries/archives/angola')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-
-### Page template departmenthistory/wwi.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/wwi`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `World War I and the Department`:   `$app/departmenthistory/wwi`
-
-### Page template departmenthistory/buildings/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/buildings`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Buildings`:  `$app/departmenthistory/buildings`
-
+(:
 #### Page template departmenthistory/buildings/section.xml
 
 - WHEN building page breadcrumbs
@@ -675,67 +693,34 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Buildings`:  `$app/departmenthistory/buildings`
+      `Introduction`: `$app/departmenthistory/buildings/intro`
 
-Note that this page doesn't include a 'local' permalink breadcrumb.
+Note that this page didn't originally include a 'local' permalink breadcrumb.
+:)
 
-### Page template departmenthistory/diplomatic-couriers/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-building-section(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/buildings"> Buildings </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/buildings/intro">  Introduction  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/buildings/intro')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/diplomatic-couriers`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `U.S. Diplomatic Couriers`:  `$app/departmenthistory/diplomatic-couriers`
-
-#### Page template departmenthistory/diplomatic-couriers/before-the-jet-age.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/diplomatic-couriers/before-the-jet-age`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `U.S. Diplomatic Couriers`:  `$app/departmenthistory/diplomatic-couriers`
-      `Before the Jet Age`: `$app/departmenthistory/diplomatic-couriers/before-the-jet-age`
-
-#### Page template departmenthistory/diplomatic-couriers/behind-the-iron-curtain.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/diplomatic-couriers/behind-the-iron-curtain`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `U.S. Diplomatic Couriers`:  `$app/departmenthistory/diplomatic-couriers`
-      `Behind the Iron Curtain`:   `$app/departmenthistory/diplomatic-couriers/behind-the-iron-curtain`
-
-#### Page template departmenthistory/diplomatic-couriers/into-moscow.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/diplomatic-couriers/into-moscow`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `U.S. Diplomatic Couriers`:  `$app/departmenthistory/diplomatic-couriers`
-      `Into Moscow`:    `$app/departmenthistory/diplomatic-couriers/into-moscow`
-
-#### Page template departmenthistory/diplomatic-couriers/through-the-khyber-pass.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/diplomatic-couriers/through-the-khyber-pass`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `U.S. Diplomatic Couriers`:  `$app/departmenthistory/diplomatic-couriers`
-      `Through the Khyber Pass`:    `$app/departmenthistory/diplomatic-couriers/through-the-khyber-pass`
-
-### Page template departmenthistory/people/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-
+(:
 #### Page template departmenthistory/people/person.xml
 
 - WHEN building page breadcrumbs
@@ -745,37 +730,31 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `People`:     `$app/departmenthistory/people`
       `Roger Hilsman Jr.`:  `$app/departmenthistory/people/hilsman-roger-jr`
+:)
 
-#### Page template departmenthistory/people/principals-chiefs.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/hilsman-roger-jr">  Roger Hilsman Jr.  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/hilsman-roger-jr')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/principals-chiefs`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Principal Officers and Chiefs of Mission`:   `$app/departmenthistory/people/principals-chiefs`
-
-#### Page template departmenthistory/people/secretaries.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/secretaries`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Biographies of the Secretaries of State`:  `$app/departmenthistory/people/secretaries`
-
-#### Page template departmenthistory/people/by-name/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/by-name`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `By Name`:    `$app/departmenthistory/people/by-name`
-
+(:
 ##### Page template departmenthistory/people/by-name/letter.xml
 
 - WHEN building page breadcrumbs
@@ -786,17 +765,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `By Name`:    `$app/departmenthistory/people/by-name`
       `Starting with T`:    `$app/departmenthistory/people/by-name/t`
+:)
 
-#### Page template departmenthistory/people/by-year/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-letter(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/by-name"> By Name </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/by-name/t">  Starting with T  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/by-name/t')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/by-year`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `By Year`:    `$app/departmenthistory/people/by-year`
-
+(:
 ##### Page template departmenthistory/people/by-year/year.xml
 
 - WHEN building page breadcrumbs
@@ -807,16 +803,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `By Year`:    `$app/departmenthistory/people/by-year`
       `1979`:       `$app/departmenthistory/people/by-year/1979`
+:)
 
-#### Page template departmenthistory/people/chiefsofmission/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-year(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/by-year"> By Year </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/by-year/1979">  1979  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/by-year/1979')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/chiefsofmission`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
+(:
 
 ##### Page template departmenthistory/people/chiefsofmission/by-role-or-country-id.xml
 
@@ -828,6 +842,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
       `Fiji`:       `$app/departmenthistory/people/chiefsofmission/fiji`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-country(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/chiefsofmission"> Chiefs of Mission </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/chiefsofmission/fiji">  Fiji  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/chiefsofmission/fiji')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
   - GIVEN a URL `$app/departmenthistory/people/chiefsofmission/representative-to-au`
     -THEN return a breadcrumb list:
       `Home`:       `$app`
@@ -835,38 +877,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
       `Representatives of the U.S.A. to the African Union`: `$app/departmenthistory/people/chiefsofmission/representative-to-au`
+:)
 
-##### Page template departmenthistory/people/chiefsofmission/countries-list.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-org(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/chiefsofmission"> Chiefs of Mission </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/chiefsofmission/representative-to-au">  Representatives of the U.S.A. to the African Union  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/chiefsofmission/representative-to-au')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/chiefsofmission/by-country`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
-      `By Country`: `$app/departmenthistory/people/chiefsofmission/by-country`
-      
-##### Page template departmenthistory/people/chiefsofmission/international-organizations-list.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/chiefsofmission/by-organization`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
-      `By Organization`: `$app/departmenthistory/people/chiefsofmission/by-organization`
-
-#### Page template departmenthistory/people/principalofficers/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/principalofficers`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Principal Officers By Title`:    `$app/departmenthistory`
+(:
 
 ##### Page template departmenthistory/people/principalofficers/by-role-id.xml
 
@@ -878,16 +916,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `Principal Officers`:    `$app/departmenthistory`
       `Secretaries of State`:  `$app/departmenthistory/people/principalofficers/secretary`
+:)
 
-### Page template departmenthistory/short-history/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-pocom-role(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/principalofficers"> Principal Officers </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/principalofficers/secretary">  Secretaries of State  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/principalofficers/secretary')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/short-history`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Short History`:  `$app/departmenthistory/short-history`
-
+(:
 #### Page template departmenthistory/short-history/section.xml
 
 - WHEN building page breadcrumbs
@@ -897,22 +953,62 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `Short History`:  `$app/departmenthistory/short-history`
       `Superpowers Collide, 1961-1981`: `$app/departmenthistory/short-history/superpowers`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-short-history-section(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/short-history"> Short History </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/short-history/superpowers">  Superpowers Collide, 1961-1981  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/short-history/superpowers')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
   - GIVEN a URL `$app/departmenthistory/short-history/cubanmissile`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Short History`:  `$app/departmenthistory/short-history`
-      `Superpowers Collide, 1961-1981`: `$app/departmenthistory/short-history/superpowers`
       `The Cuban Missile Crises`:   `$app/departmenthistory/short-history/cubanmissile`
+:)
 
-### Page template departmenthistory/timeline/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-short-history-subsection(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/short-history"> Short History </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/short-history/cubanmissile">  The Cuban Missile Crises  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/short-history/cubanmissile')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/timeline`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Administrative Timeline`:    `/$app/departmenthistory/timeline`
+(:
 
 #### Page template departmenthistory/timeline/section.xml
 
@@ -923,26 +1019,31 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `Administrative Timeline`:    `/$app/departmenthistory/timeline`
       `1970-1979`:  `/$app/departmenthistory/timeline/1970-1979`
+:)
 
-### Page template departmenthistory/travels/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-timeline-section(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/timeline"> Administrative Timeline </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/departmenthistory/timeline/1970-1979">  1970–1979  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/timeline/1970-1979')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/travels`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
-
-#### Page template departmenthistory/travels/president/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/travels/president`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
-      `Presidents`: `$app/departmenthistory/travels/president`
-
+(:
 ##### Page template departmenthistory/travels/president/person-or-country.xml
 
 - WHEN building page breadcrumbs
@@ -953,6 +1054,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
       `Presidents`: `$app/departmenthistory/travels/president`
       `William Howard Taft`:    `$app/departmenthistory/travels/president/taft-william-howard`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-president-person(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels"> Presidential and Secretaries Travels Abroad </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/president"> Presidents </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/president/taft-william-howard">  William Howard Taft  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/travels/president/taft-william-howard')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
   - GIVEN a URL `$app/departmenthistory/travels/president/laos`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
@@ -960,17 +1089,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
       `Presidents`: `$app/departmenthistory/travels/president`
       `Laos`:       `$app/departmenthistory/travels/president/laos`
+:)
 
-#### Page template departmenthistory/travels/secretary/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-president-country(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels"> Presidential and Secretaries Travels Abroad </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/president"> Presidents </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/president/laos">  Laos  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/travels/president/laos')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/travels/secretary`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
-      `Secretaries`: `$app/departmenthistory/travels/secretary`
-
+(:
 ##### Page template departmenthistory/travels/secretary/person-or-country.xml
 
 - WHEN building page breadcrumbs
@@ -981,23 +1127,69 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
       `Secretaries`:    `$app/departmenthistory/travels/secretary`
       `Elihu Root`: `$app/departmenthistory/travels/secretary/root-elihu`
-  - GIVEN a URL `$app/departmenthistory/travels/president/laos`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-secretary-person(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels"> Presidential and Secretaries Travels Abroad </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary"> Secretaries </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary/root-elihu">  Elihu Root  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/travels/secretary/root-elihu')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
+  - GIVEN a URL `$app/departmenthistory/travels/secretary/laos`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
       `Secretaries`:    `$app/departmenthistory/travels/secretary`
       `Laos`:       `$app/departmenthistory/travels/secretary/laos`
+:)
 
-### Page template departmenthistory/visits/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-secretary-country(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels"> Presidential and Secretaries Travels Abroad </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary"> Secretaries </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary/laos">  Laos  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/travels/secretary/laos')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/visits`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Visits by Foreign Leaders`:  `$app/departmenthistory/visits`
-
+(:
 #### Page template departmenthistory/visits/country-or-year.xml
 
 - WHEN building page breadcrumbs
@@ -1007,46 +1199,64 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `Visits by Foreign Leaders`:  `$app/departmenthistory/visits`
       `Cuba`:       `$app/departmenthistory/visits/cuba`
+:)
+
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-visits-country(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/visits"> Visits by Foreign Leaders </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/visits/cuba">  Cuba  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/visits/cuba')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:     
   - GIVEN a URL `$app/departmenthistory/visits/1979`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Visits by Foreign Leaders`:  `$app/departmenthistory/visits`
       `1979`:       `$app/departmenthistory/visits/1979`
+:)
 
-## Page template developer/index.xml
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-visits-year(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory"> Department History </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/visits"> Visits by Foreign Leaders </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/departmenthistory/visits/1979">  1979  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/departmenthistory/visits/1979')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/developer`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Developer`:  `$app/developer`
-
-### Page template developer/catalog.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/developer/catalog`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Developer`:  `$app/developer`
-      `Catalog`:    `$app/developer/catalog`
-
-## Page template education/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/education`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Education`:  `$app/education`
-
-### Page template education/modules.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/education/modules`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Education`:  `$app/education`
-      `Curriculum Modules`: `$app/education/modules`
+(:     
 
 #### Page template education/module.xml
 
@@ -1057,24 +1267,32 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Education`:  `$app/education`
       `Curriculum Modules`: `$app/education/modules`
       `Introduction to Curriculum Packet on `A History of Diplomacy`:   `$app/education/modules/history-diplomacy-intro`
+:)
 
-## Page template historicaldocuments/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-education-module(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/education"> Education </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/education/modules"> Curriculum Modules </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/education/modules/history-diplomacy-intro">  Introduction to Curriculum Packet on “A History of
+                    Diplomacy”  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/education/modules/history-diplomacy-intro')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-
-### Page template historicaldocuments/about-frus.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/about-frus`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `About the <em>Foreign Relations</em> Series`:    `$app/historicaldocuments/about-frus`
-
+(:
 ### Page template historicaldocuments/administrations.xml
 
 - WHEN building page breadcrumbs
@@ -1083,60 +1301,28 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Home`:       `$app`
       `Historical Documents`:   `$app/historicaldocuments`
       `Woodrow Wilson Administration (1913-1921)`:    `$app/historicaldocuments/wilson`
+:)
 
-### Page template historicaldocuments/citing-frus.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-administration(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments/wilson">  Woodrow Wilson Administration (1913–1921)  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/wilson')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/citing-frus`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Citing the <em>Foreign Relations</em> series`:   `$app/historicaldocuments/citing-frus`
-
-### Page template historicaldocuments/ebooks.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/ebooks`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Ebooks`:     `$app/historicaldocuments/ebooks`
-
-### Page template historicaldocuments/other-electronic-resources.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/other-electronic-resources`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Other Electronic Resources`: `$app/historicaldocuments/other-electronic-resources`
-
-### Page template historicaldocuments/status-of-the-series.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/status-of-the-series`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Status of the Series`:   `$app/historicaldocuments/status-of-the-series`
-
-### Page template historicaldocuments/vietnam-guide.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Guide to Sources on Vietnam, 1969-1975`: `$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975`
-
-### Page template historicaldocuments/volume-landing.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/frus1981-88v11`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Foreign Relations of the United States, 1981-1988, Volume XI, START I`:  `$app/historicaldocuments/frus1981-88v11`
+(:
 
 ### Page template historicaldocuments/volume-interior.xml
 
@@ -1146,16 +1332,88 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Home`:       `$app`
       `Historical Documents`:   `$app/historicaldocuments`
       `Foreign Relations of the United States, 1981-1988, Volume XI, START I`:  `$app/historicaldocuments/frus1981-88v11`
-      `Persons`:    `$app/historicaldocuments/frus1981-88v11/persons`
+      `Persons`:    `$app/historicaldocuments/frus1981-88v11/persons`  
+:)
 
-### Page template historicaldocuments/frus-history/index.xml
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-frus(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1981-88v11">  Foreign Relations of the United States, 1981–1988, Volume XI,
+                    START I  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1981-88v11/persons">  Persons  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus1981-88v11/persons')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+  
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/frus-history`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+(: footnotes in chapter titles to be suppressed :)
+
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-frus-footnote-in-head(){
+    let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1894">  Papers Relating to the Foreign Relations of the United
+                    States, 1894, With the Annual Message of the President, Transmitted to Congress,
+                    December 3, 1894  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1894/ch25">  Friendly offices to Japanese in China  </a>
+                </li>
+            </ol>
+        </div>
+    let $result := pages:generate-breadcrumbs('/historicaldocuments/frus1894/ch25')
+    return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(: documents to be styled appropriately; no footnotes in header :)
+
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-frus-document-no(){
+    let $expected :=
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1952-54v07p1">  Foreign Relations of the United States, 1952–1954, Germany
+                    and Austria, Volume VII, Part 1  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus1952-54v07p1/d379">  Document 379  </a>
+                </li>
+            </ol>
+        </div>
+    let $result := pages:generate-breadcrumbs('/historicaldocuments/frus1952-54v07p1/d379')
+    return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 
 #### Page template historicaldocuments/frus-history/monograph-interior.xml
 
@@ -1166,16 +1424,34 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Historical Documents`:   `$app/historicaldocuments`
       `Toward “Thorough, Accurate, and Reliable”: A History of the <em>Foreign Relations of the United States</em> Series`:  `$app/historicaldocuments/frus-history`
       `Foreword`:   `$app/historicaldocuments/frus-history/foreword`
+      
+:)
 
-#### Page template historicaldocuments/frus-history/documents/index.xml
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-frus-history-section(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">  Toward “Thorough, Accurate, and Reliable”: A History of the
+                        Foreign Relations of the United States Series  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/foreword">  Foreword  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus-history/foreword')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/frus-history/documents`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
-      `Documents`:  `$app/historicaldocuments/frus-history/documents`
+(:
 
 ##### Page template historicaldocuments/frus-history/documents/document.xml
 
@@ -1187,26 +1463,36 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
       `Documents`:  `$app/historicaldocuments/frus-history/documents`
       `Telegram From Embassy Athens, 2002`: `$app/historicaldocuments/frus-history/documents/2002-08-19-athens-02867`
+:)
 
-#### Page template historicaldocuments/frus-history/events/index.xml
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-frus-documents(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+            </li>
+            <li>
+              <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">  Toward “Thorough, Accurate, and Reliable”: A History of the
+                        Foreign Relations of the United States Series  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/documents"> Documents </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/documents/2002-08-19-athens-02867">  Telegram From Embassy Athens, 2002  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus-history/documents/2002-08-19-athens-02867')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/frus-history/events`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
-      `Events`: `$app/historicaldocuments/frus-history/events`
-
-#### Page template historicaldocuments/frus-history/research/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/frus-history/research`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
-      `Research`:   `$app/historicaldocuments/frus-history/research`
+(:
 
 #### Page template historicaldocuments/frus-history/research/article.xml
 
@@ -1215,39 +1501,38 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+      `Toward “Thorough, Accurate, and Reliable”: A History of the Foreign Relations of the United States Series`:   `$app/historicaldocuments/frus-history`
       `Research`:   `$app/historicaldocuments/frus-history/research`
       `A Good Year's Work`: `$app/historicaldocuments/frus-history/research/a-good-years-work`
+:)
 
-### Page template historicaldocuments/pre-1861/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-history-articles(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li>
+          <a href="/exist/apps/hsg-shell/">  Home  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">  Toward “Thorough, Accurate, and Reliable”: A History of the
+                        Foreign Relations of the United States Series  </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/research"> Research </a>
+        </li>
+        <li>
+          <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history/research/a-good-years-work">  A Good Year’s Work  </a>
+        </li>
+      </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus-history/research/a-good-years-work')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/pre-1861`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
-
-#### Page template historicaldocuments/pre-1861/serial-set/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/pre-1861/serial-set`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
-      `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
-
-##### Page template historicaldocuments/pre-1861/serial-set/all.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/pre-1861/serial-set/all`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
-      `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
-      `All`:        `$app/historicaldocuments/pre-1861/serial-set/all`
+(:
 
 ##### Page template historicaldocuments/pre-1861/serial-set/browse.xml
 
@@ -1259,47 +1544,47 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
       `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
       `Europe`:     `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe`
+:)
+
+declare
+%test:pending('testing Url parameters not possible at this time; implement test when/if URI reimplemented')
+%test:assertEquals('true') function x:test-pages-breadcrumb-serial-set-region(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li><a href="/exist/apps/hsg-shell/">  Home  </a></li>
+            <li><a href="/exist/apps/hsg-shell/historicaldocuments"> Historical Documents </a></li>
+            <li><a href="/exist/apps/hsg-shell/historicaldocuments/pre-1861"> Pre-1861 U.S. foreign relations materials </a></li>
+            <li><a href="/exist/apps/hsg-shell/historicaldocuments/pre-1861/serial-set"> U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set </a></li>
+            <li><a href="/exist/apps/hsg-shell/historicaldocuments/pre-1861/serial-set/browse">  France  </a></li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/pre-1861/serial-set/browse?region=Europe')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:   
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe&subject=France`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
+      `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
       `France`:     `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe&subject=France`
+:)
 
-### Page template historicaldocuments/quarterly-releases/index.xml
+declare
+%test:pending('testing Url parameters not possible at this time; implement test when/if URI reimplemented')
+%test:assertEquals('true') function x:test-pages-breadcrumb-serial-set-subject(){
+  let $expected := ''
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/pre-1861/serial-set/browse?region=Europe&amp;subject=France')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/quarterly-releases`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Quarterly Releases`: $app/historicaldocuments/quarterly-releases
-
-#### Page template historicaldocuments/quarterly-releases/announcements/2016-q3.xml
-
-There are a number of other page templates in this format: it seems excessive to test them all!
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/quarterly-releases/2016-q3`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Quarterly Releases`: $app/historicaldocuments/quarterly-releases
-      `2016 Quarter 3`: `$app/historicaldocuments/quarterly-releases/2016-q3`
-      
-## Page template historicaldocuments/milestones/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/milestones`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Milestones`: `$app/milestones`
-
-### Page template historicaldocuments/milestones/all.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/milestones/all`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Milestones`: `$app/milestones`
-      `All`:        `$app/milestones/all`
-      
-### Page template historicaldocuments/milestones/chapter/index.xml
+(: 
+### Page template milestones/chapter/index.xml
 
 - WHEN building page breadcrumbs
   - GIVEN a URL `$app/milestones/1977-1980`
@@ -1307,8 +1592,30 @@ There are a number of other page templates in this format: it seems excessive to
       `Home`:       `$app`
       `Milestones`: `$app/milestones`
       `1977-1980`:  `$app/milestones/1977-1980`
-      
-### Page template historicaldocuments/milestones/chapter/article.xml
+:)
+
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-milestone-chapter(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/milestones"> Milestones </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/milestones/1977-1980">  1977-1980  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/milestones/1977-1980')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:   
+### Page template milestones/chapter/article.xml
 
 - WHEN building page breadcrumbs
   - GIVEN a URL `$app/milestones/1977-1980/china-policy`
@@ -1317,75 +1624,32 @@ There are a number of other page templates in this format: it seems excessive to
       `Milestones`: `$app/milestones`
       `1977-1980`:  `$app/milestones/1977-1980`
       `China Policy`:   `$app/milestones/1977-1980/china-policy`
-      
-## Page template open/index.xml
+:)
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/open`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Open Government Initiative`: `$app/open`
-      
-### Page template $app/open/frus-latest/index.xml
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-milestone-article(){
+  let $expected := 
+    <div class="hsg-breadcrumb-wrapper">
+        <ol class="breadcrumb">
+            <li>
+                <a href="/exist/apps/hsg-shell/">  Home  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/milestones"> Milestones </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/milestones/1977-1980">  1977-1980  </a>
+            </li>
+            <li>
+                <a href="/exist/apps/hsg-shell/milestones/1977-1980/china-policy">  China Policy  </a>
+            </li>
+        </ol>
+    </div>
+  let $result := pages:generate-breadcrumbs('/milestones/1977-1980/china-policy')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/open/frus-latest`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Open Government Initiative`: `$app/open`
-      `Latest Volumes of <em>Foreign Relations of the United States</em> Series`:   `$app/open/frus-latest`
-      
-### Page template open/frus-metadata/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/open/frus-metadata`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Open Government Initiative`: `$app/open`
-      `Bibliographic Metadata of the <em>Foreign Relations of the United States</em> Series`:   `$app/open/frus-metadata`
-      
-## Page template search/search-landing.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/search`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Search`:     `$app/search`
-            
-### Page template search/search-result.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/search?q=taft`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Search`:     `$app/search`
-      
-### Page template search/tips.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/search/tips`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Search`:     `$app/search`
-      `Search Tips`:    `$app/search/tips`
-      
-## Page template tags/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/tags`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Tags`:       `$app/tags`
-      
-### Page template tags/all.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/tags/all`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Tags`:       `$app/tags`
-      `All Tags`:   `$app/tags/all`
-      
+(:     
 ### Page template tags/browse.xml
 
 - WHEN building page breadcrumbs
@@ -1396,3 +1660,23 @@ There are a number of other page templates in this format: it seems excessive to
       `Clay, Henry`:    `$app/tags/clay-henry`
       
 :)
+
+declare %test:assertEquals('true') 
+function x:test-pages-breadcrumb-tags(){
+  let $expected := 
+        <div class="hsg-breadcrumb-wrapper">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/exist/apps/hsg-shell/">  Home  </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/tags"> Tags </a>
+                </li>
+                <li>
+                    <a href="/exist/apps/hsg-shell/tags/clay-henry">  Clay, Henry  </a>
+                </li>
+            </ol>
+        </div>
+  let $result := pages:generate-breadcrumbs('/tags/clay-henry')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};

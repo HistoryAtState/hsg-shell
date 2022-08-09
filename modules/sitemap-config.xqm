@@ -7,6 +7,7 @@ import module namespace util="http://exist-db.org/xquery/util";
 declare namespace u="http://www.sitemaps.org/schemas/sitemap/0.9";
 
 declare variable $site:debug as xs:boolean := true();
+declare variable $site:config as element(site:root) := doc('/db/apps/hsg-shell/urls.xml')/*;
 declare variable $site:base-url := "https://history.state.gov/";
 
 (: A helper function for running tests on annotations :)
@@ -139,7 +140,7 @@ declare function site:build-map($cfg as element(), $state as map(*)){
    prepended by parent name `/@` for attributes.
 :) 
 declare
-  %site:mode-selector('config', 'sitemap')
+  %site:mode-selector('config', 'sitemap', 'cwpfus')
 function site:local-name-selector($node) as xs:string? {
   typeswitch ($node)
   case element() return local-name($node)
@@ -148,7 +149,7 @@ function site:local-name-selector($node) as xs:string? {
 };
 
 declare
-  %site:on-no-match('sitemap')
+  %site:on-no-match('sitemap', 'cwpfus')
 function site:shallow-skip($item, $state as map(*)){
   for $i in $item/*
   return site:process($i, $state?current-mode, $state)
@@ -548,4 +549,110 @@ declare function site:eval-avt($avt as node(), $cache-flag as xs:boolean, $exter
     
   return util:eval($tmp, $cache-flag, $external-variable) ! string(.)
   
+};
+
+declare function site:call-with-parameters-for-uri-steps($url as xs:string, $config as element(), $function as function(*)) {
+  let $state := map{
+    'full-url': $url,
+    'steps': tokenize($url, '/')[. ne ''],
+    'function': $function,
+    'current-url': '/'
+  }
+  return site:process($config, 'cwpfus', $state)
+};
+
+declare
+  %site:mode('cwpfus')
+  %site:match('root', 'step')
+function site:cwpfus-step($root as element(), $state as map(*)) {
+  let $next.step := head($state?steps)
+  let $this.key as map(*)? := if ($root/@key) then map{$root/@key: $state?step} else ()
+  let $keys := map:merge(($state?keys, $this.key))
+  let $new.state := map{
+    'full-url': $state?full-url,
+    'current-url': replace($state?current-url, '/$', '') || '/' || $next.step,
+    'step': $next.step,
+    'steps': tail($state?steps),
+    'function': $state?function,
+    'keys': $keys
+  }
+  let $select := (
+    $root/site:step[@value eq $next.step],
+    ($root/site:step[@match])[matches($next.step, @match)],
+    $root/site:step[not(@match or @value)]
+  )[1][$state?current-url ne $state?full-url]
+  return (
+    (: calls the function by matching any page-templates :)
+    site:process($root/site:page-template, 'cwpfus', map:merge(($state, map{'keys': $keys}), map{'duplicates':'use-last'})),
+    (: if there are any more url step components, this will continue the process :)
+    site:process($select, 'cwpfus', $new.state)
+  )
+};
+
+declare
+  %site:mode('cwpfus')
+  %site:match('page-template')
+function site:cwpfus-template($page-template as element(site:page-template), $state as map(*)) {
+  let $params := map:merge(site:process($page-template/site:with-param, 'cwpfus', $state),map{'duplicates':'use-last'})
+  let $page-template.rel := site:eval-avt($page-template/@href, false(), (xs:QName('site:key'), $state?keys))
+  let $page-template.abs := resolve-uri($page-template.rel, base-uri($page-template))
+  let $new.state := map:merge(
+    (
+      $state,
+      map{'parameters': $params},
+      map{'page-template': $page-template.abs}
+    ), map{'duplicates': 'use-last'}
+  )
+  return $state?function($new.state)
+};
+
+declare
+  %site:mode('cwpfus')
+  %site:match('with-param')
+function site:cwpfus-with-param($with-param as element(site:with-param), $state as map(*)) {
+  map{$with-param/@name: site:process($with-param/(@* except @name), 'cwpfus', $state)}
+};
+
+declare
+  %site:mode('cwpfus')
+  %site:match('with-param/@value')
+function site:cwpfus-with-param-value($value as attribute(value), $state as map(*)) {
+  string($value)
+};
+
+declare
+  %site:mode('cwpfus')
+  %site:match('with-param/@keyval')
+function site:cwpfus-with-param-keyval($keyval as attribute(keyval), $state as map(*)) {
+  let $keys := $state?keys
+  return $keys?($keyval)
+};
+
+declare
+  %site:mode('cwpfus')
+  %site:match('with-param/@select')
+function site:cwpfus-with-param-select($select as attribute(select), $state as map(*)) {
+  let $keys := $state?keys
+  return util:eval($select, false(), ('site:keys', $keys))
+};
+
+declare function site:get-url() {
+  (: imported from old controller.xql :)
+    concat(
+        request:get-scheme(),
+        '://',
+        request:get-server-name(),
+        let $server-port := request:get-server-port()
+        return 
+            if ($server-port = (80, 443)) then 
+                ()
+            else 
+                concat(":", string($server-port)),
+        site:get-uri()
+        )
+};
+
+declare function site:get-uri() {
+  (: imported from old controller.xql :)
+    (request:get-header("nginx-request-uri"), request:get-uri())[1]
 };

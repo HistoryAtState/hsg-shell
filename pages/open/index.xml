@@ -6,15 +6,8 @@
       <div>
          <div id="static-title" class="hidden">Open Government Initiative</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/open">Open Government Initiative</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">Open Government Initiative</p>
             </div>
          </div>
          <div class="row">

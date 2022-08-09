@@ -5,15 +5,8 @@
         data-template-at="content">
       <div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/countries">Countries</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">Countries</p>
             </div>
          </div>
          <div class="row">

@@ -255,7 +255,22 @@ declare %test:assertEquals('/db/apps/hsg-shell/tests/data/sitemap-config/Collect
   site:get-urls-from-collection('/db/apps/hsg-shell/tests/data/sitemap-config/Collection/world-factbook')
 };
 
+declare %test:assertEquals('foo') function x:test-call-with-parameters-for-steps-value(){
+  site:call-with-parameters-for-uri-steps('/music/beck/odelay/2', $x:sample/*, function($state){$state?parameters?value})
+};
 
-declare %test:assertEquals('urlset') function x:test-build-map-root(){
-  site:build-map($x:sample/site:root) => local-name()
+declare %test:assertEquals('bar') function x:test-call-with-parameters-for-steps-select(){
+  site:call-with-parameters-for-uri-steps('/music/beck/odelay/2', $x:sample/*, function($state){$state?parameters?select})
+};
+
+declare %test:assertEquals('2') function x:test-call-with-parameters-for-steps-keyval(){
+  site:call-with-parameters-for-uri-steps('/music/beck/odelay/2', $x:sample/*, function($state){$state?parameters?track})
+};
+
+declare %test:assertEquals('3') function x:test-call-with-parameters-for-steps-all-steps(){
+  site:call-with-parameters-for-uri-steps('/music/beck/odelay/2', $x:sample/*, function($state){$state?parameters?artist})[. eq 'beck'] => count()
+};
+
+declare %test:assertEquals('/db/apps/hsg-shell/tests/data/sitemap-config/pages/artist/beck.xml') function x:test-call-with-parameters-for-steps-page-template(){
+  site:call-with-parameters-for-uri-steps('/music/beck', $x:sample/*, function($state){$state?page-template})[2]
 };

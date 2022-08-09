@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
+   <div data-template="templates:surround" data-template-with="templates/site.xml" data-template-at="content">
       <div>
          <div id="static-title" class="hidden">About Us</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/about">About</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">About</p>
             </div>
          </div>
          <div class="row">

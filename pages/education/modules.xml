@@ -6,18 +6,8 @@
       <div>
          <div id="static-title" class="hidden">Curriculum Modules - Education Resources</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/education">Education</a>
-                  </li>
-                  <li>
-                     <a href="$app/education/modules">Curriculum Modules</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">Curriculum Modules</p>
             </div>
          </div>
          <div class="row">

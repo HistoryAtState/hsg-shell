@@ -7,22 +7,8 @@
          <div id="static-title" class="hidden">Principal Officers and Chiefs of Mission - People -
             Department History</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory">Department History</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory/people">People</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory/people/principals-chiefs">Principal Officers
-                            and Chiefs of Mission</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">Principal Officers and Chiefs of Mission</p>
             </div>
          </div>
          <div class="row">

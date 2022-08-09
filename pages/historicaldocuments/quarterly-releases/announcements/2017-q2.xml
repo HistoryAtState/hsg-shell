@@ -4,21 +4,8 @@
         data-template-with="templates/site.xml"
         data-template-at="content">
       <div class="row">
-         <div class="hsg-breadcrumb-wrapper">
-            <ol class="breadcrumb" data-template="app:fix-links">
-               <li>
-                  <a href="$app">Home</a>
-               </li>
-               <li>
-                  <a href="$app/historicaldocuments">Historical Documents</a>
-               </li>
-               <li>
-                  <a href="$app/historicaldocuments/quarterly-releases">Quarterly Releases</a>
-               </li>
-               <li>
-                  <a href="$app/historicaldocuments/quarterly-releases/2017-q2">2017 Quarter 2</a>
-               </li>
-            </ol>
+         <div data-template="pages:breadcrumb">
+            <p id="breadcrumb-title">2017 Quarter 2</p>
          </div>
       </div>
       <div class="row hsg-main">
