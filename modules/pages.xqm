@@ -13,6 +13,7 @@ import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
+import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "sidebar.xqm";
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
@@ -519,7 +520,11 @@ declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
   </div>
 };
 
-declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)*{
+declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)*{ 
+    <li>{pages:generate-breadcrumb-link($state)}</li>
+};
+
+declare function pages:generate-breadcrumb-link($state as map(*)) as element(a)*{
   let $uri := $state?current-url
   let $app-root := 
     try {$app:APP_ROOT} 
@@ -529,6 +534,12 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
       '/exist/apps/hsg-shell'
     }
   let $full-url := $app-root || $uri
+  return
+    <a href="{$full-url}">{" ", pages:generate-breadcrumb-label($state), " "}</a>
+};
+
+declare function pages:generate-breadcrumb-label($state as map(*)) {
+  let $uri := $state?current-url
   let $page-template := $state?page-template
   let $parameters as map(*)? := 
     map:merge(
@@ -559,12 +570,10 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
         then $config:PUBLICATIONS?($publication-id)?title
       else 
         "Office of the Historian"
-  return
-    <li>
-      <a href="{$full-url}">{" ", $label, " "
-      (:,  serialize($state, map{'method':'adaptive', 'indent':true()}):)
-      }</a>
-    </li>
+  return (
+    $label
+    (:,  serialize($state, map{'method':'adaptive', 'indent':true()}):)
+  )
 };
 
 declare function pages:app-root($node as node(), $model as map(*)) {
@@ -718,4 +727,30 @@ declare function pages:section-category($node, $model) {
     root($model?data)//tei:title[@type = 'short']/string()
 };
 
+declare function pages:asides($node, $model){
+    (:
+     : function to generate asides (e.g. sidebars) on pages; eventually all sidebar content will be generated here,
+     : but for now we will recurse over existing content.
+     :)
+    let $static-asides :=
+    <aside class="hsg-aside--static">
+        {
+            let $nodes := $node/node()[not(@data-template eq 'pages:section-nav')]
+            let $processed := templates:process($nodes, $model)
+            return app:fix-links($processed)
+        }
+    </aside>
+    return
+        <div class="hsg-width-sidebar">
+            {
+                $static-asides,
+                side:section-nav($node, $model)
+            }
+        </div>
+};
+
 declare function pages:suppress($node as node()?, $model as map(*)?) {};
+
+declare function pages:unless-asides($node, $model){
+    if ($node/ancestor::body/div[tokenize(@class, '\s') = 'hsg-main']//aside[@data-template eq 'pages:asides']) then () else $node
+};

@@ -140,7 +140,7 @@ declare function site:build-map($cfg as element(), $state as map(*)){
    prepended by parent name `/@` for attributes.
 :) 
 declare
-  %site:mode-selector('config', 'sitemap', 'cwpfus')
+  %site:mode-selector('config', 'sitemap', 'cwpfus', 'find-children')
 function site:local-name-selector($node) as xs:string? {
   typeswitch ($node)
   case element() return local-name($node)
@@ -149,7 +149,7 @@ function site:local-name-selector($node) as xs:string? {
 };
 
 declare
-  %site:on-no-match('sitemap', 'cwpfus')
+  %site:on-no-match('sitemap', 'cwpfus', 'find-children')
 function site:shallow-skip($item, $state as map(*)){
   for $i in $item/*
   return site:process($i, $state?current-mode, $state)
@@ -551,13 +551,83 @@ declare function site:eval-avt($avt as node(), $cache-flag as xs:boolean, $exter
   
 };
 
+declare function site:call-for-uri-step-children($url as xs:string, $config as element(), $function as function(*), $state as map(*)?) {
+  let $new.state := map:merge((
+    map{
+      'parent-url': $url,
+      'steps': tokenize($url, '/')[. ne ''],
+      'function': $function,
+      'current-url': '/',
+      'step': '/'
+    },
+    $state
+  ), map{'duplicates':'use-last'})
+  return site:process($config, 'find-children', $new.state)
+};
+
+declare 
+  %site:mode('find-children')
+  %site:match('root', 'step')
+function site:find-children-step($step as element(), $state as map(*)){
+  let $next.step := head($state?steps)
+  let $this.key as map(*)? := if ($step/@key) then map{$step/@key: $state?step} else ()
+  let $keys := map:merge(($state?keys, $this.key))
+  return
+    if ($state?current-url eq $state?parent-url) then
+      (: we have found a parent :) 
+      for $child in $step/site:step[@value][not($state?exclude-role = tokenize(site:config/site:exclude/@role, '\s'))]
+      let $child.state := map:merge((
+        $state,
+        map{
+          'full-url': $state?parent-url || '/' || $child/@value,
+          'parent-url': $state?parent-url || '/' || $child/@value,
+          'current-url': replace($state?current-url, '/$', '') || '/' || $child/@value,
+          'step': $child/@value,
+          'steps': (),
+          'function': $state?function,
+          'keys': $keys
+        }), map{'duplicates':'use-last'})
+      return
+        if ($state?skip-role = tokenize($child/site:config/site:skip/@role, '\s')) then
+          (: skip a level, treating the child as a new parent :)
+          site:process($child, $state?current-mode, $child.state)
+        else
+          (: For other steps, use cwpfus mode to run function:)
+          site:process($child, 'cwpfus', $child.state)
+    else
+      (: recurse to next URI step :)
+      let $next as element(site:step)? := (
+        $step/site:step[@value eq $next.step],
+        ($step/site:step[@match])[matches($next.step, @match)],
+        $step/site:step[not(@match or @value)]
+      )[1]
+      let $new.state := map:merge((
+        $state,
+        map{
+          'parent-url': $state?parent-url,
+          'current-url': replace($state?current-url, '/$', '') || '/' || $next.step,
+          'step': $next.step,
+          'steps': tail($state?steps),
+          'function': $state?function,
+          'keys': $keys
+        }), map{'duplicates':'use-last'})
+      return site:process($next, $state?current-mode, $new.state)
+};
+
 declare function site:call-with-parameters-for-uri-steps($url as xs:string, $config as element(), $function as function(*)) {
-  let $state := map{
-    'full-url': $url,
-    'steps': tokenize($url, '/')[. ne ''],
-    'function': $function,
-    'current-url': '/'
-  }
+  site:call-with-parameters-for-uri-steps($url, $config, $function, map{})
+};
+
+declare function site:call-with-parameters-for-uri-steps($url as xs:string, $config as element(), $function as function(*), $state as map(*)) {
+  let $state := map:merge((
+    map{
+     'full-url': $url,
+     'steps': tokenize($url, '/')[. ne ''],
+     'function': $function,
+     'current-url': '/'
+    },
+    $state
+  ), map{'duplicates':'use-last'})
   return site:process($config, 'cwpfus', $state)
 };
 

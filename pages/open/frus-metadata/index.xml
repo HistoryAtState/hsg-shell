@@ -30,7 +30,7 @@
                   <p>Visit the <a href="https://catalog.data.gov/dataset/bibliographical-metadata-of-the-foreign-relations-of-the-united-states-series">Data.gov catalog entry</a> for this dataset</p>
                </div>
             </div>
-            <aside class="hsg-width-one-third">
+            <aside data-template="pages:asides">
                <div id="sections" class="hsg-panel" data-template="app:fix-links">
                   <div class="hsg-panel-heading">
                      <h2 class="hsg-sidebar-title">Open Government Initiative</h2>
