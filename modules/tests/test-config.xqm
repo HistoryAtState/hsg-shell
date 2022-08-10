@@ -35,27 +35,34 @@ return values like "og:type": "website" can be considered to be shorthand for:
 :)
 
 declare
-    %test:assertEquals(
-        '<meta property="og:type" content="website"/>',
-        '<meta property="twitter:card" content="summary"/>',
-        '<meta property="twitter:site" content="@HistoryAtState"/>',
-        '<meta property="og:site_name" content="Office of the Historian"/>',
-        '<meta property="og:title" content="Office of the Historian"/>',
-        '<meta property="og:description" content="Office of the Historian"/>',
-        '<meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>',
-        '<meta property="og:image:width" content="400"/>',
-        '<meta property="og:image:height" content="400"/>',
-        '<meta property="og:image:alt" content="Department of State heraldic shield"/>',
-        '<meta property="og:url" content="test-url"/>'
-    )
+     %test:assertEquals('true') 
 function x:open-graph-defaults() {
+    let $expected as element(meta)* := (
+        <meta property="og:type" content="website"/>,
+        <meta property="twitter:card" content="summary"/>,
+        <meta property="twitter:site" content="@HistoryAtState"/>,
+        <meta property="og:site_name" content="Office of the Historian"/>,
+        <meta property="og:title" content="Office of the Historian"/>,
+        <meta property="og:description" content="Office of the Historian"/>,
+        <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>,
+        <meta property="og:image:width" content="400"/>,
+        <meta property="og:image:height" content="400"/>,
+        <meta property="og:image:alt" content="Department of State heraldic shield"/>,
+        <meta property="og:url" content="test-url"/>,
+        <meta name="DC.type" content="webpage"/>,
+        <meta name="citation_public_url" content="test-url"/>,
+        <meta name="accessDate" content="{format-date(current-date(), '[Y0001]-[M01]-[D01]')}"/>
+    )
     let $node:= ()
     let $model:= map {
              "open-graph": $config:OPEN_GRAPH,
         "open-graph-keys": $config:OPEN_GRAPH_KEYS,
                     "url": "test-url"
     }
-    return config:open-graph($node,$model)
+    let $result as element(meta)* := config:open-graph($node,$model)
+    return if (deep-equal($expected, $result)) 
+    then 'true'
+    else (<result>{$result}</result>, <expected>{$expected}</expected>)
 };
 
 

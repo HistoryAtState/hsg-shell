@@ -86,9 +86,8 @@
                   </div>
                </div>
             </div>
-            <aside class="hsg-width-one-third" data-template="app:fix-links">
-               <div data-template="pages:section-nav"/>
-               <div class="hsg-panel">
+            <aside data-template="pages:asides">
+               <div class="hsg-panel" data-template="app:fix-links">
                   <div class="hsg-panel-heading">
                      <h3 class="hsg-sidebar-title">Related Links</h3>
                   </div>

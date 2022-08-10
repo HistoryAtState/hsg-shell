@@ -13,6 +13,7 @@ import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
+import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "sidebar.xqm";
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
@@ -109,8 +110,21 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                     else (),
                 "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
         		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
-        		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"})
+        		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"}),
+        		"url":
+        		  try { request:get-url() } 
+        		  catch err:XPDY0002 { 'test-url' },  (: some contexts do not have a request object, e.g. xqsuite testing :)
+        		"local-uri":
+        		  try { substring-after(request:get-uri(), $app:APP_ROOT)} 
+        		  catch err:XPDY0002 { 'test-path' }  (: some contexts do not have a request object, e.g. xqsuite testing :)
             }
+            let $citation-meta :=
+                let $meta-fun := $config:PUBLICATIONS?($publication-id)?citation-meta
+                let $new.model := map:merge(($model, $content), map{'duplicates': 'use-last'})
+                return if (exists($meta-fun)) then
+                    $meta-fun($node, $new.model)
+                else
+                    config:default-citation-meta($node, $new.model)
         
             return
                 (
@@ -121,7 +135,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                         )
                     else
                         (),
-                    templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
+                    templates:process($node/*, map:merge(($model, $content, map{'citation-meta': $citation-meta}),  map{"duplicates": "use-last"}))
                 )
 };
 
@@ -575,35 +589,6 @@ declare function pages:generate-breadcrumb-label($state as map(*)) {
   )
 };
 
-declare function pages:section-nav($node as node(), $model as map(*)){
-  pages:generate-section-nav(substring-after(request:get-uri(), $app:APP_ROOT))
-};
-
-declare function pages:generate-section-nav($uri as xs:string) as element(div) {
-  let $site-section := '/' || (tokenize($uri,'/')[. ne ''])[1]
-  let $section-title := site:call-with-parameters-for-uri-steps($site-section, $site:config, pages:generate-breadcrumb-label#1)[2]
-  let $section-links := site:call-for-uri-step-children($site-section, $site:config, pages:generate-breadcrumb-link#1, map{'exclude-role': 'section-nav', 'skip-role': 'section-nav'})
-  return
-    <div id="sections" class="hsg-panel">
-      {
-        if ($section-title) then
-          <div class="hsg-panel-heading">
-            <h2 class="hsg-sidebar-title">{$section-title}</h2>
-          </div>
-        else ()
-      }{
-        if ($section-links) then
-          <ul class="hsg-list-group">
-            {
-              for $link in $section-links return
-              <li class="hsg-list-group-item">{$link}</li>
-            }
-          </ul>
-        else ($section-links)
-      }
-    </div>
-};
-
 declare function pages:app-root($node as node(), $model as map(*)) {
     let $root := try {
         if (request:get-header("nginx-request-uri")) then (
@@ -616,13 +601,13 @@ declare function pages:app-root($node as node(), $model as map(*)) {
     element { node-name($node) } {
         $node/@*,
         attribute data-app { $root },
-        let $content := templates:process($node/*, $model)
+        let $content as node()* := templates:process($node/*, $model)
         let $title := string-join((pages:generate-short-title($node, $model)[. ne 'Office of the Historian'], "Office of the Historian"), " - ")
 
         let $log := console:log("pages:app-root -> title: " || $title)
         return (
             <head>
-                { $content/self::head/* }
+                {$content[self::head]/*}
                 <title>{$title}</title>
             </head>,
             $content/self::body
@@ -755,4 +740,31 @@ declare function pages:section-category($node, $model) {
     root($model?data)//tei:title[@type = 'short']/string()
 };
 
+declare function pages:asides($node, $model){
+    (:
+     : function to generate asides (e.g. sidebars) on pages; eventually all sidebar content will be generated here,
+     : but for now we will recurse over existing content.
+     :)
+    let $static-asides :=
+    <aside class="hsg-aside--static">
+        {
+            let $nodes := $node/node()[not(@data-template eq 'pages:section-nav')]
+            let $processed := templates:process($nodes, $model)
+            return app:fix-links($processed)
+        }
+    </aside>
+    return
+        <div class="hsg-width-sidebar">
+            {
+                side:info($node, $model),
+				$static-asides,
+                side:section-nav($node, $model)
+            }
+        </div>
+};
+
 declare function pages:suppress($node as node()?, $model as map(*)?) {};
+
+declare function pages:unless-asides($node, $model){
+    if ($node/ancestor::body/div[tokenize(@class, '\s') = 'hsg-main']//aside[@data-template eq 'pages:asides']) then () else $node
+};

@@ -265,9 +265,7 @@
                         on duty when they present their credentials to their host governments.</p>
                </div>
             </div>
-            <aside class="hsg-width-one-third">
-               <div data-template="pages:section-nav"/>
-            </aside>
+            <aside data-template="pages:asides"/>
          </div>
       </div>
    </div>

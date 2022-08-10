@@ -97,7 +97,8 @@ gulp.task('scripts:build', function () {
     // minified version of js is used in production only
     return gulp.src([
             'resources/scripts/app.js',
-            'resources/scripts/metagrid.js'
+            'resources/scripts/metagrid.js',
+            'resources/scripts/cite.js'
         ])
         .pipe(uglify())
         .pipe(concat('app.min.js'))
@@ -108,6 +109,7 @@ gulp.task('scripts:concat', gulp.series('scripts:build', function () {
     return gulp.src([
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+            'resources/scripts/citeproc.min.js',
             'resources/scripts/app.min.js'
         ])
       .pipe(concat('app.all.js'))
