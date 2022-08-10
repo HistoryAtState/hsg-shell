@@ -53,7 +53,8 @@ jQuery(function ($) {
     }
     function getFootnoteContent() {
       if (touchAvailable()) {
-        return $(getFootnote(this)).html();
+        footnote = $(getFootnote(this));
+        return '<span>[' + footnote.attr('value') + '] </span>' + footnote.html();
       }
       var footnote = $(
         '<div class="footnote-popover">' +
