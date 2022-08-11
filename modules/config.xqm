@@ -8,7 +8,7 @@ module namespace config="http://history.state.gov/ns/site/hsg/config";
 
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 
-import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../resources/odd/compiled/frus-web-module.xql";
+import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../transform/frus-web-module.xql";
 
 declare namespace templates="http://exist-db.org/xquery/templates";
 
