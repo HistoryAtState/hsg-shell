@@ -38,12 +38,7 @@
                 at="xmldb:exist:///db/apps/hsg-shell/modules/ext-fo.xql"/>
     </output>
     <!-- Special web configuration for the documentation (to handle <code>) -->
-    <output mode="web" odd="documentation">
-        <module prefix="ext-html"
-                uri="http://www.tei-c.org/tei-simple/xquery/ext-html"
-                at="xmldb:exist:///db/apps/hsg-shell/modules/ext-html.xql"/>
-    </output>
-    <output mode="print" odd="frus">
+    <output mode="web" odd="frus">
         <module prefix="ext-html"
                 uri="http://history.state.gov/ns/site/hsg/pmf-html"
                 at="xmldb:exist:///db/apps/hsg-shell/modules/ext-html.xql"/>
