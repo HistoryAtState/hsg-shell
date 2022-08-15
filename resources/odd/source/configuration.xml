@@ -12,25 +12,23 @@
 -->
 <modules>
     <!-- Special latex configuration for presentations -->
-    <output mode="latex" odd="beamer">
+<!--     <output mode="latex" odd="beamer">
         <module prefix="ext-beamer"
                 uri="http://www.tei-c.org/tei-simple/xquery/ext-latexbeamer"
                 at="xmldb:exist:///db/apps/hsg-shell/modules/ext-latexbeamer.xql"/>
     </output>
-    <!-- General latex extension functions -->
-    <output mode="latex">
+ -->    <!-- General latex extension functions -->
+<!--     <output mode="latex">
         <module prefix="ext-latex"
                 uri="http://www.tei-c.org/tei-simple/xquery/ext-latex"
                 at="xmldb:exist:///db/apps/hsg-shell/modules/ext-latex.xql">
-            <!-- directory from which images should be loaded -->
-            <!-- TODO: Update paths in case latex will be used again -->
             <property name="image-dir">
                 (system:get-exist-home() ||
                 "/webapp/WEB-INF/data/expathrepo/tei-simple-0.3/test/", system:get-exist-home() ||
                 "/webapp/WEB-INF/data/expathrepo/tei-simple-0.3/doc/")
             </property>
         </module>
-    </output>
+    </output> -->
     <!-- General fo extension functions -->
     <output mode="print">
         <module prefix="ext-fo"
