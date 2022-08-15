@@ -16,10 +16,11 @@
         <meta data-template="config:app-meta"/>
         <link rel="shortcut icon" href="$app/resources/images/favicon.ico"/>
         <!-- @if PRODUCTION=true -->
-        <link rel="stylesheet" type="text/css" href="$app/resources/css/all.css"/>
+        <link rel="stylesheet" type="text/css" href="$app/resources/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="$app/transform/frus.css"/>
         <!-- @endif -->
         <!-- @if PRODUCTION=false -->
-        <link rel="stylesheet" type="text/css" href="$app/resources/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="$app/resources/css/all.css"/>
         <link rel="stylesheet" type="text/css" data-template="pages:styles"
             data-template-odd="frus.odd"/>
         <!-- @endif -->
@@ -231,7 +232,7 @@
                 </div>
             </section>
         </div>
-        
+
         <div class="hsg-cite__footer" data-template="pages:unless-asides">
             <section class="hsg-grid">
                 <div class="container">
