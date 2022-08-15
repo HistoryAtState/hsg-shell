@@ -279,7 +279,7 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                             </error-handler>
                                         </dispatch>
                             case "appendix-a" return
-                                let $page := "historicaldocuments/frus-history/appendix-a.xql"
+                                let $page := "historicaldocuments/frus-history/appendix-a.xml"
                                 let $section-id := "appendix-a"
                                 return
                                     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
