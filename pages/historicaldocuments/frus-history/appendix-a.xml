@@ -1,31 +1,63 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<div data-template="templates:surround" data-template-with="templates/site.xml" data-template-at="content">
-
-    <div class="content">
-        <div data-template="appendix-a:chart-title" />
-        <div data-template="appendix-a:chart-css" />
-        <div class="bordered" style="margin-bottom: 1em">
-            <div id="graph" style="width: 100%; height: 400px" />
-            <div style="margin-top: 1em; margin-left: 1em">
-                <p style="margin-bottom: 0">Select Datasets to Display Above:<br />
-                    <input type="checkbox" id="0" checked="checked" onClick="change(this)" />
-                    <label for="0" style="font-weight: normal; color: inherit;">Annual
-                        <em>FRUS</em>
-                        Production</label><br />
-                    <input type="checkbox" id="1" checked="checked" onClick="change(this)" />
-                    <label for="1" style="font-weight: normal; color: inherit;">Average
-                        <em>FRUS</em>
-                        Lag</label><br />
-                    <input type="checkbox" id="2" onClick="change(this)" />
-                    <label for="2" style="font-weight: normal; color: inherit;">Average Regular
-                        <em>FRUS</em> Lag</label>
-                </p>
-            </div>
-        </div>
-        <div data-template="appendix-a:chart-into" />
-        <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.0.1/dygraph-combined.js"></script>
-        <div data-template="appendix-a:chart-data" />
+<div data-template="pages:load">
+    <div data-template="templates:surround" data-template-with="templates/site.xml" data-template-at="content">
+       <div>
+          <div id="static-title" class="hidden">
+             <span data-template="frus-history:monograph-page-title"/> - History of the Foreign
+             Relations Series - Historical Documents</div>
+          <div class="row">
+             <div data-template="pages:breadcrumb"/>
+          </div>
+          <div class="row">
+             <div class="hsg-navigation-wrapper">
+                <h2 class="hsg-navigation-title" id="navigation-title" data-template="frus-history:monograph-title"/>
+             </div>
+          </div>
+          <div class="row" data-template="pages:navigation">
+             <a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
+                <i class="glyphicon glyphicon-chevron-left"/>
+             </a>
+             <a data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
+                <i class="glyphicon glyphicon-chevron-right"/>
+             </a>
+             <div class="hsg-width-main">
+                <div id="content-inner">
+                   <div id="content-container" >
+                      <div class="content">
+         <div data-template="appendix-a:chart-title"/>
+         
+         <div class="bordered" style="margin-bottom: 1em">
+             <div id="graph" style="width: 100%; height: 400px"/>
+             <div style="margin-top: 1em; margin-left: 1em">
+                 <p style="margin-bottom: 0">Select Datasets to Display Above:<br/>
+                     <input type="checkbox" id="0" checked="checked" onClick="change(this)"/>
+                     <label for="0" style="font-weight: normal; color: inherit;">Annual
+                         <em>FRUS</em>
+                         Production</label>
+                                             <br/>
+                     <input type="checkbox" id="1" checked="checked" onClick="change(this)"/>
+                     <label for="1" style="font-weight: normal; color: inherit;">Average
+                         <em>FRUS</em>
+                         Lag</label>
+                                             <br/>
+                     <input type="checkbox" id="2" onClick="change(this)"/>
+                     <label for="2" style="font-weight: normal; color: inherit;">Average Regular
+                         <em>FRUS</em> Lag</label>
+                 </p>
+             </div>
+         </div>
+         <div data-template="appendix-a:chart-into"/>
+         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.0.1/dygraph-combined.js"/>
+         <div data-template="appendix-a:chart-data"/>
+         <div data-template="appendix-a:chart-css"/>
+     </div>
+                   </div>
+                </div>
+             </div>
+             <!-- TOC Sidebar -->
+             <aside data-template="pages:asides">
+                <div data-template="toc:table-of-contents-sidebar" data-template-heading="false" data-template-highlight="true"/>
+             </aside>
+          </div>
+       </div>
     </div>
-</div>
+ </div>
