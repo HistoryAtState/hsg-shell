@@ -39,7 +39,7 @@ declare function local:get-line($src, $line as xs:int) {
         replace($lines[$line], "^\s*(.*?)", "$1")
 };
 
-let $odd := xmldb:get-child-resources($config:odd-root)[ends-with(., ".odd")]
+let $odd := xmldb:get-child-resources($config:odd-source)[ends-with(., ".odd")]
 let $result :=
     for $source in $odd
     (: for $module in ("web", "print", "latex", epub") :)
@@ -47,7 +47,7 @@ let $result :=
     return
         try {
             for $file in pmu:process-odd(
-                    odd:get-compiled($config:odd-root, $source),
+                    odd:get-compiled($config:odd-source, $source),
                     $config:output-root,
                     $module,
                     "../" || $config:output,
