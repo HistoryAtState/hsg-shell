@@ -48,7 +48,6 @@
          <div data-template="appendix-a:chart-into"/>
          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.0.1/dygraph-combined.js"/>
          <div data-template="appendix-a:chart-data"/>
-         <div data-template="appendix-a:chart-css"/>
      </div>
                    </div>
                 </div>

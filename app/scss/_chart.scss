@@ -1,0 +1,38 @@
+/* Chart -------------- */
+
+.dygraph-title {
+    font-size: 75%;
+    color: #606060;
+    margin-bottom: 2em;
+}
+
+.dygraph-ylabel {
+    color: rgb(155, 17, 30);
+}
+
+.dygraph-y2label {
+    color: rgb(73, 102, 144);
+}
+
+.dygraph-axis-label-x {
+    color: rgb(73, 102, 144);
+}
+
+.dygraph-axis-label-y {
+    color: rgb(155, 17, 30);
+}
+
+.dygraph-axis-label-y2 {
+    color: rgb(73, 102, 144);
+}
+
+.dygraph-legend {
+    margin-top: 10px;
+}
+
+.dygraph-rangesel-zoomhandle {
+    border: unset ;
+    padding: unset ;
+    -webkit-border-radius: unset ;
+    -moz-border-radius: unset ; 
+}

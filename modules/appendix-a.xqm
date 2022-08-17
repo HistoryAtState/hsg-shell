@@ -19,29 +19,12 @@ declare
 function appendix-a:chart-data($node as node(), $model as map(*)) {
     let $chart-data := util:binary-to-string(util:binary-doc('/db/apps/frus-history/frus-production-chart/frus-production-chart-data.json'))
     let $chart-parameters := util:binary-to-string(util:binary-doc('/db/apps/frus-history/frus-production-chart/frus-production-chart-parameters.json'))
-    let $chart-js := util:binary-to-string(util:binary-doc('/db/apps/frus-history/frus-production-chart/frus-production-chart-js.js'))
     return (
     <script type="text/javascript">
         const g = window.g = new Dygraph(document.getElementById("graph"), {$chart-data}, {$chart-parameters});
-        {$chart-js}
     </script>
     )
 };
-
-
-
-
-declare 
-    %templates:replace
-function appendix-a:chart-css($node as node(), $model as map(*)) {
-    let $chart-css := util:binary-to-string(util:binary-doc('/db/apps/frus-history/frus-production-chart/frus-production-chart-css.css'))
-    return (
-        <style type="text/css">
-            {$chart-css}
-        </style>
-    )
-};
-
 
 declare 
     %templates:replace
