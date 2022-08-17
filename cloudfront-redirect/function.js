@@ -3,6 +3,7 @@
 const fs = require('fs').promises;
 
 let redirectMap = null;
+const FILE_NAME = '/tmp/redirect-sample.json';
 
 const aws = require('aws-sdk');
 const s3 = new aws.S3({ region: 'us-east-1' });
@@ -10,32 +11,49 @@ const s3Params = {
   Bucket: 'redirectbuket',
   Key: 'redirect-sample.json',
 };
- 
+const getFromS3 = async () => 
+    s3.getObject(s3Params).promise()
+    .then(res => res.Body.toString('utf-8'))
+    
+
+const writeFile = async (filehandle,jsonString) => 
+    filehandle.writeFile(jsonString)
+
+const writeToFile = async () => fs.open(FILE_NAME, 'w+')
+                                    .then(handle => getFromS3()
+                                                    .then(data => writeFile(handle, data))
+                                                    .then(() => handle)
+                                    )
 async function fetchRedirections() {
-    //check if the redirects are in tmp
-    let stats = null;
-    try {
-        /* code */
-        stats = await fs.stat('/tmp/redirect-sample.json')
-        console.log(JSON.stringify(stats))
-    } catch (e) {}
-
-    if(!stats || stats.mtimeMs + (3600 * 1000) < Date.now()) {
-        const response = await s3.getObject(s3Params).promise();
-        const jsonResponse = JSON.parse(response.Body.toString('utf-8'));
-            
-        await fs.writeFile('/tmp/redirect-sample.json', response.Body.toString('utf-8'));
-    }
-
-    let data = await fs.readFile('/tmp/redirect-sample.json');
-    if(data) return JSON.parse(data);
+    //check if the redirects are in tmpa
+    return fs.open(FILE_NAME)
+        .catch(err => writeToFile())
+        .then(handle => handle.stat().then(stat => {
+            return {handle,stat}
+        }))
+        .then(({handle, stat}) => {
+            if (stat.mtimeMs + (3600 * 1000) < Date.now()) {
+                // renew file
+                return handle
+                .close()
+                .then(() => writeToFile())
+            } else {
+                return handle
+            }
+        })
+        .then(handle => handle.close())
+        .then(() => fs.open(FILE_NAME))
+        .then(handle => handle
+                .readFile()
+                .then(data => handle.close().then(() => data))
+            )
+        .then(res => JSON.parse(res))
 }
 
 exports.handler = async (event, context) => {
     if(!redirectMap) {
         redirectMap = await fetchRedirections();
     }
-    
     const request = event.Records[0].cf.request;
     const uri  = request.uri;
     const redirect = redirectMap ? redirectMap[uri] : null;
