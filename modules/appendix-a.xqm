@@ -32,3 +32,12 @@ function appendix-a:chart-title($node as node(), $model as map(*)) {
     <h1>Appendix A: Historical <span class="font-italic">Foreign Relations</span> Timeliness and
         Production Charts</h1>
 };
+
+
+declare 
+    %templates:replace
+function appendix-a:chart-subtitle($node as node(), $model as map(*)) {
+    <h2 class="h4">
+        <em>Foreign Relations</em> Series: Production &amp; Timeliness, 1861-2015
+    </h2>
+};

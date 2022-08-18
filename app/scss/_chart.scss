@@ -1,9 +1,10 @@
 /* Chart -------------- */
 
 .dygraph-title {
+    display: none;
     font-size: 75%;
     color: #606060;
-    margin-bottom: 2em;
+    // margin-bottom: 2em;
 }
 
 .dygraph-ylabel {
@@ -35,4 +36,13 @@ img.dygraph-rangesel-zoomhandle {
     padding: unset ;
     -webkit-border-radius: unset ;
     -moz-border-radius: unset ; 
+}
+
+.graph-checkboxes {
+    margin-top: 2em; 
+    margin-left: 2em;
+
+    & label {
+        margin-bottom: 0.75rem;
+    }
 }
