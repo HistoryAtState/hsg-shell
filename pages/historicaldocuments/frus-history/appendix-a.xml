@@ -49,6 +49,7 @@
                         </div>
                      </div>
                      <div data-template="appendix-a:chart-into"/>
+                     <script type="text/javascript" src="$app/resources/scripts/dygraph-combined.js"/>
                      <div data-template="appendix-a:chart-data"/>
                   </div>
                </div>

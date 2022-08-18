@@ -338,8 +338,6 @@
             data-template="app:fix-this-link"/>
         <script type="text/javascript" async="async" src="$app/resources/scripts/cite.js"
             data-template="app:fix-this-link" id="cite-script"/>
-            <script type="text/javascript" async="async" src="$app/resources/scripts/dygraph-combined.js"
-            data-template="app:fix-this-link" id="graph-script"/>
         <!-- @endif -->
         <!-- @if PRODUCTION=true -->
         <script type="text/javascript" async="async" src="$app/resources/scripts/app.all.js"
