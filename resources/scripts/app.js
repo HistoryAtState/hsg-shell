@@ -550,10 +550,3 @@ $(document).ready(function() {
     toggleComponents();
     toggleShowMoreLink();
 });
-
-
-// change function is responsible for toggling data on the dygraph chart on the appendix-a page
-function change(el) {
-    g.setVisibility(parseInt(el.id), el.checked);
-
-}
