@@ -1,653 +1,676 @@
 <root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
-  <path match="/resources/|/bower_components/">
-    <fwd url="{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
-  </path>
-  <step value="validate-results-of-twitter-jobs.xq">
-    <xq href="/tests/xquery/validate-results-of-twitter-jobs.xq"/>
-  </step>
-  <step value="resource-name.xml">
-    <xq href="/tests/xquery/resource-name.xml"/>
-  </step>
-  <step value="validate-replication">
-    <xq href="/tests/xquery/validate-replication.xq"/>
-  </step>
-  <path match=".xql$">
-    <ignore/>
-  </path>
-  <step value="robots.txt opensearch.xml favicon.ico" key="path">
-    <fwd url="/resources/{$site:key?path}"/>
-  </step>
-  <step match="^sitemap" key="sitemap">
-    <fwd url="/resources/sitemaps/{$site:key?sitemap}"/>
-  </step>
-  <step value="historicaldocuments">
-    <step value="about-frus">
-      <page-template href="pages/historicaldocuments/about-frus.xml"/>
+    <path match="/resources/|/bower_components/">
+        <fwd url="{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
+    </path>
+    <step value="validate-results-of-twitter-jobs.xq">
+        <xq href="/tests/xquery/validate-results-of-twitter-jobs.xq"/>
     </step>
-    <step value="status-of-the-series">
-      <page-template href="pages/historicaldocuments/status-of-the-series.xml"/>
+    <step value="resource-name.xml">
+        <xq href="/tests/xquery/resource-name.xml"/>
     </step>
-    <step value="frus-history">
-      <step value="documents">
-        <step key="doc-id">
-          <page-template href="pages/historicaldocuments/frus-history/documents/document.xml">
-            <with-param name="document-id" keyval="doc-id"/>
-            <with-param name="publication-id" value="frus-history-documents"/>
-          </page-template>
-          <config>
-            <src collection="/db/apps/frus-history/documents"/>
-          </config>
+    <step value="validate-replication">
+        <xq href="/tests/xquery/validate-replication.xq"/>
+    </step>
+    <path match=".xql$">
+        <ignore/>
+    </path>
+    <step key="path" value="robots.txt opensearch.xml favicon.ico">
+        <fwd url="/resources/{$site:key?path}"/>
+    </step>
+    <step key="sitemap" match="^sitemap">
+        <fwd url="/resources/sitemaps/{$site:key?sitemap}"/>
+    </step>
+    <step value="historicaldocuments">
+        <step value="about-frus">
+            <page-template href="pages/historicaldocuments/about-frus.xml"/>
         </step>
-        <page-template href="pages/historicaldocuments/frus-history/documents/index.xml"/>
-      </step>
-      <step value="events">
-        <page-template href="pages/historicaldocuments/frus-history/events/index.xml"/>
-      </step>
-      <step value="research">
-        <step key="article-id">
-          <page-template href="pages/historicaldocuments/frus-history/research/article.xml">
-            <with-param name="publication-id" value="articles"/>
-            <with-param name="article-id" keyval="article-id"/>
-          </page-template>
-          <config>
-            <src collection="/db/apps/frus-history/articles"/>
-          </config>
+        <step value="status-of-the-series">
+            <page-template href="pages/historicaldocuments/status-of-the-series.xml"/>
         </step>
-        <page-template href="pages/historicaldocuments/frus-history/research/index.xml"/>
-      </step>
-      <step key="section">
-        <page-template href="pages/historicaldocuments/frus-history/monograph-interior.xml">
-          <with-param name="publication-id" value="frus-history-monograph"/>
-          <with-param name="document-id" value="frus-history"/>
-          <with-param name="section-id" keyval="section"/>
-          <with-param name="requested-url" select="site:get-url()"/>
+        <step value="frus-history">
+            <step value="documents">
+                <step key="doc-id">
+                    <page-template
+                        href="pages/historicaldocuments/frus-history/documents/document.xml">
+                        <with-param keyval="doc-id" name="document-id"/>
+                        <with-param name="publication-id" value="frus-history-documents"/>
+                    </page-template>
+                    <config>
+                        <src collection="/db/apps/frus-history/documents"/>
+                    </config>
+                </step>
+                <page-template href="pages/historicaldocuments/frus-history/documents/index.xml"/>
+            </step>
+            <step value="events">
+                <page-template href="pages/historicaldocuments/frus-history/events/index.xml"/>
+            </step>
+            <step value="research">
+                <step key="article-id">
+                    <page-template
+                        href="pages/historicaldocuments/frus-history/research/article.xml">
+                        <with-param name="publication-id" value="articles"/>
+                        <with-param keyval="article-id" name="article-id"/>
+                    </page-template>
+                    <config>
+                        <src collection="/db/apps/frus-history/articles"/>
+                    </config>
+                </step>
+                <page-template href="pages/historicaldocuments/frus-history/research/index.xml"/>
+            </step>
+            <step key="section">
+                <page-template href="pages/historicaldocuments/frus-history/monograph-interior.xml">
+                    <with-param name="publication-id" value="frus-history-monograph"/>
+                    <with-param name="document-id" value="frus-history"/>
+                    <with-param keyval="section" name="section-id"/>
+                    <with-param name="requested-url" select="site:get-url()"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/frus-history/monograph"/>
+                </config>
+            </step>
+            <page-template href="pages/historicaldocuments/frus-history/index.xml">
+                <with-param name="publication-id" value="frus-history-monograph"/>
+                <with-param name="document-id" value="frus-history"/>
+            </page-template>
+            <config>
+                <src collection="/db/apps/frus-history/monograph"/>
+            </config>
+        </step>
+        <step value="ebooks">
+            <page-template href="pages/historicaldocuments/ebooks.xml"/>
+        </step>
+        <step value="other-electronic-resources">
+            <page-template href="pages/historicaldocuments/other-electronic-resources.xml"/>
+        </step>
+        <step value="guide-to-sources-on-vietnam-1969-1975">
+            <page-template href="pages/historicaldocuments/vietnam-guide.xml">
+                <with-param name="publication-id" value="vietnam-guide"/>
+                <with-param name="document-id" value="guide-to-sources-on-vietnam-1969-1975"/>
+            </page-template>
+        </step>
+        <step value="pre-1861">
+            <step value="serial-set">
+                <step value="all">
+                    <page-template href="pages/historicaldocuments/pre-1861/serial-set/all.xml"/>
+                </step>
+                <step value="browse">
+                    <page-template href="pages/historicaldocuments/pre-1861/serial-set/browse.xml">
+                        <with-param name="publication-id" value="serial-set"/>
+                    </page-template>
+                </step>
+                <page-template href="pages/historicaldocuments/pre-1861/serial-set/index.xml"/>
+            </step>
+            <page-template href="pages/historicaldocuments/pre-1861/index.xml"/>
+            <config>
+                <exclude role="section-nav"/>
+            </config>
+        </step>
+        <step value="quarterly-releases">
+            <step key="announcement">
+                <page-template
+                    href="pages/historicaldocuments/quarterly-releases/announcements/{$site:key?announcement}.xml"/>
+                <config>
+                    <src
+                        collection="/db/apps/hsg-shell/pages/historicaldocuments/quarterly-releases/announcements"
+                    />
+                </config>
+            </step>
+            <page-template href="pages/historicaldocuments/quarterly-releases/index.xml"/>
+            <config>
+                <exclude role="section-nav"/>
+            </config>
+        </step>
+        <step value="citing-frus">
+            <page-template href="pages/historicaldocuments/citing-frus.xml"/>
+        </step>
+        <step key="frus-volume" match="^frus">
+            <step key="section">
+                <page-template href="pages/historicaldocuments/volume-interior.xml">
+                    <with-param name="publication-id" value="frus"/>
+                    <with-param keyval="frus-volume" name="document-id"/>
+                    <with-param keyval="section" name="section-id"/>
+                    <with-param name="requested-url" select="site:get-url()"/>
+                </page-template>
+                <config>
+                    <src xq=".//@xml:id"/>
+                </config>
+            </step>
+            <page-template href="pages/historicaldocuments/volume-landing.xml">
+                <with-param name="publication-id" value="frus"/>
+                <with-param keyval="frus-volume" name="document-id"/>
+            </page-template>
+            <config>
+                <src collection="/db/apps/frus/volumes"/>
+            </config>
+        </step>
+        <step key="administration">
+            <page-template href="pages/historicaldocuments/administrations.xml">
+                <with-param keyval="administration" name="administration-id"/>
+                <with-param name="publication-id" value="frus-administration"/>
+            </page-template>
+            <config>
+                <src doc="/db/apps/frus/code-tables/administration-code-table.xml"
+                    xq="/code-table/items/item/value"/>
+            </config>
+        </step>
+        <page-template href="pages/historicaldocuments/index.xml">
+            <with-param name="publication-id" value="historicaldocuments"/>
         </page-template>
-        <config>
-          <src collection="/db/apps/frus-history/monograph"/>
-        </config>
-      </step>
-      <page-template href="pages/historicaldocuments/frus-history/index.xml">
-        <with-param name="publication-id" value="frus-history-monograph"/>
-        <with-param name="document-id" value="frus-history"/>
-      </page-template>
-      <config>
-        <src collection="/db/apps/frus-history/monograph"/>
-      </config>
     </step>
-    <step value="ebooks">
-      <page-template href="pages/historicaldocuments/ebooks.xml"/>
-    </step>
-    <step value="other-electronic-resources">
-      <page-template href="pages/historicaldocuments/other-electronic-resources.xml"/>
-    </step>
-    <step value="guide-to-sources-on-vietnam-1969-1975">
-      <page-template href="pages/historicaldocuments/vietnam-guide.xml">
-        <with-param name="publication-id" value="vietnam-guide"/>
-        <with-param name="document-id" value="guide-to-sources-on-vietnam-1969-1975"/>
-      </page-template>
-    </step>
-    <step value="pre-1861">
-      <step value="serial-set">
+    <step value="countries">
         <step value="all">
-          <page-template href="pages/historicaldocuments/pre-1861/serial-set/all.xml"/>
+            <page-template href="pages/countries/all.xml"/>
         </step>
-        <step value="browse">
-          <page-template href="pages/historicaldocuments/pre-1861/serial-set/browse.xml">
-            <with-param name="publication-id" value="serial-set"/>
-          </page-template>
+        <step value="issues">
+            <step key="issue">
+                <page-template href="pages/countries/issues/article.xml">
+                    <with-param name="publication-id" value="countries-issues"/>
+                    <with-param keyval="issue" name="document-id"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/rdcr/issues"/>
+                </config>
+            </step>
+            <page-template href="pages/countries/issues/index.xml"/>
         </step>
-        <page-template href="pages/historicaldocuments/pre-1861/serial-set/index.xml"/>
-      </step>
-      <page-template href="pages/historicaldocuments/pre-1861/index.xml"/>
-      <config>
-        <exclude role="section-nav"/>
-      </config>
-    </step>
-    <step value="quarterly-releases">
-      <step key="announcement">
-        <page-template href="pages/historicaldocuments/quarterly-releases/announcements/{$site:key?announcement}.xml"/>
-        <config>
-          <src collection="/db/apps/hsg-shell/pages/historicaldocuments/quarterly-releases/announcements"/>
-        </config>
-      </step>
-      <page-template href="pages/historicaldocuments/quarterly-releases/index.xml"/>
-      <config>
-        <exclude role="section-nav"/>
-      </config>
-    </step>
-    <step value="citing-frus">
-      <page-template href="pages/historicaldocuments/citing-frus.xml"/>
-    </step>
-    <step match="^frus" key="frus-volume">
-      <step key="section">
-        <page-template href="pages/historicaldocuments/volume-interior.xml">
-          <with-param name="publication-id" value="frus"/>
-          <with-param name="document-id" keyval="frus-volume"/>
-          <with-param name="section-id" keyval="section"/>
-          <with-param name="requested-url" select="site:get-url()"/>
-        </page-template>
-        <config>
-          <src xq=".//@xml:id"/>
-        </config>
-      </step>
-      <page-template href="pages/historicaldocuments/volume-landing.xml">
-        <with-param name="publication-id" value="frus"/>
-        <with-param name="document-id" keyval="frus-volume"/>
-      </page-template>
-      <config>
-        <src collection="/db/apps/frus/volumes"/>
-      </config>
-    </step>
-    <step key="administration">
-      <page-template href="pages/historicaldocuments/administrations.xml">
-        <with-param name="administration-id" keyval="administration"/>
-        <with-param name="publication-id" value="frus-administration"/>
-      </page-template>
-      <config>
-        <src doc="/db/apps/frus/code-tables/administration-code-table.xml" xq="/code-table/items/item/value"/>
-      </config>
-    </step>
-    <page-template href="pages/historicaldocuments/index.xml">
-      <with-param name="publication-id" value="historicaldocuments"/>
-    </page-template>
-  </step>
-  <step value="countries">
-    <step value="all">
-      <page-template href="pages/countries/all.xml"/>
-    </step>
-    <step value="issues">
-      <step key="issue">
-        <page-template href="pages/countries/issues/article.xml">
-          <with-param name="publication-id" value="countries-issues"/>
-          <with-param name="document-id" keyval="issue"/>
-        </page-template>
-        <config>
-          <src collection="/db/apps/rdcr/issues"/>
-        </config>
-      </step>
-      <page-template href="pages/countries/issues/index.xml"/>
-    </step>
-    <step value="archives">
-      <step value="all">
-        <page-template href="pages/countries/archives/all.xml">
-          <with-param name="publication-id" value="archives"/>
-        </page-template>
-      </step>
-      <step key="article">
-        <page-template href="pages/countries/archives/article.xml">
-          <with-param name="publication-id" value="archives"/>
-          <with-param name="document-id" keyval="article"/>
-        </page-template>
-        <config>
-          <src collection="/db/apps/wwdai/articles"/>
-        </config>
-      </step>
-      <page-template href="pages/countries/archives/index.xml">
-        <with-param name="publication-id" value="archives"/>
-      </page-template>
-    </step>
-    <step key="country">
-      <page-template href="pages/countries/article.xml">
-        <with-param name="publication-id" value="countries"/>
-        <with-param name="document-id" keyval="country"/>
-      </page-template>
-      <config>
-        <src collection="articles"/>
-      </config>
-    </step>
-    <page-template href="pages/countries/index.xml">
-      <with-param name="publication-id" value="countries"/>
-    </page-template>
-    <config>
-      <src collection="/db/apps/rdcr"/>
-    </config>
-  </step>
-  <step value="departmenthistory">
-    <step value="timeline">
-      <step key="section">
-        <page-template href="pages/departmenthistory/timeline/section.xml">
-          <with-param name="publication-id" value="timeline"/>
-          <with-param name="document-id" value="timeline"/>
-          <with-param name="section-id" keyval="section"/>
-        </page-template>
-        <config>
-          <src doc="/db/apps/administrative-timeline/timeline/timeline.xml" xq=".//@xml:id"/>
-        </config>
-      </step>
-      <page-template href="pages/departmenthistory/timeline/index.xml">
-        <with-param name="publication-id" value="timeline"/>
-        <with-param name="document-id" value="timeline"/>
-      </page-template>
-    </step>
-    <step value="short-history">
-      <step key="section">
-        <page-template href="pages/departmenthistory/short-history/section.xml">
-          <with-param name="publication-id" value="short-history"/>
-          <with-param name="document-id" value="short-history"/>
-          <with-param name="section-id" keyval="section"/>
-        </page-template>
-        <config>
-          <src doc="/db/apps/other-publications/short-history/short-history.xml" xq=".//@xml:id"/>
-        </config>
-      </step>
-      <page-template href="pages/departmenthistory/short-history/index.xml">
-        <with-param name="publication-id" value="short-history"/>
-        <with-param name="document-id" value="short-history"/>
-      </page-template>
-      <config>
-        <exclude role="section-nav"/>
-      </config>
-    </step>
-    <step value="buildings">
-      <step key="section">
-        <page-template href="pages/departmenthistory/buildings/section.xml">
-          <with-param name="publication-id" value="buildings"/>
-          <with-param name="document-id" value="buildings"/>
-          <with-param name="section-id" keyval="section"/>
-        </page-template>
-        <config>
-          <src doc="/db/apps/other-publications/buildings/buildings.xml" xq=".//@xml:id"/>
-        </config>
-      </step>
-      <page-template href="pages/departmenthistory/buildings/index.xml">
-        <with-param name="publication-id" value="buildings"/>
-        <with-param name="document-id" value="buildings"/>
-        <with-param name="section-id" value="intro"/>
-      </page-template>
-    </step>
-    <step value="people">
-      <step value="secretaries">
-        <page-template href="pages/departmenthistory/people/secretaries.xml">
-          <with-param name="publication-id" value="secretaries"/>
-        </page-template>
-      </step>
-      <step value="principals-chiefs">
-        <page-template href="pages/departmenthistory/people/principals-chiefs.xml">
-          <with-param name="publication-id" value="principals-chiefs"/>
-        </page-template>
-      </step>
-      <step value="by-name">
-        <step key="letter">
-          <page-template href="pages/departmenthistory/people/by-name/letter.xml">
-            <with-param name="publication-id" value="people-by-alpha"/>
-            <with-param name="letter" keyval="letter"/>
-          </page-template>
-          <config>
-            <src child-collections="/db/apps/pocom/people"/>
-          </config>
+        <step value="archives">
+            <step value="all">
+                <page-template href="pages/countries/archives/all.xml">
+                    <with-param name="publication-id" value="archives"/>
+                </page-template>
+            </step>
+            <step key="article">
+                <page-template href="pages/countries/archives/article.xml">
+                    <with-param name="publication-id" value="archives"/>
+                    <with-param keyval="article" name="document-id"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/wwdai/articles"/>
+                </config>
+            </step>
+            <page-template href="pages/countries/archives/index.xml">
+                <with-param name="publication-id" value="archives"/>
+            </page-template>
         </step>
-        <page-template href="pages/departmenthistory/people/by-name/index.xml">
-          <with-param name="publication-id" value="people-by-alpha"/>
-        </page-template>
-        <config>
-          <exclude role="section-nav"/>
-        </config>
-      </step>
-      <step value="by-year">
-        <step key="year">
-          <page-template href="pages/departmenthistory/people/by-year/year.xml">
-            <with-param name="publication-id" value="people-by-year"/>
-            <with-param name="year" keyval="year"/>
-          </page-template>
-          <config>
-            <src collection="/db/apps/pocom" xq="distinct-values(for $date in .//date[not(. = '')] return xs:integer(substring($date, 1, 4)))"/>
-          </config>
+        <step key="country">
+            <page-template href="pages/countries/article.xml">
+                <with-param name="publication-id" value="countries"/>
+                <with-param keyval="country" name="document-id"/>
+            </page-template>
+            <config>
+                <src collection="articles"/>
+            </config>
         </step>
-        <page-template href="pages/departmenthistory/people/by-year/index.xml">
-          <with-param name="publication-id" value="people-by-year"/>
+        <page-template href="pages/countries/index.xml">
+            <with-param name="publication-id" value="countries"/>
         </page-template>
         <config>
-          <exclude role="section-nav"/>
+            <src collection="/db/apps/rdcr"/>
         </config>
-      </step>
-      <step value="principalofficers">
-        <step key="role">
-          <page-template href="pages/departmenthistory/people/principalofficers/by-role-id.xml">
-            <with-param name="publication-id" value="people-by-role"/>
-            <with-param name="role-id" keyval="role"/>
-          </page-template>
-          <config>
-            <src collection="/db/apps/pocom/positions-principals"/>
-          </config>
+    </step>
+    <step value="departmenthistory">
+        <step value="timeline">
+            <step key="section">
+                <page-template href="pages/departmenthistory/timeline/section.xml">
+                    <with-param name="publication-id" value="timeline"/>
+                    <with-param name="document-id" value="timeline"/>
+                    <with-param keyval="section" name="section-id"/>
+                </page-template>
+                <config>
+                    <src doc="/db/apps/administrative-timeline/timeline/timeline.xml"
+                        xq=".//@xml:id"/>
+                </config>
+            </step>
+            <page-template href="pages/departmenthistory/timeline/index.xml">
+                <with-param name="publication-id" value="timeline"/>
+                <with-param name="document-id" value="timeline"/>
+            </page-template>
         </step>
-        <page-template href="pages/departmenthistory/people/principalofficers/index.xml">
-          <with-param name="publication-id" value="people"/>
-        </page-template>
-        <config>
-          <exclude role="section-nav"/>
-        </config>
-      </step>
-      <step value="chiefsofmission">
-        <step value="by-country">
-          <page-template href="pages/departmenthistory/people/chiefsofmission/countries-list.xml">
-            <with-param name="publication-id" value="people"/>
-          </page-template>
+        <step value="short-history">
+            <step key="section">
+                <page-template href="pages/departmenthistory/short-history/section.xml">
+                    <with-param name="publication-id" value="short-history"/>
+                    <with-param name="document-id" value="short-history"/>
+                    <with-param keyval="section" name="section-id"/>
+                </page-template>
+                <config>
+                    <src doc="/db/apps/other-publications/short-history/short-history.xml"
+                        xq=".//@xml:id"/>
+                </config>
+            </step>
+            <page-template href="pages/departmenthistory/short-history/index.xml">
+                <with-param name="publication-id" value="short-history"/>
+                <with-param name="document-id" value="short-history"/>
+            </page-template>
+            <config>
+                <exclude role="section-nav"/>
+            </config>
         </step>
-        <step value="by-organization">
-          <page-template href="pages/departmenthistory/people/chiefsofmission/international-organizations-list.xml">
-            <with-param name="publication-id" value="people"/>
-          </page-template>
+        <step value="buildings">
+            <step key="section">
+                <page-template href="pages/departmenthistory/buildings/section.xml">
+                    <with-param name="publication-id" value="buildings"/>
+                    <with-param name="document-id" value="buildings"/>
+                    <with-param keyval="section" name="section-id"/>
+                </page-template>
+                <config>
+                    <src doc="/db/apps/other-publications/buildings/buildings.xml" xq=".//@xml:id"/>
+                </config>
+            </step>
+            <page-template href="pages/departmenthistory/buildings/index.xml">
+                <with-param name="publication-id" value="buildings"/>
+                <with-param name="document-id" value="buildings"/>
+                <with-param name="section-id" value="intro"/>
+            </page-template>
         </step>
-        <step key="org">
-          <page-template href="pages/departmenthistory/people/chiefsofmission/by-role-or-country-id.xml">
-            <with-param name="publication-id" value="people"/>
-            <with-param name="role-or-country-id" keyval="org"/>
-          </page-template>
-          <config>
-            <src collection="/db/apps/pocom/missions-orgs"/>
-            <src collection="/db/apps/pocom/missions-countries"/>
-          </config>
+        <step value="people">
+            <step value="secretaries">
+                <page-template href="pages/departmenthistory/people/secretaries.xml">
+                    <with-param name="publication-id" value="secretaries"/>
+                </page-template>
+            </step>
+            <step value="principals-chiefs">
+                <page-template href="pages/departmenthistory/people/principals-chiefs.xml">
+                    <with-param name="publication-id" value="principals-chiefs"/>
+                </page-template>
+            </step>
+            <step value="by-name">
+                <step key="letter">
+                    <page-template href="pages/departmenthistory/people/by-name/letter.xml">
+                        <with-param name="publication-id" value="people-by-alpha"/>
+                        <with-param keyval="letter" name="letter"/>
+                    </page-template>
+                    <config>
+                        <src child-collections="/db/apps/pocom/people"/>
+                    </config>
+                </step>
+                <page-template href="pages/departmenthistory/people/by-name/index.xml">
+                    <with-param name="publication-id" value="people-by-alpha"/>
+                </page-template>
+                <config>
+                    <exclude role="section-nav"/>
+                </config>
+            </step>
+            <step value="by-year">
+                <step key="year">
+                    <page-template href="pages/departmenthistory/people/by-year/year.xml">
+                        <with-param name="publication-id" value="people-by-year"/>
+                        <with-param keyval="year" name="year"/>
+                    </page-template>
+                    <config>
+                        <src collection="/db/apps/pocom"
+                            xq="distinct-values(for $date in .//date[not(. = '')] return xs:integer(substring($date, 1, 4)))"
+                        />
+                    </config>
+                </step>
+                <page-template href="pages/departmenthistory/people/by-year/index.xml">
+                    <with-param name="publication-id" value="people-by-year"/>
+                </page-template>
+                <config>
+                    <exclude role="section-nav"/>
+                </config>
+            </step>
+            <step value="principalofficers">
+                <step key="role">
+                    <page-template
+                        href="pages/departmenthistory/people/principalofficers/by-role-id.xml">
+                        <with-param name="publication-id" value="people-by-role"/>
+                        <with-param keyval="role" name="role-id"/>
+                    </page-template>
+                    <config>
+                        <src collection="/db/apps/pocom/positions-principals"/>
+                    </config>
+                </step>
+                <page-template href="pages/departmenthistory/people/principalofficers/index.xml">
+                    <with-param name="publication-id" value="people"/>
+                </page-template>
+                <config>
+                    <exclude role="section-nav"/>
+                </config>
+            </step>
+            <step value="chiefsofmission">
+                <step value="by-country">
+                    <page-template
+                        href="pages/departmenthistory/people/chiefsofmission/countries-list.xml">
+                        <with-param name="publication-id" value="people"/>
+                    </page-template>
+                </step>
+                <step value="by-organization">
+                    <page-template
+                        href="pages/departmenthistory/people/chiefsofmission/international-organizations-list.xml">
+                        <with-param name="publication-id" value="people"/>
+                    </page-template>
+                </step>
+                <step key="org">
+                    <page-template
+                        href="pages/departmenthistory/people/chiefsofmission/by-role-or-country-id.xml">
+                        <with-param name="publication-id" value="people"/>
+                        <with-param keyval="org" name="role-or-country-id"/>
+                    </page-template>
+                    <config>
+                        <src collection="/db/apps/pocom/missions-orgs"/>
+                        <src collection="/db/apps/pocom/missions-countries"/>
+                    </config>
+                </step>
+                <page-template href="pages/departmenthistory/people/chiefsofmission/index.xml">
+                    <with-param name="publication-id" value="people"/>
+                </page-template>
+                <config>
+                    <exclude role="section-nav"/>
+                </config>
+            </step>
+            <step key="person">
+                <page-template href="pages/departmenthistory/people/person.xml">
+                    <with-param keyval="person" name="person-id"/>
+                    <with-param keyval="person" name="document-id"/>
+                    <with-param name="publication-id" value="people"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/pocom/people"/>
+                </config>
+            </step>
+            <page-template href="pages/departmenthistory/people/index.xml">
+                <with-param name="publication-id" value="people"/>
+            </page-template>
+            <config>
+                <skip role="section-nav"/>
+            </config>
         </step>
-        <page-template href="pages/departmenthistory/people/chiefsofmission/index.xml">
-          <with-param name="publication-id" value="people"/>
-        </page-template>
-        <config>
-          <exclude role="section-nav"/>
-        </config>
-      </step>
-      <step key="person">
-        <page-template href="pages/departmenthistory/people/person.xml">
-          <with-param name="person-id" keyval="person"/>
-          <with-param name="document-id" keyval="person"/>
-          <with-param name="publication-id" value="people"/>
-        </page-template>
-        <config>
-          <src collection="/db/apps/pocom/people"/>
-        </config>
-      </step>
-      <page-template href="pages/departmenthistory/people/index.xml">
-        <with-param name="publication-id" value="people"/>
-      </page-template>
-      <config>
-        <skip role="section-nav"/>
-      </config>
-    </step>
-    <step value="travels">
-      <step value="president">
-        <step key="id">
-          <page-template href="pages/departmenthistory/travels/president/person-or-country.xml">
-            <with-param name="person-or-country-id" keyval="id"/>
-            <with-param name="publication-id" value="travels-president"/>
-          </page-template>
-          <config>
-            <src collection="/db/apps/travels/president-travels" xq="trips/trip/@who"/>
-            <src collection="/db/apps/travels/president-travels" xq="distinct-values(trips/trip/country/@id)"/>
-          </config>
+        <step value="travels">
+            <step value="president">
+                <step key="id">
+                    <page-template
+                        href="pages/departmenthistory/travels/president/person-or-country.xml">
+                        <with-param keyval="id" name="person-or-country-id"/>
+                        <with-param name="publication-id" value="travels-president"/>
+                    </page-template>
+                    <config>
+                        <src collection="/db/apps/travels/president-travels" xq="trips/trip/@who"/>
+                        <src collection="/db/apps/travels/president-travels"
+                            xq="distinct-values(trips/trip/country/@id)"/>
+                    </config>
+                </step>
+                <page-template href="pages/departmenthistory/travels/president/index.xml">
+                    <with-param name="publication-id" value="travels-president"/>
+                </page-template>
+            </step>
+            <step value="secretary">
+                <step key="id">
+                    <page-template
+                        href="pages/departmenthistory/travels/secretary/person-or-country.xml">
+                        <with-param keyval="id" name="person-or-country-id"/>
+                        <with-param name="publication-id" value="travels-secretary"/>
+                    </page-template>
+                    <config>
+                        <src collection="/db/apps/travels/secretary-travels"
+                            xq="distinct-values(trips/trip/@who)"/>
+                        <src collection="/db/apps/travels/secretary-travels"
+                            xq="distinct-values(trips/trip/country/@id)"/>
+                    </config>
+                </step>
+                <page-template href="pages/departmenthistory/travels/secretary/index.xml">
+                    <with-param name="publication-id" value="travels-secretary"/>
+                </page-template>
+            </step>
+            <page-template href="pages/departmenthistory/travels/index.xml">
+                <with-param name="publication-id" value="travels-secretary"/>
+            </page-template>
+            <config>
+                <skip role="section-nav"/>
+            </config>
         </step>
-        <page-template href="pages/departmenthistory/travels/president/index.xml">
-          <with-param name="publication-id" value="travels-president"/>
-        </page-template>
-      </step>
-      <step value="secretary">
-        <step key="id">
-          <page-template href="pages/departmenthistory/travels/secretary/person-or-country.xml">
-            <with-param name="person-or-country-id" keyval="id"/>
-            <with-param name="publication-id" value="travels-secretary"/>
-          </page-template>
-          <config>
-            <src collection="/db/apps/travels/secretary-travels" xq="distinct-values(trips/trip/@who)"/>
-            <src collection="/db/apps/travels/secretary-travels" xq="distinct-values(trips/trip/country/@id)"/>
-          </config>
+        <step value="visits">
+            <step key="id">
+                <page-template href="pages/departmenthistory/visits/country-or-year.xml">
+                    <with-param name="publication-id" value="visits"/>
+                    <with-param keyval="id" name="country-or-year"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/visits/data"
+                        xq="distinct-values(             for $date in .//(start-date | end-date)             let $year := year-from-date($date)             return $year           )"/>
+                    <src collection="/db/apps/visits/data" xq="visits/visit/from/@id"/>
+                </config>
+            </step>
+            <page-template href="pages/departmenthistory/visits/index.xml">
+                <with-param name="publication-id" value="visits"/>
+            </page-template>
         </step>
-        <page-template href="pages/departmenthistory/travels/secretary/index.xml">
-          <with-param name="publication-id" value="travels-secretary"/>
+        <step value="wwi">
+            <page-template href="pages/departmenthistory/wwi.xml">
+                <with-param name="publication-id" value="wwi"/>
+            </page-template>
+        </step>
+        <step value="diplomatic-couriers">
+            <step value="before-the-jet-age">
+                <page-template
+                    href="pages/departmenthistory/diplomatic-couriers/before-the-jet-age.xml">
+                    <with-param name="publication-id" value="diplomatic-couriers"/>
+                    <with-param name="film-id" value="before-the-jet-age"/>
+                </page-template>
+            </step>
+            <step value="behind-the-iron-curtain">
+                <page-template
+                    href="pages/departmenthistory/diplomatic-couriers/behind-the-iron-curtain.xml">
+                    <with-param name="publication-id" value="diplomatic-couriers"/>
+                    <with-param name="film-id" value="behind-the-iron-curtain"/>
+                </page-template>
+            </step>
+            <step value="into-moscow">
+                <page-template href="pages/departmenthistory/diplomatic-couriers/into-moscow.xml">
+                    <with-param name="publication-id" value="diplomatic-couriers"/>
+                    <with-param name="film-id" value="into-moscow"/>
+                </page-template>
+            </step>
+            <step value="through-the-khyber-pass">
+                <page-template
+                    href="pages/departmenthistory/diplomatic-couriers/through-the-khyber-pass.xml">
+                    <with-param name="publication-id" value="diplomatic-couriers"/>
+                    <with-param name="film-id" value="through-the-khyber-pass"/>
+                </page-template>
+            </step>
+            <page-template href="pages/departmenthistory/diplomatic-couriers/index.xml">
+                <with-param name="publication-id" value="diplomatic-couriers"/>
+            </page-template>
+        </step>
+        <page-template href="pages/departmenthistory/index.xml">
+            <with-param name="publication-id" value="departmenthistory"/>
         </page-template>
-      </step>
-      <page-template href="pages/departmenthistory/travels/index.xml">
-        <with-param name="publication-id" value="travels-secretary"/>
-      </page-template>
-      <config>
-        <skip role="section-nav"/>
-      </config>
     </step>
-    <step value="visits">
-      <step key="id">
-        <page-template href="pages/departmenthistory/visits/country-or-year.xml">
-          <with-param name="publication-id" value="visits"/>
-          <with-param name="country-or-year" keyval="id"/>
+    <step value="about">
+        <step value="contact-us">
+            <page-template href="pages/about/contact-us.xml"/>
+        </step>
+        <step value="faq">
+            <step key="section">
+                <page-template href="pages/about/faq/section.xml">
+                    <with-param name="publication-id" value="faq"/>
+                    <with-param name="document-id" value="faq"/>
+                    <with-param keyval="section" name="section-id"/>
+                </page-template>
+                <config>
+                    <src doc="/db/apps/other-publications/faq/faq.xml" xq=".//@xml:id"/>
+                </config>
+            </step>
+            <page-template href="pages/about/faq/index.xml">
+                <with-param name="publication-id" value="faq"/>
+                <with-param name="document-id" value="faq"/>
+            </page-template>
+        </step>
+        <step value="the-historian">
+            <page-template href="pages/about/the-historian.xml"/>
+        </step>
+        <step value="hac">
+            <step key="section">
+                <page-template href="pages/about/hac/section.xml">
+                    <with-param name="publication-id" value="hac"/>
+                    <with-param name="document-id" value="hac"/>
+                    <with-param keyval="section" name="section-id"/>
+                </page-template>
+                <config>
+                    <src doc="/db/apps/hac/hac.xml" xq=".//@xml:id"/>
+                </config>
+            </step>
+            <page-template href="pages/about/hac/index.xml">
+                <with-param name="publication-id" value="hac"/>
+                <with-param name="document-id" value="hac"/>
+            </page-template>
+        </step>
+        <step value="recent-publications">
+            <page-template href="pages/about/recent-publications.xml"/>
+        </step>
+        <step value="content-warning">
+            <page-template href="pages/about/content-warning.xml"/>
+        </step>
+        <page-template href="pages/about/index.xml"/>
+    </step>
+    <step value="milestones">
+        <step value="all">
+            <page-template href="pages/milestones/all.xml">
+                <with-param name="publication-id" value="milestones"/>
+            </page-template>
+        </step>
+        <step key="chapter">
+            <step key="section">
+                <page-template href="pages/milestones/chapter/article.xml">
+                    <with-param name="publication-id" value="milestones"/>
+                    <with-param keyval="chapter" name="document-id"/>
+                    <with-param keyval="section" name="section-id"/>
+                </page-template>
+                <config>
+                    <src xq=".//@xml:id"/>
+                </config>
+            </step>
+            <page-template href="pages/milestones/chapter/index.xml">
+                <with-param name="publication-id" value="milestones"/>
+                <with-param keyval="chapter" name="document-id"/>
+            </page-template>
+            <config>
+                <src collection="/db/apps/milestones/chapters"/>
+            </config>
+        </step>
+        <page-template href="pages/milestones/index.xml">
+            <with-param name="publication-id" value="milestones"/>
         </page-template>
-        <config>
-          <src collection="/db/apps/visits/data" xq="distinct-values(             for $date in .//(start-date | end-date)             let $year := year-from-date($date)             return $year           )"/>
-          <src collection="/db/apps/visits/data" xq="visits/visit/from/@id"/>
-        </config>
-      </step>
-      <page-template href="pages/departmenthistory/visits/index.xml">
-        <with-param name="publication-id" value="visits"/>
-      </page-template>
     </step>
-    <step value="wwi">
-      <page-template href="pages/departmenthistory/wwi.xml">
-        <with-param name="publication-id" value="wwi"/>
-      </page-template>
-    </step>
-    <step value="diplomatic-couriers">
-      <step value="before-the-jet-age">
-        <page-template href="pages/departmenthistory/diplomatic-couriers/before-the-jet-age.xml">
-          <with-param name="publication-id" value="diplomatic-couriers"/>
-          <with-param name="film-id" value="before-the-jet-age"/>
+    <step value="conferences">
+        <step key="conference">
+            <step key="section">
+                <page-template href="pages/conferences/conference/section.xml">
+                    <with-param name="publication-id" value="conferences"/>
+                    <with-param keyval="conference" name="document-id"/>
+                    <with-param keyval="section" name="section-id"/>
+                </page-template>
+                <config>
+                    <src xq=".//@xml:id"/>
+                </config>
+            </step>
+            <page-template href="pages/conferences/conference/index.xml">
+                <with-param name="publication-id" value="conferences"/>
+                <with-param keyval="conference" name="document-id"/>
+            </page-template>
+            <config>
+                <src collection="/db/apps/conferences/data"/>
+            </config>
+        </step>
+        <page-template href="pages/conferences/index.xml">
+            <with-param name="publication-id" value="conferences"/>
         </page-template>
-      </step>
-      <step value="behind-the-iron-curtain">
-        <page-template href="pages/departmenthistory/diplomatic-couriers/behind-the-iron-curtain.xml">
-          <with-param name="publication-id" value="diplomatic-couriers"/>
-          <with-param name="film-id" value="behind-the-iron-curtain"/>
+    </step>
+    <step value="developer">
+        <step value="catalog">
+            <page-template href="pages/developer/catalog.xml"/>
+        </step>
+        <page-template href="pages/developer/index.xml"/>
+    </step>
+    <step value="open">
+        <step value="frus-latest">
+            <page-template href="pages/open/frus-latest/index.xml"/>
+        </step>
+        <step value="frus-metadata">
+            <page-template href="pages/open/frus-metadata/index.xml"/>
+        </step>
+        <step value="frus-latest.xml">
+            <xq href="modules/open.xql">
+                <with-param name="xql-feed" value="latest"/>
+                <with-param name="xql-application-url" select="site:get-url()"/>
+            </xq>
+        </step>
+        <step value="frus-metadata.xml">
+            <xq href="modules/open.xql">
+                <with-param name="xql-feed" value="metadata"/>
+                <with-param name="xql-application-url" select="site:get-url()"/>
+            </xq>
+        </step>
+        <page-template href="pages/open/index.xml"/>
+    </step>
+    <step value="tags">
+        <step value="all">
+            <page-template href="pages/tags/all.xml">
+                <with-param name="publication-id" value="tags"/>
+            </page-template>
+        </step>
+        <step key="tag-id">
+            <page-template href="pages/tags/browse.xml">
+                <with-param name="publication-id" value="tags"/>
+                <with-param keyval="tag-id" name="tag-id"/>
+            </page-template>
+            <config>
+                <src doc="/db/apps/tags/taxonomy/taxonomy.xml" xq=".//id"/>
+            </config>
+        </step>
+        <page-template href="pages/tags/index.xml">
+            <with-param name="publication-id" value="tags"/>
         </page-template>
-      </step>
-      <step value="into-moscow">
-        <page-template href="pages/departmenthistory/diplomatic-couriers/into-moscow.xml">
-          <with-param name="publication-id" value="diplomatic-couriers"/>
-          <with-param name="film-id" value="into-moscow"/>
+    </step>
+    <step value="education">
+        <step value="modules">
+            <step key="doc-id">
+                <page-template href="pages/education/module.xml">
+                    <with-param name="publication-id" value="education"/>
+                    <with-param keyval="doc-id" name="document-id"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/other-publications/education/introductions"/>
+                </config>
+            </step>
+            <page-template href="pages/education/modules.xml"/>
+        </step>
+        <page-template href="pages/education/index.xml"/>
+    </step>
+    <step value="search">
+        <param name="q start-date end-date">
+            <page-template href="pages/search/search-result.xml"/>
+        </param>
+        <step value="tips">
+            <page-template href="pages/search/tips.xml">
+                <with-param name="suppress-sitewide-search-field" value="true"/>
+            </page-template>
+        </step>
+        <page-template href="pages/search/search-landing.xml">
+            <with-param name="suppress-sitewide-search-field" value="true"/>
         </page-template>
-      </step>
-      <step value="through-the-khyber-pass">
-        <page-template href="pages/departmenthistory/diplomatic-couriers/through-the-khyber-pass.xml">
-          <with-param name="publication-id" value="diplomatic-couriers"/>
-          <with-param name="film-id" value="through-the-khyber-pass"/>
-        </page-template>
-      </step>
-      <page-template href="pages/departmenthistory/diplomatic-couriers/index.xml">
-        <with-param name="publication-id" value="diplomatic-couriers"/>
-      </page-template>
     </step>
-    <page-template href="pages/departmenthistory/index.xml">
-      <with-param name="publication-id" value="departmenthistory"/>
-    </page-template>
-  </step>
-  <step value="about">
-    <step value="contact-us">
-      <page-template href="pages/about/contact-us.xml"/>
+    <step value="api">
+        <step value="v1">
+            <step value="catalog">
+                <xq href="/modules/opds-catalog.xql">
+                    <with-param name="xql-application-url" select="site:get-url()"/>
+                </xq>
+            </step>
+            <xq href="/modules/opds-catalog.xql">
+                <with-param name="xql-application-url" select="site:get-url()"/>
+            </xq>
+        </step>
+        <ignore/>
     </step>
-    <step value="faq">
-      <step key="section">
-        <page-template href="pages/about/faq/section.xml">
-          <with-param name="publication-id" value="faq"/>
-          <with-param name="document-id" value="faq"/>
-          <with-param name="section-id" keyval="section"/>
-        </page-template>
-        <config>
-          <src doc="/db/apps/other-publications/faq/faq.xml" xq=".//@xml:id"/>
-        </config>
-      </step>
-      <page-template href="pages/about/faq/index.xml">
-        <with-param name="publication-id" value="faq"/>
-          <with-param name="document-id" value="faq"/>
-      </page-template>
+    <step value="services">
+        <step value="volume-ids">
+            <xq href="/modules/volume-ids.xql"/>
+        </step>
+        <step value="volume-images">
+            <xq href="/modules/volume-images.xql"/>
+        </step>
+        <ignore/>
     </step>
-    <step value="the-historian">
-      <page-template href="pages/about/the-historian.xml"/>
-    </step>
-    <step value="hac">
-      <step key="section">
-        <page-template href="pages/about/hac/section.xml">
-          <with-param name="publication-id" value="hac"/>
-          <with-param name="document-id" value="hac"/>
-          <with-param name="section-id" keyval="section"/>
-        </page-template>
-        <config>
-          <src doc="/db/apps/hac/hac.xml" xq=".//@xml:id"/>
-        </config>
-      </step>
-      <page-template href="pages/about/hac/index.xml">
-        <with-param name="publication-id" value="hac"/>
-          <with-param name="document-id" value="hac"/>
-      </page-template>
-    </step>
-    <step value="recent-publications">
-      <page-template href="pages/about/recent-publications.xml"/>
-    </step>
-    <step value="content-warning">
-      <page-template href="pages/about/content-warning.xml"/>
-    </step>
-    <page-template href="pages/about/index.xml"/>
-  </step>
-  <step value="milestones">
-    <step value="all">
-      <page-template href="pages/milestones/all.xml">
-        <with-param name="publication-id" value="milestones"/>
-      </page-template>
-    </step>
-    <step key="chapter">
-      <step key="section">
-        <page-template href="pages/milestones/chapter/article.xml">
-          <with-param name="publication-id" value="milestones"/>
-          <with-param name="document-id" keyval="chapter"/>
-          <with-param name="section-id" keyval="section"/>
-        </page-template>
-        <config>
-          <src xq=".//@xml:id"/>
-        </config>
-      </step>
-      <page-template href="pages/milestones/chapter/index.xml">
-        <with-param name="publication-id" value="milestones"/>
-        <with-param name="document-id" keyval="chapter"/>
-      </page-template>
-      <config>
-        <src collection="/db/apps/milestones/chapters"/>
-      </config>
-    </step>
-    <page-template href="pages/milestones/index.xml">
-      <with-param name="publication-id" value="milestones"/>
-    </page-template>
-  </step>
-  <step value="conferences">
-    <step key="conference">
-      <step key="section">
-        <page-template href="pages/conferences/conference/section.xml">
-          <with-param name="publication-id" value="conferences"/>
-          <with-param name="document-id" keyval="conference"/>
-          <with-param name="section-id" keyval="section"/>
-        </page-template>
-        <config>
-          <src xq=".//@xml:id"/>
-        </config>
-      </step>
-      <page-template href="pages/conferences/conference/index.xml">
-        <with-param name="publication-id" value="conferences"/>
-        <with-param name="document-id" keyval="conference"/>
-      </page-template>
-      <config>
-        <src collection="/db/apps/conferences/data"/>
-      </config>
-    </step>
-    <page-template href="pages/conferences/index.xml">
-      <with-param name="publication-id" value="conferences"/>
-    </page-template>
-  </step>
-  <step value="developer">
-    <step value="catalog">
-      <page-template href="pages/developer/catalog.xml"/>
-    </step>
-    <page-template href="pages/developer/index.xml"/>
-  </step>
-  <step value="open">
-    <step value="frus-latest">
-      <page-template href="pages/open/frus-latest/index.xml"/>
-    </step>
-    <step value="frus-metadata">
-      <page-template href="pages/open/frus-metadata/index.xml"/>
-    </step>
-    <step value="frus-latest.xml">
-      <xq href="modules/open.xql">
-        <with-param name="xql-feed" value="latest"/>
-        <with-param name="xql-application-url" select="site:get-url()"/>
-      </xq>
-    </step>
-    <step value="frus-metadata.xml">
-      <xq href="modules/open.xql">
-        <with-param name="xql-feed" value="metadata"/>
-        <with-param name="xql-application-url" select="site:get-url()"/>
-      </xq>
-    </step>
-    <page-template href="pages/open/index.xml"/>
-  </step>
-  <step value="tags">
-    <step value="all">
-      <page-template href="pages/tags/all.xml">
-        <with-param name="publication-id" value="tags"/>
-      </page-template>
-    </step>
-    <step key="tag-id">
-      <page-template href="pages/tags/browse.xml">
-        <with-param name="publication-id" value="tags"/>
-        <with-param name="tag-id" keyval="tag-id"/>
-      </page-template>
-      <config>
-        <src doc="/db/apps/tags/taxonomy/taxonomy.xml" xq=".//id"/>
-      </config>
-    </step>
-    <page-template href="pages/tags/index.xml">
-      <with-param name="publication-id" value="tags"/>
-    </page-template>
-  </step>
-  <step value="education">
-    <step value="modules">
-      <step key="doc-id">
-        <page-template href="pages/education/module.xml">
-          <with-param name="publication-id" value="education"/>
-          <with-param name="document-id" keyval="doc-id"/>
-        </page-template>
-        <config>
-          <src collection="/db/apps/other-publications/education/introductions"/>
-        </config>
-      </step>
-      <page-template href="pages/education/modules.xml"/>
-    </step>
-    <page-template href="pages/education/index.xml"/>
-  </step>
-  <step value="search">
-    <param name="q start-date end-date">
-      <page-template href="pages/search/search-result.xml"/>
-    </param>
-    <step value="tips">
-      <page-template href="pages/search/tips.xml">
-        <with-param name="suppress-sitewide-search-field" value="true"/>
-      </page-template>
-    </step>
-    <page-template href="pages/search/search-landing.xml">
-      <with-param name="suppress-sitewide-search-field" value="true"/>
-    </page-template>
-  </step>
-  <step value="api">
-    <step value="v1">
-      <step value="catalog">
-        <xq href="/modules/opds-catalog.xql">
-          <with-param name="xql-application-url" select="site:get-url()"/>
-        </xq>
-      </step>
-      <xq href="/modules/opds-catalog.xql">
-        <with-param name="xql-application-url" select="site:get-url()"/>
-      </xq>
-    </step>
-    <ignore/>
-  </step>
-  <step value="services">
-    <step value="volume-ids">
-      <xq href="/modules/volume-ids.xql"/>
-    </step>
-    <step value="volume-images">
-      <xq href="/modules/volume-images.xql"/>
-    </step>
-    <ignore/>
-  </step>
-  <page-template href="pages/index.xml"/>
+    <page-template href="pages/index.xml"/>
 </root>
