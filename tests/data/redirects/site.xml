@@ -17,6 +17,7 @@
         <step key="person">
             <ignore/>
             <config>
+                <src xq="//person/id"/>
                 <redirects>
                     <redirect>
                         <old-url select="//person/old-ids/old-id/string(.)" key="old-id"/>

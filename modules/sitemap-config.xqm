@@ -861,10 +861,12 @@ function site:redirect-from-select($select as attribute(select), $state as map(*
                     ('site:keys', $state?config?urls?($url)?keys)
                 )
                 let $key := if ($select/../@key) then map{'keys':map{$select/../@key: $last}} else ()
-                return map:merge((map{
-                    'from': concat($url, '/', $last),
+                let $parent-url := tokenize($url, '/')[position() ne last()] => string-join('/')
+                let $redirect := map:merge((map{
+                    'from': concat($parent-url, '/', $last),
                     'parent-path': $url
                 }, $key))
+                return if ($last[. ne '']) then $redirect else () 
         }
     return site:process($select/ancestor::site:redirect[1]/site:new-url, $state?current-mode, site:state-config-merge($state, $conf))
 };
@@ -899,6 +901,7 @@ declare %site:mode('redirects') %site:match('new-url/@select')
 function site:redirect-to-select($select as attribute(select), $state as map(*)) {
     for $redirect in $state?config?redirects
     let $url := $state?config?urls?($redirect?parent-path)
+    let $parent-url := tokenize($redirect?parent-path, '/')[position() ne last()] => string-join('/')
     let $filepath := $url?filepath
     let $keys as map(*)* := map:merge((
             $url?keys,
@@ -913,7 +916,7 @@ function site:redirect-to-select($select as attribute(select), $state as map(*))
                                  false(), 
                                  (xs:QName('site:keys'), $keys)
                              ),
-                             $redirect?parent-path || '/'
+                             $parent-url || '/'
                          )
         }
     }
