@@ -932,7 +932,7 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-pocom-role()
                 <a href="/exist/apps/hsg-shell/departmenthistory/people"> People </a>
             </li>
             <li>
-                <a href="/exist/apps/hsg-shell/departmenthistory/people/principalofficers"> Principal Officers </a>
+                <a href="/exist/apps/hsg-shell/departmenthistory/people/principalofficers"> Principal Officers By Title </a>
             </li>
             <li>
                 <a href="/exist/apps/hsg-shell/departmenthistory/people/principalofficers/secretary">  Secretaries of State  </a>
@@ -940,7 +940,7 @@ declare %test:assertEquals('true') function x:test-pages-breadcrumb-pocom-role()
         </ol>
     </div>
   let $result := pages:generate-breadcrumbs('/departmenthistory/people/principalofficers/secretary')
-  return if (deep-equal($expected, $result)) then 'true' else $result
+  return if (deep-equal($expected, $result)) then 'true' else (<result>{$result}</result>, <expected>{$expected}</expected>)
 };
 
 (:
