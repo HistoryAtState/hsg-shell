@@ -4,6 +4,7 @@ module namespace x="http://history.state.gov/ns/site/hsg/tests/test-section-nav"
 import module namespace t="http://history.state.gov/ns/site/hsg/xqsuite" at "../xqsuite.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "../pages.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
+import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "../sidebar.xqm";
 import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
@@ -268,40 +269,42 @@ declare variable $x:sitemap :=
 ;
 
 declare variable $x:expected := 
-  <div id="sections" class="hsg-panel">
-    <div class="hsg-panel-heading">
-      <h2 class="hsg-sidebar-title">Department History</h2>
-    </div>
-    <ul class="hsg-list-group">
-      <li class="hsg-list-group-item">
-        <a href="/exist/apps/hsg-shell/departmenthistory/timeline"> Administrative Timeline </a>
-      </li>
-      <li class="hsg-list-group-item">
-        <a href="/exist/apps/hsg-shell/departmenthistory/buildings"> Buildings of the Department </a>
-      </li>
-      <li class="hsg-list-group-item">
-        <a href="/exist/apps/hsg-shell/departmenthistory/people/secretaries"> Biographies of the Secretaries of State </a>
-      </li>
-      <li class="hsg-list-group-item">
-        <a href="/exist/apps/hsg-shell/departmenthistory/people/principals-chiefs"> Principal Officers and Chiefs of Mission </a>
-      </li>
-      <li class="hsg-list-group-item">
-        <a href="/exist/apps/hsg-shell/departmenthistory/travels/president"> Travels of the President </a>
-      </li>
-      <li class="hsg-list-group-item">
-        <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary"> Travels of the Secretary </a>
-      </li>
-      <li class="hsg-list-group-item">
-        <a href="/exist/apps/hsg-shell/departmenthistory/visits"> Visits by Foreign Leaders </a>
-      </li>
-      <li class="hsg-list-group-item">
-        <a href="/exist/apps/hsg-shell/departmenthistory/wwi"> World War I and the Department </a>
-      </li>
-      <li class="hsg-list-group-item">
-        <a href="/exist/apps/hsg-shell/departmenthistory/diplomatic-couriers"> U.S. Diplomatic Couriers </a>
-      </li>
-    </ul>
-  </div>
+    <aside id="sections" class="hsg-aside--section">
+        <div class="hsg-panel">
+            <div class="hsg-panel-heading">
+                <h2 class="hsg-sidebar-title">Department History</h2>
+            </div>
+            <ul class="hsg-list-group">
+                <li class="hsg-list-group-item">
+                    <a href="/exist/apps/hsg-shell/departmenthistory/timeline"> Administrative Timeline </a>
+                </li>
+                <li class="hsg-list-group-item">
+                    <a href="/exist/apps/hsg-shell/departmenthistory/buildings"> Buildings of the Department </a>
+                </li>
+                <li class="hsg-list-group-item">
+                    <a href="/exist/apps/hsg-shell/departmenthistory/people/secretaries"> Biographies of the Secretaries of State </a>
+                </li>
+                <li class="hsg-list-group-item">
+                    <a href="/exist/apps/hsg-shell/departmenthistory/people/principals-chiefs"> Principal Officers and Chiefs of Mission </a>
+                </li>
+                <li class="hsg-list-group-item">
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/president"> Travels of the President </a>
+                </li>
+                <li class="hsg-list-group-item">
+                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary"> Travels of the Secretary </a>
+                </li>
+                <li class="hsg-list-group-item">
+                    <a href="/exist/apps/hsg-shell/departmenthistory/visits"> Visits by Foreign Leaders </a>
+                </li>
+                <li class="hsg-list-group-item">
+                    <a href="/exist/apps/hsg-shell/departmenthistory/wwi"> World War I and the Department </a>
+                </li>
+                <li class="hsg-list-group-item">
+                    <a href="/exist/apps/hsg-shell/departmenthistory/diplomatic-couriers"> U.S. Diplomatic Couriers </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
 ;
 
 (:
@@ -311,7 +314,7 @@ declare variable $x:expected :=
  :)
 
 declare %test:assertEquals('true') function x:section-nav-toplevel(){
-  let $result := pages:generate-section-nav('/departmenthistory')
+  let $result := side:generate-section-nav('/departmenthistory')
   return if (deep-equal($x:expected, $result)) 
   then 'true' 
   else (<result>{$result}</result>, <expected>{$x:expected}</expected>)
@@ -324,8 +327,8 @@ declare %test:assertEquals('true') function x:section-nav-toplevel(){
  :)
 
 declare %test:assertEquals('true') function x:section-nav-bottomlevel(){
-  let $result   := pages:generate-section-nav('/departmenthistory/travels/secretary/root-elihu')
-  let $expected := pages:generate-section-nav('/departmenthistory')
+  let $result   := side:generate-section-nav('/departmenthistory/travels/secretary/root-elihu')
+  let $expected := side:generate-section-nav('/departmenthistory')
   return if (deep-equal($expected, $result)) then
     'true' 
   else (<result>{$result}</result>, <expected>{$expected}</expected>)
