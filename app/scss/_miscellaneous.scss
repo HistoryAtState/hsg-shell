@@ -154,3 +154,19 @@ html input[disabled] {
     text-align: right;
   }
 }
+
+/* Bootstrap tooltip customization
+/* Override with styles from USWDS
+/* https://designsystem.digital.gov/components/tooltip/
+ */
+.tooltip-inner {
+  font-size: 1.65rem !important;
+  line-height: 1.6;
+  border-radius: 4px;
+  padding: 8px !important;
+  transition: opacity .08s ease-in-out !important;
+  background-color: #1b1b1b;
+  color: #f0f0f0;
+  width: auto !important;
+  max-width: calc(100vw / 2) !important;
+}
