@@ -173,30 +173,6 @@ $icon-font-path: "../fonts/";
   width: inherit;
 }
 
-/* Breadcrumb ----------- */
-
-.breadcrumb {
-  background-color: transparent;
-  font-size: inherit;
-  padding: 12px 0 0 0;
-}
-
-.breadcrumb li {
-  font-family: $font-sans;
-}
-
-.breadcrumb > li {
-  display: inline !important;
-}
-
-ol.breadcrumb li:first-child:before {
-  content: "" !important;
-}
-
-ol.breadcrumb li:before {
-  content: "›" !important;
-}
-
 /* Lists ---------------- */
 
 .list-group i {
