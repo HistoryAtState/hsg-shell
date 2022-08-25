@@ -546,22 +546,31 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
     </li>
 };
 
-declare function pages:generate-breadcrumb-link($state as map(*)) as element(a)*{
-  let $uri := $state?current-url
-  let $app-root := 
-    try {$app:APP_ROOT} 
-    catch * {
-      (: Assume APP_ROOT is '/exist/apps/hsg-shell'; Needed for xqsuite testing, 
-         since there is no context for calls to e.g. request:get-header(). :)
-      '/exist/apps/hsg-shell'
-    }
-  let $full-url := $app-root || $uri
-  return
-    <a href="{ $full-url}">
-        { pages:generate-breadcrumb-label($state) }
-    </a>
-};
+declare function pages:generate-breadcrumb-link($state as map(*)) {
+    let $uri := $state?current-url
+    let $app-root :=
+        try {$app:APP_ROOT}
+        catch * {
+        (: Assume APP_ROOT is '/exist/apps/hsg-shell'; Needed for xqsuite testing,
+                 since there is no context for calls to e.g. request:get-header(). :)
+        '/exist/apps/hsg-shell'
+        }
+    let $full-url := $app-root || $uri
+    let $current-uri := request:get-uri()
 
+    return (
+        element a {
+            attribute href { $full-url },
+            attribute property { "item" },
+            attribute typeof { "WebPage" },
+            if (ends-with($current-uri, $uri))
+            then (
+                attribute aria-current { "page" }
+            )
+            else (),
+            element span { pages:generate-breadcrumb-label($state) }
+        }
+    )
 };
 
 declare function pages:generate-breadcrumb-label($state as map(*)) {
