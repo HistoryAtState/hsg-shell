@@ -546,7 +546,7 @@ declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)
     </li>
 };
 
-declare function pages:generate-breadcrumb-link($state as map(*)) {
+declare function pages:generate-breadcrumb-link($state as map(*)) as element(a)* {
     let $uri := $state?current-url
     let $app-root :=
         try {$app:APP_ROOT}
@@ -564,9 +564,7 @@ declare function pages:generate-breadcrumb-link($state as map(*)) {
             attribute property { "item" },
             attribute typeof { "WebPage" },
             if (ends-with($current-uri, $uri))
-            then (
-                attribute aria-current { "page" }
-            )
+            then (attribute aria-current { "page" })
             else (),
             element span { pages:generate-breadcrumb-label($state) }
         }
