@@ -524,17 +524,26 @@ declare function pages:breadcrumb($node, $model){
 };
 
 declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
-  <div class="hsg-breadcrumb-wrapper">
-    <ol class="breadcrumb">
+  <nav class="hsg-breadcrumb-wrapper" aria-label="breadcrumbs">
+    <ol
+        vocab="http://schema.org/"
+        typeof="BreadcrumbList"
+        class="breadcrumb"
+    >
       {
         site:call-with-parameters-for-uri-steps($uri, $site:config, pages:generate-breadcrumb-item#1)
       }
     </ol>
-  </div>
+  </nav>
 };
 
 declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)*{ 
-    <li>{pages:generate-breadcrumb-link($state)}</li>
+    <li
+        property="itemListElement"
+        typeof="ListItem"
+    >
+    { pages:generate-breadcrumb-link($state) }
+    </li>
 };
 
 declare function pages:generate-breadcrumb-link($state as map(*)) as element(a)*{
@@ -548,7 +557,11 @@ declare function pages:generate-breadcrumb-link($state as map(*)) as element(a)*
     }
   let $full-url := $app-root || $uri
   return
-    <a href="{$full-url}">{" ", pages:generate-breadcrumb-label($state), " "}</a>
+    <a href="{ $full-url}">
+        { pages:generate-breadcrumb-label($state) }
+    </a>
+};
+
 };
 
 declare function pages:generate-breadcrumb-label($state as map(*)) {
