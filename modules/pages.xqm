@@ -524,7 +524,7 @@ declare function pages:breadcrumb($node, $model){
 };
 
 declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
-  <nav class="hsg-breadcrumb hsg-breadcrumb--wrap hsg-breadcrumb-wrapper" aria-label="breadcrumbs">
+  <nav class="hsg-breadcrumb hsg-breadcrumb--wrap" aria-label="breadcrumbs">
     <ol
         vocab="http://schema.org/"
         typeof="BreadcrumbList"
