@@ -1,10 +1,6 @@
 <div data-template="pages:load">
    <div data-template="templates:surround" data-template-with="templates/site.xml" data-template-at="content">
       <div>
-         <div id="static-title" class="hidden">
-            <span data-template="frus-history:monograph-page-title"/>
- - History of the Foreign
-             Relations Series - Historical Documents</div>
          <div class="row">
             <div data-template="pages:breadcrumb"/>
          </div>
