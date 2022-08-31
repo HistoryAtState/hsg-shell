@@ -18,7 +18,6 @@ import module namespace countries="http://history.state.gov/ns/site/hsg/countrie
 import module namespace edu="http://history.state.gov/ns/site/hsg/education-html" at "education-html.xqm";
 import module namespace frus="http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
 import module namespace frus-history="http://history.state.gov/ns/site/hsg/frus-history-html" at "frus-history-html.xqm";
-import module namespace appendix-a="http://history.state.gov/ns/site/hsg/appendix-a" at "appendix-a.xqm";
 import module namespace milestones="http://history.state.gov/ns/site/hsg/milestones-html" at "milestones-html.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace pocom="http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";

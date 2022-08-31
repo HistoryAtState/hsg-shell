@@ -24,9 +24,9 @@
                <div id="content-inner">
                   <div id="content-container">
                      <div class="content">
-
-                        <h1 data-template="appendix-a:chart-title"/>
-                        <h2 data-template="appendix-a:chart-subtitle"/>
+                         
+                         <h1>Appendix A: Historical <span class="font-italic">Foreign Relations</span> Timeliness and Production Charts</h1>
+                         <h2 class="h4"> <em>Foreign Relations</em> Series: Production &amp; Timeliness, 1861-2015 </h2>
 
                         <div class="bordered" style="margin-bottom: 1em">
                            <div id="graph"/>
@@ -48,9 +48,10 @@
                            </p>
                         </div>
                      </div>
-                     <div data-template="appendix-a:chart-into"/>
+                     <div data-template="frus-history:appendix-a-chart-intro"/>
                      <script type="text/javascript" src="$app/resources/scripts/dygraph-combined.js"/>
-                     <div data-template="appendix-a:chart-data"/>
+                         <div data-template="frus-history:appendix-a-chart-data"/>
+                         
                   </div>
                </div>
             </div>
