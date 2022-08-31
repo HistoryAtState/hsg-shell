@@ -29,7 +29,7 @@
                         <h2 data-template="appendix-a:chart-subtitle"/>
 
                         <div class="bordered" style="margin-bottom: 1em">
-                           <div id="graph" style="width: 100%; height: 400px"/>
+                           <div id="graph"/>
                            <div class="graph-checkboxes">
                               <p style="margin-bottom: 0">Select Datasets to Display Above:<br/>
                               <input type="checkbox" id="0" checked="checked" onClick="change(this)"/>
