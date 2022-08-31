@@ -6,7 +6,7 @@
 
  const Page  = require('../../pageobjects/Page');
 
-describe.skip('A breadcrumb', () => {
+describe('A breadcrumb', () => {
     let t, v, p, a, c, i;
     before(() => {
         Page.open('historicaldocuments/frus-history/chapter-4');
