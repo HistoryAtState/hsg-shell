@@ -9,7 +9,6 @@
     display: none;
     font-size: 75%;
     color: #606060;
-    // margin-bottom: 2em;
 }
 
 .dygraph-ylabel {
@@ -39,15 +38,22 @@
 img.dygraph-rangesel-zoomhandle {
     border: unset ;
     padding: unset ;
+    border-radius: unset;
     -webkit-border-radius: unset ;
-    -moz-border-radius: unset ; 
+    -moz-border-radius: unset ;
 }
 
 .graph-checkboxes {
-    margin-top: 2em; 
-    margin-left: 2em;
+    margin: 2.4rem 0 1.8rem 0;
+    padding-left: .2rem;
 
-    & label {
+    label {
         margin-bottom: 0.75rem;
+        font-weight: normal;
     }
+
+    > p {
+        margin-bottom: 0;
+    }
+
 }
