@@ -5,7 +5,7 @@ xquery version "3.1";
  :)
 module namespace pmf="http://history.state.gov/ns/site/hsg/pmf-fo";
 
-import module namespace print="http://www.tei-c.org/tei-simple/xquery/functions/fo" at "/db/apps/tei-simple/content/fo-functions.xql";
+import module namespace print="http://www.tei-c.org/tei-simple/xquery/functions/fo";
 import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
@@ -52,9 +52,9 @@ declare function pmf:ref($config as map(*), $node as element(), $class as xs:str
             $target
         else if (matches($target, '^frus')) then
             if (contains($target, '#')) then
-                toc:href(substring-before($target, '#'), substring-after($target, '#'), ())
+                toc:href(substring-before($target, '#'), substring-after($target, '#'), (), ())
             else
-                toc:href($target, (), ())
+                toc:href($target, (), (), ())
         else
             $target
     return

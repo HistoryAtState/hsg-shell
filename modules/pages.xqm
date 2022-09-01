@@ -379,7 +379,7 @@ function pages:styles($node as node(), $model as map(*), $odd as xs:string?) {
     attribute href {
         let $name := replace($odd, "^([^/\.]+).*$", "$1")
         return
-            $pages:app-root || "/resources/odd/compiled/" || $name || ".css"
+            $pages:app-root || "/transform/" || $name || ".css"
     }
 };
 

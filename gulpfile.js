@@ -146,7 +146,7 @@ gulp.task('styles:build', gulp.series(function () {
 gulp.task('styles:concat', gulp.series('styles:build', function () {
     return gulp.src([
             'resources/css/main.css',
-            'resources/odd/compiled/frus.css'
+            'transform/frus.css'
         ])
       .pipe(concat('all.css'))
       .pipe(gulp.dest('resources/css'));
@@ -246,7 +246,8 @@ gulp.task('deploy', gulp.series('build', function () {
             modulesPath,
             imagePath,
             otherPath,
-            fontPath
+            fontPath,
+            'transform/*'
         ], {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))

@@ -78,6 +78,14 @@ else if (contains($exist:path, "/resources/") or contains($exist:path, "/bower_c
         <forward url="{$exist:controller}/{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
     </dispatch>
 
+else if (ends-with($exist:path, "transform/frus.css"))
+then (
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <set-header name="Cache-Control" value="no-cache" />
+        <cache-control cache="yes"/>
+    </dispatch>
+)
+
 (: handle requests for static resource: robots.txt :)
 else if ($exist:path = ("/robots.txt", "/opensearch.xml", "/favicon.ico")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">

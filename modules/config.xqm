@@ -8,7 +8,7 @@ module namespace config="http://history.state.gov/ns/site/hsg/config";
 
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 
-import module namespace pm-frus='http://www.tei-c.org/tei-simple/models/frus.odd/web/module' at "../resources/odd/compiled/frus-web-module.xql";
+import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../transform/frus-web-module.xql";
 
 declare namespace templates="http://exist-db.org/xquery/templates";
 
@@ -42,13 +42,19 @@ declare variable $config:repo-descriptor := doc(concat($config:app-root, "/repo.
 
 declare variable $config:expath-descriptor := doc(concat($config:app-root, "/expath-pkg.xml"))/expath:package;
 
+declare variable $config:default-odd := "frus.odd";
+
+declare variable $config:odd := $config:default-odd;
+
 declare variable $config:odd-root := $config:app-root || "/resources/odd";
 
 declare variable $config:odd-source := $config:odd-root || "/source";
 
-declare variable $config:odd-compiled := $config:odd-root || "/compiled";
+declare variable $config:odd-compiled := "/transform";
 
-declare variable $config:odd := "frus.odd";
+declare variable $config:output := "transform";
+
+declare variable $config:output-root := $config:app-root || "/" || $config:output;
 
 (: Default transformation function: calls tei simple pm using frus.odd :)
 declare variable $config:odd-transform-default := function($xml, $parameters) {
@@ -56,6 +62,14 @@ declare variable $config:odd-transform-default := function($xml, $parameters) {
 };
 
 declare variable $config:module-config := doc($config:odd-source || "/configuration.xml")/*;
+
+(:
+ : The default to use for determining the amount of content to be shown
+ : on a single page. Possible values: 'div' for showing entire divs (see
+ : the parameters below for further configuration), or 'page' to browse
+ : a document by actual pages determined by TEI pb elements.
+ :)
+declare variable $config:default-view := "div";
 
 declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes";
 
