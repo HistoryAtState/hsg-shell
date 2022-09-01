@@ -81,7 +81,7 @@ declare function site:process($item, $mode-name as xs:string, $state as map(*)?)
   let $selector as function(*) := (
     $state?mode?($mode-name)?selector,
     site:mode-selector($mode-name),
-    function($item) {}
+    function($item) { site:local-name-selector($item) } (: Use local name selector by default:)
   )[1]
   
   let $templates as map(xs:string, function(*)) := (
@@ -92,7 +92,8 @@ declare function site:process($item, $mode-name as xs:string, $state as map(*)?)
   
   let $on-no-match as function(*) := (
     $state?mode?($mode-name)?on-no-match,
-    site:mode-on-no-match($mode-name)
+    site:mode-on-no-match($mode-name),
+    function($item, $state) { site:shallow-skip($item, $state) } (: Use shallow skip by default :)
   )[1]
   
   let $modes as map(*) := map:merge((
@@ -156,7 +157,7 @@ function site:shallow-skip($item, $state as map(*)){
 };
 
 declare
-  %site:on-no-match('config')
+  %site:on-no-match('config', 'redirects')
 function site:shallow-skip-with-attributes($item, $state as map(*)){
   for $i in $item/(node()|@*)
   return site:process($i, $state?current-mode, $state)
@@ -173,13 +174,8 @@ function site:sitemap-root($root as element(), $state as map(*)){
   let $_ := if (xmldb:collection-available($sitemap-dir)) then xmldb:remove($sitemap-dir) else ()
   let $_ := xmldb:create-collection('/db/apps/hsg-shell/resources', 'sitemaps')
   let $_ := cache:create('last-modified', map{})
-  let $urls :=
-    site:process(
-      $root/*,
-      'sitemap',
-      site:state-config-merge($state, site:get-config($root, $state))
-    )
-  let $maxurls := 10000
+  let $urls := site:process-with-config($root, $state)
+  let $maxurls := 100
   let $result := 
     if (count($urls) lt $maxurls)
     then
@@ -272,23 +268,21 @@ declare
   %site:match('step')
 function site:sitemap-step($step as element(), $state as map(*)?){
   let $_ := site:log(("SMG: processing step: ", $step/@value, $step/@key))
-  return
-    site:process(
-      $step/*,
-      'sitemap',
-      site:state-config-merge(
-        $state,
-        site:get-config(
-          $step,
-          $state
-        )
-      )
-    )
+  return site:process-with-config($step, $state)
 };
 
 (: convenience function for returning the config :)
 declare function site:get-config($node, $state as map(*)) as map(*)?{
   site:config-merge(site:process($node, 'config', $state))
+};
+
+declare function site:get-config($node) as map(*)?{
+    let $state :=
+        typeswitch ($node)
+            case element(site:root) return map{}
+            default return site:state-config-merge(map{}, site:get-config($node/..))
+    (: end let :)
+    return site:config-merge(site:process($node, 'config', $state))
 };
 
 declare
@@ -311,7 +305,7 @@ function site:config-root($node as element(site:root), $state as map(*)) as map(
     map{
       'urls': map{
         '/': map{
-          'filepath': util:collection-name($node)
+          'filepath': (util:collection-name($node), '/')[1]
         }
       }
     },
@@ -331,7 +325,7 @@ function site:config-step-value($value as attribute(value), $state as map(*)) as
       for $parent-url in $parent-urls ! map:keys(.)
       let $url := replace($parent-url, '(.*)/$', '$1')||'/'||$value
       return map{
-        $url: $parent-urls($parent-url)
+        $url: $parent-urls?($parent-url)
       }
     ))
     return map{
@@ -371,21 +365,91 @@ declare
   %site:mode('config')
   %site:match('src/@collection')
 function site:config-step-src-collection($collection as attribute(collection), $state as map(*)) as map(*)*{
-  if ($collection/../@xq)
+    if ($collection/../@xq) then
+        ()
+    else
+        let $parent-url-maps as map(*)* := $state?config?parent-urls
+        let $parent-urls := 
+            for $parent-url-map in $parent-url-maps
+                let $parent-url := map:keys($parent-url-map)
+                group by $parent-url
+            return $parent-url
+        (: end let :)
+        let $key-label  as xs:string? := $collection/(ancestor::site:step[1])[@key]/string(@key)
+        let $step-value as xs:string? := $collection/(ancestor::site:step[1])[@value]/string(@value)
+        let $current-urls := 
+            for $parent-url-maybe-no-slash in $parent-urls
+                let $parent-url-no-slash := replace($parent-url-maybe-no-slash, '(.*?)/?$', '$1')
+                let $parent-url := $parent-url-no-slash || '/'
+                group by $parent-url
+                let $parent-filepaths := 
+                    for $url in ($parent-url, $parent-url-no-slash)
+                        let $filepath := $parent-url-maps?($url)?filepath
+                        group by $filepath
+                    return $filepath
+                (: end let :)
+                let $current-filepaths := 
+                    for $pf in $parent-filepaths
+                        let $cf := resolve-uri($collection, replace($pf, '(.*?)/?$', '$1') || '/')
+                    return $cf
+                (: end let :)
+                let $parent-keys as map(*)? := (for $url in ($parent-url, $parent-url-no-slash) return $parent-url-maps?($url)?keys)[1]
+                return if ($step-value) then 
+                    let $current-url := resolve-uri($step-value, $parent-url)
+                    for $current-filepath in $current-filepaths
+                    return map{
+                        $current-url: map{
+                            'filepath': $current-filepath,
+                            'keys': $parent-keys
+                        }
+                    }
+                else if ($key-label) then
+                    for $current-filepath in $current-filepaths
+                        for $current-file in site:get-urls-from-collection($current-filepath)
+                            let $filepath-rel := substring-after($current-file, $current-filepath)
+                            let $filename.ext := tokenize($current-file, '/')[last()]
+                            let $filename := replace($filename.ext, '(.*?)(\.[^.]+)?$', '$1')
+                            let $current-url := resolve-uri($filename, $parent-url)
+                            let $current-keys := map{ $key-label: $filename}
+                            let $keys := 
+                                map:merge((
+                                    $parent-keys,
+                                    $current-keys
+                                ), map{'duplicates': 'use-last'})
+                            (: end let :)
+                        return map{
+                            $current-url: map{
+                                'filepath': $current-file,
+                                'keys': $keys
+                            }
+                        }
+                    (: end flwor :)    
+                else ()
+            (: end flwor :)
+        (: end let :)
+        return map{
+            'urls': $current-urls
+        }
+    (: end if :)
+};
+
+declare 
+  %site:mode('config')
+  %site:match('src/@doc')
+function site:config-step-src-doc($doc as attribute(doc), $state as map(*)) as map(*)*{
+  if ($doc/../@xq)
   then ()
   else
     let $parent-urls as map(*)*:= $state?config?parent-urls
-    let $key-label as xs:string? := $collection/(ancestor::site:step[1])[@key]/string(@key)
+    let $key-label as xs:string? := $doc/(ancestor::site:step[1])[@key]/string(@key)
     for $parent-url in $parent-urls ! map:keys(.)
-      let $parent-filepath := replace(resolve-uri($collection, replace($parent-urls?($parent-url)?filepath, '(.*)/$', '$1')||'/'), '(.*)/$', '$1')
-      let $filepaths := site:get-urls-from-collection($parent-filepath)
-      for $filepath in $filepaths
-        let $filename.ext := substring-after($filepath, $parent-filepath||'/')
+        let $filepath := replace(resolve-uri($doc, replace($parent-urls?($parent-url)?filepath, '(.*)/$', '$1')||'/'), '(.*)/$', '$1')
+        let $filename.ext := tokenize($filepath, '/')[last()]
         let $filename := replace($filename.ext, '(.*?)(\.[^.]+)?$', '$1')
         return map{
           'urls': map{
-            $parent-url||'/'||$filename: map:merge((
-              map{'filepath': $parent-filepath||'/'||$filename.ext},
+            replace($parent-url, '(.*)/$', '$1')||'/'||$filename: map:merge((
+              map{'filepath': $filepath},
               if ($key-label) 
               then map{'keys': map:merge((
                 $parent-urls?($parent-url)?keys,
@@ -417,7 +481,8 @@ function site:config-step-src-xq($xq as attribute(xq), $state as map(*)) as map(
         else
           $parent-filepath
       for $context in $contexts
-      for $source in util:eval('doc("'||$context||'")/'||$xq, false(), ('site:keys', $parent-urls?($parent-url)?keys))
+      let $xq-clean := replace($xq, '^/?(.*)$', '$1') (: removes the first of any leading / characters :)
+      for $source in util:eval('doc("'||$context||'")/'||$xq-clean, false(), ('site:keys', $parent-urls?($parent-url)?keys))
       let $keys := 
         if ($key-label) 
         then map:merge((
@@ -439,23 +504,28 @@ function site:config-step-src-xq($xq as attribute(xq), $state as map(*)) as map(
 };
 
 declare function site:get-urls-from-collection($collection as xs:string) as xs:string* {
-  for $resource in xmldb:get-child-resources($collection)
-  let $uri := resolve-uri($resource, $collection||'/')
-  return $uri[not(util:is-binary-doc(.))],
-  for $sub-collection in xmldb:get-child-collections($collection)
-  return site:get-urls-from-collection(resolve-uri($sub-collection, $collection||'/'))
+    let $resources := xmldb:get-child-resources($collection)
+    for $resource in $resources
+        let $uri := resolve-uri($resource, $collection||'/')
+        return 
+            $uri[not(util:is-binary-doc(.))],
+            let $sub-collections := try {xmldb:get-child-collections($collection)} catch * {()}
+            for $sub-collection in $sub-collections
+                return site:get-urls-from-collection(resolve-uri($sub-collection, $collection||'/'))
 };
 
-(:  config-merge is a mini-framework for merging (config) maps; it combines keys,
-    looking for the key name annotation in one of the following functions: 
-    - site:config-merge-combine()
-    - site:config-merge-use-last()
-    - site:config-merge-use-first()
-    All of which follow similar behaviour correlating to the behaviour of
-    map:merge() options.  This a) allows for finer control of combining maps by key
-    and b) allows options such as 'combine' which are not supported by eXist's
-    xquery engine.
-:)
+(:
+ :  config-merge is a mini-framework for merging (config) maps; it combines keys,
+ :  looking for the key name annotation in one of the following functions: 
+ :  - site:config-merge-combine()
+ :  - site:config-merge-use-last()
+ :  - site:config-merge-use-first()
+ :  All of which follow similar behaviour correlating to the behaviour of
+ :  map:merge() options.  This a) allows for finer control of combining maps by key
+ :  and b) allows options such as 'combine' which are not supported by eXist's
+ :  xquery engine.
+ :)
+ 
 declare function site:config-merge($maps as map(*)*) as map(*)? {
   let $keys := distinct-values($maps ! map:keys(.))
   return map:merge((
@@ -725,4 +795,129 @@ declare function site:get-url() {
 declare function site:get-uri() {
   (: imported from old controller.xql :)
     (request:get-header("nginx-request-uri"), request:get-uri())[1]
+};
+
+declare function site:generate-redirects($cfg) {
+    map:merge(site:process($cfg, 'redirects'), map{'duplicates':'use-last'})
+};
+
+declare
+    %site:mode('redirects')
+    %site:match('root', 'step')
+function site:process-with-config($e as element(), $state as map(*)) {
+    let $conf := site:get-config($e, $state) 
+    let $new.state := site:state-config-merge($state, $conf)
+    return site:process($e/*, $state?current-mode, $new.state)
+};
+
+declare
+    %site:mode('redirects')
+    %site:match('redirect')
+function site:redirect($redirect as element(site:redirect), $state as map(*)) {
+    let $status as xs:string := xs:string(($redirect/@status, 'permanent')[1])
+    let $status-code := 
+        switch($status)
+        case 'permanent' return '301'
+        case 'temporary' return '302'
+        default return '301'
+    let $old-url as element(site:old-url)? := $redirect/site:old-url
+    return if ($old-url) then
+        let $new.state := site:state-config-merge($state, map{
+            'redirect-status': $status-code
+        })
+        return site:process($redirect/site:old-url, $state?current-mode, $new.state)
+    else
+        let $new.state := site:state-config-merge($state, map{
+            'redirect-status': $status-code,
+            'redirects': 
+                for $url in $state?config?urls ! map:keys(.) 
+                return map{'from': $url}
+        })
+        return site:process($redirect/site:new-url, $state?current-mode, $new.state)
+    
+};
+
+declare 
+    %site:mode('redirects')
+    %site:match('old-url/@value')
+function site:redirect-from-value($value as attribute(value), $state as map(*)) {
+    let $urls := $state?config?urls ! map:keys(.)
+    let $conf := map{'redirects': for $url in $urls return map{
+        'from': $url || '/' || $value,
+        'parent-path': $url
+    }}
+    return site:process($value/ancestor::site:redirect[1]/site:new-url, $state?current-mode, site:state-config-merge($state, $conf))
+};
+
+declare %site:mode('redirects') %site:match('old-url/@select')
+function site:redirect-from-select($select as attribute(select), $state as map(*)) {
+    let $urls := $state?config?urls ! map:keys(.)
+    let $conf := map{ 'redirects':
+        for $url in $urls
+            for $filepath in $state?config?urls?($url)?filepath
+                for $last in util:eval(
+                    ('doc("'||$filepath||'")'||$select),
+                    false(), 
+                    ('site:keys', $state?config?urls?($url)?keys)
+                )
+                let $key := if ($select/../@key) then map{'keys':map{$select/../@key: $last}} else ()
+                let $parent-url := tokenize($url, '/')[position() ne last()] => string-join('/')
+                let $redirect := map:merge((map{
+                    'from': concat($parent-url, '/', $last),
+                    'parent-path': $url
+                }, $key))
+                return if ($last[. ne '']) then $redirect else () 
+        }
+    return site:process($select/ancestor::site:redirect[1]/site:new-url, $state?current-mode, site:state-config-merge($state, $conf))
+};
+
+declare %site:mode('redirects') %site:match('old-url/@keyval')
+function site:redirect-from-keyval($keyval as attribute(keyval), $state as map(*)) {
+    let $urls := $state?config?urls ! map:keys(.)
+    let $conf := map{
+        'redirects':
+            for $url in $urls
+                let $keys := map:merge(($state?keys, $state?config?urls?($url)?keys), map{'duplicates':'use-last'})
+                return map{
+                    'from': $url || '/' || $keys?($keyval),
+                    'parent-path': $url
+                }
+    }
+    return site:process($select/ancestor::site:redirect[1]/site:new-url, $state?current-mode, site:state-config-merge($state, $conf))
+};
+
+declare %site:mode('redirects') %site:match('new-url/@value')
+function site:redirect-to-value($value as attribute(value), $state as map(*)) {
+    for $redirect in $state?config?redirects
+    return map {
+        $redirect?from: map{
+           'status':   $state?config?redirect-status,
+           'to'    :   resolve-uri($value, $redirect?parent-path || '/')
+       }
+    }
+};
+
+declare %site:mode('redirects') %site:match('new-url/@select')
+function site:redirect-to-select($select as attribute(select), $state as map(*)) {
+    for $redirect in $state?config?redirects
+    let $url := $state?config?urls?($redirect?parent-path)
+    let $parent-url := tokenize($redirect?parent-path, '/')[position() ne last()] => string-join('/')
+    let $filepath := $url?filepath
+    let $keys as map(*)* := map:merge((
+            $url?keys,
+            $redirect?keys
+        ), map{'duplicates': 'use-last'})
+    return map {
+        $redirect?from: map{
+            'status':   $state?config?redirect-status,
+            'to'    :   resolve-uri(
+                            util:eval(
+                                 ('doc("'||$filepath||'")'||$select),
+                                 false(), 
+                                 (xs:QName('site:keys'), $keys)
+                             ),
+                             $parent-url || '/'
+                         )
+        }
+    }
 };

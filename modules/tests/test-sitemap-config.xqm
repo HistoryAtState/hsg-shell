@@ -212,21 +212,21 @@ declare %test:assertEquals(
 };
 
 declare %test:assertEquals("beck") function x:test-config-step-album-key-artist(){
-  let $state:= map{
-  'config': map {
-    "urls": map {
-        "/music/beck": map {
-            "filepath": "/db/apps/hsg-shell/tests/data/sitemap-config/Collection/music-library/beck",
-            "keys": map {
-                "artist": "beck"
+    let $state:= map{
+        'config': map {
+            "urls": map {
+                "/music/beck": map {
+                    "filepath": "/db/apps/hsg-shell/tests/data/sitemap-config/Collection/music-library/beck",
+                    "keys": map {
+                        "artist": "beck"
+                    }
+                }
             }
         }
     }
-}
-}
-let $sample := $x:sample/site:root/site:step[@value eq 'music']/site:step[@key eq 'artist']/site:step[@key eq 'album']
+    let $sample := $x:sample/site:root/site:step[@value eq 'music']/site:step[@key eq 'artist']/site:step[@key eq 'album']
 
-return site:get-config($sample, $state)?urls?('/music/beck/odelay')?keys?artist
+    return site:get-config($sample, $state)?urls?('/music/beck/odelay')?keys?artist
 };
 
 declare %test:assertEquals('/db/apps/hsg-shell/tests/data/sitemap-config/Collection/world-factbook/country-data.xml') function x:test-config-step-region-filepath(){
@@ -273,4 +273,198 @@ declare %test:assertEquals('3') function x:test-call-with-parameters-for-steps-a
 
 declare %test:assertEquals('/db/apps/hsg-shell/tests/data/sitemap-config/pages/artist/beck.xml') function x:test-call-with-parameters-for-steps-page-template(){
   site:call-with-parameters-for-uri-steps('/music/beck', $x:sample/*, function($state){$state?page-template})[2]
+};
+
+declare %test:assertEquals('true') function x:test-urls-root(){
+    let $cfg :=
+        <root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
+            <step value="countries">
+                <page-template href="pages/countries/index.xml">
+                    <with-param name="publication-id" value="countries"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/rdcr"/>
+                </config>
+            </step>
+        </root>
+    let $expected := 
+        map {
+            "urls": map {
+                "/": map {
+                    "filepath": "/"
+                }
+            }
+        }
+    let $result := site:get-config($cfg, map{})
+    
+    return 
+        if (deep-equal($expected, $result)) then
+            'true' 
+        else (
+            <expected>{serialize($expected, map{'method': 'adaptive','indent': true()})}</expected>,
+            <result>{serialize($result, map{'method': 'adaptive','indent': true()})}</result>
+        )
+};
+
+declare %test:assertEquals('true') function x:test-urls-step-value(){
+    let $cfg :=
+        <root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
+            <step value="countries">
+                <page-template href="pages/countries/index.xml">
+                    <with-param name="publication-id" value="countries"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/rdcr"/>
+                </config>
+            </step>
+        </root>
+    let $root.state := map{"config": site:get-config($cfg, map{})}
+    let $expected := 
+        map {
+            "urls": map {
+                "/countries": map {
+                    "filepath": "/db/apps/rdcr",
+                    "keys": ()
+                }
+            }
+        }
+    let $result := site:get-config($cfg/site:step, $root.state)
+    
+    return 
+        if (deep-equal($expected, $result)) then
+            'true' 
+        else (
+            <expected>{serialize($expected, map{'method': 'adaptive','indent': true()})}</expected>,
+            <result>{serialize($result, map{'method': 'adaptive','indent': true()})}</result>
+        )
+};
+
+declare %test:assertEquals('true') function x:test-urls-step-value-sub-collection(){
+    let $cfg :=
+        <root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
+            <step value="countries">
+                <step value="by-country">
+                    <page-template href="pages/countries/by-country.xml"/>
+                    <config>
+                        <src collection="articles"/>
+                    </config>
+                </step>
+                <page-template href="pages/countries/index.xml">
+                    <with-param name="publication-id" value="countries"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/rdcr"/>
+                </config>
+            </step>
+        </root>
+    let $countries.state := 
+        map{
+            "config": map {
+                "urls": map {
+                    "/countries": map {
+                        "filepath": "/db/apps/rdcr",
+                        "keys": ()
+                    } 
+                } 
+            }
+        }
+    let $expected := 
+        map {
+            "urls": map {
+                "/countries/by-country": map {
+                    "filepath": "/db/apps/rdcr/articles",
+                    "keys": ()
+                } 
+            } 
+        }
+    let $result := site:get-config($cfg/site:step/site:step[@value eq 'by-country'], $countries.state)
+    
+    return 
+        if (deep-equal($expected, $result)) then
+            'true' 
+        else (
+            <expected>{serialize($expected, map{'method': 'adaptive','indent': true()})}</expected>,
+            <result>{serialize($result, map{'method': 'adaptive','indent': true()})}</result>
+        )
+};
+
+declare %test:assertEquals('true') function x:test-urls-step-key(){
+    let $cfg :=
+        <root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
+            <step value="countries">
+                <step value="by-country">
+                    <step key="country">
+                        <page-template href="pages/countries/article.xml">
+                            <with-param name="publication-id" value="countries"/>
+                            <with-param name="document-id" keyval="country"/>
+                        </page-template>
+                        <config>
+                            <src collection="."/>
+                        </config>
+                    </step>
+                    <page-template href="pages/countries/by-country.xml"/>
+                    <config>
+                        <src collection="articles"/>
+                    </config>
+                </step>
+                <page-template href="pages/countries/index.xml">
+                    <with-param name="publication-id" value="countries"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/rdcr"/>
+                </config>
+            </step>
+        </root>
+    let $by-country.state := 
+        map{
+            "config": map {
+                "urls": map {
+                    "/countries/by-country": map {
+                        "filepath": "/db/apps/rdcr/articles",
+                        "keys": ()
+                    } 
+                } 
+            }
+        }
+    let $expected :=  map {
+        "filepath": "/db/apps/rdcr/articles/fiji.xml",
+        "keys": map{ 'country': 'fiji' }
+    }
+    let $result := site:get-config($cfg/site:step/site:step[@value eq 'by-country']/site:step, $by-country.state)?urls?("/countries/by-country/fiji")
+    
+    return 
+        if (deep-equal($expected, $result)) then
+            'true' 
+        else (
+            <expected>{serialize($expected, map{'method': 'adaptive','indent': true()})}</expected>,
+            <result>{serialize($result, map{'method': 'adaptive','indent': true()})}</result>
+        )
+};
+
+declare %test:assertEquals('true') function x:test-urls-step-key-sub-collection-names(){
+    let $cfg :=
+        <root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
+            <step key="person">
+                <page-template href="pages/departmenthistory/people/person.xml"/>
+                <config>
+                    <src collection="/db/apps/pocom/people"/>
+                </config>
+            </step>
+        </root>
+    let $root.state := map{"config": site:get-config($cfg, map{})}
+    let $expected := map {
+        "filepath": "/db/apps/pocom/people/b/bellocchi-natale-h.xml",
+        "keys": map {
+            "person": "bellocchi-natale-h"
+        }
+    }
+    let $result := site:get-config($cfg/site:step, $root.state)?urls?('/bellocchi-natale-h')
+    
+    return 
+        if (deep-equal($expected, $result)) then
+            'true' 
+        else (
+            <expected>{serialize($expected, map{'method': 'adaptive','indent': true()})}</expected>,
+            <result>{serialize($result, map{'method': 'adaptive','indent': true()})}</result>
+        )
 };

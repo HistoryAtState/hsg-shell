@@ -214,6 +214,11 @@
             <src collection="/db/apps/rdcr"/>
         </config>
     </step>
+    <step value="frus150">
+        <redirect>
+            <new-url value="departmenthistory/frus-history"/>
+        </redirect>
+    </step>
     <step value="departmenthistory">
         <step value="timeline">
             <step key="section">
@@ -373,6 +378,12 @@
                 </page-template>
                 <config>
                     <src collection="/db/apps/pocom/people"/>
+                    <redirects>
+                        <redirect>
+                            <old-url select="//person/old-ids/old-id/string(.)" key="old-id"/>
+                            <new-url select="//person[old-ids/old-id = $site:keys?old-id]/id/string(.)"/>
+                        </redirect>
+                    </redirects>
                 </config>
             </step>
             <page-template href="pages/departmenthistory/people/index.xml">
@@ -437,7 +448,8 @@
                             for $date in .//(start-date | end-date)
                             let $year := year-from-date($date)
                             return $year           
-                        )"/>
+                        )"
+                    />
                     <src collection="/db/apps/visits/data" xq="visits/visit/from/@id"/>
                 </config>
             </step>
@@ -561,6 +573,642 @@
         <page-template href="pages/milestones/index.xml">
             <with-param name="publication-id" value="milestones"/>
         </page-template>
+        <config>
+            <redirects>
+                <redirect>
+                    <old-url value="1750-1775/AlbanyPlan"/>
+                    <new-url value="1750-1775/albany-plan"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1750-1775/FrenchIndianWar"/>
+                    <new-url value="1750-1775/french-indian-war"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1750-1775/Incidents"/>
+                    <new-url value="1750-1775/incidents"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1750-1775/ParliamentaryTaxation"/>
+                    <new-url value="1750-1775/parliamentary-taxation"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1750-1775/ProclamationLine1763"/>
+                    <new-url value="1750-1775/proclamation-line"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1750-1775/TreatyofParis"/>
+                    <new-url value="1750-1775/treaty-of-paris"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1776-1783/Articles"/>
+                    <new-url value="1776-1783/articles"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1776-1783/BFranklin"/>
+                    <new-url value="1776-1783/b-franklin"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1776-1783/ContinentalCongress"/>
+                    <new-url value="1776-1783/continental-congress"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1776-1783/Declaration"/>
+                    <new-url value="1776-1783/declaration"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1776-1783/FrenchAlliance"/>
+                    <new-url value="1776-1783/french-alliance"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1776-1783/ModelTreaty"/>
+                    <new-url value="1776-1783/model-treaty"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1776-1783/SecretCommittee"/>
+                    <new-url value="1776-1783/secret-committee"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1776-1783/Treaty"/>
+                    <new-url value="1776-1783/treaty"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1784-1800/CitizenGenet"/>
+                    <new-url value="1784-1800/citizen-genet"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1784-1800/ConventionandRatification"/>
+                    <new-url value="1784-1800/convention-and-ratification"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1784-1800/FrenchRev"/>
+                    <new-url value="1784-1800/french-rev"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1784-1800/HaitianRev"/>
+                    <new-url value="1784-1800/haitian-rev"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1784-1800/JayTreaty"/>
+                    <new-url value="1784-1800/jay-treaty"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1784-1800/Loans"/>
+                    <new-url value="1784-1800/loans"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1784-1800/PickneyTreaty"/>
+                    <new-url value="1784-1800/pickney-treaty"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1784-1800/WashingtonFarewell"/>
+                    <new-url value="1784-1800/washington-farewell"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1784-1800/XYZ"/>
+                    <new-url value="1784-1800/xyz"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1801-1829/BarbaryWars"/>
+                    <new-url value="1801-1829/barbary-wars"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1801-1829/Florida"/>
+                    <new-url value="1801-1829/florida"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1801-1829/LouisianaPurchase"/>
+                    <new-url value="1801-1829/louisiana-purchase"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1801-1829/Monroe"/>
+                    <new-url value="1801-1829/monroe"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1801-1829/NapoleonicWars"/>
+                    <new-url value="1801-1829/napoleonic-wars"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1801-1829/Ruch-Bagot"/>
+                    <new-url value="1801-1829/rush-bagot"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1801-1829/Warof1812"/>
+                    <new-url value="1801-1829/war-of-1812"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/Amistad"/>
+                    <new-url value="1830-1860/amistad"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/China1"/>
+                    <new-url value="1830-1860/china-1"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/China2"/>
+                    <new-url value="1830-1860/china-2"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/GadsdenPurchase"/>
+                    <new-url value="1830-1860/gadsden-purchase"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/IndianTreaties"/>
+                    <new-url value="1830-1860/indian-treaties"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/Liberia"/>
+                    <new-url value="1830-1860/liberia"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/OpeningtoJapan"/>
+                    <new-url value="1830-1860/opening-to-japan"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/OregonTerritory"/>
+                    <new-url value="1830-1860/oregon-territory"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/PacificExpansion"/>
+                    <new-url value="1830-1860/pacific-expansion"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/TerritorialExpansion"/>
+                    <new-url value="1830-1860/territorial-expansion"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/TexasAnnexation"/>
+                    <new-url value="1830-1860/texas-annexation"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1830-1860/WebsterTreaty"/>
+                    <new-url value="1830-1860/webster-treaty"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1861-1865/Alabama"/>
+                    <new-url value="1861-1865/alabama"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1861-1865/Blockade"/>
+                    <new-url value="1861-1865/blockade"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1861-1865/Confederacy"/>
+                    <new-url value="1861-1865/confederacy"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1861-1865/FrenchIntervention"/>
+                    <new-url value="1861-1865/french-intervention"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1861-1865/TrentAffair"/>
+                    <new-url value="1861-1865/trent-affair"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1861-1865/Victory"/>
+                    <new-url value="1861-1865/victory"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/AlaskaPurchase"/>
+                    <new-url value="1866-1898/alaska-purchase"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/Blaine"/>
+                    <new-url value="1866-1898/blaine"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/Burlingame-SewardTreaty"/>
+                    <new-url value="1866-1898/burlingame-seward-treaty"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/ChineseImmigration"/>
+                    <new-url value="1866-1898/chinese-immigration"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/CommodoreShufeldt"/>
+                    <new-url value="1866-1898/commodore-shufeldt"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/Hawaii"/>
+                    <new-url value="1866-1898/hawaii"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/Mahan"/>
+                    <new-url value="1866-1898/mahan"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/Spanish_american_war"/>
+                    <new-url value="1866-1898/spanish-american-war"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/Telegraph"/>
+                    <new-url value="1866-1898/telegraph"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/Venezuela"/>
+                    <new-url value="1866-1898/venezuela"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1866-1898/Yellow_journalism"/>
+                    <new-url value="1866-1898/yellow-journalism"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1899-1913/ChineseRev"/>
+                    <new-url value="1899-1913/chinese-rev"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1899-1913/DollarDiplo"/>
+                    <new-url value="1899-1913/dollar-diplo"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1899-1913/HayandChina"/>
+                    <new-url value="1899-1913/hay-and-china"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1899-1913/JapaneseRelations"/>
+                    <new-url value="1899-1913/japanese-relations"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1899-1913/PanamaCanal"/>
+                    <new-url value="1899-1913/panama-canal"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1899-1913/Platt"/>
+                    <new-url value="1899-1913/platt"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1899-1913/PortsmouthTreaty"/>
+                    <new-url value="1899-1913/portsmouth-treaty"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1899-1913/RooseveltandMonroeDoctrine"/>
+                    <new-url value="1899-1913/roosevelt-and-monroe-doctrine"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1899-1913/War"/>
+                    <new-url value="1899-1913/war"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1914-1920/BullittMission"/>
+                    <new-url value="1914-1920/bullitt-mission"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1914-1920/FourteenPoints"/>
+                    <new-url value="1914-1920/fourteen-points"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1914-1920/Haiti"/>
+                    <new-url value="1914-1920/haiti"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1914-1920/League"/>
+                    <new-url value="1914-1920/league"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1914-1920/ParisPeace"/>
+                    <new-url value="1914-1920/paris-peace"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1914-1920/WWI"/>
+                    <new-url value="1914-1920/wwi"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/Dawes"/>
+                    <new-url value="1921-1936/dawes"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/Geneva"/>
+                    <new-url value="1921-1936/geneva"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/GoodNeighbor"/>
+                    <new-url value="1921-1936/good-neighbor"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/GreatDepression"/>
+                    <new-url value="great-depression"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/ImmigrationAct"/>
+                    <new-url value="1921-1936/immigration-act"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/Kellogg"/>
+                    <new-url value="1921-1936/kellogg"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/LondonNavalConf"/>
+                    <new-url value="1921-1936/london-naval-conf"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/Mukden_incident"/>
+                    <new-url value="1921-1936/mukden-incident"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/NavalConference"/>
+                    <new-url value="1921-1936/naval-conference"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/Neutrality_acts"/>
+                    <new-url value="1921-1936/neutrality-acts"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/Protectionism"/>
+                    <new-url value="1921-1936/protectionism"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/RedLine"/>
+                    <new-url value="1921-1936/red-line"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/USSR"/>
+                    <new-url value="1921-1936/ussr"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1921-1936/export-importbank"/>
+                    <new-url value="1921-1936/export-import-bank"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/AmericanIsolationism"/>
+                    <new-url value="1937-1945/american-isolationism"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/AtlanticConf"/>
+                    <new-url value="1937-1945/atlantic-conf"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/BrettonWoods"/>
+                    <new-url value="bretton-woods"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/Casablanca"/>
+                    <new-url value="1937-1945/casablanca"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/ChineseExclusionActRepeal"/>
+                    <new-url value="1937-1945/chinese-exclusion-act-repeal"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/Internationalism"/>
+                    <new-url value="1937-1945/internationalism"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/LendLease"/>
+                    <new-url value="1937-1945/lend-lease"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/MexicanOil"/>
+                    <new-url value="1937-1945/mexican-oil"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/PotsdamConf"/>
+                    <new-url value="1937-1945/potsdam-conf"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/TehranConf"/>
+                    <new-url value="1937-1945/tehran-conf"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/UN"/>
+                    <new-url value="1937-1945/un"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/USSoviet"/>
+                    <new-url value="1937-1945/us-soviet"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/WarTimeConferences"/>
+                    <new-url value="1937-1945/war-time-conferences"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1937-1945/YaltaConf"/>
+                    <new-url value="1937-1945/yalta-conf"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/ANZUS"/>
+                    <new-url value="1945-1952/anzus"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/ArabIsraeliWar"/>
+                    <new-url value="1945-1952/arab-israeli-war"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/AsiaandAfrica"/>
+                    <new-url value="1945-1952/asia-and-africa"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/Atomic"/>
+                    <new-url value="1945-1952/atomic"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/BaruchPlans"/>
+                    <new-url value="1945-1952/baruch-plans"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/BerlinCrises"/>
+                    <new-url value="1945-1952/berlin-airlift"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/ChineseRev"/>
+                    <new-url value="1945-1952/chinese-rev"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/CreationIsrael"/>
+                    <new-url value="1945-1952/creation-israel"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/ImmigrationAct"/>
+                    <new-url value="1945-1952/immigration-act"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/JapanReconstruction"/>
+                    <new-url value="1945-1952/japan-reconstruction"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/Kennan"/>
+                    <new-url value="1945-1952/kennan"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/KoreanWar"/>
+                    <new-url value="1945-1952/korean-war"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/KoreanWar2"/>
+                    <new-url value="1945-1952/korean-war-2"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/MarshallPlan"/>
+                    <new-url value="1945-1952/marshall-plan"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/NATO"/>
+                    <new-url value="1945-1952/nato"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/NationalSecurityAct"/>
+                    <new-url value="1945-1952/national-security-act"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1945-1952/TrumanDoctrine"/>
+                    <new-url value="1945-1952/truman-doctrine"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/BandungConf"/>
+                    <new-url value="1953-1960/bandung-conf"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/BerlinCrises"/>
+                    <new-url value="1953-1960/berlin-crises"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/CENTO"/>
+                    <new-url value="1953-1960/cento"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/ChinaTalks"/>
+                    <new-url value="1953-1960/china-talks"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/DienBienPhu"/>
+                    <new-url value="1953-1960/dien-bien-phu"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/EisenhowerDoctrine"/>
+                    <new-url value="1953-1960/eisenhower-doctrine"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/SEATO"/>
+                    <new-url value="1953-1960/seato"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/Sputnik"/>
+                    <new-url value="1953-1960/sputnik"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/Suez"/>
+                    <new-url value="1953-1960/suez"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/TaiwanSTraitCrises"/>
+                    <new-url value="1953-1960/taiwan-strait-crises"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/U2-incident"/>
+                    <new-url value="1953-1960/u2-incident"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/WarsawTreaty"/>
+                    <new-url value="1953-1960/warsaw-treaty"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1953-1960/khrushchev-20thc-congress"/>
+                    <new-url value="1953-1960/khrushchev-20th-congress"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1961-1968/AllianceforProgress"/>
+                    <new-url value="1961-1968/alliance-for-progress "/>
+                </redirect>
+                <redirect>
+                    <old-url value="1961-1968/ArabIsraeliWar67"/>
+                    <new-url value="1961-1968/arab-israeli-war-1967"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1961-1968/CubanMissile"/>
+                    <new-url value="1961-1968/cuban-missile-crisis"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1961-1968/GulfofTonkin"/>
+                    <new-url value="1961-1968/gulf-of-tonkin"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1961-1968/IndiaPakistanWar"/>
+                    <new-url value="1961-1968/india-pakistan-war"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1961-1968/LimitedBan"/>
+                    <new-url value="1961-1968/limited-ban"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1961-1968/NPT"/>
+                    <new-url value="1961-1968/npt"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1961-1968/TET"/>
+                    <new-url value="1961-1968/tet"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1969-1976/Angola"/>
+                    <new-url value="1969-1976/angola"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1969-1976/ArabIsraeliWar73"/>
+                    <new-url value="1969-1976/arab-israeli-war-1973"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1969-1976/Detente"/>
+                    <new-url value="1969-1976/detente"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1969-1976/Helsinki"/>
+                    <new-url value="1969-1976/helsinki"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1969-1976/OPEC"/>
+                    <new-url value="1969-1976/oil-embargo"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1969-1976/SALT"/>
+                    <new-url value="1969-1976/salt"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1969-1976/SouthAsia"/>
+                    <new-url value="1969-1976/south-asia"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1969-1976/VietnamWar"/>
+                    <new-url value="1969-1976/vietnam-war"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1977-1980/NorthSouthDialogue"/>
+                    <new-url value="1977-1980/north-south-dialogue"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1977-1980/Olympic"/>
+                    <new-url value="1977-1980/olympic"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1977-1980/TrilateralDiplomacy"/>
+                    <new-url value="1977-1980/trilateral-diplomacy"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1981-1989/APEC"/>
+                    <new-url value="1989-1992/apec"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1981-1989/FallofCommunism"/>
+                    <new-url value="1989-1992/fall-of-communism"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1990-2000"/>
+                    <new-url value="1989-1992"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1990-2000/Apartheid"/>
+                    <new-url value="1989-1992/apartheid"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1990-2000/Oslo"/>
+                    <new-url value="1993-2000/oslo"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1990-2000/StrategicArmsReduction"/>
+                    <new-url value="1989-1992/strategic-arms-reduction"/>
+                </redirect>
+                <redirect>
+                    <old-url value="1990-2000/foreword"/>
+                    <new-url value="1989-1992/foreword"/>
+                </redirect>
+            </redirects>
+        </config>
     </step>
     <step value="conferences">
         <step key="conference">

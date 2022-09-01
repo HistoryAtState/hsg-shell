@@ -5,6 +5,7 @@ import module namespace side = "http://history.state.gov/ns/site/hsg/sidebar" at
 import module namespace t="http://history.state.gov/ns/site/hsg/xqsuite" at "../xqsuite.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "../pages.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
+import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "../sidebar.xqm";
 import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
