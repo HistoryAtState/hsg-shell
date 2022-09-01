@@ -14,6 +14,7 @@ import module namespace app="http://history.state.gov/ns/site/hsg/templates" at 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
 import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "sidebar.xqm";
+import module namespace link="http://history.state.gov/ns/site/hsg/link" at "link.xqm";
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
@@ -378,7 +379,7 @@ function pages:styles($node as node(), $model as map(*), $odd as xs:string?) {
     attribute href {
         let $name := replace($odd, "^([^/\.]+).*$", "$1")
         return
-            $pages:app-root || "/resources/odd/compiled/" || $name || ".css"
+            $pages:app-root || "/transform/" || $name || ".css"
     }
 };
 
@@ -524,70 +525,39 @@ declare function pages:breadcrumb($node, $model){
 };
 
 declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
-  <div class="hsg-breadcrumb-wrapper">
-    <ol class="breadcrumb">
+  <nav class="hsg-breadcrumb hsg-breadcrumb--wrap" aria-label="breadcrumbs">
+    <ol
+        vocab="http://schema.org/"
+        typeof="BreadcrumbList"
+        class="hsg-breadcrumb__list"
+    >
       {
-        site:call-with-parameters-for-uri-steps($uri, $site:config, pages:generate-breadcrumb-item#1)
+        site:call-with-parameters-for-uri-steps($uri, $site:config, pages:generate-breadcrumb-item#1, map{'originating-url': $uri})
       }
     </ol>
-  </div>
+  </nav>
 };
 
-declare function pages:generate-breadcrumb-item($state as map(*)) as element(li)*{ 
-    <li>{pages:generate-breadcrumb-link($state)}</li>
-};
-
-declare function pages:generate-breadcrumb-link($state as map(*)) as element(a)*{
-  let $uri := $state?current-url
-  let $app-root := 
-    try {$app:APP_ROOT} 
-    catch * {
-      (: Assume APP_ROOT is '/exist/apps/hsg-shell'; Needed for xqsuite testing, 
-         since there is no context for calls to e.g. request:get-header(). :)
-      '/exist/apps/hsg-shell'
-    }
-  let $full-url := $app-root || $uri
-  return
-    <a href="{$full-url}">{" ", pages:generate-breadcrumb-label($state), " "}</a>
-};
-
-declare function pages:generate-breadcrumb-label($state as map(*)) {
-  let $uri := $state?current-url
-  let $page-template := $state?page-template
-  let $parameters as map(*)? := 
-    map:merge(
-      (
-        let $param-names as xs:string* := try {request:get-parameter-names()} catch err:XPDY0002 {()}
-        for $param-name in $param-names[. = ('region', 'subject')] (: filter necessary to avoid e.g. section-id being over-written :)
-        return map{
-          $param-name: request:get-parameter($param-name, '')
-        },
-        $state?parameters,
-        for $param in doc($page-template)//*[@data-template eq 'pages:breadcrumb']/@*[starts-with(name(.), 'data-template-')]
-        return map{
-          name($param) => substring-after('data-template-'):
-          string($param)
+declare function pages:generate-breadcrumb-item($uri-step-state as map(*)) as element(li)*{ 
+    (: The URI step state is generated from the site config file for each URI in the breadcrumb list :)
+    <li
+        class="hsg-breadcrumb__list-item"
+        property="itemListElement"
+        typeof="ListItem"
+    >
+    {
+        (: We want to pass through appropriate attributes to the link generator :)
+        let $link-attributes := function() as attribute()* {
+            attribute class { "hsg-breadcrumb__link" },
+            attribute property { "item" },
+            attribute typeof { "WebPage" }
         }
-      ), map{'duplicates': 'use-last'}
-    )
-  let $publication-id := $parameters?publication-id
-  let $breadcrumb-title as function(*)? := $config:PUBLICATIONS?($publication-id)?breadcrumb-title
-  let $label := 
-      if ($uri eq '/')
-        then "Home"
-      else if (doc($page-template)//*[@id eq 'breadcrumb-title'])
-        then doc($page-template)//*[@id eq 'breadcrumb-title']/node()
-      else if (exists($breadcrumb-title)) 
-        then $breadcrumb-title($parameters) 
-      else if ($config:PUBLICATIONS?($publication-id)?title)
-        then $config:PUBLICATIONS?($publication-id)?title
-      else 
-        "Office of the Historian"
-  return (
-    $label
-    (:,  serialize($state, map{'method':'adaptive', 'indent':true()}):)
-  )
+        let $state := map:merge(($uri-step-state, map{'link-attributes': $link-attributes}), map{'duplicates': 'use-last'})
+        return link:generate-from-state($state)
+    }
+    </li>
 };
+
 
 declare function pages:app-root($node as node(), $model as map(*)) {
     let $root := try {

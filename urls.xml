@@ -30,7 +30,8 @@
         <step value="frus-history">
             <step value="documents">
                 <step key="doc-id">
-                    <page-template href="pages/historicaldocuments/frus-history/documents/document.xml">
+                    <page-template
+                        href="pages/historicaldocuments/frus-history/documents/document.xml">
                         <with-param keyval="doc-id" name="document-id"/>
                         <with-param name="publication-id" value="frus-history-documents"/>
                     </page-template>
@@ -45,7 +46,8 @@
             </step>
             <step value="research">
                 <step key="article-id">
-                    <page-template href="pages/historicaldocuments/frus-history/research/article.xml">
+                    <page-template
+                        href="pages/historicaldocuments/frus-history/research/article.xml">
                         <with-param name="publication-id" value="articles"/>
                         <with-param keyval="article-id" name="article-id"/>
                     </page-template>
@@ -54,6 +56,14 @@
                     </config>
                 </step>
                 <page-template href="pages/historicaldocuments/frus-history/research/index.xml"/>
+            </step>
+            <step value="appendix-a">
+                <page-template href="pages/historicaldocuments/frus-history/appendix-a.xml">
+                    <with-param name="publication-id" value="frus-history-monograph"/>
+                    <with-param name="document-id" value="frus-history"/>
+                    <with-param name="section-id" value="appendix-a"/>
+                    <with-param name="requested-url" select="local:get-url()"/>
+                </page-template>
             </step>
             <step key="section">
                 <page-template href="pages/historicaldocuments/frus-history/monograph-interior.xml">
@@ -105,7 +115,8 @@
         </step>
         <step value="quarterly-releases">
             <step key="announcement">
-                <page-template href="pages/historicaldocuments/quarterly-releases/announcements/{$site:key?announcement}.xml"/>
+                <page-template
+                    href="pages/historicaldocuments/quarterly-releases/announcements/{$site:key?announcement}.xml"/>
                 <config>
                     <src collection="/db/apps/hsg-shell/pages/historicaldocuments/quarterly-releases/announcements"/>
                 </config>
@@ -144,7 +155,8 @@
                 <with-param name="publication-id" value="frus-administration"/>
             </page-template>
             <config>
-                <src doc="/db/apps/frus/code-tables/administration-code-table.xml" xq="/code-table/items/item/value"/>
+                <src doc="/db/apps/frus/code-tables/administration-code-table.xml"
+                    xq="/code-table/items/item/value"/>
             </config>
         </step>
         <page-template href="pages/historicaldocuments/index.xml">
@@ -216,7 +228,8 @@
                     <with-param keyval="section" name="section-id"/>
                 </page-template>
                 <config>
-                    <src doc="/db/apps/administrative-timeline/timeline/timeline.xml" xq=".//@xml:id"/>
+                    <src doc="/db/apps/administrative-timeline/timeline/timeline.xml"
+                        xq=".//@xml:id"/>
                 </config>
             </step>
             <page-template href="pages/departmenthistory/timeline/index.xml">
@@ -232,7 +245,8 @@
                     <with-param keyval="section" name="section-id"/>
                 </page-template>
                 <config>
-                    <src doc="/db/apps/other-publications/short-history/short-history.xml" xq=".//@xml:id"/>
+                    <src doc="/db/apps/other-publications/short-history/short-history.xml"
+                        xq=".//@xml:id"/>
                 </config>
             </step>
             <page-template href="pages/departmenthistory/short-history/index.xml">
@@ -295,7 +309,9 @@
                         <with-param keyval="year" name="year"/>
                     </page-template>
                     <config>
-                        <src collection="/db/apps/pocom" xq="distinct-values(for $date in .//date[not(. = '')] return xs:integer(substring($date, 1, 4)))"/>
+                        <src collection="/db/apps/pocom"
+                            xq="distinct-values(for $date in .//date[not(. = '')] return xs:integer(substring($date, 1, 4)))"
+                        />
                     </config>
                 </step>
                 <page-template href="pages/departmenthistory/people/by-year/index.xml">
@@ -307,7 +323,8 @@
             </step>
             <step value="principalofficers">
                 <step key="role">
-                    <page-template href="pages/departmenthistory/people/principalofficers/by-role-id.xml">
+                    <page-template
+                        href="pages/departmenthistory/people/principalofficers/by-role-id.xml">
                         <with-param name="publication-id" value="people-by-role"/>
                         <with-param keyval="role" name="role-id"/>
                     </page-template>
@@ -324,17 +341,20 @@
             </step>
             <step value="chiefsofmission">
                 <step value="by-country">
-                    <page-template href="pages/departmenthistory/people/chiefsofmission/countries-list.xml">
+                    <page-template
+                        href="pages/departmenthistory/people/chiefsofmission/countries-list.xml">
                         <with-param name="publication-id" value="people"/>
                     </page-template>
                 </step>
                 <step value="by-organization">
-                    <page-template href="pages/departmenthistory/people/chiefsofmission/international-organizations-list.xml">
+                    <page-template
+                        href="pages/departmenthistory/people/chiefsofmission/international-organizations-list.xml">
                         <with-param name="publication-id" value="people"/>
                     </page-template>
                 </step>
                 <step key="org">
-                    <page-template href="pages/departmenthistory/people/chiefsofmission/by-role-or-country-id.xml">
+                    <page-template
+                        href="pages/departmenthistory/people/chiefsofmission/by-role-or-country-id.xml">
                         <with-param name="publication-id" value="people"/>
                         <with-param keyval="org" name="role-or-country-id"/>
                     </page-template>
@@ -376,13 +396,15 @@
         <step value="travels">
             <step value="president">
                 <step key="id">
-                    <page-template href="pages/departmenthistory/travels/president/person-or-country.xml">
+                    <page-template
+                        href="pages/departmenthistory/travels/president/person-or-country.xml">
                         <with-param keyval="id" name="person-or-country-id"/>
                         <with-param name="publication-id" value="travels-president"/>
                     </page-template>
                     <config>
                         <src collection="/db/apps/travels/president-travels" xq="trips/trip/@who"/>
-                        <src collection="/db/apps/travels/president-travels" xq="distinct-values(trips/trip/country/@id)"/>
+                        <src collection="/db/apps/travels/president-travels"
+                            xq="distinct-values(trips/trip/country/@id)"/>
                     </config>
                 </step>
                 <page-template href="pages/departmenthistory/travels/president/index.xml">
@@ -391,13 +413,16 @@
             </step>
             <step value="secretary">
                 <step key="id">
-                    <page-template href="pages/departmenthistory/travels/secretary/person-or-country.xml">
+                    <page-template
+                        href="pages/departmenthistory/travels/secretary/person-or-country.xml">
                         <with-param keyval="id" name="person-or-country-id"/>
                         <with-param name="publication-id" value="travels-secretary"/>
                     </page-template>
                     <config>
-                        <src collection="/db/apps/travels/secretary-travels" xq="distinct-values(trips/trip/@who)"/>
-                        <src collection="/db/apps/travels/secretary-travels" xq="distinct-values(trips/trip/country/@id)"/>
+                        <src collection="/db/apps/travels/secretary-travels"
+                            xq="distinct-values(trips/trip/@who)"/>
+                        <src collection="/db/apps/travels/secretary-travels"
+                            xq="distinct-values(trips/trip/country/@id)"/>
                     </config>
                 </step>
                 <page-template href="pages/departmenthistory/travels/secretary/index.xml">
@@ -418,8 +443,7 @@
                     <with-param keyval="id" name="country-or-year"/>
                 </page-template>
                 <config>
-                    <src 
-                        collection="/db/apps/visits/data"
+                    <src collection="/db/apps/visits/data"
                         xq="distinct-values(
                             for $date in .//(start-date | end-date)
                             let $year := year-from-date($date)
@@ -440,13 +464,15 @@
         </step>
         <step value="diplomatic-couriers">
             <step value="before-the-jet-age">
-                <page-template href="pages/departmenthistory/diplomatic-couriers/before-the-jet-age.xml">
+                <page-template
+                    href="pages/departmenthistory/diplomatic-couriers/before-the-jet-age.xml">
                     <with-param name="publication-id" value="diplomatic-couriers"/>
                     <with-param name="film-id" value="before-the-jet-age"/>
                 </page-template>
             </step>
             <step value="behind-the-iron-curtain">
-                <page-template href="pages/departmenthistory/diplomatic-couriers/behind-the-iron-curtain.xml">
+                <page-template
+                    href="pages/departmenthistory/diplomatic-couriers/behind-the-iron-curtain.xml">
                     <with-param name="publication-id" value="diplomatic-couriers"/>
                     <with-param name="film-id" value="behind-the-iron-curtain"/>
                 </page-template>
@@ -458,7 +484,8 @@
                 </page-template>
             </step>
             <step value="through-the-khyber-pass">
-                <page-template href="pages/departmenthistory/diplomatic-couriers/through-the-khyber-pass.xml">
+                <page-template
+                    href="pages/departmenthistory/diplomatic-couriers/through-the-khyber-pass.xml">
                     <with-param name="publication-id" value="diplomatic-couriers"/>
                     <with-param name="film-id" value="through-the-khyber-pass"/>
                 </page-template>

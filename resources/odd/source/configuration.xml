@@ -12,36 +12,38 @@
 -->
 <modules>
     <!-- Special latex configuration for presentations -->
-    <output mode="latex" odd="beamer">
-        <module uri="http://www.tei-c.org/tei-simple/xquery/ext-latexbeamer" prefix="ext-beamer"
-            at="../modules/ext-latexbeamer.xql"/>
+<!--     <output mode="latex" odd="beamer">
+        <module prefix="ext-beamer"
+                uri="http://www.tei-c.org/tei-simple/xquery/ext-latexbeamer"
+                at="xmldb:exist:///db/apps/hsg-shell/modules/ext-latexbeamer.xql"/>
     </output>
-    <!-- General latex extension functions -->
-    <output mode="latex">
-        <module uri="http://www.tei-c.org/tei-simple/xquery/ext-latex" prefix="ext-latex"
-            at="../modules/ext-latex.xql">
-            <!-- directory from which images should be loaded -->
-            <property name="image-dir"> (system:get-exist-home() ||
+ -->    <!-- General latex extension functions -->
+<!--     <output mode="latex">
+        <module prefix="ext-latex"
+                uri="http://www.tei-c.org/tei-simple/xquery/ext-latex"
+                at="xmldb:exist:///db/apps/hsg-shell/modules/ext-latex.xql">
+            <property name="image-dir">
+                (system:get-exist-home() ||
                 "/webapp/WEB-INF/data/expathrepo/tei-simple-0.3/test/", system:get-exist-home() ||
-                "/webapp/WEB-INF/data/expathrepo/tei-simple-0.3/doc/") </property>
+                "/webapp/WEB-INF/data/expathrepo/tei-simple-0.3/doc/")
+            </property>
         </module>
-    </output>
+    </output> -->
     <!-- General fo extension functions -->
     <output mode="print">
-        <module mode="print" uri="http://history.state.gov/ns/site/hsg/pmf-fo" prefix="ext-fo"
-            at="../../hsg-shell/modules/ext-fo.xql"/>
+        <module prefix="ext-fo"
+                uri="http://history.state.gov/ns/site/hsg/pmf-fo"
+                at="xmldb:exist:///db/apps/hsg-shell/modules/ext-fo.xql"/>
     </output>
     <!-- Special web configuration for the documentation (to handle <code>) -->
-    <output mode="web" odd="documentation">
-        <module mode="html" uri="http://www.tei-c.org/tei-simple/xquery/ext-html" prefix="ext-html"
-            at="../modules/ext-html.xql"/>
-    </output>
     <output mode="web" odd="frus">
-        <module mode="html" uri="http://history.state.gov/ns/site/hsg/pmf-html" prefix="ext-html"
-            at="../../hsg-shell/modules/ext-html.xql"/>
+        <module prefix="ext-html"
+                uri="http://history.state.gov/ns/site/hsg/pmf-html"
+                at="xmldb:exist:///db/apps/hsg-shell/modules/ext-html.xql"/>
     </output>
-    <output mode="web" odd="departmenthistory">
-        <module mode="html" uri="http://history.state.gov/ns/site/hsg/pmf-html" prefix="ext-html"
-            at="../../hsg-shell/modules/ext-html.xql"/>
+    <output mode="print" odd="departmenthistory">
+        <module prefix="ext-html"
+                uri="http://history.state.gov/ns/site/hsg/pmf-html"
+                at="xmldb:exist:///db/apps/hsg-shell/modules/ext-html.xql"/>
     </output>
 </modules>

@@ -78,6 +78,14 @@ else if (contains($exist:path, "/resources/") or contains($exist:path, "/bower_c
         <forward url="{$exist:controller}/{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
     </dispatch>
 
+else if (ends-with($exist:path, "transform/frus.css"))
+then (
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <set-header name="Cache-Control" value="no-cache" />
+        <cache-control cache="yes"/>
+    </dispatch>
+)
+
 (: handle requests for static resource: robots.txt :)
 else if ($exist:path = ("/robots.txt", "/opensearch.xml", "/favicon.ico")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -278,6 +286,25 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                                 <forward url="{$exist:controller}/modules/view.xql"/>
                                             </error-handler>
                                         </dispatch>
+                            case "appendix-a" return
+                                let $page := "historicaldocuments/frus-history/appendix-a.xml"
+                                let $section-id := "appendix-a"
+                                return
+                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                        <forward url="{$exist:controller}/pages/{$page}"/>
+                                        <view>
+                                            <forward url="{$exist:controller}/modules/view.xql">
+                                                <add-parameter name="publication-id" value="frus-history-monograph"/>
+                                                <add-parameter name="document-id" value="frus-history"/>
+                                                <add-parameter name="section-id" value="{$section-id}"/>
+                                                <add-parameter name="requested-url" value="{local:get-url()}"/>
+                                            </forward>
+                                        </view>
+                                        <error-handler>
+                                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
+                                            <forward url="{$exist:controller}/modules/view.xql"/>
+                                        </error-handler>
+                                    </dispatch>
                             default return
                                 let $page := "historicaldocuments/frus-history/monograph-interior.xml"
                                 let $section-id := $fragments[2]
