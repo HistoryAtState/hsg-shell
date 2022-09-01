@@ -50,6 +50,8 @@ function x:open-graph-defaults() {
         <meta property="og:image:alt" content="Department of State heraldic shield"/>,
         <meta property="og:url" content="test-url"/>,
         <meta name="DC.type" content="webpage"/>,
+        <meta name="citation_series_title" content="Office of the Historian"/>,
+        <meta name="citation_title" content="Office of the Historian"/>,
         <meta name="citation_public_url" content="test-url"/>,
         <meta name="accessDate" content="{format-date(current-date(), '[Y0001]-[M01]-[D01]')}"/>
     )
