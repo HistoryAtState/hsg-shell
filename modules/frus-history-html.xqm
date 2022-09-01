@@ -366,3 +366,27 @@ declare function fhh:events($node, $model) {
             { $recent-events-list }
         </div>
 };
+
+declare 
+    %templates:replace
+function fhh:appendix-a-chart-intro($node as node(), $model as map(*)) {
+    let $chart-intro := doc('/db/apps/frus-history/frus-production-chart/frus-production-chart-intro.html')
+    return (
+        $chart-intro
+    )
+};
+
+declare 
+    %templates:replace
+function fhh:appendix-a-chart-data($node as node(), $model as map(*)) {
+    let $chart-data := util:binary-to-string(util:binary-doc('/db/apps/frus-history/frus-production-chart/frus-production-chart-data.json'))
+    let $chart-parameters := util:binary-to-string(util:binary-doc('/db/apps/frus-history/frus-production-chart/frus-production-chart-parameters.json'))
+    return (
+    <script type="text/javascript">
+        const g = window.g = new Dygraph(document.getElementById("graph"), {$chart-data}, {$chart-parameters});
+        function change(el) {{
+            g.setVisibility(parseInt(el.id), el.checked);
+        }}
+    </script>
+    )
+};
