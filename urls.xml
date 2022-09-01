@@ -55,7 +55,15 @@
         </step>
         <page-template href="pages/historicaldocuments/frus-history/research/index.xml"/>
       </step>
-      <step key="section">
+      <step value="appendix-a">
+          <page-template href="pages/historicaldocuments/frus-history/appendix-a.xml">
+              <with-param name="publication-id" value="frus-history-monograph"/>
+              <with-param name="document-id" value="frus-history"/>
+              <with-param name="section-id" value="appendix-a"/>
+              <with-param name="requested-url" select="local:get-url()"/>
+          </page-template>
+      </step>
+        <step key="section">
         <page-template href="pages/historicaldocuments/frus-history/monograph-interior.xml">
           <with-param name="publication-id" value="frus-history-monograph"/>
           <with-param name="document-id" value="frus-history"/>

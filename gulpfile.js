@@ -99,7 +99,8 @@ gulp.task('scripts:build', function () {
     return gulp.src([
             'resources/scripts/app.js',
             'resources/scripts/metagrid.js',
-            'resources/scripts/cite.js'
+            'resources/scripts/cite.js',
+            'resources/scripts/dygraph-combined.js',
         ])
         .pipe(uglify())
         .pipe(concat('app.min.js'))
@@ -111,7 +112,7 @@ gulp.task('scripts:concat', gulp.series('scripts:build', function () {
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
             'resources/scripts/citeproc.min.js',
-            'resources/scripts/app.min.js'
+            'resources/scripts/app.min.js',
         ])
       .pipe(concat('app.all.js'))
       .pipe(gulp.dest('resources/scripts'));

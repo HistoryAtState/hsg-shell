@@ -899,7 +899,7 @@ return
          else
            $div/tei:head[1]/string-join((node() except tei:note) ! string())
       else
-       $div/tei:head[1]/string-join((node() except tei:note) ! string()) 
+       $div/tei:head[1]/string-join((node() except tei:note) ! normalize-space(.), ' ') 
     )
   )
 };
@@ -950,7 +950,7 @@ declare function config:tei-section-citation-meta($node as node()?, $model as ma
         map { 'type': "chapter" },
         if (exists($citation_title)) then map{ 'title': $citation_title } else (),
         if (exists($book_title)) then map{'container-title': $book_title} else (),
-        if (exists($location)) then map{'page': $location} else ()
+        if (exists($location[. ne '-'])) then map{'page': $location} else ()
     ), map{'duplicates':'use-last'})
 };
 
