@@ -532,7 +532,7 @@ declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
         class="hsg-breadcrumb__list"
     >
       {
-        site:call-with-parameters-for-uri-steps($uri, $site:config, pages:generate-breadcrumb-item#1, map{'originating-url': $uri})
+        site:call-with-parameters-for-uri-steps($uri, $site:config, pages:generate-breadcrumb-item#1)
       }
     </ol>
   </nav>

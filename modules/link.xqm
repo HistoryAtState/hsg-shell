@@ -26,9 +26,11 @@ declare function link:generate-from-state($url-state as map(*)) as element(a)* {
         <a href="{ $full-url }">
             {
                 $url-state?link-attributes!.(), (: any class or rdfa attributes may be passed in as a function using the $url-state:)
-                if (ends-with($url-state?originating-uri, $uri))
+                if (ends-with($url-state?full-url, $uri))
                 then (attribute aria-current { "page" })
-                else ()
+                else (),
+                attribute data-originating {$url-state?full-url},
+                attribute data-current {$uri}
             }
             <span>{link:generate-label-from-state($url-state)}</span>
         </a>
