@@ -1,0 +1,33 @@
+/* HSG Badge -------------- */
+
+.hsg-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: $badge-width;
+    height: $badge-height;
+    background: $color-gray-light;
+    color: $color-white;
+    font-family: $font-sans;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 5px;
+    white-space: nowrap;
+
+    &--twitter {
+      background: $twitter-color;
+    }
+
+    &--volume {
+      background: $volume-color;
+    }
+
+    &--press {
+      background: $press-color;
+    }
+
+    &--article {
+      background: $article-color;
+    }
+  }

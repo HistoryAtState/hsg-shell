@@ -126,6 +126,11 @@ footer {
   @extend .col-lg-12;
 }
 
+.hsg-columns__flex {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Main Content Grid -------------- */
 
 .hsg-breadcrumb-wrapper {
