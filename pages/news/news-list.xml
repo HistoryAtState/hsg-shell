@@ -3,22 +3,39 @@
     <div data-template="templates:surround"
          data-template-with="templates/site.xml"
          data-template-at="content">
-        <div>
             <div id="static-title" class="hidden">News</div>
-            <div class="row">
+            <section class="row">
                 <div data-template="pages:breadcrumb">
                     <p id="breadcrumb-title">News</p>
                 </div>
-            </div>
+            </section>
 
-            <div class="row">
-                <div class="hsg-width-two-thirds">
-                    <div id="content-inner" data-template="app:fix-links">
+            <section class="row">
+                <div class="hsg-width-one-whole">
+                    <div data-template="app:fix-links">
                         <h1>News</h1>
                         <p>Latest news from Office of The Historian</p>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
+
+            <section class="row">
+                <div class="hsg-width-one-whole">
+                    <ul class="hsg-list hsg-columns__flex">
+                        <li class="hsg-list__item">
+                            <div class="hsg-list__item__row">
+                                <span class="hsg-list__badge hsg-badge hsg-badge--twitter">Jun 03, 2022</span>
+                                <div class="hsg-list__item-wrap">
+                                    <a class="hsg-list__link" href="#">A headline</a>
+                                    <p class="hsg-list__paragraph">A text</p>
+                                    <a class="hsg-list__more" href="#">
+                                        <span>View Twitter post</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
     </div>
 </div>
