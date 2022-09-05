@@ -349,7 +349,7 @@ declare function fh:get-persons($root as element(), $ids as xs:string*) {
         )
     order by $persName
     return
-        <a href="persons{$idref}" class="list-group-item" data-toggle="tooltip" title="{$persDescription}">{$persName/string()}</a>
+        <a href="persons{$idref}" tabindex="0" class="list-group-item" data-toggle="tooltip" title="{$persDescription}">{$persName/string()}</a>
 };
 
 declare
@@ -379,7 +379,7 @@ declare function fh:get-gloss($root as element(), $ids as xs:string*) {
         )
     order by $term
     return
-        <a href="terms{$idref}" class="list-group-item" data-toggle="tooltip" title="{$termDescription}">{$term/string()}</a>
+        <a href="terms{$idref}" tabindex="0" class="list-group-item" data-toggle="tooltip" title="{$termDescription}">{$term/string()}</a>
 };
 
 declare function fh:volume-breadcrumb($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
