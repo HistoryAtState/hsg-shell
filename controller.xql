@@ -1713,7 +1713,7 @@ else if (matches($exist:path, '^/education/?')) then
     let $fragments := tokenize(substring-after($exist:path, '/news/'), '/')[. ne '']
     let $log := util:log('info', ('controller.xq, Endpoint => ^/news/?'))
     let $log := util:log('info', ('$fragments=', $fragments))
-    (: TODO: Refactor url endpoints for news articles, this is just an interim solution for template development :)
+    (: TODO TFJH: Refactor url endpoints for news articles, this is just an interim solution for template development :)
     let $page :=
         if ($fragments[1]) then
             switch ($fragments[1])
