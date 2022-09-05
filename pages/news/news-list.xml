@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="pages:load">
+    <div data-template="templates:surround"
+         data-template-with="templates/site.xml"
+         data-template-at="content">
+        <div>
+            <div id="static-title" class="hidden">News</div>
+            <div class="row">
+                <div data-template="pages:breadcrumb">
+                    <p id="breadcrumb-title">News</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="hsg-width-two-thirds">
+                    <div id="content-inner" data-template="app:fix-links">
+                        <h1>News</h1>
+                        <p>Latest news from Office of The Historian</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
