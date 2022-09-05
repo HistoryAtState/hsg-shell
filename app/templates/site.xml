@@ -78,8 +78,8 @@
                 <div class="navbar-collapse collapse" id="navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="$app/" shape="rect">
-                                <span>Home</span>
+                            <a href="$app/news" shape="rect">
+                                <span>News</span>
                             </a>
                         </li>
                         <li class="dropdown">
