@@ -86,7 +86,7 @@ exports.config = {
         browserName: 'chrome',
         'goog:chromeOptions': {
           args: [
-            //'headless',
+            'headless',
             'disable-gpu',
             '--window-size=1280,1024',
             'ignore-certificate-errors',
