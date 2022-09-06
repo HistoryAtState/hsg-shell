@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>carousel-16</id>
+   <title>New Publication: SALT I, 1969–1972</title>
+   <published>2011-07-25T22:18:58.587-04:00</published>
+   <updated>2011-07-25T22:18:58.587-04:00</updated>
+   <link href="/news/carousel-16" rel="self"/>
+   <link rel="about"
+         title="Visit Resource"
+         href="https://history.state.gov/historicaldocuments/frus1969-76v32"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <figure>
+            <img alt="The spine of SALT, 1969–1972"
+                 height="230"
+                 src="https://static.history.state.gov/carousel/frus1969-76v32.jpg"
+                 width="293"/>
+         </figure>
+         <p>This volume documents United States policy toward the Strategic Arms Limitation
+                    Talks from January 1969 until October 1972.</p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="carousel"/>
+</entry>

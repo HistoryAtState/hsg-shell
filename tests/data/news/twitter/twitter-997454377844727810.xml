@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>twitter-997454377844727810</id>
+   <title>Sometimes diplomacy is awkward, as…</title>
+   <published>2018-05-18T12:30:30Z</published>
+   <updated>2018-05-18T12:30:30Z</updated>
+   <link href="/news/twitter-997454377844727810" rel="self"/>
+   <link rel="DCTERMS.source"
+         title="View Twitter Post"
+         href="https://twitter.com/HistoryAtState/status/997454377844727810"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>Sometimes diplomacy is awkward, as when <a href="https://twitter.com/search?q=%23Spain&amp;src=hash">#Spain</a>’s
+                    Foreign Minister Areilza stated to Secretary Kissinger that the Danish Army
+                    rides in on bikes. <a href="https://buff.ly/2rJGzzj">buff.ly/2rJGzzj</a>
+            <a href="https://twitter.com/search?q=%23BikeToWork&amp;src=hash">#BikeToWork</a>
+            <a href="https://twitter.com/search?q=%23BTWD2018&amp;src=hash">#BTWD2018</a>
+            <a href="https://twitter.com/search?q=%23FRUS&amp;src=hash">#FRUS</a>
+            <a href="https://twitter.com/HistoryAtState/status/997454377844727810/photo/1">
+               <img src="https://pbs.twimg.com/media/DdereCPVQAE88Tj.jpg"/>
+            </a>
+         </p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="twitter"/>
+</entry>

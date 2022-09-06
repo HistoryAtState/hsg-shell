@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>twitter-998588428919984129</id>
+   <title>In #FRUS our recently digitized…</title>
+   <published>2018-05-21T15:36:48Z</published>
+   <updated>2018-05-21T15:36:48Z</updated>
+   <link href="/news/twitter-998588428919984129" rel="self"/>
+   <link rel="DCTERMS.source"
+         title="View Twitter Post"
+         href="https://twitter.com/HistoryAtState/status/998588428919984129"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>In <a href="https://twitter.com/search?q=%23FRUS&amp;src=hash">#FRUS</a> our
+                    recently digitized volumes from <a href="https://twitter.com/search?q=%23WWI&amp;src=hash">#WWI</a> contain
+                    numerous items of interest to <a href="https://twitter.com/RedCross">@RedCross</a> and <a href="https://twitter.com/ICRC">@ICRC</a> historians
+                    and enthusiasts <a href="https://twitter.com/search?q=%23twitterstorians&amp;src=hash">#twitterstorians</a>
+         </p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="twitter"/>
+</entry>

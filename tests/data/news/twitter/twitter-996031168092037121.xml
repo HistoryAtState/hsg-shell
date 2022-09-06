@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>twitter-996031168092037121</id>
+   <title>Between October 12 and 22,…</title>
+   <published>2018-05-14T14:15:10Z</published>
+   <updated>2018-05-14T14:15:10Z</updated>
+   <link href="/news/twitter-996031168092037121" rel="self"/>
+   <link rel="DCTERMS.source"
+         title="View Twitter Post"
+         href="https://twitter.com/HistoryAtState/status/996031168092037121"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>Between October 12 and 22, 2001, the <a href="https://twitter.com/StateDept">@StateDept</a>’s main mail processing center in Sterling, VA, was closed
+                    after an anthrax-contaminated letter was routed there after the September 11
+                    terrorist attacks. <a href="https://go.usa.gov/xQN6F">go.usa.gov/xQN6F</a>
+            <a href="https://twitter.com/search?q=%23twitterstorians&amp;src=hash">#twitterstorians</a>
+         </p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="twitter"/>
+</entry>

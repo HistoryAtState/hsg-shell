@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>carousel-20</id>
+   <title>New Publication: Arab-Israeli Crisis and War, 1973</title>
+   <published>2011-07-25T22:18:58.587-04:00</published>
+   <updated>2011-07-25T22:18:58.587-04:00</updated>
+   <link href="/news/carousel-20" rel="self"/>
+   <link rel="about"
+         title="Visit Resource"
+         href="https://history.state.gov/historicaldocuments/frus1969-76v25"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <figure>
+            <img alt=""
+                 height="230"
+                 src="https://static.history.state.gov/carousel/frus1969-76v25-sadat-war-room-ap.jpg"
+                 width="293"/>
+         </figure>
+         <p>This volume documents U.S. policymaking during the months surrounding the
+                    Arab-Israeli war of October 1973, a war which ignited an energy crisis and led
+                    to the threat of a direct superpower confrontation. (AP Photo)</p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="carousel"/>
+</entry>
