@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>carousel-18</id>
-   <title>Sesquicentennial of the Foreign Relations Series</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Sesquicentennial of the Foreign Relations Series</div>
+   </title>
    <published>2011-07-25T22:18:58.587-04:00</published>
    <updated>2011-07-25T22:18:58.587-04:00</updated>
    <link href="/news/carousel-18" rel="self"/>
@@ -15,17 +17,15 @@
    <summary/>
    <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
-         <figure>
-            <img alt="From the Foreign Relations archive"
-                 height="230"
-                 src="https://static.history.state.gov/carousel/frus-sesqui.jpg"
-                 width="293"/>
-         </figure>
          <p>The Office of the Historian commemorates the 150th anniversary of the <em>Foreign
                         Relations of the United States</em> series. Watch videos of talks, attend
                     upcoming events, and read about the history of the series and its role in
                     American politics.</p>
       </div>
    </content>
+   <link rel="enclosure"
+         type="img/jpeg"
+         title="From the Foreign Relations archive"
+         href="https://static.history.state.gov/carousel/frus-sesqui.jpg"/>
    <category scheme="http://history.state.gov/ns/site/hsg/news" term="carousel"/>
 </entry>

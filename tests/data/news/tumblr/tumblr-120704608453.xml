@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>tumblr-120704608453</id>
-   <title>Opening a Digital Window onto the Early Cold War—Part 2</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Opening a Digital Window onto the Early Cold War—Part 2</div>
+   </title>
    <published>2015-06-04T13:03:16-04:00</published>
    <updated>2015-06-04T13:03:16-04:00</updated>
    <link href="/news/tumblr-120704608453" rel="self"/>

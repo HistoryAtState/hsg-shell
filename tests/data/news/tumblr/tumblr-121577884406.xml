@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>tumblr-121577884406</id>
-   <title>Haiti 1949</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Haiti 1949</div>
+   </title>
    <published>2015-06-15T05:00:24-04:00</published>
    <updated>2015-06-15T05:00:24-04:00</updated>
    <link href="/news/tumblr-121577884406" rel="self"/>

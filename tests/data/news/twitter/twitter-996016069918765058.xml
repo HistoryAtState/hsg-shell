@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>twitter-996016069918765058</id>
-   <title>The @StateDept began its first…</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">The @StateDept began its first…</div>
+   </title>
    <published>2018-05-14T13:15:10Z</published>
    <updated>2018-05-14T13:15:10Z</updated>
    <link href="/news/twitter-996016069918765058" rel="self"/>

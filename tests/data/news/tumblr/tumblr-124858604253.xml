@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>tumblr-124858604253</id>
-   <title>todaysdocument:Do You Have Suggestions for NARA’s Digitization...</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">todaysdocument:Do You Have Suggestions for NARA’s Digitization...</div>
+   </title>
    <published>2015-07-23T16:04:29-04:00</published>
    <updated>2015-07-23T16:04:29-04:00</updated>
    <link href="/news/tumblr-124858604253" rel="self"/>

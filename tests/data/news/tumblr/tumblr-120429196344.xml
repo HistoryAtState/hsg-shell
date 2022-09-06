@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>tumblr-120429196344</id>
-   <title>Meet Me At the Fair: St. Louis 1904</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Meet Me At the Fair: St. Louis 1904</div>
+   </title>
    <published>2015-06-01T05:00:45-04:00</published>
    <updated>2015-06-01T05:00:45-04:00</updated>
    <link href="/news/tumblr-120429196344" rel="self"/>

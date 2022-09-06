@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>carousel-113</id>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Now Available: <em>Foreign Relations of the United States</em>, 1981–1988, Volume XI,
+            START I</div>
+   </title>
+   <published>2021-04-22T15:00:00.704-06:00</published>
+   <updated>2021-04-22T15:00:00.704-06:00</updated>
+   <link href="/news/carousel-113" rel="self"/>
+   <link rel="about"
+         title="Visit Resource"
+         href="https://history.state.gov/historicaldocuments/frus1981-88v11"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>This volume is the first of two volumes devoted to the START I agreement with the
+                    Soviet Union to reduce and limit strategic offensive arms. This volume documents
+                    the negotations and internal U.S. deliberations during the Reagan
+                    administration.</p>
+      </div>
+   </content>
+   <link rel="enclosure"
+         type="img/jpeg"
+         title="Book Cover of Foreign Relations of the United States, 1981–1988, Volume XI, START I"
+         href="https://static.history.state.gov/carousel/frus1981-88v11.jpg"/>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="carousel"/>
+</entry>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>tumblr-121177286643</id>
-   <title>A World’s Fair On the Brink of War: New York Exposition 1939</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">A World’s Fair On the Brink of War: New York Exposition 1939</div>
+   </title>
    <published>2015-06-10T05:00:30-04:00</published>
    <updated>2015-06-10T05:00:30-04:00</updated>
    <link href="/news/tumblr-121177286643" rel="self"/>

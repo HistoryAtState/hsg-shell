@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>tumblr-121047914363</id>
-   <title>The Jason and the World Expo: From Christmas Gifts to Art, 1915</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">The Jason and the World Expo: From Christmas Gifts to Art, 1915</div>
+   </title>
    <published>2015-06-08T16:44:19-04:00</published>
    <updated>2015-06-08T16:44:19-04:00</updated>
    <link href="/news/tumblr-121047914363" rel="self"/>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>tumblr-136892724523</id>
-   <title>Remembering Ambassador Stephen W. Bosworth</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Remembering Ambassador Stephen W. Bosworth</div>
+   </title>
    <published>2016-01-08T13:54:22-05:00</published>
    <updated>2016-01-08T13:54:22-05:00</updated>
    <link href="/news/tumblr-136892724523" rel="self"/>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>twitter-996375936852480000</id>
-   <title>Students! Apply now to intern…</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Students! Apply now to intern…</div>
+   </title>
    <published>2018-05-15T13:05:09Z</published>
    <updated>2018-05-15T13:05:09Z</updated>
    <link href="/news/twitter-996375936852480000" rel="self"/>

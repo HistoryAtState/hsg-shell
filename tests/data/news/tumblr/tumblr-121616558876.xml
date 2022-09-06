@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>tumblr-121616558876</id>
-   <title>From Soup to (Ice Cream) Nuts: Brussels Expo 1958</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">From Soup to (Ice Cream) Nuts: Brussels Expo 1958</div>
+   </title>
    <published>2015-06-15T17:00:57-04:00</published>
    <updated>2015-06-15T17:00:57-04:00</updated>
    <link href="/news/tumblr-121616558876" rel="self"/>
