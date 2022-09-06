@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>press-release-frus1977-80v17p3</id>
+   <title>Press Release</title>
+   <published>2017-10-31T09:00:00-05:00</published>
+   <updated>2017-10-31T09:00:00-05:00</updated>
+   <link href="/news/press-release-frus1977-80v17p3" rel="self"/>
+   <link rel="about"
+         title="Visit Resource"
+         href="https://history.state.gov/historicaldocuments/frus1977-80v17p3"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <h2>Press Release</h2>
+         <p>
+            <strong>Office of the Historian<br/>Bureau of Public Affairs<br/>United States
+                        Department of State<br/>October 31, 2017</strong>
+         </p>
+         <p>This volume is part of a <em>Foreign Relations</em> subseries that documents the
+                    foreign policy decisions of the administration of President Jimmy Carter. The
+                    volume documents the Carter administration’s efforts to promote peace and
+                    stability in the Maghreb through a variety of strategies that addressed the many
+                    challenges in the region: “normalizing” relations with Algeria and Libya;
+                    reassuring Morocco and Tunisia of the administration’s continued support and
+                    consultation on the Middle East peace initiative; and serving as an “honest
+                    broker” in the regional dispute over the Western Sahara.</p>
+         <p>This volume was compiled and edited by Myra F. Burton. The volume and this press
+                    release are available on the Office of the Historian website at <a href="https://history.state.gov/historicaldocuments/frus1977-80v17p3">https://history.state.gov/historicaldocuments/frus1977-80v17p3</a>. Copies
+                    of the volume will be available for purchase from the U.S. Government Publishing
+                    Office online at <a href="https://bookstore.gpo.gov">http://bookstore.gpo.gov</a> (GPO S/N 044-000-02690-2; ISBN
+                    978-0-16-094172-6), or by calling toll-free 1-866-512-1800 (D.C. area
+                    202-512-1800). For further information, contact <a href="https://history.state.gov/historicaldocuments/mailto:history@state.gov">history@state.gov</a>. </p>
+      </div>
+   </content>
+   <link rel="enclosure"
+         type="img/jpeg"
+         title="Cover image of frus1977-80v17p3"
+         href="https://static.history.state.gov/frus/frus1977-80v17p3/covers/frus1977-80v17p3.jpg"/>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="pr"/>
+</entry>

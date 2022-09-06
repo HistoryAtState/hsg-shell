@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>carousel-2</id>
+   <title>April 28, 1952: Ending of WWII</title>
+   <published>2010-04-21T16:05:42.247-05:00</published>
+   <updated>2010-04-21T16:05:42.247-05:00</updated>
+   <link href="/news/carousel-2" rel="self"/>
+   <link rel="about"
+         title="Visit Resource"
+         href="https://history.state.gov/historicaldocuments/themes/japan"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <figure>
+            <img alt="DipNote"
+                 height="230"
+                 src="https://static.history.state.gov/carousel/japanwwii.jpg"
+                 width="293"/>
+         </figure>
+         <p>When the U.S. Embassy in Japan reopened on April 28, 1952, after a decade marked
+                    by bitter war followed by the U.S.-led reconstruction of Japan, the two nations
+                    were once again on equal diplomatic footing.</p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="carousel"/>
+</entry>

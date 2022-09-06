@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>twitter-998549764902879232</id>
+   <title>Happy 137th to @RedCross! Pictured…</title>
+   <published>2018-05-21T13:03:10Z</published>
+   <updated>2018-05-21T13:03:10Z</updated>
+   <link href="/news/twitter-998549764902879232" rel="self"/>
+   <link rel="DCTERMS.source"
+         title="View Twitter Post"
+         href="https://twitter.com/HistoryAtState/status/998549764902879232"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>Happy 137th to <a href="https://twitter.com/RedCross">@RedCross</a>! Pictured is
+                    founder Clara Barton. <a href="https://twitter.com/search?q=%23RedCross137&amp;src=hash">#RedCross137</a>
+            <a href="https://twitter.com/search?q=%23twitterstorians&amp;src=hash">#twitterstorians</a>
+            <a href="https://twitter.com/HistoryAtState/status/998549764902879232/photo/1">
+               <img src="https://pbs.twimg.com/media/DduPl7mV0AAPeDH.jpg"/>
+            </a>
+         </p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="twitter"/>
+</entry>
