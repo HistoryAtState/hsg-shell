@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>tumblr-121854126473</id>
-   <title>todaysdocument: The Battle of Waterloo, as Reported by John...</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">todaysdocument: The Battle of Waterloo, as Reported by John...</div>
+   </title>
    <published>2015-06-18T14:39:40-04:00</published>
    <updated>2015-06-18T14:39:40-04:00</updated>
    <link href="/news/tumblr-121854126473" rel="self"/>

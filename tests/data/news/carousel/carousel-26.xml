@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>carousel-26</id>
-   <title>
-      <em>Foreign Relations</em> Ebook Initiative</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <em>Foreign Relations</em> Ebook Initiative</div>
+   </title>
    <published>2011-07-25T22:18:58.587-04:00</published>
    <updated>2011-07-25T22:18:58.587-04:00</updated>
    <link href="/news/carousel-26" rel="self"/>
@@ -16,17 +18,15 @@
    <summary/>
    <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
-         <figure>
-            <img alt=""
-                 height="230"
-                 src="https://static.history.state.gov/carousel/ebooks.jpg"
-                 width="293"/>
-         </figure>
          <p>The Office of the Historian is pleased to announce the pilot phase of its
                         <em>Foreign Relations of the United States</em> (<em>FRUS</em>) ebook
                     initiative. Download <em>FRUS</em> ebooks, help “beta test” the new ebooks, and
                     send us your feedback. Learn more <a href="/historicaldocuments/ebooks">here</a>.</p>
       </div>
    </content>
+   <link rel="enclosure"
+         type="img/jpeg"
+         title=""
+         href="https://static.history.state.gov/carousel/ebooks.jpg"/>
    <category scheme="http://history.state.gov/ns/site/hsg/news" term="carousel"/>
 </entry>

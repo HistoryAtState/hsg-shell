@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>press-release-frus1977-80v02</id>
-   <title>Press Release</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Press Release</div>
+   </title>
    <published>2013-08-22T09:00:00-05:00</published>
    <updated>2013-08-22T09:00:00-05:00</updated>
    <link href="/news/press-release-frus1977-80v02" rel="self"/>

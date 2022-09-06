@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>twitter-997469424562061313</id>
-   <title>The #Chinese produced 1.7 million…</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">The #Chinese produced 1.7 million…</div>
+   </title>
    <published>2018-05-18T13:30:17Z</published>
    <updated>2018-05-18T13:30:17Z</updated>
    <link href="/news/twitter-997469424562061313" rel="self"/>

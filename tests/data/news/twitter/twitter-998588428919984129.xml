@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>twitter-998588428919984129</id>
-   <title>In #FRUS our recently digitized…</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">In #FRUS our recently digitized…</div>
+   </title>
    <published>2018-05-21T15:36:48Z</published>
    <updated>2018-05-21T15:36:48Z</updated>
    <link href="/news/twitter-998588428919984129" rel="self"/>

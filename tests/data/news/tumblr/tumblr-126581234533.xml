@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>tumblr-126581234533</id>
-   <title>“This Hateful Thing”—The Berlin Wall Crisis, August 1961</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">“This Hateful Thing”—The Berlin Wall Crisis, August 1961</div>
+   </title>
    <published>2015-08-13T06:56:51-04:00</published>
    <updated>2015-08-13T06:56:51-04:00</updated>
    <link href="/news/tumblr-126581234533" rel="self"/>

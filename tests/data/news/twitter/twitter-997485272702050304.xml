@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>twitter-997485272702050304</id>
-   <title>.@GeorgeHWBush41 and #BarbaraBush #BikeToWork in…</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">.@GeorgeHWBush41 and #BarbaraBush #BikeToWork in…</div>
+   </title>
    <published>2018-05-18T14:33:16Z</published>
    <updated>2018-05-18T14:33:16Z</updated>
    <link href="/news/twitter-997485272702050304" rel="self"/>

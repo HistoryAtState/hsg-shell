@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>twitter-997454377844727810</id>
-   <title>Sometimes diplomacy is awkward, as…</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Sometimes diplomacy is awkward, as…</div>
+   </title>
    <published>2018-05-18T12:30:30Z</published>
    <updated>2018-05-18T12:30:30Z</updated>
    <link href="/news/twitter-997454377844727810" rel="self"/>

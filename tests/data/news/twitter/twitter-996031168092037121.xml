@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entry xmlns="http://www.w3.org/2005/Atom">
    <id>twitter-996031168092037121</id>
-   <title>Between October 12 and 22,…</title>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Between October 12 and 22,…</div>
+   </title>
    <published>2018-05-14T14:15:10Z</published>
    <updated>2018-05-14T14:15:10Z</updated>
    <link href="/news/twitter-996031168092037121" rel="self"/>
