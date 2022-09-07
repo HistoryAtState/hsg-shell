@@ -63,6 +63,10 @@
   h2 {
     margin-top: 0;
   }
+
+  .hsg-sidebar-title {
+    margin: 1rem 0;
+  }
 }
 
 // Keep margin for second headline on small screens
@@ -79,10 +83,6 @@ aside {
     }
   .hsg-section:not(.hsg-hidden) {
       padding: 0 0 1.5rem 0;
-  }
-
-  .hsg-sidebar-title {
-    margin: 1rem 0;
   }
 }
 
