@@ -8,26 +8,7 @@
             <span data-template="frus-history:article-title"/> -
             Research - History of the Foreign Relations Series - Historical Documents</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/historicaldocuments">Historical Documents</a>
-                  </li>
-                  <li>
-                     <a href="$app/historicaldocuments/frus-history">History of the <em>Foreign
-                                Relations</em> Series</a>
-                  </li>
-                  <li>
-                     <a href="$app/historicaldocuments/frus-history/research">Research</a>
-                  </li>
-                  <li>
-                     <a data-template="frus-history:article-breadcrumb"/>
-                  </li>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div class="row hsg-main">
             <div class="hsg-width-two-thirds">
@@ -43,7 +24,7 @@
                   <div data-template="frus-history:article"/>
                </div>
             </div>
-            <aside class="hsg-width-one-third">
+            <aside data-template="pages:asides">
                <div id="sections" class="hsg-panel" data-template="app:fix-links">
                   <div class="hsg-panel-heading">
                      <h2 class="hsg-sidebar-title">

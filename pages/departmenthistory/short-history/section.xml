@@ -8,21 +8,7 @@
             <span data-template="pages:deep-section-page-title"/>
             - Department History</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory">Department History</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory/short-history">Short History</a>
-                  </li>
-                  <li data-template="pages:deep-section-breadcrumbs"
-                      data-template-truncate="true"/>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div class="row">
             <div class="hsg-navigation-wrapper">
@@ -54,7 +40,7 @@
                </div>
             </div>
             <!-- TOC Sidebar -->
-            <aside class="hsg-width-sidebar" data-template="app:fix-links">
+            <aside data-template="pages:asides">
                <div data-template="toc:table-of-contents-sidebar"
                     data-template-heading="false"
                     data-template-highlight="true"/>

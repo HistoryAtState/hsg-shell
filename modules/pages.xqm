@@ -12,6 +12,9 @@ declare namespace expath="http://expath.org/ns/pkg";
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
+import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "sidebar.xqm";
+import module namespace link="http://history.state.gov/ns/site/hsg/link" at "link.xqm";
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
@@ -54,6 +57,8 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
     let $ogk as xs:string* := if ($open-graph-keys) then tokenize($open-graph-keys, '\s') else $config:OPEN_GRAPH_KEYS
     let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
     let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
+
+
 
     let $last-modified := 
         if (exists($publication-id) and exists($document-id)) then
@@ -106,8 +111,21 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                     else (),
                 "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
         		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
-        		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"})
+        		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"}),
+        		"url":
+        		  try { request:get-url() } 
+        		  catch err:XPDY0002 { 'test-url' },  (: some contexts do not have a request object, e.g. xqsuite testing :)
+        		"local-uri":
+        		  try { substring-after(request:get-uri(), $app:APP_ROOT)} 
+        		  catch err:XPDY0002 { 'test-path' }  (: some contexts do not have a request object, e.g. xqsuite testing :)
             }
+            let $citation-meta :=
+                let $meta-fun := $config:PUBLICATIONS?($publication-id)?citation-meta
+                let $new.model := map:merge(($model, $content), map{'duplicates': 'use-last'})
+                return if (exists($meta-fun)) then
+                    $meta-fun($node, $new.model)
+                else
+                    config:default-citation-meta($node, $new.model)
         
             return
                 (
@@ -118,7 +136,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                         )
                     else
                         (),
-                    templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
+                    templates:process($node/*, map:merge(($model, $content, map{'citation-meta': $citation-meta}),  map{"duplicates": "use-last"}))
                 )
 };
 
@@ -361,7 +379,7 @@ function pages:styles($node as node(), $model as map(*), $odd as xs:string?) {
     attribute href {
         let $name := replace($odd, "^([^/\.]+).*$", "$1")
         return
-            $pages:app-root || "/resources/odd/compiled/" || $name || ".css"
+            $pages:app-root || "/transform/" || $name || ".css"
     }
 };
 
@@ -501,6 +519,46 @@ declare function pages:generate-short-title($node, $model) as xs:string? {
     )[. ne ''][1]
 };
 
+(: Generate page breadcrumbs :)
+declare function pages:breadcrumb($node, $model){
+  pages:generate-breadcrumbs(substring-after(request:get-uri(), $app:APP_ROOT))
+};
+
+declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
+  <nav class="hsg-breadcrumb hsg-breadcrumb--wrap" aria-label="breadcrumbs">
+    <ol
+        vocab="http://schema.org/"
+        typeof="BreadcrumbList"
+        class="hsg-breadcrumb__list"
+    >
+      {
+        site:call-with-parameters-for-uri-steps($uri, $site:config, pages:generate-breadcrumb-item#1)
+      }
+    </ol>
+  </nav>
+};
+
+declare function pages:generate-breadcrumb-item($uri-step-state as map(*)) as element(li)*{ 
+    (: The URI step state is generated from the site config file for each URI in the breadcrumb list :)
+    <li
+        class="hsg-breadcrumb__list-item"
+        property="itemListElement"
+        typeof="ListItem"
+    >
+    {
+        (: We want to pass through appropriate attributes to the link generator :)
+        let $link-attributes := function() as attribute()* {
+            attribute class { "hsg-breadcrumb__link" },
+            attribute property { "item" },
+            attribute typeof { "WebPage" }
+        }
+        let $state := map:merge(($uri-step-state, map{'link-attributes': $link-attributes}), map{'duplicates': 'use-last'})
+        return link:generate-from-state($state)
+    }
+    </li>
+};
+
+
 declare function pages:app-root($node as node(), $model as map(*)) {
     let $root := try {
         if (request:get-header("nginx-request-uri")) then (
@@ -513,13 +571,13 @@ declare function pages:app-root($node as node(), $model as map(*)) {
     element { node-name($node) } {
         $node/@*,
         attribute data-app { $root },
-        let $content := templates:process($node/*, $model)
+        let $content as node()* := templates:process($node/*, $model)
         let $title := string-join((pages:generate-short-title($node, $model)[. ne 'Office of the Historian'], "Office of the Historian"), " - ")
 
         let $log := console:log("pages:app-root -> title: " || $title)
         return (
             <head>
-                { $content/self::head/* }
+                {$content[self::head]/*}
                 <title>{$title}</title>
             </head>,
             $content/self::body
@@ -652,4 +710,31 @@ declare function pages:section-category($node, $model) {
     root($model?data)//tei:title[@type = 'short']/string()
 };
 
+declare function pages:asides($node, $model){
+    (:
+     : function to generate asides (e.g. sidebars) on pages; eventually all sidebar content will be generated here,
+     : but for now we will recurse over existing content.
+     :)
+    let $static-asides :=
+    <aside class="hsg-aside--static">
+        {
+            let $nodes := $node/node()[not(@data-template eq 'pages:section-nav')]
+            let $processed := templates:process($nodes, $model)
+            return app:fix-links($processed)
+        }
+    </aside>
+    return
+        <div class="hsg-width-sidebar">
+            {
+                side:info($node, $model),
+				$static-asides,
+                side:section-nav($node, $model)
+            }
+        </div>
+};
+
 declare function pages:suppress($node as node()?, $model as map(*)?) {};
+
+declare function pages:unless-asides($node, $model){
+    if ($node/ancestor::body/div[tokenize(@class, '\s') = 'hsg-main']//aside[@data-template eq 'pages:asides']) then () else $node
+};

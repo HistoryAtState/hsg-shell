@@ -4,15 +4,8 @@
      data-template-at="content">
    <div id="static-title" class="hidden">Search</div>
    <div class="row">
-      <div class="hsg-breadcrumb-wrapper">
-         <ol class="breadcrumb" data-template="app:fix-links">
-            <li>
-               <a href="$app">Home</a>
-            </li>
-            <li>
-               <a href="$app/search">Search</a>
-            </li>
-         </ol>
+      <div data-template="pages:breadcrumb">
+         <p id="breadcrumb-title">Search</p>
       </div>
    </div>
    <div data-template="search:load-results">

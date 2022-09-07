@@ -8,19 +8,7 @@
               class="hidden"
               data-template="pages:conference-title"/>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/conferences">Conferences</a>
-                  </li>
-                  <li>
-                     <a href="." class="section" data-template="pages:document-link"/>
-                  </li>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div class="row">
             <div class="hsg-navigation-wrapper">
@@ -47,8 +35,8 @@
                   </div>
                </div>
             </div>
-            <aside class="hsg-width-sidebar">
-               <div id="sections" class="hsg-panel" data-template="app:fix-links">
+            <aside data-template="pages:asides">
+               <div class="hsg-panel" data-template="app:fix-links">
                   <div class="hsg-panel-heading">
                      <h2 class="hsg-sidebar-title">Conferences</h2>
                   </div>

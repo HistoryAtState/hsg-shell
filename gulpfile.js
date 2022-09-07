@@ -3,13 +3,14 @@
 const gulp = require('gulp'),
     fs = require('fs'),
     exist = require('@existdb/gulp-exist'),
-    sass = require('gulp-sass'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     del = require('del'),
     preprocess = require('gulp-preprocess'),
     autoprefixer = require('gulp-autoprefixer'),
     concat = require('gulp-concat');
+
+const sass = require('gulp-sass')(require('sass'));
 
 const AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -98,7 +99,9 @@ gulp.task('scripts:build', function () {
     return gulp.src([
             'resources/scripts/footnote.js',
             'resources/scripts/app.js',
-            'resources/scripts/metagrid.js'
+            'resources/scripts/metagrid.js',
+            'resources/scripts/cite.js',
+            'resources/scripts/dygraph-combined.js',
         ])
         .pipe(uglify())
         .pipe(concat('app.min.js'))
@@ -109,7 +112,8 @@ gulp.task('scripts:concat', gulp.series('scripts:build', function () {
     return gulp.src([
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-            'resources/scripts/app.min.js'
+            'resources/scripts/citeproc.min.js',
+            'resources/scripts/app.min.js',
         ])
       .pipe(concat('app.all.js'))
       .pipe(gulp.dest('resources/scripts'));
@@ -143,7 +147,7 @@ gulp.task('styles:build', gulp.series(function () {
 gulp.task('styles:concat', gulp.series('styles:build', function () {
     return gulp.src([
             'resources/css/main.css',
-            'resources/odd/compiled/frus.css'
+            'transform/frus.css'
         ])
       .pipe(concat('all.css'))
       .pipe(gulp.dest('resources/css'));
@@ -243,7 +247,8 @@ gulp.task('deploy', gulp.series('build', function () {
             modulesPath,
             imagePath,
             otherPath,
-            fontPath
+            fontPath,
+            'transform/*'
         ], {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))

@@ -6,18 +6,8 @@
       <div>
          <div id="static-title" class="hidden">Administrative Timeline - Department History</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory">Department History</a>
-                  </li>
-                  <li>
-                     <a href="$app/departmenthistory/timeline">Administrative Timeline</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">Administrative Timeline</p>
             </div>
          </div>
          <div class="row">
@@ -45,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <aside class="hsg-width-one-third">
+            <aside data-template="pages:asides">
                 <div class="hsg-panel" data-template="app:fix-links">
                     <div class="hsg-panel-heading">
                         <h2 class="hsg-sidebar-title">Periods</h2>

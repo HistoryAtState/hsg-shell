@@ -5,18 +5,7 @@
         data-template-at="content">
       <div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/milestones">Milestones</a>
-                  </li>
-                  <li data-template="milestones:period-link"/>
-                  <li class="section" data-template="milestones:section-link"/>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div class="row">
             <div class="hsg-navigation-wrapper">
@@ -48,7 +37,7 @@
                </div>
             </div>
             <!-- TOC Sidebar -->
-            <aside class="hsg-width-sidebar" data-template="app:fix-links">
+            <aside data-template="pages:asides">
                <div data-template="toc:table-of-contents-sidebar"
                     data-template-heading="false"
                     data-template-highlight="true"/>

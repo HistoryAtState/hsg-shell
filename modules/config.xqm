@@ -8,7 +8,7 @@ module namespace config="http://history.state.gov/ns/site/hsg/config";
 
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 
-import module namespace pm-frus='http://www.tei-c.org/tei-simple/models/frus.odd/web/module' at "../resources/odd/compiled/frus-web-module.xql";
+import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../transform/frus-web-module.xql";
 
 declare namespace templates="http://exist-db.org/xquery/templates";
 
@@ -42,13 +42,19 @@ declare variable $config:repo-descriptor := doc(concat($config:app-root, "/repo.
 
 declare variable $config:expath-descriptor := doc(concat($config:app-root, "/expath-pkg.xml"))/expath:package;
 
+declare variable $config:default-odd := "frus.odd";
+
+declare variable $config:odd := $config:default-odd;
+
 declare variable $config:odd-root := $config:app-root || "/resources/odd";
 
 declare variable $config:odd-source := $config:odd-root || "/source";
 
-declare variable $config:odd-compiled := $config:odd-root || "/compiled";
+declare variable $config:odd-compiled := "/transform";
 
-declare variable $config:odd := "frus.odd";
+declare variable $config:output := "transform";
+
+declare variable $config:output-root := $config:app-root || "/" || $config:output;
 
 (: Default transformation function: calls tei simple pm using frus.odd :)
 declare variable $config:odd-transform-default := function($xml, $parameters) {
@@ -56,6 +62,14 @@ declare variable $config:odd-transform-default := function($xml, $parameters) {
 };
 
 declare variable $config:module-config := doc($config:odd-source || "/configuration.xml")/*;
+
+(:
+ : The default to use for determining the amount of content to be shown
+ : on a single page. Possible values: 'div' for showing entire divs (see
+ : the parameters below for further configuration), or 'page' to browse
+ : a document by actual pages determined by TEI pb elements.
+ :)
+declare variable $config:default-view := "div";
 
 declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes";
 
@@ -180,7 +194,31 @@ declare variable $config:PUBLICATIONS :=
                 (: Called to transform content based on the odd using tei simple pm :)
                 function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Historical Documents",
-            "base-path": function($document-id, $section-id) { "frus/" || $document-id }
+            "base-path": function($document-id, $section-id) { "frus/" || $document-id },
+            "open-graph": map{
+                    "og:type": function($node as node()?, $model as map(*)?) {'document'}
+                },
+            "citation-meta": function($node as node()?, $model as map(*)?) as map(*) {
+                    config:tei-citation-meta($node, $model)
+                },
+            "breadcrumb-title": 
+              function($parameters as map(*)) as xs:string? {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }        
+        },
+        "frus-administration": map {
+          "select-section": function($administration-id) {
+              doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $administration-id]
+            },
+          "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+              let $admin := $config:PUBLICATIONS?frus-administration?select-section($parameters?administration-id)
+              return $admin/label/string()
+            }
         },
         "buildings": map {
             "collection": $config:BUILDINGS_COL,
@@ -194,7 +232,10 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Buildings - Department History",
-            "base-path": function($document-id, $section-id) { "buildings" }
+            "base-path": function($document-id, $section-id) { "buildings" },
+            "breadcrumb-title": function($parameters as map(*)) {
+                config:tei-full-breadcrumb-title-from-section('buildings', 'buildings', $parameters?section-id, false())
+              }
         },
         "historicaldocuments": map {
             "title": "Historical Documents"
@@ -214,7 +255,15 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())), map{"duplicates": "use-last"})) },
             "title": "Conferences",
-            "base-path": function($document-id, $section-id) { "conferences" }
+            "base-path": function($document-id, $section-id) { "conferences" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }
         },
         "status-of-the-series": map {
             "title": "Foreign Relations of the United States: Status of the Series - Historical Documents"
@@ -240,7 +289,15 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Countries",
-            "base-path": function($document-id, $section-id) { "countries" }
+            "base-path": function($document-id, $section-id) { "countries" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }
         },
         "countries-issues": map {
             "collection": $config:COUNTRIES_ISSUES_COL,
@@ -254,7 +311,15 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Issues Relevant to U.S. Foreign Policy",
-            "base-path": function($document-id, $section-id) { "countries" }
+            "base-path": function($document-id, $section-id) { "countries" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }
         },
         "archives": map {
             "collection": $config:ARCHIVES_ARTICLES_COL,
@@ -267,7 +332,15 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/countries/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
-            "title": "World Wide Diplomatic Archives Indes"
+            "title": "World Wide Diplomatic Archives Index",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }
         },
         "articles": map {
             "collection": $config:FRUS_HISTORY_ARTICLES_COL,
@@ -280,7 +353,11 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/frus-history/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
-            "base-path": function($document-id, $section-id) { "frus150" }
+            "base-path": function($document-id, $section-id) { "frus150" },
+            "breadcrumb-title": 
+              function($parameters as map(*)) as xs:string? {
+                config:tei-short-breadcrumb-title($parameters?publication-id, $parameters?article-id)
+              }
         },
         "about": map {
             "title": "About Us"
@@ -305,7 +382,20 @@ declare variable $config:PUBLICATIONS :=
                 (: Called to transform content based on the odd using tei simple pm :)
                 function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "People - Department History",
-            "base-path": function($document-id, $section-id) { "secretaries" }
+            "base-path": function($document-id, $section-id) { "secretaries" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                let $role as element(org-mission)? := collection('/db/apps/pocom/missions-orgs')/org-mission[id eq $parameters?role-or-country-id]
+                let $country as element(country)? := collection('/db/apps/gsh/data/countries-old')/country[id eq $parameters?role-or-country-id]
+                let $person as element(person)? := collection('/db/apps/pocom/people')/person[id eq $parameters?person-id]
+                return
+                  if (exists($role)) then
+                    $role/names/plural/string()
+                  else if (exists($country)) then
+                    $country/label/string()
+                  else if (exists($person)) then
+                    $person/persName/string-join((forename, surname, genName), ' ')
+                  else ()
+              }
         },
         "secretaries": map {
             "title": "Biographies of the Secretaries of State - Department History"
@@ -314,28 +404,56 @@ declare variable $config:PUBLICATIONS :=
             "title": "Principal Officers and Chiefs of Mission - Department History"
         },
         "people-by-alpha": map {
-            "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History"
+            "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History",
+            "breadcrumb-title": 
+              function($parameters as map(*)) as xs:string? {
+                  "Starting with " || upper-case($parameters?letter)
+                }
         },
         "people-by-year": map {
-            "title": "Principal Officers and Chiefs of Mission Chronological Listing - Department History"
+            "title": "Principal Officers and Chiefs of Mission Chronological Listing - Department History",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                $parameters?year
+              }
         },
         "people-by-role": map {
-            "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History"
+            "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                collection('/db/apps/pocom/positions-principals')/principal-position[id eq $parameters?role-id]/names/plural/string()
+              }
         },
         "tags": map {
-            "title": "Tags"
+            "title": "Tags",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                collection('/db/apps/tags/taxonomy')//*[id eq $parameters?tag-id]/label/string()
+              }
         },
         "travels": map {
             "title": "Presidents and Secretaries of State Foreign Travels - Department History"
         },
         "travels-president": map {
-            "title": "Travels of the President - Department History"
+            "title": "Travels of the President - Department History",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string?{
+                config:visits-breadcrumb-title($parameters?person-or-country-id, $config:TRAVELS_COL||"/president-travels")
+              }
         },
         "travels-secretary": map {
-            "title": "Travels of the Secretary of State - Department History"
+            "title": "Travels of the Secretary of State - Department History",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string?{
+                config:visits-breadcrumb-title($parameters?person-or-country-id, $config:TRAVELS_COL||"/secretary-travels")
+              }
         },
         "visits": map {
-            "title": "Visits of Foreign Leaders and Heads of State - Department History"
+            "title": "Visits of Foreign Leaders and Heads of State - Department History",
+            "breadcrumb-title": 
+              function($parameters as map(*)) as xs:string? {
+                let $key := $parameters?country-or-year
+                let $country as element()? := collection('/db/apps/gsh/data/countries-old')//country[id eq $key]
+                return if (exists($country)) then
+                  $country/label/string()
+                else (: $key is a year :)
+                  $key
+              }
         },
         "wwi": map {
             "title": "World War I - Department History"
@@ -352,7 +470,12 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Milestones in the History of U.S. Foreign Relations",
-            "base-path": function($document-id, $section-id) { "milestones" }
+            "base-path": function($document-id, $section-id) { "milestones" },
+            "breadcrumb-title": function($parameters as map(*)) {
+                if (exists($parameters?section-id)) then
+                  $config:PUBLICATIONS?($parameters?publication-id)?select-section($parameters?document-id, $parameters?section-id)/tei:head[1]/string()
+                else $parameters?document-id
+              }
         },
         "short-history": map {
             "collection": $config:SHORT_HISTORY_COL,
@@ -366,7 +489,15 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Short History - Department History",
-            "base-path": function($document-id, $section-id) { "short-history" }
+            "base-path": function($document-id, $section-id) { "short-history" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }
         },
         "timeline": map {
             "collection": $config:ADMINISTRATIVE_TIMELINE_COL,
@@ -381,7 +512,15 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Administrative Timeline - Department History",
-            "base-path": function($document-id, $section-id) { "timeline" }
+            "base-path": function($document-id, $section-id) { "timeline" },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }
         },
         "faq": map {
             "collection": $config:FAQ_COL,
@@ -394,7 +533,15 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
-            "title": "FAQ - About Us"
+            "title": "FAQ - About Us",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }
         },
         "hac": map {
             "collection": $config:HAC_COL,
@@ -407,7 +554,15 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
-            "title": "Historical Advisory Committee - About Us"
+            "title": "Historical Advisory Committee - About Us",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }
         },
         "education": map {
             "collection": $config:EDUCATION_COL,
@@ -420,7 +575,15 @@ declare variable $config:PUBLICATIONS :=
             "html-href": function($document-id, $section-id) { "$app/education/modules/" || string-join(($document-id, $section-id), '#') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
-            "title": "Education Resources"
+            "title": "Education Resources",
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }
         },
         "education-modules": map {
             "title": "Curriculum Modules - Education Resources"
@@ -473,7 +636,27 @@ declare variable $config:PUBLICATIONS :=
                 pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"}))
             },
             "title": "History of the Foreign Relations Series",
-            "base-path": function($document-id, $section-id) { "frus-history" }
+            "base-path": function($document-id, $section-id) { "frus-history" },
+            "open-graph": map{
+                    "og:type": function($node as node()?, $model as map(*)?) {'document'}
+                },
+            "citation-meta": function($node as node()?, $model as map(*)?) as map(*)* {
+                    config:tei-citation-meta($node, $model)
+                },
+            "breadcrumb-title": function($parameters as map(*)) {
+                config:tei-full-breadcrumb-title(
+                  $parameters?publication-id,
+                  $parameters?document-id,
+                  $parameters?section-id,
+                  $parameters?truncate
+                )
+              }
+        },
+        "frus-history-documents": map {
+          "select-document": function($document-id) { doc($config:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml") },
+          "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+              config:tei-short-breadcrumb-title($parameters?publication-id, $parameters?document-id)
+            }
         },
         "vietnam-guide": map {
             "collection": $config:VIETNAM_GUIDE_COL,
@@ -498,6 +681,16 @@ declare variable $config:PUBLICATIONS :=
             "select-section": function($document-id, $section-id) { doc($config:VIEWS_FROM_EMBASSY_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/wwi" },
             "title": "World War I and the Department - Department History"
+        },
+        "serial-set": map{
+          "breadcrumb-title": function($parameters as map(*)) as xs:string* {
+            let $subject as xs:string? := $parameters?subject
+            let $region as xs:string? := $parameters?region
+            return
+              if (exists($subject)) then $subject
+              else if (exists($region)) then $region
+              else ()
+          }
         }
     };
 
@@ -523,7 +716,7 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:ARCHIVES_ARTICLES_COL: "archives"
     };
 
-declare variable $config:OPEN_GRAPH_KEYS := ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:image", "og:url");
+declare variable $config:OPEN_GRAPH_KEYS := ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:image", "og:url", "citation");
     
 declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
     "twitter:card"  : function($node, $model) {
@@ -540,14 +733,19 @@ declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
             for $img in $model?data//tei:graphic
             return
                 <meta property="og:image" content="https://static.history.state.gov/{$model?base-path}/{$img/@url}"/>,
-            <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>,
-            <meta property="og:image:width" content="400"/>,
-            <meta property="og:image:height" content="400"/>,
-            <meta property="og:image:alt" content="Department of State heraldic shield"/>
+                <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>,
+                <meta property="og:image:width" content="400"/>,
+                <meta property="og:image:height" content="400"/>,
+                <meta property="og:image:alt" content="Department of State heraldic shield"/>
            
         },
     "og:type"       : function($node, $model) {
-            <meta property="og:type" content="website"/>
+            <meta property="og:type" content="{
+                let $publication-id := $model?publication-id
+                let $pub.type := $config:PUBLICATIONS?($publication-id)?open-graph?("og:type")
+                return
+                    ($pub.type!.($node, $model), 'website')[1]
+            }"/>
         },
     "og:title"      : function($node, $model) {
             <meta property="og:title" content="{pages:generate-short-title($node, $model)}"/>
@@ -557,6 +755,18 @@ declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
         },
     "og:url"        : function($node, $model) {
             <meta property="og:url" content="{$model?url}"/>
+        },
+    "citation"      : function ($node, $model) {
+            let $cls as array(*) :=
+                let $citation-meta as function(*)? := $config:PUBLICATIONS?($model?publication-id)?citation-meta
+                return if (exists($model?citation-meta)) then 
+                    array { $model?citation-meta }
+                else if (exists($citation-meta)) then
+                    array { $citation-meta($node, $model) }
+                else 
+                    array { config:default-citation-meta($node, $model) }
+            let $metas as element(meta)* := config:cls-to-html($cls)
+            return $metas
         }
     };
 
@@ -615,9 +825,9 @@ declare function config:app-meta($node as node(), $model as map(*)) as element()
  : See https://github.com/HistoryAtState/hsg-project/wiki/social-media-cards.
  :)
 declare function config:open-graph($node as node()?, $model as map(*)?) as element()* {
-  for $key in $model?open-graph-keys 
-  for $fn in $model?open-graph($key)
-  return $fn($node, $model)
+    for $key in $model?open-graph-keys 
+    for $fn in $model?open-graph($key)
+    return $fn($node, $model)
 };
 
 (:~
@@ -646,4 +856,335 @@ declare function config:app-info($node as node(), $model as map(*)) {
                 <td>{ request:get-attribute("$exist:controller") }</td>
             </tr>
         </table>
+};
+
+(:
+ : Function for generating short titles from TEI content
+ :)
+declare function config:tei-short-breadcrumb-title($publication-id as xs:string?, $document-id as xs:string?) as xs:string? {
+  let $article := $config:PUBLICATIONS?($publication-id)?select-document($document-id)
+  return $article//tei:title[@type='short']/string()
+};
+
+(:
+ : Function for generating full titles from TEI content
+ :)
+declare function config:tei-full-breadcrumb-title($publication-id as xs:string, $document-id as xs:string?, $section-id as xs:string?, $truncate as xs:boolean?) as xs:string? {
+  if (exists($document-id)) then 
+    if (exists($section-id)) then 
+      (: Return the breadcrumb title for the section within the frus volume :)
+      config:tei-full-breadcrumb-title-from-section($publication-id, $document-id, $section-id, $truncate)
+    else (: not exists($section-id) :) config:tei-full-breadcrumb-title-from-document($publication-id, $document-id)
+  else (: not exists($document-id) :) ()
+};
+
+declare function config:tei-full-breadcrumb-title-from-document($publication-id as xs:string, $document-id as xs:string) as xs:string? {
+  (: Return the breadcrumb title for the frus volume :)
+  let $doc := $config:PUBLICATIONS?($publication-id)?select-document($document-id)
+  return ($doc//tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'complete'])[1]/string()
+};
+
+declare function config:tei-full-breadcrumb-title-from-section($publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?, $truncate as xs:boolean?) {
+let $div := $config:PUBLICATIONS?($publication-id)?select-section($document-id, $section-id)
+return 
+  if ($div/@type eq 'document') then
+    concat('Document ', $div/@n/string()) 
+  else (:$div/@type ne 'document':) (
+    if ($div instance of element(tei:pb)) then 
+      concat(
+        (
+          if ($div/@type eq "facsimile") then 
+            let $next-sibling := $div/following-sibling::element()[1]/self::tei:div/@n
+            let $ancestor-div := $div/ancestor::tei:div[1]/@n
+            let $parent-doc as attribute()? := ($next-sibling, $ancestor-div)[1]
+            return "Document "[exists($parent-doc)] || ($parent-doc) || " Facsimile "
+          else ()
+        ), 
+        'Page ', 
+        $div/@n/string()
+      )
+    else (:$div not instance of element(tei:pb):) (
+      if ($truncate) then
+       let $words := tokenize($div/tei:head[1]/string-join((node() except tei:note) ! string()), '\s+')
+       let $max-word-count := 8
+       return
+         if (count($words) gt $max-word-count) then
+           concat(string-join(subsequence($words, 1, $max-word-count), ' '), '...')
+         else
+           $div/tei:head[1]/string-join((node() except tei:note) ! string())
+      else
+       $div/tei:head[1]/string-join((node() except tei:note) ! normalize-space(.), ' ') 
+    )
+  )
+};
+
+declare function config:visits-breadcrumb-title($id as xs:string, $collection as xs:string) as xs:string? {
+  (
+    (collection($collection)//trip[@who eq $id])[1]/name, 
+    collection('/db/apps/gsh/data/territories')/territory[id eq $id]/short-form-name
+  )[1]/string()
+};
+
+declare function config:tei-citation-meta($node as node()?, $model as map(*)?) {
+    let $publication-id := $model?publication-id
+    let $section-id := $model?section-id
+    let $doc := $config:PUBLICATIONS?($publication-id)?select-document($model?document-id)
+    let $section := $config:PUBLICATIONS?($publication-id)?select-section($model?document-id, $section-id)
+    return if (exists($section-id)) then
+        config:tei-section-citation-meta($node, $model, $doc, $section)
+    else 
+        config:tei-document-citation-meta($node, $model, $doc)
+};
+
+declare function config:tei-section-citation-meta($node as node()?, $model as map(*)?) as map(*) {
+    let $publication-id := $model?publication-id
+    let $section-id := $model?section-id
+    let $doc := $config:PUBLICATIONS?($publication-id)?select-document($model?document-id)
+    let $section := $config:PUBLICATIONS?($publication-id)?select-section($model?document-id, $section-id)
+    return config:tei-section-citation-meta($node, $model, $doc, $section)
+};
+
+declare function config:tei-section-citation-meta($node as node()?, $model as map(*)?, $doc as document-node()?, $section as node()?) as map(*) {
+    let $location := 
+        if ($section/@type eq 'document') then
+            'Document '||$section/@n
+        else if ($section/self::tei:pb) then (
+            $section/replace(@n, '\[?(.+?)\]?', '$1')
+        )
+        else (
+            ($section//text()[normalize-space(.) ne ''])[1]/preceding::tei:pb[1]/replace(@n, '\[?(.+?)\]?', '$1') ||
+            '-' ||
+            ($section//text()[normalize-space(.) ne ''])[last()]/preceding::tei:pb[1]/replace(@n, '\[?(.+?)\]?', '$1')
+        )
+    let $citation_title := config:tei-full-breadcrumb-title($model?publication-id, $model?document-id, $model?section-id, false())
+    let $shared-citation := config:tei-shared-citation-meta($node, $model, $doc)
+    let $book_title := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='volume']/string(.)
+    return map:merge((
+        $shared-citation,
+        map { 'type': "chapter" },
+        if (exists($citation_title)) then map{ 'title': $citation_title } else (),
+        if (exists($book_title)) then map{'container-title': $book_title} else (),
+        if (exists($location[. ne '-'])) then map{'page': $location} else ()
+    ), map{'duplicates':'use-last'})
+};
+
+declare function config:tei-document-citation-meta($node as node()?, $model as map(*)?) as map(*) {
+    let $publication-id := $model?publication-id
+    let $doc := $config:PUBLICATIONS?($publication-id)?select-document($model?document-id)
+    return config:tei-document-citation-meta($node, $model, $doc)
+};
+
+declare function config:tei-document-citation-meta($node as node()?, $model as map(*)?, $doc as document-node()?) as map(*) {
+    let $citation_title :=
+        config:tei-full-breadcrumb-title($model?publication-id, $model?document-id, $model?section-id, false())
+    let $shared-citation := config:tei-shared-citation-meta($node, $model, $doc)
+    return map:merge((
+        $shared-citation,
+        map { 'type': "book" },
+        if (exists($citation_title)) then map{ 'title': $citation_title} else ()
+    ), map{'duplicates': 'use-last'})
+};
+
+declare function config:tei-shared-citation-meta($node as node()?, $model as map(*)?, $doc as document-node()?) as map(*) {
+    let $doc := $config:PUBLICATIONS?($model?publication-id)?select-document($model?document-id)
+    let $editors := 
+        for $editor in $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:editor[@role eq 'primary']
+        let $name-parts := tokenize($editor, '\s')
+        return map{
+            'family':   $name-parts[last()],
+            'given':    string-join($name-parts[position() ne last()], ' ')
+        }
+    let $series_title :=    $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='series']/string(.)
+    let $series_number :=  $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='sub-series']/string(.)
+    let $volume :=     $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='volume-number']/string(.)
+    let $publisher := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:publisher/string(.)
+    let $issued :=  $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type eq 'publication-date']/string(.)
+    let $isbn := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type eq 'isbn-13']/string(.)
+    return map:merge((
+        config:default-citation-meta($node, $model),
+        if (exists($editors)) then map{'editor': array { $editors }} else (),
+        if (exists($series_title)) then map{'collection-title': $series_title} else (),
+        if (exists($series_number)) then map{'collection-number': $series_number} else (),
+        if (exists($volume)) then map{'volume':$volume} else (),
+        if (exists($publisher)) then map{'publisher': $publisher} else (),
+        if (exists($issued)) then map{'issued': map{'raw': $issued} } else (),
+        if (exists($isbn)) then map { 'ISBN': $isbn } else ()
+    ), map {'duplicates': 'use-last'})
+        
+};
+
+declare function config:default-citation-meta($node as node()?, $model as map(*)) as map(*)? {
+    let $accessed := current-date()
+    let $url := (
+        $model?url,
+        try {request:get-url()}
+        catch err:XPDY0002 { 'test-url' } (: Some contexts e.g. xquery testing have no request context :)
+    )[1]
+    let $local-uri := (
+        $model?local-uri,
+        try {substring-after($url, $pages:app-root)}
+        catch err:XPDY0002 { 'test-path' } (: Some contexts e.g. xquery testing have no request context :)
+    )[1]
+    return map:merge((
+        map{ 'id':  $local-uri },
+        map{ 'type':    'webpage'},
+        map{ 'title': pages:generate-short-title($node, $model)},
+        map{ 'collection-title': "Office of the Historian"},
+        map{ 'accessed':    
+            map{
+                'date-parts':   array {
+                    array{
+                        year-from-date($accessed),
+                        month-from-date($accessed),
+                        day-from-date($accessed)
+                    }
+                }
+            }
+        },
+        map{ 'URL': $url }
+    ), map{'duplicates': 'use-last'})
+};
+
+declare %templates:wrap function config:csl-json($node as node(), $model as map(*)) as xs:string? {
+    if (exists($model?citation-meta)) then 
+        serialize(array { $model?citation-meta }, map{'method':'json'}) => normalize-space()
+    else
+        serialize(array { config:default-citation-meta($node, $model) }, map{'method':'json'}) => normalize-space()
+};
+
+declare variable $config:cls-to-zotero as map(xs:string, function(*)) := map {    
+    "ISBN":
+        function($value) as element(meta)*{
+            <meta name="citation_isbn" content="{$value}"/>
+        },
+    "volume":
+        function($value) as element(meta)*{
+            <meta name="citation_volume" content="{$value}"/>
+        },
+    "type":
+        function($value) as element(meta)*{
+            let $type-mapping := map{
+                "graphic": "artwork",
+                "song": "audioRecording",
+                "bill": "bill",
+                "post-weblog": "blogPost",
+                "book": "book",
+                "chapter": "bookSection",
+                "legal_case": "case",
+                "paper-conference": "conferencePaper",
+                "entry-dictionary": "dictionaryEntry",
+                "document": "document",
+                "entry-encyclopedia": "encyclopediaArticle",
+                "post": "forumPost",
+                "interview": "interview",
+                "article-journal": "journalArticle",
+                "personal_communication": "letter",
+                "article-magazine": "magazineArticle",
+                "manuscript": "manuscript",
+                "map": "map",
+                "article-newspaper": "newspaperArticle",
+                "patent": "patent",
+                "article": "preprint",
+                "speech": "presentation",
+                "report": "report",
+                "legislation": "statute",
+                "thesis": "thesis",
+                "broadcast": "tvBroadcast",
+                "motion_picture": "videoRecording",
+                "webpage": "webpage"
+            }
+            for $type in $type-mapping?($value)
+            return <meta name="DC.type" content="{$type}"/>
+        },
+    "editor":
+        function($editors) as element(meta)*{
+            (:eg "editor": [
+        			{
+        				"family": "Lawler",
+        				"given": "Daniel J."
+        			},
+        			{
+        				"family": "Mahan",
+        				"given": "Erin R."
+        			}
+        		]
+        		:)
+            for $editor in array:flatten($editors)
+            return <meta name="citation_editor" content="{config:cls-name($editor)}"/>
+        },
+    "publisher-place":
+        function($value) as element(meta)*{
+            <meta name="place" content="{$value}"/>
+        },
+    "publisher":
+        function($value) as element(meta)*{
+            <meta name="citation_publisher" content="{$value}"/>
+        },
+    "container-title":
+        function($value) as element(meta)*{
+            <meta name="citation_book_title" content="{$value}"/>
+        },
+    "title":
+        function($value) as element(meta)*{
+            <meta name="citation_title" content="{$value}"/>
+        },
+    "collection-number":
+        function($value) as element(meta)*{
+            <meta name="citation_series_number" content="{$value}"/>
+        },
+    "page":
+        function($value) as element(meta)*{
+            if (contains($value, '-')) then (
+                (: capture as page range :)
+                <meta name="citation_firstpage" content="{substring-before($value, '-')}"/>,
+                <meta name="citation_lastpage" content="{substring-after($value, '-')}"/>
+            )
+            else
+                (: capture as a single page/location reference :)
+                <meta name="citation_firstpage" content="{$value}"/>
+        },
+    "issued":
+        function($value) as element(meta)*{
+            <meta name="citation_date" content="{config:cls-date($value)}"/>
+        },
+    "URL":
+        function($value) as element(meta)*{
+            <meta name="citation_public_url" content="{$value}"/>
+        },
+    "accessed":
+        function($value) as element(meta)*{
+            <meta name="accessDate" content="{config:cls-date($value)}"/>
+        },
+    "collection-title":
+        function($value) as element(meta)*{
+            <meta name="citation_series_title" content="{$value}"/>
+        }
+};
+
+declare function config:cls-name($name as map(*)) {
+    string-join(($name?given, $name?family), ' ')
+};
+
+declare function config:cls-date($date as map(*)) {
+    if ($date?raw castable as xs:date or matches($date?raw, '\d{4}(-\d{2}(-\d{2})?)?')) then
+        $date?raw
+    else if ($date?date-parts!array:size(.) eq 1) then
+        config:cls-date-parts($date?date-parts?1)
+    else ()  
+};
+
+declare function config:cls-date-parts($date as array(*)) {
+    let $d-seq := array:flatten($date)
+    let $year  := $d-seq[1]
+    let $month := $d-seq[2] ! format-number(., '00')
+    let $day   := $d-seq[3] ! format-number(., '00')
+    return string-join(($year, $month, $day), '-')
+};
+
+declare function config:cls-to-html($json as array(map(*))) as element(meta)* {
+    let $citation := $json?1
+    for $key in map:keys($citation)
+    let $value := $citation?($key)
+    let $lookup as function(*)? := $config:cls-to-zotero?($key)
+    return if (exists($lookup)) then $lookup($value) else ()
 };

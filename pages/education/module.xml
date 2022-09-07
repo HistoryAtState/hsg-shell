@@ -8,22 +8,7 @@
               class="hidden"
               data-template="edu:education-module-title"/>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/education">Education</a>
-                  </li>
-                  <li>
-                     <a href="$app/education/modules">Curriculum Modules</a>
-                  </li>
-                  <li>
-                     <a class="section" href="#" data-template="pages:document-link"/>
-                  </li>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div class="row">
             <div class="hsg-width-two-thirds" id="volume">
@@ -40,7 +25,7 @@
                   <div data-template="edu:module-introduction"/>
                </div>
             </div>
-            <aside class="hsg-width-sidebar">
+            <aside data-template="pages:asides">
                <div id="sections" class="hsg-panel" data-template="app:fix-links">
                   <div class="hsg-panel-heading">
                      <h2 class="hsg-sidebar-title">Education</h2>

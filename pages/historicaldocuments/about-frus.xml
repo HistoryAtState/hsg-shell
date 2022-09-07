@@ -5,19 +5,8 @@
    <div id="static-title" class="hidden">About the Foreign Relations Series - Historical
         Documents</div>
    <div class="row">
-      <div class="hsg-breadcrumb-wrapper">
-         <ol class="breadcrumb" data-template="app:fix-links">
-            <li>
-               <a href="$app">Home</a>
-            </li>
-            <li>
-               <a href="$app/historicaldocuments">Historical Documents</a>
-            </li>
-            <li>
-               <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
-                            Relations</em> Series</a>
-            </li>
-         </ol>
+      <div data-template="pages:breadcrumb">
+         <p id="breadcrumb-title">About the <em>Foreign Relations</em> Series</p>
       </div>
    </div>
    <div class="row hsg-main">
@@ -54,10 +43,10 @@
                         Historian</a>.</p>
          </div>
       </div>
-      <aside class="hsg-width-one-third">
+      <aside data-template="pages:asides">
          <div class="hsg-panel" data-template="app:fix-links">
             <div class="hsg-panel-heading">
-               <h2 class="hsg-sidebar-title">Historical Documents</h2>
+               <h2 class="hsg-sidebar-title">Administrations</h2>
             </div>
             <div class="hsg-panel-body">
                <p>Browse official documents from the <em>Foreign Relations of the United
@@ -90,43 +79,6 @@
                </li>
                <li class="hsg-list-group-item">
                   <a href="$app/historicaldocuments">All Administrations</a>
-               </li>
-            </ul>
-         </div>
-         <div id="sections" class="hsg-panel" data-template="app:fix-links">
-            <div class="hsg-panel-heading">
-               <h3 class="hsg-sidebar-title">Related Resources</h3>
-            </div>
-            <ul class="hsg-list-group">
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/about-frus">About the <em>Foreign
-                                Relations</em> series</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/status-of-the-series">Status of the
-                            Series</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/frus-history">History of the Series</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/ebooks">
-                     <em>Foreign Relations</em> ebooks</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/other-electronic-resources">Other
-                            Electronic resources for U.S. foreign relations</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975">Guide to sources on Vietnam, 1969-1975</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/search/tips">Tips for searching the <em>Foreign Relations</em>
-                            Series</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/citing-frus">How to cite <em>Foreign
-                                Relations</em> documents</a>
                </li>
             </ul>
          </div>

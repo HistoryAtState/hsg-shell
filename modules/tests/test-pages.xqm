@@ -8,7 +8,6 @@ import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
-(:declare namespace t="http://history.state.gov/ns/site/hsg/xqsuite";:)
 
 
 (:
@@ -22,7 +21,7 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
     - THEN return the default set of keys from $config:OPEN_GRAPH_KEYS as $new-model?open-graph-keys
 :)
 
-declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url') function x:pages-load-add-default-open-graph-keys() {
+declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url citation') function x:pages-load-add-default-open-graph-keys() {
     let $node := <div data-template="pages:load"><span data-template="t:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
@@ -38,7 +37,7 @@ declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:ti
         $templates:CONFIGURATION : $config
     }
     let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), (), (), ())()
-    
+
     return $new-model?open-graph-keys => string-join(' ')
 };
 
@@ -54,7 +53,7 @@ declare %test:assertEquals('og:type twitter:card twitter:site og:site_name og:ti
 :)
 
 declare %test:assertEquals('<meta property="og:description" content="Custom hard-coded description goes here"/>') function x:pages-load-add-open-graph-static() {
-    let $node := 
+    let $node :=
         <div data-template="pages:load">
             <div id="static-open-graph" data-template="pages:suppress">
                 <meta property="og:description" content="Custom hard-coded description goes here"/>
@@ -75,7 +74,7 @@ declare %test:assertEquals('<meta property="og:description" content="Custom hard
         $templates:CONFIGURATION : $config
     }
     let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), (), (), ())()
-    
+
     return $new-model?open-graph?("og:description")((),())
 };
 
@@ -90,8 +89,8 @@ declare %test:assertEquals('<meta property="og:description" content="Custom hard
     - THEN return $new-model?open-graph-keys including 'made:up'
 :)
 
-declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url') function x:pages-load-add-open-graph-keys-static() {
-    let $node := 
+declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url citation') function x:pages-load-add-open-graph-keys-static() {
+    let $node :=
         <div data-template="pages:load">
             <div id="static-open-graph" data-template="pages:suppress">
                 <meta property="made:up" content="value"/>
@@ -112,7 +111,7 @@ declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_na
         $templates:CONFIGURATION : $config
     }
     let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), (), (), ())()
-    
+
     return $new-model?open-graph-keys => string-join(' ')
 };
 
@@ -141,11 +140,11 @@ declare %test:assertEquals('og:type og:description') function x:pages-load-add-o
         $templates:CONFIGURATION : $config
     }
     let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), "og:type og:description", (), ())()
-    
+
     return $new-model?open-graph-keys => string-join(' ')
 };
 
-(: 
+(:
 ## Should remove open graph keys corresponding to $open-graph-keys-exclude
 
 - WHEN HTML templating function pages:load is called
@@ -170,12 +169,12 @@ declare %test:assertEquals('twitter:card twitter:site og:site_name og:title og:i
     let $model := map {
         $templates:CONFIGURATION : $config
     }
-    let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), (), "og:type og:description", ())()
-    
+    let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), (), "og:type og:description citation", ())()
+
     return $new-model?open-graph-keys => string-join(' ')
 };
 
-(:  
+(:
 ## Should add new open graph keys with $open-graph-keys-add
 
 - WHEN HTML templating function pages:load is called
@@ -185,7 +184,7 @@ declare %test:assertEquals('twitter:card twitter:site og:site_name og:title og:i
     - THEN return the the default set of keys from $config:OPEN_GRAPH_KEYS in addition to the sepcified keys as $new-model?open-graph-keys
 :)
 
-declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url') function x:pages-load-add-open-graph-keys-add() {
+declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_name og:title og:description og:image og:url citation') function x:pages-load-add-open-graph-keys-add() {
     let $node := <div data-template="pages:load"><span data-template="t:return-model"/></div>
     let $config := map{
         $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
@@ -201,11 +200,11 @@ declare %test:assertEquals('made:up og:type twitter:card twitter:site og:site_na
         $templates:CONFIGURATION : $config
     }
     let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), (), (), "made:up")()
-    
+
     return $new-model?open-graph-keys => string-join(' ')
 };
 
-(:  
+(:
 ## Should replace $open-graph-keys-exclude tokens in supplied $open-graph-keys with $open-graph-keys-add
 
 - WHEN HTML templating function pages:load is called
@@ -233,7 +232,7 @@ declare %test:assertEquals('made:up twitter:card') function x:pages-load-add-ope
         $templates:CONFIGURATION : $config
     }
     let $new-model := pages:load($node, $model, "frus", (), (), "div", false(), "og:type twitter:card", "og:type", "made:up")()
-    
+
     return $new-model?open-graph-keys => string-join(' ')
 };
 
@@ -286,7 +285,7 @@ declare %test:assertEquals("Office of the Historian") function x:generate-short-
 :)
 
 declare %test:assertEquals("Office of the Historian") function x:generate-short-title-empty-H1() {
-    let $node := 
+    let $node :=
         (<div>
             <h1/>
             <p>Not a title</p>
@@ -338,7 +337,7 @@ declare %test:assertEquals("H3") function x:generate-short-title-H3(){
     return pages:generate-short-title($node, ())
 };
 
-(: 
+(:
   - GIVEN an empty HTML h2 heading "H2", ($node//h2))[1] = "" //Empty String
     AND a following HTML h1 heading "H1", ($node//h1))[1] = "H1"
     - THEN return "H1"
@@ -354,7 +353,7 @@ declare %test:assertEquals("H1") function x:generate-short-title-H1-after-empty-
     return pages:generate-short-title($node, ())
 };
 
-(:  
+(:
   - GIVEN a publication ID, $model?publication-id = "articles", with no associated title,  map:get($config:PUBLICATIONS, $model?publication-id)?title = ()
     AND a HTML h3 heading "H3", ($node//h3))[1] = "H3"
     - THEN return "H3"
@@ -366,7 +365,7 @@ declare %test:assertEquals("H3") function x:generate-short-title-empty-publicati
     return pages:generate-short-title($node, $model)
 };
 
-(:    
+(:
   - GIVEN a publication ID, $model?publication-id = "frus", with an associated title,  map:get($config:PUBLICATIONS, $model?publication-id)?title = "Historical Documents"
     AND a HTML h3 heading "H3", ($node//h3))[1] = "H3"
     - THEN return "Historical Documents"
@@ -378,7 +377,7 @@ declare %test:assertEquals("Historical Documents") function x:generate-short-tit
     return pages:generate-short-title($node, $model)
 };
 
-(: 
+(:
   - GIVEN an empty static title, ($node//h1))[1] = "" //Empty String
     AND a publication ID with an associated title, $model?publication-id = "frus"
     - THEN return "Historical Documents"
@@ -390,7 +389,7 @@ declare %test:assertEquals("Historical Documents") function x:generate-short-tit
     return pages:generate-short-title($node, $model)
 };
 
-(: 
+(:
   - GIVEN a Static title "Static", $node/ancestor::*[last()]//div[@id="static-title"]/string() = "Static"
     AND a publication ID with an associated title, $model?publication-id = "frus"
     - THEN return "Static"
@@ -458,58 +457,291 @@ declare %test:assertEquals("H1 - Office of the Historian") function x:app-root-h
 
 For the purpose of these tests, $app refers to the URI root of the hsg-shell app.
 
+Test data generator: :)
+
+declare function x:generate-breadcrumb-test-data($url as xs:string){
+    let $data := map{
+        '/about': [
+            <span>Home</span>,
+            <span>About</span>
+        ],
+        '/historicaldocuments/about-frus': [
+            <span>Home</span>,
+            <span>Historical Documents</span>,
+            <span>About the <em>Foreign Relations</em> Series</span>
+        ],
+        '/about/faq/what-is-frus': [
+            <span>Home</span>,
+            <span>About</span>,
+            <span>Frequently Asked Questions</span>,
+            <span>Where can I find information about the Foreign...</span>
+        ],
+        '/about/hac/members': [
+            <span>Home</span>,
+            <span>About</span>,
+            <span>Historical Advisory Committee</span>,
+            <span>Members</span>
+        ],
+        '/conferences/2011-foreign-economic-policy/panel': [
+            <span>Home</span>,
+            <span>Conferences</span>,
+            <span>Foreign Economic Policy, 1973-1976</span>,
+            <span>Panel Discussion</span>
+        ],
+        '/countries/mali': [
+            <span>Home</span>,
+            <span>Countries</span>,
+            <span>A Guide to the United States’ History of Recognition, Diplomatic, and Consular Relations, by Country, since 1776: Mali</span>
+        ],
+        '/countries/issues/italian-unification': [
+            <span>Home</span>,
+            <span>Countries</span>,
+            <span>Issues</span>,
+            <span>Issues Relevant to U.S. Foreign Diplomacy: Unification of Italian States</span>
+        ],
+        '/countries/archives/angola': [
+            <span>Home</span>,
+            <span>Countries</span>,
+            <span>Archives</span>,
+            <span>World Wide Diplomatic Archives Index: Angola</span>
+        ],
+        '/departmenthistory/buildings/intro': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>Buildings of the Department</span>,
+            <span>Introduction</span>
+        ],
+        '/departmenthistory/people/hilsman-roger-jr': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>People</span>,
+            <span>Roger Hilsman Jr.</span>
+        ],
+        '/departmenthistory/people/by-name/t': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>People</span>,
+            <span>By Name</span>,
+            <span>Starting with T</span>
+        ],
+        '/departmenthistory/people/by-year/1979': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>People</span>,
+            <span>By Year</span>,
+            <span>1979</span>
+        ],
+        '/departmenthistory/people/chiefsofmission/fiji': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>People</span>,
+            <span>Chiefs of Mission</span>,
+            <span>Fiji</span>
+        ],
+        '/departmenthistory/people/chiefsofmission/representative-to-au': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>People</span>,
+            <span>Chiefs of Mission</span>,
+            <span>Representatives of the U.S.A. to the African Union</span>
+        ],
+        '/departmenthistory/people/principalofficers/secretary': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>People</span>,
+            <span>Principal Officers By Title</span>,
+            <span>Secretaries of State</span>
+        ],
+        '/departmenthistory/short-history/superpowers': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>Short History</span>,
+            <span>Superpowers Collide, 1961-1981</span>
+        ],
+        '/departmenthistory/short-history/cubanmissile': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>Short History</span>,
+            <span>The Cuban Missile Crises</span>
+        ],
+        '/departmenthistory/timeline/1970-1979': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>Administrative Timeline</span>,
+            <span>1970–1979</span>
+        ],
+        '/departmenthistory/travels/president/taft-william-howard': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>Presidential and Secretaries Travels Abroad</span>,
+            <span>Travels of the President</span>,
+            <span>William Howard Taft</span>
+        ],
+        '/departmenthistory/travels/president/laos': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>Presidential and Secretaries Travels Abroad</span>,
+            <span>Travels of the President</span>,
+            <span>Laos</span>
+        ],
+        '/departmenthistory/travels/secretary/root-elihu': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>Presidential and Secretaries Travels Abroad</span>,
+            <span>Travels of the Secretary</span>,
+            <span>Elihu Root</span>
+        ],
+        '/departmenthistory/travels/secretary/laos': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>Presidential and Secretaries Travels Abroad</span>,
+            <span>Travels of the Secretary</span>,
+            <span>Laos</span>
+        ],
+        '/departmenthistory/visits/cuba': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>Visits by Foreign Leaders</span>,
+            <span>Cuba</span>
+        ],
+        '/departmenthistory/visits/1979': [
+            <span>Home</span>,
+            <span>Department History</span>,
+            <span>Visits by Foreign Leaders</span>,
+            <span>1979</span>
+        ],
+        '/education/modules/history-diplomacy-intro': [
+            <span>Home</span>,
+            <span>Education</span>,
+            <span>Curriculum Modules</span>,
+            <span>Introduction to Curriculum Packet on “A History of Diplomacy”</span>
+        ],
+        '/historicaldocuments/wilson': [
+            <span>Home</span>,
+            <span>Historical Documents</span>,
+            <span>Woodrow Wilson Administration (1913–1921)</span>
+        ],
+        '/historicaldocuments/frus1981-88v11/persons': [
+            <span>Home</span>,
+            <span>Historical Documents</span>,
+            <span>Foreign Relations of the United States, 1981–1988, Volume XI, START I</span>,
+            <span>Persons</span>
+        ],
+        '/historicaldocuments/frus1894/ch25': [
+            <span>Home</span>,
+            <span>Historical Documents</span>,
+            <span>Papers Relating to the Foreign Relations of the United States, 1894, With the Annual Message of the President, Transmitted to Congress, December 3, 1894</span>,
+            <span>Friendly offices to Japanese in China</span>
+        ],
+        '/historicaldocuments/frus1952-54v07p1/d379': [
+            <span>Home</span>,
+            <span>Historical Documents</span>,
+            <span>Foreign Relations of the United States, 1952–1954, Germany and Austria, Volume VII, Part 1</span>,
+            <span>Document 379</span>
+        ],
+        '/historicaldocuments/frus-history/foreword': [
+            <span>Home</span>,
+            <span>Historical Documents</span>,
+            <span>History of the <em>Foreign Relations</em> Series</span>,
+            <span>Foreword</span>
+        ],
+        '/historicaldocuments/frus-history/documents/2002-08-19-athens-02867': [
+            <span>Home</span>,
+            <span>Historical Documents</span>,
+            <span>History of the <em>Foreign Relations</em> Series</span>,
+            <span>Documents</span>,
+            <span>Telegram From Embassy Athens, 2002</span>
+        ],
+        '/historicaldocuments/frus-history/research/a-good-years-work': [
+            <span>Home</span>,
+            <span>Historical Documents</span>,
+            <span>History of the <em>Foreign Relations</em> Series</span>,
+            <span>Research</span>,
+            <span>A Good Year’s Work</span>
+        ],
+        '/historicaldocuments/pre-1861/serial-set/browse?region=Europe': [
+            <span>Home</span>,
+            <span>Historical Documents</span>,
+            <span>Pre-1861 U.S. foreign relations materials</span>,
+            <span>U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set</span>,
+            <span>Europe</span>
+        ],
+        '/historicaldocuments/pre-1861/serial-set/browse?region=Europe&amp;subject=France': [
+            <span>Home</span>,
+            <span>Historical Documents</span>,
+            <span>Pre-1861 U.S. foreign relations materials</span>,
+            <span>U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set</span>,
+            <span>France</span>
+        ],
+        '/milestones/1977-1980': [
+            <span>Home</span>,
+            <span>Milestones</span>,
+            <span>1977-1980</span>
+        ],
+        '/milestones/1977-1980/china-policy': [
+            <span>Home</span>,
+            <span>Milestones</span>,
+            <span>1977-1980</span>,
+            <span>China Policy</span>
+        ],
+        '/tags/clay-henry': [
+            <span>Home</span>,
+            <span>Tags</span>,
+            <span>Clay, Henry</span>
+        ]
+    }
+    let $url-tokens as xs:string* := tokenize($url, '/')
+    return 
+         <nav class="hsg-breadcrumb hsg-breadcrumb--wrap" aria-label="breadcrumbs">
+            <ol vocab="http://schema.org/" typeof="BreadcrumbList" class="hsg-breadcrumb__list">
+                {
+                    for $i in (1 to count($url-tokens))
+                    let $href := '/exist/apps/hsg-shell/' || string-join($url-tokens[position() le $i][. ne ''], '/')
+                    let $span := $data?($url)?($i)
+                    return
+                    <li class="hsg-breadcrumb__list-item" property="itemListElement" typeof="ListItem">
+                        <a href="{$href}" class="hsg-breadcrumb__link" property="item" typeof="WebPage">
+                            {$span}
+                        </a>
+                    </li>
+                }
+            </ol>
+         </nav>
+};
+
+(:
+
 ## Page template about/index.xml
 
 - WHEN building page breadcrumbs
   - GIVEN a URL `$app/about`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
-      `About`:      `$app/about` 
-      
-### Page template about/contact-us.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/contact-us`
-    - THEN return the breadcrumb list:
-      `Home`:       `$app`
       `About`:      `$app/about`
-      `Contact us`: `$app/about/contact-us`
+:)
 
-### Page template about/content-warning.xml
+declare
+  %test:assertEquals('true')
+function x:test-pages-breadcrumb-about() {
+  let $result := pages:generate-breadcrumbs('/about')
+  let $expected := x:generate-breadcrumb-test-data('/about')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/contact-warning`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `Content Warning`: `$app/about/content-warning`
-      
-### Page template about/recent-publications.xml
+(: Test results with mixed content (em elements) :)
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/recent-publications`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `Recent Publications` `$app/about/recent-publications`
-      
-### Page template about/the-historian.xml
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-with-elements() {
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/about-frus')
+  let $expected := x:generate-breadcrumb-test-data('/historicaldocuments/about-frus')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/the-historian`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `The Historian`:   `$app/about/the-historian`
-      
-### Page template about/faq/index.html
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/faq`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `Frequently Asked Questions`: `$app/about/faq`
+(:
 
 #### Page template about/faq/section.xml
 
@@ -520,43 +752,38 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `About`:      `$app/about`
       `Frequently Asked Questions`: `$app/about/faq`
       `Where can I find information about the Foreign...`: `$app/about/faq/what-is-frus`
+:)
 
-### Page template about/hac/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-faq-section(){
+  let $expected := x:generate-breadcrumb-test-data('/about/faq/what-is-frus')
+  let $result := pages:generate-breadcrumbs('/about/faq/what-is-frus')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/hac`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `About`:      `$app/about`
-      `Historical Advisory Committee`:  `$app/about/hac`
-
+(:
 #### Page template about/hac/section.xml
 
 - WHEN building page breadcrumbs
-  - GIVEN a URL `$app/about/hac`
+  - GIVEN a URL `$app/about/hac/members`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `About`:      `$app/about`
       `Historical Advisory Committee`:  `$app/about/hac`
       `Members`:    `/about/hac/members`
-      
-## Page template conferences/index.xml
+:)
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/conferences`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Conferences`:    `$app/conferences`
-      
-### Page template conferences/conference/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-hac-section(){
+  let $expected as element(nav) := x:generate-breadcrumb-test-data('/about/hac/members')
+  let $result := pages:generate-breadcrumbs('/about/hac/members')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/conferences/2011-foreign-economic-policy`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Conferences`:    `$app/conferences`
-      `Foreign Economic Policy, 1973-1976`: `$app/conferences/2011-foreign-economic-policy`
-      
+(:
+
 #### Page template conferences/conference/section.xml
 
 - WHEN building page breadcrumbs
@@ -566,23 +793,17 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `Conferences`:    `$app/conferences`
       `Foreign Economic Policy, 1973-1976`: `$app/conferences/2011-foreign-economic-policy`
       `Panel Discussion`:   `$app/conferences/2011-foreign-economic-policy/panel`
+:)
 
-## Page template countries/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-conference-secion(){
+  let $expected := x:generate-breadcrumb-test-data('/conferences/2011-foreign-economic-policy/panel')
+let $result := pages:generate-breadcrumbs('/conferences/2011-foreign-economic-policy/panel')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/countries`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Countries`:  `$app/countries`
-
-### Page template countries/all.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/countries/all`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Countries`:  `$app/countries`
-      `All Countries`:  `$app/countries/all`
+(:
 
 ### Page template countries/article.xml
 
@@ -592,16 +813,17 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `Home`:       `$app`
       `Countries`:  `$app/countries`
       `A Guide to the United States’ History of Recognition, Diplomatic, and Consular Relations, by Country, since 1776: Mali`: `$app/countries/mali`
+:)
 
-### Page template countries/issues/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-country-article(){
+  let $expected := x:generate-breadcrumb-test-data('/countries/mali')
+  let $result := pages:generate-breadcrumbs('/countries/mali')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/countries/issues`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Countries`:  `$app/countries`
-      `Issues`:     `$app/countries/issues`
-
+(:
 #### Page template countries/issues/article.xml
 
 - WHEN building page breadcrumbs
@@ -611,26 +833,17 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `Countries`:  `$app/countries`
       `Issues`:     `$app/countries/issues`
       `Issues Relevant to U.S. Foreign Diplomacy: Unification of Italian States`:   `$app/countries/issues/italian-unification`
-      
-### Page template countries/archives/index.xml
+:)
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/countries/archives`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Countries`:  `$app/countries`
-      `Archives`:   `$app/countries/archives`
-      
-#### Page template countries/archives/all.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-country-issue-article(){
+  let $expected := x:generate-breadcrumb-test-data('/countries/issues/italian-unification')
+  let $result := pages:generate-breadcrumbs('/countries/issues/italian-unification')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Countries`:  `$app/countries`
-      `Archives`:   `$app/countries/archives`
-      `All Archives`:   `$app/countries/archives/all`
-      
+(:
 #### Page template countries/archives/article.xml
 
 - WHEN building page breadcrumbs
@@ -640,33 +853,17 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `Countries`:  `$app/countries`
       `Archives`:   `$app/countries/archives`
       `World Wide Diplomatic Archives Index: Angola`:   `$app/countries/archives/angola`
+:)
 
-## Page template departmenthistory/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-country-archive-article(){
+  let $expected := x:generate-breadcrumb-test-data('/countries/archives/angola')
+  let $result := pages:generate-breadcrumbs('/countries/archives/angola')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-
-### Page template departmenthistory/wwi.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/wwi`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `World War I and the Department`:   `$app/departmenthistory/wwi`
-
-### Page template departmenthistory/buildings/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/buildings`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Buildings`:  `$app/departmenthistory/buildings`
-
+(:
 #### Page template departmenthistory/buildings/section.xml
 
 - WHEN building page breadcrumbs
@@ -675,67 +872,20 @@ For the purpose of these tests, $app refers to the URI root of the hsg-shell app
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Buildings`:  `$app/departmenthistory/buildings`
+      `Introduction`: `$app/departmenthistory/buildings/intro`
 
-Note that this page doesn't include a 'local' permalink breadcrumb.
+Note that this page didn't originally include a 'local' permalink breadcrumb.
+:)
 
-### Page template departmenthistory/diplomatic-couriers/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-building-section(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/buildings/intro')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/buildings/intro')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/diplomatic-couriers`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `U.S. Diplomatic Couriers`:  `$app/departmenthistory/diplomatic-couriers`
-
-#### Page template departmenthistory/diplomatic-couriers/before-the-jet-age.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/diplomatic-couriers/before-the-jet-age`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `U.S. Diplomatic Couriers`:  `$app/departmenthistory/diplomatic-couriers`
-      `Before the Jet Age`: `$app/departmenthistory/diplomatic-couriers/before-the-jet-age`
-
-#### Page template departmenthistory/diplomatic-couriers/behind-the-iron-curtain.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/diplomatic-couriers/behind-the-iron-curtain`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `U.S. Diplomatic Couriers`:  `$app/departmenthistory/diplomatic-couriers`
-      `Behind the Iron Curtain`:   `$app/departmenthistory/diplomatic-couriers/behind-the-iron-curtain`
-
-#### Page template departmenthistory/diplomatic-couriers/into-moscow.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/diplomatic-couriers/into-moscow`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `U.S. Diplomatic Couriers`:  `$app/departmenthistory/diplomatic-couriers`
-      `Into Moscow`:    `$app/departmenthistory/diplomatic-couriers/into-moscow`
-
-#### Page template departmenthistory/diplomatic-couriers/through-the-khyber-pass.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/diplomatic-couriers/through-the-khyber-pass`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `U.S. Diplomatic Couriers`:  `$app/departmenthistory/diplomatic-couriers`
-      `Through the Khyber Pass`:    `$app/departmenthistory/diplomatic-couriers/through-the-khyber-pass`
-
-### Page template departmenthistory/people/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-
+(:
 #### Page template departmenthistory/people/person.xml
 
 - WHEN building page breadcrumbs
@@ -745,37 +895,15 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `People`:     `$app/departmenthistory/people`
       `Roger Hilsman Jr.`:  `$app/departmenthistory/people/hilsman-roger-jr`
+:)
 
-#### Page template departmenthistory/people/principals-chiefs.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/people/hilsman-roger-jr')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/hilsman-roger-jr')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/principals-chiefs`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Principal Officers and Chiefs of Mission`:   `$app/departmenthistory/people/principals-chiefs`
-
-#### Page template departmenthistory/people/secretaries.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/secretaries`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Biographies of the Secretaries of State`:  `$app/departmenthistory/people/secretaries`
-
-#### Page template departmenthistory/people/by-name/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/by-name`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `By Name`:    `$app/departmenthistory/people/by-name`
-
+(:
 ##### Page template departmenthistory/people/by-name/letter.xml
 
 - WHEN building page breadcrumbs
@@ -786,17 +914,15 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `By Name`:    `$app/departmenthistory/people/by-name`
       `Starting with T`:    `$app/departmenthistory/people/by-name/t`
+:)
 
-#### Page template departmenthistory/people/by-year/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-letter(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/people/by-name/t')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/by-name/t')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/by-year`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `By Year`:    `$app/departmenthistory/people/by-year`
-
+(:
 ##### Page template departmenthistory/people/by-year/year.xml
 
 - WHEN building page breadcrumbs
@@ -807,16 +933,15 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `By Year`:    `$app/departmenthistory/people/by-year`
       `1979`:       `$app/departmenthistory/people/by-year/1979`
+:)
 
-#### Page template departmenthistory/people/chiefsofmission/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-year(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/people/by-year/1979')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/by-year/1979')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/chiefsofmission`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
+(:
 
 ##### Page template departmenthistory/people/chiefsofmission/by-role-or-country-id.xml
 
@@ -828,6 +953,15 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
       `Fiji`:       `$app/departmenthistory/people/chiefsofmission/fiji`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-country(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/people/chiefsofmission/fiji')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/chiefsofmission/fiji')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
   - GIVEN a URL `$app/departmenthistory/people/chiefsofmission/representative-to-au`
     -THEN return a breadcrumb list:
       `Home`:       `$app`
@@ -835,38 +969,15 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
       `Representatives of the U.S.A. to the African Union`: `$app/departmenthistory/people/chiefsofmission/representative-to-au`
+:)
 
-##### Page template departmenthistory/people/chiefsofmission/countries-list.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-person-org(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/people/chiefsofmission/representative-to-au')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/chiefsofmission/representative-to-au')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/chiefsofmission/by-country`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
-      `By Country`: `$app/departmenthistory/people/chiefsofmission/by-country`
-      
-##### Page template departmenthistory/people/chiefsofmission/international-organizations-list.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/chiefsofmission/by-organization`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Chiefs of Mission`:    `$app/departmenthistory/people/chiefsofmission`
-      `By Organization`: `$app/departmenthistory/people/chiefsofmission/by-organization`
-
-#### Page template departmenthistory/people/principalofficers/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/people/principalofficers`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `People`:     `$app/departmenthistory/people`
-      `Principal Officers By Title`:    `$app/departmenthistory`
+(:
 
 ##### Page template departmenthistory/people/principalofficers/by-role-id.xml
 
@@ -878,16 +989,17 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `People`:     `$app/departmenthistory/people`
       `Principal Officers`:    `$app/departmenthistory`
       `Secretaries of State`:  `$app/departmenthistory/people/principalofficers/secretary`
+:)
 
-### Page template departmenthistory/short-history/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-pocom-role(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/people/principalofficers/secretary')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/people/principalofficers/secretary')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/short-history`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Short History`:  `$app/departmenthistory/short-history`
-
+(:
 #### Page template departmenthistory/short-history/section.xml
 
 - WHEN building page breadcrumbs
@@ -897,22 +1009,30 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `Short History`:  `$app/departmenthistory/short-history`
       `Superpowers Collide, 1961-1981`: `$app/departmenthistory/short-history/superpowers`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-short-history-section(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/short-history/superpowers')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/short-history/superpowers')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
   - GIVEN a URL `$app/departmenthistory/short-history/cubanmissile`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Short History`:  `$app/departmenthistory/short-history`
-      `Superpowers Collide, 1961-1981`: `$app/departmenthistory/short-history/superpowers`
       `The Cuban Missile Crises`:   `$app/departmenthistory/short-history/cubanmissile`
+:)
 
-### Page template departmenthistory/timeline/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-short-history-subsection(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/short-history/cubanmissile')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/short-history/cubanmissile')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/timeline`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Administrative Timeline`:    `/$app/departmenthistory/timeline`
+(:
 
 #### Page template departmenthistory/timeline/section.xml
 
@@ -923,26 +1043,15 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `Administrative Timeline`:    `/$app/departmenthistory/timeline`
       `1970-1979`:  `/$app/departmenthistory/timeline/1970-1979`
+:)
 
-### Page template departmenthistory/travels/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-timeline-section(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/timeline/1970-1979')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/timeline/1970-1979')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/travels`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
-
-#### Page template departmenthistory/travels/president/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/travels/president`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
-      `Presidents`: `$app/departmenthistory/travels/president`
-
+(:
 ##### Page template departmenthistory/travels/president/person-or-country.xml
 
 - WHEN building page breadcrumbs
@@ -953,6 +1062,15 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
       `Presidents`: `$app/departmenthistory/travels/president`
       `William Howard Taft`:    `$app/departmenthistory/travels/president/taft-william-howard`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-president-person(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/travels/president/taft-william-howard')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/travels/president/taft-william-howard')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
   - GIVEN a URL `$app/departmenthistory/travels/president/laos`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
@@ -960,17 +1078,15 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
       `Presidents`: `$app/departmenthistory/travels/president`
       `Laos`:       `$app/departmenthistory/travels/president/laos`
+:)
 
-#### Page template departmenthistory/travels/secretary/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-president-country(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/travels/president/laos')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/travels/president/laos')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/travels/secretary`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
-      `Secretaries`: `$app/departmenthistory/travels/secretary`
-
+(:
 ##### Page template departmenthistory/travels/secretary/person-or-country.xml
 
 - WHEN building page breadcrumbs
@@ -981,23 +1097,31 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
       `Secretaries`:    `$app/departmenthistory/travels/secretary`
       `Elihu Root`: `$app/departmenthistory/travels/secretary/root-elihu`
-  - GIVEN a URL `$app/departmenthistory/travels/president/laos`
+:)
+
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-secretary-person(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/travels/secretary/root-elihu')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/travels/secretary/root-elihu')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
+  - GIVEN a URL `$app/departmenthistory/travels/secretary/laos`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Presidential and Secretaries Travels Abroad`:    `$app/departmenthistory/travels`
       `Secretaries`:    `$app/departmenthistory/travels/secretary`
       `Laos`:       `$app/departmenthistory/travels/secretary/laos`
+:)
 
-### Page template departmenthistory/visits/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-travels-secretary-country(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/travels/secretary/laos')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/travels/secretary/laos')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/departmenthistory/visits`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Department History`:  `$app/departmenthistory`
-      `Visits by Foreign Leaders`:  `$app/departmenthistory/visits`
-
+(:
 #### Page template departmenthistory/visits/country-or-year.xml
 
 - WHEN building page breadcrumbs
@@ -1007,46 +1131,32 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Department History`:  `$app/departmenthistory`
       `Visits by Foreign Leaders`:  `$app/departmenthistory/visits`
       `Cuba`:       `$app/departmenthistory/visits/cuba`
+:)
+
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-visits-country(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/visits/cuba')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/visits/cuba')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
   - GIVEN a URL `$app/departmenthistory/visits/1979`
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Department History`:  `$app/departmenthistory`
       `Visits by Foreign Leaders`:  `$app/departmenthistory/visits`
       `1979`:       `$app/departmenthistory/visits/1979`
+:)
 
-## Page template developer/index.xml
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-visits-year(){
+  let $expected := x:generate-breadcrumb-test-data('/departmenthistory/visits/1979')
+  let $result := pages:generate-breadcrumbs('/departmenthistory/visits/1979')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/developer`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Developer`:  `$app/developer`
-
-### Page template developer/catalog.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/developer/catalog`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Developer`:  `$app/developer`
-      `Catalog`:    `$app/developer/catalog`
-
-## Page template education/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/education`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Education`:  `$app/education`
-
-### Page template education/modules.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/education/modules`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Education`:  `$app/education`
-      `Curriculum Modules`: `$app/education/modules`
+(:
 
 #### Page template education/module.xml
 
@@ -1057,24 +1167,15 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Education`:  `$app/education`
       `Curriculum Modules`: `$app/education/modules`
       `Introduction to Curriculum Packet on `A History of Diplomacy`:   `$app/education/modules/history-diplomacy-intro`
+:)
 
-## Page template historicaldocuments/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-education-module(){
+  let $expected := x:generate-breadcrumb-test-data('/education/modules/history-diplomacy-intro')
+  let $result := pages:generate-breadcrumbs('/education/modules/history-diplomacy-intro')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-
-### Page template historicaldocuments/about-frus.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/about-frus`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `About the <em>Foreign Relations</em> Series`:    `$app/historicaldocuments/about-frus`
-
+(:
 ### Page template historicaldocuments/administrations.xml
 
 - WHEN building page breadcrumbs
@@ -1083,60 +1184,15 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Home`:       `$app`
       `Historical Documents`:   `$app/historicaldocuments`
       `Woodrow Wilson Administration (1913-1921)`:    `$app/historicaldocuments/wilson`
+:)
 
-### Page template historicaldocuments/citing-frus.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-administration(){
+  let $expected := x:generate-breadcrumb-test-data('/historicaldocuments/wilson')
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/wilson')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/citing-frus`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Citing the <em>Foreign Relations</em> series`:   `$app/historicaldocuments/citing-frus`
-
-### Page template historicaldocuments/ebooks.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/ebooks`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Ebooks`:     `$app/historicaldocuments/ebooks`
-
-### Page template historicaldocuments/other-electronic-resources.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/other-electronic-resources`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Other Electronic Resources`: `$app/historicaldocuments/other-electronic-resources`
-
-### Page template historicaldocuments/status-of-the-series.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/status-of-the-series`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Status of the Series`:   `$app/historicaldocuments/status-of-the-series`
-
-### Page template historicaldocuments/vietnam-guide.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Guide to Sources on Vietnam, 1969-1975`: `$app/historicaldocuments/guide-to-sources-on-vietnam-1969-1975`
-
-### Page template historicaldocuments/volume-landing.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/frus1981-88v11`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Foreign Relations of the United States, 1981-1988, Volume XI, START I`:  `$app/historicaldocuments/frus1981-88v11`
+(:
 
 ### Page template historicaldocuments/volume-interior.xml
 
@@ -1147,15 +1203,35 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Historical Documents`:   `$app/historicaldocuments`
       `Foreign Relations of the United States, 1981-1988, Volume XI, START I`:  `$app/historicaldocuments/frus1981-88v11`
       `Persons`:    `$app/historicaldocuments/frus1981-88v11/persons`
+:)
 
-### Page template historicaldocuments/frus-history/index.xml
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-frus(){
+  let $expected := x:generate-breadcrumb-test-data('/historicaldocuments/frus1981-88v11/persons')
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus1981-88v11/persons')
+  return if (deep-equal($expected, $result)) then 'true' else $result
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/frus-history`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+};
+
+(: footnotes in chapter titles to be suppressed :)
+
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-frus-footnote-in-head(){
+    let $expected := x:generate-breadcrumb-test-data('/historicaldocuments/frus1894/ch25')
+    let $result := pages:generate-breadcrumbs('/historicaldocuments/frus1894/ch25')
+    return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(: documents to be styled appropriately; no footnotes in header :)
+
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-frus-document-no(){
+    let $expected := x:generate-breadcrumb-test-data('/historicaldocuments/frus1952-54v07p1/d379')
+    let $result := pages:generate-breadcrumbs('/historicaldocuments/frus1952-54v07p1/d379')
+    return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
 
 #### Page template historicaldocuments/frus-history/monograph-interior.xml
 
@@ -1167,15 +1243,18 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Toward “Thorough, Accurate, and Reliable”: A History of the <em>Foreign Relations of the United States</em> Series`:  `$app/historicaldocuments/frus-history`
       `Foreword`:   `$app/historicaldocuments/frus-history/foreword`
 
-#### Page template historicaldocuments/frus-history/documents/index.xml
+:)
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/frus-history/documents`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
-      `Documents`:  `$app/historicaldocuments/frus-history/documents`
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-frus-history-section(){
+  let $expected := x:generate-breadcrumb-test-data('/historicaldocuments/frus-history/foreword')
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus-history/foreword')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
+
+(:
 
 ##### Page template historicaldocuments/frus-history/documents/document.xml
 
@@ -1187,26 +1266,18 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
       `Documents`:  `$app/historicaldocuments/frus-history/documents`
       `Telegram From Embassy Athens, 2002`: `$app/historicaldocuments/frus-history/documents/2002-08-19-athens-02867`
+:)
 
-#### Page template historicaldocuments/frus-history/events/index.xml
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-frus-documents(){
+  let $expected := x:generate-breadcrumb-test-data('/historicaldocuments/frus-history/documents/2002-08-19-athens-02867')
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus-history/documents/2002-08-19-athens-02867')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/frus-history/events`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
-      `Events`: `$app/historicaldocuments/frus-history/events`
-
-#### Page template historicaldocuments/frus-history/research/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/frus-history/research`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
-      `Research`:   `$app/historicaldocuments/frus-history/research`
+(:
 
 #### Page template historicaldocuments/frus-history/research/article.xml
 
@@ -1215,39 +1286,20 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
     - THEN return a breadcrumb list:
       `Home`:       `$app`
       `Historical Documents`:   `$app/historicaldocuments`
-      `History of the <em>Foreign Relations</em> Series`:   `$app/historicaldocuments/frus-history`
+      `Toward “Thorough, Accurate, and Reliable”: A History of the Foreign Relations of the United States Series`:   `$app/historicaldocuments/frus-history`
       `Research`:   `$app/historicaldocuments/frus-history/research`
       `A Good Year's Work`: `$app/historicaldocuments/frus-history/research/a-good-years-work`
+:)
 
-### Page template historicaldocuments/pre-1861/index.xml
+declare %test:assertEquals('true') function x:test-pages-breadcrumb-frus-history-articles(){
+  let $expected := x:generate-breadcrumb-test-data('/historicaldocuments/frus-history/research/a-good-years-work')
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/frus-history/research/a-good-years-work')
+  return if (deep-equal($expected, $result)) 
+  then 'true' 
+  else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/pre-1861`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
-
-#### Page template historicaldocuments/pre-1861/serial-set/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/pre-1861/serial-set`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
-      `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
-
-##### Page template historicaldocuments/pre-1861/serial-set/all.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/pre-1861/serial-set/all`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
-      `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
-      `All`:        `$app/historicaldocuments/pre-1861/serial-set/all`
+(:
 
 ##### Page template historicaldocuments/pre-1861/serial-set/browse.xml
 
@@ -1259,47 +1311,38 @@ Note that this page doesn't include a 'local' permalink breadcrumb.
       `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
       `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
       `Europe`:     `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe`
+:)
+
+declare
+%test:pending('testing Url parameters not possible at this time; implement test when/if URI reimplemented')
+%test:assertEquals('true') function x:test-pages-breadcrumb-serial-set-region(){
+  let $expected := x:generate-breadcrumb-test-data('/historicaldocuments/pre-1861/serial-set/browse?region=Europe')
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/pre-1861/serial-set/browse?region=Europe')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
+
+- WHEN building page breadcrumbs
+  - GIVEN a URL `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe&subject=France`
+    - THEN return a breadcrumb list:
+      `Home`:       `$app`
+      `Historical Documents`:   `$app/historicaldocuments`
+      `Pre-1861 U.S. foreign relations materials`:  `$app/historicaldocuments/pre-1861`
+      `U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set`: `$app/historicaldocuments/pre-1861/serial-set`
       `France`:     `$app/historicaldocuments/pre-1861/serial-set/browse?region=Europe&subject=France`
+:)
 
-### Page template historicaldocuments/quarterly-releases/index.xml
+declare
+%test:pending('testing Url parameters not possible at this time; implement test when/if URI reimplemented')
+%test:assertEquals('true') function x:test-pages-breadcrumb-serial-set-subject(){
+  let $expected := x:generate-breadcrumb-test-data('/historicaldocuments/pre-1861/serial-set/browse?region=Europe&amp;subject=France')
+  let $result := pages:generate-breadcrumbs('/historicaldocuments/pre-1861/serial-set/browse?region=Europe&amp;subject=France')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/quarterly-releases`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Quarterly Releases`: $app/historicaldocuments/quarterly-releases
-
-#### Page template historicaldocuments/quarterly-releases/announcements/2016-q3.xml
-
-There are a number of other page templates in this format: it seems excessive to test them all!
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/historicaldocuments/quarterly-releases/2016-q3`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Historical Documents`:   `$app/historicaldocuments`
-      `Quarterly Releases`: $app/historicaldocuments/quarterly-releases
-      `2016 Quarter 3`: `$app/historicaldocuments/quarterly-releases/2016-q3`
-      
-## Page template historicaldocuments/milestones/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/milestones`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Milestones`: `$app/milestones`
-
-### Page template historicaldocuments/milestones/all.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/milestones/all`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Milestones`: `$app/milestones`
-      `All`:        `$app/milestones/all`
-      
-### Page template historicaldocuments/milestones/chapter/index.xml
+(:
+### Page template milestones/chapter/index.xml
 
 - WHEN building page breadcrumbs
   - GIVEN a URL `$app/milestones/1977-1980`
@@ -1307,8 +1350,17 @@ There are a number of other page templates in this format: it seems excessive to
       `Home`:       `$app`
       `Milestones`: `$app/milestones`
       `1977-1980`:  `$app/milestones/1977-1980`
-      
-### Page template historicaldocuments/milestones/chapter/article.xml
+:)
+
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-milestone-chapter(){
+  let $expected := x:generate-breadcrumb-test-data('/milestones/1977-1980')
+  let $result := pages:generate-breadcrumbs('/milestones/1977-1980')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
+
+(:
+### Page template milestones/chapter/article.xml
 
 - WHEN building page breadcrumbs
   - GIVEN a URL `$app/milestones/1977-1980/china-policy`
@@ -1317,75 +1369,16 @@ There are a number of other page templates in this format: it seems excessive to
       `Milestones`: `$app/milestones`
       `1977-1980`:  `$app/milestones/1977-1980`
       `China Policy`:   `$app/milestones/1977-1980/china-policy`
-      
-## Page template open/index.xml
+:)
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/open`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Open Government Initiative`: `$app/open`
-      
-### Page template $app/open/frus-latest/index.xml
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-milestone-article(){
+  let $expected := x:generate-breadcrumb-test-data('/milestones/1977-1980/china-policy')
+  let $result := pages:generate-breadcrumbs('/milestones/1977-1980/china-policy')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};
 
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/open/frus-latest`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Open Government Initiative`: `$app/open`
-      `Latest Volumes of <em>Foreign Relations of the United States</em> Series`:   `$app/open/frus-latest`
-      
-### Page template open/frus-metadata/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/open/frus-metadata`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Open Government Initiative`: `$app/open`
-      `Bibliographic Metadata of the <em>Foreign Relations of the United States</em> Series`:   `$app/open/frus-metadata`
-      
-## Page template search/search-landing.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/search`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Search`:     `$app/search`
-            
-### Page template search/search-result.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/search?q=taft`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Search`:     `$app/search`
-      
-### Page template search/tips.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/search/tips`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Search`:     `$app/search`
-      `Search Tips`:    `$app/search/tips`
-      
-## Page template tags/index.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/tags`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Tags`:       `$app/tags`
-      
-### Page template tags/all.xml
-
-- WHEN building page breadcrumbs
-  - GIVEN a URL `$app/tags/all`
-    - THEN return a breadcrumb list:
-      `Home`:       `$app`
-      `Tags`:       `$app/tags`
-      `All Tags`:   `$app/tags/all`
-      
+(:
 ### Page template tags/browse.xml
 
 - WHEN building page breadcrumbs
@@ -1394,5 +1387,12 @@ There are a number of other page templates in this format: it seems excessive to
       `Home`:       `$app`
       `Tags`:       `$app/tags`
       `Clay, Henry`:    `$app/tags/clay-henry`
-      
+
 :)
+
+declare %test:assertEquals('true')
+function x:test-pages-breadcrumb-tags(){
+  let $expected := x:generate-breadcrumb-test-data('/tags/clay-henry')
+  let $result := pages:generate-breadcrumbs('/tags/clay-henry')
+  return if (deep-equal($expected, $result)) then 'true' else $result
+};

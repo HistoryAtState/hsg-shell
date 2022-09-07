@@ -6,22 +6,7 @@
       <div>
          <div id="static-title" class="hidden" data-template="pages:hac-title"/>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/about">About</a>
-                  </li>
-                  <li>
-                     <a href="$app/about/hac">Historical Advisory Committee</a>
-                  </li>
-                  <li>
-                     <a class="section" href="." data-template="pages:section-link"/>
-                  </li>
-               </ol>
-            </div>
+            <div data-template="pages:breadcrumb"/>
          </div>
          <div class="row">
             <div class="hsg-navigation-wrapper">
@@ -51,7 +36,7 @@
                </div>
             </div>
             <!-- TOC Sidebar -->
-            <aside class="hsg-width-sidebar" data-template="app:fix-links">
+            <aside data-template="pages:asides">
                <div data-template="toc:table-of-contents-sidebar"
                     data-template-heading="false"
                     data-template-highlight="true"/>

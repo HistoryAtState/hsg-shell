@@ -6,21 +6,8 @@
       <div>
          <div id="static-title" class="hidden">All Archives - Archives - Countries</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/countries">Countries</a>
-                  </li>
-                  <li>
-                     <a href="$app/countries/archives">Archives</a>
-                  </li>
-                  <li>
-                     <a href="$app/countries/archives">All Archives</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">All Archives</p>
             </div>
          </div>
          <div class="row">
@@ -30,7 +17,7 @@
                   <div data-template="archives:list"/>
                </div>
             </div>
-            <aside class="hsg-width-one-third">
+            <aside data-template="pages:asides">
                <div class="hsg-panel" data-template="app:fix-links">
                   <div class="hsg-panel-heading">
                      <h2 class="hsg-sidebar-title">Archives</h2>

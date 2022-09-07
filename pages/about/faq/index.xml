@@ -6,18 +6,8 @@
       <div>
          <div id="static-title" class="hidden">FAQs - About Us</div>
          <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-               <ol class="breadcrumb" data-template="app:fix-links">
-                  <li>
-                     <a href="$app">Home</a>
-                  </li>
-                  <li>
-                     <a href="$app/about">About</a>
-                  </li>
-                  <li>
-                     <a href="$app/about/faq">Frequently Asked Questions</a>
-                  </li>
-               </ol>
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">Frequently Asked Questions</p>
             </div>
          </div>
          <div class="row">
@@ -35,33 +25,7 @@
                   </div>
                </div>
             </div>
-            <aside class="hsg-width-sidebar">
-                <div id="sections" class="hsg-panel" data-template="app:fix-links">
-                    <div class="hsg-panel-heading">
-                        <h2 class="hsg-sidebar-title">About</h2>
-                    </div>
-                    <ul class="hsg-list-group">
-                        <li class="hsg-list-group-item">
-                            <a href="$app/about/contact-us">Contact Us</a>
-                        </li>
-                        <li class="hsg-list-group-item">
-                            <a href="$app/about/faq">Frequently Asked Questions</a>
-                        </li>
-                        <li class="hsg-list-group-item">
-                            <a href="$app/about/the-historian">The Historian</a>
-                        </li>
-                        <li class="hsg-list-group-item">
-                            <a href="$app/about/hac">Historical Advisory Committee</a>
-                        </li>
-                        <li class="hsg-list-group-item">
-                            <a href="$app/about/recent-publications">Recent Publications</a>
-                        </li>
-                        <li class="hsg-list-group-item">
-                            <a href="$app/about/content-warning">Content Warning</a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+            <aside data-template="pages:asides"/>
          </div>
       </div>
    </div>
