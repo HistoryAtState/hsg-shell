@@ -19,11 +19,17 @@
         }
     }
 
+    &__title {
+        margin-top: 0;
+    }
+
     &__badge {
         max-width: $badge-width;
-        margin-right: 12px;
-        margin-left: 0;
-        margin-top: 4px;
+        margin: 0 2.5rem 0 0;
+    }
+
+    &__more {
+        font-family: $font-sans;
     }
 }
 

@@ -1,0 +1,33 @@
+/* HSG news list customizations -------------- */
+
+.hsg-list {
+    $el: '.hsg-list';
+    // hsg-list__news
+    &#{$el}__news {
+        #{$el}__badge {
+            margin-top: .4rem; // depends on height & top-alignment of element next to the badge
+        }
+
+        #{$el}__title {
+            @extend .h4;
+            margin-top: 0; // align with badge on the left
+        }
+    }
+
+    // hsg-list__text--truncated
+    &__text {
+        // hsg-list__text--truncated
+        &--truncated {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        white-space: nowrap;
+
+            &--ellipsis {
+                display: table-cell;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
