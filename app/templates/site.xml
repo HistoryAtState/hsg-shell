@@ -229,14 +229,9 @@
             <section class="hsg-grid hsg-main-inner">
                 <div class="container hsg-main-content">
                     <main id="content"/>
-                </div>
-            </section>
-        </div>
-
-        <div class="hsg-cite__footer" data-template="pages:unless-asides">
-            <section class="hsg-grid">
-                <div class="container">
-                    <button title="Cite this resource" class="hsg-cite__button">Cite this resource</button>
+                    <section class="" data-template="pages:unless-asides">
+                        <button title="Cite this resource" class="hsg-cite__button">Cite this resource</button>
+                    </section>
                 </div>
             </section>
         </div>

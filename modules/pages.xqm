@@ -45,30 +45,30 @@ declare
     %templates:default("ignore", "false")
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?,
         $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean, $open-graph-keys as xs:string?, $open-graph-keys-exclude as xs:string?, $open-graph-keys-add as xs:string?) {
-        
+
     let $log := console:log("loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id )
-    
+
     let $static-open-graph := map:merge((
         for $meta in $node//*[@id eq 'static-open-graph']/meta
         return map{ string($meta/@property) : function($node as node()?, $model as map(*)?) {$meta}}),  map{"duplicates": "use-last"}
     )
     let $static-open-graph-keys := map:keys($static-open-graph)
-    
+
     let $ogk as xs:string* := if ($open-graph-keys) then tokenize($open-graph-keys, '\s') else $config:OPEN_GRAPH_KEYS
     let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
     let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
 
 
 
-    let $last-modified := 
+    let $last-modified :=
         if (exists($publication-id) and exists($document-id)) then
             pages:last-modified($publication-id, $document-id, $section-id)
-        else 
+        else
             ()
     let $if-modified-since := try { request:get-attribute("if-modified-since") => parse-ietf-date() } catch * { () }
-    let $should-return-304 := 
+    let $should-return-304 :=
         if (exists($last-modified) and exists($if-modified-since)) then
-            $if-modified-since ge 
+            $if-modified-since ge
                 $last-modified
                 (: For the purpose of comparing the resource's last modified date with the If-Modified-Since
                  : header supplied by the client, we must truncate any milliseconds from the last modified date.
@@ -78,14 +78,14 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                 => xs:dateTime()
         else
             ()
-    let $created := 
+    let $created :=
         if (exists($publication-id) and exists($document-id)) then
             (: No need to truncate creation date; it'll be serialized in view.xql :)
             pages:created($publication-id, $document-id, $section-id)
-        else 
+        else
             ()
     return
-        (: if the "If-Modified-Since" header in the client request is later than the 
+        (: if the "If-Modified-Since" header in the client request is later than the
          : last-modified date, then halt further processing of the templates and simply
          : return a 304 response. :)
         if ($should-return-304) then
@@ -113,10 +113,10 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
         		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"}),
         		"url":
-        		  try { request:get-url() } 
+        		  try { request:get-url() }
         		  catch err:XPDY0002 { 'test-url' },  (: some contexts do not have a request object, e.g. xqsuite testing :)
         		"local-uri":
-        		  try { substring-after(request:get-uri(), $app:APP_ROOT)} 
+        		  try { substring-after(request:get-uri(), $app:APP_ROOT)}
         		  catch err:XPDY0002 { 'test-path' }  (: some contexts do not have a request object, e.g. xqsuite testing :)
             }
             let $citation-meta :=
@@ -126,7 +126,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                     $meta-fun($node, $new.model)
                 else
                     config:default-citation-meta($node, $new.model)
-        
+
             return
                 (
                     if (exists($last-modified) and exists($created)) then
@@ -503,7 +503,7 @@ declare function pages:generate-title ($model, $content) {
 };
 
 (: The short title does not include super-section titles, in contrast to the full title.
- : 
+ :
  : The short title is populated by the first non-empty value from the following list:
  : - A pre-defined static title on the page template: `$node/ancestor-or-self::*[last()]//div[@id="static-title"]/string()`
  : - The title defined by publication-id: `if ($model?publication-id) then map:get($config:PUBLICATIONS, $model?publication-id)?title else ()`
@@ -538,7 +538,7 @@ declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
   </nav>
 };
 
-declare function pages:generate-breadcrumb-item($uri-step-state as map(*)) as element(li)*{ 
+declare function pages:generate-breadcrumb-item($uri-step-state as map(*)) as element(li)*{
     (: The URI step state is generated from the site config file for each URI in the breadcrumb list :)
     <li
         class="hsg-breadcrumb__list-item"
@@ -736,5 +736,7 @@ declare function pages:asides($node, $model){
 declare function pages:suppress($node as node()?, $model as map(*)?) {};
 
 declare function pages:unless-asides($node, $model){
-    if ($node/ancestor::body/div[tokenize(@class, '\s') = 'hsg-main']//aside[@data-template eq 'pages:asides']) then () else $node
+    if ($node/ancestor::body/main[@id = 'content']//aside[@data-template eq 'pages:asides'])
+    then ()
+    else $node
 };
