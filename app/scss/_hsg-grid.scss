@@ -2,7 +2,7 @@
 
 .hsg-container {
   @media (min-width: $screen-lg-min) {
-    width: $container-md;
+    width: 968px;
   }
 }
 
@@ -13,13 +13,13 @@
     width: $container-sm;
   }
   @media screen and (min-width: $screen-lg-min) {
-    width: $container-md;
+    width: 968px;
   }
 }
 
 .hsg-grid {
   @media screen and (min-width: $screen-lg-min) {
-    width: $container-md;
+    width: 968px;
     max-width: 100%;
     margin: 0 auto;
     border: $default-border-style;
