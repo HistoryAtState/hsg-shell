@@ -20,7 +20,9 @@
             </section>
 
             <section class="row">
-            <!--section class="row" data-template="news:init-news"-->
+            <!--
+                <section class="row" data-template="news:init-news">
+            -->
                 <div class="hsg-width-one-whole">
                     <ul class="hsg-list hsg-columns__flex hsg-list__news">
                         <li class="hsg-list__item">
@@ -31,9 +33,13 @@
                                 -->
                                 <div class="hsg-list__item-wrap">
                                     <h3 class="hsg-list__title">
-                                    <!--h3 class="hsg-list__title" data-template="news:heading"-->
-                                        <a class="hsg-list__link" href="#">Foreign Relations of the United States, 1977–1980, Volume IX, Arab-Israeli Dispute, August 1978–December 1980</a>
-                                        <!--a class="hsg-list__link" data-template="news:heading-link" /-->
+                                    <!--
+                                        <h3 class="hsg-list__title" data-template="news:heading"/>
+                                    -->
+                                        <a class="hsg-list__link" href="news/news-article">Foreign Relations of the United States, 1977–1980, Volume IX, Arab-Israeli Dispute, August 1978–December 1980</a>
+                                        <!--
+                                            <a class="hsg-list__link" data-template="news:heading-link"/>
+                                        -->
                                     </h3>
                                     <p class="hsg-list__text--truncated">
                                         <span class="hsg-list__text--truncated--ellipsis">
@@ -48,10 +54,14 @@
                                             It traces the course of the September 1978 Camp David Summit and the series of negotiations which followed,
                                             talks which culminated in the conclusion of the Egyptian-Israeli Peace Treaty on March 26, 1979.
                                         </span>
-                                        <!--span data-template="news:text"/-->
+                                        <!--
+                                            <span data-template="news:text"/>
+                                        -->
                                     </p>
                                     <a class="hsg-list__more" href="historicaldocuments/frus1977-80v09/pressrelease">View press release</a>
-                                    <!--a class="hsg-list__more" data-template="news:link"/-->
+                                    <!--
+                                        <a class="hsg-list__more" data-template="news:read-more-link"/>
+                                    -->
                                 </div>
                             </div>
                         </li>
