@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="pages:load">
+<div data-template="pages:load" data-template-ignore="true">
    <div data-template="templates:surround"
         data-template-with="templates/site.xml"
         data-template-at="content">
