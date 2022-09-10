@@ -5,7 +5,12 @@ xquery version "3.1";
  :)
 module namespace news = "http://history.state.gov/ns/site/hsg/news";
 
+import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+
+declare namespace a="http://www.w3.org/2005/Atom";
+declare namespace xhtml="http://www.w3.org/1999/xhtml";
 
 declare
     %templates:replace
@@ -87,4 +92,12 @@ function news:read-more-link ($node as node(), $model as map(*)) {
             * attr href with link
             * label string as node content
     :)
+};
+
+declare
+    %templates:wrap
+function news:article-body($node as node(), $model as map(*), $document-id as xs:string) as node()* {
+    let $article := $config:PUBLICATIONS?news?select-document($document-id)
+    let $article-body := $article/a:entry/a:content/xhtml:div
+    return $article-body/node()
 };

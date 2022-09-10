@@ -1714,25 +1714,35 @@ else if (matches($exist:path, '^/education/?')) then
     let $log := util:log('info', ('controller.xq, Endpoint => ^/news/?'))
     let $log := util:log('info', ('$fragments=', $fragments))
     (: TODO TFJH: Refactor url endpoints for news articles, this is just an interim solution for template development :)
-    let $page :=
-        if ($fragments[1]) then
-            switch ($fragments[1])
-                case $fragments[1] return 'news/news-article.xml'
-                default return 'error-page.xml'
-        else
-            'news/news-list.xml'
-    return (
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/pages/{ $page }"/>
-            <view>
-                <forward url="{$exist:controller}/modules/view.xql"/>
-            </view>
-            <error-handler>
-                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                <forward url="{$exist:controller}/modules/view.xql"/>
-            </error-handler>
-        </dispatch>
-    )
+    return 
+        if ($fragments[1]) 
+        then (
+            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                <forward url="{$exist:controller}/pages/news/news-article.xml"/>
+                <view>
+                    <forward url="{$exist:controller}/modules/view.xql">
+                        <add-parameter name="publication-id" value="news"/>
+                        <add-parameter name="document-id" value="{$fragments[1]}"/>
+                    </forward>
+                </view>
+                <error-handler>
+                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
+                    <forward url="{$exist:controller}/modules/view.xql"/>
+                </error-handler>
+            </dispatch>
+        ) 
+        else (
+            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                <forward url="{$exist:controller}/pages/news/news-list.xml"/>
+                <view>
+                    <forward url="{$exist:controller}/modules/view.xql"/>
+                </view>
+                <error-handler>
+                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
+                    <forward url="{$exist:controller}/modules/view.xql"/>
+                </error-handler>
+            </dispatch>
+        )
 
 (: handle search requests :)
 else if (matches($exist:path, '^/search/?')) then

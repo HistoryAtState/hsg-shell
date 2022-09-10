@@ -1332,7 +1332,10 @@
     </step>
     <step value="news">
         <step key="article">
-            <page-template href="pages/news/news-article.xml"/>
+            <page-template href="pages/news/news-article.xml">
+                <with-param name="publication-id" value="news"/>
+                <with-param name="document-id" keyval="article"/>
+            </page-template>
             <config>
                 <src collection="."/>
             </config>
