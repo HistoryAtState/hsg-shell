@@ -17,6 +17,8 @@ declare namespace repo="http://exist-db.org/xquery/repo";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace request="http://exist-db.org/xquery/request";
 declare namespace response="http://exist-db.org/xquery/response";
+declare namespace a="http://www.w3.org/2005/Atom";
+declare namespace xhtml="http://www.w3.org/1999/xhtml";
 
 (:
     Determine the application root collection from the current module load path.
@@ -119,7 +121,7 @@ declare variable $config:HAC_COL := "/db/apps/hac";
 declare variable $config:HIST_DOCS :=  "/db/apps/hsg-shell/pages/historicaldocuments";
 declare variable $config:TWITTER_COL := "/db/apps/twitter/data/HistoryAtState";
 declare variable $config:TUMBLR_COL := "/db/apps/tumblr/data/HistoryAtState";
-
+declare variable $config:NEWS_COL := "/db/apps/hsg-shell/tests/data/news";
 declare variable $config:FRUS_HISTORY_COL := '/db/apps/frus-history';
 declare variable $config:FRUS_HISTORY_ARTICLES_COL := $config:FRUS_HISTORY_COL || '/articles';
 declare variable $config:FRUS_HISTORY_DOCUMENTS_COL := $config:FRUS_HISTORY_COL || '/documents';
@@ -691,6 +693,28 @@ declare variable $config:PUBLICATIONS :=
               else if (exists($region)) then $region
               else ()
           }
+        },
+        "news": map{
+            "collection": $config:NEWS_COL,
+            "select-document": function($document-id) { 
+                collection($config:NEWS_COL)/*[.//a:id eq $document-id] => root()
+            },
+            "document-last-modified": function($document-id) {
+                let $uri := collection($config:NEWS_COL)/*[.//a:id eq $document-id] => document-uri()
+                let $col-name := replace($uri, '(.+)/.+', '$1')
+                let $doc-name := replace($uri, '.+/(.+)', '$1')
+                return xmldb:last-modified($col-name, $doc-name)
+            },
+            "document-created": function($document-id) { 
+                let $uri := collection($config:NEWS_COL)/*[.//a:id eq $document-id] => document-uri()
+                let $col-name := replace($uri, '(.+)/.+', '$1')
+                let $doc-name := replace($uri, '.+/(.+)', '$1')
+                return xmldb:created($col-name, $doc-name)
+            },
+            "breadcrumb-title": 
+                function($parameters as map(*)) {
+                    collection($config:NEWS_COL)/a:entry[a:id eq $parameters?document-id]/a:title/xhtml:div/node()
+                }  
         }
     };
 
@@ -713,7 +737,8 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:VIEWS_FROM_EMBASSY_COL: "views-from-the-embassy",
         $config:COUNTRIES_ARTICLES_COL: "countries",
         $config:COUNTRIES_ISSUES_COL: "countries-issues",
-        $config:ARCHIVES_ARTICLES_COL: "archives"
+        $config:ARCHIVES_ARTICLES_COL: "archives",
+        $config:NEWS_COL: "news"
     };
 
 declare variable $config:OPEN_GRAPH_KEYS := ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:image", "og:url", "citation");
