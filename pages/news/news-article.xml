@@ -1,17 +1,25 @@
 <div data-template="pages:load" data-template-ignore="true">
     <div data-template="templates:surround" data-template-with="templates/site.xml" data-template-at="content">
-        <div class="row">
+        <section class="row">
             <div data-template="pages:breadcrumb"/>
-        </div>
-        <div class="row">
-            <div class="hsg-width-two-thirds">
-            <!--
-            <div class="hsg-width-two-thirds" data-template="news:init-article">
-            -->
-                <div id="content-inner" data-template="news:article-body">
-                    <h1>News Article headline</h1>
+        </section>
+        <div data-template="news:init-article">
+            <section class="row">
+                <div class="hsg-width-one-whole">
+                    <div data-template="app:fix-links">
+                        <h1 data-template="news:heading"/>
+                    </div>
                 </div>
-            </div>
+            </section>
+            <section class="row">
+                <div class="hsg-width-two-thirds">
+                    <div class="hsg-badge hsg-badge__news" data-template="news:date"/>
+                    <div class="hsg-news hsg-news__article__content" data-template="news:article-content"/>
+                    <div>
+                        <a class="hsg-list__more" target="_blank" data-template="news:read-more-link"/>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </div>

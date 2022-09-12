@@ -48,22 +48,35 @@ function news:sorted ($news-list) {
     :)
 };
 
+(:
+ : Colored badges with date
+ : 1. retrieve news type from news-model, e.g. 'twitter', 'tumblr'
+ : 2. retrieve date string to display in badge
+ : 3. return
+ :    * element with attr `classname` || --`type` for badge-color =>  `hsg-badge--twitter`
+ :    * date string as node content
+ :)
 declare
     %templates:replace
 function news:date ($node as node(), $model as map(*) ) {
-    (:
-        1. retrieve news type from news-model
-        2. retrieve date string to display in badge
-        3. return
-            * element with attr `classname` || --`type` for badge-color =>  `hsg-badge--twitter`
-            * date string as node content
-    :)
+
+    let $type := $model?type
+    let $raw-date := $model?date-published
+    let $date := app:format-date-month-short-day-year($raw-date)
+    return
+        element { node-name($node) } {
+            $node/@*[not(local-name() = 'class')],
+            attribute class {
+                string-join(($node/@class/string(), "hsg-badge--" || $type), ' ')
+            },
+            $date
+        }
 };
 
 declare
-    %templates:replace
+    %templates:wrap
 function news:heading ($node as node(), $model as map(*) )  {
-    (: retrieve news title string from news-model :)
+   $model?title/string()
 };
 
 declare
@@ -77,55 +90,66 @@ function news:heading-link ($node as node(), $model as map(*)) {
 
 declare
     %templates:wrap
-function news:text ($node as node(), $model as map(*) ) {
-    (: retrieve description text from news-model as string :)
+function news:summary ($node as node(), $model as map(*) ) {
+    (: retrieve summary from news-model as string :)
 };
 
 declare
-    %templates:wrap
+    %templates:replace
 function news:read-more-link ($node as node(), $model as map(*)) {
-    (:
-        1. retrieve news type from news-model
-        2. retrieve text label for link
-        3. retrieve URL depending on type
-        4. return
-            * attr href with link
-            * label string as node content
-    :)
+    let $label := $model?label/string()
+    let $url := $model?external-link
+
+    return
+        element { node-name( $node ) } {
+            $node/@*[not(local-name() = 'href')],
+            attribute href { $url },
+            $label
+        }
 };
 
+(:
+ : Initialize News Articles
+ : Populate $model with news article data
+ :)
 declare
-    %templates:wrap
-function news:init-article($node as node(), $model as map(*)) {
-    (: Add metadata to new model
-    let $title := get news title
-    let $news := get news
-    let $id := get ID
-    let $thumbnail := get thumbnail if available
+    %templates:replace
+function news:init-article($node as node(), $model as map(*), $document-id as xs:string) {
+    let $news := $config:PUBLICATIONS?news?select-document($document-id)
+    let $type := substring-before($news/a:entry/a:id/string(), '-')
+    let $title := $news/a:entry/a:title/xhtml:div
+    let $id := $document-id
+    let $external-link := $news/a:entry/a:link[@rel != 'self']/@href
+    let $label := $news/a:entry/a:link/@title
+    (:let $thumbnail := get thumbnail if available:)
+    let $date-published := $news/a:entry/a:published
+    let $updated := $news/a:entry/a:updated
+    let $content := $news/a:entry/a:content/xhtml:div
 
     let $news-model := map:merge((
         $model,
         map {
             'news': $news,
             'title': $title,
-            'thumbnail': $thumbnail
             'id': $id,
-            'external-link': $external-link
+            'type': $type,
+            'external-link': $external-link,
+            'date-published': $date-published,
+            'updated' : $updated,
+            'label' : $label,
+            'content' : $content
         }
     ))
 
     return
         element { node-name( $node ) } {
-            $node,
-            $news-model)
+            $node/@*,
+            templates:process($node/node(), $news-model)
         }
-    :)
 };
 
 declare
     %templates:wrap
-function news:article-body($node as node(), $model as map(*), $document-id as xs:string) as node()* {
-    let $article := $config:PUBLICATIONS?news?select-document($document-id)
-    let $article-body := $article/a:entry/a:content/xhtml:div
-    return $article-body/node()
+function news:article-content($node as node(), $model as map(*)) {
+    $model?content
 };
