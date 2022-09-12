@@ -165,6 +165,14 @@ declare function app:set-created($created as xs:dateTime) {
     response:set-header("Created", app:format-http-date($created))
 };
 
+(:
+ : 2015-06-04T13:03:16-04:00 -> Jun 4, 2015
+ :)
+declare function app:format-date-month-short-day-year($dateTime as xs:dateTime) as xs:string {
+    $dateTime
+    => format-dateTime("[MNn,*-3] [D01], [Y]", "en", (), ())
+};
+
 declare function app:uri($node as node(), $model as map(*)) {
     <code>{request:get-attribute("hsg-shell.path")}</code>
 };
