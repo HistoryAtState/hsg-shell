@@ -96,6 +96,34 @@ function news:read-more-link ($node as node(), $model as map(*)) {
 
 declare
     %templates:wrap
+function news:init-article($node as node(), $model as map(*)) {
+    (: Add metadata to new model
+    let $title := get news title
+    let $news := get news
+    let $id := get ID
+    let $thumbnail := get thumbnail if available
+
+    let $news-model := map:merge((
+        $model,
+        map {
+            'news': $news,
+            'title': $title,
+            'thumbnail': $thumbnail
+            'id': $id,
+            'external-link': $external-link
+        }
+    ))
+
+    return
+        element { node-name( $node ) } {
+            $node,
+            $news-model)
+        }
+    :)
+};
+
+declare
+    %templates:wrap
 function news:article-body($node as node(), $model as map(*), $document-id as xs:string) as node()* {
     let $article := $config:PUBLICATIONS?news?select-document($document-id)
     let $article-body := $article/a:entry/a:content/xhtml:div
