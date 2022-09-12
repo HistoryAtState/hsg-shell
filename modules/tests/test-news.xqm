@@ -13,33 +13,111 @@ declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace a="http://www.w3.org/2005/Atom";
 declare namespace xhtml="http://www.w3.org/1999/xhtml";
 
+declare variable $x:test_col := collection('../../tests/data/news');
+
 (:
- :  WHEN calling news:article-body()
- :  GIVEN an article ID $article
- :  GIVEN the test news collection      TODO TFJH: work out how best to specify collections to separate test data
- :  THEN return the $expected article body
+ :  WHEN calling news:init-news-list()
+ :  GIVEN a position to start from, $start
+ :  GIVEN a number of entries to return, $num
+ :  THEN return a map with ?collection := $config:NEWS_COL
+ :  AND ?total as an integer
+ :  AND ?entries as $num atom entries
  :)
-declare
-    %test:assertEquals('true')
-function x:test-news-article-body() {
-    let $article := 'twitter-996375936852480000'
-    let $node := <div/> (: xqsuite is not great at replicating the templating functions, so this is really just a placeholder :)
-    let $model := map{} (: we don't need too much from the model here. :)
-    let $actual := news:article-body($node, $model, $article)
-    let $expected := (
-         <p xmlns="http://www.w3.org/1999/xhtml">Students! Apply now to intern in 2019 at the <a href="https://twitter.com/StateDept">@StateDept</a> Office of the Historian
-                        (<a href="https://twitter.com/HistoryAtState">@HistoryAtState</a>)! <a href="https://www.historians.org/news-and-advocacy/calendar/event-detail?eventId=1817">historians.org/news-and-advoc…</a>
-            <a href="https://twitter.com/AHAhistorians">@AHAhistorians</a>
-            <a href="https://twitter.com/search?q=%23twitterstorians&amp;src=hash">#twitterstorians</a>
-         </p>
-      )
-    return 
-        if (deep-equal($actual, $expected))
-        then 
-            'true' 
-        else 
-            <result>
-                <actual>{$actual}</actual>
-                <expected>{$expected}</expected>
-            </result>
-};
+
+(:
+ :  WHEN calling news:sorted()
+ :  GIVEN a sequence of atom entries $entries
+ :  GIVEN a $start position in the sequence
+ :  GIVEN an $end position in the sequence
+ :  THEN return the entries corresponding to those between the $start
+ :  and $end position in the sequence inclusive, where the sequence
+ :  has been sorted by date descending.
+ :)
+
+(:
+ :  WHEN calling news:init-news-entry()
+ :  GIVEN a model containing an atom entry as ?to
+ :  GIVEN no supplied $document-id
+ :  THEN return a map with ?entry with the result of ?to
+ :  AND ?type taken from ?entry
+ :  AND ?sort-date taken from ?entry
+ :)
+
+(:
+ :  WHEN calling news:init-news-entry()
+ :  GIVEN model NOT containing ?to
+ :  GIVEN a model containing the ?collection of atom entries
+ :  GIVEN a supplied $document-id
+ :  THEN return a map with ?entry corresponding to $document-id
+ :  AND ?type taken from ?entry
+ :  AND ?sort-date taken from ?entry
+ :)
+
+(:
+ :  WHEN calling news:get-sort-date()
+ :  GIVEN a supplied atom entry with an updated date
+ :  THEN return the updated date as a dateTime
+ :)
+
+(:
+ :  WHEN calling news:get-sort-date()
+ :  GIVEN a supplied atom entry with no updated date
+ :  THEN return the created date as a dateTime
+ :)
+
+(:
+ :  WHEN calling news:date
+ :  GIVEN a $model map with ?type
+ :  GIVEN a $model map with ?sort-date
+ :  GIVEN a span $node
+ :  THEN add the string ("hsg-badge--" || ?type) to $node/@class
+ :  AND replace the contents of $node with app:format-date-month-short-day-year($model?sort-date)
+ :)
+
+(:
+ :  WHEN calling news:title
+ :  GIVEN a $model?entry
+ :  RETURN the title nodes from the entry
+ :)
+
+(:
+ :  WHEN calling news:heading-link
+ :  GIVEN a $model?entry
+ :  GIVEN a <a/> $node
+ :  RETURN the <a/> node with preserved @class
+ :  AND @href corresponding to $model?entry/a:entry/a:link[@rel eq 'self']/@href
+ :  AND content corresponding to news:title($node, $model)
+ :)
+ 
+(:
+ :  WHEN calling news:further-links
+ :  GIVEN a $model?entry with one or more 'further' types of $link
+ :      (//a:link[not(@rel = ('self', 'enclosure'))])
+ :  GIVEN a $node/a template hyperlink
+ :  THEN return a hyperlink for each $link
+ :  AND set @href to $link/$href
+ :  AND set the text content to $link/@title (if present)
+ :  AND set the text content to 'Visit Resource' (if not)
+ :  AND preserve any other attributes from $node/a
+ :  
+ :)
+
+(:
+ :  WHEN calling news:summary
+ :  GIVEN an atom entry as $model?entry
+ :  GIVEN that entry has an non-empty summary
+ :  THEN generate a summary from a:entry/a:summary/xhtml:div/node()
+ :)
+
+(:
+ :  WHEN calling news:summary
+ :  GIVEN an atom entry as $model?entry
+ :  GIVEN that entry has no non-empty summary
+ :  THEN generate a summary from a:entry/a:content/xhtml:div/node()
+ :)
+ 
+(:
+ :  WHEN calling news:article-content
+ :  GIVEN an atom entry as $model?entry
+ :  THEN generate content from a:entry/a:content/xhtml:div/node()
+ :)
