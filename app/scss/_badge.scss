@@ -1,10 +1,8 @@
 /* HSG Badge -------------- */
 
 .hsg-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     min-width: $badge-width;
+    width: $badge-width;
     height: $badge-height;
     background: $color-gray-light;
     color: $color-white;
@@ -19,15 +17,23 @@
       background: $twitter-color;
     }
 
-    &--volume {
-      background: $volume-color;
+    &--carousel {
+      background: $carousel-color;
     }
 
     &--press {
       background: $press-color;
     }
 
+    &--tumblr {
+      background: $tumblr-color;
+    }
+
     &--article {
       background: $article-color;
+    }
+
+    &__news {
+      margin: 2rem 0 1.3rem 0;
     }
   }

@@ -31,3 +31,17 @@
         }
     }
 }
+
+.hsg-news {
+    img {
+        @extend .img-responsive;
+        border: 1px solid $color-gray-light;
+        padding: 10px;
+        border-radius: 1ex;
+    }
+
+    &__article {
+        &__content {
+        }
+    }
+}
