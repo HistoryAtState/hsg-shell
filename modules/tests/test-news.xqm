@@ -19,10 +19,50 @@ declare variable $x:test_col := collection('../../tests/data/news');
  :  WHEN calling news:init-news-list()
  :  GIVEN a position to start from, $start
  :  GIVEN a number of entries to return, $num
- :  THEN return a map with ?collection := $config:NEWS_COL
- :  AND ?total as an integer
- :  AND ?entries as $num atom entries
+ :  THEN return a map with ?entries as $num atom entries from $model?collection
+ :  AND ?total as the integer total of entries in ?entries 
  :)
+declare
+    %test:assertEquals('true')
+function x:test-init-news-list-collection(){
+    let $expected := collection('../../tests/data/news')
+    let $model := map{
+            "collection": $x:test_col
+        }
+    let $actual := news:init-news-list((), $model, 1, 5)
+    return 
+        if (deep-equals($actual?collection, $expected))
+        then 'true'
+        else 
+            <result>
+                <actual>{$actual?collection}</actual>
+                <expected>{$expected}</expected>
+            </result>
+};
+
+declare
+    %test:assertEquals(5)
+function x:test-init-news-list-total(){
+    let $model := map{
+            "collection": $x:test_col
+        }
+    let $actual := news:init-news-list((), $model, 1, 5)
+    return $actual?total
+};
+
+declare
+    %test:assertEquals(
+        "press-release-frus1981-88v11",
+        "carousel-112"
+    )
+function x:test-init-news-list-articles(){
+    let $model := map{
+            "collection": $x:test_col
+        }
+    let $actual := news:init-news-list((), $model, 2, 3)
+    let $entries := $actual?entries
+    return $entries/a:entry/a:id
+};
 
 (:
  :  WHEN calling news:sorted()
@@ -33,6 +73,18 @@ declare variable $x:test_col := collection('../../tests/data/news');
  :  and $end position in the sequence inclusive, where the sequence
  :  has been sorted by date descending.
  :)
+
+declare
+    %test:assertEquals(
+        "carousel-112",
+        "press-release-frus1981-88v04",
+        "carousel-111"
+    )
+function x:test-news-sorted(){
+    let $entries := $x:test_col
+    let $actual := news:sorted($entries, 3, 5)
+    return $actual/a:entry/a:id
+};
 
 (:
  :  WHEN calling news:init-news-entry()
