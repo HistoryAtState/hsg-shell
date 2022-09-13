@@ -63,11 +63,15 @@ function news:date ($node as node(), $model as map(*) ) {
     let $type := $model?type
     let $raw-date := $model?date-published
     let $date := app:format-date-month-short-day-year($raw-date)
+    let $dateTime-attribute := app:format-date-short($raw-date)
     return
         element { node-name($node) } {
             $node/@*[not(local-name() = 'class')],
             attribute class {
                 string-join(($node/@class/string(), "hsg-badge--" || $type), ' ')
+            },
+            attribute dateTime {
+                $dateTime-attribute
             },
             $date
         }

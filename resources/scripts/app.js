@@ -451,16 +451,7 @@ $(document).ready(function() {
     //------------------------------------------//
 
     function initContent() {
-        $(".content .note").popover({
-            html: true,
-            trigger: "hover click",
-            placement: "auto bottom",
-            viewport: "#content-container",
-            content: function() {
-                var fn = document.getElementById(this.hash.substring(1));
-                return $(fn).find(".fn-content").html();
-            }
-        });
+        window.initFootnotes();
         $(".content .note, .content .fn-back").click(function(ev) {
             ev.preventDefault();
             var fn = document.getElementById(this.hash.substring(1));

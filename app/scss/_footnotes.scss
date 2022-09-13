@@ -1,0 +1,64 @@
+/* Footnote styles for displaying on mobile devices */
+
+#footnote-modal{
+  &.modal.fade {
+    .modal-dialog {
+      -webkit-transform: translate(0, 30%);
+      transform: translate(0, 30%);
+    }
+  }
+  &.modal.in {
+    .modal-dialog {
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0);
+    }
+  }
+  .modal-dialog-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .modal-dialog {
+    position: relative;
+    font-size: 125%;
+    .modal-content {
+      border-radius: 0;
+      width: auto !important;
+      height: auto !important;
+      .modal-header {
+        padding-bottom: 0;
+        border: none;
+      }
+      a.fn-back {
+        display: none;
+      }
+    }
+  }
+  #link {
+    padding-top: 15px;
+  }
+}
+.popover-content a.fn-back {
+  display: none;
+}
+
+/* override default list styling since FRUS footnote labels may contain non-numeric values.
+ * by default, browsers only output leading numbers in li/@value, so in value="60a", the "a" was not shown. */
+ .footnotes {
+    ol {
+      list-style: none;
+      padding-inline-start: 0px;
+      border-collapse: separate;
+      border-spacing: 0 $margin-vertical-base;
+    }
+    li {
+      display: table-row;
+    }
+    li:before {
+      content: attr(value)".";
+      display: table-cell;
+      padding-right: 0.25rem;
+      text-align: right;
+    }
+  }

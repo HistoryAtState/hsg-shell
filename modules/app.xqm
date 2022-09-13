@@ -5,6 +5,7 @@ module namespace app="http://history.state.gov/ns/site/hsg/templates";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace functx = "http://www.functx.com";
 
 declare variable $app:APP_ROOT :=
     let $nginx-request-uri := request:get-header('nginx-request-uri')
@@ -171,6 +172,16 @@ declare function app:set-created($created as xs:dateTime) {
 declare function app:format-date-month-short-day-year($dateTime as xs:dateTime) as xs:string {
     $dateTime
     => format-dateTime("[MNn,*-3] [D01], [Y]", "en", (), ())
+};
+
+(:
+ : 2015-06-04T13:03:16-04:00 -> 06/04/2015
+ :)
+declare function app:format-date-short ($date as xs:dateTime) as xs:string {
+    let $mm := functx:pad-integer-to-length(month-from-dateTime($date), 2)
+    let $dd := functx:pad-integer-to-length(day-from-dateTime($date), 2)
+    let $yyyy := year-from-dateTime($date)
+    return string-join(($mm, $dd, $yyyy), '/')
 };
 
 declare function app:uri($node as node(), $model as map(*)) {
