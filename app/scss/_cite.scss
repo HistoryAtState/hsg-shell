@@ -52,12 +52,6 @@ button.btn.btn-primary.close-button {
   min-width: 60px;
 }
 
-// Needed to display the citation trigger button correctly
-// for pages without a sidebar
-.hsg-main > .hsg-grid:not(last-of-type) {
-  border-bottom: 0;
-}
-
 // Link Button at bottom of pages without a sidebar
 .hsg-cite {
   &__footer {
