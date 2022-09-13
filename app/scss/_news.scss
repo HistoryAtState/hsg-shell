@@ -33,6 +33,10 @@
 }
 
 .hsg-news {
+    figure {
+        margin: 2rem 0;
+    }
+
     img {
         @extend .img-responsive;
         border: 1px solid $color-gray-light;
@@ -43,5 +47,9 @@
     &__article {
         &__content {
         }
+    }
+
+    &__more {
+        font-family: $font-sans;
     }
 }

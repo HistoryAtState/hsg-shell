@@ -12,12 +12,10 @@
                 </div>
             </section>
             <section class="row">
-                <div class="hsg-width-two-thirds">
+                <div class="hsg-width-two-thirds hsg-news">
                     <div class="hsg-badge hsg-badge__news" data-template="news:date"/>
                     <div class="hsg-news hsg-news__article__content" data-template="news:article-content"/>
-                    <div>
-                        <a class="hsg-list__more" target="_blank" data-template="news:read-more-link"/>
-                    </div>
+                    <a class="hsg-news__more" target="_blank" data-template="news:read-more-link"/>
                 </div>
             </section>
         </div>
