@@ -1,5 +1,6 @@
 /* Citation component, modal dialog and trigger buttons */
 
+// Customized modal for citation
 .modal-body {
   &__citation-group:not(:last-child) {
     margin-bottom: 4rem;
@@ -41,14 +42,18 @@
   word-break: break-word;
 }
 
+// Highlighting for selected citation
 .copied {
   background-color: $color-gray-lightest;;
 }
 
+// Close button in modal dialog
 button.btn.btn-primary.close-button {
   min-width: 60px;
 }
 
+// Needed to display the citation trigger button correctly
+// for pages without a sidebar
 .hsg-main > .hsg-grid:not(last-of-type) {
   border-bottom: 0;
 }
