@@ -175,13 +175,11 @@ declare function app:format-date-month-short-day-year($dateTime as xs:dateTime) 
 };
 
 (:
- : 2015-06-04T13:03:16-04:00 -> 06/04/2015
+ : 2015-06-04T13:03:16-04:00 -> yyyy-mm-dd -> 2015-06-04
  :)
 declare function app:format-date-short ($date as xs:dateTime) as xs:string {
-    let $mm := functx:pad-integer-to-length(month-from-dateTime($date), 2)
-    let $dd := functx:pad-integer-to-length(day-from-dateTime($date), 2)
-    let $yyyy := year-from-dateTime($date)
-    return string-join(($mm, $dd, $yyyy), '/')
+    let $date := substring-before($date, 'T')
+    return $date
 };
 
 declare function app:uri($node as node(), $model as map(*)) {
