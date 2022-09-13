@@ -13,7 +13,7 @@
             </section>
             <section class="row">
                 <div class="hsg-width-two-thirds hsg-news hsg-news__container">
-                    <div class="hsg-badge hsg-badge__news" data-template="news:date"/>
+                    <time class="hsg-badge hsg-badge__news" data-template="news:date"/>
                     <div class="hsg-news__content--article" data-template="news:article-content"/>
                     <a class="hsg-news__more" target="_blank" data-template="news:read-more-link"/>
                 </div>
