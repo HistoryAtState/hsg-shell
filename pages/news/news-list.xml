@@ -58,7 +58,7 @@
                                             <span data-template="news:text"/>
                                         -->
                                     </p>
-                                    <a class="hsg-list__more" href="historicaldocuments/frus1977-80v09/pressrelease">View press release</a>
+                                    <a class="hsg-news__more" href="historicaldocuments/frus1977-80v09/pressrelease">View press release</a>
                                     <!--
                                         <a class="hsg-list__more" data-template="news:read-more-link"/>
                                     -->
