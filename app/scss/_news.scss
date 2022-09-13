@@ -33,8 +33,10 @@
 }
 
 .hsg-news {
-    figure {
-        margin: 2rem 0;
+    $el: '.hsg-news';
+
+    &#{$el}__container {
+        margin: 0 0 4rem 0;
     }
 
     img {
@@ -44,8 +46,11 @@
         border-radius: 1ex;
     }
 
-    &__article {
-        &__content {
+    &__content {
+        &--article {
+            figure {
+                margin: 2rem 0;
+            }
         }
     }
 
