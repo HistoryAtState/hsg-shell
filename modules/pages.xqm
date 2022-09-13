@@ -102,6 +102,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                 "publication-id": $publication-id,
                 "document-id": $document-id,
                 "section-id": $section-id,
+                "collection": $config:PUBLICATIONS?($publication-id)?collection,
                 "view": $view,
                 "base-path":
                     (: allow for pages that do not have $config:PUBLICATIONS?select-document defined :)
