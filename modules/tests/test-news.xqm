@@ -87,8 +87,14 @@ function x:test-news-sorted(){
 };
 
 (:
+ :  WHEN calling news:type()
+ :  GIVEN an atom $entry
+ :  THEN return the type of the entry
+ :)
+
+(:
  :  WHEN calling news:init-news-entry()
- :  GIVEN a model containing an atom entry as ?to
+ :  GIVEN a model containing an atom entry as ?entry
  :  GIVEN no supplied $document-id
  :  THEN return a map with ?entry with the result of ?to
  :  AND ?type taken from ?entry
@@ -119,11 +125,10 @@ function x:test-news-sorted(){
 
 (:
  :  WHEN calling news:date
- :  GIVEN a $model map with ?type
- :  GIVEN a $model map with ?sort-date
+ :  GIVEN a $model map with an atom entry ?entry with $type and $sort-date
  :  GIVEN a span $node
- :  THEN add the string ("hsg-badge--" || ?type) to $node/@class
- :  AND replace the contents of $node with app:format-date-month-short-day-year($model?sort-date)
+ :  THEN add the string ("hsg-badge--" || $type) to $node/@class
+ :  AND replace the contents of $node with app:format-date-month-short-day-year($sort-date)
  :)
 
 (:
