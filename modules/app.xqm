@@ -170,6 +170,7 @@ declare function app:set-created($created as xs:dateTime) {
  :)
 declare function app:format-date-month-short-day-year($dateTime as xs:dateTime) as xs:string {
     $dateTime
+    => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
     => format-dateTime("[MNn,*-3] [D01], [Y]", "en", (), ())
 };
 
