@@ -737,7 +737,7 @@ declare function pages:asides($node, $model){
 declare function pages:suppress($node as node()?, $model as map(*)?) {};
 
 declare function pages:unless-asides($node, $model){
-    if ($node/ancestor::body/main[@id = 'content']//aside[@data-template eq 'pages:asides'])
+    if ($node/ancestor::body//aside[@data-template eq 'pages:asides'])
     then ()
     else $node
 };
