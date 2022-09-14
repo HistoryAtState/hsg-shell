@@ -6,6 +6,7 @@ xquery version "3.1";
 module namespace news = "http://history.state.gov/ns/site/hsg/news";
 
 import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace util="http://exist-db.org/xquery/util";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 
@@ -13,39 +14,35 @@ declare namespace a="http://www.w3.org/2005/Atom";
 declare namespace xhtml="http://www.w3.org/1999/xhtml";
 
 declare
-    %templates:replace
-function news:init-news ($node as node(), $model as map(*)) {
-    (: Add metadata to new model
-        $title := get news title
-        $news := get all sorted-by-date news
-        $start := get pagination parameter e.g. start=11
-
-    let $news-model := map:merge((
-        $model,
-        map {
-            'title': $title,
-            'total': count($news),
-            'news-list': subsequence($news, $start, 20 (:e.g. 20 results per page:))
-        }
-    ))
-
-    return
-        element { node-name($node) } {
-            $node,
-            $news-model
-        }
-    :)
+    %templates:wrap
+    %templates:default("start", 1)
+    %templates:default("num", 20)
+function news:init-news-list ($node as node()?, $model as map(*), $start as xs:integer, $num as xs:integer) as map(*) {
+    let $_ := util:log('news', serialize($model, map{'indent':true(), 'method':'adaptive'}))
+    let $news-list := news:sorted($model?collection, $start, $num)
+    return map{
+        "total":    count($news-list),
+        "entries":  $news-list
+    }
 };
 
 
-declare
-function news:sorted ($news-list) {
-    (:
-        sort news by date:
-        1. loop through $news-list
-        2. order by date descending
-        3. return news
-    :)
+declare function news:sorted ($collection, $start as xs:integer, $num as xs:integer) {
+    let $sorted := (
+        for $entry in $collection
+        let $date := news:get-sort-date($entry)
+        order by $date descending
+        return $entry
+    )
+    return subsequence($sorted, $start, $num)
+};
+
+declare function news:get-sort-date($entry as document-node(element(a:entry))) {
+    xs:dateTime($entry/a:entry/a:updated)
+};
+
+declare function news:type($entry as document-node(element(a:entry))) as xs:string? {
+    $entry/a:entry/a:category[@scheme="http://history.state.gov/ns/site/hsg/news"]/@term
 };
 
 (:
@@ -59,56 +56,76 @@ function news:sorted ($news-list) {
 declare
     %templates:replace
 function news:date ($node as node(), $model as map(*) ) {
-
-    let $type := $model?type
-    let $raw-date := $model?date-published
-    let $date := app:format-date-month-short-day-year($raw-date)
     let $dateTime-attribute := app:format-date-short($raw-date)
+    let $entry := $model?entry
+    let $type := news:type($entry)
+    let $date := news:get-sort-date($entry)
+    let $classes := tokenize($node/@class, '\s')
+    let $add-class := 
+        if ($type ne 'pr') 
+        then "hsg-badge--" || $type 
+        else "hsg-badge--press"
     return
         element { node-name($node) } {
             $node/@*[not(local-name() = 'class')],
             attribute class {
-                string-join(($node/@class/string(), "hsg-badge--" || $type), ' ')
+                string-join(($classes, $add-class), ' ')
             },
             attribute dateTime {
                 $dateTime-attribute
             },
-            $date
+            app:format-date-month-short-day-year($date)
         }
 };
 
 declare
     %templates:wrap
-function news:heading ($node as node(), $model as map(*) )  {
-   $model?title/string()
+function news:title($node as node()?, $model as map(*)?) {
+    (: allows calling news:title from templating :)
+    news:title($model?entry)
+};
+
+declare
+    %templates:wrap
+function news:title ($entry as document-node(element(a:entry)) ) {
+   $entry/a:entry/a:title/xhtml:div/node()
 };
 
 declare
     %templates:replace
-function news:heading-link ($node as node(), $model as map(*)) {
-    (:
-        1. get URL as string
-        2. return element with href attribute containing url
-    :)
+function news:title-link ($node as node(), $model as map(*)) {
+    element { node-name($node) } {
+        $node/@*[not(local-name() = 'data-template')],
+        attribute href {
+            let $app-root :=
+                try {$app:APP_ROOT}
+                catch * {
+                (: Assume APP_ROOT is '/exist/apps/hsg-shell'; Needed for xqsuite testing,
+                         since there is no context for calls to e.g. request:get-header(). :)
+                '/exist/apps/hsg-shell'
+                }
+            return $app-root || $model?entry/a:entry/a:link[@rel eq 'self']/@href
+        },
+        news:title($model?entry)
+    }
 };
 
 declare
     %templates:wrap
 function news:summary ($node as node(), $model as map(*) ) {
-    (: retrieve summary from news-model as string :)
+    $model?entry/a:entry/a:content/xhtml:div/node()
 };
 
 declare
     %templates:replace
-function news:read-more-link ($node as node(), $model as map(*)) {
-    let $label := $model?label/string()
-    let $url := $model?external-link
-
+function news:further-link ($node as node(), $model as map(*)) {
+    let $entry := $model?entry
+    let $link := ($entry/a:entry/a:link[not(@rel = ('self', 'enclosure'))])[1]
     return
         element { node-name( $node ) } {
             $node/@*[not(local-name() = 'href')],
-            attribute href { $url },
-            $label
+            $link/@href,
+            string($link/@title)
         }
 };
 
@@ -116,44 +133,16 @@ function news:read-more-link ($node as node(), $model as map(*)) {
  : Initialize News Articles
  : Populate $model with news article data
  :)
-declare
-    %templates:replace
-function news:init-article($node as node(), $model as map(*), $document-id as xs:string) {
-    let $news := $config:PUBLICATIONS?news?select-document($document-id)
-    let $type := substring-before($news/a:entry/a:id/string(), '-')
-    let $title := $news/a:entry/a:title/xhtml:div
-    let $id := $document-id
-    let $external-link := $news/a:entry/a:link[@rel != 'self']/@href
-    let $label := $news/a:entry/a:link/@title
-    (:let $thumbnail := get thumbnail if available:)
-    let $date-published := $news/a:entry/a:published
-    let $updated := $news/a:entry/a:updated
-    let $content := $news/a:entry/a:content/xhtml:div
-
-    let $news-model := map:merge((
-        $model,
-        map {
-            'news': $news,
-            'title': $title,
-            'id': $id,
-            'type': $type,
-            'external-link': $external-link,
-            'date-published': $date-published,
-            'updated' : $updated,
-            'label' : $label,
-            'content' : $content
-        }
-    ))
-
-    return
-        element { node-name( $node ) } {
-            $node/@*,
-            templates:process($node/node(), $news-model)
-        }
+declare function news:init-article($node as node()?, $model as map(*), $document-id as xs:string) {
+    let $collection := $model?collection
+    let $entry as document-node(element(a:entry))? := $collection[.//a:id eq $document-id]
+    return map{
+        "entry":    $entry
+    }
 };
 
 declare
     %templates:wrap
 function news:article-content($node as node(), $model as map(*)) {
-    $model?content
+    $model?entry/a:entry/a:content/xhtml:div/node()
 };

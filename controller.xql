@@ -1735,7 +1735,9 @@ else if (matches($exist:path, '^/education/?')) then
             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                 <forward url="{$exist:controller}/pages/news/news-list.xml"/>
                 <view>
-                    <forward url="{$exist:controller}/modules/view.xql"/>
+                    <forward url="{$exist:controller}/modules/view.xql">
+                        <add-parameter name="publication-id" value="news"/>
+                    </forward>
                 </view>
                 <error-handler>
                     <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>

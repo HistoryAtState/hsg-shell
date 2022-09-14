@@ -102,7 +102,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                 "publication-id": $publication-id,
                 "document-id": $document-id,
                 "section-id": $section-id,
-                "collection": $config:PUBLICATIONS?($publication-id)?collection,
+                "collection": collection($config:PUBLICATIONS?($publication-id)?collection),
                 "view": $view,
                 "base-path":
                     (: allow for pages that do not have $config:PUBLICATIONS?select-document defined :)
@@ -737,7 +737,7 @@ declare function pages:asides($node, $model){
 declare function pages:suppress($node as node()?, $model as map(*)?) {};
 
 declare function pages:unless-asides($node, $model){
-    if ($node/ancestor::body//aside[@data-template eq 'pages:asides'])
+    if ($node/ancestor::body/main[@id = 'content']//aside[@data-template eq 'pages:asides'])
     then ()
     else $node
 };

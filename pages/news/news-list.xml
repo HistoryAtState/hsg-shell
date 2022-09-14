@@ -1,72 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-    <div data-template="templates:surround"
-         data-template-with="templates/site.xml"
-         data-template-at="content">
-            <div id="static-title" class="hidden">News</div>
-            <section class="row">
-                <div data-template="pages:breadcrumb">
-                    <p id="breadcrumb-title">News</p>
-                </div>
-            </section>
+    <div data-template="templates:surround" data-template-at="content" data-template-with="templates/site.xml">
+        <div class="hidden" id="static-title">News</div>
+        <section class="row">
+            <div data-template="pages:breadcrumb">
+                <p id="breadcrumb-title">News</p>
+            </div>
+        </section>
 
-            <section class="row">
-                <div class="hsg-width-one-whole">
-                    <div data-template="app:fix-links">
-                        <h1>News</h1>
-                        <p>Latest news from Office of The Historian</p>
-                    </div>
+        <section class="row">
+            <div class="hsg-width-one-whole">
+                <div data-template="app:fix-links">
+                    <h1>News</h1>
+                    <p>Latest news from Office of The Historian</p>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="row">
-            <!--
-                <section class="row" data-template="news:init-news">
-            -->
+        <section class="row" data-template="news:init-news-list">
+            <div data-template="templates:each" data-template-from="entries"
+                data-template-to="entry">
                 <div class="hsg-width-one-whole">
                     <ul class="hsg-list hsg-columns__flex hsg-list__news">
                         <li class="hsg-list__item">
                             <div class="hsg-list__item__row">
-                                <span class="hsg-list__badge hsg-badge hsg-badge--press">Dec 18, 2014</span>
-                                <!--
-                                    <span class="hsg-list__badge hsg-badge hsg-badge-\-press" data-template="news:date"/>
-                                -->
+                                <span class="hsg-list__badge hsg-badge"
+                                    data-template="news:date"/>
                                 <div class="hsg-list__item-wrap">
-                                    <h3 class="hsg-list__title">
-                                    <!--
-                                        <h3 class="hsg-list__title" data-template="news:heading"/>
-                                    -->
-                                        <a class="hsg-list__link" href="news/news-article">Foreign Relations of the United States, 1977–1980, Volume IX, Arab-Israeli Dispute, August 1978–December 1980</a>
-                                        <!--
-                                            <a class="hsg-list__link" data-template="news:heading-link"/>
-                                        -->
+                                    <h3 class="hsg-list__title" data-template="app:fix-links">
+                                        <a class="hsg-list__link" data-template="news:title-link"/>
                                     </h3>
                                     <p class="hsg-list__text--truncated">
-                                        <span class="hsg-list__text--truncated--ellipsis">
-                                            The Department of State released today Foreign Relations of the United States,
-                                            1977–1980, Volume IX, Arab-Israeli Dispute, August 1978–December 1980.
-                                            As part of the Foreign Relations subseries devoted to the foreign policy of the
-                                            administration of President Jimmy Carter, this volume is the second of two volumes that document U.S.
-                                            efforts to achieve a negotiated settlement to the Arab-Israeli dispute.
-                                            This volume begins with the August 1978 acceptance by Egyptian President
-                                            Anwar al-Sadat and Israeli Prime Minister Menachem Begin of President Carter’s
-                                            invitation to attend a tripartite summit meeting at Camp David.
-                                            It traces the course of the September 1978 Camp David Summit and the series of negotiations which followed,
-                                            talks which culminated in the conclusion of the Egyptian-Israeli Peace Treaty on March 26, 1979.
-                                        </span>
-                                        <!--
-                                            <span data-template="news:text"/>
-                                        -->
+                                        <span class="hsg-list__text--truncated--ellipsis" data-template="news:summary"/>
                                     </p>
-                                    <a class="hsg-news__more" href="historicaldocuments/frus1977-80v09/pressrelease">View press release</a>
-                                    <!--
-                                        <a class="hsg-list__more" data-template="news:read-more-link"/>
-                                    -->
+                                    <a class="hsg-news__more"
+                                        href="historicaldocuments/frus1977-80v09/pressrelease"
+                                        data-template="news:further-link"/>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div>
-            </section>
+            </div>
+        </section>
     </div>
 </div>

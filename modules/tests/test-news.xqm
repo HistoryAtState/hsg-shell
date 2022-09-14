@@ -13,7 +13,7 @@ declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace a="http://www.w3.org/2005/Atom";
 declare namespace xhtml="http://www.w3.org/1999/xhtml";
 
-declare variable $x:test_col := collection('../../tests/data/news');
+declare variable $x:test_col := collection('/db/apps/hsg-shell/tests/data/news');
 
 (:
  :  WHEN calling news:init-news-list()
@@ -22,23 +22,6 @@ declare variable $x:test_col := collection('../../tests/data/news');
  :  THEN return a map with ?entries as $num atom entries from $model?collection
  :  AND ?total as the integer total of entries in ?entries 
  :)
-declare
-    %test:assertEquals('true')
-function x:test-init-news-list-collection(){
-    let $expected := collection('../../tests/data/news')
-    let $model := map{
-            "collection": $x:test_col
-        }
-    let $actual := news:init-news-list((), $model, 1, 5)
-    return 
-        if (deep-equals($actual?collection, $expected))
-        then 'true'
-        else 
-            <result>
-                <actual>{$actual?collection}</actual>
-                <expected>{$expected}</expected>
-            </result>
-};
 
 declare
     %test:assertEquals(5)
@@ -59,16 +42,16 @@ function x:test-init-news-list-articles(){
     let $model := map{
             "collection": $x:test_col
         }
-    let $actual := news:init-news-list((), $model, 2, 3)
+    let $actual := news:init-news-list((), $model, 2, 2)
     let $entries := $actual?entries
-    return $entries/a:entry/a:id
+    return $entries ! /a:entry/a:id/text()
 };
 
 (:
  :  WHEN calling news:sorted()
  :  GIVEN a sequence of atom entries $entries
  :  GIVEN a $start position in the sequence
- :  GIVEN an $end position in the sequence
+ :  GIVEN a number of entries to return, $num
  :  THEN return the entries corresponding to those between the $start
  :  and $end position in the sequence inclusive, where the sequence
  :  has been sorted by date descending.
@@ -82,8 +65,8 @@ declare
     )
 function x:test-news-sorted(){
     let $entries := $x:test_col
-    let $actual := news:sorted($entries, 3, 5)
-    return $actual/a:entry/a:id
+    let $actual := news:sorted($entries, 3, 3)
+    return $actual ! /a:entry/a:id/text()
 };
 
 (:
@@ -92,24 +75,12 @@ function x:test-news-sorted(){
  :  THEN return the type of the entry
  :)
 
-(:
- :  WHEN calling news:init-news-entry()
- :  GIVEN a model containing an atom entry as ?entry
- :  GIVEN no supplied $document-id
- :  THEN return a map with ?entry with the result of ?to
- :  AND ?type taken from ?entry
- :  AND ?sort-date taken from ?entry
- :)
-
-(:
- :  WHEN calling news:init-news-entry()
- :  GIVEN model NOT containing ?to
- :  GIVEN a model containing the ?collection of atom entries
- :  GIVEN a supplied $document-id
- :  THEN return a map with ?entry corresponding to $document-id
- :  AND ?type taken from ?entry
- :  AND ?sort-date taken from ?entry
- :)
+declare
+    %test:assertEquals("pr")
+function x:test-news-type(){
+    let $entry := doc('/db/apps/hsg-shell/tests/data/news/pr/press-release-frus1977-80v11p1.xml')
+    return news:type($entry)
+};
 
 (:
  :  WHEN calling news:get-sort-date()
@@ -117,47 +88,144 @@ function x:test-news-sorted(){
  :  THEN return the updated date as a dateTime
  :)
 
+declare
+    %test:assertEquals('true')
+function x:test-news-get-sort-date() {
+    let $entry := doc('/db/apps/hsg-shell/tests/data/news/carousel/carousel-22.xml')
+    let $expected := xs:dateTime('2011-09-29T13:42:00.000-04:00')
+    let $actual := news:get-sort-date($entry)
+    return if ($expected eq $actual) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
 (:
- :  WHEN calling news:get-sort-date()
- :  GIVEN a supplied atom entry with no updated date
- :  THEN return the created date as a dateTime
+ :  WHEN calling news:init-article()
+ :  GIVEN a $document-id and
+ :  GIVEN a collection $model?collection
+ :  THEN return a map with the atom entry corresponding to $document-id in $collection
  :)
+
+declare
+    %test:assertEquals('tumblr-121854126473')
+function x:test-news-init-article() {
+    let $model := map{
+        "collection":   $x:test_col
+    }
+    let $document-id := "tumblr-121854126473"
+    let $actual := news:init-article((), $model, $document-id)
+    return $actual?entry/a:entry/a:id/text()
+};
 
 (:
  :  WHEN calling news:date
- :  GIVEN a $model map with an atom entry ?entry with $type and $sort-date
+ :  GIVEN a $model map with an atom entry ?entry with $type[not .= 'pr'] and $sort-date
  :  GIVEN a span $node
  :  THEN add the string ("hsg-badge--" || $type) to $node/@class
  :  AND replace the contents of $node with app:format-date-month-short-day-year($sort-date)
  :)
 
+declare
+    %test:assertEquals('true')
+function x:test-news-date(){
+    let $node :=
+        <span class="foo bar"/>
+    let $model := map{
+        "collection": $x:test_col,
+        "entry": doc('/db/apps/hsg-shell/tests/data/news/carousel/carousel-22.xml')
+    }
+    let $expected := 
+        <span class="foo bar hsg-badge--carousel">Sep 29, 2011</span>
+    let $actual := news:date($node, $model)
+    return if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
+(:
+ :  WHEN calling news:date
+ :  GIVEN a $model map with an atom entry ?entry with $type[ .= 'pr'] and $sort-date
+ :  GIVEN a span $node
+ :  THEN add the string ("hsg-badge--press") to $node/@class
+ :  AND replace the contents of $node with app:format-date-month-short-day-year($sort-date)
+ :)
+
+declare
+    %test:assertEquals('true')
+function x:test-news-date-press(){
+    let $node :=
+        <span class="foo bar"/>
+    let $model := map{
+        "collection": $x:test_col,
+        "entry": doc('/db/apps/hsg-shell/tests/data/news/pr/press-release-frus1969-76ve15p2Ed2.xml')
+    }
+    let $expected := 
+        <span class="foo bar hsg-badge--press">Feb 12, 2021</span>
+    let $actual := news:date($node, $model)
+    return if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
 (:
  :  WHEN calling news:title
- :  GIVEN a $model?entry
+ :  GIVEN a $entry
  :  RETURN the title nodes from the entry
  :)
 
+declare
+    %test:assertEquals('true')
+function x:test-news-title() {
+    let $entry := doc('/db/apps/hsg-shell/tests/data/news/carousel/carousel-111.xml')
+    let $expected := 
+        <div xmlns="http://www.w3.org/1999/xhtml">Now Available: <em>Foreign Relations of the United States</em>, 1969–1976, Volume
+            E–15, Part 2, Documents on Western Europe, 1973–1976, Second, Revised Edition</div>
+    let $actual := <div xmlns="http://www.w3.org/1999/xhtml">{
+        news:title($entry)
+    }</div>
+    return if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
 (:
- :  WHEN calling news:heading-link
+ :  WHEN calling news:title-link
  :  GIVEN a $model?entry
  :  GIVEN a <a/> $node
- :  RETURN the <a/> node with preserved @class
+ :  RETURN the <a/> node with preserved @*
  :  AND @href corresponding to $model?entry/a:entry/a:link[@rel eq 'self']/@href
  :  AND content corresponding to news:title($node, $model)
+ :  AND remove $node/@data-template
  :)
- 
+
+declare
+    %test:assertEquals('true')
+function x:test-news-title-link(){
+    let $node := <a class="hsg-news__more" target="_blank" data-template="news:read-more-link"/>
+    let $entry := doc('/db/apps/hsg-shell/tests/data/news/carousel/carousel-26.xml')
+    let $model := map{
+        "entry":    $entry 
+    }
+    let $expected := <a class="hsg-news__more" target="_blank" href="/exist/apps/hsg-shell/news/carousel-26">{news:title($entry)}</a>
+  let $actual := news:title-link($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
 (:
- :  WHEN calling news:further-links
- :  GIVEN a $model?entry with one or more 'further' types of $link
+ :  WHEN calling news:further-link
+ :  GIVEN a $model?entry with one 'further' type of $link
  :      (//a:link[not(@rel = ('self', 'enclosure'))])
  :  GIVEN a $node/a template hyperlink
- :  THEN return a hyperlink for each $link
- :  AND set @href to $link/$href
+ :  THEN return a hyperlink with @href set to $link/$href
  :  AND set the text content to $link/@title (if present)
  :  AND set the text content to 'Visit Resource' (if not)
  :  AND preserve any other attributes from $node/a
- :  
  :)
+
+declare
+    %test:assertEquals('true')
+function x:test-news-further-link(){
+    let $node := <a class="hsg-news__more" target="_blank"/>
+    let $entry := doc('/db/apps/hsg-shell/tests/data/news/twitter/twitter-996046266021896194.xml')
+    let $model := map{
+        "entry":    $entry
+    }
+    let $expected := <a class="hsg-news__more" target="_blank" href="https://twitter.com/HistoryAtState/status/996046266021896194">View Twitter Post</a>
+    let $actual := news:further-link($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
 
 (:
  :  WHEN calling news:summary
@@ -166,15 +234,45 @@ function x:test-news-sorted(){
  :  THEN generate a summary from a:entry/a:summary/xhtml:div/node()
  :)
 
+declare
+    %test:pending('No test data yet')
+function x:test-news-summary-summary(){};
+
 (:
  :  WHEN calling news:summary
  :  GIVEN an atom entry as $model?entry
  :  GIVEN that entry has no non-empty summary
  :  THEN generate a summary from a:entry/a:content/xhtml:div/node()
  :)
- 
+
+declare
+    %test:assertEquals('true')
+function x:test-news-summary-no-summary(){
+    let $node := <div xmlns="http://www.w3.org/1999/xhtml"/>
+    let $entry := doc('/db/apps/hsg-shell/tests/data/news/twitter/twitter-996046266021896194.xml')
+    let $model := map{
+        "entry":    $entry
+    }
+    let $expected := $entry/a:entry/a:content/xhtml:div
+    let $actual := <div xmlns="http://www.w3.org/1999/xhtml">{news:summary($node, $model)}</div>
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
 (:
  :  WHEN calling news:article-content
  :  GIVEN an atom entry as $model?entry
  :  THEN generate content from a:entry/a:content/xhtml:div/node()
  :)
+
+declare
+    %test:assertEquals('true')
+function x:test-news-article-content(){
+    let $node := <div xmlns="http://www.w3.org/1999/xhtml"/>
+    let $entry := doc('/db/apps/hsg-shell/tests/data/news/twitter/twitter-996046266021896194.xml')
+    let $model := map{
+        "entry":    $entry
+    }
+    let $expected := $entry/a:entry/a:content/xhtml:div
+    let $actual := <div xmlns="http://www.w3.org/1999/xhtml">{news:summary($node, $model)}</div>
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};

@@ -1,13 +1,13 @@
 <div data-template="pages:load" data-template-ignore="true">
     <div data-template="templates:surround" data-template-with="templates/site.xml" data-template-at="content">
-        <section class="row">
-            <div data-template="pages:breadcrumb"/>
-        </section>
         <div data-template="news:init-article">
+            <section class="row">
+                <div data-template="pages:breadcrumb"/>
+            </section>
             <section class="row">
                 <div class="hsg-width-one-whole">
                     <div data-template="app:fix-links">
-                        <h1 data-template="news:heading"/>
+                        <h1 data-template="news:title"/>
                     </div>
                 </div>
             </section>
@@ -15,7 +15,7 @@
                 <div class="hsg-width-one-whole hsg-news hsg-news__container">
                     <time class="hsg-badge hsg-badge__news" data-template="news:date"/>
                     <div class="hsg-news__content--article" data-template="news:article-content"/>
-                    <a class="hsg-news__more" target="_blank" data-template="news:read-more-link"/>
+                    <a class="hsg-news__more" data-template="news:further-link" target="_blank"/>
                 </div>
             </section>
         </div>
