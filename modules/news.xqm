@@ -56,10 +56,10 @@ declare function news:type($entry as document-node(element(a:entry))) as xs:stri
 declare
     %templates:replace
 function news:date ($node as node(), $model as map(*) ) {
-    let $dateTime-attribute := app:format-date-short($raw-date)
     let $entry := $model?entry
     let $type := news:type($entry)
     let $date := news:get-sort-date($entry)
+    let $dateTime-attribute := app:format-date-short($date)
     let $classes := tokenize($node/@class, '\s')
     let $add-class := 
         if ($type ne 'pr') 
