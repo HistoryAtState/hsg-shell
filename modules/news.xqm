@@ -113,7 +113,19 @@ function news:title-link ($node as node(), $model as map(*)) {
 declare
     %templates:wrap
 function news:summary ($node as node(), $model as map(*) ) {
-    $model?entry/a:entry/a:content/xhtml:div/node()
+    let $source := 
+        if ($model?entry/a:entry/a:summary/normalize-space(.) ne '')
+        then
+            $model?entry/a:entry/a:summary/xhtml:div
+        else
+            $model?entry/a:entry/a:content/xhtml:div
+    let $stylesheet-node := doc("/db/apps/hsg-shell/modules/lib/xhtml.xsl")
+    let $transformerAttributes := 
+        <attributes>
+            <attr name="http://saxon.sf.net/feature/initialMode" value="summary"/>
+        </attributes>
+    let $transformed := transform:transform($source, $stylesheet-node, (), $transformerAttributes,'')
+    return $transformed
 };
 
 declare
@@ -144,5 +156,9 @@ declare function news:init-article($node as node()?, $model as map(*), $document
 declare
     %templates:wrap
 function news:article-content($node as node(), $model as map(*)) {
-    $model?entry/a:entry/a:content/xhtml:div/node()
+    let $source := $model?entry/a:entry/a:content/xhtml:div
+    let $stylesheet-node := doc("/db/apps/hsg-shell/modules/lib/xhtml.xsl")
+    let $transformerAttributes := ()
+    let $transformed := transform:transform($source, $stylesheet-node, (), $transformerAttributes,'')
+    return $transformed
 };
