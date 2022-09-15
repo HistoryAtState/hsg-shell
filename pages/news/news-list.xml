@@ -18,29 +18,27 @@
         </section>
 
         <section class="row" data-template="news:init-news-list">
-            <div data-template="templates:each" data-template-from="entries"
-                data-template-to="entry">
-                <div class="hsg-width-one-whole">
-                    <ul class="hsg-list hsg-columns__flex hsg-list__news">
-                        <li class="hsg-list__item">
-                            <div class="hsg-list__item__row">
-                                <span class="hsg-list__badge hsg-badge"
-                                    data-template="news:date"/>
-                                <div class="hsg-list__item-wrap">
-                                    <h3 class="hsg-list__title" data-template="app:fix-links">
-                                        <a class="hsg-list__link" data-template="news:title-link"/>
-                                    </h3>
-                                    <p class="hsg-list__text--truncated">
-                                        <span class="hsg-list__text--truncated--ellipsis" data-template="news:summary"/>
-                                    </p>
-                                    <a class="hsg-news__more"
-                                        href="historicaldocuments/frus1977-80v09/pressrelease"
-                                        data-template="news:further-link"/>
-                                </div>
+            <div class="hsg-width-one-whole">
+                <ul class="hsg-list hsg-columns__flex hsg-list__news">
+                    <li class="hsg-list__item" data-template="templates:each" data-template-from="entries"
+                        data-template-to="entry">
+                        <div class="hsg-list__item__row">
+                            <span class="hsg-list__badge hsg-badge"
+                                data-template="news:date"/>
+                            <div class="hsg-list__item-wrap">
+                                <h3 class="hsg-list__title" data-template="app:fix-links">
+                                    <a class="hsg-list__link" data-template="news:title-link"/>
+                                </h3>
+                                <p class="hsg-list__text--truncated">
+                                    <span class="hsg-list__text--truncated--ellipsis" data-template="news:summary"/>
+                                </p>
+                                <a class="hsg-news__more"
+                                    href="historicaldocuments/frus1977-80v09/pressrelease"
+                                    data-template="news:further-link"/>
                             </div>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </section>
     </div>
