@@ -61,10 +61,7 @@ function news:date ($node as node(), $model as map(*) ) {
     let $date := news:get-sort-date($entry)
     let $dateTime-attribute := app:format-date-short($date)
     let $classes := tokenize($node/@class, '\s')
-    let $add-class := 
-        if ($type ne 'pr') 
-        then "hsg-badge--" || $type 
-        else "hsg-badge--press"
+    let $add-class := "hsg-badge--" || $type
     return
         element { node-name($node) } {
             $node/@*[not(local-name() = 'class')],
