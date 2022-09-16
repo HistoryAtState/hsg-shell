@@ -80,18 +80,15 @@ div, span, p, li {
   font-family: inherit;
 }
 
-a,
-a:hover,
-a:visited,
-a:active {
+a {
   color: $color-primary-darker;
-  transition: color 0.5s ease 0s;
 }
 
 a:hover,
 a:active,
 a:focus {
   color: $color-primary-darkest;
+  transition: color 0.5s ease 0s;
 }
 
 input {
