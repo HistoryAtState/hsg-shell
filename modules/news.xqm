@@ -18,9 +18,9 @@ declare
     %templates:default("start", 1)
     %templates:default("num", 20)
 function news:init-news-list ($node as node()?, $model as map(*), $start as xs:integer, $num as xs:integer) as map(*) {
-    let $_ := util:log('news', serialize($model, map{'indent':true(), 'method':'adaptive'}))
     let $news-list := news:sorted($model?collection, $start, $num)
     return map{
+    let $log := util:log('debug', ('news.xqm, serialize model data =>', serialize($model, map{'indent':true(), 'method':'adaptive'})))
         "total":    count($news-list),
         "entries":  $news-list
     }
