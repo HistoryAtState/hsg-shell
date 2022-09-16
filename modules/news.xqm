@@ -21,7 +21,7 @@ function news:init-news-list ($node as node()?, $model as map(*), $start as xs:i
     let $_ := util:log('news', serialize($model, map{'indent':true(), 'method':'adaptive'}))
     let $news-list := news:sorted($model?collection, $start, $num)
     return map{
-        "total":    count($news-list),
+        "total":    count($model?collection),
         "entries":  $news-list
     }
 };
