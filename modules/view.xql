@@ -28,6 +28,7 @@ import module namespace travels="http://history.state.gov/ns/site/hsg/travels-ht
 import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";
 import module namespace visits="http://history.state.gov/ns/site/hsg/visits-html" at "visits-html.xqm";
 import module namespace news="http://history.state.gov/ns/site/hsg/news" at "news.xqm";
+import module namespace pagination="http://history.state.gov/ns/site/hsg/pagination" at "pagination.xqm";
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 
