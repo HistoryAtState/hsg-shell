@@ -22,7 +22,7 @@ function news:init-news-list ($node as node()?, $model as map(*), $start as xs:i
     let $news-list := news:sorted($model?collection, $start, $per-page)
     return (
         map {
-            "total":    count($news-list),
+            "total":    count($model?collection),
             "entries":  $news-list,
             "hits":     $model?collection
         }
