@@ -16,25 +16,27 @@ declare namespace xhtml="http://www.w3.org/1999/xhtml";
 declare
     %templates:wrap
     %templates:default("start", 1)
-    %templates:default("num", 20)
-function news:init-news-list ($node as node()?, $model as map(*), $start as xs:integer, $num as xs:integer) as map(*) {
-    let $news-list := news:sorted($model?collection, $start, $num)
-    return map{
+    %templates:default("per-page", 20)
+function news:init-news-list ($node as node()?, $model as map(*), $start as xs:integer, $per-page as xs:integer) as map(*) {
     let $log := util:log('debug', ('news.xqm, serialize model data =>', serialize($model, map{'indent':true(), 'method':'adaptive'})))
-        "total":    count($news-list),
-        "entries":  $news-list
-    }
+    let $news-list := news:sorted($model?collection, $start, $per-page)
+    return (
+        map {
+            "total":    count($news-list),
+            "entries":  $news-list,
+            "hits":     $model?collection
+        }
+    )
 };
 
-
-declare function news:sorted ($collection, $start as xs:integer, $num as xs:integer) {
+declare function news:sorted ($collection, $start as xs:integer, $per-page as xs:integer) {
     let $sorted := (
         for $entry in $collection
         let $date := news:get-sort-date($entry)
         order by $date descending
         return $entry
     )
-    return subsequence($sorted, $start, $num)
+    return subsequence($sorted, $start, $per-page)
 };
 
 declare function news:get-sort-date($entry as document-node(element(a:entry))) {
