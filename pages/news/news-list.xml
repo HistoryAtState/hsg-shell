@@ -19,6 +19,10 @@
 
         <section class="row" data-template="news:init-news-list">
             <div class="hsg-width-one-whole">
+                <nav>
+                    <ul class="pagination" data-template="pagination:paginate" data-template-per-page="20" data-template-min-hits="11"/>
+                </nav>
+
                 <ul class="hsg-list hsg-columns__flex hsg-list__news">
                     <li class="hsg-list__item" data-template="templates:each" data-template-from="entries"
                         data-template-to="entry">
@@ -39,7 +43,13 @@
                         </div>
                     </li>
                 </ul>
+
+                <nav>
+                    <ul class="pagination" data-template="pagination:paginate" data-template-per-page="20" data-template-min-hits="11"/>
+                </nav>
+
             </div>
+
         </section>
     </div>
 </div>
