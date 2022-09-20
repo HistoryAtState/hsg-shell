@@ -38,9 +38,10 @@ function pagination:paginate($node as node(), $model as map(*), $key as xs:strin
                         <li>
                             <a href="{
                                 ut:serialize-parameters(
-                                    map:merge((
-                                        $parameters, map {'start': 1}
-                                    ))
+                                    map:merge(
+                                        ($parameters, map {'start': 1}),
+                                        map{"duplicates": "use-last"}
+                                    )
                                 )
                             }">
                                 <i class="glyphicon glyphicon-fast-backward"/>
@@ -49,12 +50,10 @@ function pagination:paginate($node as node(), $model as map(*), $key as xs:strin
                         <li>
                             <a href="{
                                 ut:serialize-parameters(
-                                    map:merge((
-                                        $parameters,
-                                        map {
-                                            'start': max( ($start - $per-page, 1 ) )
-                                        }
-                                    ))
+                                    map:merge(
+                                        ($parameters, map {'start': max(($start - $per-page, 1 ))}),
+                                        map{"duplicates": "use-last"}
+                                    )
                                 )
                             }">
                                 <i class="glyphicon glyphicon-backward"/>
@@ -73,12 +72,10 @@ function pagination:paginate($node as node(), $model as map(*), $key as xs:strin
                             <li class="active">
                                 <a href="{
                                     ut:serialize-parameters(
-                                        map:merge((
-                                            $parameters,
-                                            map {
-                                                'start': max( (($i - 1) * $per-page + 1, 1) )
-                                            }
-                                        ))
+                                        map:merge(
+                                            ($parameters, map {'start': max((($i - 1) * $per-page + 1, 1))}),
+                                            map{"duplicates": "use-last"}
+                                        )
                                     )
                                 }">
                                     { $i }
@@ -89,12 +86,10 @@ function pagination:paginate($node as node(), $model as map(*), $key as xs:strin
                             <li>
                                 <a href="{
                                     ut:serialize-parameters(
-                                        map:merge((
-                                            $parameters,
-                                            map {
-                                                'start': max((($i - 1) * $per-page + 1 , 1))
-                                            }
-                                        ))
+                                        map:merge(
+                                            ($parameters, map {'start': max((($i - 1) * $per-page + 1 , 1))}),
+                                            map{"duplicates": "use-last"}
+                                        )
                                     )
                                 }">
                                     { $i }
@@ -108,12 +103,10 @@ function pagination:paginate($node as node(), $model as map(*), $key as xs:strin
                         <li>
                             <a href="{
                                 ut:serialize-parameters(
-                                    map:merge((
-                                        $parameters,
-                                        map {
-                                            'start': $start + $per-page
-                                        }
-                                    ))
+                                    map:merge(
+                                        ($parameters, map {'start': $start + $per-page}),
+                                        map{"duplicates": "use-last"}
+                                    )
                                 )
                             }">
                                 <i class="glyphicon glyphicon-forward"/>
@@ -122,10 +115,10 @@ function pagination:paginate($node as node(), $model as map(*), $key as xs:strin
                         <li>
                             <a href="{
                                 ut:serialize-parameters(
-                                    map:merge((
-                                        $parameters,
-                                        map { 'start': max( (($count - 1) * $per-page + 1, 1)) }
-                                    ))
+                                    map:merge(
+                                        ($parameters, map { 'start': max( (($count - 1) * $per-page + 1, 1)) }),
+                                        map{"duplicates": "use-last"}
+                                    )
                                 )
                             }">
                                 <i class="glyphicon glyphicon-fast-forward"/>
