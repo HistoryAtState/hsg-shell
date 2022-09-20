@@ -52,8 +52,9 @@ declare
 function ut:get-parameter-values ($parameter-names as xs:string*) as map(*) {
     map:merge(
         for-each($parameter-names, ut:create-parameter-map-entry#1),
-        map{"duplicates": "use-last"}
+        map {"duplicates" : "use-last"}
     )
+};
 
 declare function ut:normalize-nodes($nodes) {
     for $node in $nodes
