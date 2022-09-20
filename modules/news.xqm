@@ -152,9 +152,7 @@ declare function news:init-article($node as node()?, $model as map(*), $document
     }
 };
 
-declare
-    %templates:wrap
-function news:article-content($node as node(), $model as map(*)) {
+declare function news:article-content($node as node(), $model as map(*)) {
     let $source := $model?entry/a:entry/a:content/xhtml:div
     let $stylesheet-node := doc("/db/apps/hsg-shell/modules/lib/xhtml.xsl")
     let $transformerAttributes := ()

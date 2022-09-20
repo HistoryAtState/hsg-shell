@@ -7,24 +7,28 @@ import module namespace app="http://history.state.gov/ns/site/hsg/templates" at 
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "../pages.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
 import module namespace news = "http://history.state.gov/ns/site/hsg/news" at "../news.xqm";
+import module namespace ut="http://history.state.gov/ns/site/hsg/app-util" at "../app-util.xqm";
 import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace a="http://www.w3.org/2005/Atom";
 declare namespace xhtml="http://www.w3.org/1999/xhtml";
 
+declare boundary-space preserve;
+
 declare variable $x:test_col := collection('/db/apps/hsg-shell/tests/data/news');
 
 (:
  :  WHEN calling news:init-news-list()
+ :  GIVEN a collection in $model?collection
  :  GIVEN a position to start from, $start
  :  GIVEN a number of entries to return, $num
  :  THEN return a map with ?entries as $num atom entries from $model?collection
- :  AND ?total as the integer total of entries in ?entries 
+ :  AND ?total as the integer total of entries in $model?collection 
  :)
 
 declare
-    %test:assertEquals(5)
+    %test:assertEquals(54)
 function x:test-init-news-list-total(){
     let $model := map{
             "collection": $x:test_col
@@ -76,9 +80,9 @@ function x:test-news-sorted(){
  :)
 
 declare
-    %test:assertEquals("pr")
+    %test:assertEquals("press")
 function x:test-news-type(){
-    let $entry := doc('/db/apps/hsg-shell/tests/data/news/pr/press-release-frus1977-80v11p1.xml')
+    let $entry := doc('/db/apps/hsg-shell/tests/data/news/press/press-release-frus1977-80v11p1.xml')
     return news:type($entry)
 };
 
@@ -133,7 +137,7 @@ function x:test-news-date(){
         "entry": doc('/db/apps/hsg-shell/tests/data/news/carousel/carousel-22.xml')
     }
     let $expected := 
-        <span class="foo bar hsg-badge--carousel">Sep 29, 2011</span>
+        <span class="foo bar hsg-badge--carousel" dateTime="2011-09-29">Sep 29, 2011</span>
     let $actual := news:date($node, $model)
     return if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
@@ -153,10 +157,10 @@ function x:test-news-date-press(){
         <span class="foo bar"/>
     let $model := map{
         "collection": $x:test_col,
-        "entry": doc('/db/apps/hsg-shell/tests/data/news/pr/press-release-frus1969-76ve15p2Ed2.xml')
+        "entry": doc('/db/apps/hsg-shell/tests/data/news/press/press-release-frus1969-76ve15p2Ed2.xml')
     }
     let $expected := 
-        <span class="foo bar hsg-badge--press">Feb 12, 2021</span>
+        <span class="foo bar hsg-badge--press" dateTime="2021-02-12">Feb 12, 2021</span>
     let $actual := news:date($node, $model)
     return if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
@@ -253,8 +257,10 @@ function x:test-news-summary-no-summary(){
     let $model := map{
         "entry":    $entry
     }
-    let $expected := $entry/a:entry/a:content/xhtml:div
-    let $actual := <div xmlns="http://www.w3.org/1999/xhtml">{news:summary($node, $model)}</div>
+    let $expected.raw as element(xhtml:div) := 
+        <div xmlns="http://www.w3.org/1999/xhtml" xml:space="preserve"> On June 19, 2009, Secretary of State Clinton announced that same-sex partners of <a  href="https://twitter.com/StateDept">@StateDept</a> employees would be entitled to the benefits and allowances extended to family members. <a href="https://history.state.gov/departmenthistory/timeline/2000-2009">history.state.gov/departmenthist…</a> <a href="https://twitter.com/search?q=%23twitterstorians&amp;src=hash">#twitterstorians</a> </div>
+    let $expected := $expected.raw/node() => ut:normalize-nodes()
+    let $actual := news:summary($node, $model) => ut:normalize-nodes()
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
 
@@ -273,6 +279,8 @@ function x:test-news-article-content(){
         "entry":    $entry
     }
     let $expected := $entry/a:entry/a:content/xhtml:div
-    let $actual := <div xmlns="http://www.w3.org/1999/xhtml">{news:summary($node, $model)}</div>
+    let $actual := news:article-content($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };

@@ -54,4 +54,22 @@ function ut:get-parameter-values ($parameter-names as xs:string*) as map(*) {
         for-each($parameter-names, ut:create-parameter-map-entry#1),
         map{"duplicates": "use-last"}
     )
+
+declare function ut:normalize-nodes($nodes) {
+    for $node in $nodes
+    return 
+        typeswitch ($node)
+        case xs:string return
+            normalize-space($node)
+        case text() return string-join((
+            (' ')[matches($node, '^\s+\S')], (: convert any leading whitespace to a single space :)
+            (' ')[matches($node, '^\s+$')],  (: convert any whitespace only nodes to a single space :)
+            normalize-space($node),
+            (' ')[matches($node, '\S\s+$')] (: convert any trailing whitespace to a single space :)
+        ))
+        case element() return element {node-name($node)} { 
+            ut:normalize-nodes(($node/@*, $node/node())) 
+        }
+        default return $node
+    
 };
