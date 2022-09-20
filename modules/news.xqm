@@ -159,3 +159,12 @@ declare function news:article-content($node as node(), $model as map(*)) {
     let $transformed := transform:transform($source, $stylesheet-node, (), $transformerAttributes,'')
     return $transformed
 };
+
+declare
+    %templates:wrap
+function news:thumbnail($node as node()?, $model as map(*)) {
+    let $thumbnail := $model?entry/a:entry/a:link[@rel eq 'enclosure']
+    let $src := $thumbnail/@href
+    let $alt := $thumbnail/@title
+    return <img src="{$src}" alt="{$alt}"/>
+};

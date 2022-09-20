@@ -282,5 +282,21 @@ function x:test-news-article-content(){
     let $actual := news:article-content($node, $model)
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
+
+(:
+ :  WHEN calling news:thumbnail
+ :  GIVEN an atom entry as $model?entry
+ :  GIVEN that entry has a thumbnail image (/a:entry/a:link[@rel eq 'enclosure'])
+ :  THEN insert the linked image
+ :)
+declare %test:assertEquals('true') function x:test-news-thumbnail(){
+    let $node := <div xmlns="http://www.w3.org/1999/xhtml"/>
+    let $entry := doc('/db/apps/hsg-shell/tests/data/news/press/press-release-frus1969-76ve15p2Ed2.xml')
+    let $model := map{
+        "entry":    $entry
+    }
+    let $expected := 
+        <img src="https://static.history.state.gov/frus/frus1969-76ve15p2Ed2/covers/frus1969-76ve15p2Ed2.jpg" alt="Cover image of frus1969-76ve15p2Ed2"/>
+    let $actual := news:thumbnail($node, $model)
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
