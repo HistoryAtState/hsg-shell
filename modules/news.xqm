@@ -124,7 +124,7 @@ function news:summary ($node as node(), $model as map(*) ) {
             <attr name="http://saxon.sf.net/feature/initialMode" value="summary"/>
         </attributes>
     let $transformed := transform:transform($source, $stylesheet-node, (), $transformerAttributes,'')
-    return $transformed
+    return app:fix-links($transformed)
 };
 
 declare
@@ -135,7 +135,7 @@ function news:further-link ($node as node(), $model as map(*)) {
     return
         element { node-name( $node ) } {
             $node/@*[not(local-name() = 'href')],
-            $link/@href,
+            attribute href {app:fix-href($link/@href)},
             string($link/@title)
         }
 };
@@ -161,7 +161,7 @@ function news:article-content($node as node(), $model as map(*)) {
     let $transformed := transform:transform($source, $stylesheet-node, (), $transformerAttributes,'')
     return (
         $node/*,
-        $transformed
+        app:fix-links($transformed)
     )
 };
 

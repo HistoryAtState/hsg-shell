@@ -7,7 +7,12 @@ import module namespace console="http://exist-db.org/xquery/console" at "java:or
 import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare variable $app:APP_ROOT :=
-    let $nginx-request-uri := request:get-header('nginx-request-uri')
+    let $nginx-request-uri := 
+        try {request:get-header('nginx-request-uri')} (: e.g. XQsuite has no request :)
+        catch * {()}
+    let $context-path := 
+        try {request:get-context-path()}
+        catch * {''}
     return
         (: if request received from nginx :)
         if ($nginx-request-uri) then
@@ -18,7 +23,7 @@ declare variable $app:APP_ROOT :=
                 ""
         (: otherwise we're in the eXist URL space :)
         else
-            request:get-context-path() || "/apps/hsg-shell";
+            $context-path || "/apps/hsg-shell";
 
 declare
     %templates:wrap
@@ -74,10 +79,14 @@ declare function app:nginx-request-uri($node as node(), $model as map(*)) {
 };
 
 declare function app:fix-href($href as xs:string*) {
-    replace(
+    let $href.1 := 
+        if (starts-with($href, '/') and not(starts-with($href, $app:APP_ROOT)))
+        then ($app:APP_ROOT || $href)
+        else $href
+    return replace(
         replace(
             replace(
-              $href,
+              $href.1,
               "\$extern",
               "https://history.state.gov"
             ),

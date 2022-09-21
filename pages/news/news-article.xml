@@ -16,7 +16,7 @@
                     <img class="hsg-news__thumbnail" data-template="news:thumbnail"/>
                     <time class="hsg-badge hsg-badge__news" data-template="news:date"/>
                     <div class="hsg-news__content--article" data-template="news:article-content"/>
-                    <a class="hsg-news__more" data-template="news:further-link" target="_blank"/>
+                    <a class="hsg-news__more" data-template="news:further-link"/>
                 </div>
             </section>
         </div>
