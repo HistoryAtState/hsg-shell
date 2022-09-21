@@ -57,4 +57,49 @@
     &__more {
         font-family: $font-sans;
     }
+
+    &__thumbnail {
+      width: 100%;
+
+      // gradually screen-size-adaptive width
+      @media screen and (min-width: $xs-screen-min) {
+        float: left;
+        max-width: 30vw !important;
+        margin: 0 2rem 2rem 0;
+      }
+
+      @media screen and (min-width: $small-screen-min) {
+        max-width: 25vw !important;
+      }
+
+      @media screen and (min-width: $sm-screen-min) {
+        max-width: 20vw !important;
+      }
+
+      @media screen and (min-width: $large-screen-min) {
+        max-width: 16vw !important;
+      }
+    }
+}
+
+// If a news thumbnail image is available
+// (==> preceding sibling of badge),
+// let the date badge float next to the image
+.hsg-news__thumbnail + .hsg-badge__news {
+  display: inline-block;
+
+  @media screen and (min-width: $xs-screen-min) {
+    margin-top: 0;
+  }
+}
+
+// Layout class for fullwidth images
+.hsg-news__thumbnail--fullwidth {
+  float: none;
+  width: 100%;
+
+  // badges under a fullwidth image
+   & + .hsg-badge__news {
+    display: inline-block;
+  }
 }
