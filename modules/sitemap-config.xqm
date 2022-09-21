@@ -624,6 +624,7 @@ declare function site:eval-avt($avt as node(), $cache-flag as xs:boolean, $exter
 declare function site:call-for-uri-step-children($url as xs:string, $config as element(), $function as function(*), $state as map(*)?) {
   let $new.state := map:merge((
     map{
+      'original-url': $url,
       'parent-url': $url,
       'steps': tokenize($url, '/')[. ne ''],
       'function': $function,
@@ -691,6 +692,7 @@ declare function site:call-with-parameters-for-uri-steps($url as xs:string, $con
 declare function site:call-with-parameters-for-uri-steps($url as xs:string, $config as element(), $function as function(*), $state as map(*)) {
   let $state := map:merge((
     map{
+     'original-url': $url,
      'full-url': $url,
      'steps': tokenize($url, '/')[. ne ''],
      'function': $function,
@@ -708,14 +710,17 @@ function site:cwpfus-step($root as element(), $state as map(*)) {
   let $next.step := head($state?steps)
   let $this.key as map(*)? := if ($root/@key) then map{$root/@key: $state?step} else ()
   let $keys := map:merge(($state?keys, $this.key))
-  let $new.state := map{
-    'full-url': $state?full-url,
-    'current-url': replace($state?current-url, '/$', '') || '/' || $next.step,
-    'step': $next.step,
-    'steps': tail($state?steps),
-    'function': $state?function,
-    'keys': $keys
-  }
+  let $new.state := 
+    map:merge((
+        $state,
+        map{
+            'current-url': replace($state?current-url, '/$', '') || '/' || $next.step,
+            'step': $next.step,
+            'steps': tail($state?steps),
+            'keys': $keys
+        }
+    ), map{'duplicates': 'use-last'})
+  
   let $select := (
     $root/site:step[@value eq $next.step],
     ($root/site:step[@match])[matches($next.step, @match)],

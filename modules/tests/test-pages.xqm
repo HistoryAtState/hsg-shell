@@ -701,7 +701,12 @@ declare function x:generate-breadcrumb-test-data($url as xs:string){
                     return
                     <li class="hsg-breadcrumb__list-item" property="itemListElement" typeof="ListItem">
                         <a href="{$href}" class="hsg-breadcrumb__link" property="item" typeof="WebPage">
-                            {$span}
+                            {
+                                if ($i eq count($url-tokens))
+                                then attribute aria-current {'page'}
+                                else (),
+                                $span
+                            }
                         </a>
                     </li>
                 }
