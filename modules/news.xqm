@@ -160,11 +160,33 @@ declare function news:article-content($node as node(), $model as map(*)) {
     return $transformed
 };
 
+(:~
+ : Check, if a news article contains a thumbnail
+ :)
 declare
-    %templates:wrap
+function news:has-thumbnail ($news) as xs:boolean {
+    exists($news/a:entry/a:link[@rel eq 'enclosure'])
+};
+
+(:~
+ : Render the thumbnail for the news article, if available,
+ : keep classnames of the to-be-replaced template node
+ :)
+declare
+    %templates:replace
 function news:thumbnail($node as node()?, $model as map(*)) {
-    let $thumbnail := $model?entry/a:entry/a:link[@rel eq 'enclosure']
-    let $src := $thumbnail/@href
-    let $alt := $thumbnail/@title
-    return <img src="{$src}" alt="{$alt}"/>
+    if (news:has-thumbnail($model?entry))
+    then (
+        let $thumbnail := $model?entry/a:entry/a:link[@rel eq 'enclosure']
+        let $src := $thumbnail/@href
+        let $alt := $thumbnail/@title
+            return (
+                element img {
+                    $node/@*,
+                    attribute src { $src },
+                    attribute alt { $alt }
+                }
+            )
+    )
+    else ()
 };
