@@ -1,7 +1,6 @@
 /* HSG Badge -------------- */
 
 .hsg-badge {
-    display: block;
     min-width: $badge-width;
     width: $badge-width;
     height: $badge-height;
@@ -36,5 +35,6 @@
 
     &__news {
       margin: 2rem 0 1.3rem 0;
+      display: inline-block;
     }
   }
