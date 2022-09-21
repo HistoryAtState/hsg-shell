@@ -47,6 +47,7 @@
     }
 
     &__content {
+        // Everything wrapped inside --article, external markup is displayed
         &--article {
             img {
                 margin: 2rem 0;
