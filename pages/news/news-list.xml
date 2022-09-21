@@ -27,8 +27,7 @@
                     <li class="hsg-list__item" data-template="templates:each" data-template-from="entries"
                         data-template-to="entry">
                         <div class="hsg-list__item__row">
-                            <span class="hsg-list__badge hsg-badge"
-                                data-template="news:date"/>
+                            <time class="hsg-list__badge hsg-badge" data-template="news:date"/>
                             <div class="hsg-list__item-wrap">
                                 <h3 class="hsg-list__title" data-template="app:fix-links">
                                     <a class="hsg-list__link" data-template="news:title-link"/>
