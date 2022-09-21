@@ -152,12 +152,17 @@ declare function news:init-article($node as node()?, $model as map(*), $document
     }
 };
 
-declare function news:article-content($node as node(), $model as map(*)) {
-    let $source := $model?entry/a:entry/a:content/xhtml:div
+declare
+    %templates:wrap
+function news:article-content($node as node(), $model as map(*)) {
+    let $source := $model?entry/a:entry/a:content/xhtml:div/*
     let $stylesheet-node := doc("/db/apps/hsg-shell/modules/lib/xhtml.xsl")
     let $transformerAttributes := ()
     let $transformed := transform:transform($source, $stylesheet-node, (), $transformerAttributes,'')
-    return $transformed
+    return (
+        $node/*,
+        $transformed
+    )
 };
 
 (:~
