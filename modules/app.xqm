@@ -12,7 +12,7 @@ declare variable $app:APP_ROOT :=
         catch * {()}
     let $context-path := 
         try {request:get-context-path()}
-        catch * {''}
+        catch * {'/exist'}
     return
         (: if request received from nginx :)
         if ($nginx-request-uri) then

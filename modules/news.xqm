@@ -95,16 +95,7 @@ declare
 function news:title-link ($node as node(), $model as map(*)) {
     element { node-name($node) } {
         $node/@*[not(local-name() = 'data-template')],
-        attribute href {
-            let $app-root :=
-                try {$app:APP_ROOT}
-                catch * {
-                (: Assume APP_ROOT is '/exist/apps/hsg-shell'; Needed for xqsuite testing,
-                         since there is no context for calls to e.g. request:get-header(). :)
-                '/exist/apps/hsg-shell'
-                }
-            return $app-root || $model?entry/a:entry/a:link[@rel eq 'self']/@href
-        },
+        attribute href { app:fix-href($model?entry/a:entry/a:link[@rel eq 'self']/@href)},
         news:title($model?entry)
     }
 };
@@ -134,7 +125,11 @@ function news:further-link ($node as node(), $model as map(*)) {
     let $link := ($entry/a:entry/a:link[not(@rel = ('self', 'enclosure'))])[1]
     return
         element { node-name( $node ) } {
-            $node/@*[not(local-name() = 'href')],
+        
+            $node/@*[not(local-name() = ('target', 'href'))],
+            if (starts-with($link/@href, '/'))
+            then ()
+            else attribute target {"_blank"},
             attribute href {app:fix-href($link/@href)},
             string($link/@title)
         }
@@ -152,16 +147,16 @@ declare function news:init-article($node as node()?, $model as map(*), $document
     }
 };
 
-declare
-    %templates:wrap
-function news:article-content($node as node(), $model as map(*)) {
-    let $source := $model?entry/a:entry/a:content/xhtml:div/*
+declare function news:article-content($node as node(), $model as map(*)) {
+    let $source := $model?entry/a:entry/a:content/xhtml:div/node()
     let $stylesheet-node := doc("/db/apps/hsg-shell/modules/lib/xhtml.xsl")
     let $transformerAttributes := ()
     let $transformed := transform:transform($source, $stylesheet-node, (), $transformerAttributes,'')
     return (
-        $node/*,
-        app:fix-links($transformed)
+        element {QName("http://www.w3.org/1999/xhtml", local-name($node))} {
+            $node/(@* except @data-template),
+            app:fix-links($transformed)
+        }
     )
 };
 

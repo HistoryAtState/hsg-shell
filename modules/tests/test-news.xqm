@@ -197,12 +197,12 @@ function x:test-news-title() {
 declare
     %test:assertEquals('true')
 function x:test-news-title-link(){
-    let $node := <a class="hsg-news__more" target="_blank" data-template="news:read-more-link"/>
+    let $node := <a class="hsg-news__more" data-template="news:read-more-link"/>
     let $entry := doc('/db/apps/hsg-shell/tests/data/news/carousel/carousel-26.xml')
     let $model := map{
         "entry":    $entry 
     }
-    let $expected := <a class="hsg-news__more" target="_blank" href="/exist/apps/hsg-shell/news/carousel-26">{news:title($entry)}</a>
+    let $expected := <a class="hsg-news__more" href="/exist/apps/hsg-shell/news/carousel-26">{news:title($entry)}</a>
   let $actual := news:title-link($node, $model)
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
@@ -240,6 +240,7 @@ function x:test-news-further-link(){
 
 declare
     %test:pending('No test data yet')
+    %test:assertEquals('true')
 function x:test-news-summary-summary(){};
 
 (:
@@ -258,7 +259,7 @@ function x:test-news-summary-no-summary(){
         "entry":    $entry
     }
     let $expected.raw as element(xhtml:div) := 
-        <div xmlns="http://www.w3.org/1999/xhtml" xml:space="preserve"> On June 19, 2009, Secretary of State Clinton announced that same-sex partners of <a  href="https://twitter.com/StateDept">@StateDept</a> employees would be entitled to the benefits and allowances extended to family members. <a href="https://history.state.gov/departmenthistory/timeline/2000-2009">history.state.gov/departmenthist…</a> <a href="https://twitter.com/search?q=%23twitterstorians&amp;src=hash">#twitterstorians</a> </div>
+        <div xmlns="http://www.w3.org/1999/xhtml" xml:space="preserve"> On June 19, 2009, Secretary of State Clinton announced that same-sex partners of <a  href="https://twitter.com/StateDept">@StateDept</a> employees would be entitled to the benefits and allowances extended to family members. <a href="/departmenthistory/timeline/2000-2009">history.state.gov/departmenthist…</a> <a href="https://twitter.com/search?q=%23twitterstorians&amp;src=hash">#twitterstorians</a> </div>
     let $expected := $expected.raw/node() => ut:normalize-nodes()
     let $actual := news:summary($node, $model) => ut:normalize-nodes()
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
@@ -273,12 +274,12 @@ function x:test-news-summary-no-summary(){
 declare
     %test:assertEquals('true')
 function x:test-news-article-content(){
-    let $node := <div xmlns="http://www.w3.org/1999/xhtml"/>
+    let $node := <div class="hsg-news__content--article" data-template="news:article-content"/>
     let $entry := doc('/db/apps/hsg-shell/tests/data/news/twitter/twitter-996046266021896194.xml')
     let $model := map{
         "entry":    $entry
     }
-    let $expected := $entry/a:entry/a:content/xhtml:div
+    let $expected := <div class="hsg-news__content--article" xmlns="http://www.w3.org/1999/xhtml">{$entry/a:entry/a:content/xhtml:div/node()}</div>
     let $actual := news:article-content($node, $model)
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };

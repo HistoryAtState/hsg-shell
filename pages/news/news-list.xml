@@ -29,7 +29,7 @@
                         <div class="hsg-list__item__row">
                             <time class="hsg-list__badge hsg-badge" data-template="news:date"/>
                             <div class="hsg-list__item-wrap">
-                                <h3 class="hsg-list__title" data-template="app:fix-links">
+                                <h3 class="hsg-list__title">
                                     <a class="hsg-list__link" data-template="news:title-link"/>
                                 </h3>
                                 <p class="hsg-list__text--truncated">
