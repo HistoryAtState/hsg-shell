@@ -7,6 +7,8 @@ module namespace news = "http://history.state.gov/ns/site/hsg/news";
 
 import module namespace templates="http://exist-db.org/xquery/templates";
 import module namespace util="http://exist-db.org/xquery/util";
+import module namespace ut="http://history.state.gov/ns/site/hsg/app-util" at "app-util.xqm";
+
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 
@@ -81,13 +83,13 @@ declare
     %templates:wrap
 function news:title($node as node()?, $model as map(*)?) {
     (: allows calling news:title from templating :)
-    news:title($model?entry)
+    ut:normalize-nodes(news:title($model?entry))
 };
 
 declare
     %templates:wrap
 function news:title ($entry as document-node(element(a:entry)) ) {
-   $entry/a:entry/a:title/xhtml:div/node()
+    $entry/a:entry/a:title/xhtml:div/node()
 };
 
 declare
