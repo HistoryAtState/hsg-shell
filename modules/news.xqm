@@ -83,13 +83,13 @@ declare
     %templates:wrap
 function news:title($node as node()?, $model as map(*)?) {
     (: allows calling news:title from templating :)
-    ut:normalize-nodes(news:title($model?entry))
+    news:title($model?entry)
 };
 
 declare
     %templates:wrap
 function news:title ($entry as document-node(element(a:entry)) ) {
-    $entry/a:entry/a:title/xhtml:div/node()
+    ut:normalize-nodes($entry/a:entry/a:title/xhtml:div/node())
 };
 
 declare

@@ -177,9 +177,7 @@ function x:test-news-title() {
     let $entry := doc('/db/apps/hsg-shell/tests/data/news/carousel/carousel-111.xml')
     let $expected := 
         <div xmlns="http://www.w3.org/1999/xhtml">Now Available: <em>Foreign Relations of the United States</em>, 1969–1976, Volume E–15, Part 2, Documents on Western Europe, 1973–1976, Second, Revised Edition</div>
-    let $actual := <div xmlns="http://www.w3.org/1999/xhtml">{
-        ut:normalize-nodes(news:title($entry))
-    }</div>
+    let $actual := <div xmlns="http://www.w3.org/1999/xhtml">{ news:title($entry) }</div>
     return if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
 
@@ -199,8 +197,8 @@ function x:test-news-title-link() {
     let $node := <a class="hsg-news__more" data-template="news:read-more-link"/>
     let $entry := doc('/db/apps/hsg-shell/tests/data/news/carousel/carousel-26.xml')
     let $model := map { "entry": $entry }
-    let $expected := <a class="hsg-news__more" href="/exist/apps/hsg-shell/news/carousel-26">{ut:normalize-nodes(news:title($entry))}</a>
-    let $actual := ut:normalize-nodes(news:title-link($node, $model))
+    let $expected := <a class="hsg-news__more" href="/exist/apps/hsg-shell/news/carousel-26">{news:title($entry)}</a>
+    let $actual := news:title-link($node, $model)
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
 
