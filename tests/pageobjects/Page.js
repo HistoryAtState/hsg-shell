@@ -101,7 +101,7 @@ Page.prototype.waitForExist = function (selector, timeInMs) {
 };
 
 Page.prototype.getElementCount = function (selector) {
-  return browser.$$(selector).value.length;
+  return browser.$$(selector).length;
 };
 
 Page.prototype.searchAll = function (searchString) {
