@@ -1,0 +1,89 @@
+<div data-template="pages:load" data-template-ignore="true">
+    <div data-template="templates:surround" data-template-at="content" data-template-with="templates/site.xml">
+        <section class="row">
+            <div data-template="pages:breadcrumb">
+                <p id="breadcrumb-title">All <i>Foreign Relations</i> Volumes</p>
+            </div>
+        </section>
+
+        <section class="row">
+            <div class="hsg-width-two-thirds">
+                <div data-template="app:fix-links">
+                    <h1>All Volumes in the <em>Foreign Relations of the United States</em> Series</h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="row" data-template="fm:init-frus-list">
+            <div class="hsg-width-two-thirds">
+
+                <ul class="hsg-list hsg-columns__flex hsg-list__news">
+                    <li class="hsg-list__item" data-template="templates:each" data-template-from="volumes-meta" data-template-to="volume-meta">
+                        <div class="hsg-list__item__row">
+                            <img class="hsg-news__thumbnail" data-template="fm:thumbnail"/>
+                            <div class="hsg-list__item-wrap">
+                                <h3 class="hsg-list__title">
+                                    <a class="hsg-list__link" data-template="fm:title-link"/>
+                                </h3>
+                                <div data-template="fm:get-media-types">
+                                    <ul class="hsg-ebook-list" data-template="fm:if-media">
+                                        <li data-template="fm:if-media-type" data-template-type="epub">
+                                            <a data-template="fm:epub-href-attribute" class="hsg-link-button">EPUB (<span data-template="fm:epub-size"/>)</a>
+                                        </li>
+                                        <li data-template="fm:if-media-type" data-template-type="mobi">
+                                            <a data-template="fm:mobi-href-attribute" class="hsg-link-button">Mobi (<span data-template="fm:mobi-size"/>)</a>
+                                        </li>
+                                        <li data-template="fm:if-media-type" data-template-type="pdf">
+                                            <a data-template="fm:pdf-href-attribute" class="hsg-link-button">PDF (<span data-template="fm:pdf-size"/>)</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>    
+            <aside data-template="pages:asides">
+                <div class="hsg-panel" data-template="app:fix-links">
+                    <div class="hsg-panel-heading">
+                        <h2 class="hsg-sidebar-title">Administrations</h2>
+                    </div>
+                    <div class="hsg-panel-body">
+                        <p>Browse official documents from the <em>Foreign Relations of the United
+                            States</em> series.</p>
+                    </div>
+                    <div class="hsg-panel-heading-second-level">
+                        <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                    </div>
+                    <ul class="hsg-list-group">
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/historicaldocuments">All Administrations</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </section>
+    </div>
+</div>
