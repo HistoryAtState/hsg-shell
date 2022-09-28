@@ -213,6 +213,9 @@ declare variable $config:PUBLICATIONS :=
                 )
               }        
         },
+        "frus-list": map{
+            "collection": $config:FRUS_METADATA_COL
+        },
         "frus-administration": map {
           "select-section": function($administration-id) {
               doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $administration-id]
