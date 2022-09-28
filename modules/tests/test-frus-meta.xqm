@@ -27,16 +27,26 @@ declare variable $x:test_col := collection('/db/apps/hsg-shell/tests/data/frus-m
  :  THEN return a map with $per-page ?volumes-meta documents sorted and selected from $model?collection
  :  AND ?total as the integer total of volume metadata documents in $model?collection 
  :)
+declare
+    %test:assertEquals(701)
+function x:test-init-volume-list-total(){
+    let $model := map{
+            "collection": $x:test_col
+        }
+    let $actual := fm:init-frus-list((), $model, 1, 50)
+    return $actual?total
+};
 
 (:
  :  WHEN calling fm:sorted()
  :  GIVEN a sequence of volume metadata $model?volumes-meta
  :  GIVEN a $start position in the sequence
- :  GIVEN a number of entries to return, $num
+ :  GIVEN a number of entries to return, $per-page
  :  THEN return the entries corresponding to those between the $start
- :  and ($start + $num) positions in the sequence inclusive, where the sequence
+ :  and ($start + $per-page) positions in the sequence inclusive, where the sequence
  :  has been sorted by $volume-meta/volume/@id ascending.
  :)
+
 
 (:
  :  WHEN calling fm:id()
