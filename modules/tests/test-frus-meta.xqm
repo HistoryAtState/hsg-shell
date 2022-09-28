@@ -49,13 +49,13 @@ function x:test-init-volume-list-total(){
 
 
 (:
- :  WHEN calling fm:id()
+ :  WHEN calling fm:get-id()
  :  GIVEN a $volume-meta document
  :  THEN return the value of $volume-meta/volume/@id
  :)
 
 (:
- :  WHEN calling fm:id()
+ :  WHEN calling fm:get-id()
  :  GIVEN a $node
  :  GIVEN a $model map containing a .?volume-meta document
  :  THEN

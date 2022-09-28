@@ -32,7 +32,7 @@ function fm:init-frus-list($node as node()?, $model as map(*), $start as xs:inte
 declare function fm:sorted ($collection, $start as xs:integer, $per-page as xs:integer) {
     let $sorted := (
         for $volume in $collection
-        let $id := fm:get-sort-id($volume)
+        let $id := fm:get-id($volume)
         order by $id ascending
         return $volume
     )
@@ -42,7 +42,7 @@ declare function fm:sorted ($collection, $start as xs:integer, $per-page as xs:i
     )
 };
 
-declare function fm:get-sort-id ($collection) {
+declare function fm:get-id ($collection) {
     $collection/volume[@id]
 };
 
