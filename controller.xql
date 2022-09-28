@@ -18,10 +18,10 @@ declare function local:get-url() {
         '://',
         request:get-server-name(),
         let $server-port := request:get-server-port()
-        return 
-            if ($server-port = (80, 443)) then 
+        return
+            if ($server-port = (80, 443)) then
                 ()
-            else 
+            else
                 concat(":", string($server-port)),
         local:get-uri()
         )
@@ -91,7 +91,7 @@ else if ($exist:path = ("/robots.txt", "/opensearch.xml", "/favicon.ico")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller || "/resources" || $exist:path}"/>
     </dispatch>
-    
+
 else if (starts-with($exist:path, "/sitemap")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller || "/resources/sitemaps" || $exist:path}"/>
@@ -109,13 +109,13 @@ else if (ends-with($exist:path, "validate-results-of-twitter-jobs.xq")) then
             <forward url="{$exist:controller}/modules/view.xql"/>
         </error-handler>
     </dispatch>
-    
+
 (: handle requests for resource-name.xml used by replication test :)
 else if (ends-with($exist:path, "resource-name.xml")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller}/tests/xquery/resource-name.xml"/>
     </dispatch>
-    
+
 (: handle requests for validate-replication:)
 else if (ends-with($exist:path, "validate-replication")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -123,8 +123,8 @@ else if (ends-with($exist:path, "validate-replication")) then
             <set-header name="Cache-Control" value="no-store"/>
         </forward>
     </dispatch>
-   
-   
+
+
 
 (: handle requests for ajax services :)
 else if (ends-with($exist:resource, ".xql")) then
@@ -1172,7 +1172,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                 <forward url="{$exist:controller}/modules/view.xql"/>
                             </error-handler>
                         </dispatch>
-                        
+
         else if (ends-with($exist:path, '/departmenthistory')) then
             let $page := "departmenthistory/index.xml"
             return
@@ -1708,16 +1708,54 @@ else if (matches($exist:path, '^/education/?')) then
                 </error-handler>
             </dispatch>
 
+(: handle requests for news pages :)
+ else if (matches($exist:path, '^/news/?')) then
+    let $fragments := tokenize(substring-after($exist:path, '/news/'), '/')[. ne '']
+    let $log := util:log('info', ('controller.xq, Endpoint => ^/news/?'))
+    let $log := util:log('info', ('$fragments=', $fragments))
+    (: TODO TFJH: Refactor url endpoints for news articles, this is just an interim solution for template development :)
+    return 
+        if ($fragments[1]) 
+        then (
+            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                <forward url="{$exist:controller}/pages/news/news-article.xml"/>
+                <view>
+                    <forward url="{$exist:controller}/modules/view.xql">
+                        <add-parameter name="publication-id" value="news"/>
+                        <add-parameter name="document-id" value="{$fragments[1]}"/>
+                    </forward>
+                </view>
+                <error-handler>
+                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
+                    <forward url="{$exist:controller}/modules/view.xql"/>
+                </error-handler>
+            </dispatch>
+        ) 
+        else (
+            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                <forward url="{$exist:controller}/pages/news/news-list.xml"/>
+                <view>
+                    <forward url="{$exist:controller}/modules/view.xql">
+                        <add-parameter name="publication-id" value="news"/>
+                    </forward>
+                </view>
+                <error-handler>
+                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
+                    <forward url="{$exist:controller}/modules/view.xql"/>
+                </error-handler>
+            </dispatch>
+        )
+
 (: handle search requests :)
 else if (matches($exist:path, '^/search/?')) then
     let $params :=
         map:merge(
-            for $name in 
+            for $name in
                 (: request:get-parameter-names() :)
                 ("q", "start-date", "end-date")
             let $values := request:get-parameter($name, ()) ! normalize-space()[. ne ""]
-            return 
-                if (exists($values)) then 
+            return
+                if (exists($values)) then
                     map:entry($name, $values)
                 else
                     (),

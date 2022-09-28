@@ -7,7 +7,12 @@ import module namespace console="http://exist-db.org/xquery/console" at "java:or
 import module namespace templates="http://exist-db.org/xquery/templates";
 
 declare variable $app:APP_ROOT :=
-    let $nginx-request-uri := request:get-header('nginx-request-uri')
+    let $nginx-request-uri := 
+        try {request:get-header('nginx-request-uri')} (: e.g. XQsuite has no request :)
+        catch * {()}
+    let $context-path := 
+        try {request:get-context-path()}
+        catch * {'/exist'}
     return
         (: if request received from nginx :)
         if ($nginx-request-uri) then
@@ -18,7 +23,7 @@ declare variable $app:APP_ROOT :=
                 ""
         (: otherwise we're in the eXist URL space :)
         else
-            request:get-context-path() || "/apps/hsg-shell";
+            $context-path || "/apps/hsg-shell";
 
 declare
     %templates:wrap
@@ -74,10 +79,14 @@ declare function app:nginx-request-uri($node as node(), $model as map(*)) {
 };
 
 declare function app:fix-href($href as xs:string*) {
-    replace(
+    let $href.1 := 
+        if (starts-with($href, '/') and not(starts-with($href, $app:APP_ROOT)))
+        then ($app:APP_ROOT || $href)
+        else $href
+    return replace(
         replace(
             replace(
-              $href,
+              $href.1,
               "\$extern",
               "https://history.state.gov"
             ),
@@ -163,6 +172,23 @@ declare function app:set-last-modified($last-modified as xs:dateTime) {
 
 declare function app:set-created($created as xs:dateTime) {
     response:set-header("Created", app:format-http-date($created))
+};
+
+(:
+ : 2015-06-04T13:03:16-04:00 -> Jun 4, 2015
+ :)
+declare function app:format-date-month-short-day-year($dateTime as xs:dateTime) as xs:string {
+    $dateTime
+    => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
+    => format-dateTime("[MNn,*-3] [D01], [Y]", "en", (), ())
+};
+
+(:
+ : 2015-06-04T13:03:16-04:00 -> yyyy-mm-dd -> 2015-06-04
+ :)
+declare function app:format-date-short ($date as xs:dateTime) as xs:string {
+    let $date := substring-before($date, 'T')
+    return $date
 };
 
 declare function app:uri($node as node(), $model as map(*)) {

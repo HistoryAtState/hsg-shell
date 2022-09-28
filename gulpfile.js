@@ -178,7 +178,7 @@ gulp.task('pages:watch', function () {
 
 // modules //
 
-let modulesPath = 'modules/*';
+let modulesPath = 'modules/**/*';
 gulp.task('modules:deploy', function () {
     return gulp.src(modulesPath, {base: './'})
         .pipe(exClient.newer(targetConfiguration))

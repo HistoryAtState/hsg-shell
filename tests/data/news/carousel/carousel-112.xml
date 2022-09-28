@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>carousel-112</id>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Now Available: <em>Foreign Relations of the United States</em>, 1961–1963, Volumes
+            X/XI/XII, American Republics; Cuba 1961–1962; Cuban Missile Crisis and Aftermath,
+            Microfiche Supplement</div>
+   </title>
+   <published>2021-03-29T04:57:44.081-05:00</published>
+   <updated>2021-03-29T04:57:44.081-05:00</updated>
+   <link href="/news/carousel-112" rel="self"/>
+   <link rel="about"
+         title="Visit Resource"
+         href="/historicaldocuments/frus1961-63v10-12mSupp"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>This release replaces the image-only preview edition and marks the completion of
+                    the digitization of this microfiche supplement, originally published in 1998.
+                    The supplement is now keyword- and date-searchable online and downloadable as
+                    free ebooks.</p>
+      </div>
+   </content>
+   <link rel="enclosure"
+         type="img/jpeg"
+         title="Book Cover of Foreign Relations of the United States, 1961–1963, Volumes X/XI/XII, American Republics; Cuba 1961–1962; Cuban Missile Crisis and Aftermath, Microfiche Supplement"
+         href="https://static.history.state.gov/carousel/frus1961-63v10-12mSupp.jpg"/>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="carousel"/>
+</entry>

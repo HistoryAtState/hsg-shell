@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>carousel-111</id>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Now Available: <em>Foreign Relations of the United States</em>, 1969–1976, Volume
+            E–15, Part 2, Documents on Western Europe, 1973–1976, Second, Revised Edition</div>
+   </title>
+   <published>2021-02-12T12:40:19.704-06:00</published>
+   <updated>2021-02-12T12:40:19.704-06:00</updated>
+   <link href="/news/carousel-111" rel="self"/>
+   <link rel="about"
+         title="Visit Resource"
+         href="/historicaldocuments/frus1969-76ve15p2Ed2"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>This volume documents the U.S. relationship with Western Europe from 1973 to
+                    1976. This second, revised edition incorporates a chapter on Italy that was not
+                    included in the first edition, which was published in 2014.</p>
+      </div>
+   </content>
+   <link rel="enclosure"
+         type="img/jpeg"
+         title="Book Cover of Foreign Relations of the United States, 1969–1976, Volume E–15, Part 2, Documents on Western Europe, 1973–1976, Second, Revised Edition"
+         href="https://static.history.state.gov/carousel/frus1969-76ve15p2Ed2.jpg"/>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="carousel"/>
+</entry>

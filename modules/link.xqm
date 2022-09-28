@@ -8,6 +8,7 @@ module namespace link = "http://history.state.gov/ns/site/hsg/link";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace ut="http://history.state.gov/ns/site/hsg/app-util" at "app-util.xqm";
 
 
 declare function link:generate-from-state($url-state as map(*)) as element(a)* {
@@ -26,11 +27,9 @@ declare function link:generate-from-state($url-state as map(*)) as element(a)* {
         <a href="{ $full-url }">
             {
                 $url-state?link-attributes!.(), (: any class or rdfa attributes may be passed in as a function using the $url-state:)
-                if (ends-with($url-state?full-url, $uri))
+                if (ends-with($full-url, $url-state?original-url))
                 then (attribute aria-current { "page" })
-                else (),
-                attribute data-originating {$url-state?full-url},
-                attribute data-current {$uri}
+                else ()
             }
             <span>{link:generate-label-from-state($url-state)}</span>
         </a>
@@ -70,24 +69,6 @@ declare function link:generate-label-from-state($url-state as map(*)) {
         else 
             "Office of the Historian"
     return (
-        link:normalize-nodes($label)
+        ut:normalize-nodes($label)
     )
-};
-
-declare function link:normalize-nodes($nodes) {
-    for $node in $nodes
-    return 
-        typeswitch ($node)
-        case xs:string return
-            normalize-space($node)
-        case text() return string-join((
-            (' ')[matches($node, '^\s+\S')], (: convert any leading whitespace to a single space :)
-            normalize-space($node),
-            (' ')[matches($node, '\S\s+$')] (: convert any trailing whitespace to a single space :)
-        ))
-        case element() return element {node-name($node)} { 
-            link:normalize-nodes(($node/@*, $node/node())) 
-        }
-        default return $node
-    
 };

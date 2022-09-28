@@ -33,14 +33,15 @@ declare function side:generate-section-nav($uri as xs:string) as element(div)? {
       site:call-with-parameters-for-uri-steps(
         $site-section,
         $site:config,
-        link:generate-label-from-state#1
+        link:generate-label-from-state#1,
+        map{'original-url': $uri}
       )[2]
   let $section-links :=
       site:call-for-uri-step-children(
         $site-section,
         $site:config,
         link:generate-from-state#1,
-        map{'exclude-role': 'section-nav', 'skip-role': 'section-nav'}
+        map{'exclude-role': 'section-nav', 'skip-role': 'section-nav', 'original-url': $uri}
       )
 
   return if ($section-links) then

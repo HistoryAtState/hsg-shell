@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>twitter-996068915477401601</id>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Ground was broken for the…</div>
+   </title>
+   <published>2018-05-14T16:45:10Z</published>
+   <updated>2018-05-14T16:45:10Z</updated>
+   <link href="/news/twitter-996068915477401601" rel="self"/>
+   <link rel="DCTERMS.source"
+         title="View Twitter Post"
+         href="https://twitter.com/HistoryAtState/status/996068915477401601"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>Ground was broken for the <a href="https://twitter.com/diplomacycenter">@diplomacycenter</a>, a museum and educational center located outside of
+                    the main Department of State building in Washington, DC, on September 3, 2014.
+                        <a href="/departmenthistory/timeline/2010-2019">history.state.gov/departmenthist…</a>
+            <a href="https://twitter.com/search?q=%23twitterstorians&amp;src=hash">#twitterstorians</a>
+         </p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="twitter"/>
+</entry>

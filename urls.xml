@@ -1330,5 +1330,22 @@
         </step>
         <ignore/>
     </step>
+    <step value="news">
+        <step key="article">
+            <page-template href="pages/news/news-article.xml">
+                <with-param name="publication-id" value="news"/>
+                <with-param name="document-id" keyval="article"/>
+            </page-template>
+            <config>
+                <src collection="."/>
+            </config>
+        </step>
+        <page-template href="pages/news/news-list.xml">
+            <with-param name="publication-id" value="news"/>
+        </page-template>
+        <config>
+            <src collection="tests/data/news"/>
+        </config>
+    </step>
     <page-template href="pages/index.xml"/>
 </root>

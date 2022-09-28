@@ -1,7 +1,6 @@
 xquery version "3.1";
 
 module namespace x="http://history.state.gov/ns/site/hsg/tests/test-section-nav";
-import module namespace side = "http://history.state.gov/ns/site/hsg/sidebar" at "../sidebar.xqm";
 import module namespace t="http://history.state.gov/ns/site/hsg/xqsuite" at "../xqsuite.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "../pages.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";

@@ -1,0 +1,33 @@
+/* HSG lists -------------- */
+.hsg-list {
+    &.hsg-columns__flex {
+        margin: 0;
+        padding: 0;
+        flex: 1 1 auto;
+    }
+
+    &__item {
+        margin: 0 0 3rem 0;
+        padding: 0;
+        break-inside: avoid;
+
+        &__row {
+            display: flex;
+            flex-direction: row;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+        }
+    }
+
+    &__title {
+        margin-top: 0;
+    }
+
+    &__badge {
+        margin: 0 2.5rem 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
