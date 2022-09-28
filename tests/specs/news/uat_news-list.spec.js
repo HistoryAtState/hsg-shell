@@ -91,7 +91,7 @@ describe('The pagination', () => {
 // News entries tests
 
 newsEntries.forEach((newsEntry) => {
-  describe('News entries of "' + newsEntry.type + '"', () => {
+  describe('News entry with ID "' + newsEntry.id + '" of type "' + newsEntry.type + '"', () => {
     let d, dc, s, id, l, sa;
 
     before(() => {
@@ -111,8 +111,11 @@ newsEntries.forEach((newsEntry) => {
     });
 
     // Check if the news entry has a headline that links to the news article
-    it('should have a headline with the correct link to news article "' + newsEntry.id + '" and contain the correct title', () => {
+    it('should have a headline with the correct link to news article "/news/' + newsEntry.id, () => {
       assert.exists(id);
+    });
+
+    it('should contain the correct title', () => {
       assert.exists(l)
     });
 
