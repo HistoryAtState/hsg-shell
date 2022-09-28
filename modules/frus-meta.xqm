@@ -19,11 +19,11 @@ declare
     %templates:default("start", 1)
     %templates:default("per-page", 20)
 function fm:init-frus-list($node as node()?, $model as map(*), $start as xs:integer, $per-page as xs:integer) as map(*) {
-    let $volume-meta := fm:sorted($model?collection, $start, $per-page)
+    let $volume-list := fm:sorted($model?collection, $start, $per-page)
     return (
         map {
             "total":        count($model?collection),
-            "volume-meta":  $volume-meta,
+            "volumes-meta": $volume-list,
             "hits":         $model?collection
         }
     )
@@ -44,5 +44,24 @@ declare function fm:sorted ($collection, $start as xs:integer, $per-page as xs:i
 
 declare function fm:get-id ($collection) {
     $collection/volume[@id]
+};
+
+declare
+    %templates:wrap
+function fm:title($node as node()?, $model as map(*)?) {
+    $model?volume-meta//title[@type='complete']/text()
+};
+
+(: FIXME: href attribute needs to be processed :)
+declare
+    %templates:replace
+function fm:title-link ($node as node(), $model as map(*)) {
+    let $log := util:log('info', ('frus-meta.xqm, title-link=', $model?volume-meta//title[@type='complete']/text()))
+    return
+    element { node-name($node) } {
+        $node/@*[not(local-name() = 'href')],
+        attribute href { '/' },
+        templates:process($node/node(), $model)
+    }
 };
 
