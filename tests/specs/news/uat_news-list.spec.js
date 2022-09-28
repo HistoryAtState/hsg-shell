@@ -106,7 +106,7 @@ newsEntries.forEach((newsEntry) => {
     });
 
     // Check if types of date badges will get the correct color
-    it('should have a date badge with the correct color ', () => {
+    it('should have a date badge with the correct background-color "' + newsEntry.color + '"', () => {
       assert.equal(dc, newsEntry.color);
     });
 
