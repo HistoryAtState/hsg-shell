@@ -2,21 +2,20 @@
     <div data-template="templates:surround" data-template-at="content" data-template-with="templates/site.xml">
         <section class="row">
             <div data-template="pages:breadcrumb">
-                <p id="breadcrumb-title">All <i>Foreign Relations</i> Volumes</p>
+                <p id="breadcrumb-title">All Titles in the Series</p>
             </div>
         </section>
 
         <section class="row">
             <div class="hsg-width-two-thirds">
                 <div data-template="app:fix-links">
-                    <h1>All Volumes in the <em>Foreign Relations of the United States</em> Series</h1>
+                    <h1>All Titles in the Series</h1>
                 </div>
             </div>
         </section>
 
         <section class="row" data-template="fm:init-frus-list">
             <div class="hsg-width-two-thirds">
-
                 <ul class="hsg-list hsg-columns__flex hsg-list__news">
                     <li class="hsg-list__item" data-template="templates:each" data-template-from="volumes-meta" data-template-to="volume-meta">
                         <div class="hsg-list__item__row">
@@ -42,8 +41,7 @@
                         </div>
                     </li>
                 </ul>
-
-            </div>    
+            </div>
             <aside data-template="pages:asides">
                 <div class="hsg-panel" data-template="app:fix-links">
                     <div class="hsg-panel-heading">
