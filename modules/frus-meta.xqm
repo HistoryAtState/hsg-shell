@@ -13,4 +13,36 @@ import module namespace frus="http://history.state.gov/ns/site/hsg/frus-html" at
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
-declare function fm:init-frus-list($node, $model) {};
+
+declare
+    %templates:wrap
+    %templates:default("start", 1)
+    %templates:default("per-page", 20)
+function fm:init-frus-list($node as node()?, $model as map(*), $start as xs:integer, $per-page as xs:integer) as map(*) {
+    let $volume-meta := fm:sorted($model?collection, $start, $per-page)
+    return (
+        map {
+            "total":        count($model?collection),
+            "volume-meta":  $volume-meta,
+            "hits":         $model?collection
+        }
+    )
+};
+
+declare function fm:sorted ($collection, $start as xs:integer, $per-page as xs:integer) {
+    let $sorted := (
+        for $volume in $collection
+        let $id := fm:get-sort-id($volume)
+        order by $id ascending
+        return $volume
+    )
+    return (
+        subsequence($sorted, $start, $per-page),
+        util:log('info', ('frus-meta.xqm, fm:sorted ', subsequence($sorted, $start, $per-page)))
+    )
+};
+
+declare function fm:get-sort-id ($collection) {
+    $collection/volume[@id]
+};
+
