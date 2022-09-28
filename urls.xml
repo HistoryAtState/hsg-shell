@@ -27,8 +27,8 @@
         <step value="status-of-the-series">
             <page-template href="pages/historicaldocuments/status-of-the-series.xml"/>
         </step>
-        <step value="frus-list">
-            <page-template href="pages/historicaldocuments/frus-list.xml">
+        <step value="volume-titles">
+            <page-template href="pages/historicaldocuments/volume-titles.xml">
                 <with-param name="publication-id" value="frus-list"/>
             </page-template>
             <config>
