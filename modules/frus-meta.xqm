@@ -74,7 +74,15 @@ declare function fm:thumbnail($volume-meta as document-node(element(volume))) {
         'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '.jpg'
 };
 
-declare function fm:thumbnail($node, $model) {};
+declare function fm:thumbnail($node, $model) {
+    let $volume-meta := $model?volume-meta
+    return
+        element { node-name($node) } {
+            $node/(@* except @data-template),
+            attribute data-src { fm:thumbnail($volume-meta) },
+            attribute alt { 'Book Cover of ' || fm:title($volume-meta) }
+        }
+};
 
 declare function fm:isbn($volume-meta as document-node(element(volume))) {};
 
