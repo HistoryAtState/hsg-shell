@@ -185,18 +185,7 @@ declare
 function x:test-fm-thumbnail-templates() {
     let $node :=
         <img class="hsg-news__thumbnail" data-template="fm:thumbnail"/>
-    let $config := map{
-        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
-            try {
-                function-lookup(xs:QName($functionName), $arity)
-            } catch * {
-                ()
-            }
-        },
-        $templates:CONFIG_PARAM_RESOLVER : map{}
-    }
     let $model := map {
-        $templates:CONFIGURATION : $config,
         "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
     }
     let $expected :=
