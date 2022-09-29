@@ -165,6 +165,13 @@ declare %test:assertEquals('true') function x:test-fm-title-link() {
  :  GIVEN a $volume-meta element (with ID $id)
  :  THEN return the thumbnail image URI at https://static.history.state.gov/frus/{$id}/covers/{$id}-thumb.jpg
  :)
+declare
+    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31-thumb.jpg')
+function x:test-fm-thumbnail() {
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    return
+        fm:thumbnail($volume-meta)
+};
 
 (:
  :  WHEN calling fm:thumbnail()
@@ -173,6 +180,37 @@ declare %test:assertEquals('true') function x:test-fm-title-link() {
  :  THEN return an img element with @src = fm:thumbnail($model?volume-meta)
  :  AND @alt = "Book Cover of " || fm:title($model?volume-meta) 
  :)
+declare
+    %test:assertEquals('true')
+function x:test-fm-thumbnail-templates() {
+    let $node :=
+        <img class="hsg-news__thumbnail" data-template="fm:thumbnail"/>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    let $expected :=
+        <img class="hsg-news__thumbnail"
+             data-template="fm:thumbnail"
+             src="https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31-thumb.jpg"
+             alt="Book Cover of Foreign Relations of the United States, 1969–1976, Volume XXXI, Foreign Economic Policy, 1973–1976"/>
+    let $actual := fm:thumbnail($node, $model)
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
 
 (:
  :  WHEN calling fm:isbn()
