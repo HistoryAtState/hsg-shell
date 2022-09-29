@@ -21,20 +21,35 @@ declare variable $x:test_col := collection('/db/apps/hsg-shell/tests/data/frus-m
 
 (:
  :  WHEN calling fm:init-frus-list()
- :  GIVEN a collection in $model?collection (of FRUS bibliographic data)
+ :  GIVEN a collection in $model?collection (of FRUS bibliographic data) with $total number of volumes
  :  GIVEN a position to start from, $start
  :  GIVEN a number of entries to return, $per-page
- :  THEN return a map with $per-page ?volumes-meta documents sorted and selected from $model?collection
+ :  THEN return a map with $total ?volumes-meta documents sorted and selected from $model?collection
  :  AND ?total as the integer total of volume metadata documents in $model?collection 
  :)
+
 declare
-    %test:assertEquals(701)
-function x:test-init-volume-list-total(){
+    %test:assertEquals(3)
+function x:test-init-frus-list-total(){
     let $model := map{
             "collection": $x:test_col
         }
     let $actual := fm:init-frus-list((), $model, 1, 50)
     return $actual?total
+};
+
+declare
+    %test:assertEquals(
+        'frus1861',
+        'frus1969-76v31',
+        'frus1981-88v11'
+    )
+function x:test-init-frus-list(){
+    let $model := map{
+            "collection": $x:test_col
+        }
+    let $actual := fm:init-frus-list((), $model, 1, 50)
+    return $actual?volumes-meta ! /volume/@id/string(.)
 };
 
 (:
@@ -47,39 +62,103 @@ function x:test-init-volume-list-total(){
  :  has been sorted by $volume-meta/volume/@id ascending.
  :)
 
+declare
+    %test:assertEquals(
+        'frus1969-76v31',
+        'frus1981-88v11'
+    )
+function x:test-fm-sorted() {
+    let $actual := fm:sorted($x:test_col, 2, 2)
+    return $actual ! string(/volume/@id)
+};
 
 (:
- :  WHEN calling fm:get-id()
+ :  WHEN calling fm:id()
  :  GIVEN a $volume-meta document
  :  THEN return the value of $volume-meta/volume/@id
  :)
 
-(:
- :  WHEN calling fm:get-id()
- :  GIVEN a $node
- :  GIVEN a $model map containing a .?volume-meta document
- :  THEN
- :)
+declare
+     %test:assertEquals('frus1861')
+function x:test-fm-id() {
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    return fm:id($volume-meta)
+};
  
 (:
  :  WHEN calling fm:title()
  :  GIVEN a $volume-meta document
  :  THEN return the whitespace-normalised content of that document's title ($volume-meta/volume/title[@type eq 'complete'])
  :)
+ 
+declare
+    %test:assertEquals('Message of the President of the United States to the Two Houses of Congress, at the Commencement of the Second Session of the Thirty-seventh Congress')
+function x:test-fm-title() {
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    return fm:title($volume-meta)
+};
+
+(:  WHEN calling fm:title()
+ :  GIVEN a $node
+ :  GIVEN a $model?volume-meta document
+ :  THEN return fm:title($model?volume-meta
+ :)
+declare %test:assertEquals('Message of the President of the United States to the Two Houses of Congress, at the Commencement of the Second Session of the Thirty-seventh Congress')
+function x:test-fm-title-template() {
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    let $node := ()
+    let $model := map{
+        'volume-meta':  $volume-meta
+    }
+    return fm:title($node, $model)
+};
 
 (:
  :  WHEN calling fm:title-url()
  :  GIVEN a $volume-meta document
- :  THEN return the (relative) URL of the corresponding FRUS landing page
+ :  THEN return the (fixed) URL of the corresponding FRUS landing page
  :)
+
+declare
+    %test:assertEquals('/exist/apps/hsg-shell/historicaldocuments/frus1861')
+function x:test-fm-title-url() {
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    return fm:title-url($volume-meta)
+};
 
 (:
  :  WHEN calling fm:title-link()
  :  GIVEN a <a/> $node
- :  GIVEN a $model map
- :  THEN return a link to the volume landing page (fm:title-url())
- :  WITH the text of the link corresponding to fm:title()
+ :  GIVEN a $model?volume-meta document
+ :  THEN return a @href link to the volume landing page (fm:title-url())
+ :  THEN process any child nodes and attributes
  :)
+declare %test:assertEquals('true') function x:test-fm-title-link() {
+    let $node := 
+        <a class="hsg-list__link" data-template="fm:title-link">
+            <h3/>
+        </a>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    }
+    let $expected := 
+        <a class="hsg-list__link" href="/exist/apps/hsg-shell/historicaldocuments/frus1861">
+            <h3/>
+        </a>
+    let $actual := fm:title-link($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
 
 (:
  :  WHEN calling fm:thumbnail()
