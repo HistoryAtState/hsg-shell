@@ -50,7 +50,9 @@ declare function fm:title($volume-meta as document-node(element(volume))) {
     ($volume-meta/volume/title[@type eq 'complete']/node()) => ut:normalize-nodes()
 };
 
-declare function fm:title($node, $model) {
+declare
+    %templates:wrap
+function fm:title($node, $model) {
     fm:title($model?volume-meta)
 };
 
@@ -58,9 +60,7 @@ declare function fm:title-url($volume-meta as document-node(element(volume))) {
     app:fix-href('/historicaldocuments/' || fm:id($volume-meta))
 };
 
-declare
-    %templates:wrap
-function fm:title-link($node, $model) {
+declare function fm:title-link($node, $model) {
     element {node-name($node)} {
         $node/(@* except @data-template),
         attribute href {fm:title-url($model?volume-meta)},
