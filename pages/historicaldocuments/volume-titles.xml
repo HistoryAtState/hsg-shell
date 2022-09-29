@@ -19,7 +19,7 @@
                 <ul class="hsg-list hsg-columns__flex hsg-list__news">
                     <li class="hsg-list__item" data-template="templates:each" data-template-from="volumes-meta" data-template-to="volume-meta">
                         <div class="hsg-list__item__row">
-                            <!--img class="hsg-news__thumbnail" data-template="fm:thumbnail"/-->
+                            <img class="hsg-news__thumbnail" data-template="fm:thumbnail"/>
                             <div class="hsg-list__item-wrap">
                                     <a class="hsg-list__link" data-template="fm:title-link">
                                         <h3 class="hsg-list__title" data-template="fm:title"/>
