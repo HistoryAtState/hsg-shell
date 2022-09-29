@@ -71,7 +71,7 @@ declare function fm:title-link($node, $model) {
 declare function fm:thumbnail($volume-meta as document-node(element(volume))) {
     let $id := fm:id($volume-meta)
     return
-        'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '-thumb.jpg'
+        'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '.jpg'
 };
 
 declare function fm:thumbnail($node, $model) {};

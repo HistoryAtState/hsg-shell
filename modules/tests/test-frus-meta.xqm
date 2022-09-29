@@ -163,10 +163,10 @@ declare %test:assertEquals('true') function x:test-fm-title-link() {
 (:
  :  WHEN calling fm:thumbnail()
  :  GIVEN a $volume-meta element (with ID $id)
- :  THEN return the thumbnail image URI at https://static.history.state.gov/frus/{$id}/covers/{$id}-thumb.jpg
+ :  THEN return the thumbnail image URI at https://static.history.state.gov/frus/{$id}/covers/{$id}.jpg
  :)
 declare
-    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31-thumb.jpg')
+    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31.jpg')
 function x:test-fm-thumbnail() {
     let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
     return
@@ -177,7 +177,7 @@ function x:test-fm-thumbnail() {
  :  WHEN calling fm:thumbnail()
  :  GIVEN an img element $node 
  :  GIVEN a $model map with .?volume-meta document
- :  THEN return an img element with @src = fm:thumbnail($model?volume-meta)
+ :  THEN return an img element with @data-src = fm:thumbnail($model?volume-meta)
  :  AND @alt = "Book Cover of " || fm:title($model?volume-meta) 
  :)
 declare
@@ -201,8 +201,7 @@ function x:test-fm-thumbnail-templates() {
     }
     let $expected :=
         <img class="hsg-news__thumbnail"
-             data-template="fm:thumbnail"
-             src="https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31-thumb.jpg"
+             data-src="https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31.jpg"
              alt="Book Cover of Foreign Relations of the United States, 1969–1976, Volume XXXI, Foreign Economic Policy, 1973–1976"/>
     let $actual := fm:thumbnail($node, $model)
     return
