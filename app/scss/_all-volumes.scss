@@ -1,0 +1,57 @@
+/* HSG "all-volumes" list customizations -------------- */
+
+.hsg-list {
+  $el: '.hsg-list';
+
+  &__volumes {
+
+    #{$el}__item{
+      margin: 0 0 1.5rem 0;
+    }
+
+    dt {
+      display: none;
+    }
+
+    dd {
+      margin: 0;
+    }
+
+    #{$el}__item-wrap {
+      border-bottom: $default-border-style;
+    }
+
+    #{$el}__media__download {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      align-content: space-between;
+      gap: 10px 10px;
+      margin: 0 0 1.5rem 0;
+
+      @media screen and (min-width: $small-screen-min) {
+        justify-content: normal;
+      }
+
+      li {
+        flex: 1 46%;
+
+        @media screen and (min-width: $small-screen-min) {
+          flex: 0 20%;
+        }
+      }
+
+      button {
+        text-transform: uppercase;
+        padding: 6px 12px;
+        width: 100%;
+
+        @media screen and (min-width: $small-screen-min) {
+          padding: 4px 8px;
+        }
+      }
+    }
+  }
+}
