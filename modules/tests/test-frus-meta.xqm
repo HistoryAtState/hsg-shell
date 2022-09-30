@@ -1,6 +1,6 @@
 xquery version "3.1";
 
-module namespace x="http://history.state.gov/ns/site/hsg/tests/test-frus-bib";
+module namespace x="http://history.state.gov/ns/site/hsg/tests/test-frus-meta";
 
 import module namespace fm="http://history.state.gov/ns/site/hsg/frus-meta" at "../frus-meta.xqm";
 import module namespace frus="http://history.state.gov/ns/site/hsg/frus-html" at "../frus-html.xqm";
