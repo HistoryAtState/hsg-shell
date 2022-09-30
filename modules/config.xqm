@@ -10,7 +10,7 @@ import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "p
 
 import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../transform/frus-web-module.xql";
 
-declare namespace templates="http://exist-db.org/xquery/templates";
+declare namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare namespace expath="http://expath.org/ns/pkg";
 declare namespace repo="http://exist-db.org/xquery/repo";

@@ -24,7 +24,7 @@
                 </nav>
 
                 <ul class="hsg-list hsg-columns__flex hsg-list__news">
-                    <li class="hsg-list__item" data-template="app:each" data-template-from="entries"
+                    <li class="hsg-list__item" data-template="templates:each" data-template-from="entries"
                         data-template-to="entry">
                         <div class="hsg-list__item__row">
                             <time class="hsg-list__badge hsg-badge" data-template="news:date"/>

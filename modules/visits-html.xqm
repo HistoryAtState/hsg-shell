@@ -9,7 +9,7 @@ module namespace visits = "http://history.state.gov/ns/site/hsg/visits-html";
  :)
 
 import module namespace gsh="http://history.state.gov/ns/xquery/geospatialhistory" at "/db/apps/gsh/modules/gsh.xqm";
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare variable $visits:DATA_COL := '/db/apps/visits/data';
 
