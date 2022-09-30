@@ -50,9 +50,7 @@ declare function fm:title($volume-meta as document-node(element(volume))) {
     ($volume-meta/volume/title[@type eq 'complete']/node()) => ut:normalize-nodes()
 };
 
-declare
-    %templates:wrap
-function fm:title($node, $model) {
+declare function fm:title($node, $model) {
     fm:title($model?volume-meta)
 };
 

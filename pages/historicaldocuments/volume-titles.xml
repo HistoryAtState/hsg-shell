@@ -21,9 +21,9 @@
                         <div class="hsg-list__item__row">
                             <img class="hsg-news__thumbnail" data-template="fm:thumbnail"/>
                             <div class="hsg-list__item-wrap">
-                                    <a class="hsg-list__link" data-template="fm:title-link">
-                                        <h3 class="hsg-list__title" data-template="fm:title"/>
-                                    </a>
+                                <h3 class="hsg-list__title">
+                                    <a class="hsg-list__link" data-template="fm:title-link"><span data-template="fm:title"/></a>
+                                </h3>
                                     <!--p data-template="fm:publish-date">Published on</p-->
                                     <!--p data-template="fm:isbn">ISBN </p-->
                                 <!--div data-template="fm:get-media-types">
