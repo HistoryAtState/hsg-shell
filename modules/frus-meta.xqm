@@ -84,7 +84,9 @@ declare function fm:thumbnail($node, $model) {
         }
 };
 
-declare function fm:isbn($volume-meta as document-node(element(volume))) {};
+declare function fm:isbn($volume-meta as document-node(element(volume))) {
+    $volume-meta/volume/((isbn13, isbn10)[normalize-space(.) ne ''])[1]/string(.)
+};
 
 declare function fm:isbn($node, $model) {};
 

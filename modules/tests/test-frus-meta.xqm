@@ -205,18 +205,30 @@ function x:test-fm-thumbnail-templates() {
  :  GIVEN a $volume-meta document with an ISBN-13 (e.g. frus1969-76v31)
  :  THEN return the 13-digit ISBN (as a string)
  :)
- 
+
+declare %test:assertEquals('9780160844102') function x:test-fm-isbn-13() {
+    fm:isbn(doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml'))
+};
+
 (:
  :  WHEN calling fm:isbn()
  :  GIVEN a $volume-meta document without any ISBN (e.g. frus1861)
  :  THEN return the empty sequence
  :)
+
+declare %test:assertEmpty function x:test-fm-isbn-empty() {
+    fm:isbn(doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml'))
+};
  
 (:
  :  WHEN calling fm:isbn()
- :  GIVEN a $volume-meta document with no ISBN-13 but with an ISBN-10 (no real examples)
+ :  GIVEN a $volume-meta document with no ISBN-13 but with an ISBN-10 (no real examples; faked it with test version of frus1981-88v11)
  :  THEN return the 10-digit ISBN.
  :)
+
+declare %test:assertEquals('016084410X') function x:test-fm-isbn-10() {
+    fm:isbn(doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml'))
+};
 
 (:
  :  WHEN calling fm:isbn()
