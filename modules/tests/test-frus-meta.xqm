@@ -244,6 +244,10 @@ declare %test:assertEquals('016084410X') function x:test-fm-isbn-10() {
  :  THEN return the publication status $volume-meta/volume/publication-status (e.g. "published")
  :)
 
+declare %test:assertEquals('published') function x:test-fm-pub-status() {
+    fm:pub-status(doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml'))
+};
+
 (:
  :  WHEN calling fm:pub-status()
  :  GIVEN a $node
@@ -255,7 +259,7 @@ declare %test:assertEquals('016084410X') function x:test-fm-isbn-10() {
 (:
  :  WHEN calling fm:get-media-types()
  :  GIVEN a $model?volume-meta document with $id
- :  THEN add a sequence consisting of the available types ('epub', 'mobi', 'pdf') to the model map with the key 'media-types'
+ :  THEN return a map with the key 'media-types' with the value a sequence consisting of the available types ('epub', 'mobi', 'pdf'). 
  :)
  
  (: TODO TFJH: add specific examples calling corresponding frus:media-exists functions :)

@@ -88,7 +88,9 @@ declare function fm:isbn($volume-meta as document-node(element(volume))) {
 
 declare function fm:isbn($node, $model) {};
 
-declare function fm:pub-status($volume-meta as document-node(element(volume))) {};
+declare function fm:pub-status($volume-meta as document-node(element(volume))) {
+    $volume-meta/volume/publication-status/string(.)
+};
 
 declare function fm:pub-status($node, $model) {};
 
