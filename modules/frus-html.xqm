@@ -695,7 +695,7 @@ declare function fh:exists-ebook($vol-id) {
 };
 
 declare function fh:exists-pdf($vol-id) {
-    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.pdf')])
+    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/pdf/resources.xml'))//filename[ends-with(., '.pdf')])
 };
 
 declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
