@@ -295,46 +295,199 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
  :  THEN return a map with the key 'media-types' with the value a sequence consisting of the available type (e.g 'pdf'). 
  :)
 
+declare
+    %test:assertEquals('true')
+function x:fm-get-media-types-single() {
+    let $model := map{
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
+    }
+    let $expected := map{
+        "media-types":  "pdf"
+    }
+    let $actual := fm:get-media-types((), $model)
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result>
+                <actual>{serialize($actual, map{'method':'adaptive', 'indent':true()})}</actual>
+                <expected>{serialize($expected, map{'method':'adaptive', 'indent':true()})}</expected>
+            </result>
+};
+
 (:
  :  WHEN calling fm:get-media-types()
  :  GIVEN a $model?volume-meta document with $id which has multiple associated media types (e.g. frus1969-76v31)
  :  THEN return a map with the key 'media-types' with the value a sequence consisting of the available types (e.g 'epub', 'mobi', 'pdf'). 
  :)
 
+declare
+    %test:assertEquals('true')
+function x:fm-get-media-types-multiple() {
+    let $model := map{
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    let $expected := map{
+        "media-types":  ("epub", "mobi", "pdf")
+    }
+    let $actual := fm:get-media-types((), $model)
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result>
+                <actual>{serialize($actual, map{'method':'adaptive', 'indent':true()})}</actual>
+                <expected>{serialize($expected, map{'method':'adaptive', 'indent':true()})}</expected>
+            </result>
+};
+
 (:
  :  WHEN calling fm:get-media-types()
  :  GIVEN a $model?volume-meta document with $id which has no associated media types (e.g. frus1861)
  :  THEN return a map with the key 'media-types' with the value an empty sequence. 
  :)
- 
+
+declare
+    %test:assertEquals('true')
+function x:fm-get-media-types-none() {
+    let $model := map{
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    }
+    let $expected := map{
+        "media-types":  ()
+    }
+    let $actual := fm:get-media-types((), $model)
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result>
+                <actual>{serialize($actual, map{'method':'adaptive', 'indent':true()})}</actual>
+                <expected>{serialize($expected, map{'method':'adaptive', 'indent':true()})}</expected>
+            </result>
+}; 
+
 (:
  :  WHEN calling fm:if-media
  :  GIVEN a $node
  :  GIVEN a $model?media-types populated with a sequence of strings
  :  THEN return the results of processing the contents of $node
  :)
- 
+
+declare
+    %test:assertEquals('true')
+function x:test-fm-if-media-true() {
+    let $node :=
+        <span data-template="fm:if-media">foobar</span>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "media-types": "pdf"
+    }
+    let $expected := <span>foobar</span>
+    let $actual := fm:if-media($node, $model)
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
 (:
  :  WHEN calling fm:if-media
  :  GIVEN an empty $model?media-types 
  :  THEN return ()
  :)
 
+declare %test:assertEmpty function x:test-fm-if-media-false() {
+    let $node :=
+        <span data-template="fm:if-media">foobar</span>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "media-types": ()
+    }
+    return fm:if-media($node, $model)
+};
+
 (:
  :  WHEN calling fm:if-media-type
+ :  GIVEN a $node
  :  GIVEN a provided $type (e.g. 'epub')
- :  GIVEN a $model?volume-meta (e.g. frus1981-88v11)
  :  GIVEN a $model?media-type containing $type
- :  THEN return true()
+ :  THEN return the results of processing the contents of $node
  :)
+ 
+declare %test:assertEquals('true') function x:fm-if-media-type-true(){
+    let $node :=
+        <span data-template="fm:if-media-type" data-template-type="epub">foobar</span>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "media-types": ('epub', 'mobi')
+    }
+    let $expected := <span>foobar</span>
+    let $actual := fm:if-media-type($node, $model, 'epub')
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
 
 (:
  :  WHEN calling fm:if-media-type
  :  GIVEN a provided $type (e.g. 'pdf')
- :  GIVEN a $model?volume-meta (e.g. frus1981-88v11)
  :  GIVEN a $model?media-type NOT containing $type
- :  THEN return false()
+ :  THEN return ()
  :)
+
+declare %test:assertEmpty function x:fm-if-media-type-false(){
+    let $node :=
+        <span data-template="fm:if-media-type" data-template-type="pdf">foobar</span>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "media-types": ('epub', 'mobi')
+    }
+    return fm:if-media-type($node, $model, 'pdf')
+};
 
 (:
  :  WHEN calling fm:epub-href-attribute

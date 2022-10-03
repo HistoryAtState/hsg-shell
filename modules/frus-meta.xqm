@@ -94,11 +94,36 @@ declare function fm:pub-status($volume-meta as document-node(element(volume))) {
 
 declare function fm:pub-status($node, $model) {};
 
-declare function fm:get-media-types($node, $model) {};
+declare function fm:get-media-types($node, $model) {
+    let $id := fm:id($model?volume-meta)
+    return map{
+        "media-types": (
+            "epub"[frus:exists-ebook($id)],
+            "mobi"[frus:exists-mobi($id)],
+            "pdf"[frus:exists-pdf($id)]
+        )
+    }
+};
 
-declare function fm:if-media($node, $model) {};
+declare function fm:if-media($node, $model) {
+    if (exists($model?media-types))
+    then
+        element {node-name($node)} {
+            $node/(@* except @data-template),
+            templates:process($node/node(), $model)
+        }
+    else ()
+};
 
-declare function fm:if-media-type($node, $model, $type) {};
+declare function fm:if-media-type($node, $model, $type) {
+    if ($type = $model?media-types)
+    then
+        element {node-name($node)} {
+            $node/(@* except (@data-template|@data-template-type)),
+            templates:process($node/node(), $model)
+        }
+    else ()
+};
 
 declare function fm:epub-href-attribute($node, $model) {
     $model?volume-meta

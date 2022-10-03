@@ -694,6 +694,10 @@ declare function fh:exists-ebook($vol-id) {
     exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.epub')])
 };
 
+declare function fh:exists-mobi($vol-id) {
+    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.mobi')])
+};
+
 declare function fh:exists-pdf($vol-id) {
     exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/pdf/resources.xml'))//filename[ends-with(., '.pdf')])
 };
