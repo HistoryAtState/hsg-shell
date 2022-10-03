@@ -100,14 +100,38 @@ declare function fm:if-media($node, $model) {};
 
 declare function fm:if-media-type($node, $model, $type) {};
 
-declare function fm:epub-href-attribute($node, $model) {};
+declare function fm:epub-href-attribute($node, $model) {
+    $model?volume-meta
+    => fm:id()
+    => frus:epub-url()
+};
 
-declare function fm:mobi-href-attribute($node, $model) {};
+declare function fm:mobi-href-attribute($node, $model) {
+    $model?volume-meta
+    => fm:id()
+    => frus:mobi-url()
+};
 
-declare function fm:pdf-href-attribute($node, $model) {};
+declare function fm:pdf-href-attribute($node, $model) {
+    $model?volume-meta
+    => fm:id()
+    => frus:pdf-url(())
+};
 
-declare function fm:epub-size($node, $model) {};
+declare function fm:epub-size($node, $model) {
+    $model?volume-meta
+    => fm:id()
+    => frus:epub-size()
+};
 
-declare function fm:mobi-size($node, $model) {};
+declare function fm:mobi-size($node, $model) {
+    $model?volume-meta
+    => fm:id()
+    => frus:mobi-size()
+};
 
-declare function fm:pdf-size($node, $model) {};
+declare function fm:pdf-size($node, $model) {
+    $model?volume-meta
+    => fm:id()
+    => frus:pdf-size()
+};

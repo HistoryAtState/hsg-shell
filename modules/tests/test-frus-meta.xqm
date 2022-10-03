@@ -19,7 +19,7 @@ declare boundary-space preserve;
 
 declare variable $x:test_col := collection('/db/apps/hsg-shell/tests/data/frus-meta');
 
-declare variable $x:test_s3 := '/db/apps/hsg-shell/tests/data/s3-cache/static.history.state.gov';
+declare variable $x:test_s3 := '/db/apps/hsg-shell/tests/data/s3-cache/static.history.state.gov.v2';
 
 (:
  :  This function replaces the contents of the S3 cache with the test data at $x:test_s3
@@ -291,27 +291,39 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
 
 (:
  :  WHEN calling fm:get-media-types()
- :  GIVEN a $model?volume-meta document with $id
- :  THEN return a map with the key 'media-types' with the value a sequence consisting of the available types ('epub', 'mobi', 'pdf'). 
+ :  GIVEN a $model?volume-meta document with $id which has a single associated media type (e.g. frus1981-88v11)
+ :  THEN return a map with the key 'media-types' with the value a sequence consisting of the available type (e.g 'pdf'). 
  :)
- 
- (: TODO TFJH: add specific examples calling corresponding frus:media-exists functions :)
+
+(:
+ :  WHEN calling fm:get-media-types()
+ :  GIVEN a $model?volume-meta document with $id which has multiple associated media types (e.g. frus1969-76v31)
+ :  THEN return a map with the key 'media-types' with the value a sequence consisting of the available types (e.g 'epub', 'mobi', 'pdf'). 
+ :)
+
+(:
+ :  WHEN calling fm:get-media-types()
+ :  GIVEN a $model?volume-meta document with $id which has no associated media types (e.g. frus1861)
+ :  THEN return a map with the key 'media-types' with the value an empty sequence. 
+ :)
  
 (:
  :  WHEN calling fm:if-media
+ :  GIVEN a $node
  :  GIVEN a $model?media-types populated with a sequence of strings
- :  THEN return true()
+ :  THEN return the results of processing the contents of $node
  :)
  
 (:
  :  WHEN calling fm:if-media
  :  GIVEN an empty $model?media-types 
- :  THEN return false()
+ :  THEN return ()
  :)
 
 (:
  :  WHEN calling fm:if-media-type
  :  GIVEN a provided $type (e.g. 'epub')
+ :  GIVEN a $model?volume-meta (e.g. frus1981-88v11)
  :  GIVEN a $model?media-type containing $type
  :  THEN return true()
  :)
@@ -319,15 +331,26 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
 (:
  :  WHEN calling fm:if-media-type
  :  GIVEN a provided $type (e.g. 'pdf')
+ :  GIVEN a $model?volume-meta (e.g. frus1981-88v11)
  :  GIVEN a $model?media-type NOT containing $type
  :  THEN return false()
  :)
 
 (:
  :  WHEN calling fm:epub-href-attribute
- :  GIVEN a $model?volume-meta with $id
- :  THEN return frus:epub-url($id)
+ :  GIVEN a $model?volume-meta with $id (e.g. frus1969-76v31)
+ :  THEN return frus:epub-url($id) (e.g. https://static.history.state.gov/frus/frus1969-76v31/ebook/frus1969-76v31.epub)
  :)
+
+declare
+    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/ebook/frus1969-76v31.epub')
+function x:test-fm-epub-href-attribute() {
+    let $node := ()
+    let $model := map{
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    return fm:epub-href-attribute($node, $model)
+};
 
 (:
  :  WHEN calling fm:mobi-href-attribute
@@ -335,11 +358,31 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
  :  THEN return frus:mobi-url($id)
  :)
 
+declare
+    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/ebook/frus1969-76v31.mobi')
+function x:test-fm-mobi-href-attribute() {
+    let $node := ()
+    let $model := map{
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    return fm:mobi-href-attribute($node, $model)
+};
+
 (:
  :  WHEN calling fm:pdf-href-attribute
  :  GIVEN a $model?volume-meta with $id
  :  THEN return frus:pdf-url($id)
  :)
+
+declare
+    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/pdf/frus1969-76v31.pdf')
+function x:test-fm-pdf-href-attribute() {
+    let $node := ()
+    let $model := map{
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    return fm:pdf-href-attribute($node, $model)
+};
 
 (:
  :  WHEN calling fm:epub-size
@@ -347,14 +390,44 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
  :  THEN return frus:epub-size($id)
  :)
 
+declare
+    %test:assertEquals('1.53mb')
+function x:test-fm-epub-size() {
+    let $node := ()
+    let $model := map{
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    return fm:epub-size($node, $model)
+};
+
 (:
  :  WHEN calling fm:mobi-size
  :  GIVEN a $model?volume-meta with $id
  :  THEN return frus:epub-size($id)
  :)
 
+declare
+    %test:assertEquals('2.08mb')
+function x:test-fm-mobi-size() {
+    let $node := ()
+    let $model := map{
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    return fm:mobi-size($node, $model)
+};
+
 (:
  :  WHEN calling fm:pdf-size
  :  GIVEN a $model?volume-meta with $id
  :  THEN return frus:epub-size($id)
  :)
+
+declare
+    %test:assertEquals('3.8mb')
+function x:test-fm-pdf-size() {
+    let $node := ()
+    let $model := map{
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    return fm:pdf-size($node, $model)
+};
