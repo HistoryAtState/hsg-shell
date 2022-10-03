@@ -19,6 +19,39 @@ declare boundary-space preserve;
 
 declare variable $x:test_col := collection('/db/apps/hsg-shell/tests/data/frus-meta');
 
+declare variable $x:test_s3 := '/db/apps/hsg-shell/tests/data/s3-cache/static.history.state.gov';
+
+(:
+ :  This function replaces the contents of the S3 cache with the test data at $x:test_s3
+ :  before running any tests.
+ :)
+
+declare
+    %test:setUp
+function x:setup-tests-s3() {
+    (: remove the existing cache :)
+    xmldb:remove('/db/apps/s3/cache'),
+    (: recreate empty cache collection :)
+    xmldb:create-collection('/db/apps/s3', 'cache'),
+    (: copy the test collection :)
+    xmldb:copy-collection($x:test_s3, '/db/apps/s3/cache')
+};
+ 
+(:
+ :  This function restores the contents of the S3 cache after running tests (if required)
+
+declare
+    %test:tearDown
+function x:teardown-tests-s3() {
+    (: remove the existing cache :)
+    xmldb:remove('/db/apps/s3/cache'),
+    (: recreate empty cache collection :)
+    xmldb:create-collection('/db/apps/s3', 'cache'),
+    util:eval(xs:anyURI('/db/apps/s3/load-cache-from-zip.xq'))
+};
+
+ :)
+
 (:
  :  WHEN calling fm:init-frus-list()
  :  GIVEN a collection in $model?collection (of FRUS bibliographic data) with $total number of volumes
