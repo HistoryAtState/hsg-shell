@@ -68,8 +68,12 @@ declare function fm:title-link($node, $model) {
 
 declare function fm:thumbnail($volume-meta as document-node(element(volume))) {
     let $id := fm:id($volume-meta)
+    let $pub-date := fm:pub-date($volume-meta)
     return
-        'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '.jpg'
+        if (exists($pub-date)) then
+            'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '.jpg'
+        else
+            'https://static.history.state.gov/images/document-image.jpg'
 };
 
 declare function fm:thumbnail($node, $model) {
@@ -77,29 +81,61 @@ declare function fm:thumbnail($node, $model) {
     return
         element { node-name($node) } {
             $node/(@* except @data-template),
-            attribute data-src { fm:thumbnail($volume-meta) },
+            attribute src { fm:thumbnail($volume-meta) },
             attribute alt { 'Book Cover of ' || fm:title($volume-meta) }
         }
 };
-
 
 declare function fm:isbn($volume-meta as document-node(element(volume))) {
     $volume-meta/volume/((isbn13, isbn10)[normalize-space(.) ne ''])[1]/string(.)
 };
 
-declare function fm:isbn($node, $model) {};
-
-declare function fm:isbn-format($node, $model) {};
-
-declare function fm:pub-status($volume-meta as document-node(element(volume))) {
-    $volume-meta/volume/publication-status/string(.)
+declare function fm:isbn($node, $model) {
+    let $format as xs:string? := fm:isbn-format($model?volume-meta)
+    let $isbn := fm:isbn($model?volume-meta)
+    return
+        if ($format) then
+            element { node-name($node) } {
+                $node/(@* except @data-template),
+                string-join(($format, $isbn), ' ')
+            }
+        else ()
 };
 
-declare function fm:if-pub-date($node, $model) {};
+declare function fm:isbn-format($volume-meta as document-node(element(volume))) {
+    if ($volume-meta/volume/isbn13[normalize-space(.) ne '']) then
+        "ISBN"
+    else if ($volume-meta/volume/isbn10[normalize-space(.) ne '']) then
+        "ISBN-10"
+    else ()
+};
 
-declare function fm:pub-date($node, $model) {};
+declare function fm:isbn-format($node, $model) {
+    let $format as xs:string? := fm:isbn-format($model?volume-meta)
+    return
+        if ($format) then
+            element { node-name($node) } {
+                $node/(@* except @data-template),
+                $format
+            }
+        else ()
+};
 
-declare function fm:pub-date($volume-meta as document-node(element(volume))) {};
+declare function fm:pub-status($volume-meta as document-node(element(volume))) {
+    let $status := $volume-meta/volume/publication-status/string(.)
+    let $code-table := $config:FRUS_CODE_TABLES_COL || "/publication-status-codes.xml"
+    return doc($code-table)/code-table/items/item[value eq $status]/label/string(.)
+};
+
+declare function fm:pub-status($node, $model) {
+    if (exists(fm:pub-date($model?volume-meta))) then
+        ()
+    else
+        element {node-name($node)} {
+            $node/(@* except @data-template),
+            fm:pub-status($model?volume-meta)
+        }
+};
 
 declare function fm:get-media-types($node, $model) {
     let $id := fm:id($model?volume-meta)
@@ -166,4 +202,45 @@ declare function fm:pdf-size($node, $model) {
     $model?volume-meta
     => fm:id()
     => frus:pdf-size()
+};
+
+declare function fm:pub-date($volume-meta as document-node(element(volume))){
+    let $_ := util:log('debug', 'getting date for '||$volume-meta/volume/@id)
+    let $date := $volume-meta/volume/published-date[. ne ''] ! xs:date(.)
+    let $year := $volume-meta/volume/published-year[. ne ''] ! xs:gYear(.)
+    return ($date, $year)[1]
+};
+
+declare function fm:pub-date($node as element(time), $model) {
+    let $date := fm:pub-date($model?volume-meta)
+    return 
+        if (exists($date)) then
+            element time {
+                $node/(@* except @data-template),
+                attribute datetime {$date},
+                app:format-date-month-short-day-year($date)
+            }
+        else()
+};
+
+declare function fm:if-pub-date($node, $model) {
+    let $date := fm:pub-date($model?volume-meta)
+    return 
+        if (exists($date)) then
+            element { node-name($node) } {
+                $node/(@* except @data-template),
+                templates:process($node/node(), $model)
+            }
+        else ()
+};
+
+declare function fm:if-not-pub-date($node, $model) {
+    let $date := fm:pub-date($model?volume-meta)
+    return 
+        if (empty($date)) then
+            element { node-name($node) } {
+                $node/(@* except @data-template),
+                templates:process($node/node(), $model)
+            }
+        else ()
 };

@@ -39,6 +39,7 @@ function x:setup-tests-s3() {
  
 (:
  :  This function restores the contents of the S3 cache after running tests (if required)
+ :)
 
 declare
     %test:tearDown
@@ -50,8 +51,6 @@ function x:teardown-tests-s3() {
     util:eval(xs:anyURI('/db/apps/s3/load-cache-from-zip.xq'))
 };
 
- :)
-
 (:
  :  WHEN calling fm:init-frus-list()
  :  GIVEN a collection in $model?collection (of FRUS bibliographic data) with $total number of volumes
@@ -62,7 +61,7 @@ function x:teardown-tests-s3() {
  :)
 
 declare
-    %test:assertEquals(3)
+    %test:assertEquals(4)
 function x:test-init-frus-list-total(){
     let $model := map{
             "collection": $x:test_col
@@ -75,6 +74,7 @@ declare
     %test:assertEquals(
         'frus1861',
         'frus1969-76v31',
+        'frus1977-80v04',
         'frus1981-88v11'
     )
 function x:test-init-frus-list(){
@@ -98,7 +98,7 @@ function x:test-init-frus-list(){
 declare
     %test:assertEquals(
         'frus1969-76v31',
-        'frus1981-88v11'
+        'frus1977-80v04'
     )
 function x:test-fm-sorted() {
     let $actual := fm:sorted($x:test_col, 2, 2)
@@ -195,13 +195,26 @@ declare %test:assertEquals('true') function x:test-fm-title-link() {
 
 (:
  :  WHEN calling fm:thumbnail()
- :  GIVEN a $volume-meta element (with ID $id)
+ :  GIVEN a $volume-meta element (with ID $id) and with a pub-date (e.g. frus1861)
  :  THEN return the thumbnail image URI at https://static.history.state.gov/frus/{$id}/covers/{$id}.jpg
  :)
 declare
-    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31.jpg')
+    %test:assertEquals('https://static.history.state.gov/frus/frus1861/covers/frus1861.jpg')
 function x:test-fm-thumbnail() {
-    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    return
+        fm:thumbnail($volume-meta)
+};
+
+(:
+ :  WHEN calling fm:thumbnail()
+ :  GIVEN a $volume-meta element with no pub-date (e.g. frus1977-80v04)
+ :  THEN return the thumbnail image URI at https://static.history.state.gov/images/document-image.jpg
+ :)
+declare
+    %test:assertEquals('https://static.history.state.gov/images/document-image.jpg')
+function x:test-fm-thumbnail-no-pub() {
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1977-80v04.xml')
     return
         fm:thumbnail($volume-meta)
 };
@@ -219,12 +232,12 @@ function x:test-fm-thumbnail-templates() {
     let $node :=
         <img class="hsg-news__thumbnail" data-template="fm:thumbnail"/>
     let $model := map {
-        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
     }
     let $expected :=
         <img class="hsg-news__thumbnail"
-             data-src="https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31.jpg"
-             alt="Book Cover of Foreign Relations of the United States, 1969–1976, Volume XXXI, Foreign Economic Policy, 1973–1976"/>
+             src="https://static.history.state.gov/frus/frus1981-88v11/covers/frus1981-88v11.jpg"
+             alt="Book Cover of {fm:title($model?volume-meta)}"/>
     let $actual := fm:thumbnail($node, $model)
     return
         if (deep-equal($expected, $actual))
@@ -266,31 +279,153 @@ declare %test:assertEquals('016084410X') function x:test-fm-isbn-10() {
 (:
  :  WHEN calling fm:isbn()
  :  GIVEN a $node
- :  GIVEN a $model with a .?volume-meta document associated with an ISBN
+ :  GIVEN a $model with a .?volume-meta document associated with an ISBN (e.g. frus1981-88v11)
  :  THEN return the original element
- :  AND with value fm:isbn($model?volume-meta)
+ :  AND with value fm:isbn($model?volume-meta) prepended by the isbn-format (e.g. ISBN-10 016084410X)
  :)
+
+declare %test:assertEquals('true') function x:test-fm-isbn-template() {
+    let $node := 
+        <dd class="some_class" data-template="fm:isbn"/>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
+    }
+    let $expected := 
+        <dd class="some_class">ISBN-10 016084410X</dd>
+    let $actual := fm:isbn($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
 
 (:
  :  WHEN calling fm:isbn()
  :  GIVEN a $node
- :  GIVEN a $model with a .?volume-meta document not with an ISBN
+ :  GIVEN a $model with a .?volume-meta document not with an ISBN (e.g. frus1861)
  :  THEN return ()
  :)
 
-(:
- :  WHEN calling fm:isbn-format
- :  GIVEN a $node
- :  GIVEN a $model with .?volume-meta with an ISBN-13 (e.g. frus1969-76v31)
- :  THEN return $node with content 'ISBN'
- :)
+declare %test:assertEmpty function x:test-fm-isbn-template-empty() {
+    let $node := 
+        <dd class="some_class" data-template="fm:isbn"/>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    }
+    return fm:isbn($node, $model)
+    
+};
 
 (:
  :  WHEN calling fm:isbn-format
- :  GIVEN a $node
- :  GIVEN a $model with .?volume-meta with an ISBN-10 (but no ISBN-13) (e.g. frus1981-88v11)
- :  THEN return $node with content 'ISBN 10'
+ :  GIVEN a $volume-meta document with an ISBN-13 (e.g. frus1969-76v31)
+ :  RETURN 'ISBN'
  :)
+declare %test:assertEquals('ISBN') function x:test-fm-isbn-format-13() {
+    doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    => fm:isbn-format()
+};
+
+(:
+ :  WHEN calling fm:isbn-format
+ :  GIVEN a $volume-meta document with an ISBN-10 but no ISBN-13 (e.g. frus1981-88v11)
+ :  RETURN 'ISBN-10'
+ :)
+declare %test:assertEquals('ISBN-10') function x:test-fm-isbn-format-10() {
+    doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
+    => fm:isbn-format()
+};
+
+(:
+ :  WHEN calling fm:isbn-format
+ :  GIVEN a $volume-meta document with an ISBN-13 (e.g. frus1861)
+ :  RETURN ()
+ :)
+declare %test:assertEmpty function x:test-fm-isbn-format-none() {
+    doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    => fm:isbn-format()
+};
+
+(:
+ :  WHEN calling fm:isbn-format
+ :  GIVEN a dd $node with some existing attributes
+ :  GIVEN a $model with .?volume-meta with an ISBN-13 (e.g. frus1969-76v31)
+ :  THEN return $node with content 'ISBN'
+ :  AND include any existing attributes except @data-template
+ :)
+
+declare %test:assertEquals('true') function x:test-fm-isbn-format-template-13() {
+    let $node := 
+        <dt class="some_class" data-template="fm:isbn-format"/>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    let $expected := 
+        <dt class="some_class">ISBN</dt>
+    let $actual := fm:isbn-format($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
+(:
+ :  WHEN calling fm:isbn-format
+ :  GIVEN a dd $node with some existing attributes
+ :  GIVEN a $model with .?volume-meta with an ISBN-10 (but no ISBN-13) (e.g. frus1981-88v11)
+ :  THEN return $node with content (e.g. ISBN-10)
+ :  AND include any existing attributes except @data-template
+ :)
+
+declare %test:assertEquals('true') function x:test-fm-isbn-format-template-10() {
+    let $node := 
+        <dt class="some_class" data-template="fm:isbn-format"/>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
+    }
+    let $expected := 
+        <dt class="some_class">ISBN-10</dt>
+    let $actual := fm:isbn-format($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
 
 (:
  :  WHEN calling fm:isbn-format
@@ -299,14 +434,78 @@ declare %test:assertEquals('016084410X') function x:test-fm-isbn-10() {
  :  THEN return ()
  :)
 
+declare %test:assertEmpty function x:test-fm-isbn-format-template-none() {
+    let $node := 
+        <dt class="some_class" data-template="fm:isbn-format"/>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    }
+    return fm:isbn-format($node, $model)
+};
+
 (:
  :  WHEN calling fm:pub-status()
- :  GIVEN a $volume-meta document (e.g. frus1969-76v31)
- :  THEN return the publication status $volume-meta/volume/publication-status (e.g. "published")
+ :  GIVEN a $volume-meta document (e.g. frus1977-80v04)
+ :  THEN return the label from /db/apps/frus/code-tables/publication-status-codes.xml (e.g. "In Production") 
+ :  that corresponds to the publication status $volume-meta/volume/publication-status (e.g. "in-production")
  :)
 
-declare %test:assertEquals('published') function x:test-fm-pub-status() {
-    fm:pub-status(doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml'))
+declare %test:assertEquals('In Production') function x:test-fm-pub-status() {
+    fm:pub-status(doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1977-80v04.xml'))
+};
+
+(:
+ :  WHEN calling fm:pub-status($node, $model)
+ :  GIVEN a node <dd data-template="fm:pub-status"/>
+ :  GIVEN a model?volume-meta document with a pub-date (e.g. frus1981-88v11)
+ :  THEN return ()
+ :)
+
+declare %test:assertEmpty function x:test-fm-pub-status-template-empty() {
+    let $node := <dd class="lots" data-template="fm:pub-status"/>
+    let $model := map{
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
+    }
+    return fm:pub-status($node, $model)
+};
+
+(:
+ :  WHEN calling fm:pub-status($node, $model)
+ :  GIVEN a node <dd data-template="fm:pub-status"/>
+ :  GIVEN a model without a pub-date (e.g. frus1977-80v04)
+ :  THEN return
+ :)
+
+declare %test:assertEquals('true') function x:test-fm-pub-status-template() {
+    let $node := <dd class="lots" data-template="fm:pub-status"/>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1977-80v04.xml')
+    }
+    let $expected := <dd class="lots">In Production</dd>
+    let $actual := fm:pub-status($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
 
 (:
@@ -315,17 +514,36 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
  :  THEN return the published date as a date (e.g. xs:date('2021-04-22'))
  :)
 
+declare %test:assertEquals('true') function x:test-fm-pub-date-date() {
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
+    let $expected := xs:date('2021-04-22')
+    let $actual := fm:pub-date($volume-meta)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
 (:
  :  WHEN calling fm:pub-date
  :  GIVEN a $volume-meta document with no published date, but with a published year (e.g. frus1861)
  :  THEN return the published year as a year (e.g. xs:gYear(1861))
  :)
+
+declare %test:assertEquals('true') function x:test-fm-pub-date-year() {
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    let $expected := xs:gYear('1861')
+    let $actual := fm:pub-date($volume-meta)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
  
 (:
  :  WHEN calling fm:pub-date
  :  GIVEN a $volume-meta document with no published date or year (e.g. frus1969-76v31)
  :  THEN return ()
  :)
+
+declare %test:assertEmpty function x:test-fm-pub-date-none() {
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    return fm:pub-date($volume-meta)
+};
 
 (:
  :  WHEN calling fm:pub-date
@@ -335,6 +553,28 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
  :  AND return the short date format as the content of the time element (e.g. 'Apr 22, 2021')
  :)
 
+declare %test:assertEquals('true') function x:test-fm-pub-date-template-date() {
+    let $node := <time data-template="fm:pub-date"/>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
+    }
+    let $expected :=
+        <time datetime="2021-04-22">Apr 22, 2021</time>
+    let $actual := fm:pub-date($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
 (:
  :  WHEN calling fm:pub-date
  :  GIVEN a time element $node
@@ -343,6 +583,28 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
  :  AND return the short date format as the content of the time element (e.g. '1861')
  :)
 
+declare %test:assertEquals('true') function x:test-fm-pub-date-template-year() {
+    let $node := <time data-template="fm:pub-date"/>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    }
+    let $expected :=
+        <time datetime="1861">1861</time>
+    let $actual := fm:pub-date($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
 (:
  :  WHEN calling fm:pub-date
  :  GIVEN a time element $node
@@ -350,19 +612,80 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
  :  THEN return ()
  :)
 
+declare %test:assertEmpty function x:test-fm-pub-date-template-none() {
+    let $node := <time data-template="fm:pub-date"/>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    return fm:pub-date($node, $model)
+};
+
 (:
  :  WHEN calling fm:if-pub-date
- :  GIVEN a  $node
+ :  GIVEN a $node
  :  GIVEN a $model?volume-meta document with a published date (e.g. frus1981-88v11)
  :  THEN return the results of processing $node
  :)
 
+declare %test:assertEquals('true') function x:test-fm-if-pub-date-date() {
+    let $node := <dt data-template="fm:if-pub-date">Published on</dt>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
+    }
+    let $expected := <dt>Published on</dt>
+    let $actual := fm:if-pub-date($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
 (:
  :  WHEN calling fm:if-pub-date
- :  GIVEN a time element $node
+ :  GIVEN an element $node
  :  GIVEN a $model?volume-meta document with no published date, but with a published year (e.g. frus1861)
  :  THEN return the results of processing $node
  :)
+
+declare %test:assertEquals('true') function x:test-fm-if-pub-date-year() {
+    let $node := <dt data-template="fm:if-pub-date">Published on</dt>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    }
+    let $expected := <dt>Published on</dt>
+    let $actual := fm:if-pub-date($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
 
 (:
  :  WHEN calling fm:if-pub-date
@@ -370,7 +693,78 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
  :  GIVEN a $model?volume-meta document with no published date or year (e.g. frus1969-76v31)
  :  THEN return ()
  :)
+ 
+declare %test:assertEmpty function x:test-fm-if-pub-date-false() {
+    let $node := <dt data-template="fm:if-pub-date">Published on</dt>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    }
+    return fm:if-pub-date($node, $model)
+};
 
+(:
+ :  WHEN calling fm:if-not-pub-date
+ :  GIVEN an element $node
+ :  GIVEN a $model?volume-meta document with no published date or year (e.g. frus1977-80v04)
+ :  THEN return the results of processing $node
+ :)
+
+declare %test:assertEquals('true') function x:test-fm-if-not-pub-date-true() {
+    let $node := <dt data-template="fm:if-not-pub-date">Publication-status</dt>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1977-80v04.xml')
+    }
+    let $expected := <dt>Publication-status</dt>
+    let $actual := fm:if-not-pub-date($node, $model)
+    return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
+(:
+ :  WHEN calling fm:if-not-pub-date
+ :  GIVEN an element $node
+ :  GIVEN a $model?volume-meta with a published date, or a published year (e.g. frus1861)
+ :  THEN return ()
+ :)
+
+declare %test:assertEmpty function x:test-fm-if-not-pub-date-false(){
+    let $node := <dt data-template="fm:if-not-pub-date">Publication-status</dt>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
+        "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    }
+    return fm:if-not-pub-date($node, $model)};
 (:
  :  WHEN calling fm:get-media-types()
  :  GIVEN a $model?volume-meta document with $id which has a single associated media type (e.g. frus1981-88v11)
