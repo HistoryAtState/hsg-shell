@@ -9,6 +9,28 @@
       margin: 0 0 1.5rem 0;
     }
 
+    #{$el}__thumbnail {
+      padding-top: 7px;
+      max-width: 6rem;
+      margin: 0 2rem 1rem 0;
+
+      @media screen and (min-width: $small-screen-min) {
+        max-width: 8rem;
+      }
+
+      @media screen and (min-width: $sm-screen-min) {
+        max-width: 10rem;
+      }
+    }
+
+    // Reduce default h3 headlines font-size for all volumes list
+    h3.hsg-list__title {
+      font-size: $h5-font-size;
+      @media screen and (min-width: $screen-sm-min) {
+        font-size: $h4-font-size;
+      }
+    }
+
     dt {
       display: none;
     }
