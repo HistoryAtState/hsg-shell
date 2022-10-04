@@ -177,10 +177,28 @@ declare function app:set-created($created as xs:dateTime) {
 (:
  : 2015-06-04T13:03:16-04:00 -> Jun 4, 2015
  :)
-declare function app:format-date-month-short-day-year($dateTime as xs:dateTime) as xs:string {
-    $dateTime
-    => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
-    => format-dateTime("[MNn,*-3] [D01], [Y]", "en", (), ())
+declare function app:format-date-month-short-day-year($dateTime) as xs:string {
+    typeswitch($dateTime)
+    case xs:dateTime return
+        $dateTime
+        => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-dateTime("[MNn,*-3] [D01], [Y]", "en", (), ())
+    case xs:date return
+        $dateTime
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date("[MNn,*-3] [D01], [Y]", "en", (), ())
+    case xs:gYearMonth return
+        (xs:string($dateTime) || '-01')
+        => xs:date()
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date("[MNn,*-3], [Y]", "en", (), ())
+    case xs:gYear return xs:string($dateTime)
+    default return
+        if ($dateTime castable as xs:dateTime) then xs:dateTime($dateTime) => app:format-date-month-short-day-year()
+        else if ($dateTime castable as xs:date) then xs:date($dateTime) => app:format-date-month-short-day-year()
+        else if ($dateTime castable as xs:gYearMonth) then xs:gYearMonth($dateTime) => app:format-date-month-short-day-year()
+        else if ($dateTime castable as xs:gYear) then xs:gYear($dateTime) => app:format-date-month-short-day-year()
+        else error(xs:QName('app:format-date'), "Could not recognise &quot;" || $dateTime || "&quot; as a date")
 };
 
 (:
