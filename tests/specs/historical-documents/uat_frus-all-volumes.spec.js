@@ -5,7 +5,9 @@
 const Page  = require('../../pageobjects/Page');
 
 const images = [
-  Page.s3_UAT + '/frus/frus1861/covers/frus1861.jpg'
+  Page.s3_UAT + '/frus/frus1861/covers/frus1861.jpg',
+  Page.s3_UAT + '/frus/frus1861-99Index/covers/frus1861-99Index.jpg',
+  Page.s3_UAT + '/frus/frus1862/covers/frus1862.jpg',
 ];
 
 const titles = [
@@ -42,8 +44,12 @@ describe('FRUS "All Volumes" page', () => {
   });
 
   it('should display a list containing a thumbnail', () => {
-    let t_0 = Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(1) img', 'src')
+    let t_0 = Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(1) img', 'src'),
+        t_1 = Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(2) img', 'src'),
+        t_2 = Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(3) img', 'src');
     assert.include(t_0, images[0]);
+    assert.include(t_1, images[1]);
+    assert.include(t_2, images[2]);
   });
 
   it('should display a list containing a title', () => {
@@ -70,7 +76,7 @@ describe('FRUS "All Volumes" page', () => {
   });
 
   it('should display a list containing download buttons, if available', () => {
-    let dl_0 = Page.getElement('ul.hsg-list__volumes li:nth-child(1) ul.hsg-list__media__download li button');
-    assert.exists(dl_0);
+    let dl = Page.getElementText('ul.hsg-list__volumes li:nth-child(1) ul.hsg-list__media__download > li > button span');
+    assert.exists(dl);
   });
 });
