@@ -99,7 +99,7 @@ declare function fm:if-pub-date($node, $model) {};
 
 declare function fm:pub-date($node, $model) {};
 
-declare function fm:pub-date($volume-meta as document-node(element(volume)) {};
+declare function fm:pub-date($volume-meta as document-node(element(volume))) {};
 
 declare function fm:get-media-types($node, $model) {
     let $id := fm:id($model?volume-meta)
