@@ -266,9 +266,37 @@ declare %test:assertEquals('016084410X') function x:test-fm-isbn-10() {
 (:
  :  WHEN calling fm:isbn()
  :  GIVEN a $node
- :  GIVEN a $model with a .?volume-meta document
- :  THEN return (TODO TFJH: confirm exact HTML node features to be returned)
+ :  GIVEN a $model with a .?volume-meta document associated with an ISBN
+ :  THEN return the original element
  :  AND with value fm:isbn($model?volume-meta)
+ :)
+
+(:
+ :  WHEN calling fm:isbn()
+ :  GIVEN a $node
+ :  GIVEN a $model with a .?volume-meta document not with an ISBN
+ :  THEN return ()
+ :)
+
+(:
+ :  WHEN calling fm:isbn-format
+ :  GIVEN a $node
+ :  GIVEN a $model with .?volume-meta with an ISBN-13 (e.g. frus1969-76v31)
+ :  THEN return $node with content 'ISBN'
+ :)
+
+(:
+ :  WHEN calling fm:isbn-format
+ :  GIVEN a $node
+ :  GIVEN a $model with .?volume-meta with an ISBN-10 (but no ISBN-13) (e.g. frus1981-88v11)
+ :  THEN return $node with content 'ISBN 10'
+ :)
+
+(:
+ :  WHEN calling fm:isbn-format
+ :  GIVEN a $node
+ :  GIVEN a $model with .?volume-meta with no ISBN (e.g. frus1861)
+ :  THEN return ()
  :)
 
 (:
@@ -282,11 +310,65 @@ declare %test:assertEquals('published') function x:test-fm-pub-status() {
 };
 
 (:
- :  WHEN calling fm:pub-status()
- :  GIVEN a $node
- :  GIVEN a $model with a .?volume-meta document
- :  THEN return (TODO TFJH: confirm exact HTML node features to be returned)
- :  AND with value fm:pub-status($model?volume-meta)
+ :  WHEN calling fm:pub-date
+ :  GIVEN a $volume-meta document with a published date (e.g. frus1981-88v11)
+ :  THEN return the published date as a date (e.g. xs:date('2021-04-22'))
+ :)
+
+(:
+ :  WHEN calling fm:pub-date
+ :  GIVEN a $volume-meta document with no published date, but with a published year (e.g. frus1861)
+ :  THEN return the published year as a year (e.g. xs:gYear(1861))
+ :)
+ 
+(:
+ :  WHEN calling fm:pub-date
+ :  GIVEN a $volume-meta document with no published date or year (e.g. frus1969-76v31)
+ :  THEN return ()
+ :)
+
+(:
+ :  WHEN calling fm:pub-date
+ :  GIVEN a time element $node
+ :  GIVEN a $model?volume-meta document with a published date (e.g. frus1981-88v11)
+ :  THEN return the time element with @datetime (e.g. '2021-04-22')
+ :  AND return the short date format as the content of the time element (e.g. 'Apr 22, 2021')
+ :)
+
+(:
+ :  WHEN calling fm:pub-date
+ :  GIVEN a time element $node
+ :  GIVEN a $model?volume-meta document with no published date, but with a published year (e.g. frus1861)
+ :  THEN return the time element with @datetime (e.g. '1861')
+ :  AND return the short date format as the content of the time element (e.g. '1861')
+ :)
+
+(:
+ :  WHEN calling fm:pub-date
+ :  GIVEN a time element $node
+ :  GIVEN a $model?volume-meta document with no published date or year (e.g. frus1969-76v31)
+ :  THEN return ()
+ :)
+
+(:
+ :  WHEN calling fm:if-pub-date
+ :  GIVEN a  $node
+ :  GIVEN a $model?volume-meta document with a published date (e.g. frus1981-88v11)
+ :  THEN return the results of processing $node
+ :)
+
+(:
+ :  WHEN calling fm:if-pub-date
+ :  GIVEN a time element $node
+ :  GIVEN a $model?volume-meta document with no published date, but with a published year (e.g. frus1861)
+ :  THEN return the results of processing $node
+ :)
+
+(:
+ :  WHEN calling fm:if-pub-date
+ :  GIVEN a element $node
+ :  GIVEN a $model?volume-meta document with no published date or year (e.g. frus1969-76v31)
+ :  THEN return ()
  :)
 
 (:

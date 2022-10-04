@@ -82,17 +82,24 @@ declare function fm:thumbnail($node, $model) {
         }
 };
 
+
 declare function fm:isbn($volume-meta as document-node(element(volume))) {
     $volume-meta/volume/((isbn13, isbn10)[normalize-space(.) ne ''])[1]/string(.)
 };
 
 declare function fm:isbn($node, $model) {};
 
+declare function fm:isbn-format($node, $model) {};
+
 declare function fm:pub-status($volume-meta as document-node(element(volume))) {
     $volume-meta/volume/publication-status/string(.)
 };
 
-declare function fm:pub-status($node, $model) {};
+declare function fm:if-pub-date($node, $model) {};
+
+declare function fm:pub-date($node, $model) {};
+
+declare function fm:pub-date($volume-meta as document-node(element(volume)) {};
 
 declare function fm:get-media-types($node, $model) {
     let $id := fm:id($model?volume-meta)
