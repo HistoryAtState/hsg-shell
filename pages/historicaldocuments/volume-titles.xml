@@ -28,26 +28,31 @@
                                 <dt data-template="fm:if-pub-date">Published on</dt>
                                 <dd data-template="fm:if-pub-date"><time data-template="fm:pub-date"/></dd>
                                 
-                                <dt data-template="fm:if-not-published">Publication Status:</dt>
+                                <dt data-template="fm:if-not-pub-date">Publication Status:</dt>
                                 <dd data-template="fm:pub-status"/>
                                 
                                 <dt data-template="fm:isbn-format"/>
                                 <dd data-template="fm:isbn"/>
                             </dl>
-                            <ul class="hsg-list__media__download" data-template="fm:if-media">
-                                <li data-template="fm:if-media-type" data-template-type="mobi">
-                                    <button class="hsg-link-button--outline">Mobi <span>12mb</span></button>
-                                </li>
-                                <li data-template="fm:if-media-type" data-template-type="epub">
-                                    <button class="hsg-link-button--outline">epub 2<span>123kb</span></button>
-                                </li>
-                                <!--<li data-template="fm:if-media-type" data-template-type="epub3">
+                            <div data-template="fm:get-media-types">
+                                <ul class="hsg-list__media__download" data-template="fm:if-media">
+                                    <li data-template="fm:if-media-type" data-template-type="mobi">
+                                        <button class="hsg-link-button--outline">Mobi
+                                                <span>12mb</span></button>
+                                    </li>
+                                    <li data-template="fm:if-media-type" data-template-type="epub">
+                                        <button class="hsg-link-button--outline">epub
+                                                2<span>123kb</span></button>
+                                    </li>
+                                    <!--<li data-template="fm:if-media-type" data-template-type="epub3">
                                     <button class="hsg-link-button-\-outline">Epub 3<span>123mb</span></button>
                                 </li>-->
-                                <li data-template="fm:if-media-type" data-template-type="pdf">
-                                    <button class="hsg-link-button--outline">PDF <span>123mb</span></button>
-                                </li>
-                            </ul>
+                                    <li data-template="fm:if-media-type" data-template-type="pdf">
+                                        <button class="hsg-link-button--outline">PDF
+                                                <span>123mb</span></button>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
                 </ul>

@@ -39,7 +39,6 @@ function x:setup-tests-s3() {
  
 (:
  :  This function restores the contents of the S3 cache after running tests (if required)
- :)
 
 declare
     %test:tearDown
@@ -50,6 +49,7 @@ function x:teardown-tests-s3() {
     xmldb:create-collection('/db/apps/s3', 'cache'),
     util:eval(xs:anyURI('/db/apps/s3/load-cache-from-zip.xq'))
 };
+ :)
 
 (:
  :  WHEN calling fm:init-frus-list()
@@ -195,20 +195,20 @@ declare %test:assertEquals('true') function x:test-fm-title-link() {
 
 (:
  :  WHEN calling fm:thumbnail()
- :  GIVEN a $volume-meta element (with ID $id) and with a pub-date (e.g. frus1861)
+ :  GIVEN a $volume-meta element (with ID $id) that has been published digitally (e.g. frus1969-76v31)
  :  THEN return the thumbnail image URI at https://static.history.state.gov/frus/{$id}/covers/{$id}.jpg
  :)
 declare
-    %test:assertEquals('https://static.history.state.gov/frus/frus1861/covers/frus1861.jpg')
+    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31.jpg')
 function x:test-fm-thumbnail() {
-    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
+    let $volume-meta := doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
     return
         fm:thumbnail($volume-meta)
 };
 
 (:
  :  WHEN calling fm:thumbnail()
- :  GIVEN a $volume-meta element with no pub-date (e.g. frus1977-80v04)
+ :  GIVEN a $volume-meta element that has not been published digitally (e.g. frus1977-80v04)
  :  THEN return the thumbnail image URI at https://static.history.state.gov/images/document-image.jpg
  :)
 declare
@@ -764,7 +764,30 @@ declare %test:assertEmpty function x:test-fm-if-not-pub-date-false(){
         $templates:CONFIGURATION : $config,
         "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1861.xml')
     }
-    return fm:if-not-pub-date($node, $model)};
+    return fm:if-not-pub-date($node, $model)
+};
+
+(:
+ :  WHEN calling fm:get-media-types()
+ :  GIVEN a $volume-meta document with $id that has associate media types (e.g. frus1969-76v31)
+ :  THEN return a sequence of available media types (e.g. 'epub', 'mobi', 'pdf').
+ :)
+declare
+    %test:assertEquals('true')
+function x:fm-get-media-types() {
+    let $volume-meta:=  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
+    let $expected := ("epub", "mobi", "pdf")
+    let $actual := fm:get-media-types($volume-meta)
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result>
+                <actual>{serialize($actual, map{'method':'adaptive', 'indent':true()})}</actual>
+                <expected>{serialize($expected, map{'method':'adaptive', 'indent':true()})}</expected>
+            </result>
+};
+
 (:
  :  WHEN calling fm:get-media-types()
  :  GIVEN a $model?volume-meta document with $id which has a single associated media type (e.g. frus1981-88v11)

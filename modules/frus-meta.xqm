@@ -68,9 +68,9 @@ declare function fm:title-link($node, $model) {
 
 declare function fm:thumbnail($volume-meta as document-node(element(volume))) {
     let $id := fm:id($volume-meta)
-    let $pub-date := fm:pub-date($volume-meta)
+    let $media-types := fm:get-media-types($volume-meta)
     return
-        if (exists($pub-date)) then
+        if (exists($media-types)) then
             'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '.jpg'
         else
             'https://static.history.state.gov/images/document-image.jpg'
@@ -137,14 +137,20 @@ declare function fm:pub-status($node, $model) {
         }
 };
 
-declare function fm:get-media-types($node, $model) {
-    let $id := fm:id($model?volume-meta)
-    return map{
-        "media-types": (
+declare function fm:get-media-types($volume-meta as document-node(element(volume))) {
+    let $id := fm:id($volume-meta) 
+    return 
+        (
             "epub"[frus:exists-ebook($id)],
             "mobi"[frus:exists-mobi($id)],
             "pdf"[frus:exists-pdf($id)]
         )
+};
+
+declare function fm:get-media-types($node, $model) {
+    let $media-types:= fm:get-media-types($model?volume-meta)
+    return map{
+        "media-types": $media-types
     }
 };
 
@@ -205,9 +211,8 @@ declare function fm:pdf-size($node, $model) {
 };
 
 declare function fm:pub-date($volume-meta as document-node(element(volume))){
-    let $_ := util:log('debug', 'getting date for '||$volume-meta/volume/@id)
-    let $date := $volume-meta/volume/published-date[. ne ''] ! xs:date(.)
-    let $year := $volume-meta/volume/published-year[. ne ''] ! xs:gYear(.)
+    let $date := $volume-meta/volume/(published-date[exists(string(.))])[. ne ''] ! xs:date(.)
+    let $year := $volume-meta/volume/(published-year[exists(string(.))])[. ne ''] ! xs:gYear(.)
     return ($date, $year)[1]
 };
 
