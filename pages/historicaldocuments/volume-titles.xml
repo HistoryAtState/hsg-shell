@@ -25,8 +25,11 @@
                                 <a class="hsg-list__link" data-template="fm:title-link"><span data-template="fm:title"/></a>
                             </h3>
                             <dl>
-                                <dt data-template="fm:if-pub-date">Published date</dt>
-                                <dd data-template="fm:if-pub-date">Published on <time data-template="fm:pub-date"/></dd>
+                                <dt data-template="fm:if-pub-date">Published on</dt>
+                                <dd data-template="fm:if-pub-date"><time data-template="fm:pub-date"/></dd>
+                                
+                                <dt data-template="fm:if-not-published">Publication Status:</dt>
+                                <dd data-template="fm:pub-status"/>
                                 
                                 <dt data-template="fm:isbn-format"/>
                                 <dd data-template="fm:isbn"/>
