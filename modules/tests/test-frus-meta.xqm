@@ -29,8 +29,9 @@ declare variable $x:test_s3 := '/db/apps/hsg-shell/tests/data/s3-cache/static.hi
 declare
     %test:setUp
 function x:setup-tests-s3() {
-    (: remove the existing cache :)
-    xmldb:remove('/db/apps/s3/cache'),
+    (: move to a temporary backup collection :)
+    xmldb:create-collection('/db/apps/s3', 'bak'),
+    xmldb:move('/db/apps/s3/cache', '/db/apps/s3/bak'),
     (: recreate empty cache collection :)
     xmldb:create-collection('/db/apps/s3', 'cache'),
     (: copy the test collection :)
@@ -39,6 +40,7 @@ function x:setup-tests-s3() {
  
 (:
  :  This function restores the contents of the S3 cache after running tests (if required)
+ :)
 
 declare
     %test:tearDown
@@ -47,9 +49,11 @@ function x:teardown-tests-s3() {
     xmldb:remove('/db/apps/s3/cache'),
     (: recreate empty cache collection :)
     xmldb:create-collection('/db/apps/s3', 'cache'),
-    util:eval(xs:anyURI('/db/apps/s3/load-cache-from-zip.xq'))
+    (: restore original cache collection :)
+    xmldb:move('/db/apps/s3/bak/cache', '/db/apps/s3'),
+    (: remove backup collection :)
+    xmldb:remove('/db/apps/s3/bak')
 };
- :)
 
 (:
  :  WHEN calling fm:init-frus-list()
@@ -281,7 +285,7 @@ declare %test:assertEquals('016084410X') function x:test-fm-isbn-10() {
  :  GIVEN a $node
  :  GIVEN a $model with a .?volume-meta document associated with an ISBN (e.g. frus1981-88v11)
  :  THEN return the original element
- :  AND with value fm:isbn($model?volume-meta) prepended by the isbn-format (e.g. ISBN-10 016084410X)
+ :  AND with value fm:isbn($model?volume-meta) (e.g. '016084410X')
  :)
 
 declare %test:assertEquals('true') function x:test-fm-isbn-template() {
@@ -302,7 +306,7 @@ declare %test:assertEquals('true') function x:test-fm-isbn-template() {
         "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
     }
     let $expected := 
-        <dd class="some_class">ISBN-10 016084410X</dd>
+        <dd class="some_class">016084410X</dd>
     let $actual := fm:isbn($node, $model)
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };

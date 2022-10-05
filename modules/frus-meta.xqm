@@ -97,7 +97,7 @@ declare function fm:isbn($node, $model) {
         if ($format) then
             element { node-name($node) } {
                 $node/(@* except @data-template),
-                string-join(($format, $isbn), ' ')
+                $isbn
             }
         else ()
 };
