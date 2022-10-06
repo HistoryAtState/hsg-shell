@@ -136,7 +136,8 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                             request:set-attribute("hsgshell.created", $created)
                         )
                     else
-                        map:merge(($model, $content, map{'citation-meta': $citation-meta}),  map{"duplicates": "use-last"})
+                        (),
+                    templates:process($node/*, map:merge(($model, $content, map{'citation-meta': $citation-meta}),  map{"duplicates": "use-last"}))
                 )
 };
 

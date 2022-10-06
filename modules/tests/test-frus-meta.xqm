@@ -344,7 +344,7 @@ declare %test:assertEmpty function x:test-fm-isbn-template-empty() {
  :  GIVEN a $volume-meta document with an ISBN-13 (e.g. frus1969-76v31)
  :  RETURN 'ISBN'
  :)
-declare %test:assertEquals('ISBN') function x:test-fm-isbn-format-13() {
+declare %test:assertEquals('ISBN:') function x:test-fm-isbn-format-13() {
     doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
     => fm:isbn-format()
 };
@@ -354,7 +354,7 @@ declare %test:assertEquals('ISBN') function x:test-fm-isbn-format-13() {
  :  GIVEN a $volume-meta document with an ISBN-10 but no ISBN-13 (e.g. frus1981-88v11)
  :  RETURN 'ISBN-10'
  :)
-declare %test:assertEquals('ISBN-10') function x:test-fm-isbn-format-10() {
+declare %test:assertEquals('ISBN-10:') function x:test-fm-isbn-format-10() {
     doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
     => fm:isbn-format()
 };
@@ -395,7 +395,7 @@ declare %test:assertEquals('true') function x:test-fm-isbn-format-template-13() 
         "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
     }
     let $expected := 
-        <dt class="some_class">ISBN</dt>
+        <dt class="some_class">ISBN:</dt>
     let $actual := fm:isbn-format($node, $model)
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
@@ -426,7 +426,7 @@ declare %test:assertEquals('true') function x:test-fm-isbn-format-template-10() 
         "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
     }
     let $expected := 
-        <dt class="some_class">ISBN-10</dt>
+        <dt class="some_class">ISBN-10:</dt>
     let $actual := fm:isbn-format($node, $model)
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
@@ -994,18 +994,36 @@ declare %test:assertEmpty function x:fm-if-media-type-false(){
 
 (:
  :  WHEN calling fm:epub-href-attribute
+ :  GIVEN an <a> node
  :  GIVEN a $model?volume-meta with $id (e.g. frus1969-76v31)
- :  THEN return frus:epub-url($id) (e.g. https://static.history.state.gov/frus/frus1969-76v31/ebook/frus1969-76v31.epub)
+ :  THEN return the results of processing the node with an added @href for the epub (e.g. https://static.history.state.gov/frus/frus1969-76v31/ebook/frus1969-76v31.epub)
  :)
 
 declare
-    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/ebook/frus1969-76v31.epub')
+    %test:assertEquals('true')
 function x:test-fm-epub-href-attribute() {
-    let $node := ()
-    let $model := map{
+    let $node := <a class="hsg-link-button--outline" data-template="fm:epub-href-attribute">epub</a>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
         "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
     }
-    return fm:epub-href-attribute($node, $model)
+    let $expected := <a class="hsg-link-button--outline" href="https://static.history.state.gov/frus/frus1969-76v31/ebook/frus1969-76v31.epub">epub</a>
+    let $actual := fm:epub-href-attribute($node, $model)
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
 
 (:
@@ -1015,13 +1033,30 @@ function x:test-fm-epub-href-attribute() {
  :)
 
 declare
-    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/ebook/frus1969-76v31.mobi')
+    %test:assertEquals('true')
 function x:test-fm-mobi-href-attribute() {
-    let $node := ()
-    let $model := map{
+    let $node := <a class="hsg-link-button--outline" data-template="fm:mobi-href-attribute">mobi</a>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
         "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
     }
-    return fm:mobi-href-attribute($node, $model)
+    let $expected := <a class="hsg-link-button--outline" href="https://static.history.state.gov/frus/frus1969-76v31/ebook/frus1969-76v31.mobi">mobi</a>
+    let $actual := fm:mobi-href-attribute($node, $model)
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
 
 (:
@@ -1031,13 +1066,30 @@ function x:test-fm-mobi-href-attribute() {
  :)
 
 declare
-    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/pdf/frus1969-76v31.pdf')
+    %test:assertEquals('true')
 function x:test-fm-pdf-href-attribute() {
-    let $node := ()
-    let $model := map{
+    let $node := <a class="hsg-link-button--outline" data-template="fm:pdf-href-attribute">pdf</a>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+        $templates:CONFIGURATION : $config,
         "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1969-76v31.xml')
     }
-    return fm:pdf-href-attribute($node, $model)
+    let $expected := <a class="hsg-link-button--outline" href="https://static.history.state.gov/frus/frus1969-76v31/pdf/frus1969-76v31.pdf">pdf</a>
+    let $actual := fm:pdf-href-attribute($node, $model)
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };
 
 (:

@@ -66,13 +66,17 @@
         }
       }
 
-      button {
+      button, a {
         text-transform: uppercase;
         padding: 6px 12px;
         width: 100%;
 
         @media screen and (min-width: $small-screen-min) {
           padding: 4px 8px;
+        }
+        
+        .hsg-glyphicon-new-window:after, .hsg-external-link:after, &[href^="http://"]:after, &[href^="https://"]:after {
+          content: ""; 
         }
       }
     }

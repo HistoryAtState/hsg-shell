@@ -104,9 +104,9 @@ declare function fm:isbn($node, $model) {
 
 declare function fm:isbn-format($volume-meta as document-node(element(volume))) {
     if ($volume-meta/volume/isbn13[normalize-space(.) ne '']) then
-        "ISBN"
+        "ISBN:"
     else if ($volume-meta/volume/isbn10[normalize-space(.) ne '']) then
-        "ISBN-10"
+        "ISBN-10:"
     else ()
 };
 
@@ -175,21 +175,39 @@ declare function fm:if-media-type($node, $model, $type) {
 };
 
 declare function fm:epub-href-attribute($node, $model) {
-    $model?volume-meta
-    => fm:id()
-    => frus:epub-url()
+    let $href := $model?volume-meta
+        => fm:id()
+        => frus:epub-url()
+    return
+        element {node-name($node)} {
+            $node/(@* except (@data-template|@data-template-type)),
+            attribute href {$href},
+            templates:process($node/node(), $model)
+        }
 };
 
 declare function fm:mobi-href-attribute($node, $model) {
-    $model?volume-meta
-    => fm:id()
-    => frus:mobi-url()
+    let $href := $model?volume-meta
+        => fm:id()
+        => frus:mobi-url()
+    return
+        element {node-name($node)} {
+            $node/(@* except (@data-template|@data-template-type)),
+            attribute href {$href},
+            templates:process($node/node(), $model)
+        }
 };
 
 declare function fm:pdf-href-attribute($node, $model) {
-    $model?volume-meta
-    => fm:id()
-    => frus:pdf-url(())
+    let $href := $model?volume-meta
+        => fm:id()
+        => frus:pdf-url(())
+    return
+        element {node-name($node)} {
+            $node/(@* except (@data-template|@data-template-type)),
+            attribute href {$href},
+            templates:process($node/node(), $model)
+        }
 };
 
 declare function fm:epub-size($node, $model) {
