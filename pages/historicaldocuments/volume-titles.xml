@@ -29,7 +29,7 @@
                                     <dt data-template="fm:if-pub-date">Published</dt>
                                     <dd data-template="fm:if-pub-date"><time data-template="fm:pub-date"/></dd>
                                     
-                                    <dt data-template="fm:if-not-pub-date">Publication Status:</dt>
+                                    <dt data-template="fm:if-not-pub-date">Status:</dt>
                                     <dd data-template="fm:pub-status"/>
                                     
                                     <dt data-template="fm:isbn-format"/>

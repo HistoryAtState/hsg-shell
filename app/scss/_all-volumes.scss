@@ -31,15 +31,9 @@
       }
     }
 
-    dl {
-      grid-template-columns: auto auto;
-      display: grid;
-      justify-content: start;
-      grid-column-gap: 1rem;
-    }
-
     dt {
-      display: inline;
+      float: left;
+      padding-inline-end: 0.3em;
     }
 
     dd {
