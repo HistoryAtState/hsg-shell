@@ -23,13 +23,32 @@ declare variable $x:test_s3 := '/db/apps/hsg-shell/tests/data/s3-cache/static.hi
 declare
     %test:setUp
 function x:setup-tests-s3() {
-    (: remove the existing cache :)
-    xmldb:remove('/db/apps/s3/cache'),
+    (: move to a temporary backup collection :)
+    xmldb:create-collection('/db/apps/s3', 'bak'),
+    xmldb:move('/db/apps/s3/cache', '/db/apps/s3/bak'),
     (: recreate empty cache collection :)
     xmldb:create-collection('/db/apps/s3', 'cache'),
     (: copy the test collection :)
     xmldb:copy-collection($x:test_s3, '/db/apps/s3/cache')
 };
+ 
+(:
+ :  This function restores the contents of the S3 cache after running tests (if required)
+ :)
+
+declare
+    %test:tearDown
+function x:teardown-tests-s3() {
+    (: remove the existing cache :)
+    xmldb:remove('/db/apps/s3/cache'),
+    (: recreate empty cache collection :)
+    xmldb:create-collection('/db/apps/s3', 'cache'),
+    (: restore original cache collection :)
+    xmldb:move('/db/apps/s3/bak/cache', '/db/apps/s3'),
+    (: remove backup collection :)
+    xmldb:remove('/db/apps/s3/bak')
+};
+
 
 (:
  :  WHEN running frus:exists-mobi()
@@ -49,4 +68,113 @@ declare %test:assertTrue %test:assertExists function x:frus-exists-mobi-true() {
 
 declare %test:assertFalse %test:assertExists function x:frus-exists-mobi-false() {
     frus:exists-mobi('frus1861')
+};
+
+(:
+ :  WHEN calling frus:get-media-types()
+ :  GIVEN an $id that has associate media types (e.g. frus1969-76v31)
+ :  THEN return a sequence of available media types (e.g. 'epub', 'mobi', 'pdf').
+ :)
+declare
+    %test:assertEquals('true')
+function x:test-frus-get-media-types() {
+    let $expected := ("epub", "mobi", "pdf")
+    let $actual := frus:get-media-types('frus1969-76v31')
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result>
+                <actual>{serialize($actual, map{'method':'adaptive', 'indent':true()})}</actual>
+                <expected>{serialize($expected, map{'method':'adaptive', 'indent':true()})}</expected>
+            </result>
+};
+
+(:
+ :  WHEN calling frus:get-media-types()
+ :  GIVEN an $id which has a single associated media type (e.g. frus1981-88v11)
+ :  THEN return a map with the key 'media-types' with the value a sequence consisting of the available type (e.g 'pdf'). 
+ :)
+
+declare
+    %test:assertEquals('pdf')
+function x:test-frus-get-media-types-single() {
+    frus:get-media-types('frus1981-88v11')
+};
+
+(:
+ :  WHEN calling frus:get-media-types()
+ :  GIVEN an $id which has no associated media types (e.g. frus1861)
+ :  THEN return an empty sequence. 
+ :)
+
+declare
+    %test:assertEmpty
+function x:test-frus-get-media-types-none() {
+    frus:get-media-types('frus1861')
+};
+
+(:
+ :  WHEN calling frus:cover-uri($id)
+ :  GIVEN an $id corresponding to an electronically published frus volume (e.g. frus1969-76v31)
+ :  RETURN the URL of the cover image (e.g. 'https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31.jpg')
+ :)
+
+declare
+    %test:assertEquals('https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31.jpg')
+function x:test-frus-cover-uri() {
+    frus:cover-uri('frus1969-76v31')
+};
+
+(:
+ :  WHEN calling frus:cover-uri($id)
+ :  GIVEN an $id corresponding to a frus volume with no cover image (e.g. 'frus1977-80v04')
+ :  RETURN ()
+ :)
+
+declare %test:assertEmpty function x:test-frus-cover-uri-none() {
+    frus:cover-uri('frus1977-80v04')
+};
+
+(:
+ :  WHEN calling frus:cover-img()
+ :  GIVEN an image element $img
+ :  GIVEN a $model?document-id corresponding to an electronically published frus volume (e.g. frus1969-76v31)
+ :  RETURN the image element, preserving existing attributes
+ :  RETURN @src to the cover image ('https://static.history.state.gov/frus/frus1969-76v31/covers/frus1969-76v31.jpg')
+ :  RETURN @alt { 'Book Cover of ' || frus:vol-title($model?document-id) }
+ :)
+
+declare %test:assertEquals('true') function x:test-frus-cover-img() {
+    let $node :=
+        <img class="hsg-frus__cover" data-template="frus:cover-img"/>
+    let $model := map {
+        "document-id":  'frus1981-88v11'
+    }
+    let $expected :=
+        <img class="hsg-frus__cover"
+             src="https://static.history.state.gov/frus/frus1981-88v11/covers/frus1981-88v11.jpg"
+             alt="Book Cover of {frus:vol-title($model?document-id)}"/>
+    let $actual := frus:cover-img($node, $model)
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
+(:
+ :  WHEN calling frus-cover-img()
+ :  GIVEN an image element $img
+ :  GIVEN a $model?document-id corresponding to a frus volume with no cover image (e.g. 'frus1977-80v04')
+ :  RETURN ()
+ :)
+
+declare %test:assertEmpty function x:test-frus-cover-img-none() {
+    let $node :=
+        <img class="hsg-frus__cover" data-template="frus:cover-img"/>
+    let $model := map {
+        "document-id":  'frus1977-80v04'
+    }
+    return frus:cover-img($node, $model)
 };
