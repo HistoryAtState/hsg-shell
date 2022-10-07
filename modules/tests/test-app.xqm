@@ -98,3 +98,90 @@ declare %test:assertEquals('2015') function x:app-format-short-year-gYear() {
 declare %test:assertEquals('2015') function x:app-format-short-year-gYear-string() {
     app:format-date-month-short-day-year("2015")
 };
+
+(:
+ :  WHEN calling app:format-date-month-long-day-year
+ :  GIVEN a string that can't be cast to any sort of date (e.g. 'wibble')
+ :  THEN throw an error
+ :)
+declare %test:assertError('app:format-date') function x:app-format-long-month-year-error() {
+    app:format-date-month-long-day-year('wibble')
+}; 
+
+(:
+ :  WHEN calling app:format-date-month-long-day-year
+ :  GIVEN a datetime (e.g. xs:dateTime('2015-06-04T13:03:16-04:00'))
+ :  THEN return the formatted date as a string (e.g. "June 4, 2015")
+ :)
+
+declare %test:assertEquals('June 4, 2015') function x:app-format-long-month-year-dateTime() {
+    app:format-date-month-long-day-year(xs:dateTime('2015-06-04T13:03:16-04:00'))
+};
+
+(:
+ :  WHEN calling app:format-date-month-long-day-year
+ :  GIVEN a string that can be cast as a datetime (e.g. "2015-06-04T13:03:16-04:00")
+ :  THEN return the formatted date as a string (e.g. "June 4, 2015")
+ :)
+declare %test:assertEquals('June 4, 2015') function x:app-format-long-month-year-dateTime-string() {
+    app:format-date-month-long-day-year('2015-06-04T13:03:16-04:00')
+};
+
+(:
+ :  WHEN calling app:format-date-month-long-day-year
+ :  GIVEN a date (e.g. xs:date('2015-06-04'))
+ :  THEN return the formatted date as a string (e.g. "June 4, 2015")
+ :)
+declare %test:assertEquals('June 4, 2015') function x:app-format-long-month-year-date() {
+    app:format-date-month-long-day-year(xs:date('2015-06-04'))
+};
+
+(:
+ :  WHEN calling app:format-date-month-long-day-year
+ :  GIVEN a string that can be cast as a datetime (e.g. "2015-06-04")
+ :  THEN return the formatted date as a string (e.g. "Jun 4, 2015")
+ :)
+declare %test:assertEquals('June 4, 2015') function x:app-format-long-month-year-date-string() {
+    app:format-date-month-long-day-year('2015-06-04')
+};
+
+(:
+ :  WHEN calling app:format-date-month-long-day-year
+ :  GIVEN a Year/Month (e.g. xs:gYearMonth("2015-06"))
+ :  THEN return the formatted date as a string (e.g. "June, 2015")
+ :)
+
+declare %test:assertEquals('June, 2015') function x:app-format-long-month-year-gYearMonth() {
+    app:format-date-month-long-day-year(xs:gYearMonth("2015-06"))
+};
+
+(:
+ :  WHEN calling app:format-date-month-long-day-year
+ :  GIVEN a string that can be cast as a Year/Month (e.g. "2015-06")
+ :  THEN return the formatted date as a string (e.g. "June, 2015")
+ :)
+
+declare %test:assertEquals('June, 2015') function x:app-format-long-month-year-gYearMonth-string() {
+    app:format-date-month-long-day-year("2015-06")
+};
+
+
+(:
+ :  WHEN calling app:format-date-month-long-day-year
+ :  GIVEN a Year (e.g. xs:gYear("2015"))
+ :  THEN return the formatted date as a string (e.g. "2015")
+ :)
+
+declare %test:assertEquals('2015') function x:app-format-long-month-year-gYear() {
+    app:format-date-month-long-day-year(xs:gYear("2015"))
+};
+
+(:
+ :  WHEN calling app:format-date-month-long-day-year
+ :  GIVEN a string that can be cast as a year (e.g. "2015")
+ :  THEN return the formatted date as a string (e.g. "2015")
+ :)
+
+declare %test:assertEquals('2015') function x:app-format-long-month-year-gYear-string() {
+    app:format-date-month-long-day-year("2015")
+};

@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 module namespace fh = "http://history.state.gov/ns/site/hsg/frus-html";
 
@@ -632,7 +632,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
                 <div id="{$vol-id}">
                     <img src="{$config:S3_URL}/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
                     <a href="$app/historicaldocuments/{$vol-id}">{let $series := fh:vol-title($vol-id, 'series') return if ($series) then (<em>{fh:vol-title($vol-id, 'series')}</em>, ", ") else (), string-join((fh:vol-title($vol-id, 'sub-series'), fh:vol-title($vol-id, 'volume-number'), fh:vol-title($vol-id, 'volume')), ', ')}</a>.
-                    <p>Ebook last updated: {format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), '[MNn] [D], [Y0001]', 'en', (), 'US')}</p>
+                    <p>Ebook last updated: {fh:ebook-last-updated($vol-id) => app:format-date-month-long-day-year()}</p>
                     <ul class="hsg-ebook-list">
                         <li><a class="hsg-link-button" href="{fh:epub-url($vol-id)}">EPUB ({ try {fh:epub-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.epub'}})</a></li>
                         <li><a class="hsg-link-button" href="{fh:mobi-url($vol-id)}">Mobi ({ try {fh:mobi-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.mobi'}})</a></li>
