@@ -554,7 +554,7 @@ declare %test:assertEmpty function x:test-fm-pub-date-none() {
  :  GIVEN a time element $node
  :  GIVEN a $model?volume-meta document with a published date (e.g. frus1981-88v11)
  :  THEN return the time element with @datetime (e.g. '2021-04-22')
- :  AND return the short date format as the content of the time element (e.g. 'Apr 22, 2021')
+ :  AND return the short date format as the content of the time element (e.g. 'April 22, 2021')
  :)
 
 declare %test:assertEquals('true') function x:test-fm-pub-date-template-date() {
@@ -574,7 +574,7 @@ declare %test:assertEquals('true') function x:test-fm-pub-date-template-date() {
         "volume-meta":  doc('/db/apps/hsg-shell/tests/data/frus-meta/frus1981-88v11.xml')
     }
     let $expected :=
-        <time datetime="2021-04-22">Apr 22, 2021</time>
+        <time datetime="2021-04-22">April 22, 2021</time>
     let $actual := fm:pub-date($node, $model)
     return  if (deep-equal($expected, $actual)) then 'true' else <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
 };

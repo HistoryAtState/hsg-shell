@@ -231,7 +231,7 @@ declare function fm:pub-date($node as element(time), $model) {
             element time {
                 $node/(@* except @data-template),
                 attribute datetime {$date},
-                app:format-date-month-short-day-year($date)
+                app:format-date-month-long-day-year($date)
             }
         else()
 };

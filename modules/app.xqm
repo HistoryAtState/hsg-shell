@@ -202,6 +202,33 @@ declare function app:format-date-month-short-day-year($dateTime) as xs:string {
 };
 
 (:
+ : 2015-06-04T13:03:16-04:00 -> June 4, 2015
+ :)
+declare function app:format-date-month-long-day-year($dateTime) as xs:string {
+    typeswitch($dateTime)
+    case xs:dateTime return
+        $dateTime
+        => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-dateTime('[MNn] [D], [Y0001]', 'en', (), 'US')
+    case xs:date return
+        $dateTime
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date('[MNn] [D], [Y0001]', 'en', (), 'US')
+    case xs:gYearMonth return
+        (xs:string($dateTime) || '-01')
+        => xs:date()
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date('[MNn], [Y0001]', 'en', (), 'US')
+    case xs:gYear return xs:string($dateTime)
+    default return
+        if ($dateTime castable as xs:dateTime) then xs:dateTime($dateTime) => app:format-date-month-long-day-year()
+        else if ($dateTime castable as xs:date) then xs:date($dateTime) => app:format-date-month-long-day-year()
+        else if ($dateTime castable as xs:gYearMonth) then xs:gYearMonth($dateTime) => app:format-date-month-long-day-year()
+        else if ($dateTime castable as xs:gYear) then xs:gYear($dateTime) => app:format-date-month-long-day-year()
+        else error(xs:QName('app:format-date'), "Could not recognise &quot;" || $dateTime || "&quot; as a date")
+};
+
+(:
  : 2015-06-04T13:03:16-04:00 -> yyyy-mm-dd -> 2015-06-04
  :)
 declare function app:format-date-short ($date as xs:dateTime) as xs:string {
