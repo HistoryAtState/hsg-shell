@@ -50,7 +50,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      align-content: space-between;
+      align-content: flex-start;
       gap: 10px 10px;
       margin: 0 0 1.5rem 0;
 
@@ -59,7 +59,11 @@
       }
 
       li {
-        flex: 1 46%;
+        flex: 1 100%;
+
+        @media screen and (min-width: $xs-screen-min) {
+          flex: 0 46%;
+        }
 
         @media screen and (min-width: $small-screen-min) {
           flex: 0 20%;
