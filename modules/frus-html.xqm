@@ -975,7 +975,7 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
             the current status of this volume is “{$not-published-status}.”</p>
         )
         else if (root($model?data)//tei:div) then (
-            pages:header($node, $model), <hr/>
+            pages:header($node, $model)
         )
             else (
                 $header,
@@ -987,4 +987,14 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
                     )
                 else ()
             )
+};
+
+declare function fh:volume-landing-title($node as node(), $model as map(*)) {
+    let $title := fh:vol-title($model?document-id)
+    return (
+        element { node-name($node) } {
+            $node/(@* except @data-template),
+            $title
+        }
+    )
 };
