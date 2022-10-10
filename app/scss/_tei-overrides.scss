@@ -52,3 +52,9 @@ span[class="tei-hi2"],
     vertical-align: middle;
   }
 }
+
+// Workaround for hiding duplicate h1,
+// rendered by "fh:render-volume-landing" (=> pages:header)
+#volume .content h1 {
+  display: none;
+}
