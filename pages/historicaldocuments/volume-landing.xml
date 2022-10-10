@@ -9,9 +9,10 @@
             <div class="row">
                 <div class="hsg-width-two-thirds" id="volume">
                     <div data-template="app:fix-links" id="content-inner">
-                        <div data-template="frus:render-volume-landing"/>
+                        <h1 data-template="frus:volume-landing-title"/>
                         <img class="hsg-frus__cover" data-template="frus:cover-img"/>
-                        <div data-template="toc:table-of-contents" data-template-heading="false"
+                        <div data-template="frus:render-volume-landing"/>
+                        <div class="hsg-frus__toc" data-template="toc:table-of-contents" data-template-heading="false"
                             data-template-highlight="false"/>
                     </div>
                 </div>
