@@ -73,9 +73,16 @@ declare function fm:thumbnail($volume-meta as document-node(element(volume))) {
 
 declare function fm:thumbnail($node, $model) {
     let $volume-meta := $model?volume-meta
+    let $media-types := fm:get-media-types($volume-meta)
     return
+
         element { node-name($node) } {
-            $node/(@* except @data-template),
+            $node/(@* except (@data-template, $node/@class)),
+            if (not(exists($media-types)))
+            then (
+                attribute class { $node/@class || ' '  || $node/@class || '--placeholder' }
+            )
+            else (attribute class { $node/@class }),
             attribute src { fm:thumbnail($volume-meta) },
             attribute alt { 'Book Cover of ' || fm:title($volume-meta) }
         }

@@ -13,13 +13,23 @@
       padding-top: 7px;
       max-width: 6rem;
       margin: 0 2rem 1rem 0;
+      width: 11rem;
 
       @media screen and (min-width: $small-screen-min) {
         max-width: 8rem;
+        width: 11rem;
       }
 
       @media screen and (min-width: $sm-screen-min) {
         max-width: 10rem;
+        width: 21rem;
+      }
+
+      &--placeholder {
+        margin: .4rem 2rem 1rem 0;
+        border: $default-border-style;
+        padding: 5px;
+        border-radius: 2px;
       }
     }
 
