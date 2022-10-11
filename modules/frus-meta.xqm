@@ -80,7 +80,7 @@ declare function fm:thumbnail($node, $model) {
             $node/(@* except (@data-template, $node/@class)),
             if (not(exists($media-types)))
             then (
-                attribute class { $node/@class || ' '  || $node/@class || '--placeholder' }
+                attribute class { $node/@class || ' hsg-list__thumbnail--placeholder' }
             )
             else (attribute class { $node/@class }),
             attribute src { fm:thumbnail($volume-meta) },
