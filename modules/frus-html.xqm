@@ -931,7 +931,7 @@ declare function fh:cover-img($img as element(img), $model) {
         element img {
             $img/(@* except @data-template),
             attribute src { $src },
-            attribute alt { 'Book Cover of ' || fh:vol-title($model?document-id) }
+            attribute alt { 'Book Cover of ' || fh:vol-title($model?document-id) => normalize-space() }
         }
     else ()
 };
@@ -990,7 +990,7 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
 };
 
 declare function fh:volume-landing-title($node as node(), $model as map(*)) {
-    let $title := fh:vol-title($model?document-id)
+    let $title := fh:vol-title($model?document-id) => normalize-space()
     return (
         element { node-name($node) } {
             $node/(@* except @data-template),
