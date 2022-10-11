@@ -9,12 +9,12 @@ describe('Volume landing page frus1951-54IranEd2 with a cover image', () => {
     Page.open('historicaldocuments/frus1951-54IranEd2');
   });
 
-  it('should display an cover image loaded from S3 production bucket', () => {
+  it('should display a cover image loaded from S3 production bucket', () => {
     let src = Page.getElementAttribute('#volume #content-inner > img', 'src')
     assert.equal(src, Page.s3_Prod + '/frus/frus1951-54IranEd2/covers/frus1951-54IranEd2.jpg');
   });
 
-  it('should display an cover image with an alt text attribute', () => {
+  it('should display a cover image with an alt text attribute', () => {
     let alt = Page.getElementAttribute('#volume img', 'alt')
     assert.equal(alt, 'Book Cover of Foreign Relations of the United States, 1952-1954, Iran, 1951–1954, Second Edition');
   });
@@ -35,7 +35,7 @@ describe('Volume landing page "frus1861-99Index" without a cover image', () => {
     Page.open('historicaldocuments/frus1861-99Index');
   });
 
-  it('should NOT display an cover image', () => {
+  it('should NOT display a cover image', () => {
     let nonExistingImg = Page.getElement('#volume #content-inner > img');
     assert.equal(nonExistingImg.error.error, 'no such element');
   });
