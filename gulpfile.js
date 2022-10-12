@@ -92,6 +92,21 @@ gulp.task('images:watch', function () {
     gulp.watch('app/images/*', gulp.series('images:deploy'))
 });
 
+// openseadragon image viewer //
+
+gulp.task('openseadragon:copy', gulp.series(function () {
+    return gulp.src([
+            'node_modules/openseadragon/build/openseadragon/*'
+        ])
+        .pipe(gulp.dest('resources/scripts/vendor/openseadragon'))
+}));
+
+gulp.task('openseadragon:deploy', gulp.series('openseadragon:copy', function () {
+    return gulp.src('resources/openseadragon/**/*', {base: '.'})
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
+}));
+
 // scripts //
 
 gulp.task('scripts:build', function () {
@@ -112,6 +127,7 @@ gulp.task('scripts:concat', gulp.series('scripts:build', function () {
     return gulp.src([
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+            'resources/scripts/vendor/openseadragon/build/openseadragon/openseadragon.min.js',
             'resources/scripts/citeproc.min.js',
             'resources/scripts/app.min.js',
         ])
@@ -237,7 +253,7 @@ gulp.task('other:watch', function () {
 
 // general //
 
-gulp.task('build', gulp.series('clean', gulp.parallel('fonts:copy', 'images:optimize', 'styles:concat', 'templates:build', 'scripts:concat')));
+gulp.task('build', gulp.series('clean', gulp.parallel('openseadragon:copy', 'fonts:copy', 'images:optimize', 'styles:concat', 'templates:build', 'scripts:concat')));
 
 gulp.task('deploy', gulp.series('build', function () {
     return gulp.src([
