@@ -281,12 +281,20 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
             $model?data//*:body/*
 
     return
-        if ($xml instance of element(tei:pb)) then
-            let $href := concat('//', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
-            return
+        if ($xml instance of element(tei:pb))
+        then (
+            let $doc-name := substring-before(util:document-name($xml), '.xml')
+            let $href := concat('https://', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
+            let $log := util:log('info', ('pages:view, href=', $href))
+            let $log := util:log('info', ('pages:view, $doc-name=', $doc-name))
+            return (
                 <div class="content">
-                    <img src="{$href}" class="img-responsive img-thumbnail center-block"/>
+                    <img src="{ $href }" class="img-responsive img-thumbnail center-block"/>
                 </div>
+                ,
+                <div id="openseadragon1" style="width: 800px; height: 600px;"></div>
+          )
+        )
         else
             pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path, "heading-offset": $heading-offset })
 };
