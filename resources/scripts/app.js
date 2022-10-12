@@ -2,6 +2,14 @@ $(document).ready(function() {
     var historySupport = !!(window.history && window.history.pushState);
     var appRoot = $("html").attr("data-app");
 
+    // http://openseadragon.github.io/docs/
+    var viewer = OpenSeadragon({
+        id: "openseadragon1",
+        prefixUrl: "resources/scripts/vendor/openseadragon/images/",
+        tileSources: "https://static.history.state.gov/frus/"
+    });
+
+
     // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
     if (!String.prototype.padStart) {

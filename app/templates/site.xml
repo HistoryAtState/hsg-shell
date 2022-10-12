@@ -356,22 +356,5 @@
             id="_fed_an_ua_tag"/>
         <!-- @endif -->
         <script type="application/json" id="original_citation" data-template="config:csl-json"/>
-        <script type="text/javascript">
-            OpenSeadragon({{
-                id:                 "openseadragon1",
-                prefixUrl:          "resources/scripts/vendor/openseadragon/images/",
-                preserveViewport:   true,
-                visibilityRatio:    1,
-                minZoomLevel:       1,
-                defaultZoomLevel:   1,
-                sequenceMode:       true,
-                tileSources:   [{{
-                    "tiles": [{{
-                        "scaleFactors": [ 1, 2, 4, 8, 16, 32 ],
-                        "width": 1024
-                    }}]
-                }}]
-            }});
-        </script>
     </body>
 </html>
