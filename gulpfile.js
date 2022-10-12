@@ -96,7 +96,7 @@ gulp.task('images:watch', function () {
 
 gulp.task('openseadragon:copy', gulp.series(function () {
     return gulp.src([
-            'node_modules/openseadragon/build/openseadragon/*'
+            'node_modules/openseadragon/build/openseadragon/**/*'
         ])
         .pipe(gulp.dest('resources/scripts/vendor/openseadragon'))
 }));
