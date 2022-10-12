@@ -127,7 +127,7 @@ gulp.task('scripts:concat', gulp.series('scripts:build', function () {
     return gulp.src([
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-            'resources/scripts/vendor/openseadragon/build/openseadragon/openseadragon.min.js',
+            'resources/scripts/vendor/openseadragon/openseadragon.min.js',
             'resources/scripts/citeproc.min.js',
             'resources/scripts/app.min.js',
         ])

@@ -337,7 +337,7 @@
             data-template="app:fix-this-link"/>
         <script type="text/javascript" async="async" src="$app/resources/scripts/cite.js"
             data-template="app:fix-this-link" id="cite-script"/>
-        <script type="text/javascript" async="async" src="$app/resources/scripts/vendor/openseadragon/build/openseadragon/openseadragon.min.js"
+        <script type="text/javascript" async="async" src="$app/resources/scripts/vendor/openseadragon/openseadragon.min.js"
             data-template="app:fix-this-link"/>
         <!-- @endif -->
         <!-- @if PRODUCTION=true -->
@@ -359,7 +359,7 @@
         <script type="text/javascript">
             OpenSeadragon({{
                 id:                 "openseadragon1",
-                prefixUrl:          "node_modules/openseadragon/build/openseadragon/images/",
+                prefixUrl:          "resources/scripts/vendor/openseadragon/images/",
                 preserveViewport:   true,
                 visibilityRatio:    1,
                 minZoomLevel:       1,
