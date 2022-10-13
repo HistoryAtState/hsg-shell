@@ -1,6 +1,6 @@
 xquery version "3.1";
 
-module namespace x="http://history.state.gov/ns/site/hsg/tests/test-section-nav";
+module namespace x="http://history.state.gov/ns/site/hsg/tests/sidebar";
 import module namespace t="http://history.state.gov/ns/site/hsg/xqsuite" at "../xqsuite.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "../pages.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
@@ -9,6 +9,7 @@ import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
+declare namespace hsg="http://history.state.gov/ns/site/hsg";
 
 (: testing for section navigation sidebar :)
 
@@ -350,4 +351,76 @@ declare %test:assertEquals('true') function x:section-nav-bottomlevel(){
   return if (deep-equal($expected, $result)) then
     'true' 
   else (<result>{$result}</result>, <expected>{$expected}</expected>)
+};
+
+declare variable $x:github-config as element() := doc('/db/apps/hsg-shell/tests/data/asides/github-config.xml')/*;
+
+(:
+ :  WHEN calling side:github-url()
+ :  GIVEN a site-config (e.g. $x:github-config)
+ :  GIVEN a site URI without a corresponding github entry in the site config (e.g. '/no-github')
+ :  THEN return ()
+ :)
+declare %test:assertEmpty function x:side-github-url-no-github(){
+    side:github-url('/no-github', $x:github-config)
+};
+
+(:
+ :  WHEN calling side:github-url()
+ :  GIVEN a site-config
+ :  GIVEN a site URI corresponding to a github entry in the site config (e.g. '/github-parent')
+ :  THEN return the corresponding URI (e.g. 'https://github.com/example/parent')
+ :)
+declare %test:assertEquals('https://github.com/example/parent') function x:side-github-url-parent-github(){
+    side:github-url('/github-parent', $x:github-config)
+};
+
+(:
+ :  WHEN calling side:github-url()
+ :  GIVEN a site-config
+ :  GIVEN a site URI inheriting a github entry in the site config (e.g. '/github-parent/inherited-child')
+ :  THEN return the corresponding URI (e.g. 'https://github.com/example/parent')
+ :)
+declare %test:assertEquals('https://github.com/example/parent') function x:side-github-url-inherited-child() {
+    side:github-url('/github-parent/inherited-child', $x:github-config)
+};
+
+(:
+ :  WHEN calling side:github-url()
+ :  GIVEN a site-config
+ :  GIVEN a site URI associated with a (changed) github entry in the site config (e.g. '/github-parent/github-child/inherited-grandchild')
+ :  THEN return the corresponding URI (e.g. 'https://github.com/example/child')
+ :)
+declare %test:assertEquals('https://github.com/example/child') function x:side-github-url-github-child() {
+    side:github-url('/github-parent/github-child', $x:github-config)
+};
+
+(:
+ :  WHEN calling side:github-url()
+ :  GIVEN a site-config
+ :  GIVEN a site URI associated with an inherited (changed) github entry in the site config (e.g. '/github-parent/github-child/inherited-grandchild')
+ :  THEN return the corresponding URI (e.g. 'https://github.com/example/child')
+ :)
+declare %test:assertEquals('https://github.com/example/child') function x:side-github-url-inherited-grandchild() {
+    side:github-url('/github-parent/github-child/inherited-grandchild', $x:github-config)
+};
+
+(:
+ :  WHEN calling side:github-url()
+ :  GIVEN a site-config
+ :  GIVEN a site URI associated with an empty github entry in the site config (e.g. '/github-parent/no-github-child')
+ :  THEN return ()
+ :)
+declare %test:assertEmpty function x:side-github-url-no-github-child(){
+    side:github-url('/github-parent/no-github-child', $x:github-config)
+};
+
+(:
+ :  WHEN calling side:github-url()
+ :  GIVEN a site-config
+ :  GIVEN a site URI associated with an inherited empty github entry in the site config (e.g. '/github-parent/no-github-child/inherited-no-child')
+ :  THEN return ()
+ :)
+declare %test:assertEmpty function x:side-github-url-no-github-inherited-no-child(){
+    side:github-url('/github-parent/no-github-child/inherited-no-child', $x:github-config)
 };

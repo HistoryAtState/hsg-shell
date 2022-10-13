@@ -160,7 +160,6 @@
             </page-template>
             <config>
                 <src collection="/db/apps/frus/volumes"/>
-                <hsg:github href="https://github.com/HistoryAtState/frus"/>
             </config>
         </step>
         <step key="administration">
@@ -176,6 +175,9 @@
         <page-template href="pages/historicaldocuments/index.xml">
             <with-param name="publication-id" value="historicaldocuments"/>
         </page-template>
+        <config>
+            <hsg:github href="https://github.com/HistoryAtState/frus"/>
+        </config>
     </step>
     <step value="countries">
         <step value="all">

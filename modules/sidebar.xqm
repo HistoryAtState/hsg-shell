@@ -10,17 +10,43 @@ import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-c
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace link="http://history.state.gov/ns/site/hsg/link" at "link.xqm";
 
+declare namespace hsg="http://history.state.gov/ns/site/hsg";
+
 declare function side:info($node, $model) {
-    <aside class="hsg-aside--info">
-        <div id="info" class="hsg-panel">
-            <div class="hsg-panel-heading">
-                <h2 class="hsg-sidebar-title">Info</h2>
+    let $github := substring-after(request:get-uri(), $app:APP_ROOT) => side:github-url()
+    return
+        <aside class="hsg-aside--info">
+            <div id="info" class="hsg-panel">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Info</h2>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item"><a href="#" class="hsg-cite__button--sidebar">Cite this resource</a></li>
+                </ul>
+                {
+                    if (exists($github)) then 
+                        <ul class="hsg-list-group">
+                            <li class="hsg-list-group-item">Download raw data from <a href="{$github}">Github</a></li>
+                        </ul>
+                    else ()
+                }
             </div>
-            <ul class="hsg-list-group">
-                <li class="hsg-list-group-item"><a href="#" class="hsg-cite__button--sidebar">Cite this resource</a></li>
-            </ul>
-        </div>
-    </aside>
+        </aside>
+};
+
+declare function side:github-url($uri as xs:string) {
+    side:github-url($uri, $site:config)
+};
+
+declare function side:github-url($uri as xs:string, $site-config as element(site:root)) {
+    site:call-for-uri-step(
+        $uri,
+        $site-config,
+        function($state as map(*)){
+            ($state?cfg.step/ancestor-or-self::site:step/site:config/hsg:github)[1]/@href ! string(.)
+        },
+        map{}
+    )
 };
 
 declare function side:section-nav($node as node(), $model as map(*)){
