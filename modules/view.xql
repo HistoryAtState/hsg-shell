@@ -5,7 +5,7 @@
  :)
 xquery version "3.0";
 
-import module namespace templates="http://exist-db.org/xquery/templates" ;
+import module namespace templates="http://exist-db.org/xquery/html-templating" ;
 
 (:
  : The following modules provide functions which will be called by the
@@ -29,6 +29,7 @@ import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html"
 import module namespace visits="http://history.state.gov/ns/site/hsg/visits-html" at "visits-html.xqm";
 import module namespace news="http://history.state.gov/ns/site/hsg/news" at "news.xqm";
 import module namespace pagination="http://history.state.gov/ns/site/hsg/pagination" at "pagination.xqm";
+import module namespace fm="http://history.state.gov/ns/site/hsg/frus-meta" at "frus-meta.xqm";
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 

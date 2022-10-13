@@ -3,6 +3,22 @@
 .hsg-link-button {
   @extend .btn;
   @extend .btn-primary;
+
+  &--outline {
+    @extend .btn;
+    background-color: $color-white;
+    color: $color-primary-darker;
+    border-color: $color-primary-darker;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+
+    &:hover,
+    &:focus,
+    &active {
+      color: $color-white;
+      background-color: $color-primary-darker;
+      border-color: $color-primary-darker;
+    }
+  }
 }
 
 .hsg-badge-number {

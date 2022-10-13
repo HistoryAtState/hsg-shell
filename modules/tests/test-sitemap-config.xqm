@@ -195,9 +195,9 @@ declare %test:assertEquals(".//track/metadata[@key='Name']") function x:test-con
 };
 
 declare %test:assertEquals(
-  "/db/apps/hsg-shell/tests/data/sitemap-config/Collection/music-library/morcheeba/big%20calm.xml",
   "/db/apps/hsg-shell/tests/data/sitemap-config/Collection/music-library/lenny%20kravitz/5.xml",
-  "/db/apps/hsg-shell/tests/data/sitemap-config/Collection/music-library/magpie%20lane/jack-in-the-green.xml"
+  "/db/apps/hsg-shell/tests/data/sitemap-config/Collection/music-library/magpie%20lane/jack-in-the-green.xml",
+  "/db/apps/hsg-shell/tests/data/sitemap-config/Collection/music-library/morcheeba/big%20calm.xml"
 ) function x:test-config-step-year-filepath(){
   let $state:= map{
     "config": map{
@@ -208,7 +208,9 @@ declare %test:assertEquals(
         }
     }
   }
-  return site:get-config($x:sample/site:root/site:step[@value eq 'music']/site:step[@value eq 'by-year']/site:step[@key eq 'year'], $state)?urls?('/music/by-year/1998')?filepath
+  for $filepath in site:get-config($x:sample/site:root/site:step[@value eq 'music']/site:step[@value eq 'by-year']/site:step[@key eq 'year'], $state)?urls?('/music/by-year/1998')?filepath
+  order by $filepath
+  return $filepath
 };
 
 declare %test:assertEquals("beck") function x:test-config-step-album-key-artist(){

@@ -10,7 +10,7 @@ import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "p
 
 import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../transform/frus-web-module.xql";
 
-declare namespace templates="http://exist-db.org/xquery/templates";
+declare namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare namespace expath="http://expath.org/ns/pkg";
 declare namespace repo="http://exist-db.org/xquery/repo";
@@ -94,7 +94,7 @@ declare variable $config:S3_CACHE_COL := "/db/apps/s3/cache/";
 
 declare variable $config:S3_BUCKET := "static.history.state.gov.v2";
 
-declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || "/" || $config:S3_BUCKET || "/";
+declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || $config:S3_BUCKET || "/";
 declare variable $config:S3_DOMAIN := "static.history.state.gov";
 declare variable $config:S3_URL := 'https://' || $config:S3_DOMAIN;
 
@@ -212,6 +212,9 @@ declare variable $config:PUBLICATIONS :=
                   $parameters?truncate
                 )
               }        
+        },
+        "frus-list": map{
+            "collection": $config:FRUS_METADATA_COL
         },
         "frus-administration": map {
           "select-section": function($administration-id) {

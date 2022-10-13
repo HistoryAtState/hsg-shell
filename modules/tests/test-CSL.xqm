@@ -3,7 +3,7 @@ xquery version "3.1";
 module namespace x="http://history.state.gov/ns/site/hsg/tests/test-CSL";
 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace  tei="http://www.tei-c.org/ns/1.0";

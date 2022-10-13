@@ -384,6 +384,19 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                 <forward url="{$exist:controller}/modules/view.xql"/>
                             </error-handler>
                         </dispatch>
+                case "volume-titles" return
+                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                        <forward url="{$exist:controller}/pages/historicaldocuments/volume-titles.xml"/>
+                        <view>
+                            <forward url="{$exist:controller}/modules/view.xql">
+                                <add-parameter name="publication-id" value="frus-list"/>
+                            </forward>
+                            <error-handler>
+                                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
+                                <forward url="{$exist:controller}/modules/view.xql"/>
+                            </error-handler>
+                        </view>
+                    </dispatch>
                 default return
                     if (starts-with($fragments[1], "frus")) then
                         if ($fragments[2]) then
