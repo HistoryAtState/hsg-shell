@@ -24,7 +24,7 @@ declare function side:info($node, $model) {
                     <li class="hsg-list-group-item"><a href="#" class="hsg-cite__button--sidebar">Cite this resource</a></li>
                     {
                         if (exists($github)) then 
-                            <li class="hsg-list-group-item">Download raw data from <a href="{$github}">Github</a></li>
+                            <li class="hsg-list-group-item">Download raw data from <a href="{$github}">HistoryAtState on GitHub</a></li>
                         else ()
                     }
                 </ul>
