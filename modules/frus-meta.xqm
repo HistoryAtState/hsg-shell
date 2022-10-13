@@ -68,12 +68,7 @@ declare function fm:title-link($node, $model) {
 
 declare function fm:thumbnail($volume-meta as document-node(element(volume))) {
     let $id := fm:id($volume-meta)
-    let $media-types := fm:get-media-types($volume-meta)
-    return
-        if (exists($media-types)) then
-            'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '.jpg'
-        else
-            'https://static.history.state.gov/images/document-image.jpg'
+    return (frus:cover-uri($id), 'https://static.history.state.gov/images/document-image.jpg')[1]
 };
 
 declare function fm:thumbnail($node, $model) {
@@ -146,12 +141,7 @@ declare function fm:pub-status($node, $model) {
 
 declare function fm:get-media-types($volume-meta as document-node(element(volume))) {
     let $id := fm:id($volume-meta) 
-    return 
-        (
-            "epub"[frus:exists-ebook($id)],
-            "mobi"[frus:exists-mobi($id)],
-            "pdf"[frus:exists-pdf($id)]
-        )
+    return frus:get-media-types($id)
 };
 
 declare function fm:get-media-types($node, $model) {

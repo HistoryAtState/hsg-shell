@@ -782,6 +782,14 @@ declare function fh:epub-url($document-id as xs:string) {
 	concat($config:S3_URL, '/frus/', $document-id, '/ebook/', $document-id, '.epub')
 };
 
+declare function fh:get-media-types($document-id) {
+    (
+        "epub"[fh:exists-ebook($document-id)],
+        "mobi"[fh:exists-mobi($document-id)],
+        "pdf"[fh:exists-pdf($document-id)]
+    )
+};
+
 declare
     %templates:wrap
 function fh:if-media-exists($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?, $suffix as xs:string) {
@@ -905,6 +913,29 @@ declare function fh:location-url ($document-id) {
             else()
 };
 
+(:
+ :  Return the URL of the cover of a frus volume (if available)
+ :)
+
+declare function fh:cover-uri($id) {
+    (: Use presence of ebooks to test whether book is published electronically (and therefore has an image)  :)
+    let $media-types := fh:get-media-types($id)
+    return if (exists($media-types)) then 
+        'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '.jpg'
+    else ()
+};
+
+declare function fh:cover-img($img as element(img), $model) {
+    let $src := fh:cover-uri($model?document-id)
+    return if (exists($src)) then
+        element img {
+            $img/(@* except @data-template),
+            attribute src { $src },
+            attribute alt { 'Book Cover of ' || fh:vol-title($model?document-id) => normalize-space() }
+        }
+    else ()
+};
+
 (:~
  :  Render frus volume landing header:
  :  Replace content (except for the document title) with a notice, if the publication-status is "under-declassification".
@@ -944,7 +975,7 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
             the current status of this volume is “{$not-published-status}.”</p>
         )
         else if (root($model?data)//tei:div) then (
-            pages:header($node, $model), <hr/>
+            pages:header($node, $model)
         )
             else (
                 $header,
@@ -956,4 +987,14 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
                     )
                 else ()
             )
+};
+
+declare function fh:volume-landing-title($node as node(), $model as map(*)) {
+    let $title := fh:vol-title($model?document-id) => normalize-space()
+    return (
+        element { node-name($node) } {
+            $node/(@* except @data-template),
+            $title
+        }
+    )
 };
