@@ -22,11 +22,12 @@ declare function side:info($node, $model) {
                 </div>
                 <ul class="hsg-list-group">
                     <li class="hsg-list-group-item"><a href="#" class="hsg-cite__button--sidebar">Cite this resource</a></li>
-                {
-                    if (exists($github)) then 
-                        <li class="hsg-list-group-item">Download raw data from <a href="{$github}">Github</a></li>
-                    else ()
-                }
+                    {
+                        if (exists($github)) then 
+                            <li class="hsg-list-group-item">Download raw data from <a href="{$github}">Github</a></li>
+                        else ()
+                    }
+                </ul>
             </div>
         </aside>
 };
