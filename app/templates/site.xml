@@ -317,6 +317,14 @@
                     </div>
                 </div>
             </section>
+            
+            <section class="hsg-grid hsg-footer-nether">
+                <div class="container">
+                    <div class="row">
+                        <p><a data-template="link:report-issue">Report an issue on this page</a></p>
+                    </div>
+                </div>
+            </section>
         </footer>
 
         <!-- @if PRODUCTION=false -->

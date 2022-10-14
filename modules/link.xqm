@@ -5,6 +5,7 @@ xquery version "3.1";
  :)
 module namespace link = "http://history.state.gov/ns/site/hsg/link";
 
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
@@ -72,3 +73,5 @@ declare function link:generate-label-from-state($url-state as map(*)) {
         ut:normalize-nodes($label)
     )
 };
+
+declare %templates:wrap function link:report-issue($node, $model) {"Report an issue on this page"};
