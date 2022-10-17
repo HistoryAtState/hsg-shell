@@ -107,7 +107,10 @@ footer {
 .hsg-footer-nether {
   background-color: $color-gray-light;
   padding: $padding-base-vertical 0;
-  padding-left: 1em;
+  p {
+    @extend .hsg-width-one-whole;
+    margin: 10px 0;
+  }
 }
 
 .hsg-footer-list {
