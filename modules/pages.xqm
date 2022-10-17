@@ -283,17 +283,15 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
     return
         if ($xml instance of element(tei:pb))
         then (
-            let $href := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
-            let $log := util:log('info', ('pages:view, href=', $href))
-            let $log := util:log('info', ('pages:view, $doc-name=', $document-id))
+            let $src := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
             return (
-                <div class="content" style="display:none;">
-                    <img src="{ $href }" class="img-responsive img-thumbnail center-block"/>
-                </div>
-                ,
-                <div class="content">
-                    <div id="openseadragon1" style="width: 70vh; height: 90vh;" data-doc-id="{ $document-id }" data-page="{ $xml/@facs }"></div>
-                </div>
+                (:<noscript>
+                    <div class="content">
+                        <img src="{ $src }" class="img-responsive img-thumbnail center-block"/>
+                    </div>
+                </noscript>
+                , :)
+                <div id="viewer" style="width: 70vh; height: 90vh;" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }"></div>
           )
         )
         else

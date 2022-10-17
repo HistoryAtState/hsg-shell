@@ -1,15 +1,18 @@
-$(document).ready(function() {
+$(document).ready(function($) {
     var historySupport = !!(window.history && window.history.pushState);
     var appRoot = $("html").attr("data-app");
 
-    var viewer = $('#openseadragon1');
-    console.log('viewer=', viewer);
-    var documentId = viewer.attr('data-doc-id');
-    console.log('documentId=', documentId);
-    var pageID = viewer.attr('data-page');
-    console.log('pageID=', pageID);
-
     // http://openseadragon.github.io/docs/
+
+    var viewer     = $('#viewer'),
+        documentId = viewer.attr('data-doc-id'),
+        facsId     = viewer.attr('data-facs'),
+        scheme     = 'http',
+        server     = 'localhost:8182', // Local Cantaloupe image server for development
+        debugMode  = false;
+
+    console.log('URI=', scheme + '://' + server + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif')
+
     var viewer = OpenSeadragon({
         id:                   "viewer",
         prefixUrl:            "resources/images/OSD-icons/",
@@ -24,8 +27,8 @@ $(document).ready(function() {
         showSequenceControl:  false,
         debugMode:            debugMode,
         tileSources:   [{
-          "@id": "http://localhost:8182/iiif/3/frus1969-76v18%2Ftiff%2F0100.tif",
           "@context": "http://iiif.io/api/image/3/context.json",
+          "@id":      scheme + "://" + server + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
           "height":   5476,
           "width":    3547,
           "maxArea":  10000000,
