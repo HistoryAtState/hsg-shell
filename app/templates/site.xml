@@ -329,7 +329,8 @@
             src="$app/resources/scripts/citeproc.min.js"
             data-template="app:fix-this-link"/>
         <script type="text/javascript" async="async" src="$app/resources/scripts/footnote.js"
-
+            data-template="app:fix-this-link"/>
+        <script type="text/javascript" async="async" src="$app/resources/scripts/vendor/openseadragon/openseadragon.js"
             data-template="app:fix-this-link"/>
         <script type="text/javascript" async="async" src="$app/resources/scripts/app.js"
             data-template="app:fix-this-link"/>
@@ -337,8 +338,6 @@
             data-template="app:fix-this-link"/>
         <script type="text/javascript" async="async" src="$app/resources/scripts/cite.js"
             data-template="app:fix-this-link" id="cite-script"/>
-        <script type="text/javascript" async="async" src="$app/resources/scripts/vendor/openseadragon/openseadragon.min.js"
-            data-template="app:fix-this-link"/>
         <!-- @endif -->
         <!-- @if PRODUCTION=true -->
         <script type="text/javascript" async="async" src="$app/resources/scripts/app.all.js"
