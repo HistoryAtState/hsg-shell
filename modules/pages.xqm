@@ -263,7 +263,7 @@ declare function pages:xml-link($node as node(), $model as map(*), $doc as xs:st
 declare
     %templates:default("view", "div")
     %templates:default("heading-offset", 0)
-function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int) {
+function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int, $document-id as xs:string?) {
     let $log := console:log("pages:view: view: " || $view || " heading-offset: " || $heading-offset)
     let $xml :=
         if ($view = "div") then
@@ -283,16 +283,15 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
     return
         if ($xml instance of element(tei:pb))
         then (
-            let $doc-name := substring-before(util:document-name($xml), '.xml')
-            let $href := concat('https://', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
+            let $href := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
             let $log := util:log('info', ('pages:view, href=', $href))
-            let $log := util:log('info', ('pages:view, $doc-name=', $doc-name))
+            let $log := util:log('info', ('pages:view, $doc-name=', $document-id))
             return (
                 <div class="content">
                     <img src="{ $href }" class="img-responsive img-thumbnail center-block"/>
                 </div>
                 ,
-                <div id="openseadragon1" style="width: 800px; height: 600px;"></div>
+                <div id="openseadragon1" style="width: 800px; height: 600px;" data-doc-id="{$document-id}" data-page="{$xml/@facs}"></div>
           )
         )
         else
