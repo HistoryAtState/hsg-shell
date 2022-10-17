@@ -11,25 +11,30 @@ $(document).ready(function() {
 
     // http://openseadragon.github.io/docs/
     var viewer = OpenSeadragon({
-        id:                 "openseadragon1",
-        prefixUrl:          "resources/scripts/vendor/openseadragon/images/",
-        preserveViewport:   true,
-        visibilityRatio:    1,
-        minZoomLevel:       1,
-        defaultZoomLevel:   1,
-        sequenceMode:       true,
+        id:                   "viewer",
+        prefixUrl:            "resources/images/OSD-icons/",
+        preserveViewport:     true,
+        visibilityRatio:      1,
+        minZoomLevel:         1,
+        defaultZoomLevel:     1,
+        sequenceMode:         true,
+        showNavigator:        true,
+        navigatorHeight:      "120px",
+        navigatorWidth:       "80px",
+        showSequenceControl:  false,
+        debugMode:            debugMode,
         tileSources:   [{
-          "@context": "http://iiif.io/api/image/2/context.json",
           "@id": "http://localhost:8182/iiif/3/frus1969-76v18%2Ftiff%2F0100.tif",
-          "height": 5476,
-          "width": 3547,
-          "maxArea": 10000000,
-          "profile": [ "http://iiif.io/api/image/2/level2.json" ],
+          "@context": "http://iiif.io/api/image/3/context.json",
+          "height":   5476,
+          "width":    3547,
+          "maxArea":  10000000,
+          "profile":  [ "http://iiif.io/api/image/2/level2.json" ],
           "protocol": "http://iiif.io/api/image",
           "tiles": [{
             "scaleFactors": [ 1, 2, 4, 8, 16, 32 ],
-            "width": 512,
-            "height": 512
+            "width":        512,
+            "height":       512
           }]
         }]
     });
