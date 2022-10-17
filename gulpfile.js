@@ -93,7 +93,6 @@ gulp.task('images:watch', function () {
 });
 
 // openseadragon image viewer //
-
 gulp.task('openseadragon:copy', gulp.series(function () {
     return gulp.src([
             'node_modules/openseadragon/build/openseadragon/**/*'
@@ -136,13 +135,20 @@ gulp.task('scripts:concat', gulp.series('scripts:build', function () {
 }));
 
 gulp.task('scripts:deploy', gulp.series('scripts:concat', function () {
-    return gulp.src('resources/scripts/*.js', {base: '.'})
+    return gulp.src('resources/scripts/*.js', {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
 }));
 
 gulp.task('scripts:watch', function () {
-    gulp.watch('resources/scripts/*.js', gulp.series('scripts:deploy'))
+    gulp.watch([
+      'resources/scripts/footnote.js',
+      'resources/scripts/app.js',
+      'resources/scripts/metagrid.js',
+      'resources/scripts/cite.js',
+      'resources/scripts/dygraph-combined.js',
+    ],
+    gulp.series('scripts:deploy'))
 });
 
 // styles //
