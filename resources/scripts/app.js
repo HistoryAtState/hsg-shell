@@ -2,13 +2,37 @@ $(document).ready(function() {
     var historySupport = !!(window.history && window.history.pushState);
     var appRoot = $("html").attr("data-app");
 
+    var viewer = $('#openseadragon1');
+    console.log('viewer=', viewer);
+    var documentId = viewer.attr('data-doc-id');
+    console.log('documentId=', documentId);
+    var pageID = viewer.attr('data-page');
+    console.log('pageID=', pageID);
+
     // http://openseadragon.github.io/docs/
     var viewer = OpenSeadragon({
-        id: "openseadragon1",
-        prefixUrl: "resources/scripts/vendor/openseadragon/images/",
-        tileSources: "https://static.history.state.gov/frus/"
+        id:                 "openseadragon1",
+        prefixUrl:          "resources/scripts/vendor/openseadragon/images/",
+        preserveViewport:   true,
+        visibilityRatio:    1,
+        minZoomLevel:       1,
+        defaultZoomLevel:   1,
+        sequenceMode:       true,
+        tileSources:   [{
+          "@context": "http://iiif.io/api/image/2/context.json",
+          "@id": "http://localhost:8182/iiif/3/frus1969-76v18%2Ftiff%2F0100.tif",
+          "height": 5476,
+          "width": 3547,
+          "maxArea": 10000000,
+          "profile": [ "http://iiif.io/api/image/2/level2.json" ],
+          "protocol": "http://iiif.io/api/image",
+          "tiles": [{
+            "scaleFactors": [ 1, 2, 4, 8, 16, 32 ],
+            "width": 512,
+            "height": 512
+          }]
+        }]
     });
-
 
     // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart

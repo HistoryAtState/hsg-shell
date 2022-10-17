@@ -287,11 +287,13 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
             let $log := util:log('info', ('pages:view, href=', $href))
             let $log := util:log('info', ('pages:view, $doc-name=', $document-id))
             return (
-                <div class="content">
+                <div class="content" style="display:none;">
                     <img src="{ $href }" class="img-responsive img-thumbnail center-block"/>
                 </div>
                 ,
-                <div id="openseadragon1" style="width: 800px; height: 600px;" data-doc-id="{$document-id}" data-page="{$xml/@facs}"></div>
+                <div class="content">
+                    <div id="openseadragon1" style="width: 70vh; height: 90vh;" data-doc-id="{ $document-id }" data-page="{ $xml/@facs }"></div>
+                </div>
           )
         )
         else
