@@ -15,10 +15,10 @@ declare namespace test="http://exist-db.org/xquery/xqsuite";
 (:
  :  WHEN calling ut:join-lines
  :  GIVEN $lines as a sequence of strings (e.g. "hello", "world")
- :  THEN return a string consisting of the strings joined with a newline character (e.g. "hello&x0a;world")
+ :  THEN return a string consisting of the strings joined with a newline character (e.g. "hello&x0d;&x0a;world")
+ :  NB we have to test this using url encoding to avoid munging of windows line endings
  :)
-declare %test:assertEquals('hello
-world') function x:ut-join-lines(){
+declare %test:assertEquals('hello%0D%0Aworld') function x:ut-join-lines(){
     let $lines := ('hello', 'world')
-    return $lines => ut:join-lines()
+    return ($lines => ut:join-lines() => encode-for-uri()) 
 };
