@@ -74,3 +74,10 @@ declare function ut:normalize-nodes($nodes) {
         default return $node
     
 };
+
+(:
+ :  Convenience function to join lines with new line breaks
+ :)
+declare function ut:join-lines($lines) {
+    $lines => string-join(codepoints-to-string(10))
+};
