@@ -2,23 +2,23 @@ $(document).ready(function($) {
     var historySupport = !!(window.history && window.history.pushState);
     var appRoot = $("html").attr("data-app");
 
-    // http://openseadragon.github.io/docs/
-
-    var viewer     = $('#viewer'),
-        documentId = viewer.attr('data-doc-id'),
-        facsId     = viewer.attr('data-facs'),
+    var osd_viewer = $('.osd-wrapper #viewer'),
+        documentId = osd_viewer.attr('data-doc-id'),
+        facsId     = osd_viewer.attr('data-facs'),
         scheme     = 'http',
         server     = 'localhost:8182', // Local Cantaloupe image server for development
         debugMode  = false;
 
-    console.log('URI=', scheme + '://' + server + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif')
+    console.log('Image URI=', scheme + '://' + server + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif')
 
+    // http://openseadragon.github.io/docs/OpenSeadragon.html#.Options
     var viewer = OpenSeadragon({
         id:                   "viewer",
         prefixUrl:            "resources/images/OSD-icons/",
         preserveViewport:     true,
         visibilityRatio:      1,
-        minZoomLevel:         1,
+        //minZoomLevel:         1,
+        minZoomImageRatio:    0.9,
         defaultZoomLevel:     1,
         sequenceMode:         true,
         showNavigator:        true,
@@ -146,6 +146,7 @@ $(document).ready(function($) {
                     }
                     showContent(container, animIn, animOut, id);
                     // FIXME: Currently not initialized fn
+                    //ga('send', 'pageview');
                 }
             });
         });
