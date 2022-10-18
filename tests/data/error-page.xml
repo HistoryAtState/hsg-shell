@@ -1,0 +1,360 @@
+<html data-template="pages:app-root" lang="en" data-app="/exist/apps/hsg-shell">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="history.state.gov 3.0 shell"/>
+        <meta property="og:type" content="website"/>
+        <meta property="twitter:card" content="summary"/>
+        <meta property="twitter:site" content="@HistoryAtState"/>
+        <meta property="og:site_name" content="Office of the Historian"/>
+        <meta property="og:title" content="An error has occurred"/>
+        <meta property="og:description" content="Office of the Historian"/>
+        <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>
+        <meta property="og:image:width" content="400"/>
+        <meta property="og:image:height" content="400"/>
+        <meta property="og:image:alt" content="Department of State heraldic shield"/>
+        <meta property="og:url" content="http://clementine.evolvedbinary.com:8080/exist/apps/hsg-shell/"/>
+        <meta name="DC.type" content="webpage"/>
+        <meta name="citation_series_title" content="Office of the Historian"/>
+        <meta name="citation_title" content="An error has occurred"/>
+        <meta name="citation_public_url" content="http://clementine.evolvedbinary.com:8080/exist/apps/hsg-shell/"/>
+        <meta name="accessDate" content="2022-10-18"/>
+        <link href="/exist/apps/hsg-shell/resources/images/favicon.ico" rel="shortcut icon"/>
+        <link href="/exist/apps/hsg-shell/resources/css/all.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" data-template="pages:styles" data-template-odd="frus.odd" href="/exist/apps/hsg-shell/transform/frus.css"/>
+        <title>An error has occurred - Office of the Historian</title>
+    </head>
+    <body id="body">
+        <header class="hsg-header" data-template="app:fix-links">
+            <section class="hsg-grid hsg-header-inner">
+                <div class="container hsg-header-content">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <a href="/exist/apps/hsg-shell/">
+                                <img src="/exist/apps/hsg-shell/resources/images/Office-of-the-Historian-logo_500x168.jpg" class="img-responsive" width="400" alt="Office of the Historian"/>
+                            </a>
+                        </div>
+                        <div class="col-sm-5">
+                            
+                                <div class="banner__search">
+                                    <div class="searchbox">
+                                        <form action="/exist/apps/hsg-shell/search" method="get" class="main-form" id="navigationSearchForm">
+                                            <p class="form-group">
+                                                <!-- Search: -->
+                                                <input type="text" size="15" name="q" placeholder="Search..." class="form-control" id="search-box"/>
+                                                <button type="submit" class="hsg-link-button search-button btn">
+                                                    <i class="hsg-search-button-icon"/>
+                                                </button>
+                                            </p>
+                                        </form>
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </header>
+
+        <nav role="navigation" class="hsg-nav navbar navbar-default" data-template="app:fix-links">
+            <div class="container hsg-nav-content">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Menu</span>
+                        <i class="fa fa-bars"/>
+                        <span class="toggle-text">Menu</span>
+                    </button>
+                    <!--<a data-template="config:app-title" class="navbar-brand" href="./index.html">App Title</a>-->
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-collapse-1" aria-expanded="false">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="/exist/apps/hsg-shell/news" shape="rect">
+                                <span>News</span>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="/exist/apps/hsg-shell/historicaldocuments" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span>Historical Documents</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/historicaldocuments">
+                                        <em>Foreign Relations of the United States</em>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/historicaldocuments/about-frus">About the
+                                            <em>Foreign Relations</em> Series</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/historicaldocuments/status-of-the-series">Current
+                                        Status of the <em>Foreign Relations</em> Series</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/historicaldocuments/frus-history">History of the
+                                            <em>Foreign Relations</em> Series</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/historicaldocuments/ebooks">Ebooks Initiative</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/historicaldocuments/quarterly-releases">Quarterly
+                                        Releases</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="index_nav" class="dropdown">
+                            <a href="/exist/apps/hsg-shell/departmenthistory" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span>Department History</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory">Overview</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory/timeline">Administrative
+                                        Timeline</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory/people/secretaries">Biographies
+                                        of the Secretaries of State</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory/people/principals-chiefs">Principal Officers and Chiefs of Mission</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/secretary">Travels of
+                                        the Secretary of State</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory/travels/president">Travels of
+                                        the President</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory/visits">Visits by Foreign Heads
+                                        of State</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory/wwi">World War I and the
+                                        Department</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory/buildings">Buildings of the
+                                        Department of State</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory/diplomatic-couriers">U.S.
+                                        Diplomatic Couriers</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="countries_nav" class="dropdown">
+                            <a href="/exist/apps/hsg-shell/countries" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span>Guide to Countries</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/countries">Guide to Country Recognition and
+                                        Relations</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/countries/archives">World Wide Diplomatic Archives
+                                        Index</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="resources_nav" class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span>More Resources</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/tags">Browse Resources by Subject Tag</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/conferences">Conferences</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/about/contact-us">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/developer">Developer Resources &amp; APIs</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/education">Educational Resources</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/about/faq">Frequently Asked Questions</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/milestones">Key Milestones</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/open">Open Government Initiative</a>
+                                </li>
+                                <li>
+                                    <a href="/exist/apps/hsg-shell/departmenthistory/short-history">A Short History
+                                        of the Department</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="/exist/apps/hsg-shell/about" shape="rect">
+                                <span>About Us</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="hsg-main">
+            <section class="hsg-grid hsg-main-inner">
+                <div class="container hsg-main-content">
+                    <main id="content">
+   <div data-template="app:handle-error">
+      <h1>An error has occurred</h1>
+      <p>An error has been generated by the application.</p>
+      <pre class="error templates:error-description">templates:NotFound No template function found for call app:tweet-xhtml (Max arity of 20 has been exceeded in searching for this template function. If needed, adjust $templates:MAX_ARITY in the templates.xql module.) [at line 190, column 85, source: /exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+In function:
+	templates:call(item(), element(), map(*)) [136:36:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [147:81:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [434:23:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	app:each(node(), map(*), xs:string, xs:string) [-1:-1:/db/apps/hsg-shell/modules/app.xqm]
+	templates:process-output(element(), map(*), item()*, element(function)) [210:9:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:call-by-introspection(element(), map(*), map(*), function(*)) [188:28:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:call(item(), element(), map(*)) [136:36:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [356:18:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	app:load-most-recent-tweets(node(), map(*), xs:integer) [-1:-1:/db/apps/hsg-shell/modules/app.xqm]
+	templates:process-output(element(), map(*), item()*, element(function)) [210:9:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:call-by-introspection(element(), map(*), map(*), function(*)) [188:28:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:call(item(), element(), map(*)) [136:36:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [147:81:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [147:81:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [147:81:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [147:81:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [147:81:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [147:81:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [147:81:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [147:81:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [575:36:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	pages:app-root(node(), map(*)) [-1:-1:/db/apps/hsg-shell/modules/pages.xqm]
+	templates:process-output(element(), map(*), item()*, element(function)) [210:9:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:call-by-introspection(element(), map(*), map(*), function(*)) [188:28:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:call(item(), element(), map(*)) [136:36:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [430:17:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process-output(element(), map(*), item()*) [229:9:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process-output(element(), map(*), item()*, element(function)) [210:9:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:call-by-introspection(element(), map(*), map(*), function(*)) [188:28:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:call(item(), element(), map(*)) [136:36:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [132:51:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:process(node()*, map(*)) [89:9:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]
+	templates:apply(node()+, function(*), map(*)?, map(*)?) [64:9:/exist/etc/../data/expathrepo/templating-1.0.4/content/templates.xqm]</pre>
+   </div>
+   <div data-template="app:handle-error" data-template-code="404"/>
+</main>
+                    <section class="" data-template="pages:unless-asides">
+                        <button title="Cite this resource" class="hsg-cite__button">Cite this resource</button>
+                    </section>
+                </div>
+            </section>
+        </div>
+
+        <footer class="hsg-footer" data-template="app:fix-links">
+            <section class="hsg-grid hsg-footer-top">
+                <div class="container">
+                    <nav class="row">
+                        <ul class="hsg-footer-list">
+                            <h4>Learn more</h4>
+                            <li>
+                                <a href="/exist/apps/hsg-shell/">Home</a>
+                            </li>
+                            <li>
+                                <a href="/exist/apps/hsg-shell/search">Search</a>
+                            </li>
+                            <li>
+                                <a href="/exist/apps/hsg-shell/about/faq">FAQ</a>
+                            </li>
+                        </ul>
+
+                        <ul class="hsg-footer-list">
+                            <h4>Topics</h4>
+                            <li>
+                                <a href="/exist/apps/hsg-shell/historicaldocuments/">Historical Documents</a>
+                            </li>
+                            <li>
+                                <a href="/exist/apps/hsg-shell/departmenthistory/">Department History</a>
+                            </li>
+                            <li>
+                                <a href="/exist/apps/hsg-shell/countries/">Countries</a>
+                            </li>
+                        </ul>
+                        <ul class="hsg-footer-list">
+                            <h4>Contact</h4>
+                            <li>
+                                <a href="/exist/apps/hsg-shell/about/">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/exist/apps/hsg-shell/about/contact-us">Contact Us</a>
+                            </li>
+                        </ul>
+
+                        <ul class="hsg-footer-list">
+                            <h4>Policies</h4>
+                            <li>
+                                <a href="https://www.state.gov/section-508-accessibility-statement/">Accessibility Statement</a>
+                            </li>
+                            <li>
+                                <a href="https://www.state.gov/privacy-policy/">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="https://www.state.gov/external-link-policy-and-disclaimers/">External Link Policy</a>
+                            </li>
+                            <li>
+                                <a href="https://www.state.gov/copyright-information/">Copyright
+                                    Information</a>
+                            </li>
+                            <li>
+                                <a href="/exist/apps/hsg-shell/about/content-warning">Content Warning</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+            <section class="hsg-grid hsg-footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <address class="col-xs-12 col-sm-12 col-md-12">
+                            <h4>Office of the Historian, Foreign Service Institute <br/>
+                                <a href="http://www.state.gov">United States Department of
+                                State</a></h4>
+                            <p>
+                                <a href="mailto:history@state.gov">history@state.gov</a>
+                            </p>
+                            <p>Phone: 202-955-0200</p>
+                            <p>Fax: 202-955-0268</p>
+                        </address>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="hsg-grid hsg-footer-nether">
+                <div class="container">
+                    <div class="row">
+                        <p><a data-template="link:report-issue">Report an issue on this page</a></p>
+                    </div>
+                </div>
+            </section>
+        </footer>
+
+        <script src="/exist/apps/hsg-shell/bower_components/jquery/dist/jquery.js" type="text/javascript"/>
+        <script src="/exist/apps/hsg-shell/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js" type="text/javascript"/>
+        <script src="/exist/apps/hsg-shell/resources/scripts/citeproc.min.js" type="text/javascript"/>
+        <script src="/exist/apps/hsg-shell/resources/scripts/footnote.js" type="text/javascript" async=""/>
+        <script src="/exist/apps/hsg-shell/resources/scripts/app.js" type="text/javascript" async=""/>
+        <script src="/exist/apps/hsg-shell/resources/scripts/metagrid.js" type="text/javascript" async=""/>
+        <script src="/exist/apps/hsg-shell/resources/scripts/cite.js" type="text/javascript" async="" id="cite-script"/>
+        <script type="application/json" id="original_citation" data-template="config:csl-json">[{"id":"/","type":"webpage","collection-title":"Office of the Historian","title":"An error has occurred","URL":"http://clementine.evolvedbinary.com:8080/exist/apps/hsg-shell/","accessed":{"date-parts":[[2022,10,18]]}}]</script>
+    
+<div id="touch-detector"/><div id="footnote-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  <div class="modal-dialog-container">    <div class="modal-dialog" role="document">      <div class="modal-content">        <div class="modal-header">          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>          <h4 class="modal-title h2">Footnote</h4>        </div>        <div class="modal-body">          <div id="footnote"/>          <div id="link">            <a href="#">View all footnotes</a>          </div>        </div>      </div>    </div>  </div></div><div id="citationDialog" class="modal fade in" style="display: none; padding-right: 12px;">  <div class="modal-dialog">    <div class="modal-content" role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modalTitle1">      <div class="modal-header">        <button type="button" class="close" data-dismiss="modal" aria-label="Close modal">         <span aria-hidden="true">×</span>        </button>        <h4 class="modal-title" id="modalTitle1">Cite this resource</h4>      </div>      <div class="modal-body">        <div class="modal-body__citation-group">          <label>Chicago Fullnote Bibliography</label>          <div class="modal-body__citation-wrapper">            <div data-style="chicago" id="text-chicago" class="citation-text" contenteditable="" readonly=""><div class="csl-entry">“An Error Has Occurred.” Office of the Historian. Accessed October 18, 2022. http://clementine.evolvedbinary.com:8080/exist/apps/hsg-shell/.</div></div>            <button type="button" class="btn btn-primary copy-button" data-style="chicago" title="Copy chicago format to clipboard">Copy</button>           </div>        </div>        <div class="modal-body__citation-group">          <label>Modern Language Association</label>          <div class="modal-body__citation-wrapper">            <div data-style="mla" id="text-mla" class="citation-text" contenteditable="" readonly=""><div class="csl-entry"><i>An Error Has Occurred</i>. http://clementine.evolvedbinary.com:8080/exist/apps/hsg-shell/. Accessed 18 Oct. 2022.</div></div>            <button data-style="mla" type="button" class="btn btn-primary copy-button" title="Copy mla format to clipboard">Copy</button>          </div>        </div>      </div>      <div class="modal-footer">        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close modal">Close</button>      </div>    </div>  </div></div></body></html>
