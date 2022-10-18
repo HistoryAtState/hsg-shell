@@ -111,11 +111,21 @@ return
             else ()
         let $html :=
             if ($xml instance of element(tei:pb)) then
-                let $href := concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
-                return
-                    <div class="content">
-                        <img src="{$href}" class="img-responsive img-thumbnail center-block"/>
-                    </div>
+                let $src := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
+                let $log := util:log('info', ('frus-ajax.xql , src=', $src))
+                let $log := util:log('info', ('frus-ajax.xql , $document-id=', $document-id))
+                let $log := util:log('info', ('frus-ajax.xql , $xml/@facs=', $xml/@facs))
+                return (
+                    <noscript>
+                        <div class="content">
+                            <img src="{ $src }" class="img-responsive img-thumbnail center-block"/>
+                        </div>
+                    </noscript>
+                    ,
+                    <section class="osd-wrapper">
+                        <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }"></div>
+                    </section>
+                )
             else
                 pages:process-content($odd, pages:get-content($xml), map { "base-uri": $base-path })
         let $html := app:fix-links($html)
