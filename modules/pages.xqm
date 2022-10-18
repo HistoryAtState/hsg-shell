@@ -285,14 +285,16 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
         then (
             let $src := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
             return (
-                (:<noscript>
+                <noscript>
                     <div class="content">
                         <img src="{ $src }" class="img-responsive img-thumbnail center-block"/>
                     </div>
                 </noscript>
-                , :)
-                <div id="viewer" style="width: 70vh; height: 90vh;" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }"></div>
-          )
+                ,
+                <section class="osd-wrapper">
+                    <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }"></div>
+                </section>
+            )
         )
         else
             pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path, "heading-offset": $heading-offset })
