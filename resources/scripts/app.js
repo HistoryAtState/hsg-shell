@@ -11,10 +11,10 @@ $(document).ready(function($) {
 
 
     // http://openseadragon.github.io/docs/OpenSeadragon.html#.Options
-    var isConnected = $( "#viewer" ).get().length;
-    // console.log(if ( isConnected == 0 ) { 'No viewer' });
+    var isConnected = $( "#viewer" ).get(0);
+    //if ( $( "#viewer" ).get(0) === undefined ) { console.log('No viewer') };
 
-    if (isConnected != 0) {
+    if ($("#viewer").get(0) != undefined) {
       console.log('Image URI=', scheme + '://' + server + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif')
 
       var viewer = OpenSeadragon({
