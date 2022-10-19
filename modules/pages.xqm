@@ -291,7 +291,7 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
                     </div>
                 </noscript>
                 ,
-                <section class="osd-wrapper">
+                <section class="osd-wrapper content">
                     <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }"></div>
                 </section>
             )

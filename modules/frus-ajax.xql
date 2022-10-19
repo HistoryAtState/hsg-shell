@@ -122,7 +122,7 @@ return
                         </div>
                     </noscript>
                     ,
-                    <section class="osd-wrapper">
+                    <section class="osd-wrapper content">
                         <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }"></div>
                     </section>
                 )
