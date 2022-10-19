@@ -163,6 +163,11 @@ return
             else
                 ($html//(h1|h2|h3))[1]
         let $doc-title := pages:title($xml/ancestor-or-self::tei:TEI)
+        let $viewer :=
+            if ($xml instance of element(tei:pb))
+            then ('true')
+            else ()
+
         return
             map {
                 "doc": $doc,
@@ -205,7 +210,8 @@ return
                       <output:omit-xml-declaration value="yes"/>
                       <output:indent>no</output:indent>
                     </output:serialization-parameters>
-                )
+                ),
+                "viewer" : $viewer
             }
         )
     else

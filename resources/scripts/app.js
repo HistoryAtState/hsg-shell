@@ -98,6 +98,11 @@ $(document).ready(function($) {
                         return;
                     }
                     $(".content").replaceWith(data.content);
+                    // Check if an image viewer is requested,
+                    // needs a reload to request & initialize Openseadragon!
+                    if (data.viewer) {
+                      location.reload();
+                    }
                     initContent();
                     if (data.title) {
                         $("#navigation-title").text(data.title);
