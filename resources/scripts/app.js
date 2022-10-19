@@ -9,38 +9,44 @@ $(document).ready(function($) {
         server     = 'localhost:8182', // Local Cantaloupe image server for development
         debugMode  = false;
 
-    console.log('Image URI=', scheme + '://' + server + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif')
 
     // http://openseadragon.github.io/docs/OpenSeadragon.html#.Options
-    var viewer = OpenSeadragon({
-        id:                   "viewer",
-        prefixUrl:            "resources/images/OSD-icons/",
-        preserveViewport:     true,
-        visibilityRatio:      1,
-        //minZoomLevel:         1,
-        minZoomImageRatio:    0.9,
-        defaultZoomLevel:     1,
-        sequenceMode:         true,
-        showNavigator:        true,
-        navigatorHeight:      "120px",
-        navigatorWidth:       "80px",
-        showSequenceControl:  false,
-        debugMode:            debugMode,
-        tileSources:   [{
-          "@context": "http://iiif.io/api/image/3/context.json",
-          "@id":      scheme + "://" + server + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
-          "height":   5476,
-          "width":    3547,
-          "maxArea":  10000000,
-          "profile":  [ "http://iiif.io/api/image/2/level2.json" ],
-          "protocol": "http://iiif.io/api/image",
-          "tiles": [{
-            "scaleFactors": [ 1, 2, 4, 8, 16, 32 ],
-            "width":        512,
-            "height":       512
+    var isConnected = $( "#viewer" ).get().length;
+    // console.log(if ( isConnected == 0 ) { 'No viewer' });
+
+    if (isConnected != 0) {
+      console.log('Image URI=', scheme + '://' + server + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif')
+
+      var viewer = OpenSeadragon({
+          id:                   "viewer",
+          prefixUrl:            "resources/images/OSD-icons/",
+          preserveViewport:     true,
+          visibilityRatio:      1,
+          //minZoomLevel:         1,
+          minZoomImageRatio:    0.9,
+          defaultZoomLevel:     1,
+          sequenceMode:         true,
+          showNavigator:        true,
+          navigatorHeight:      "120px",
+          navigatorWidth:       "80px",
+          showSequenceControl:  false,
+          debugMode:            debugMode,
+          tileSources:   [{
+            "@context": "http://iiif.io/api/image/3/context.json",
+            "@id":      scheme + "://" + server + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
+            "height":   5476,
+            "width":    3547,
+            "maxArea":  10000000,
+            "profile":  [ "http://iiif.io/api/image/2/level2.json" ],
+            "protocol": "http://iiif.io/api/image",
+            "tiles": [{
+              "scaleFactors": [ 1, 2, 4, 8, 16, 32 ],
+              "width":        512,
+              "height":       512
+            }]
           }]
-        }]
-    });
+      });
+    }
 
     // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
