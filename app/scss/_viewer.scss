@@ -4,16 +4,15 @@
   position: relative;
   width: 100%;
   height: auto;
+  margin-bottom: 3rem;
 }
 
 #viewer {
-  margin-bottom: 3rem;
   top: 0;
   left: 0;
   width: 100%;
   height: 650px;
   background-color: $color-gray-light;
-  border: $default-border-style;
   border-radius: 5px;
 
   @media (min-width: $xs-screen-min) { // 481px
@@ -39,4 +38,8 @@
   @media (min-width: 1200px) {
     height: 900px;
   }
+}
+.openseadragon-container {
+  border: 1px solid transparent !important;
+  border-radius: 5px !important;
 }
