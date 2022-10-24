@@ -7,7 +7,7 @@ $(document).ready(function($) {
         facsId     = osd_viewer.attr('data-facs'),
         scheme     = 'http',
         server     = 'localhost:8182', // Local Cantaloupe image server for development
-        debugMode  = true;
+        debugMode  = false;
 
 
     // http://openseadragon.github.io/docs/OpenSeadragon.html#.Options
