@@ -7,7 +7,7 @@ $(document).ready(function($) {
         facsId     = osd_viewer.attr('data-facs'),
         scheme     = 'http',
         server     = 'localhost:8182', // Local Cantaloupe image server for development
-        debugMode  = false;
+        debugMode  = true;
 
 
     // http://openseadragon.github.io/docs/OpenSeadragon.html#.Options
@@ -34,8 +34,8 @@ $(document).ready(function($) {
           tileSources:   [{
             "@context": "http://iiif.io/api/image/3/context.json",
             "@id":      scheme + "://" + server + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
-            "height":   5476,
-            "width":    3547,
+            "height":   5069,
+            "width":    3040,
             "maxArea":  10000000,
             "profile":  [ "http://iiif.io/api/image/2/level2.json" ],
             "protocol": "http://iiif.io/api/image",
