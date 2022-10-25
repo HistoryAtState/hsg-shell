@@ -11,7 +11,6 @@ import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-c
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace ut="http://history.state.gov/ns/site/hsg/app-util" at "app-util.xqm";
 
-
 declare function link:generate-from-state($url-state as map(*)) as element(a)* {
     (: $url-state is generated from the site config for a given URL :)
     let $uri := $url-state?current-url
@@ -98,19 +97,19 @@ declare function link:email($email as xs:string, $subject as xs:string?, $body a
         $subject ! ("subject=" || encode-for-uri(.))
     )
     let $bodyClean := (
-        $body ! ("body=" || encode-for-uri(.))
+        $body ! ("body=" || substring(., 1, 2000) => encode-for-uri())
     )
     let $params as xs:string* := ($subjClean, $bodyClean)
     return (
         "mailto:" ||
         $email ||
         "?"[exists($params)] ||
-        string-join($params, '&amp;')
+        string-join($params,  '&amp;')
     )
 };
 
 declare function link:report-issue-body($node, $model) as xs:string {
-    let $error as xs:string? := (templates:process(<pre class="error templates:error-description"/>, $model)/string(.))[1]
+    let $error as xs:string? := (templates:process(<pre class="error templates:error-description"/>, $model)/string(.))[1][normalize-space(.) ne '']
     let $url := (
         $model?url,
         try { request:get-url() }
