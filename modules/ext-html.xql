@@ -113,3 +113,17 @@ declare function pmf:note($config as map(*), $node as element(), $class as xs:st
                 </li>
             )
 };
+
+declare function pmf:pb-link($config as map(*), $node as node(), $class as xs:string+, $content, $uri, $id, $type) {
+    let $label :=
+        switch ($type)
+            case 'facsimile' return
+                'Facsimile '
+            case 'typeset' return
+                'Typeset '
+            default return ''
+    return
+        <a href="{ $uri }" id="{ $id }" class="{ $class }" target="_self">
+            [{$label, $config?apply-children($config, $node, $content)}]
+        </a>
+};
