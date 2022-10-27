@@ -265,6 +265,7 @@ declare
     %templates:default("heading-offset", 0)
 function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int, $document-id as xs:string?) {
     let $log := console:log("pages:view: view: " || $view || " heading-offset: " || $heading-offset)
+    let $log := util:log('info', ('pages:view, view=', $view))
     let $xml :=
         if ($view = "div") then
             if ($model?data[@subtype='removed-pending-rewrite']) then
@@ -283,7 +284,22 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
     return
         if ($xml instance of element(tei:pb))
         then (
+            let $this-page := $xml
+            let $next-page := $this-page/following::tei:pb[1]
+            let $next-page-starts-document := $next-page/preceding-sibling::element()[1][self::tei:head] or (not($next-page/preceding-sibling::element()) and $next-page/parent::tei:div/@type = 'document')
+            let $fragment-ending-this-page :=
+                if ($next-page-starts-document) then
+                    $next-page/parent::tei:div
+                else
+                    $next-page
+            let $page-div-ids :=
+                (
+                    $this-page/ancestor::tei:div[@type='document'],
+                    $fragment-ending-this-page/ancestor-or-self::tei:div[@type='document']/preceding::tei:div[@type='document'][.>> $this-page]
+                )/@xml:id
+
             let $src := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
+            let $log := util:log('info', ('pages:view, $page-div-ids=', $page-div-ids))
             return (
                 <noscript>
                     <div class="content">
