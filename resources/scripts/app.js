@@ -6,7 +6,8 @@ $(document).ready(function($) {
         documentId = osd_viewer.attr('data-doc-id'),
         facsId     = osd_viewer.attr('data-facs'),
         scheme     = 'http',
-        server     = 'localhost:8182', // Local Cantaloupe image server for development
+        server     = 'localhost', // Local Cantaloupe image server for development
+        port       = '8182',
         debugMode  = false;
 
 
@@ -15,7 +16,7 @@ $(document).ready(function($) {
     //if ( $( "#viewer" ).get(0) === undefined ) { console.log('No viewer') };
 
     if ($("#viewer").get(0) != undefined) {
-      console.log('Image URI=', scheme + '://' + server + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif')
+      console.log('Image URI=', scheme + '://' + server + ':' + port + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif')
 
       var viewer = OpenSeadragon({
           id:                   "viewer",
@@ -33,7 +34,7 @@ $(document).ready(function($) {
           debugMode:            debugMode,
           tileSources:   [{
             "@context": "http://iiif.io/api/image/3/context.json",
-            "@id":      scheme + "://" + server + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
+            "@id":      scheme + "://" + server + ':' + port + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
             "height":   5069,
             "width":    3040,
             "maxArea":  10000000,
