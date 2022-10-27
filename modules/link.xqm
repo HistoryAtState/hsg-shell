@@ -109,7 +109,7 @@ declare function link:email($email as xs:string, $subject as xs:string?, $body a
 };
 
 declare function link:report-issue-body($node, $model) as xs:string {
-    let $error as xs:string? := (templates:process(<pre class="error templates:error-description"/>, $model)/string(.))[1][normalize-space(.) ne '']
+    let $error as xs:string? := (templates:process(<pre class="error app:error-description"/>, $model)/string(.))[1][normalize-space(.) ne '']
     let $url := (
         $model?url,
         try { request:get-url() }
