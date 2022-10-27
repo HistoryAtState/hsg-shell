@@ -9,6 +9,7 @@ import module namespace app="http://history.state.gov/ns/site/hsg/templates" at 
 import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace ut="http://history.state.gov/ns/site/hsg/app-util" at "app-util.xqm";
+import module namespace templates="http://exist-db.org/xquery/templates" ;
 
 
 declare function link:generate-from-state($url-state as map(*)) as element(a)* {
@@ -71,4 +72,31 @@ declare function link:generate-label-from-state($url-state as map(*)) {
     return (
         ut:normalize-nodes($label)
     )
+};
+
+declare function link:create-link($node as element(a), $model, $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?) {
+    (: creates a link using functions defined in $config:PUBLICATIONS :)
+    let $html-href as function(*) := $config:PUBLICATIONS?($publication-id)?html-href
+    let $breadcrumb-title as function(*) := $config:PUBLICATIONS?($publication-id)?breadcrumb-title
+    return if (exists($html-href) and exists($breadcrumb-title))
+    then 
+        <a>
+            {
+                attribute href {
+                    $html-href(
+                        ($model?document-id, $document-id)[1],
+                        ($model?section-id, $section-id)[1]
+                    )
+                },
+                $breadcrumb-title(
+                    map{
+                        "publication-id":   $publication-id,
+                        "document-id":      ($model?document-id, $document-id)[1],
+                        "section-id":       ($model?section-id, $section-id)[1],
+                        "truncate":         false()
+                    }
+                )
+            }
+        </a>
+    else ()
 };

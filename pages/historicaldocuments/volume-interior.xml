@@ -25,7 +25,17 @@
                </div>
             </div>
             <aside data-template="pages:asides">
-               <div id="media-download" data-template="frus:if-media-exists" data-template-suffix="pdf">
+                <aside id="docs-on-page" data-template="side:docs-on-page">
+                    <div class="hsg-panel">
+                        <h4>Show Documents on this Page:</h4>
+                    </div>
+                    <div class="hsg-panel-body" data-template="app:fix-links">
+                        <ul class="hsg-list-group" data-template="templates:each" data-template-from="pb-doc-ids" data-template-to="section-id">
+                            <li class="hsg-list-group-item"><a data-template="link:create-link"></a></li>
+                        </ul>
+                    </div>
+                </aside>
+                <div id="media-download" data-template="frus:if-media-exists" data-template-suffix="pdf">
                   <div class="hsg-panel">
                      <div class="hsg-panel-heading">
                         <h4 class="hsg-sidebar-title">Download</h4>
