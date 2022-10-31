@@ -95,11 +95,21 @@ footer {
     margin-top: 0;
   }
 }
+
 .hsg-footer-bottom {
   background-color: $color-gray-lighter;
   padding: $padding-base-vertical 0;
   address {
     text-align: right;
+  }
+}
+
+.hsg-footer-nether {
+  background-color: $color-gray-light;
+  padding: $padding-base-vertical 0;
+  p {
+    @extend .hsg-width-one-whole;
+    margin: 10px 0;
   }
 }
 

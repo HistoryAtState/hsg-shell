@@ -30,6 +30,7 @@ import module namespace visits="http://history.state.gov/ns/site/hsg/visits-html
 import module namespace news="http://history.state.gov/ns/site/hsg/news" at "news.xqm";
 import module namespace pagination="http://history.state.gov/ns/site/hsg/pagination" at "pagination.xqm";
 import module namespace fm="http://history.state.gov/ns/site/hsg/frus-meta" at "frus-meta.xqm";
+import module namespace link="http://history.state.gov/ns/site/hsg/link" at "link.xqm";
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 

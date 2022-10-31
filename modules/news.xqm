@@ -144,9 +144,16 @@ function news:further-link ($node as node(), $model as map(*)) {
 declare function news:init-article($node as node()?, $model as map(*), $document-id as xs:string) {
     let $collection := $model?collection
     let $entry as document-node(element(a:entry))? := $collection[.//a:id eq $document-id]
-    return map{
-        "entry":    $entry
-    }
+    return 
+        if (empty($entry)) then (
+            request:set-attribute("hsg-shell.errcode", 404),
+            request:set-attribute("hsg-shell.path", "news/" || $document-id),
+            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "publication news document " || $document-id || " not found")
+        )
+        else
+            map{
+                "entry":    $entry
+            }
 };
 
 declare function news:article-content($node as node(), $model as map(*)) {
