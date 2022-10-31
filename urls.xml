@@ -1,4 +1,4 @@
-<root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap">
+<root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap" xmlns:hsg="http://history.state.gov/ns/site/hsg">
     <path match="/resources/|/bower_components/">
         <fwd url="{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
     </path>
@@ -26,6 +26,14 @@
         </step>
         <step value="status-of-the-series">
             <page-template href="pages/historicaldocuments/status-of-the-series.xml"/>
+        </step>
+        <step value="volume-titles">
+            <page-template href="pages/historicaldocuments/volume-titles.xml">
+                <with-param name="publication-id" value="frus-list"/>
+            </page-template>
+            <config>
+                <src collection="/db/apps/frus/bibliography"/>
+            </config>
         </step>
         <step value="frus-history">
             <step value="documents">
@@ -82,6 +90,7 @@
             </page-template>
             <config>
                 <src collection="/db/apps/frus-history/monograph"/>
+                <hsg:github href="https://github.com/HistoryAtState/frus-history"/>
             </config>
         </step>
         <step value="ebooks">
@@ -95,6 +104,9 @@
                 <with-param name="publication-id" value="vietnam-guide"/>
                 <with-param name="document-id" value="guide-to-sources-on-vietnam-1969-1975"/>
             </page-template>
+            <config>
+                <hsg:github href="https://github.com/HistoryAtState/other-publications"/>
+            </config>
         </step>
         <step value="pre-1861">
             <step value="serial-set">
@@ -111,6 +123,7 @@
             <page-template href="pages/historicaldocuments/pre-1861/index.xml"/>
             <config>
                 <exclude role="section-nav"/>
+                <hsg:github href="https://github.com/HistoryAtState/other-publications"/>
             </config>
         </step>
         <step value="quarterly-releases">
@@ -162,6 +175,9 @@
         <page-template href="pages/historicaldocuments/index.xml">
             <with-param name="publication-id" value="historicaldocuments"/>
         </page-template>
+        <config>
+            <hsg:github href="https://github.com/HistoryAtState/frus"/>
+        </config>
     </step>
     <step value="countries">
         <step value="all">
@@ -197,6 +213,9 @@
             <page-template href="pages/countries/archives/index.xml">
                 <with-param name="publication-id" value="archives"/>
             </page-template>
+            <config>
+                <hsg:github href="https://github.com/HistoryAtState/wwdai"/>
+            </config>
         </step>
         <step key="country">
             <page-template href="pages/countries/article.xml">
@@ -212,6 +231,7 @@
         </page-template>
         <config>
             <src collection="/db/apps/rdcr"/>
+            <hsg:github href="https://github.com/HistoryAtState/rdcr"/>
         </config>
     </step>
     <step value="frus150">
@@ -236,6 +256,9 @@
                 <with-param name="publication-id" value="timeline"/>
                 <with-param name="document-id" value="timeline"/>
             </page-template>
+            <config>
+                <hsg:github href="https://github.com/HistoryAtState/administrative-timeline"/>
+            </config>
         </step>
         <step value="short-history">
             <step key="section">
@@ -255,6 +278,7 @@
             </page-template>
             <config>
                 <exclude role="section-nav"/>
+                <hsg:github href="https://github.com/HistoryAtState/other-publications"/>
             </config>
         </step>
         <step value="buildings">
@@ -273,17 +297,26 @@
                 <with-param name="document-id" value="buildings"/>
                 <with-param name="section-id" value="intro"/>
             </page-template>
+            <config>
+                <hsg:github href="https://github.com/HistoryAtState/other-publications"/>
+            </config>
         </step>
         <step value="people">
             <step value="secretaries">
                 <page-template href="pages/departmenthistory/people/secretaries.xml">
                     <with-param name="publication-id" value="secretaries"/>
                 </page-template>
+                <config>
+                    <hsg:github href="https://github.com/HistoryAtState/other-publications"/>
+                </config>
             </step>
             <step value="principals-chiefs">
                 <page-template href="pages/departmenthistory/people/principals-chiefs.xml">
                     <with-param name="publication-id" value="principals-chiefs"/>
                 </page-template>
+                <config>
+                    <hsg:github href="https://github.com/HistoryAtState/pocom"/>
+                </config>
             </step>
             <step value="by-name">
                 <step key="letter">
@@ -337,6 +370,7 @@
                 </page-template>
                 <config>
                     <exclude role="section-nav"/>
+                    <hsg:github href="https://github.com/HistoryAtState/pocom"/>
                 </config>
             </step>
             <step value="chiefsofmission">
@@ -368,6 +402,7 @@
                 </page-template>
                 <config>
                     <exclude role="section-nav"/>
+                    <hsg:github href="https://github.com/HistoryAtState/pocom"/>
                 </config>
             </step>
             <step key="person">
@@ -434,6 +469,7 @@
             </page-template>
             <config>
                 <skip role="section-nav"/>
+                <hsg:github href="https://github.com/HistoryAtState/travels"/>
             </config>
         </step>
         <step value="visits">
@@ -456,11 +492,17 @@
             <page-template href="pages/departmenthistory/visits/index.xml">
                 <with-param name="publication-id" value="visits"/>
             </page-template>
+            <config>
+                <hsg:github href="https://github.com/HistoryAtState/visits"/>
+            </config>
         </step>
         <step value="wwi">
             <page-template href="pages/departmenthistory/wwi.xml">
                 <with-param name="publication-id" value="wwi"/>
             </page-template>
+            <config>
+                <hsg:github href="https://github.com/HistoryAtState/other-publications"/>
+            </config>
         </step>
         <step value="diplomatic-couriers">
             <step value="before-the-jet-age">
@@ -517,6 +559,9 @@
                 <with-param name="publication-id" value="faq"/>
                 <with-param name="document-id" value="faq"/>
             </page-template>
+            <config>
+                <hsg:github href="https://github.com/HistoryAtState/other-publications"/>
+            </config>
         </step>
         <step value="the-historian">
             <page-template href="pages/about/the-historian.xml"/>
@@ -536,6 +581,9 @@
                 <with-param name="publication-id" value="hac"/>
                 <with-param name="document-id" value="hac"/>
             </page-template>
+            <config>
+                <hsg:github href="https://github.com/HistoryAtState/hac"/>
+            </config>
         </step>
         <step value="recent-publications">
             <page-template href="pages/about/recent-publications.xml"/>
@@ -1208,6 +1256,7 @@
                     <new-url value="1989-1992/foreword"/>
                 </redirect>
             </redirects>
+            <hsg:github href="https://github.com/HistoryAtState/milestones"/>
         </config>
     </step>
     <step value="conferences">
@@ -1233,6 +1282,9 @@
         <page-template href="pages/conferences/index.xml">
             <with-param name="publication-id" value="conferences"/>
         </page-template>
+        <config>
+            <hsg:github href="https://github.com/HistoryAtState/conferences"/>
+        </config>
     </step>
     <step value="developer">
         <step value="catalog">
@@ -1294,6 +1346,9 @@
             <page-template href="pages/education/modules.xml"/>
         </step>
         <page-template href="pages/education/index.xml"/>
+        <config>
+            <hsg:github href="https://github.com/HistoryAtState/other-publications"/>
+        </config>
     </step>
     <step value="search">
         <param name="q start-date end-date">

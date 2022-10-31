@@ -7,7 +7,7 @@ module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 

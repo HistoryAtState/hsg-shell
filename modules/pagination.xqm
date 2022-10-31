@@ -2,7 +2,7 @@ xquery version "3.0";
 
 module namespace pagination="http://history.state.gov/ns/site/hsg/pagination";
 
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace ut="http://history.state.gov/ns/site/hsg/app-util" at "app-util.xqm";
 
 (:~

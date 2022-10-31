@@ -1,0 +1,33 @@
+<root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:hsg="http://history.state.gov/ns/site/hsg" xmlns:site="http://ns.evolvedbinary.com/sitemap">
+    <step value="no-github">
+        <page-template href="page.xml"/>
+    </step>
+    <step value="github-parent">
+        <step value="inherited-child">
+            <page-template href="page.xml"/>
+        </step>
+        <step value="github-child">
+            <step value="inherited-grandchild">
+                <page-template href="page.xml"/>
+            </step>
+            <page-template href="page.xml"/>
+            <config>
+                <hsg:github href="https://github.com/example/child"/>
+            </config>
+        </step>
+        <step value="no-github-child">
+            <step value="inherited-no-child">
+                <page-template href="page.xml"/>
+            </step>
+            <page-template href="page.xml"/>
+            <config>
+                <hsg:github/>
+            </config>
+        </step>
+        <page-template href="page.xml"/>
+        <config>
+            <hsg:github href="https://github.com/example/parent"/>
+        </config>
+    </step>
+    <page-template href="page.xml"/>
+</root>

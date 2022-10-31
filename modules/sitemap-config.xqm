@@ -5,6 +5,7 @@ module namespace site="http://ns.evolvedbinary.com/sitemap";
 import module namespace util="http://exist-db.org/xquery/util";
 
 declare namespace u="http://www.sitemaps.org/schemas/sitemap/0.9";
+declare namespace hsg="http://history.state.gov/ns/site/hsg";
 
 declare variable $site:debug as xs:boolean := true();
 declare variable $site:config as element(site:root) := doc('/db/apps/hsg-shell/urls.xml')/*;
@@ -621,6 +622,50 @@ declare function site:eval-avt($avt as node(), $cache-flag as xs:boolean, $exter
   
 };
 
+declare function site:call-for-uri-step($url as xs:string, $config as element(), $function as function(*), $state as map(*)?) {
+  let $new.state := map:merge((
+    map{
+      'original-url': $url,
+      'steps': tokenize($url, '/')[. ne ''],
+      'function': $function,
+      'current-url': '/',
+      'step': '/'
+    },
+    $state
+  ), map{'duplicates':'use-last'})
+  return site:process($config, 'find-step', $new.state)
+};
+
+declare 
+  %site:mode('find-step')
+  %site:match('root', 'step')
+function site:find-step($step as element(), $state as map(*)){
+  let $next.step := head($state?steps)
+  let $this.key as map(*)? := if ($step/@key) then map{$step/@key: $state?step} else ()
+  let $keys := map:merge(($state?keys, $this.key))
+  return
+    if ($state?current-url eq $state?original-url) then
+      (: we have found the step :) 
+      site:process($step, 'cwpfus', $state)
+    else
+      (: recurse to next URI step :)
+      let $next as element(site:step)? := (
+        $step/site:step[@value eq $next.step],
+        ($step/site:step[@match])[matches($next.step, @match)],
+        $step/site:step[not(@match or @value)]
+      )[1]
+      let $new.state := map:merge((
+        $state,
+        map{
+          'current-url': replace($state?current-url, '/$', '') || '/' || $next.step,
+          'step': $next.step,
+          'steps': tail($state?steps),
+          'function': $state?function,
+          'keys': $keys
+        }), map{'duplicates':'use-last'})
+      return site:process($next, $state?current-mode, $new.state)
+};
+
 declare function site:call-for-uri-step-children($url as xs:string, $config as element(), $function as function(*), $state as map(*)?) {
   let $new.state := map:merge((
     map{
@@ -728,7 +773,7 @@ function site:cwpfus-step($root as element(), $state as map(*)) {
   )[1][$state?current-url ne $state?full-url]
   return (
     (: calls the function by matching any page-templates :)
-    site:process($root/site:page-template, 'cwpfus', map:merge(($state, map{'keys': $keys}), map{'duplicates':'use-last'})),
+    site:process($root/site:page-template, 'cwpfus', map:merge(($state, map{'cfg.step': $root}, map{'keys': $keys}), map{'duplicates':'use-last'})),
     (: if there are any more url step components, this will continue the process :)
     site:process($select, 'cwpfus', $new.state)
   )

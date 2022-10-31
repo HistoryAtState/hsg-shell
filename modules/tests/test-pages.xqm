@@ -4,7 +4,7 @@ module namespace x="http://history.state.gov/ns/site/hsg/tests/test-pages";
 import module namespace t="http://history.state.gov/ns/site/hsg/xqsuite" at "../xqsuite.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "../pages.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace tei="http://www.tei-c.org/ns/1.0";

@@ -8,7 +8,7 @@ import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at ".
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
 import module namespace news = "http://history.state.gov/ns/site/hsg/news" at "../news.xqm";
 import module namespace ut="http://history.state.gov/ns/site/hsg/app-util" at "../app-util.xqm";
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 declare namespace a="http://www.w3.org/2005/Atom";

@@ -1,8 +1,8 @@
-xquery version "3.0";
+xquery version "3.1";
 
 module namespace fh = "http://history.state.gov/ns/site/hsg/frus-html";
 
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html" at "frus-toc-html.xqm";
@@ -632,7 +632,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
                 <div id="{$vol-id}">
                     <img src="{$config:S3_URL}/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
                     <a href="$app/historicaldocuments/{$vol-id}">{let $series := fh:vol-title($vol-id, 'series') return if ($series) then (<em>{fh:vol-title($vol-id, 'series')}</em>, ", ") else (), string-join((fh:vol-title($vol-id, 'sub-series'), fh:vol-title($vol-id, 'volume-number'), fh:vol-title($vol-id, 'volume')), ', ')}</a>.
-                    <p>Ebook last updated: {format-dateTime(xs:dateTime(fh:ebook-last-updated($vol-id)), '[MNn] [D], [Y0001]', 'en', (), 'US')}</p>
+                    <p>Ebook last updated: {fh:ebook-last-updated($vol-id) => app:format-date-month-long-day-year()}</p>
                     <ul class="hsg-ebook-list">
                         <li><a class="hsg-link-button" href="{fh:epub-url($vol-id)}">EPUB ({ try {fh:epub-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.epub'}})</a></li>
                         <li><a class="hsg-link-button" href="{fh:mobi-url($vol-id)}">Mobi ({ try {fh:mobi-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.mobi'}})</a></li>
@@ -694,8 +694,12 @@ declare function fh:exists-ebook($vol-id) {
     exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.epub')])
 };
 
+declare function fh:exists-mobi($vol-id) {
+    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.mobi')])
+};
+
 declare function fh:exists-pdf($vol-id) {
-    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.pdf')])
+    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/pdf/resources.xml'))//filename[ends-with(., '.pdf')])
 };
 
 declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
@@ -776,6 +780,14 @@ declare function fh:pdf-url($document-id as xs:string, $section-id as xs:string?
 
 declare function fh:epub-url($document-id as xs:string) {
 	concat($config:S3_URL, '/frus/', $document-id, '/ebook/', $document-id, '.epub')
+};
+
+declare function fh:get-media-types($document-id) {
+    (
+        "epub"[fh:exists-ebook($document-id)],
+        "mobi"[fh:exists-mobi($document-id)],
+        "pdf"[fh:exists-pdf($document-id)]
+    )
 };
 
 declare
@@ -901,6 +913,29 @@ declare function fh:location-url ($document-id) {
             else()
 };
 
+(:
+ :  Return the URL of the cover of a frus volume (if available)
+ :)
+
+declare function fh:cover-uri($id) {
+    (: Use presence of ebooks to test whether book is published electronically (and therefore has an image)  :)
+    let $media-types := fh:get-media-types($id)
+    return if (exists($media-types)) then 
+        'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '.jpg'
+    else ()
+};
+
+declare function fh:cover-img($img as element(img), $model) {
+    let $src := fh:cover-uri($model?document-id)
+    return if (exists($src)) then
+        element img {
+            $img/(@* except @data-template),
+            attribute src { $src },
+            attribute alt { 'Book Cover of ' || fh:vol-title($model?document-id) => normalize-space() }
+        }
+    else ()
+};
+
 (:~
  :  Render frus volume landing header:
  :  Replace content (except for the document title) with a notice, if the publication-status is "under-declassification".
@@ -940,7 +975,7 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
             the current status of this volume is “{$not-published-status}.”</p>
         )
         else if (root($model?data)//tei:div) then (
-            pages:header($node, $model), <hr/>
+            pages:header($node, $model)
         )
             else (
                 $header,
@@ -952,4 +987,14 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
                     )
                 else ()
             )
+};
+
+declare function fh:volume-landing-title($node as node(), $model as map(*)) {
+    let $title := fh:vol-title($model?document-id) => normalize-space()
+    return (
+        element { node-name($node) } {
+            $node/(@* except @data-template),
+            $title
+        }
+    )
 };

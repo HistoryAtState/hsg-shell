@@ -13,17 +13,41 @@ import module namespace templates="http://exist-db.org/xquery/templates" ;
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
+declare namespace hsg="http://history.state.gov/ns/site/hsg";
+
 declare function side:info($node, $model) {
-    <aside class="hsg-aside--info">
-        <div id="info" class="hsg-panel">
-            <div class="hsg-panel-heading">
-                <h2 class="hsg-sidebar-title">Info</h2>
+    let $github := substring-after(request:get-uri(), $app:APP_ROOT) => side:github-url()
+    return
+        <aside class="hsg-aside--info">
+            <div id="info" class="hsg-panel">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Info</h2>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item"><a href="#" class="hsg-cite__button--sidebar">Cite this resource</a></li>
+                    {
+                        if (exists($github)) then 
+                            <li class="hsg-list-group-item">Download raw data from <a href="{$github}">HistoryAtState on GitHub</a></li>
+                        else ()
+                    }
+                </ul>
             </div>
-            <ul class="hsg-list-group">
-                <li class="hsg-list-group-item"><a href="#" class="hsg-cite__button--sidebar">Cite this resource</a></li>
-            </ul>
-        </div>
-    </aside>
+        </aside>
+};
+
+declare function side:github-url($uri as xs:string) {
+    side:github-url($uri, $site:config)
+};
+
+declare function side:github-url($uri as xs:string, $site-config as element(site:root)) {
+    site:call-for-uri-step(
+        $uri,
+        $site-config,
+        function($state as map(*)){
+            ($state?cfg.step/ancestor-or-self::site:step/site:config/hsg:github)[1]/@href ! string(.)
+        },
+        map{}
+    )
 };
 
 declare function side:section-nav($node as node(), $model as map(*)){

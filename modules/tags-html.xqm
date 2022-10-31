@@ -3,7 +3,7 @@ xquery version "3.0";
 module namespace tags = "http://history.state.gov/ns/site/hsg/tags-html";
 
 import module namespace frus="http://history.state.gov/ns/site/hsg/frus-html" at "frus-html.xqm";
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace app = "http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 

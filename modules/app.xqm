@@ -4,7 +4,7 @@ module namespace app="http://history.state.gov/ns/site/hsg/templates";
 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare variable $app:APP_ROOT :=
     let $nginx-request-uri := 
@@ -177,10 +177,55 @@ declare function app:set-created($created as xs:dateTime) {
 (:
  : 2015-06-04T13:03:16-04:00 -> Jun 4, 2015
  :)
-declare function app:format-date-month-short-day-year($dateTime as xs:dateTime) as xs:string {
-    $dateTime
-    => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
-    => format-dateTime("[MNn,*-3] [D01], [Y]", "en", (), ())
+declare function app:format-date-month-short-day-year($dateTime) as xs:string {
+    typeswitch($dateTime)
+    case xs:dateTime return
+        $dateTime
+        => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-dateTime("[MNn,*-3] [D01], [Y]", "en", (), ())
+    case xs:date return
+        $dateTime
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date("[MNn,*-3] [D01], [Y]", "en", (), ())
+    case xs:gYearMonth return
+        (xs:string($dateTime) || '-01')
+        => xs:date()
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date("[MNn,*-3], [Y]", "en", (), ())
+    case xs:gYear return xs:string($dateTime)
+    default return
+        if ($dateTime castable as xs:dateTime) then xs:dateTime($dateTime) => app:format-date-month-short-day-year()
+        else if ($dateTime castable as xs:date) then xs:date($dateTime) => app:format-date-month-short-day-year()
+        else if ($dateTime castable as xs:gYearMonth) then xs:gYearMonth($dateTime) => app:format-date-month-short-day-year()
+        else if ($dateTime castable as xs:gYear) then xs:gYear($dateTime) => app:format-date-month-short-day-year()
+        else error(xs:QName('app:format-date'), "Could not recognise &quot;" || $dateTime || "&quot; as a date")
+};
+
+(:
+ : 2015-06-04T13:03:16-04:00 -> June 4, 2015
+ :)
+declare function app:format-date-month-long-day-year($dateTime) as xs:string {
+    typeswitch($dateTime)
+    case xs:dateTime return
+        $dateTime
+        => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-dateTime('[MNn] [D], [Y0001]', 'en', (), 'US')
+    case xs:date return
+        $dateTime
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date('[MNn] [D], [Y0001]', 'en', (), 'US')
+    case xs:gYearMonth return
+        (xs:string($dateTime) || '-01')
+        => xs:date()
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date('[MNn], [Y0001]', 'en', (), 'US')
+    case xs:gYear return xs:string($dateTime)
+    default return
+        if ($dateTime castable as xs:dateTime) then xs:dateTime($dateTime) => app:format-date-month-long-day-year()
+        else if ($dateTime castable as xs:date) then xs:date($dateTime) => app:format-date-month-long-day-year()
+        else if ($dateTime castable as xs:gYearMonth) then xs:gYearMonth($dateTime) => app:format-date-month-long-day-year()
+        else if ($dateTime castable as xs:gYear) then xs:gYear($dateTime) => app:format-date-month-long-day-year()
+        else error(xs:QName('app:format-date'), "Could not recognise &quot;" || $dateTime || "&quot; as a date")
 };
 
 (:

@@ -5,7 +5,7 @@ xquery version "3.1";
  :)
 module namespace news = "http://history.state.gov/ns/site/hsg/news";
 
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace util="http://exist-db.org/xquery/util";
 import module namespace ut="http://history.state.gov/ns/site/hsg/app-util" at "app-util.xqm";
 

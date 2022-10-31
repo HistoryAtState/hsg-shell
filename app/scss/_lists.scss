@@ -1,4 +1,5 @@
 /* HSG lists -------------- */
+
 .hsg-list {
     &.hsg-columns__flex {
         margin: 0;
@@ -17,6 +18,14 @@
             -webkit-box-orient: horizontal;
             -webkit-box-direction: normal;
         }
+
+        &__row--alignstart {
+          display: flex;
+          flex-direction: row;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          align-items: flex-start;
+        }
     }
 
     &__title {
@@ -28,6 +37,28 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    &__thumbnail {
+      padding-top: 7px;
+      max-width: 6rem;
+      margin: 0 2rem 1rem 0;
+
+      @media screen and (min-width: $small-screen-min) {
+        max-width: 10rem;
+      }
+
+      @media screen and (min-width: $sm-screen-min) {
+        max-width: 13rem;
+      }
+
+      @media screen and (min-width: $large-screen-min) {
+        max-width: 13rem;
+      }
+    }
+
+    &__media__download {
+      @extend .list-unstyled;
     }
 }
 
