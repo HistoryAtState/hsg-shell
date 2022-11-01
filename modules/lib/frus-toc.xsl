@@ -16,73 +16,67 @@
     <xsl:mode on-no-match="shallow-skip" use-accumulators="#all"/>
     <xsl:mode name="html" on-no-match="text-only-copy"/>
     
-    <xsl:accumulator name="document-ids" initial-value="()" as="xs:string*">
+    <xsl:accumulator name="document-nos" initial-value="()" as="xs:string*">
         <xsl:accumulator-rule match="tei:div[@type eq 'document']" select="($value, @n)" phase="end"/>
     </xsl:accumulator>
     
+    <xsl:accumulator name="document-ids" initial-value="()" as="xs:string*">
+        <xsl:accumulator-rule match="tei:div[tei:div/@type eq 'document']" select="()"/>
+        <xsl:accumulator-rule match="tei:div[@type eq 'document']" select="($value, @xml:id)" phase="end"/>
+    </xsl:accumulator>
+    
     <xsl:template match="tei:TEI">
-        <div id="toc">
-            <div class="hsg-toc-sidebar">
-                <div class="toc-inner">
-                    <!-- Create header, if there is one -->
-                    <xsl:apply-templates select="(tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='volume'])[1][$heading]"></xsl:apply-templates>
-                    <ul>
-                        <xsl:apply-templates select="tei:text"/>
-                    </ul>
-                </div>
+        <div class="hsg-panel hsg-toc">
+            <div class="hsg-panel-heading hsg-toc__header">
+                <h4 class="hsg-sidebar-title">Contents</h4>
             </div>
+            <nav aria-label="Side navigation,,," class="hsg-toc__chapters">
+                <ul class="hsg-accordion-chapters js-smoothscroll">
+                    <xsl:apply-templates select="tei:text"/>
+                </ul>
+            </nav>
         </div>
     </xsl:template>
     
-    <xsl:template match="tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type = 'volume']">
-        <div>
-            <h2><xsl:apply-templates mode="html"/></h2>
-        </div>
-    </xsl:template>
-    
-    <xsl:template match="tei:div[@xml:id]">
-        <xsl:variable name="accDocs" as="xs:string*" select="accumulator-after('document-ids')"/>
-        <xsl:variable name="prevDocs" as="xs:string*" select="accumulator-before('document-ids')"/>
+    <xsl:template match="tei:div[@xml:id][not(@type = ('document'))]">
+        <xsl:param name="nested" as="xs:boolean" select="false()" tunnel="yes"/>
+        <xsl:variable name="accDocs" as="xs:string*" select="accumulator-after('document-nos')"/>
+        <xsl:variable name="prevDocs" as="xs:string*" select="accumulator-before('document-nos')"/>
         <xsl:variable name="docs" as="xs:string*" select="$accDocs[not(. = $prevDocs)]"/>
+        <xsl:variable name="prevDocIDs" as="xs:string*" select="accumulator-before('document-ids')"/>
+        <xsl:variable name="docIDs" as="xs:string*" select="accumulator-after('document-ids')[not(. = $prevDocIDs)]"/>
         <li data-tei-id="{@xml:id}">
-            <span>
-                <a href="/historicaldocument/{$documentID}/{@xml:id}">
-                    <xsl:apply-templates select="tei:head" mode="html"/>
-                </a>
-                <xsl:value-of select="(
-                    ' (Document' ||
-                    's'[count($docs) gt 1] ||
-                    ' ' ||
-                    $docs[1] ||
-                    ' - '[count($docs) gt 1] ||
-                    $docs[last()][count($docs) gt 1] ||
-                    ')'
-                )[exists($docs)]"/>
-            </span>
+            <xsl:if test="exists($docIDs) and tei:div[@type='document']">
+                <xsl:attribute name="data-tei-documents" select="string-join($docIDs, ' ')"/>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$nested">
+                    <xsl:attribute name="class" select="'hsg-accordion-chapters__nested-item'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="class" select="'hsg-accordion-chapters__item js-accordion'"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            
+            <a class="hsg-accordion-chapters__nested-link"
+                href="/historicaldocuments/{$documentID}/{@xml:id}">
+                <xsl:apply-templates mode="html" select="tei:head"/>
+            </a>
+            <xsl:value-of
+                select="(' (Document' || 's'[count($docs) gt 1] || ' ' || $docs[1] || ' - '[count($docs) gt 1] || $docs[last()][count($docs) gt 1] || ')')[exists($docs)]"
+            />
+            
             <xsl:where-populated>
-                <ul>
-                    <xsl:apply-templates/>
+                <ul class="hsg-accordion-chapters__nested">
+                    <xsl:apply-templates>
+                        <xsl:with-param name="nested" tunnel="true" select="true()"/>
+                    </xsl:apply-templates>
                 </ul>
             </xsl:where-populated>
         </li>
     </xsl:template>
     
     <xsl:template match="tei:div[@xml:id eq 'toc']" priority="2"/>
-    
-    <xsl:template match="tei:front">
-        <xsl:where-populated>
-            <li>
-                <xsl:on-non-empty>
-                    <span>Front Matter</span>
-                </xsl:on-non-empty>
-                <xsl:where-populated>
-                    <ul>
-                        <xsl:apply-templates/>
-                    </ul>
-                </xsl:where-populated>
-            </li>
-        </xsl:where-populated>
-    </xsl:template>
     
     <xsl:template match="tei:head/tei:note" mode="html"/>
     

@@ -308,3 +308,15 @@ declare function toc:paginate($child-document-count as xs:int, $start as xs:int)
     else
         ()
 };
+
+declare function toc:generate-frus-tocs() {
+    let $xsl-url := doc('/db/apps/hsg-shell/modules/lib/frus-toc.xsl')
+    for $volume in collection($config:FRUS_VOLUMES_COL)
+        let $toc-name := $volume/tei:TEI/@xml:id || '-toc.xml'
+        let $toc := transform:transform(
+            $volume,
+            $xsl-url,
+            ()
+        )
+        return xmldb:store('/db/apps/frus/frus-toc', $toc-name, $toc, 'application/xml')
+};
