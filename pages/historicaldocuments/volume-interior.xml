@@ -36,6 +36,2095 @@
                      </div>
                   </div>
                </div>
+
+                <div class="hsg-panel hsg-toc">
+                    <div class="hsg-panel-heading hsg-toc__header">
+                        <h4 class="hsg-sidebar-title">Soviet Union, March 1985–October 1986</h4>
+                    </div>
+                    <nav class="hsg-toc__chapters" aria-label="Side navigation,,,">
+                        <ul class="hsg-accordion-chapters js-smoothscroll">
+                            <li class="hsg-accordion-chapters__item js-accordion">
+                                <a class="hsg-accordion-chapters__nested-link" href="#">Front Matter</a>
+                                <ul class="hsg-accordion-chapters__nested">
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="pressrelease">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/pressrelease">Press Release</a>
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="abouttheseries">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/abouttheseries">About the Series</a>
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="preface">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/preface">Preface</a>
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="sources">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/sources">Sources</a>
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="terms">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/terms">Abbreviations and Terms</a>
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="persons">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/persons">Persons</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="hsg-accordion-chapters__item js-accordion" data-tei-id="comp">
+                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/comp">Soviet Union, March 1985–October 1986</a>
+                                (Documents 1 - 309)
+                                <ul class="hsg-accordion-chapters__nested">
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="ch1">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/ch1">March 1985–July 1985<br/>“Now we have to begin everything anew”: Gorbachev’s Debut</a>
+                                        (Documents 1 - 50)
+                                        <ul class="hsg-accordion-chapters__nested">
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d1">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d1">1. Letter From President Reagan to Soviet General Secretary Gorbachev</a>
+                                                (Document 1)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d2">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d2">2. Talking Points for Secretary of State Shultz Prepared in the Department of State</a>
+                                                (Document 2)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d3">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d3">3. Memorandum From John Lenczowski of the National Security Council Staff to the President’s Assistant for National Security Affairs (McFarlane)</a>
+                                                (Document 3)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d4">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d4">4. Telegram From the Delegation at the Nuclear and Space Talks to the Department of State</a>
+                                                (Document 4)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d5">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d5">5. Telegram From the Embassy in the Soviet Union to the Department of State</a>
+                                                (Document 5)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d6">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d6">6. Information Memorandum From the Director of the Bureau of Intelligence and Research (Abramowitz) to Secretary of State Shultz</a>
+                                                (Document 6)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d7">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d7">7. Information Memorandum From the Chairman of the Policy Planning Council (Rodman) to Secretary of State Shultz</a>
+                                                (Document 7)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d8">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d8">8. Information Memorandum From the
+                                                    Assistant Secretary of State for
+                                                    European and Canadian Affairs (Burt) and the Acting Director of the Bureau of
+                                                    Politico-Military Affairs (Hawes) to Secretary of State Shultz
+                                                </a>
+                                                (Document 8)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d9">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d9">9. Telegram From the Embassy in the Soviet Union to the Department of State</a>
+                                                (Document 9)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d10">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d10">10. Memorandum From Secretary of State Shultz to President Reagan</a>
+                                                (Document 10)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d11">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d11">11. Action Memorandum From the Assistant Secretary of State for European and Canadian Affairs (Burt) and the Assistant Secretary of State for Human Rights and Humanitarian Affairs (Abrams) to Secretary of State Shultz</a>
+                                                (Document 11)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d12">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d12">12. Telegram From the Department of
+                                                    State to the Embassies in the
+                                                    Soviet Union and the Federal Republic of Germany and the Mission in West
+                                                    Berlin
+                                                </a>
+                                                (Document 12)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d13">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d13">13. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 13)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d14">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d14">14. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 14)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d15">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d15">15. Letter From President Reagan to
+                                                    Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 15)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d16">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d16">16. Briefing Memorandum From the
+                                                    Assistant Secretary of State for
+                                                    European and Canadian Affairs (Burt) to the Under Secretary of State for
+                                                    Political
+                                                    Affairs (Armacost)
+                                                </a>
+                                                (Document 16)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d17">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d17">17. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 17)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d18">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d18">18. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 18)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d19">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d19">19. Memorandum From the President’s
+                                                    Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 19)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d20">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d20">20. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 20)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d21">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d21">21. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 21)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d22">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d22">22. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 22)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d23">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d23">23. Letter From President Reagan to
+                                                    Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 23)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d24">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d24">24. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 24)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d25">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d25">25. Telegram From the Embassy in
+                                                    the Soviet Union to the Department of
+                                                    State
+                                                </a>
+                                                (Document 25)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d26">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d26">26. Letter From President Reagan to
+                                                    Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 26)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d27">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d27">27. Memorandum From the President’s Assistant for National Security Affairs (McFarlane) to President Reagan</a>
+                                                (Document 27)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d28">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d28">28. Memorandum of Conversation</a>
+                                                (Document 28)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d29">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d29">29. Telegram From Secretary of State Shultz to the White House </a>
+                                                (Document 29)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d30">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d30">30. Talking Points for Secretary of State Shultz Prepared in the Department of State</a>
+                                                (Document 30)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d31">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d31">31. National Security Decision Directive Number 169</a>
+                                                (Document 31)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d32">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d32">32. Telegram From the Embassy in
+                                                    the Soviet Union to the Department of
+                                                    State
+                                                </a>
+                                                (Document 32)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d33">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d33">33. Briefing Memorandum From the
+                                                    Assistant Secretary of State for
+                                                    European and Canadian Affairs (Burt) to Secretary of State Shultz
+                                                </a>
+                                                (Document 33)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d34">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d34">34. Editorial Note</a>
+                                                (Document 34)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d35">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d35">35. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 35)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d36">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d36">36. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 36)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d37">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d37">37. Memorandum From the Director of
+                                                    the Bureau of Intelligence and
+                                                    Research (Abramowitz) to
+                                                    Secretary of State Shultz
+                                                </a>
+                                                (Document 37)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d38">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d38">38. Memorandum of Conversation</a>
+                                                (Document 38)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d39">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d39">39. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 39)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d40">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d40">40. Memorandum From the Deputy
+                                                    Secretary of State (Dam) to Secretary of State Shultz
+                                                </a>
+                                                (Document 40)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d41">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d41">41. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 41)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d42">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d42">42. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 42)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d43">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d43">43. Memorandum of Conversation</a>
+                                                (Document 43)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d44">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d44">44. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 44)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d45">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d45">45. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 45)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d46">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d46">46. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 46)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d47">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d47">47. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 47)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d48">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d48">48. Paper Prepared in the Central
+                                                    Intelligence Agency
+                                                </a>
+                                                (Document 48)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d49">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d49">49. Telegram From the Embassy in
+                                                    the Soviet Union to the Department of
+                                                    State
+                                                </a>
+                                                (Document 49)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d50">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d50">50. Memorandum From the Special
+                                                    Advisor to the President and Secretary
+                                                    of State on Arms Control Matters (Nitze) to Secretary of State Shultz
+                                                </a>
+                                                (Document 50)
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="ch2">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/ch2">July 1985–August 1985<br/>Sizing Up
+                                            Shevardnadze and the Soviet Union 101
+                                        </a>
+                                        (Documents 51 - 79)
+                                        <ul class="hsg-accordion-chapters__nested">
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d51">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d51">51. Memorandum From the President’s
+                                                    Assistant for National Security
+                                                    Affairs (McFarlane) to Jack Matlock of the National Security
+                                                    Council Staff
+                                                </a>
+                                                (Document 51)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d52">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d52">52. Editorial Note</a>
+                                                (Document 52)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d53">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d53">53. Telegram From the Embassy in
+                                                    the Soviet Union to the Department of
+                                                    State
+                                                </a>
+                                                (Document 53)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d54">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d54">54. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 54)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d55">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d55">55. Memorandum of Conversation</a>
+                                                (Document 55)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d56">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d56">56. Telegram From the Department of
+                                                    State to Secretary of State
+                                                    Shultz in Bangkok
+                                                </a>
+                                                (Document 56)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d57">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d57">57. Message From the President’s
+                                                    Assistant for National Security
+                                                    Affairs (McFarlane) to Secretary
+                                                    of State Shultz in Bangkok
+                                                </a>
+                                                (Document 57)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d58">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d58">58. Information Memorandum From the
+                                                    Assistant Secretary of State for
+                                                    European and Canadian Affairs (Burt) to Secretary of State Shultz
+                                                </a>
+                                                (Document 58)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d59">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d59">59. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 59)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d60">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d60">60. Memorandum From the President’s
+                                                    Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 60)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d61">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d61">61. Telegram From the Department of
+                                                    State to Secretary of State
+                                                    Shultz in Nadi
+                                                </a>
+                                                (Document 61)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d62">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d62">62. Action Memorandum From the
+                                                    Assistant Secretary of State for
+                                                    European and Canadian Affairs (Burt) to Secretary of State Shultz
+                                                </a>
+                                                (Document 62)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d63">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d63">63. Letter From John Denver to
+                                                    Secretary of State Shultz
+                                                </a>
+                                                (Document 63)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d64">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d64">64. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 64)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d65">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d65">65. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 65)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d66">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d66">66. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 66)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d67">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d67">67. Electronic Message From the
+                                                    President’s Assistant for National
+                                                    Security Affairs (McFarlane) to
+                                                    the President’s Deputy Assistant for National Security Affairs
+                                                    (Poindexter) and Jack Matlock of the National Security
+                                                    Council Staff
+                                                </a>
+                                                (Document 67)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d68">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d68">68. Action Memorandum From the
+                                                    Assistant Secretary of State for
+                                                    European and Canadian Affairs (Ridgway) to Secretary of State Shultz
+                                                </a>
+                                                (Document 68)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d69">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d69">69. Telegram From the Department of
+                                                    State to the Embassy in the Soviet
+                                                    Union
+                                                </a>
+                                                (Document 69)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d70">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d70">70. Letter From the
+                                                    Ambassador-Designate to the Federal Republic of
+                                                    Germany (Burt) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 70)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d71">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d71">71. Memorandum of Conversation</a>
+                                                (Document 71)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d72">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d72">72. Telegram From Secretary of
+                                                    State Shultz to the White House
+                                                </a>
+                                                (Document 72)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d73">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d73">73. National Security Decision
+                                                    Directive 183
+                                                </a>
+                                                (Document 73)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d74">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d74">74. Memorandum From the President’s
+                                                    Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 74)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d75">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d75">75. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 75)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d76">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d76">76. Memorandum From the President’s
+                                                    Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 76)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d77">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d77">77. Memorandum From President
+                                                    Reagan to Secretary of Defense Weinberger and the Chairman of the
+                                                    Joint Chiefs of Staff (Vessey)
+                                                </a>
+                                                (Document 77)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d78">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d78">78. Memorandum From the President’s
+                                                    Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 78)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d79">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d79">79. Memorandum From the President’s
+                                                    Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 79)
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="ch3">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/ch3">September 1985–November 1985<br/>Personal
+                                            Diplomacy: Reagan, Gorbachev, and the Geneva Summit
+                                        </a>
+                                        (Documents 80 - 159)
+                                        <ul class="hsg-accordion-chapters__nested">
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d80">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d80">80. Paper Prepared in the Central
+                                                    Intelligence Agency
+                                                </a>
+                                                (Document 80)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d81">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d81">81. Memorandum From William
+                                                    Stearman of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 81)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d82">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d82">82. Notes of a Meeting</a>
+                                                (Document 82)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d83">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d83">83. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 83)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d84">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d84">84. Letter From Soviet General
+                                                    Secretary Gorbachev to President Reagan
+                                                </a>
+                                                (Document 84)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d85">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d85">85. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 85)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d86">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d86">86. Notes of a Meeting</a>
+                                                (Document 86)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d87">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d87">87. Note From the Deputy Director
+                                                    for Intelligence, Central
+                                                    Intelligence Agency (Gates) to
+                                                    the President’s Deputy Assistant for National Security Affairs
+                                                    (Poindexter), the Under
+                                                    Secretary of State for Political Affairs (Armacost) and the Under Secretary of
+                                                    Defense for Policy
+                                                    (Ikle)
+                                                </a>
+                                                (Document 87)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d88">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d88">88. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 88)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d89">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d89">89. Minutes of a Meeting</a>
+                                                (Document 89)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d90">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d90">90. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 90)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d91">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d91">91. Editorial Note</a>
+                                                (Document 91)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d92">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d92">92. Memorandum From President
+                                                    Reagan to Secretary of State Shultz, Secretary of Defense Weinberger, Director
+                                                    of Central
+                                                    Intelligence Casey, the Chairman
+                                                    of the Joint Chiefs of Staff (Vessey), and the Director of the Arms Control and
+                                                    Disarmament Agency (Adelman)
+                                                </a>
+                                                (Document 92)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d93">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d93">93. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 93)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d94">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d94">94. Minutes of a National Security
+                                                    Council Meeting
+                                                </a>
+                                                (Document 94)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d95">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d95">95. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 95)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d96">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d96">96. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 96)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d97">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d97">97. Paper Prepared by the Arms
+                                                    Control Support Group
+                                                </a>
+                                                (Document 97)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d98">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d98">98. Memorandum From the Deputy
+                                                    Director for Operations, Central
+                                                    Intelligence Agency (George) to
+                                                    President Reagan, Vice President
+                                                    Bush, Secretary of State
+                                                    Shultz, Secretary of Defense
+                                                    Weinberger, and the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 98)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d99">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d99">99. Memorandum of Conversation</a>
+                                                (Document 99)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d100">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d100">100. Notes of a Private Meeting
+                                                    Between Secretary of State Shultz and Soviet Foreign Minister
+                                                    Shevardnadze
+                                                </a>
+                                                (Document 100)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d101">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d101">101. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 101)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d102">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d102">102. Memorandum for Record by the
+                                                    Special Advisor to the President and
+                                                    Secretary of State on Arms Control Matters (Nitze)
+                                                </a>
+                                                (Document 102)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d103">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d103">103. Briefing Memorandum From the
+                                                    Assistant Secretary of State for
+                                                    European and Canadian Affairs (Ridgway) to Secretary of State Shultz
+                                                </a>
+                                                (Document 103)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d104">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d104">104. Memorandum From the Chairman
+                                                    of the Joint Chiefs of Staff
+                                                    (Vessey) to Secretary of
+                                                    Defense Weinberger
+                                                </a>
+                                                (Document 104)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d105">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d105">105. Memorandum of Conversation
+                                                </a>
+                                                (Document 105)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d106">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d106">106. Memorandum of Conversation
+                                                </a>
+                                                (Document 106)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d107">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d107">107. Memorandum of Conversation
+                                                </a>
+                                                (Document 107)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d108">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d108">108. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 108)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d109">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d109">109. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 109)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d110">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d110">110. Information Memorandum From
+                                                    the Acting Director of the Bureau of
+                                                    Intelligence and Research (McNeil) to Acting Secretary of State Whitehead
+                                                </a>
+                                                (Document 110)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d111">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d111">111. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 111)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d112">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d112">112. Memorandum From the Special
+                                                    Assistant to the Under Secretary of
+                                                    State for Political Affairs (Courtney) to the Under Secretary of State for
+                                                    Political
+                                                    Affairs (Armacost)
+                                                </a>
+                                                (Document 112)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d113">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d113">113. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 113)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d114">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d114">114. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 114)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d115">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d115">115. Letter From Soviet General
+                                                    Secretary Gorbachev to President Reagan
+                                                </a>
+                                                (Document 115)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d116">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d116">116. Telegram From the Department
+                                                    of State to the Embassy in the
+                                                    Soviet Union
+                                                </a>
+                                                (Document 116)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d117">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d117">117. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 117)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d118">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d118">118. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 118)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d119">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d119">119. Information Memorandum From
+                                                    the Director of the Policy Planning
+                                                    Staff (Rodman) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 119)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d120">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d120">120. Letter From President Reagan
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 120)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d121">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d121">121. Memorandum of Conversation
+                                                </a>
+                                                (Document 121)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d122">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d122">122. Memorandum of Conversation
+                                                </a>
+                                                (Document 122)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d123">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d123">123. National Security Decision
+                                                    Directive 194
+                                                </a>
+                                                (Document 123)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d124">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d124">124. National Security Decision
+                                                    Directive 195
+                                                </a>
+                                                (Document 124)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d125">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d125">125. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 125)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d126">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d126">126. Memorandum From John
+                                                    Lenczowski of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 126)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d127">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d127">127. Letter From President Reagan
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 127)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d128">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d128">128. Letter From President Reagan
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 128)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d129">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d129">129. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 129)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d130">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d130">130. Note From the President’s
+                                                    Assistant for National Security Affairs
+                                                    (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 130)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d131">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d131">131. Information Memorandum From
+                                                    the Director of the Bureau of
+                                                    Intelligence and Research (Abramowitz) to Secretary of State Shultz
+                                                </a>
+                                                (Document 131)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d132">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d132">132. Information Memorandum From
+                                                    the Director of the Policy Planning
+                                                    Staff (Rodman) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 132)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d133">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d133">133. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (McFarlane) to President
+                                                    Reagan
+                                                </a>
+                                                (Document 133)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d134">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d134">134. Memorandum of Conversation
+                                                </a>
+                                                (Document 134)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d135">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d135">135. Memorandum of Conversation
+                                                </a>
+                                                (Document 135)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d136">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d136">136. Memorandum of Conversation
+                                                </a>
+                                                (Document 136)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d137">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d137">137. Telegram From Secretary of
+                                                    State Shultz to the White House
+                                                </a>
+                                                (Document 137)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d138">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d138">138. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 138)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d139">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d139">139. Personal Notes of Secretary
+                                                    of State Shultz
+                                                </a>
+                                                (Document 139)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d140">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d140">140. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 140)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d141">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d141">141. Draft National Intelligence
+                                                    Estimate
+                                                </a>
+                                                (Document 141)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d142">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d142">142. Memorandum From Peter
+                                                    Sommer of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 142)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d143">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d143">143. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 143)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d144">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d144">144. Minutes of a National
+                                                    Security Council Meeting
+                                                </a>
+                                                (Document 144)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d145">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d145">145. Information Memorandum From
+                                                    the Director of the Bureau of
+                                                    Intelligence and Research (Abramowitz) to Secretary of State Shultz
+                                                </a>
+                                                (Document 145)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d146">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d146">146. Personal Notes of Robert
+                                                    Linhard of the National Security Council Staff
+                                                </a>
+                                                (Document 146)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d147">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d147">147. Information Memorandum From
+                                                    the Director of the Bureau of
+                                                    Intelligence and Research (Abramowitz) and the Legal Adviser of the Department
+                                                    of
+                                                    State (Sofaer) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 147)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d148">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d148">148. Memorandum From the Under
+                                                    Secretary of Defense for Policy (Ikle)
+                                                    to Secretary of Defense Weinberger
+                                                </a>
+                                                (Document 148)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d149">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d149">149. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (McFarlane)
+                                                </a>
+                                                (Document 149)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d150">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d150">150. Memorandum of Conversation
+                                                </a>
+                                                (Document 150)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d151">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d151">151. Memorandum of Conversation
+                                                </a>
+                                                (Document 151)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d152">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d152">152. Memorandum of Conversation
+                                                </a>
+                                                (Document 152)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d153">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d153">153. Memorandum of Conversation
+                                                </a>
+                                                (Document 153)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d154">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d154">154. Record of a Meeting</a>
+                                                (Document 154)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d155">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d155">155. Memorandum of Conversation
+                                                </a>
+                                                (Document 155)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d156">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d156">156. Memorandum of Conversation
+                                                </a>
+                                                (Document 156)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d157">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d157">157. Memorandum of Conversation
+                                                </a>
+                                                (Document 157)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d158">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d158">158. Memorandum of Conversation
+                                                </a>
+                                                (Document 158)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d159">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d159">159. Memorandum of Conversation
+                                                </a>
+                                                (Document 159)
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="ch4">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/ch4">November 1985–April 1986<br/>New Political
+                                            Thinking: Gorbachev’s Proposal To Eliminate Nuclear
+                                            Weapons
+                                        </a>
+                                        (Documents 160 - 219)
+                                        <ul class="hsg-accordion-chapters__nested">
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d160">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d160">160. Report Prepared in the
+                                                    Central Intelligence Agency
+                                                </a>
+                                                (Document 160)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d161">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d161">161. Memorandum From the Deputy
+                                                    Assistant Secretary of State for
+                                                    European and Canadian Affairs (Palmer) to Secretary of State Shultz
+                                                </a>
+                                                (Document 161)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d162">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d162">162. Memorandum From the Special
+                                                    Advisor to the President and
+                                                    Secretary of State on Arms Control Matters (Nitze) to Secretary of State Shultz
+                                                </a>
+                                                (Document 162)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d163">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d163">163. Handwritten Letter From
+                                                    President Reagan to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 163)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d164">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d164">164. Information Memorandum From
+                                                    the Director of the Policy Planning
+                                                    Staff (Rodman) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 164)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d165">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d165">165. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 165)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d166">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d166">166. Letter From Soviet General
+                                                    Secretary Gorbachev to President Reagan
+                                                </a>
+                                                (Document 166)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d167">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d167">167. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 167)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d168">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d168">168. Letter From President Reagan
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 168)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d169">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d169">169. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 169)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d170">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d170">170. Telegram From the Department
+                                                    of State to the Mission to NATO
+                                                </a>
+                                                (Document 170)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d171">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d171">171. National Security Decision
+                                                    Directive 203
+                                                </a>
+                                                (Document 171)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d172">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d172">172. Letter From Soviet General
+                                                    Secretary Gorbachev to President Reagan
+                                                </a>
+                                                (Document 172)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d173">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d173">173. Letter From President Reagan
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 173)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d174">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d174">174. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 174)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d175">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d175">175. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 175)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d176">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d176">176. National Security Decision
+                                                    Directive 206
+                                                </a>
+                                                (Document 176)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d177">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d177">177. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 177)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d178">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d178">178. Memorandum for the Record by
+                                                    the Special Advisor to the President
+                                                    and Secretary of State on Arms Control Matters (Nitze)
+                                                </a>
+                                                (Document 178)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d179">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d179">179. Memorandum From the Special
+                                                    Advisor to the President and
+                                                    Secretary of State on Arms Control Matters (Rowny) to Secretary of State Shultz
+                                                </a>
+                                                (Document 179)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d180">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d180">180. Memorandum From the Director
+                                                    of the Bureau of Politico-Military
+                                                    Affairs (Holmes) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 180)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d181">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d181">181. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 181)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d182">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d182">182. Information Memorandum From
+                                                    the Director of the Policy Planning
+                                                    Staff (Rodman) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 182)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d183">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d183">183. Information Memorandum From
+                                                    the Assistant Secretary of State for
+                                                    European and Canadian Affairs (Ridgway) to Secretary of State Shultz
+                                                </a>
+                                                (Document 183)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d184">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d184">184. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 184)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d185">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d185">185. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (Poindexter) to
+                                                    President Reagan
+                                                </a>
+                                                (Document 185)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d186">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d186">186. Information Memorandum From
+                                                    the Director of the Policy Planning
+                                                    Staff (Rodman) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 186)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d187">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d187">187. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 187)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d188">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d188">188. Minutes of a National
+                                                    Security Planning Group Meeting
+                                                </a>
+                                                (Document 188)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d189">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d189">189. Memorandum From William
+                                                    Wright and Robert
+                                                    Linhard of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 189)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d190">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d190">190. National Security Decision
+                                                    Directive 209
+                                                </a>
+                                                (Document 190)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d191">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d191">191. Note From the Deputy
+                                                    Assistant Secretary of State for European
+                                                    and Canadian Affairs (Palmer)
+                                                    to Secretary of State Shultz
+                                                </a>
+                                                (Document 191)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d192">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d192">192. Talking Points Prepared in
+                                                    the Office of Soviet Union Affairs,
+                                                    Bureau of European and Canadian Affairs for Secretary of State Shultz
+                                                </a>
+                                                (Document 192)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d193">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d193">193. Telegram From the Embassy in
+                                                    the Federal Republic of Germany to
+                                                    the Department of State
+                                                </a>
+                                                (Document 193)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d194">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d194">194. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 194)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d195">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d195">195. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (Poindexter) to
+                                                    President Reagan
+                                                </a>
+                                                (Document 195)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d196">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d196">196. Editorial Note</a>
+                                                (Document 196)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d197">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d197">197. Letter From President Reagan
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 197)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d198">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d198">198. Notes of an Interview With
+                                                    Oleg
+                                                    Gordievskiy
+                                                </a>
+                                                (Document 198)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d199">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d199">199. Letter From Secretary of
+                                                    State Shultz to the President’s Assistant for National
+                                                    Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 199)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d200">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d200">200. Information Memorandum From
+                                                    the Director of the Policy Planning
+                                                    Staff Staff (Rodman) to
+                                                    Secretary of State Shultz
+                                                </a>
+                                                (Document 200)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d201">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d201">201. Information Memorandum From
+                                                    the Assistant Secretary of State for
+                                                    European and Canadian Affairs (Ridgway) to Secretary of State Shultz
+                                                </a>
+                                                (Document 201)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d202">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d202">202. Memorandum From the Head of
+                                                    the U.S. Delegation to the Nuclear
+                                                    and Space Talks (Kampelman) to
+                                                    Secretary of State Shultz
+                                                </a>
+                                                (Document 202)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d203">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d203">203. Telegram From the Department
+                                                    of State to the Embassy in the
+                                                    Soviet Union
+                                                </a>
+                                                (Document 203)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d204">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d204">204. Memorandum of Conversation
+                                                </a>
+                                                (Document 204)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d205">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d205">205. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 205)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d206">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d206">206. Note From the Deputy
+                                                    Assistant Secretaries of State for European
+                                                    and Canadian Affairs (Palmer
+                                                    and Thomas) to the Assistant Secretary of State for European and
+                                                    Canadian Affairs (Ridgway)
+                                                </a>
+                                                (Document 206)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d207">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d207">207. Telegram From the Department
+                                                    of State to Secretary of State
+                                                    Shultz in Rome
+                                                </a>
+                                                (Document 207)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d208">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d208">208. Letter From Soviet General
+                                                    Secretary Gorbachev to President Reagan
+                                                </a>
+                                                (Document 208)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d209">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d209">209. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 209)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d210">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d210">210. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 210)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d211">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d211">211. Memorandum From Jack
+                                                    Matlock, Judyt
+                                                    Mandel, and John
+                                                    Lenczowski of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 211)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d212">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d212">212. Memorandum of Conversation
+                                                </a>
+                                                (Document 212)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d213">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d213">213. Letter From President Reagan
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 213)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d214">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d214">214. Memorandum of Conversation
+                                                </a>
+                                                (Document 214)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d215">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d215">215. Intelligence Assessment
+                                                    Prepared in the Central Intelligence
+                                                    Agency
+                                                </a>
+                                                (Document 215)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d216">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d216">216. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 216)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d217">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d217">217. Note From the Assistant
+                                                    Secretary of State for European and
+                                                    Canadian Affairs (Ridgway) to
+                                                    Secretary of State Shultz
+                                                </a>
+                                                (Document 217)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d218">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d218">218. National Security Decision
+                                                    Directive 223
+                                                </a>
+                                                (Document 218)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d219">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d219">219. Information Memorandum From
+                                                    the Director of the Policy Planning
+                                                    Staff (Solomon) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 219)
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="ch5">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/ch5">April 1986–August 1986<br/>Arms Control in
+                                            the Shadow of Chernobyl
+                                        </a>
+                                        (Documents 220 - 266)
+                                        <ul class="hsg-accordion-chapters__nested">
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d220">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d220">220. Intelligence Report Prepared
+                                                    in the Central Intelligence
+                                                    Agency
+                                                </a>
+                                                (Document 220)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d221">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d221">221. Telegram From the Department
+                                                    of State to the Embassy in the
+                                                    Soviet Union
+                                                </a>
+                                                (Document 221)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d222">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d222">222. Telegram From the Department
+                                                    of State to Secretary of State
+                                                    Shultz in Bali
+                                                </a>
+                                                (Document 222)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d223">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d223">223. Report Prepared in the
+                                                    Central Intelligence Agency
+                                                </a>
+                                                (Document 223)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d224">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d224">224. Telegram From the Department
+                                                    of State to Secretary of State
+                                                    Shultz in Bali
+                                                </a>
+                                                (Document 224)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d225">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d225">225. Telegram From the Department
+                                                    of State to Secretary of State
+                                                    Shultz in Tokyo
+                                                </a>
+                                                (Document 225)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d226">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d226">226. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 226)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d227">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d227">227. Telegram From the Department
+                                                    of State to Secretary of State
+                                                    Shultz in Tokyo
+                                                </a>
+                                                (Document 227)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d228">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d228">228. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 228)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d229">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d229">229. Telegram From the Department
+                                                    of State to Secretary of State
+                                                    Shultz in Manila
+                                                </a>
+                                                (Document 229)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d230">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d230">230. Memorandum From the Executive
+                                                    Secretary of the Department of
+                                                    State (Platt) to the President’s
+                                                    Assistant for National Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 230)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d231">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d231">231. Note From the Assistant
+                                                    Secretary of State for European and
+                                                    Canadian Affairs (Ridgway) to
+                                                    Secretary of State Shultz
+                                                </a>
+                                                (Document 231)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d232">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d232">232. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State, the Department of Defense, the Mission to NATO, and the Defense
+                                                    Intelligence
+                                                    Agency
+                                                </a>
+                                                (Document 232)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d233">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d233">233. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 233)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d234">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d234">234. Information Memorandum From
+                                                    the Director of the Policy Planning
+                                                    Staff (Solomon) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 234)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d235">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d235">235. Letter From President Reagan
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 235)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d236">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d236">236. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 236)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d237">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d237">237. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 237)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d238">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d238">238. Telegram From the Delegation
+                                                    to the Nuclear and Space Talks to
+                                                    the Department of State
+                                                </a>
+                                                (Document 238)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d239">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d239">239. Memorandum for the Record of
+                                                    a Meeting of the National Security
+                                                    Planning Group
+                                                </a>
+                                                (Document 239)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d240">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d240">240. Mock Memorandum From Soviet
+                                                    Foreign Policy Assistant Chernyayev
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 240)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d241">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d241">241. Action Memorandum From the
+                                                    Acting Assistant Secretary of State
+                                                    for European and Canadian Affairs (Woessner) to Secretary of State
+                                                    Shultz
+                                                </a>
+                                                (Document 241)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d242">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d242">242. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 242)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d243">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d243">243. Minutes of a National
+                                                    Security Planning Group Meeting
+                                                </a>
+                                                (Document 243)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d244">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d244">244. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 244)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d245">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d245">245. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 245)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d246">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d246">246. Memorandum of Conversation
+                                                </a>
+                                                (Document 246)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d247">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d247">247. Telegram From the Department
+                                                    of State to Secretary of State
+                                                    Shultz in Singapore
+                                                </a>
+                                                (Document 247)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d248">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d248">248. Mock Memorandum From Soviet
+                                                    Foreign Policy Assistant Chernyayev
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 248)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d249">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d249">249. Memorandum From the Special
+                                                    Advisor to the President and
+                                                    Secretary of State on Arms Control Matters (Nitze) to Secretary of State Shultz
+                                                </a>
+                                                (Document 249)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d250">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d250">250. Information Memorandum From
+                                                    the Assistant Secretary of State for
+                                                    European and Canadian Affairs (Ridgway) to Secretary of State Shultz
+                                                </a>
+                                                (Document 250)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d251">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d251">251. Telegram From the Department
+                                                    of State to the Embassy in the
+                                                    Soviet Union
+                                                </a>
+                                                (Document 251)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d252">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d252">252. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (Poindexter) to
+                                                    President Reagan
+                                                </a>
+                                                (Document 252)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d253">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d253">253. Memorandum From the National
+                                                    Intelligence Officer for USSR (Ermarth) to Director of Central Intelligence
+                                                    Casey and the Deputy Director of
+                                                    Central Intelligence (Gates)
+                                                </a>
+                                                (Document 253)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d254">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d254">254. Letter From President Reagan
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 254)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d255">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d255">255. Memorandum of Conversation
+                                                </a>
+                                                (Document 255)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d256">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d256">256. Memorandum of Conversation
+                                                </a>
+                                                (Document 256)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d257">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d257">257. Memorandum of Conversation
+                                                </a>
+                                                (Document 257)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d258">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d258">258. Memorandum of Conversation
+                                                </a>
+                                                (Document 258)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d259">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d259">259. Memorandum From Jack
+                                                    Matlock of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 259)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d260">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d260">260. Information Memorandum From
+                                                    the Director of the Policy Planning
+                                                    Staff (Solomon) to Secretary of
+                                                    State Shultz
+                                                </a>
+                                                (Document 260)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d261">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d261">261. Talking Points Prepared in
+                                                    the Central Intelligence Agency
+                                                </a>
+                                                (Document 261)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d262">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d262">262. Information Memorandum From
+                                                    the Assistant Secretary of State for
+                                                    European and Canadian Affairs (Ridgway) to Secretary of State Shultz
+                                                </a>
+                                                (Document 262)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d263">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d263">263. Telegram From the Department
+                                                    of State to the Mission to NATO, the Embassy in Japan, and the
+                                                    Embassy in Australia
+                                                </a>
+                                                (Document 263)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d264">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d264">264. National Security Decision
+                                                    Directive 232
+                                                </a>
+                                                (Document 264)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d265">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d265">265. Note From Jack Matlock of
+                                                    the National Security Council Staff
+                                                </a>
+                                                (Document 265)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d266">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d266">266. Memorandum From the Chief of
+                                                    the Arms Control Intelligence Staff,
+                                                    Central Intelligence Agency (George) to Director of Central Intelligence Casey
+                                                </a>
+                                                (Document 266)
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="ch6">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/ch6">August 1986–October 1986<br/>“The Iceland
+                                            Cometh”: The Arrest of Daniloff; SDI and the Reykjavik Summit
+                                        </a>
+                                        (Documents 267 - 309)
+                                        <ul class="hsg-accordion-chapters__nested">
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d267">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d267">267. Telegram From the Embassy in
+                                                    the Soviet Union to the Department
+                                                    of State
+                                                </a>
+                                                (Document 267)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d268">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d268">268. Telegram From the Department
+                                                    of State to Secretary of State
+                                                    Shultz
+                                                </a>
+                                                (Document 268)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d269">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d269">269. Report Prepared in the
+                                                    Central Intelligence Agency
+                                                </a>
+                                                (Document 269)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d270">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d270">270. Telegram From the Department
+                                                    of State to Secretary of State
+                                                    Shultz
+                                                </a>
+                                                (Document 270)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d271">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d271">271. Letter From President Reagan
+                                                    to Soviet General Secretary Gorbachev
+                                                </a>
+                                                (Document 271)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d272">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d272">272. Note From the Deputy
+                                                    Executive Secretary of the Department of
+                                                    State (Pascoe) to the Under
+                                                    Secretary of State for Political Affairs (Armacost)
+                                                </a>
+                                                (Document 272)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d273">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d273">273. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 273)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d274">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d274">274. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (Poindexter) to
+                                                    President Reagan
+                                                </a>
+                                                (Document 274)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d275">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d275">275. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (Poindexter) to
+                                                    President Reagan
+                                                </a>
+                                                (Document 275)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d276">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d276">276. Telegram From the Department
+                                                    of State to the Embassy in the
+                                                    Soviet Union
+                                                </a>
+                                                (Document 276)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d277">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d277">277. Memorandum From Stephen
+                                                    Sestanovich of the National Security Council Staff to the
+                                                    President’s Assistant for National Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 277)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d278">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d278">278. Special National Intelligence
+                                                    Estimate
+                                                </a>
+                                                (Document 278)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d279">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d279">279. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 279)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d280">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d280">280. Letter From Soviet General
+                                                    Secretary Gorbachev to President Reagan
+                                                </a>
+                                                (Document 280)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d281">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d281">281. Memorandum From Tyrus Cobb
+                                                    and Robert Linhard of the
+                                                    National Security Council Staff to the President’s Assistant for
+                                                    National Security Affairs (Poindexter)
+                                                </a>
+                                                (Document 281)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d282">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d282">282. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (Poindexter) to
+                                                    President Reagan
+                                                </a>
+                                                (Document 282)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d283">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d283">283. Memorandum of Conversation
+                                                </a>
+                                                (Document 283)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d284">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d284">284. Memorandum of Conversation
+                                                </a>
+                                                (Document 284)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d285">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d285">285. Memorandum of Conversation
+                                                </a>
+                                                (Document 285)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d286">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d286">286. Memorandum of Conversation
+                                                </a>
+                                                (Document 286)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d287">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d287">287. Memorandum of Conversation
+                                                </a>
+                                                (Document 287)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d288">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d288">288. Memorandum of Conversation
+                                                </a>
+                                                (Document 288)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d289">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d289">289. Memorandum of Conversation
+                                                </a>
+                                                (Document 289)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d290">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d290">290. Notes of a Meeting</a>
+                                                (Document 290)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d291">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d291">291. Memorandum of Conversation
+                                                </a>
+                                                (Document 291)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d292">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d292">292. Memorandum of Conversation
+                                                </a>
+                                                (Document 292)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d293">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d293">293. Memorandum From Secretary of
+                                                    State Shultz to President Reagan
+                                                </a>
+                                                (Document 293)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d294">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d294">294. Memorandum From the
+                                                    President’s Assistant for National Security
+                                                    Affairs (Poindexter) to
+                                                    President Reagan
+                                                </a>
+                                                (Document 294)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d295">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d295">295. Paper Prepared by Jack
+                                                    Matlock of the National Security Council Staff
+                                                </a>
+                                                (Document 295)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d296">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d296">296. Paper Prepared by the Senior
+                                                    Arms Control Group and the Arms
+                                                    Control Support Group
+                                                </a>
+                                                (Document 296)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d297">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d297">297. Talking Points Prepared by
+                                                    the National Security Council
+                                                    Staff
+                                                </a>
+                                                (Document 297)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d298">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d298">298. National Security Decision
+                                                    Directive 245
+                                                </a>
+                                                (Document 298)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d299">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d299">299. Letter From Secretary of
+                                                    Defense Weinberger to President Reagan
+                                                </a>
+                                                (Document 299)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d300">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d300">300. Editorial Note</a>
+                                                (Document 300)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d301">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d301">301. Memorandum of Conversation
+                                                </a>
+                                                (Document 301)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d302">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d302">302. Memorandum of Conversation
+                                                </a>
+                                                (Document 302)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d303">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d303">303. Draft Memorandum of
+                                                    Conversation
+                                                </a>
+                                                (Document 303)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d304">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d304">304. Editorial Note</a>
+                                                (Document 304)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d305">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d305">305. Paper Prepared for President
+                                                    Reagan
+                                                </a>
+                                                (Document 305)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d306">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d306">306. Memorandum of Conversation
+                                                </a>
+                                                (Document 306)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d307">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d307">307. Memorandum of Conversation
+                                                </a>
+                                                (Document 307)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d308">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d308">308. Memorandum of Conversation
+                                                </a>
+                                                (Document 308)
+                                            </li>
+                                            <li class="hsg-accordion-chapters__nested-item" data-tei-id="d309">
+                                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/d309">309. Editorial Note</a>
+                                                (Document 309)
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="hsg-accordion-chapters__item js-accordion" data-tei-id="app">
+                                <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/app">Appendix</a>
+                                (Documents A - C)
+                                <ul>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="appA">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/appA">A. Personal Notes of Robert
+                                            Linhard of the National Security Council Staff
+                                        </a>
+                                        (Document A)
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="appB">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/appB">B. Handwritten Letter From President
+                                            Reagan to Soviet General Secretary Gorbachev
+                                        </a>
+                                        (Document B)
+                                    </li>
+                                    <li class="hsg-accordion-chapters__nested-item" data-tei-id="appC">
+                                        <a class="hsg-accordion-chapters__nested-link" href="$app/historicaldocuments/frus1981-88v05/appC">C. Notes of a Meeting</a>
+                                        (Document C)
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
                <div id="toc" data-template="app:fix-links">
                   <div class="hsg-toc-sidebar" data-template="toc:table-of-contents" data-template-heading="true" data-template-highlight="true"/>
                </div>
