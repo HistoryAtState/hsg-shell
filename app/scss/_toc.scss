@@ -71,3 +71,75 @@
     margin-left: 2em;
   }
 }
+
+// New Frus TOC
+.hsg-toc {
+  ul {
+    list-style: none;
+  }
+}
+
+.hsg-accordion-chapters {
+  $el: &;
+
+  margin: 0;
+  padding: 0;
+  margin-bottom: 12px;
+
+  &__item {
+    border-bottom: 1px solid $color-gray-lighter;
+    margin: 0;
+    padding: 15px 0;
+  }
+
+  &__link {
+    display: block;
+    color: #333;
+    padding-left: 24px;
+
+    &:hover {
+      color: black;
+    }
+
+    &.is-open {
+      font-weight: 600;
+    }
+  }
+
+  &__nested {
+    //display: none;
+    margin-top: 10px;
+    padding: flip(10px 0 5px 10px, 5px 10px 5px 0);
+    //background-color: $color-gray-lightest;
+  }
+
+  &__nested-item {
+    margin: 0;
+    padding: 4px 0;
+
+    &.is-open {
+      > #{$el}__nested-link {
+        border-left: 3px solid $color-primary-darker;
+        padding-left: 12px;
+        margin-left: -15px;
+        font-weight: 600;
+      }
+
+      #{$el}__nested {
+        display: block;
+      }
+    }
+  }
+  @media (min-width: $sm-screen-min) {
+    &__link {
+      //padding-left: 24px;
+      padding-right: 0;
+    }
+
+    &__item > #{$el}__nested {
+      padding-left: 24px;
+      padding-right: 0;
+    }
+  }
+
+}
