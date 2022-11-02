@@ -37,7 +37,7 @@
   background-color: #dddde8;
 }
 
-// TOC in sidebar
+// Old TOC in sidebar
 
 .hsg-toc-sidebar .toc-inner {
   > div {
@@ -72,74 +72,104 @@
   }
 }
 
-// New Frus TOC
+// New Frus TOC in sidebar
 .hsg-toc {
-  ul {
-    list-style: none;
+  a {
+    display: block;
+    padding: 0.7rem 1.5rem;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $color-gray-lightest;
+      text-decoration: none;
+    }
+  }
+
+  a:not(.hsg-current) {
+    color: $color-base;
+
+     &:hover {
+       color: $color-primary-darker;
+     }
+
+     &:focus {
+       //outline-offset: 0;
+       outline: 0.25rem solid $color-gray-light;
+     }
+  }
+
+  // level 2+
+  ul > li > a {
+    padding-left: 1.8rem;
+  }
+
+  // level 3+
+  ul > li > ul > li > a {
+    padding-left: 3.5rem;
+  }
+
+  // level 4+
+  ul > li > ul > li > ul > li > a {
+    padding-left: 5.3rem;
   }
 }
 
-.hsg-accordion-chapters {
-  $el: &;
+.hsg-toc__chapters {
+  $el: '.hsg-toc__chapters';
 
-  margin: 0;
-  padding: 0;
-  margin-bottom: 12px;
+  list-style: none;
+  margin-bottom: 0;
+  margin-top: 0;
+  list-style-type: none;
+  padding-left: 0;
 
   &__item {
     border-bottom: 1px solid $color-gray-lighter;
-    margin: 0;
-    padding: 15px 0;
-  }
+    margin-bottom: 0;
+    max-width: unset;
 
-  &__link {
-    display: block;
-    color: #333;
-    padding-left: 24px;
-
-    &:hover {
-      color: black;
-    }
-
-    &.is-open {
-      font-weight: 600;
+    &:last-child {
+      border-bottom: none;
     }
   }
 
+  // Sublist
   &__nested {
-    //display: none;
-    margin-top: 10px;
-    padding: flip(10px 0 5px 10px, 5px 10px 5px 0);
-    //background-color: $color-gray-lightest;
-  }
-
-  &__nested-item {
+    list-style-type: none;
+    padding-left: 0;
     margin: 0;
-    padding: 4px 0;
 
-    &.is-open {
-      > #{$el}__nested-link {
-        border-left: 3px solid $color-primary-darker;
-        padding-left: 12px;
-        margin-left: -15px;
-        font-weight: 600;
-      }
-
-      #{$el}__nested {
-        display: block;
-      }
-    }
-  }
-  @media (min-width: $sm-screen-min) {
-    &__link {
-      //padding-left: 24px;
-      padding-right: 0;
+    li:first-child {
+      border-top: 1px solid $color-gray-lighter;
     }
 
-    &__item > #{$el}__nested {
-      padding-left: 24px;
-      padding-right: 0;
+    li:last-child {
+      border-bottom: none;
     }
   }
 
+  // Highlight current chapters
+  .hsg-current {
+    position: relative;
+    color: $color-primary-darker;
+    font-weight: 700;
+
+    &:focus,
+    &:active {
+      background-color: $color-gray-lightest;
+    }
+  }
+
+  #{$el}__item > .hsg-current::after {
+    background-color: $color-primary-darker;
+    border-radius: 99rem;
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: .25rem;
+    top: .25rem;
+    width: .45rem;
+    left: 0;
+  }
 }
+
