@@ -146,6 +146,10 @@
     li:last-child {
       border-bottom: none;
     }
+
+    #{$el}__item > .hsg-current {
+      background-color: $color-gray-lightest;
+    }
   }
 
   // Highlight current chapters
@@ -160,7 +164,7 @@
     }
   }
 
-  #{$el}__item > .hsg-current::after {
+  & > li >  .hsg-current::after {
     background-color: $color-primary-darker;
     border-radius: 99rem;
     content: "";
