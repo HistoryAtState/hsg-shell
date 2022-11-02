@@ -30,8 +30,8 @@
             <div class="hsg-panel-heading hsg-toc__header">
                 <h4 class="hsg-sidebar-title">Contents</h4>
             </div>
-            <nav aria-label="Side navigation,,," class="hsg-toc__chapters">
-                <ul class="hsg-accordion-chapters js-smoothscroll">
+            <nav aria-label="Side navigation,,,">
+                <ul class="hsg-toc__chapters">
                     <xsl:apply-templates select="tei:text"/>
                 </ul>
             </nav>
@@ -51,23 +51,26 @@
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="$nested">
-                    <xsl:attribute name="class" select="'hsg-accordion-chapters__nested-item'"/>
+                    <xsl:attribute name="class" select="'hsg-toc__chapters__item'"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:attribute name="class" select="'hsg-accordion-chapters__item js-accordion'"/>
+                    <xsl:attribute name="class" select="'hsg-toc__chapters__item js-accordion'"/>
                 </xsl:otherwise>
             </xsl:choose>
             
-            <a class="hsg-accordion-chapters__nested-link"
-                href="/historicaldocuments/{$documentID}/{@xml:id}">
+            <a href="/historicaldocuments/{$documentID}/{@xml:id}">
                 <xsl:apply-templates mode="html" select="tei:head"/>
+                <xsl:where-populated>
+                    <span>
+                        <xsl:value-of
+                            select="(' (Document' || 's'[count($docs) gt 1] || ' ' || $docs[1] || ' - '[count($docs) gt 1] || $docs[last()][count($docs) gt 1] || ')')[exists($docs)]"
+                        />
+                    </span>
+                </xsl:where-populated>
             </a>
-            <xsl:value-of
-                select="(' (Document' || 's'[count($docs) gt 1] || ' ' || $docs[1] || ' - '[count($docs) gt 1] || $docs[last()][count($docs) gt 1] || ')')[exists($docs)]"
-            />
-            
+
             <xsl:where-populated>
-                <ul class="hsg-accordion-chapters__nested">
+                <ul class="hsg-toc__chapters__nested">
                     <xsl:apply-templates>
                         <xsl:with-param name="nested" tunnel="true" select="true()"/>
                     </xsl:apply-templates>
