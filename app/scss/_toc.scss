@@ -79,9 +79,17 @@
     padding: 0.7rem 1.5rem;
     text-decoration: none;
 
+    > span {
+      color: $color-base;
+    }
+
     &:hover {
       background-color: $color-gray-lightest;
       text-decoration: none;
+
+      > span {
+        color: $color-base;
+      }
     }
   }
 
