@@ -21,7 +21,7 @@
     </xsl:accumulator>
     
     <xsl:accumulator name="document-ids" initial-value="()" as="xs:string*">
-        <xsl:accumulator-rule match="tei:div[tei:div/@type eq 'document']" select="()"/>
+        <xsl:accumulator-rule match="tei:div[tei:div/@type = 'document']" select="()"/>
         <xsl:accumulator-rule match="tei:div[@type eq 'document']" select="($value, @xml:id)" phase="end"/>
     </xsl:accumulator>
     
@@ -45,18 +45,24 @@
         <xsl:variable name="docs" as="xs:string*" select="$accDocs[not(. = $prevDocs)]"/>
         <xsl:variable name="prevDocIDs" as="xs:string*" select="accumulator-before('document-ids')"/>
         <xsl:variable name="docIDs" as="xs:string*" select="accumulator-after('document-ids')[not(. = $prevDocIDs)]"/>
-        <li data-tei-id="{@xml:id}">
+        <xsl:variable name="child_list" as="element(ul)?">
+            <xsl:where-populated>
+                <ul class="hsg-toc__chapters__nested">
+                    <xsl:apply-templates>
+                        <xsl:with-param name="nested" tunnel="true" select="true()"/>
+                    </xsl:apply-templates>
+                </ul>
+            </xsl:where-populated>
+        </xsl:variable>
+        <xsl:variable name="classes" as="xs:string*" select="(
+                'hsg-toc__chapters__item',
+                'js-accordion'[$child_list]
+            )"/>
+        <li data-tei-id="{@xml:id}" class="{string-join($classes, ' ')}">
+            
             <xsl:if test="exists($docIDs) and tei:div[@type='document']">
                 <xsl:attribute name="data-tei-documents" select="string-join($docIDs, ' ')"/>
             </xsl:if>
-            <xsl:choose>
-                <xsl:when test="$nested">
-                    <xsl:attribute name="class" select="'hsg-toc__chapters__item'"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:attribute name="class" select="'hsg-toc__chapters__item js-accordion'"/>
-                </xsl:otherwise>
-            </xsl:choose>
             
             <a href="/historicaldocuments/{$documentID}/{@xml:id}">
                 <xsl:apply-templates mode="html" select="tei:head"/>
@@ -68,14 +74,9 @@
                     </span>
                 </xsl:where-populated>
             </a>
-
-            <xsl:where-populated>
-                <ul class="hsg-toc__chapters__nested">
-                    <xsl:apply-templates>
-                        <xsl:with-param name="nested" tunnel="true" select="true()"/>
-                    </xsl:apply-templates>
-                </ul>
-            </xsl:where-populated>
+            
+            <xsl:sequence select="$child_list"/>
+            
         </li>
     </xsl:template>
     
