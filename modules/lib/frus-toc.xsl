@@ -39,7 +39,6 @@
     </xsl:template>
     
     <xsl:template match="tei:div[@xml:id][not(@type = ('document'))]">
-        <xsl:param name="nested" as="xs:boolean" select="false()" tunnel="yes"/>
         <xsl:variable name="accDocs" as="xs:string*" select="accumulator-after('document-nos')"/>
         <xsl:variable name="prevDocs" as="xs:string*" select="accumulator-before('document-nos')"/>
         <xsl:variable name="docs" as="xs:string*" select="$accDocs[not(. = $prevDocs)]"/>
@@ -48,9 +47,7 @@
         <xsl:variable name="child_list" as="element(ul)?">
             <xsl:where-populated>
                 <ul class="hsg-toc__chapters__nested">
-                    <xsl:apply-templates>
-                        <xsl:with-param name="nested" tunnel="true" select="true()"/>
-                    </xsl:apply-templates>
+                    <xsl:apply-templates/>
                 </ul>
             </xsl:where-populated>
         </xsl:variable>
