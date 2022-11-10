@@ -397,14 +397,8 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                 "work" : $work
             }
         else
-            (:  TODO: not sure if the following check for divs containing only a div as first element is needed.
-                Code was copied from tei-simple generic app where this case could occur and led to empty pages.
-                Do we need the same for hsg? The check is very expensive.
-            :)
-(:            let $parent := $div/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]:)
-            let $prevDiv := pages:get-previous($div)
-            let $nextDiv := pages:get-next($div)
-        (:        ($div//tei:div[not(*[1] instance of element(tei:div))] | $div/following::tei:div)[1]:)
+            let $prevDiv := $config:PUBLICATIONS?($model?publication-id)?previous($div)
+            let $nextDiv := $config:PUBLICATIONS?($model?publication-id)?next($div)
             return
                 map {
                     "previous" : $prevDiv,
@@ -412,27 +406,6 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                     "work" : $work,
                     "div" : $div
                 }
-};
-
-declare function pages:get-next($div as element()) {
-    if ($div/self::tei:pb) then
-        $div/following::tei:pb[1]
-    else if ($div/tei:div[@xml:id]) then
-        $div/tei:div[@xml:id][1]
-    else
-        ($div/following::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[1]
-};
-
-declare function pages:get-previous($div as element()?) {
-    if ($div/self::tei:pb) then
-        $div/preceding::tei:pb[1]
-    else if (($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[not(tei:div/@type)]) then
-        ($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[last()]
-    else
-        (
-            $div/ancestor::tei:div[@type = ('compilation', 'chapter', 'subchapter', 'section', 'part')][tei:div/@type][1],
-            ($div/preceding::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[1]
-        )[1]
 };
 
 declare function pages:get-content($div as element()) {

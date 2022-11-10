@@ -7,6 +7,7 @@ xquery version "3.1";
 module namespace config="http://history.state.gov/ns/site/hsg/config";
 
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
+import module namespace tu="http://history.state.gov/ns/site/hsg/tei-util" at "tei-util.xqm";
 
 import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../transform/frus-web-module.xql";
 
@@ -196,6 +197,8 @@ declare variable $config:PUBLICATIONS :=
                 (: Called to transform content based on the odd using tei simple pm :)
                 function($xml, $parameters) { pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Historical Documents",
+            "next":     tu:get-next#1,
+            "previous": tu:get-previous#1,
             "base-path": function($document-id, $section-id) { "frus/" || $document-id },
             "open-graph": map{
                     "og:type": function($node as node()?, $model as map(*)?) {'document'}
