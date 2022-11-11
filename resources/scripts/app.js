@@ -6,8 +6,8 @@ $(document).ready(function($) {
         documentId = osd_viewer.attr('data-doc-id'),
         facsId     = osd_viewer.attr('data-facs'),
         tif_url    = osd_viewer.attr('data-url'),
-        tif_width  = osd_viewer.attr('data-width') => parseInt(),
-        tif_height = osd_viewer.attr('data-height') => parseInt(),
+        tif_width  = parseInt(osd_viewer.attr('data-width')),
+        tif_height = parseInt(osd_viewer.attr('data-height')),
         scheme     = 'http',
         server     = 'localhost', // Local Cantaloupe image server for development
         port       = '8182',
