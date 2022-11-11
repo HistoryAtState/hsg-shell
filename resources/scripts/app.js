@@ -5,6 +5,9 @@ $(document).ready(function($) {
     var osd_viewer = $('.osd-wrapper #viewer'),
         documentId = osd_viewer.attr('data-doc-id'),
         facsId     = osd_viewer.attr('data-facs'),
+        tif_url    = osd_viewer.attr('data-url'),
+        tif_width  = osd_viewer.attr('data-width') => parseInt(),
+        tif_height = osd_viewer.attr('data-height') => parseInt(),
         scheme     = 'http',
         server     = 'localhost', // Local Cantaloupe image server for development
         port       = '8182',
@@ -16,7 +19,10 @@ $(document).ready(function($) {
     //if ( $( "#viewer" ).get(0) === undefined ) { console.log('No viewer') };
 
     if ($("#viewer").get(0) != undefined) {
-      console.log('Image URI=', scheme + '://' + server + ':' + port + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif')
+      console.log('IIIF URI=', scheme + '://' + server + ':' + port + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif')
+      console.log('S3 URI=', tif_url);
+      console.log('width=', tif_width, ', height=', tif_height);
+
 
       var viewer = OpenSeadragon({
           id:                   "viewer",
@@ -26,7 +32,6 @@ $(document).ready(function($) {
           //minZoomLevel:         1,
           minZoomImageRatio:    0.9,
           defaultZoomLevel:     1,
-          sequenceMode:         true,
           showNavigator:        true,
           navigatorHeight:      "120px",
           navigatorWidth:       "80px",
@@ -35,8 +40,8 @@ $(document).ready(function($) {
           tileSources:   [{
             "@context": "http://iiif.io/api/image/3/context.json",
             "@id":      scheme + "://" + server + ':' + port + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
-            "height":   5069,
-            "width":    3040,
+            "height":   tif_height,
+            "width":    tif_width,
             "maxArea":  10000000,
             "profile":  [ "http://iiif.io/api/image/2/level2.json" ],
             "protocol": "http://iiif.io/api/image",
