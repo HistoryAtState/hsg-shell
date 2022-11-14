@@ -109,12 +109,16 @@ return
             if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
                 map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
             else ()
+
         let $html :=
-            if ($xml instance of element(tei:pb)) then
+            if ($xml instance of element(tei:pb))
+            then (
+                let $pg-id :=  concat('#', $xml/@xml:id)
+                let $tif-graphic := $xml/ancestor::tei:TEI//tei:surface[@start=string($pg-id)]//tei:graphic[@mimeType="image/tiff"]
+                let $tif-graphic-height := $tif-graphic/@height => substring-before("px")
+                let $tif-graphic-width := $tif-graphic/@width => substring-before("px")
+                let $tif-graphic-url := $tif-graphic/@url
                 let $src := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
-                let $log := util:log('info', ('frus-ajax.xql , src=', $src))
-                let $log := util:log('info', ('frus-ajax.xql , $document-id=', $document-id))
-                let $log := util:log('info', ('frus-ajax.xql , $xml/@facs=', $xml/@facs))
                 return (
                     <noscript>
                         <div class="content">
@@ -123,9 +127,10 @@ return
                     </noscript>
                     ,
                     <section class="osd-wrapper content">
-                        <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }"></div>
+                        <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }" data-url="{ $tif-graphic-url }" data-width="{ $tif-graphic-width }" data-height="{ $tif-graphic-height }"></div>
                     </section>
                 )
+            )
             else
                 pages:process-content($odd, pages:get-content($xml), map { "base-uri": $base-path })
         let $html := app:fix-links($html)
