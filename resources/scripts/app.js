@@ -1,6 +1,5 @@
 function initializeImageViewer() {
     if ($("#viewer").get(0) != undefined) {
-        console.log('Image URI=', scheme + '://' + server + ':' + port + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif');
 
         var osd_viewer = $('.osd-wrapper #viewer'),
             documentId = osd_viewer.attr('data-doc-id'),
@@ -12,6 +11,8 @@ function initializeImageViewer() {
             server     = 'localhost', // Local Cantaloupe image server for development
             port       = '8182',
             debugMode  = false;
+
+        console.log('Image URI=', scheme + '://' + server + ':' + port + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif');
 
         var viewer = OpenSeadragon({
             id:                   "viewer",
@@ -50,7 +51,6 @@ $(document).ready(function($) {
 
     // http://openseadragon.github.io/docs/OpenSeadragon.html#.Options
     var isConnected = $( "#viewer" ).get(0);
-    //if ( $( "#viewer" ).get(0) === undefined ) { console.log('No viewer') };
 
     initializeImageViewer();
 
