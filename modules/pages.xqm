@@ -298,8 +298,12 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
                     $fragment-ending-this-page/ancestor-or-self::tei:div[@type='document']/preceding::tei:div[@type='document'][.>> $this-page]
                 )/@xml:id
 
+            let $pg-id :=  concat('#', $xml/@xml:id)
+            let $tif-graphic := $this-page/ancestor::tei:TEI//tei:surface[@start=string($pg-id)]//tei:graphic[@mimeType="image/tiff"]
+            let $tif-graphic-height := $tif-graphic/@height => substring-before("px")
+            let $tif-graphic-width := $tif-graphic/@width => substring-before("px")
+            let $tif-graphic-url := $tif-graphic/@url
             let $src := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
-            let $log := util:log('info', ('pages:view, $page-div-ids=', $page-div-ids))
             return (
                 <noscript>
                     <div class="content">
@@ -308,7 +312,7 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
                 </noscript>
                 ,
                 <section class="osd-wrapper content">
-                    <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }"></div>
+                    <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }" data-url="{ $tif-graphic-url }" data-width="{ $tif-graphic-width }" data-height="{ $tif-graphic-height }"></div>
                 </section>
             )
         )

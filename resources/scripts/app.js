@@ -4,39 +4,41 @@ function initializeImageViewer() {
 
         var osd_viewer = $('.osd-wrapper #viewer'),
             documentId = osd_viewer.attr('data-doc-id'),
-            facsId = osd_viewer.attr('data-facs'),
-            scheme = 'http',
-            server = 'localhost', // Local Cantaloupe image server for development
-            port = '8182',
-            debugMode = false;
+            facsId     = osd_viewer.attr('data-facs'),
+            tif_url    = osd_viewer.attr('data-url'),
+            tif_width  = parseInt(osd_viewer.attr('data-width')),
+            tif_height = parseInt(osd_viewer.attr('data-height')),
+            scheme     = 'http',
+            server     = 'localhost', // Local Cantaloupe image server for development
+            port       = '8182',
+            debugMode  = false;
 
         var viewer = OpenSeadragon({
-            id: "viewer",
-            prefixUrl: "resources/images/OSD-icons/",
-            preserveViewport: true,
-            visibilityRatio: 1,
+            id:                   "viewer",
+            prefixUrl:            "resources/images/OSD-icons/",
+            preserveViewport:     true,
+            visibilityRatio:      1,
             //minZoomLevel:         1,
-            minZoomImageRatio: 0.9,
-            defaultZoomLevel: 1,
-            sequenceMode: true,
-            showNavigator: true,
-            navigatorHeight: "120px",
-            navigatorWidth: "80px",
-            showSequenceControl: false,
-            debugMode: debugMode,
-            tileSources: [{
-                "@context": "http://iiif.io/api/image/3/context.json",
-                "@id": scheme + "://" + server + ':' + port + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
-                "height": 5069,
-                "width": 3040,
-                "maxArea": 10000000,
-                "profile": ["http://iiif.io/api/image/2/level2.json"],
-                "protocol": "http://iiif.io/api/image",
-                "tiles": [{
-                    "scaleFactors": [1, 2, 4, 8, 16, 32],
-                    "width": 512,
-                    "height": 512
-                }]
+            minZoomImageRatio:    0.9,
+            defaultZoomLevel:     1,
+            showNavigator:        true,
+            navigatorHeight:      "120px",
+            navigatorWidth:       "80px",
+            showSequenceControl:  false,
+            debugMode:            debugMode,
+            tileSources:   [{
+              "@context": "http://iiif.io/api/image/3/context.json",
+              "@id":      scheme + "://" + server + ':' + port + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
+              "height":   tif_height,
+              "width":    tif_width,
+              "maxArea":  10000000,
+              "profile":  [ "http://iiif.io/api/image/2/level2.json" ],
+              "protocol": "http://iiif.io/api/image",
+              "tiles": [{
+                "scaleFactors": [ 1, 2, 4, 8, 16, 32 ],
+                "width":        512,
+                "height":       512
+              }]
             }]
         });
     }
