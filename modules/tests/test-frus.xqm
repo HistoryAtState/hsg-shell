@@ -154,7 +154,7 @@ declare %test:assertEquals('true') function x:test-frus-cover-img() {
     let $expected :=
         <img class="hsg-frus__cover"
              src="https://static.history.state.gov/frus/frus1981-88v11/covers/frus1981-88v11.jpg"
-             alt="Book Cover of {frus:vol-title($model?document-id)}"/>
+             alt="Book Cover of {frus:vol-title($model?document-id) => normalize-space()}"/>
     let $actual := frus:cover-img($node, $model)
     return
         if (deep-equal($expected, $actual))
