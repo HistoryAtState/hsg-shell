@@ -202,6 +202,28 @@ return
                     return
                         if ($persons) then <div class="list-group">{$persons}</div> else (),
                 "pdf": $mediaLink,
+(:
+                "page-div-ids":
+                    if ($xml instance of element(tei:pb))
+                    then (
+                        let $this-page := $xml
+                        let $next-page := $this-page/following::tei:pb[1]
+                        let $next-page-starts-document as xs:boolean := $next-page/preceding-sibling::element()[1][self::tei:head] or (not($next-page/preceding-sibling::element()) and $next-page/parent::tei:div/@type = 'document')
+                        let $fragment-ending-this-page :=
+                            if ($next-page-starts-document) then
+                                $next-page/parent::tei:div
+                            else
+                                $next-page
+                        let $page-div-ids :=
+                            (
+                                $this-page/ancestor::tei:div[@type='document'],
+                                ($this-page/following::tei:div[@type='document'][not(. >> $next-page)] except $next-page/ancestor::tei:div[@type="document"][$next-page-starts-document])
+
+                            )/@xml:id
+                        return $page-div-ids
+                    )
+                    else (),
+:)
                 "gloss":
                     let $gloss :=
                         if ($xml/@type=('compilation', 'chapter', 'subchapter')) then
