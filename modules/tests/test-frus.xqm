@@ -178,3 +178,109 @@ declare %test:assertEmpty function x:test-frus-cover-img-none() {
     }
     return frus:cover-img($node, $model)
 };
+
+(:
+ :  Regression test for frus previous links
+ :
+ :  WHEN calling pages:navigation-link()
+ :  GIVEN a $node <a/> (e.g. from pages/historicaldocuments/volume-interior.xml)
+ :  GIVEN a $model with keys and (pseudo-) values:
+ :      map{
+ :          "next": frus1969-76v02/comp1,
+ :          "div":  frus1969-76v02/ch1,
+ :          "publication-id":   'frus',
+ :          "document-id":  'frus1969-76v02'
+ :      }
+ :  GIVEN a $direction "previous"
+ :  GIVEN a $view "div"
+ :  RETURN a <a/> with attributes
+ :)
+declare
+    %test:pending('Awaiting NPE resolution - TFJH')
+    %test:assertEquals('true')
+function x:test-frus-prev-link() {
+    let $node := 
+        <a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
+           <i class="glyphicon glyphicon-chevron-left"/>
+        </a>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+            $templates:CONFIGURATION : $config,
+            "publication-id":   'frus',
+            "document-id":      'frus1969-76v02',
+            "previous": pages:load-xml('frus', 'frus1969-76v02', 'comp1', 'div'),
+            "div":  pages:load-xml('frus', 'frus1969-76v02', 'ch1', 'div')
+        }
+    let $actual := pages:navigation-link($node, $model, "previous", "div")
+    let $expected := 
+        <a data-doc="frus1969-76v02.xml" data-root="1.5.4.4" data-current="1.5.4.4.8" data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev" href="/exist/apps/hsg-shell/historicaldocuments/frus1969-76v02/comp1">
+           <i class="glyphicon glyphicon-chevron-left"/>
+        </a>
+    return 
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
+
+(:
+ :  Regression test for frus next links
+ :
+ :  WHEN calling pages:navigation-link()
+ :  GIVEN a $node <a/> (e.g. from pages/historicaldocuments/volume-interior.xml)
+ :  GIVEN a $model with keys and (pseudo-) values:
+ :      map{
+ :          "next": frus1969-76v02/d1,
+ :          "div":  frus1969-76v02/ch1,
+ :          "publication-id":   'frus',
+ :          "document-id":  'frus1969-76v02'
+ :      }
+ :  GIVEN a $direction "next"
+ :  GIVEN a $view "div"
+ :  RETURN a <a/> with attributes
+ :)
+declare
+    %test:pending('Awaiting NPE resolution - TFJH')
+    %test:assertEquals('true')
+function x:test-frus-next-link() {
+    let $node := 
+        <a data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
+           <i class="glyphicon glyphicon-chevron-right"/>
+        </a>
+    let $config := map{
+        $templates:CONFIG_FN_RESOLVER : function($functionName as xs:string, $arity as xs:int) {
+            try {
+                function-lookup(xs:QName($functionName), $arity)
+            } catch * {
+                ()
+            }
+        },
+        $templates:CONFIG_PARAM_RESOLVER : map{}
+    }
+    let $model := map {
+            $templates:CONFIGURATION : $config,
+            "publication-id":   'frus',
+            "document-id":      'frus1969-76v02',
+            "next": pages:load-xml('frus', 'frus1969-76v02', 'd1', 'div'),
+            "div":  pages:load-xml('frus', 'frus1969-76v02', 'ch1', 'div')
+        }
+    let $actual := pages:navigation-link($node, $model, "next", "div")
+    let $expected := 
+        <a data-doc="frus1969-76v02.xml" data-root="1.5.4.4.8.8" data-current="1.5.4.4.8" data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next" href="/exist/apps/hsg-shell/historicaldocuments/frus1969-76v02/d1">
+           <i class="glyphicon glyphicon-chevron-right"/>
+        </a>
+    return
+        if (deep-equal($expected, $actual))
+        then 'true'
+        else
+            <result><actual>{$actual}</actual><expected>{$expected}</expected></result>
+};
