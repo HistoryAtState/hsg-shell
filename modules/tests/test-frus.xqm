@@ -196,7 +196,6 @@ declare %test:assertEmpty function x:test-frus-cover-img-none() {
  :  RETURN a <a/> with attributes
  :)
 declare
-    %test:pending('Awaiting NPE resolution - TFJH')
     %test:assertEquals('true')
 function x:test-frus-prev-link() {
     let $node := 
@@ -249,7 +248,6 @@ function x:test-frus-prev-link() {
  :  RETURN a <a/> with attributes
  :)
 declare
-    %test:pending('Awaiting NPE resolution - TFJH')
     %test:assertEquals('true')
 function x:test-frus-next-link() {
     let $node := 
