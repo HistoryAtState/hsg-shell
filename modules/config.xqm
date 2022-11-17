@@ -240,6 +240,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Buildings - Department History",
+            "next":     tu:get-next#1,
+            "previous": tu:get-previous#1,
             "base-path": function($document-id, $section-id) { "buildings" },
             "breadcrumb-title": function($parameters as map(*)) {
                 config:tei-full-breadcrumb-title-from-section('buildings', 'buildings', $parameters?section-id, false())
@@ -263,6 +265,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())), map{"duplicates": "use-last"})) },
             "title": "Conferences",
+            "next":     tu:get-next#1,
+            "previous": tu:get-previous#1,
             "base-path": function($document-id, $section-id) { "conferences" },
             "breadcrumb-title": function($parameters as map(*)) as xs:string? {
                 config:tei-full-breadcrumb-title(
@@ -478,6 +482,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "title": "Milestones in the History of U.S. Foreign Relations",
+            "next":     tu:get-next#1,
+            "previous": tu:get-previous#1,
             "base-path": function($document-id, $section-id) { "milestones" },
             "breadcrumb-title": function($parameters as map(*)) {
                 if (exists($parameters?section-id)) then
@@ -497,6 +503,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Short History - Department History",
+            "next":     tu:get-next#1,
+            "previous": tu:get-previous#1,
             "base-path": function($document-id, $section-id) { "short-history" },
             "breadcrumb-title": function($parameters as map(*)) as xs:string? {
                 config:tei-full-breadcrumb-title(
@@ -520,6 +528,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Administrative Timeline - Department History",
+            "next":     tu:get-next#1,
+            "previous": tu:get-previous#1,
             "base-path": function($document-id, $section-id) { "timeline" },
             "breadcrumb-title": function($parameters as map(*)) as xs:string? {
                 config:tei-full-breadcrumb-title(
@@ -542,6 +552,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "FAQ - About Us",
+            "next":     tu:get-next#1,
+            "previous": tu:get-previous#1,
             "breadcrumb-title": function($parameters as map(*)) as xs:string? {
                 config:tei-full-breadcrumb-title(
                   $parameters?publication-id,
@@ -563,6 +575,8 @@ declare variable $config:PUBLICATIONS :=
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml,  map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"})) },
             "title": "Historical Advisory Committee - About Us",
+            "next":     tu:get-next#1,
+            "previous": tu:get-previous#1,
             "breadcrumb-title": function($parameters as map(*)) as xs:string? {
                 config:tei-full-breadcrumb-title(
                   $parameters?publication-id,
@@ -644,6 +658,8 @@ declare variable $config:PUBLICATIONS :=
                 pm-frus:transform($xml, map:merge(($parameters, map:entry("document-list", true())),  map{"duplicates": "use-last"}))
             },
             "title": "History of the Foreign Relations Series",
+            "next":     tu:get-next#1,
+            "previous": tu:get-previous#1,
             "base-path": function($document-id, $section-id) { "frus-history" },
             "open-graph": map{
                     "og:type": function($node as node()?, $model as map(*)?) {'document'}
