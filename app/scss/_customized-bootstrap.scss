@@ -16,7 +16,7 @@ $icon-font-path: "../fonts/";
   right: 15%;
 }
 
-.content {
+.content:not(.osd-wrapper) {
 
   img {
     border: 1px solid $color-gray-light;

@@ -6,7 +6,9 @@
   "engines": {
     "node": ">=10.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "openseadragon": "^3.1.0"
+  },
   "devDependencies": {
     "@existdb/gulp-exist": "^3.0.3",
     "@wdio/cli": "^5.18.6",

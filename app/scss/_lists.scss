@@ -62,3 +62,15 @@
     }
 }
 
+#docs-on-page {
+  .hsg-list-group-item {
+    border-top: $default-border-style;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    &:nth-of-type(1) {
+      border-top: none;
+    }
+  }
+
+}

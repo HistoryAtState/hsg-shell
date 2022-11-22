@@ -9,6 +9,9 @@ import module namespace app="http://history.state.gov/ns/site/hsg/templates" at 
 import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace link="http://history.state.gov/ns/site/hsg/link" at "link.xqm";
+import module namespace templates="http://exist-db.org/xquery/templates" ;
+
+declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 declare namespace hsg="http://history.state.gov/ns/site/hsg";
 
@@ -90,4 +93,30 @@ declare function side:generate-section-nav($uri as xs:string) as element(div)? {
         </div>
     </aside>
   else ()
+};
+
+declare function side:docs-on-page($node, $model) {
+    if ($model?data instance of element(tei:pb)) then
+        element {node-name($node)} {
+            $node/(@* except @data-template),
+            templates:process($node/*, map:merge(($model, map{'pb-doc-ids': side:doc-ids-on-page($model?data)}), map{'duplicates':'use-last'}))
+        }
+    else ()
+};
+
+declare function side:doc-ids-on-page($this-page as element(tei:pb)) as xs:string* {
+    let $next-page := $this-page/following::tei:pb[1]
+    let $next-page-starts-document as xs:boolean := $next-page/preceding-sibling::element()[1][self::tei:head] or (not($next-page/preceding-sibling::element()) and $next-page/parent::tei:div/@type = 'document')
+    let $fragment-ending-this-page :=
+        if ($next-page-starts-document) then
+            $next-page/parent::tei:div
+        else
+            $next-page
+    let $page-div-ids :=
+        (
+            $this-page/ancestor::tei:div[@type='document'],
+            ($this-page/following::tei:div[@type='document'][not(. >> $next-page)] except $next-page/ancestor::tei:div[@type="document"][$next-page-starts-document])
+            
+        )/@xml:id
+    return $page-div-ids
 };

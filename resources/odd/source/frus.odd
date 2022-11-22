@@ -242,12 +242,15 @@
                 <elementSpec ident="ref" mode="change">
                     <model behaviour="ref"/>
                 </elementSpec>
+
                 <elementSpec ident="pb" mode="change">
                     <modelSequence>
-                        <model output="web" behaviour="link">
-                            <param name="content">concat('[', switch (@type) case 'facsimile' return 'Facsimile ' case 'typeset' return 'Typeset ' default return '', 'Page ', @n, ']')</param>
-                            <param name="link">@xml:id</param><!--<param name="link">concat('https://static.history.state.gov/frus/', root(.)/TEI/@xml:id, '/medium/', @facs, '.png')</param>-->
-                            <outputRendition>display: block; margin-left: 4pt; color: grey; float: right;</outputRendition>
+                        <model output="web" behaviour="pb-link" cssClass="hsg-facsilime-link">
+                            <desc>A "pb" link to a Facsimile or Typeset target</desc>
+                            <param name="content" value="'Page '|| @n"/>
+                            <param name="uri" value="@xml:id"/>
+                            <param name="id" value="@xml:id"/>
+                            <param name="type" value="@type"/>
                         </model>
                         <model output="print" behaviour="omit"/>
                     </modelSequence>

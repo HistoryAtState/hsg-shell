@@ -263,8 +263,9 @@ declare function pages:xml-link($node as node(), $model as map(*), $doc as xs:st
 declare
     %templates:default("view", "div")
     %templates:default("heading-offset", 0)
-function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int) {
+function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int, $document-id as xs:string?) {
     let $log := console:log("pages:view: view: " || $view || " heading-offset: " || $heading-offset)
+    let $log := util:log('info', ('pages:view, view=', $view))
     let $xml :=
         if ($view = "div") then
             if ($model?data[@subtype='removed-pending-rewrite']) then
@@ -281,12 +282,40 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
             $model?data//*:body/*
 
     return
-        if ($xml instance of element(tei:pb)) then
-            let $href := concat('//', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
-            return
-                <div class="content">
-                    <img src="{$href}" class="img-responsive img-thumbnail center-block"/>
-                </div>
+        if ($xml instance of element(tei:pb))
+        then (
+            let $this-page := $xml
+            let $next-page := $this-page/following::tei:pb[1]
+            let $next-page-starts-document := $next-page/preceding-sibling::element()[1][self::tei:head] or (not($next-page/preceding-sibling::element()) and $next-page/parent::tei:div/@type = 'document')
+            let $fragment-ending-this-page :=
+                if ($next-page-starts-document) then
+                    $next-page/parent::tei:div
+                else
+                    $next-page
+            let $page-div-ids :=
+                (
+                    $this-page/ancestor::tei:div[@type='document'],
+                    $fragment-ending-this-page/ancestor-or-self::tei:div[@type='document']/preceding::tei:div[@type='document'][.>> $this-page]
+                )/@xml:id
+
+            let $pg-id :=  concat('#', $xml/@xml:id)
+            let $tif-graphic := $this-page/ancestor::tei:TEI//tei:surface[@start=string($pg-id)]//tei:graphic[@mimeType="image/tiff"]
+            let $tif-graphic-height := $tif-graphic/@height => substring-before("px")
+            let $tif-graphic-width := $tif-graphic/@width => substring-before("px")
+            let $tif-graphic-url := $tif-graphic/@url
+            let $src := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
+            return (
+                <noscript>
+                    <div class="content">
+                        <img src="{ $src }" class="img-responsive img-thumbnail center-block"/>
+                    </div>
+                </noscript>
+                ,
+                <section class="osd-wrapper content">
+                    <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }" data-url="{ $tif-graphic-url }" data-width="{ $tif-graphic-width }" data-height="{ $tif-graphic-height }"></div>
+                </section>
+            )
+        )
         else
             pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path, "heading-offset": $heading-offset })
 };
