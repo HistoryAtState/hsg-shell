@@ -556,3 +556,13 @@ declare function app:insert-url-parameter($node as node(), $model as map(*)) {
         )
     }, $node/@* except $node/@href, $node/node() }
 };
+
+declare function app:error-description($node as node(), $model as map(*)) {
+    try {templates:error-description($node, $model)}
+    catch * {
+        element { node-name($node) } {
+            $node/@*,
+            $err:description
+        }
+    }
+};

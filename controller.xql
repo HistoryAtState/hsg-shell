@@ -1722,7 +1722,7 @@ else if (matches($exist:path, '^/education/?')) then
             </dispatch>
 
 (: handle requests for news pages :)
- else if (matches($exist:path, '^/news/?')) then
+ else if (matches($exist:path, '^/news(/|$)')) then
     let $fragments := tokenize(substring-after($exist:path, '/news/'), '/')[. ne '']
     let $log := util:log('info', ('controller.xq, Endpoint => ^/news/?'))
     let $log := util:log('info', ('$fragments=', $fragments))
