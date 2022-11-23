@@ -37,6 +37,8 @@
                   </div>
                </div>
 
+                <div data-template="app:fix-links">
+                    <div data-template="toc:frus-toc"/>
                 </div>
 
                <div id="toc" data-template="app:fix-links">

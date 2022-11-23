@@ -324,3 +324,13 @@ declare function toc:generate-frus-tocs() {
         )
         return xmldb:store('/db/apps/frus/frus-toc', $toc-name, $toc, 'application/xml')
 };
+
+declare
+    %templates:replace
+function toc:frus-toc($node as node(), $model as map(*)) as element()* {
+    let $toc-path := $config:FRUS_VOLUMES_TOC || $model?document-id || '-toc.xml'
+    let $toc-content := doc($toc-path)
+    return (
+        <div>{ $toc-content }</div>
+    )
+};
