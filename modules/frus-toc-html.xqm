@@ -309,6 +309,10 @@ declare function toc:paginate($child-document-count as xs:int, $start as xs:int)
         ()
 };
 
+(:
+    TODO: Add processing this function to post-install.xql with the according permissions,
+    check for target collection and create a new, empty one, if necessary
+:)
 declare function toc:generate-frus-tocs() {
     let $xsl-url := doc('/db/apps/hsg-shell/modules/lib/frus-toc.xsl')
     for $volume in collection($config:FRUS_VOLUMES_COL)
