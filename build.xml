@@ -86,6 +86,7 @@
             <exclude name="package-lock.json"/>
             <exclude name="bower.json"/>
             <exclude name=".idea/**"/>
+            <exclude name=".vscode/**"/>
             <exclude name="tests/reports/**"/>
             <exclude name="npm-shrinkwrap.json"/>
             <exclude name="build.properties.local.xml"/>
