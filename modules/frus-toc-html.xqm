@@ -9,6 +9,7 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
@@ -338,14 +339,13 @@ function toc:frus-toc($node as node(), $model as map(*)) as element()* {
 declare function toc:highlight-current($node as node(), $model as map(*)) {
     let $current-ids := $node/@data-template-current-ids
     let $is-current := $model?section-id = tokenize($current-ids, '\s')
-    let $log := util:log('debug', ('toc:highlight-current, $current-ids=', $current-ids))
-    let $log := util:log('debug', ('toc:highlight-current, $is-current=', $is-current))
 
     return (
         element { node-name($node) } {
-            $node/@* except ($node/@data-template-current-ids, $node/@class),
+            $node/@* except ($node/@data-template-current-ids, $node/@class, $node/@href ),
             attribute class { string-join(($node/@class, 'hsg-current'[$is-current]), ' ') },
-            $node/node()
+            attribute href { app:fix-href($node/@href) },
+            $node/node() => templates:process($model)
         }
     )
 };
