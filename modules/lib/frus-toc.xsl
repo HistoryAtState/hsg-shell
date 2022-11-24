@@ -54,11 +54,11 @@
                 'hsg-toc__chapters__item',
                 'js-accordion'[$child_list]
             )"/>
-        <li data-template="toc:highlight-current" class="{string-join($classes, ' ')}">
+        <li class="{string-join($classes, ' ')}">
             
-            <xsl:attribute name="data-template-current-ids" select="string-join(($docIDs), ' ')"/>
+            <a href="/historicaldocuments/{$documentID}/{@xml:id}" data-template="toc:highlight-current">
             
-            <a href="/historicaldocuments/{$documentID}/{@xml:id}">
+                <xsl:attribute name="data-template-current-ids" select="string-join(($docIDs), ' ')"/>
                 <xsl:apply-templates mode="html" select="tei:head"/>
                 <xsl:where-populated>
                     <span>
