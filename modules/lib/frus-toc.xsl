@@ -29,7 +29,7 @@
             <div class="hsg-panel-heading hsg-toc__header">
                 <h4 class="hsg-sidebar-title">Contents</h4>
             </div>
-            <nav aria-label="Side navigation,,,">
+            <nav aria-label="Side navigation">
                 <ul class="hsg-toc__chapters">
                     <xsl:apply-templates select="tei:text"/>
                 </ul>
@@ -40,7 +40,7 @@
     <xsl:template match="tei:div[@xml:id][not(@type = ('document'))]">
         <xsl:variable name="accDocs" as="xs:string*" select="accumulator-after('document-nos')"/>
         <xsl:variable name="prevDocs" as="xs:string*" select="accumulator-before('document-nos')"/>
-        <xsl:variable name="docs" as="xs:string*" select="$accDocs[not(. = $prevDocs)]"/>
+        <xsl:variable name="docs" as="xs:string*" select="if (tei:div[@type eq 'document']) then $accDocs[not(. = $prevDocs)] else ()"/>
         <xsl:variable name="prevDocIDs" as="xs:string*" select="accumulator-before('document-ids')"/>
         <xsl:variable name="docIDs" as="xs:string*" select="accumulator-after('document-ids')[not(. = $prevDocIDs)]"/>
         <xsl:variable name="child_list" as="element(ul)?">
