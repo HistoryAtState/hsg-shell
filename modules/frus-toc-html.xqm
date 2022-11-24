@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 (:~
  : Template functions to render table of contents.
@@ -331,16 +331,20 @@ function toc:frus-toc($node as node(), $model as map(*)) as element()* {
     let $toc-path := $config:FRUS_VOLUMES_TOC || $model?document-id || '-toc.xml'
     let $log := util:log('debug', ('toc:frus-toc, $model?section-id=', $model?section-id))
     return (
-        doc($toc-path)/*
+        doc($toc-path)/* => templates:process($model)
     )
 };
 
-declare function toc:highlight-current($node as node(), $model as map(*), $current-ids) {
+declare function toc:highlight-current($node as node(), $model as map(*)) {
+    let $current-ids := $node/@data-template-current-ids
     let $is-current := $model?section-id = tokenize($current-ids, '\s')
+    let $log := util:log('debug', ('toc:highlight-current, $current-ids=', $current-ids))
+    let $log := util:log('debug', ('toc:highlight-current, $is-current=', $is-current))
+
     return (
         element { node-name($node) } {
-            $node/@* except $node/@data-template-current-ids,
-            attribute class { string-join(($node/class, 'hsg-current'[$is-current]), ' ') },
+            $node/@* except ($node/@data-template-current-ids, $node/@class),
+            attribute class { string-join(($node/@class, 'hsg-current'[$is-current]), ' ') },
             $node/node()
         }
     )
