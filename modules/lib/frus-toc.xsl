@@ -43,7 +43,7 @@
         <xsl:variable name="prevDocs" as="xs:string*" select="accumulator-before('document-nos')"/>
         <xsl:variable name="docs" as="xs:string*" select="$accDocs[not(. = $prevDocs)]"/>
         <xsl:variable name="prevDocIDs" as="xs:string*" select="accumulator-before('document-ids')"/>
-        <xsl:variable name="docIDs" as="xs:string*" select="accumulator-after('document-ids')[not(. = $prevDocIDs)]"/>
+        <xsl:variable name="docIDs" as="xs:string*" select="if (tei:div[@type='document']) then accumulator-after('document-ids')[not(. = $prevDocIDs)] else ()"/>
         <xsl:variable name="child_list" as="element(ul)?">
             <xsl:where-populated>
                 <ul class="hsg-toc__chapters__nested">
@@ -57,9 +57,7 @@
             )"/>
         <li data-template="toc:highlight-current" class="{string-join($classes, ' ')}">
             
-            <xsl:if test="exists($docIDs) and tei:div[@type='document']">
-                <xsl:attribute name="data-template-current-ids" select="string-join((@xml:id, $docIDs), ' ')"/>
-            </xsl:if>
+            <xsl:attribute name="data-template-current-ids" select="string-join((@xml:id, $docIDs), ' ')"/>
             
             <a href="/historicaldocuments/{$documentID}/{@xml:id}">
                 <xsl:apply-templates mode="html" select="tei:head"/>
