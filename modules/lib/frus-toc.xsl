@@ -21,8 +21,7 @@
     </xsl:accumulator>
     
     <xsl:accumulator name="document-ids" initial-value="()" as="xs:string*">
-        <xsl:accumulator-rule match="tei:div[tei:div/@type = 'document']" select="()"/>
-        <xsl:accumulator-rule match="tei:div[@type eq 'document']" select="($value, @xml:id)" phase="end"/>
+        <xsl:accumulator-rule match="tei:div" select="($value, @xml:id)" phase="end"/>
     </xsl:accumulator>
     
     <xsl:template match="tei:TEI">
@@ -43,7 +42,7 @@
         <xsl:variable name="prevDocs" as="xs:string*" select="accumulator-before('document-nos')"/>
         <xsl:variable name="docs" as="xs:string*" select="$accDocs[not(. = $prevDocs)]"/>
         <xsl:variable name="prevDocIDs" as="xs:string*" select="accumulator-before('document-ids')"/>
-        <xsl:variable name="docIDs" as="xs:string*" select="if (tei:div[@type='document']) then accumulator-after('document-ids')[not(. = $prevDocIDs)] else ()"/>
+        <xsl:variable name="docIDs" as="xs:string*" select="accumulator-after('document-ids')[not(. = $prevDocIDs)]"/>
         <xsl:variable name="child_list" as="element(ul)?">
             <xsl:where-populated>
                 <ul class="hsg-toc__chapters__nested">
@@ -57,7 +56,7 @@
             )"/>
         <li data-template="toc:highlight-current" class="{string-join($classes, ' ')}">
             
-            <xsl:attribute name="data-template-current-ids" select="string-join((@xml:id, $docIDs), ' ')"/>
+            <xsl:attribute name="data-template-current-ids" select="string-join(($docIDs), ' ')"/>
             
             <a href="/historicaldocuments/{$documentID}/{@xml:id}">
                 <xsl:apply-templates mode="html" select="tei:head"/>
