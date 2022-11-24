@@ -329,8 +329,19 @@ declare
     %templates:replace
 function toc:frus-toc($node as node(), $model as map(*)) as element()* {
     let $toc-path := $config:FRUS_VOLUMES_TOC || $model?document-id || '-toc.xml'
-    let $toc-content := doc($toc-path)
+    let $log := util:log('debug', ('toc:frus-toc, $model?section-id=', $model?section-id))
     return (
-        <div>{ $toc-content }</div>
+        doc($toc-path)/*
+    )
+};
+
+declare function toc:highlight-current($node as node(), $model as map(*), $current-ids) {
+    let $is-current := $model?section-id = tokenize($current-ids, '\s')
+    return (
+        element { node-name($node) } {
+            $node/@* except $node/@data-template-current-ids,
+            attribute class { string-join(($node/class, 'hsg-current'[$is-current]), ' ') },
+            $node/node()
+        }
     )
 };
