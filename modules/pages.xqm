@@ -396,6 +396,7 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                 "div" : $div,
                 "work" : $work
             }
+        else
             let $prevDiv := ($config:PUBLICATIONS?($model?publication-id)?previous)($model)
             let $nextDiv := ($config:PUBLICATIONS?($model?publication-id)?next)($model)
             return
