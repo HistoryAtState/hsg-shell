@@ -31,6 +31,7 @@ $(document).ready(function() {
         return parseInt(size.replace(/^(\d+)px/, "$1"));
     }
 
+    /*
     function load(params, direction, id) {
         var animOut = direction == "nav-next" ? "fadeOutLeft" : (direction == "nav-prev" ? "fadeOutRight" : "fadeOut");
         var animIn = direction == "nav-next" ? "fadeInRight" : (direction == "nav-prev" ? "fadeInLeft" : "fadeIn");
@@ -110,6 +111,7 @@ $(document).ready(function() {
             });
         });
     }
+    */
 
     //-------------- Search Filters and Forms--------------//
 
@@ -464,10 +466,10 @@ $(document).ready(function() {
                 html: true
             });
         });
-        initNavigation(".content .section-link");
+        //initNavigation(".content .section-link");
     }
 
-    function initNavigation(selector) {
+    /*function initNavigation(selector) {
         // click on page navigation previous/next buttons
         $(selector).click(function(ev) {
             ev.preventDefault();
@@ -480,7 +482,7 @@ $(document).ready(function() {
             }
             load(params, this.className.split(" ")[0], this.hash);
         });
-    }
+    }*/
 
     function highlightToc(activeId) {
         $("#toc li a").removeClass("highlight");
@@ -517,13 +519,13 @@ $(document).ready(function() {
         $("#content-inner").css("font-size", (size - 1) + "px");
     });
 
-    $(window).on("popstate", function(ev) {
+    /*$(window).on("popstate", function(ev) {
         var params = {
             url: window.location.pathname.replace(new RegExp("^" + appRoot + "(.*)$"), "$1")
         };
         //console.log("popstate: %s", params.url);
         load(params);
-    });
+    });*/
 
     $("#collapse-sidebar").click(function(ev) {
         $("#sidebar").toggleClass("hidden");
@@ -534,7 +536,7 @@ $(document).ready(function() {
         }
     });
 
-    initNavigation("#content .page-nav, .content .section-link, #toc .toc-link, #person-panel a, #gloss-panel a");
+    //initNavigation("#content .page-nav, .content .section-link, #toc .toc-link, #person-panel a, #gloss-panel a");
     initContent();
 
     $('[data-toggle="tooltip"]').tooltip({placement: "auto top"});
