@@ -8,6 +8,7 @@ module namespace config="http://history.state.gov/ns/site/hsg/config";
 
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace tu="http://history.state.gov/ns/site/hsg/tei-util" at "tei-util.xqm";
+import module namespace frus-history = "http://history.state.gov/ns/site/hsg/frus-history-html" at "frus-history-html.xqm";
 
 import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../transform/frus-web-module.xql";
 
@@ -677,8 +678,10 @@ declare variable $config:PUBLICATIONS :=
               }
         },
         "frus-history-documents": map {
-          "select-document": function($document-id) { doc($config:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml") },
-          "breadcrumb-title": function($parameters as map(*)) as xs:string? {
+            "next": frus-history:get-next-doc#1,
+            "previous": frus-history:get-previous-doc#1,
+            "select-document": function($document-id) { doc($config:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml") },
+            "breadcrumb-title": function($parameters as map(*)) as xs:string? {
               config:tei-short-breadcrumb-title($parameters?publication-id, $parameters?document-id)
             }
         },
