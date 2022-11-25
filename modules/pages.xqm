@@ -110,7 +110,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                     if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
                         map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
                     else (),
-                "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
+                "odd": (if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else(), $config:odd-transform-default)[1],
         		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
         		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"}),
         		"url":
@@ -143,16 +143,16 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
 
 declare function pages:last-modified($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified($document-id, $section-id)
+        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified!.($document-id, $section-id)
     else
-        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified($document-id)
+        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified!.($document-id)
 };
 
 declare function pages:created($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        map:get($config:PUBLICATIONS, $publication-id)?section-created($document-id, $section-id)
+        map:get($config:PUBLICATIONS, $publication-id)?section-created!.($document-id, $section-id)
     else
-        map:get($config:PUBLICATIONS, $publication-id)?document-created($document-id)
+        map:get($config:PUBLICATIONS, $publication-id)?document-created!.($document-id)
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
@@ -161,7 +161,7 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?,
     $view as xs:string, $ignore as xs:boolean?) {
-    console:log("pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
+    util:log("debug", "pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
     let $block :=
         if ($view = "div") then
             if ($section-id) then (
@@ -396,9 +396,8 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                 "div" : $div,
                 "work" : $work
             }
-        else
-            let $prevDiv := $config:PUBLICATIONS?($model?publication-id)?previous($div)
-            let $nextDiv := $config:PUBLICATIONS?($model?publication-id)?next($div)
+            let $prevDiv := ($config:PUBLICATIONS?($model?publication-id)?previous)($model)
+            let $nextDiv := ($config:PUBLICATIONS?($model?publication-id)?next)($model)
             return
                 map {
                     "previous" : $prevDiv,
@@ -432,20 +431,18 @@ declare
 function pages:navigation-link($node as node(), $model as map(*), $direction as xs:string, $view as xs:string) {
     if ($view = "single") then
         ()
-    else if ($model($direction)) then
-        <a data-doc="{util:document-name($model($direction))}"
-            data-root="{util:node-id($model($direction))}"
+    else if (exists($model($direction))) then
+        <a data-doc="{util:document-name($model?($direction)?data)}"
+            data-root="{util:node-id($model?($direction)?data)}"
             data-current="{util:node-id($model('div'))}">
         {
             $node/@* except $node/@href,
             let $publication-id := $model?publication-id
             let $document-id := $model?document-id
-            let $section-id := $model($direction)/@xml:id
             let $href :=
-                if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'html-href')) then
-                    map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
-                else
-                    $model($direction)/@xml:id
+                typeswitch ($model?($direction)?href)
+                case $fn as function(*) return $fn($model)
+                default $s return $s
             return
                 attribute href { app:fix-href($href) },
             $node/node()
