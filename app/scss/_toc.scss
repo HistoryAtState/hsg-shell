@@ -120,6 +120,16 @@
   ul > li > ul > li > ul > li > a {
     padding-left: 5.3rem;
   }
+
+  // level 5+
+  ul > li > ul > li > ul > li > ul > li > a {
+    padding-left: 6.4rem;
+  }
+
+  // level 6+
+  ul > li > ul > li > ul > li > ul > li > ul > li > a {
+    padding-left: 8rem;
+  }
 }
 
 .hsg-toc__chapters {
@@ -155,7 +165,7 @@
       border-bottom: none;
     }
 
-    #{$el}__item > .hsg-current {
+    #{$el}__item > .hsg-current:last-child {
       background-color: $color-gray-lightest;
     }
   }
