@@ -109,13 +109,28 @@ return
             if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
                 map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
             else ()
+
         let $html :=
-            if ($xml instance of element(tei:pb)) then
-                let $href := concat('//', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
-                return
-                    <div class="content">
-                        <img src="{$href}" class="img-responsive img-thumbnail center-block"/>
-                    </div>
+            if ($xml instance of element(tei:pb))
+            then (
+                let $pg-id :=  concat('#', $xml/@xml:id)
+                let $tif-graphic := $xml/ancestor::tei:TEI//tei:surface[@start=string($pg-id)]//tei:graphic[@mimeType="image/tiff"]
+                let $tif-graphic-height := $tif-graphic/@height => substring-before("px")
+                let $tif-graphic-width := $tif-graphic/@width => substring-before("px")
+                let $tif-graphic-url := $tif-graphic/@url
+                let $src := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
+                return (
+                    <noscript>
+                        <div class="content">
+                            <img src="{ $src }" class="img-responsive img-thumbnail center-block"/>
+                        </div>
+                    </noscript>
+                    ,
+                    <section class="osd-wrapper content">
+                        <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }" data-url="{ $tif-graphic-url }" data-width="{ $tif-graphic-width }" data-height="{ $tif-graphic-height }"></div>
+                    </section>
+                )
+            )
             else
                 pages:process-content($odd, pages:get-content($xml), map { "base-uri": $base-path })
         let $html := app:fix-links($html)
@@ -153,6 +168,11 @@ return
             else
                 ($html//(h1|h2|h3))[1]
         let $doc-title := pages:title($xml/ancestor-or-self::tei:TEI)
+        let $viewer :=
+            if ($xml instance of element(tei:pb))
+            then ('true')
+            else ()
+
         return
             map {
                 "doc": $doc,
@@ -195,7 +215,8 @@ return
                       <output:omit-xml-declaration value="yes"/>
                       <output:indent>no</output:indent>
                     </output:serialization-parameters>
-                )
+                ),
+                "viewer" : $viewer
             }
         )
     else

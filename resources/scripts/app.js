@@ -1,6 +1,58 @@
-$(document).ready(function() {
+function initializeImageViewer() {
+    if ($("#viewer").get(0) != undefined) {
+
+        var osd_viewer = $('.osd-wrapper #viewer'),
+            documentId = osd_viewer.attr('data-doc-id'),
+            facsId     = osd_viewer.attr('data-facs'),
+            tif_url    = osd_viewer.attr('data-url'),
+            tif_width  = parseInt(osd_viewer.attr('data-width')),
+            tif_height = parseInt(osd_viewer.attr('data-height')),
+            scheme     = 'http',
+            server     = 'localhost', // Local Cantaloupe image server for development
+            port       = '8182',
+            debugMode  = false;
+
+        console.log('Image URI=', scheme + '://' + server + ':' + port + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif');
+
+        var viewer = OpenSeadragon({
+            id:                   "viewer",
+            prefixUrl:            "resources/images/OSD-icons/",
+            preserveViewport:     true,
+            visibilityRatio:      1,
+            //minZoomLevel:         1,
+            minZoomImageRatio:    0.9,
+            defaultZoomLevel:     1,
+            showNavigator:        true,
+            navigatorHeight:      "120px",
+            navigatorWidth:       "80px",
+            showSequenceControl:  false,
+            debugMode:            debugMode,
+            tileSources:   [{
+              "@context": "http://iiif.io/api/image/3/context.json",
+              "@id":      scheme + "://" + server + ':' + port + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
+              "height":   tif_height,
+              "width":    tif_width,
+              "maxArea":  10000000,
+              "profile":  [ "http://iiif.io/api/image/2/level2.json" ],
+              "protocol": "http://iiif.io/api/image",
+              "tiles": [{
+                "scaleFactors": [ 1, 2, 4, 8, 16, 32 ],
+                "width":        512,
+                "height":       512
+              }]
+            }]
+        });
+    }
+}
+
+$(document).ready(function($) {
     var historySupport = !!(window.history && window.history.pushState);
     var appRoot = $("html").attr("data-app");
+
+    // http://openseadragon.github.io/docs/OpenSeadragon.html#.Options
+    var isConnected = $( "#viewer" ).get(0);
+
+    initializeImageViewer();
 
     // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
@@ -53,6 +105,11 @@ $(document).ready(function() {
                         return;
                     }
                     $(".content").replaceWith(data.content);
+                    // Check if an image viewer is requested,
+                    // needs a reload to request & initialize Openseadragon!
+                    if (data.viewer) {
+                        initializeImageViewer();
+                    }
                     initContent();
                     if (data.title) {
                         $("#navigation-title").text(data.title);
@@ -61,8 +118,10 @@ $(document).ready(function() {
                         $("html head title").text(data.windowTitle);
                     }
                     if (data.breadcrumbSection) {
-                        $(".breadcrumb .section-breadcrumb").remove();
-                        $(".breadcrumb").append(data.breadcrumbSection);
+                        var oldBreadcrumb = $(".hsg-breadcrumb ol li:last-child");
+                        var newBreadcrumb = $(data.breadcrumbSection);
+                        $('a', oldBreadcrumb).attr('href', $('a', oldBreadcrumb).attr('href').replace(/\/[^\/]+$/, '/' + $('a', newBreadcrumb).attr('href')));
+                        $('a span', oldBreadcrumb).text($('a', newBreadcrumb).text());
                         // $(".breadcrumb .section").html(data.breadcrumbSection);
                     }
                     if (data.persons) {
@@ -106,7 +165,8 @@ $(document).ready(function() {
                         $(".nav-prev").css("visibility", "hidden");
                     }
                     showContent(container, animIn, animOut, id);
-                    ga('send', 'pageview');
+                    // FIXME: Currently not initialized fn
+                    //ga('send', 'pageview');
                 }
             });
         });
