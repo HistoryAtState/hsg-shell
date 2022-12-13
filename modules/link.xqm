@@ -134,3 +134,30 @@ declare function link:report-issue-body($node, $model) as xs:string {
         $error
     ) => ut:join-lines()
 };
+
+declare function link:create-link($node as element(a), $model, $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?) {
+    (: creates a link using functions defined in $config:PUBLICATIONS :)
+    let $html-href as function(*) := $config:PUBLICATIONS?($publication-id)?html-href
+    let $breadcrumb-title as function(*) := $config:PUBLICATIONS?($publication-id)?breadcrumb-title
+    return if (exists($html-href) and exists($breadcrumb-title))
+    then
+        <a>
+            {
+                attribute href {
+                    $html-href(
+                        ($model?document-id, $document-id)[1],
+                        ($model?section-id, $section-id)[1]
+                    )
+                },
+                $breadcrumb-title(
+                    map{
+                        "publication-id":   $publication-id,
+                        "document-id":      ($model?document-id, $document-id)[1],
+                        "section-id":       ($model?section-id, $section-id)[1],
+                        "truncate":         false()
+                    }
+                )
+            }
+        </a>
+    else ()
+};
