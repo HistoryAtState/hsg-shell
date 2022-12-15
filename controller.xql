@@ -223,6 +223,7 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                                             <view>
                                                 <forward url="{$exist:controller}/modules/view.xql">
                                                     <add-parameter name="document-id" value="{$document-id}"/>
+                                                    <add-parameter name="publication-id" value="frus-history-documents"/>
                                                 </forward>
                                             </view>
                                             <error-handler>

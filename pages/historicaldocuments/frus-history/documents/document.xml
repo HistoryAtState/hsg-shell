@@ -18,6 +18,14 @@
                   <p data-template="frus-history:document-pdf"/>
                   <p data-template="frus-history:document"/>
                </div>
+                <div class="row" data-template="pages:navigation">
+                    <a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
+                        <i class="glyphicon glyphicon-chevron-left"/>
+                    </a>
+                    <a data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
+                        <i class="glyphicon glyphicon-chevron-right"/>
+                    </a>
+                </div>
             </div>
             <aside data-template="pages:asides">
                <div id="sections" class="hsg-panel" data-template="app:fix-links">

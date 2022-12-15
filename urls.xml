@@ -236,7 +236,7 @@
     </step>
     <step value="frus150">
         <redirect>
-            <new-url value="departmenthistory/frus-history"/>
+            <new-url value="historicaldocuments/frus-history"/>
         </redirect>
     </step>
     <step value="departmenthistory">

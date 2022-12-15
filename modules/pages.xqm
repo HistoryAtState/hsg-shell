@@ -110,7 +110,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                     if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
                         map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
                     else (),
-                "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default,
+                "odd": (if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else(), $config:odd-transform-default)[1],
         		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
         		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"}),
         		"url":
@@ -143,16 +143,16 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
 
 declare function pages:last-modified($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified($document-id, $section-id)
+        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified!.($document-id, $section-id)
     else
-        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified($document-id)
+        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified!.($document-id)
 };
 
 declare function pages:created($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        map:get($config:PUBLICATIONS, $publication-id)?section-created($document-id, $section-id)
+        map:get($config:PUBLICATIONS, $publication-id)?section-created!.($document-id, $section-id)
     else
-        map:get($config:PUBLICATIONS, $publication-id)?document-created($document-id)
+        map:get($config:PUBLICATIONS, $publication-id)?document-created!.($document-id)
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
@@ -161,7 +161,7 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?,
     $view as xs:string, $ignore as xs:boolean?) {
-    console:log("pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
+    util:log("debug", "pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
     let $block :=
         if ($view = "div") then
             if ($section-id) then (
@@ -426,14 +426,8 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                 "work" : $work
             }
         else
-            (:  TODO: not sure if the following check for divs containing only a div as first element is needed.
-                Code was copied from tei-simple generic app where this case could occur and led to empty pages.
-                Do we need the same for hsg? The check is very expensive.
-            :)
-(:            let $parent := $div/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]:)
-            let $prevDiv := pages:get-previous($div)
-            let $nextDiv := pages:get-next($div)
-        (:        ($div//tei:div[not(*[1] instance of element(tei:div))] | $div/following::tei:div)[1]:)
+            let $prevDiv := ($config:PUBLICATIONS?($model?publication-id)?previous)($model)
+            let $nextDiv := ($config:PUBLICATIONS?($model?publication-id)?next)($model)
             return
                 map {
                     "previous" : $prevDiv,
@@ -441,27 +435,6 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                     "work" : $work,
                     "div" : $div
                 }
-};
-
-declare function pages:get-next($div as element()) {
-    if ($div/self::tei:pb) then
-        $div/following::tei:pb[1]
-    else if ($div/tei:div[@xml:id]) then
-        $div/tei:div[@xml:id][1]
-    else
-        ($div/following::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[1]
-};
-
-declare function pages:get-previous($div as element()?) {
-    if ($div/self::tei:pb) then
-        $div/preceding::tei:pb[1]
-    else if (($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[not(tei:div/@type)]) then
-        ($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[last()]
-    else
-        (
-            $div/ancestor::tei:div[@type = ('compilation', 'chapter', 'subchapter', 'section', 'part')][tei:div/@type][1],
-            ($div/preceding::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[1]
-        )[1]
 };
 
 declare function pages:get-content($div as element()) {
@@ -488,20 +461,18 @@ declare
 function pages:navigation-link($node as node(), $model as map(*), $direction as xs:string, $view as xs:string) {
     if ($view = "single") then
         ()
-    else if ($model($direction)) then
-        <a data-doc="{util:document-name($model($direction))}"
-            data-root="{util:node-id($model($direction))}"
+    else if (exists($model($direction))) then
+        <a data-doc="{util:document-name($model?($direction)?data)}"
+            data-root="{util:node-id($model?($direction)?data)}"
             data-current="{util:node-id($model('div'))}">
         {
             $node/@* except $node/@href,
             let $publication-id := $model?publication-id
             let $document-id := $model?document-id
-            let $section-id := $model($direction)/@xml:id
             let $href :=
-                if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'html-href')) then
-                    map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
-                else
-                    $model($direction)/@xml:id
+                typeswitch ($model?($direction)?href)
+                case $fn as function(*) return $fn($model)
+                default $s return $s
             return
                 attribute href { app:fix-href($href) },
             $node/node()

@@ -10,12 +10,12 @@
             </div>
          </div>
          <div class="row" data-template="pages:navigation">
-            <!--<a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
+            <a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
                <i class="glyphicon glyphicon-chevron-left"/>
             </a>
             <a data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
                <i class="glyphicon glyphicon-chevron-right"/>
-            </a>-->
+            </a>
             <div class="hsg-width-main">
                <div id="content-inner">
                   <div id="content-container">
