@@ -225,6 +225,53 @@ declare function fhh:document-list($node, $model) {
             )
 };
 
+declare function fhh:get-next-doc($model) {
+    let $div := $model?data/ancestor-or-self::tei:TEI
+    let $documents := collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
+    let $col := 
+            for $doc in $documents
+            let $created := $doc//tei:date[@type='created']/@when
+            order by $created
+            return $doc
+    let $index := index-of($col, $div)
+    let $size := count($col)
+    let $data := 
+        switch($index)
+            case $size return ()
+            default return ($col[$index + 1]//tei:body)[1]
+    let $href := if ($data) then "$app/historicaldocuments/frus-history/documents/" || substring-before(util:document-name($data), '.xml') else ()
+    return 
+        if ($data) then 
+            map{
+                "data": $data,
+                "href": $href
+            }
+        else ()
+};
+
+declare function fhh:get-previous-doc($model) {
+    let $div := $model?data/ancestor-or-self::tei:TEI
+    let $documents := collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
+    let $col := 
+            for $doc in $documents
+            let $created := $doc//tei:date[@type='created']/@when
+            order by $created
+            return $doc
+    let $index := index-of($col, $div)
+    let $data := 
+        switch($index)
+            case 1 return ()
+            default return ($col[$index - 1]//tei:body)[1]
+    let $href := if ($data) then "$app/historicaldocuments/frus-history/documents/" || substring-before(util:document-name($data), '.xml') else ()
+    return 
+        if ($data) then 
+            map{
+                "data": $data,
+                "href": $href
+            }
+        else ()
+};
+
 declare function fhh:document-list-full($node, $model, $document-id) {
     let $documents := collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
     return

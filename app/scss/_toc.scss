@@ -37,7 +37,7 @@
   background-color: #dddde8;
 }
 
-// TOC in sidebar
+// Old TOC in sidebar
 
 .hsg-toc-sidebar .toc-inner {
   > div {
@@ -71,3 +71,117 @@
     margin-left: 2em;
   }
 }
+
+// New Frus TOC in sidebar
+.hsg-toc {
+  a {
+    display: block;
+    padding: 0.7rem 1.5rem;
+    text-decoration: none;
+
+    > span {
+      color: $color-base;
+    }
+
+    &:hover {
+      background-color: $color-gray-lightest;
+      text-decoration: none;
+
+      > span {
+        color: $color-base;
+      }
+    }
+  }
+
+  a:not(.hsg-current) {
+    color: $color-base;
+
+     &:hover {
+       color: $color-primary-darker;
+     }
+
+     &:focus {
+       //outline-offset: 0;
+       outline: 0.25rem solid $color-gray-light;
+     }
+  }
+
+  // level 2+
+  ul > li > a {
+    padding-left: 1.8rem;
+  }
+
+  // level 3+
+  ul > li > ul > li > a {
+    padding-left: 3.5rem;
+  }
+
+  // level 4+
+  ul > li > ul > li > ul > li > a {
+    padding-left: 5.3rem;
+  }
+}
+
+.hsg-toc__chapters {
+  $el: '.hsg-toc__chapters';
+
+  list-style: none;
+  margin-bottom: 0;
+  margin-top: 0;
+  list-style-type: none;
+  padding-left: 0;
+
+  &__item {
+    border-bottom: 1px solid $color-gray-lighter;
+    margin-bottom: 0;
+    max-width: unset;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  // Sublist
+  &__nested {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+
+    li:first-child {
+      border-top: 1px solid $color-gray-lighter;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    #{$el}__item > .hsg-current {
+      background-color: $color-gray-lightest;
+    }
+  }
+
+  // Highlight current chapters
+  .hsg-current {
+    position: relative;
+    color: $color-primary-darker;
+    font-weight: 700;
+
+    &:focus,
+    &:active {
+      background-color: $color-gray-lightest;
+    }
+  }
+
+  & > li >  .hsg-current::after {
+    background-color: $color-primary-darker;
+    border-radius: 99rem;
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: .25rem;
+    top: .25rem;
+    width: .45rem;
+    left: 0;
+  }
+}
+
