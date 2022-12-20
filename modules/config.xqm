@@ -77,6 +77,9 @@ declare variable $config:default-view := "div";
 
 declare variable $config:FRUS_VOLUMES_COL := "/db/apps/frus/volumes";
 
+(: TODO: Create post-install task for `toc:generate-frus-tocs()` to create this folder, if not available  :)
+declare variable $config:FRUS_VOLUMES_TOC := "/db/apps/frus/frus-toc/";
+
 declare variable $config:FRUS_METADATA_COL := "/db/apps/frus/bibliography";
 
 declare variable $config:FRUS_METADATA := collection($config:FRUS_METADATA_COL);

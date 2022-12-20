@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 (:~
  : Template functions to render table of contents.
@@ -9,6 +9,7 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
@@ -309,6 +310,10 @@ declare function toc:paginate($child-document-count as xs:int, $start as xs:int)
         ()
 };
 
+(:
+    TODO: Add processing this function to post-install.xql with the according permissions,
+    check for target collection and create a new, empty one, if necessary
+:)
 declare function toc:generate-frus-tocs() {
     let $xsl-url := doc('/db/apps/hsg-shell/modules/lib/frus-toc.xsl')
     for $volume in collection($config:FRUS_VOLUMES_COL)
@@ -319,4 +324,28 @@ declare function toc:generate-frus-tocs() {
             ()
         )
         return xmldb:store('/db/apps/frus/frus-toc', $toc-name, $toc, 'application/xml')
+};
+
+declare
+    %templates:replace
+function toc:frus-toc($node as node(), $model as map(*)) as element()* {
+    let $toc-path := $config:FRUS_VOLUMES_TOC || $model?document-id || '-toc.xml'
+    let $log := util:log('debug', ('toc:frus-toc, $model?section-id=', $model?section-id))
+    return (
+        doc($toc-path)/* => templates:process($model)
+    )
+};
+
+declare function toc:highlight-current($node as node(), $model as map(*)) {
+    let $current-ids := $node/@data-template-current-ids
+    let $is-current := $model?section-id = tokenize($current-ids, '\s')
+
+    return (
+        element { node-name($node) } {
+            $node/@* except ($node/@data-template-current-ids, $node/@class, $node/@href ),
+            attribute class { string-join(($node/@class, 'hsg-current'[$is-current]), ' ') },
+            attribute href { app:fix-href($node/@href) },
+            $node/node() => templates:process($model)
+        }
+    )
 };
