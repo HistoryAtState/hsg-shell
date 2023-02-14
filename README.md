@@ -74,20 +74,20 @@ To create an up-to-date build package to install in eXist-db, this should do
 ## Build
 ### Prerequisites
 1. You will need to have `nvm` installed: 
-    Install [nvm](https://github.com/nvm-sh/nvm) and follow the [installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating).
-1. Install (or update to) the latest `npm` version with `npm install -g npm`.
-1. Install bower `npm install -g bower`.
-1. Install gulp `npm install -g gulp`. The project's gulp file depends on `gulp 4` (or higher) syntax, so make sure in the next step, that you'll have gulp 4.x running.
+    Install [nvm](https://github.com/nvm-sh/nvm) and follow the [installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating). Make sure to install nvm with a specific node version (see https://github.com/nvm-sh/nvm/blob/master/README.md#usage) `nvm install 17.6.0`.
+2. Install (or update to) the latest `npm` version with `npm install -g npm`.
+3. Install bower `npm install -g bower`.
+4. Install gulp `npm install -g gulp`. The project's gulp file depends on `gulp 4` (or higher) syntax, so make sure in the next step, that you'll have gulp 4.x running.
 
 ### Installation
-For a ready-to-install xar file, run the combined commands
+For a ready-to-install xar file, run the command
 
 ```
-ant prepare && ant node && ant
+ant
 ```
 
-* `ant prepare` will check your local paths to all the specific `npm and `gulp` binaries within the `nvm` folder and create a local build properties file for you.
-* `ant node` will install the appropriate node version for this project, which is specified in the `.nvmrc` file.
+* The included subtask `ant prepare` will check your local paths to all the specific `npm` and `gulp` binaries within the `nvm` folder and create a local build properties file for you.
+* `ant node` will install the appropriate node version for this project, which is specified in the `.nvmrc` file, currently `v17.6.0`.
 * `ant` will build a XAR file after automatically running npm install bower install and gulp (build).  
 
 ## How to update Node and other build & development tools
@@ -95,27 +95,27 @@ ant prepare && ant node && ant
 In order to build a xar package of the app with `ant` and to run scripts, that will build the app files like ie. minified css, js, you'll need to install `node.js`, `npm` and `gulp` in certain versions, that will be specified in this projects `package.json` and `package-lock.json` (for dependency locks).  
 
 ### Update node and npm versions
-*TODO: Review this chapter* 
 
 1. Install [nvm](https://github.com/nvm-sh/nvm) and follow the [installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating).
-1. Check your current node version with `node --version`, it should be `v10.6.0` or higher now (this step can be skipped once the local build file has been created by running `ant prepare && ant node`).
+1. Check your current node version with `node --version`, it should be `v17.6.0` now (this step can be skipped once the local build file has been created by running `ant`).
 1. Install (or update to) the latest `npm` version with `npm install -g npm`.
 1. Install bower `npm install -g bower`.
 1. Install gulp `npm install -g gulp`. The project's gulp file depends on `gulp 4` (or higher) syntax, so make sure in the next step, that you'll have gulp 4.x running.
 1. Check the paths, where your node, npm and gulp have been installed (depends on OS) by running `which node`,
 `which npm`, `which gulp` (this step can be skipped once the local build file has been created by running `ant prepare`).
-1. Look for file `example.local.build.properties`, copy it, rename it to `local.build.properties` and insert the current paths you just got by running the "which" commands. This file is necessary for pointing the ant task runner to the necessary build tools (this step can be skipped once the local build file has been created by running `ant prepare`).
+1. Look for file `build.properties.local.example.xml`, copy it, rename it to `build.properties.local.xml` and insert the current paths you just got by running the "which" commands. This file is necessary for pointing the ant task runner to the necessary build tools (this step can be skipped once the local build file has been created by running `ant prepare`).
 1. Install the node packages (listed in file `package.json`) by running `npm install` .
-1. If npm errors occur, try fix it either by running `npm update`, or by
+1. If npm errors occur, try fix it either by running `npm install` again, or `npm update`, or by
 deleting the entire `node_modules` folder from the project and then running `npm install` once again.
 1. Last, you may have to edit the credentials in file `local.node-exist.json` which is needed for configure the automated deployment of files from your local HSG-Shell project to your local existdb. The defaults in this file will generally apply here, unless you have modified the credentials elsewhere.
 
 ### Finally check currently installed versions
-1. node: `node -v` => Should output `v10.0.0`
-2. npm: `npm -v` => Should output at least `v6.9.0`
+
+1. node: `node -v` => Should output `v17.6.0`
+2. npm: `npm -v` => Should output at least `v8.5.0`
 3. gulp: `gulp -v` => Should output at least `CLI version: 2.2.0, Local version: 4.0.2`
 
-Now, with a running eXist-db you're ready to run either `ant prepare && ant node && ant`, `ant`, or `gulp` to test if your update was successful.
+Now, with a running eXist-db you're ready to run either `ant`, or `gulp` to test if your update was successful.
 
 ### Production
 
