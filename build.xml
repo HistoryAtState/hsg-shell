@@ -43,31 +43,22 @@
     <!-- Retrieve local paths to binaries and store them -->
     <target name="get-binary-paths">
         <echo>Call target get-binary-paths</echo>
-        <exec executable="which" outputproperty="which.gulp">
-            <arg line="gulp"/>
-        </exec>
-        <echo>Path to gulp binary: ${which.gulp}</echo>
-        <property name="path.gulp" value="${which.gulp}"/>
-        
-        <exec executable="which" outputproperty="which.node">
-            <arg line="node"/>
-        </exec>
-        <echo>Path to node binary: ${which.node}</echo>
-        <property name="path.node" value="${which.node}"/>
-        
-        <exec executable="which" outputproperty="which.npm">
-            <arg line="npm"/>
-        </exec>
-        <echo>Path to npm binary: ${which.npm}</echo>
-        <property name="path.npm" value="${which.npm}"/>
+        <echo>Path to nvm/node version: ${env.NVM_BIN}</echo>
+        <property name="node.PATH" value="${env.NVM_BIN}"/>
+
+        <echo>Path to gulp binary: ${env.NVM_BIN}/gulp</echo>
+        <property name="path.gulp" value="${env.NVM_BIN}/gulp"/>
+
+        <echo>Path to npm binary: ${env.NVM_BIN}/gulp</echo>
+        <property name="path.npm" value="${env.NVM_BIN}/npm"/>
     </target>
     
     <!-- Replace tokens with current local paths to binaries in local build property file -->
     <target name="copy-paths-to-local-build-properties" depends="get-binary-paths">
         <echo message="Copy binary paths to build.properties.local.xml"/>
-        <property name="node-PATH" value="${node.PATH}"/>
         <copy file="build.properties.xml" tofile="build.properties.local.xml" overwrite="yes">
             <filterset>
+                <filter token="node.path" value="${node.PATH}"/>
                 <filter token="npm" value="${path.npm}"/>
                 <filter token="gulp" value="${path.gulp}"/>
             </filterset>
@@ -92,8 +83,8 @@
         <echo message="Calling ant target 'copy-paths-to-local-build-properties'"/>
         <antcall target="copy-paths-to-local-build-properties"/>
     </target>
-    
-    <target name="node">
+
+    <target name="node" depends="prepare">
         <echo message="Calling ant target 'install-project-specific-node-version'"/>
         <!--
             TODO: Check if file build.properties.local.xml has been generated and display error in case of failure
@@ -108,8 +99,8 @@
     </target>
     
     <!-- / END PREPARATION -->
-    
-    <target name="run-npm">
+
+    <target name="run-npm" depends="node">
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
         <exec executable="${npm}" outputproperty="npm.output">
             <arg line="start"/>
