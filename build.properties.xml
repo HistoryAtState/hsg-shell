@@ -11,6 +11,6 @@
     <npm>@npm@</npm>
     <gulp>@gulp@</gulp>
     <node>
-        <path>/usr/local/opt/node/bin:/usr/local/bin/node</path>
+        <path>@node.path@</path>
     </node>
 </root>
