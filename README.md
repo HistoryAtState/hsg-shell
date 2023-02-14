@@ -73,11 +73,24 @@ To create an up-to-date build package to install in eXist-db, this should do
 
 ## Build
 ### Prerequisites
-1. You will need to have `nvm` installed: 
-    Install [nvm](https://github.com/nvm-sh/nvm) and follow the [installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating). Make sure to install nvm with a specific node version (see https://github.com/nvm-sh/nvm/blob/master/README.md#usage) `nvm install 17.6.0`.
-2. Install (or update to) the latest `npm` version with `npm install -g npm`.
-3. Install bower `npm install -g bower`.
-4. Install gulp `npm install -g gulp`. The project's gulp file depends on `gulp 4` (or higher) syntax, so make sure in the next step, that you'll have gulp 4.x running.
+1. You will need to have `nvm` installed:
+   Install [nvm](https://github.com/nvm-sh/nvm) and follow the [installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating). Make sure to install nvm with a specific node version (see https://github.com/nvm-sh/nvm/blob/master/README.md#usage)
+
+        nvm install 17.6.0
+
+3. Install (or update to) the latest `npm` version with:
+
+        npm install -g npm
+
+4. Install bower:
+
+        npm install -g bower
+
+5. Install gulp
+
+        npm install -g gulp
+
+   The project's gulp file depends on `gulp 4` (or higher) syntax, so make sure in the next step, that you'll have gulp 4.x running.
 
 ### Installation
 For a ready-to-install xar file, run the command
