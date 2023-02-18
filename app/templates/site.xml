@@ -329,13 +329,16 @@
         <!-- @if PRODUCTION=true -->
         <script type="text/javascript" async="async" src="$app/resources/scripts/app.all.js"
             data-template="app:fix-this-link"/>
-        <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount',
-            'UA-23344799-1']); _gaq.push(['_setDomainName', 'history.state.gov']);
-            _gaq.push(['_trackPageview']); (function() {{ var ga = document.createElement('script');
-            ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' ==
-            document.location.protocol ? 'https://ssl' : 'http://www') +
-            '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s); }})(); </script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GWKX1LXFD1"></script>
+        <script>
+        window.dataLayer = window.dataLayer ||[];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        
+        gtag('config', 'G-GWKX1LXFD1');</script>
         <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
         <script type="text/javascript" async="async"
             src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=DOS"
