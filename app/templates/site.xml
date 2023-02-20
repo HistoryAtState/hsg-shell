@@ -330,7 +330,7 @@
         <script type="text/javascript" async="async" src="$app/resources/scripts/app.all.js"
             data-template="app:fix-this-link"/>
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GWKX1LXFD1"></script>
+        <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GWKX1LXFD1"></script>
         <script>
         window.dataLayer = window.dataLayer ||[];
         function gtag() {
