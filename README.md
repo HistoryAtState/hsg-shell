@@ -146,8 +146,16 @@ google-analytics and DAP tracking.
 ### How to run local web tests
 
 #### 1. Install Chrome
-Make sure you have Google Chrome >= 79 and all required node_modules installed (`npm install`).
+Make sure you have Google Chrome >= 100 and all required node_modules installed (`npm install`).
 If you have problems with installing or running Chromedriver, have a look at these resources: [webdriver.io/docs/wdio-chromedriver-service.html](https://webdriver.io/docs/wdio-chromedriver-service.html), [stackoverflow](https://stackoverflow.com/questions/54940853/chrome-version-must-be-between-71-and-75-error-after-updating-to-chromedriver-2)
+
+It might be helpful to run 
+
+```shell
+npm install chromedriver --detect_chromedriver_version
+```
+
+if your current Chrome version doesn't match the require one. This command will check the required version and install a suitable Chromedriver for you. 
 
 #### 2. Edit configuration 
 * Edit the path to where your local Chrome binary is installed in the **web test configuration** **`wdio.conf.js`** at line: 
