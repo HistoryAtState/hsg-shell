@@ -23,17 +23,14 @@
 
         <div class="row">
             <div class="hsg-navigation-wrapper">
-                <h2 class="hsg-navigation-title" id="navigation-title"
-                    data-template="pages:navigation-title"/>
+                <h2 class="hsg-navigation-title" id="navigation-title" data-template="pages:navigation-title"/>
             </div>
         </div>
         <div class="row" data-template="pages:navigation">
-            <a data-template="pages:navigation-link" data-template-direction="previous"
-                class="page-nav nav-prev">
+            <a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
                 <i class="glyphicon glyphicon-chevron-left"/>
             </a>
-            <a data-template="pages:navigation-link" data-template-direction="next"
-                class="page-nav nav-next">
+            <a data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
                 <i class="glyphicon glyphicon-chevron-right"/>
             </a>
             <div class="hsg-width-main">
@@ -44,7 +41,7 @@
                 </div>
             </div>
             <!-- TOC Sidebar -->
-            <aside class="hsg-width-one-third">
+            <aside class="hsg-width-sidebar">
                 <div class="hsg-panel" data-template="app:fix-links">
                     <div class="hsg-panel-heading">
                         <h2 class="hsg-sidebar-title">Periods</h2>
@@ -87,7 +84,10 @@
                             <a href="$app/departmenthistory/timeline/2000-2009">2000–2009</a>
                         </li>
                         <li class="hsg-list-group-item">
-                            <a href="$app/departmenthistory/timeline/2010-2019">2010–present</a>
+                            <a href="$app/departmenthistory/timeline/2010-2019">2010–2019</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/2020-2029">2020–present</a>
                         </li>
                     </ul>
                 </div>

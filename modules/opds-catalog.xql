@@ -271,7 +271,17 @@ declare function opds:browse() {
 declare function opds:search() {
     let $taxonomy := collection($tags:TAXONOMY_COL)/taxonomy
     let $q := request:get-parameter('q', ())[1]
-    let $tag-hits := if ($q) then $taxonomy//label[ft:query(., $q)]/.. else ()
+    let $tag-hits := 
+        if (exists($q)) then 
+            (: wrap ft:query in a try-catch block to swallow errors triggered by malformed Lucene query syntax 
+             : TODO Instead of swallowing the error, provide an appropriate HTTP error code and status message :)
+            try { 
+                $taxonomy//label[ft:query(., $q)]/.. 
+            } catch * { 
+                () 
+            } 
+        else 
+            ()
     let $tag-hit-ids := $tag-hits/id
     return
 

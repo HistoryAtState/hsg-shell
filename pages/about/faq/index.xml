@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <aside class="hsg-width-one-third">
+            <aside class="hsg-width-sidebar">
                 <div id="sections" class="hsg-panel" data-template="app:fix-links">
                     <div class="hsg-panel-heading">
                         <h2 class="hsg-sidebar-title">About</h2>

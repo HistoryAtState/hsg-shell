@@ -593,7 +593,14 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
             let $range-start := $range?start
             let $range-end := $range?end
             let $query-sections-start := util:system-time()
-            let $hits := search:query-sections($adjusted-within, $volume-id, $q, $range-start, $range-end)
+            let $hits := 
+                (: wrap search:query-sections in a try-catch block to swallow ft:query errors triggered by malformed Lucene query syntax
+                 : TODO Instead of swallowing the error, provide an appropriate HTTP error code and status message :)
+                try { 
+                    search:query-sections($adjusted-within, $volume-id, $q, $range-start, $range-end) 
+                } catch * { 
+                    () 
+                }
             let $query-sections-end := util:system-time()
             let $query-sections-duration := console:log("query-sections-duration: " || $query-sections-end - $query-sections-start)
             let $sorted-hits-start := util:system-time()

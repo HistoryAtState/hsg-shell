@@ -40,7 +40,7 @@
                             make this resource searchable, but in the meantime please browse the
                             resource using the links to each period in the sidebar. We apologize for
                             any inconvenience.</p>
-                        <div class="tei-closer">Last updated, May 9, 2018.</div>
+                        <div class="tei-closer">Last updated, February 18, 2020.</div>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,10 @@
                             <a href="$app/departmenthistory/timeline/2000-2009">2000–2009</a>
                         </li>
                         <li class="hsg-list-group-item">
-                            <a href="$app/departmenthistory/timeline/2010-2019">2010–present</a>
+                            <a href="$app/departmenthistory/timeline/2010-2019">2010–2019</a>
+                        </li>
+                        <li class="hsg-list-group-item">
+                            <a href="$app/departmenthistory/timeline/2020-2029">2020–present</a>
                         </li>
                     </ul>
                 </div>
