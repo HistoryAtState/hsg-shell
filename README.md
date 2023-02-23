@@ -146,7 +146,10 @@ google-analytics and DAP tracking.
 ### How to run local web tests
 
 #### 1. Install Chrome
-Make sure you have Google Chrome >= 100 and all required node_modules installed (`npm install`).
+Make sure you have Google Chrome >= 110 and all required node_modules installed (`npm install`).
+
+##### Troubleshooting Chromedriver Problems
+
 If you have problems with installing or running Chromedriver, have a look at these resources: [webdriver.io/docs/wdio-chromedriver-service.html](https://webdriver.io/docs/wdio-chromedriver-service.html), [stackoverflow](https://stackoverflow.com/questions/54940853/chrome-version-must-be-between-71-and-75-error-after-updating-to-chromedriver-2)
 
 It might be helpful to run 
@@ -155,7 +158,13 @@ It might be helpful to run
 npm install chromedriver --detect_chromedriver_version
 ```
 
-if your current Chrome version doesn't match the require one. This command will check the required version and install a suitable Chromedriver for you. 
+All available chromedriver versions are listed here: [https://chromedriver.storage.googleapis.com/](https://chromedriver.storage.googleapis.com/).
+
+If your current Chrome version doesn't match the required one. 
+This command will check the required version and install a suitable Chromedriver for you.
+
+Note: If you are using an Apple M1 computer, the filename for chromedriver has been changed by Chrome between version 105 and 106 [See fix for node_chromedriver: https://github.com/giggio/node-chromedriver/pull/386/](https://github.com/giggio/node-chromedriver/pull/386/commits/7bc8dc46583ca484ca17707d9d98f8a1f98b9be4#). 
+When running this project's ant script on an M1 with a Chrome version <=105, you should either update Chrome to 110 like defined in file `package.json`, or change the chromedriver version to your current Chrome version to match the expected chromedriver filename.   
 
 #### 2. Edit configuration 
 * Edit the path to where your local Chrome binary is installed in the **web test configuration** **`wdio.conf.js`** at line: 
