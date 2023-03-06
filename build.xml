@@ -69,9 +69,15 @@
     </target>
     
     <!-- Call script "nvm use" in package.json to install the correct node version -->
+<<<<<<< HEAD
     <target name="install-project-specific-node-version" depends="copy-paths-to-local-build-properties">
         <echo message="Use required node version ${nvm_version} from nvmrc file..."/>
         <exec executable="${nvm_bin}/npm" outputproperty="npm.output" logError="true">
+=======
+    <target name="install-project-specific-node-version">
+        <echo message="Install node version from nvmrc file..."/>
+        <exec executable="${env.NVM_BIN}/npm" outputproperty="npm.output" logError="true">
+>>>>>>> da596c1 (fix(build): Set the binary path variable for initial build w/ $NVM_BIN)
             <arg line="run-script"/>
             <arg line="nvm"/>
             <env key="PATH" value="${node.PATH}:${env.PATH}"/>
@@ -106,7 +112,11 @@
     <!-- / END PREPARATION -->
     <target name="run-npm">
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
+<<<<<<< HEAD
         <exec executable="${nvm_bin}/npm" outputproperty="npm.output">
+=======
+        <exec executable="${env.NVM_BIN}/npm" outputproperty="npm.output">
+>>>>>>> da596c1 (fix(build): Set the binary path variable for initial build w/ $NVM_BIN)
             <arg line="start"/>
             <env key="PATH" value="${node.path}:${env.PATH}"/>
             <env key="NODE_ENV" value="${NODE_ENV.production}"/>
