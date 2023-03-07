@@ -8,6 +8,8 @@
     <available file="${git.repo.path}" type="dir" property="git.present"/>
 
     <property environment="env"/>
+    <loadfile property="nvm_version" srcFile=".nvmrc"/>
+    <property name="nvm_bin" value="${env.HOME}/.nvm/versions/node/${nvm_version}/bin"/>
     <property name="files-to-be-excluded" value="${build.dir}/**,**/*.tmpl,node_modules/**,package.json,package-lock.json,gulpfile.js,.idea/**,.* example.local.build.properties,npm-shrinkwrap.json,tests/reports/**"/>
     
     <!-- Allow NODE_ENV to be passed in either as an environment variable or as a regular variable -->
@@ -25,7 +27,7 @@
     
     <target name="clean">
         <echo message="Calling gulp clean..."/>
-        <exec executable="${env.NVM_BIN}/gulp" outputproperty="gulp.output">
+        <exec executable="${nvm_bin}/gulp" outputproperty="gulp.output">
             <arg line="clean"/>
             <env key="PATH" value="${node.path}:${env.PATH}"/>
         </exec>
@@ -43,14 +45,14 @@
     <!-- Retrieve local paths to binaries and store them -->
     <target name="get-binary-paths">
         <echo>Call target get-binary-paths</echo>
-        <echo>Path to nvm/node version: ${env.NVM_BIN}</echo>
-        <property name="node.PATH" value="${env.NVM_BIN}"/>
+        <echo>Path to nvm/node version: ${nvm_bin}</echo>
+        <property name="node.PATH" value="${nvm_bin}"/>
 
-        <echo>Path to gulp binary: ${env.NVM_BIN}/gulp</echo>
-        <property name="path.gulp" value="${env.NVM_BIN}/gulp"/>
+        <echo>Path to gulp binary: ${nvm_bin}/gulp</echo>
+        <property name="path.gulp" value="${nvm_bin}/gulp"/>
 
-        <echo>Path to npm binary: ${env.NVM_BIN}/gulp</echo>
-        <property name="path.npm" value="${env.NVM_BIN}/npm"/>
+        <echo>Path to npm binary: ${nvm_bin}/gulp</echo>
+        <property name="path.npm" value="${nvm_bin}/npm"/>
     </target>
     
     <!-- Replace tokens with current local paths to binaries in local build property file -->
@@ -68,9 +70,9 @@
     </target>
     
     <!-- Call script "nvm use" in package.json to install the correct node version -->
-    <target name="install-project-specific-node-version">
+    <target name="install-project-specific-node-version" depends="copy-paths-to-local-build-properties">
         <echo message="Install node version from nvmrc file..."/>
-        <exec executable="${env.NVM_BIN}/npm" outputproperty="npm.output" logError="true">
+        <exec executable="${nvm_bin}/npm" outputproperty="npm.output" logError="true">
             <arg line="run-script"/>
             <arg line="nvm"/>
             <env key="PATH" value="${node.PATH}:${env.PATH}"/>
@@ -102,7 +104,7 @@
 
     <target name="run-npm" depends="node">
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
-        <exec executable="${env.NVM_BIN}/npm" outputproperty="npm.output">
+        <exec executable="${nvm_bin}/npm" outputproperty="npm.output">
             <arg line="start"/>
             <env key="PATH" value="${node.path}:${env.PATH}"/>
             <env key="NODE_ENV" value="${NODE_ENV.production}"/>
