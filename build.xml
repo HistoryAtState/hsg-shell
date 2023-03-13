@@ -104,6 +104,7 @@
     </target>
     
     <!-- / END PREPARATION -->
+
     <target name="run-npm">
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
         <exec executable="${nvm_bin}/npm" outputproperty="npm.output">
