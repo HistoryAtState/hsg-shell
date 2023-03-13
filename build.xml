@@ -36,12 +36,7 @@
         <echo message="Deleting xar files..."/>
         <delete dir="${build.dir}"/>
     </target>
-    
-    <!-- PREPARATION OF LOCAL BUILD PROPERTIES -->
-    <echo message="------------------------------------------------------------"/>
-    <echo message="Prepare local build properties and node version"/>
-    <echo message="------------------------------------------------------------"/>
-    
+
     <!-- Retrieve local paths to binaries and store them -->
     <target name="get-binary-paths">
         <echo>Call target get-binary-paths</echo>
@@ -82,6 +77,10 @@
     </target>
     
     <target name="prepare">
+        <!-- PREPARATION OF LOCAL BUILD PROPERTIES -->
+        <echo message="------------------------------------------------------------"/>
+        <echo message="Prepare local build properties and node version"/>
+        <echo message="------------------------------------------------------------"/>
         <echo message="Calling ant target 'copy-paths-to-local-build-properties'"/>
         <antcall target="copy-paths-to-local-build-properties"/>
     </target>
@@ -102,7 +101,7 @@
     
     <!-- / END PREPARATION -->
 
-    <target name="run-npm" depends="node">
+    <target name="run-npm">
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
         <exec executable="${nvm_bin}/npm" outputproperty="npm.output">
             <arg line="start"/>
@@ -113,7 +112,7 @@
     </target>
     
         
-    <target name="xar" depends="clean,run-npm,git.revision" description="create xar file">
+    <target name="xar" depends="node,clean,run-npm,git.revision" description="create xar file">
         <echo message="Creating build folder..."/>
         <mkdir dir="${build.dir}"/>
         <copy todir="${basedir}" overwrite="true" verbose="true">        
