@@ -8,7 +8,11 @@
     <available file="${git.repo.path}" type="dir" property="git.present"/>
 
     <property environment="env"/>
-    <loadfile property="nvm_version" srcFile=".nvmrc"/>
+    <loadfile property="nvm_version" srcFile=".nvmrc">
+        <filterchain>
+            <filterreader classname="org.apache.tools.ant.filters.StripLineBreaks"/>
+        </filterchain>
+    </loadfile>
     <property name="nvm_bin" value="${env.HOME}/.nvm/versions/node/${nvm_version}/bin"/>
     <property name="files-to-be-excluded" value="${build.dir}/**,**/*.tmpl,node_modules/**,package.json,package-lock.json,gulpfile.js,.idea/**,.* example.local.build.properties,npm-shrinkwrap.json,tests/reports/**"/>
     
@@ -66,7 +70,7 @@
     
     <!-- Call script "nvm use" in package.json to install the correct node version -->
     <target name="install-project-specific-node-version" depends="copy-paths-to-local-build-properties">
-        <echo message="Install node version from nvmrc file..."/>
+        <echo message="Use required node version ${nvm_version} from nvmrc file..."/>
         <exec executable="${nvm_bin}/npm" outputproperty="npm.output" logError="true">
             <arg line="run-script"/>
             <arg line="nvm"/>
