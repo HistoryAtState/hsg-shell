@@ -8,6 +8,12 @@
     <available file="${git.repo.path}" type="dir" property="git.present"/>
 
     <property environment="env"/>
+    <loadfile property="nvm_version" srcFile=".nvmrc">
+        <filterchain>
+            <filterreader classname="org.apache.tools.ant.filters.StripLineBreaks"/>
+        </filterchain>
+    </loadfile>
+    <property name="nvm_bin" value="${env.HOME}/.nvm/versions/node/${nvm_version}/bin"/>
     <property name="files-to-be-excluded" value="${build.dir}/**,**/*.tmpl,node_modules/**,package.json,package-lock.json,gulpfile.js,.idea/**,.* example.local.build.properties,npm-shrinkwrap.json,tests/reports/**"/>
     
     <!-- Allow NODE_ENV to be passed in either as an environment variable or as a regular variable -->
@@ -25,7 +31,7 @@
     
     <target name="clean">
         <echo message="Calling gulp clean..."/>
-        <exec executable="${gulp}" outputproperty="gulp.output">
+        <exec executable="${nvm_bin}/gulp" outputproperty="gulp.output">
             <arg line="clean"/>
             <env key="PATH" value="${node.path}:${env.PATH}"/>
         </exec>
@@ -34,11 +40,74 @@
         <echo message="Deleting xar files..."/>
         <delete dir="${build.dir}"/>
     </target>
+
+    <!-- Retrieve local paths to binaries and store them -->
+    <target name="get-binary-paths">
+        <echo>Call target get-binary-paths</echo>
+        <echo>Path to nvm/node version: ${nvm_bin}</echo>
+        <property name="node.PATH" value="${nvm_bin}"/>
+
+        <echo>Path to gulp binary: ${nvm_bin}/gulp</echo>
+        <property name="path.gulp" value="${nvm_bin}/gulp"/>
+
+        <echo>Path to npm binary: ${nvm_bin}/gulp</echo>
+        <property name="path.npm" value="${nvm_bin}/npm"/>
+    </target>
     
+    <!-- Replace tokens with current local paths to binaries in local build property file -->
+    <target name="copy-paths-to-local-build-properties" depends="get-binary-paths">
+        <echo message="Copy binary paths to build.properties.local.xml"/>
+        <copy file="build.properties.xml" tofile="build.properties.local.xml" overwrite="yes">
+            <filterset>
+                <filter token="node.path" value="${node.PATH}"/>
+                <filter token="npm" value="${path.npm}"/>
+                <filter token="gulp" value="${path.gulp}"/>
+            </filterset>
+        </copy>
+        
+        <echo>Copied ${path.npm} and ${path.gulp} to local.build.properties</echo>
+    </target>
     
+    <!-- Call script "nvm use" in package.json to install the correct node version -->
+    <target name="install-project-specific-node-version" depends="copy-paths-to-local-build-properties">
+        <echo message="Use required node version ${nvm_version} from nvmrc file..."/>
+        <exec executable="${nvm_bin}/npm" outputproperty="npm.output" logError="true">
+            <arg line="run-script"/>
+            <arg line="nvm"/>
+            <env key="PATH" value="${node.PATH}:${env.PATH}"/>
+            <env key="NODE_ENV" value="${NODE_ENV}"/>
+        </exec>
+        <echo message="${npm.output}"/>
+    </target>
+    
+    <target name="prepare">
+        <!-- PREPARATION OF LOCAL BUILD PROPERTIES -->
+        <echo message="------------------------------------------------------------"/>
+        <echo message="Prepare local build properties and node version"/>
+        <echo message="------------------------------------------------------------"/>
+        <echo message="Calling ant target 'copy-paths-to-local-build-properties'"/>
+        <antcall target="copy-paths-to-local-build-properties"/>
+    </target>
+
+    <target name="node" depends="prepare">
+        <echo message="Calling ant target 'install-project-specific-node-version'"/>
+        <!--
+            TODO: Check if file build.properties.local.xml has been generated and display error in case of failure
+            <condition property="build-file-has-been-prepared">
+                <resourcecontains resource="build.properties.local.xml" substring="bin"/>
+            </condition>
+            
+            <fail message="ERROR: The local build properties file has not been generated. Please run `ant prepare` (again)."
+                  unless="build-file-has-been-prepared"/>
+        -->
+        <antcall target="install-project-specific-node-version"/>
+    </target>
+    
+    <!-- / END PREPARATION -->
+
     <target name="run-npm">
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
-        <exec executable="${npm}" outputproperty="npm.output">
+        <exec executable="${nvm_bin}/npm" outputproperty="npm.output">
             <arg line="start"/>
             <env key="PATH" value="${node.path}:${env.PATH}"/>
             <env key="NODE_ENV" value="${NODE_ENV.production}"/>
@@ -47,7 +116,7 @@
     </target>
     
         
-    <target name="xar" depends="clean,run-npm,git.revision" description="create xar file">
+    <target name="xar" depends="node,clean,run-npm,git.revision" description="create xar file">
         <echo message="Creating build folder..."/>
         <mkdir dir="${build.dir}"/>
         <copy todir="${basedir}" overwrite="true" verbose="true">        

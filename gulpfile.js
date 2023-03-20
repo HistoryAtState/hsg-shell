@@ -3,7 +3,7 @@
 const gulp = require('gulp'),
     fs = require('fs'),
     exist = require('@existdb/gulp-exist'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-sass')(require('sass')),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     del = require('del'),
@@ -232,7 +232,10 @@ gulp.task('other:watch', function () {
 
 // general //
 
-gulp.task('build', gulp.series('clean', gulp.parallel('fonts:copy', 'images:optimize', 'styles:concat', 'templates:build', 'scripts:concat')));
+gulp.task('build', gulp.series('clean', gulp.parallel('fonts:copy', 'styles:concat', 'templates:build', 'scripts:concat')));
+
+// separate task only for optimizing images
+gulp.task('build:images', gulp.parallel('images:optimize'));
 
 gulp.task('deploy', gulp.series('build', function () {
     return gulp.src([
