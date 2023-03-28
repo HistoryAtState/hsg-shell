@@ -133,7 +133,7 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
                     if ($first = $last) then
                         concat(' ', $first)
                     else
-                        concat('s ', $first, '-', $last)
+                        concat('s ', $first, '–', $last)
                 return
                     concat(' (Document', $document, ')')
             else 
