@@ -30,13 +30,6 @@
     </condition>
     
     <target name="clean">
-        <echo message="Calling gulp clean..."/>
-        <exec executable="${nvm_bin}/gulp" outputproperty="gulp.output">
-            <arg line="clean"/>
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
-        </exec>
-        <echo message="${gulp.output}"/>
-    
         <echo message="Deleting xar files..."/>
         <delete dir="${build.dir}"/>
     </target>
