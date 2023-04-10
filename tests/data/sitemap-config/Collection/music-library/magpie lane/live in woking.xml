@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="18">
+   <name>live in woking</name>
+   <artist>magpie lane</artist>
+   <track>
+      <metadata key="Track ID" type="integer">11483</metadata>
+      <metadata key="Name" type="string">Noel Noel</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">19268227</metadata>
+      <metadata key="Total Time" type="integer">244293</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:11:50Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T15:58:46Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3716886105</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T11:21:45Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-10-30T09:16:47Z</metadata>
+      <metadata key="Normalization" type="integer">51</metadata>
+      <metadata key="Persistent ID" type="string">9082037E776B2702</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11485</metadata>
+      <metadata key="Name" type="string">All You Who are to Mirth Inclined</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">14012167</metadata>
+      <metadata key="Total Time" type="integer">155253</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:11:51Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T16:59:28Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">2</metadata>
+      <metadata key="Play Date" type="integer">3669874294</metadata>
+      <metadata key="Play Date UTC" type="date">2020-04-16T08:31:34Z</metadata>
+      <metadata key="Normalization" type="integer">618</metadata>
+      <metadata key="Persistent ID" type="string">E3429CB2AE290E1A</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11487</metadata>
+      <metadata key="Name" type="string">A Virgin Unspotted</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">20256051</metadata>
+      <metadata key="Total Time" type="integer">256440</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:11:55Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T15:59:52Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2021-10-12T11:23:18Z</metadata>
+      <metadata key="Normalization" type="integer">39</metadata>
+      <metadata key="Sort Name" type="string">Virgin Unspotted</metadata>
+      <metadata key="Persistent ID" type="string">09097A1F1F4E8706</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11489</metadata>
+      <metadata key="Name" type="string">One More Dance and Then/Not a Natural Dancer/The Spirit of the Dance</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">35357390</metadata>
+      <metadata key="Total Time" type="integer">392520</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:01Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:00:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3669877581</metadata>
+      <metadata key="Play Date UTC" type="date">2020-04-16T09:26:21Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2015-12-05T00:34:24Z</metadata>
+      <metadata key="Normalization" type="integer">1203</metadata>
+      <metadata key="Persistent ID" type="string">0BBCD9E5A2C215F2</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11491</metadata>
+      <metadata key="Name" type="string">Babes in the Wood</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">21764338</metadata>
+      <metadata key="Total Time" type="integer">262653</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:04Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:01:24Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3534517153</metadata>
+      <metadata key="Play Date UTC" type="date">2016-01-01T18:19:13Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Normalization" type="integer">194</metadata>
+      <metadata key="Persistent ID" type="string">B7E1BF19E3B69742</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11493</metadata>
+      <metadata key="Name" type="string">This is the Truth Sent from Above</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">12671461</metadata>
+      <metadata key="Total Time" type="integer">171066</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:07Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:01:58Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">2</metadata>
+      <metadata key="Play Date" type="integer">3501095599</metadata>
+      <metadata key="Play Date UTC" type="date">2014-12-10T22:33:19Z</metadata>
+      <metadata key="Skip Count" type="integer">8</metadata>
+      <metadata key="Skip Date" type="date">2014-12-10T12:21:38Z</metadata>
+      <metadata key="Normalization" type="integer">49</metadata>
+      <metadata key="Persistent ID" type="string">9948516B9C09D057</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11495</metadata>
+      <metadata key="Name" type="string">The Nine Joys of Mary</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">25033673</metadata>
+      <metadata key="Total Time" type="integer">330866</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:11Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:02:19Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3564573363</metadata>
+      <metadata key="Play Date UTC" type="date">2016-12-14T15:16:03Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2016-12-08T12:21:19Z</metadata>
+      <metadata key="Normalization" type="integer">66</metadata>
+      <metadata key="Sort Name" type="string">Nine Joys of Mary</metadata>
+      <metadata key="Persistent ID" type="string">6CC539F6571CBFD7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11497</metadata>
+      <metadata key="Name" type="string">Lo! The Eastern Sages Rise</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">9741543</metadata>
+      <metadata key="Total Time" type="integer">128453</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:11:46Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T15:58:27Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">8</metadata>
+      <metadata key="Play Date" type="integer">3716885861</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T11:17:41Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2013-12-16T14:55:49Z</metadata>
+      <metadata key="Normalization" type="integer">56</metadata>
+      <metadata key="Persistent ID" type="string">D467B722F80A0746</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11499</metadata>
+      <metadata key="Name" type="string">When the Snows of Winter Fall</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">25286729</metadata>
+      <metadata key="Total Time" type="integer">356520</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:16Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:02:57Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3669899335</metadata>
+      <metadata key="Play Date UTC" type="date">2020-04-16T15:28:55Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-12-10T17:24:54Z</metadata>
+      <metadata key="Normalization" type="integer">90</metadata>
+      <metadata key="Persistent ID" type="string">6330D3197C4989E8</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11501</metadata>
+      <metadata key="Name" type="string">The Boar's Hede</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">11623072</metadata>
+      <metadata key="Total Time" type="integer">155600</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">18</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:45Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:06:43Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3501092529</metadata>
+      <metadata key="Play Date UTC" type="date">2014-12-10T21:42:09Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2020-12-05T19:07:31Z</metadata>
+      <metadata key="Normalization" type="integer">169</metadata>
+      <metadata key="Sort Name" type="string">Boar's Hede</metadata>
+      <metadata key="Persistent ID" type="string">9253EA747F1D5330</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11503</metadata>
+      <metadata key="Name" type="string">Lumps of Plum Pudding/The Holly and the Ivy</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">24417549</metadata>
+      <metadata key="Total Time" type="integer">311026</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:20Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:03:37Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">2</metadata>
+      <metadata key="Play Date" type="integer">3564046433</metadata>
+      <metadata key="Play Date UTC" type="date">2016-12-08T12:53:53Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-08-27T14:16:56Z</metadata>
+      <metadata key="Normalization" type="integer">247</metadata>
+      <metadata key="Persistent ID" type="string">8351FE3D77F4428C</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11505</metadata>
+      <metadata key="Name" type="string">Hark! Hark! What News</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">11767146</metadata>
+      <metadata key="Total Time" type="integer">156786</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:22Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:04:09Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3669968311</metadata>
+      <metadata key="Play Date UTC" type="date">2020-04-17T10:38:31Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Normalization" type="integer">47</metadata>
+      <metadata key="Persistent ID" type="string">DB328E8272327A7B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11507</metadata>
+      <metadata key="Name" type="string">Sweet Chiming Bells</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">16275736</metadata>
+      <metadata key="Total Time" type="integer">207720</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:25Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:04:26Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">1</metadata>
+      <metadata key="Play Date" type="integer">3470053342</metadata>
+      <metadata key="Play Date UTC" type="date">2013-12-16T15:42:22Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2014-12-11T12:08:11Z</metadata>
+      <metadata key="Normalization" type="integer">54</metadata>
+      <metadata key="Persistent ID" type="string">441FD9248FC801BC</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11509</metadata>
+      <metadata key="Name" type="string">Christmas Day in the Morning/The Sussex Carol</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">19121276</metadata>
+      <metadata key="Total Time" type="integer">238293</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">13</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:29Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:04:46Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3501248833</metadata>
+      <metadata key="Play Date UTC" type="date">2014-12-12T17:07:13Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Normalization" type="integer">55</metadata>
+      <metadata key="Persistent ID" type="string">E4498A54B9B40E44</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11511</metadata>
+      <metadata key="Name" type="string">Hark!  Hear you not?</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">10730507</metadata>
+      <metadata key="Total Time" type="integer">140880</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">14</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:31Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:05:10Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3532588236</metadata>
+      <metadata key="Play Date UTC" type="date">2015-12-10T10:30:36Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2014-12-09T16:39:14Z</metadata>
+      <metadata key="Normalization" type="integer">44</metadata>
+      <metadata key="Persistent ID" type="string">544A7EEAC0D1A92A</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11513</metadata>
+      <metadata key="Name" type="string">Christmas Eve / Duncormick Mummers' Jig</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">20970263</metadata>
+      <metadata key="Total Time" type="integer">261813</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">15</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:34Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:05:24Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3531927044</metadata>
+      <metadata key="Play Date UTC" type="date">2015-12-02T18:50:44Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-02-12T16:06:08Z</metadata>
+      <metadata key="Normalization" type="integer">69</metadata>
+      <metadata key="Persistent ID" type="string">145F9956AD0B04AD</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11515</metadata>
+      <metadata key="Name" type="string">The Wren Boys' Song</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">27109565</metadata>
+      <metadata key="Total Time" type="integer">316186</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">16</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:39Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:05:49Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3532849157</metadata>
+      <metadata key="Play Date UTC" type="date">2015-12-13T10:59:17Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2013-12-12T10:22:27Z</metadata>
+      <metadata key="Normalization" type="integer">777</metadata>
+      <metadata key="Sort Name" type="string">Wren Boys' Song</metadata>
+      <metadata key="Persistent ID" type="string">878D593862037B25</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11517</metadata>
+      <metadata key="Name" type="string">The Trees are All Bare</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Live in Woking</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">25654022</metadata>
+      <metadata key="Total Time" type="integer">300360</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">17</metadata>
+      <metadata key="Track Count" type="integer">18</metadata>
+      <metadata key="Year" type="integer">2012</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:12:42Z</metadata>
+      <metadata key="Date Added" type="date">2013-01-01T17:06:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Part Of Gapless Album" type="true"/>
+      <metadata key="Skip Count" type="integer">4</metadata>
+      <metadata key="Skip Date" type="date">2014-12-10T12:21:28Z</metadata>
+      <metadata key="Normalization" type="integer">251</metadata>
+      <metadata key="Sort Name" type="string">Trees are All Bare</metadata>
+      <metadata key="Persistent ID" type="string">DCA0DF76564D5FF0</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+</album>

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="13">
+   <name>let love rule</name>
+   <artist>lenny kravitz</artist>
+   <track>
+      <metadata key="Track ID" type="integer">3734</metadata>
+      <metadata key="Name" type="string">Be</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">19289900</metadata>
+      <metadata key="Total Time" type="integer">199066</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:53:51Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">10</metadata>
+      <metadata key="Play Count" type="integer">21</metadata>
+      <metadata key="Play Date" type="integer">3682425072</metadata>
+      <metadata key="Play Date UTC" type="date">2020-09-08T14:51:12Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Rating" type="integer">60</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">618</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">88C985440DF266C8</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3736</metadata>
+      <metadata key="Name" type="string">Fear</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lisa Bonet</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">36104990</metadata>
+      <metadata key="Total Time" type="integer">320306</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:52:00Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">06</metadata>
+      <metadata key="Play Count" type="integer">19</metadata>
+      <metadata key="Play Date" type="integer">3698311016</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T12:36:56Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Rating" type="integer">80</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1249</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">2FE5DBE2B7A70947</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3738</metadata>
+      <metadata key="Name" type="string">Flower Child</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">21593571</metadata>
+      <metadata key="Total Time" type="integer">176266</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">13</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:54:55Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">13</metadata>
+      <metadata key="Play Count" type="integer">57</metadata>
+      <metadata key="Play Date" type="integer">3711455026</metadata>
+      <metadata key="Play Date UTC" type="date">2021-08-10T14:43:46Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1034</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">91D2DD1BDB91F479</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3740</metadata>
+      <metadata key="Name" type="string">Freedom Train</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">19165612</metadata>
+      <metadata key="Total Time" type="integer">170800</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:49:41Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">03</metadata>
+      <metadata key="Play Count" type="integer">67</metadata>
+      <metadata key="Play Date" type="integer">3698310002</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T12:20:02Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1099</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">901C2A4F676767FA</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3742</metadata>
+      <metadata key="Name" type="string">Let Love Rule</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">38245659</metadata>
+      <metadata key="Total Time" type="integer">342240</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:49:13Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">02</metadata>
+      <metadata key="Play Count" type="integer">55</metadata>
+      <metadata key="Play Date" type="integer">3698309832</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T12:17:12Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1102</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">DF548700FC5E3E98</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3744</metadata>
+      <metadata key="Name" type="string">Mr. Cab Driver</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">24772199</metadata>
+      <metadata key="Total Time" type="integer">230760</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:52:53Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">08</metadata>
+      <metadata key="Play Count" type="integer">43</metadata>
+      <metadata key="Play Date" type="integer">3698311644</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T12:47:24Z</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1068</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">8BA83E7F82B603B5</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3746</metadata>
+      <metadata key="Name" type="string">Rosemary</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lisa Bonet</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">34887593</metadata>
+      <metadata key="Total Time" type="integer">328400</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:53:30Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">09</metadata>
+      <metadata key="Play Count" type="integer">12</metadata>
+      <metadata key="Play Date" type="integer">3698311973</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T12:52:53Z</metadata>
+      <metadata key="Rating" type="integer">60</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">853</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">989D069B199EE836</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3748</metadata>
+      <metadata key="Name" type="string">Sittin' On Top Of The World</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">19099179</metadata>
+      <metadata key="Total Time" type="integer">195666</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:48:13Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">01</metadata>
+      <metadata key="Play Count" type="integer">78</metadata>
+      <metadata key="Play Date" type="integer">3706948396</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-19T10:53:16Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2015-05-13T14:25:39Z</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">898</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">2BF3C1D3E57490D7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3750</metadata>
+      <metadata key="Name" type="string">Blues For Sister Someone</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">17950281</metadata>
+      <metadata key="Total Time" type="integer">180040</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:54:09Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">11</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3682425252</metadata>
+      <metadata key="Play Date UTC" type="date">2020-09-08T14:54:12Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2016-12-03T14:36:38Z</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1202</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">B06AEC1A5433DBD3</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3752</metadata>
+      <metadata key="Name" type="string">Empty Hands</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">31253917</metadata>
+      <metadata key="Total Time" type="integer">283000</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:54:38Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">12</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3682425535</metadata>
+      <metadata key="Play Date UTC" type="date">2020-09-08T14:58:55Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Rating" type="integer">60</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1008</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">593FEBF97608B048</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3754</metadata>
+      <metadata key="Name" type="string">My Precious Love</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">33475120</metadata>
+      <metadata key="Total Time" type="integer">315693</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:50:28Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">04</metadata>
+      <metadata key="Play Count" type="integer">12</metadata>
+      <metadata key="Play Date" type="integer">3698310318</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T12:25:18Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2018-05-31T12:08:16Z</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1257</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">84D53EAAAAB9F938</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9483</metadata>
+      <metadata key="Name" type="string">I Build This Garden For Us</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">44783193</metadata>
+      <metadata key="Total Time" type="integer">377333</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:51:20Z</metadata>
+      <metadata key="Date Added" type="date">2008-02-22T21:50:30Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3698310696</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T12:31:36Z</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1021</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">8EE50ECF67526074</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9485</metadata>
+      <metadata key="Name" type="string">Does Anybody Out There Even Care</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Let Love Rule</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">21236572</metadata>
+      <metadata key="Total Time" type="integer">222600</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1989</metadata>
+      <metadata key="Date Modified" type="date">2008-02-22T20:52:27Z</metadata>
+      <metadata key="Date Added" type="date">2008-02-22T21:52:02Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">21</metadata>
+      <metadata key="Play Date" type="integer">3698311239</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T12:40:39Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-01-31T11:52:50Z</metadata>
+      <metadata key="Rating" type="integer">60</metadata>
+      <metadata key="Album Rating" type="integer">60</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1045</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">F66E3E5CAE7A58E2</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+</album>

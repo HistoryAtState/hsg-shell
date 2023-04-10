@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="17">
+   <name>the information</name>
+   <artist>beck</artist>
+   <track>
+      <metadata key="Track ID" type="integer">11093</metadata>
+      <metadata key="Name" type="string">Think I'm In Love</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">21945573</metadata>
+      <metadata key="Total Time" type="integer">199426</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:13:04Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:12:33Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3666084466</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T12:47:46Z</metadata>
+      <metadata key="Normalization" type="integer">2472</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">0FFC79EABBDFA03C</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11095</metadata>
+      <metadata key="Name" type="string">Cellphone's Dead</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">32841585</metadata>
+      <metadata key="Total Time" type="integer">285733</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:13:48Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:13:06Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">15</metadata>
+      <metadata key="Play Date" type="integer">3666084751</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T12:52:31Z</metadata>
+      <metadata key="Normalization" type="integer">2425</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">B8882276508735CC</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11097</metadata>
+      <metadata key="Name" type="string">Strange Apparition</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29008995</metadata>
+      <metadata key="Total Time" type="integer">228000</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:14:21Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:13:50Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">11</metadata>
+      <metadata key="Play Date" type="integer">3666084979</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T12:56:19Z</metadata>
+      <metadata key="Normalization" type="integer">6183</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">BD90CBDC712C7677</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11099</metadata>
+      <metadata key="Name" type="string">Soldier Jane</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Nigel Godrich</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29486584</metadata>
+      <metadata key="Total Time" type="integer">238946</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:14:53Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:14:22Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">12</metadata>
+      <metadata key="Play Date" type="integer">3666085218</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:00:18Z</metadata>
+      <metadata key="Normalization" type="integer">3208</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">2C2F526C74401A38</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11101</metadata>
+      <metadata key="Name" type="string">Nausea</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">21382698</metadata>
+      <metadata key="Total Time" type="integer">175520</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:15:16Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:14:54Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">10</metadata>
+      <metadata key="Play Date" type="integer">3666085392</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:03:12Z</metadata>
+      <metadata key="Normalization" type="integer">5825</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">85877324E5E5CC1D</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11103</metadata>
+      <metadata key="Name" type="string">New Round</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">23515511</metadata>
+      <metadata key="Total Time" type="integer">205600</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:15:41Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:15:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">11</metadata>
+      <metadata key="Play Date" type="integer">3666085598</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:06:38Z</metadata>
+      <metadata key="Normalization" type="integer">2116</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">36A4757227446BF3</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11105</metadata>
+      <metadata key="Name" type="string">Dark Star</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">24294262</metadata>
+      <metadata key="Total Time" type="integer">225066</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:16:08Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:15:43Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">11</metadata>
+      <metadata key="Play Date" type="integer">3666085823</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:10:23Z</metadata>
+      <metadata key="Normalization" type="integer">1569</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">A3AD8749961BE585</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11107</metadata>
+      <metadata key="Name" type="string">Elevator Music</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26221335</metadata>
+      <metadata key="Total Time" type="integer">218200</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:12:31Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:11:54Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3669793843</metadata>
+      <metadata key="Play Date UTC" type="date">2020-04-15T10:10:43Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2018-10-02T10:52:12Z</metadata>
+      <metadata key="Normalization" type="integer">4524</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">0DF0AF01DEFE799A</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11109</metadata>
+      <metadata key="Name" type="string">We Dance Alone</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26872112</metadata>
+      <metadata key="Total Time" type="integer">236880</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:16:35Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:16:09Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">15</metadata>
+      <metadata key="Play Date" type="integer">3666086060</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:14:20Z</metadata>
+      <metadata key="Normalization" type="integer">1745</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">D94A7FFFAA54FCFA</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11111</metadata>
+      <metadata key="Name" type="string">This Girl That I Know</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">18409610</metadata>
+      <metadata key="Total Time" type="integer">163533</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">17</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:19:58Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:19:45Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">9</metadata>
+      <metadata key="Play Date" type="integer">3666087936</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:45:36Z</metadata>
+      <metadata key="Normalization" type="integer">3924</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">B0C83CBB19FBBC6D</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11113</metadata>
+      <metadata key="Name" type="string">No Complaints</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">19575985</metadata>
+      <metadata key="Total Time" type="integer">180346</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:16:55Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:16:36Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">10</metadata>
+      <metadata key="Play Date" type="integer">3666086240</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:17:20Z</metadata>
+      <metadata key="Normalization" type="integer">2751</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">4D90E1A4534B0E45</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11115</metadata>
+      <metadata key="Name" type="string">1000 Bpm</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">17701512</metadata>
+      <metadata key="Total Time" type="integer">149493</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:17:11Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:16:56Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">9</metadata>
+      <metadata key="Play Date" type="integer">3621337885</metadata>
+      <metadata key="Play Date UTC" type="date">2018-10-02T14:11:25Z</metadata>
+      <metadata key="Normalization" type="integer">3855</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">E0A2982D18ABCA45</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11117</metadata>
+      <metadata key="Name" type="string">Motorcade</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Nigel Godrich</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">24305720</metadata>
+      <metadata key="Total Time" type="integer">255253</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:17:38Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:17:13Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">10</metadata>
+      <metadata key="Play Date" type="integer">3666086538</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:22:18Z</metadata>
+      <metadata key="Normalization" type="integer">1238</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">24FAFFE764CC62CD</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11119</metadata>
+      <metadata key="Name" type="string">The Information</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26765941</metadata>
+      <metadata key="Total Time" type="integer">225973</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">13</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:18:02Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:17:41Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">12</metadata>
+      <metadata key="Play Date" type="integer">3666086764</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:26:04Z</metadata>
+      <metadata key="Normalization" type="integer">3403</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Sort Name" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">2D12431338F974E2</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11121</metadata>
+      <metadata key="Name" type="string">Movie Theme</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Nigel Godrich</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">27468532</metadata>
+      <metadata key="Total Time" type="integer">233173</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">14</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:18:25Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:18:03Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">11</metadata>
+      <metadata key="Play Date" type="integer">3666086997</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:29:57Z</metadata>
+      <metadata key="Normalization" type="integer">2593</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">53B06EB3DBEB32EC</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11123</metadata>
+      <metadata key="Name" type="string">The Horrible Fanfare/Landslide/Exoskelton</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Nigel Godrich</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">64067517</metadata>
+      <metadata key="Total Time" type="integer">636826</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">15</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:19:24Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:18:26Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">7</metadata>
+      <metadata key="Play Date" type="integer">3504080991</metadata>
+      <metadata key="Play Date UTC" type="date">2015-01-14T11:49:51Z</metadata>
+      <metadata key="Normalization" type="integer">2271</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Sort Name" type="string">Horrible Fanfare/Landslide/Exoskelton</metadata>
+      <metadata key="Persistent ID" type="string">1D8888B254BE9205</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11125</metadata>
+      <metadata key="Name" type="string">Inside Out</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Composer" type="string">Beck Hansen</metadata>
+      <metadata key="Album" type="string">The Information</metadata>
+      <metadata key="Genre" type="string">Indie Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29597985</metadata>
+      <metadata key="Total Time" type="integer">223040</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">16</metadata>
+      <metadata key="Track Count" type="integer">17</metadata>
+      <metadata key="Year" type="integer">2006</metadata>
+      <metadata key="Date Modified" type="date">2012-01-16T10:19:44Z</metadata>
+      <metadata key="Date Added" type="date">2012-01-16T11:19:25Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3669925900</metadata>
+      <metadata key="Play Date UTC" type="date">2020-04-16T22:51:40Z</metadata>
+      <metadata key="Normalization" type="integer">5494</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Information</metadata>
+      <metadata key="Persistent ID" type="string">A5C0B4407F9C50BF</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

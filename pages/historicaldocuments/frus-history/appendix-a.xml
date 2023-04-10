@@ -1,0 +1,65 @@
+<div data-template="pages:load">
+   <div data-template="templates:surround" data-template-with="templates/site.xml" data-template-at="content">
+      <div>
+         <div class="row">
+            <div data-template="pages:breadcrumb"/>
+         </div>
+         <div class="row">
+            <div class="hsg-navigation-wrapper">
+               <h2 class="hsg-navigation-title" id="navigation-title" data-template="frus-history:monograph-title"/>
+            </div>
+         </div>
+         <div class="row" data-template="pages:navigation">
+            <a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
+               <i class="glyphicon glyphicon-chevron-left"/>
+            </a>
+            <a data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
+               <i class="glyphicon glyphicon-chevron-right"/>
+            </a>
+            <div class="hsg-width-main">
+               <div id="content-inner">
+                  <div id="content-container">
+                     <div class="content">
+
+                         <h1>Appendix A: Historical <span class="font-italic">Foreign Relations</span> Timeliness and Production Charts</h1>
+                         <h2 class="h4"> <em>Foreign Relations</em> Series: Production &amp; Timeliness, 1861-2015 </h2>
+
+                        <div id="graph"/>
+                        <fieldset id="graph-fieldset" class="graph-checkboxes">
+                           <label for="#graph-fieldset">Select Datasets to Display Above:</label>
+                           <div>
+                              <input type="checkbox" id="0" checked="checked" onClick="change(this)"/>
+                              <label for="0">
+                                 Annual <em>FRUS</em> Production
+                              </label>
+                           </div>
+                           <div>
+                              <input type="checkbox" id="1" checked="checked" onClick="change(this)"/>
+                              <label for="1">
+                                 Average <em>FRUS</em> Lag
+                              </label>
+                           </div>
+                           <div>
+                              <input type="checkbox" id="2" onClick="change(this)"/>
+                              <label for="2">
+                                 Average Regular <em>FRUS</em> Lag
+                              </label>
+                           </div>
+                        </fieldset>
+
+                     <div data-template="frus-history:appendix-a-chart-intro"/>
+                     <script type="text/javascript" src="$app/resources/scripts/dygraph-combined.js"/>
+                     <div data-template="frus-history:appendix-a-chart-data"/>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- TOC Sidebar -->
+         <aside data-template="pages:asides">
+            <div data-template="toc:table-of-contents-sidebar" data-template-heading="false" data-template-highlight="true"/>
+         </aside>
+      </div>
+   </div>
+</div>
+</div>

@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="13">
+   <name>5</name>
+   <artist>lenny kravitz</artist>
+   <track>
+      <metadata key="Track ID" type="integer">3610</metadata>
+      <metadata key="Name" type="string">Straight Cold Player</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29491903</metadata>
+      <metadata key="Total Time" type="integer">259493</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-23T23:25:23Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3698327333</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T17:08:53Z</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">2942</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">DAA4439EDC7DE06B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3612</metadata>
+      <metadata key="Name" type="string">You're My Flavor</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26578750</metadata>
+      <metadata key="Total Time" type="integer">228506</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-23T23:26:03Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3698327664</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T17:14:24Z</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">5187</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">846DDE6260693910</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3614</metadata>
+      <metadata key="Name" type="string">Can We Find A Reason?</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">42905176</metadata>
+      <metadata key="Total Time" type="integer">386493</metadata>
+      <metadata key="Track Number" type="integer">13</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-23T23:26:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3698328055</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T17:20:55Z</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">4932</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">0FB1C540D7758B2B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8029</metadata>
+      <metadata key="Name" type="string">Live</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Craig Ross/Lenny Kravitz, Craig Ross</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">41463373</metadata>
+      <metadata key="Total Time" type="integer">310960</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:58:56Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3698324241</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T16:17:21Z</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">6464</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">7F4B54DA08B1494F</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8031</metadata>
+      <metadata key="Name" type="string">Supersoulfighter</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">35653934</metadata>
+      <metadata key="Total Time" type="integer">298906</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:59:22Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">2</metadata>
+      <metadata key="Play Date" type="integer">3698324539</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T16:22:19Z</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">5417</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">1B13495A2EA177A9</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8033</metadata>
+      <metadata key="Name" type="string">I Belong To You</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29417054</metadata>
+      <metadata key="Total Time" type="integer">257560</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:59:45Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3698324797</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T16:26:37Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2014-03-10T11:57:23Z</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">3277</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">879DC105812F4836</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8035</metadata>
+      <metadata key="Name" type="string">Black Velveteen</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">34924485</metadata>
+      <metadata key="Total Time" type="integer">288706</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T03:00:03Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3698325086</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T16:31:26Z</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">7812</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">F1A5FE48E868ECC8</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8037</metadata>
+      <metadata key="Name" type="string">If You Can't Say No</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">34710995</metadata>
+      <metadata key="Total Time" type="integer">317400</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T03:00:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3698325403</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T16:36:43Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Rating" type="integer">40</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">2372</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">662799985A6D0756</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8039</metadata>
+      <metadata key="Name" type="string">Thinking Of You</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lysa Trenier/Lenny Kravitz, Lysa Trenier</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">45315915</metadata>
+      <metadata key="Total Time" type="integer">383960</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T03:00:43Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3698325787</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T16:43:07Z</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">2434</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">B89795F865CD009E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8041</metadata>
+      <metadata key="Name" type="string">Take Time</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29895122</metadata>
+      <metadata key="Total Time" type="integer">271866</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T03:01:04Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3698326059</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T16:47:39Z</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">2603</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">8C259B9FEC720276</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8043</metadata>
+      <metadata key="Name" type="string">Fly Away</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26907630</metadata>
+      <metadata key="Total Time" type="integer">221400</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T03:01:19Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">6</metadata>
+      <metadata key="Play Date" type="integer">3698326282</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T16:51:22Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">5744</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">4784E471C7FB171E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8045</metadata>
+      <metadata key="Name" type="string">It's Your Life</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">36586642</metadata>
+      <metadata key="Total Time" type="integer">302706</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T03:01:30Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3698327073</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T17:04:33Z</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">6433</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">822A8CB5F23937CA</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8047</metadata>
+      <metadata key="Name" type="string">Little Girl's Eyes</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">5</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">51222353</metadata>
+      <metadata key="Total Time" type="integer">464933</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T03:02:09Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">2</metadata>
+      <metadata key="Play Date" type="integer">3483357940</metadata>
+      <metadata key="Play Date UTC" type="date">2014-05-19T14:25:40Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Rating" type="integer">20</metadata>
+      <metadata key="Album Rating" type="integer">40</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">2848</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">6066F98AED5A299F</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

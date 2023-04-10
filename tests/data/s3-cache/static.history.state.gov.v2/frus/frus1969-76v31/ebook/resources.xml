@@ -1,0 +1,14 @@
+<resources prefix="frus/frus1969-76v31/ebook/">
+    <resource>
+        <filename>frus1969-76v31.epub</filename>
+        <s3-key>frus/frus1969-76v31/ebook/frus1969-76v31.epub</s3-key>
+        <size>1529580</size>
+        <last-modified>2013-05-22T13:33:26.000Z</last-modified>
+    </resource>
+    <resource>
+        <filename>frus1969-76v31.mobi</filename>
+        <s3-key>frus/frus1969-76v31/ebook/frus1969-76v31.mobi</s3-key>
+        <size>2081301</size>
+        <last-modified>2013-05-22T13:34:05.000Z</last-modified>
+    </resource>
+</resources>

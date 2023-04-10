@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="12">
+   <name>the robber bird</name>
+   <artist>magpie lane</artist>
+   <track>
+      <metadata key="Track ID" type="integer">11275</metadata>
+      <metadata key="Name" type="string">When The Snows Of Winter Fall</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">36464186</metadata>
+      <metadata key="Total Time" type="integer">375333</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T22:00:49Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T23:00:16Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">30</metadata>
+      <metadata key="Play Date" type="integer">3717258060</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-16T18:41:00Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2012-11-16T13:35:36Z</metadata>
+      <metadata key="Normalization" type="integer">2034</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Persistent ID" type="string">F046BDF08D2577F3</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11277</metadata>
+      <metadata key="Name" type="string">The Lark In The Morning</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">47808999</metadata>
+      <metadata key="Total Time" type="integer">441693</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T21:54:39Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T22:53:22Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">26</metadata>
+      <metadata key="Play Date" type="integer">3717159554</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-15T15:19:14Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2018-02-20T16:54:17Z</metadata>
+      <metadata key="Normalization" type="integer">3277</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Sort Name" type="string">Lark In The Morning</metadata>
+      <metadata key="Persistent ID" type="string">BFD3291639F2004D</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11279</metadata>
+      <metadata key="Name" type="string">Poaching Song</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">15672724</metadata>
+      <metadata key="Total Time" type="integer">150453</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T21:55:04Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T22:54:42Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">27</metadata>
+      <metadata key="Play Date" type="integer">3717225436</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-16T09:37:16Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Normalization" type="integer">2702</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Persistent ID" type="string">E8E7D5A405BE09B1</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11281</metadata>
+      <metadata key="Name" type="string">Turtle Dove</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">25361711</metadata>
+      <metadata key="Total Time" type="integer">266493</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T21:55:44Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T22:55:06Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">23</metadata>
+      <metadata key="Play Date" type="integer">3717225712</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-16T09:41:52Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2021-10-11T13:31:45Z</metadata>
+      <metadata key="Normalization" type="integer">1439</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Persistent ID" type="string">4FB59A89C1DB99E1</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11283</metadata>
+      <metadata key="Name" type="string">Bobbing Joe / The Shepherd's Song / Glorishears</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">50561633</metadata>
+      <metadata key="Total Time" type="integer">476026</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T21:56:49Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T22:55:46Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">18</metadata>
+      <metadata key="Play Date" type="integer">3716807981</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T13:39:41Z</metadata>
+      <metadata key="Normalization" type="integer">2182</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Persistent ID" type="string">7F6E3FAB9A5FFC21</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11285</metadata>
+      <metadata key="Name" type="string">The Highwayman Outwitted</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">17322643</metadata>
+      <metadata key="Total Time" type="integer">166026</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T21:57:10Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T22:56:50Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3716808147</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T13:42:27Z</metadata>
+      <metadata key="Normalization" type="integer">2402</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Sort Name" type="string">Highwayman Outwitted</metadata>
+      <metadata key="Persistent ID" type="string">A3C9CA973713D324</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11287</metadata>
+      <metadata key="Name" type="string">Travel The Country Round</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26069021</metadata>
+      <metadata key="Total Time" type="integer">249613</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T21:57:40Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T22:57:11Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">26</metadata>
+      <metadata key="Play Date" type="integer">3716808591</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T13:49:51Z</metadata>
+      <metadata key="Normalization" type="integer">3082</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Persistent ID" type="string">1D10DB31517AECD7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11289</metadata>
+      <metadata key="Name" type="string">Treadmill Song / Hanging Johnny / Shreds And Patches</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">49999660</metadata>
+      <metadata key="Total Time" type="integer">467320</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T21:58:32Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T22:57:42Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3716809058</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T13:57:38Z</metadata>
+      <metadata key="Normalization" type="integer">3922</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Persistent ID" type="string">8DC62D63B297F6BB</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11291</metadata>
+      <metadata key="Name" type="string">Isle Of France</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">21296018</metadata>
+      <metadata key="Total Time" type="integer">219746</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T21:58:56Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T22:58:34Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">26</metadata>
+      <metadata key="Play Date" type="integer">3716883883</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T10:44:43Z</metadata>
+      <metadata key="Normalization" type="integer">2355</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Persistent ID" type="string">88405A6D925CCE2C</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11293</metadata>
+      <metadata key="Name" type="string">Christmas Eve / Duncormick Mummers' Jig</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">27798920</metadata>
+      <metadata key="Total Time" type="integer">250560</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T21:59:22Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T22:58:58Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">21</metadata>
+      <metadata key="Play Date" type="integer">3716884133</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T10:48:53Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-07-04T08:33:03Z</metadata>
+      <metadata key="Normalization" type="integer">3289</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Persistent ID" type="string">8A4EA9D03B475BF7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11295</metadata>
+      <metadata key="Name" type="string">Oxford City</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">24200383</metadata>
+      <metadata key="Total Time" type="integer">276493</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T22:59:49Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T23:59:23Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">15</metadata>
+      <metadata key="Play Date" type="integer">3698046847</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-08T11:14:07Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-07-04T09:33:10Z</metadata>
+      <metadata key="Normalization" type="integer">920</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Persistent ID" type="string">5263D8CDEDA146FB</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11297</metadata>
+      <metadata key="Name" type="string">Bobby Shaftoe / York Winter Assemblies</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">The Robber Bird</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">28370784</metadata>
+      <metadata key="Total Time" type="integer">262426</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2011</metadata>
+      <metadata key="Date Modified" type="date">2012-07-01T22:00:15Z</metadata>
+      <metadata key="Date Added" type="date">2012-07-01T22:59:51Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">20</metadata>
+      <metadata key="Play Date" type="integer">3716885357</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-12T11:09:17Z</metadata>
+      <metadata key="Normalization" type="integer">1651</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album" type="string">Robber Bird</metadata>
+      <metadata key="Persistent ID" type="string">E2D0D2AD25E2F9B0</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+</album>

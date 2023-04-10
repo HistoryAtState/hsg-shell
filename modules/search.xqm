@@ -4,7 +4,7 @@ module namespace search = "http://history.state.gov/ns/site/hsg/search";
 
 import module namespace kwic="http://exist-db.org/xquery/kwic";
 import module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace fd="http://history.state.gov/ns/site/hsg/frus-dates" at "frus-dates.xqm";
@@ -207,7 +207,7 @@ declare function search:load-sections($node, $model) {
             </section>
         )
     }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };
@@ -226,7 +226,7 @@ function search:filters($node as node(), $model as map(*), $administration as xs
         "administration": $administration
     }
     return
-        map:merge(($model, map { "filters": $filters}))
+        map:merge(($model, map { "filters": $filters}),  map{"duplicates": "use-last"})
 };
 
 (:~
@@ -240,7 +240,7 @@ function search:component($node as node(), $model as map(*), $component as xs:st
         "component": $component,
         "filter": $filter
     }
-    return map:merge(($model, $new))
+    return map:merge(($model, $new),  map{"duplicates": "use-last"})
 };
 
 
@@ -342,7 +342,7 @@ declare function search:load-volumes-within($node, $model, $volume-id as xs:stri
                 </volume>
         )
     }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };
@@ -417,7 +417,7 @@ declare function search:load-administrations ($node, $model) {
             </administration>
         )
     }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };
@@ -530,7 +530,7 @@ function search:landing-page($node as node(), $model as map(*), $within as xs:st
             "sort-by": $sort-by
         }
     }
-    let $html := templates:process($node/*, map:merge(($model, $query-info)))
+    let $html := templates:process($node/*, map:merge(($model, $query-info),  map{"duplicates": "use-last"}))
     return
         $html
 };
@@ -673,7 +673,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
             ()
     
     let $templates-process-start := util:system-time()
-    let $html := templates:process($node/*, map:merge(($model, $query-info)))
+    let $html := templates:process($node/*, map:merge(($model, $query-info),  map{"duplicates": "use-last"}))
     let $templates-process-end := util:system-time()
     let $log := console:log("templates-process-duration: ", $templates-process-end - $templates-process-start)
     return
@@ -1048,7 +1048,7 @@ function search:load-volumes($node as node(), $model as map(*)) {
                         <title>{$complete-title}</title>
                     </volume>
             let $new-volumes-entry := map { "volumes": $new-volumes }
-            let $put := cache:put($cache-name, $cache-key, map:merge(($cache, $new-volumes-entry)))
+            let $put := cache:put($cache-name, $cache-key, map:merge(($cache, $new-volumes-entry),  map{"duplicates": "use-last"}))
             return
                 if (exists($volume-ids)) then
                     map { "volumes": $new-volumes[id = $volume-ids] }
@@ -1065,7 +1065,7 @@ function search:load-volumes($node as node(), $model as map(*)) {
     
     let $load-volumes-end := util:system-time()
     let $log := console:log("search:load-volumes: loaded " || count($volumes?*) || " in " || $load-volumes-end - $load-volumes-start)
-    let $new := map:merge(($model, $volumes))
+    let $new := map:merge(($model, $volumes),  map{"duplicates": "use-last"})
 
     return
         $new

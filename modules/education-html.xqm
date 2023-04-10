@@ -2,7 +2,7 @@ xquery version "3.0";
 
 module namespace edu = "http://history.state.gov/ns/site/hsg/education-html";
 
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 

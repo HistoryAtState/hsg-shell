@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>twitter-996016069918765058</id>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">The @StateDept began its first…</div>
+   </title>
+   <published>2018-05-14T13:15:10Z</published>
+   <updated>2018-05-14T13:15:10Z</updated>
+   <link href="/news/twitter-996016069918765058" rel="self"/>
+   <link rel="DCTERMS.source"
+         title="View Twitter Post"
+         href="https://twitter.com/HistoryAtState/status/996016069918765058"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>The <a href="https://twitter.com/StateDept">@StateDept</a> began its first
+                    program for recycling paper on April 23, 1990. <a href="/departmenthistory/timeline/1990-1999">history.state.gov/departmenthist…</a>
+            <a href="https://twitter.com/search?q=%23twitterstorians&amp;src=hash">#twitterstorians</a>
+         </p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="twitter"/>
+</entry>

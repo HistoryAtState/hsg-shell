@@ -1,0 +1,8 @@
+<resources prefix="frus/frus1981-88v11/pdf/">
+    <resource>
+        <filename>frus1981-88v11.pdf</filename>
+        <s3-key>frus/frus1981-88v11/pdf/frus1981-88v11.pdf</s3-key>
+        <size>1234567</size>
+        <last-modified>2022-10-03T13:17:45.416Z</last-modified>
+    </resource>
+</resources>

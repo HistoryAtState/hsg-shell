@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>press-release-frus1977-80v12</id>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Press Release</div>
+   </title>
+   <published>2018-12-20T09:00:00-05:00</published>
+   <updated>2018-12-20T09:00:00-05:00</updated>
+   <link href="/news/press-release-frus1977-80v12" rel="self"/>
+   <link rel="about"
+         title="Visit Resource"
+         href="/historicaldocuments/frus1977-80v12"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <h2>Press Release</h2>
+         <strong>Office of the Historian<br/>Bureau of Public Affairs<br/>United States
+                    Department of State</strong>
+         <br/>
+         <strong>December 20, 2018</strong>
+         <p>The Department of State released today <a href="/historicaldocuments/frus1977-80v12">
+               <em>Foreign Relations of the United States</em>, 1977–1980, Volume XII,
+                        Afghanistan</a>.</p>
+         <p>This volume is part of a <em>Foreign Relations</em> subseries that documents the
+                    most important foreign policy issues of the Jimmy Carter administration. The
+                    focus of this volume is on the Carter administration’s approach to events in
+                    Afghanistan during the buildup of the Soviet Union’s presence in that country
+                    beginning in early 1978 and culminating in the large scale invasion of Soviet
+                    troops at the end of 1979. Officials in the Carter administration regarded
+                    Soviet actions as among the most flagrant violations of international norms
+                    during the Cold War. The volume is arranged chronologically, with the majority
+                    of documents concentrated around the crisis period during the lead-up to the
+                    invasion, and during the aftermath, when the Carter administration formulated a
+                    range of policy responses to challenge the Soviet Union’s domination of
+                    Afghanistan. </p>
+         <p>This compilation was compiled and edited by David Zierler. This PDF version of
+                    the volume and press release are available on the Office of the Historian
+                    website at <a href="/historicaldocuments/frus1977-80v12">https://history.state.gov/historicaldocuments/frus1977-80v12</a>. The full
+                    text and ebooks of the volume will be released on a later date. Copies of the
+                    volume will be available for purchase from the U.S. Government Printing Office
+                    online at <a href="https://bookstore.gpo.gov">http://bookstore.gpo.gov</a> (GPO
+                    S/N 044-000-02697-0; ISBN 978-0-16-094970-8), or by calling toll-free
+                    1-866-512-1800 (D.C. area 202-512-1800). For further information, contact<a href="mailto:history@state.gov">history@state.gov</a>. </p>
+      </div>
+   </content>
+   <link rel="enclosure"
+         type="img/jpeg"
+         title="Cover image of frus1977-80v12"
+         href="https://static.history.state.gov/frus/frus1977-80v12/covers/frus1977-80v12.jpg"/>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="press"/>
+</entry>

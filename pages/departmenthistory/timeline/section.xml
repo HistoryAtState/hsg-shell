@@ -1,27 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround" data-template-with="templates/site.xml"
-    data-template-at="content">
-    <div data-template="pages:load">
-        <div id="static-title" class="hidden"><span data-template="pages:navigation-title"/> -
+<div data-template="pages:load">
+   <div data-template="templates:surround"
+        data-template-with="templates/site.xml"
+        data-template-at="content">
+      <div>
+         <div id="static-title" class="hidden">
+            <span data-template="pages:navigation-title"/> -
             Department History</div>
-        <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-                <ol class="breadcrumb" data-template="app:fix-links">
-                    <li>
-                        <a href="$app">Home</a>
-                    </li>
-                    <li>
-                        <a href="$app/departmenthistory">Department History</a>
-                    </li>
-                    <li>
-                        <a href="$app/departmenthistory/timeline">Administrative Timeline</a>
-                    </li>
-                    <li data-template="pages:deep-section-breadcrumbs"/>
-                </ol>
-            </div>
-        </div>
-
-        <div class="row">
+         <div class="row">
+            <div data-template="pages:breadcrumb"/>
+         </div>
+         <div class="row">
             <div class="hsg-navigation-wrapper">
                 <h2 class="hsg-navigation-title" id="navigation-title" data-template="pages:navigation-title"/>
             </div>
@@ -34,14 +23,14 @@
                 <i class="glyphicon glyphicon-chevron-right"/>
             </a>
             <div class="hsg-width-main">
-                <div id="content-inner">
-                    <div id="content-container" data-template="app:fix-links">
-                        <div class="content" data-template="pages:view"/>
-                    </div>
-                </div>
+               <div id="content-inner">
+                  <div id="content-container" data-template="app:fix-links">
+                     <div class="content" data-template="pages:view"/>
+                  </div>
+               </div>
             </div>
             <!-- TOC Sidebar -->
-            <aside class="hsg-width-sidebar">
+            <aside data-template="pages:asides">
                 <div class="hsg-panel" data-template="app:fix-links">
                     <div class="hsg-panel-heading">
                         <h2 class="hsg-sidebar-title">Periods</h2>
@@ -94,4 +83,5 @@
             </aside>
         </div>
     </div>
+</div>
 </div>

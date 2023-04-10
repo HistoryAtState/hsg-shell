@@ -10,7 +10,7 @@ Page.prototype.setViewPortSize = function (size) {
 };
 
 Page.prototype.setMobileViewPortSize = function () {
-  browser.setWindowSize({width: 600, height: 800});
+  browser.setWindowSize({width: 480, height: 740});
 };
 
 Page.prototype.setDesktopViewPortSize = function () {
@@ -101,7 +101,7 @@ Page.prototype.waitForExist = function (selector, timeInMs) {
 };
 
 Page.prototype.getElementCount = function (selector) {
-  return browser.$$(selector).value.length;
+  return browser.$$(selector).length;
 };
 
 Page.prototype.searchAll = function (searchString) {

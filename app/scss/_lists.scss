@@ -1,0 +1,76 @@
+/* HSG lists -------------- */
+
+.hsg-list {
+    &.hsg-columns__flex {
+        margin: 0;
+        padding: 0;
+        flex: 1 1 auto;
+    }
+
+    &__item {
+        margin: 0 0 3rem 0;
+        padding: 0;
+        break-inside: avoid;
+
+        &__row {
+            display: flex;
+            flex-direction: row;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+        }
+
+        &__row--alignstart {
+          display: flex;
+          flex-direction: row;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          align-items: flex-start;
+        }
+    }
+
+    &__title {
+        margin-top: 0;
+    }
+
+    &__badge {
+        margin: 0 2.5rem 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__thumbnail {
+      padding-top: 7px;
+      max-width: 6rem;
+      margin: 0 2rem 1rem 0;
+
+      @media screen and (min-width: $small-screen-min) {
+        max-width: 10rem;
+      }
+
+      @media screen and (min-width: $sm-screen-min) {
+        max-width: 13rem;
+      }
+
+      @media screen and (min-width: $large-screen-min) {
+        max-width: 13rem;
+      }
+    }
+
+    &__media__download {
+      @extend .list-unstyled;
+    }
+}
+
+#docs-on-page {
+  .hsg-list-group-item {
+    border-top: $default-border-style;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    &:nth-of-type(1) {
+      border-top: none;
+    }
+  }
+
+}

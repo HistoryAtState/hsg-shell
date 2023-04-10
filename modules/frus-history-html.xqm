@@ -2,7 +2,7 @@ xquery version "3.0";
 
 module namespace fhh = "http://history.state.gov/ns/site/hsg/frus-history-html";
 
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
@@ -10,11 +10,11 @@ import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html"
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
-declare variable $fhh:FRUS_HISTORY_COL := '/db/apps/frus-history';
-declare variable $fhh:FRUS_HISTORY_ARTICLES_COL := $fhh:FRUS_HISTORY_COL || '/articles';
-declare variable $fhh:FRUS_HISTORY_DOCUMENTS_COL := $fhh:FRUS_HISTORY_COL || '/documents';
-declare variable $fhh:FRUS_HISTORY_EVENTS_COL := $fhh:FRUS_HISTORY_COL || '/events';
-declare variable $fhh:FRUS_HISTORY_MONOGRAPH_COL := $fhh:FRUS_HISTORY_COL || '/monograph';
+declare variable $fhh:FRUS_HISTORY_COL := $config:FRUS_HISTORY_COL;
+declare variable $fhh:FRUS_HISTORY_ARTICLES_COL := $config:FRUS_HISTORY_ARTICLES_COL;
+declare variable $fhh:FRUS_HISTORY_DOCUMENTS_COL := $config:FRUS_HISTORY_DOCUMENTS_COL;
+declare variable $fhh:FRUS_HISTORY_EVENTS_COL := $config:FRUS_HISTORY_EVENTS_COL;
+declare variable $fhh:FRUS_HISTORY_MONOGRAPH_COL := $config:FRUS_HISTORY_MONOGRAPH_COL;
 
 declare function fhh:monograph-title($node, $model) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
@@ -225,6 +225,53 @@ declare function fhh:document-list($node, $model) {
             )
 };
 
+declare function fhh:get-next-doc($model) {
+    let $div := $model?data/ancestor-or-self::tei:TEI
+    let $documents := collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
+    let $col := 
+            for $doc in $documents
+            let $created := $doc//tei:date[@type='created']/@when
+            order by $created
+            return $doc
+    let $index := index-of($col, $div)
+    let $size := count($col)
+    let $data := 
+        switch($index)
+            case $size return ()
+            default return ($col[$index + 1]//tei:body)[1]
+    let $href := if ($data) then "$app/historicaldocuments/frus-history/documents/" || substring-before(util:document-name($data), '.xml') else ()
+    return 
+        if ($data) then 
+            map{
+                "data": $data,
+                "href": $href
+            }
+        else ()
+};
+
+declare function fhh:get-previous-doc($model) {
+    let $div := $model?data/ancestor-or-self::tei:TEI
+    let $documents := collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
+    let $col := 
+            for $doc in $documents
+            let $created := $doc//tei:date[@type='created']/@when
+            order by $created
+            return $doc
+    let $index := index-of($col, $div)
+    let $data := 
+        switch($index)
+            case 1 return ()
+            default return ($col[$index - 1]//tei:body)[1]
+    let $href := if ($data) then "$app/historicaldocuments/frus-history/documents/" || substring-before(util:document-name($data), '.xml') else ()
+    return 
+        if ($data) then 
+            map{
+                "data": $data,
+                "href": $href
+            }
+        else ()
+};
+
 declare function fhh:document-list-full($node, $model, $document-id) {
     let $documents := collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
     return
@@ -365,4 +412,28 @@ declare function fhh:events($node, $model) {
             <h1>Recent Events</h1>
             { $recent-events-list }
         </div>
+};
+
+declare 
+    %templates:replace
+function fhh:appendix-a-chart-intro($node as node(), $model as map(*)) {
+    let $chart-intro := doc('/db/apps/frus-history/frus-production-chart/frus-production-chart-intro.html')
+    return (
+        $chart-intro
+    )
+};
+
+declare 
+    %templates:replace
+function fhh:appendix-a-chart-data($node as node(), $model as map(*)) {
+    let $chart-data := util:binary-to-string(util:binary-doc('/db/apps/frus-history/frus-production-chart/frus-production-chart-data.json'))
+    let $chart-parameters := util:binary-to-string(util:binary-doc('/db/apps/frus-history/frus-production-chart/frus-production-chart-parameters.json'))
+    return (
+    <script type="text/javascript">
+        const g = window.g = new Dygraph(document.getElementById("graph"), {$chart-data}, {$chart-parameters});
+        function change(el) {{
+            g.setVisibility(parseInt(el.id), el.checked);
+        }}
+    </script>
+    )
 };

@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="14">
+   <name>mama said</name>
+   <artist>lenny kravitz</artist>
+   <track>
+      <metadata key="Track ID" type="integer">2594</metadata>
+      <metadata key="Name" type="string">It Ain't Over 'Til It's Over</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26342131</metadata>
+      <metadata key="Total Time" type="integer">242573</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T00:45:21Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">23</metadata>
+      <metadata key="Play Date" type="integer">3698313440</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T13:17:20Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1437</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">217B563F9FACCCE0</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">2596</metadata>
+      <metadata key="Name" type="string">More Than Anything In This World</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">21031111</metadata>
+      <metadata key="Total Time" type="integer">208266</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T00:45:42Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">11</metadata>
+      <metadata key="Play Date" type="integer">3698313649</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T13:20:49Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1453</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">AEA192F1B54CB10C</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">2598</metadata>
+      <metadata key="Name" type="string">Stop Draggin' Around</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">18405297</metadata>
+      <metadata key="Total Time" type="integer">159373</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T00:46:45Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">81</metadata>
+      <metadata key="Play Date" type="integer">3702118541</metadata>
+      <metadata key="Play Date UTC" type="date">2021-04-24T13:15:41Z</metadata>
+      <metadata key="Rating" type="integer">80</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1355</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">9185159A5A5E5450</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">2600</metadata>
+      <metadata key="Name" type="string">Fields Of Joy (Reprise)</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Michael Kamen/Hal Fredricks</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">28143955</metadata>
+      <metadata key="Total Time" type="integer">239106</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T00:47:08Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3698317618</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T14:26:58Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1877</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">3C1F3785E295BA1A</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">2602</metadata>
+      <metadata key="Name" type="string">When The Morning Turns To Night</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">19550744</metadata>
+      <metadata key="Total Time" type="integer">179373</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T00:47:41Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3698318051</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T14:34:11Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1259</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">8609E95DBAA1F401</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">2604</metadata>
+      <metadata key="Name" type="string">What The Fuck Are We Saying?</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">35071406</metadata>
+      <metadata key="Total Time" type="integer">313800</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">13</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-22T00:47:53Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3698318365</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T14:39:25Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1259</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">A5E4AB264F7A0BF4</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8065</metadata>
+      <metadata key="Name" type="string">Fields Of Joy</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Michael Kamen/Hal Fredricks</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">25778382</metadata>
+      <metadata key="Total Time" type="integer">238240</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T04:11:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">58</metadata>
+      <metadata key="Play Date" type="integer">3711095011</metadata>
+      <metadata key="Play Date UTC" type="date">2021-08-06T10:43:31Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1929</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">D1F18F969DD5B4CE</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8067</metadata>
+      <metadata key="Name" type="string">Always On The Run</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Slash/Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26973686</metadata>
+      <metadata key="Total Time" type="integer">233000</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T04:11:45Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">21</metadata>
+      <metadata key="Play Date" type="integer">3704692554</metadata>
+      <metadata key="Play Date UTC" type="date">2021-05-24T08:15:54Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">2810</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">074D6E5FD5B655E4</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8069</metadata>
+      <metadata key="Name" type="string">Stand By My Woman</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">A. Krizan/S. Pasch/Lenny Kravitz/Henry Hirsch</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">27141053</metadata>
+      <metadata key="Total Time" type="integer">260426</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T04:12:10Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">21</metadata>
+      <metadata key="Play Date" type="integer">3698313201</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T13:13:21Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1416</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">56B6313A0AC7B244</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8071</metadata>
+      <metadata key="Name" type="string">What Goes Around Comes Around</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">28284991</metadata>
+      <metadata key="Total Time" type="integer">289933</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T04:13:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3698313939</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T13:25:39Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1259</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">036B841A10630972</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8073</metadata>
+      <metadata key="Name" type="string">The Difference Is Why</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29767827</metadata>
+      <metadata key="Total Time" type="integer">292760</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T04:13:37Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">19</metadata>
+      <metadata key="Play Date" type="integer">3698314231</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T13:30:31Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1259</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Name" type="string">Difference Is Why</metadata>
+      <metadata key="Persistent ID" type="string">ADEADEA0525F5907</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8075</metadata>
+      <metadata key="Name" type="string">Flowers For Zoe</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">14371241</metadata>
+      <metadata key="Total Time" type="integer">163626</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T04:14:11Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">21</metadata>
+      <metadata key="Play Date" type="integer">3698317379</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T14:22:59Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">692</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">4EA2097FB081AE50</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8077</metadata>
+      <metadata key="Name" type="string">All I Ever Wanted</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Sean Ono Lennon/Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26577050</metadata>
+      <metadata key="Total Time" type="integer">254293</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T04:14:39Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">22</metadata>
+      <metadata key="Play Date" type="integer">3698317872</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T14:31:12Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2021-05-24T08:10:40Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1261</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">2B960B802CA37653</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">8079</metadata>
+      <metadata key="Name" type="string">Butterfly</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Composer" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Mama Said</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">9702358</metadata>
+      <metadata key="Total Time" type="integer">110600</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">14</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1991</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:05:31Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T04:15:26Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">26</metadata>
+      <metadata key="Play Date" type="integer">3698318480</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T14:41:20Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">458</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">82D0955E11F97D63</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

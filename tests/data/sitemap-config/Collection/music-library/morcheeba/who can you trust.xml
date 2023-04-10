@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="12">
+   <name>who can you trust?</name>
+   <artist>morcheeba</artist>
+   <track>
+      <metadata key="Track ID" type="integer">9971</metadata>
+      <metadata key="Name" type="string">Moog Island</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">25958450</metadata>
+      <metadata key="Total Time" type="integer">321893</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:34:47Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:34:20Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">32</metadata>
+      <metadata key="Play Date" type="integer">3707806060</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:07:40Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2020-05-12T13:28:03Z</metadata>
+      <metadata key="Rating" type="integer">80</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">4E24A3D8CD799A42</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9973</metadata>
+      <metadata key="Name" type="string">Trigger Hippie</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">33108563</metadata>
+      <metadata key="Total Time" type="integer">331800</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:35:13Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:34:48Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">40</metadata>
+      <metadata key="Play Date" type="integer">3707806391</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:13:11Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">D9F3D2377F6D5E23</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9975</metadata>
+      <metadata key="Name" type="string">Post Houmous</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">9192890</metadata>
+      <metadata key="Total Time" type="integer">109266</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:35:21Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:35:14Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">32</metadata>
+      <metadata key="Play Date" type="integer">3707806500</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:15:00Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">4B2A6AA228BA4D75</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9977</metadata>
+      <metadata key="Name" type="string">Tape Loop</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">25340065</metadata>
+      <metadata key="Total Time" type="integer">262866</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:35:39Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:35:22Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">37</metadata>
+      <metadata key="Play Date" type="integer">3707806762</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:19:22Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">48B7C64CF5999274</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9979</metadata>
+      <metadata key="Name" type="string">Never An Easy Way</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">37225204</metadata>
+      <metadata key="Total Time" type="integer">401973</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:36:04Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:35:40Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">28</metadata>
+      <metadata key="Play Date" type="integer">3707807165</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:26:05Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">83B94DD6FC68B63D</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9981</metadata>
+      <metadata key="Name" type="string">Howling</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">22871950</metadata>
+      <metadata key="Total Time" type="integer">220560</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:36:17Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:36:05Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">31</metadata>
+      <metadata key="Play Date" type="integer">3707807386</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:29:46Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">B8CD0B0DCC6658BE</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9983</metadata>
+      <metadata key="Name" type="string">Small Town</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">28428539</metadata>
+      <metadata key="Total Time" type="integer">309506</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:36:35Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:36:18Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">34</metadata>
+      <metadata key="Play Date" type="integer">3707807695</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:34:55Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2021-04-16T15:06:41Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">CEFDAF1DA564AC9F</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9985</metadata>
+      <metadata key="Name" type="string">Enjoy The Wait</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4821066</metadata>
+      <metadata key="Total Time" type="integer">67093</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:36:38Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:36:35Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">39</metadata>
+      <metadata key="Play Date" type="integer">3707807763</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:36:03Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2016-03-31T08:43:29Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">F82DFB823978C411</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9987</metadata>
+      <metadata key="Name" type="string">Col</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">21969857</metadata>
+      <metadata key="Total Time" type="integer">249173</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:36:52Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:36:39Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">28</metadata>
+      <metadata key="Play Date" type="integer">3707808012</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:40:12Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">563</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">86280A1337FF1DDC</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9989</metadata>
+      <metadata key="Name" type="string">Who Can You Trust?</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">40696041</metadata>
+      <metadata key="Total Time" type="integer">535826</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:37:20Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:36:52Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">21</metadata>
+      <metadata key="Play Date" type="integer">3707808548</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:49:08Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">ACDC4A0AEDCC2CF6</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9991</metadata>
+      <metadata key="Name" type="string">Almost Done</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">36966656</metadata>
+      <metadata key="Total Time" type="integer">398906</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-12T23:37:45Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:37:21Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">31</metadata>
+      <metadata key="Play Date" type="integer">3727427365</metadata>
+      <metadata key="Play Date UTC" type="date">2022-02-11T12:29:25Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">06FB5CF77733C50F</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">9993</metadata>
+      <metadata key="Name" type="string">End Theme</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Ross Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Who Can You Trust?</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">12830083</metadata>
+      <metadata key="Total Time" type="integer">147626</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2009-05-13T00:37:56Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-13T01:37:46Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">26</metadata>
+      <metadata key="Play Date" type="integer">3707809096</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:58:16Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1230</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">39764D96FEE329B5</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

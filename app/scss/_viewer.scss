@@ -1,0 +1,45 @@
+/* HSG integration of Openseadragon viewer -------------- */
+
+.osd-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 3rem;
+}
+
+#viewer {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 650px;
+  background-color: $color-gray-light;
+  border-radius: 5px;
+
+  @media (min-width: $xs-screen-min) { // 481px
+    height: 700px;
+  }
+
+  @media (min-width: 520px) {
+    height: 800px;
+  }
+
+  @media (min-width: $small-screen-min) { // 601px
+    height: 1000px;
+  }
+
+  @media (min-width: $sm-screen-min) { // 841px
+    height: 1000px;
+  }
+
+  @media (min-width: 992px) {
+    height: 750px;
+  }
+
+  @media (min-width: 1200px) {
+    height: 900px;
+  }
+}
+.openseadragon-container {
+  border: 1px solid transparent !important;
+  border-radius: 5px !important;
+}

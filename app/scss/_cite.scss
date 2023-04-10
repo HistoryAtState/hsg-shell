@@ -1,0 +1,72 @@
+/* Citation component, modal dialog and trigger buttons */
+
+// Customized modal for citation
+.modal-body {
+  &__citation-group:not(:last-child) {
+    margin-bottom: 4rem;
+  }
+  &__citation-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    flex-direction: column;
+    @media screen and (min-width: $screen-xs-min) {
+     flex-direction: row;
+    }
+  }
+}
+
+// Bootstrap overrides for modal dialog on mobile screens
+@media (max-width: $xs-screen) {
+  .modal.in .modal-dialog {
+    margin: 0 !important;
+  }
+
+  .modal-content {
+    @media (max-width: $xs-screen) {
+      height: 100vh !important;
+      width: 100vw !important;
+      border-radius: 0 !important;
+      border: 0;
+    }
+  }
+}
+
+.citation-text {
+  flex: 1 auto;
+  padding: 8px;
+  border: $default-border-style;
+  border-radius: 4px;
+  height: auto;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+// Highlighting for selected citation
+.copied {
+  background-color: $color-gray-lightest;;
+}
+
+// Close button in modal dialog
+button.btn.btn-primary.close-button {
+  min-width: 60px;
+}
+
+// Link Button at bottom of pages without a sidebar
+.hsg-cite {
+  &__footer {
+    .hsg-grid {
+      border-top: 0;
+    }
+  }
+
+  &__button:not(&--sidebar) {
+    @extend .hsg-link-button--outline;
+    margin: 0 0 3rem 0;
+    font-weight: 700;
+
+    @media (min-width: 1200px) {
+      margin: $margin-horizontal-base 0 5px;
+    }
+  }
+}

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="11">
+   <name>are you gonna go my way</name>
+   <artist>lenny kravitz</artist>
+   <track>
+      <metadata key="Track ID" type="integer">3690</metadata>
+      <metadata key="Name" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3398368</metadata>
+      <metadata key="Total Time" type="integer">212244</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:04:05Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">104</metadata>
+      <metadata key="Play Date" type="integer">3714892733</metadata>
+      <metadata key="Play Date UTC" type="date">2021-09-19T09:38:53Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Rating" type="integer">80</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">5584</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">ADADBD7B8911FFB7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3692</metadata>
+      <metadata key="Name" type="string">Believe</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4716174</metadata>
+      <metadata key="Total Time" type="integer">294582</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:04:05Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">23</metadata>
+      <metadata key="Play Date" type="integer">3698318985</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T14:49:45Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">3570</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">68B72788514199B8</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3694</metadata>
+      <metadata key="Name" type="string">Eleutheria</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4696896</metadata>
+      <metadata key="Total Time" type="integer">293407</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:04:06Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">13</metadata>
+      <metadata key="Play Date" type="integer">3698321274</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:27:54Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1753</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">A4F8B3EB68CE8966</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3696</metadata>
+      <metadata key="Name" type="string">Is There Any Love In Your Heart?</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3535046</metadata>
+      <metadata key="Total Time" type="integer">220786</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:04:06Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">20</metadata>
+      <metadata key="Play Date" type="integer">3698319859</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:04:19Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">3135</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">AA2041AC9FE60958</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3698</metadata>
+      <metadata key="Name" type="string">My Love</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3735225</metadata>
+      <metadata key="Total Time" type="integer">233273</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2008-01-30T19:04:06Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">13</metadata>
+      <metadata key="Play Date" type="integer">3698320317</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:11:57Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">2637</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">6DA47B67D79316B4</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3700</metadata>
+      <metadata key="Name" type="string">Black Girl</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3598723</metadata>
+      <metadata key="Total Time" type="integer">224835</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:49Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">24</metadata>
+      <metadata key="Play Date" type="integer">3698320084</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:08:04Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1887</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">5F390F6C279AC0F8</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3702</metadata>
+      <metadata key="Name" type="string">Come On And Love Me</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3746690</metadata>
+      <metadata key="Total Time" type="integer">234083</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:49Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">23</metadata>
+      <metadata key="Play Date" type="integer">3698319219</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T14:53:39Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1511</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">6940601CEAA54B68</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3704</metadata>
+      <metadata key="Name" type="string">Heaven Help</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3062496</metadata>
+      <metadata key="Total Time" type="integer">191320</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:49Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">15</metadata>
+      <metadata key="Play Date" type="integer">3698319410</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T14:56:50Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1286</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">9471E52307AC6DC7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3706</metadata>
+      <metadata key="Name" type="string">Just Be A Woman</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3653066</metadata>
+      <metadata key="Total Time" type="integer">228231</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:49Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3698319638</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:00:38Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2018-05-29T13:09:32Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">754</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">BF2C0F61F664D5B2</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3708</metadata>
+      <metadata key="Name" type="string">Sister</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">6796105</metadata>
+      <metadata key="Total Time" type="integer">424698</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:49Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">18</metadata>
+      <metadata key="Play Date" type="integer">3698320980</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:23:00Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1649</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">C1A026F7C556FA71</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">3710</metadata>
+      <metadata key="Name" type="string">Sugar</metadata>
+      <metadata key="Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album Artist" type="string">Lenny Kravitz</metadata>
+      <metadata key="Album" type="string">Are You Gonna Go My Way</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3813138</metadata>
+      <metadata key="Total Time" type="integer">238236</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">13</metadata>
+      <metadata key="Year" type="integer">1993</metadata>
+      <metadata key="Date Modified" type="date">2009-04-09T18:24:50Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:54:15Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3698320555</metadata>
+      <metadata key="Play Date UTC" type="date">2021-03-11T15:15:55Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">1417</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Sort Artist" type="string">Kravitz, Lenny</metadata>
+      <metadata key="Persistent ID" type="string">6663D82A57AD601E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

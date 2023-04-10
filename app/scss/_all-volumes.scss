@@ -1,0 +1,98 @@
+/* HSG "all-volumes" list customizations -------------- */
+
+.hsg-list {
+  $el: '.hsg-list';
+
+  &__volumes {
+
+    #{$el}__item{
+      margin: 0 0 1.5rem 0;
+    }
+
+    #{$el}__thumbnail {
+      padding-top: 7px;
+      max-width: 6rem;
+      margin: 0 2rem 1rem 0;
+      width: 11rem;
+
+      @media screen and (min-width: $small-screen-min) {
+        max-width: 8rem;
+        width: 11rem;
+      }
+
+      @media screen and (min-width: $sm-screen-min) {
+        max-width: 10rem;
+        width: 21rem;
+      }
+
+      &--placeholder {
+        margin: .4rem 2rem 1rem 0;
+        border: $default-border-style;
+        padding: 5px;
+        border-radius: 2px;
+      }
+    }
+
+    // Reduce default h3 headlines font-size for all volumes list
+    h3.hsg-list__title {
+      font-size: $h5-font-size;
+      @media screen and (min-width: $screen-sm-min) {
+        font-size: $h4-font-size;
+      }
+    }
+
+    dt {
+      float: left;
+      padding-inline-end: 0.3em;
+    }
+
+    dd {
+      margin: 0;
+    }
+
+    #{$el}__item-wrap {
+      border-bottom: $default-border-style;
+    }
+
+    #{$el}__media__download {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      align-content: flex-start;
+      gap: 10px 10px;
+      margin: 0 0 1.5rem 0;
+
+      @media screen and (min-width: $small-screen-min) {
+        justify-content: normal;
+      }
+
+      li {
+        flex: 1 100%;
+
+        @media screen and (min-width: $xs-screen-min) {
+          flex: 0 46%;
+        }
+
+        @media screen and (min-width: $small-screen-min) {
+          flex: 0 20%;
+        }
+      }
+
+      button, a {
+        text-transform: uppercase;
+        padding: 6px 12px;
+        width: 100%;
+
+        @media screen and (min-width: $small-screen-min) {
+          padding: 4px 8px;
+        }
+        
+        .hsg-glyphicon-new-window:after, .hsg-external-link:after, &[href^="http://"]:after, &[href^="https://"]:after {
+          content: ""; 
+        }
+      }
+    }
+  }
+}
