@@ -91,13 +91,32 @@ gulp.task('images:watch', function () {
     gulp.watch('app/images/*', gulp.series('images:deploy'))
 });
 
+// openseadragon image viewer //
+gulp.task('openseadragon:copy', gulp.series(function () {
+    return gulp.src([
+            'node_modules/openseadragon/build/openseadragon/images/*',
+            'node_modules/openseadragon/build/openseadragon/openseadragon.js'
+        ])
+        .pipe(gulp.dest('resources/scripts/vendor/openseadragon'))
+}));
+
+gulp.task('openseadragon:deploy', gulp.series('openseadragon:copy', function () {
+    return gulp.src('resources/openseadragon/**/*', {base: '.'})
+        .pipe(exClient.newer(targetConfiguration))
+        .pipe(exClient.dest(targetConfiguration))
+}));
+
 // scripts //
 
 gulp.task('scripts:build', function () {
     // minified version of js is used in production only
     return gulp.src([
+            'resources/scripts/footnote.js',
             'resources/scripts/app.js',
-            'resources/scripts/metagrid.js'
+            'resources/scripts/metagrid.js',
+            'resources/scripts/cite.js',
+            'resources/scripts/dygraph-combined.js',
+            'resources/scripts/vendor/openseadragon/openseadragon.js'
         ])
         .pipe(uglify())
         .pipe(concat('app.min.js'))
@@ -108,20 +127,28 @@ gulp.task('scripts:concat', gulp.series('scripts:build', function () {
     return gulp.src([
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-            'resources/scripts/app.min.js'
+            'resources/scripts/citeproc.min.js',
+            'resources/scripts/app.min.js',
         ])
       .pipe(concat('app.all.js'))
       .pipe(gulp.dest('resources/scripts'));
 }));
 
 gulp.task('scripts:deploy', gulp.series('scripts:concat', function () {
-    return gulp.src('resources/scripts/*.js', {base: '.'})
+    return gulp.src('resources/scripts/*.js', {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
 }));
 
 gulp.task('scripts:watch', function () {
-    gulp.watch('resources/scripts/*.js', gulp.series('scripts:deploy'))
+    gulp.watch([
+      'resources/scripts/footnote.js',
+      'resources/scripts/app.js',
+      'resources/scripts/metagrid.js',
+      'resources/scripts/cite.js',
+      'resources/scripts/dygraph-combined.js',
+    ],
+    gulp.series('scripts:deploy'))
 });
 
 // styles //
@@ -142,7 +169,7 @@ gulp.task('styles:build', gulp.series(function () {
 gulp.task('styles:concat', gulp.series('styles:build', function () {
     return gulp.src([
             'resources/css/main.css',
-            'resources/odd/compiled/frus.css'
+            'transform/frus.css'
         ])
       .pipe(concat('all.css'))
       .pipe(gulp.dest('resources/css'));
@@ -173,7 +200,7 @@ gulp.task('pages:watch', function () {
 
 // modules //
 
-let modulesPath = 'modules/*';
+let modulesPath = 'modules/**/*';
 gulp.task('modules:deploy', function () {
     return gulp.src(modulesPath, {base: './'})
         .pipe(exClient.newer(targetConfiguration))
@@ -245,7 +272,8 @@ gulp.task('deploy', gulp.series('build', function () {
             modulesPath,
             imagePath,
             otherPath,
-            fontPath
+            fontPath,
+            'transform/*'
         ], {base: './'})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))

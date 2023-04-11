@@ -1,29 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround" data-template-with="templates/site.xml"
-    data-template-at="content">
-    <div data-template="pages:load">
-        <div id="static-title" class="hidden">Administrative Timeline - Department History</div>
-        <div class="row">
-            <div class="hsg-breadcrumb-wrapper">
-                <ol class="breadcrumb" data-template="app:fix-links">
-                    <li>
-                        <a href="$app">Home</a>
-                    </li>
-                    <li>
-                        <a href="$app/departmenthistory">Department History</a>
-                    </li>
-                    <li>
-                        <a href="$app/departmenthistory/timeline">Administrative Timeline</a>
-                    </li>
-                </ol>
+<div data-template="pages:load">
+   <div data-template="templates:surround"
+        data-template-with="templates/site.xml"
+        data-template-at="content">
+      <div>
+         <div id="static-title" class="hidden">Administrative Timeline - Department History</div>
+         <div class="row">
+            <div data-template="pages:breadcrumb">
+               <p id="breadcrumb-title">Administrative Timeline</p>
             </div>
-        </div>
-        <div class="row">
+         </div>
+         <div class="row">
             <div class="hsg-width-two-thirds">
-                <div id="content-inner">
-                    <div id="content-container">
-                        <h1>Administrative Timeline of the Department of State</h1>
-                        <p>This annotated timeline encompasses principal events concerning
+               <div id="content-inner">
+                  <div id="content-container">
+                     <h1>Administrative Timeline of the Department of State</h1>
+                     <p>This annotated timeline encompasses principal events concerning
                             Department of State administration from 1789 through the most recent
                             update noted below, focusing on the establishment of new offices and
                             changes in organization. Research Historian Evan Duncan compiled this
@@ -33,9 +25,8 @@
                                 <em>U.S. Statutes at Large</em>, Executive Orders, Departmental
                             Orders, and Department of State periodicals such as the <em>Department
                                 of State Bulletin</em> and <em>State Magazine</em>. We invite
-                            questions and comments about this resource at <a
-                                href="mailto:history@state.gov">history@state.gov</a>.</p>
-                        <p>The Administrative Timeline of the Department of State is not yet
+                            questions and comments about this resource at <a href="mailto:history@state.gov">history@state.gov</a>.</p>
+                     <p>The Administrative Timeline of the Department of State is not yet
                             searchable with the history.state.gov search engine. We are working to
                             make this resource searchable, but in the meantime please browse the
                             resource using the links to each period in the sidebar. We apologize for
@@ -44,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <aside class="hsg-width-one-third">
+            <aside data-template="pages:asides">
                 <div class="hsg-panel" data-template="app:fix-links">
                     <div class="hsg-panel-heading">
                         <h2 class="hsg-sidebar-title">Periods</h2>
@@ -95,6 +86,7 @@
                     </ul>
                 </div>
             </aside>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>

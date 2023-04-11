@@ -1,0 +1,106 @@
+/* HSG news list customizations -------------- */
+
+.hsg-list {
+    $el: '.hsg-list';
+    // hsg-list__news
+    &#{$el}__news {
+        #{$el}__badge {
+            margin-top: .4rem; // depends on height & top-alignment of element next to the badge
+        }
+
+        #{$el}__title {
+            @extend .h4;
+            margin-top: 0; // align with badge on the left
+        }
+    }
+
+    // hsg-list__text--truncated
+    &__text {
+        // hsg-list__text--truncated
+        &--truncated {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        white-space: nowrap;
+
+            &--ellipsis {
+                display: table-cell;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+.hsg-news {
+    $el: '.hsg-news';
+
+    &#{$el}__container {
+        margin: 0 0 4rem 0;
+    }
+
+    img {
+        @extend .img-responsive;
+        border: 1px solid $color-gray-light;
+        padding: 10px;
+        border-radius: 1ex;
+    }
+
+    &__content {
+        // Everything wrapped inside --article, external markup is displayed
+        &--article {
+            img {
+                margin: 2rem 0;
+            }
+        }
+    }
+
+    &__more {
+        font-family: $font-sans;
+    }
+
+    &__thumbnail {
+      width: 100%;
+
+      // gradually screen-size-adaptive width
+      @media screen and (min-width: $xs-screen-min) {
+        float: left;
+        max-width: 30vw !important;
+        margin: 0 2rem 1rem 0;
+      }
+
+      @media screen and (min-width: $small-screen-min) {
+        max-width: 25vw !important;
+      }
+
+      @media screen and (min-width: $sm-screen-min) {
+        max-width: 20vw !important;
+      }
+
+      @media screen and (min-width: $large-screen-min) {
+        max-width: 16vw !important;
+      }
+    }
+}
+
+// If a news thumbnail image is available
+// (==> preceding sibling of badge),
+// let the date badge float next to the image
+.hsg-news__thumbnail + .hsg-badge__news {
+  display: inline-block;
+
+  @media screen and (min-width: $xs-screen-min) {
+    margin-top: 0;
+  }
+}
+
+// Layout class for fullwidth images
+.hsg-news__thumbnail--fullwidth {
+  float: none;
+  width: 100%;
+
+  // badges under a fullwidth image
+   & + .hsg-badge__news {
+    display: inline-block;
+  }
+}

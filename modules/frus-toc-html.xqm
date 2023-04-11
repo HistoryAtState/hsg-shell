@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 (:~
  : Template functions to render table of contents.
@@ -7,8 +7,9 @@ module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
@@ -132,7 +133,7 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
                     if ($first = $last) then
                         concat(' ', $first)
                     else
-                        concat('s ', $first, '-', $last)
+                        concat('s ', $first, '–', $last)
                 return
                     concat(' (Document', $document, ')')
             else 
@@ -159,7 +160,7 @@ declare function toc:toc-head($model as map(*), $node as element(tei:head)?) {
         let $params := map:put($model?parameters, "omit-notes", true())
         return
             $model?apply-children(
-                map:merge(($model, $params)),
+                map:merge(($model, $params),  map{"duplicates": "use-last"}),
                 $node, $node/node())
     else
         $model?odd($node/node(), map { "omit-notes": true() })
@@ -187,7 +188,7 @@ declare function toc:href($publication-id as xs:string, $document-id as xs:strin
  :)
 declare function toc:document-list($config as map(*), $node as element(tei:div), $class) {
     let $start := xs:integer(request:get-parameter("start", 1))
-    let $headConfig := map:merge(($config, map { "parameters": map:put($config?parameters, "omit-notes", true())}))
+    let $headConfig := map:merge(($config, map { "parameters": map:put($config?parameters, "omit-notes", true())}),  map{"duplicates": "use-last"})
     let $head := $node/tei:head[1]
     let $child-documents := $node/tei:div[@type='document']
     let $child-document-count := count($child-documents)
@@ -307,4 +308,44 @@ declare function toc:paginate($child-document-count as xs:int, $start as xs:int)
         </ul>
     else
         ()
+};
+
+(:
+    TODO: Add processing this function to post-install.xql with the according permissions,
+    check for target collection and create a new, empty one, if necessary
+:)
+declare function toc:generate-frus-tocs() {
+    let $xsl-url := doc('/db/apps/hsg-shell/modules/lib/frus-toc.xsl')
+    for $volume in collection($config:FRUS_VOLUMES_COL)
+        let $toc-name := $volume/tei:TEI/@xml:id || '-toc.xml'
+        let $toc := transform:transform(
+            $volume,
+            $xsl-url,
+            ()
+        )
+        return xmldb:store('/db/apps/frus/frus-toc', $toc-name, $toc, 'application/xml')
+};
+
+declare
+    %templates:replace
+function toc:frus-toc($node as node(), $model as map(*)) as element()* {
+    let $toc-path := $config:FRUS_VOLUMES_TOC || $model?document-id || '-toc.xml'
+    let $log := util:log('debug', ('toc:frus-toc, $model?section-id=', $model?section-id))
+    return (
+        doc($toc-path)/* => templates:process($model)
+    )
+};
+
+declare function toc:highlight-current($node as node(), $model as map(*)) {
+    let $current-ids := $node/@data-template-current-ids
+    let $is-current := $model?section-id = tokenize($current-ids, '\s')
+
+    return (
+        element { node-name($node) } {
+            $node/@* except ($node/@data-template-current-ids, $node/@class, $node/@href ),
+            attribute class { string-join(($node/@class, 'hsg-current'[$is-current]), ' ') },
+            attribute href { app:fix-href($node/@href) },
+            $node/node() => templates:process($model)
+        }
+    )
 };

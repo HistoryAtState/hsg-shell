@@ -1,0 +1,634 @@
+{
+    "/milestones/1945-1952/BaruchPlans": {
+        "status": "301",
+        "to": "/milestones/1945-1952/baruch-plans"
+    },
+    "/milestones/1776-1783/Articles": {
+        "status": "301",
+        "to": "/milestones/1776-1783/articles"
+    },
+    "/milestones/1945-1952/KoreanWar": {
+        "status": "301",
+        "to": "/milestones/1945-1952/korean-war"
+    },
+    "/milestones/1866-1898/Mahan": {
+        "status": "301",
+        "to": "/milestones/1866-1898/mahan"
+    },
+    "/milestones/1961-1968/CubanMissile": {
+        "status": "301",
+        "to": "/milestones/1961-1968/cuban-missile-crisis"
+    },
+    "/milestones/1914-1920/Haiti": {
+        "status": "301",
+        "to": "/milestones/1914-1920/haiti"
+    },
+    "/milestones/1801-1829/Ruch-Bagot": {
+        "status": "301",
+        "to": "/milestones/1801-1829/rush-bagot"
+    },
+    "/milestones/1937-1945/ChineseExclusionActRepeal": {
+        "status": "301",
+        "to": "/milestones/1937-1945/chinese-exclusion-act-repeal"
+    },
+    "/milestones/1969-1976/OPEC": {
+        "status": "301",
+        "to": "/milestones/1969-1976/oil-embargo"
+    },
+    "/milestones/1776-1783/Treaty": {
+        "status": "301",
+        "to": "/milestones/1776-1783/treaty"
+    },
+    "/milestones/1945-1952/CreationIsrael": {
+        "status": "301",
+        "to": "/milestones/1945-1952/creation-israel"
+    },
+    "/milestones/1937-1945/Casablanca": {
+        "status": "301",
+        "to": "/milestones/1937-1945/casablanca"
+    },
+    "/milestones/1830-1860/GadsdenPurchase": {
+        "status": "301",
+        "to": "/milestones/1830-1860/gadsden-purchase"
+    },
+    "/milestones/1866-1898/Hawaii": {
+        "status": "301",
+        "to": "/milestones/1866-1898/hawaii"
+    },
+    "/milestones/1921-1936/ImmigrationAct": {
+        "status": "301",
+        "to": "/milestones/1921-1936/immigration-act"
+    },
+    "/milestones/1953-1960/WarsawTreaty": {
+        "status": "301",
+        "to": "/milestones/1953-1960/warsaw-treaty"
+    },
+    "/milestones/1945-1952/AsiaandAfrica": {
+        "status": "301",
+        "to": "/milestones/1945-1952/asia-and-africa"
+    },
+    "/milestones/1866-1898/Telegraph": {
+        "status": "301",
+        "to": "/milestones/1866-1898/telegraph"
+    },
+    "/milestones/1937-1945/WarTimeConferences": {
+        "status": "301",
+        "to": "/milestones/1937-1945/war-time-conferences"
+    },
+    "/milestones/1899-1913/HayandChina": {
+        "status": "301",
+        "to": "/milestones/1899-1913/hay-and-china"
+    },
+    "/milestones/1981-1989/APEC": {
+        "status": "301",
+        "to": "/milestones/1989-1992/apec"
+    },
+    "/milestones/1953-1960/CENTO": {
+        "status": "301",
+        "to": "/milestones/1953-1960/cento"
+    },
+    "/milestones/1801-1829/Florida": {
+        "status": "301",
+        "to": "/milestones/1801-1829/florida"
+    },
+    "/milestones/1776-1783/ModelTreaty": {
+        "status": "301",
+        "to": "/milestones/1776-1783/model-treaty"
+    },
+    "/milestones/1784-1800/ConventionandRatification": {
+        "status": "301",
+        "to": "/milestones/1784-1800/convention-and-ratification"
+    },
+    "/milestones/1977-1980/TrilateralDiplomacy": {
+        "status": "301",
+        "to": "/milestones/1977-1980/trilateral-diplomacy"
+    },
+    "/milestones/1750-1775/Incidents": {
+        "status": "301",
+        "to": "/milestones/1750-1775/incidents"
+    },
+    "/milestones/1914-1920/WWI": {
+        "status": "301",
+        "to": "/milestones/1914-1920/wwi"
+    },
+    "/milestones/1990-2000/foreword": {
+        "status": "301",
+        "to": "/milestones/1989-1992/foreword"
+    },
+    "/milestones/1750-1775/ProclamationLine1763": {
+        "status": "301",
+        "to": "/milestones/1750-1775/proclamation-line"
+    },
+    "/milestones/1784-1800/WashingtonFarewell": {
+        "status": "301",
+        "to": "/milestones/1784-1800/washington-farewell"
+    },
+    "/milestones/1784-1800/PickneyTreaty": {
+        "status": "301",
+        "to": "/milestones/1784-1800/pickney-treaty"
+    },
+    "/milestones/1899-1913/PanamaCanal": {
+        "status": "301",
+        "to": "/milestones/1899-1913/panama-canal"
+    },
+    "/milestones/1784-1800/JayTreaty": {
+        "status": "301",
+        "to": "/milestones/1784-1800/jay-treaty"
+    },
+    "/milestones/1953-1960/SEATO": {
+        "status": "301",
+        "to": "/milestones/1953-1960/seato"
+    },
+    "/milestones/1990-2000/Oslo": {
+        "status": "301",
+        "to": "/milestones/1993-2000/oslo"
+    },
+    "/milestones/1945-1952/JapanReconstruction": {
+        "status": "301",
+        "to": "/milestones/1945-1952/japan-reconstruction"
+    },
+    "/milestones/1914-1920/ParisPeace": {
+        "status": "301",
+        "to": "/milestones/1914-1920/paris-peace"
+    },
+    "/milestones/1914-1920/FourteenPoints": {
+        "status": "301",
+        "to": "/milestones/1914-1920/fourteen-points"
+    },
+    "/milestones/1961-1968/AllianceforProgress": {
+        "status": "301",
+        "to": "/milestones/1961-1968/alliance-for-progress "
+    },
+    "/milestones/1977-1980/NorthSouthDialogue": {
+        "status": "301",
+        "to": "/milestones/1977-1980/north-south-dialogue"
+    },
+    "/milestones/1945-1952/ANZUS": {
+        "status": "301",
+        "to": "/milestones/1945-1952/anzus"
+    },
+    "/milestones/1801-1829/NapoleonicWars": {
+        "status": "301",
+        "to": "/milestones/1801-1829/napoleonic-wars"
+    },
+    "/milestones/1830-1860/Liberia": {
+        "status": "301",
+        "to": "/milestones/1830-1860/liberia"
+    },
+    "/milestones/1937-1945/LendLease": {
+        "status": "301",
+        "to": "/milestones/1937-1945/lend-lease"
+    },
+    "/milestones/1784-1800/Loans": {
+        "status": "301",
+        "to": "/milestones/1784-1800/loans"
+    },
+    "/milestones/1866-1898/Blaine": {
+        "status": "301",
+        "to": "/milestones/1866-1898/blaine"
+    },
+    "/milestones/1899-1913/Platt": {
+        "status": "301",
+        "to": "/milestones/1899-1913/platt"
+    },
+    "/milestones/1969-1976/Helsinki": {
+        "status": "301",
+        "to": "/milestones/1969-1976/helsinki"
+    },
+    "/milestones/1776-1783/SecretCommittee": {
+        "status": "301",
+        "to": "/milestones/1776-1783/secret-committee"
+    },
+    "/milestones/1961-1968/ArabIsraeliWar67": {
+        "status": "301",
+        "to": "/milestones/1961-1968/arab-israeli-war-1967"
+    },
+    "/milestones/1969-1976/Detente": {
+        "status": "301",
+        "to": "/milestones/1969-1976/detente"
+    },
+    "/milestones/1945-1952/Kennan": {
+        "status": "301",
+        "to": "/milestones/1945-1952/kennan"
+    },
+    "/milestones/1921-1936/GoodNeighbor": {
+        "status": "301",
+        "to": "/milestones/1921-1936/good-neighbor"
+    },
+    "/milestones/1899-1913/JapaneseRelations": {
+        "status": "301",
+        "to": "/milestones/1899-1913/japanese-relations"
+    },
+    "/milestones/1921-1936/RedLine": {
+        "status": "301",
+        "to": "/milestones/1921-1936/red-line"
+    },
+    "/milestones/1945-1952/ImmigrationAct": {
+        "status": "301",
+        "to": "/milestones/1945-1952/immigration-act"
+    },
+    "/milestones/1961-1968/TET": {
+        "status": "301",
+        "to": "/milestones/1961-1968/tet"
+    },
+    "/milestones/1801-1829/BarbaryWars": {
+        "status": "301",
+        "to": "/milestones/1801-1829/barbary-wars"
+    },
+    "/milestones/1784-1800/HaitianRev": {
+        "status": "301",
+        "to": "/milestones/1784-1800/haitian-rev"
+    },
+    "/milestones/1861-1865/FrenchIntervention": {
+        "status": "301",
+        "to": "/milestones/1861-1865/french-intervention"
+    },
+    "/milestones/1899-1913/War": {
+        "status": "301",
+        "to": "/milestones/1899-1913/war"
+    },
+    "/milestones/1961-1968/IndiaPakistanWar": {
+        "status": "301",
+        "to": "/milestones/1961-1968/india-pakistan-war"
+    },
+    "/milestones/1953-1960/BerlinCrises": {
+        "status": "301",
+        "to": "/milestones/1953-1960/berlin-crises"
+    },
+    "/milestones/1990-2000/Apartheid": {
+        "status": "301",
+        "to": "/milestones/1989-1992/apartheid"
+    },
+    "/milestones/1861-1865/Confederacy": {
+        "status": "301",
+        "to": "/milestones/1861-1865/confederacy"
+    },
+    "/milestones/1830-1860/TerritorialExpansion": {
+        "status": "301",
+        "to": "/milestones/1830-1860/territorial-expansion"
+    },
+    "/milestones/1921-1936/Mukden_incident": {
+        "status": "301",
+        "to": "/milestones/1921-1936/mukden-incident"
+    },
+    "/milestones/1945-1952/BerlinCrises": {
+        "status": "301",
+        "to": "/milestones/1945-1952/berlin-airlift"
+    },
+    "/milestones/1969-1976/Angola": {
+        "status": "301",
+        "to": "/milestones/1969-1976/angola"
+    },
+    "/milestones/1953-1960/TaiwanSTraitCrises": {
+        "status": "301",
+        "to": "/milestones/1953-1960/taiwan-strait-crises"
+    },
+    "/milestones/1961-1968/LimitedBan": {
+        "status": "301",
+        "to": "/milestones/1961-1968/limited-ban"
+    },
+    "/milestones/1937-1945/MexicanOil": {
+        "status": "301",
+        "to": "/milestones/1937-1945/mexican-oil"
+    },
+    "/milestones/1921-1936/Dawes": {
+        "status": "301",
+        "to": "/milestones/1921-1936/dawes"
+    },
+    "/milestones/1861-1865/Alabama": {
+        "status": "301",
+        "to": "/milestones/1861-1865/alabama"
+    },
+    "/milestones/1937-1945/TehranConf": {
+        "status": "301",
+        "to": "/milestones/1937-1945/tehran-conf"
+    },
+    "/milestones/1945-1952/Atomic": {
+        "status": "301",
+        "to": "/milestones/1945-1952/atomic"
+    },
+    "/milestones/1801-1829/Warof1812": {
+        "status": "301",
+        "to": "/milestones/1801-1829/war-of-1812"
+    },
+    "/milestones/1937-1945/AtlanticConf": {
+        "status": "301",
+        "to": "/milestones/1937-1945/atlantic-conf"
+    },
+    "/milestones/1784-1800/FrenchRev": {
+        "status": "301",
+        "to": "/milestones/1784-1800/french-rev"
+    },
+    "/milestones/1801-1829/LouisianaPurchase": {
+        "status": "301",
+        "to": "/milestones/1801-1829/louisiana-purchase"
+    },
+    "/milestones/1921-1936/NavalConference": {
+        "status": "301",
+        "to": "/milestones/1921-1936/naval-conference"
+    },
+    "/milestones/1921-1936/Protectionism": {
+        "status": "301",
+        "to": "/milestones/1921-1936/protectionism"
+    },
+    "/milestones/1990-2000": {
+        "status": "301",
+        "to": "/milestones/1989-1992"
+    },
+    "/milestones/1945-1952/TrumanDoctrine": {
+        "status": "301",
+        "to": "/milestones/1945-1952/truman-doctrine"
+    },
+    "/milestones/1899-1913/PortsmouthTreaty": {
+        "status": "301",
+        "to": "/milestones/1899-1913/portsmouth-treaty"
+    },
+    "/milestones/1861-1865/Blockade": {
+        "status": "301",
+        "to": "/milestones/1861-1865/blockade"
+    },
+    "/milestones/1969-1976/ArabIsraeliWar73": {
+        "status": "301",
+        "to": "/milestones/1969-1976/arab-israeli-war-1973"
+    },
+    "/milestones/1953-1960/Sputnik": {
+        "status": "301",
+        "to": "/milestones/1953-1960/sputnik"
+    },
+    "/milestones/1784-1800/CitizenGenet": {
+        "status": "301",
+        "to": "/milestones/1784-1800/citizen-genet"
+    },
+    "/milestones/1945-1952/KoreanWar2": {
+        "status": "301",
+        "to": "/milestones/1945-1952/korean-war-2"
+    },
+    "/milestones/1945-1952/NATO": {
+        "status": "301",
+        "to": "/milestones/1945-1952/nato"
+    },
+    "/milestones/1953-1960/EisenhowerDoctrine": {
+        "status": "301",
+        "to": "/milestones/1953-1960/eisenhower-doctrine"
+    },
+    "/milestones/1977-1980/Olympic": {
+        "status": "301",
+        "to": "/milestones/1977-1980/olympic"
+    },
+    "/milestones/1899-1913/ChineseRev": {
+        "status": "301",
+        "to": "/milestones/1899-1913/chinese-rev"
+    },
+    "/milestones/1937-1945/YaltaConf": {
+        "status": "301",
+        "to": "/milestones/1937-1945/yalta-conf"
+    },
+    "/milestones/1953-1960/khrushchev-20thc-congress": {
+        "status": "301",
+        "to": "/milestones/1953-1960/khrushchev-20th-congress"
+    },
+    "/milestones/1969-1976/VietnamWar": {
+        "status": "301",
+        "to": "/milestones/1969-1976/vietnam-war"
+    },
+    "/milestones/1953-1960/ChinaTalks": {
+        "status": "301",
+        "to": "/milestones/1953-1960/china-talks"
+    },
+    "/milestones/1914-1920/League": {
+        "status": "301",
+        "to": "/milestones/1914-1920/league"
+    },
+    "/milestones/1937-1945/BrettonWoods": {
+        "status": "301",
+        "to": "/milestones/bretton-woods"
+    },
+    "/milestones/1866-1898/AlaskaPurchase": {
+        "status": "301",
+        "to": "/milestones/1866-1898/alaska-purchase"
+    },
+    "/milestones/1830-1860/OregonTerritory": {
+        "status": "301",
+        "to": "/milestones/1830-1860/oregon-territory"
+    },
+    "/milestones/1776-1783/ContinentalCongress": {
+        "status": "301",
+        "to": "/milestones/1776-1783/continental-congress"
+    },
+    "/milestones/1866-1898/Spanish_american_war": {
+        "status": "301",
+        "to": "/milestones/1866-1898/spanish-american-war"
+    },
+    "/milestones/1776-1783/FrenchAlliance": {
+        "status": "301",
+        "to": "/milestones/1776-1783/french-alliance"
+    },
+    "/milestones/1969-1976/SouthAsia": {
+        "status": "301",
+        "to": "/milestones/1969-1976/south-asia"
+    },
+    "/milestones/1937-1945/PotsdamConf": {
+        "status": "301",
+        "to": "/milestones/1937-1945/potsdam-conf"
+    },
+    "/milestones/1961-1968/GulfofTonkin": {
+        "status": "301",
+        "to": "/milestones/1961-1968/gulf-of-tonkin"
+    },
+    "/milestones/1945-1952/ArabIsraeliWar": {
+        "status": "301",
+        "to": "/milestones/1945-1952/arab-israeli-war"
+    },
+    "/milestones/1981-1989/FallofCommunism": {
+        "status": "301",
+        "to": "/milestones/1989-1992/fall-of-communism"
+    },
+    "/milestones/1750-1775/ParliamentaryTaxation": {
+        "status": "301",
+        "to": "/milestones/1750-1775/parliamentary-taxation"
+    },
+    "/milestones/1830-1860/OpeningtoJapan": {
+        "status": "301",
+        "to": "/milestones/1830-1860/opening-to-japan"
+    },
+    "/milestones/1801-1829/Monroe": {
+        "status": "301",
+        "to": "/milestones/1801-1829/monroe"
+    },
+    "/milestones/1830-1860/IndianTreaties": {
+        "status": "301",
+        "to": "/milestones/1830-1860/indian-treaties"
+    },
+    "/milestones/1899-1913/DollarDiplo": {
+        "status": "301",
+        "to": "/milestones/1899-1913/dollar-diplo"
+    },
+    "/milestones/1866-1898/Burlingame-SewardTreaty": {
+        "status": "301",
+        "to": "/milestones/1866-1898/burlingame-seward-treaty"
+    },
+    "/milestones/1776-1783/Declaration": {
+        "status": "301",
+        "to": "/milestones/1776-1783/declaration"
+    },
+    "/milestones/1937-1945/AmericanIsolationism": {
+        "status": "301",
+        "to": "/milestones/1937-1945/american-isolationism"
+    },
+    "/milestones/1861-1865/Victory": {
+        "status": "301",
+        "to": "/milestones/1861-1865/victory"
+    },
+    "/milestones/1937-1945/Internationalism": {
+        "status": "301",
+        "to": "/milestones/1937-1945/internationalism"
+    },
+    "/milestones/1866-1898/Yellow_journalism": {
+        "status": "301",
+        "to": "/milestones/1866-1898/yellow-journalism"
+    },
+    "/milestones/1830-1860/PacificExpansion": {
+        "status": "301",
+        "to": "/milestones/1830-1860/pacific-expansion"
+    },
+    "/milestones/1921-1936/GreatDepression": {
+        "status": "301",
+        "to": "/milestones/great-depression"
+    },
+    "/milestones/1830-1860/TexasAnnexation": {
+        "status": "301",
+        "to": "/milestones/1830-1860/texas-annexation"
+    },
+    "/milestones/1921-1936/USSR": {
+        "status": "301",
+        "to": "/milestones/1921-1936/ussr"
+    },
+    "/milestones/1945-1952/ChineseRev": {
+        "status": "301",
+        "to": "/milestones/1945-1952/chinese-rev"
+    },
+    "/milestones/1969-1976/SALT": {
+        "status": "301",
+        "to": "/milestones/1969-1976/salt"
+    },
+    "/milestones/1750-1775/TreatyofParis": {
+        "status": "301",
+        "to": "/milestones/1750-1775/treaty-of-paris"
+    },
+    "/milestones/1866-1898/Venezuela": {
+        "status": "301",
+        "to": "/milestones/1866-1898/venezuela"
+    },
+    "/milestones/1953-1960/Suez": {
+        "status": "301",
+        "to": "/milestones/1953-1960/suez"
+    },
+    "/milestones/1961-1968/NPT": {
+        "status": "301",
+        "to": "/milestones/1961-1968/npt"
+    },
+    "/milestones/1953-1960/BandungConf": {
+        "status": "301",
+        "to": "/milestones/1953-1960/bandung-conf"
+    },
+    "/milestones/1945-1952/MarshallPlan": {
+        "status": "301",
+        "to": "/milestones/1945-1952/marshall-plan"
+    },
+    "/milestones/1750-1775/AlbanyPlan": {
+        "status": "301",
+        "to": "/milestones/1750-1775/albany-plan"
+    },
+    "/milestones/1921-1936/Kellogg": {
+        "status": "301",
+        "to": "/milestones/1921-1936/kellogg"
+    },
+    "/milestones/1914-1920/BullittMission": {
+        "status": "301",
+        "to": "/milestones/1914-1920/bullitt-mission"
+    },
+    "/milestones/1921-1936/Geneva": {
+        "status": "301",
+        "to": "/milestones/1921-1936/geneva"
+    },
+    "/milestones/1750-1775/FrenchIndianWar": {
+        "status": "301",
+        "to": "/milestones/1750-1775/french-indian-war"
+    },
+    "/milestones/1937-1945/UN": {
+        "status": "301",
+        "to": "/milestones/1937-1945/un"
+    },
+    "/milestones/1861-1865/TrentAffair": {
+        "status": "301",
+        "to": "/milestones/1861-1865/trent-affair"
+    },
+    "/milestones/1990-2000/StrategicArmsReduction": {
+        "status": "301",
+        "to": "/milestones/1989-1992/strategic-arms-reduction"
+    },
+    "/milestones/1953-1960/DienBienPhu": {
+        "status": "301",
+        "to": "/milestones/1953-1960/dien-bien-phu"
+    },
+    "/milestones/1830-1860/China1": {
+        "status": "301",
+        "to": "/milestones/1830-1860/china-1"
+    },
+    "/milestones/1830-1860/China2": {
+        "status": "301",
+        "to": "/milestones/1830-1860/china-2"
+    },
+    "/milestones/1945-1952/NationalSecurityAct": {
+        "status": "301",
+        "to": "/milestones/1945-1952/national-security-act"
+    },
+    "/milestones/1866-1898/ChineseImmigration": {
+        "status": "301",
+        "to": "/milestones/1866-1898/chinese-immigration"
+    },
+    "/milestones/1921-1936/Neutrality_acts": {
+        "status": "301",
+        "to": "/milestones/1921-1936/neutrality-acts"
+    },
+    "/milestones/1899-1913/RooseveltandMonroeDoctrine": {
+        "status": "301",
+        "to": "/milestones/1899-1913/roosevelt-and-monroe-doctrine"
+    },
+    "/milestones/1937-1945/USSoviet": {
+        "status": "301",
+        "to": "/milestones/1937-1945/us-soviet"
+    },
+    "/milestones/1776-1783/BFranklin": {
+        "status": "301",
+        "to": "/milestones/1776-1783/b-franklin"
+    },
+    "/milestones/1866-1898/CommodoreShufeldt": {
+        "status": "301",
+        "to": "/milestones/1866-1898/commodore-shufeldt"
+    },
+    "/milestones/1921-1936/LondonNavalConf": {
+        "status": "301",
+        "to": "/milestones/1921-1936/london-naval-conf"
+    },
+    "/milestones/1921-1936/export-importbank": {
+        "status": "301",
+        "to": "/milestones/1921-1936/export-import-bank"
+    },
+    "/milestones/1830-1860/WebsterTreaty": {
+        "status": "301",
+        "to": "/milestones/1830-1860/webster-treaty"
+    },
+    "/milestones/1830-1860/Amistad": {
+        "status": "301",
+        "to": "/milestones/1830-1860/amistad"
+    },
+    "/milestones/1784-1800/XYZ": {
+        "status": "301",
+        "to": "/milestones/1784-1800/xyz"
+    },
+    "/milestones/1953-1960/U2-incident": {
+        "status": "301",
+        "to": "/milestones/1953-1960/u2-incident"
+    }
+}

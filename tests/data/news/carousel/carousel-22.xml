@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>carousel-22</id>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">New Publication: Soviet Union, October 1970–October 1971</div>
+   </title>
+   <published>2011-09-22T14:51:00.000-04:00</published>
+   <updated>2011-09-29T13:42:00.000-04:00</updated>
+   <link href="/news/carousel-22" rel="self"/>
+   <link rel="about"
+         title="Visit Resource"
+         href="/historicaldocuments/frus1969-76v13"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>This volume documents the conflicts and collaboration between the two
+                    superpowers, including the development of the Nixon administration’s policy of
+                    détente and the crucial role of the private channel between Henry Kissinger and
+                    Anatoly Dobrynin.</p>
+      </div>
+   </content>
+   <link rel="enclosure"
+         type="img/jpeg"
+         title="Cover of Volume XIII, Soviet Union, October 1970–October 1971"
+         href="https://static.history.state.gov/carousel/frus1969-76v13.jpg"/>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="carousel"/>
+</entry>

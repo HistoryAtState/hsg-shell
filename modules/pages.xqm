@@ -9,9 +9,12 @@ module namespace pages="http://history.state.gov/ns/site/hsg/pages";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace expath="http://expath.org/ns/pkg";
 
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
+import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
+import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "sidebar.xqm";
+import module namespace link="http://history.state.gov/ns/site/hsg/link" at "link.xqm";
 (:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
 (:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
@@ -41,18 +44,31 @@ declare
     %templates:default("view", "div")
     %templates:default("ignore", "false")
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?,
-        $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean) {
+        $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean, $open-graph-keys as xs:string?, $open-graph-keys-exclude as xs:string?, $open-graph-keys-add as xs:string?) {
+
     let $log := console:log("loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id )
 
-    let $last-modified := 
+    let $static-open-graph := map:merge((
+        for $meta in $node//*[@id eq 'static-open-graph']/meta
+        return map{ string($meta/@property) : function($node as node()?, $model as map(*)?) {$meta}}),  map{"duplicates": "use-last"}
+    )
+    let $static-open-graph-keys := map:keys($static-open-graph)
+
+    let $ogk as xs:string* := if ($open-graph-keys) then tokenize($open-graph-keys, '\s') else $config:OPEN_GRAPH_KEYS
+    let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
+    let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
+
+
+
+    let $last-modified :=
         if (exists($publication-id) and exists($document-id)) then
             pages:last-modified($publication-id, $document-id, $section-id)
-        else 
+        else
             ()
     let $if-modified-since := try { request:get-attribute("if-modified-since") => parse-ietf-date() } catch * { () }
-    let $should-return-304 := 
+    let $should-return-304 :=
         if (exists($last-modified) and exists($if-modified-since)) then
-            $if-modified-since ge 
+            $if-modified-since ge
                 $last-modified
                 (: For the purpose of comparing the resource's last modified date with the If-Modified-Since
                  : header supplied by the client, we must truncate any milliseconds from the last modified date.
@@ -62,14 +78,14 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                 => xs:dateTime()
         else
             ()
-    let $created := 
+    let $created :=
         if (exists($publication-id) and exists($document-id)) then
             (: No need to truncate creation date; it'll be serialized in view.xql :)
             pages:created($publication-id, $document-id, $section-id)
-        else 
+        else
             ()
     return
-        (: if the "If-Modified-Since" header in the client request is later than the 
+        (: if the "If-Modified-Since" header in the client request is later than the
          : last-modified date, then halt further processing of the templates and simply
          : return a 304 response. :)
         if ($should-return-304) then
@@ -86,6 +102,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                 "publication-id": $publication-id,
                 "document-id": $document-id,
                 "section-id": $section-id,
+                "collection": collection($config:PUBLICATIONS?($publication-id)?collection),
                 "view": $view,
                 "base-path":
                     (: allow for pages that do not have $config:PUBLICATIONS?select-document defined :)
@@ -93,9 +110,24 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                     if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
                         map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
                     else (),
-                "odd": if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else $config:odd-transform-default
+                "odd": (if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else(), $config:odd-transform-default)[1],
+        		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
+        		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"}),
+        		"url":
+        		  try { request:get-url() }
+        		  catch err:XPDY0002 { 'test-url' },  (: some contexts do not have a request object, e.g. xqsuite testing :)
+        		"local-uri":
+        		  try { substring-after(request:get-uri(), $app:APP_ROOT)}
+        		  catch err:XPDY0002 { 'test-path' }  (: some contexts do not have a request object, e.g. xqsuite testing :)
             }
-        
+            let $citation-meta :=
+                let $meta-fun := $config:PUBLICATIONS?($publication-id)?citation-meta
+                let $new.model := map:merge(($model, $content), map{'duplicates': 'use-last'})
+                return if (exists($meta-fun)) then
+                    $meta-fun($node, $new.model)
+                else
+                    config:default-citation-meta($node, $new.model)
+
             return
                 (
                     if (exists($last-modified) and exists($created)) then
@@ -105,22 +137,22 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
                         )
                     else
                         (),
-                    templates:process($node/*, map:merge(($model, $content)))
+                    templates:process($node/*, map:merge(($model, $content, map{'citation-meta': $citation-meta}),  map{"duplicates": "use-last"}))
                 )
 };
 
 declare function pages:last-modified($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified($document-id, $section-id)
+        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified!.($document-id, $section-id)
     else
-        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified($document-id)
+        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified!.($document-id)
 };
 
 declare function pages:created($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        map:get($config:PUBLICATIONS, $publication-id)?section-created($document-id, $section-id)
+        map:get($config:PUBLICATIONS, $publication-id)?section-created!.($document-id, $section-id)
     else
-        map:get($config:PUBLICATIONS, $publication-id)?document-created($document-id)
+        map:get($config:PUBLICATIONS, $publication-id)?document-created!.($document-id)
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
@@ -129,7 +161,7 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?,
     $view as xs:string, $ignore as xs:boolean?) {
-    console:log("pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
+    util:log("debug", "pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
     let $block :=
         if ($view = "div") then
             if ($section-id) then (
@@ -231,8 +263,9 @@ declare function pages:xml-link($node as node(), $model as map(*), $doc as xs:st
 declare
     %templates:default("view", "div")
     %templates:default("heading-offset", 0)
-function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int) {
+function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int, $document-id as xs:string?) {
     let $log := console:log("pages:view: view: " || $view || " heading-offset: " || $heading-offset)
+    let $log := util:log('info', ('pages:view, view=', $view))
     let $xml :=
         if ($view = "div") then
             if ($model?data[@subtype='removed-pending-rewrite']) then
@@ -249,12 +282,40 @@ function pages:view($node as node(), $model as map(*), $view as xs:string, $head
             $model?data//*:body/*
 
     return
-        if ($xml instance of element(tei:pb)) then
-            let $href := concat('//', $config:S3_DOMAIN, '/frus/', substring-before(util:document-name($xml), '.xml') (:ACK why is this returning blank?!?! root($xml)/tei:TEI/@xml:id:), '/medium/', $xml/@facs, '.png')
-            return
-                <div class="content">
-                    <img src="{$href}" class="img-responsive img-thumbnail center-block"/>
-                </div>
+        if ($xml instance of element(tei:pb))
+        then (
+            let $this-page := $xml
+            let $next-page := $this-page/following::tei:pb[1]
+            let $next-page-starts-document := $next-page/preceding-sibling::element()[1][self::tei:head] or (not($next-page/preceding-sibling::element()) and $next-page/parent::tei:div/@type = 'document')
+            let $fragment-ending-this-page :=
+                if ($next-page-starts-document) then
+                    $next-page/parent::tei:div
+                else
+                    $next-page
+            let $page-div-ids :=
+                (
+                    $this-page/ancestor::tei:div[@type='document'],
+                    $fragment-ending-this-page/ancestor-or-self::tei:div[@type='document']/preceding::tei:div[@type='document'][.>> $this-page]
+                )/@xml:id
+
+            let $pg-id :=  concat('#', $xml/@xml:id)
+            let $tif-graphic := $this-page/ancestor::tei:TEI//tei:surface[@start=string($pg-id)]//tei:graphic[@mimeType="image/tiff"]
+            let $tif-graphic-height := $tif-graphic/@height => substring-before("px")
+            let $tif-graphic-width := $tif-graphic/@width => substring-before("px")
+            let $tif-graphic-url := $tif-graphic/@url
+            let $src := concat('https://', $config:S3_DOMAIN, '/frus/', $document-id, '/medium/', $xml/@facs, '.png')
+            return (
+                <noscript>
+                    <div class="content">
+                        <img src="{ $src }" class="img-responsive img-thumbnail center-block"/>
+                    </div>
+                </noscript>
+                ,
+                <section class="osd-wrapper content">
+                    <div id="viewer" data-doc-id="{ $document-id }" data-facs="{ $xml/@facs }" data-url="{ $tif-graphic-url }" data-width="{ $tif-graphic-width }" data-height="{ $tif-graphic-height }"></div>
+                </section>
+            )
+        )
         else
             pages:process-content($model?odd, $xml, map { "base-uri": $model?base-path, "heading-offset": $heading-offset })
 };
@@ -348,7 +409,7 @@ function pages:styles($node as node(), $model as map(*), $odd as xs:string?) {
     attribute href {
         let $name := replace($odd, "^([^/\.]+).*$", "$1")
         return
-            $pages:app-root || "/resources/odd/compiled/" || $name || ".css"
+            $pages:app-root || "/transform/" || $name || ".css"
     }
 };
 
@@ -365,14 +426,8 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                 "work" : $work
             }
         else
-            (:  TODO: not sure if the following check for divs containing only a div as first element is needed.
-                Code was copied from tei-simple generic app where this case could occur and led to empty pages.
-                Do we need the same for hsg? The check is very expensive.
-            :)
-(:            let $parent := $div/ancestor::tei:div[not(*[1] instance of element(tei:div))][1]:)
-            let $prevDiv := pages:get-previous($div)
-            let $nextDiv := pages:get-next($div)
-        (:        ($div//tei:div[not(*[1] instance of element(tei:div))] | $div/following::tei:div)[1]:)
+            let $prevDiv := ($config:PUBLICATIONS?($model?publication-id)?previous)($model)
+            let $nextDiv := ($config:PUBLICATIONS?($model?publication-id)?next)($model)
             return
                 map {
                     "previous" : $prevDiv,
@@ -380,27 +435,6 @@ function pages:navigation($node as node(), $model as map(*), $view as xs:string)
                     "work" : $work,
                     "div" : $div
                 }
-};
-
-declare function pages:get-next($div as element()) {
-    if ($div/self::tei:pb) then
-        $div/following::tei:pb[1]
-    else if ($div/tei:div[@xml:id]) then
-        $div/tei:div[@xml:id][1]
-    else
-        ($div/following::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[1]
-};
-
-declare function pages:get-previous($div as element()?) {
-    if ($div/self::tei:pb) then
-        $div/preceding::tei:pb[1]
-    else if (($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[not(tei:div/@type)]) then
-        ($div/preceding-sibling::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[last()]
-    else
-        (
-            $div/ancestor::tei:div[@type = ('compilation', 'chapter', 'subchapter', 'section', 'part')][tei:div/@type][1],
-            ($div/preceding::tei:div[@xml:id] except $div/id($config:IGNORED_DIVS))[1]
-        )[1]
 };
 
 declare function pages:get-content($div as element()) {
@@ -427,20 +461,18 @@ declare
 function pages:navigation-link($node as node(), $model as map(*), $direction as xs:string, $view as xs:string) {
     if ($view = "single") then
         ()
-    else if ($model($direction)) then
-        <a data-doc="{util:document-name($model($direction))}"
-            data-root="{util:node-id($model($direction))}"
+    else if (exists($model($direction))) then
+        <a data-doc="{util:document-name($model?($direction)?data)}"
+            data-root="{util:node-id($model?($direction)?data)}"
             data-current="{util:node-id($model('div'))}">
         {
             $node/@* except $node/@href,
             let $publication-id := $model?publication-id
             let $document-id := $model?document-id
-            let $section-id := $model($direction)/@xml:id
             let $href :=
-                if (map:contains(map:get($config:PUBLICATIONS, $publication-id), 'html-href')) then
-                    map:get($config:PUBLICATIONS, $publication-id)?html-href($document-id, $section-id)
-                else
-                    $model($direction)/@xml:id
+                typeswitch ($model?($direction)?href)
+                case $fn as function(*) return $fn($model)
+                default $s return $s
             return
                 attribute href { app:fix-href($href) },
             $node/node()
@@ -451,13 +483,8 @@ function pages:navigation-link($node as node(), $model as map(*), $direction as 
 };
 
 declare function pages:generate-title ($model, $content) {
-    (: without an entry in $config:PUBLICATIONS and a publication-id parameter from controller.xql,
-     : only the stock "Office of the Historian" title will appear in the <title> element :)
-    let $title :=
-        if ($model?publication-id) then
-            map:get($config:PUBLICATIONS, $model?publication-id)?title
-        else
-            ($content//(h1|h2|h3))[1]
+    (: Use generate-short-title; suppress default output as this will be suffixed below in any case. :)
+    let $title := pages:generate-short-title($content, $model)[. ne "Office of the Historian"]
 
     let $head :=
         if ($model?section-id) then
@@ -476,33 +503,82 @@ declare function pages:generate-title ($model, $content) {
     return string-join(($head, $title, "Office of the Historian")[. ne ""], " - ")
 };
 
-declare
-function pages:app-root($node as node(), $model as map(*)) {
-    let $root :=
+(: The short title does not include super-section titles, in contrast to the full title.
+ :
+ : The short title is populated by the first non-empty value from the following list:
+ : - A pre-defined static title on the page template: `$node/ancestor-or-self::*[last()]//div[@id="static-title"]/string()`
+ : - The title defined by publication-id: `if ($model?publication-id) then map:get($config:PUBLICATIONS, $model?publication-id)?title else ()`
+ : - The first H1, H2, or H3 title in the content: ($node/ancestor-or-self::*[last()]//(h1|h2|h3))[1]
+ : - A fallback string of 'Office of the Historian'
+ :)
+declare function pages:generate-short-title($node, $model) as xs:string? {
+    (
+        $node/ancestor-or-self::*[last()]//div[@id="static-title"]/string(),
+        $config:PUBLICATIONS?($model?publication-id)?title,
+        $node/ancestor-or-self::*[last()]//(h1|h2|h3),
+        'Office of the Historian'
+    )[. ne ''][1]
+};
+
+(: Generate page breadcrumbs :)
+declare function pages:breadcrumb($node, $model){
+  pages:generate-breadcrumbs(substring-after(request:get-uri(), $app:APP_ROOT))
+};
+
+declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {
+  <nav class="hsg-breadcrumb hsg-breadcrumb--wrap" aria-label="breadcrumbs">
+    <ol
+        vocab="http://schema.org/"
+        typeof="BreadcrumbList"
+        class="hsg-breadcrumb__list"
+    >
+      {
+        site:call-with-parameters-for-uri-steps($uri, $site:config, pages:generate-breadcrumb-item#1)
+      }
+    </ol>
+  </nav>
+};
+
+declare function pages:generate-breadcrumb-item($uri-step-state as map(*)) as element(li)*{
+    (: The URI step state is generated from the site config file for each URI in the breadcrumb list :)
+    <li
+        class="hsg-breadcrumb__list-item"
+        property="itemListElement"
+        typeof="ListItem"
+    >
+    {
+        (: We want to pass through appropriate attributes to the link generator :)
+        let $link-attributes := function() as attribute()* {
+            attribute class { "hsg-breadcrumb__link" },
+            attribute property { "item" },
+            attribute typeof { "WebPage" }
+        }
+        let $state := map:merge(($uri-step-state, map{'link-attributes': $link-attributes}), map{'duplicates': 'use-last'})
+        return link:generate-from-state($state)
+    }
+    </li>
+};
+
+
+declare function pages:app-root($node as node(), $model as map(*)) {
+    let $root := try {
         if (request:get-header("nginx-request-uri")) then (
             ""
             (: replace(request:get-header("nginx-request-uri"), "^(\w+://[^/]+).*$", "$1") :)
         ) else
-            request:get-context-path() || substring-after($config:app-root, "/db")
+            request:get-context-path() || substring-after($config:app-root, "/db")}
+        catch err:XPDY0002 {()} (: required for local testing when there is no request :)
     return
     element { node-name($node) } {
         $node/@*,
         attribute data-app { $root },
-        let $content := templates:process($node/*, $model)
-        let $title :=
-            (: use static override when defined in page template :)
-            if ($content//div[@id="static-title"]) then
-                string-join(
-                    ($content//div[@id="static-title"]/string(), "Office of the Historian")[. ne ""],
-                    " - "
-                )
-            else
-                pages:generate-title($model, $content)
+        let $content as node()* := templates:process($node/*, $model)
+        let $title := string-join((pages:generate-short-title($node, $model)[. ne 'Office of the Historian'], "Office of the Historian"), " - ")
 
         let $log := console:log("pages:app-root -> title: " || $title)
         return (
             <head>
-                { $content/self::head/* }
+                {$content[self::head]/*}
                 <title>{$title}</title>
             </head>,
             $content/self::body
@@ -633,4 +709,35 @@ declare function pages:deep-section-page-title($node, $model) {
 
 declare function pages:section-category($node, $model) {
     root($model?data)//tei:title[@type = 'short']/string()
+};
+
+declare function pages:asides($node, $model){
+    (:
+     : function to generate asides (e.g. sidebars) on pages; eventually all sidebar content will be generated here,
+     : but for now we will recurse over existing content.
+     :)
+    let $static-asides :=
+    <aside class="hsg-aside--static">
+        {
+            let $nodes := $node/node()[not(@data-template eq 'pages:section-nav')]
+            let $processed := templates:process($nodes, $model)
+            return app:fix-links($processed)
+        }
+    </aside>
+    return
+        <div class="hsg-width-sidebar">
+            {
+                side:info($node, $model),
+				$static-asides,
+                side:section-nav($node, $model)
+            }
+        </div>
+};
+
+declare function pages:suppress($node as node()?, $model as map(*)?) {};
+
+declare function pages:unless-asides($node, $model){
+    if ($node/ancestor::body//aside[@data-template eq 'pages:asides'])
+    then ()
+    else $node
 };

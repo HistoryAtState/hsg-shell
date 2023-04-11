@@ -25,3 +25,4 @@ build.properties.local.xml
 !.existdb.json
 !.npmrc
 !.nvmrc
+!.gitkeep

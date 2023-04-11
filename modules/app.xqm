@@ -4,10 +4,15 @@ module namespace app="http://history.state.gov/ns/site/hsg/templates";
 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare variable $app:APP_ROOT :=
-    let $nginx-request-uri := request:get-header('nginx-request-uri')
+    let $nginx-request-uri := 
+        try {request:get-header('nginx-request-uri')} (: e.g. XQsuite has no request :)
+        catch * {()}
+    let $context-path := 
+        try {request:get-context-path()}
+        catch * {'/exist'}
     return
         (: if request received from nginx :)
         if ($nginx-request-uri) then
@@ -18,7 +23,7 @@ declare variable $app:APP_ROOT :=
                 ""
         (: otherwise we're in the eXist URL space :)
         else
-            request:get-context-path() || "/apps/hsg-shell";
+            $context-path || "/apps/hsg-shell";
 
 declare
     %templates:wrap
@@ -74,10 +79,14 @@ declare function app:nginx-request-uri($node as node(), $model as map(*)) {
 };
 
 declare function app:fix-href($href as xs:string*) {
-    replace(
+    let $href.1 := 
+        if (starts-with($href, '/') and not(starts-with($href, $app:APP_ROOT)))
+        then ($app:APP_ROOT || $href)
+        else $href
+    return replace(
         replace(
             replace(
-              $href,
+              $href.1,
               "\$extern",
               "https://history.state.gov"
             ),
@@ -163,6 +172,68 @@ declare function app:set-last-modified($last-modified as xs:dateTime) {
 
 declare function app:set-created($created as xs:dateTime) {
     response:set-header("Created", app:format-http-date($created))
+};
+
+(:
+ : 2015-06-04T13:03:16-04:00 -> Jun 4, 2015
+ :)
+declare function app:format-date-month-short-day-year($dateTime) as xs:string {
+    typeswitch($dateTime)
+    case xs:dateTime return
+        $dateTime
+        => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-dateTime("[MNn,*-3] [D01], [Y]", "en", (), ())
+    case xs:date return
+        $dateTime
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date("[MNn,*-3] [D01], [Y]", "en", (), ())
+    case xs:gYearMonth return
+        (xs:string($dateTime) || '-01')
+        => xs:date()
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date("[MNn,*-3], [Y]", "en", (), ())
+    case xs:gYear return xs:string($dateTime)
+    default return
+        if ($dateTime castable as xs:dateTime) then xs:dateTime($dateTime) => app:format-date-month-short-day-year()
+        else if ($dateTime castable as xs:date) then xs:date($dateTime) => app:format-date-month-short-day-year()
+        else if ($dateTime castable as xs:gYearMonth) then xs:gYearMonth($dateTime) => app:format-date-month-short-day-year()
+        else if ($dateTime castable as xs:gYear) then xs:gYear($dateTime) => app:format-date-month-short-day-year()
+        else error(xs:QName('app:format-date'), "Could not recognise &quot;" || $dateTime || "&quot; as a date")
+};
+
+(:
+ : 2015-06-04T13:03:16-04:00 -> June 4, 2015
+ :)
+declare function app:format-date-month-long-day-year($dateTime) as xs:string {
+    typeswitch($dateTime)
+    case xs:dateTime return
+        $dateTime
+        => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-dateTime('[MNn] [D], [Y0001]', 'en', (), 'US')
+    case xs:date return
+        $dateTime
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date('[MNn] [D], [Y0001]', 'en', (), 'US')
+    case xs:gYearMonth return
+        (xs:string($dateTime) || '-01')
+        => xs:date()
+        => adjust-date-to-timezone(xs:dayTimeDuration("PT0H"))
+        => format-date('[MNn], [Y0001]', 'en', (), 'US')
+    case xs:gYear return xs:string($dateTime)
+    default return
+        if ($dateTime castable as xs:dateTime) then xs:dateTime($dateTime) => app:format-date-month-long-day-year()
+        else if ($dateTime castable as xs:date) then xs:date($dateTime) => app:format-date-month-long-day-year()
+        else if ($dateTime castable as xs:gYearMonth) then xs:gYearMonth($dateTime) => app:format-date-month-long-day-year()
+        else if ($dateTime castable as xs:gYear) then xs:gYear($dateTime) => app:format-date-month-long-day-year()
+        else error(xs:QName('app:format-date'), "Could not recognise &quot;" || $dateTime || "&quot; as a date")
+};
+
+(:
+ : 2015-06-04T13:03:16-04:00 -> yyyy-mm-dd -> 2015-06-04
+ :)
+declare function app:format-date-short ($date as xs:dateTime) as xs:string {
+    let $date := substring-before($date, 'T')
+    return $date
 };
 
 declare function app:uri($node as node(), $model as map(*)) {
@@ -282,7 +353,7 @@ declare %templates:wrap function app:load-most-recent-tweets($node as node(), $m
         return $tweet
     let $tweets-to-show := subsequence($ordered-tweets, 1, $how-many)
     let $content := map { "tweets": $tweets-to-show }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };
@@ -326,7 +397,7 @@ declare %templates:wrap function app:load-most-recent-tumblr-posts($node as node
     let $posts-to-show := subsequence($ordered-posts, count($ordered-posts) - $how-many + 1)
     let $newest-on-top := reverse($posts-to-show)
     let $content := map { "posts": $newest-on-top }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };
@@ -350,7 +421,7 @@ declare %templates:wrap function app:load-carousel-items($node as node(), $model
     let $carousel-items := collection($config:CAROUSEL_COL || '/data/entries')/topic[id = $carousel-ids]
     let $ordered-carousel-items := for $item in $carousel-items order by index-of($carousel-ids, $item/id) return $item
     let $content := map { "carousel-items": $ordered-carousel-items }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };
@@ -360,7 +431,7 @@ declare function app:each($node as node(), $model as map(*), $from as xs:string,
     for $item in $model($from)
     return
         element { node-name($node) } {
-            $node/@*, templates:process($node/node(), map:merge(($model, map:entry($to, $item))))
+            $node/@*, templates:process($node/node(), map:merge(($model, map:entry($to, $item)),  map{"duplicates": "use-last"}))
         }
 };
 
@@ -484,4 +555,14 @@ declare function app:insert-url-parameter($node as node(), $model as map(*)) {
                 )
         )
     }, $node/@* except $node/@href, $node/node() }
+};
+
+declare function app:error-description($node as node(), $model as map(*)) {
+    try {templates:error-description($node, $model)}
+    catch * {
+        element { node-name($node) } {
+            $node/@*,
+            $err:description
+        }
+    }
 };

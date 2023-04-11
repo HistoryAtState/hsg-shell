@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>twitter-996375936852480000</id>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">Students! Apply now to intern…</div>
+   </title>
+   <published>2018-05-15T13:05:09Z</published>
+   <updated>2018-05-15T13:05:09Z</updated>
+   <link href="/news/twitter-996375936852480000" rel="self"/>
+   <link rel="DCTERMS.source"
+         title="View Twitter Post"
+         href="https://twitter.com/HistoryAtState/status/996375936852480000"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>Students! Apply now to intern in 2019 at the <a href="https://twitter.com/StateDept">@StateDept</a> Office of the Historian
+                        (<a href="https://twitter.com/HistoryAtState">@HistoryAtState</a>)! <a href="https://www.historians.org/news-and-advocacy/calendar/event-detail?eventId=1817">historians.org/news-and-advoc…</a>
+            <a href="https://twitter.com/AHAhistorians">@AHAhistorians</a>
+            <a href="https://twitter.com/search?q=%23twitterstorians&amp;src=hash">#twitterstorians</a>
+         </p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="twitter"/>
+</entry>

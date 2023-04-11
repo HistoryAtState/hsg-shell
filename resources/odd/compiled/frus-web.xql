@@ -5,21 +5,21 @@
  :)
 xquery version "3.1";
 
-module namespace model="http://www.tei-c.org/tei-simple/models/frus.odd/web";
+module namespace model = "http://www.tei-c.org/pm/models/frus/web";
 
 declare default element namespace "http://www.tei-c.org/ns/1.0";
 
-declare namespace xhtml='http://www.w3.org/1999/xhtml';
+declare namespace xhtml = 'http://www.w3.org/1999/xhtml';
 
-declare namespace skos='http://www.w3.org/2004/02/skos/core#';
+declare namespace skos = 'http://www.w3.org/2004/02/skos/core#';
 
-declare namespace frus='http://history.state.gov/frus/ns/1.0';
+declare namespace frus = 'http://history.state.gov/frus/ns/1.0';
 
-import module namespace css="http://www.tei-c.org/tei-simple/xquery/css" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/css.xql";
+import module namespace css = "http://www.tei-c.org/tei-simple/xquery/css";
 
-import module namespace html="http://www.tei-c.org/tei-simple/xquery/functions" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/html-functions.xql";
+import module namespace html = "http://www.tei-c.org/tei-simple/xquery/functions";
 
-import module namespace ext-html="http://history.state.gov/ns/site/hsg/pmf-html" at "xmldb:exist://embedded-eXist-server/db/apps/tei-simple/content/../../hsg-shell/modules/ext-html.xql";
+import module namespace ext-html = "http://history.state.gov/ns/site/hsg/pmf-html" at "xmldb:exist:///db/apps/hsg-shell/modules/ext-html.xql";
 
 (:~
 
@@ -36,7 +36,7 @@ declare function model:transform($options as map(*), $input as node()*) {
                 "apply": model:apply#2,
                 "apply-children": model:apply-children#3
             }
-        ))
+        ),  map{"duplicates": "use-last"})
     
     return (
         html:prepare($config, $input),
@@ -80,7 +80,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:block($config, ., ("tei-back"), .)
                 case element(bibl) return
                     if (parent::listBibl) then
-                        html:listItem($config, ., ("tei-bibl1"), .)
+                        html:listItem($config, ., ("tei-bibl1"), ., ())
                     else
                         html:inline($config, ., ("tei-bibl2"), .)
                 case element(body) return
@@ -100,11 +100,11 @@ declare function model:apply($config as map(*), $input as node()*) {
                     else
                         $config?apply($config, ./node())
                 case element(castItem) return
-                    (: Insert item, rendered as described in parent list rendition. :)
-                    html:listItem($config, ., ("tei-castItem"), .)
+                (: Insert item, rendered as described in parent list rendition. :)
+                    html:listItem($config, ., ("tei-castItem"), ., ())
                 case element(castList) return
                     if (child::*) then
-                        html:list($config, ., css:get-rendition(., ("tei-castList")), castItem)
+                        html:list($config, ., css:get-rendition(., ("tei-castList")), castItem, ())
                     else
                         $config?apply($config, ./node())
                 case element(cb) return
@@ -114,19 +114,19 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:cell($config, ., css:get-rendition(., ("tei-cell")), ., ())
                 case element(choice) return
                     if (sic and corr) then
-                        html:alternate($config, ., ("tei-choice1"), ., corr[1], sic[1])
+                        html:alternate($config, ., ("tei-choice1"), ., corr[1], sic[1], ())
                     else
                         if (abbr and expan) then
-                            html:alternate($config, ., ("tei-choice1"), ., expan[1], abbr[1])
+                            html:alternate($config, ., ("tei-choice1"), ., expan[1], abbr[1], ())
                         else
                             if (orig and reg) then
-                                html:alternate($config, ., ("tei-choice6"), ., reg[1], orig[1])
+                                html:alternate($config, ., ("tei-choice6"), ., reg[1], orig[1], ())
                             else
                                 $config?apply($config, ./node())
                 case element(cit) return
                     if (child::quote and child::bibl) then
-                        (: Insert citation :)
-                        html:cit($config, ., ("tei-cit"), .)
+                    (: Insert citation :)
+                        html:cit($config, ., ("tei-cit"), ., .)
                     else
                         $config?apply($config, ./node())
                 case element(closer) return
@@ -271,9 +271,9 @@ declare function model:apply($config as map(*), $input as node()*) {
                                         $config?apply($config, ./node())
                 case element(imprimatur) return
                     html:block($config, ., ("tei-imprimatur"), .)
-                case element(item) return
-                    html:listItem($config, ., ("tei-item"), .)
-                case element(l) return
+                    case element(item) return
+                    html:listItem($config, ., ("tei-item"), ., ())
+                    case element (l) return
                     html:block($config, ., css:get-rendition(., ("tei-l")), .)
                 case element(label) return
                     if (@foo='baz') then
@@ -286,37 +286,37 @@ declare function model:apply($config as map(*), $input as node()*) {
                     html:block($config, ., ("tei-lg"), .)
                 case element(list) return
                     if (head) then
-                        (
-                            (: Headline for lists, level 4 will transform to html:h4 element :)
-                            html:heading($config, ., ("tei-list1", "listHead"), head/node(), 4),
-                            html:list($config, ., ("tei-list2", "list", "hsg-list-default"), item)
-                        )
+                    (
+                    (: Headline for lists, level 4 will transform to html:h4 element :)
+                    html:heading($config, ., ("tei-list1", "listHead"), head/ node (), 4),
+                    html:list($config, ., ("tei-list2", "list", "hsg-list-default"), item, ())
+                    )
 
                     else
-                        if (@rend = 'bulleted') then
-                            html:list($config, ., ("tei-list1", "hsg-list-disc"), item)
-                        else
-                            if (@type = ('participants', 'to', 'from', 'subject')) then
-                                html:list($config, ., ("tei-list1", "hsg-list-default"), item)
-                            else
-                                if (parent::list/@type = ('participants', 'to', 'from', 'subject')) then
-                                    (: This is a nested list within a list-item :)
-                                    html:list($config, ., ("tei-list1"), item)
-                                else
-                                    if (label) then
-                                        html:list($config, ., ("tei-list1", "labeled-list"), item)
-                                    else
-                                        if (ancestor::div[@xml:id='persons']) then
-                                            html:list($config, ., ("tei-list1", "list-person"), item)
-                                        else
-                                            if (ancestor::list) then
-                                                (: This is a nested list within a list :)
-                                                html:list($config, ., ("tei-list6", "hsg-nested-list"), item)
-                                            else
-                                                html:list($config, ., ("tei-list2", "hsg-list"), item)
-                case element(listBibl) return
+                    if (@rend = 'bulleted') then
+                    html:list($config, ., ("tei-list1", "hsg-list-disc"), item, ())
+                    else
+                    if (@type = ('participants', 'to', 'from', 'subject')) then
+                    html:list($config, ., ("tei-list1", "hsg-list-default"), item, ())
+                    else
+                    if ( parent::list/@type = ('participants', 'to', 'from', 'subject')) then
+                    (: This is a nested list within a list-item :)
+                    html:list($config, ., ("tei-list1"), item, ())
+                    else
+                    if (label) then
+                    html:list($config, ., ("tei-list1", "labeled-list"), item, ())
+                    else
+                    if (ancestor::div[@xml:id = 'persons']) then
+                    html:list($config, ., ("tei-list1", "list-person"), item, ())
+                    else
+                    if ( ancestor::list) then
+                    (: This is a nested list within a list :)
+                    html:list($config, ., ("tei-list6", "hsg-nested-list"), item, ())
+                    else
+                    html:list($config, ., ("tei-list2", "hsg-list"), item, ())
+                    case element (listBibl) return
                     if (bibl) then
-                        html:list($config, ., ("tei-listBibl1"), bibl)
+                    html:list($config, ., ("tei-listBibl1"), bibl, ())
                     else
                         html:block($config, ., ("tei-listBibl2"), .)
                 case element(measure) return

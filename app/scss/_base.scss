@@ -5,16 +5,19 @@ html {
   font-size: $em-base;
 }
 
-body {
+body, p , dt, dd {
   font-family: $font-serif;
   line-height: $base-line-height;
   font-weight: $font-normal;
   font-size:   $small-font-size;
-  background:  $color-white url("../images/background.gif") repeat-x scroll 0 0;
+  
   @media screen and (min-width: $screen-xs-min) {
     font-size: $base-font-size;
   }
+}
 
+body {
+  background:  $color-white url("../images/background.gif") repeat-x scroll 0 0;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -80,18 +83,15 @@ div, span, p, li {
   font-family: inherit;
 }
 
-a,
-a:hover,
-a:visited,
-a:active {
+a {
   color: $color-primary-darker;
-  transition: color 0.5s ease 0s;
 }
 
 a:hover,
 a:active,
 a:focus {
   color: $color-primary-darkest;
+  transition: color 0.5s ease 0s;
 }
 
 input {

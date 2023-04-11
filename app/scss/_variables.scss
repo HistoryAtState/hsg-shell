@@ -90,6 +90,7 @@ $color-visited:              #4c2c92;
 
 // Link Colors
 $hsg-link-color-default:     $color-primary-darker;
+$hsg-link-color-visited:     #54278f;
 $hsg-link-color-hover:       $color-primary-darkest;
 
 // Mobile First Breakpoints
@@ -156,3 +157,12 @@ $dropdown-link-disabled-color:        $color-gray-warm-dark;
 
 $panel-default-border: $color-gray-lighter;
 $panel-default-heading-bg: $color-gray-lightest;
+
+// Badge
+$badge-width: 80px;
+$badge-height: 20px;
+$twitter-color: #1D9BFF;
+$carousel-color: #C05600;
+$press-color: #22711B;
+$tumblr-color: #3b627e;
+$article-color: $color-primary-darker;

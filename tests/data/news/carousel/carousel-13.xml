@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>carousel-13</id>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">New Publication: Vietnam, January–October 1972</div>
+   </title>
+   <published>2011-07-25T22:18:58.587-04:00</published>
+   <updated>2011-07-25T22:18:58.587-04:00</updated>
+   <link href="/news/carousel-13" rel="self"/>
+   <link rel="about"
+         title="Visit Resource"
+         href="/historicaldocuments/frus1969-76v08"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>Documents in this volume examine the link between force and diplomacy in U.S.
+                    national security policy toward the Vietnam war. This volume is dominated by
+                    documentary coverage of the Easter Offensive and its ramifications.</p>
+      </div>
+   </content>
+   <link rel="enclosure"
+         type="img/jpeg"
+         title="The spine of Vietnam, January–October 1972"
+         href="https://static.history.state.gov/carousel/frus1969-76v08.jpg"/>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="carousel"/>
+</entry>

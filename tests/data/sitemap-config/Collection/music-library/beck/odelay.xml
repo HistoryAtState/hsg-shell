@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="14">
+   <name>odelay</name>
+   <artist>beck</artist>
+   <track>
+      <metadata key="Track ID" type="integer">7873</metadata>
+      <metadata key="Name" type="string">Devils Haircut</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3140882</metadata>
+      <metadata key="Total Time" type="integer">196048</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:03Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">13</metadata>
+      <metadata key="Play Date" type="integer">3666088220</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:50:20Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Skip Date" type="date">2020-09-03T17:59:54Z</metadata>
+      <metadata key="Normalization" type="integer">5578</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">5431651EBC5B1BEA</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7875</metadata>
+      <metadata key="Name" type="string">Hotwax</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3693908</metadata>
+      <metadata key="Total Time" type="integer">230582</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:03Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3666088449</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:54:09Z</metadata>
+      <metadata key="Normalization" type="integer">1530</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">670F3D2A3BEC4F3B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7877</metadata>
+      <metadata key="Name" type="string">Lord Only Knows</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4112114</metadata>
+      <metadata key="Total Time" type="integer">256757</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:03Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">28</metadata>
+      <metadata key="Play Date" type="integer">3666088703</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T13:58:23Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2016-03-22T10:59:44Z</metadata>
+      <metadata key="Normalization" type="integer">2753</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">F7F97CCD1487CC58</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7879</metadata>
+      <metadata key="Name" type="string">The New Pollution</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3547945</metadata>
+      <metadata key="Total Time" type="integer">221492</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:04Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3669964108</metadata>
+      <metadata key="Play Date UTC" type="date">2020-04-17T09:28:28Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Normalization" type="integer">1912</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Sort Name" type="string">New Pollution</metadata>
+      <metadata key="Persistent ID" type="string">84F12A667BDD5D1A</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7881</metadata>
+      <metadata key="Name" type="string">Derelict</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4082182</metadata>
+      <metadata key="Total Time" type="integer">254902</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:04Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">15</metadata>
+      <metadata key="Play Date" type="integer">3666089175</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T14:06:15Z</metadata>
+      <metadata key="Normalization" type="integer">1254</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">99748EEDAABA373C</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7883</metadata>
+      <metadata key="Name" type="string">Novacane</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4477727</metadata>
+      <metadata key="Total Time" type="integer">279614</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:04Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3666089452</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T14:10:52Z</metadata>
+      <metadata key="Normalization" type="integer">6619</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">C66D5ABC8D07F9FB</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7885</metadata>
+      <metadata key="Name" type="string">Jack-Ass</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4066167</metadata>
+      <metadata key="Total Time" type="integer">253910</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:04Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">27</metadata>
+      <metadata key="Play Date" type="integer">3666089705</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T14:15:05Z</metadata>
+      <metadata key="Normalization" type="integer">2067</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">0352F92C0C5EEEB6</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7887</metadata>
+      <metadata key="Name" type="string">Where It's At</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">5331009</metadata>
+      <metadata key="Total Time" type="integer">332878</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:04Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">66</metadata>
+      <metadata key="Play Date" type="integer">3673528227</metadata>
+      <metadata key="Play Date UTC" type="date">2020-05-28T15:30:27Z</metadata>
+      <metadata key="Normalization" type="integer">3576</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">DC92577B9829D321</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7889</metadata>
+      <metadata key="Name" type="string">Minus</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">2474238</metadata>
+      <metadata key="Total Time" type="integer">154409</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:04Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3666090188</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T14:23:08Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Normalization" type="integer">3260</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">1ABAB593E6B6027E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7891</metadata>
+      <metadata key="Name" type="string">Sissyneck</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3758880</metadata>
+      <metadata key="Total Time" type="integer">234657</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:04Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">20</metadata>
+      <metadata key="Play Date" type="integer">3666090420</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T14:27:00Z</metadata>
+      <metadata key="Normalization" type="integer">2358</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">A5854BF92D5C5A0B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7893</metadata>
+      <metadata key="Name" type="string">Readymade</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">2548540</metadata>
+      <metadata key="Total Time" type="integer">159059</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:05Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">13</metadata>
+      <metadata key="Play Date" type="integer">3666090577</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T14:29:37Z</metadata>
+      <metadata key="Normalization" type="integer">1805</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">6B9BFEE79221804A</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7895</metadata>
+      <metadata key="Name" type="string">High 5 (Rock the Catskills)</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4048246</metadata>
+      <metadata key="Total Time" type="integer">252708</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:05Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:31Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">13</metadata>
+      <metadata key="Play Date" type="integer">3666090828</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T14:33:48Z</metadata>
+      <metadata key="Normalization" type="integer">1959</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">CB417E64288F5BB0</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7897</metadata>
+      <metadata key="Name" type="string">Ramshackle</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4615525</metadata>
+      <metadata key="Total Time" type="integer">288235</metadata>
+      <metadata key="Track Number" type="integer">13</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:05Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:32Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3666091114</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T14:38:34Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Normalization" type="integer">1062</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">B65D2522E37CBAC8</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">7899</metadata>
+      <metadata key="Name" type="string">Diskobox</metadata>
+      <metadata key="Artist" type="string">Beck</metadata>
+      <metadata key="Album Artist" type="string">Beck</metadata>
+      <metadata key="Album" type="string">Odelay</metadata>
+      <metadata key="Genre" type="string">Rock</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3445615</metadata>
+      <metadata key="Total Time" type="integer">215170</metadata>
+      <metadata key="Track Number" type="integer">14</metadata>
+      <metadata key="Track Count" type="integer">14</metadata>
+      <metadata key="Year" type="integer">1996</metadata>
+      <metadata key="Date Modified" type="date">2008-01-25T02:23:05Z</metadata>
+      <metadata key="Date Added" type="date">2008-01-25T02:51:32Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3666091329</metadata>
+      <metadata key="Play Date UTC" type="date">2020-03-03T14:42:09Z</metadata>
+      <metadata key="Normalization" type="integer">3020</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Album Artist" type="string">Beck</metadata>
+      <metadata key="Sort Artist" type="string">Beck</metadata>
+      <metadata key="Persistent ID" type="string">8417053EE05AE029</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

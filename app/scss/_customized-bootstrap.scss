@@ -16,7 +16,7 @@ $icon-font-path: "../fonts/";
   right: 15%;
 }
 
-.content {
+.content:not(.osd-wrapper) {
 
   img {
     border: 1px solid $color-gray-light;
@@ -171,30 +171,6 @@ $icon-font-path: "../fonts/";
 /* override bootstrap, which makes tables full width. TODO: modify bootstrap base style */
 .table {
   width: inherit;
-}
-
-/* Breadcrumb ----------- */
-
-.breadcrumb {
-  background-color: transparent;
-  font-size: inherit;
-  padding: 12px 0 0 0;
-}
-
-.breadcrumb li {
-  font-family: $font-sans;
-}
-
-.breadcrumb > li {
-  display: inline !important;
-}
-
-ol.breadcrumb li:first-child:before {
-  content: "" !important;
-}
-
-ol.breadcrumb li:before {
-  content: "›" !important;
 }
 
 /* Lists ---------------- */

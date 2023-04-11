@@ -1,0 +1,40 @@
+/* frus pages -------------- */
+
+.hsg-frus {
+  &__cover {
+    @extend .img-responsive;
+    border: 1px solid $color-gray-light;
+    padding: 10px;
+    border-radius: 1ex;
+  }
+}
+
+#volume {
+  // volume landing page images
+  .hsg-frus__cover {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    margin: 1.4rem 2.5rem 2.5rem 0;
+
+    @media screen and (min-width: $screen-xs-min) {
+      margin: 1rem 2.5rem 2.5rem 0;
+      float: left;
+    }
+
+    // if there is an preceding sibling "image", then ...
+    + .content {
+      padding: 1.4rem 0 2rem 0;
+    }
+  }
+
+  .hsg-frus__toc {
+    padding-top: 1.5rem;
+    border-top: $default-border-style;
+
+    @media screen and (min-width: $screen-xs-min) {
+      clear: both;
+    }
+  }
+}
+

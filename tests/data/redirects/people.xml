@@ -1,0 +1,26 @@
+<people>
+    <person>
+        <id>james-makila</id>
+        <old-ids>
+            <old-id>jones-malika</old-id>
+            <old-id>james-malika</old-id>
+        </old-ids>
+        <persName>
+            <surname>James</surname>
+            <forename>Makila</forename>
+        </persName>
+        <birth>1957</birth>
+        <death/>
+        <career-type>career</career-type>
+        <residence>
+            <state-id>dc</state-id>
+        </residence>
+        <created-by>wicentowskijc</created-by>
+        <created-date>2012-09-24</created-date>
+        <last-modified-by>wicentowskijc</last-modified-by>
+        <last-modified-date>2016-08-04</last-modified-date>
+    </person>
+    <person>
+        <id>hillman-tomos</id>
+    </person>
+</people>

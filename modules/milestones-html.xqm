@@ -2,7 +2,7 @@ xquery version "3.0";
 
 module namespace milestones = "http://history.state.gov/ns/site/hsg/milestones-html";
 
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
@@ -19,7 +19,7 @@ declare %templates:wrap function milestones:load-periods($node as node(), $model
         order by util:document-name($c)
         return $c
     let $content := map { "periods": $ordered-articles }
-    let $html := templates:process($node/*, map:merge(($model, $content)))
+    let $html := templates:process($node/*, map:merge(($model, $content),  map{"duplicates": "use-last"}))
     return
         $html
 };

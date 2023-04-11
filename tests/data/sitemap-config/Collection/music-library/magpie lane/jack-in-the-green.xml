@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="16">
+   <name>jack-in-the-green</name>
+   <artist>magpie lane</artist>
+   <track>
+      <metadata key="Track ID" type="integer">11629</metadata>
+      <metadata key="Name" type="string">Mother Goose / The Priest And His Boots / Hopkinson's Favourite</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">26550413</metadata>
+      <metadata key="Total Time" type="integer">246173</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:45:46Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:45:05Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3716793335</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T09:35:35Z</metadata>
+      <metadata key="Normalization" type="integer">4386</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">BA786E7C71D497C7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11631</metadata>
+      <metadata key="Name" type="string">In Sheffield Park</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">13582737</metadata>
+      <metadata key="Total Time" type="integer">154200</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:46:11Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:45:48Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3716793489</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T09:38:09Z</metadata>
+      <metadata key="Normalization" type="integer">819</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">7B2026BB09F02F42</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11633</metadata>
+      <metadata key="Name" type="string">Thame Fair</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">13103473</metadata>
+      <metadata key="Total Time" type="integer">133160</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:46:31Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:46:13Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3716793623</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T09:40:23Z</metadata>
+      <metadata key="Normalization" type="integer">2125</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">01A14040F7EBFFBE</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11635</metadata>
+      <metadata key="Name" type="string">The Flowers Of Edinburgh</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">6869661</metadata>
+      <metadata key="Total Time" type="integer">74000</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:46:43Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:46:33Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3716793696</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T09:41:36Z</metadata>
+      <metadata key="Normalization" type="integer">1215</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Flowers Of Edinburgh</metadata>
+      <metadata key="Persistent ID" type="string">B34BBDF364A74A97</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11637</metadata>
+      <metadata key="Name" type="string">A Rosebud In June</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">17337269</metadata>
+      <metadata key="Total Time" type="integer">194440</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:47:11Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:46:45Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3716793891</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T09:44:51Z</metadata>
+      <metadata key="Normalization" type="integer">485</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Rosebud In June</metadata>
+      <metadata key="Persistent ID" type="string">E9BAFC2AAB5BE69B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11639</metadata>
+      <metadata key="Name" type="string">Jack-in-the-Green / Jack's Alive</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29710678</metadata>
+      <metadata key="Total Time" type="integer">307826</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:47:51Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:47:13Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3716794731</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T09:58:51Z</metadata>
+      <metadata key="Normalization" type="integer">2471</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">096120875528FBE3</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11641</metadata>
+      <metadata key="Name" type="string">May Song</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">18369933</metadata>
+      <metadata key="Total Time" type="integer">184760</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:45:03Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:44:30Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3716793089</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T09:31:29Z</metadata>
+      <metadata key="Normalization" type="integer">2567</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">C7A7A4A97DA28E07</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11643</metadata>
+      <metadata key="Name" type="string">The Sheepstealer</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">14509979</metadata>
+      <metadata key="Total Time" type="integer">167000</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:48:12Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:47:53Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3716794898</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T10:01:38Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-08-15T13:27:05Z</metadata>
+      <metadata key="Normalization" type="integer">1075</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Sheepstealer</metadata>
+      <metadata key="Persistent ID" type="string">6DA58F49D4962344</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11645</metadata>
+      <metadata key="Name" type="string">Mayer's Song / The Rochdale Coconut Dance / Three Around Three</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">34808240</metadata>
+      <metadata key="Total Time" type="integer">345960</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">16</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:51:22Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:50:51Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3716797133</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T10:38:53Z</metadata>
+      <metadata key="Normalization" type="integer">2387</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">8449AF46E33BA97E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11647</metadata>
+      <metadata key="Name" type="string">Quickstep At The Battle Of Prague / Welch's Polka</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">21905279</metadata>
+      <metadata key="Total Time" type="integer">204306</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:48:37Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:48:14Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3716795102</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T10:05:02Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-08-15T13:27:19Z</metadata>
+      <metadata key="Normalization" type="integer">1486</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">739BF3D5654884F5</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11649</metadata>
+      <metadata key="Name" type="string">Northill May Song / The Cuckoo's Nest</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">17210257</metadata>
+      <metadata key="Total Time" type="integer">185666</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:48:58Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:48:38Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3716795288</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T10:08:08Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-08-15T13:27:25Z</metadata>
+      <metadata key="Normalization" type="integer">1508</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">3683F928A1958795</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11651</metadata>
+      <metadata key="Name" type="string">The Seeds Of Love</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">15617397</metadata>
+      <metadata key="Total Time" type="integer">155400</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:49:16Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:49:00Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3716795443</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T10:10:43Z</metadata>
+      <metadata key="Normalization" type="integer">3350</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Seeds Of Love</metadata>
+      <metadata key="Persistent ID" type="string">F04E00DA841A8427</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11653</metadata>
+      <metadata key="Name" type="string">Just As The Tide Was Flowing</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">18972883</metadata>
+      <metadata key="Total Time" type="integer">188933</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:49:37Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:49:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">5</metadata>
+      <metadata key="Play Date" type="integer">3716795632</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T10:13:52Z</metadata>
+      <metadata key="Normalization" type="integer">2957</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">C4DE1C4EB0234319</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11655</metadata>
+      <metadata key="Name" type="string">The Banks Of The Lea</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">24436835</metadata>
+      <metadata key="Total Time" type="integer">292200</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">13</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T18:50:07Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T18:49:38Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3577373331</metadata>
+      <metadata key="Play Date UTC" type="date">2017-05-11T17:48:51Z</metadata>
+      <metadata key="Normalization" type="integer">639</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Banks Of The Lea</metadata>
+      <metadata key="Persistent ID" type="string">925614B6650E541E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11657</metadata>
+      <metadata key="Name" type="string">Font Whatling's Polka / Galloway Girth</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">23183030</metadata>
+      <metadata key="Total Time" type="integer">211093</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">14</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:50:28Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:50:09Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">3</metadata>
+      <metadata key="Play Date" type="integer">3716796574</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T10:29:34Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-08-15T13:35:31Z</metadata>
+      <metadata key="Normalization" type="integer">4325</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">E4D7384BA22275D7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11659</metadata>
+      <metadata key="Name" type="string">Two Ravens</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Jack-in-the-Green</metadata>
+      <metadata key="Genre" type="string">Country &amp; Folk</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">20089969</metadata>
+      <metadata key="Total Time" type="integer">213973</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">15</metadata>
+      <metadata key="Track Count" type="integer">16</metadata>
+      <metadata key="Year" type="integer">1998</metadata>
+      <metadata key="Date Modified" type="date">2014-01-26T17:50:49Z</metadata>
+      <metadata key="Date Added" type="date">2014-01-26T17:50:30Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">4</metadata>
+      <metadata key="Play Date" type="integer">3716796787</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-11T10:33:07Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-08-15T13:35:47Z</metadata>
+      <metadata key="Normalization" type="integer">1517</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">F22B5501E9342BBC</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

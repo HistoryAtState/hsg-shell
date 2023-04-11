@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+   <id>twitter-997469424562061313</id>
+   <title type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">The #Chinese produced 1.7 million…</div>
+   </title>
+   <published>2018-05-18T13:30:17Z</published>
+   <updated>2018-05-18T13:30:17Z</updated>
+   <link href="/news/twitter-997469424562061313" rel="self"/>
+   <link rel="DCTERMS.source"
+         title="View Twitter Post"
+         href="https://twitter.com/HistoryAtState/status/997469424562061313"/>
+   <author>
+      <name>Office of the Historian, U.S. Department of State</name>
+      <uri>https://history.state.gov</uri>
+   </author>
+   <summary/>
+   <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <p>The <a href="https://twitter.com/search?q=%23Chinese&amp;src=hash">#Chinese</a>
+                    produced 1.7 million bicycles per year at the Forever factory in Shanghai and
+                    was an example of the strengths and weaknesses of their modernization efforts.
+                        <a href="https://buff.ly/2Ik6xon">buff.ly/2Ik6xon</a>
+            <a href="https://twitter.com/search?q=%23BikeToWork&amp;src=hash">#BikeToWork</a>
+            <a href="https://twitter.com/search?q=%23BTWD2018&amp;src=hash">#BTWD2018</a>
+            <a href="https://twitter.com/search?q=%23FRUS&amp;src=hash">#FRUS</a>
+            <a href="https://twitter.com/HistoryAtState/status/997469424562061313/photo/1">
+               <img src="https://pbs.twimg.com/media/Dde5J3WVwAA1tmt.jpg"/>
+            </a>
+         </p>
+      </div>
+   </content>
+   <category scheme="http://history.state.gov/ns/site/hsg/news" term="twitter"/>
+</entry>

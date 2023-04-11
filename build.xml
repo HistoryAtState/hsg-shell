@@ -30,13 +30,6 @@
     </condition>
     
     <target name="clean">
-        <echo message="Calling gulp clean..."/>
-        <exec executable="${nvm_bin}/gulp" outputproperty="gulp.output">
-            <arg line="clean"/>
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
-        </exec>
-        <echo message="${gulp.output}"/>
-    
         <echo message="Deleting xar files..."/>
         <delete dir="${build.dir}"/>
     </target>
@@ -53,7 +46,7 @@
         <echo>Path to npm binary: ${nvm_bin}/gulp</echo>
         <property name="path.npm" value="${nvm_bin}/npm"/>
     </target>
-    
+
     <!-- Replace tokens with current local paths to binaries in local build property file -->
     <target name="copy-paths-to-local-build-properties" depends="get-binary-paths">
         <echo message="Copy binary paths to build.properties.local.xml"/>
@@ -79,7 +72,7 @@
         </exec>
         <echo message="${npm.output}"/>
     </target>
-    
+
     <target name="prepare">
         <!-- PREPARATION OF LOCAL BUILD PROPERTIES -->
         <echo message="------------------------------------------------------------"/>
@@ -114,8 +107,7 @@
         </exec>
         <echo message="${npm.output}"/>
     </target>
-    
-        
+
     <target name="xar" depends="node,clean,run-npm,git.revision" description="create xar file">
         <echo message="Creating build folder..."/>
         <mkdir dir="${build.dir}"/>
@@ -155,6 +147,7 @@
             <exclude name="package-lock.json"/>
             <exclude name="bower.json"/>
             <exclude name=".idea/**"/>
+            <exclude name=".vscode/**"/>
             <exclude name="tests/reports/**"/>
             <exclude name="npm-shrinkwrap.json"/>
             <exclude name="build.properties.local.xml"/>

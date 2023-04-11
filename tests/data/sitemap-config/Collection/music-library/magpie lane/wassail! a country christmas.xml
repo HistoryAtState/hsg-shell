@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="20">
+   <name>wassail! a country christmas</name>
+   <artist>magpie lane</artist>
+   <track>
+      <metadata key="Track ID" type="integer">10831</metadata>
+      <metadata key="Name" type="string">The Gloucestershire Wassail</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">10411676</metadata>
+      <metadata key="Total Time" type="integer">108093</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:10:11Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T00:17:05Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">32</metadata>
+      <metadata key="Play Date" type="integer">3722697810</metadata>
+      <metadata key="Play Date UTC" type="date">2021-12-18T18:43:30Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2018-12-08T15:13:18Z</metadata>
+      <metadata key="Normalization" type="integer">2262</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Gloucestershire Wassail</metadata>
+      <metadata key="Persistent ID" type="string">9B360DAC84035D1C</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10833</metadata>
+      <metadata key="Name" type="string">The Botton Of The Punchbowl / The Christmas Baby</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">19783885</metadata>
+      <metadata key="Total Time" type="integer">180706</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:10:13Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T01:17:25Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">34</metadata>
+      <metadata key="Play Date" type="integer">3691524929</metadata>
+      <metadata key="Play Date UTC" type="date">2020-12-22T23:35:29Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Normalization" type="integer">1442</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Botton Of The Punchbowl / The Christmas Baby</metadata>
+      <metadata key="Persistent ID" type="string">3F98E4E6315F629B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10835</metadata>
+      <metadata key="Name" type="string">The Sheep Are Neath The Snow</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">20520377</metadata>
+      <metadata key="Total Time" type="integer">227733</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:10:15Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T00:18:33Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">32</metadata>
+      <metadata key="Play Date" type="integer">3717309153</metadata>
+      <metadata key="Play Date UTC" type="date">2021-10-17T08:52:33Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Skip Date" type="date">2014-12-10T16:24:47Z</metadata>
+      <metadata key="Normalization" type="integer">613</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Sheep Are Neath The Snow</metadata>
+      <metadata key="Persistent ID" type="string">08406E1C309FC6AB</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10837</metadata>
+      <metadata key="Name" type="string">Saint Stephen</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">26172245</metadata>
+      <metadata key="Total Time" type="integer">252360</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:10:18Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T01:19:10Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">42</metadata>
+      <metadata key="Play Date" type="integer">3691520707</metadata>
+      <metadata key="Play Date UTC" type="date">2020-12-22T22:25:07Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Normalization" type="integer">1568</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">A65149E129CE60F2</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10839</metadata>
+      <metadata key="Name" type="string">Lullay My Liking</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">10082563</metadata>
+      <metadata key="Total Time" type="integer">123440</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:10:20Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T01:19:28Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">30</metadata>
+      <metadata key="Play Date" type="integer">3691512820</metadata>
+      <metadata key="Play Date UTC" type="date">2020-12-22T20:13:40Z</metadata>
+      <metadata key="Normalization" type="integer">696</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">A5CD2E628A753531</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10841</metadata>
+      <metadata key="Name" type="string">The Holly And The Ivy</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">18825530</metadata>
+      <metadata key="Total Time" type="integer">186533</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:10:22Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T00:19:53Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">24</metadata>
+      <metadata key="Play Date" type="integer">3722070326</metadata>
+      <metadata key="Play Date UTC" type="date">2021-12-11T12:25:26Z</metadata>
+      <metadata key="Normalization" type="integer">1696</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Holly And The Ivy</metadata>
+      <metadata key="Persistent ID" type="string">DEAE8E6E21EAA7B7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10843</metadata>
+      <metadata key="Name" type="string">The Trees Are All Bare</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">23294593</metadata>
+      <metadata key="Total Time" type="integer">237226</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T10:42:02Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T01:20:23Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">34</metadata>
+      <metadata key="Play Date" type="integer">3691669314</metadata>
+      <metadata key="Play Date UTC" type="date">2020-12-24T15:41:54Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2020-12-10T10:05:18Z</metadata>
+      <metadata key="Normalization" type="integer">2106</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Trees Are All Bare</metadata>
+      <metadata key="Persistent ID" type="string">C061560310EA9C81</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10845</metadata>
+      <metadata key="Name" type="string">Frost And Snow / Snow On The Hills</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">18055372</metadata>
+      <metadata key="Total Time" type="integer">169773</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:10:26Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T01:20:43Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">34</metadata>
+      <metadata key="Play Date" type="integer">3691343767</metadata>
+      <metadata key="Play Date UTC" type="date">2020-12-20T21:16:07Z</metadata>
+      <metadata key="Normalization" type="integer">2145</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">4621E56A27094D2E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10847</metadata>
+      <metadata key="Name" type="string">Down In Yon Forest</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">18011906</metadata>
+      <metadata key="Total Time" type="integer">192933</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:10:29Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T00:21:06Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">35</metadata>
+      <metadata key="Play Date" type="integer">3723024116</metadata>
+      <metadata key="Play Date UTC" type="date">2021-12-22T13:21:56Z</metadata>
+      <metadata key="Skip Count" type="integer">5</metadata>
+      <metadata key="Skip Date" type="date">2019-12-14T19:04:51Z</metadata>
+      <metadata key="Normalization" type="integer">693</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">9FD24B829DFB45D5</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10849</metadata>
+      <metadata key="Name" type="string">The King</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">15825906</metadata>
+      <metadata key="Total Time" type="integer">161200</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:10:31Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T00:21:24Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">31</metadata>
+      <metadata key="Play Date" type="integer">3723024687</metadata>
+      <metadata key="Play Date UTC" type="date">2021-12-22T13:31:27Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2017-12-13T16:51:36Z</metadata>
+      <metadata key="Normalization" type="integer">1550</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">King</metadata>
+      <metadata key="Persistent ID" type="string">6520753EE45D1C50</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10851</metadata>
+      <metadata key="Name" type="string">The Christmas Holidays, Or, Stuff Your Guts</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">19942239</metadata>
+      <metadata key="Total Time" type="integer">195066</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:10:33Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T01:21:46Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">31</metadata>
+      <metadata key="Play Date" type="integer">3691514154</metadata>
+      <metadata key="Play Date UTC" type="date">2020-12-22T20:35:54Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Normalization" type="integer">1245</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Christmas Holidays, Or, Stuff Your Guts</metadata>
+      <metadata key="Persistent ID" type="string">6246E83B3556293C</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10853</metadata>
+      <metadata key="Name" type="string">The Somerset Wassail</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">14067124</metadata>
+      <metadata key="Total Time" type="integer">155493</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:10:35Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T00:22:02Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">27</metadata>
+      <metadata key="Play Date" type="integer">3722691282</metadata>
+      <metadata key="Play Date UTC" type="date">2021-12-18T16:54:42Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Skip Date" type="date">2020-12-10T09:05:31Z</metadata>
+      <metadata key="Normalization" type="integer">1344</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Somerset Wassail</metadata>
+      <metadata key="Persistent ID" type="string">F8A77B98091A8ED3</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10855</metadata>
+      <metadata key="Name" type="string">Hogmanay Jig / We Wish You A Merry New Year</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">16149895</metadata>
+      <metadata key="Total Time" type="integer">158840</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">13</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:10:37Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T01:22:19Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">35</metadata>
+      <metadata key="Play Date" type="integer">3691344630</metadata>
+      <metadata key="Play Date UTC" type="date">2020-12-20T21:30:30Z</metadata>
+      <metadata key="Normalization" type="integer">1950</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">42D428C8A64B03E8</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10857</metadata>
+      <metadata key="Name" type="string">Babes In The Wood</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">28803676</metadata>
+      <metadata key="Total Time" type="integer">274026</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">14</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T09:42:05Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T00:22:46Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">33</metadata>
+      <metadata key="Play Date" type="integer">3722692335</metadata>
+      <metadata key="Play Date UTC" type="date">2021-12-18T17:12:15Z</metadata>
+      <metadata key="Skip Count" type="integer">6</metadata>
+      <metadata key="Skip Date" type="date">2020-11-29T10:24:30Z</metadata>
+      <metadata key="Normalization" type="integer">2020</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">834D3B4A67EBCD8F</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10859</metadata>
+      <metadata key="Name" type="string">Poor Frozen-Out Gardeners</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">24536954</metadata>
+      <metadata key="Total Time" type="integer">244600</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">15</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:10:42Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T00:23:10Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">36</metadata>
+      <metadata key="Play Date" type="integer">3722687754</metadata>
+      <metadata key="Play Date UTC" type="date">2021-12-18T15:55:54Z</metadata>
+      <metadata key="Normalization" type="integer">1534</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">A6D1D58E9BD16840</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10861</metadata>
+      <metadata key="Name" type="string">Here We Come A-Wassailing</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">9228269</metadata>
+      <metadata key="Total Time" type="integer">101373</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">16</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T10:42:06Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T01:23:20Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">34</metadata>
+      <metadata key="Play Date" type="integer">3691345250</metadata>
+      <metadata key="Play Date UTC" type="date">2020-12-20T21:40:50Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Skip Date" type="date">2019-12-14T21:43:39Z</metadata>
+      <metadata key="Normalization" type="integer">944</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">01314C72A2ED2E67</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10863</metadata>
+      <metadata key="Name" type="string">Nowell: The Bory's Hede</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">7716689</metadata>
+      <metadata key="Total Time" type="integer">100893</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">17</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:10:45Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T00:23:29Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">30</metadata>
+      <metadata key="Play Date" type="integer">3722692061</metadata>
+      <metadata key="Play Date UTC" type="date">2021-12-18T17:07:41Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2021-12-13T08:58:30Z</metadata>
+      <metadata key="Normalization" type="integer">545</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">DA90E4468E96C7F0</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10865</metadata>
+      <metadata key="Name" type="string">King Herod And The Cock</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">11947534</metadata>
+      <metadata key="Total Time" type="integer">130333</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">18</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T01:10:47Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T01:23:42Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">33</metadata>
+      <metadata key="Play Date" type="integer">3691345481</metadata>
+      <metadata key="Play Date UTC" type="date">2020-12-20T21:44:41Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Normalization" type="integer">1256</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">8293F93E4FE896E9</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10867</metadata>
+      <metadata key="Name" type="string">The Standing Stones</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">23453195</metadata>
+      <metadata key="Total Time" type="integer">246773</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">19</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:10:50Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T12:24:04Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">24</metadata>
+      <metadata key="Play Date" type="integer">3723019712</metadata>
+      <metadata key="Play Date UTC" type="date">2021-12-22T12:08:32Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2020-12-07T12:17:02Z</metadata>
+      <metadata key="Normalization" type="integer">990</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Standing Stones</metadata>
+      <metadata key="Persistent ID" type="string">334AE3178613D527</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10869</metadata>
+      <metadata key="Name" type="string">Christmas Day In The Morning / The Sussex Carol</metadata>
+      <metadata key="Artist" type="string">Magpie Lane</metadata>
+      <metadata key="Album" type="string">Wassail! A Country Christmas</metadata>
+      <metadata key="Genre" type="string">Folk</metadata>
+      <metadata key="Kind" type="string">MPEG-4 audio file</metadata>
+      <metadata key="Size" type="integer">24399147</metadata>
+      <metadata key="Total Time" type="integer">229493</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">20</metadata>
+      <metadata key="Track Count" type="integer">20</metadata>
+      <metadata key="Year" type="integer">1995</metadata>
+      <metadata key="Date Modified" type="date">2015-12-13T00:10:53Z</metadata>
+      <metadata key="Date Added" type="date">2011-12-18T00:24:24Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">29</metadata>
+      <metadata key="Play Date" type="integer">3722490290</metadata>
+      <metadata key="Play Date UTC" type="date">2021-12-16T09:04:50Z</metadata>
+      <metadata key="Normalization" type="integer">2073</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">67EF0615E4B62925</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

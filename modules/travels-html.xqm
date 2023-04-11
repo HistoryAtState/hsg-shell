@@ -11,7 +11,7 @@ module namespace travels = "http://history.state.gov/ns/site/hsg/travels-html";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace gsh="http://history.state.gov/ns/xquery/geospatialhistory" at "/db/apps/gsh/modules/gsh.xqm";
 import module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare variable $travels:DATA_COL := '/db/apps/travels';
 declare variable $travels:PRESIDENT_TRAVELS_COL := '/db/apps/travels/president-travels';

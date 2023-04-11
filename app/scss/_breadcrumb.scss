@@ -1,0 +1,139 @@
+// USWDS Styles (https://designsystem.digital.gov/components/breadcrumb/)
+
+// "WRAPPING BREADCRUMB" component for inline-block
+// styling of link items (default breadcrumb is inline)
+@media all and (min-width: $xs-screen-min){
+  .hsg-breadcrumb--wrap{
+    line-height:1.4;
+  }
+}
+
+.hsg-breadcrumb {
+  @extend .hsg-breadcrumb-wrapper;   // legacy grid class for side margins
+  font-family: $font-sans;
+  font-size: $small-font-size;
+  line-height:1.3;
+
+  &__list {
+    margin-bottom: 0;
+    margin-top: 0;
+    list-style-type:none;
+    padding-left: 0;
+    display: block;
+
+    > li {
+      margin-bottom: 0;
+      max-width: unset;
+    }
+  }
+
+  &__list-item {
+    position: absolute;
+    left: -999em;
+    right: auto;
+    display: inline-block;
+    white-space: normal; // Custom (instead of USWDS "nowrap"!)
+  }
+
+  &__link {
+    color: $hsg-link-color-default;
+    background-color: transparent;
+    display: inline;
+    line-height: 1.5;
+    border: 0;
+    border-radius: 0;
+    font-weight: normal;
+
+    &:hover,
+    &:active,
+    &:disabled,
+    &:disabled:hover,
+    &:disabled:focus {
+      -moz-osx-font-smoothing: inherit;
+      -webkit-font-smoothing: inherit;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    &:active,
+    &:hover {
+      color: $hsg-link-color-hover;
+    }
+
+    // Customized for HSG: Current level is still a link,
+    // but in normal text color
+    &[aria-current="page"] {
+      color: $color-base;
+    }
+  }
+
+  @media all and (min-width: $xs-screen-min){
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    font-size: $base-font-size;
+  }
+}
+
+@media all and (max-width: $xs-screen){
+  .hsg-breadcrumb__list-item {
+
+    // the only visible breadcrumb level
+    &:nth-last-child(2) {
+      position: static;
+
+      .hsg-breadcrumb__link {
+        display: inline-block;
+        padding-top: 1rem;
+        padding-left: calc(2ex + 0px);
+        text-indent: calc((2ex + 0px) * -1);
+
+        // Arrow icon as indicator for "back to parent level"
+        &:before{
+          background: url("../images/arrow_back.svg") no-repeat center/contain;
+          content: "";
+          display: inline-block;
+          position: relative;
+          vertical-align: baseline;
+          height: 2ex;
+          width: 2ex;
+          margin-right: 0;
+          bottom: -0.2em;
+
+          @supports ((-webkit-mask: url("")) or (mask: url(""))){
+            background:none;
+            background-color:#71767a;
+            -webkit-mask:url("../images/arrow_back.svg") no-repeat center/contain;
+                    mask:url("../images/arrow_back.svg") no-repeat center/contain;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: $xs-screen-min){
+  .hsg-breadcrumb__list-item {
+    position:static;
+
+    // icon "chevron" as divider between breadcrumb items
+    &:not(:last-child)::after {
+      background:url("../images/navigate_next.svg") no-repeat center/contain;
+      content: "";
+      display: inline-block;
+      position: relative;
+      vertical-align: baseline;
+      height: 2ex;
+      width: 2ex;
+      bottom: -0.2em;
+      margin-left: 0px;
+      margin-right: 0px;
+
+      @supports ((-webkit-mask: url("")) or (mask: url(""))){
+        background:none;
+        background-color:#71767a;
+        -webkit-mask:url("../images/navigate_next.svg") no-repeat center/contain;
+                mask:url("../images/navigate_next.svg") no-repeat center/contain;
+        }
+    }
+  }
+}

@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="12">
+   <name>fragments of freedom</name>
+   <artist>morcheeba</artist>
+   <track>
+      <metadata key="Track ID" type="integer">10225</metadata>
+      <metadata key="Name" type="string">World Looking In</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">A. Reed/P. Godfrey/Ross Godfrey/R. Godfrey/S. Edwards/Skye Edwards/Paul Godfrey</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29905118</metadata>
+      <metadata key="Total Time" type="integer">247160</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:20:15Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:19:54Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">41</metadata>
+      <metadata key="Play Date" type="integer">3707724472</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-28T10:27:52Z</metadata>
+      <metadata key="Rating" type="integer">80</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">3372</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">30E9832FAECE6BAB</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10227</metadata>
+      <metadata key="Name" type="string">Rome Wasn't Built In A Day</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Paul Godfrey/Skye Edwards/S. Edwards/Ross Godfrey/R. Godfrey/P. Godfrey</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">28135883</metadata>
+      <metadata key="Total Time" type="integer">215373</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:20:33Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:20:16Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">35</metadata>
+      <metadata key="Play Date" type="integer">3707724686</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-28T10:31:26Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">7882</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">B0C0687A51F31959</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10229</metadata>
+      <metadata key="Name" type="string">Love Is Rare</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Ross Godfrey/Paul Godfrey/Skye Edwards/P. Godfrey/S. Edwards/R. Godfrey</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">28942532</metadata>
+      <metadata key="Total Time" type="integer">244560</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:20:51Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:20:34Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">36</metadata>
+      <metadata key="Play Date" type="integer">3707724930</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-28T10:35:30Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">5920</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">92536FF690025F58</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10231</metadata>
+      <metadata key="Name" type="string">Let It Go</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">S. Edwards/Skye Edwards/R. Godfrey/Ross Godfrey/P. Godfrey/Paul Godfrey</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">34419887</metadata>
+      <metadata key="Total Time" type="integer">282973</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:21:11Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:20:52Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">28</metadata>
+      <metadata key="Play Date" type="integer">3707725213</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-28T10:40:13Z</metadata>
+      <metadata key="Skip Count" type="integer">4</metadata>
+      <metadata key="Skip Date" type="date">2016-04-16T11:25:27Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">4590</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">6CE1B94446FBE0AB</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10233</metadata>
+      <metadata key="Name" type="string">A Well Deserved Break</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Skye Edwards/Ross Godfrey/Paul Godfrey/S. Edwards/R. Godfrey/P. Godfrey</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">13254835</metadata>
+      <metadata key="Total Time" type="integer">133893</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:21:20Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:21:12Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">28</metadata>
+      <metadata key="Play Date" type="integer">3707725346</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-28T10:42:26Z</metadata>
+      <metadata key="Rating" type="integer">60</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">992</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Well Deserved Break</metadata>
+      <metadata key="Persistent ID" type="string">EB947B68001D7A88</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10235</metadata>
+      <metadata key="Name" type="string">Love Sweet Love</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Skye Edwards/R. Godfrey/S. Edwards/Ross Godfrey/P. Godfrey/Paul Godfrey</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">30328499</metadata>
+      <metadata key="Total Time" type="integer">239040</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:21:35Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:21:21Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">30</metadata>
+      <metadata key="Play Date" type="integer">3707725584</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-28T10:46:24Z</metadata>
+      <metadata key="Rating" type="integer">80</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">5725</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">6BAEB98B0D3C1AA1</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10237</metadata>
+      <metadata key="Name" type="string">In The Hands Of The Gods</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Ross Godfrey/R. Godfrey/P. Godfrey/S. Edwards/Paul Godfrey/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">11628268</metadata>
+      <metadata key="Total Time" type="integer">102933</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:21:42Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:21:36Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">34</metadata>
+      <metadata key="Play Date" type="integer">3707725686</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-28T10:48:06Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">5013</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">E465E6BA69714273</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10239</metadata>
+      <metadata key="Name" type="string">Shallow End</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">R. Godfrey/Ross Godfrey/Paul Godfrey/Skye Edwards/P. Godfrey/S. Edwards</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">30695766</metadata>
+      <metadata key="Total Time" type="integer">233426</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:21:56Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:21:43Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">22</metadata>
+      <metadata key="Play Date" type="integer">3707725919</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-28T10:51:59Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">5989</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">542186254449775E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10241</metadata>
+      <metadata key="Name" type="string">Be Yourself</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">Ross Godfrey/Paul Godfrey/S. Edwards/Skye Edwards/P. Godfrey/R. Godfrey</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">25426446</metadata>
+      <metadata key="Total Time" type="integer">196240</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T22:22:07Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:21:57Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">72</metadata>
+      <metadata key="Play Date" type="integer">3727427559</metadata>
+      <metadata key="Play Date UTC" type="date">2022-02-11T12:32:39Z</metadata>
+      <metadata key="Rating" type="integer">80</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">5562</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">DE4B527943880093</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10243</metadata>
+      <metadata key="Name" type="string">Coming Down Gently</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">S. Edwards/Ross Godfrey/P. Godfrey/R. Godfrey/Skye Edwards/Paul Godfrey</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">29739554</metadata>
+      <metadata key="Total Time" type="integer">260760</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">10</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:22:21Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:22:08Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">29</metadata>
+      <metadata key="Play Date" type="integer">3707805224</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T08:53:44Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">4785</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">84461BB3393A6866</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10245</metadata>
+      <metadata key="Name" type="string">Good Girl Down</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">A. Reed</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">25940773</metadata>
+      <metadata key="Total Time" type="integer">207200</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">11</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:22:32Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:22:22Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">26</metadata>
+      <metadata key="Play Date" type="integer">3707805431</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T08:57:11Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">5398</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">5458592D01F3F9D5</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">10247</metadata>
+      <metadata key="Name" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Artist" type="string">Morcheeba</metadata>
+      <metadata key="Composer" type="string">R. Godfrey/P. Godfrey/Paul Godfrey/Ross Godfrey/S. Edwards/Skye Edwards</metadata>
+      <metadata key="Album" type="string">Fragments Of Freedom</metadata>
+      <metadata key="Genre" type="string">Electronica/Dance</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">36585485</metadata>
+      <metadata key="Total Time" type="integer">306466</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">1</metadata>
+      <metadata key="Track Number" type="integer">12</metadata>
+      <metadata key="Track Count" type="integer">12</metadata>
+      <metadata key="Year" type="integer">2000</metadata>
+      <metadata key="Date Modified" type="date">2009-05-15T23:22:48Z</metadata>
+      <metadata key="Date Added" type="date">2009-05-16T00:22:33Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">23</metadata>
+      <metadata key="Play Date" type="integer">3707805738</metadata>
+      <metadata key="Play Date UTC" type="date">2021-06-29T09:02:18Z</metadata>
+      <metadata key="Album Rating" type="integer">80</metadata>
+      <metadata key="Album Rating Computed" type="true"/>
+      <metadata key="Normalization" type="integer">4813</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">9140DEC893CE5EF8</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+      <metadata key="Matched" type="true"/>
+   </track>
+</album>

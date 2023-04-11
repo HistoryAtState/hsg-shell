@@ -20,6 +20,7 @@
         <!-- @endif -->
         <!-- @if PRODUCTION=false -->
         <link rel="stylesheet" type="text/css" href="$app/resources/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="$app/transform/frus.css"/>
         <link rel="stylesheet" type="text/css" data-template="pages:styles"
             data-template-odd="frus.odd"/>
         <!-- @endif -->
@@ -77,8 +78,8 @@
                 <div class="navbar-collapse collapse" id="navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="$app/" shape="rect">
-                                <span>Home</span>
+                            <a href="$app/news" shape="rect">
+                                <span>News</span>
                             </a>
                         </li>
                         <li class="dropdown">
@@ -228,6 +229,9 @@
             <section class="hsg-grid hsg-main-inner">
                 <div class="container hsg-main-content">
                     <main id="content"/>
+                    <section class="" data-template="pages:unless-asides">
+                        <button title="Cite this resource" class="hsg-cite__button">Cite this resource</button>
+                    </section>
                 </div>
             </section>
         </div>
@@ -313,6 +317,14 @@
                     </div>
                 </div>
             </section>
+            
+            <section class="hsg-grid hsg-footer-nether">
+                <div class="container">
+                    <div class="row">
+                        <p><a data-template="link:report-issue">Report an issue on this page</a></p>
+                    </div>
+                </div>
+            </section>
         </footer>
 
         <!-- @if PRODUCTION=false -->
@@ -321,28 +333,39 @@
         <script type="text/javascript"
             src="$app/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"
             data-template="app:fix-this-link"/>
-        <script type="text/javascript" async="async" src="$app/resources/scripts/app.js"
+        <script type="text/javascript"
+            src="$app/resources/scripts/citeproc.min.js"
+            data-template="app:fix-this-link"/>
+        <script type="text/javascript" src="$app/resources/scripts/footnote.js"
+            data-template="app:fix-this-link"/>
+        <script type="text/javascript" src="$app/resources/scripts/vendor/openseadragon/openseadragon.js"
+            data-template="app:fix-this-link"/>
+        <script type="text/javascript" src="$app/resources/scripts/app.js"
             data-template="app:fix-this-link"/>
         <script type="text/javascript" async="async" src="$app/resources/scripts/metagrid.js"
             data-template="app:fix-this-link"/>
+        <script type="text/javascript" async="async" src="$app/resources/scripts/cite.js"
+            data-template="app:fix-this-link" id="cite-script"/>
         <!-- @endif -->
         <!-- @if PRODUCTION=true -->
         <script type="text/javascript" async="async" src="$app/resources/scripts/app.all.js"
-            data-template="app:fix-this-link"/>
+                data-template="app:fix-this-link" id="cite-script"/>
         <!-- Google tag (gtag.js) -->
         <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GWKX1LXFD1"></script>
         <script>
-        window.dataLayer = window.dataLayer ||[];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        
-        gtag('config', 'G-GWKX1LXFD1');</script>
+            window.dataLayer = window.dataLayer ||[];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-GWKX1LXFD1');
+        </script>
         <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
         <script type="text/javascript" async="async"
             src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=DOS"
             id="_fed_an_ua_tag"/>
         <!-- @endif -->
+        <script type="application/json" id="original_citation" data-template="config:csl-json"/>
     </body>
 </html>

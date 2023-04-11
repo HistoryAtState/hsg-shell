@@ -10,7 +10,7 @@ module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html";
 
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace gsh="http://history.state.gov/ns/xquery/geospatialhistory" at "/db/apps/gsh/modules/gsh.xqm";
-import module namespace templates="http://exist-db.org/xquery/templates";
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare variable $pocom:DATA-COL := '/db/apps/pocom';
 declare variable $pocom:DATA := collection($pocom:DATA-COL);

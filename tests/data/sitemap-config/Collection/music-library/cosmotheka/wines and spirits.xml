@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<album track-count="16">
+   <name>wines and spirits</name>
+   <artist>cosmotheka</artist>
+   <track>
+      <metadata key="Track ID" type="integer">11685</metadata>
+      <metadata key="Name" type="string">The 'ouses in Between</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">27944567</metadata>
+      <metadata key="Total Time" type="integer">276346</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">7</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:06Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:00:52Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">15</metadata>
+      <metadata key="Play Date" type="integer">3664178119</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:15:19Z</metadata>
+      <metadata key="Normalization" type="integer">1733</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">'ouses in Between</metadata>
+      <metadata key="Persistent ID" type="string">D5263AA8AD089B7B</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11687</metadata>
+      <metadata key="Name" type="string">The Baby's Name</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">12014432</metadata>
+      <metadata key="Total Time" type="integer">123973</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">7</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:07Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:01:17Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">15</metadata>
+      <metadata key="Play Date" type="integer">3664178243</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:17:23Z</metadata>
+      <metadata key="Normalization" type="integer">2461</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Baby's Name</metadata>
+      <metadata key="Persistent ID" type="string">98A3540C2F496002</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11689</metadata>
+      <metadata key="Name" type="string">Little Dolly Daydream</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">27470030</metadata>
+      <metadata key="Total Time" type="integer">263053</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">7</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:09Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:01:28Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">7</metadata>
+      <metadata key="Play Date" type="integer">3669916146</metadata>
+      <metadata key="Play Date UTC" type="date">2020-04-16T20:09:06Z</metadata>
+      <metadata key="Skip Count" type="integer">3</metadata>
+      <metadata key="Skip Date" type="date">2014-06-03T14:51:04Z</metadata>
+      <metadata key="Normalization" type="integer">4972</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">0FB821398512EDF1</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11691</metadata>
+      <metadata key="Name" type="string">Down the Road</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">2104048</metadata>
+      <metadata key="Total Time" type="integer">19506</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">7</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:09Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:01:49Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">Link Track</metadata>
+      <metadata key="Play Count" type="integer">12</metadata>
+      <metadata key="Play Date" type="integer">3557404337</metadata>
+      <metadata key="Play Date UTC" type="date">2016-09-22T14:52:17Z</metadata>
+      <metadata key="Normalization" type="integer">4723</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">641BFD4101B69136</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11693</metadata>
+      <metadata key="Name" type="string">Up Went My Little Umbrella</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">18422755</metadata>
+      <metadata key="Total Time" type="integer">172293</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">7</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:10Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:01:51Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3664178447</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:20:47Z</metadata>
+      <metadata key="Normalization" type="integer">2497</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">F889F7E670DFA86F</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11695</metadata>
+      <metadata key="Name" type="string">The Golden Dustman</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">31332945</metadata>
+      <metadata key="Total Time" type="integer">311040</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">7</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:12Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:02:04Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">18</metadata>
+      <metadata key="Play Date" type="integer">3664178758</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:25:58Z</metadata>
+      <metadata key="Normalization" type="integer">1259</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Golden Dustman</metadata>
+      <metadata key="Persistent ID" type="string">8879E1BDA6BC4936</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11697</metadata>
+      <metadata key="Name" type="string">The Ragtime Ragshop</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">22081684</metadata>
+      <metadata key="Total Time" type="integer">218280</metadata>
+      <metadata key="Disc Number" type="integer">2</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">9</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:13Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:02:25Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">16</metadata>
+      <metadata key="Play Date" type="integer">3664178976</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:29:36Z</metadata>
+      <metadata key="Normalization" type="integer">1579</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Ragtime Ragshop</metadata>
+      <metadata key="Persistent ID" type="string">62F35D89CF1BA2D3</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11699</metadata>
+      <metadata key="Name" type="string">The Kangaroo Hop</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">17371784</metadata>
+      <metadata key="Total Time" type="integer">170760</metadata>
+      <metadata key="Disc Number" type="integer">2</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">2</metadata>
+      <metadata key="Track Count" type="integer">9</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:14Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:02:40Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3664179147</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:32:27Z</metadata>
+      <metadata key="Normalization" type="integer">2312</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Sort Name" type="string">Kangaroo Hop</metadata>
+      <metadata key="Persistent ID" type="string">6870B310359803CB</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11701</metadata>
+      <metadata key="Name" type="string">Hitch Coo</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">5591793</metadata>
+      <metadata key="Total Time" type="integer">53840</metadata>
+      <metadata key="Disc Number" type="integer">2</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">3</metadata>
+      <metadata key="Track Count" type="integer">9</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:15Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:02:51Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">Link Track</metadata>
+      <metadata key="Play Count" type="integer">17</metadata>
+      <metadata key="Play Date" type="integer">3664179201</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:33:21Z</metadata>
+      <metadata key="Normalization" type="integer">4624</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">2B0F24F9AD4DC818</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11703</metadata>
+      <metadata key="Name" type="string">Johnny</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">22804422</metadata>
+      <metadata key="Total Time" type="integer">226160</metadata>
+      <metadata key="Disc Number" type="integer">2</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">4</metadata>
+      <metadata key="Track Count" type="integer">9</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:16Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:02:55Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">18</metadata>
+      <metadata key="Play Date" type="integer">3664179427</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:37:07Z</metadata>
+      <metadata key="Normalization" type="integer">1560</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">27D16773CF84DB5D</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11705</metadata>
+      <metadata key="Name" type="string">Robin Redbreast</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">18054306</metadata>
+      <metadata key="Total Time" type="integer">166546</metadata>
+      <metadata key="Disc Number" type="integer">2</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">5</metadata>
+      <metadata key="Track Count" type="integer">9</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:17Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:03:09Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">18</metadata>
+      <metadata key="Play Date" type="integer">3664179594</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:39:54Z</metadata>
+      <metadata key="Normalization" type="integer">2844</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">8F3C5E0B80B1622E</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11707</metadata>
+      <metadata key="Name" type="string">Music Box Tune</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3986664</metadata>
+      <metadata key="Total Time" type="integer">37893</metadata>
+      <metadata key="Disc Number" type="integer">2</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">6</metadata>
+      <metadata key="Track Count" type="integer">9</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:18Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:03:19Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">Link Track</metadata>
+      <metadata key="Play Count" type="integer">18</metadata>
+      <metadata key="Play Date" type="integer">3664179631</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:40:31Z</metadata>
+      <metadata key="Normalization" type="integer">2565</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">5300BF1F586E2404</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11709</metadata>
+      <metadata key="Name" type="string">Good Little Girl</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">4249996</metadata>
+      <metadata key="Total Time" type="integer">45813</metadata>
+      <metadata key="Disc Number" type="integer">1</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">1</metadata>
+      <metadata key="Track Count" type="integer">7</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:04Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:00:47Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">Link Track</metadata>
+      <metadata key="Play Count" type="integer">14</metadata>
+      <metadata key="Play Date" type="integer">3664177843</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:10:43Z</metadata>
+      <metadata key="Skip Count" type="integer">1</metadata>
+      <metadata key="Skip Date" type="date">2014-02-23T11:11:36Z</metadata>
+      <metadata key="Normalization" type="integer">1689</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">9EBA9C730B0E1866</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11711</metadata>
+      <metadata key="Name" type="string">Only Come Down For The Day</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">20792216</metadata>
+      <metadata key="Total Time" type="integer">213680</metadata>
+      <metadata key="Disc Number" type="integer">2</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">7</metadata>
+      <metadata key="Track Count" type="integer">9</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:19Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:03:22Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">21</metadata>
+      <metadata key="Play Date" type="integer">3664179845</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:44:05Z</metadata>
+      <metadata key="Normalization" type="integer">1023</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">6871293C8E913673</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11715</metadata>
+      <metadata key="Name" type="string">Timothy Let's Have a Look at it</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">15031191</metadata>
+      <metadata key="Total Time" type="integer">153933</metadata>
+      <metadata key="Disc Number" type="integer">2</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">8</metadata>
+      <metadata key="Track Count" type="integer">9</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:20Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:03:34Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Play Count" type="integer">20</metadata>
+      <metadata key="Play Date" type="integer">3664179999</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:46:39Z</metadata>
+      <metadata key="Skip Count" type="integer">2</metadata>
+      <metadata key="Skip Date" type="date">2014-04-09T14:05:31Z</metadata>
+      <metadata key="Normalization" type="integer">2451</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">2F3769ED73193F82</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+   <track>
+      <metadata key="Track ID" type="integer">11717</metadata>
+      <metadata key="Name" type="string">Just Like the Ivy</metadata>
+      <metadata key="Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album Artist" type="string">Cosmotheka</metadata>
+      <metadata key="Album" type="string">Wines and Spirits</metadata>
+      <metadata key="Genre" type="string">Music Hall</metadata>
+      <metadata key="Kind" type="string">AAC audio file</metadata>
+      <metadata key="Size" type="integer">3700879</metadata>
+      <metadata key="Total Time" type="integer">40080</metadata>
+      <metadata key="Disc Number" type="integer">2</metadata>
+      <metadata key="Disc Count" type="integer">2</metadata>
+      <metadata key="Track Number" type="integer">9</metadata>
+      <metadata key="Track Count" type="integer">9</metadata>
+      <metadata key="Year" type="integer">1977</metadata>
+      <metadata key="Date Modified" type="date">2014-02-21T20:06:20Z</metadata>
+      <metadata key="Date Added" type="date">2014-02-21T20:03:43Z</metadata>
+      <metadata key="Bit Rate" type="integer">256</metadata>
+      <metadata key="Sample Rate" type="integer">44100</metadata>
+      <metadata key="Comments" type="string">Link Track</metadata>
+      <metadata key="Play Count" type="integer">20</metadata>
+      <metadata key="Play Date" type="integer">3664180050</metadata>
+      <metadata key="Play Date UTC" type="date">2020-02-10T11:47:30Z</metadata>
+      <metadata key="Normalization" type="integer">2479</metadata>
+      <metadata key="Artwork Count" type="integer">1</metadata>
+      <metadata key="Persistent ID" type="string">4C0CF6BC15CAA1B7</metadata>
+      <metadata key="Track Type" type="string">Remote</metadata>
+   </track>
+</album>
