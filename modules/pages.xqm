@@ -15,8 +15,7 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
 import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "sidebar.xqm";
 import module namespace link="http://history.state.gov/ns/site/hsg/link" at "link.xqm";
-(:import module namespace pmu="http://www.tei-c.org/tei-simple/xquery/util" at "/db/apps/tei-simple/content/util.xql";:)
-(:import module namespace odd="http://www.tei-c.org/tei-simple/odd2odd" at "/db/apps/tei-simple/content/odd2odd.xql";:)
+
 import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 declare variable $pages:app-root :=
@@ -336,8 +335,6 @@ declare function pages:process-content($odd as function(*), $xml as element()*, 
 (:    console:log("Processing content using odd: " || $odd),:)
 	let $html :=
 	    $odd($xml, $parameters)
-(:        pmu:process(odd:get-compiled($config:odd-source, $odd, $config:odd-compiled), $xml, $config:odd-compiled, "web", "../generated", :)
-(:            $config:module-config, $parameters):)
     let $content := pages:clean-footnotes($html)
     (: let $class := if ($html//*[@class = ('margin-note')]) then "margin-right" else () :)
     return
