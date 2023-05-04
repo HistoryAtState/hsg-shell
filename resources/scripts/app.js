@@ -7,19 +7,17 @@ function initializeImageViewer() {
             tif_url    = osd_viewer.attr('data-url'),
             tif_width  = parseInt(osd_viewer.attr('data-width')),
             tif_height = parseInt(osd_viewer.attr('data-height')),
-            scheme     = 'http',
-            server     = 'localhost', // Local Cantaloupe image server for development
-            port       = '8182',
+            scheme     = 'https',
+            server     = 'ci.history.state.gov',
             debugMode  = false;
 
-        console.log('Image URI=', scheme + '://' + server + ':' + port + '/iiif/3/' + documentId + '%2Ftiff%2F' + facsId + '.tif');
+        console.log('Image URI=', scheme + "://" + server +  "/iiif/2/" + documentId + "%2Ftiff%2F" + facsId + ".tif");
 
         var viewer = OpenSeadragon({
             id:                   "viewer",
             prefixUrl:            "resources/images/OSD-icons/",
             preserveViewport:     true,
             visibilityRatio:      1,
-            //minZoomLevel:         1,
             minZoomImageRatio:    0.9,
             defaultZoomLevel:     1,
             showNavigator:        true,
@@ -28,8 +26,8 @@ function initializeImageViewer() {
             showSequenceControl:  false,
             debugMode:            debugMode,
             tileSources:   [{
-              "@context": "http://iiif.io/api/image/3/context.json",
-              "@id":      scheme + "://" + server + ':' + port + "/iiif/3/" + documentId + "%2Ftiff%2F" + facsId + ".tif",
+              "@context": "http://iiif.io/api/image/2/context.json",
+              "@id":      scheme + "://" + server +  "/iiif/2/frus%2F" + documentId + "%2Ftiff%2F" + facsId + ".tif",
               "height":   tif_height,
               "width":    tif_width,
               "maxArea":  10000000,
