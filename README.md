@@ -14,19 +14,31 @@ You need to have *ant*, *git*, *nvm* and *nodeJS* installed.
 
         nvm install 14.19.3
 
-3. Install (or update to) the latest `npm` version with:
+3. If you have already used nvm before and have various node versions already installed, you can skip 1). Now just make sure to use the project's required node version by running 
+
+        nvm use
+
+This command will check the local node settings in the project's `.nvmrc` file and switch to this node version only for this project.  
+
+4. Install (or update to) the latest `npm` version with:
 
         npm install -g npm
 
-4. Install bower:
+5. Install bower:
 
         npm install -g bower
 
-5. Install gulp
+6. Install gulp
 
         npm install -g gulp
 
    The project's gulp file depends on `gulp 4` (or higher) syntax, so make sure in the next step, that you'll have gulp 4.x running.
+
+#### Troubleshooting `npm` Problems
+
+When you encounter errors while running `npm start` (this is called when building the xar file by running `ant`), or during `npm install`, please delete file `package-lock.json`, delete the entire `node_modules` folder, run `nvm use` and finally `npm start` again.
+This should install all node modules with the required node version.   
+A new `package-lock.json` file will be created, which should be added to version control.  
 
 ### Installation
 
