@@ -51,8 +51,8 @@ describe('The news list', () => {
   });
 
   // Check if 20 entries are displayed
-  it('should contain 21 list items on one page', () => {
-    assert.equal(lc, 21 );
+  it('should contain 20 list items on one page', () => {
+    assert.equal(lc, 20 );
   });
 });
 
