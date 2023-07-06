@@ -223,14 +223,15 @@ declare
     %templates:wrap
 function fh:series-volumes($node as node(), $model as map(*)) {
     for $vol in $model?volumes
-    let $title := 
-        string-join(
-            (
-                ($vol/title[@type='volume'], $vol/title[@type='volume-number'])[. ne ''], 
-                $vol/title[@type='sub-series']
-            )[1], 
-            ', '
-        )
+    let $title :=
+        (: catch outliers like frus1918, which have no volume title or number :)
+        if ($vol/title[@type eq "volume"] eq "" and $vol/title[@type eq "volume-number"] eq "") then
+            $vol/title[@type eq "sub-series"]
+        else
+            string-join(
+                ($vol/title[@type eq "volume"], $vol/title[@type eq "volume-number"])[. ne ""],
+                ', '
+            )
     let $vol-id := $vol/@id
     let $publication-status := $vol/publication-status
     order by $vol-id
