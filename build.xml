@@ -108,7 +108,7 @@
         <echo message="${npm.output}"/>
     </target>
 
-    <target name="xar" depends="node,clean,run-npm,git.revision" description="create xar file">
+    <target name="xar" depends="clean,git.revision" description="create xar file">
         <echo message="Creating build folder..."/>
         <mkdir dir="${build.dir}"/>
         <copy todir="${basedir}" overwrite="true" verbose="true">        
