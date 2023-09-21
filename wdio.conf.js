@@ -8,7 +8,7 @@ process.env.WDIO_PREFIX = process.env.WDIO_PREFIX || '/exist/apps/hsg-shell/';
 
 // set service port
 process.env.WDIO_CHROMEDRIVER_PORT = process.env.WDIO_CHROMEDRIVER_PORT || '9515';
-process.env.WDIO_CHROME_BINARY = process.env.WDIO_CHROME_BINARY || '<path-to-Google-Chrome-binary>';
+// process.env.WDIO_CHROME_BINARY = process.env.WDIO_CHROME_BINARY || '/Applications/Google\ Chrome.appContents/MacOS/Google\ Chrome';
 
 exports.config = {
     //
@@ -91,8 +91,8 @@ exports.config = {
             '--window-size=1280,1024',
             'ignore-certificate-errors',
             'ignore-urlfetcher-cert-requests'
-          ],
-          binary: process.env.WDIO_CHROME_BINARY
+          ]
+          // binary: process.env.WDIO_CHROME_BINARY
         }
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
