@@ -56,8 +56,8 @@ let fontPath = 'resources/fonts/';
 
 gulp.task('fonts:copy', gulp.series(function () {
     return gulp.src([
-            'bower_components/bootstrap-sass/assets/fonts/**/*',
-            'bower_components/font-awesome/fonts/*'
+            'node_modules/bootstrap-sass/assets/fonts/**/*',
+            'node_modules/font-awesome/fonts/*'
         ])
         .pipe(gulp.dest('resources/fonts'))
 }));
@@ -107,6 +107,19 @@ gulp.task('openseadragon:deploy', gulp.series('openseadragon:copy', function () 
 }));
 
 // scripts //
+gulp.task('scripts:dev', function () {
+    // minified version of js is used in production only
+    return gulp.src([
+        'node_modules/jquery/dist/jquery.min.js',
+        'node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+    ])
+    .pipe(gulp.dest('resources/scripts'))
+})
+
+const uglifyOptions = PRODUCTION ? undefined : {
+    compress: false,
+    mangle: false 
+}
 
 gulp.task('scripts:build', function () {
     // minified version of js is used in production only
@@ -118,21 +131,23 @@ gulp.task('scripts:build', function () {
             'resources/scripts/dygraph-combined.js',
             'resources/scripts/vendor/openseadragon/openseadragon.js'
         ])
-        .pipe(uglify())
+        .pipe(uglify(uglifyOptions))
         .pipe(concat('app.min.js'))
         .pipe(gulp.dest('resources/scripts'))
 });
 
-gulp.task('scripts:concat', gulp.series('scripts:build', function () {
+function compileVendorScripts () {
     return gulp.src([
-            'bower_components/jquery/dist/jquery.min.js',
-            'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+            'node_modules/jquery/dist/jquery.min.js',
+            'node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
             'resources/scripts/citeproc.min.js',
             'resources/scripts/app.min.js',
         ])
       .pipe(concat('app.all.js'))
       .pipe(gulp.dest('resources/scripts'));
-}));
+}
+
+gulp.task('scripts:concat', gulp.series('scripts:build', compileVendorScripts));
 
 gulp.task('scripts:deploy', gulp.series('scripts:concat', function () {
     return gulp.src('resources/scripts/*.js', {base: './'})
