@@ -6,10 +6,6 @@ process.env.WDIO_PORT = process.env.WDIO_PORT || '8080';
 // set path prefix - defaults to exist db standard path - production servers need '/'
 process.env.WDIO_PREFIX = process.env.WDIO_PREFIX || '/exist/apps/hsg-shell/';
 
-// set service port
-process.env.WDIO_CHROMEDRIVER_PORT = process.env.WDIO_CHROMEDRIVER_PORT || '9515';
-// process.env.WDIO_CHROME_BINARY = process.env.WDIO_CHROME_BINARY || '/Applications/Google\ Chrome.appContents/MacOS/Google\ Chrome';
-
 exports.config = {
     //
     // ====================
