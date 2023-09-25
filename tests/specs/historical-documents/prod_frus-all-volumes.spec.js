@@ -28,55 +28,55 @@ const publishedDates = [
 
 describe('FRUS "All Volumes" page', () => {
   let imageSrc, imageSelector;
-  before( () => {
-    Page.open('historicaldocuments/volume-titles');
-    Page.pause(500);
+  before(async () => {
+    await Page.open('historicaldocuments/volume-titles');
+    await Page.pause(500);
   });
 
-  it('should display a title', () => {
-    let title = Page.getElementText('h1');
+  it('should display a title', async () => {
+    let title = await Page.getElementText('h1');
     assert.equal(title, 'All Titles in the Series');
   });
 
-  it('should display a sidebar with citation option', () => {
-    let sidebar = Page.getElement('hsg-cite__button--sidebar');
+  it('should display a sidebar with citation option', async () => {
+    let sidebar = await Page.getElement('hsg-cite__button--sidebar');
     assert.exists(sidebar);
   });
 
-  it('should display a list containing a thumbnail', () => {
-    let t_0 = Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(1) img', 'src'),
-        t_1 = Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(2) img', 'src'),
-        t_2 = Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(3) img', 'src');
+  it('should display a list containing a thumbnail', async () => {
+    let t_0 = await Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(1) img', 'src'),
+        t_1 = await Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(2) img', 'src'),
+        t_2 = await Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(3) img', 'src');
     assert.include(t_0, images[0]);
     assert.include(t_1, images[1]);
     assert.include(t_2, images[2]);
   });
 
-  it('should display a list containing a title', () => {
-    let title_0 = Page.getElementText('ul.hsg-list__volumes li:nth-child(1) h3 a'),
-        title_1 = Page.getElementText('ul.hsg-list__volumes li:nth-child(2) h3 a'),
-        title_2 = Page.getElementText('ul.hsg-list__volumes li:nth-child(3) h3 a');
+  it('should display a list containing a title', async () => {
+    let title_0 = await Page.getElementText('ul.hsg-list__volumes li:nth-child(1) h3 a'),
+        title_1 = await Page.getElementText('ul.hsg-list__volumes li:nth-child(2) h3 a'),
+        title_2 = await Page.getElementText('ul.hsg-list__volumes li:nth-child(3) h3 a');
     assert.equal(title_0, titles[0]);
     assert.equal(title_1, titles[1]);
     assert.equal(title_2, titles[2]);
   });
 
-  it('should display a list containing a link to the volume', () => {
-    let link_0 = Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(1) h3 a', 'href'),
-        link_1 = Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(2) h3 a', 'href'),
-        link_2 = Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(3) h3 a', 'href');
+  it('should display a list containing a link to the volume', async () => {
+    let link_0 = await Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(1) h3 a', 'href'),
+        link_1 = await Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(2) h3 a', 'href'),
+        link_2 = await Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(3) h3 a', 'href');
     assert.include(link_0, links[0]);
     assert.include(link_1, links[1]);
     assert.include(link_2, links[2]);
   });
 
-  it('should display a list containing a published status and date, if available', () => {
-    let publishedDate_0 = Page.getElementText('ul.hsg-list__volumes li:nth-child(1) dl dd:nth-of-type(1)');
+  it('should display a list containing a published status and date, if available', async () => {
+    let publishedDate_0 = await Page.getElementText('ul.hsg-list__volumes li:nth-child(1) dl dd:nth-of-type(1)');
     assert.include(publishedDate_0, publishedDates);
   });
 
-  it('should display a list containing download buttons, if available', () => {
-    let dl = Page.getElementText('ul.hsg-list__volumes li:nth-child(1) ul.hsg-list__media__download > li > button span');
+  it('should display a list containing download buttons, if available', async () => {
+    let dl = await Page.getElementText('ul.hsg-list__volumes li:nth-child(1) ul.hsg-list__media__download > li > button span');
     assert.exists(dl);
   });
 });

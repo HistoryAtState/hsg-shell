@@ -19,15 +19,15 @@ const viewer = '.openseadragon-canvas > canvas',
 // TODO: Catch server response when browsing with side navigation, if correct images are served
 
 describe('Requesting images from an external source (S3) via a IIIF server', () => {
-  let v;
-  before(() => {
-      Page.open(p1);
-      Page.pause(500);
-      v = Page.getElement(viewer);
+  let viewer;
+  before(async () => {
+      await Page.open(p1);
+      await Page.pause(500);
+      viewer = await Page.getElement(viewer);
   });
 
   it('should be displayed in a IIIF viewer', () => {
-    assert.exists(v);
+    assert.exists(viewer);
   });
 });
 

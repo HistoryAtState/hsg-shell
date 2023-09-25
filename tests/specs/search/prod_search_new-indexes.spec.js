@@ -49,65 +49,65 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
   let count, duration;
 
   // Keyword Indochina
-  it('query "' + queries[0] + '" should display the expected amount of ' + expectedCount[0] + ' results', () => {
-    Page.open(queries[0] + filterOptions[2] + sortingOptions[1]);
-    count = Page.getElementText(searchCount);
+  it('query "' + queries[0] + '" should display the expected amount of ' + expectedCount[0] + ' results', async () => {
+    await Page.open(queries[0] + filterOptions[2] + sortingOptions[1]);
+    count = await Page.getElementText(searchCount);
     count = count.replace(/,/, '');
     console.log('count=', count);
     assert.isTrue(count = expectedCount[0], 'Current result did not match expected result');
   });
 
-  it('query "' + queries[0] + '" should be performed in less than ' + expectedDuration[0] + ' second', () => {
-    Page.open('search?q=Indochina&within=documents&start-date=1950&end-date=1980');
-    duration = Page.getElementText(searchDuration)
+  it('query "' + queries[0] + '" should be performed in less than ' + expectedDuration[0] + ' second', async () => {
+    await Page.open('search?q=Indochina&within=documents&start-date=1950&end-date=1980');
+    duration = await Page.getElementText(searchDuration)
     console.log('duration=', parseFloat(duration));
     assert.isTrue(parseFloat(duration) < expectedDuration[0], 'Current duration did not match expected duration');
   });
 
   // Keyword Sudan
-  it('query "' + queries[1] + '" should display the expected amount of ' + expectedCount[1] + ' results', () => {
-    Page.open(queries[1] + filterOptions[2] + sortingOptions[1]);
-    count = Page.getElementText(searchCount);
+  it('query "' + queries[1] + '" should display the expected amount of ' + expectedCount[1] + ' results', async () => {
+    await Page.open(queries[1] + filterOptions[2] + sortingOptions[1]);
+    count = await Page.getElementText(searchCount);
     count = count.replace(/,/, '');
     console.log('count=', count);
     assert.isTrue(count = expectedCount[1], 'Current result did not match expected result');
   });
 
-  it('query "' + queries[1] + '" should be performed in less than ' + expectedDuration[1] + ' second', () => {
-    Page.open('search?q=Indochina&within=documents&start-date=1950&end-date=1980');
-    duration = Page.getElementText(searchDuration)
+  it('query "' + queries[1] + '" should be performed in less than ' + expectedDuration[1] + ' second', async () => {
+    await Page.open('search?q=Indochina&within=documents&start-date=1950&end-date=1980');
+    duration = await Page.getElementText(searchDuration)
     console.log('duration=', parseFloat(duration));
     assert.isTrue(parseFloat(duration) < expectedDuration[1], 'Current duration did not match expected duration');
   });
 
   // Keyword China
-  it('query "' + queries[2] + '" should display the expected amount of ' + expectedCount[2] + ' results', () => {
-    Page.open(queries[2] + filterOptions[2] + sortingOptions[1]);
-    count = Page.getElementText(searchCount);
+  it('query "' + queries[2] + '" should display the expected amount of ' + expectedCount[2] + ' results', async () => {
+    await Page.open(queries[2] + filterOptions[2] + sortingOptions[1]);
+    count = await Page.getElementText(searchCount);
     count = count.replace(/,/, '');
     console.log('count=', count);
     assert.isTrue(count = expectedCount[2], 'Current result did not match expected result');
   });
 
-  it('query "' + queries[2] + '" should be performed in less than ' + expectedDuration[2] + ' second', () => {
-    Page.open('search?q=Indochina&within=documents&start-date=1950&end-date=1980');
-    duration = Page.getElementText(searchDuration)
+  it('query "' + queries[2] + '" should be performed in less than ' + expectedDuration[2] + ' second', async () => {
+    await Page.open('search?q=Indochina&within=documents&start-date=1950&end-date=1980');
+    duration = await Page.getElementText(searchDuration)
     console.log('duration=', parseFloat(duration));
     assert.isTrue(parseFloat(duration) < expectedDuration[2], 'Current duration did not match expected duration');
   });
 
   // Keyword Tokyo
-  it('query "' + queries[3] + '" should display the expected amount of ' + expectedCount[3] + ' results', () => {
-    Page.open(queries[3] + filterOptions[2] + sortingOptions[1]);
-    count = Page.getElementText(searchCount);
+  it('query "' + queries[3] + '" should display the expected amount of ' + expectedCount[3] + ' results', async () => {
+    await Page.open(queries[3] + filterOptions[2] + sortingOptions[1]);
+    count = await Page.getElementText(searchCount);
     count = count.replace(/,/, '');
     console.log('count=', count);
     assert.isTrue(count = expectedCount[3], 'Current result did not match expected result');
   });
 
-  it('query "' + queries[3] + '" should be performed in less than ' + expectedDuration[3] + ' second', () => {
-    Page.open('search?q=Indochina&within=documents&start-date=1950&end-date=1980');
-    duration = Page.getElementText(searchDuration)
+  it('query "' + queries[3] + '" should be performed in less than ' + expectedDuration[3] + ' second', async () => {
+    await Page.open('search?q=Indochina&within=documents&start-date=1950&end-date=1980');
+    duration = await Page.getElementText(searchDuration)
     console.log('duration=', parseFloat(duration));
     assert.isTrue(parseFloat(duration) < expectedDuration[3], 'Current duration did not match expected duration');
   });

@@ -81,8 +81,8 @@ invalidFilterOptions.forEach(function (parameters) {
     });
 
     // TODO: Check for notifications instead after this feature has been implemented, this is only a workaround
-    it('"' + parameters + '" should not return any search results', function () {
-      assert.equal(Page.getElementText('#content-inner > section > p'), 'No results were found.', 'No results should be displayed for this search.');
+    it('"' + parameters + '" should not return any search results', async function () {
+      assert.equal(await Page.getElementText('#content-inner > section > p'), 'No results were found.', 'No results should be displayed for this search.');
     });
   });
 });
