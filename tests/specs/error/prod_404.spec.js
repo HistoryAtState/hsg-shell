@@ -3,11 +3,10 @@
  */
 
 const Page = require('../../pageobjects/Page');
-const { assert } = require('chai');
 
 describe('Requesting a non existing page', () => {
-  it('should redirect to the 404 error page', () => {
-    Page.open('asdfg');
-    assert.include(Page.getTitle(), 'An error has occurred - Office of the Historian');
+  it('should redirect to the 404 error page', async () => {
+    await Page.open('asdfg');
+    assert.include(await Page.getTitle(), 'An error has occurred - Office of the Historian');
   });
 });
