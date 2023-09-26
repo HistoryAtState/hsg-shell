@@ -9,7 +9,7 @@ import module namespace app="http://history.state.gov/ns/site/hsg/templates" at 
 import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-config.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace link="http://history.state.gov/ns/site/hsg/link" at "link.xqm";
-import module namespace templates="http://exist-db.org/xquery/templates" ;
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
