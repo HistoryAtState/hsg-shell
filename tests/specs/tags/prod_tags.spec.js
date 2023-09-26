@@ -42,9 +42,9 @@ const subpages = [
 describe('On the Tag page: ', function () {
 
   it('should display the headline', async function () {
-    Page.open(page.link);
+    Page.open(mainpage.link);
     const title = await Page.getElementText(SubPage.headline_h1)
-    assert.equal(page.title, title.replace(regex, ''));
+    assert.equal(mainpage.title, title.replace(regex, ''));
   });
 
   // Subpage titles check

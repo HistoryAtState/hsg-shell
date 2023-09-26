@@ -38,7 +38,7 @@ describe('on the Milestone page', function () {
       it('should display the headline (' + page.name + ')', async function () {
         await Page.open(page.link);
         const title = await Page.getElementText(SubPage.headline_h1)
-        assert.equal(page.title, title.replace(regex, ''));
+        assert.equal(page.title, title);
       })
     })
   })
