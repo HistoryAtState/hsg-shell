@@ -17,10 +17,10 @@ describe('FRUS landing page: The first 3 tiles', function () {
   });
 
   images.forEach(function (image, index) {
-      describe('Each tile on the landing page', function () {
+      describe('Each tile on the landing page', async function () {
           it('should display an image', async function () {
-              const imgSrc = Page.getElementAttribute('#content-inner div article:nth-child(' + (index + 1) + ') a img', 'src');
-              assert.include(tile0, image);
+              const imgSrc = await Page.getElementAttribute('#content-inner div article:nth-child(' + (index + 1) + ') a img', 'src');
+              assert.include(imgSrc, image);
           });
       });
   });
