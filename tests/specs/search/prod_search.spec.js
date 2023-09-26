@@ -14,7 +14,7 @@ describe('Searching on home page', function () {
   before(async function () {
     await Page.open();
     searchInput = await Page.getElement('form input#search-box');
-    searchInput.setValue(searchPhrases[0]);
+    await searchInput.setValue(searchPhrases[0]);
     submitButton = await Page.getElement('button[type="submit"]');
     submitButton.click();
   });
@@ -28,8 +28,8 @@ describe('Searching on home page', function () {
 searchPhrases.forEach(function (phrase) {
   describe('Searching for', function () {
 
-    before(function () {
-      Page.open('search?q=' + phrase);
+    before(async function () {
+      await Page.open('search?q=' + phrase);
     });
 
     it('"' + phrase + '" should have results', async function () {
