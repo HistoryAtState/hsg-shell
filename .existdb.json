@@ -1,0 +1,25 @@
+{
+    "servers": {
+        "localhost": {
+            "server": "http://localhost:8080/exist",
+            "user": "admin",
+            "password": "",
+            "root": "/db/apps/hsg-shell"
+        }
+    },
+    "sync": {
+        "server": "localhost",
+        "ignore": [
+            "build/**",
+            "bower_components/**",
+            ".devcontainer/**",
+            ".existdb.json",
+            ".git/**",
+            ".idea",
+            "tests/**",
+            "node_modules/**",
+            "package*.json",
+            ".vscode/**"
+        ]
+    }
+}
