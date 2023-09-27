@@ -10,7 +10,8 @@ describe('The TOC of a volume', () => {
   });
 
   it('should highlight the current chapter', async () => {
-    let currentLink = await Page.getCssProperty('a.hsg-current[href*="historicaldocuments/frus1947v03/comp1"]', 'color').parsed.hex;
-    assert.equal(currentLink, '#205493');
+    let currentLink = await Page.getCssProperty('a.hsg-current[href*="historicaldocuments/frus1947v03/comp1"]', 'color')
+    const color = currentLink.parsed.hex;
+    assert.equal(color, '#205493');
   });
 });
