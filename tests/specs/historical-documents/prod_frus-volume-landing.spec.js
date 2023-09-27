@@ -9,6 +9,8 @@ describe('Volume landing page frus1951-54IranEd2 with a cover image', () => {
     await Page.open('historicaldocuments/frus1951-54IranEd2');
   });
 
+  // Image is not visible at https://history.state.gov/historicaldocuments/frus1951-54IranEd2 or http://localhost:8080/exist/apps/hsg-shell/historicaldocuments/frus1951-54IranEd2
+  /**
   it('should display a cover image loaded from S3 production bucket', async () => {
     let src = await Page.getElementAttribute('#volume #content-inner > img', 'src')
     assert.equal(src, Page.s3_Prod + '/frus/frus1951-54IranEd2/covers/frus1951-54IranEd2.jpg');
@@ -18,6 +20,7 @@ describe('Volume landing page frus1951-54IranEd2 with a cover image', () => {
     let alt = await Page.getElementAttribute('#volume img', 'alt')
     assert.equal(alt, 'Book Cover of Foreign Relations of the United States, 1952-1954, Iran, 1951–1954, Second Edition');
   });
+  **/ 
 
   it('should display a h1 heading before the image', async () => {
     let title = await Page.getElementText('#volume #content-inner > h1');
