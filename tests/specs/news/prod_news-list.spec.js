@@ -98,7 +98,7 @@ newsEntries.forEach((newsEntry) => {
       await Page.open('news');
       await Page.pause(500)
       d  = await Page.getElement('.hsg-list__news time.hsg-badge--' + newsEntry.type);
-      dc = await Page.getCssProperty('.hsg-list__news time.hsg-badge--' + newsEntry.type, 'background-color').parsed.hex;
+      dc = await Page.getCssProperty('.hsg-list__news time.hsg-badge--' + newsEntry.type, 'background-color');
       s  = '.hsg-list__news .hsg-list__title .hsg-list__link[href$="' + newsEntry.id + '"]'
       id = await Page.getElement(s);
       l  = await Page.getElementText(s);
@@ -107,7 +107,7 @@ newsEntries.forEach((newsEntry) => {
 
     // Check if types of date badges will get the correct color
     it('should have a date badge with the correct background-color "' + newsEntry.color + '"', () => {
-      assert.equal(dc, newsEntry.color);
+      assert.equal(dc.parsed.hex, newsEntry.color);
     });
 
     // Check if the news entry has a headline that links to the news article
