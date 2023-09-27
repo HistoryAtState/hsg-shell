@@ -37,9 +37,9 @@ validFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with valid parameters and sorted by "' + sortingOptions[0] + '"', function () {
     let searchResult;
 
-      before(function () {
-        Page.open(query + parameters + sortingOptions[0]);
-        searchResult = Page.getElementText(firstResultItem);
+      before(async function () {
+        await Page.open(query + parameters + sortingOptions[0]);
+        searchResult = await Page.getElementText(firstResultItem);
       });
 
       it('"' + parameters + '" should return search results', function () {
@@ -53,9 +53,9 @@ validFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with valid parameters and sorted by "' + sortingOptions[1] + '"' , function () {
     let searchResult;
 
-      before(function () {
-        Page.open(query + parameters + sortingOptions[1]);
-        searchResult = Page.getElementText(firstResultItem);
+      before(async function () {
+        await Page.open(query + parameters + sortingOptions[1]);
+        searchResult = await Page.getElementText(firstResultItem);
       });
 
       it('"' + parameters + '" should return search results', function () {
@@ -70,10 +70,10 @@ invalidFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with invalid parameters', function () {
     let searchResult, searchResultSection;
 
-    before(function () {
-      Page.open(query + parameters + sortingOptions[0]);
-      searchResult = Page.getElementText(noResultsMessage);
-      searchResultSection = Page.getElement('.hsg-search-section');
+    before(async function () {
+      await Page.open(query + parameters + sortingOptions[0]);
+      searchResult = await Page.getElementText(noResultsMessage);
+      searchResultSection = await Page.getElement('.hsg-search-section');
     });
 
     it('"' + parameters + '" should display the search page', function () {
