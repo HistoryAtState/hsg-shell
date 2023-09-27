@@ -5,13 +5,16 @@
 const Page  = require('../../pageobjects/Page'),
   SubPage = require('../../pageobjects/SubPage');
 
-const subpages = [
+const pages = [
   { name: 'p1', link: 'education', title: 'Education' },
   {
     name: 'p2',
     link: 'education/modules',
     title: 'Curriculum Modules'
-  },
+  }
+] 
+
+const subpages = [
   {
     name: 'p3',
     link: 'education/modules/documents-intro',
@@ -51,12 +54,23 @@ const subpages = [
 
 describe('Education pages: ', function () {
 
+  // page titles check
+  describe('Each "Education" page should be displayed and subsequently', function () {
+    pages.forEach(page => {
+      it('should display the headline (' + page.name + ')', async function () {
+        await Page.open(page.link);
+        const title = await Page.getElementText(SubPage.headline_h1);
+        assert.equal(page.title, title);
+      })
+    })
+  });
   // Subpage titles check
   describe('Each "Education" subpage should be displayed and subsequently', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', async function () {
         await Page.open(page.link);
-        const title = await Page.getElementText(SubPage.headline_h1);
+        // SubPage.headline_h2 would select the title of the red alert box
+        const title = await Page.getElementText('#content-inner div:nth-child(2) h2');
         assert.equal(page.title, title);
       })
     })

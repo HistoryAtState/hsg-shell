@@ -115,7 +115,7 @@ const subpages = [
 describe('The conference page', function () {
 
   it('should display the headline', async function () {
-    Page.open(page.link);
+    await Page.open(page.link);
     const title = await Page.getElementText(SubPage.headline_h1)
     assert.equal(page.title, title.replace(regex, ''));
   });
@@ -125,7 +125,7 @@ describe('The conference page', function () {
 
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', async function () {
-        Page.open(page.link);
+        await Page.open(page.link);
         const title = await Page.getElementText(headline[page.h])
         assert.equal(page.title, title.replace(regex, ''));
       });
