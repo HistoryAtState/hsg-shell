@@ -63,14 +63,14 @@ newsArticles.forEach((article) => {
      fl = await Page.getElement('.hsg-news__more');
      bt = await $('.hsg-breadcrumb__link[aria-current="page"] > span').getHTML(false);
      d  = await Page.getElement('time.hsg-badge--' + article.type);
-     dc = await Page.getCssProperty('time.hsg-badge--' + article.type, 'background-color').parsed.hex;
+     dc = await Page.getCssProperty('time.hsg-badge--' + article.type, 'background-color');
      dt = await Page.getElementAttribute('time.hsg-badge', 'datetime');
      ts = 'img.hsg-news__thumbnail';
     });
 
     // Check if types of date badges will get the correct color
     it('should have a date badge with the correct background-color "' + article.color + '"', () => {
-      assert.equal(dc, article.color);
+      assert.equal(dc.parsed.hex, article.color);
     });
 
     // Check if date is formatted correctly
