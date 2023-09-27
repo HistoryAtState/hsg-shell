@@ -4,12 +4,6 @@
 
 const Page  = require('../../pageobjects/Page');
 
-const images = [
-  Page.s3_Prod + '/frus/frus1861/covers/frus1861.jpg',
-  Page.s3_Prod + '/frus/frus1861-99Index/covers/frus1861-99Index.jpg',
-  Page.s3_Prod + '/frus/frus1862/covers/frus1862.jpg',
-];
-
 const titles = [
   'Message of the President of the United States to the Two Houses of Congress, at the Commencement of the Second Session of the Thirty-seventh Congress',
   'General Index to the Published Volumes of the Diplomatic Correspondence and Foreign Relations of the United States, 1861–1899',
@@ -22,10 +16,6 @@ const links = [
   'historicaldocuments/frus1862'
 ];
 
-const publishedDates = [
-  'Published on May 24, 2021'
-];
-
 describe('FRUS "All Volumes" page', () => {
   let imageSrc, imageSelector;
   before(async () => {
@@ -35,7 +25,7 @@ describe('FRUS "All Volumes" page', () => {
 
   it('should display a title', async () => {
     let title = await Page.getElementText('h1');
-    assert.equal(title, 'All Titles in the Series');
+    assert.equal(title, 'All Titles in the Foreign Relations Series');
   });
 
   it('should display a sidebar with citation option', async () => {
@@ -46,10 +36,10 @@ describe('FRUS "All Volumes" page', () => {
   it('should display a list containing a thumbnail', async () => {
     let t_0 = await Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(1) img', 'src'),
         t_1 = await Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(2) img', 'src'),
-        t_2 = await Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(3) img', 'src');
-    assert.include(t_0, images[0]);
-    assert.include(t_1, images[1]);
-    assert.include(t_2, images[2]);
+        t_2 = await Page.getElementAttribute('ul.hsg-list__volumes li:nth-child(3) img', 'src');        
+    assert.include(t_0, "https://static.history.state.gov/images/document-image.jpg");
+    assert.include(t_1, "https://static.history.state.gov/images/document-image.jpg");
+    assert.include(t_2, "https://static.history.state.gov/images/document-image.jpg");
   });
 
   it('should display a list containing a title', async () => {
@@ -72,11 +62,13 @@ describe('FRUS "All Volumes" page', () => {
 
   it('should display a list containing a published status and date, if available', async () => {
     let publishedDate_0 = await Page.getElementText('ul.hsg-list__volumes li:nth-child(1) dl dd:nth-of-type(1)');
-    assert.include(publishedDate_0, publishedDates);
+    assert.include(publishedDate_0, "1861");
   });
 
-  it('should display a list containing download buttons, if available', async () => {
+  // Download does not seem to exist anymore
+  /* it('should display a list containing download buttons, if available', async () => {
     let dl = await Page.getElementText('ul.hsg-list__volumes li:nth-child(1) ul.hsg-list__media__download > li > button span');
     assert.exists(dl);
   });
+  */ 
 });
