@@ -64,21 +64,21 @@ exports.config = {
         'tests/specs/historical-documents/prod_frus_titles.spec.js',
         'tests/specs/historical-documents/prod_frus_toc.spec.js',
         'tests/specs/historical-documents/prod_frus-all-volumes.spec.js',
-        // 'tests/specs/historical-documents/prod_frus-volume-landing.spec.js',
+        'tests/specs/historical-documents/prod_frus-volume-landing.spec.js',
         'tests/specs/iiif-images/prod_iiif-viewer.spec.js',
         'tests/specs/landing/prod_landing_title.spec.js',
         'tests/specs/landing/prod_landing_twitter.spec.js',
         'tests/specs/milestones/prod_milestones_chapter.spec.js',
         'tests/specs/milestones/prod_milestones_titles.spec.js',
-        // 'tests/specs/news/prod_news-article.spec.js',
-        // 'tests/specs/news/prod_news-list.spec.js',
+        'tests/specs/news/prod_news-article.spec.js',
+        'tests/specs/news/prod_news-list.spec.js',
         'tests/specs/open/prod_open_titles.spec.js',
         // 'tests/specs/replication/prod_replication.spec.js',
         'tests/specs/search/prod_search_filter_results.spec.js',
         // 'tests/specs/search/prod_search_new-indexes.spec.js',
         'tests/specs/search/prod_search.spec.js',
-        'tests/specs/tags/prod_tags.spec.js'
-        // 'tests/specs/UI-components/prod_breadcrumb.spec.js',
+        'tests/specs/tags/prod_tags.spec.js',
+        'tests/specs/UI-components/prod_breadcrumb.spec.js'
         // 'tests/specs/UI-components/prod_tooltip.spec.js',
         // 'tests/specs/twitter/twitter-scheduler.spec.js'
       ]
