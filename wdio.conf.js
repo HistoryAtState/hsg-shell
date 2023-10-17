@@ -35,6 +35,7 @@ exports.config = {
         // 'path/to/excluded/files'
     ],
     suites: {
+
       uat: [
         './tests/specs/**/uat_*.js'
       ],
@@ -49,6 +50,9 @@ exports.config = {
         './tests/specs/**/prod_*.js',
         './tests/specs/twitter/twitter-scheduler.spec.js'
       ],
+      single: [
+        'tests/specs/footnote/uat_footnote_popover.spec.js'
+      ],
       jenkins: [
         'tests/specs/conferences/prod_conferences_titles.spec.js',
         'tests/specs/countries/prod_countries_landing.spec.js',
@@ -58,7 +62,7 @@ exports.config = {
         'tests/specs/departmenthistory/prod_shorthistory_titles.spec.js',
         'tests/specs/developer/prod_developer_titles.spec.js',
         'tests/specs/education/prod_education_titles.spec.js',
-        // 'tests/specs/error/prod_404.spec.js',
+        'tests/specs/error/prod_404.spec.js',
         // 'tests/specs/footnote/prod_footnote_popover.spec.js',
         'tests/specs/historical-documents/prod_frus_landing.spec.js',
         'tests/specs/historical-documents/prod_frus_titles.spec.js',
@@ -75,12 +79,11 @@ exports.config = {
         'tests/specs/open/prod_open_titles.spec.js',
         // 'tests/specs/replication/prod_replication.spec.js',
         'tests/specs/search/prod_search_filter_results.spec.js',
-        // 'tests/specs/search/prod_search_new-indexes.spec.js',
+        'tests/specs/search/prod_search_new-indexes.spec.js',
         'tests/specs/search/prod_search.spec.js',
         'tests/specs/tags/prod_tags.spec.js',
         'tests/specs/UI-components/prod_breadcrumb.spec.js'
-        // 'tests/specs/UI-components/prod_tooltip.spec.js',
-        // 'tests/specs/twitter/twitter-scheduler.spec.js'
+        // 'tests/specs/UI-components/prod_tooltip.spec.js'        
       ]
     },
 
@@ -100,7 +103,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 5,
+    maxInstances: 30,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -110,7 +113,7 @@ exports.config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 1,
+        maxInstances: 30,
         //
         browserName: 'chrome',
         'goog:chromeOptions': {
