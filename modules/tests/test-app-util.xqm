@@ -5,7 +5,6 @@ module namespace x="http://history.state.gov/ns/site/hsg/tests/test-app";
 import module namespace ut="http://history.state.gov/ns/site/hsg/app-util" at "../app-util.xqm";
 (:import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "../app.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
-import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 import module namespace t="http://history.state.gov/ns/site/hsg/xqsuite" at "../xqsuite.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "../pages.xqm";:)
 import module namespace templates="http://exist-db.org/xquery/html-templating";

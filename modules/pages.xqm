@@ -16,8 +16,6 @@ import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-c
 import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "sidebar.xqm";
 import module namespace link="http://history.state.gov/ns/site/hsg/link" at "link.xqm";
 
-import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
-
 declare variable $pages:app-root :=
     let $nginx-request-uri := request:get-header('nginx-request-uri')
     return
@@ -45,7 +43,7 @@ declare
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?,
         $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean, $open-graph-keys as xs:string?, $open-graph-keys-exclude as xs:string?, $open-graph-keys-add as xs:string?) {
 
-    let $log := console:log("loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id )
+    let $log := util:log("info", "loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id )
 
     let $static-open-graph := map:merge((
         for $meta in $node//*[@id eq 'static-open-graph']/meta
@@ -173,14 +171,14 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
         if (empty($block) and not($ignore)) then (
             pages:load-fallback-page($publication-id, $document-id, $section-id)
         ) else (
-            console:log("pages:load-xml: Loaded " || document-uri(root($block)) || ". Node name: " || node-name($block) || "."),
+            util:log("info", "pages:load-xml: Loaded " || document-uri(root($block)) || ". Node name: " || node-name($block) || "."),
             $block
         )
 };
 
 declare function pages:load-fallback-page($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
     let $volume := $config:FRUS_METADATA/volume[@id=$document-id]
-    let $log := console:log("Loading fallback page for " || $document-id)
+    let $log := util:log("info", "Loading fallback page for " || $document-id)
     return
         if (empty($volume)) then (
             request:set-attribute("hsg-shell.errcode", 404),
@@ -263,8 +261,7 @@ declare
     %templates:default("view", "div")
     %templates:default("heading-offset", 0)
 function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int, $document-id as xs:string?) {
-    let $log := console:log("pages:view: view: " || $view || " heading-offset: " || $heading-offset)
-    let $log := util:log('info', ('pages:view, view=', $view))
+    let $log := util:log("info", "pages:view: view: " || $view || " heading-offset: " || $heading-offset)    
     let $xml :=
         if ($view = "div") then
             if ($model?data[@subtype='removed-pending-rewrite']) then
@@ -332,7 +329,7 @@ declare function pages:process-content($odd as function(*), $xml as element()*) 
 };
 
 declare function pages:process-content($odd as function(*), $xml as element()*, $parameters as map(*)?) {
-(:    console:log("Processing content using odd: " || $odd),:)
+(:    util:log("info", "Processing content using odd: " || $odd),:)
 	let $html :=
 	    $odd($xml, $parameters)
     let $content := pages:clean-footnotes($html)
@@ -572,7 +569,7 @@ declare function pages:app-root($node as node(), $model as map(*)) {
         let $content as node()* := templates:process($node/*, $model)
         let $title := string-join((pages:generate-short-title($node, $model)[. ne 'Office of the Historian'], "Office of the Historian"), " - ")
 
-        let $log := console:log("pages:app-root -> title: " || $title)
+        let $log := util:log("info", "pages:app-root -> title: " || $title)
         return (
             <head>
                 {$content[self::head]/*}
