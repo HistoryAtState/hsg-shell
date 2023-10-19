@@ -3,7 +3,6 @@ xquery version "3.1";
 module namespace app="http://history.state.gov/ns/site/hsg/templates";
 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
-import module namespace console="http://exist-db.org/xquery/console";
 import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare variable $app:APP_ROOT :=
@@ -151,7 +150,7 @@ declare
     %templates:wrap
 function app:handle-error($node as node(), $model as map(*), $code as xs:int?) {
     let $errcode := request:get-attribute("hsg-shell.errcode")
-    let $log := console:log("error: " || $errcode || " code: " || $code)
+    let $log := util:log("info", "error: " || $errcode || " code: " || $code)
     return
         if ((empty($errcode) and empty($code)) or $code = number($errcode)) then
             (templates:process($node/node(), $model),
