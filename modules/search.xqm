@@ -589,11 +589,11 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
                     () 
                 }
             let $query-sections-end := util:system-time()
-            let $query-sections-duration := util:log("info", "query-sections-duration: " || $query-sections-end - $query-sections-start)
+            (: let $query-sections-duration := util:log("info", "query-sections-duration: " || $query-sections-end - $query-sections-start) :) 
             let $sorted-hits-start := util:system-time()
             let $sorted-hits := search:sort($hits, $adjusted-sort-by)
             let $sorted-hits-end := util:system-time()
-            let $sorted-hits-duration := util:log("info", "sorted-hits-duration: " || $sorted-hits-end - $sorted-hits-start)
+            (: let $sorted-hits-duration := util:log("info", "sorted-hits-duration: " || $sorted-hits-end - $sorted-hits-start) :) 
             let $vol-ids :=  
                 map:for-each(ft:facets($hits, "frus-volume-id", ()), function($label, $count) {
                     $label
@@ -665,7 +665,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
     let $templates-process-start := util:system-time()
     let $html := templates:process($node/*, map:merge(($model, $query-info),  map{"duplicates": "use-last"}))
     let $templates-process-end := util:system-time()
-    let $log := util:log("info", "templates-process-duration: ", $templates-process-end - $templates-process-start)
+    (: let $log := util:log("info", "templates-process-duration: " || $templates-process-end - $templates-process-start) :)
     return
         $html
 };
@@ -775,7 +775,7 @@ declare %private function search:prepare-query($sections as xs:string*, $volume-
 
     let $fields := map {"fields": ("hsg-date-min", "hsg-fulltext", "hsg-url")}
 
-    let $log := util:log("info", "search:query-section prepared: query: " || $query-string || " range-start: " || $range-start || " range-end: " || $range-end || " category: "  || string-join($category, ' '))
+    (: let $log := util:log("info", "search:query-section prepared: query: " || $query-string || " range-start: " || $range-start || " range-end: " || $range-end || " category: "  || string-join($category, ' ')) :) 
 
     return map {
         "fields": $fields,
@@ -1139,7 +1139,7 @@ function search:load-volumes($node as node(), $model as map(*)) {
             ()
     
     let $load-volumes-end := util:system-time()
-    let $log := util:log("info", "search:load-volumes: loaded " || count($volumes?*) || " in " || $load-volumes-end - $load-volumes-start)
+    (: let $log := util:log("info", "search:load-volumes: loaded " || count($volumes?*) || " in " || $load-volumes-end - $load-volumes-start) :) 
     let $new := map:merge(($model, $volumes),  map{"duplicates": "use-last"})
 
     return
