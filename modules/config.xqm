@@ -95,9 +95,9 @@ declare variable $config:proxy-url :=
     then ($config:x-forwarded-proto || "://" || substring-before($config:x-forwarded-host,":"))
     else ($config:exist-path-to-root);
 
-declare variable $config:S3_CACHE_COL := "/db/apps/s3/cache/";
+declare variable $config:S3_CACHE_COL := "/db/apps/hsg-publish-data/data/s3/";
 
-declare variable $config:S3_BUCKET := "static.history.state.gov.v2";
+declare variable $config:S3_BUCKET := "static.history.state.gov.v3";
 
 declare variable $config:HSG_S3_CACHE_COL := $config:S3_CACHE_COL || $config:S3_BUCKET || "/";
 declare variable $config:S3_DOMAIN := "static.history.state.gov";
