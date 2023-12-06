@@ -4,7 +4,7 @@
   "description": "## Setup",
   "main": "gulpfile.js",
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "animate.css": "^3.5.1",
@@ -21,11 +21,11 @@
     "@wdio/mocha-framework": "^7.30.2",
     "@wdio/spec-reporter": "^7.31.1",
     "autoprefixer": "^9.7.4",
-    "bower": "^1.8.14",
     "chai": "^4.3.8",
     "chai-as-promised": "^7.1.1",
-    "chromedriver": "^117.0.3",
+    "chokidar": "^3.5.3",
     "del": "^6.1.1",
+    "glob-stream": "^7.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-concat": "^2.6.1",
@@ -40,12 +40,16 @@
     "wdio-chromedriver-service": "^7.3.2",
     "webdriverio": "^7.32.4"
   },
+  "overrides": {
+    "chokidar": "$chokidar",
+    "glob-stream": "$glob-stream"
+  },
   "scripts": {
-    "test": "./node_modules/.bin/wdio wdio.conf.js --suite jenkins",
-    "test-dev": "./node_modules/.bin/wdio wdio.conf.js --suite prod",
-    "test-dev-producer": "./node_modules/.bin/wdio wdio.conf.js --suite prod_producer",
-    "test-prod": "./node_modules/.bin/wdio wdio.conf.js --suite prod",
-    "test-prod-producer": "./node_modules/.bin/wdio wdio.conf.js --suite prod_producer",
+    "test": "wdio wdio.conf.js --suite jenkins",
+    "test-dev": "wdio wdio.conf.js --suite prod",
+    "test-dev-producer": "wdio wdio.conf.js --suite prod_producer",
+    "test-prod": "wdio wdio.conf.js --suite prod",
+    "test-prod-producer": "wdio wdio.conf.js --suite prod_producer",
     "update": "npm update && gulp",
     "start": "npm install --quiet && gulp"
   },
