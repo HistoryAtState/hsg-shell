@@ -77,7 +77,7 @@
         <echo message="Creating xar file..."/>
         <echo message="------------------------------------------------------------"/>
         
-        <zip basedir="${basedir}" destfile="${build.dir}/${app.name}-${app.version}.xar">
+        <zip basedir="${basedir}" destfile="${build.dir}/${app.name}.xar">
             <!-- <exclude name="app/**"/> -->
             <exclude name="${build.dir}/**"/>
             <exclude name="*.tmpl"/>
@@ -95,6 +95,9 @@
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>   
             <exclude name="wdio*"/>
+            <exclude name=".github/**"/>
+            <exclude name=".releaserc"/>
+            <exclude name="commitlint.config.cjs"/>
         </zip>
     </target>
 
