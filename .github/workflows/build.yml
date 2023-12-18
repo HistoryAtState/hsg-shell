@@ -6,6 +6,8 @@
 name: exist-db CI
 
 on: [push, pull_request]
+env:
+  TEST_TAG: ${{ secrets.DOCKER_USERNAME }}/hsg-project:exist-ci
 
 jobs:
   build:
@@ -29,6 +31,26 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libxml2-utils bats
+
+      # Prepare Docker Environment
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64 
+          # platforms: all
+  
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+  
+      - name: Make buildkit default
+        uses: docker/setup-buildx-action@v3
+        id: buildx
+        with:
+          install: true
+      
       # sanity check
       # TODO(DP) Validate ?
       - name: Ensure all XML files are well-formed
@@ -36,7 +58,7 @@ jobs:
           xmllint --noout \
             $(find . -type f -name '*.xml')
 
-      # Build
+      # Build Environment
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -49,12 +71,20 @@ jobs:
           java-version: ${{ matrix.java-version }}
       - run: ant
 
-      # Install
+      - name: Build default images for testing on CI
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          load: true
+          tags: ${{ env.TEST_TAG }}
+          build-args: ${{ matrix.exist-version }}
+
+      # Install Package in Exist
+      # TODO(DP) Sleep will be much longer TBD
       - name: Start exist-ci containers
         run: |
-          docker run -dit -p 8080:8080 -v ${{ github.workspace }}/build:/exist/autodeploy \
-          --name exist --rm --health-interval=2s --health-start-period=4s \
-          duncdrum/existdb:${{ matrix.exist-version }}
+          docker run -dit -p 8080:8080 --name exist-ci --rm ${{ env.TEST_TAG }}
           sleep 15s
 
       # Test       
@@ -72,7 +102,27 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
-        uses: actions/checkout@v4 
+        uses: actions/checkout@v4
+
+      # Prepare Docker Environment
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64 
+          # platforms: all
+  
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+  
+      - name: Make buildkit default
+        uses: docker/setup-buildx-action@v3
+        id: buildx
+        with:
+          install: true
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -85,6 +135,25 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLIC_REPO: ${{ secrets.PUBLIC_REPO }}
         run: npx semantic-release
+
+        # TODO(DP) avoid duplicate building ala duncrum/distroless-exist
+        # TODO(DP) publish both release and latest images to dockerhub
+        # TODO(DP) add CRON ?
+        # TODO(DP) use ghcr
+      - name: Push :latest to Dockerhub
+        if: github.ref == 'refs/heads/master'
+        uses: docker/build-push-action@v5
+        with:
+          context: ./
+          platforms: linux/amd64,linux/arm64
+          file: ./Dockerfile
+          build-args: EXIST_VER=release
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/hsg-project:release
+          # cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/hsg-project:buildcache
+          # cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/hsg-project:buildcache,mode=max
+
         # TODO(DP): 
         #   - add secrets to github
         #   - publish to public repo?
