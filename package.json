@@ -14,7 +14,11 @@
     "openseadragon": "^3.1.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-angular": "^18.4.3",
     "@existdb/gulp-exist": "^4.4.0",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@wdio/cli": "^7.32.4",
     "@wdio/junit-reporter": "^7.31.1",
     "@wdio/local-runner": "^7.32.4",
@@ -37,6 +41,7 @@
     "gulp-uglify": "^3.0.2",
     "mocha": "^7.0.1",
     "sass": "^1.68.0",
+    "semantic-release": "^22.0.12",
     "wdio-chromedriver-service": "^7.3.2",
     "webdriverio": "^7.32.4"
   },

@@ -12,25 +12,21 @@ You need to have *ant*, *git*, *nvm* and *nodeJS* installed.
    Install [nvm](https://github.com/nvm-sh/nvm) and follow the [installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating).
 2. Make sure to install nvm with a specific node version (see https://github.com/nvm-sh/nvm/blob/master/README.md#usage)
 
-        nvm install 14.19.3
+        `nvm install 18.18.2`
 
 3. If you have already used nvm before and have various node versions already installed, you can skip 1). Now just make sure to use the project's required node version by running 
 
-        nvm use
+        `nvm use 18`
 
 This command will check the local node settings in the project's `.nvmrc` file and switch to this node version only for this project.  
 
 4. Install (or update to) the latest `npm` version with:
 
-        npm install -g npm
+        `npm install -g npm`
 
-5. Install bower:
+5. Install gulp
 
-        npm install -g bower
-
-6. Install gulp
-
-        npm install -g gulp
+        `npm install -g gulp`
 
    The project's gulp file depends on `gulp 4` (or higher) syntax, so make sure in the next step, that you'll have gulp 4.x running.
 
@@ -221,3 +217,17 @@ Have a look at the documentation:
 * Webdriver.io functions: [webdriver.io/docs/api](https://webdriver.io/docs/api.html)
 * List of all functions in the Chai Assertion library: [chaijs.com/api/assert](https://www.chaijs.com/api/assert/)
 * Overview about mocha.js: [mochajs.org](https://mochajs.org/)
+
+## Release
+
+Releases for this data package are automated. Any commit to the `master` branch will trigger the release automation.
+
+All commit message must conform to [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines) to determine semantic versioning of releases, please adhere to these conventions, like so:
+
+| Commit message  | Release type |
+|-----------------|--------------|
+| `fix(pencil): stop graphite breaking when too much pressure applied` | Patch Release |
+| `feat(pencil): add 'graphiteWidth' option` | ~~Minor~~ Feature Release |
+| `perf(pencil): remove graphiteWidth option`<br/><br/>`BREAKING CHANGE: The graphiteWidth option has been removed.`<br/>`The default graphite width of 10mm is always used for performance reasons.` | ~~Major~~ Breaking Release |
+
+When opening PRs commit messages are checked using commitlint.

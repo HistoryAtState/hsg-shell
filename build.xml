@@ -153,6 +153,7 @@
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>   
             <exclude name="wdio*"/>
+            <exclude name=".github/**"/>
         </zip>
     </target>
 
