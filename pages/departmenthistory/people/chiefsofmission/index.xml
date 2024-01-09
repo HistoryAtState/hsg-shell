@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
-      <div>
-         <div id="static-title" class="hidden">Chiefs of Mission - People - Department History</div>
-         <div class="row">
-            <div data-template="pages:breadcrumb">
-               <p id="breadcrumb-title">Chiefs of Mission</p>
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="hidden" id="static-title">Chiefs of Mission - People - Department
+                History</div>
+            <div class="row">
+                <div data-template="pages:breadcrumb">
+                    <p id="breadcrumb-title">Chiefs of Mission</p>
+                </div>
             </div>
-         </div>
-         <div class="row">
-            <div class="hsg-width-two-thirds">
-               <div id="content-inner" data-template="app:fix-links" class="lists">
-                  <h1>Chiefs of Mission</h1>
-                  <ul>
-                     <li>
-                        <a href="$app/departmenthistory/people/chiefsofmission/by-country">Listed Alphabetically, by Country</a>
-                     </li>
-                     <li>
-                        <a href="$app/departmenthistory/people/chiefsofmission/by-organization">Listed By International Organization</a>
-                     </li>
-                  </ul>
-               </div>
+            <div class="row">
+                <div class="hsg-width-two-thirds">
+                    <div class="lists" data-template="app:fix-links" id="content-inner">
+                        <h1>Chiefs of Mission</h1>
+                        <ul>
+                            <li>
+                                <a href="$app/departmenthistory/people/chiefsofmission/by-country"
+                                    >Listed Alphabetically, by Country</a>
+                            </li>
+                            <li>
+                                <a
+                                    href="$app/departmenthistory/people/chiefsofmission/by-organization"
+                                    >Listed By International Organization</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <aside data-template="pages:asides"/>
             </div>
-            <aside data-template="pages:asides"/>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

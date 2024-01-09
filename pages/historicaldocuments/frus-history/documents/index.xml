@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
-      <div>
-         <div id="static-title" class="hidden">Documents - History of the Foreign Relations Series -
-            Historical Documents</div>
-         <div class="row">
-            <div data-template="pages:breadcrumb">
-               <p id="breadcrumb-title">Documents</p>
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="hidden" id="static-title">Documents - History of the Foreign Relations
+                Series - Historical Documents</div>
+            <div class="row">
+                <div data-template="pages:breadcrumb">
+                    <p id="breadcrumb-title">Documents</p>
+                </div>
             </div>
-         </div>
-         <div class="row hsg-main">
-            <div class="hsg-width-two-thirds">
-               <div id="content-inner" data-template="app:fix-links">
-                  <h1>Documents</h1>
-                  <p>In the course of preparing <em>Toward “Thorough, Accurate, and
-                            Reliable,”</em> Joshua Botts, author of the chapters covering recent
-                        decades, relied on many documents that had not yet been released to the
-                        public. All those documents have now been reviewed for declassification and
-                        approved for release; in some cases, documents were released with excisions.
-                        Over the coming year, the Office of the Historian will periodically post
-                        some of these records on this website. Check back occasionally for the
-                        latest additions.</p>
-                  <div data-template="frus-history:document-list"/>
-               </div>
+            <div class="row hsg-main">
+                <div class="hsg-width-two-thirds">
+                    <div data-template="app:fix-links" id="content-inner">
+                        <h1>Documents</h1>
+                        <p>In the course of preparing <em>Toward “Thorough, Accurate, and
+                                Reliable,”</em> Joshua Botts, author of the chapters covering recent
+                            decades, relied on many documents that had not yet been released to the
+                            public. All those documents have now been reviewed for declassification
+                            and approved for release; in some cases, documents were released with
+                            excisions. Over the coming year, the Office of the Historian will
+                            periodically post some of these records on this website. Check back
+                            occasionally for the latest additions.</p>
+                        <div data-template="frus-history:document-list"/>
+                    </div>
+                </div>
+                <aside data-template="pages:asides">
+                    <div class="hsg-panel" data-template="app:fix-links" id="sections">
+                        <div class="hsg-panel-heading">
+                            <h2 class="hsg-sidebar-title">
+                                <em>FRUS</em> History Resources</h2>
+                        </div>
+                        <div class="hsg-panel-body">
+                            <p>Other resources about the history of the <em>Foreign Relations of the
+                                    United States</em> series.</p>
+                        </div>
+                        <div class="hsg-panel-heading-second-level">
+                            <h3 class="hsg-sidebar-title-second-level">
+                                <a href="$app/historicaldocuments/frus-history/research"
+                                    >Research</a>
+                            </h3>
+                        </div>
+                        <ul data-template="frus-history:most-recent-articles"/>
+                        <div data-template="frus-history:most-recent-events"/>
+                    </div>
+                </aside>
             </div>
-            <aside data-template="pages:asides">
-               <div id="sections" class="hsg-panel" data-template="app:fix-links">
-                  <div class="hsg-panel-heading">
-                     <h2 class="hsg-sidebar-title">
-                        <em>FRUS</em> History Resources</h2>
-                  </div>
-                  <div class="hsg-panel-body">
-                     <p>Other resources about the history of the <em>Foreign Relations of the
-                                United States</em> series.</p>
-                  </div>
-                  <div class="hsg-panel-heading-second-level">
-                     <h3 class="hsg-sidebar-title-second-level">
-                        <a href="$app/historicaldocuments/frus-history/research">Research</a>
-                     </h3>
-                  </div>
-                  <ul data-template="frus-history:most-recent-articles"/>
-                  <div data-template="frus-history:most-recent-events"/>
-               </div>
-            </aside>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

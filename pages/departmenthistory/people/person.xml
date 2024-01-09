@@ -1,63 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load" data-template-ignore="true">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
-      <div data-template-ignore="true">
-         <div id="static-title" class="hidden">
-            <span data-template="pocom:person-page-title"/> -
-            People - Department History</div>
-         <div class="row">
-            <div data-template="pages:breadcrumb"/>
-         </div>
-         <div data-template="pocom:show-biography">
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div data-template-ignore="true">
+            <div class="hidden" id="static-title">
+                <span data-template="pocom:person-page-title"/> - People - Department History</div>
+            <div class="row">
+                <div data-template="pages:breadcrumb"/>
+            </div>
+            <div data-template="pocom:show-biography">
 
-            <!-- Templating note: The pocom:show-biography template only returns the following div if a biography is found.
+                <!-- Templating note: The pocom:show-biography template only returns the following div if a biography is found.
                 Otherwise, the next one is shown. -->
-            <div class="row">
-               <div class="hsg-width-two-thirds">
-                  <div id="content-inner">
-                     <div id="content-container" data-template="app:fix-links">
-                        <h1>Biographies of the Secretaries of State: <span data-template="pocom:person-name-birth-death"/>
-                        </h1>
-                        <div class="content"
-                             data-template="pages:view"
-                             data-template-heading-offset="1"/>
-                     </div>
-                  </div>
-               </div>
-               <aside class="hsg-print" data-template="pages:asides">
-                  <div id="pocom-data" class="hsg-panel">
-                     <div class="hsg-panel-heading">
-                        <h2 class="hsg-sidebar-title">From Principal Officers and Chiefs of Mission</h2>
-                     </div>
-                     <div class="hsg-panel-body" data-template="app:fix-links">
-                        <p>Born <span data-template="pocom:birth-date"/>
-                           <br/>
-                           <span data-template="pocom:death-date"/>
-                        </p>
+                <div class="row">
+                    <div class="hsg-width-two-thirds">
+                        <div id="content-inner">
+                            <div data-template="app:fix-links" id="content-container">
+                                <h1>Biographies of the Secretaries of State: <span
+                                        data-template="pocom:person-name-birth-death"/>
+                                </h1>
+                                <div class="content" data-template="pages:view"
+                                    data-template-heading-offset="1"/>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="hsg-print" data-template="pages:asides">
+                        <div class="hsg-panel" id="pocom-data">
+                            <div class="hsg-panel-heading">
+                                <h2 class="hsg-sidebar-title">From Principal Officers and Chiefs of
+                                    Mission</h2>
+                            </div>
+                            <div class="hsg-panel-body" data-template="app:fix-links">
+                                <p>Born <span data-template="pocom:birth-date"/>
+                                    <br/>
+                                    <span data-template="pocom:death-date"/>
+                                </p>
+                                <div data-template="pocom:person-entry"/>
+                            </div>
+                        </div>
+                    </aside>
+                    <!-- Metagrid Widget -->
+                    <aside class="hsg-width-one-third hsg-print" data-template="app:fix-links"
+                        id="metagrid-wrapper"/>
+                </div>
+                <!-- Templating note: The pocom:show-biography template only returns the following div if a biography is NOT found. -->
+                <div class="row">
+                    <div class="hsg-width-two-thirds" data-template="app:fix-links">
+                        <h1 data-template="pocom:person-name-birth-death"/>
                         <div data-template="pocom:person-entry"/>
-                     </div>
-                  </div>
-               </aside>
-               <!-- Metagrid Widget -->
-               <aside id="metagrid-wrapper"
-                      class="hsg-width-one-third hsg-print"
-                      data-template="app:fix-links"/>
+                    </div>
+                    <!-- Metagrid Widget -->
+                    <aside class="hsg-width-one-third hsg-print" data-template="app:fix-links"
+                        id="metagrid-wrapper"/>
+                    <aside data-template="pages:asides"/>
+                </div>
             </div>
-            <!-- Templating note: The pocom:show-biography template only returns the following div if a biography is NOT found. -->
-            <div class="row">
-               <div class="hsg-width-two-thirds" data-template="app:fix-links">
-                  <h1 data-template="pocom:person-name-birth-death"/>
-                  <div data-template="pocom:person-entry"/>
-               </div>
-               <!-- Metagrid Widget -->
-               <aside id="metagrid-wrapper"
-                      class="hsg-width-one-third hsg-print"
-                      data-template="app:fix-links"/>
-               <aside data-template="pages:asides"/>
-            </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

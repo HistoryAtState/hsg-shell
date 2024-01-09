@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround"
-     data-template-with="templates/site.xml"
-     data-template-at="content">
-   <div data-template="travels:load-secretary">
-      <div id="static-title" class="hidden">
-         <span data-template="travels:title"/> - Travels of the
-            President - Travels - Department History</div>
-      <div class="row">
-         <div data-template="pages:breadcrumb"/>
-      </div>
-      <div class="row">
-         <div class="hsg-width-two-thirds">
-            <div id="content-inner" data-template="app:fix-links" class="lists">
-               <h1>
-                  <span data-template="travels:title"/>
-               </h1>
-               <table data-template="travels:table"/>
+<div data-template="templates:surround" data-template-at="content"
+    data-template-with="templates/site.xml">
+    <div data-template="travels:load-secretary">
+        <div class="hidden" id="static-title">
+            <span data-template="travels:title"/> - Travels of the President - Travels - Department
+            History</div>
+        <div class="row">
+            <div data-template="pages:breadcrumb"/>
+        </div>
+        <div class="row">
+            <div class="hsg-width-two-thirds">
+                <div class="lists" data-template="app:fix-links" id="content-inner">
+                    <h1>
+                        <span data-template="travels:title"/>
+                    </h1>
+                    <table data-template="travels:table"/>
+                </div>
             </div>
-         </div>
-         <aside data-template="pages:asides"/>
-      </div>
-   </div>
+            <aside data-template="pages:asides"/>
+        </div>
+    </div>
 </div>

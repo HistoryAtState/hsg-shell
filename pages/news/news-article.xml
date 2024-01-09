@@ -1,5 +1,6 @@
 <div data-template="pages:load" data-template-ignore="true">
-    <div data-template="templates:surround" data-template-with="templates/site.xml" data-template-at="content">
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
         <div data-template="news:init-article">
             <section class="row">
                 <div data-template="pages:breadcrumb"/>

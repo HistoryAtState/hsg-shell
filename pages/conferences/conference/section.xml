@@ -1,47 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
-      <div>
-         <div id="static-title"
-              class="hidden"
-              data-template="pages:conference-subpage-title"/>
-         <div class="row">
-            <div data-template="pages:breadcrumb"/>
-         </div>
-         <div class="row">
-            <div class="hsg-navigation-wrapper">
-               <h2 class="hsg-navigation-title"
-                   id="navigation-title"
-                   data-template="pages:navigation-title"/>
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="hidden" data-template="pages:conference-subpage-title" id="static-title"/>
+            <div class="row">
+                <div data-template="pages:breadcrumb"/>
             </div>
-         </div>
-         <div class="row" data-template="pages:navigation">
-            <a data-template="pages:navigation-link"
-               data-template-direction="previous"
-               class="page-nav nav-prev">
-               <i class="glyphicon glyphicon-chevron-left"/>
-            </a>
-            <a data-template="pages:navigation-link"
-               data-template-direction="next"
-               class="page-nav nav-next">
-               <i class="glyphicon glyphicon-chevron-right"/>
-            </a>
-            <div class="hsg-width-main">
-               <div id="content-inner">
-                  <div id="content-container" data-template="app:fix-links">
-                     <div class="content" data-template="pages:view"/>
-                  </div>
-               </div>
+            <div class="row">
+                <div class="hsg-navigation-wrapper">
+                    <h2 class="hsg-navigation-title" data-template="pages:navigation-title"
+                        id="navigation-title"/>
+                </div>
             </div>
-            <!-- TOC Sidebar -->
-            <aside data-template="pages:asides">
-               <div data-template="toc:table-of-contents-sidebar"
-                    data-template-heading="false"
-                    data-template-highlight="true"/>
-            </aside>
-         </div>
-      </div>
-   </div>
+            <div class="row" data-template="pages:navigation">
+                <a class="page-nav nav-prev" data-template="pages:navigation-link"
+                    data-template-direction="previous">
+                    <i class="glyphicon glyphicon-chevron-left"/>
+                </a>
+                <a class="page-nav nav-next" data-template="pages:navigation-link"
+                    data-template-direction="next">
+                    <i class="glyphicon glyphicon-chevron-right"/>
+                </a>
+                <div class="hsg-width-main">
+                    <div id="content-inner">
+                        <div data-template="app:fix-links" id="content-container">
+                            <div class="content" data-template="pages:view"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- TOC Sidebar -->
+                <aside data-template="pages:asides">
+                    <div data-template="toc:table-of-contents-sidebar" data-template-heading="false"
+                        data-template-highlight="true"/>
+                </aside>
+            </div>
+        </div>
+    </div>
 </div>

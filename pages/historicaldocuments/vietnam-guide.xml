@@ -1,64 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
-      <div>
-         <div id="static-title" class="hidden">Guide to Sources on Vietnam, 1969-1975 - Historical
-            Documents</div>
-         <div class="row">
-            <div data-template="pages:breadcrumb">
-               <p id="breadcrumb-title">Guide to Sources on Vietnam, 1969-1975</p>
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="hidden" id="static-title">Guide to Sources on Vietnam, 1969-1975 -
+                Historical Documents</div>
+            <div class="row">
+                <div data-template="pages:breadcrumb">
+                    <p id="breadcrumb-title">Guide to Sources on Vietnam, 1969-1975</p>
+                </div>
             </div>
-         </div>
-         <div class="row hsg-main">
-            <div class="hsg-width-two-thirds">
-               <div id="content-inner">
-                  <div class="content" data-template="pages:view"/>
-               </div>
+            <div class="row hsg-main">
+                <div class="hsg-width-two-thirds">
+                    <div id="content-inner">
+                        <div class="content" data-template="pages:view"/>
+                    </div>
+                </div>
+                <aside data-template="pages:asides">
+                    <div class="hsg-panel" data-template="app:fix-links">
+                        <div class="hsg-panel-heading">
+                            <h2 class="hsg-sidebar-title">Administrations</h2>
+                        </div>
+                        <div class="hsg-panel-body">
+                            <p>Browse official documents from the <em>Foreign Relations of the
+                                    United States</em> series.</p>
+                        </div>
+                        <div class="hsg-panel-heading-second-level">
+                            <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                        </div>
+                        <ul class="hsg-list-group">
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/kennedy">Kennedy
+                                    Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/johnson">Johnson
+                                    Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford
+                                    Administrations</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments/clinton">Clinton
+                                    Administration</a>
+                            </li>
+                            <li class="hsg-list-group-item">
+                                <a href="$app/historicaldocuments">All Administrations</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
             </div>
-            <aside data-template="pages:asides">
-               <div class="hsg-panel" data-template="app:fix-links">
-                  <div class="hsg-panel-heading">
-                     <h2 class="hsg-sidebar-title">Administrations</h2>
-                  </div>
-                  <div class="hsg-panel-body">
-                     <p>Browse official documents from the <em>Foreign Relations of the United
-                                States</em> series.</p>
-                  </div>
-                  <div class="hsg-panel-heading-second-level">
-                     <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
-                  </div>
-                  <ul class="hsg-list-group">
-                     <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford
-                                Administrations</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
-                     </li>
-                     <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments">All Administrations</a>
-                     </li>
-                  </ul>
-               </div>
-            </aside>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

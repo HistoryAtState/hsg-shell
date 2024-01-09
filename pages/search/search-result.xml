@@ -1,102 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround"
-     data-template-with="templates/site.xml"
-     data-template-at="content">
-   <div id="static-title" class="hidden">Search</div>
-   <div class="row">
-      <div data-template="pages:breadcrumb">
-         <p id="breadcrumb-title">Search</p>
-      </div>
-   </div>
-   <div data-template="search:load-results">
-      <div data-template="templates:include"
-           data-template-path="pages/search/_search-bar.xml"/>
-      <div data-template="templates:include"
-           data-template-path="pages/search/_filter-row-sort-by.xml"
-           class="hsg-search-results"/>
-      <div class="row hsg-search-results" data-template="search:filters">
+<div data-template="templates:surround" data-template-at="content"
+    data-template-with="templates/site.xml">
+    <div class="hidden" id="static-title">Search</div>
+    <div class="row">
+        <div data-template="pages:breadcrumb">
+            <p id="breadcrumb-title">Search</p>
+        </div>
+    </div>
+    <div data-template="search:load-results">
+        <div data-template="templates:include" data-template-path="pages/search/_search-bar.xml"/>
+        <div class="hsg-search-results" data-template="templates:include"
+            data-template-path="pages/search/_filter-row-sort-by.xml"/>
+        <div class="row hsg-search-results" data-template="search:filters">
             <!-- filter sidebar -->
-         <aside class="hsg-width-one-third" data-template="app:fix-links">
-            <h2>Filter by</h2>
-            <!-- filter sections -->
-            <h3 class="hsg-sidebar-title">Sections</h3>
-            <div data-template="templates:include"
-                 data-template-path="pages/search/_filter-sections.xml"/>
-            <!-- filter date -->
-            <h3 class="hsg-sidebar-title">Date</h3>
-            <p>Date search is active only if the <b>Historical Documents</b> section is
+            <aside class="hsg-width-one-third" data-template="app:fix-links">
+                <h2>Filter by</h2>
+                <!-- filter sections -->
+                <h3 class="hsg-sidebar-title">Sections</h3>
+                <div data-template="templates:include"
+                    data-template-path="pages/search/_filter-sections.xml"/>
+                <!-- filter date -->
+                <h3 class="hsg-sidebar-title">Date</h3>
+                <p>Date search is active only if the <b>Historical Documents</b> section is
                     selected.</p>
-            <div data-template="templates:include"
-                 data-template-path="pages/search/_filter-date.xml"/>
-            <!-- filter volumes -->
-            <h3 class="hsg-sidebar-title">Volumes</h3>
-            <p>Volume search is active only if the <b>Historical Documents</b> section is
+                <div data-template="templates:include"
+                    data-template-path="pages/search/_filter-date.xml"/>
+                <!-- filter volumes -->
+                <h3 class="hsg-sidebar-title">Volumes</h3>
+                <p>Volume search is active only if the <b>Historical Documents</b> section is
                     selected.</p>
-            <div data-template="templates:include"
-                 data-template-path="pages/search/_filter-volumes.xml"/>
-            <!-- filter administrations -->
-            <!--
+                <div data-template="templates:include"
+                    data-template-path="pages/search/_filter-volumes.xml"/>
+                <!-- filter administrations -->
+                <!--
             <h3 class="hsg-sidebar-title">Administrations</h3>
             <p>Administrations search is active only if the <b>Historical Documents</b> section is selected.</p>
             <div data-template="templates:include" data-template-path="pages/search/_filter-administrations.xml"/>
 -->
-            <!-- Reset filters / Apply filters  -->
-            <section class="row">
-               <form method="get"
-                     action="$app/search"
-                     class="filter-form hsg-width-one-whole"
-                     id="formFilters">
-                  <button id="filterResetButton"
-                          class="hsg-sidebar-btn"
-                          name="reset-filters"
-                          type="reset"
-                          value="reset_filters">
-                     <span class="glyphicon glyphicon-remove" aria-hidden="true"/> Reset
+                <!-- Reset filters / Apply filters  -->
+                <section class="row">
+                    <form action="$app/search" class="filter-form hsg-width-one-whole"
+                        id="formFilters" method="get">
+                        <button class="hsg-sidebar-btn" id="filterResetButton" name="reset-filters"
+                            type="reset" value="reset_filters">
+                            <span aria-hidden="true" class="glyphicon glyphicon-remove"/> Reset
                             Filters </button>
-                  <button id="filterApplyButton"
-                          class="hsg-sidebar-btn"
-                          name="apply-filters"
-                          type="submit">
-                     <span class="glyphicon glyphicon-ok" aria-hidden="true"/> Apply Filters
+                        <button class="hsg-sidebar-btn" id="filterApplyButton" name="apply-filters"
+                            type="submit">
+                            <span aria-hidden="true" class="glyphicon glyphicon-ok"/> Apply Filters
                         </button>
-               </form>
-            </section>
-         </aside>
-         <div class="hsg-width-two-thirds">
-            <div id="content-inner" data-template="app:fix-links">
-               <section class="hsg-search-section">
-                  <h2>Results</h2>
-                  <p data-template="search:results-summary"/>
-                  <nav>
-                     <ul class="pagination"
-                         data-template="search:paginate"
-                         data-template-per-page="10"
-                         data-template-max-pages="10"
-                         data-template-min-hits="1"/>
-                  </nav>
-                  <div class="hsg-search-result"
-                       data-template="templates:each"
-                       data-template-from="results"
-                       data-template-to="result">
-                     <h3 class="hsg-search-result-heading">
-                        <a xml:space="preserve"><span data-template="search:result-href-attribute"/><span data-template="search:result-heading"/></a>
-                     </h3>
-                     <p class="hsg-search-result-summary">
-                        <span data-template="search:result-summary"/>
-                     </p>
-                  </div>
-                  <nav>
-                     <ul class="pagination"
-                         data-template="search:paginate"
-                         data-template-per-page="10"
-                         data-template-max-pages="10"
-                         data-template-min-hits="1"/>
-                  </nav>
-                  <div data-template="templates:include"
-                       data-template-path="pages/search/_submit-search-button.xml"/>
-               </section>
+                    </form>
+                </section>
+            </aside>
+            <div class="hsg-width-two-thirds">
+                <div data-template="app:fix-links" id="content-inner">
+                    <section class="hsg-search-section">
+                        <h2>Results</h2>
+                        <p data-template="search:results-summary"/>
+                        <nav>
+                            <ul class="pagination" data-template="search:paginate"
+                                data-template-max-pages="10" data-template-min-hits="1"
+                                data-template-per-page="10"/>
+                        </nav>
+                        <div class="hsg-search-result" data-template="templates:each"
+                            data-template-from="results" data-template-to="result">
+                            <h3 class="hsg-search-result-heading">
+                                <a xml:space="preserve"><span data-template="search:result-href-attribute"/><span data-template="search:result-heading"/></a>
+                            </h3>
+                            <p class="hsg-search-result-summary">
+                                <span data-template="search:result-summary"/>
+                            </p>
+                        </div>
+                        <nav>
+                            <ul class="pagination" data-template="search:paginate"
+                                data-template-max-pages="10" data-template-min-hits="1"
+                                data-template-per-page="10"/>
+                        </nav>
+                        <div data-template="templates:include"
+                            data-template-path="pages/search/_submit-search-button.xml"/>
+                    </section>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

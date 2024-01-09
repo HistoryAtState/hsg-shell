@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
-      <div>
-         <div id="static-title" class="hidden">Principals and Chiefs Alphabetical Listing - People -
-            Department History</div>
-         <div class="row">
-            <div data-template="pages:breadcrumb">
-               <p id="breadcrumb-title">By Name</p>
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="hidden" id="static-title">Principals and Chiefs Alphabetical Listing -
+                People - Department History</div>
+            <div class="row">
+                <div data-template="pages:breadcrumb">
+                    <p id="breadcrumb-title">By Name</p>
+                </div>
             </div>
-         </div>
-         <div class="row">
-            <div class="hsg-width-two-thirds">
-               <div id="content-inner" data-template="app:fix-links">
-                  <h1>Principal Officers and Chiefs of Mission Alphabetical Listing</h1>
-                  <p>Select a letter to view the names and records of all matching Principal
-                        Officers and Chiefs of Mission.</p>
-                  <div data-template="pocom:letters"/>
-               </div>
+            <div class="row">
+                <div class="hsg-width-two-thirds">
+                    <div data-template="app:fix-links" id="content-inner">
+                        <h1>Principal Officers and Chiefs of Mission Alphabetical Listing</h1>
+                        <p>Select a letter to view the names and records of all matching Principal
+                            Officers and Chiefs of Mission.</p>
+                        <div data-template="pocom:letters"/>
+                    </div>
+                </div>
+                <aside data-template="pages:asides"/>
             </div>
-            <aside data-template="pages:asides"/>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

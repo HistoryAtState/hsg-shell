@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
-      <div>
-         <div id="static-title" class="hidden">Travels - Department History</div>
-         <div class="row">
-            <div data-template="pages:breadcrumb">
-               <p id="breadcrumb-title">Presidential and Secretaries Travels Abroad</p>
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="hidden" id="static-title">Travels - Department History</div>
+            <div class="row">
+                <div data-template="pages:breadcrumb">
+                    <p id="breadcrumb-title">Presidential and Secretaries Travels Abroad</p>
+                </div>
             </div>
-         </div>
-         <div class="row">
-            <div class="hsg-width-two-thirds">
-               <div id="content-inner" data-template="app:fix-links">
-                  <h1>Presidential and Secretaries Travels Abroad</h1>
-                  <p>These separate lists of <a href="$app/departmenthistory/travels/president">Presidential Travel Abroad</a> and <a href="$app/departmenthistory/travels/secretary">Secretaries Travel
-                            Abroad</a> present basic historical information on all trips taken
-                        outside the United States by Presidents and Secretaries of State.</p>
-                  <p>Up-to-date information on foreign travel by the Secretary of State is at <a href="https://www.state.gov/travels-with-the-secretary-of-state/">Travels With the Secretary</a>.</p>
-               </div>
+            <div class="row">
+                <div class="hsg-width-two-thirds">
+                    <div data-template="app:fix-links" id="content-inner">
+                        <h1>Presidential and Secretaries Travels Abroad</h1>
+                        <p>These separate lists of <a
+                                href="$app/departmenthistory/travels/president">Presidential Travel
+                                Abroad</a> and <a href="$app/departmenthistory/travels/secretary"
+                                >Secretaries Travel Abroad</a> present basic historical information
+                            on all trips taken outside the United States by Presidents and
+                            Secretaries of State.</p>
+                        <p>Up-to-date information on foreign travel by the Secretary of State is at
+                                <a href="https://www.state.gov/travels-with-the-secretary-of-state/"
+                                >Travels With the Secretary</a>.</p>
+                    </div>
+                </div>
+                <aside data-template="pages:asides"/>
             </div>
-            <aside data-template="pages:asides"/>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>
