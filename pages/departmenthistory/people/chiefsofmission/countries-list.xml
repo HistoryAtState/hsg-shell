@@ -14,6 +14,7 @@
                 <div class="hsg-width-two-thirds">
                     <div class="lists" data-template="app:fix-links" id="content-inner">
                         <h1>Chiefs of Mission By Country</h1>
+                        <div data-template="templates:include" data-template-path="pages/departmenthistory/people/_notice-pocom-hiatus.xml"/>
                         <ul data-template="pocom:chiefs-countries-list"/>
                     </div>
                 </div>

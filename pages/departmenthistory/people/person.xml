@@ -47,6 +47,7 @@
                 <div class="row">
                     <div class="hsg-width-two-thirds" data-template="app:fix-links">
                         <h1 data-template="pocom:person-name-birth-death"/>
+                        <div data-template="templates:include" data-template-path="pages/departmenthistory/people/_notice-pocom-hiatus.xml"/>
                         <div data-template="pocom:person-entry"/>
                     </div>
                     <!-- Metagrid Widget -->

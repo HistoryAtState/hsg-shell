@@ -15,6 +15,7 @@
                         <h1>Principal Officers and Chiefs of Mission, by Name: <span
                                 data-template="pocom:letter-requested"/>
                         </h1>
+                        <div data-template="templates:include" data-template-path="pages/departmenthistory/people/_notice-pocom-hiatus.xml"/>
                         <p>Note: Career Foreign Service appointees are asterisked.</p>
                         <div data-template="pocom:letter"/>
                         <div data-template="pocom:letters-prev-next-nav"/>

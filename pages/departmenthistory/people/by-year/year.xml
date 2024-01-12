@@ -15,6 +15,7 @@
                         <h1>Principal Officers and Chiefs of Mission, by Year: <span
                                 data-template="pocom:year-requested"/>
                         </h1>
+                        <div data-template="templates:include" data-template-path="pages/departmenthistory/people/_notice-pocom-hiatus.xml"/>
                         <p>Note: Career Foreign Service appointees are asterisked.</p>
                         <div data-template="pocom:year"/>
                         <div data-template="pocom:years-prev-next-nav"/>
