@@ -10,53 +10,73 @@ declare variable $exist:controller external;
 declare variable $exist:prefix external;
 declare variable $exist:root external;
 
+
+declare variable $local:nginx-request-uri-header := request:get-header("nginx-request-uri");
+declare variable $local:is-proxied-request := exists($local:nginx-request-uri-header);
+
+declare function local:uri() as xs:string {
+    if ($local:is-proxied-request)
+    then $local:nginx-request-uri-header
+    else request:get-uri()
+};
+
+declare function local:port($port as xs:integer) xs:string? {
+    if ($port = (80, 443)) then () else ":" || $port
+};
+
 declare function local:get-url() {
     concat(
         request:get-scheme(),
         '://',
         request:get-server-name(),
-        let $server-port := request:get-server-port()
-        return 
-            if ($server-port = (80, 443)) then 
-                ()
-            else 
-                concat(":", string($server-port)),
-        local:get-uri()
-        )
+        local:port(request:get-server-port()),
+        local:uri()
+    )
 };
 
-declare function local:get-uri() {
-    (request:get-header("nginx-request-uri"), request:get-uri())[1]
-};
 
-declare function local:split-path($path as xs:string) as xs:string+ {
+declare function local:split-path($path as xs:string) as xs:string* {
     tokenize($path, '/')[. ne '']
 };
 
+declare function local:maybe-set-if-modified-since($ims-header-value as xs:string?) as empty-sequence() {
+    if (empty($ims-header-value)) then ()
+    else request:set-attribute("if-modified-since", $ims-header-value)
+};
+
+declare function local:redirect-to-static-404() as element() {
+    if ($local:is-proxied-request)
+    then
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/pages/static-error-404.html" method="get"/>
+        </dispatch>
+    else
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/pages/local-static-error-404.html" method="get"/>
+        </dispatch>
+};
+
+
 (:
-console:log('request:get-uri(): ' || request:get-uri())
-,
-console:log('nginx-request-uri: ' || request:get-header('nginx-request-uri'))
-,
-console:log('exist:path: ' || $exist:path)
-,
+util:log('debug', map {
+    "request:get-uri": request:get-uri(),
+    "nginx-request-uri": request:get-header('nginx-request-uri'),
+    "exist:path": $exist:path
+})
 :)
 
 let $path-parts := local:split-path($exist:path)
-let $if-modified-since := request:get-header("If-Modified-Since")
+let $if-modified-since := local:maybe-set-if-modified-since(request:get-header("If-Modified-Since"))
+
 return
-    if ($if-modified-since) then
-        request:set-attribute("if-modified-since", $if-modified-since)
-    else
-        (),
 
 if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <redirect url="{local:get-uri()}/"/>
+        <redirect url="{local:uri()}/"/>
     </dispatch>
 
 (: handle request for landing page, e.g., http://history.state.gov/ :)
-else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq '' and request:get-header('nginx-request-uri') eq '/')) then
+else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq '' and $local:nginx-request-uri-header eq '/')) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller}/pages/index.xml"/>
         <view>
@@ -71,7 +91,7 @@ else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq ''
 (: strip trailing slash :)
 else if (ends-with($exist:path, "/")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <redirect url="{replace(local:get-uri(), '/$', '')}"/>
+        <redirect url="{replace(local:uri(), '/$', '')}"/>
     </dispatch>
 
 (: TODO: remove bower_components once grunt/gulp integration is added :)
@@ -127,23 +147,10 @@ else if ($path-parts[1] eq 'historicaldocuments') then
     return
         if (count($path-parts) gt 4) then (
             util:log("info", ("hsg-shell controller.xql received >4 path parts: ", string-join($path-parts, ":"))),
-            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                <forward url="{$exist:controller}/pages/error-page.xml">
-                </forward>
-                <view>
-                    <forward url="{$exist:controller}/modules/view.xql">
-                        <set-attribute name="hsg-shell.errcode" value="404"/>
-                        <add-parameter name="uri" value="{$exist:path}"/>
-                    </forward>
-                </view>
-                <error-handler>
-                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                    <forward url="{$exist:controller}/modules/view.xql"/>
-                </error-handler>
-            </dispatch>
+            local:redirect-to-static-404()
         )
         else if (empty($path-parts[2])) then
-           (: section landing page :)
+            (: section landing page :)
             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                 <forward url="{$exist:controller}/pages/historicaldocuments/index.xml"/>
                 <view>
@@ -207,20 +214,7 @@ else if ($path-parts[1] eq 'historicaldocuments') then
                                         </error-handler>
                                     </dispatch>
                                 default return
-                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                        <forward url="{$exist:controller}/pages/error-page.xml">
-                                        </forward>
-                                        <view>
-                                            <forward url="{$exist:controller}/modules/view.xql">
-                                                <set-attribute name="hsg-shell.errcode" value="404"/>
-                                                <add-parameter name="uri" value="{$exist:path}"/>
-                                            </forward>
-                                        </view>
-                                        <error-handler>
-                                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </error-handler>
-                                    </dispatch>
+                                    local:redirect-to-static-404()
                 case "frus-history" return
                     if (empty($path-parts[3])) then
                         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -356,24 +350,10 @@ else if ($path-parts[1] eq 'historicaldocuments') then
                 default return
                     if (starts-with($path-parts[2], "frus")) then
                         (: return 404 for requests with unreasonable numbers of path fragments :)
-                        if (count($path-parts) gt 3) then
-                            (
-                                util:log("info", ("hsg-shell controller.xql received >2 fragments: ", string-join($path-parts, "/"))),
-                                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                    <forward url="{$exist:controller}/pages/error-page.xml">
-                                    </forward>
-                                    <view>
-                                        <forward url="{$exist:controller}/modules/view.xql">
-                                            <set-attribute name="hsg-shell.errcode" value="404"/>
-                                            <add-parameter name="uri" value="{$exist:path}"/>
-                                        </forward>
-                                    </view>
-                                    <error-handler>
-                                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
-                                    </error-handler>
-                                </dispatch>
-                            )
+                        if (count($path-parts) gt 3) then (
+                            util:log("info", ("hsg-shell controller.xql received >2 fragments: ", string-join($path-parts, "/"))),
+                            local:redirect-to-static-404()
+                        )
                         else if ($path-parts[3]) then
                             let $page := "historicaldocuments/volume-interior.xml"
                             let $document-id := $path-parts[2]
@@ -575,19 +555,7 @@ else if (matches($exist:path, '^/countries/?')) then
                     </error-handler>
                 </dispatch>
         else (: anything else is an error :)
-            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                <forward url="{$exist:controller}/pages/error-page.xml"/>
-                <view>
-                    <forward url="{$exist:controller}/modules/view.xql">
-                        <set-attribute name="hsg-shell.errcode" value="404"/>
-                        <add-parameter name="uri" value="{$exist:path}"/>
-                    </forward>
-                </view>
-                <error-handler>
-                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                    <forward url="{$exist:controller}/modules/view.xql"/>
-                </error-handler>
-            </dispatch>
+            local:redirect-to-static-404()
 
 (: handle requests for departmenthistory section :)
 else if (matches($exist:path, '^/departmenthistory/?')) then
@@ -1002,20 +970,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                                             </error-handler>
                                         </dispatch>
                             default return
-                                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                    <forward url="{$exist:controller}/pages/error-page.xml">
-                                    </forward>
-                                    <view>
-                                        <forward url="{$exist:controller}/modules/view.xql">
-                                            <set-attribute name="hsg-shell.errcode" value="404"/>
-                                            <add-parameter name="uri" value="{$exist:path}"/>
-                                        </forward>
-                                    </view>
-                                    <error-handler>
-                                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
-                                    </error-handler>
-                                </dispatch>
+                                local:redirect-to-static-404()
                     else
                         let $page := 'departmenthistory/travels/index.xml'
                         return
@@ -1148,19 +1103,7 @@ else if (matches($exist:path, '^/departmenthistory/?')) then
                 </dispatch>
 
         else (: anything else is an error :)
-            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                <forward url="{$exist:controller}/pages/error-page.xml"/>
-                <view>
-                    <forward url="{$exist:controller}/modules/view.xql">
-                        <set-attribute name="hsg-shell.errcode" value="404"/>
-                        <add-parameter name="uri" value="{$exist:path}"/>
-                    </forward>
-                </view>
-                <error-handler>
-                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                    <forward url="{$exist:controller}/modules/view.xql"/>
-                </error-handler>
-            </dispatch>
+            local:redirect-to-static-404()
 
 (: handle requests for about section :)
 else if (matches($exist:path, '^/about/?')) then
@@ -1256,20 +1199,7 @@ else if (matches($exist:path, '^/about/?')) then
                             case "content-warning" return 'about/content-warning.xml'
                             default return 'error-page.xml'
                     return
-                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                            <forward url="{$exist:controller}/pages/{$page}">
-                            </forward>
-                            <view>
-                                <forward url="{$exist:controller}/modules/view.xql">
-                                    <set-attribute name="hsg-shell.errcode" value="404"/>
-                                    <add-parameter name="uri" value="{$exist:path}"/>
-                                </forward>
-                            </view>
-                            <error-handler>
-                                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </error-handler>
-                        </dispatch>
+                        local:redirect-to-static-404()
         else if (ends-with($exist:path, '/about')) then
             let $page := "about/index.xml"
             return
@@ -1286,19 +1216,7 @@ else if (matches($exist:path, '^/about/?')) then
                     </error-handler>
                 </dispatch>
         else (: anything else is an error :)
-            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                <forward url="{$exist:controller}/pages/error-page.xml"/>
-                <view>
-                    <forward url="{$exist:controller}/modules/view.xql">
-                        <set-attribute name="hsg-shell.errcode" value="404"/>
-                        <add-parameter name="uri" value="{$exist:path}"/>
-                    </forward>
-                </view>
-                <error-handler>
-                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                    <forward url="{$exist:controller}/modules/view.xql"/>
-                </error-handler>
-            </dispatch>
+            local:redirect-to-static-404()
 
 
 (: handle requests for milestones section :)
@@ -1374,19 +1292,7 @@ else if (matches($exist:path, '^/milestones/?')) then
                     </error-handler>
                 </dispatch>
         else (: anything else is an error :)
-            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                <forward url="{$exist:controller}/pages/error-page.xml"/>
-                <view>
-                    <forward url="{$exist:controller}/modules/view.xql">
-                        <set-attribute name="hsg-shell.errcode" value="404"/>
-                        <add-parameter name="uri" value="{$exist:path}"/>
-                    </forward>
-                </view>
-                <error-handler>
-                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                    <forward url="{$exist:controller}/modules/view.xql"/>
-                </error-handler>
-            </dispatch>
+            local:redirect-to-static-404()
 
 (: handle requests for conferences section :)
 else if (matches($exist:path, '^/conferences/?')) then
@@ -1448,19 +1354,7 @@ else if (matches($exist:path, '^/conferences/?')) then
                     </error-handler>
                 </dispatch>
         else (: anything else is an error :)
-            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                <forward url="{$exist:controller}/pages/error-page.xml"/>
-                <view>
-                    <forward url="{$exist:controller}/modules/view.xql">
-                        <set-attribute name="hsg-shell.errcode" value="404"/>
-                        <add-parameter name="uri" value="{$exist:path}"/>
-                    </forward>
-                </view>
-                <error-handler>
-                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                    <forward url="{$exist:controller}/modules/view.xql"/>
-                </error-handler>
-            </dispatch>
+            local:redirect-to-static-404()
 
 (: handle requests for developer section :)
 else if (matches($exist:path, '^/developer/?')) then
@@ -1572,19 +1466,7 @@ else if (matches($exist:path, '^/tags/?')) then
                     </error-handler>
                 </dispatch>
         else (: anything else is an error :)
-            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                <forward url="{$exist:controller}/pages/error-page.xml"/>
-                <view>
-                    <forward url="{$exist:controller}/modules/view.xql">
-                        <set-attribute name="hsg-shell.errcode" value="404"/>
-                        <add-parameter name="uri" value="{$exist:path}"/>
-                    </forward>
-                </view>
-                <error-handler>
-                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                    <forward url="{$exist:controller}/modules/view.xql"/>
-                </error-handler>
-            </dispatch>
+            local:redirect-to-static-404()
 
 (: handle requests for education section :)
 else if (matches($exist:path, '^/education/?')) then
@@ -1624,20 +1506,7 @@ else if (matches($exist:path, '^/education/?')) then
                                 </error-handler>
                             </dispatch>
                 default return
-                    let $page := "error-page.xml"
-                    return
-                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                            <forward url="{$exist:controller}/pages/{$page}"/>
-                            <view>
-                                <forward url="{$exist:controller}/modules/view.xql">
-                                    <set-attribute name="hsg-shell.errcode" value="404"/>
-                                </forward>
-                            </view>
-                            <error-handler>
-                                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </error-handler>
-                        </dispatch>
+                    local:redirect-to-static-404()
         else if (ends-with($exist:path, '/education')) then
             let $page := "education/index.xml"
             return
@@ -1652,19 +1521,7 @@ else if (matches($exist:path, '^/education/?')) then
                     </error-handler>
                 </dispatch>
         else (: anything else is an error :)
-            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                <forward url="{$exist:controller}/pages/error-page.xml"/>
-                <view>
-                    <forward url="{$exist:controller}/modules/view.xql">
-                        <set-attribute name="hsg-shell.errcode" value="404"/>
-                        <add-parameter name="uri" value="{$exist:path}"/>
-                    </forward>
-                </view>
-                <error-handler>
-                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                    <forward url="{$exist:controller}/modules/view.xql"/>
-                </error-handler>
-            </dispatch>
+            local:redirect-to-static-404()
 
 (: handle search requests :)
 else if (matches($exist:path, '^/search/?')) then
@@ -1737,16 +1594,4 @@ else if (matches($exist:path, '^/services/.+?') and substring-after($exist:path,
 
 (: fallback: return 404 :)
 else
-    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/pages/error-page.xml"/>
-        <view>
-            <forward url="{$exist:controller}/modules/view.xql">
-                <set-attribute name="hsg-shell.errcode" value="404"/>
-                <add-parameter name="uri" value="{$exist:path}"/>
-            </forward>
-        </view>
-        <error-handler>
-            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-            <forward url="{$exist:controller}/modules/view.xql"/>
-        </error-handler>
-    </dispatch>
+    local:redirect-to-static-404()
