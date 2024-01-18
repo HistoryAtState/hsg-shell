@@ -10,6 +10,12 @@ declare variable $exist:controller external;
 declare variable $exist:prefix external;
 declare variable $exist:root external;
 
+declare variable $local:error-handler := 
+    <error-handler>
+        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
+        <forward url="{$exist:controller}/modules/view.xql"/>
+    </error-handler>
+;
 
 declare variable $local:nginx-request-uri-header := request:get-header("nginx-request-uri");
 declare variable $local:is-proxied-request := exists($local:nginx-request-uri-header);
@@ -20,7 +26,7 @@ declare function local:uri() as xs:string {
     else request:get-uri()
 };
 
-declare function local:port($port as xs:integer) xs:string? {
+declare function local:port($port as xs:integer) as xs:string? {
     if ($port = (80, 443)) then () else ":" || $port
 };
 
@@ -45,15 +51,37 @@ declare function local:maybe-set-if-modified-since($ims-header-value as xs:strin
 };
 
 declare function local:redirect-to-static-404() as element() {
-    if ($local:is-proxied-request)
-    then
+    let $static-error-page :=
+        if ($local:is-proxied-request)
+        then "static-error-404.html"
+        else "local-static-error-404.html"
+
+    return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/pages/static-error-404.html" method="get"/>
+            <forward url="{$exist:controller}/pages/{$static-error-page}" method="get"/>
         </dispatch>
-    else
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/pages/local-static-error-404.html" method="get"/>
-        </dispatch>
+};
+
+declare variable $local:view-module-url := $exist:controller || "/modules/view.xql";
+declare variable $local:error-page-template := $exist:controller || "/pages/error-page.xml";
+declare function local:render-page($page-template as xs:string, $parameters as map(*)) as element() {
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <forward url="{$exist:controller}/pages/{$page-template}"/>
+        <view>
+            <forward url="{$local:view-module-url}">{
+                for $name in map:keys($parameters)
+                let $value := $parameters($name)
+                return <add-parameter name="{$name}" value="{$value}" />
+            }</forward>
+        </view>
+        <error-handler>
+            <forward url="{$local:error-page-template}" method="get"/>
+            <forward url="{$local:view-module-url}"/>
+        </error-handler>
+    </dispatch>
+};
+declare function local:render-page($page-template as xs:string) as element() {
+    local:render-page($page-template, map{})
 };
 
 
@@ -77,16 +105,7 @@ if ($exist:path eq '') then
 
 (: handle request for landing page, e.g., http://history.state.gov/ :)
 else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq '' and $local:nginx-request-uri-header eq '/')) then
-    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/pages/index.xml"/>
-        <view>
-            <forward url="{$exist:controller}/modules/view.xql"/>
-        </view>
-        <error-handler>
-            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-            <forward url="{$exist:controller}/modules/view.xql"/>
-        </error-handler>
-    </dispatch>
+    local:render-page("index.xml")
 
 (: strip trailing slash :)
 else if (ends-with($exist:path, "/")) then
@@ -104,7 +123,7 @@ else if (contains($exist:path, "/resources/") or contains($exist:path, "/bower_c
 (: handle requests for static resource: robots.txt :)
 else if ($exist:path = ("/robots.txt", "/opensearch.xml", "/favicon.ico")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller || "/resources" || $exist:path}"/>
+        <forward url="{$exist:controller}/resources{$exist:path}"/>
     </dispatch>
 
 (: handle requests for twitter test :)
@@ -134,7 +153,7 @@ else if (ends-with($exist:path, "validate-replication")) then
         </forward>
     </dispatch>
 
-(: handle requests for ajax services :)
+(: ignore direct requests to main modules :)
 else if (ends-with($exist:resource, ".xql")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <ignore/>
@@ -142,285 +161,98 @@ else if (ends-with($exist:resource, ".xql")) then
 
 (: handle requests for historicaldocuments section :)
 else if ($path-parts[1] eq 'historicaldocuments') then
-    (: let $fragments := tokenize(substring-after($exist:path, '/historicaldocuments/'), '/')[. ne ''] :)
-    let $log := util:log("info", ("hsg-shell historicaldocuments: ", string-join($path-parts, ':')))
-    return
-        if (count($path-parts) gt 4) then (
-            util:log("info", ("hsg-shell controller.xql received >4 path parts: ", string-join($path-parts, ":"))),
-            local:redirect-to-static-404()
-        )
-        else if (empty($path-parts[2])) then
-            (: section landing page :)
-            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                <forward url="{$exist:controller}/pages/historicaldocuments/index.xml"/>
-                <view>
-                    <forward url="{$exist:controller}/modules/view.xql">
-                        <add-parameter name="publication-id" value="historicaldocuments"/>
-                    </forward>
-                </view>
-                <error-handler>
-                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                    <forward url="{$exist:controller}/modules/view.xql"/>
-                </error-handler>
-            </dispatch>
-        else
-            switch ($path-parts[2])
-                case "pre-1861" return
-                    if (empty($path-parts[3])) then
-                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                            <forward url="{$exist:controller}/pages/historicaldocuments/pre-1861/index.xml"/>
-                            <view>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </view>
-                            <error-handler>
-                                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </error-handler>
-                        </dispatch>
+    if (count($path-parts) gt 4) then (
+        util:log("info", ("hsg-shell controller.xql received >4 path parts: ", string-join($path-parts, ":"))),
+        local:redirect-to-static-404()
+    )
+    else if (empty($path-parts[2])) then
+        (: section landing page :)
+        local:render-page("historicaldocuments/index.xml", map{
+            "publication-id": "historicaldocuments"
+        })
+    else
+        switch ($path-parts[2])
+            case "pre-1861" return
+                if (empty($path-parts[3])) then
+                    local:render-page("historicaldocuments/pre-1861/index.xml")
+                else
+                    if (empty($path-parts[4])) then
+                        local:render-page("historicaldocuments/pre-1861/serial-set/index.xml")
                     else
-                        if (empty($path-parts[4])) then
-                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/historicaldocuments/pre-1861/serial-set/index.xml"/>
-                                <view>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
-                                </view>
-                                <error-handler>
-                                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
-                                </error-handler>
-                            </dispatch>
-                        else
-                            switch ($path-parts[4])
-                                case "all" return
-                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                        <forward url="{$exist:controller}/pages/historicaldocuments/pre-1861/serial-set/all.xml"/>
-                                        <view>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </view>
-                                        <error-handler>
-                                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </error-handler>
-                                    </dispatch>
-                                case "browse" return
-                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                        <forward url="{$exist:controller}/pages/historicaldocuments/pre-1861/serial-set/browse.xml"/>
-                                        <view>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </view>
-                                        <error-handler>
-                                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </error-handler>
-                                    </dispatch>
-                                default return
-                                    local:redirect-to-static-404()
-                case "frus-history" return
-                    if (empty($path-parts[3])) then
-                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                            <forward url="{$exist:controller}/pages/historicaldocuments/frus-history/index.xml"/>
-                            <view>
-                                <forward url="{$exist:controller}/modules/view.xql">
-                                    <add-parameter name="publication-id" value="frus-history-monograph"/>
-                                    <add-parameter name="document-id" value="frus-history"/>
-                                </forward>
-                            </view>
-                            <error-handler>
-                                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </error-handler>
-                        </dispatch>
-                    else
-                        switch ($path-parts[3])
-                            case "documents" return
-                                if (empty($path-parts[4])) then
-                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                        <forward url="{$exist:controller}/pages/historicaldocuments/frus-history/documents/index.xml"/>
-                                        <view>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </view>
-                                        <error-handler>
-                                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </error-handler>
-                                    </dispatch>
-                                else
-                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                        <forward url="{$exist:controller}/pages/historicaldocuments/frus-history/documents/document.xml"/>
-                                        <view>
-                                            <forward url="{$exist:controller}/modules/view.xql">
-                                                <add-parameter name="document-id" value="{$path-parts[4]}"/>
-                                            </forward>
-                                        </view>
-                                        <error-handler>
-                                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </error-handler>
-                                    </dispatch>
-                            case "events" return
-                                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                    <forward url="{$exist:controller}/pages/historicaldocuments/frus-history/events/index.xml"/>
-                                    <view>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
-                                    </view>
-                                    <error-handler>
-                                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
-                                    </error-handler>
-                                </dispatch>
-                            case "research" return
-                                if (empty($path-parts[4])) then
-                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                        <forward url="{$exist:controller}/pages/historicaldocuments/frus-history/research/index.xml"/>
-                                        <view>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </view>
-                                        <error-handler>
-                                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </error-handler>
-                                    </dispatch>
-                                else
-                                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                        <forward url="{$exist:controller}/pages/historicaldocuments/frus-history/research/article.xml"/>
-                                        <view>
-                                            <forward url="{$exist:controller}/modules/view.xql">
-                                                <add-parameter name="article-id" value="{$path-parts[4]}"/>
-                                            </forward>
-                                        </view>
-                                        <error-handler>
-                                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                            <forward url="{$exist:controller}/modules/view.xql"/>
-                                        </error-handler>
-                                    </dispatch>
+                        switch ($path-parts[4])
+                            case "all" return
+                                local:render-page("historicaldocuments/pre-1861/serial-set/all.xml")
+                            case "browse" return
+                                local:render-page("historicaldocuments/pre-1861/serial-set/browse.xml")
                             default return
-                                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                    <forward url="{$exist:controller}/pages/historicaldocuments/frus-history/monograph-interior.xml"/>
-                                    <view>
-                                        <forward url="{$exist:controller}/modules/view.xql">
-                                            <add-parameter name="publication-id" value="frus-history-monograph"/>
-                                            <add-parameter name="document-id" value="frus-history"/>
-                                            <add-parameter name="section-id" value="{$path-parts[3]}"/>
-                                            <add-parameter name="requested-url" value="{local:get-url()}"/>
-                                        </forward>
-                                    </view>
-                                    <error-handler>
-                                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
-                                    </error-handler>
-                                </dispatch>
-                case "quarterly-releases" return
-                    if (empty($path-parts[3])) then
-                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                            <forward url="{$exist:controller}/pages/historicaldocuments/quarterly-releases/index.xml"/>
-                            <view>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </view>
-                            <error-handler>
-                                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </error-handler>
-                        </dispatch>
+                                local:redirect-to-static-404()
+            case "frus-history" return
+                if (empty($path-parts[3])) then
+                    local:render-page("historicaldocuments/frus-history/index.xml", map{
+                        "publication-id": "frus-history-monograph",
+                        "document-id": "frus-history"
+                    })
+                else
+                    switch ($path-parts[3])
+                        case "documents" return
+                            if (empty($path-parts[4])) then
+                                local:render-page("historicaldocuments/frus-history/documents/document.xml")
+                            else
+                                local:render-page("historicaldocuments/frus-history/documents/index.xml", map{
+                                    "document-id": $path-parts[4]
+                                })
+                        case "events" return
+                            local:render-page("historicaldocuments/frus-history/events/index.xml")
+                        case "research" return
+                            if (empty($path-parts[4])) then
+                                local:render-page("historicaldocuments/frus-history/research/index.xml")
+                            else
+                                local:render-page("historicaldocuments/frus-history/research/article.xml", map{
+                                    "article-id": $path-parts[4]
+                                })
+                        default return
+                            local:render-page("historicaldocuments/frus-history/monograph-interior.xml", map{
+                                "publication-id": "frus-history-monograph",
+                                "document-id": "frus-history",
+                                "section-id": $path-parts[3],
+                                "requested-url": local:get-url()
+                            })
+            case "quarterly-releases" return
+                if (empty($path-parts[3])) then
+                    local:render-page("historicaldocuments/quarterly-releases/index.xml")
+                else
+                    local:render-page("historicaldocuments/quarterly-releases/announcements/" || $path-parts[3] || ".xml")
+            case "guide-to-sources-on-vietnam-1969-1975" return
+                local:render-page("historicaldocuments/vietnam-guide.xml", map{
+                    "publication-id": "vietnam-guide",
+                    "document-id": "guide-to-sources-on-vietnam-1969-1975"
+                })
+            default return
+                if (starts-with($path-parts[2], "frus")) then
+                    (: return 404 for requests with unreasonable numbers of path fragments :)
+                    if (count($path-parts) gt 3) then (
+                        util:log("info", ("hsg-shell controller.xql received >2 fragments: ", string-join($path-parts, "/"))),
+                        local:redirect-to-static-404()
+                    )
+                    else if ($path-parts[3]) then
+                        local:render-page("historicaldocuments/volume-interior.xml", map{
+                            "publication-id": "frus",
+                            "document-id": $path-parts[2],
+                            "section-id": $path-parts[3],
+                            "requested-url": local:get-url()
+                        })
                     else
-                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                            <forward url="{$exist:controller}/pages/historicaldocuments/quarterly-releases/announcements/{$path-parts[3]}.xml"/>
-                            <view>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </view>
-                            <error-handler>
-                                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </error-handler>
-                        </dispatch>
-                case "guide-to-sources-on-vietnam-1969-1975" return
-                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                        <forward url="{$exist:controller}/pages/historicaldocuments/vietnam-guide.xml">
-                        </forward>
-                        <view>
-                            <forward url="{$exist:controller}/modules/view.xql">
-                                <add-parameter name="publication-id" value="vietnam-guide"/>
-                                <add-parameter name="document-id" value="guide-to-sources-on-vietnam-1969-1975"/>
-                            </forward>
-                        </view>
-                        <error-handler>
-                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                            <forward url="{$exist:controller}/modules/view.xql"/>
-                        </error-handler>
-                    </dispatch>
-                default return
-                    if (starts-with($path-parts[2], "frus")) then
-                        (: return 404 for requests with unreasonable numbers of path fragments :)
-                        if (count($path-parts) gt 3) then (
-                            util:log("info", ("hsg-shell controller.xql received >2 fragments: ", string-join($path-parts, "/"))),
-                            local:redirect-to-static-404()
-                        )
-                        else if ($path-parts[3]) then
-                            let $page := "historicaldocuments/volume-interior.xml"
-                            let $document-id := $path-parts[2]
-                            let $section-id := $path-parts[3]
-                            return
-                                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                    <forward url="{$exist:controller}/pages/{$page}"/>
-                                    <view>
-                                        <forward url="{$exist:controller}/modules/view.xql">
-                                            <add-parameter name="publication-id" value="frus"/>
-                                            <add-parameter name="document-id" value="{$document-id}"/>
-                                            <add-parameter name="section-id" value="{$section-id}"/>
-                                            <add-parameter name="requested-url" value="{local:get-url()}"/>
-                                        </forward>
-                                    </view>
-                                    <error-handler>
-                                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
-                                    </error-handler>
-                                </dispatch>
-                        else
-                            let $page := "historicaldocuments/volume-landing.xml"
-                            let $document-id := $path-parts[2]
-                            return
-                                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                    <forward url="{$exist:controller}/pages/{$page}"/>
-                                    <view>
-                                        <forward url="{$exist:controller}/modules/view.xql">
-                                            <add-parameter name="publication-id" value="frus"/>
-                                            <add-parameter name="document-id" value="{$document-id}"/>
-                                        </forward>
-                                    </view>
-                                    <error-handler>
-                                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
-                                    </error-handler>
-                                </dispatch>
+                        local:render-page("historicaldocuments/volume-landing.xml", map{
+                            "publication-id": "frus",
+                            "document-id": $path-parts[2]
+                        })
+                else
+                    if ($path-parts[2] = ("about-frus", "citing-frus", "ebooks", "other-electronic-resources", "status-of-the-series")) then
+                        local:render-page("historicaldocuments/" || $path-parts[2] || ".xml")
                     else
-                        if ($path-parts[2] = ("about-frus", "citing-frus", "ebooks", "other-electronic-resources", "status-of-the-series")) then
-                            let $page := "historicaldocuments/" || $path-parts[2] || ".xml"
-                            return
-                                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                    <forward url="{$exist:controller}/pages/{$page}"/>
-                                    <view>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
-                                    </view>
-                                    <error-handler>
-                                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
-                                    </error-handler>
-                                </dispatch>
-                        else
-                            let $page := "historicaldocuments/administrations.xml"
-                            let $administration-id := $path-parts[2]
-                            return
-                                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                    <forward url="{$exist:controller}/pages/{$page}"/>
-                                    <view>
-                                        <forward url="{$exist:controller}/modules/view.xql">
-                                            <add-parameter name="administration-id" value="{$administration-id}"/>
-                                        </forward>
-                                    </view>
-                                    <error-handler>
-                                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                        <forward url="{$exist:controller}/modules/view.xql"/>
-                                    </error-handler>
-                                </dispatch>
+                        local:render-page("historicaldocuments/administrations.xml", map{
+                            "administration-id": $path-parts[2]
+                        })
 
 (: handle requests for countries section :)
 else if (matches($exist:path, '^/countries/?')) then
