@@ -540,66 +540,22 @@ else if ($path-parts[1] eq 'milestones') then
         local:redirect-to-static-404()
 
 (: handle requests for conferences section :)
-else if (matches($exist:path, '^/conferences/?')) then
-    let $fragments := tokenize(substring-after($exist:path, '/conferences/'), '/')[. ne '']
-    return
-        if ($fragments[1]) then
-            if ($fragments[2]) then
-                let $page := 'conferences/conference/section.xml'
-                let $publication-id := 'conferences'
-                let $document-id := $fragments[1]
-                let $section-id := $fragments[2]
-                return
-                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                        <forward url="{$exist:controller}/pages/{$page}"/>
-                        <view>
-                            <forward url="{$exist:controller}/modules/view.xql">
-                                <add-parameter name="publication-id" value="{$publication-id}"/>
-                                <add-parameter name="document-id" value="{$document-id}"/>
-                                <add-parameter name="section-id" value="{$section-id}"/>
-                            </forward>
-                        </view>
-                        <error-handler>
-                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                            <forward url="{$exist:controller}/modules/view.xql"/>
-                        </error-handler>
-                    </dispatch>
-            else
-                let $page := 'conferences/conference/index.xml'
-                let $publication-id := 'conferences'
-                let $document-id := $fragments[1]
-                return
-                    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                        <forward url="{$exist:controller}/pages/{$page}"/>
-                        <view>
-                            <forward url="{$exist:controller}/modules/view.xql">
-                                <add-parameter name="publication-id" value="{$publication-id}"/>
-                                <add-parameter name="document-id" value="{$document-id}"/>
-                            </forward>
-                        </view>
-                        <error-handler>
-                            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                            <forward url="{$exist:controller}/modules/view.xql"/>
-                        </error-handler>
-                    </dispatch>
-        else if (ends-with($exist:path, '/conferences')) then
-            let $page := 'conferences/index.xml'
-            let $publication-id := 'conferences'
-            return
-                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <forward url="{$exist:controller}/pages/{$page}"/>
-                    <view>
-                        <forward url="{$exist:controller}/modules/view.xql">
-                            <add-parameter name="publication-id" value="{$publication-id}"/>
-                        </forward>
-                    </view>
-                    <error-handler>
-                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                        <forward url="{$exist:controller}/modules/view.xql"/>
-                    </error-handler>
-                </dispatch>
-        else (: anything else is an error :)
-            local:redirect-to-static-404()
+else if ($path-parts[1] eq 'conferences') then
+    if (empty($path-parts[2])) then
+        local:render-page('conferences/index.xml', map{
+            "publication-id": 'conferences'
+        })
+    else if (empty($path-parts[3])) then
+        local:render-page('conferences/conference/index.xml', map{
+            "publication-id": 'conferences',
+            "document-id": $path-parts[2]
+        })
+    else
+        local:render-page('conferences/conference/section.xml', map{
+            "publication-id": 'conferences',
+            "document-id": $path-parts[2],
+            "section-id": $path-parts[3]
+        })
 
 (: handle requests for developer section :)
 else if (matches($exist:path, '^/developer/?')) then
