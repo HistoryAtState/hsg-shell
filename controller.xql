@@ -314,7 +314,7 @@ else if ($path-parts[1] eq 'departmenthistory') then
                 else
                     local:render-page("departmenthistory/timeline/section.xml", map {
                         "publication-id": "timeline",
-                        "document-id": "timeline"
+                        "document-id": "timeline",
                         "section-id": $path-parts[3]
                     })
             case "short-history" return
@@ -426,7 +426,7 @@ else if ($path-parts[1] eq 'departmenthistory') then
                                 })
                             else
                                 local:render-page('departmenthistory/travels/president/person-or-country.xml', map{
-                                    "publication-id": "travels-president"
+                                    "publication-id": "travels-president",
                                     "person-or-country-id": $path-parts[4]
                                 })
                         case "secretary" return
@@ -492,7 +492,7 @@ else if ($path-parts[1] eq 'about') then
                 else
                     local:render-page("about/faq/section.xml", map{
                         "publication-id": "faq",
-                        "document-id": "faq"
+                        "document-id": "faq",
                         "section-id": $path-parts[3]
                     })
             case "hac" return
@@ -530,10 +530,10 @@ else if ($path-parts[1] eq 'milestones') then
             "publication-id": "milestones",
             "document-id": $path-parts[2]
         })
-    else if (exists($path-parts[2]) and exists($path-parts[3]))
+    else if (exists($path-parts[2]) and exists($path-parts[3])) then
         local:render-page('milestones/chapter/article.xml', map{
             "publication-id": "milestones",
-            "document-id": $path-parts[2]
+            "document-id": $path-parts[2],
             "section-id": $path-parts[3]
         })
     else (: anything else is an error :)
@@ -627,8 +627,8 @@ else if ($path-parts[1] eq 'education') then
 (: handle search requests :)
 else if ($path-parts[1] eq 'search') then
     if (empty($path-parts[2])) then
-        let $show-search-results := fold-left(("q", "start-date", "end-date"), false(), function($result, $next) {
-            let $values := request:get-parameter($name, ()) ! normalize-space()[. ne ""]
+        let $show-search-results := fold-left(("q", "start-date", "end-date"), false(), function($result, $next-parameter-name) {
+            let $values := request:get-parameter($next-parameter-name, ()) ! normalize-space()[. ne ""]
             return $result or exists($values)
         })
         (: If a search query is present, show the results template :)
