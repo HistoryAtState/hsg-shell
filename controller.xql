@@ -476,118 +476,43 @@ else if ($path-parts[1] eq 'departmenthistory') then
                 local:redirect-to-static-404()
 
 (: handle requests for about section :)
-else if (matches($exist:path, '^/about/?')) then
-    let $fragments := tokenize(substring-after($exist:path, '/about/'), '/')[. ne '']
-    (: let $log := console:log("hsg-shell controller.xql fragments: " || string-join(for $f at $n in $fragments return concat($n, ": ", $f), ', ')) :)
-    return
-        if ($fragments[1]) then
-            switch ($fragments[1])
-                case "faq" return
-                    if ($fragments[2]) then
-                        let $page := "about/faq/section.xml"
-                        let $publication-id := 'faq'
-                        let $document-id := 'faq'
-                        let $section-id := $fragments[2]
-                        return
-                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/{$page}"/>
-                                <view>
-                                    <forward url="{$exist:controller}/modules/view.xql">
-                                        <add-parameter name="publication-id" value="{$publication-id}"/>
-                                        <add-parameter name="document-id" value="{$document-id}"/>
-                                        <add-parameter name="section-id" value="{$section-id}"/>
-                                    </forward>
-                                </view>
-                                <error-handler>
-                                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
-                                </error-handler>
-                            </dispatch>
-                    else
-                        let $page := "about/faq/index.xml"
-                        let $publication-id := 'faq'
-                        let $document-id := 'faq'
-                        return
-                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/{$page}"/>
-                                <view>
-                                    <forward url="{$exist:controller}/modules/view.xql">
-                                        <add-parameter name="publication-id" value="{$publication-id}"/>
-                                        <add-parameter name="document-id" value="{$document-id}"/>
-                                    </forward>
-                                </view>
-                                <error-handler>
-                                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
-                                </error-handler>
-                            </dispatch>
-                case "hac" return
-                    if ($fragments[2]) then
-                        let $page := "about/hac/section.xml"
-                        let $publication-id := 'hac'
-                        let $document-id := 'hac'
-                        let $section-id := $fragments[2]
-                        return
-                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/{$page}"/>
-                                <view>
-                                    <forward url="{$exist:controller}/modules/view.xql">
-                                        <add-parameter name="publication-id" value="{$publication-id}"/>
-                                        <add-parameter name="document-id" value="{$document-id}"/>
-                                        <add-parameter name="section-id" value="{$section-id}"/>
-                                    </forward>
-                                </view>
-                                <error-handler>
-                                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
-                                </error-handler>
-                            </dispatch>
-                    else
-                        let $page := "about/hac/index.xml"
-                        let $publication-id := 'hac'
-                        let $document-id := 'hac'
-                        return
-                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/{$page}"/>
-                                <view>
-                                    <forward url="{$exist:controller}/modules/view.xql">
-                                        <add-parameter name="publication-id" value="{$publication-id}"/>
-                                        <add-parameter name="document-id" value="{$document-id}"/>
-                                    </forward>
-                                </view>
-                                <error-handler>
-                                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
-                                </error-handler>
-                            </dispatch>
-                default return
-                    let $page :=
-                        switch ($fragments[1])
-                            case "contact-us" return 'about/contact-us.xml'
-                            case "the-historian" return 'about/the-historian.xml'
-                            case "recent-publications" return 'about/recent-publications.xml'
-                            case "content-warning" return 'about/content-warning.xml'
-                            default return 'error-page.xml'
-                    return
-                        local:redirect-to-static-404()
-        else if (ends-with($exist:path, '/about')) then
-            let $page := "about/index.xml"
-            return
-                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <forward url="{$exist:controller}/pages/{$page}"/>
-                    <view>
-                        <forward url="{$exist:controller}/modules/view.xql">
-                            <add-parameter name="publication-id" value="about"/>
-                        </forward>
-                    </view>
-                    <error-handler>
-                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                        <forward url="{$exist:controller}/modules/view.xql"/>
-                    </error-handler>
-                </dispatch>
-        else (: anything else is an error :)
-            local:redirect-to-static-404()
-
+else if ($path-parts[1] eq 'about') then
+    if (empty($path-parts[2])) then
+        local:render-page("about/index.xml", map{
+            "publication-id": "about"
+        })
+    else
+        switch ($path-parts[2])
+            case "faq" return
+                if (empty($path-parts[3])) then
+                    local:render-page("about/faq/index.xml", map{
+                        "publication-id": "faq",
+                        "document-id": "faq"
+                    })
+                else
+                    local:render-page("about/faq/section.xml", map{
+                        "publication-id": "faq",
+                        "document-id": "faq"
+                        "section-id": $path-parts[3]
+                    })
+            case "hac" return
+                if (empty($path-parts[3])) then
+                    local:render-page("about/hac/index.xml", map{
+                        "publication-id": "hac",
+                        "document-id": "hac"
+                    })
+                else
+                    local:render-page("about/hac/section.xml", map{
+                        "publication-id": "hac",
+                        "document-id": "hac",
+                        "section-id": $path-parts[3]
+                    })
+            case "contact-us" return local:render-page('about/contact-us.xml')
+            case "the-historian" return local:render-page('about/the-historian.xml')
+            case "recent-publications" return local:render-page('about/recent-publications.xml')
+            case "content-warning" return local:render-page('about/content-warning.xml')
+            default return
+                local:redirect-to-static-404()
 
 (: handle requests for milestones section :)
 else if (matches($exist:path, '^/milestones/?')) then
