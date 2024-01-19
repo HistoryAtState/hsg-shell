@@ -558,240 +558,109 @@ else if ($path-parts[1] eq 'conferences') then
         })
 
 (: handle requests for developer section :)
-else if (matches($exist:path, '^/developer/?')) then
-    let $fragments := tokenize(substring-after($exist:path, '/developer/'), '/')[. ne '']
-    let $page :=
-        if ($fragments[1]) then
-            switch ($fragments[1])
-                case "catalog" return 'developer/catalog.xml'
-                default return 'error-page.xml'
-        else
-            'developer/index.xml'
-    return
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/pages/{$page}"/>
-            <view>
-                <forward url="{$exist:controller}/modules/view.xql"/>
-            </view>
-            <error-handler>
-                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                <forward url="{$exist:controller}/modules/view.xql"/>
-            </error-handler>
-        </dispatch>
+else if ($path-parts[1] eq 'developer') then
+    if (empty($path-parts[2])) then
+        local:render-page('developer/index.xml')
+    else if ($path-parts[2] eq 'catalog') then
+        local:render-page('developer/catalog.xml')
+    else
+        local:redirect-to-static-404()
 
 (: handle requests for open section :)
-else if (matches($exist:path, '^/open/?')) then
-    let $fragments := tokenize(substring-after($exist:path, '/open/'), '/')[. ne '']
-    let $choice :=
-        if ($fragments[1]) then
-            switch ($fragments[1])
-                case "frus-latest" return <choice page="pages/open/frus-latest/index.xml" mode="html"/>
-                case "frus-metadata" return <choice page="pages/open/frus-metadata/index.xml" mode="html"/>
-                case "frus-latest.xml" return <choice page="modules/open.xql" mode="xml" xql-feed="latest"/>
-                case "frus-metadata.xml" return <choice page="modules/open.xql" mode="xml" xql-feed="metadata"/>
-                default return <choice page="error-page.xml" mode="html"/>
-        else
-            <choice page="pages/open/index.xml" mode="html"/>
-    return
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/{$choice/@page}">
-                {if($choice/@xql-feed)
-                    then <add-parameter name="xql-feed" value="{$choice/@xql-feed}"/>
-                    else () }
-                {if($choice/@mode = 'xml')
-                    then <add-parameter name="xql-application-url" value="{local:get-url()}"/>
-                    else () }
-            </forward>
-            {if($choice/@mode = 'html') then (
-            <view>
-                <forward url="{$exist:controller}/modules/view.xql"/>
-            </view>,
-            <error-handler>
-                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                <forward url="{$exist:controller}/modules/view.xql"/>
-            </error-handler>
-            ) else ()}
-        </dispatch>
+else if ($path-parts[1] eq 'open') then
+    if (empty($path-parts[2])) then
+        local:render-page("open/index.xml")
+    else
+        switch ($path-parts[2])
+            case "frus-latest"
+            case "frus-metadata" return
+                local:render-page("pages/open/"|| $path-parts[2] ||"/index.xml")
+
+            case "frus-latest.xml" return
+                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                    <forward url="{$exist:controller}/modules/open.xql">
+                        <add-parameter name="xql-feed" value="latest"/>
+                        <add-parameter name="xql-application-url" value="{local:get-url()}"/>
+                    </forward>
+                </dispatch>
+            case "frus-metadata.xml" return
+                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                    <forward url="{$exist:controller}/modules/open.xql">
+                        <add-parameter name="xql-feed" value="metadata"/>
+                        <add-parameter name="xql-application-url" value="{local:get-url()}"/>
+                    </forward>
+                </dispatch>
+            default return
+                local:redirect-to-static-404()
 
 (: handle requests for tags section :)
-else if (matches($exist:path, '^/tags/?')) then
-    let $fragments := tokenize(substring-after($exist:path, '/tags/'), '/')[. ne '']
-    return
-        if ($fragments[1]) then
-            switch ($fragments[1])
-                case "all" return
-                    let $page := "tags/all.xml"
-                    return
-                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                            <forward url="{$exist:controller}/pages/{$page}"/>
-                            <view>
-                                <forward url="{$exist:controller}/modules/view.xql">
-                                    <add-parameter name="publication-id" value="tags"/>
-                                </forward>
-                            </view>
-                            <error-handler>
-                                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </error-handler>
-                        </dispatch>
-                default return
-                    let $page := "tags/browse.xml"
-                    let $tag-id := $fragments[1]
-                    return
-                        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                            <forward url="{$exist:controller}/pages/{$page}"/>
-                            <view>
-                                <forward url="{$exist:controller}/modules/view.xql">
-                                    <add-parameter name="publication-id" value="tags"/>
-                                    <add-parameter name="tag-id" value="{$tag-id}"/>
-                                </forward>
-                            </view>
-                            <error-handler>
-                                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                <forward url="{$exist:controller}/modules/view.xql"/>
-                            </error-handler>
-                        </dispatch>
-        else if (ends-with($exist:path, '/tags')) then
-            let $page := "tags/index.xml"
-            return
-                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <forward url="{$exist:controller}/pages/{$page}"/>
-                    <view>
-                        <forward url="{$exist:controller}/modules/view.xql">
-                            <add-parameter name="publication-id" value="tags"/>
-                        </forward>
-                    </view>
-                    <error-handler>
-                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                        <forward url="{$exist:controller}/modules/view.xql"/>
-                    </error-handler>
-                </dispatch>
-        else (: anything else is an error :)
-            local:redirect-to-static-404()
+else if ($path-parts[1] eq 'tags') then
+    if (empty($path-parts[2])) then
+        local:render-page("tags/index.xml", map{ "publication-id": "tags" })
+    else
+        switch ($path-parts[2])
+            case "all" return
+                local:render-page("tags/all.xml", map{ "publication-id": "tags" })
+            default return
+                local:render-page("tags/browse.xml", map{
+                    "publication-id": "tags",
+                    "tag-id": $path-parts[2]
+                })
 
 (: handle requests for education section :)
-else if (matches($exist:path, '^/education/?')) then
-    let $fragments := tokenize(substring-after($exist:path, '/education/'), '/')[. ne '']
-    return
-        if ($fragments[1]) then
-            switch ($fragments[1])
-                case "modules" return
-                    if ($fragments[2]) then
-                        let $page := "education/module.xml"
-                        let $document-id := $fragments[2]
-                        return
-                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/{$page}"/>
-                                <view>
-                                    <forward url="{$exist:controller}/modules/view.xql">
-                                        <add-parameter name="publication-id" value="education"/>
-                                        <add-parameter name="document-id" value="{$document-id}"/>
-                                    </forward>
-                                </view>
-                                <error-handler>
-                                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
-                                </error-handler>
-                            </dispatch>
-                    else
-                        let $page := "education/modules.xml"
-                        return
-                            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                                <forward url="{$exist:controller}/pages/{$page}"/>
-                                <view>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
-                                </view>
-                                <error-handler>
-                                    <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                                    <forward url="{$exist:controller}/modules/view.xql"/>
-                                </error-handler>
-                            </dispatch>
-                default return
-                    local:redirect-to-static-404()
-        else if (ends-with($exist:path, '/education')) then
-            let $page := "education/index.xml"
-            return
-                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <forward url="{$exist:controller}/pages/{$page}"/>
-                    <view>
-                        <forward url="{$exist:controller}/modules/view.xql"/>
-                    </view>
-                    <error-handler>
-                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                        <forward url="{$exist:controller}/modules/view.xql"/>
-                    </error-handler>
-                </dispatch>
-        else (: anything else is an error :)
-            local:redirect-to-static-404()
+else if ($path-parts[1] eq 'education') then
+    if (empty($path-parts[2])) then
+        local:render-page("education/index.xml")
+    else
+        switch ($path-parts[2])
+            case "modules" return
+                if (empty($path-parts[3])) then
+                    local:render-page("education/modules.xml")
+                else
+                    local:render-page("education/module.xml", map{
+                        "publication-id": "education",
+                        "document-id": $path-parts[3]
+                    })
+            default return
+                local:redirect-to-static-404()
 
 (: handle search requests :)
-else if (matches($exist:path, '^/search/?')) then
-    let $params :=
-        map:merge(
-            for $name in 
-                (: request:get-parameter-names() :)
-                ("q", "start-date", "end-date")
+else if ($path-parts[1] eq 'search') then
+    if (empty($path-parts[2])) then
+        let $show-search-results := fold-left(("q", "start-date", "end-date"), false(), function($result, $next) {
             let $values := request:get-parameter($name, ()) ! normalize-space()[. ne ""]
-            return 
-                if (exists($values)) then 
-                    map:entry($name, $values)
-                else
-                    ()
-        )
-    (: let $log := console:log($params) :)
-    let $fragments := tokenize(substring-after($exist:path, '/search/'), '/')[. ne '']
-    let $is-keyword := map:contains($params, "q")
-    let $is-date := map:contains($params, "start-date") or map:contains($params, "end-date")
-    let $page :=
+            return $result or exists($values)
+        })
         (: If a search query is present, show the results template :)
-        if ($is-keyword or $is-date) then
-            'search/search-result.xml'
-        else if ($fragments[1]) then
-            switch ($fragments[1])
-                case "tips" return 'search/tips.xml'
-                default return 'error-page.xml'
-        else
-            'search/search-landing.xml'
-    return
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/pages/{$page}"/>
-            <view>
-                <forward url="{$exist:controller}/modules/view.xql">
-                    <add-parameter name="suppress-sitewide-search-field" value="true"/>
-                </forward>
-            </view>
-            <error-handler>
-                <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-                <forward url="{$exist:controller}/modules/view.xql"/>
-            </error-handler>
-        </dispatch>
+        let $page :=
+            if ($show-search-results) then
+                'search/search-result.xml'
+            else
+                'search/search-landing.xml'
+        return
+            local:render-page($page, map{
+                "suppress-sitewide-search-field": "true"
+            })
+    else if ($path-parts[2] eq 'tips') then
+        local:render-page('search/tips.xml')
+    else
+        local:redirect-to-static-404()
 
 (: handle OPDS API requests :)
-else if (matches($exist:path, '^/api/v1/?')) then
-    let $fragments := tokenize(substring-after($exist:path, '/api/v1/'), '/')[. ne '']
-    let $xql := switch ($fragments[1])
-        case "catalog" return 'opds-catalog.xql'
-        default return 'opds-catalog.xql'
-    return
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/modules/{$xql}">
-                <add-parameter name="xql-application-url" value="{local:get-url()}"/>
-            </forward>
-            <!--TODO Add an error handler appropriate for this API - with error codes, redirects. We currently let bad requests through without raising errors. -->
-        </dispatch>
+else if ($path-parts[1] eq 'api' and $path-parts[2] eq 'v1') then
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <forward url="{$exist:controller}/modules/opds-catalog.xql">
+            <add-parameter name="xql-application-url" value="{local:get-url()}"/>
+        </forward>
+        <!--TODO Add an error handler appropriate for this API - with error codes, redirects. We currently let bad requests through without raising errors. -->
+    </dispatch>
 
 (: handle services requests :)
-else if (matches($exist:path, '^/services/.+?') and substring-after($exist:path, '/services/') = ('volume-ids', 'volume-images')) then
-    let $fragments := tokenize(substring-after($exist:path, '/services/'), '/')[. ne '']
-    let $xql := switch ($fragments[1])
-        case "volume-ids" return 'volume-ids.xql'
-        case "volume-images" return 'volume-images.xql'
-        default return ()
-    return
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/modules/{$xql}"/>
-            <!--TODO Maybe add an error handler, but not the default one. -->
-        </dispatch>
+else if ($path-parts[1] eq 'services' and $path-parts[2] = ('volume-ids', 'volume-images')) then
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <forward url="{$exist:controller}/modules/{$path-parts[2]}.xql"/>
+        <!--TODO Maybe add an error handler, but not the default one. -->
+    </dispatch>
 
 (: fallback: return 404 :)
 else
