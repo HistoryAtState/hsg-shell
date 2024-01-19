@@ -80,23 +80,23 @@ declare function local:render-page($page-template as xs:string, $parameters as m
         </error-handler>
     </dispatch>
 };
+
 declare function local:render-page($page-template as xs:string) as element() {
     local:render-page($page-template, map{})
 };
 
+declare variable $path-parts := local:split-path($exist:path)
 
 (:
 util:log('debug', map {
     "request:get-uri": request:get-uri(),
     "nginx-request-uri": request:get-header('nginx-request-uri'),
-    "exist:path": $exist:path
-})
+    "exist:path": $exist:path,
+    "path-parts": $path-parts
+}),
 :)
 
-let $path-parts := local:split-path($exist:path)
-let $if-modified-since := local:maybe-set-if-modified-since(request:get-header("If-Modified-Since"))
-
-return
+local:maybe-set-if-modified-since(request:get-header("If-Modified-Since")),
 
 if ($exist:path eq '') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -120,12 +120,6 @@ else if (contains($exist:path, "/resources/") or contains($exist:path, "/bower_c
         <forward url="{$exist:controller}/{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
     </dispatch>
 
-(: handle requests for static resource: robots.txt :)
-else if ($exist:path = ("/robots.txt", "/opensearch.xml", "/favicon.ico")) then
-    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/resources{$exist:path}"/>
-    </dispatch>
-
 (: handle requests for twitter test :)
 else if (ends-with($exist:path, "validate-results-of-twitter-jobs.xq")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -138,7 +132,7 @@ else if (ends-with($exist:path, "validate-results-of-twitter-jobs.xq")) then
             <forward url="{$exist:controller}/modules/view.xql"/>
         </error-handler>
     </dispatch>
-    
+
 (: handle requests for resource-name.xml used by replication test :)
 else if (ends-with($exist:path, "resource-name.xml")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -159,64 +153,75 @@ else if (ends-with($exist:resource, ".xql")) then
         <ignore/>
     </dispatch>
 
-(: handle requests for historicaldocuments section :)
-else if ($path-parts[1] eq 'historicaldocuments') then
-    if (count($path-parts) gt 4) then (
-        util:log("info", ("hsg-shell controller.xql received >4 path parts: ", string-join($path-parts, ":"))),
-        local:redirect-to-static-404()
-    )
-    else if (empty($path-parts[2])) then
-        (: section landing page :)
-        local:render-page("historicaldocuments/index.xml", map{
-            "publication-id": "historicaldocuments"
-        })
-    else
-        switch ($path-parts[2])
+(: reject ANY request with more than 4 path parts -> /a/b/c/d/e :)
+else if (count($path-parts) gt 4) then (
+    util:log("info", ("hsg-shell controller.xql received >4 path parts: ", string-join($path-parts, ":"))),
+    local:redirect-to-static-404()
+)
+
+else switch($path-parts[1])
+
+    (: handle requests for static resource: robots.txt :)
+    case "robots.txt"
+    case "opensearch.html"
+    case "favicon.ico" return
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{$exist:controller}/resources/{$exist:path}"/>
+        </dispatch>
+        
+    (: handle requests for historicaldocuments section :)
+    case 'historicaldocuments' return
+        switch (string($path-parts[2]))
+            case '' return
+                (: section landing page :)
+                local:render-page("historicaldocuments/index.xml", map{
+                    "publication-id": "historicaldocuments"
+                })
             case "pre-1861" return
                 if (empty($path-parts[3])) then
                     local:render-page("historicaldocuments/pre-1861/index.xml")
-                else
-                    if (empty($path-parts[4])) then
-                        local:render-page("historicaldocuments/pre-1861/serial-set/index.xml")
-                    else
-                        switch ($path-parts[4])
-                            case "all" return
-                                local:render-page("historicaldocuments/pre-1861/serial-set/all.xml")
-                            case "browse" return
-                                local:render-page("historicaldocuments/pre-1861/serial-set/browse.xml")
-                            default return
-                                local:redirect-to-static-404()
-            case "frus-history" return
-                if (empty($path-parts[3])) then
-                    local:render-page("historicaldocuments/frus-history/index.xml", map{
-                        "publication-id": "frus-history-monograph",
-                        "document-id": "frus-history"
-                    })
-                else
-                    switch ($path-parts[3])
-                        case "documents" return
-                            if (empty($path-parts[4])) then
-                                local:render-page("historicaldocuments/frus-history/documents/document.xml")
-                            else
-                                local:render-page("historicaldocuments/frus-history/documents/index.xml", map{
-                                    "document-id": $path-parts[4]
-                                })
-                        case "events" return
-                            local:render-page("historicaldocuments/frus-history/events/index.xml")
-                        case "research" return
-                            if (empty($path-parts[4])) then
-                                local:render-page("historicaldocuments/frus-history/research/index.xml")
-                            else
-                                local:render-page("historicaldocuments/frus-history/research/article.xml", map{
-                                    "article-id": $path-parts[4]
-                                })
+                else if ($path-parts[3] eq 'serial-set') then
+                    switch (string($path-parts[4]))
+                        case '' return
+                            local:render-page("historicaldocuments/pre-1861/serial-set/index.xml")
+                        case "all" return
+                            local:render-page("historicaldocuments/pre-1861/serial-set/all.xml")
+                        case "browse" return
+                            local:render-page("historicaldocuments/pre-1861/serial-set/browse.xml")
                         default return
-                            local:render-page("historicaldocuments/frus-history/monograph-interior.xml", map{
-                                "publication-id": "frus-history-monograph",
-                                "document-id": "frus-history",
-                                "section-id": $path-parts[3],
-                                "requested-url": local:get-url()
+                            local:redirect-to-static-404()
+                else
+                    local:redirect-to-static-404()
+            case "frus-history" return
+                switch (string($path-parts[3]))
+                    case '' return
+                        local:render-page("historicaldocuments/frus-history/index.xml", map{
+                            "publication-id": "frus-history-monograph",
+                            "document-id": "frus-history"
+                        })
+                    case "documents" return
+                        if (empty($path-parts[4])) then
+                            local:render-page("historicaldocuments/frus-history/documents/document.xml")
+                        else
+                            local:render-page("historicaldocuments/frus-history/documents/index.xml", map{
+                                "document-id": $path-parts[4]
                             })
+                    case "events" return
+                        local:render-page("historicaldocuments/frus-history/events/index.xml")
+                    case "research" return
+                        if (empty($path-parts[4])) then
+                            local:render-page("historicaldocuments/frus-history/research/index.xml")
+                        else
+                            local:render-page("historicaldocuments/frus-history/research/article.xml", map{
+                                "article-id": $path-parts[4]
+                            })
+                    default return
+                        local:render-page("historicaldocuments/frus-history/monograph-interior.xml", map{
+                            "publication-id": "frus-history-monograph",
+                            "document-id": "frus-history",
+                            "section-id": $path-parts[3],
+                            "requested-url": local:get-url()
+                        })
             case "quarterly-releases" return
                 if (empty($path-parts[3])) then
                     local:render-page("historicaldocuments/quarterly-releases/index.xml")
@@ -227,6 +232,13 @@ else if ($path-parts[1] eq 'historicaldocuments') then
                     "publication-id": "vietnam-guide",
                     "document-id": "guide-to-sources-on-vietnam-1969-1975"
                 })
+            case "about-frus"
+            case "citing-frus"
+            case "ebooks"
+            case "other-electronic-resources"
+            case "status-of-the-series" return
+                local:render-page("historicaldocuments/" || $path-parts[2] || ".xml")
+
             default return
                 if (starts-with($path-parts[2], "frus")) then
                     (: return 404 for requests with unreasonable numbers of path fragments :)
@@ -247,21 +259,17 @@ else if ($path-parts[1] eq 'historicaldocuments') then
                             "document-id": $path-parts[2]
                         })
                 else
-                    if ($path-parts[2] = ("about-frus", "citing-frus", "ebooks", "other-electronic-resources", "status-of-the-series")) then
-                        local:render-page("historicaldocuments/" || $path-parts[2] || ".xml")
-                    else
-                        local:render-page("historicaldocuments/administrations.xml", map{
-                            "administration-id": $path-parts[2]
-                        })
+                    local:render-page("historicaldocuments/administrations.xml", map{
+                        "administration-id": $path-parts[2]
+                    })
 
-(: handle requests for countries section :)
-else if ($path-parts[1] eq 'countries') then
-    if (empty($path-parts[2])) then
-        local:render-page('countries/index.xml', map{
-            "publication-id": "countries"
-        })
-    else
-        switch ($path-parts[2])
+    (: handle requests for countries section :)
+    case 'countries' return
+        switch (string($path-parts[2]))
+            case '' return
+                local:render-page('countries/index.xml', map{
+                    "publication-id": "countries"
+                })
             case "all" return
                 local:render-page('countries/all.xml')
             case "issues" return
@@ -273,38 +281,36 @@ else if ($path-parts[1] eq 'countries') then
                         "document-id": $path-parts[3]
                     })
             case "archives" return
-                if (empty($path-parts[3])) then
-                    local:render-page('countries/archives/index.xml', map {
-                        "publication-id": "archives"
-                    })
-                else
-                    switch ($path-parts[3])
-                        case "all" return
-                            local:render-page('countries/archives/all.xml', map {
-                                "publication-id": "archives"
-                            })
-                        default return
-                            local:render-page('countries/archives/article.xml', map {
-                                "publication-id": "archives",
-                                "document-id": $path-parts[3]
-                            })
+                switch (string($path-parts[3]))
+                    case '' return
+                        local:render-page('countries/archives/index.xml', map {
+                            "publication-id": "archives"
+                        })
+
+                    case "all" return
+                        local:render-page('countries/archives/all.xml', map {
+                            "publication-id": "archives"
+                        })
+                    default return
+                        local:render-page('countries/archives/article.xml', map {
+                            "publication-id": "archives",
+                            "document-id": $path-parts[3]
+                        })
             default return
                 (: FIXME: find out which values are allowed here :)
                 local:render-page('countries/article.xml', map{
                     "publication-id": "countries",
                     "document-id": $path-parts[2]
                 })
-                (: else (: anything else is an error :)
-                    local:redirect-to-static-404() :)
 
 (: handle requests for departmenthistory section :)
-else if ($path-parts[1] eq 'departmenthistory') then
-    if (empty($path-parts[2])) then
-        local:render-page("departmenthistory/index.xml", map {
-            "publication-id": "departmenthistory"
-        })
-    else
-        switch ($path-parts[2])
+    case 'departmenthistory' return
+        switch (string($path-parts[2]))
+            case '' return
+                local:render-page("departmenthistory/index.xml", map {
+                    "publication-id": "departmenthistory"
+                })
+
             case "timeline" return
                 if (empty($path-parts[3])) then
                     local:render-page("departmenthistory/timeline/index.xml", map {
@@ -344,103 +350,103 @@ else if ($path-parts[1] eq 'departmenthistory') then
                     })
 
             case "people" return
-                if (empty($path-parts[3])) then
-                    local:render-page('departmenthistory/people/index.xml', map{
-                        "publication-id": "people"
-                    })
-                else
-                    switch ($path-parts[3])
-                        case "secretaries"
-                        case "principals-chiefs" return
-                            local:render-page('departmenthistory/people/' || $path-parts[3] || '.xml', map{
-                                "publication-id": $path-parts[3]
+                switch (string($path-parts[3]))
+                    case '' return
+                        local:render-page('departmenthistory/people/index.xml', map{
+                            "publication-id": "people"
+                        })
+                    case "secretaries"
+                    case "principals-chiefs" return
+                        local:render-page('departmenthistory/people/' || $path-parts[3] || '.xml', map{
+                            "publication-id": $path-parts[3]
+                        })
+                    case "by-name" return
+                        if (empty($path-parts[4])) then
+                            local:render-page('departmenthistory/people/by-name/index.xml', map{
+                                "publication-id": "people-by-alpha"
                             })
-                        case "by-name" return
-                            if (empty($path-parts[4])) then
-                                local:render-page('departmenthistory/people/by-name/index.xml', map{
-                                    "publication-id": "people-by-alpha"
-                                })
-                            else
-                                local:render-page('departmenthistory/people/by-name/letter.xml', map{
-                                    "publication-id": "people-by-alpha",
-                                    "letter": $path-parts[4]
-                                })
-                        case "by-year" return
-                            if (empty($path-parts[4])) then
-                                local:render-page('departmenthistory/people/by-year/index.xml', map{
-                                    "publication-id": "people-by-year"
-                                })
-                            else
-                                local:render-page('departmenthistory/people/by-year/year.xml', map{
-                                    "publication-id": "people-by-year",
-                                    "year": $path-parts[4]
-                                })
-                        case "principalofficers" return
-                            if (empty($path-parts[4])) then
-                                local:render-page('departmenthistory/people/principalofficers/index.xml', map{
-                                    "publication-id": "people"
-                                })
-                            else
-                                local:render-page('departmenthistory/people/principalofficers/by-role-id.xml', map{
-                                    "publication-id": "people-by-role",
-                                    "role-id": $path-parts[4]
-                                })
-                        case "chiefsofmission" return
-                            if (empty($path-parts[4])) then
+                        else
+                            local:render-page('departmenthistory/people/by-name/letter.xml', map{
+                                "publication-id": "people-by-alpha",
+                                "letter": $path-parts[4]
+                            })
+                    case "by-year" return
+                        if (empty($path-parts[4])) then
+                            local:render-page('departmenthistory/people/by-year/index.xml', map{
+                                "publication-id": "people-by-year"
+                            })
+                        else
+                            local:render-page('departmenthistory/people/by-year/year.xml', map{
+                                "publication-id": "people-by-year",
+                                "year": $path-parts[4]
+                            })
+                    case "principalofficers" return
+                        if (empty($path-parts[4])) then
+                            local:render-page('departmenthistory/people/principalofficers/index.xml', map{
+                                "publication-id": "people"
+                            })
+                        else
+                            local:render-page('departmenthistory/people/principalofficers/by-role-id.xml', map{
+                                "publication-id": "people-by-role",
+                                "role-id": $path-parts[4]
+                            })
+                    case "chiefsofmission" return
+                        switch (string($path-parts[4]))
+                            case '' return
                                 local:render-page('departmenthistory/people/chiefsofmission/index.xml', map{
                                     "publication-id": "people"
                                 })
-                            else
-                                switch ($path-parts[4])
-                                    case "by-country" return
-                                        local:render-page('departmenthistory/people/chiefsofmission/countries-list.xml', map{
-                                            "publication-id": "people"
-                                        })
-                                    case "by-organization" return
-                                        local:render-page('departmenthistory/people/chiefsofmission/international-organizations-list.xml', map{
-                                            "publication-id": "people"
-                                        })
-                                    default return
-                                        local:render-page('departmenthistory/people/chiefsofmission/by-role-or-country-id.xml', map{
-                                            "publication-id": "people",
-                                            "role-or-country-id": $path-parts[4]
-                                        })
-                        default return
-                            local:render-page('departmenthistory/people/person.xml', map{
-                                "publication-id": "people",
-                                "person-id": $path-parts[3],
-                                "document-id": $path-parts[3]
-                            })
+
+                            case "by-country" return
+                                local:render-page('departmenthistory/people/chiefsofmission/countries-list.xml', map{
+                                    "publication-id": "people"
+                                })
+                            case "by-organization" return
+                                local:render-page('departmenthistory/people/chiefsofmission/international-organizations-list.xml', map{
+                                    "publication-id": "people"
+                                })
+                            default return
+                                local:render-page('departmenthistory/people/chiefsofmission/by-role-or-country-id.xml', map{
+                                    "publication-id": "people",
+                                    "role-or-country-id": $path-parts[4]
+                                })
+                    default return
+                        local:render-page('departmenthistory/people/person.xml', map{
+                            "publication-id": "people",
+                            "person-id": $path-parts[3],
+                            "document-id": $path-parts[3]
+                        })
 
             case "travels" return
-                if (empty($path-parts[3])) then
-                    local:render-page('departmenthistory/travels/index.xml', map{
-                        "publication-id": "travels-secretary"
-                    })
-                else
-                    switch ($path-parts[3])
-                        case "president" return
-                            if (empty($path-parts[4])) then
-                                local:render-page('departmenthistory/travels/president/index.xml', map{
-                                    "publication-id": "travels-president"
-                                })
-                            else
-                                local:render-page('departmenthistory/travels/president/person-or-country.xml', map{
-                                    "publication-id": "travels-president",
-                                    "person-or-country-id": $path-parts[4]
-                                })
-                        case "secretary" return
-                            if (empty($path-parts[4])) then
-                                local:render-page('departmenthistory/travels/secretary/index.xml', map{
-                                    "publication-id": "travels-secretary"
-                                })
-                            else
-                                local:render-page('departmenthistory/travels/secretary/person-or-country', map{
-                                    "publication-id": "travels-secretary",
-                                    "person-or-country-id": $path-parts[4]
-                                })
-                        default return
-                            local:redirect-to-static-404()
+                switch (string($path-parts[3]))
+                    case '' return
+                        local:render-page('departmenthistory/travels/index.xml', map{
+                            "publication-id": "travels-secretary"
+                        })
+
+                    case "president" return
+                        if (empty($path-parts[4])) then
+                            local:render-page('departmenthistory/travels/president/index.xml', map{
+                                "publication-id": "travels-president"
+                            })
+                        else
+                            local:render-page('departmenthistory/travels/president/person-or-country.xml', map{
+                                "publication-id": "travels-president",
+                                "person-or-country-id": $path-parts[4]
+                            })
+                    case "secretary" return
+                        if (empty($path-parts[4])) then
+                            local:render-page('departmenthistory/travels/secretary/index.xml', map{
+                                "publication-id": "travels-secretary"
+                            })
+                        else
+                            local:render-page('departmenthistory/travels/secretary/person-or-country', map{
+                                "publication-id": "travels-secretary",
+                                "person-or-country-id": $path-parts[4]
+                            })
+                    default return
+                        local:redirect-to-static-404()
+
             case "visits" return
                 if (empty($path-parts[3])) then
                     local:render-page('departmenthistory/visits/index.xml', map{
@@ -451,23 +457,25 @@ else if ($path-parts[1] eq 'departmenthistory') then
                         "publication-id": "visits",
                         "country-or-year": $path-parts[3]
                     })
+
             case "diplomatic-couriers" return
-                if (empty($path-parts[3])) then
-                    local:render-page('departmenthistory/diplomatic-couriers/index.xml', map{
-                        "publication-id": 'diplomatic-couriers'
-                    })
-                else
-                    switch($path-parts[3])
-                        case "before-the-jet-age"
-                        case "behind-the-iron-curtain"
-                        case "into-moscow"
-                        case "through-the-khyber-pass" return
-                            local:render-page('departmenthistory/diplomatic-couriers/' || $path-parts[3] || '.xml', map{
-                                "publication-id": 'diplomatic-couriers',
-                                "film-id": $path-parts[3]
-                            })
-                        default return
-                            local:redirect-to-static-404()
+                switch(string($path-parts[3]))
+                    case '' return
+                        local:render-page('departmenthistory/diplomatic-couriers/index.xml', map{
+                            "publication-id": 'diplomatic-couriers'
+                        })
+
+                    case "before-the-jet-age"
+                    case "behind-the-iron-curtain"
+                    case "into-moscow"
+                    case "through-the-khyber-pass" return
+                        local:render-page('departmenthistory/diplomatic-couriers/' || $path-parts[3] || '.xml', map{
+                            "publication-id": 'diplomatic-couriers',
+                            "film-id": $path-parts[3]
+                        })
+                    default return
+                        local:redirect-to-static-404()
+
             case "wwi" return
                 local:render-page('departmenthistory/wwi.xml', map {
                     "publication-id": "wwi"
@@ -476,13 +484,12 @@ else if ($path-parts[1] eq 'departmenthistory') then
                 local:redirect-to-static-404()
 
 (: handle requests for about section :)
-else if ($path-parts[1] eq 'about') then
-    if (empty($path-parts[2])) then
-        local:render-page("about/index.xml", map{
-            "publication-id": "about"
-        })
-    else
-        switch ($path-parts[2])
+    case 'about' return
+        switch (string($path-parts[2]))
+            case '' return
+                local:render-page("about/index.xml", map{
+                    "publication-id": "about"
+                })
             case "faq" return
                 if (empty($path-parts[3])) then
                     local:render-page("about/faq/index.xml", map{
@@ -515,63 +522,64 @@ else if ($path-parts[1] eq 'about') then
                 local:redirect-to-static-404()
 
 (: handle requests for milestones section :)
-(: milestones/1750-1775/foreword :)
-else if ($path-parts[1] eq 'milestones') then
-    if (empty($path-parts[2])) then
-        local:render-page('milestones/index.xml', map{
-            "publication-id": "milestones"
-        })
-    else if ($path-parts[2] eq "all") then
-        local:render-page('milestones/all.xml', map{
-            "publication-id": "milestones"
-        })
-    else if (exists($path-parts[2]) and empty($path-parts[3])) then
-        local:render-page('milestones/chapter/index.xml', map{
-            "publication-id": "milestones",
-            "document-id": $path-parts[2]
-        })
-    else if (exists($path-parts[2]) and exists($path-parts[3])) then
-        local:render-page('milestones/chapter/article.xml', map{
-            "publication-id": "milestones",
-            "document-id": $path-parts[2],
-            "section-id": $path-parts[3]
-        })
-    else (: anything else is an error :)
-        local:redirect-to-static-404()
+    case 'milestones' return
+        if (empty($path-parts[2])) then
+            local:render-page('milestones/index.xml', map{
+                "publication-id": "milestones"
+            })
+        (: milestones/all :)
+        else if ($path-parts[2] eq "all") then
+            local:render-page('milestones/all.xml', map{
+                "publication-id": "milestones"
+            })
+        (: milestones/1750-1775 :)
+        else if (exists($path-parts[2]) and empty($path-parts[3])) then
+            local:render-page('milestones/chapter/index.xml', map{
+                "publication-id": "milestones",
+                "document-id": $path-parts[2]
+            })
+        (: milestones/1750-1775/foreword :)
+        else if (exists($path-parts[2]) and exists($path-parts[3])) then
+            local:render-page('milestones/chapter/article.xml', map{
+                "publication-id": "milestones",
+                "document-id": $path-parts[2],
+                "section-id": $path-parts[3]
+            })
+        else (: (FIXME: this is currently never the case) anything else is an error :)
+            local:redirect-to-static-404()
 
 (: handle requests for conferences section :)
-else if ($path-parts[1] eq 'conferences') then
-    if (empty($path-parts[2])) then
-        local:render-page('conferences/index.xml', map{
-            "publication-id": 'conferences'
-        })
-    else if (empty($path-parts[3])) then
-        local:render-page('conferences/conference/index.xml', map{
-            "publication-id": 'conferences',
-            "document-id": $path-parts[2]
-        })
-    else
-        local:render-page('conferences/conference/section.xml', map{
-            "publication-id": 'conferences',
-            "document-id": $path-parts[2],
-            "section-id": $path-parts[3]
-        })
+    case 'conferences' return
+        if (empty($path-parts[2])) then
+            local:render-page('conferences/index.xml', map{
+                "publication-id": 'conferences'
+            })
+        else if (empty($path-parts[3])) then
+            local:render-page('conferences/conference/index.xml', map{
+                "publication-id": 'conferences',
+                "document-id": $path-parts[2]
+            })
+        else
+            local:render-page('conferences/conference/section.xml', map{
+                "publication-id": 'conferences',
+                "document-id": $path-parts[2],
+                "section-id": $path-parts[3]
+            })
 
-(: handle requests for developer section :)
-else if ($path-parts[1] eq 'developer') then
-    if (empty($path-parts[2])) then
-        local:render-page('developer/index.xml')
-    else if ($path-parts[2] eq 'catalog') then
-        local:render-page('developer/catalog.xml')
-    else
-        local:redirect-to-static-404()
+    (: handle requests for developer section :)
+    case 'developer' return
+        if (empty($path-parts[2])) then
+            local:render-page('developer/index.xml')
+        else if ($path-parts[2] eq 'catalog') then
+            local:render-page('developer/catalog.xml')
+        else
+            local:redirect-to-static-404()
 
 (: handle requests for open section :)
-else if ($path-parts[1] eq 'open') then
-    if (empty($path-parts[2])) then
-        local:render-page("open/index.xml")
-    else
-        switch ($path-parts[2])
+    case 'open' return
+        switch (string($path-parts[2]))
+            case '' return
+                local:render-page("open/index.xml")
             case "frus-latest"
             case "frus-metadata" return
                 local:render-page("pages/open/"|| $path-parts[2] ||"/index.xml")
@@ -594,11 +602,10 @@ else if ($path-parts[1] eq 'open') then
                 local:redirect-to-static-404()
 
 (: handle requests for tags section :)
-else if ($path-parts[1] eq 'tags') then
-    if (empty($path-parts[2])) then
-        local:render-page("tags/index.xml", map{ "publication-id": "tags" })
-    else
-        switch ($path-parts[2])
+    case 'tags' return
+        switch (string($path-parts[2]))
+            case '' return
+                local:render-page("tags/index.xml", map{ "publication-id": "tags" })
             case "all" return
                 local:render-page("tags/all.xml", map{ "publication-id": "tags" })
             default return
@@ -608,11 +615,10 @@ else if ($path-parts[1] eq 'tags') then
                 })
 
 (: handle requests for education section :)
-else if ($path-parts[1] eq 'education') then
-    if (empty($path-parts[2])) then
-        local:render-page("education/index.xml")
-    else
-        switch ($path-parts[2])
+    case 'education' return
+        switch (string($path-parts[2]))
+            case '' return
+                local:render-page("education/index.xml")
             case "modules" return
                 if (empty($path-parts[3])) then
                     local:render-page("education/modules.xml")
@@ -625,43 +631,52 @@ else if ($path-parts[1] eq 'education') then
                 local:redirect-to-static-404()
 
 (: handle search requests :)
-else if ($path-parts[1] eq 'search') then
-    if (empty($path-parts[2])) then
-        let $show-search-results := fold-left(("q", "start-date", "end-date"), false(), function($result, $next-parameter-name) {
-            let $values := request:get-parameter($next-parameter-name, ()) ! normalize-space()[. ne ""]
-            return $result or exists($values)
-        })
-        (: If a search query is present, show the results template :)
-        let $page :=
-            if ($show-search-results) then
-                'search/search-result.xml'
-            else
-                'search/search-landing.xml'
-        return
-            local:render-page($page, map{
-                "suppress-sitewide-search-field": "true"
-            })
-    else if ($path-parts[2] eq 'tips') then
-        local:render-page('search/tips.xml')
-    else
+    case 'search' return
+        switch (string($path-parts[2]))
+            case '' return
+                let $show-search-results := fold-left(("q", "start-date", "end-date"), false(), function($result, $next-parameter-name) {
+                    let $values := request:get-parameter($next-parameter-name, ()) ! normalize-space()[. ne ""]
+                    return $result or exists($values)
+                })
+                (: If a search query is present, show the results template :)
+                let $page :=
+                    if ($show-search-results) then
+                        'search/search-result.xml'
+                    else
+                        'search/search-landing.xml'
+                return
+                    local:render-page($page, map{
+                        "suppress-sitewide-search-field": "true"
+                    })
+            case 'tips' return
+                local:render-page('search/tips.xml')
+            default return
+                local:redirect-to-static-404()
+
+    (: handle OPDS API requests :)
+    case 'api' return
+        if ($path-parts[2] eq 'v1') then
+            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                <forward url="{$exist:controller}/modules/opds-catalog.xql">
+                    <add-parameter name="xql-application-url" value="{local:get-url()}"/>
+                </forward>
+                <!--TODO Add an error handler appropriate for this API - with error codes, redirects. We currently let bad requests through without raising errors. -->
+            </dispatch>
+        else
+            local:redirect-to-static-404()
+
+    (: handle services requests :)
+    case 'services' return
+        switch($path-parts[2])
+            case 'volume-ids'
+            case 'volume-images' return
+                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                    <forward url="{$exist:controller}/modules/{$path-parts[2]}.xql"/>
+                    <!--TODO Maybe add an error handler, but not the default one. -->
+                </dispatch>
+            default return
+                local:redirect-to-static-404()
+
+    (: fallback: return 404 :)
+    default return
         local:redirect-to-static-404()
-
-(: handle OPDS API requests :)
-else if ($path-parts[1] eq 'api' and $path-parts[2] eq 'v1') then
-    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/modules/opds-catalog.xql">
-            <add-parameter name="xql-application-url" value="{local:get-url()}"/>
-        </forward>
-        <!--TODO Add an error handler appropriate for this API - with error codes, redirects. We currently let bad requests through without raising errors. -->
-    </dispatch>
-
-(: handle services requests :)
-else if ($path-parts[1] eq 'services' and $path-parts[2] = ('volume-ids', 'volume-images')) then
-    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/modules/{$path-parts[2]}.xql"/>
-        <!--TODO Maybe add an error handler, but not the default one. -->
-    </dispatch>
-
-(: fallback: return 404 :)
-else
-    local:redirect-to-static-404()
