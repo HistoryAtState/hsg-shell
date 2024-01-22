@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-at="content"
+    data-template-with="templates/site.xml">
+    <div>
+        <h1>Page Not found</h1>
+        <p>The resource you requested could not be found.</p>
+    </div>
+</div>

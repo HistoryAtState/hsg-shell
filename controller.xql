@@ -50,16 +50,11 @@ declare function local:maybe-set-if-modified-since($ims-header-value as xs:strin
     else request:set-attribute("if-modified-since", $ims-header-value)
 };
 
-declare function local:redirect-to-static-404() as element() {
-    let $static-error-page :=
-        if ($local:is-proxied-request)
-        then "static-error-404.html"
-        else "local-static-error-404.html"
-
-    return
-        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-            <forward url="{$exist:controller}/pages/{$static-error-page}" method="get"/>
-        </dispatch>
+declare function local:serve-not-found-page() as element() {
+    response:set-status-code(404),
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <forward url="{$exist:controller}/modules/error-404.xq"/>
+    </dispatch>
 };
 
 declare variable $local:view-module-url := $exist:controller || "/modules/view.xql";
@@ -85,7 +80,7 @@ declare function local:render-page($page-template as xs:string) as element() {
     local:render-page($page-template, map{})
 };
 
-declare variable $path-parts := local:split-path($exist:path)
+declare variable $path-parts := local:split-path($exist:path);
 
 (:
 util:log('debug', map {
@@ -156,7 +151,7 @@ else if (ends-with($exist:resource, ".xql")) then
 (: reject ANY request with more than 4 path parts -> /a/b/c/d/e :)
 else if (count($path-parts) gt 4) then (
     util:log("info", ("hsg-shell controller.xql received >4 path parts: ", string-join($path-parts, ":"))),
-    local:redirect-to-static-404()
+    local:serve-not-found-page()
 )
 
 else switch($path-parts[1])
@@ -189,9 +184,9 @@ else switch($path-parts[1])
                         case "browse" return
                             local:render-page("historicaldocuments/pre-1861/serial-set/browse.xml")
                         default return
-                            local:redirect-to-static-404()
+                            local:serve-not-found-page()
                 else
-                    local:redirect-to-static-404()
+                    local:serve-not-found-page()
             case "frus-history" return
                 switch (string($path-parts[3]))
                     case '' return
@@ -244,7 +239,7 @@ else switch($path-parts[1])
                     (: return 404 for requests with unreasonable numbers of path fragments :)
                     if (count($path-parts) gt 3) then (
                         util:log("info", ("hsg-shell controller.xql received >2 fragments: ", string-join($path-parts, "/"))),
-                        local:redirect-to-static-404()
+                        local:serve-not-found-page()
                     )
                     else if ($path-parts[3]) then
                         local:render-page("historicaldocuments/volume-interior.xml", map{
@@ -445,7 +440,7 @@ else switch($path-parts[1])
                                 "person-or-country-id": $path-parts[4]
                             })
                     default return
-                        local:redirect-to-static-404()
+                        local:serve-not-found-page()
 
             case "visits" return
                 if (empty($path-parts[3])) then
@@ -474,14 +469,14 @@ else switch($path-parts[1])
                             "film-id": $path-parts[3]
                         })
                     default return
-                        local:redirect-to-static-404()
+                        local:serve-not-found-page()
 
             case "wwi" return
                 local:render-page('departmenthistory/wwi.xml', map {
                     "publication-id": "wwi"
                 })
             default return
-                local:redirect-to-static-404()
+                local:serve-not-found-page()
 
 (: handle requests for about section :)
     case 'about' return
@@ -519,7 +514,7 @@ else switch($path-parts[1])
             case "recent-publications" return local:render-page('about/recent-publications.xml')
             case "content-warning" return local:render-page('about/content-warning.xml')
             default return
-                local:redirect-to-static-404()
+                local:serve-not-found-page()
 
 (: handle requests for milestones section :)
     case 'milestones' return
@@ -546,7 +541,7 @@ else switch($path-parts[1])
                 "section-id": $path-parts[3]
             })
         else (: (FIXME: this is currently never the case) anything else is an error :)
-            local:redirect-to-static-404()
+            local:serve-not-found-page()
 
 (: handle requests for conferences section :)
     case 'conferences' return
@@ -573,7 +568,7 @@ else switch($path-parts[1])
         else if ($path-parts[2] eq 'catalog') then
             local:render-page('developer/catalog.xml')
         else
-            local:redirect-to-static-404()
+            local:serve-not-found-page()
 
 (: handle requests for open section :)
     case 'open' return
@@ -599,7 +594,7 @@ else switch($path-parts[1])
                     </forward>
                 </dispatch>
             default return
-                local:redirect-to-static-404()
+                local:serve-not-found-page()
 
 (: handle requests for tags section :)
     case 'tags' return
@@ -628,7 +623,7 @@ else switch($path-parts[1])
                         "document-id": $path-parts[3]
                     })
             default return
-                local:redirect-to-static-404()
+                local:serve-not-found-page()
 
 (: handle search requests :)
     case 'search' return
@@ -651,7 +646,7 @@ else switch($path-parts[1])
             case 'tips' return
                 local:render-page('search/tips.xml')
             default return
-                local:redirect-to-static-404()
+                local:serve-not-found-page()
 
     (: handle OPDS API requests :)
     case 'api' return
@@ -663,7 +658,7 @@ else switch($path-parts[1])
                 <!--TODO Add an error handler appropriate for this API - with error codes, redirects. We currently let bad requests through without raising errors. -->
             </dispatch>
         else
-            local:redirect-to-static-404()
+            local:serve-not-found-page()
 
     (: handle services requests :)
     case 'services' return
@@ -675,8 +670,8 @@ else switch($path-parts[1])
                     <!--TODO Maybe add an error handler, but not the default one. -->
                 </dispatch>
             default return
-                local:redirect-to-static-404()
+                local:serve-not-found-page()
 
     (: fallback: return 404 :)
     default return
-        local:redirect-to-static-404()
+        local:serve-not-found-page()
