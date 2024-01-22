@@ -148,9 +148,8 @@ declare function app:fix-links($nodes as node()*) {
 
 declare
     %templates:wrap
-function app:handle-error($node as node(), $model as map(*), $code as xs:int?) {
+function app:handle-error($node as node(), $model as map(*), $code as xs:integer?) {
     let $errcode := request:get-attribute("hsg-shell.errcode")
-    let $log := util:log("info", "error: " || $errcode || " code: " || $code)
     return
         if ((empty($errcode) and empty($code)) or $code = number($errcode)) then
             (templates:process($node/node(), $model),
