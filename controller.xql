@@ -196,9 +196,9 @@ else switch($path-parts[1])
                         })
                     case "documents" return
                         if (empty($path-parts[4])) then
-                            local:render-page("historicaldocuments/frus-history/documents/document.xml")
+                            local:render-page("historicaldocuments/frus-history/documents/index.xml")
                         else
-                            local:render-page("historicaldocuments/frus-history/documents/index.xml", map{
+                            local:render-page("historicaldocuments/frus-history/documents/document.xml", map{
                                 "document-id": $path-parts[4]
                             })
                     case "events" return
