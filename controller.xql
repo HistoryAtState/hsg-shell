@@ -48,7 +48,8 @@ declare function local:render-page($page-template as xs:string, $parameters as m
         <view>
             <forward url="{$local:view-module-url}">{
                 map:for-each($parameters, function ($name as xs:string, $value as xs:string) as element() {
-                    <add-parameter name="{$name}" value="{$value}" />
+                    <add-parameter xmlns="http://exist.sourceforge.net/NS/exist"
+                        name="{$name}" value="{$value}" />
                 })
             }</forward>
         </view>
@@ -321,7 +322,7 @@ else switch($path-parts[1])
                         "section-id": "intro"
                     })
                 else
-                    local:render-page('departmenthistory/buildings/index.xml', map{
+                    local:render-page('departmenthistory/buildings/section.xml', map{
                         "publication-id": "buildings",
                         "document-id": "buildings",
                         "section-id": $path-parts[3]
@@ -418,7 +419,7 @@ else switch($path-parts[1])
                                 "publication-id": "travels-secretary"
                             })
                         else
-                            local:render-page('departmenthistory/travels/secretary/person-or-country', map{
+                            local:render-page('departmenthistory/travels/secretary/person-or-country.xml', map{
                                 "publication-id": "travels-secretary",
                                 "person-or-country-id": $path-parts[4]
                             })
@@ -560,7 +561,7 @@ else switch($path-parts[1])
                 local:render-page("open/index.xml")
             case "frus-latest"
             case "frus-metadata" return
-                local:render-page("pages/open/"|| $path-parts[2] ||"/index.xml")
+                local:render-page("open/"|| $path-parts[2] ||"/index.xml")
 
             case "frus-latest.xml" return
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
