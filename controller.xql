@@ -10,20 +10,11 @@ declare variable $exist:controller external;
 declare variable $exist:prefix external;
 declare variable $exist:root external;
 
-declare variable $local:error-handler := 
-    <error-handler>
-        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-        <forward url="{$exist:controller}/modules/view.xql"/>
-    </error-handler>
-;
-
-declare variable $local:nginx-request-uri-header := request:get-header("nginx-request-uri");
-declare variable $local:is-proxied-request := exists($local:nginx-request-uri-header);
+declare variable $path-parts := tokenize($exist:path, '/')[. ne ''];
+declare variable $nginx-request-uri-header := request:get-header("nginx-request-uri");
 
 declare function local:uri() as xs:string {
-    if ($local:is-proxied-request)
-    then $local:nginx-request-uri-header
-    else request:get-uri()
+    ($nginx-request-uri-header, request:get-uri())[1]
 };
 
 declare function local:port($port as xs:integer) as xs:string? {
@@ -40,11 +31,6 @@ declare function local:get-url() {
     )
 };
 
-
-declare function local:split-path($path as xs:string) as xs:string* {
-    tokenize($path, '/')[. ne '']
-};
-
 declare function local:maybe-set-if-modified-since($ims-header-value as xs:string?) as empty-sequence() {
     if (empty($ims-header-value)) then ()
     else request:set-attribute("if-modified-since", $ims-header-value)
@@ -52,25 +38,22 @@ declare function local:maybe-set-if-modified-since($ims-header-value as xs:strin
 
 declare function local:serve-not-found-page() as element() {
     response:set-status-code(404),
-    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/modules/error-404.xq"/>
-    </dispatch>
+    local:render-page("error-page-404.xml")
 };
 
 declare variable $local:view-module-url := $exist:controller || "/modules/view.xql";
-declare variable $local:error-page-template := $exist:controller || "/pages/error-page.xml";
 declare function local:render-page($page-template as xs:string, $parameters as map(*)) as element() {
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller}/pages/{$page-template}"/>
         <view>
             <forward url="{$local:view-module-url}">{
-                for $name in map:keys($parameters)
-                let $value := $parameters($name)
-                return <add-parameter name="{$name}" value="{$value}" />
+                map:for-each($parameters, function ($name as xs:string, $value as xs:string) as element() {
+                    <add-parameter name="{$name}" value="{$value}" />
+                })
             }</forward>
         </view>
         <error-handler>
-            <forward url="{$local:error-page-template}" method="get"/>
+            <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
             <forward url="{$local:view-module-url}"/>
         </error-handler>
     </dispatch>
@@ -80,7 +63,6 @@ declare function local:render-page($page-template as xs:string) as element() {
     local:render-page($page-template, map{})
 };
 
-declare variable $path-parts := local:split-path($exist:path);
 
 (:
 util:log('debug', map {
@@ -99,7 +81,7 @@ if ($exist:path eq '') then
     </dispatch>
 
 (: handle request for landing page, e.g., http://history.state.gov/ :)
-else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq '' and $local:nginx-request-uri-header eq '/')) then
+else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq '' and $nginx-request-uri-header eq '/')) then
     local:render-page("index.xml")
 
 (: strip trailing slash :)
@@ -161,6 +143,7 @@ else switch($path-parts[1])
     case "opensearch.html"
     case "favicon.ico" return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <!-- TODO: add cache header! -->
             <forward url="{$exist:controller}/resources/{$exist:path}"/>
         </dispatch>
         
@@ -172,6 +155,22 @@ else switch($path-parts[1])
                 local:render-page("historicaldocuments/index.xml", map{
                     "publication-id": "historicaldocuments"
                 })
+            case "about-frus"
+            case "citing-frus"
+            case "ebooks"
+            case "other-electronic-resources"
+            case "status-of-the-series" return
+                local:render-page("historicaldocuments/" || $path-parts[2] || ".xml")
+            case "guide-to-sources-on-vietnam-1969-1975" return
+                local:render-page("historicaldocuments/vietnam-guide.xml", map{
+                    "publication-id": "vietnam-guide",
+                    "document-id": "guide-to-sources-on-vietnam-1969-1975"
+                })
+            case "quarterly-releases" return
+                if (empty($path-parts[3])) then
+                    local:render-page("historicaldocuments/quarterly-releases/index.xml")
+                else
+                    local:render-page("historicaldocuments/quarterly-releases/announcements/" || $path-parts[3] || ".xml")
             case "pre-1861" return
                 if (empty($path-parts[3])) then
                     local:render-page("historicaldocuments/pre-1861/index.xml")
@@ -194,6 +193,8 @@ else switch($path-parts[1])
                             "publication-id": "frus-history-monograph",
                             "document-id": "frus-history"
                         })
+                    case "events" return
+                        local:render-page("historicaldocuments/frus-history/events/index.xml")
                     case "documents" return
                         if (empty($path-parts[4])) then
                             local:render-page("historicaldocuments/frus-history/documents/index.xml")
@@ -201,8 +202,6 @@ else switch($path-parts[1])
                             local:render-page("historicaldocuments/frus-history/documents/document.xml", map{
                                 "document-id": $path-parts[4]
                             })
-                    case "events" return
-                        local:render-page("historicaldocuments/frus-history/events/index.xml")
                     case "research" return
                         if (empty($path-parts[4])) then
                             local:render-page("historicaldocuments/frus-history/research/index.xml")
@@ -211,47 +210,31 @@ else switch($path-parts[1])
                                 "article-id": $path-parts[4]
                             })
                     default return
+                        (: TODO: can we check easily here, if a section-id is valid? :)
                         local:render-page("historicaldocuments/frus-history/monograph-interior.xml", map{
                             "publication-id": "frus-history-monograph",
                             "document-id": "frus-history",
                             "section-id": $path-parts[3],
                             "requested-url": local:get-url()
                         })
-            case "quarterly-releases" return
-                if (empty($path-parts[3])) then
-                    local:render-page("historicaldocuments/quarterly-releases/index.xml")
-                else
-                    local:render-page("historicaldocuments/quarterly-releases/announcements/" || $path-parts[3] || ".xml")
-            case "guide-to-sources-on-vietnam-1969-1975" return
-                local:render-page("historicaldocuments/vietnam-guide.xml", map{
-                    "publication-id": "vietnam-guide",
-                    "document-id": "guide-to-sources-on-vietnam-1969-1975"
-                })
-            case "about-frus"
-            case "citing-frus"
-            case "ebooks"
-            case "other-electronic-resources"
-            case "status-of-the-series" return
-                local:render-page("historicaldocuments/" || $path-parts[2] || ".xml")
-
             default return
-                if (starts-with($path-parts[2], "frus")) then
-                    (: return 404 for requests with unreasonable numbers of path fragments :)
-                    if (count($path-parts) gt 3) then (
-                        util:log("info", ("hsg-shell controller.xql received >2 fragments: ", string-join($path-parts, "/"))),
-                        local:serve-not-found-page()
-                    )
-                    else if ($path-parts[3]) then
+                (: return 404 for requests with unreasonable numbers of path path-parts :)
+                if (count($path-parts) gt 3) then (
+                    util:log("info", ("hsg-shell controller.xql received >2 path-parts: ", string-join($path-parts, "/"))),
+                    local:serve-not-found-page()
+                )
+                else if (starts-with($path-parts[2], "frus")) then
+                    if (empty($path-parts[3])) then
+                        local:render-page("historicaldocuments/volume-landing.xml", map{
+                            "publication-id": "frus",
+                            "document-id": $path-parts[2]
+                        })
+                    else
                         local:render-page("historicaldocuments/volume-interior.xml", map{
                             "publication-id": "frus",
                             "document-id": $path-parts[2],
                             "section-id": $path-parts[3],
                             "requested-url": local:get-url()
-                        })
-                    else
-                        local:render-page("historicaldocuments/volume-landing.xml", map{
-                            "publication-id": "frus",
-                            "document-id": $path-parts[2]
                         })
                 else
                     local:render-page("historicaldocuments/administrations.xml", map{
