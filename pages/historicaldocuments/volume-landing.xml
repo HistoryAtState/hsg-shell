@@ -12,8 +12,8 @@
                         <h1 data-template="frus:volume-landing-title"/>
                         <img class="hsg-frus__cover" data-template="frus:cover-img"/>
                         <div data-template="frus:render-volume-landing"/>
-                        <div class="hsg-frus__toc" data-template="toc:table-of-contents" data-template-heading="false"
-                            data-template-highlight="false"/>
+                        <div class="hsg-frus__toc" data-template="toc:table-of-contents"
+                            data-template-heading="false" data-template-highlight="false"/>
                     </div>
                 </div>
                 <aside data-template="pages:asides">
@@ -100,10 +100,12 @@
                         </div>
                         <ul class="hsg-list-group">
                             <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                                <a href="$app/historicaldocuments/kennedy">Kennedy
+                                    Administration</a>
                             </li>
                             <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                                <a href="$app/historicaldocuments/johnson">Johnson
+                                    Administration</a>
                             </li>
                             <li class="hsg-list-group-item">
                                 <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford
@@ -119,7 +121,8 @@
                                 <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
                             </li>
                             <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                                <a href="$app/historicaldocuments/clinton">Clinton
+                                    Administration</a>
                             </li>
                             <li class="hsg-list-group-item">
                                 <a href="$app/historicaldocuments">All Administrations</a>

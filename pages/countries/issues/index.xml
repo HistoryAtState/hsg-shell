@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
-      <div>
-         <div class="row">
-            <div data-template="pages:breadcrumb">
-               <p id="breadcrumb-title">Issues</p>
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="row">
+                <div data-template="pages:breadcrumb">
+                    <p id="breadcrumb-title">Issues</p>
+                </div>
             </div>
-         </div>
-         <div class="row">
-            <div class="hsg-width-two-thirds">
-               <div id="content-inner" data-template="app:fix-links">
-                  <h1>Issues Relevant to U.S. Foreign Policy</h1>
-                  <ol data-template="countries:issues-list"/>
-               </div>
+            <div class="row">
+                <div class="hsg-width-two-thirds">
+                    <div data-template="app:fix-links" id="content-inner">
+                        <h1>Issues Relevant to U.S. Foreign Policy</h1>
+                        <ol data-template="countries:issues-list"/>
+                    </div>
+                </div>
+                <aside data-template="pages:asides">
+                    <div class="hsg-panel" data-template="app:fix-links">
+                        <div class="hsg-panel-heading">
+                            <h2 class="hsg-sidebar-title">Countries</h2>
+                        </div>
+                        <div class="hsg-panel-body">
+                            <p>
+                                <a href="$app/countries/all">View a list of all countries</a>
+                            </p>
+                        </div>
+                    </div>
+                </aside>
             </div>
-            <aside data-template="pages:asides">
-               <div class="hsg-panel" data-template="app:fix-links">
-                  <div class="hsg-panel-heading">
-                     <h2 class="hsg-sidebar-title">Countries</h2>
-                  </div>
-                  <div class="hsg-panel-body">
-                     <p>
-                        <a href="$app/countries/all">View a list of all countries</a>
-                     </p>
-                  </div>
-               </div>
-            </aside>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

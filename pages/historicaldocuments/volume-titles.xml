@@ -1,5 +1,6 @@
 <div data-template="pages:load" data-template-ignore="true">
-    <div data-template="templates:surround" data-template-at="content" data-template-with="templates/site.xml">
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
         <section class="row">
             <div data-template="pages:breadcrumb">
                 <p id="breadcrumb-title">All Titles in the <em>Foreign Relations</em> Series</p>
@@ -18,36 +19,51 @@
         <section class="row" data-template="fm:init-frus-list">
             <div class="hsg-width-two-thirds">
                 <ul class="hsg-list hsg-columns__flex hsg-list__volumes">
-                    <li class="hsg-list__item" data-template="templates:each" data-template-from="volumes-meta" data-template-to="volume-meta">
+                    <li class="hsg-list__item" data-template="templates:each"
+                        data-template-from="volumes-meta" data-template-to="volume-meta">
                         <div class="hsg-list__item__row--alignstart">
                             <img class="hsg-list__thumbnail" data-template="fm:thumbnail"/>
                             <div>
                                 <h3 class="hsg-list__title">
-                                    <a class="hsg-list__link" data-template="fm:title-link"><span data-template="fm:title"/></a>
+                                    <a class="hsg-list__link" data-template="fm:title-link">
+                                        <span data-template="fm:title"/>
+                                    </a>
                                 </h3>
                                 <dl>
                                     <dt data-template="fm:if-pub-date">Published:</dt>
-                                    <dd data-template="fm:if-pub-date"><time data-template="fm:pub-date"/></dd>
-                                    
+                                    <dd data-template="fm:if-pub-date">
+                                        <time data-template="fm:pub-date"/>
+                                    </dd>
+
                                     <dt data-template="fm:if-not-pub-date">Status:</dt>
                                     <dd data-template="fm:pub-status"/>
-                                    
+
                                     <dt data-template="fm:isbn-format"/>
                                     <dd data-template="fm:isbn"/>
                                 </dl>
                                 <div data-template="fm:get-media-types">
-                                    <ul class="hsg-list__media__download" data-template="fm:if-media">
-                                        <li data-template="fm:if-media-type" data-template-type="mobi">
-                                            <a class="hsg-link-button--outline" data-template="fm:mobi-href-attribute">Mobi (<span data-template="fm:mobi-size">12mb</span>)</a>
+                                    <ul class="hsg-list__media__download"
+                                        data-template="fm:if-media">
+                                        <li data-template="fm:if-media-type"
+                                            data-template-type="mobi">
+                                            <a class="hsg-link-button--outline"
+                                                data-template="fm:mobi-href-attribute">Mobi (<span
+                                                  data-template="fm:mobi-size">12mb</span>)</a>
                                         </li>
-                                        <li data-template="fm:if-media-type" data-template-type="epub">
-                                            <a class="hsg-link-button--outline" data-template="fm:epub-href-attribute">epub 2 (<span data-template="fm:epub-size">123kb</span>)</a>
+                                        <li data-template="fm:if-media-type"
+                                            data-template-type="epub">
+                                            <a class="hsg-link-button--outline"
+                                                data-template="fm:epub-href-attribute">epub 2 (<span
+                                                  data-template="fm:epub-size">123kb</span>)</a>
                                         </li>
                                         <!--<li data-template="fm:if-media-type" data-template-type="epub3">
                                         <button class="hsg-link-button-\-outline">Epub 3<span>123mb</span></button>
                                     </li>-->
-                                        <li data-template="fm:if-media-type" data-template-type="pdf">
-                                            <a class="hsg-link-button--outline" data-template="fm:pdf-href-attribute">PDF (<span data-template="fm:pdf-size">123mb</span>)</a>
+                                        <li data-template="fm:if-media-type"
+                                            data-template-type="pdf">
+                                            <a class="hsg-link-button--outline"
+                                                data-template="fm:pdf-href-attribute">PDF (<span
+                                                  data-template="fm:pdf-size">123mb</span>)</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -63,7 +79,7 @@
                     </div>
                     <div class="hsg-panel-body">
                         <p>Browse official documents from the <em>Foreign Relations of the United
-                            States</em> series.</p>
+                                States</em> series.</p>
                     </div>
                     <div class="hsg-panel-heading-second-level">
                         <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
@@ -76,7 +92,8 @@
                             <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
                         </li>
                         <li class="hsg-list-group-item">
-                            <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                            <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford
+                                Administrations</a>
                         </li>
                         <li class="hsg-list-group-item">
                             <a href="$app/historicaldocuments/carter">Carter Administration</a>

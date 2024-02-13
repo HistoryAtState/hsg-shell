@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
-      <div>
-         <div id="static-title" class="hidden">Short History - Department History</div>
-         <div class="row">
-            <div data-template="pages:breadcrumb">
-               <p id="breadcrumb-title">Short History</p>
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="hidden" id="static-title">Short History - Department History</div>
+            <div class="row">
+                <div data-template="pages:breadcrumb">
+                    <p id="breadcrumb-title">Short History</p>
+                </div>
             </div>
-         </div>
-         <div class="row">
-            <div class="hsg-width-two-thirds">
-               <div id="content-inner">
-                  <div id="content-container" data-template="app:fix-links">
-                     <h1>A Short History of the Department of State</h1>
-                     <div class="alert alert-danger" role="alert">
-                        <h2>NOTE TO READERS</h2>
-                        <p>This publication, “A Short History of the Department of State,” has
-                                been retired. The text remains online for reference purposes, but it
-                                is no longer being maintained or expanded.</p>
-                        <p>Why retire “A Short History”? In mid-2016 the Office of the Historian
-                                completed a review of its online offerings and concluded that
-                                extensive resources would be needed to revise and expand this
-                                publication to meet the Office’s standards for accuracy and
-                                comprehensiveness. At the same time, the events described in the “A
-                                Short History” essays are amply covered by numerous respected
-                                secondary sources. Rather than duplicate these efforts, the Office
-                                of the Historian has decided to focus its resources on areas where
-                                it is uniquely suited to make a contribution, such as coverage of <a href="$app/departmenthistory/timeline">the Department of State’s
-                                    institutional history</a>. In keeping with the publication’s new
-                                status, it can now be found under “More Resources” in the site-wide
-                                menu.</p>
-                        <p style="text-align: right; font-style: italic">Notice posted on April
-                                8, 2018.</p>
-                     </div>
-                     <div class="toc" data-template="toc:table-of-contents"/>
-                  </div>
-               </div>
+            <div class="row">
+                <div class="hsg-width-two-thirds">
+                    <div id="content-inner">
+                        <div data-template="app:fix-links" id="content-container">
+                            <h1>A Short History of the Department of State</h1>
+                            <div class="alert alert-danger" role="alert">
+                                <h2>NOTE TO READERS</h2>
+                                <p>This publication, “A Short History of the Department of State,”
+                                    has been retired. The text remains online for reference
+                                    purposes, but it is no longer being maintained or expanded.</p>
+                                <p>Why retire “A Short History”? In mid-2016 the Office of the
+                                    Historian completed a review of its online offerings and
+                                    concluded that extensive resources would be needed to revise and
+                                    expand this publication to meet the Office’s standards for
+                                    accuracy and comprehensiveness. At the same time, the events
+                                    described in the “A Short History” essays are amply covered by
+                                    numerous respected secondary sources. Rather than duplicate
+                                    these efforts, the Office of the Historian has decided to focus
+                                    its resources on areas where it is uniquely suited to make a
+                                    contribution, such as coverage of <a
+                                        href="$app/departmenthistory/timeline">the Department of
+                                        State’s institutional history</a>. In keeping with the
+                                    publication’s new status, it can now be found under “More
+                                    Resources” in the site-wide menu.</p>
+                                <p style="text-align: right; font-style: italic">Notice posted on
+                                    April 8, 2018.</p>
+                            </div>
+                            <div class="toc" data-template="toc:table-of-contents"/>
+                        </div>
+                    </div>
+                </div>
+                <aside data-template="pages:asides"/>
             </div>
-            <aside data-template="pages:asides"/>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

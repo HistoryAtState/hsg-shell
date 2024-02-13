@@ -1,72 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround" data-template-with="templates/site.xml" data-template-at="content">
-      <div>
-         <div class="row">
-            <div data-template="pages:breadcrumb"/>
-         </div>
-         <div class="row">
-            <div class="hsg-navigation-wrapper">
-               <h2 class="hsg-navigation-title" id="navigation-title" data-template="pages:navigation-title"/>
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="row">
+                <div data-template="pages:breadcrumb"/>
             </div>
-         </div>
-         <div class="row" data-template="pages:navigation">
-            <a data-template="pages:navigation-link" data-template-direction="previous" class="page-nav nav-prev">
-               <i class="glyphicon glyphicon-chevron-left"/>
-            </a>
-            <a data-template="pages:navigation-link" data-template-direction="next" class="page-nav nav-next">
-               <i class="glyphicon glyphicon-chevron-right"/>
-            </a>
-            <div class="hsg-width-main">
-               <div id="content-inner">
-                  <div id="content-container" data-template="app:fix-links">
-                     <div class="content" data-template="pages:view" data-template-base-path="frus"/>
-                  </div>
-               </div>
+            <div class="row">
+                <div class="hsg-navigation-wrapper">
+                    <h2 class="hsg-navigation-title" data-template="pages:navigation-title"
+                        id="navigation-title"/>
+                </div>
             </div>
-            <aside data-template="pages:asides">
-                <div id="docs-on-page" data-template="side:docs-on-page">
-                    <div class="hsg-panel">
-                        <div class="hsg-panel-heading">
-                            <h4 class="hsg-sidebar-title">Show Documents on this Page</h4>
+            <div class="row" data-template="pages:navigation">
+                <a class="page-nav nav-prev" data-template="pages:navigation-link"
+                    data-template-direction="previous">
+                    <i class="glyphicon glyphicon-chevron-left"/>
+                </a>
+                <a class="page-nav nav-next" data-template="pages:navigation-link"
+                    data-template-direction="next">
+                    <i class="glyphicon glyphicon-chevron-right"/>
+                </a>
+                <div class="hsg-width-main">
+                    <div id="content-inner">
+                        <div data-template="app:fix-links" id="content-container">
+                            <div class="content" data-template="pages:view"
+                                data-template-base-path="frus"/>
                         </div>
-                        <ul class="hsg-list-group" data-template="app:fix-links">
-                            <li class="hsg-list-group-item" data-template="templates:each" data-template-from="pb-doc-ids" data-template-to="section-id">
-                                <a data-template="link:create-link"></a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
-                <div id="media-download" data-template="frus:if-media-exists" data-template-suffix="pdf">
-                  <div class="hsg-panel">
-                     <div class="hsg-panel-heading">
-                        <h4 class="hsg-sidebar-title">Download</h4>
-                     </div>
-                     <div class="hsg-panel-body">
-                        <a data-template="frus:pdf-href-attribute" class="hsg-link-button">PDF
-                                    (<span data-template="frus:pdf-size"/>)</a>
-                     </div>
-                  </div>
-               </div>
+                <aside data-template="pages:asides">
+                    <div data-template="side:docs-on-page" id="docs-on-page">
+                        <div class="hsg-panel">
+                            <div class="hsg-panel-heading">
+                                <h4 class="hsg-sidebar-title">Show Documents on this Page</h4>
+                            </div>
+                            <ul class="hsg-list-group" data-template="app:fix-links">
+                                <li class="hsg-list-group-item" data-template="templates:each"
+                                    data-template-from="pb-doc-ids" data-template-to="section-id">
+                                    <a data-template="link:create-link"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div data-template="frus:if-media-exists" data-template-suffix="pdf"
+                        id="media-download">
+                        <div class="hsg-panel">
+                            <div class="hsg-panel-heading">
+                                <h4 class="hsg-sidebar-title">Download</h4>
+                            </div>
+                            <div class="hsg-panel-body">
+                                <a class="hsg-link-button" data-template="frus:pdf-href-attribute"
+                                    >PDF (<span data-template="frus:pdf-size"/>)</a>
+                            </div>
+                        </div>
+                    </div>
 
-               <div data-template="toc:frus-toc"/>
+                    <div data-template="toc:frus-toc"/>
 
-               <div data-template="frus:facets">
-                  <div id="person-panel" class="hsg-panel" data-template="app:hide-if-empty" data-template-property="persons">
-                     <div class="hsg-panel-heading">
-                        <h4 class="hsg-sidebar-title">Persons</h4>
-                     </div>
-                     <div class="hsg-list-group" data-template="frus:view-persons"/>
-                  </div>
-                  <div id="gloss-panel" class="hsg-panel" data-template="app:hide-if-empty" data-template-property="gloss">
-                     <div class="hsg-panel-heading">
-                        <h4 class="hsg-sidebar-title">Abbreviations &amp; Terms</h4>
-                     </div>
-                     <div class="hsg-list-group" data-template="frus:view-gloss"/>
-                  </div>
-               </div>
-            </aside>
-         </div>
-      </div>
-   </div>
+                    <div data-template="frus:facets">
+                        <div class="hsg-panel" data-template="app:hide-if-empty"
+                            data-template-property="persons" id="person-panel">
+                            <div class="hsg-panel-heading">
+                                <h4 class="hsg-sidebar-title">Persons</h4>
+                            </div>
+                            <div class="hsg-list-group" data-template="frus:view-persons"/>
+                        </div>
+                        <div class="hsg-panel" data-template="app:hide-if-empty"
+                            data-template-property="gloss" id="gloss-panel">
+                            <div class="hsg-panel-heading">
+                                <h4 class="hsg-sidebar-title">Abbreviations &amp; Terms</h4>
+                            </div>
+                            <div class="hsg-list-group" data-template="frus:view-gloss"/>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
 </div>

@@ -19,7 +19,7 @@ declare boundary-space preserve;
 
 declare variable $x:test_col := collection('/db/apps/hsg-shell/tests/data/frus-meta');
 
-declare variable $x:test_s3 := '/db/apps/hsg-shell/tests/data/s3-cache/static.history.state.gov.v2';
+declare variable $x:test_s3 := '/db/apps/hsg-shell/tests/data/s3-cache/static.history.state.gov.v3';
 
 (:
  :  This function replaces the contents of the S3 cache with the test data at $x:test_s3
@@ -30,12 +30,12 @@ declare
     %test:setUp
 function x:setup-tests-s3() {
     (: move to a temporary backup collection :)
-    xmldb:create-collection('/db/apps/s3', 'bak'),
-    xmldb:move('/db/apps/s3/cache', '/db/apps/s3/bak'),
+    xmldb:create-collection('/db/apps/hsg-publish-data', 'bak'),
+    xmldb:move('/db/apps/hsg-publish-data/data', '/db/apps/hsg-publish-data/bak'),
     (: recreate empty cache collection :)
-    xmldb:create-collection('/db/apps/s3', 'cache'),
+    xmldb:create-collection('/db/apps/hsg-publish-data', 'data'),
     (: copy the test collection :)
-    xmldb:copy-collection($x:test_s3, '/db/apps/s3/cache')
+    xmldb:copy-collection($x:test_s3, '/db/apps/hsg-publish-data/data')
 };
  
 (:
@@ -46,13 +46,13 @@ declare
     %test:tearDown
 function x:teardown-tests-s3() {
     (: remove the existing cache :)
-    xmldb:remove('/db/apps/s3/cache'),
+    xmldb:remove('/db/apps/hsg-publish-data/data'),
     (: recreate empty cache collection :)
-    xmldb:create-collection('/db/apps/s3', 'cache'),
+    xmldb:create-collection('/db/apps/hsg-publish-data', 'data'),
     (: restore original cache collection :)
-    xmldb:move('/db/apps/s3/bak/cache', '/db/apps/s3'),
+    xmldb:move('/db/apps/hsg-publish-data/bak/cache', '/db/apps/hsg-publish-data/data'),
     (: remove backup collection :)
-    xmldb:remove('/db/apps/s3/bak')
+    xmldb:remove('/db/apps/hsg-publish-data/bak')
 };
 
 (:

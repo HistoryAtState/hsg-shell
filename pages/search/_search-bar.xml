@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div class="row">
-   <div class="hsg-width-one-whole" data-template="app:fix-links">
-      <h1>Search</h1>
-      <p>Read these <a href="$app/search/tips">Search Tips</a> to learn all about the search
+    <div class="hsg-width-one-whole" data-template="app:fix-links">
+        <h1>Search</h1>
+        <p>Read these <a href="$app/search/tips">Search Tips</a> to learn all about the search
             engine’s keyword, date filter, volume filter, and sort functions—as well as some of the
             search engine’s limitations.</p>
-      <form method="get"
-            action="$app/search"
-            class="main-form"
-            id="searchForm">
-         <p class="form-group searchbox">
-            <label for="q" class="sr-only">Search</label>
-            <input type="search"
-                   name="q"
-                   class="form-control"
-                   id="q"
-                   data-template="templates:form-control"/>
-            <button type="submit" class="hsg-link-button search-button btn">
-               <span class="hsg-search-submit-text">Search</span>
-               <i class="hsg-search-icon"/>
-            </button>
-         </p>
-      </form>
-   </div>
+        <form action="$app/search" class="main-form" id="searchForm" method="get">
+            <p class="form-group searchbox">
+                <label class="sr-only" for="q">Search</label>
+                <input class="form-control" data-template="templates:form-control" id="q" name="q"
+                    type="search"/>
+                <button class="hsg-link-button search-button btn" type="submit">
+                    <span class="hsg-search-submit-text">Search</span>
+                    <i class="hsg-search-icon"/>
+                </button>
+            </p>
+        </form>
+    </div>
 </div>

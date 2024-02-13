@@ -398,7 +398,26 @@ else if (matches($exist:path, '^/historicaldocuments/?')) then
                     </dispatch>
                 default return
                     if (starts-with($fragments[1], "frus")) then
-                        if ($fragments[2]) then
+                        (: return 404 for requests with unreasonable numbers of path fragments :)
+                        if (count($fragments) gt 2) then
+                            (
+                                util:log("info", "hsg-shell controller.xql received >2 fragments: " || string-join($fragments, "/")),
+                                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                                    <forward url="{$exist:controller}/pages/error-page.xml">
+                                    </forward>
+                                    <view>
+                                        <forward url="{$exist:controller}/modules/view.xql">
+                                            <set-attribute name="hsg-shell.errcode" value="404"/>
+                                            <add-parameter name="uri" value="{$exist:path}"/>
+                                        </forward>
+                                    </view>
+                                    <error-handler>
+                                        <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
+                                        <forward url="{$exist:controller}/modules/view.xql"/>
+                                    </error-handler>
+                                </dispatch>
+                            )
+                        else if ($fragments[2]) then
                             let $page := "historicaldocuments/volume-interior.xml"
                             let $document-id := $fragments[1]
                             let $section-id := $fragments[2]

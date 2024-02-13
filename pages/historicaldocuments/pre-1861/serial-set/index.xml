@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div data-template="templates:surround"
-     data-template-with="templates/site.xml"
-     data-template-at="content">
-   <div id="static-title" class="hidden">U.S. foreign relations materials in the pre-1861 U.S.
+<div data-template="templates:surround" data-template-at="content"
+    data-template-with="templates/site.xml">
+    <div class="hidden" id="static-title">U.S. foreign relations materials in the pre-1861 U.S.
         Congressional Serial Set - Pre-1861 U.S. Foreign Relations Materials - Historical
         Documents</div>
-   <div class="row">
-      <div data-template="pages:breadcrumb">
-         <p id="breadcrumb-title">U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial Set</p>
-      </div>
-   </div>
-   <div class="row">
-      <div class="hsg-width-two-thirds"
-           id="volume"
-           data-template="app:fix-links">
-         <div id="content-inner">
-            <h1>U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial
+    <div class="row">
+        <div data-template="pages:breadcrumb">
+            <p id="breadcrumb-title">U.S. foreign relations materials in the pre-1861 U.S.
+                Congressional Serial Set</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="hsg-width-two-thirds" data-template="app:fix-links" id="volume">
+            <div id="content-inner">
+                <h1>U.S. foreign relations materials in the pre-1861 U.S. Congressional Serial
                     Set</h1>
-            <div data-template="serial-set:introduction"/>
-            <p>Browse sources by <span data-template="serial-set:regions-count"/> regions and
-                        <span data-template="serial-set:subjects-count"/> subjects, or <a href="$app/historicaldocuments/pre-1861/serial-set/all">View all <span data-template="serial-set:bibls-count"/> sources</a>.</p>
-            <ul data-template="serial-set:region-subject-list"/>
-         </div>
-      </div>
-      <aside data-template="pages:asides">
-         <div class="hsg-panel" data-template="app:fix-links">
-            <div class="hsg-panel-heading">
-               <h2 class="hsg-sidebar-title">Administrations</h2>
+                <div data-template="serial-set:introduction"/>
+                <p>Browse sources by <span data-template="serial-set:regions-count"/> regions and
+                        <span data-template="serial-set:subjects-count"/> subjects, or <a
+                        href="$app/historicaldocuments/pre-1861/serial-set/all">View all <span
+                            data-template="serial-set:bibls-count"/> sources</a>.</p>
+                <ul data-template="serial-set:region-subject-list"/>
             </div>
-            <div class="hsg-panel-body">
-               <p>Browse official documents from the <em>Foreign Relations of the United
+        </div>
+        <aside data-template="pages:asides">
+            <div class="hsg-panel" data-template="app:fix-links">
+                <div class="hsg-panel-heading">
+                    <h2 class="hsg-sidebar-title">Administrations</h2>
+                </div>
+                <div class="hsg-panel-body">
+                    <p>Browse official documents from the <em>Foreign Relations of the United
                             States</em> series.</p>
+                </div>
+                <div class="hsg-panel-heading-second-level">
+                    <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
+                </div>
+                <ul class="hsg-list-group">
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/carter">Carter Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments">All Administrations</a>
+                    </li>
+                </ul>
             </div>
-            <div class="hsg-panel-heading-second-level">
-               <h3 class="hsg-sidebar-title-second-level">Recent Administrations</h3>
-            </div>
-            <ul class="hsg-list-group">
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/kennedy">Kennedy Administration</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/johnson">Johnson Administration</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/nixon-ford">Nixon-Ford Administrations</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/carter">Carter Administration</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
-               </li>
-               <li class="hsg-list-group-item">
-                  <a href="$app/historicaldocuments">All Administrations</a>
-               </li>
-            </ul>
-         </div>
-      </aside>
-   </div>
+        </aside>
+    </div>
 </div>

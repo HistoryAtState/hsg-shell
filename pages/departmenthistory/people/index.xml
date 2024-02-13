@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div data-template="pages:load">
-   <div data-template="templates:surround"
-        data-template-with="templates/site.xml"
-        data-template-at="content">
-      <div>
-         <div id="static-title" class="hidden">People - Department History</div>
-         <div class="row">
-            <div data-template="pages:breadcrumb">
-               <p id="breadcrumb-title">People</p>
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="hidden" id="static-title">People - Department History</div>
+            <div class="row">
+                <div data-template="pages:breadcrumb">
+                    <p id="breadcrumb-title">People</p>
+                </div>
             </div>
-         </div>
-         <div class="row">
-            <div class="hsg-width-two-thirds">
-               <div id="content-inner" data-template="app:fix-links">
-                  <h1>People</h1>
-                  <p>The people who have served the Department of State represent a long and
-                        complex tradition of U.S. diplomacy. This section contains a variety of
-                        information about these people and their work. It includes the following: <ul>
-                        <li>
-                           <a href="$app/departmenthistory/people/secretaries">Biographies</a>
-                                of the Secretaries of State and suggestions for further reading
-                                about these public servants;</li>
-                        <li>Extensive lists of the past <a href="$app/departmenthistory/people/principals-chiefs">Principal
-                                    Officers of the Department of State and Chiefs of Mission</a>
-                                organized by position, country, and name; </li>
-                        <li>Details about the <a href="$app/departmenthistory/travels/secretary">foreign travels of the Secretaries of State</a> and the <a href="$app/departmenthistory/travels/president">Presidents of
-                                    the United States</a>; and,</li>
-                        <li>Lists of the <a href="$app/departmenthistory/visits">visits of
-                                    foreign leaders</a> to the United States.</li>
-                     </ul>
-                  </p>
-               </div>
+            <div class="row">
+                <div class="hsg-width-two-thirds">
+                    <div data-template="app:fix-links" id="content-inner">
+                        <h1>People</h1>
+                        <p>The people who have served the Department of State represent a long and
+                            complex tradition of U.S. diplomacy. This section contains a variety of
+                            information about these people and their work. It includes the
+                            following: <ul>
+                                <li>
+                                    <a href="$app/departmenthistory/people/secretaries"
+                                        >Biographies</a> of the Secretaries of State and suggestions
+                                    for further reading about these public servants;</li>
+                                <li>Extensive lists of the past <a
+                                        href="$app/departmenthistory/people/principals-chiefs"
+                                        >Principal Officers of the Department of State and Chiefs of
+                                        Mission</a> organized by position, country, and name; </li>
+                                <li>Details about the <a
+                                        href="$app/departmenthistory/travels/secretary">foreign
+                                        travels of the Secretaries of State</a> and the <a
+                                        href="$app/departmenthistory/travels/president">Presidents
+                                        of the United States</a>; and,</li>
+                                <li>Lists of the <a href="$app/departmenthistory/visits">visits of
+                                        foreign leaders</a> to the United States.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+                <aside data-template="pages:asides"/>
             </div>
-            <aside data-template="pages:asides"/>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>
