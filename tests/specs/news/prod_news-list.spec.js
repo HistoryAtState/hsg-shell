@@ -43,11 +43,11 @@
 describe('The news list', () => {
   let lc;
 
-  before(() => {
-    Page.open('news');
-    Page.pause(500)
-    Page.getElements('ul.hsg-list__news li.hsg-list__item')
-    lc = Page.getElementCount('.hsg-list__news .hsg-list__item')
+  before(async () => {
+    await Page.open('news');
+    await Page.pause(500)
+    await Page.getElements('ul.hsg-list__news li.hsg-list__item')
+    lc = await Page.getElementCount('.hsg-list__news .hsg-list__item')
   });
 
   // Check if 20 entries are displayed
@@ -59,12 +59,12 @@ describe('The news list', () => {
 describe('The pagination', () => {
   let p, a, pc;
 
-  before(() => {
-    Page.open('news');
-    Page.pause(500)
-    p = Page.getElement('nav ul.pagination')
-    pa = Page.getElements('nav ul.pagination a')
-    pc = Page.getElementCount('nav ul.pagination li')
+  before(async () => {
+    await Page.open('news');
+    await Page.pause(500)
+    p = await Page.getElement('nav ul.pagination')
+    pa = await Page.getElements('nav ul.pagination a')
+    pc = await Page.getElementCount('nav ul.pagination li')
   });
 
   // Pagination
@@ -82,8 +82,8 @@ describe('The pagination', () => {
   });
 
   // check if pagination link no.2 will redirect to page showing entries 21-40
-  it('should provide a link to the next 20 pages on the first news page', () => {
-    let href = Page.getElementAttribute(pa[3], 'href');
+  it('should provide a link to the next 20 pages on the first news page', async () => {
+    let href = await Page.getElementAttribute(pa[3], 'href');
     assert.equal(href, '?start=21');
   });
 });
@@ -94,20 +94,20 @@ newsEntries.forEach((newsEntry) => {
   describe('News entry with ID "' + newsEntry.id + '" of type "' + newsEntry.type + '"', () => {
     let d, dc, s, id, l, sa;
 
-    before(() => {
-      Page.open('news');
-      Page.pause(500)
-      d  = Page.getElement('.hsg-list__news time.hsg-badge--' + newsEntry.type);
-      dc = Page.getCssProperty('.hsg-list__news time.hsg-badge--' + newsEntry.type, 'background-color').parsed.hex;
+    before(async () => {
+      await Page.open('news');
+      await Page.pause(500)
+      d  = await Page.getElement('.hsg-list__news time.hsg-badge--' + newsEntry.type);
+      dc = await Page.getCssProperty('.hsg-list__news time.hsg-badge--' + newsEntry.type, 'background-color');
       s  = '.hsg-list__news .hsg-list__title .hsg-list__link[href$="' + newsEntry.id + '"]'
-      id = Page.getElement(s);
-      l  = Page.getElementText(s);
+      id = await Page.getElement(s);
+      l  = await Page.getElementText(s);
       sa  = '.hsg-list__news time.hsg-badge--' + newsEntry.type + '[dateTime="' + newsEntry.dateTime + '"] + .hsg-list__item-wrap > a.hsg-news__more'
     });
 
     // Check if types of date badges will get the correct color
     it('should have a date badge with the correct background-color "' + newsEntry.color + '"', () => {
-      assert.equal(dc, newsEntry.color);
+      assert.equal(dc.parsed.hex, newsEntry.color);
     });
 
     // Check if the news entry has a headline that links to the news article
@@ -120,8 +120,8 @@ newsEntries.forEach((newsEntry) => {
     });
 
     // Check if further links are displayed and contain expected href attribute
-    it('should display a further link to "' + newsEntry.furtherLink + '"', () => {
-      let link = Page.getElementAttribute(sa, 'href');
+    it('should display a further link to "' + newsEntry.furtherLink + '"', async () => {
+      let link = await Page.getElementAttribute(sa, 'href');
       assert.include(link, newsEntry.furtherLink);
     });
   });

@@ -3,7 +3,6 @@
  */
 
 const Page = require('../../pageobjects/Page'),
-  SearchPage = require('../../pageobjects/SearchPage'),
   searchPhrases = ['Washington', 'United Nations'];
 
 let firstResultHeadline = '.hsg-search-result > h3 > a';
@@ -12,16 +11,16 @@ let searchResult;
 describe('Searching on home page', function () {
   let searchInput, submitButton;
 
-  before(function () {
-    Page.open();
-    searchInput = Page.getElement('form input#search-box');
-    searchInput.setValue(searchPhrases[0]);
-    submitButton = Page.getElement('button[type="submit"]');
+  before(async function () {
+    await Page.open();
+    searchInput = await Page.getElement('form input#search-box');
+    await searchInput.setValue(searchPhrases[0]);
+    submitButton = await Page.getElement('button[type="submit"]');
     submitButton.click();
   });
 
-  it('should have results', function () {
-    searchResult = Page.getElementText(firstResultHeadline);
+  it('should have results', async function () {
+    searchResult = await Page.getElementText(firstResultHeadline);
     assert.exists(searchResult);
   });
 });
@@ -29,12 +28,12 @@ describe('Searching on home page', function () {
 searchPhrases.forEach(function (phrase) {
   describe('Searching for', function () {
 
-    before(function () {
-      Page.open('search?q=' + phrase);
+    before(async function () {
+      await Page.open('search?q=' + phrase);
     });
 
-    it('"' + phrase + '" should have results', function () {
-      searchResult = Page.getElementText(firstResultHeadline);
+    it('"' + phrase + '" should have results', async function () {
+      searchResult = await Page.getElementText(firstResultHeadline);
       assert.exists(searchResult);
     });
   });

@@ -18,7 +18,6 @@ import module namespace config="http://history.state.gov/ns/site/hsg/config" at 
 import module namespace pm-config="http://www.tei-c.org/tei-simple/pm-config" at "../pm-config.xql";
 import module namespace pages="http://www.tei-c.org/tei-simple/pages" at "pages.xql";
 import module namespace tpu="http://www.tei-c.org/tei-publisher/util" at "lib/util.xql";
-import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 import module namespace nav="http://www.tei-c.org/tei-simple/navigation" at "../navigation.xql";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";

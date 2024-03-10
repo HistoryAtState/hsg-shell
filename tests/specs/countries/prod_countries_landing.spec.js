@@ -2,22 +2,16 @@
  * Checks departmenthistory page type
  */
 
-const Page  = require('../../pageobjects/Page'),
-  SubPage   = require('../../pageobjects/SubPage');
-
-const subpages = {
-  links: {
-    p1: 'countries' // 1st level subpage (landing)
-  },
-  titles: {
-    p1: 'Countries'
-  }
+const Page  = require('../../pageobjects/Page')
+const mainpage = { 
+  link: 'countries', // 1st level subpage (landing)
+  title: 'Countries'
 };
 
 describe('The "Countries" landing page', function () {
-  it('should display a select input for choosing countries', function () {
-    Page.open(subpages.links.p1);
-    let select = $('select[data-template="countries:load-countries"]');
+  it('should display a select input for choosing countries', async function () {
+    await Page.open(mainpage.link);
+    let select = await $('select[data-template="countries:load-countries"]');
     assert.exists(select);
   });
 

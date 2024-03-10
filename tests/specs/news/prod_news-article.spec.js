@@ -57,20 +57,20 @@ newsArticles.forEach((article) => {
   describe('The news article with ID ' + article.id, () => {
     let fl, bt, d, dc, dt, ts, i, a;
 
-    before(() => {
-     Page.open('news/' + article.id);
-     Page.pause(500);
-     fl = Page.getElement('.hsg-news__more');
-     bt = $('.hsg-breadcrumb__link[aria-current="page"] > span').getHTML(false);
-     d  = Page.getElement('time.hsg-badge--' + article.type);
-     dc = Page.getCssProperty('time.hsg-badge--' + article.type, 'background-color').parsed.hex;
-     dt = Page.getElementAttribute('time.hsg-badge', 'datetime');
+    before(async () => {
+     await Page.open('news/' + article.id);
+     await Page.pause(500);
+     fl = await Page.getElement('.hsg-news__more');
+     bt = await $('.hsg-breadcrumb__link[aria-current="page"] > span').getHTML(false);
+     d  = await Page.getElement('time.hsg-badge--' + article.type);
+     dc = await Page.getCssProperty('time.hsg-badge--' + article.type, 'background-color');
+     dt = await Page.getElementAttribute('time.hsg-badge', 'datetime');
      ts = 'img.hsg-news__thumbnail';
     });
 
     // Check if types of date badges will get the correct color
     it('should have a date badge with the correct background-color "' + article.color + '"', () => {
-      assert.equal(dc, article.color);
+      assert.equal(dc.parsed.hex, article.color);
     });
 
     // Check if date is formatted correctly
@@ -84,17 +84,17 @@ newsArticles.forEach((article) => {
 
     // Check if thumbnail is available and displayed
     if (article.thumbnail != undefined) {
-      it('should display a thumbnail if available', () => {
-        i = Page.getElementAttribute(ts, 'src');
-        a = Page.getElementAttribute(ts, 'alt');
+      it('should display a thumbnail if available', async () => {
+        i = await Page.getElementAttribute(ts, 'src');
+        a = await Page.getElementAttribute(ts, 'alt');
         assert.equal(i, article.thumbnail);
         assert.equal(a, article.altText);
       });
     }
 
     // Check if further links are displayed and contain expected href attribute
-    it('should display a further link to "' + article.furtherLink + '"', () => {
-      let link = Page.getElementAttribute(fl, 'href');
+    it('should display a further link to "' + article.furtherLink + '"', async () => {
+      let link = await Page.getElementAttribute(fl, 'href');
       assert.include(link, article.furtherLink);
     });
 

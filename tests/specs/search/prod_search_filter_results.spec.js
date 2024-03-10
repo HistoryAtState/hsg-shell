@@ -37,9 +37,9 @@ validFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with valid parameters and sorted by "' + sortingOptions[0] + '"', function () {
     let searchResult;
 
-      before(function () {
-        Page.open(query + parameters + sortingOptions[0]);
-        searchResult = Page.getElementText(firstResultItem);
+      before(async function () {
+        await Page.open(query + parameters + sortingOptions[0]);
+        searchResult = await Page.getElementText(firstResultItem);
       });
 
       it('"' + parameters + '" should return search results', function () {
@@ -53,9 +53,9 @@ validFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with valid parameters and sorted by "' + sortingOptions[1] + '"' , function () {
     let searchResult;
 
-      before(function () {
-        Page.open(query + parameters + sortingOptions[1]);
-        searchResult = Page.getElementText(firstResultItem);
+      before(async function () {
+        await Page.open(query + parameters + sortingOptions[1]);
+        searchResult = await Page.getElementText(firstResultItem);
       });
 
       it('"' + parameters + '" should return search results', function () {
@@ -70,10 +70,10 @@ invalidFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with invalid parameters', function () {
     let searchResult, searchResultSection;
 
-    before(function () {
-      Page.open(query + parameters + sortingOptions[0]);
-      searchResult = Page.getElementText(noResultsMessage);
-      searchResultSection = Page.getElement('.hsg-search-section');
+    before(async function () {
+      await Page.open(query + parameters + sortingOptions[0]);
+      searchResult = await Page.getElementText(noResultsMessage);
+      searchResultSection = await Page.getElement('.hsg-search-section');
     });
 
     it('"' + parameters + '" should display the search page', function () {
@@ -81,8 +81,8 @@ invalidFilterOptions.forEach(function (parameters) {
     });
 
     // TODO: Check for notifications instead after this feature has been implemented, this is only a workaround
-    it('"' + parameters + '" should not return any search results', function () {
-      assert.equal(Page.getElementText('#content-inner > section > p'), 'No results were found.', 'No results should be displayed for this search.');
+    it('"' + parameters + '" should not return any search results', async function () {
+      assert.equal(await Page.getElementText('#content-inner > section > p'), 'No results were found.', 'No results should be displayed for this search.');
     });
   });
 });

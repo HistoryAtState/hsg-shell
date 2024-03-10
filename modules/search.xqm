@@ -5,7 +5,6 @@ module namespace search = "http://history.state.gov/ns/site/hsg/search";
 import module namespace kwic="http://exist-db.org/xquery/kwic";
 import module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";
 import module namespace templates="http://exist-db.org/xquery/html-templating";
-import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
 import module namespace fd="http://history.state.gov/ns/site/hsg/frus-dates" at "frus-dates.xqm";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
@@ -246,7 +245,7 @@ function search:entire-site-check($node as node(), $model as map(*)) {
 declare
     %templates:wrap
 function search:filter-input-attributes($node as node(), $model as map(*)) {
-    (:let $c:=console:log($model?component || ' : filter :' || $model?filter ):)
+    (:let $c:=util:log("info", $model?component || ' : filter :' || $model?filter ):)
     let $component := $model?component
     let $filter := $model?filter
     let $component-id := $model($component)/id
@@ -292,17 +291,17 @@ declare
 function search:component-checked($node as node(), $model as map(*)) {
     let $component := $model?component
     let $filter := $model?filter
-(:    let $c:=console:log('bar' || $filter):)
+(:    let $c:=util:log("info", 'bar' || $filter):)
     let $within := $model?filters($filter)
-(:    let $c:=console:log($within):)
+(:    let $c:=util:log("info", $within):)
     let $component-id := $model($component)/id
     return if ($component-id = $within) then "checked" else $within
 };
 
 declare
 function search:component-hidden($node as node(), $model as map(*), $component as xs:string) {
-(:    let $c:=console:log('c ' ||$component)
-    let $c:=console:log($model($component))
+(:    let $c:=util:log("info", 'c ' ||$component)
+    let $c:=util:log("info", $model($component))
     return:)
     element {$node/name()} {
         attribute class {
@@ -590,11 +589,11 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
                     () 
                 }
             let $query-sections-end := util:system-time()
-            let $query-sections-duration := console:log("query-sections-duration: " || $query-sections-end - $query-sections-start)
+            (: let $query-sections-duration := util:log("info", "query-sections-duration: " || $query-sections-end - $query-sections-start) :) 
             let $sorted-hits-start := util:system-time()
             let $sorted-hits := search:sort($hits, $adjusted-sort-by)
             let $sorted-hits-end := util:system-time()
-            let $sorted-hits-duration := console:log("sorted-hits-duration: " || $sorted-hits-end - $sorted-hits-start)
+            (: let $sorted-hits-duration := util:log("info", "sorted-hits-duration: " || $sorted-hits-end - $sorted-hits-start) :) 
             let $vol-ids :=  
                 map:for-each(ft:facets($hits, "frus-volume-id", ()), function($label, $count) {
                     $label
@@ -645,7 +644,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
             "query-duration": $query-duration
         }
     }
-    (: let $log := console:log($query-info?query-info) :)
+    (: let $log := util:log("info", $query-info?query-info) :)
 
     (: purge cache :)
     let $cache-max-age := xs:dayTimeDuration("PT5M")
@@ -666,7 +665,7 @@ function search:load-results($node as node(), $model as map(*), $q as xs:string?
     let $templates-process-start := util:system-time()
     let $html := templates:process($node/*, map:merge(($model, $query-info),  map{"duplicates": "use-last"}))
     let $templates-process-end := util:system-time()
-    let $log := console:log("templates-process-duration: ", $templates-process-end - $templates-process-start)
+    (: let $log := util:log("info", "templates-process-duration: " || $templates-process-end - $templates-process-start) :)
     return
         $html
 };
@@ -776,7 +775,7 @@ declare %private function search:prepare-query($sections as xs:string*, $volume-
 
     let $fields := map {"fields": ("hsg-date-min", "hsg-fulltext", "hsg-url")}
 
-    let $log := console:log("search:query-section prepared: query: " || $query-string || " range-start: " || $range-start || " range-end: " || $range-end || " category: "  || string-join($category, ' '))
+    (: let $log := util:log("info", "search:query-section prepared: query: " || $query-string || " range-start: " || $range-start || " range-end: " || $range-end || " category: "  || string-join($category, ' ')) :) 
 
     return map {
         "fields": $fields,
@@ -865,7 +864,7 @@ declare function search:result-summary($node, $model) {
     let $pub-name := $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))
     let $publication-has-custom-function := if ($publication-by-collection) then map:contains($search:DISPLAY, $config:PUBLICATION-COLLECTIONS?(util:collection-name($result))) else ()
     let $element-name-has-custom-function := map:contains($search:DISPLAY, local-name($result))
-(:    let $log := console:log("publication has custom function: " || $publication-has-custom-function || " element name has custom function: " || $element-name-has-custom-function):)
+(:    let $log := util:log("info", "publication has custom function: " || $publication-has-custom-function || " element name has custom function: " || $element-name-has-custom-function):)
     return
         if ($result/@xml:id = 'index') then
             '[Back of book index: too many hits to display]'
@@ -1140,7 +1139,7 @@ function search:load-volumes($node as node(), $model as map(*)) {
             ()
     
     let $load-volumes-end := util:system-time()
-    let $log := console:log("search:load-volumes: loaded " || count($volumes?*) || " in " || $load-volumes-end - $load-volumes-start)
+    (: let $log := util:log("info", "search:load-volumes: loaded " || count($volumes?*) || " in " || $load-volumes-end - $load-volumes-start) :) 
     let $new := map:merge(($model, $volumes),  map{"duplicates": "use-last"})
 
     return

@@ -6,23 +6,23 @@ function Page() {
 }
 
 Page.prototype.setViewPortSize = function (size) {
-  browser.setWindowSize(size);
+  return browser.setWindowSize(size);
 };
 
 Page.prototype.setMobileViewPortSize = function () {
-  browser.setWindowSize({width: 480, height: 740});
+  return browser.setWindowSize({width: 480, height: 740});
 };
 
 Page.prototype.setDesktopViewPortSize = function () {
-  browser.setWindowSize({width: 1200, height: 800});
+  return browser.setWindowSize({width: 1200, height: 800});
 };
 
 Page.prototype.scroll = function (selector) {
-  $(selector).scrollIntoView()
+  return $(selector).scrollIntoView()
 };
 
-Page.prototype.click = function (selector) {
-  $(selector).click();
+Page.prototype.click = async function (selector) {
+  return $(selector).click();
 };
 
 Page.prototype.getElement = function (selector) {
@@ -85,28 +85,28 @@ Page.prototype.getCssProperty = function (selector, cssProperty) {
 };
 
 Page.prototype.openUrl = function (url) {
-  browser.url(url);
+  return browser.url(url);
 };
 
-Page.prototype.pause = function (timeInMs) {
-  browser.pause(timeInMs);
+Page.prototype.pause = async function (timeInMs) {
+  return browser.pause(timeInMs);
 };
 
 Page.prototype.waitForVisible = function (selector, timeInMs) {
-  $(selector).waitForDisplayed(timeInMs)
+  return $(selector).waitForDisplayed(timeInMs)
 };
 
 Page.prototype.waitForExist = function (selector, timeInMs) {
-  browser.waitForExist(selector, timeInMs);
+  return browser.waitForExist(selector, timeInMs);
 };
 
 Page.prototype.getElementCount = function (selector) {
   return browser.$$(selector).length;
 };
 
-Page.prototype.searchAll = function (searchString) {
-  browser.element('#search-box').setValue(searchString);
-  browser.element('.hsg-link-button.search-button.btn').click();
+Page.prototype.searchAll = async function (searchString) {
+  await browser.element('#search-box').setValue(searchString);
+  await browser.element('.hsg-link-button.search-button.btn').click();
 };
 
 Page.prototype.getCookie = function (name) {
@@ -140,12 +140,12 @@ Page.prototype.open = function (path, data) {
   var parameters = data || {};
   var stem = path || '';
   var url = process.env.WDIO_PREFIX + stem + serializeParameters(parameters);
-  console.log('Requested URI: ' + url);
-  browser.url(url);
+  // console.log('Requested URI: ' + url);
+  return browser.url(url);
 };
 
 Page.prototype.refresh = function () {
-  browser.refresh();
+  return browser.refresh();
 };
 
 Page.prototype.getCookie = function (name) {
