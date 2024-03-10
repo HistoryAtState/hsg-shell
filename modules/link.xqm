@@ -118,7 +118,11 @@ declare function link:report-issue-body($node, $model) as xs:string {
     let $tab := codepoints-to-string(9)
     let $parameters as xs:string* :=
         for $param in try {request:get-parameter-names()} catch err:XPDY0002 {()}
-        return ($tab || $param || ':  ' || request:get-parameter($param, ()))
+        let $values := request:get-parameter($param, ())
+        (: discard internal parameters; perhaps we should move these from parameters to attributes :)
+        where $param ne "suppress-sitewide-search-field"
+        return 
+            $values ! ($tab || $param || ':  ' || .)
     return (
         "",
         "_________________________________________________________",
