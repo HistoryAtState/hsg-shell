@@ -35,7 +35,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
     count = await Page.getElementText(searchCount);
     count = count.replace(/,/, '');
     console.log('count=', count);
-    assert.equal(count, 1136, 'Current result did not match expected result');
+    assert.equal(count, 1138, 'Current result did not match expected result');
   });
 
   it('query "search?q=Sudan" should be performed in less than 0.403 second', async () => {
@@ -51,7 +51,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
     count = await Page.getElementText(searchCount);
     count = count.replace(/,/, '');
     console.log('count=', count);
-    assert.equal(count, 13775, 'Current result did not match expected result');
+    assert.equal(count, 13802, 'Current result did not match expected result');
   });
 
   it('query "search?q=China" should be performed in less than 0.406 second', async () => {
@@ -67,7 +67,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
     count = await Page.getElementText(searchCount);
     count = count.replace(/,/, '');
     console.log('count=', count);
-    assert.equal(count, 3790, 'Current result did not match expected result');
+    assert.equal(count, 3791, 'Current result did not match expected result');
   });
 
   it('query "search?q=Tokyo" should be performed in less than 0.474 second', async () => {
