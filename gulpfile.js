@@ -23,7 +23,7 @@ const AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
-const PRODUCTION = (!!process.env.NODE_ENV && process.env.NODE_ENV === 'production');
+const PRODUCTION = (!!process.env.HSG_ENV && process.env.HSG_ENV === 'production');
 
 console.log('Production? %s', PRODUCTION);
 

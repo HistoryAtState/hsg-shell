@@ -80,21 +80,21 @@ In order to build a xar package of the app with `ant` and to run scripts, that w
 
 ### Finally check currently installed versions
 
-1. node: `node -v` => Should output `v14.19.3`
+1. node: `node -v` => Should output `v18.18.2`
 2. npm: `npm -v` => Should output at least `v8.5.0`
-3. gulp: `gulp -v` => Should output at least `CLI version: 2.2.0, Local version: 4.0.2`
+3. gulp: `npx gulp -v` => Should output at least `CLI version: 2.2.0, Local version: 4.0.2`
 
 Now, with a running eXist-db you're ready to run either `ant`, or `gulp` to test if your update was successful.
 
 ### Production
 
-If `NODE_ENV` environment variable is set to **production** the XAR is build with
+If `HSG_ENV` environment variable is set to **production** the XAR is build with
 minified and concatenated styles and scripts. This build will then include
 google-analytics and DAP tracking.
 
-`NODE_ENV=production ant` for a single test
+`HSG_ENV=production ant` for a single test
 
-`export NODE_ENV` in the login script on a production server
+`export HSG_ENV` in the login script on a production server
 
 ## 2. Update
 
@@ -111,11 +111,11 @@ To create an up-to-date build package to install in eXist-db, this should do
 
 ## 3. Development
 
-`gulp build` builds the resource folder with fonts, optimized images, scripts and compiled styles
+`npx gulp build` builds the resource folder with fonts, optimized images, scripts and compiled styles
 
-`gulp deploy` sends the resource folder to a local existDB
+`npx gulp deploy` sends the resource folder to a local existDB
 
-`gulp watch` will upload the build files whenever a source file changes.
+`npx gulp watch` will upload the build files whenever a source file changes.
 
 **NOTE:** For the deploy and watch task you may have to edit the DB credentials in `gulpfile.js`.
 
@@ -168,27 +168,27 @@ When running this project's ant script on an M1 with a Chrome version <=105, you
 
 Basic syntax of starting an entire test suite is
 ```bash
-node_modules/.bin/wdio wdio.conf.js --suite name-of-the-testsuite
+npx wdio wdio.conf.js --suite <name-of-the-testsuite>
 ```
 for example (runs all development environment test that have been listed in the wdio configuration in `suites: {dev : ...}`):
 
 ```bash
-node_modules/.bin/wdio wdio.conf.js --suite dev
+npx wdio wdio.conf.js --suite dev
 ```
 
 and for a single test it is
 ```bash
-node_modules/.bin/wdio wdio.conf.js --spec path-to-the-testspec
+npx wdio wdio.conf.js --spec path-to-the-testspec
 ```
 for example:
 ```bash
-node_modules/.bin/wdio wdio.conf.js --spec tests/specs/error/prod_404.spec.js
+npx wdio wdio.conf.js --spec tests/specs/error/prod_404.spec.js
 ```
 
 In addition, you can define running the test commands in `package.json`
 within the `scripts` key, for example:
 ```json
-"test-dev": "./node_modules/.bin/wdio wdio.conf.js --suite dev"
+"test-dev": "wdio wdio.conf.js --suite dev"
 ```
 and run this command with
 ```shell
