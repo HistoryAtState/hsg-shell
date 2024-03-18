@@ -23,10 +23,8 @@
     "autoprefixer": "^9.7.4",
     "chai": "^4.3.8",
     "chai-as-promised": "^7.1.1",
-    "chokidar": "^3.6.0",
     "chromedriver": "^122.0.4",
     "del": "^6.1.1",
-    "glob-stream": "^8.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-concat": "^2.6.1",
@@ -60,8 +58,6 @@
     "url": "https://github.com/HistoryAtState/hsg-shell/issues"
   },
   "overrides": {
-    "chokidar": "$chokidar",
-    "glob-stream": "$glob-stream"
   },
   "homepage": "https://github.com/HistoryAtState/hsg-shell#readme"
 }
