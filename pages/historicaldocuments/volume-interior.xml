@@ -51,7 +51,7 @@
                             </div>
                             <div class="hsg-panel-body">
                                 <a class="hsg-link-button" data-template="frus:pdf-href-attribute"
-                                    >PDF (<span data-template="frus:pdf-size"/>)</a>
+                                    >PDF (<span data-template="frus:pdf-size-templating"/>)</a>
                             </div>
                         </div>
                     </div>

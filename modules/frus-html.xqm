@@ -263,7 +263,7 @@ declare
 function fh:volume-availability-summary($node as node(), $model as map(*)) {
     let $volume-id := $model?vol-id
     let $full-text := if (fh:exists-volume-in-db($volume-id)) then 'Full Text' else ()
-    let $ebook := if (fh:exists-ebook($volume-id)) then 'Ebook' else ()
+    let $ebook := if (fh:exists-epub($volume-id)) then 'Ebook' else ()
     let $pdf := if (fh:exists-pdf($volume-id)) then 'PDF' else ()
     let $publication-status := $model?publication-status
     let $not-published-status :=
@@ -615,9 +615,9 @@ declare function fh:published-date-to-english($date as xs:date) {
 };
 
 declare function fh:volumes-with-ebooks() {
-    for $hit in collection($config:HSG_S3_CACHE_COL || 'frus')//filename[ends-with(., '.epub')]
+    for $hit in collection($config:FRUS_VOLUMES_COL)//tei:relatedItem[@type eq "epub"]
     return
-        substring-before($hit, '.epub')
+        root($hit)/tei:TEI/@xml:id/string()
 };
 
 declare function fh:frus-ebooks-catalog($node, $model) {
@@ -653,27 +653,22 @@ declare function fh:frus-ebooks-catalog($node, $model) {
 declare function fh:frus-history-ebook-entry($model as map(*)) {
     let $book := doc('/db/apps/frus-history/monograph/frus-history.xml')
     let $book-title := pages:process-content($model?odd, $book//tei:title[@type='complete'])
-    let $preview-edition := if ($book//tei:sourceDesc/tei:p[1] = 'Preview Edition') then ' (Preview Edition)' else ()
-    let $vol-id := 'frus-history'
-    let $s3-resources-col := concat($config:HSG_S3_CACHE_COL, $vol-id)
-    let $s3-base-url := concat($config:S3_URL, '/', $vol-id)
-    let $epub-filename := concat($vol-id, '.epub')
-    let $mobi-filename := concat($vol-id, '.mobi')
-    let $pdf-filename := concat($vol-id, '.pdf')
-    let $epub-url := concat($s3-base-url, '/ebooks/', $epub-filename)
-    let $mobi-url := concat($s3-base-url, '/ebooks/', $mobi-filename)
-    let $pdf-url := concat($s3-base-url, '/ebooks/', $pdf-filename)
-    let $epub-resource := (doc(concat($s3-resources-col, '/ebooks/resources.xml'))//filename[. = $epub-filename]/parent::resource)[1]
-    let $mobi-resource := (doc(concat($s3-resources-col, '/ebooks/resources.xml'))//filename[. = $mobi-filename]/parent::resource)[1]
-    let $pdf-resource := (doc(concat($s3-resources-col, '/ebooks/resources.xml'))//filename[. = $pdf-filename]/parent::resource)[1]
-    let $last-updated := $epub-resource/last-modified/string()
-    let $epub-size := try { app:bytes-to-readable($epub-resource//size) } catch * {'problem getting size of ' || $epub-filename}
-    let $mobi-size := try { app:bytes-to-readable($mobi-resource//size) } catch * {'problem getting size of ' || $mobi-filename}
-    let $pdf-size := try { app:bytes-to-readable($pdf-resource//size) } catch * {'problem getting size of ' || $pdf-filename}
+    let $s3-base-url := concat($config:S3_URL, '/frus-history')
+    let $relatedItems := $book//tei:relatedItem
+    let $epub-item := $relatedItems[@type eq "epub"]
+    let $mobi-item := $relatedItems[@type eq "mobi"]
+    let $pdf-item := $relatedItems[@type eq "pdf"]
+    let $epub-url := $epub-item//tei:ref/@target
+    let $mobi-url := $mobi-item//tei:ref/@target
+    let $pdf-url := $pdf-item//tei:ref/@target
+    let $last-updated := $epub-item//tei:date/@when
+    let $epub-size := app:bytes-to-readable($epub-item//tei:measure/@quantity)
+    let $mobi-size := app:bytes-to-readable($mobi-item//tei:measure/@quantity)
+    let $pdf-size := app:bytes-to-readable($pdf-item//tei:measure/@quantity)
     return
         <div id="frus-history">
-            <img src="{$s3-base-url}/covers/{$vol-id}-thumb.png" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-            <a href="$app/historicaldocuments/{$vol-id}">{$book-title}{$preview-edition}</a>
+            <img src="{$s3-base-url}/covers/frus-history-thumb.png" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
+            <a href="$app/historicaldocuments/frus-history">{$book-title}</a>
             <p>Ebook last updated: {format-dateTime(xs:dateTime($last-updated), '[MNn] [D], [Y0001]', 'en', (), 'US')}.</p>
             <ul class="hsg-ebook-list">
                 <li><a class="hsg-link-button" href="{$epub-url}">EPUB ({$epub-size})</a></li>
@@ -691,16 +686,16 @@ declare function fh:exists-volume-in-db($vol-id) {
     exists(fh:volume($vol-id))
 };
 
-declare function fh:exists-ebook($vol-id) {
-    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.epub')])
+declare function fh:exists-epub($vol-id) {
+    exists(doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "epub"])
 };
 
 declare function fh:exists-mobi($vol-id) {
-    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.mobi')])
+    exists(doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "mobi"])
 };
 
 declare function fh:exists-pdf($vol-id) {
-    exists(doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/pdf/resources.xml'))//filename[ends-with(., '.pdf')])
+    exists(doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "pdf"])
 };
 
 declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
@@ -722,29 +717,32 @@ declare function fh:volume($vol-id as xs:string) {
 };
 
 declare function fh:ebook-last-updated($vol-id) {
-    let $epub-filename := concat($vol-id, '.epub')
-    let $epub := (doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.epub')]/parent::resource)[1]
+    let $epub := doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "epub"]
     return
-        $epub/last-modified/string()
+        $epub//tei:date/@when
 };
 
 declare function fh:epub-size($vol-id) {
-    let $epub := (doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.epub')]/parent::resource)[1]
-    let $size := $epub//size
+    let $epub := doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "epub"]
+    let $size := $epub//tei:measure/@quantity
     return
         app:bytes-to-readable($size)
 };
 
 declare function fh:mobi-size($vol-id) {
-    let $mobi := (doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/ebook/resources.xml'))//filename[ends-with(., '.mobi')]/parent::resource)[1]
-    let $size := $mobi//size
+    let $mobi := doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "mobi"]
+    let $size := $mobi//tei:measure/@quantity
     return
         app:bytes-to-readable($size)
 };
 
-declare function fh:pdf-size($vol-id) {
-    let $pdf:= (doc(concat($config:HSG_S3_CACHE_COL, 'frus/', $vol-id, '/pdf/resources.xml'))//filename[ends-with(., '.pdf')]/parent::resource)[1]
-    let $size := $pdf//size
+declare function fh:pdf-size($vol-id, $section-id) {
+    let $pdf:= 
+        if (exists($section-id)) then
+            doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $section-id and @type eq "pdf"]
+        else
+            doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "pdf"]
+    let $size := $pdf//tei:measure/@quantity
     return
         app:bytes-to-readable($size)
 };
@@ -763,29 +761,29 @@ function fh:mobi-size($node as node(), $model as map(*), $document-id as xs:stri
 
 declare
     %templates:wrap
-function fh:pdf-size($node as node(), $model as map(*), $document-id as xs:string) {
-    fh:pdf-size($document-id)
+function fh:pdf-size-templating($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
+    fh:pdf-size($document-id, $section-id)
 };
 
 
 declare function fh:mobi-url($document-id as xs:string) {
-	concat($config:S3_URL, '/frus/', $document-id, '/ebook/', $document-id, '.mobi')
+	doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq "mobi"]//tei:ref/@target
 };
 
 declare function fh:pdf-url($document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        concat($config:S3_URL, '/frus/', $document-id, '/pdf/', $section-id, '.pdf')
+        doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $section-id and @type eq "pdf"]//tei:ref/@target
     else
-        concat($config:S3_URL, '/frus/', $document-id, '/pdf/', $document-id, '.pdf')
+        doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq "pdf"]//tei:ref/@target
 };
 
 declare function fh:epub-url($document-id as xs:string) {
-	concat($config:S3_URL, '/frus/', $document-id, '/ebook/', $document-id, '.epub')
+	doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq "epub"]//tei:ref/@target
 };
 
 declare function fh:get-media-types($document-id) {
     (
-        "epub"[fh:exists-ebook($document-id)],
+        "epub"[fh:exists-epub($document-id)],
         "mobi"[fh:exists-mobi($document-id)],
         "pdf"[fh:exists-pdf($document-id)]
     )
@@ -803,20 +801,10 @@ function fh:if-media-exists($node as node(), $model as map(*), $document-id as x
 };
 
 declare function fh:media-exists($document-id as xs:string, $section-id as xs:string?, $suffix as xs:string) {
-    let $subcol := if ($suffix = ("pdf")) then "pdf" else "ebook"
-    let $document :=  doc(
-                        concat(
-                            $config:HSG_S3_CACHE_COL, 'frus/',
-                                $document-id, '/',
-                                $subcol, '/resources.xml'
-                            )
-                        )
-
-    return
-        if ($section-id) then
-            exists($document//s3-key[. = "frus/" || $document-id || "/" || $subcol || "/"|| $section-id || "." || $suffix])
-        else
-            exists($document//filename[. = $document-id || "." || $suffix])
+    if (exists($section-id)) then
+        exists(doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $section-id and @type eq $suffix])
+    else
+        exists(doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq $suffix])
 };
 
 

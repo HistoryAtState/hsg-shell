@@ -57,7 +57,7 @@
                                         data-template-suffix="pdf">
                                         <a class="hsg-link-button"
                                             data-template="frus:pdf-href-attribute">PDF (<span
-                                                data-template="frus:pdf-size"/>)</a>
+                                                data-template="frus:pdf-size-templating"/>)</a>
                                     </li>
                                 </ul>
                                 <a href="./ebooks">

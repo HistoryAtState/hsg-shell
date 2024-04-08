@@ -104,7 +104,7 @@ declare function opds:ebook-entries($vol-ids) {
             else ()
         :)
     let $epub-mobi-links :=
-        if (fh:exists-ebook($vol-id)) then
+        if (fh:exists-epub($vol-id)) then
             (
             opds:link('application/epub+zip', 'http://opds-spec.org/acquisition', fh:epub-url($vol-id), concat($title, ' (EPUB)')),
             opds:link('application/x-mobipocket-ebook', 'http://opds-spec.org/acquisition', fh:mobi-url($vol-id), concat($title, ' (Mobi)'))
