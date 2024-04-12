@@ -6,7 +6,6 @@ import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "pages.xqm";
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
-import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 

@@ -36,16 +36,16 @@
 
  tooltips.forEach((tooltip) => {
    describe('A link with tooltip type: "' + tooltip.type + '" , label: "' + tooltip.triggerLabel + '"', () => {
-     let hasTabindex, hasRole, el, ttLink, tt, title, ttContent;
+     let hasTabindex, hasRole, el, ttLink, tt, title;
 
-     before(() => {
+     before(async () => {
        Page.pause(1500);
-       Page.open(tooltip.pageURL);
+       await Page.open(tooltip.pageURL);
        el = 'div[data-template="frus:facets"] ' + tooltip.triggerSelector
-       hasTabindex = Page.getElementAttribute(el, 'tabindex');
-       ttLink = Page.getElement(el);
-       title = Page.getElementAttribute(el, 'data-original-title');
-       ttSelector = '.tooltip';
+       hasTabindex = await Page.getElementAttribute(el, 'tabindex');
+       ttLink = await Page.getElement(el);
+       title = await Page.getElementAttribute(el, 'data-original-title');
+       
        Page.pause(1000);
      });
 
@@ -55,35 +55,42 @@
      });
 
      // Check if tooltip opens on hover
-     it('should display a tooltip on hovering the element', () => {
-       assert.equal(Page.getElement(ttSelector).isDisplayed(), false);
-       ttLink.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
-       Page.pause(1500);
-       ttLink.moveTo(1,1)
-       Page.pause(1500);
-       tt = Page.getElement(ttSelector);
-       assert.equal(tt.isDisplayed(), true);
+     it('should display a tooltip on hovering the element', async () => {
+        let ttSelector = '.tooltip';
+        let ttS = await Page.getElement(ttSelector);
+        assert.equal(await ttS.isDisplayed(), false);
+        ttLink.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+        Page.pause(1500);
+        ttLink.moveTo(1,1)
+        Page.pause(1500);
+        let tt = await Page.getElement(ttSelector);
+        assert.equal(await tt.isDisplayed(), true);
      });
 
      // Check if tooltip content is identical with the trigger title content
-     it('should display its title as the tooltip content', () => {
-       ttContent = Page.getElementText(tt);
+     it('should display its title as the tooltip content', async () => {       
+       let ttContent = await Page.getElementText('.tooltip');
+       console.log("ttContent: ", ttContent);
        assert.equal(ttContent, title);
      });
 
      // Check if tooltip contains role="tooltip"
-     it('should display a tooltip with attribute "role=tooltip"', () => {
-       hasRole = Page.getElementAttribute(tt, 'role');
+     it('should display a tooltip with attribute "role=tooltip"', async () => {
+       hasRole = await Page.getElementAttribute(tt, 'role');
        assert.equal(hasRole, 'tooltip');
      });
 
      // Check if USWDS css properties are applied (== Bootstrap overrides)
-      it('should display a tooltip with correct USWDS CSS properties', () => {
-       ttSelector = '.tooltip-inner';
-       assert.equal(Page.getCssProperty(ttSelector, 'color').value, 'rgba(240,240,240,1)');
-       assert.equal(Page.getCssProperty(ttSelector, 'background-color').value, 'rgba(27,27,27,1)');
-       assert.equal(Page.getCssProperty(ttSelector, 'font-size').value, '16.5px');
-       assert.equal(Page.getCssProperty(ttSelector, 'padding').value, '8px');
+      it('should display a tooltip with correct USWDS CSS properties', async () => {
+        let ttSelector = '.tooltip-inner';
+        let color  = await Page.getCssProperty(ttSelector, 'color');
+        assert.equal(color.value, 'rgba(240,240,240,1)');
+        let background = await Page.getCssProperty(ttSelector, 'background-color');
+        assert.equal(background.value, 'rgba(27,27,27,1)');
+        let fontSize = await Page.getCssProperty(ttSelector, 'font-size');
+        assert.equal(fontSize.value, '16.5px');
+        let padding = await Page.getCssProperty(ttSelector, 'padding'); 
+        assert.equal(padding.value, '8px');
      });
    });
  });

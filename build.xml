@@ -8,24 +8,18 @@
     <available file="${git.repo.path}" type="dir" property="git.present"/>
 
     <property environment="env"/>
-    <loadfile property="nvm_version" srcFile=".nvmrc">
-        <filterchain>
-            <filterreader classname="org.apache.tools.ant.filters.StripLineBreaks"/>
-        </filterchain>
-    </loadfile>
-    <property name="nvm_bin" value="${env.HOME}/.nvm/versions/node/${nvm_version}/bin"/>
-    <property name="files-to-be-excluded" value="${build.dir}/**,**/*.tmpl,node_modules/**,package.json,package-lock.json,gulpfile.js,.idea/**,.* example.local.build.properties,npm-shrinkwrap.json,tests/reports/**"/>
+    <!-- <property name="files-to-be-excluded" value="${build.dir}/**,**/*.tmpl,node_modules/**,package.json,package-lock.json,gulpfile.js,.idea/**,.* example.local.build.properties,npm-shrinkwrap.json,tests/reports/**"/> -->
     
-    <!-- Allow NODE_ENV to be passed in either as an environment variable or as a regular variable -->
+    <!-- Allow HSG_ENV to be passed in either as an environment variable or as a regular variable -->
     <condition property="node-env-is-set-for-production" else="false">
         <or>
-            <equals arg1="${env.NODE_ENV}" arg2="production"/>
-            <equals arg1="${NODE_ENV}" arg2="production"/>
+            <equals arg1="${env.HSG_ENV}" arg2="production"/>
+            <equals arg1="${HSG_ENV}" arg2="production"/>
         </or>
     </condition>
     
-    <!-- Create a new property that sets production mode based on whether either variation of NODE_ENV is set to production -->
-    <condition property="NODE_ENV.production" value="production" else="development">
+    <!-- Create a new property that sets production mode based on whether either variation of HSG_ENV is set to production -->
+    <condition property="HSG_ENV.production" value="production" else="development">
         <istrue value="${node-env-is-set-for-production}"/>
     </condition>
     
@@ -47,71 +41,19 @@
         <property name="path.npm" value="${nvm_bin}/npm"/>
     </target>
 
-    <!-- Replace tokens with current local paths to binaries in local build property file -->
-    <target name="copy-paths-to-local-build-properties" depends="get-binary-paths">
-        <echo message="Copy binary paths to build.properties.local.xml"/>
-        <copy file="build.properties.xml" tofile="build.properties.local.xml" overwrite="yes">
-            <filterset>
-                <filter token="node.path" value="${node.PATH}"/>
-                <filter token="npm" value="${path.npm}"/>
-                <filter token="gulp" value="${path.gulp}"/>
-            </filterset>
-        </copy>
-        
-        <echo>Copied ${path.npm} and ${path.gulp} to local.build.properties</echo>
-    </target>
-    
-    <!-- Call script "nvm use" in package.json to install the correct node version -->
-    <target name="install-project-specific-node-version" depends="copy-paths-to-local-build-properties">
-        <echo message="Use required node version ${nvm_version} from nvmrc file..."/>
-        <exec executable="${nvm_bin}/npm" outputproperty="npm.output" logError="true">
-            <arg line="run-script"/>
-            <arg line="nvm"/>
-            <env key="PATH" value="${node.PATH}:${env.PATH}"/>
-            <env key="NODE_ENV" value="${NODE_ENV}"/>
-        </exec>
-        <echo message="${npm.output}"/>
-    </target>
-
-    <target name="prepare">
-        <!-- PREPARATION OF LOCAL BUILD PROPERTIES -->
-        <echo message="------------------------------------------------------------"/>
-        <echo message="Prepare local build properties and node version"/>
-        <echo message="------------------------------------------------------------"/>
-        <echo message="Calling ant target 'copy-paths-to-local-build-properties'"/>
-        <antcall target="copy-paths-to-local-build-properties"/>
-    </target>
-
-    <target name="node" depends="prepare">
-        <echo message="Calling ant target 'install-project-specific-node-version'"/>
-        <!--
-            TODO: Check if file build.properties.local.xml has been generated and display error in case of failure
-            <condition property="build-file-has-been-prepared">
-                <resourcecontains resource="build.properties.local.xml" substring="bin"/>
-            </condition>
-            
-            <fail message="ERROR: The local build properties file has not been generated. Please run `ant prepare` (again)."
-                  unless="build-file-has-been-prepared"/>
-        -->
-        <antcall target="install-project-specific-node-version"/>
-    </target>
-    
-    <!-- / END PREPARATION -->
-
     <target name="run-npm">
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
-        <exec executable="${nvm_bin}/npm" outputproperty="npm.output">
+        <exec executable="npm" outputproperty="npm.output">
             <arg line="start"/>
-            <env key="PATH" value="${node.path}:${env.PATH}"/>
-            <env key="NODE_ENV" value="${NODE_ENV.production}"/>
+            <env key="HSG_ENV" value="${HSG_ENV.production}"/>
         </exec>
         <echo message="${npm.output}"/>
     </target>
 
-    <target name="xar" depends="node,clean,run-npm,git.revision" description="create xar file">
+    <target name="xar" depends="clean,run-npm,git.revision" description="create xar file">
         <echo message="Creating build folder..."/>
         <mkdir dir="${build.dir}"/>
-        <copy todir="${basedir}" overwrite="true" verbose="true">        
+        <copy todir="${basedir}" overwrite="true" verbose="true">
             <fileset file="*.xml.tmpl"/>
             <filterchain>
                 <replacetokens>
@@ -136,24 +78,24 @@
         <echo message="------------------------------------------------------------"/>
         
         <zip basedir="${basedir}" destfile="${build.dir}/${app.name}-${app.version}.xar">
+            <!-- <exclude name="app/**"/> -->
             <exclude name="${build.dir}/**"/>
             <exclude name="*.tmpl"/>
-            <exclude name="hsg-shell.xpr"/>   
-            <exclude name="build.properties.local.example.xml"/>            
+            <exclude name="hsg-shell.xpr"/>
+            <exclude name="build.properties.local.example.xml"/>
             <exclude name="build.properties.xml"/>
             <exclude name="build.xml"/>
             <exclude name="node_modules/**"/>
             <exclude name="package.json"/>
             <exclude name="package-lock.json"/>
-            <exclude name="bower.json"/>
             <exclude name=".idea/**"/>
             <exclude name=".vscode/**"/>
             <exclude name="tests/reports/**"/>
             <exclude name="npm-shrinkwrap.json"/>
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>   
-            <exclude name="wdio*"/>         
-        </zip>        
+            <exclude name="wdio*"/>
+        </zip>
     </target>
 
     <target name="git.revision" description="Store git revision in ${repository.version}" if="git.present">
@@ -178,5 +120,5 @@
             <arg value="${git.revision}"/>
         </exec>
         <echo>Git time: ${git.time}</echo>
-    </target>      
+    </target>
 </project>

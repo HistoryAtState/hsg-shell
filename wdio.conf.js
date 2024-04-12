@@ -6,10 +6,6 @@ process.env.WDIO_PORT = process.env.WDIO_PORT || '8080';
 // set path prefix - defaults to exist db standard path - production servers need '/'
 process.env.WDIO_PREFIX = process.env.WDIO_PREFIX || '/exist/apps/hsg-shell/';
 
-// set service port
-process.env.WDIO_CHROMEDRIVER_PORT = process.env.WDIO_CHROMEDRIVER_PORT || '9515';
-process.env.WDIO_CHROME_BINARY = process.env.WDIO_CHROME_BINARY || '<path-to-Google-Chrome-binary>';
-
 exports.config = {
     //
     // ====================
@@ -52,6 +48,41 @@ exports.config = {
       prod_producer: [
         './tests/specs/**/prod_*.js',
         './tests/specs/twitter/twitter-scheduler.spec.js'
+      ],
+      single: [
+        'tests/specs/footnote/uat_footnote_popover.spec.js'
+      ],
+      jenkins: [
+        'tests/specs/conferences/prod_conferences_titles.spec.js',
+        'tests/specs/countries/prod_countries_landing.spec.js',
+        'tests/specs/countries/prod_countries_titles.spec.js',
+        'tests/specs/departmenthistory/prod_buildings_titles.spec.js',
+        'tests/specs/departmenthistory/prod_departmenthistory_titles.spec.js',
+        'tests/specs/departmenthistory/prod_shorthistory_titles.spec.js',
+        'tests/specs/developer/prod_developer_titles.spec.js',
+        'tests/specs/education/prod_education_titles.spec.js',
+        'tests/specs/error/prod_404.spec.js',
+        // 'tests/specs/footnote/prod_footnote_popover.spec.js',
+        'tests/specs/historical-documents/prod_frus_landing.spec.js',
+        'tests/specs/historical-documents/prod_frus_titles.spec.js',
+        'tests/specs/historical-documents/prod_frus_toc.spec.js',
+        'tests/specs/historical-documents/prod_frus-all-volumes.spec.js',
+        'tests/specs/historical-documents/prod_frus-volume-landing.spec.js',
+        'tests/specs/iiif-images/prod_iiif-viewer.spec.js',
+        'tests/specs/landing/prod_landing_title.spec.js',
+        'tests/specs/landing/prod_landing_twitter.spec.js',
+        'tests/specs/milestones/prod_milestones_chapter.spec.js',
+        'tests/specs/milestones/prod_milestones_titles.spec.js',
+        'tests/specs/news/prod_news-article.spec.js',
+        'tests/specs/news/prod_news-list.spec.js',
+        'tests/specs/open/prod_open_titles.spec.js',
+        // 'tests/specs/replication/prod_replication.spec.js',
+        'tests/specs/search/prod_search_filter_results.spec.js',
+        'tests/specs/search/prod_search_new-indexes.spec.js',
+        'tests/specs/search/prod_search.spec.js',
+        'tests/specs/tags/prod_tags.spec.js',
+        'tests/specs/UI-components/prod_breadcrumb.spec.js'
+        // 'tests/specs/UI-components/prod_tooltip.spec.js'        
       ]
     },
 
@@ -91,8 +122,8 @@ exports.config = {
             '--window-size=1280,1024',
             'ignore-certificate-errors',
             'ignore-urlfetcher-cert-requests'
-          ],
-          binary: process.env.WDIO_CHROME_BINARY
+          ]
+          // binary: process.env.WDIO_CHROME_BINARY
         }
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.

@@ -3,9 +3,7 @@
  * and the functionality of the dropdown menu
  */
 
-const Page  = require('../../pageobjects/Page'),
-  SubPage   = require('../../pageobjects/SubPage');
-
+const Page  = require('../../pageobjects/Page')
 
 const images = [
   Page.s3_Prod + '/images/alincoln.jpg',
@@ -14,31 +12,16 @@ const images = [
 ];
 
 describe('FRUS landing page: The first 3 tiles', function () {
-  let imageSrc, imageSelector;
   before(function () {
     Page.open('historicaldocuments');
   });
 
-  /*
-      images.forEach(function (image) {
-          describe('Each tile on the landing page', function () {
-              it('should display an image', function () {
-                  imageSelector = Page.getElements('#content-inner div article a img');
-                  imageSelector.value.forEach(function (elem) {
-                      var imgSource = elem.elements('#content-inner div article a img').getHTML();
-                      assert.include(imgSource, image);
-                  });
-              });
+  images.forEach(function (image, index) {
+      describe('Each tile on the landing page', async function () {
+          it('should display an image', async function () {
+              const imgSrc = await Page.getElementAttribute('#content-inner div article:nth-child(' + (index + 1) + ') a img', 'src');
+              assert.include(imgSrc, image);
           });
       });
-  */
-
-  it('should each contain an image', function () {
-    let tile0 = Page.getElementAttribute('#content-inner div article:nth-child(1) a img', 'src'),
-      tile1 = Page.getElementAttribute('#content-inner div article:nth-child(2) a img', 'src'),
-      tile2 = Page.getElementAttribute('#content-inner div article:nth-child(3) a img', 'src');
-      assert.include(tile0, images[0]);
-      assert.include(tile1, images[1]);
-      assert.include(tile2, images[2]);
   });
 });
