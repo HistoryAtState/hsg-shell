@@ -91,11 +91,10 @@ else if (ends-with($exist:path, "/")) then
         <redirect url="{replace(local:uri(), '/$', '')}"/>
     </dispatch>
 
-(: TODO: remove bower_components once grunt/gulp integration is added :)
 (: handle requests for static resources: css, js, images, etc. :)
-else if (contains($exist:path, "/resources/") or contains($exist:path, "/bower_components/")) then
+else if (contains($exist:path, "/resources/")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
+        <forward url="{$exist:controller}/{replace($exist:path, '^.*(resources.*)$', '$1')}"/>
     </dispatch>
 
 (: handle requests for twitter test :)
