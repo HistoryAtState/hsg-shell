@@ -116,6 +116,11 @@ else if (ends-with($exist:resource, ".xql")) then
         <ignore/>
     </dispatch>
 
+else if (starts-with($exist:path, "/sitemap")) then
+     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+         <forward url="{$exist:controller || "/resources/sitemaps" || $exist:path}"/>
+     </dispatch>
+
 (: reject ANY request with more than 4 path parts -> /a/b/c/d/e :)
 else if (count($path-parts) gt 4) then (
     util:log("info", ("hsg-shell controller.xql received >4 path parts: ", string-join($path-parts, ":"))),
@@ -132,7 +137,14 @@ else switch($path-parts[1])
             <!-- TODO: add cache header! -->
             <forward url="{$exist:controller}/resources/{$exist:path}"/>
         </dispatch>
-        
+    case "transform" return
+        if ($path-parts[2] eq "frus.css") then
+            <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                <!-- <set-header name="Cache-Control" value="no-cache" /> -->
+                <cache-control cache="yes"/>
+            </dispatch>
+        else
+            local:serve-not-found-page()
     (: handle requests for historicaldocuments section :)
     case 'historicaldocuments' return
         switch (string($path-parts[2]))
