@@ -167,6 +167,10 @@ else switch($path-parts[1])
                     "publication-id": "vietnam-guide",
                     "document-id": "guide-to-sources-on-vietnam-1969-1975"
                 })
+            case "volume-titles" return
+                local:render-page("historicaldocuments/volume-titles.xml", map{
+                    "publication-id": "frus-list"
+                })
             case "quarterly-releases" return
                 if (empty($path-parts[3])) then
                     local:render-page("historicaldocuments/quarterly-releases/index.xml")
@@ -210,6 +214,13 @@ else switch($path-parts[1])
                             local:render-page("historicaldocuments/frus-history/research/article.xml", map{
                                 "article-id": $path-parts[4]
                             })
+                    case "appendix-a" return
+                            local:render-page("historicaldocuments/frus-history/appendix-a.xml", map{
+                                "publication-id": "frus-history-monograph",
+                                "document-id": "frus-history",
+                                "section-id": "appendix-a",
+                                    "requested-url": local:get-url()
+                            })  
                     default return
                         (: TODO: can we check easily here, if a section-id is valid? :)
                         local:render-page("historicaldocuments/frus-history/monograph-interior.xml", map{
@@ -608,6 +619,18 @@ else switch($path-parts[1])
                     })
             default return
                 local:serve-not-found-page()
+
+(: handle requests for news pages :)
+(: TODO TFJH: Refactor url endpoints for news articles, this is just an interim solution for template development :)
+    case 'news' return
+        switch (string($path-parts[2]))
+            case '' return
+                local:render-page("news/news-list.xml", map{ "publication-id": "news" })
+            default return
+                local:render-page("news/news-list.xml", map{
+                    "publication-id": "news",
+                    "document-id": $path-parts[2]
+                })
 
 (: handle search requests :)
     case 'search' return
