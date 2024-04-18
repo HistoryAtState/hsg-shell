@@ -26,3 +26,5 @@ build.properties.local.xml
 !.npmrc
 !.nvmrc
 !.gitkeep
+!.github/
+!.releaserc
