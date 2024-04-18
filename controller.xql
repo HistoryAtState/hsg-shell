@@ -110,20 +110,6 @@ else if (ends-with($exist:path, "validate-results-of-twitter-jobs.xq")) then
         </error-handler>
     </dispatch>
 
-(: handle requests for resource-name.xml used by replication test :)
-else if (ends-with($exist:path, "resource-name.xml")) then
-    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/tests/xquery/resource-name.xml"/>
-    </dispatch>
-    
-(: handle requests for validate-replication:)
-else if (ends-with($exist:path, "validate-replication")) then
-    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/tests/xquery/validate-replication.xq">
-            <set-header name="Cache-Control" value="no-store"/>
-        </forward>
-    </dispatch>
-
 (: ignore direct requests to main modules :)
 else if (ends-with($exist:resource, ".xql")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
