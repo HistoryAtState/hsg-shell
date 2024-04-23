@@ -624,7 +624,7 @@ else switch($path-parts[1])
             case '' return
                 local:render-page("news/news-list.xml", map{ "publication-id": "news" })
             default return
-                local:render-page("news/news-list.xml", map{
+                local:render-page("news/news-article.xml", map{
                     "publication-id": "news",
                     "document-id": $path-parts[2]
                 })
