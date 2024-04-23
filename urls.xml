@@ -183,6 +183,7 @@
         <step value="all">
             <page-template href="pages/countries/all.xml"/>
         </step>
+<!-- 
         <step value="issues">
             <step key="issue">
                 <page-template href="pages/countries/issues/article.xml">
@@ -195,6 +196,7 @@
             </step>
             <page-template href="pages/countries/issues/index.xml"/>
         </step>
+-->
         <step value="archives">
             <step value="all">
                 <page-template href="pages/countries/archives/all.xml">
