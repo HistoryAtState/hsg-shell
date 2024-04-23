@@ -35,7 +35,8 @@ import module namespace fm="http://history.state.gov/ns/site/hsg/frus-meta" at "
 
 declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 
-declare option output:method "html5";
+declare option output:method "html";
+declare option output:html-version "5";
 declare option output:media-type "text/html";
 
 let $config := map {
@@ -48,7 +49,7 @@ let $config := map {
  : module cannot see the application modules, but the inline function
  : below does see them.
  :)
-let $lookup := function($functionName as xs:string, $arity as xs:int) {
+let $lookup := function($functionName as xs:string, $arity as xs:integer) {
     try {
         function-lookup(xs:QName($functionName), $arity)
     } catch * {
