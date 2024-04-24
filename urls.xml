@@ -27,6 +27,7 @@
         <step value="status-of-the-series">
             <page-template href="pages/historicaldocuments/status-of-the-series.xml"/>
         </step>
+        <!--
         <step value="volume-titles">
             <page-template href="pages/historicaldocuments/volume-titles.xml">
                 <with-param name="publication-id" value="frus-list"/>
@@ -35,6 +36,7 @@
                 <src collection="/db/apps/frus/bibliography"/>
             </config>
         </step>
+        -->
         <step value="frus-history">
             <step value="documents">
                 <step key="doc-id">

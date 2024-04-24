@@ -164,10 +164,12 @@ else switch($path-parts[1])
                     "publication-id": "vietnam-guide",
                     "document-id": "guide-to-sources-on-vietnam-1969-1975"
                 })
+            (:
             case "volume-titles" return
                 local:render-page("historicaldocuments/volume-titles.xml", map{
                     "publication-id": "frus-list"
                 })
+            :)
             case "quarterly-releases" return
                 if (empty($path-parts[3])) then
                     local:render-page("historicaldocuments/quarterly-releases/index.xml")

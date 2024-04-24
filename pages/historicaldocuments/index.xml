@@ -13,9 +13,9 @@
                 <p>The <em>Foreign Relations of the United States</em> (FRUS) series presents the
                     official documentary historical record of major U.S. foreign policy decisions
                     and significant diplomatic activity.</p>
-                <p>Search <a href="$app/search?within=documents">within the volumes</a> , browse
-                    volume titles by administration, or view <a
-                        href="$app/historicaldocuments/volume-titles">all titles in the series</a>: </p>
+                <p>Search <a href="$app/search?within=documents">within the volumes</a> or browse
+                    volume titles by administration<!--, or view <a
+                        href="$app/historicaldocuments/volume-titles">all titles in the series</a>-->:</p>
                 <div class="row text-center">
                     <article class="hsg-thumbnail-wrapper">
                         <a class="hsg-thumbnail" href="$app/historicaldocuments/lincoln">
