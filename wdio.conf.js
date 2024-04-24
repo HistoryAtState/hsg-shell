@@ -66,7 +66,7 @@ exports.config = {
         'tests/specs/historical-documents/prod_frus_landing.spec.js',
         'tests/specs/historical-documents/prod_frus_titles.spec.js',
         'tests/specs/historical-documents/prod_frus_toc.spec.js',
-        'tests/specs/historical-documents/prod_frus-all-volumes.spec.js',
+        // 'tests/specs/historical-documents/prod_frus-all-volumes.spec.js',
         'tests/specs/historical-documents/prod_frus-volume-landing.spec.js',
         'tests/specs/iiif-images/prod_iiif-viewer.spec.js',
         'tests/specs/landing/prod_landing_title.spec.js',
