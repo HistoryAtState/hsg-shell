@@ -721,7 +721,9 @@ declare function pages:asides($node, $model){
     return
         <div class="hsg-width-sidebar">
             {
+                (:
                 side:info($node, $model),
+                :)
 				$static-asides,
                 side:section-nav($node, $model)
             }

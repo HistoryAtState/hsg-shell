@@ -28,7 +28,7 @@ describe('FRUS "All Volumes" page', () => {
     assert.equal(title, 'All Titles in the Foreign Relations Series');
   });
 
-  it('should display a sidebar with citation option', async () => {
+  it.skip('should display a sidebar with citation option', async () => {
     let sidebar = await Page.getElement('hsg-cite__button--sidebar');
     assert.exists(sidebar);
   });
