@@ -786,7 +786,7 @@ declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
                 <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>,
                 <meta property="og:image:width" content="400"/>,
                 <meta property="og:image:height" content="400"/>,
-                <meta property="og:image:alt" content="Department of State heraldic shield"/>
+                <meta property="og:image:alt" content="Office of the Historian social media avatar"/>
            
         },
     "og:type"       : function($node, $model) {
@@ -851,6 +851,7 @@ declare %templates:wrap function config:app-title($node as node(), $model as map
 
 declare function config:app-meta($node as node(), $model as map(*)) as element()* {
     <meta xmlns="http://www.w3.org/1999/xhtml" name="description" content="{$config:repo-descriptor/repo:description/text()}"/>,
+    (:
     config:open-graph(
         $node, 
         map:merge(
@@ -865,6 +866,7 @@ declare function config:app-meta($node as node(), $model as map(*)) as element()
             map{"duplicates": "use-last"}
         )
     ),
+    :)
     for $author in $config:repo-descriptor/repo:author[fn:normalize-space(.) ne '']
     return
         <meta xmlns="http://www.w3.org/1999/xhtml" name="creator" content="{$author/text()}"/>

@@ -507,7 +507,7 @@ declare function pages:generate-title ($model, $content) {
  :)
 declare function pages:generate-short-title($node, $model) as xs:string? {
     (
-        $node/ancestor-or-self::*[last()]//div[@id="static-title"]/string(),
+        $node/ancestor-or-self::*[last()]//div[@id="static-title"]/normalize-space(),
         $config:PUBLICATIONS?($model?publication-id)?title,
         $node/ancestor-or-self::*[last()]//(h1|h2|h3),
         'Office of the Historian'
@@ -567,7 +567,7 @@ declare function pages:app-root($node as node(), $model as map(*)) {
         $node/@*,
         attribute data-app { $root },
         let $content as node()* := templates:process($node/*, $model)
-        let $title := string-join((pages:generate-short-title($node, $model)[. ne 'Office of the Historian'], "Office of the Historian"), " - ")
+        let $title := string-join((pages:generate-short-title($content, $model)[. ne 'Office of the Historian'], "Office of the Historian"), " - ")
 
         let $log := util:log("info", "pages:app-root -> title: " || $title)
         return (
@@ -721,7 +721,9 @@ declare function pages:asides($node, $model){
     return
         <div class="hsg-width-sidebar">
             {
+                (:
                 side:info($node, $model),
+                :)
 				$static-asides,
                 side:section-nav($node, $model)
             }

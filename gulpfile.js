@@ -127,7 +127,7 @@ gulp.task('scripts:build', function () {
             'resources/scripts/footnote.js',
             'resources/scripts/app.js',
             'resources/scripts/metagrid.js',
-            'resources/scripts/cite.js',
+//            'resources/scripts/cite.js',
             'resources/scripts/dygraph-combined.js',
             'resources/scripts/vendor/openseadragon/openseadragon.js'
         ])
@@ -140,7 +140,7 @@ function compileVendorScripts () {
     return gulp.src([
             'node_modules/jquery/dist/jquery.min.js',
             'node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-            'resources/scripts/citeproc.min.js',
+//            'resources/scripts/citeproc.min.js',
             'resources/scripts/app.min.js',
         ])
       .pipe(concat('app.all.js'))
@@ -160,7 +160,7 @@ gulp.task('scripts:watch', function () {
       'resources/scripts/footnote.js',
       'resources/scripts/app.js',
       'resources/scripts/metagrid.js',
-      'resources/scripts/cite.js',
+//      'resources/scripts/cite.js',
       'resources/scripts/dygraph-combined.js',
     ],
     gulp.series('scripts:deploy'))

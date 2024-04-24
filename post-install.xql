@@ -47,7 +47,7 @@ sm:chmod(xs:anyURI($target || "/modules/view.xql"), "rwsr-xr-x"),
 sm:chmod(xs:anyURI($target || "/modules/frus-ajax.xql"), "rwsr-xr-x"),
 sm:chmod(xs:anyURI($target || "/modules/fo.xql"), "rwsr-xr-x"),
 sm:chmod(xs:anyURI($target || "/modules/lib/regenerate.xql"), "rwsr-xr-x"),
-sm:chmod(xs:anyURI($target || "/tests/xquery/validate-results-of-twitter-jobs.xq"), "rwsr-xr-x"),
+(:sm:chmod(xs:anyURI($target || "/tests/xquery/validate-results-of-twitter-jobs.xq"), "rwsr-xr-x"),:)
 util:eval(xs:anyURI($target || "/modules/lib/regenerate.xql")),
 
 local:generate-code($target)

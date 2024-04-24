@@ -1387,6 +1387,7 @@
         </step>
         <ignore/>
     </step>
+    <!--
     <step value="news">
         <step key="article">
             <page-template href="pages/news/news-article.xml">
@@ -1404,5 +1405,6 @@
             <src collection="tests/data/news"/>
         </config>
     </step>
+    -->
     <page-template href="pages/index.xml"/>
 </root>

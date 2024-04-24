@@ -619,6 +619,7 @@ else switch($path-parts[1])
 
 (: handle requests for news pages :)
 (: TODO TFJH: Refactor url endpoints for news articles, this is just an interim solution for template development :)
+(:
     case 'news' return
         switch (string($path-parts[2]))
             case '' return
@@ -628,6 +629,7 @@ else switch($path-parts[1])
                     "publication-id": "news",
                     "document-id": $path-parts[2]
                 })
+:)
 
 (: handle search requests :)
     case 'search' return
