@@ -735,6 +735,10 @@ declare function fh:mobi-size($vol-id) {
         app:bytes-to-readable($size)
 };
 
+declare function fh:pdf-size($vol-id) {
+    fh:pdf-size($vol-id, ())
+};
+
 declare function fh:pdf-size($vol-id, $section-id) {
     let $pdf:= 
         if (exists($section-id)) then
@@ -756,6 +760,12 @@ declare
     %templates:wrap
 function fh:mobi-size($node as node(), $model as map(*), $document-id as xs:string) {
     fh:mobi-size($document-id)
+};
+
+declare
+    %templates:wrap
+function fh:pdf-size-templating($node as node(), $model as map(*), $document-id as xs:string) {
+    fh:pdf-size($document-id)
 };
 
 declare
