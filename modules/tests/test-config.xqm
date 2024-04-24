@@ -29,7 +29,7 @@ return values like "og:type": "website" can be considered to be shorthand for:
                "og:image": "https://static.history.state.gov/images/avatar_big.jpg"
          "og:image:width": "400"
         "og:image:height": "400"
-           "og:image:alt": "Department of State heraldic shield"
+           "og:image:alt": "Office of the Historian social media avatar"
                "og:title": pages:generate-short-title()
                  "og:url": "test-url"
 :)
@@ -47,7 +47,7 @@ function x:open-graph-defaults() {
         <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>,
         <meta property="og:image:width" content="400"/>,
         <meta property="og:image:height" content="400"/>,
-        <meta property="og:image:alt" content="Department of State heraldic shield"/>,
+        <meta property="og:image:alt" content="Office of the Historian social media avatar"/>,
         <meta property="og:url" content="test-url"/>,
         <meta name="DC.type" content="webpage"/>,
         <meta name="citation_series_title" content="Office of the Historian"/>,

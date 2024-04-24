@@ -786,7 +786,7 @@ declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
                 <meta property="og:image" content="https://static.history.state.gov/images/avatar_big.jpg"/>,
                 <meta property="og:image:width" content="400"/>,
                 <meta property="og:image:height" content="400"/>,
-                <meta property="og:image:alt" content="Department of State heraldic shield"/>
+                <meta property="og:image:alt" content="Office of the Historian social media avatar"/>
            
         },
     "og:type"       : function($node, $model) {
