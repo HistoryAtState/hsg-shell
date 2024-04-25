@@ -527,9 +527,9 @@ declare function pocom:format-roles($person) {
             let $sorted-roles :=
                 for $role in $item/*
                 (: delicately construct a new root node containing all of the info needed to reconstruct position description with dept:format-role() :)
-                let $role-node := element {$role/name()} {$role/*}
+                let $role-node := document { element {$role/name()} {$role/*} }
                 return
-                    pocom:format-role($person, $role-node/*[2])
+                    pocom:format-role($person, $role-node/*/*[2])
             return
                 <li>
                     <em>Concurrent Appointments</em>
