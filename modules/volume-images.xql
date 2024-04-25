@@ -8,7 +8,8 @@ declare namespace s3xml="http://s3.amazonaws.com/doc/2006-03-01/";
 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "config.xqm";
 import module namespace functx = "http://www.functx.com";
-import module namespace s3="http://history.state.gov/ns/xquery/s3" at "/db/apps/hsg-publish/modules/s3.xqm";
+import module namespace s3-bucket = "http://history.state.gov/ns/xquery/aws/s3/bucket";
+
 
 declare function local:contents-to-resources($contents) {
     for $item in $contents
@@ -33,7 +34,7 @@ declare function local:update-leaf-directory($directory as xs:string) {
     let $marker := ()
     let $max-keys := ()
     let $prefix := $directory
-    let $list := s3:bucket-list($bucket, $delimiter, (), (), $prefix)
+    let $list := s3-bucket:list($bucket, $delimiter, (), (), $prefix)
     let $contents := $list[2]/s3xml:ListBucketResult/s3xml:Contents[s3xml:Key ne $prefix]
     let $resources :=
         <resources prefix="{$prefix}">{
