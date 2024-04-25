@@ -114,7 +114,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
         		  try { request:get-url() }
         		  catch err:XPDY0002 { 'test-url' },  (: some contexts do not have a request object, e.g. xqsuite testing :)
         		"local-uri":
-        		  try { substring-after(request:get-uri(), $app:APP_ROOT)}
+        		  try { substring-after(site:get-uri(), $app:APP_ROOT)}
         		  catch err:XPDY0002 { 'test-path' }  (: some contexts do not have a request object, e.g. xqsuite testing :)
             }
             let $citation-meta :=
@@ -516,7 +516,7 @@ declare function pages:generate-short-title($node, $model) as xs:string? {
 
 (: Generate page breadcrumbs :)
 declare function pages:breadcrumb($node, $model){
-  pages:generate-breadcrumbs(substring-after(request:get-uri(), $app:APP_ROOT))
+  pages:generate-breadcrumbs(substring-after(site:get-uri(), $app:APP_ROOT))
 };
 
 declare function pages:generate-breadcrumbs($uri as xs:string) as element(div) {

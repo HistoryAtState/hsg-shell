@@ -844,7 +844,12 @@ declare function site:get-url() {
 
 declare function site:get-uri() {
   (: imported from old controller.xql :)
-    (request:get-header("nginx-request-uri"), request:get-uri())[1]
+    let $uri := (request:get-header("nginx-request-uri"), request:get-uri())[1]
+    return
+        if (contains($uri, "?")) then
+            substring-before($uri, "?")
+        else
+            $uri
 };
 
 declare function site:generate-redirects($cfg) {

@@ -16,7 +16,7 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace hsg="http://history.state.gov/ns/site/hsg";
 
 declare function side:info($node, $model) {
-    let $github := substring-after(request:get-uri(), $app:APP_ROOT) => side:github-url()
+    let $github := substring-after(site:get-uri(), $app:APP_ROOT) => side:github-url()
     return
         <aside class="hsg-aside--info">
             <div id="info" class="hsg-panel">
@@ -51,7 +51,7 @@ declare function side:github-url($uri as xs:string, $site-config as element(site
 };
 
 declare function side:section-nav($node as node(), $model as map(*)){
-  side:generate-section-nav(substring-after(request:get-uri(), $app:APP_ROOT))
+  side:generate-section-nav(substring-after(site:get-uri(), $app:APP_ROOT))
 };
 
 declare function side:generate-section-nav($uri as xs:string) as element(div)? {
