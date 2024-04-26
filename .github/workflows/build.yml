@@ -56,6 +56,7 @@ jobs:
           wget http://exist-db.org/exist/apps/public-repo/public/templating-1.1.0.xar -O 001.xar
           wget https://exist-db.org/exist/apps/public-repo/public/tei-publisher-lib-2.10.1.xar -O 002.xar
           wget https://exist-db.org/exist/apps/public-repo/public/functx-1.0.1.xar -O 003.xar
+          wget https://github.com/HistoryAtState/aws.xq/releases/latest/download/aws-xq.xar -O 004.xar
 
 
       # Install
