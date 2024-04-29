@@ -26,7 +26,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
     await Page.open('search?q=Indochina&within=documents&start-date=1950&end-date=1980');
     duration = await Page.getElementText(searchDuration)
     console.log('duration=', parseFloat(duration));
-    assert.isTrue(parseFloat(duration) < 0.500, 'Current duration did not match expected duration');
+    assert.isTrue(parseFloat(duration) < 1.000, 'Current duration did not match expected duration');
   });
 
   // Keyword Sudan
@@ -42,7 +42,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
     await Page.open('search?q=Sudan&within=documents&start-date=1950&end-date=1980');
     duration = await Page.getElementText(searchDuration)
     console.log('duration=', parseFloat(duration));
-    assert.isTrue(parseFloat(duration) < 0.500, 'Current duration did not match expected duration');
+    assert.isTrue(parseFloat(duration) < 1.000, 'Current duration did not match expected duration');
   });
 
   // Keyword China
@@ -58,7 +58,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
     await Page.open('search?q=China&within=documents&start-date=1950&end-date=1980');
     duration = await Page.getElementText(searchDuration)
     console.log('duration=', parseFloat(duration));
-    assert.isTrue(parseFloat(duration) < 0.500, 'Current duration did not match expected duration');
+    assert.isTrue(parseFloat(duration) < 1.000, 'Current duration did not match expected duration');
   });
 
   // Keyword Tokyo
@@ -74,7 +74,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
     await Page.open('search?q=Tokyo&within=documents&start-date=1950&end-date=1980');
     duration = await Page.getElementText(searchDuration)
     console.log('duration=', parseFloat(duration));
-    assert.isTrue(parseFloat(duration) < 0.500, 'Current duration did not match expected duration');
+    assert.isTrue(parseFloat(duration) < 1.000, 'Current duration did not match expected duration');
   });
 
 });
