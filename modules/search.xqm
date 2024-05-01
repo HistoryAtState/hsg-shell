@@ -31,6 +31,7 @@ declare variable $search:ft-query-options := map {
 declare variable $search:SECTIONS := map {
     "documents": "frus",
     "department": (
+        "timeline",
         "short-history",
         "people",
         "buildings",
