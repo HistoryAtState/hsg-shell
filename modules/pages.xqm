@@ -43,7 +43,7 @@ declare
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?,
         $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean, $open-graph-keys as xs:string?, $open-graph-keys-exclude as xs:string?, $open-graph-keys-add as xs:string?) {
 
-    let $log := util:log("info", "loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id )
+    let $log := util:log("info", "loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id  || " view: " || $view || " ignore: " || $ignore || " open-graph-keys: " || $open-graph-keys || " open-graph-keys-exclude: " || $open-graph-keys-exclude || " open-graph-keys-add: " || $open-graph-keys-add)
 
     let $static-open-graph := map:merge((
         for $meta in $node//*[@id eq 'static-open-graph']/meta
@@ -183,7 +183,7 @@ declare function pages:load-fallback-page($publication-id as xs:string, $documen
         if (empty($volume)) then (
             request:set-attribute("hsg-shell.errcode", 404),
             request:set-attribute("hsg-shell.path", string-join(($document-id, $section-id), "/")),
-            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "publication " || $publication-id || " document " || $document-id || " section " || $section-id || " not found")
+            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id || " not found")
         ) else
             pages:volume-to-tei($volume)
 };
