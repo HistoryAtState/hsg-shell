@@ -523,7 +523,7 @@ declare variable $config:PUBLICATIONS :=
             "document-created": function($document-id) { xmldb:created($config:ADMINISTRATIVE_TIMELINE_COL, $document-id || '.xml') },
             "section-created": function($document-id, $section-id) {xmldb:created($config:ADMINISTRATIVE_TIMELINE_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml') },
-            "select-section": function($document-id, $section-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml')/id('chapter_' || $section-id) },
+            "select-section": function($document-id, $section-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, substring-after($section-id, 'chapter_')), '/') },
             "url-fragment": function($div) { if (starts-with($div/@xml:id, 'chapter_')) then substring-after($div/@xml:id, 'chapter_') else $div/@xml:id/string() },
             "odd": "frus.odd",
