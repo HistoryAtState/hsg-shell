@@ -201,17 +201,23 @@ else switch($path-parts[1])
                         local:render-page("historicaldocuments/frus-history/events/index.xml")
                     case "documents" return
                         if (empty($path-parts[4])) then
-                            local:render-page("historicaldocuments/frus-history/documents/index.xml")
+                            local:render-page("historicaldocuments/frus-history/documents/index.xml", map{
+                                "publication-id": "frus-history-documents"
+                            })
                         else
                             local:render-page("historicaldocuments/frus-history/documents/document.xml", map{
+                                "publication-id": "frus-history-documents",
                                 "document-id": $path-parts[4]
                             })
                     case "research" return
                         if (empty($path-parts[4])) then
-                            local:render-page("historicaldocuments/frus-history/research/index.xml")
+                            local:render-page("historicaldocuments/frus-history/research/index.xml", map{
+                                "publication-id": "frus-history-articles"
+                            })
                         else
                             local:render-page("historicaldocuments/frus-history/research/article.xml", map{
-                                "article-id": $path-parts[4]
+                                "publication-id": "frus-history-articles",
+                                "document-id": $path-parts[4]
                             })
                     case "appendix-a" return
                             local:render-page("historicaldocuments/frus-history/appendix-a.xml", map{

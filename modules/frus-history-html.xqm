@@ -225,6 +225,52 @@ declare function fhh:document-list($node, $model) {
             )
 };
 
+declare function fhh:get-next-article($model) {
+    let $div := $model?data/ancestor-or-self::tei:TEI
+    let $documents := collection($fhh:FRUS_HISTORY_ARTICLES_COL)/tei:TEI
+    let $col := 
+            for $doc in $documents
+            let $created := $doc//tei:publicationStmt/tei:date/@when
+            order by $created
+            return $doc
+    let $index := index-of($col, $div)
+    let $size := count($col)
+    let $data := 
+        switch($index)
+            case $size return ()
+            default return ($col[$index + 1]//tei:body)[1]
+    let $href := if ($data) then "$app/historicaldocuments/frus-history/research/" || substring-before(util:document-name($data), '.xml') else ()
+    return 
+        if ($data) then 
+            map{
+                "data": $data,
+                "href": $href
+            }
+        else ()
+};
+
+declare function fhh:get-previous-article($model) {
+    let $div := $model?data/ancestor-or-self::tei:TEI
+    let $documents := collection($fhh:FRUS_HISTORY_ARTICLES_COL)/tei:TEI
+    let $col := 
+            for $doc in $documents
+            let $created := $doc//tei:publicationStmt/tei:date/@when
+            order by $created
+            return $doc
+    let $index := index-of($col, $div)
+    let $data := 
+        switch($index)
+            case 1 return ()
+            default return ($col[$index - 1]//tei:body)[1]
+    let $href := if ($data) then "$app/historicaldocuments/frus-history/research/" || substring-before(util:document-name($data), '.xml') else ()
+    return 
+        if ($data) then 
+            map{
+                "data": $data,
+                "href": $href
+            }
+        else ()
+};
 declare function fhh:get-next-doc($model) {
     let $div := $model?data/ancestor-or-self::tei:TEI
     let $documents := collection($fhh:FRUS_HISTORY_DOCUMENTS_COL)/tei:TEI
@@ -339,41 +385,46 @@ declare function fhh:article-list-sidebar($node, $model, $article-id) {
         }</ul>
 };
 
-declare function fhh:article-breadcrumb($node, $model, $article-id) {
-    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+declare function fhh:article-breadcrumb($node, $model, $document-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $document-id || ".xml")
     let $title := $article//tei:title[@type='short']
     return
         <a href="$app/historicaldocuments/frus-history/research/{$article-id}">{$title/string()}</a>
 };
 
-declare function fhh:article-title($node, $model, $article-id) {
-    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+declare function fhh:article-title($node, $model, $document-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $document-id || ".xml")
     return
         pages:process-content($model?odd, $article//tei:title[@type='complete'])
 };
 
-declare function fhh:article-author($node, $model, $article-id) {
-    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+declare function fhh:article-author($node, $model, $document-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $document-id || ".xml")
     let $author := $article//tei:author/text()
     let $affiliation := $article//tei:sponsor/text()
     let $date := $article//tei:publicationStmt/tei:date/text()
     return
         (
-            <h3>By <span itemprop="author">{$author}</span><br/>
-            <span itemprop="sourceOrganization">{$affiliation}</span></h3>,
+            if ($author) then
+                <h3>By 
+                    <span itemprop="author">{$author}</span><br/>
+                    <span itemprop="sourceOrganization">{$affiliation}</span>
+                </h3>
+            else
+                (),
             <h4>Released <span itemprop="datePublished">{$date}</span></h4>
         )
 };
 
-declare function fhh:article-description($node, $model, $article-id) {
-    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+declare function fhh:article-description($node, $model, $document-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $document-id || ".xml")
     let $publication-statement := $article//tei:sourceDesc/tei:p
     return
         pages:process-content($model?odd, $publication-statement)
 };
 
-declare function fhh:article($node, $model, $article-id) {
-    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $article-id || ".xml")
+declare function fhh:article($node, $model, $document-id) {
+    let $article := doc($fhh:FRUS_HISTORY_ARTICLES_COL || "/" || $document-id || ".xml")
     return
         pages:process-content($model?odd, $article//tei:text/*, map { "base-uri": "frus150" })
 };

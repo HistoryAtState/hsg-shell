@@ -355,21 +355,23 @@ declare variable $config:PUBLICATIONS :=
                 )
               }
         },
-        "articles": map {
+        "frus-history-articles": map {
             "collection": $config:FRUS_HISTORY_ARTICLES_COL,
             "document-last-modified": function($document-id) { xmldb:last-modified($config:FRUS_HISTORY_ARTICLES_COL, $document-id || '.xml') },  
             "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:FRUS_HISTORY_ARTICLES_COL, $document-id || '.xml') },
             "document-created": function($document-id) { xmldb:created($config:FRUS_HISTORY_ARTICLES_COL, $document-id || '.xml') },
             "section-created": function($document-id, $section-id) {xmldb:created($config:FRUS_HISTORY_ARTICLES_COL, $document-id || '.xml') },
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_ARTICLES_COL || '/' || $document-id || '.xml') },
-            "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_ARTICLES_COL || '/' || $document-id || '.xml')//tei:body },
+            "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_ARTICLES_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "next": frus-history:get-next-article#1,
+            "previous": frus-history:get-previous-article#1,
             "html-href": function($document-id, $section-id) { "$app/frus-history/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
             "base-path": function($document-id, $section-id) { "frus150" },
             "breadcrumb-title": 
               function($parameters as map(*)) as xs:string? {
-                config:tei-short-breadcrumb-title($parameters?publication-id, $parameters?article-id)
+                config:tei-short-breadcrumb-title($parameters?publication-id, $parameters?document-id)
               }
         },
         "about": map {
