@@ -140,16 +140,16 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
 
 declare function pages:last-modified($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified!.($document-id, $section-id)
+        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified($document-id, $section-id)
     else
-        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified!.($document-id)
+        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified($document-id)
 };
 
 declare function pages:created($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        map:get($config:PUBLICATIONS, $publication-id)?section-created!.($document-id, $section-id)
+        map:get($config:PUBLICATIONS, $publication-id)?section-created($document-id, $section-id)
     else
-        map:get($config:PUBLICATIONS, $publication-id)?document-created!.($document-id)
+        map:get($config:PUBLICATIONS, $publication-id)?document-created($document-id)
 };
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
