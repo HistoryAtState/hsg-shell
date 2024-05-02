@@ -43,7 +43,7 @@ declare
 function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?,
         $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean, $open-graph-keys as xs:string?, $open-graph-keys-exclude as xs:string?, $open-graph-keys-add as xs:string?) {
 
-    let $log := util:log("info", "loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id  || " view: " || $view || " ignore: " || $ignore || " open-graph-keys: " || $open-graph-keys || " open-graph-keys-exclude: " || $open-graph-keys-exclude || " open-graph-keys-add: " || $open-graph-keys-add)
+    let $log := util:log("info", "pages:load: loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id  || " view: " || $view || " ignore: " || $ignore || " open-graph-keys: " || $open-graph-keys || " open-graph-keys-exclude: " || $open-graph-keys-exclude || " open-graph-keys-add: " || $open-graph-keys-add)
 
     let $static-open-graph := map:merge((
         for $meta in $node//*[@id eq 'static-open-graph']/meta
@@ -158,7 +158,7 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
 
 declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?,
     $view as xs:string, $ignore as xs:boolean?) {
-    util:log("debug", "pages:load-xml: publication: " || $publication-id || "; document: " || $document-id || "; section: " || $section-id || "; view: " || $view),
+    util:log("debug", "pages:load-xml: Loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id || " view: " || $view || " ignore: " || $ignore),
     let $block :=
         if ($view = "div") then
             if ($section-id) then (
@@ -171,7 +171,7 @@ declare function pages:load-xml($publication-id as xs:string, $document-id as xs
         if (empty($block) and not($ignore)) then (
             pages:load-fallback-page($publication-id, $document-id, $section-id)
         ) else (
-            util:log("info", "pages:load-xml: Loaded " || document-uri(root($block)) || ". Node name: " || node-name($block) || "."),
+            util:log("info", "pages:load-xml: Loaded document-uri: " || document-uri(root($block)) || " node-name: " || node-name($block)),
             $block
         )
 };
@@ -516,6 +516,7 @@ declare function pages:generate-short-title($node, $model) as xs:string? {
 
 (: Generate page breadcrumbs :)
 declare function pages:breadcrumb($node, $model){
+  util:log("info", "pages:breadcrumb site:get-url: " || site:get-uri() || " $app:APP_ROOT: " || $app:APP_ROOT),
   pages:generate-breadcrumbs(substring-after(site:get-uri(), $app:APP_ROOT))
 };
 
