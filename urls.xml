@@ -42,8 +42,8 @@
                 <step key="doc-id">
                     <page-template
                         href="pages/historicaldocuments/frus-history/documents/document.xml">
-                        <with-param keyval="doc-id" name="document-id"/>
                         <with-param name="publication-id" value="frus-history-documents"/>
+                        <with-param keyval="document-id" name="document-id"/>
                     </page-template>
                     <config>
                         <src collection="/db/apps/frus-history/documents"/>
@@ -55,11 +55,11 @@
                 <page-template href="pages/historicaldocuments/frus-history/events/index.xml"/>
             </step>
             <step value="research">
-                <step key="article-id">
+                <step key="document-id">
                     <page-template
                         href="pages/historicaldocuments/frus-history/research/article.xml">
-                        <with-param name="publication-id" value="articles"/>
-                        <with-param keyval="article-id" name="article-id"/>
+                        <with-param name="publication-id" value="frus-history-articles"/>
+                        <with-param keyval="document-id" name="document-id"/>
                     </page-template>
                     <config>
                         <src collection="/db/apps/frus-history/articles"/>

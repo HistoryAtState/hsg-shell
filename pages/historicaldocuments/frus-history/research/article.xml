@@ -2,14 +2,14 @@
 <div data-template="pages:load">
     <div data-template="templates:surround" data-template-at="content"
         data-template-with="templates/site.xml">
-        <div class="row">
+        <div>
             <div class="hidden" id="static-title">
                 <span data-template="frus-history:article-title"/> - Research - History of the
                 Foreign Relations Series - Historical Documents</div>
             <div class="row">
                 <div data-template="pages:breadcrumb"/>
             </div>
-            <div class="row hsg-main">
+            <div class="row">
                 <div class="hsg-width-two-thirds">
                     <div data-template="app:fix-links" id="content-inner" itemscope="itemscope"
                         itemtype="http://schema.org/Article">
@@ -19,6 +19,16 @@
                         <div data-template="frus-history:article-author"/>
                         <p data-template="frus-history:article-description"/>
                         <div data-template="frus-history:article"/>
+                    </div>
+                    <div class="row" data-template="pages:navigation">
+                        <a class="page-nav nav-prev" data-template="pages:navigation-link"
+                            data-template-direction="previous">
+                            <i class="glyphicon glyphicon-chevron-left"/>
+                        </a>
+                        <a class="page-nav nav-next" data-template="pages:navigation-link"
+                            data-template-direction="next">
+                            <i class="glyphicon glyphicon-chevron-right"/>
+                        </a>
                     </div>
                 </div>
                 <aside data-template="pages:asides">

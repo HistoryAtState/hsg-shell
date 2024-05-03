@@ -31,6 +31,7 @@ declare variable $search:ft-query-options := map {
 declare variable $search:SECTIONS := map {
     "documents": "frus",
     "department": (
+        "timeline",
         "short-history",
         "people",
         "buildings",
@@ -42,7 +43,7 @@ declare variable $search:SECTIONS := map {
     "retired": ("milestones", "education"),
     "countries": ("countries-articles", "archives"),
     "conferences": "conferences",
-    "frus-history": "frus-history-monograph",
+    "frus-history": ("frus-history-articles", "frus-history-documents", "frus-history-monograph"),
     "about": ("hac", "faq")
 };
 
@@ -815,6 +816,8 @@ declare function search:query-sections($sections as xs:string*, $query-configura
                 collection("/db/apps/conferences/data")//tei:div[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/hac")//tei:div[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/frus/volumes")//tei:div[ft:query(., $query-string, $frus-query-options)],
+                collection("/db/apps/frus-history/articles")//tei:body[ft:query(., $query-string, $query-options)],
+                collection("/db/apps/frus-history/documents")//tei:body[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/frus-history/monograph")//tei:div[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/rdcr/articles")//tei:body[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/wwdai/articles")//tei:body[ft:query(., $query-string, $query-options)],
