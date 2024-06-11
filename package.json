@@ -16,7 +16,7 @@
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-angular": "^18.4.3",
-    "@existdb/gulp-exist": "^4.4.0",
+    "@existdb/gulp-exist": "^5.0.0",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@wdio/cli": "^7.32.4",
@@ -29,7 +29,7 @@
     "chai-as-promised": "^7.1.1",
     "chromedriver": "^122.0.4",
     "del": "^6.1.1",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^7.1.0",
