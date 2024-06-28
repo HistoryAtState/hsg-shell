@@ -14,7 +14,7 @@ import module namespace app="http://history.state.gov/ns/site/hsg/templates" at 
 
 declare option output:method "xml";
 
-declare variable $application-url := request:get-parameter('xql-application-url', '');
+declare variable $application-url := request:get-parameter('xq-application-url', '');
 
 
 declare function open:frus-latest() {
@@ -227,7 +227,7 @@ declare function open:frus-metadata() {
         </volumes>
 };
 
-switch(request:get-parameter('xql-feed', ''))
+switch(request:get-parameter('xq-feed', ''))
 case 'latest' return open:frus-latest()
 case 'metadata' return open:frus-metadata()
 default return <error/>

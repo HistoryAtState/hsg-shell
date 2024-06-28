@@ -41,7 +41,7 @@ declare function local:serve-not-found-page() as element() {
     local:render-page("error-page-404.xml")
 };
 
-declare variable $local:view-module-url := $exist:controller || "/modules/view.xql";
+declare variable $local:view-module-url := $exist:controller || "/modules/view.xq";
 declare function local:render-page($page-template as xs:string, $parameters as map(*)) as element() {
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller}/pages/{$page-template}"/>
@@ -102,16 +102,16 @@ else if (ends-with($exist:path, "validate-results-of-twitter-jobs.xq")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller}/tests/xquery/validate-results-of-twitter-jobs.xq"/>
         <view>
-            <forward url="{$exist:controller}/modules/view.xql"/>
+            <forward url="{$exist:controller}/modules/view.xq"/>
         </view>
         <error-handler>
             <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>
-            <forward url="{$exist:controller}/modules/view.xql"/>
+            <forward url="{$exist:controller}/modules/view.xq"/>
         </error-handler>
     </dispatch>
 
 (: ignore direct requests to main modules :)
-else if (ends-with($exist:resource, ".xql")) then
+else if (ends-with($exist:resource, ".xq")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <ignore/>
     </dispatch>
@@ -123,7 +123,7 @@ else if (starts-with($exist:path, "/sitemap")) then
 
 (: reject ANY request with more than 4 path parts -> /a/b/c/d/e :)
 else if (count($path-parts) gt 4) then (
-    util:log("info", ("hsg-shell controller.xql received >4 path parts: ", string-join($path-parts, ":"))),
+    util:log("info", ("hsg-shell controller.xq received >4 path parts: ", string-join($path-parts, ":"))),
     local:serve-not-found-page()
 )
 
@@ -237,7 +237,7 @@ else switch($path-parts[1])
             default return
                 (: return 404 for requests with unreasonable numbers of path path-parts :)
                 if (count($path-parts) gt 3) then (
-                    util:log("info", ("hsg-shell controller.xql received >2 path-parts: ", string-join($path-parts, "/"))),
+                    util:log("info", ("hsg-shell controller.xq received >2 path-parts: ", string-join($path-parts, "/"))),
                     local:serve-not-found-page()
                 )
                 else if (starts-with($path-parts[2], "frus")) then
@@ -581,16 +581,16 @@ else switch($path-parts[1])
 
             case "frus-latest.xml" return
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <forward url="{$exist:controller}/modules/open.xql">
-                        <add-parameter name="xql-feed" value="latest"/>
-                        <add-parameter name="xql-application-url" value="{local:get-url()}"/>
+                    <forward url="{$exist:controller}/modules/open.xq">
+                        <add-parameter name="xq-feed" value="latest"/>
+                        <add-parameter name="xq-application-url" value="{local:get-url()}"/>
                     </forward>
                 </dispatch>
             case "frus-metadata.xml" return
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <forward url="{$exist:controller}/modules/open.xql">
-                        <add-parameter name="xql-feed" value="metadata"/>
-                        <add-parameter name="xql-application-url" value="{local:get-url()}"/>
+                    <forward url="{$exist:controller}/modules/open.xq">
+                        <add-parameter name="xq-feed" value="metadata"/>
+                        <add-parameter name="xq-application-url" value="{local:get-url()}"/>
                     </forward>
                 </dispatch>
             default return
@@ -666,8 +666,8 @@ else switch($path-parts[1])
     case 'api' return
         if ($path-parts[2] eq 'v1') then
             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                <forward url="{$exist:controller}/modules/opds-catalog.xql">
-                    <add-parameter name="xql-application-url" value="{local:get-url()}"/>
+                <forward url="{$exist:controller}/modules/opds-catalog.xq">
+                    <add-parameter name="xq-application-url" value="{local:get-url()}"/>
                 </forward>
                 <!--TODO Add an error handler appropriate for this API - with error codes, redirects. We currently let bad requests through without raising errors. -->
             </dispatch>
@@ -680,7 +680,7 @@ else switch($path-parts[1])
             case 'volume-ids'
             case 'volume-images' return
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-                    <forward url="{$exist:controller}/modules/{$path-parts[2]}.xql"/>
+                    <forward url="{$exist:controller}/modules/{$path-parts[2]}.xq"/>
                     <!--TODO Maybe add an error handler, but not the default one. -->
                 </dispatch>
             default return

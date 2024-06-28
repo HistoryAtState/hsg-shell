@@ -10,9 +10,9 @@ declare namespace output="http://www.w3.org/2010/xslt-xquery-serialization";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
-import module namespace pm-config="http://www.tei-c.org/tei-simple/pm-config" at "../pm-config.xql";
-import module namespace pages="http://www.tei-c.org/tei-simple/pages" at "pages.xql";
-import module namespace tpu="http://www.tei-c.org/tei-publisher/util" at "util.xql";
+import module namespace pm-config="http://www.tei-c.org/tei-simple/pm-config" at "../pm-config.xqm";
+import module namespace pages="http://www.tei-c.org/tei-simple/pages" at "pages.xqm";
+import module namespace tpu="http://www.tei-c.org/tei-publisher/util" at "util.xqm";
 
 declare option output:method "html";
 declare option output:html-version "5.0";

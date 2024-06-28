@@ -307,7 +307,7 @@ declare function toc:paginate($child-document-count as xs:int, $start as xs:int)
 };
 
 (:
-    TODO: Add processing this function to post-install.xql with the according permissions,
+    TODO: Add processing this function to post-install.xq with the according permissions,
     check for target collection and create a new, empty one, if necessary
 :)
 declare function toc:generate-frus-tocs() {

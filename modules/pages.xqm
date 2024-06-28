@@ -77,7 +77,7 @@ function pages:load($node as node(), $model as map(*), $publication-id as xs:str
             ()
     let $created :=
         if (exists($publication-id) and exists($document-id)) then
-            (: No need to truncate creation date; it'll be serialized in view.xql :)
+            (: No need to truncate creation date; it'll be serialized in view.xq :)
             pages:created($publication-id, $document-id, $section-id)
         else
             ()

@@ -16,7 +16,7 @@ import module namespace tags="http://history.state.gov/ns/site/hsg/tags-html" at
 declare option output:method "xml";
 
 declare variable $opds:opds-path := 'api/v1/catalog';
-declare variable $opds:server-url := substring-before(request:get-parameter('xql-application-url', ''), $opds:opds-path);
+declare variable $opds:server-url := substring-before(request:get-parameter('xq-application-url', ''), $opds:opds-path);
 declare variable $opds:opds-base-url := $opds:server-url || $opds:opds-path;
 declare variable $opds:feed-author-name {'Office of the Historian'};
 declare variable $opds:opds-search-url {concat($opds:server-url, 'opensearch.xml')};

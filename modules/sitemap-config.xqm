@@ -827,7 +827,7 @@ function site:cwpfus-with-param-select($select as attribute(select), $state as m
 };
 
 declare function site:get-url() {
-  (: imported from old controller.xql :)
+  (: imported from old controller.xq :)
     concat(
         request:get-scheme(),
         '://',
@@ -843,7 +843,7 @@ declare function site:get-url() {
 };
 
 declare function site:get-uri() {
-  (: imported from old controller.xql :)
+  (: imported from old controller.xq :)
     let $uri := (request:get-header("nginx-request-uri"), request:get-uri())[1]
     return
         if (contains($uri, "?")) then

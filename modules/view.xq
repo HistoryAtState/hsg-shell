@@ -1,11 +1,11 @@
 (:~
- : This is the main XQuery which will (by default) be called by controller.xql
+ : This is the main XQuery which will (by default) be called by controller.xq
  : to process any URI ending with ".html". It receives the HTML from
  : the controller and passes it to the templating system.
  :)
 xquery version "3.0";
 
-import module namespace templates="http://exist-db.org/xquery/html-templating" ;
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 (:
  : The following modules provide functions which will be called by the

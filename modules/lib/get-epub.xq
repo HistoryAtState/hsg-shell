@@ -1,8 +1,8 @@
 xquery version "3.1";
 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
-import module namespace epub="http://exist-db.org/xquery/epub" at "epub.xql";
-import module namespace pages="http://www.tei-c.org/tei-simple/pages" at "pages.xql";
+import module namespace epub="http://exist-db.org/xquery/epub" at "epub.xqm";
+import module namespace pages="http://www.tei-c.org/tei-simple/pages" at "pages.xqm";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 

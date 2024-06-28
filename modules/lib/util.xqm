@@ -21,7 +21,7 @@ module namespace tpu="http://www.tei-c.org/tei-publisher/util";
 
 
 import module namespace config="http://history.state.gov/ns/site/hsg/config" at "../config.xqm";
-import module namespace nav="http://www.tei-c.org/tei-simple/navigation" at "../navigation.xql";
+import module namespace nav="http://www.tei-c.org/tei-simple/navigation" at "../navigation.xqm";
 
 declare function tpu:parse-pi($doc as document-node(), $view as xs:string?) {
     tpu:parse-pi($doc, $view, request:get-parameter("odd", ()))
