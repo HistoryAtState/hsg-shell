@@ -131,7 +131,7 @@ else switch($path-parts[1])
 
     (: handle requests for static resource: robots.txt :)
     case "robots.txt"
-    case "opensearch.html"
+    case "opensearch.xml"
     case "favicon.ico" return
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <!-- TODO: add cache header! -->
@@ -664,7 +664,15 @@ else switch($path-parts[1])
 
     (: handle OPDS API requests :)
     case 'api' return
-        if ($path-parts[2] eq 'v1') then
+        if (
+            $path-parts[2] eq 'v1' 
+            and 
+            (
+                ($path-parts[3] eq 'catalog' and empty($path-parts[4])) 
+                or 
+                ($path-parts[3] eq 'catalog' and $path-parts[4] = ('all', 'recent', 'browse', 'search'))
+            )
+        ) then
             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                 <forward url="{$exist:controller}/modules/opds-catalog.xql">
                     <add-parameter name="xql-application-url" value="{local:get-url()}"/>
