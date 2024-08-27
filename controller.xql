@@ -44,14 +44,17 @@ declare function local:serve-not-found-page() as element() {
 declare variable $local:view-module-url := $exist:controller || "/modules/view.xql";
 declare function local:render-page($page-template as xs:string, $parameters as map(*)) as element() {
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{$exist:controller}/pages/{$page-template}"/>
+        <forward url="{$exist:controller}/pages/{$page-template}" method="get" />
         <view>
-            <forward url="{$local:view-module-url}">{
+            <forward url="{$local:view-module-url}">
+            {
                 map:for-each($parameters, function ($name as xs:string, $value as xs:string) as element() {
                     <add-parameter xmlns="http://exist.sourceforge.net/NS/exist"
                         name="{$name}" value="{$value}" />
                 })
-            }</forward>
+            }
+                <add-parameter name="x-method" value="{lower-case(request:get-method())}" />
+            </forward>
         </view>
         <error-handler>
             <forward url="{$exist:controller}/pages/error-page.xml" method="get"/>

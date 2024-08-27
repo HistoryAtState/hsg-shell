@@ -158,18 +158,60 @@ function app:handle-error($node as node(), $model as map(*), $code as xs:integer
             ()
 };
 
+(: For the purpose of comparing the resource's last modified date with the If-Modified-Since
+ : header supplied by the client, we must truncate any milliseconds from the last modified date.
+ : This is because HTTP-date is only specific to the second.
+ : @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1 :)
+declare function app:modified-since ($last-modified as xs:dateTime?, $if-modified-since as xs:dateTime?) as xs:boolean {
+    util:log("info", ('---pages:modified-since----', $last-modified, '<>', $if-modified-since)),
+    exists($last-modified) and 
+    exists($if-modified-since) and 
+    $last-modified - $if-modified-since < xs:dayTimeDuration("PT1S")
+};
+
+declare function app:safe-parse-if-modified-since-header() as xs:dateTime? {
+    try {
+        parse-ietf-date(
+            request:get-attribute("if-modified-since"))
+    } catch err:FORG0010 { () }
+};
+
+declare function app:last-modified($publication-config as map(*), $document-id as xs:string?, $section-id as xs:string?) {
+    if ($document-id and $section-id and map:contains($publication-config, "section-last-modified")) then (
+        $publication-config?section-last-modified($document-id, $section-id)
+    ) else if ($document-id and map:contains($publication-config, "document-last-modified")) then (
+        $publication-config?document-last-modified($document-id)
+    ) else if (map:contains($publication-config, "publication-last-modified")) then (
+        $publication-config?publication-last-modified()
+    ) else ()
+};
+
+declare function app:created($publication-config as map(*), $document-id as xs:string?, $section-id as xs:string?) {
+    if ($section-id and $document-id and map:contains($publication-config, "section-created")) then (
+        $publication-config?section-created($document-id, $section-id)
+    ) else if ($document-id and map:contains($publication-config, "document-created")) then (
+        $publication-config?document-created($document-id)
+    ) else ()
+};
+
+
 declare function app:format-http-date($dateTime as xs:dateTime) as xs:string {
     $dateTime
     => adjust-dateTime-to-timezone(xs:dayTimeDuration("PT0H"))
     => format-dateTime("[FNn,*-3], [D01] [MNn,*-3] [Y0001] [H01]:[m01]:[s01] [Z0000]", "en", (), ())
 };
 
-declare function app:set-last-modified($last-modified as xs:dateTime) {
-    response:set-header("Last-Modified", app:format-http-date($last-modified))
+declare function app:set-last-modified($last-modified as xs:dateTime?) as empty-sequence() {
+    if (empty($last-modified)) then () else (
+        response:set-header("Last-Modified", app:format-http-date($last-modified)),
+        response:set-header("Cache-Control", "max-age: 300; must-revalidate")
+    )
 };
 
-declare function app:set-created($created as xs:dateTime) {
-    response:set-header("Created", app:format-http-date($created))
+declare function app:set-created($created as xs:dateTime?) as empty-sequence() {
+    if (empty($created)) then () else (
+       response:set-header("Created", app:format-http-date($created))
+    )
 };
 
 (:
@@ -556,7 +598,9 @@ declare function app:insert-url-parameter($node as node(), $model as map(*)) {
 };
 
 declare function app:error-description($node as node(), $model as map(*)) {
-    try {templates:error-description($node, $model)}
+    try {
+        templates:error-description($node, $model)
+    }
     catch * {
         element { node-name($node) } {
             $node/@*,

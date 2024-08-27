@@ -3,7 +3,7 @@
  : to process any URI ending with ".html". It receives the HTML from
  : the controller and passes it to the templating system.
  :)
-xquery version "3.0";
+xquery version "3.1";
 
 import module namespace templates="http://exist-db.org/xquery/html-templating" ;
 
@@ -37,41 +37,56 @@ declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 
 declare option output:method "html";
 declare option output:html-version "5";
+(: This does not seem to have an effect! :)
+declare option output:indent "no";
 declare option output:media-type "text/html";
 
-let $config := map {
-    $templates:CONFIG_APP_ROOT : $config:app-root,
-    $templates:CONFIG_STOP_ON_ERROR : true()
-}
-(:
- : We have to provide a lookup function to templates:apply to help it
- : find functions in the imported application modules. The templates
- : module cannot see the application modules, but the inline function
- : below does see them.
- :)
-let $lookup := function($functionName as xs:string, $arity as xs:integer) {
-    try {
-        function-lookup(xs:QName($functionName), $arity)
-    } catch * {
-        ()
-    }
-}
-(:
- : The HTML is passed in the request from the controller.
- : Run it through the templating system and return the result.
- :)
-let $content := request:get-data()
-return
-    (
-        templates:apply($content, $lookup, (), $config),
-        let $last-modified := request:get-attribute("hsgshell.last-modified")
-        let $created := request:get-attribute("hsgshell.created")
-        return
-            if (exists($last-modified) and exists($created)) then
-                (
-                    app:set-last-modified($last-modified),
-                    app:set-created($created)
-                )
-            else
-                ()
+let $publication-id := request:get-parameter('publication-id',())
+let $document-id := request:get-parameter('document-id',())
+let $section-id := request:get-parameter('section-id',())
+
+let $publication-config := ($config:PUBLICATIONS?($publication-id), map{})[1]
+let $created := app:created($publication-config, $document-id, $section-id)
+let $last-modified := app:last-modified($publication-config, $document-id, $section-id)
+let $not-modified-since := app:modified-since($last-modified, app:safe-parse-if-modified-since-header())
+
+return 
+    if ($not-modified-since) then (
+        (: if the "If-Modified-Since" header in the client request is later than the
+         : last-modified date, then halt further processing of the templates and simply
+         : return a 304 response. :)
+        response:set-status-code(304),
+        app:set-last-modified($last-modified)
+    ) else if (request:get-parameter('x-method', ()) eq 'head') then (
+        (: When revalidating a cached resource and the "If-Modified-Since" header sent by the client indicates
+         : the resource has changed in the meantime, it is just a head request. Do not render the page as the 
+         : response body is discarded anyway and just return status code 200. :)
+        response:set-status-code(200),
+        app:set-last-modified($last-modified)
+    ) else (
+        (:
+         : The HTML is passed in the request from the controller.
+         : Run it through the templating system and return the result.
+         :)
+        templates:apply(
+            request:get-data(),
+            (:
+             : We have to provide a lookup function to templates:apply to help it
+             : find functions in the imported application modules. The templates
+             : module cannot see the application modules, but the inline function
+             : below does see them.
+             :)
+            function($function-name as xs:string, $arity as xs:integer) as function(*)? {
+                function-lookup(xs:QName($function-name), $arity)
+            },
+            (),
+            map {
+                $templates:CONFIG_APP_ROOT : $config:app-root,
+                $templates:CONFIG_STOP_ON_ERROR : true(),
+                $templates:CONFIG_FILTER_ATTRIBUTES : true()
+            }
+        ),
+        (: only set last-modified if rendering was succesful :)
+        app:set-last-modified($last-modified),
+        app:set-created($created)
     )
