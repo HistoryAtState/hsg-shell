@@ -110,10 +110,10 @@ declare function link:email($email as xs:string, $subject as xs:string?, $body a
 
 declare function link:report-issue-body($node, $model) as xs:string {
     let $error as xs:string? := (templates:process(<pre class="error app:error-description"/>, $model)/string(.))[1][normalize-space(.) ne '']
-    let $url := (
-        $model?url,
-        try { request:get-url() }
-            catch err:XPDY0002 { 'test-url' }  (: some contexts do not have a request object, e.g. xqsuite testing :)
+    let $uri := "https://history.state.gov" || (
+        $model?uri,
+        try { substring-after(request:get-uri(), $app:APP_ROOT)}
+            catch err:XPDY0002 { 'test-path' }  (: some contexts do not have a request object, e.g. xqsuite testing :)
     )[1]
     let $tab := codepoints-to-string(9)
     let $parameters as xs:string* :=
@@ -129,7 +129,7 @@ declare function link:report-issue-body($node, $model) as xs:string {
         "Please provide any additional information above this line",
         "",
         "Requested URL:",
-        $tab || $url,
+        $tab || $uri,
         ""[exists($parameters)],
         "Parameters:"[exists($parameters)],
         $parameters,
