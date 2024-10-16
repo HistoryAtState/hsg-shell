@@ -680,6 +680,9 @@ declare variable $config:PUBLICATIONS :=
               }
         },
         "frus-history-documents": map {
+            "collection": $config:FRUS_HISTORY_DOCUMENTS_COL,
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:FRUS_HISTORY_DOCUMENTS_COL, $document-id || '.xml') },  
+            "document-created": function($document-id) { xmldb:created($config:FRUS_HISTORY_DOCUMENTS_COL, $document-id || '.xml') },
             "next": frus-history:get-next-doc#1,
             "previous": frus-history:get-previous-doc#1,
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_DOCUMENTS_COL || "/" || $document-id || ".xml") },
