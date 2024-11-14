@@ -27,7 +27,7 @@
     "autoprefixer": "^9.7.4",
     "chai": "^4.3.8",
     "chai-as-promised": "^7.1.1",
-    "chromedriver": "^122.0.4",
+    "chromedriver": "^122.0.6",
     "del": "^6.1.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
@@ -62,7 +62,6 @@
   "bugs": {
     "url": "https://github.com/HistoryAtState/hsg-shell/issues"
   },
-  "overrides": {
-  },
+  "overrides": {},
   "homepage": "https://github.com/HistoryAtState/hsg-shell#readme"
 }
