@@ -14,8 +14,8 @@
                     <div data-template="app:fix-links" id="content-inner">
                         <h1>About Us</h1>
                         <p>Download our brochure (<a
-                                href="$s3static/about/office-of-the-historian-brochure-2019.pdf"
-                                >PDF, 1.6mb</a>).</p>
+                                href="$s3static/about/office-of-the-historian-brochure.pdf">PDF,
+                                2.4mb</a>).</p>
                         <div>
                             <h2>Who We Are</h2>
                             <p>The Office of the Historian is staffed by professional historians who
