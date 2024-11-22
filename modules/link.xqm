@@ -31,7 +31,7 @@ declare function link:generate-from-state($url-state as map(*)) as element(a)* {
                 then (attribute aria-current { "page" })
                 else ()
             }
-            <span>{link:generate-label-from-state($url-state)}</span>
+            <span property="name">{link:generate-label-from-state($url-state)}</span>
         </a>
 };
 
