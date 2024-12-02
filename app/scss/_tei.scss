@@ -57,6 +57,15 @@
   }
 }
 
+// Lists with hanging indents in "sources" - same as for "persons"
+
+#sources {
+  .tei-item .tei-item {
+    margin-left: 2em;
+    text-indent: -2em;
+  }
+}
+
 // No padding for terms list, because of empty wrapping list
 // historicaldocuments/frus1977-80v30/terms
 
