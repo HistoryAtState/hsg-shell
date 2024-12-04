@@ -1,7 +1,4 @@
 <root xmlns="http://ns.evolvedbinary.com/sitemap" xmlns:site="http://ns.evolvedbinary.com/sitemap" xmlns:hsg="http://history.state.gov/ns/site/hsg">
-    <path match="/resources/|/bower_components/">
-        <fwd url="{replace($exist:path, '^.*((resources|bower_components).*)$', '$1')}"/>
-    </path>
     <step value="validate-results-of-twitter-jobs.xq">
         <xq href="/tests/xquery/validate-results-of-twitter-jobs.xq"/>
     </step>

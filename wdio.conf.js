@@ -38,16 +38,8 @@ exports.config = {
       uat: [
         './tests/specs/**/uat_*.js'
       ],
-      uat_producer: [
-        './tests/specs/**/uat_*.js',
-        './tests/specs/twitter/twitter-scheduler.spec.js'
-      ],
       prod: [
         './tests/specs/**/prod_*.js'
-      ],
-      prod_producer: [
-        './tests/specs/**/prod_*.js',
-        './tests/specs/twitter/twitter-scheduler.spec.js'
       ],
       single: [
         'tests/specs/footnote/uat_footnote_popover.spec.js'
