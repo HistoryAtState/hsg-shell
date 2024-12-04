@@ -12,39 +12,45 @@ You need to have *ant*, *git*, *asdf* and *nodeJS* installed.
    Install [asdf](https://asdf-vm.com/guide/getting-started.html).
 2. If you have already used asdf before and have various ant / node versions already installed, you can skip this. Now just make sure to use the project's required nodejs / ant version is running 
 
-        `asdf install nodejs 18.18.2`
-        `asdf install ant 1.10.13`
+        asdf plugin add nodejs
+        asdf install nodejs 18.18.2
+        asdf global nodejs 18.18.2
+   
+        asdf plugin add ant
+        asdf install ant 1.10.13
+        asdf global ant 1.10.13
 
-3. Install gulp
+4. Install gulp
 
-        `npm install -g gulp`
+        npm install -g gulp
 
    The project's gulp file depends on `gulp 4` (or higher) syntax, so make sure in the next step, that you'll have gulp 4.x running.
-
-#### Troubleshooting `npm` Problems
-
-When you encounter errors while running `npm start` (this is called when building the xar file by running `ant`), or during `npm install`, please delete file `package-lock.json`, delete the entire `node_modules` folder and finally `npm start` again.
-This should install all node modules with the required node version.
-
-A new `package-lock.json` file will be created, which should be added to version control.  
 
 ### Installation
 
 1. Clone the repository
 
         git clone https://github.com/HistoryAtState/hsg-shell.git
+        cd hsg-shell
 
-1. Build the application package
+3. Build the application package
    For a ready-to-install xar file, run the command
 
-    ant
+        ant
 
    * `ant` will build a XAR file after automatically running npm start and gulp (build).
+   * At least on macOS, the asdf shim for `ant` produces an error if the command has no flags. As a workaround, use `ant -Dfoo=bar`.
 
-2. Install the package `build/hsg-shell.xar` with the Package Manager
+4. Install the package `build/hsg-shell.xar` with the Package Manager or, as described below, xst
 
-3. Click on the *history.state.gov* icon on the eXist Dashboard
+5. Click on the *history.state.gov* icon on the eXist Dashboard
 
+#### Troubleshooting `npm` Problems
+
+If you encounter errors while running `npm start` (this is called when building the xar file by running `ant`), or during `npm install`, please delete file `package-lock.json`, delete the entire `node_modules` folder and finally `npm start` again.
+This should install all node modules with the required node version.
+
+A new `package-lock.json` file will be created, which should be added to version control.  
 
 ### Check currently installed versions
 
@@ -61,7 +67,7 @@ google-analytics and DAP tracking.
 
 `HSG_ENV=production ant` for a single test
 
-`export HSG_ENV` in the login script on a production server
+`export HSG_ENV=production` in the login script on a production server
 
 ## 2. Update
 
@@ -95,7 +101,7 @@ docker run -p 8080:8080 joewiz/hsg-project:latest
 One the docker container is started point your browser to http://localhost:8080 to verify everything is working
 
 ### Deploy local changes via `xst` into a local eXist-db
-Install `xst` by executing `npm install --global @existdb/xst`. 
+Install [`xst`](https://github.com/eXist-db/xst) by executing `npm install --global @existdb/xst`. 
 
 Create a file called `.env` in the root folder of this project with the following content: 
 
@@ -107,7 +113,7 @@ EXISTDB_SERVER=http://localhost:8080
 
 Run `ant` to create the XAR file and afterwards `xst package install build/hsg-shell.xar` to install the created XAR file in your local database. 
 
-### Deploy local changes via `existdb-vscode ` into a local eXist-db
+### Deploy local changes via `existdb-vscode` into a local eXist-db
 Make sure you have [Visual Studio Code](https://code.visualstudio.com/) installed and open it. In Visual Studio Code open `View > Extensions` from the menu and make sure the `existdb-vscode` extension is installed. 
 
 Open `.existdb.json` in Visual Studio Code and click "save". This opens a dialog with the following text 
