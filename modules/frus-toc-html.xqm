@@ -61,7 +61,7 @@ declare function toc:toc($model as map(*), $root as node()?, $show-heading as xs
                 toc:toc-passthru(
                     $model,
                     $root/ancestor-or-self::tei:TEI/tei:text,
-                    if ($highlight) then $root/ancestor-or-self::tei:div[@type != "document"][1] else ()
+                    if ($highlight) then $root/ancestor-or-self::tei:div[@type != ("document", "document-pending")][1] else ()
                 )
             }</ul>
         </div>
@@ -103,11 +103,14 @@ declare function toc:volume-title($node as node(), $type as xs:string) as text()
 (: handles divs for TOCs :)
 declare function toc:toc-div($model as map(*), $node as element(tei:div), $current as element()?) {
     (: we only show certain divs :)
-    for $node in $node[@xml:id != 'toc'][@type != 'document']
-    let $descendant-docs := $node//tei:div[@type = 'document']
+    for $node in $node[@xml:id != 'toc'][not(@type = ('document', 'document-pending'))]
+    let $descendant-docs := $node//tei:div[@type = ('document', 'document-pending')]
+    let $is-pending := ends-with($node/@type, "-pending")
     return
         <li>
         {
+            if ($is-pending) then attribute class { 'pending' } else ()
+            ,
             let $href := attribute href { toc:href($node) }
             let $highlight := if ($node is $current) then 'highlight' else ()
             (: .toc-link would trigger an ajax call, so only use this if we're not showing a
@@ -186,11 +189,11 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
     let $start := xs:integer(request:get-parameter("start", 1))
     let $headConfig := map:merge(($config, map { "parameters": map:put($config?parameters, "omit-notes", true())}),  map{"duplicates": "use-last"})
     let $head := $node/tei:head[1]
-    let $child-documents := $node/tei:div[@type='document']
+    let $child-documents := $node/tei:div[@type=('document', 'document-pending')]
     let $child-document-count := count($child-documents)
     (: let $child-documents-to-show := $node/tei:div[@type='document'] :)
     let $child-documents-to-show := subsequence($child-documents, $start, $toc:ENTRIES_PER_PAGE)
-    let $has-inner-sections := $node/tei:div[@type != 'document']
+    let $has-inner-sections := $node/tei:div[not(@type = ('document', 'document-pending'))]
     return
         <div class="{$class}">
             <h3>{
@@ -235,7 +238,7 @@ declare function toc:document-list($config as map(*), $node as element(tei:div),
                             <a href="{$href}">
                             {
                             	(: show a bracketed document number for volumes that don't use document numbers :)
-                            	if (not(starts-with($doctitle, concat($docnumber, '.')))) then
+                            	if (not(starts-with($doctitle, concat($docnumber, '.'))) and $document/@type ne 'document-pending') then
                             		concat('[', $docnumber, '] ')
                             	else
                             		()
