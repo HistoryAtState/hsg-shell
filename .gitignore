@@ -1,7 +1,6 @@
 # artifacts
 build/*
 node_modules
-bower_components
 resources/css
 resources/fonts
 resources/scripts/app.all.js
@@ -16,15 +15,12 @@ tests/reports/junit-reports/*
 
 # local properties
 local.node-exist.json
-build.properties.local.xml
-!build.properties.local.example.xml
 
 # other local files
 .*
 !.gitignore
 !.existdb.json
 !.npmrc
-!.nvmrc
 !.gitkeep
 !.github/
 !.releaserc

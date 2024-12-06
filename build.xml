@@ -28,19 +28,6 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <!-- Retrieve local paths to binaries and store them -->
-    <target name="get-binary-paths">
-        <echo>Call target get-binary-paths</echo>
-        <echo>Path to nvm/node version: ${nvm_bin}</echo>
-        <property name="node.PATH" value="${nvm_bin}"/>
-
-        <echo>Path to gulp binary: ${nvm_bin}/gulp</echo>
-        <property name="path.gulp" value="${nvm_bin}/gulp"/>
-
-        <echo>Path to npm binary: ${nvm_bin}/gulp</echo>
-        <property name="path.npm" value="${nvm_bin}/npm"/>
-    </target>
-
     <target name="run-npm">
         <echo message="Calling npm start... (Production? ${node-env-is-set-for-production})"/>
         <exec executable="npm" outputproperty="npm.output">
