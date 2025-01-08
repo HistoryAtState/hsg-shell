@@ -117,7 +117,7 @@ declare function pmf:pb-link($config as map(*), $node as node(), $class as xs:st
                 'Typeset '
             default return ''
     return
-        <a href="{ $uri }" id="{ $id }" class="{ $class }" target="_self">
+        <a href="{ $uri }" id="{ $id }" class="{ $class }" target="_self" rel="nofollow">
             [{$label, $config?apply-children($config, $node, $content)}]
         </a>
 };
