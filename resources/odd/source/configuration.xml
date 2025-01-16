@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     Defines extension modules to be loaded for a given output mode, optionally limited to a
     specific odd file. Order is important: the first module function matching a given behaviour
