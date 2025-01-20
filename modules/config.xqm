@@ -12,6 +12,8 @@ import module namespace frus-history = "http://history.state.gov/ns/site/hsg/fru
 
 import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../transform/frus-web-module.xql";
 
+import module namespace frus-lm = "http://history.state.gov/ns/site/frus/last-modified" at "/db/apps/frus/modules/frus.xqm";
+
 declare namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare namespace expath="http://expath.org/ns/pkg";
@@ -138,28 +140,26 @@ declare variable $config:PUBLICATIONS :=
             "collection": $config:FRUS_VOLUMES_COL,
             "document-last-modified": function($document-id) { 
                 (
-                    xmldb:last-modified($config:FRUS_VOLUMES_COL, $document-id || '.xml'),
-                    (: for volumes that we do not have as TEI yet, fall back on volume metadata :)
-                    xmldb:last-modified($config:FRUS_METADATA_COL, $document-id || '.xml')
+                    $frus-lm:lm?('volumes/' || $document-id || '.xml'),
+                    $frus-lm:lm?('bibliography/' ||$document-id || '.xml')
                 )[1]
             },
             "section-last-modified": function($document-id, $section-id) {
                 (
-                    xmldb:last-modified($config:FRUS_VOLUMES_COL, $document-id || '.xml'),
-                    xmldb:last-modified($config:FRUS_METADATA_COL, $document-id || '.xml')
+                    $frus-lm:lm?('volumes/' || $document-id || '.xml'),
+                    $frus-lm:lm?('bibliography/' ||$document-id || '.xml')
                 )[1]
             },
             "document-created": function($document-id) { 
                 (
-                    xmldb:created($config:FRUS_VOLUMES_COL, $document-id || '.xml'),
-                    (: for volumes that we do not have as TEI yet, fall back on volume metadata :)
-                    xmldb:created($config:FRUS_METADATA_COL, $document-id || '.xml')
+                    $frus-lm:lm?('volumes/' || $document-id || '.xml'),
+                    $frus-lm:lm?('bibliography/' ||$document-id || '.xml')
                 )[1]
             },
             "section-created": function($document-id, $section-id) {
                 (
-                    xmldb:created($config:FRUS_VOLUMES_COL, $document-id || '.xml'),
-                    xmldb:created($config:FRUS_METADATA_COL, $document-id || '.xml')
+                    $frus-lm:lm?('volumes/' || $document-id || '.xml'),
+                    $frus-lm:lm?('bibliography/' ||$document-id || '.xml')
                 )[1]
             },
             "select-document": function($document-id) { doc($config:FRUS_VOLUMES_COL || '/' || $document-id || '.xml') },
