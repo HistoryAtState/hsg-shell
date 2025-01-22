@@ -16,15 +16,13 @@ import module namespace site="http://ns.evolvedbinary.com/sitemap" at "sitemap-c
 import module namespace side="http://history.state.gov/ns/site/hsg/sidebar" at "sidebar.xqm";
 import module namespace link="http://history.state.gov/ns/site/hsg/link" at "link.xqm";
 
+(: if request received from nginx :)
+(: otherwise we're in the eXist URL space :)
 declare variable $pages:app-root :=
-    let $nginx-request-uri := request:get-header('nginx-request-uri')
-    return
-        (: if request received from nginx :)
-        if ($nginx-request-uri) then
-            ""
-        (: otherwise we're in the eXist URL space :)
-        else
-            request:get-context-path() || substring-after($config:app-root, "/db");
+    if (request:get-header('nginx-request-uri')) 
+    then ("")
+    else (request:get-context-path() || substring-after($config:app-root, "/db"))
+;
 
 declare variable $pages:EXIDE :=
     let $pkg := collection(repo:get-root())//expath:package[@name = "http://exist-db.org/apps/eXide"]
@@ -35,155 +33,103 @@ declare variable $pages:EXIDE :=
             ()
     let $path := string-join((request:get-context-path(), request:get-attribute("$exist:prefix"), $appLink, "index.html"), "/")
     return
-        replace($path, "/+", "/");
+        replace($path, "/+", "/")
+;
 
 declare
     %templates:default("view", "div")
     %templates:default("ignore", "false")
-function pages:load($node as node(), $model as map(*), $publication-id as xs:string?, $document-id as xs:string?,
-        $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean, $open-graph-keys as xs:string?, $open-graph-keys-exclude as xs:string?, $open-graph-keys-add as xs:string?) {
-
-    let $log := util:log("info", "pages:load: loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id  || " view: " || $view || " ignore: " || $ignore || " open-graph-keys: " || $open-graph-keys || " open-graph-keys-exclude: " || $open-graph-keys-exclude || " open-graph-keys-add: " || $open-graph-keys-add)
+function pages:load(
+    $node as node(), $model as map(*),
+    $publication-id as xs:string?, $document-id as xs:string?, $section-id as xs:string?,
+    $view as xs:string, $ignore as xs:boolean,
+    $open-graph-keys as xs:string?, $open-graph-keys-exclude as xs:string?, $open-graph-keys-add as xs:string?
+) {
+    util:log("debug", ("loading publication-id: ", $publication-id, " document-id: ", $document-id, " section-id: ", $section-id)),
+    let $publication-config := ($config:PUBLICATIONS?($publication-id), map{})[1]
 
     let $static-open-graph := map:merge((
         for $meta in $node//*[@id eq 'static-open-graph']/meta
-        return map{ string($meta/@property) : function($node as node()?, $model as map(*)?) {$meta}}),  map{"duplicates": "use-last"}
-    )
+        return map{ string($meta/@property) : function($node as node()?, $model as map(*)?) {$meta} }
+    ))
+
     let $static-open-graph-keys := map:keys($static-open-graph)
 
     let $ogk as xs:string* := if ($open-graph-keys) then tokenize($open-graph-keys, '\s') else $config:OPEN_GRAPH_KEYS
     let $ogke as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-exclude, '\s'))
     let $ogka as xs:string* := ($static-open-graph-keys, tokenize($open-graph-keys-add, '\s')[not(. = $static-open-graph-keys)])
 
+    let $content := map {
+        "data": pages:load-xml($publication-config, $document-id, $section-id, $view, $ignore),
+        "publication-id": $publication-id,
+        "document-id": $document-id,
+        "section-id": $section-id,
+        "collection": collection($publication-config?collection),
+        "view": $view,
+        "base-path":
+            (: allow for pages that do not have $config:PUBLICATIONS?select-document defined :)
+            (: ... TODO: I do not see any such cases in config:PUBLICATIONS! Check if OK to remove this entry? - JW :)
+            if (map:contains($publication-config, 'base-path')) then (
+                $publication-config?base-path($document-id, $section-id)
+            ) else (),
+        "odd": ($publication-config?transform, $config:odd-transform-default)[1],
+        "open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
+        "open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{ "duplicates": "use-last" }),
+        "url":
+            try { request:get-url() }
+            catch err:XPDY0002 { 'test-url' },  (: some contexts do not have a request object, e.g. xqsuite testing :)
+        "local-uri":
+            try { substring-after(request:get-uri(), $app:APP_ROOT)}
+            catch err:XPDY0002 { 'test-path' }  (: some contexts do not have a request object, e.g. xqsuite testing :)
+    }
+    let $model-with-content := map:merge(($model, $content), map{ 'duplicates': 'use-last' })
 
+    let $citation-meta := map{
+        'citation-meta':
+        if (map:contains($publication-config, 'citation-meta')) then
+            $publication-config?citation-meta($node, $model-with-content)
+        else
+            config:default-citation-meta($node, $model-with-content)
+    }
 
-    let $last-modified :=
-        if (exists($publication-id) and exists($document-id)) then
-            pages:last-modified($publication-id, $document-id, $section-id)
-        else
-            ()
-    let $if-modified-since := try { request:get-attribute("if-modified-since") => parse-ietf-date() } catch * { () }
-    let $should-return-304 :=
-        if (exists($last-modified) and exists($if-modified-since)) then
-            $if-modified-since ge
-                $last-modified
-                (: For the purpose of comparing the resource's last modified date with the If-Modified-Since
-                 : header supplied by the client, we must truncate any milliseconds from the last modified date.
-                 : This is because HTTP-date is only specific to the second.
-                 : @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1 :)
-                => format-dateTime("[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01][Z]")
-                => xs:dateTime()
-        else
-            ()
-    let $created :=
-        if (exists($publication-id) and exists($document-id)) then
-            (: No need to truncate creation date; it'll be serialized in view.xql :)
-            pages:created($publication-id, $document-id, $section-id)
-        else
-            ()
-    return
-        (: if the "If-Modified-Since" header in the client request is later than the
-         : last-modified date, then halt further processing of the templates and simply
-         : return a 304 response. :)
-        if ($should-return-304) then
-            (
-                response:set-status-code(304),
-                app:set-last-modified($last-modified)
+    let $with-citation := map:merge(($model-with-content, $citation-meta),  map{ "duplicates": "use-last" })
+
+    return templates:process($node/*, $with-citation)
+};
+
+declare function pages:load-xml($publication-config as map(*), $document-id as xs:string?, $section-id as xs:string?, $view as xs:string) {
+    pages:load-xml($publication-config, $document-id, $section-id, $view, false())
+};
+
+declare function pages:load-xml($publication-config as map(*), $document-id as xs:string?, $section-id as xs:string?, $view as xs:string, $ignore as xs:boolean?) {
+    util:log("debug", ("pages:load-xml: config:", $publication-config , " document: ", $document-id, "; section: ", $section-id, "; view: ", $view)),
+    if (empty($document-id) and empty($section-id)) then () else (
+        let $block :=
+            if ($view = "div" and $section-id) then
+                $publication-config?select-section($document-id, $section-id)
+            else if ($view = 'div') then
+                $publication-config?select-document($document-id)//tei:body
+            else
+                $publication-config?select-document($document-id)//tei:text
+
+        return
+            if (empty($block) and not($ignore)) then (
+                pages:load-fallback-page($document-id, $section-id)
+            ) else (
+                util:log("debug", ("pages:load-xml: Loaded ", document-uri(root($block)), ". Node name: ", node-name($block), ".")),
+                $block
             )
-        else
-            let $content := map {
-                "data":
-                    if (exists($publication-id) and exists($document-id)) then
-                        pages:load-xml($publication-id, $document-id, $section-id, $view, $ignore)
-                    else (),
-                "publication-id": $publication-id,
-                "document-id": $document-id,
-                "section-id": $section-id,
-                "collection": collection($config:PUBLICATIONS?($publication-id)?collection),
-                "view": $view,
-                "base-path":
-                    (: allow for pages that do not have $config:PUBLICATIONS?select-document defined :)
-                    (: ... TODO: I do not see any such cases in config:PUBLICATIONS! Check if OK to remove this entry? - JW :)
-                    if (exists($publication-id) and map:contains(map:get($config:PUBLICATIONS, $publication-id), 'base-path')) then
-                        map:get($config:PUBLICATIONS, $publication-id)?base-path($document-id, $section-id)
-                    else (),
-                "odd": (if (exists($publication-id)) then map:get($config:PUBLICATIONS, $publication-id)?transform else(), $config:odd-transform-default)[1],
-        		"open-graph-keys": ($ogka, $ogk[not(. = $ogke)]),
-        		"open-graph": map:merge(($config:OPEN_GRAPH, $static-open-graph),  map{"duplicates": "use-last"}),
-        		"url":
-        		  try { request:get-url() }
-        		  catch err:XPDY0002 { 'test-url' },  (: some contexts do not have a request object, e.g. xqsuite testing :)
-        		"local-uri":
-        		  try { substring-after(site:get-uri(), $app:APP_ROOT)}
-        		  catch err:XPDY0002 { 'test-path' }  (: some contexts do not have a request object, e.g. xqsuite testing :)
-            }
-            let $citation-meta :=
-                let $meta-fun := $config:PUBLICATIONS?($publication-id)?citation-meta
-                let $new.model := map:merge(($model, $content), map{'duplicates': 'use-last'})
-                return if (exists($meta-fun)) then
-                    $meta-fun($node, $new.model)
-                else
-                    config:default-citation-meta($node, $new.model)
-
-            return
-                (
-                    if (exists($last-modified) and exists($created)) then
-                        (
-                            request:set-attribute("hsgshell.last-modified", $last-modified),
-                            request:set-attribute("hsgshell.created", $created)
-                        )
-                    else
-                        (),
-                    templates:process($node/*, map:merge(($model, $content, map{'citation-meta': $citation-meta}),  map{"duplicates": "use-last"}))
-                )
+    )
 };
 
-declare function pages:last-modified($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
-    if ($section-id) then
-        map:get($config:PUBLICATIONS, $publication-id)?section-last-modified($document-id, $section-id)
-    else
-        map:get($config:PUBLICATIONS, $publication-id)?document-last-modified($document-id)
-};
-
-declare function pages:created($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
-    if ($section-id) then
-        map:get($config:PUBLICATIONS, $publication-id)?section-created($document-id, $section-id)
-    else
-        map:get($config:PUBLICATIONS, $publication-id)?document-created($document-id)
-};
-
-declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?, $view as xs:string) {
-    pages:load-xml($publication-id, $document-id, $section-id, $view, false())
-};
-
-declare function pages:load-xml($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?,
-    $view as xs:string, $ignore as xs:boolean?) {
-    util:log("debug", "pages:load-xml: Loading publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id || " view: " || $view || " ignore: " || $ignore),
-    let $block :=
-        if ($view = "div") then
-            if ($section-id) then (
-                map:get($config:PUBLICATIONS, $publication-id)?select-section($document-id, $section-id)
-            ) else
-                map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:body
-        else
-            map:get($config:PUBLICATIONS, $publication-id)?select-document($document-id)//tei:text
-    return
-        if (empty($block) and not($ignore)) then (
-            pages:load-fallback-page($publication-id, $document-id, $section-id)
-        ) else (
-            util:log("info", "pages:load-xml: Loaded document-uri: " || document-uri(root($block)) || " node-name: " || node-name($block)),
-            $block
-        )
-};
-
-declare function pages:load-fallback-page($publication-id as xs:string, $document-id as xs:string, $section-id as xs:string?) {
+declare function pages:load-fallback-page($document-id as xs:string?, $section-id as xs:string?) {
+    util:log("debug", ("Loading fallback page for ", $document-id)),
     let $volume := $config:FRUS_METADATA/volume[@id=$document-id]
-    let $log := util:log("info", "Loading fallback page for " || $document-id)
     return
         if (empty($volume)) then (
             request:set-attribute("hsg-shell.errcode", 404),
             request:set-attribute("hsg-shell.path", string-join(($document-id, $section-id), "/")),
-            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "publication-id: " || $publication-id || " document-id: " || $document-id || " section-id: " || $section-id || " not found")
+            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "document " || $document-id || " section " || $section-id || " not found")
         ) else
             pages:volume-to-tei($volume)
 };
@@ -570,7 +516,7 @@ declare function pages:app-root($node as node(), $model as map(*)) {
         let $content as node()* := templates:process($node/*, $model)
         let $title := string-join((pages:generate-short-title($content, $model)[. ne 'Office of the Historian'], "Office of the Historian"), " - ")
 
-        let $log := util:log("info", "pages:app-root -> title: " || $title)
+        let $log := util:log("debug", "pages:app-root -> title: " || $title)
         return (
             <head>
                 {$content[self::head]/*}
@@ -584,10 +530,8 @@ declare function pages:app-root($node as node(), $model as map(*)) {
 (: lets a template provide a full path to a document, as used in pages/departmenthistory/buildings.
  : TODO: extend with an $odd parameter. :)
 declare function pages:render-document($node, $model, $document-path, $section-id) {
-    let $doc := doc($document-path)
-    let $section := $doc/id($section-id)
-    return
-        pages:process-content($model?odd, $section)
+    pages:process-content($model?odd,
+        doc($document-path)/id($section-id))
 };
 
 declare
@@ -722,10 +666,8 @@ declare function pages:asides($node, $model){
     return
         <div class="hsg-width-sidebar">
             {
-                (:
-                side:info($node, $model),
-                :)
-				$static-asides,
+                (: side:info($node, $model), :)
+                $static-asides,
                 side:section-nav($node, $model)
             }
         </div>

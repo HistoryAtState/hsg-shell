@@ -772,19 +772,18 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
     };
 
 declare variable $config:OPEN_GRAPH_KEYS := ("og:type", "twitter:card", "twitter:site", "og:site_name", "og:title", "og:description", "og:image", "og:url", "citation");
-    
+
 declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
-    "twitter:card"  : function($node, $model) {
+    "twitter:card": function($node, $model) {
             <meta property='twitter:card' content='summary'/>
         },
-    "twitter:site"  : function($node, $model) {
+    "twitter:site": function($node, $model) {
             <meta property='twitter:site' content='@HistoryAtState'/>
         },
-    "og:site_name"  : function($node, $model) {
+    "og:site_name": function($node, $model) {
             <meta property='og:site_name' content='Office of the Historian'/>
         },
-    "og:image"      : function($node, $model) {
-            
+    "og:image": function($node, $model) {
             for $img in $model?data//tei:graphic
             return
                 <meta property="og:image" content="https://static.history.state.gov/{$model?base-path}/{$img/@url}"/>,
@@ -792,36 +791,36 @@ declare variable $config:OPEN_GRAPH as map(xs:string, function(*)) := map{
                 <meta property="og:image:width" content="400"/>,
                 <meta property="og:image:height" content="400"/>,
                 <meta property="og:image:alt" content="Office of the Historian social media avatar"/>
-           
         },
-    "og:type"       : function($node, $model) {
+    "og:type": function($node, $model) {
             <meta property="og:type" content="{
                 let $publication-id := $model?publication-id
-                let $pub.type := $config:PUBLICATIONS?($publication-id)?open-graph?("og:type")
+                let $pub-type := $config:PUBLICATIONS?($publication-id)?open-graph?("og:type")
                 return
-                    ($pub.type!.($node, $model), 'website')[1]
+                    ($pub-type ! .($node, $model), 'website')[1]
             }"/>
         },
-    "og:title"      : function($node, $model) {
+    "og:title": function($node, $model) {
             <meta property="og:title" content="{pages:generate-short-title($node, $model)}"/>
         },
-    "og:description" : function($node, $model) {
+    "og:description": function($node, $model) {
             <meta property="og:description" content="Office of the Historian"/>
         },
-    "og:url"        : function($node, $model) {
+    "og:url": function($node, $model) {
             <meta property="og:url" content="{$model?url}"/>
         },
-    "citation"      : function ($node, $model) {
-            let $cls as array(*) :=
-                let $citation-meta as function(*)? := $config:PUBLICATIONS?($model?publication-id)?citation-meta
-                return if (exists($model?citation-meta)) then 
-                    array { $model?citation-meta }
+    "citation": function ($node, $model) as element(meta)* {
+            let $citation-meta as function(*)? := $config:PUBLICATIONS?($model?publication-id)?citation-meta
+            let $cls as array(*) := array {
+                if (exists($model?citation-meta)) then 
+                    $model?citation-meta
                 else if (exists($citation-meta)) then
-                    array { $citation-meta($node, $model) }
+                    $citation-meta($node, $model)
                 else 
-                    array { config:default-citation-meta($node, $model) }
-            let $metas as element(meta)* := config:cls-to-html($cls)
-            return $metas
+                    config:default-citation-meta($node, $model)
+            }
+
+            return config:cls-to-html($cls)
         }
     };
 
@@ -1044,19 +1043,24 @@ declare function config:tei-document-citation-meta($node as node()?, $model as m
 
 declare function config:tei-shared-citation-meta($node as node()?, $model as map(*)?, $doc as document-node()?) as map(*) {
     let $doc := $config:PUBLICATIONS?($model?publication-id)?select-document($model?document-id)
-    let $editors := 
-        for $editor in $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:editor[@role eq 'primary']
+
+    let $fileDesc := $doc/tei:TEI/tei:teiHeader/tei:fileDesc
+    let $editors :=
+        for $editor in $fileDesc/tei:titleStmt/tei:editor[@role eq 'primary']
         let $name-parts := tokenize($editor, '\s')
         return map{
-            'family':   $name-parts[last()],
-            'given':    string-join($name-parts[position() ne last()], ' ')
+            'family': $name-parts[last()],
+            'given': string-join($name-parts[position() ne last()], ' ')
         }
-    let $series_title :=    $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='series']/string(.)
-    let $series_number :=  $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='sub-series']/string(.)
-    let $volume :=     $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title[@type='volume-number']/string(.)
-    let $publisher := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:publisher/string(.)
-    let $issued :=  $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:date[@type eq 'publication-date']/string(.)
-    let $isbn := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:idno[@type eq 'isbn-13']/string(.)
+
+    let $series_title := $fileDesc/tei:titleStmt/tei:title[@type='series']/string()
+    let $series_number := $fileDesc/tei:titleStmt/tei:title[@type='sub-series']/string()
+    let $volume := $fileDesc/tei:titleStmt/tei:title[@type='volume-number']/string()
+
+    let $publisher := $fileDesc/tei:publicationStmt/tei:publisher/string()
+    let $issued := $fileDesc/tei:publicationStmt/tei:date[@type eq 'publication-date']/string()
+    let $isbn := $fileDesc/tei:publicationStmt/tei:idno[@type eq 'isbn-13']/string()
+
     return map:merge((
         config:default-citation-meta($node, $model),
         if (exists($editors)) then map{'editor': array { $editors }} else (),
@@ -1109,7 +1113,7 @@ declare %templates:wrap function config:csl-json($node as node(), $model as map(
         serialize(array { config:default-citation-meta($node, $model) }, map{'method':'json'}) => normalize-space()
 };
 
-declare variable $config:cls-to-zotero as map(xs:string, function(*)) := map {    
+declare variable $config:cls-to-zotero as map(xs:string, function(*)) := map {
     "ISBN":
         function($value) as element(meta)*{
             <meta name="citation_isbn" content="{$value}"/>
@@ -1225,9 +1229,9 @@ declare function config:cls-name($name as map(*)) {
 declare function config:cls-date($date as map(*)) {
     if ($date?raw castable as xs:date or matches($date?raw, '\d{4}(-\d{2}(-\d{2})?)?')) then
         $date?raw
-    else if ($date?date-parts!array:size(.) eq 1) then
+    else if (array:size($date?date-parts) eq 1) then
         config:cls-date-parts($date?date-parts?1)
-    else ()  
+    else ()
 };
 
 declare function config:cls-date-parts($date as array(*)) {
@@ -1239,9 +1243,9 @@ declare function config:cls-date-parts($date as array(*)) {
 };
 
 declare function config:cls-to-html($json as array(map(*))) as element(meta)* {
-    let $citation := $json?1
-    for $key in map:keys($citation)
-    let $value := $citation?($key)
-    let $lookup as function(*)? := $config:cls-to-zotero?($key)
-    return if (exists($lookup)) then $lookup($value) else ()
+    map:for-each($json?1, function ($key, $value) {
+        if (map:contains($config:cls-to-zotero, $key)) then
+            $config:cls-to-zotero?($key)($value)
+        else ()
+    })
 };
