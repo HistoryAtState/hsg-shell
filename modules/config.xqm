@@ -129,8 +129,15 @@ declare variable $config:FRUS_HISTORY_ARTICLES_COL := $config:FRUS_HISTORY_COL |
 declare variable $config:FRUS_HISTORY_DOCUMENTS_COL := $config:FRUS_HISTORY_COL || '/documents';
 declare variable $config:FRUS_HISTORY_EVENTS_COL := $config:FRUS_HISTORY_COL || '/events';
 declare variable $config:FRUS_HISTORY_MONOGRAPH_COL := $config:FRUS_HISTORY_COL || '/monograph';
+declare variable $config:POCOM_PEOPLE_COL := '/db/apps/pocom/people';
 
 declare variable $config:IGNORED_DIVS := ("toc");
+
+declare function config:pocom-people-last-modified() as xs:dateTime {
+    collection($config:POCOM_PEOPLE_COL)//last-modified-date
+    => sort() => reverse() => head()
+    => concat("T00:00:00Z") => xs:dateTime()
+};
 
 declare variable $config:PUBLICATIONS :=
     map {
@@ -423,13 +430,15 @@ declare variable $config:PUBLICATIONS :=
             "breadcrumb-title": 
               function($parameters as map(*)) as xs:string? {
                   "Starting with " || upper-case($parameters?letter)
-                }
+                },
+            "publication-last-modified": config:pocom-people-last-modified#0
         },
         "people-by-year": map {
             "title": "Principal Officers and Chiefs of Mission Chronological Listing - Department History",
             "breadcrumb-title": function($parameters as map(*)) as xs:string? {
                 $parameters?year
-              }
+            },
+            "publication-last-modified": config:pocom-people-last-modified#0
         },
         "people-by-role": map {
             "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History",
