@@ -123,15 +123,22 @@ declare function toc:toc-div($model as map(*), $node as element(tei:div), $curre
             ,
 
             if ($descendant-docs) then
+                let $labels := 
+                    if ($node/ancestor::tei:back) then 
+                        ("Appendix", "Appendixes") 
+                    else 
+                        ("Document", "Documents")
                 let $first := $descendant-docs[1]/@n
                 let $last := $descendant-docs[last()]/@n
-                let $document :=
-                    if ($first = $last) then
-                        concat(' ', $first)
-                    else
-                        concat('s ', $first, '–', $last)
                 return
-                    concat(' (Document', $document, ')')
+                    concat(
+                        ' (',
+                        if ($first = $last) then
+                            concat($labels[1], ' ', $first)
+                        else
+                            concat($labels[2], ' ', $first, '–', $last),
+                        ')'
+                    )
             else 
                 ()
             ,

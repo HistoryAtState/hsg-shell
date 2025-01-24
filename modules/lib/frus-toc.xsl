@@ -43,6 +43,23 @@
         <xsl:variable name="docs" as="xs:string*" select="if (tei:div[@type eq 'document']) then $accDocs[not(. = $prevDocs)] else ()"/>
         <xsl:variable name="prevDocIDs" as="xs:string*" select="accumulator-before('document-ids')"/>
         <xsl:variable name="docIDs" as="xs:string*" select="accumulator-after('document-ids')[not(. = $prevDocIDs)]"/>
+        <xsl:variable name="labels" as="xs:string*">
+            <xsl:choose>
+                <xsl:when test="ancestor::tei:back">
+                    <xsl:sequence>
+                        <xsl:text>Appendix</xsl:text>
+                        <xsl:text>Appendixes</xsl:text>
+                    </xsl:sequence>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:sequence>
+                        <xsl:text>Document</xsl:text>
+                        <xsl:text>Documents</xsl:text>
+                    </xsl:sequence>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="singular-plural" as="xs:integer" select="if (count($docs) eq 1) then 1 else 2"/>
         <xsl:variable name="child_list" as="element(ul)?">
             <xsl:where-populated>
                 <ul class="hsg-toc__chapters__nested">
@@ -63,7 +80,7 @@
                 <xsl:where-populated>
                     <span>
                         <xsl:value-of
-                            select="(' (Document' || 's'[count($docs) gt 1] || ' ' || $docs[1] || ' - '[count($docs) gt 1] || $docs[last()][count($docs) gt 1] || ')')[exists($docs)]"
+                            select="(' (' || $labels[$singular-plural] || ' ' || $docs[1] || ('–' || $docs[last()])[count($docs) gt 1] || ')')[exists($docs)]"
                         />
                     </span>
                 </xsl:where-populated>
