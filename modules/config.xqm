@@ -110,9 +110,11 @@ declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
 declare variable $config:COUNTRIES_ARTICLES_COL := "/db/apps/rdcr/articles";
 declare variable $config:COUNTRIES_ISSUES_COL := "/db/apps/rdcr/issues";
 declare variable $config:SHORT_HISTORY_COL := "/db/apps/other-publications/short-history";
-declare variable $config:ADMINISTRATIVE_TIMELINE_COL := "/db/apps/administrative-timeline/timeline";
+declare variable $config:ADMINISTRATIVE_TIMELINE_COL := "/db/apps/administrative-timeline";
+declare variable $config:ADMINISTRATIVE_TIMELINE_DATA_COL := $config:ADMINISTRATIVE_TIMELINE_COL || "/timeline";
 declare variable $config:SECRETARY_BIOS_COL := "/db/apps/other-publications/secretary-bios";
-declare variable $config:MILESTONES_COL := "/db/apps/milestones/chapters";
+declare variable $config:MILESTONES_COL := "/db/apps/milestones";
+declare variable $config:MILESTONES_CHAPTERS_COL := "/db/apps/milestones/chapters";
 declare variable $config:EDUCATION_COL := "/db/apps/other-publications/education/introductions";
 declare variable $config:FAQ_COL := "/db/apps/other-publications/faq";
 declare variable $config:VIETNAM_GUIDE_COL := "/db/apps/other-publications/vietnam-guide";
@@ -130,7 +132,11 @@ declare variable $config:FRUS_HISTORY_ARTICLES_COL := $config:FRUS_HISTORY_COL |
 declare variable $config:FRUS_HISTORY_DOCUMENTS_COL := $config:FRUS_HISTORY_COL || '/documents';
 declare variable $config:FRUS_HISTORY_EVENTS_COL := $config:FRUS_HISTORY_COL || '/events';
 declare variable $config:FRUS_HISTORY_MONOGRAPH_COL := $config:FRUS_HISTORY_COL || '/monograph';
-declare variable $config:POCOM_PEOPLE_COL := '/db/apps/pocom/people';
+declare variable $config:POCOM_COL := '/db/apps/pocom';
+declare variable $config:POCOM_PEOPLE_COL := $config:POCOM_COL || '/people';
+declare variable $config:TAGS_COL := '/db/apps/tags';
+
+
 
 declare variable $config:IGNORED_DIVS := ("toc");
 
@@ -241,8 +247,10 @@ declare variable $config:PUBLICATIONS :=
               }        
         },
         "frus-list": map{
-            "collection": $config:FRUS_METADATA_COL
+            "collection": $config:FRUS_METADATA_COL,
+            "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_COL)
         },
+        (: not in controller.xql :)
         "frus-administration": map {
           "select-section": function($administration-id) {
               doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $administration-id]
@@ -254,6 +262,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "buildings": map {
             "collection": $config:BUILDINGS_COL,
+            "publication-last-modified": config:last-modified-from-repo-xml($config:OTHER_PUBLICATIONS_COL),
             "document-last-modified": function($document-id) { xmldb:last-modified($config:BUILDINGS_COL, $document-id || '.xml') },  
             "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:BUILDINGS_COL, $document-id || '.xml') },
             "document-created": function($document-id) { xmldb:created($config:BUILDINGS_COL, $document-id || '.xml') },
@@ -307,10 +316,10 @@ declare variable $config:PUBLICATIONS :=
             "title": "Foreign Relations of the United States: Status of the Series - Historical Documents",
             "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_COL)
         },
-        "ebooks": map {            
+        "ebooks": map { 
             "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_COL)
         },
-        "quarterly-releases": map {            
+        "quarterly-releases": map { 
             "publication-last-modified": config:last-modified-from-repo-xml($config:app-root)
         },
    
@@ -319,7 +328,8 @@ declare variable $config:PUBLICATIONS :=
             "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_COL)
         },
         "other-electronic-resources": map {
-            "title": "Electronic Resources for U.S. Foreign Relations - Historical Documents"
+            "title": "Electronic Resources for U.S. Foreign Relations - Historical Documents",
+            "publication-last-modified": config:last-modified-from-repo-xml($config:app-root)
         },
         "countries": map {
             "collection": $config:COUNTRIES_ARTICLES_COL,
@@ -372,6 +382,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "archives": map {
             "collection": $config:ARCHIVES_ARTICLES_COL,
+            "publication-last-modified": config:last-modified-from-repo-xml($config:ARCHIVES_COL),
             "document-last-modified": function($document-id) { xmldb:last-modified($config:ARCHIVES_ARTICLES_COL, $document-id || '.xml') },  
             "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:ARCHIVES_ARTICLES_COL, $document-id || '.xml') },
             "document-created": function($document-id) { xmldb:created($config:ARCHIVES_ARTICLES_COL, $document-id || '.xml') },
@@ -414,17 +425,16 @@ declare variable $config:PUBLICATIONS :=
                 config:tei-short-breadcrumb-title($parameters?publication-id, $parameters?document-id)
               }
         },
-        "about": map {
-            "title": "About Us"
-        },
         "departmenthistory": map {
-            "title": "Department History"
+            "title": "Department History",
+            "publication-last-modified": config:last-modified-from-repo-xml($config:app-root)
         },
         "diplomatic-couriers": map {
             "title": "U.S. Diplomatic Couriers - Department History"
         },
         "people": map {
             "collection": $config:SECRETARY_BIOS_COL,
+            "publication-last-modified": config:last-modified-from-repo-xml($config:app-root),
             "document-last-modified": function($document-id) { xmldb:last-modified($config:SECRETARY_BIOS_COL, $document-id || '.xml') },  
             "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:SECRETARY_BIOS_COL, $document-id || '.xml') },
             "document-created": function($document-id) { xmldb:created($config:SECRETARY_BIOS_COL, $document-id || '.xml') },
@@ -453,10 +463,13 @@ declare variable $config:PUBLICATIONS :=
               }
         },
         "secretaries": map {
-            "title": "Biographies of the Secretaries of State - Department History"
+            "title": "Biographies of the Secretaries of State - Department History",
+            "publication-last-modified": config:last-modified-from-repo-xml($config:POCOM_COL)
         },
         "principals-chiefs": map {
-            "title": "Principal Officers and Chiefs of Mission - Department History"
+            "title": "Principal Officers and Chiefs of Mission - Department History",
+            "publication-last-modified": config:last-modified-from-repo-xml($config:app-root)
+
         },
         "people-by-alpha": map {
             "title": "Principal Officers and Chiefs of Mission Alphabetical Listing - Department History",
@@ -483,8 +496,9 @@ declare variable $config:PUBLICATIONS :=
         "tags": map {
             "title": "Tags",
             "breadcrumb-title": function($parameters as map(*)) as xs:string? {
-                collection('/db/apps/tags/taxonomy')//*[id eq $parameters?tag-id]/label/string()
-              }
+                collection($config:TAGS_COL || '/taxonomy')//*[id eq $parameters?tag-id]/label/string()
+              },
+              "publication-last-modified": config:last-modified-from-repo-xml($config:TAGS_COL)
         },
         "travels": map {
             "title": "Presidents and Secretaries of State Foreign Travels - Department History",
@@ -519,16 +533,18 @@ declare variable $config:PUBLICATIONS :=
               }
         },
         "wwi": map {
-            "title": "World War I - Department History"
+            "title": "World War I - Department History",
+            "publication-last-modified":config:last-modified-from-repo-xml($config:app-root)
         },
         "milestones": map {
-            "collection": $config:MILESTONES_COL,
-            "document-last-modified": function($document-id) { xmldb:last-modified($config:MILESTONES_COL, $document-id || '.xml') },  
-            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:MILESTONES_COL, $document-id || '.xml') },
-            "document-created": function($document-id) { xmldb:created($config:MILESTONES_COL, $document-id || '.xml') },
-            "section-created": function($document-id, $section-id) {xmldb:created($config:MILESTONES_COL, $document-id || '.xml') },
-            "select-document": function($document-id) { doc($config:MILESTONES_COL || '/' || $document-id || '.xml') },
-            "select-section": function($document-id, $section-id) { doc($config:MILESTONES_COL|| '/' || $document-id || '.xml')/id($section-id) },
+            "collection": $config:MILESTONES_CHAPTERS_COL,
+            "publication-last-modified":config:last-modified-from-repo-xml($config:MILESTONES_COL),
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:MILESTONES_CHAPTERS_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:MILESTONES_CHAPTERS_COL, $document-id || '.xml') },
+            "document-created": function($document-id) { xmldb:created($config:MILESTONES_CHAPTERS_COL, $document-id || '.xml') },
+            "section-created": function($document-id, $section-id) {xmldb:created($config:MILESTONES_CHAPTERS_COL, $document-id || '.xml') },
+            "select-document": function($document-id) { doc($config:MILESTONES_CHAPTERS_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:MILESTONES_CHAPTERS_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/milestones/" || string-join(($document-id, $section-id), '/') },
             "odd": "frus.odd",
             "transform": function($xml, $parameters) { pm-frus:transform($xml, $parameters) },
@@ -544,6 +560,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "short-history": map {
             "collection": $config:SHORT_HISTORY_COL,
+            "publication-last-modified":config:last-modified-from-repo-xml($config:OTHER_PUBLICATIONS_COL),
             "document-last-modified": function($document-id) { xmldb:last-modified($config:SHORT_HISTORY_COL, $document-id || '.xml') },  
             "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:SHORT_HISTORY_COL, $document-id || '.xml') },
             "document-created": function($document-id) { xmldb:created($config:SHORT_HISTORY_COL, $document-id || '.xml') },
@@ -567,13 +584,14 @@ declare variable $config:PUBLICATIONS :=
               }
         },
         "timeline": map {
-            "collection": $config:ADMINISTRATIVE_TIMELINE_COL,
-            "document-last-modified": function($document-id) { xmldb:last-modified($config:ADMINISTRATIVE_TIMELINE_COL, $document-id || '.xml') },  
-            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:ADMINISTRATIVE_TIMELINE_COL, $document-id || '.xml') },
-            "document-created": function($document-id) { xmldb:created($config:ADMINISTRATIVE_TIMELINE_COL, $document-id || '.xml') },
-            "section-created": function($document-id, $section-id) {xmldb:created($config:ADMINISTRATIVE_TIMELINE_COL, $document-id || '.xml') },
-            "select-document": function($document-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml') },
-            "select-section": function($document-id, $section-id) { doc($config:ADMINISTRATIVE_TIMELINE_COL || '/' || $document-id || '.xml')/id($section-id) },
+            "collection": $config:ADMINISTRATIVE_TIMELINE_DATA_COL,
+            "publication-last-modified":config:last-modified-from-repo-xml($config:ADMINISTRATIVE_TIMELINE_COL),
+            "document-last-modified": function($document-id) { xmldb:last-modified($config:ADMINISTRATIVE_TIMELINE_DATA_COL, $document-id || '.xml') },  
+            "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:ADMINISTRATIVE_TIMELINE_DATA_COL, $document-id || '.xml') },
+            "document-created": function($document-id) { xmldb:created($config:ADMINISTRATIVE_TIMELINE_DATA_COL, $document-id || '.xml') },
+            "section-created": function($document-id, $section-id) {xmldb:created($config:ADMINISTRATIVE_TIMELINE_DATA_COL, $document-id || '.xml') },
+            "select-document": function($document-id) { doc($config:ADMINISTRATIVE_TIMELINE_DATA_COL || '/' || $document-id || '.xml') },
+            "select-section": function($document-id, $section-id) { doc($config:ADMINISTRATIVE_TIMELINE_DATA_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, substring-after($section-id, 'chapter_')), '/') },
             "url-fragment": function($div) { if (starts-with($div/@xml:id, 'chapter_')) then substring-after($div/@xml:id, 'chapter_') else $div/@xml:id/string() },
             "odd": "frus.odd",
@@ -617,6 +635,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "hac": map {
             "collection": $config:HAC_COL,
+            "publication-last-modified": config:last-modified-from-repo-xml($config:HAC_COL),
             "document-last-modified": function($document-id) { xmldb:last-modified($config:HAC_COL, $document-id || '.xml') },  
             "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:HAC_COL, $document-id || '.xml') },
             "document-created": function($document-id) { xmldb:created($config:HAC_COL, $document-id || '.xml') },
@@ -743,6 +762,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "vietnam-guide": map {
             "collection": $config:VIETNAM_GUIDE_COL,
+            "publication-last-modified": config:last-modified-from-repo-xml($config:OTHER_PUBLICATIONS_COL),
             "document-last-modified": function($document-id) { xmldb:last-modified($config:VIETNAM_GUIDE_COL, $document-id || '.xml') },  
             "section-last-modified": function($document-id, $section-id) { xmldb:last-modified($config:VIETNAM_GUIDE_COL, $document-id || '.xml') },
             "document-created": function($document-id) { xmldb:created($config:VIETNAM_GUIDE_COL, $document-id || '.xml') },
@@ -808,13 +828,13 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:FRUS_METADATA_COL: "frus",
         $config:BUILDINGS_COL: "buildings",
         $config:SHORT_HISTORY_COL: "short-history",
-        $config:ADMINISTRATIVE_TIMELINE_COL: "timeline",
+        $config:ADMINISTRATIVE_TIMELINE_DATA_COL: "timeline",
         $config:FAQ_COL: "faq",
         $config:HAC_COL: "hac",
         $config:EDUCATION_COL: "education",
         $config:FRUS_HISTORY_MONOGRAPH_COL: "frus-history-monograph",
         $config:CONFERENCES_ARTICLES_COL: "conferences",
-        $config:MILESTONES_COL: "milestones",
+        $config:MILESTONES_CHAPTERS_COL: "milestones",
         $config:FRUS_HISTORY_ARTICLES_COL: "articles",
         $config:SECRETARY_BIOS_COL: "people",
         $config:VIETNAM_GUIDE_COL: "vietnam-guide",
