@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:math="http://www.w3.org/2005/xpath-functions/math"
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:tei="http://www.tei-c.org/ns/1.0"
-    exclude-result-prefixes="xs math xd tei"
-    version="3.0">
-    
-    <xsl:param name="heading" as="xs:boolean" select="true()"/>
-    <xsl:param name="documentID" as="xs:string" select="/tei:TEI/@xml:id"/>
-    
+<xsl:stylesheet exclude-result-prefixes="xs math xd tei" version="3.0"
+    xmlns:math="http://www.w3.org/2005/xpath-functions/math" xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <xsl:param as="xs:boolean" name="heading" select="true()"/>
+    <xsl:param as="xs:string" name="documentID" select="/tei:TEI/@xml:id"/>
+
     <xsl:output indent="true"/>
-    
+
     <xsl:mode on-no-match="shallow-skip" use-accumulators="#all"/>
     <xsl:mode name="html" on-no-match="text-only-copy"/>
-    
-    <xsl:accumulator name="document-nos" initial-value="()" as="xs:string*">
-        <xsl:accumulator-rule match="tei:div[@type eq 'document']" select="($value, @n)" phase="end"/>
+
+    <xsl:accumulator as="xs:string*" initial-value="()" name="document-nos">
+        <xsl:accumulator-rule match="tei:div[@type eq 'document']" phase="end" select="($value, @n)"
+        />
     </xsl:accumulator>
-    
-    <xsl:accumulator name="document-ids" initial-value="()" as="xs:string*">
-        <xsl:accumulator-rule match="tei:div" select="($value, @xml:id)" phase="end"/>
+
+    <xsl:accumulator as="xs:string*" initial-value="()" name="document-ids">
+        <xsl:accumulator-rule match="tei:div" phase="end" select="($value, @xml:id)"/>
     </xsl:accumulator>
-    
+
     <xsl:template match="tei:TEI">
         <div class="hsg-panel hsg-toc">
             <div class="hsg-panel-heading hsg-toc__header">
@@ -36,14 +33,19 @@
             </nav>
         </div>
     </xsl:template>
-    
+
     <xsl:template match="tei:div[@xml:id][not(@type = ('document'))]">
-        <xsl:variable name="accDocs" as="xs:string*" select="accumulator-after('document-nos')"/>
-        <xsl:variable name="prevDocs" as="xs:string*" select="accumulator-before('document-nos')"/>
-        <xsl:variable name="docs" as="xs:string*" select="if (tei:div[@type eq 'document']) then $accDocs[not(. = $prevDocs)] else ()"/>
-        <xsl:variable name="prevDocIDs" as="xs:string*" select="accumulator-before('document-ids')"/>
-        <xsl:variable name="docIDs" as="xs:string*" select="accumulator-after('document-ids')[not(. = $prevDocIDs)]"/>
-        <xsl:variable name="labels" as="xs:string*">
+        <xsl:variable as="xs:string*" name="accDocs" select="accumulator-after('document-nos')"/>
+        <xsl:variable as="xs:string*" name="prevDocs" select="accumulator-before('document-nos')"/>
+        <xsl:variable as="xs:string*" name="docs" select="
+                if (tei:div[@type eq 'document']) then
+                    $accDocs[not(. = $prevDocs)]
+                else
+                    ()"/>
+        <xsl:variable as="xs:string*" name="prevDocIDs" select="accumulator-before('document-ids')"/>
+        <xsl:variable as="xs:string*" name="docIDs"
+            select="accumulator-after('document-ids')[not(. = $prevDocIDs)]"/>
+        <xsl:variable as="xs:string*" name="labels">
             <xsl:choose>
                 <xsl:when test="ancestor::tei:back">
                     <xsl:sequence>
@@ -59,22 +61,25 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="singular-plural" as="xs:integer" select="if (count($docs) eq 1) then 1 else 2"/>
-        <xsl:variable name="child_list" as="element(ul)?">
+        <xsl:variable as="xs:integer" name="singular-plural" select="
+                if (count($docs) eq 1) then
+                    1
+                else
+                    2"/>
+        <xsl:variable as="element(ul)?" name="child_list">
             <xsl:where-populated>
                 <ul class="hsg-toc__chapters__nested">
                     <xsl:apply-templates/>
                 </ul>
             </xsl:where-populated>
         </xsl:variable>
-        <xsl:variable name="classes" as="xs:string*" select="(
-                'hsg-toc__chapters__item',
-                'js-accordion'[$child_list]
-            )"/>
+        <xsl:variable as="xs:string*" name="classes"
+            select="('hsg-toc__chapters__item', 'js-accordion'[$child_list])"/>
         <li class="{string-join($classes, ' ')}">
-            
-            <a href="/historicaldocuments/{$documentID}/{@xml:id}" data-template="toc:highlight-current">
-            
+
+            <a data-template="toc:highlight-current"
+                href="/historicaldocuments/{$documentID}/{@xml:id}">
+
                 <xsl:attribute name="data-template-current-ids" select="string-join(($docIDs), ' ')"/>
                 <xsl:apply-templates mode="html" select="tei:head"/>
                 <xsl:where-populated>
@@ -85,18 +90,18 @@
                     </span>
                 </xsl:where-populated>
             </a>
-            
+
             <xsl:sequence select="$child_list"/>
-            
+
         </li>
     </xsl:template>
-    
+
     <xsl:template match="tei:div[@xml:id eq 'toc']" priority="2"/>
-    
+
     <xsl:template match="tei:head/tei:note" mode="html"/>
-    
+
     <xsl:template match="tei:lb" mode="html">
         <br/>
     </xsl:template>
-    
+
 </xsl:stylesheet>
