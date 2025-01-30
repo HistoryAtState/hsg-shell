@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(function () {
 
     var personId = window.location.href.match(/\/departmenthistory\/people\/([^/#]+)$/i);
     if (!personId) {
