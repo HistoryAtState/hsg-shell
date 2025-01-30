@@ -86,7 +86,7 @@ if ($exist:path eq '') then
 
 (: handle request for landing page, e.g., http://history.state.gov/ :)
 else if ($exist:path eq "/" or (: remove after beta period :) ($exist:path eq '' and $nginx-request-uri-header eq '/')) then
-    local:render-page("index.xml")
+    local:render-page("index.xml", map{ "publication-id": "app" })
 
 (: strip trailing slash :)
 else if (ends-with($exist:path, "/")) then
@@ -153,15 +153,17 @@ else switch($path-parts[1])
         switch (string($path-parts[2]))
             case '' return
                 (: section landing page :)
-                local:render-page("historicaldocuments/index.xml", map{
-                    "publication-id": "historicaldocuments"
-                })
-            case "about-frus"
-            case "citing-frus"
-            case "ebooks"
-            case "other-electronic-resources"
+                local:render-page("historicaldocuments/index.xml", map{ "publication-id": "historicaldocuments" })
+            case "about-frus" return 
+                local:render-page("historicaldocuments/about-frus.xml", map{ "publication-id": "about-frus" })
+            case "citing-frus" return
+                local:render-page("historicaldocuments/citing-frus.xml", map{ "publication-id": "citing-frus" })
+            case "ebooks" return
+                local:render-page("historicaldocuments/ebooks.xml", map{ "publication-id": "ebooks" })
+            case "other-electronic-resources" return
+                local:render-page("historicaldocuments/other-electronic-resources.xml", map{  "publication-id": "other-electronic-resources" })
             case "status-of-the-series" return
-                local:render-page("historicaldocuments/" || $path-parts[2] || ".xml")
+                local:render-page("historicaldocuments/status-of-the-series.xml", map{  "publication-id": "status-of-the-series" })
             case "guide-to-sources-on-vietnam-1969-1975" return
                 local:render-page("historicaldocuments/vietnam-guide.xml", map{
                     "publication-id": "vietnam-guide",
@@ -175,20 +177,30 @@ else switch($path-parts[1])
             :)
             case "quarterly-releases" return
                 if (empty($path-parts[3])) then
-                    local:render-page("historicaldocuments/quarterly-releases/index.xml")
+                    local:render-page("historicaldocuments/quarterly-releases/index.xml", map{ "publication-id": "app" })
                 else
-                    local:render-page("historicaldocuments/quarterly-releases/announcements/" || $path-parts[3] || ".xml")
+                    local:render-page("historicaldocuments/quarterly-releases/announcements/" || $path-parts[3] || ".xml", map{
+                        "publication-id": "app"
+                    })
             case "pre-1861" return
                 if (empty($path-parts[3])) then
-                    local:render-page("historicaldocuments/pre-1861/index.xml")
+                    local:render-page("historicaldocuments/pre-1861/index.xml", map{
+                        "publication-id": "app"
+                    })
                 else if ($path-parts[3] eq 'serial-set') then
                     switch (string($path-parts[4]))
                         case '' return
-                            local:render-page("historicaldocuments/pre-1861/serial-set/index.xml")
+                            local:render-page("historicaldocuments/pre-1861/serial-set/index.xml", map{
+                                "publication-id": "other-publications"
+                            })
                         case "all" return
-                            local:render-page("historicaldocuments/pre-1861/serial-set/all.xml")
+                            local:render-page("historicaldocuments/pre-1861/serial-set/all.xml", map{
+                                "publication-id": "other-publications"
+                            })
                         case "browse" return
-                            local:render-page("historicaldocuments/pre-1861/serial-set/browse.xml")
+                            local:render-page("historicaldocuments/pre-1861/serial-set/browse.xml", map{
+                                "publication-id": "other-publications"
+                            })
                         default return
                             local:serve-not-found-page()
                 else
@@ -201,7 +213,9 @@ else switch($path-parts[1])
                             "document-id": "frus-history"
                         })
                     case "events" return
-                        local:render-page("historicaldocuments/frus-history/events/index.xml")
+                        local:render-page("historicaldocuments/frus-history/events/index.xml", map{
+                            "publication-id": "frus-history"
+                        })
                     case "documents" return
                         if (empty($path-parts[4])) then
                             local:render-page("historicaldocuments/frus-history/documents/index.xml", map{
@@ -269,10 +283,14 @@ else switch($path-parts[1])
                     "publication-id": "countries"
                 })
             case "all" return
-                local:render-page('countries/all.xml')
+                local:render-page('countries/all.xml', map{
+                    "publication-id": "countries-other"
+                })
             case "issues" return
                 if (empty($path-parts[3])) then
-                    local:render-page('countries/issues/index.xml')
+                    local:render-page('countries/issues/index.xml', map{
+                        "publication-id": "countries-other"
+                    })
                 else
                     local:render-page('countries/issues/article.xml', map {
                         "publication-id": "countries-issues",
@@ -353,11 +371,10 @@ else switch($path-parts[1])
                         local:render-page('departmenthistory/people/index.xml', map{
                             "publication-id": "people"
                         })
-                    case "secretaries"
+                    case "secretaries" return
+                        local:render-page('departmenthistory/people/secretaries.xml', map{ "publication-id": "secretaries" })
                     case "principals-chiefs" return
-                        local:render-page('departmenthistory/people/' || $path-parts[3] || '.xml', map{
-                            "publication-id": $path-parts[3]
-                        })
+                        local:render-page('departmenthistory/people/principals-chiefs.xml', map{ "publication-id": "principals-chiefs" })
                     case "by-name" return
                         if (empty($path-parts[4])) then
                             local:render-page('departmenthistory/people/by-name/index.xml', map{
@@ -486,7 +503,7 @@ else switch($path-parts[1])
         switch (string($path-parts[2]))
             case '' return
                 local:render-page("about/index.xml", map{
-                    "publication-id": "about"
+                    "publication-id": "app"
                 })
             case "faq" return
                 if (empty($path-parts[3])) then
@@ -512,10 +529,10 @@ else switch($path-parts[1])
                         "document-id": "hac",
                         "section-id": $path-parts[3]
                     })
-            case "contact-us" return local:render-page('about/contact-us.xml')
-            case "the-historian" return local:render-page('about/the-historian.xml')
-            case "recent-publications" return local:render-page('about/recent-publications.xml')
-            case "content-warning" return local:render-page('about/content-warning.xml')
+            case "contact-us" return local:render-page('about/contact-us.xml', map{ "publication-id": "app" })
+            case "the-historian" return local:render-page('about/the-historian.xml', map{ "publication-id": "app" })
+            case "recent-publications" return local:render-page('about/recent-publications.xml', map{ "publication-id": "app" })
+            case "content-warning" return local:render-page('about/content-warning.xml', map{ "publication-id": "app" })
             default return
                 local:serve-not-found-page()
 
@@ -567,9 +584,9 @@ else switch($path-parts[1])
     (: handle requests for developer section :)
     case 'developer' return
         if (empty($path-parts[2])) then
-            local:render-page('developer/index.xml')
+            local:render-page('developer/index.xml', map{ "publication-id": "app" })
         else if ($path-parts[2] eq 'catalog') then
-            local:render-page('developer/catalog.xml')
+            local:render-page('developer/catalog.xml', map{ "publication-id": "app" })
         else
             local:serve-not-found-page()
 
@@ -577,10 +594,10 @@ else switch($path-parts[1])
     case 'open' return
         switch (string($path-parts[2]))
             case '' return
-                local:render-page("open/index.xml")
+                local:render-page("open/index.xml", map{ "publication-id": "app" })
             case "frus-latest"
             case "frus-metadata" return
-                local:render-page("open/"|| $path-parts[2] ||"/index.xml")
+                local:render-page("open/"|| $path-parts[2] ||"/index.xml", map{ "publication-id": "app" })
 
             case "frus-latest.xml" return
                 <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
@@ -616,10 +633,10 @@ else switch($path-parts[1])
     case 'education' return
         switch (string($path-parts[2]))
             case '' return
-                local:render-page("education/index.xml")
+                local:render-page("education/index.xml", map{ "publication-id": "app" })
             case "modules" return
                 if (empty($path-parts[3])) then
-                    local:render-page("education/modules.xml")
+                    local:render-page("education/modules.xml", map{ "publication-id": "app" })
                 else
                     local:render-page("education/module.xml", map{
                         "publication-id": "education",
@@ -658,10 +675,11 @@ else switch($path-parts[1])
                         'search/search-landing.xml'
                 return
                     local:render-page($page, map{
-                        "suppress-sitewide-search-field": "true"
+                        "suppress-sitewide-search-field": "true",
+                        "publication-id": "search"
                     })
             case 'tips' return
-                local:render-page('search/tips.xml')
+                local:render-page('search/tips.xml', map{ "publication-id": "app" })
             default return
                 local:serve-not-found-page()
 
