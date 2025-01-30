@@ -43,7 +43,7 @@ function initializeImageViewer() {
     }
 }
 
-$(document).ready(function($) {
+jQuery(function($) {
     var historySupport = !!(window.history && window.history.pushState);
     var appRoot = $("html").attr("data-app");
 
@@ -72,7 +72,7 @@ $(document).ready(function($) {
     }
 
     //make sure the mobile menu is hidden when window is resized
-    $( window ).resize(function() {
+    $( window ).on('resize', function() {
         $( ".collapse").collapse("hide");
     });
 
