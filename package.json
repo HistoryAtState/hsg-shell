@@ -11,7 +11,7 @@
     "bootstrap-sass": "^3.3.6",
     "chromedriver": "^128.0.0",
     "font-awesome": "^4.5.0",
-    "jquery": "^2.2.4",
+    "jquery": "^3.7.1",
     "openseadragon": "^3.1.0"
   },
   "devDependencies": {
