@@ -421,12 +421,7 @@ jQuery(function($) {
     }
 
     function allSelected() {
-        return sections.filter(':checked').size() === sections.size();
-    }
-
-    // Return all filters unchecked except for input "Historical Documents"
-    function allSelectedButDocuments() {
-        return sections.not(documentsInput).filter(':checked').size() === 0;
+        return sections.filter(':checked').length === sections.length;
     }
 
     /**
@@ -437,8 +432,15 @@ jQuery(function($) {
         sectionsInputs = $('#sectionFilter input'), // all inputs in "filter by section"
         toggledComponents = $('.hsg-filter-toggle'); // components to be toggled
 
+    /**
+     * Returns true if the checkbox for "Historical Documents" is the only checked one
+     */
+    function onlyHistoricalDocumentsSelected() {
+        return documentsInput.is( ":checked" ) && sections.filter(':checked').length === 1;
+    }
+
     function toggleComponents () {
-        if (documentsInput.is( ":checked" ) && allSelectedButDocuments()) {
+        if (onlyHistoricalDocumentsSelected()) {
             toggledComponents.removeClass("hsg-hidden");
             toggledComponents.addClass("hsg-active");
             //console.log("Date: ", $('.hsg-filter-toggle').data());
