@@ -31,7 +31,7 @@ declare variable $search:ft-query-options := map {
 declare variable $search:SECTIONS := map {
     "documents": "frus",
     "department": (
-        "timeline",
+        (:"timeline",:)
         "short-history",
         "people",
         "buildings",
@@ -810,7 +810,9 @@ declare function search:query-sections($sections as xs:string*, $query-configura
 
     return
               ( 
+                (:
                 collection("/db/apps/administrative-timeline/timeline")//tei:div[ft:query(., $query-string, $query-options)],
+                :)
                 collection("/db/apps/other-publications")//tei:div[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/other-publications")//tei:body[ft:query(., $query-string, $query-options)],
                 collection("/db/apps/conferences/data")//tei:div[ft:query(., $query-string, $query-options)],

@@ -327,6 +327,7 @@ else switch($path-parts[1])
                     "publication-id": "departmenthistory"
                 })
 
+            (:
             case "timeline" return
                 if (empty($path-parts[3])) then
                     local:render-page("departmenthistory/timeline/index.xml", map {
@@ -339,6 +340,7 @@ else switch($path-parts[1])
                         "document-id": "timeline",
                         "section-id": "chapter_" || $path-parts[3]
                     })
+            :)
             case "short-history" return
                 if (empty($path-parts[3])) then
                     local:render-page('departmenthistory/short-history/index.xml', map{
