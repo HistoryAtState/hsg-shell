@@ -136,10 +136,12 @@
                                 <li>
                                     <a href="$app/departmenthistory">Overview</a>
                                 </li>
+                                <!--
                                 <li>
                                     <a href="$app/departmenthistory/timeline">Administrative
                                         Timeline</a>
                                 </li>
+                                -->
                                 <li>
                                     <a href="$app/departmenthistory/people/secretaries">Biographies
                                         of the Secretaries of State</a>
