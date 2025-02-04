@@ -2,6 +2,15 @@
  * Checks departmenthistory page type
  */
 
+/**
+ * REMOVED TIMELIEN FROM TESTS 
+ * 
+ {
+    name: 'p2',
+    link: 'departmenthistory/timeline',
+    title: 'Administrative Timeline of the Department of State'
+  },
+ */
 const Page  = require('../../pageobjects/Page'),
     SubPage = require('../../pageobjects/SubPage');
 
@@ -10,11 +19,6 @@ const subpages = [
     name: 'p1',
     link: 'departmenthistory',
     title: 'Department History'
-  },
-  {
-    name: 'p2',
-    link: 'departmenthistory/timeline',
-    title: 'Administrative Timeline of the Department of State'
   },
   {
     name: 'p3',
