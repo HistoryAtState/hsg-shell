@@ -2,7 +2,7 @@
 <div data-template="templates:surround" data-template-at="content"
     data-template-with="templates/site.xml">
     <div>
-        <h1>Page Not found</h1>
+        <h1>Page not found</h1>
         <p>The resource you requested could not be found.</p>
     </div>
 </div>

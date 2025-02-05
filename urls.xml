@@ -241,6 +241,7 @@
         </redirect>
     </step>
     <step value="departmenthistory">
+        <!--
         <step value="timeline">
             <step key="section">
                 <page-template href="pages/departmenthistory/timeline/section.xml">
@@ -261,6 +262,7 @@
                 <hsg:github href="https://github.com/HistoryAtState/administrative-timeline"/>
             </config>
         </step>
+        -->
         <step value="short-history">
             <step key="section">
                 <page-template href="pages/departmenthistory/short-history/section.xml">
