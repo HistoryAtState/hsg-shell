@@ -203,8 +203,7 @@ declare function app:format-http-date($dateTime as xs:dateTime) as xs:string {
 
 declare function app:set-last-modified($last-modified as xs:dateTime?) as empty-sequence() {
     if (empty($last-modified)) then () else (
-        response:set-header("Last-Modified", app:format-http-date($last-modified)),
-        response:set-header("Cache-Control", "max-age: 300; must-revalidate")
+        response:set-header("Last-Modified", app:format-http-date($last-modified))
     )
 };
 
