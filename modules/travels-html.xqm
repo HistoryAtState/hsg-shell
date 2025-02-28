@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 module namespace travels = "http://history.state.gov/ns/site/hsg/travels-html";
 
@@ -9,9 +9,7 @@ module namespace travels = "http://history.state.gov/ns/site/hsg/travels-html";
  :)
 
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
-import module namespace gsh="http://history.state.gov/ns/xquery/geospatialhistory" at "/db/apps/gsh/modules/gsh.xqm";
 import module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";
-import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare variable $travels:DATA_COL := '/db/apps/travels';
 declare variable $travels:PRESIDENT_TRAVELS_COL := '/db/apps/travels/president-travels';
@@ -30,7 +28,7 @@ declare function travels:load-secretary($node as node(), $model as map(*), $pers
         if ($is-person-or-country-id eq 'person') then
             pocom:person-name-first-last($node, $model, $person-or-country-id)
         else
-            gsh:territory-id-to-short-name($person-or-country-id)
+            collection($travels:SECRETARY_TRAVELS_COL)//country[@id eq $person-or-country-id] => head()
     let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
     let $table := 
         if ($is-person-or-country-id eq 'person') then
@@ -56,7 +54,7 @@ declare function travels:load-president($node as node(), $model as map(*), $pers
         if ($is-person-or-country-id eq 'person') then
             $matching-president/name/string()
         else
-            gsh:territory-id-to-short-name($person-or-country-id)
+            collection($travels:PRESIDENT_TRAVELS_COL)//country[@id eq $person-or-country-id] => head()
     let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
     let $table := 
         if ($is-person-or-country-id eq 'person') then
@@ -87,7 +85,8 @@ declare function travels:presidents($node as node(), $model as map(*)) {
     <ul>
         {
             let $presidents := collection($travels:PRESIDENTS_COL)//president
-            for $president-id in distinct-values(collection($travels:PRESIDENT_TRAVELS_COL)//trip/@who)
+            for $trip in collection($travels:PRESIDENT_TRAVELS_COL)//trip
+            group by $president-id := $trip/@who
             let $president := $presidents[id eq $president-id]
             let $president-name := $president/name
             let $start-year := year-from-date(xs:date($president/took-office-date))
@@ -102,8 +101,9 @@ declare function travels:presidents($node as node(), $model as map(*)) {
 declare function travels:presidents-destinations($node as node(), $model as map(*)) {
     <ul>
         {
-            for $country in distinct-values(collection($travels:PRESIDENT_TRAVELS_COL)//country)
-            let $country-id := collection($travels:PRESIDENT_TRAVELS_COL)//country[. eq $country][1]/@id/string()
+            for $country in collection($travels:PRESIDENT_TRAVELS_COL)//country
+            let $country-id := $country/@id
+            group by $country, $country-id
             order by $country
             return
                 <li><a href="$app/departmenthistory/travels/president/{$country-id}">{$country}</a></li>
@@ -135,8 +135,9 @@ declare function travels:secretaries($node as node(), $model as map(*)) {
 declare function travels:secretaries-destinations($node as node(), $model as map(*)) {
     <ul>
         {
-            for $country in distinct-values(collection($travels:SECRETARY_TRAVELS_COL)//country)
-            let $country-id := collection($travels:SECRETARY_TRAVELS_COL)//country[. eq $country][1]/@id/string()
+            for $country in collection($travels:SECRETARY_TRAVELS_COL)//country
+            let $country-id := $country/@id
+            group by $country, $country-id
             order by $country
             return
                 <li><a href="$app/departmenthistory/travels/secretary/{$country-id}">{$country}</a></li>
