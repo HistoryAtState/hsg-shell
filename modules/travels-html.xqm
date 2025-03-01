@@ -26,7 +26,7 @@ declare function travels:load-secretary($node as node(), $model as map(*), $pers
             'country'
     let $title :=
         if ($is-person-or-country-id eq 'person') then
-            pocom:person-name-first-last($node, $model, $person-or-country-id)
+            collection($travels:SECRETARY_TRAVELS_COL)//trip[@who eq $person-or-country-id]/name => head()
         else
             collection($travels:SECRETARY_TRAVELS_COL)//country[@id eq $person-or-country-id] => head()
     let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
@@ -52,7 +52,7 @@ declare function travels:load-president($node as node(), $model as map(*), $pers
                 'country'
     let $title :=
         if ($is-person-or-country-id eq 'person') then
-            $matching-president/name/string()
+            $matching-president[1]/name/string()
         else
             collection($travels:PRESIDENT_TRAVELS_COL)//country[@id eq $person-or-country-id] => head()
     let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
@@ -84,10 +84,11 @@ declare function travels:table($node as node(), $model as map(*)) {
 declare function travels:presidents($node as node(), $model as map(*)) {
     <ul>
         {
-            let $presidents := collection($travels:PRESIDENTS_COL)//president
-            for $trip in collection($travels:PRESIDENT_TRAVELS_COL)//trip
-            group by $president-id := $trip/@who
-            let $president := $presidents[id eq $president-id]
+            let $trips := collection($travels:PRESIDENT_TRAVELS_COL)//trip
+            for $president in collection($travels:PRESIDENTS_COL)//president
+            let $president-id := $president/id
+            let $has-traveled := $president-id = $trips/@who
+            where $has-traveled
             let $president-name := $president/name
             let $start-year := year-from-date(xs:date($president/took-office-date))
             let $end-year := if ($president/left-office-date ne '') then year-from-date(xs:date($president/left-office-date)) else ()
@@ -116,7 +117,7 @@ declare function travels:secretaries($node as node(), $model as map(*)) {
         {
             let $secretaries-who-travelled := for $x in xmldb:get-child-resources($travels:SECRETARY_TRAVELS_COL) return replace($x, '.xml$', '')
             for $person-id in $secretaries-who-travelled
-            let $name := pocom:person-name-first-last($node, $model, $person-id)
+            let $name := collection($travels:SECRETARY_TRAVELS_COL)//trip[@who eq $person-id]/name => head()
             let $secretary-role := doc($pocom:POSITIONS-PRINCIPALS-COL || '/secretary.xml')//principal[person-id eq $person-id][1]
             let $startyear := app:year-from-date($secretary-role/started/date)
             let $endyear :=

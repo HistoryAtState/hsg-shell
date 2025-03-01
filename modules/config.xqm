@@ -511,16 +511,16 @@ declare variable $config:PUBLICATIONS :=
             "breadcrumb-title": 
                 function($parameters as map(*)) as xs:string? {
                     let $key := $parameters?person-or-country-id
-                    let $current-country-name := 
+                    let $president-name := 
                         let $trips := 
-                            for $trip in collection($config:TRAVELS_PRESIDENTS_COL)//trip[country/@id eq $key]
+                            for $trip in collection($config:TRAVELS_PRESIDENTS_COL)//trip[@who eq $key]
                             order by $trip/start-date
                             return $trip
                         return
-                            $trips[last()]/country
+                            $trips[last()]/name
                     return
-                        if (exists($current-country-name)) then
-                            $current-country-name/string()
+                        if (exists($president-name)) then
+                            $president-name/string()
                         else (: $key is a year :)
                             $key
                 },
