@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 module namespace travels = "http://history.state.gov/ns/site/hsg/travels-html";
 
@@ -9,9 +9,7 @@ module namespace travels = "http://history.state.gov/ns/site/hsg/travels-html";
  :)
 
 import module namespace app="http://history.state.gov/ns/site/hsg/templates" at "app.xqm";
-import module namespace gsh="http://history.state.gov/ns/xquery/geospatialhistory" at "/db/apps/gsh/modules/gsh.xqm";
 import module namespace pocom = "http://history.state.gov/ns/site/hsg/pocom-html" at "pocom-html.xqm";
-import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare variable $travels:DATA_COL := '/db/apps/travels';
 declare variable $travels:PRESIDENT_TRAVELS_COL := '/db/apps/travels/president-travels';
@@ -21,19 +19,14 @@ declare variable $travels:PRESIDENTS_COL := '/db/apps/travels/presidents';
 
 declare function travels:load-secretary($node as node(), $model as map(*), $person-or-country-id as xs:string) {
     let $matching-secretary := collection($travels:SECRETARY_TRAVELS_COL)//@who[. eq $person-or-country-id]/..
-    let $is-person-or-country-id := 
-        if ($matching-secretary) then
-            'person'
-        else
-            'country'
     let $title :=
-        if ($is-person-or-country-id eq 'person') then
-            pocom:person-name-first-last($node, $model, $person-or-country-id)
+        if ($matching-secretary) then
+            collection($travels:SECRETARY_TRAVELS_COL)//trip[@who eq $person-or-country-id]/name => head()
         else
-            gsh:territory-id-to-short-name($person-or-country-id)
+            collection($travels:SECRETARY_TRAVELS_COL)//country[@id eq $person-or-country-id] => head()
     let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
     let $table := 
-        if ($is-person-or-country-id eq 'person') then
+        if ($matching-secretary) then
             travels:by-person("secretary", $person-or-country-id)
         else
             travels:by-country("secretary", $person-or-country-id)
@@ -47,19 +40,21 @@ declare function travels:load-secretary($node as node(), $model as map(*), $pers
 
 declare function travels:load-president($node as node(), $model as map(*), $person-or-country-id as xs:string) {
     let $matching-president := collection($travels:PRESIDENTS_COL)//president[id eq $person-or-country-id]
-    let $is-person-or-country-id := 
-            if ($matching-president) then
-                'person'
-            else
-                'country'
+    let $current-country-name := 
+        let $trips := 
+            for $trip in collection($travels:PRESIDENT_TRAVELS_COL)//trip[country/@id eq $person-or-country-id]
+            order by $trip/start-date
+            return $trip
+        return
+            $trips[last()]/country
     let $title :=
-        if ($is-person-or-country-id eq 'person') then
-            $matching-president/name/string()
+        if ($matching-president) then
+            head($matching-president)/name/string()
         else
-            gsh:territory-id-to-short-name($person-or-country-id)
+            $current-country-name/string()
     let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
     let $table := 
-        if ($is-person-or-country-id eq 'person') then
+        if ($matching-president) then
             travels:by-person("president", $person-or-country-id)
         else
             travels:by-country("president", $person-or-country-id)
@@ -86,9 +81,11 @@ declare function travels:table($node as node(), $model as map(*)) {
 declare function travels:presidents($node as node(), $model as map(*)) {
     <ul>
         {
-            let $presidents := collection($travels:PRESIDENTS_COL)//president
-            for $president-id in distinct-values(collection($travels:PRESIDENT_TRAVELS_COL)//trip/@who)
-            let $president := $presidents[id eq $president-id]
+            let $trips := collection($travels:PRESIDENT_TRAVELS_COL)//trip
+            for $president in collection($travels:PRESIDENTS_COL)//president
+            let $president-id := $president/id
+            let $has-traveled := $president-id = $trips/@who
+            where $has-traveled
             let $president-name := $president/name
             let $start-year := year-from-date(xs:date($president/took-office-date))
             let $end-year := if ($president/left-office-date ne '') then year-from-date(xs:date($president/left-office-date)) else ()
@@ -102,8 +99,9 @@ declare function travels:presidents($node as node(), $model as map(*)) {
 declare function travels:presidents-destinations($node as node(), $model as map(*)) {
     <ul>
         {
-            for $country in distinct-values(collection($travels:PRESIDENT_TRAVELS_COL)//country)
-            let $country-id := collection($travels:PRESIDENT_TRAVELS_COL)//country[. eq $country][1]/@id/string()
+            for $country in collection($travels:PRESIDENT_TRAVELS_COL)//country
+            let $country-id := $country/@id
+            group by $country, $country-id
             order by $country
             return
                 <li><a href="$app/departmenthistory/travels/president/{$country-id}">{$country}</a></li>
@@ -116,7 +114,7 @@ declare function travels:secretaries($node as node(), $model as map(*)) {
         {
             let $secretaries-who-travelled := for $x in xmldb:get-child-resources($travels:SECRETARY_TRAVELS_COL) return replace($x, '.xml$', '')
             for $person-id in $secretaries-who-travelled
-            let $name := pocom:person-name-first-last($node, $model, $person-id)
+            let $name := collection($travels:SECRETARY_TRAVELS_COL)//trip[@who eq $person-id]/name => head()
             let $secretary-role := doc($pocom:POSITIONS-PRINCIPALS-COL || '/secretary.xml')//principal[person-id eq $person-id][1]
             let $startyear := app:year-from-date($secretary-role/started/date)
             let $endyear :=
@@ -135,8 +133,9 @@ declare function travels:secretaries($node as node(), $model as map(*)) {
 declare function travels:secretaries-destinations($node as node(), $model as map(*)) {
     <ul>
         {
-            for $country in distinct-values(collection($travels:SECRETARY_TRAVELS_COL)//country)
-            let $country-id := collection($travels:SECRETARY_TRAVELS_COL)//country[. eq $country][1]/@id/string()
+            for $country in collection($travels:SECRETARY_TRAVELS_COL)//country
+            let $country-id := $country/@id
+            group by $country, $country-id
             order by $country
             return
                 <li><a href="$app/departmenthistory/travels/secretary/{$country-id}">{$country}</a></li>

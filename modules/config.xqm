@@ -121,6 +121,9 @@ declare variable $config:VIETNAM_GUIDE_COL := "/db/apps/other-publications/vietn
 declare variable $config:VIEWS_FROM_EMBASSY_COL := "/db/apps/other-publications/views-from-the-embassy";
 declare variable $config:VISITS_COL := "/db/apps/visits";
 declare variable $config:TRAVELS_COL := "/db/apps/travels";
+declare variable $config:TRAVELS_PRESIDENTS_COL := $config:TRAVELS_COL || '/president-travels';
+declare variable $config:TRAVELS_SECRETARIES_COL := $config:TRAVELS_COL || '/secretary-travels';
+declare variable $config:PRESIDENTS_COL := "/db/apps/travels/presidents";
 declare variable $config:HAC_COL := "/db/apps/hac";
 declare variable $config:HIST_DOCS :=  "/db/apps/hsg-shell/pages/historicaldocuments";
 declare variable $config:OTHER_PUBLICATIONS_COL := "/db/apps/other-publications";
@@ -506,17 +509,44 @@ declare variable $config:PUBLICATIONS :=
         },
         "travels-president": map {
             "title": "Travels of the President - Department History",
-            "breadcrumb-title": function($parameters as map(*)) as xs:string?{
-                config:visits-breadcrumb-title($parameters?person-or-country-id, $config:TRAVELS_COL||"/president-travels")
-              },
+            "breadcrumb-title": 
+                function($parameters as map(*)) as xs:string? {
+                    let $key := $parameters?person-or-country-id
+                    let $current-country-name := 
+                        let $trips := 
+                            for $trip in collection($config:TRAVELS_SECRETARIES_COL)//trip[country/@id eq $key]
+                            order by $trip/start-date
+                            return $trip
+                        return
+                            $trips[last()]/country
+                    let $president-name := head(collection($config:PRESIDENTS_COL)//president[id eq $key])/name
+                    return
+                        if (exists($current-country-name)) then
+                            $current-country-name/string()
+                        else (: if (exists($president-name)) then :)
+                            $president-name/string()
+                },
             "publication-last-modified": config:last-modified-from-repo-xml($config:TRAVELS_COL)
 
         },
         "travels-secretary": map {
             "title": "Travels of the Secretary of State - Department History",
-            "breadcrumb-title": function($parameters as map(*)) as xs:string?{
-                config:visits-breadcrumb-title($parameters?person-or-country-id, $config:TRAVELS_COL||"/secretary-travels")
-              },
+            "breadcrumb-title": 
+                function($parameters as map(*)) as xs:string? {
+                    let $key := $parameters?person-or-country-id
+                    let $current-country-name := 
+                        let $trips := 
+                            for $trip in collection($config:TRAVELS_SECRETARIES_COL)//trip[country/@id eq $key]
+                            order by $trip/start-date
+                            return $trip
+                        return
+                            $trips[last()]/country
+                    return
+                        if (exists($current-country-name)) then
+                            $current-country-name/string()
+                        else (: $key is a year :)
+                            $key
+                },
             "publication-last-modified": config:last-modified-from-repo-xml($config:TRAVELS_COL)
         },
         "visits": map {
