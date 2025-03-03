@@ -14,6 +14,17 @@
                 <div class="hsg-width-two-thirds">
                     <div class="lists" data-template="app:fix-links" id="content-inner">
                         <h1>Visits by Foreign Leaders</h1>
+                        <p>This resource presents basic historical information on visits by foreign
+                            heads of state or heads of government to the United States that included
+                            a meeting with the President, or with the Vice President if the
+                            President was indisposed or out of the country. Except for the San
+                            Francisco Conference in 1945, visits of leaders attending UN sessions
+                            are included only if the leader met separately with the President.
+                            Updates are published annually for the prior year. We invite questions
+                            and comments about this resource at <a href="mailto:history@state.gov"
+                                >history@state.gov</a>.</p>
+                        <p style="text-align: right; font-style: italic">Last updated, February
+                            2025.</p>
                         <div class="col-md-4">
                             <h3>By Year</h3>
                             <ul data-template="visits:years"/>

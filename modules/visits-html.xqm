@@ -1,4 +1,4 @@
-xquery version "3.0";
+xquery version "3.1";
 
 module namespace visits = "http://history.state.gov/ns/site/hsg/visits-html";
 
@@ -8,19 +8,27 @@ module namespace visits = "http://history.state.gov/ns/site/hsg/visits-html";
  : draws on data in /db/apps/visits - installed via visits.xar
  :)
 
-import module namespace gsh="http://history.state.gov/ns/xquery/geospatialhistory" at "/db/apps/gsh/modules/gsh.xqm";
 import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 declare variable $visits:DATA_COL := '/db/apps/visits/data';
 
 declare function visits:load($node, $model, $country-or-year as xs:string) {
     let $is-year := matches($country-or-year, '^\d{4}')
+    let $visits := 
+        if ($is-year) then
+            collection($visits:DATA_COL)//visit[year-from-date(start-date) eq xs:integer($country-or-year)]
+        else
+            collection($visits:DATA_COL)//visit[from/@id eq $country-or-year]
+    let $sorted-visits := 
+        for $visit in $visits
+        order by $visit/start-date
+        return $visit
     return
         if ($is-year) then
             let $page-title := $country-or-year
             let $title := 'Visits By Foreign Leaders in ' || $country-or-year
             let $breadcrumb := <li><a href="$app/departmenthistory/visits/{$country-or-year}">{$page-title}</a></li>
-            let $table := visits:visits-in-year-table($country-or-year cast as xs:integer)
+            let $table := visits:visits-table($sorted-visits, ())
             return
                 map {
                     "page-title": $page-title,
@@ -29,10 +37,10 @@ declare function visits:load($node, $model, $country-or-year as xs:string) {
                     "table": $table
                 }
         else
-            let $page-title := collection('/db/apps/gsh/data/countries-old')//country[id eq $country-or-year]/label/string()
+            let $page-title := $sorted-visits[last()]/from/string()
             let $title := 'Visits By Foreign Leaders of ' || $page-title
-            let $breadcrumb := <li><a href="$app/departmenthistory/visits/{$country-or-year}">{$page-title}</a></li>
-            let $table := visits:visits-from-country-table($country-or-year)
+            let $breadcrumb := <li><a href="$app/departmenthistory/visits/{$country-or-year}">{"$page-title"}</a></li>
+            let $table := visits:visits-table($sorted-visits, "from")
             return
                 map {
                     "page-title": $page-title,
@@ -82,24 +90,6 @@ declare function visits:countries($node, $model) {
         return
             <li><a href="$app/departmenthistory/visits/{$country-id}">{$country}</a> {if ($country-id ne '') then () else '*'}</li>
     }</ul>
-};
-
-declare function visits:visits-in-year-table($year as xs:integer) {
-    let $visits :=
-        for $visit in collection($visits:DATA_COL)//visit[year-from-date(start-date) eq $year]
-        order by $visit/start-date
-        return $visit
-    return
-        visits:visits-table($visits, ())
-};
-
-declare function visits:visits-from-country-table($country-id as xs:string) {
-    let $visits :=
-        for $visit in collection($visits:DATA_COL)//visit[from/@id eq $country-id]
-        order by $visit/start-date
-        return $visit
-    return
-        visits:visits-table($visits, 'from')
 };
 
 declare function visits:visits-table($results-to-display as node()*, $suppress as xs:string*) {

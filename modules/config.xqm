@@ -523,14 +523,22 @@ declare variable $config:PUBLICATIONS :=
             "title": "Visits of Foreign Leaders and Heads of State - Department History",
             "publication-last-modified":config:last-modified-from-repo-xml($config:VISITS_COL),
             "breadcrumb-title": 
-              function($parameters as map(*)) as xs:string? {
-                let $key := $parameters?country-or-year
-                let $country as element()? := collection('/db/apps/gsh/data/countries-old')//country[id eq $key]
-                return if (exists($country)) then
-                  $country/label/string()
-                else (: $key is a year :)
-                  $key
-              }
+                function($parameters as map(*)) as xs:string? {
+                    let $key := $parameters?country-or-year
+                    let $current-country-name := 
+                        let $visits := 
+                            for $visit in collection($config:VISITS_COL)//visit[from/@id eq $key]
+                            order by $visit/start-date
+                            return $visit
+                        return
+                            $visits[last()]/from
+                    return
+                        if (exists($current-country-name)) then
+                            $current-country-name/string()
+                        else 
+                            (: $key is a year :)
+                            $key
+                  }
         },
         "wwi": map {
             "title": "World War I - Department History",
