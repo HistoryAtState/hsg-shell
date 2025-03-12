@@ -8,6 +8,19 @@ name: exist-db CI
 on: [push]
 
 jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install
+      # Run the commitlint action, considering its own dependencies and yours as well 🚀
+      # `github.workspace` is the path to your repository.
+      - uses: wagoid/commitlint-github-action@v6
+        env:
+          NODE_PATH: ${{ github.workspace }}/node_modules
   build:
     runs-on: ubuntu-latest
     strategy:
@@ -73,20 +86,16 @@ jobs:
           do sleep 2s; \
           done
 
-      # Test       
+      # Test
       - name: Run smoke test
         run: bats --tap tests/bats/*.bats
-      
-      # TODO: add further tests
-
-      # Lint commit messages
-      - name: lint commit message
-        uses: wagoid/commitlint-github-action@v6
 
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: build
+    needs: 
+      - commitlint
+      - build
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
