@@ -25,6 +25,12 @@
                                 other government records. The Office is directed by <a
                                     href="$app/about/the-historian">The Historian of the U.S.
                                     Department of State</a>.</p>
+                                are experts in the history of U.S. foreign policy and the
+                                institutional history of the Department of State. Our historians
+                                possess unparalleled research experience in State Department and
+                                other government records. The Office is directed by <a
+                                    href="$app/about/the-historian">The Historian of the U.S.
+                                    Department of State</a>.</p>
                         </div>
                         <div id="what-we-do">
                             <h2>What We Do</h2>
@@ -32,22 +38,28 @@
                                 preparation and publication of the official documentary history of
                                 U.S. foreign policy in the <em><a href="$app/historicaldocuments"
                                         >Foreign Relations of the United States</a></em> (FRUS)
-                                series. The FRUS series presents the official documentary historical
-                                record of major U.S. foreign policy decisions. The series began in
-                                1861 and now comprises more than 550 individual publications. FRUS
-                                publications contain historical documents from the Departments of
-                                State and Defense, the White House, National Security Council,
+                                series.</p>
+                            <p>The FRUS series presents the official documentary historical record
+                                of major U.S. foreign policy decisions. The series began in 1861 and
+                                now comprises more than 550 individual publications.</p>
+                            <p>FRUS publications contain historical documents from the Departments
+                                of State and Defense, the White House, National Security Council,
                                 Intelligence Community, and other agencies across the national
-                                security establishment. Our historians compiling FRUS have full and
-                                complete access to records in the Presidential libraries, the
-                                National Archives, and Department and agency repositories.</p>
+                                security establishment. </p>
+                            <p>Our historians compiling FRUS have full and complete access to
+                                records in the Presidential libraries, the National Archives, and
+                                Department and agency repositories.</p>
                             <p>The Office prepares historical and institutional studies for
                                 Department principals that provide essential context, evaluate how
                                 and why policies evolved, identify precedents, and derive lessons
                                 learned.</p>
                         </div>
-                        <div id="our-outreach-activities">
+                        <div>
                             <h2>Our Outreach Activities</h2>
+                            <p>Our Office provides information to the American people about the
+                                Department and its history; U.S. foreign relations and resources to
+                                conduct research on Department records; and responds to
+                                content-specific questions about FRUS series.</p>
                             <p>Our Office provides information to the American people about the
                                 Department and its history; U.S. foreign relations and resources to
                                 conduct research on Department records; and responds to
@@ -55,25 +67,26 @@
                         </div>
                         <div id="how-to-access-our-materials">
                             <h2>How to Access Our Materials</h2>
-                            <p>In addition to a <a href="$app/historicaldocuments">full text archive
-                                    of the <em>Foreign Relations</em> series</a>, our website
-                                includes valuable encyclopedic content on the history of <a
+                            <p>In addition to a <a href="$app/historicaldocuments">full text archive
+                                    of the <i>Foreign Relations</i> series</a>, our website includes
+                                valuable encyclopedic content on the history of <a
                                     href="$app/countries">U.S. relations with states around the
-                                    world</a>, and a database of the <a
+                                    world</a>, and a database of the <a
                                     href="$app/departmenthistory/people">Department’s principal
                                     officers and chiefs of mission</a>.</p>
                             <p>In keeping with the Open Government Directive’s principle of
                                 transparency, participation, and collaboration as the cornerstone of
                                 an open government, all of the content and code on this site is
-                                available for free download. The core repositories are available at
-                                    <a href="https://github.com/HistoryAtState">HistoryAtState</a>
-                                on GitHub. Follow our progress, fork our code, file issues, and send
-                                us your pull requests. The <a
+                                available for free download. The core repositories are available
+                                    at <a href="https://github.com/HistoryAtState"
+                                    >HistoryAtState</a> on GitHub. Follow our progress, fork our
+                                code, file issues, and send us your pull requests. The <a
                                     href="https://github.com/HistoryAtState/hsg-project"
-                                    >hsg-project</a> repository contains all instructions to install
+                                    >hsg-project</a> repository contains all instructions to install
                                 a complete copy of the history.state.gov website on your own
-                                computer. Please visit our <a href="$app/open">Open Government</a>
-                                page to learn more about our contributions to data.gov.</p>
+                                computer. Please visit our <a href="$app/open">Open
+                                Government</a> page to learn more about our contributions to
+                                data.gov.</p>
                         </div>
                     </div>
                 </div>
