@@ -94,6 +94,12 @@ else if (ends-with($exist:path, "/")) then
         <redirect url="{replace(local:uri(), '/$', '')}"/>
     </dispatch>
 
+(: strip multiple slashes :)
+else if (contains($exist:path, "//")) then
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <redirect url="{replace(local:uri(), '/+', '/')}"/>
+    </dispatch>
+
 (: handle requests for static resources: css, js, images, etc. :)
 else if (contains($exist:path, "/resources/")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
