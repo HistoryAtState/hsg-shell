@@ -292,16 +292,6 @@ else switch($path-parts[1])
                 local:render-page('countries/all.xml', map{
                     "publication-id": "countries-other"
                 })
-            case "issues" return
-                if (empty($path-parts[3])) then
-                    local:render-page('countries/issues/index.xml', map{
-                        "publication-id": "countries-other"
-                    })
-                else
-                    local:render-page('countries/issues/article.xml', map {
-                        "publication-id": "countries-issues",
-                        "document-id": $path-parts[3]
-                    })
             case "archives" return
                 switch (string($path-parts[3]))
                     case '' return
