@@ -177,13 +177,22 @@ declare function app:safe-parse-if-modified-since-header() as xs:dateTime? {
 };
 
 declare function app:last-modified($publication-config as map(*), $document-id as xs:string?, $section-id as xs:string?) {
-    if ($document-id and $section-id and map:contains($publication-config, "section-last-modified")) then (
-        $publication-config?section-last-modified($document-id, $section-id)
-    ) else if ($document-id and map:contains($publication-config, "document-last-modified")) then (
-        $publication-config?document-last-modified($document-id)
-    ) else if (map:contains($publication-config, "publication-last-modified")) then (
-        $publication-config?publication-last-modified()
-    ) else ()
+    let $last-modified-date-time := 
+        if ($document-id and $section-id and map:contains($publication-config, "section-last-modified")) then (
+            $publication-config?section-last-modified($document-id, $section-id)
+        ) else if ($document-id and map:contains($publication-config, "document-last-modified")) then (
+            $publication-config?document-last-modified($document-id)
+        ) else if (map:contains($publication-config, "publication-last-modified")) then (
+            $publication-config?publication-last-modified()
+        ) else ()
+    return 
+        if($last-modified-date-time instance of xs:dateTime) 
+        then (
+            if($config:EDITORIAL_DATE_TIME > $last-modified-date-time)
+            then ($config:EDITORIAL_DATE_TIME )
+            else ($last-modified-date-time)
+        ) else () 
+
 };
 
 declare function app:created($publication-config as map(*), $document-id as xs:string?, $section-id as xs:string?) {
