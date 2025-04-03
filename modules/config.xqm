@@ -149,6 +149,8 @@ declare function config:pocom-people-last-modified() as xs:dateTime {
 };
 
 declare variable $config:epoch-start := xs:dateTime("1970-01-01T00:00:00-00:00");
+declare variable $config:EDITORIAL_DATE_TIME := $config:epoch-start;
+(: declare variable $config:EDITORIAL_DATE_TIME := xs:dateTime("2025-04-03T00:00:00-00:00");  :)
 
 declare function config:last-modified-from-repo-xml ($collection as xs:string) as function(*) {
     function () {

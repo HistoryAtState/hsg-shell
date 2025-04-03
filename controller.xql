@@ -67,15 +67,13 @@ declare function local:render-page($page-template as xs:string) as element() {
     local:render-page($page-template, map{})
 };
 
-
-(:
-util:log('debug', map {
+util:log('info', map {
     "request:get-uri": request:get-uri(),
     "nginx-request-uri": request:get-header('nginx-request-uri'),
     "exist:path": $exist:path,
     "path-parts": $path-parts
 }),
-:)
+
 
 local:maybe-set-if-modified-since(request:get-header("If-Modified-Since")),
 
