@@ -755,6 +755,31 @@ declare variable $config:PUBLICATIONS :=
               else ()
           }
         },
+        "search": map{
+            "publication-last-modified": 
+                function() {
+                    let $dates := (
+                        config:last-modified-from-repo-xml("/db/apps/conferences")(),
+                        config:last-modified-from-repo-xml("/db/apps/other-publications")(),
+                        config:last-modified-from-repo-xml("/db/apps/hac")(),
+                        config:last-modified-from-repo-xml("/db/apps/frus")(),
+                        config:last-modified-from-repo-xml("/db/apps/frus-history")(),
+                        config:last-modified-from-repo-xml("/db/apps/rdcr")(),
+                        config:last-modified-from-repo-xml("/db/apps/wwdai")(),
+                        config:last-modified-from-repo-xml("/db/apps/pocom")(),
+                        config:last-modified-from-repo-xml("/db/apps/travels")(),
+                        config:last-modified-from-repo-xml("/db/apps/visits")(),
+                        config:last-modified-from-repo-xml("/db/apps/milestones")()
+                    )
+                    let $sort := for $date in $dates 
+                        order by $date descending
+                        return
+                            $date
+                    return
+                        $sort[1]
+                }
+        },
+
         "news": map{
             "collection": $config:NEWS_COL,
             "select-document": function($document-id) { 
