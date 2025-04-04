@@ -54,7 +54,7 @@
                                 and why policies evolved, identify precedents, and derive lessons
                                 learned.</p>
                         </div>
-                        <div>
+                        <div id="our-outreach-activities">
                             <h2>Our Outreach Activities</h2>
                             <p>Our Office provides information to the American people about the
                                 Department and its history; U.S. foreign relations and resources to
@@ -67,26 +67,25 @@
                         </div>
                         <div id="how-to-access-our-materials">
                             <h2>How to Access Our Materials</h2>
-                            <p>In addition to a <a href="$app/historicaldocuments">full text archive
-                                    of the <i>Foreign Relations</i> series</a>, our website includes
-                                valuable encyclopedic content on the history of <a
+                            <p>In addition to a <a href="$app/historicaldocuments">full text archive
+                                    of the <em>Foreign Relations</em> series</a>, our website
+                                includes valuable encyclopedic content on the history of <a
                                     href="$app/countries">U.S. relations with states around the
-                                    world</a>, and a database of the <a
+                                    world</a>, and a database of the <a
                                     href="$app/departmenthistory/people">Department’s principal
                                     officers and chiefs of mission</a>.</p>
                             <p>In keeping with the Open Government Directive’s principle of
                                 transparency, participation, and collaboration as the cornerstone of
                                 an open government, all of the content and code on this site is
-                                available for free download. The core repositories are available
-                                    at <a href="https://github.com/HistoryAtState"
-                                    >HistoryAtState</a> on GitHub. Follow our progress, fork our
-                                code, file issues, and send us your pull requests. The <a
+                                available for free download. The core repositories are available at
+                                    <a href="https://github.com/HistoryAtState">HistoryAtState</a>
+                                on GitHub. Follow our progress, fork our code, file issues, and send
+                                us your pull requests. The <a
                                     href="https://github.com/HistoryAtState/hsg-project"
-                                    >hsg-project</a> repository contains all instructions to install
+                                    >hsg-project</a> repository contains all instructions to install
                                 a complete copy of the history.state.gov website on your own
-                                computer. Please visit our <a href="$app/open">Open
-                                Government</a> page to learn more about our contributions to
-                                data.gov.</p>
+                                computer. Please visit our <a href="$app/open">Open Government</a>
+                                page to learn more about our contributions to data.gov.</p>
                         </div>
                     </div>
                 </div>
