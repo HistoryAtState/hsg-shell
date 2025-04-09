@@ -163,7 +163,7 @@ function app:handle-error($node as node(), $model as map(*), $code as xs:integer
  : This is because HTTP-date is only specific to the second.
  : @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1 :)
 declare function app:modified-since ($last-modified as xs:dateTime?, $if-modified-since as xs:dateTime?) as xs:boolean {
-    util:log("info", ('---pages:modified-since----', $last-modified, '<>', $if-modified-since)),
+    util:log("debug", ('---pages:modified-since----', $last-modified, '<>', $if-modified-since)),
     exists($last-modified) and 
     exists($if-modified-since) and 
     $last-modified - $if-modified-since < xs:dayTimeDuration("PT1S")
@@ -176,31 +176,28 @@ declare function app:safe-parse-if-modified-since-header() as xs:dateTime? {
     } catch err:FORG0010 { () }
 };
 
-declare function app:last-modified($publication-config as map(*), $document-id as xs:string?, $section-id as xs:string?) {
+declare function app:last-modified($publication-config as map(*), $document-id as xs:string?) {
     let $last-modified-date-time := 
-        if ($document-id and $section-id and map:contains($publication-config, "section-last-modified")) then (
-            $publication-config?section-last-modified($document-id, $section-id)
-        ) else if ($document-id and map:contains($publication-config, "document-last-modified")) then (
-            $publication-config?document-last-modified($document-id)
+        if ($document-id and map:contains($publication-config, "document-last-modified")) then (
+            xs:dateTime($publication-config?document-last-modified($document-id))
         ) else if (map:contains($publication-config, "publication-last-modified")) then (
-            $publication-config?publication-last-modified()
-        ) else ()
+            xs:dateTime($publication-config?publication-last-modified())
+        ) else (
+            $config:EDITORIAL_DATE_TIME
+        )
     return 
-        if($last-modified-date-time instance of xs:dateTime) 
-        then (
-            if($config:EDITORIAL_DATE_TIME > $last-modified-date-time)
-            then ($config:EDITORIAL_DATE_TIME )
-            else ($last-modified-date-time)
-        ) else () 
+        if ($last-modified-date-time > $config:EDITORIAL_DATE_TIME)
+        then $last-modified-date-time
+        else $config:EDITORIAL_DATE_TIME
 
 };
 
-declare function app:created($publication-config as map(*), $document-id as xs:string?, $section-id as xs:string?) {
-    if ($section-id and $document-id and map:contains($publication-config, "section-created")) then (
-        $publication-config?section-created($document-id, $section-id)
-    ) else if ($document-id and map:contains($publication-config, "document-created")) then (
-        $publication-config?document-created($document-id)
-    ) else ()
+declare function app:created($publication-config as map(*), $document-id as xs:string?) {    
+    if ($document-id and map:contains($publication-config, "document-created")) then (
+        xs:dateTime($publication-config?document-created($document-id))
+    ) else (
+        $config:EDITORIAL_DATE_TIME
+    )
 };
 
 

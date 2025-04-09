@@ -124,7 +124,7 @@ declare function pages:load-xml($publication-config as map(*), $document-id as x
 
 declare function pages:load-fallback-page($document-id as xs:string?, $section-id as xs:string?) {
     util:log("debug", ("Loading fallback page for ", $document-id)),
-    let $volume := $config:FRUS_METADATA/volume[@id=$document-id]
+    let $volume := $config:FRUS_COL_METADATA_COL/volume[@id=$document-id]
     return
         if (empty($volume)) then (
             request:set-attribute("hsg-shell.errcode", 404),
@@ -207,7 +207,7 @@ declare
     %templates:default("view", "div")
     %templates:default("heading-offset", 0)
 function pages:view($node as node(), $model as map(*), $view as xs:string, $heading-offset as xs:int, $document-id as xs:string?) {
-    let $log := util:log("info", "pages:view: view: " || $view || " heading-offset: " || $heading-offset)    
+    let $log := util:log("debug", "pages:view: view: " || $view || " heading-offset: " || $heading-offset)    
     let $xml :=
         if ($view = "div") then
             if ($model?data[@subtype='removed-pending-rewrite']) then
@@ -274,8 +274,7 @@ declare function pages:process-content($odd as function(*), $xml as element()*) 
     pages:process-content($odd, $xml, ())
 };
 
-declare function pages:process-content($odd as function(*), $xml as element()*, $parameters as map(*)?) {
-(:    util:log("info", "Processing content using odd: " || $odd),:)
+declare function pages:process-content($odd as function(*), $xml as element()*, $parameters as map(*)?) {    
 	let $html :=
 	    $odd($xml, $parameters)
     let $content := pages:clean-footnotes($html)
@@ -462,7 +461,7 @@ declare function pages:generate-short-title($node, $model) as xs:string? {
 
 (: Generate page breadcrumbs :)
 declare function pages:breadcrumb($node, $model){
-  util:log("info", "pages:breadcrumb site:get-url: " || site:get-uri() || " $app:APP_ROOT: " || $app:APP_ROOT),
+  util:log("debug", "pages:breadcrumb site:get-url: " || site:get-uri() || " $app:APP_ROOT: " || $app:APP_ROOT),
   pages:generate-breadcrumbs(substring-after(site:get-uri(), $app:APP_ROOT))
 };
 
