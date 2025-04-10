@@ -9,7 +9,6 @@
   "dependencies": {
     "animate.css": "^3.5.1",
     "bootstrap-sass": "^3.3.6",
-    "chromedriver": "^128.0.0",
     "font-awesome": "^4.5.0",
     "jquery": "^3.7.1",
     "openseadragon": "^3.1.0"
@@ -28,7 +27,7 @@
     "autoprefixer": "^9.7.4",
     "chai": "^4.3.8",
     "chai-as-promised": "^7.1.1",
-    "chromedriver": "^131.0.0",
+    "chromedriver": "^131.0.5",
     "del": "^6.1.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",

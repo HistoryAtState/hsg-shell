@@ -23,8 +23,8 @@ declare option output:media-type "application/json";
  : and, if appropriate, issue a 304 Not Modified status code.
  :)
 declare function local:set-headers($publication-config as map(*), $document-id as xs:string, $section-id as xs:string?) {
-    let $created := app:created($publication-config, $document-id, $section-id)
-    let $last-modified := app:last-modified($publication-config, $document-id, $section-id)
+    let $created := app:created($publication-config, $document-id)
+    let $last-modified := app:last-modified($publication-config, $document-id)
 
     let $not-modified-since := app:modified-since($last-modified, app:safe-parse-if-modified-since-header())
     let $status-code := if ($not-modified-since) then (304) else (200)

@@ -28,7 +28,7 @@ declare function open:frus-latest() {
 
    (: create a list of all volumes sorted by the publication date :)
    let $volumes :=
-      for $volume in collection($config:FRUS_METADATA_COL)/volume[publication-status eq 'published']
+      for $volume in collection($config:FRUS_COL_METADATA)/volume[publication-status eq 'published']
       order by $volume/published-year descending
       return $volume
 
@@ -145,8 +145,8 @@ declare function open:frus-latest() {
             <id>{$feed-id}</id>
             <updated>{
                 let $dates :=
-                    for $volume in xmldb:get-child-resources($config:FRUS_METADATA_COL)
-                    return xmldb:last-modified($config:FRUS_METADATA_COL, $volume)
+                    for $volume in xmldb:get-child-resources($config:FRUS_COL_METADATA)
+                    return xmldb:last-modified($config:FRUS_COL_METADATA, $volume)
                 return max($dates)
             }</updated>
             <author><name>{$author}</name></author>
@@ -158,7 +158,7 @@ declare function open:frus-metadata() {
     let $serialize := util:declare-option('exist:serialize', 'method=xml media-type=text/xml indent=yes')
 
     let $volumes :=
-        for $volume in collection($config:FRUS_METADATA_COL)/volume[publication-status eq 'published']
+        for $volume in collection($config:FRUS_COL_METADATA)/volume[publication-status eq 'published']
             let $titles := $volume/title[. ne '']
             let $raw-summary := $volume/summary
             let $summary := if(normalize-space(string($raw-summary)))
@@ -211,8 +211,8 @@ declare function open:frus-metadata() {
     Report Last Updated: '
                     ,
                     let $dates :=
-                        for $volume in xmldb:get-child-resources($config:FRUS_METADATA_COL)
-                        return xmldb:last-modified($config:FRUS_METADATA_COL, $volume)
+                        for $volume in xmldb:get-child-resources($config:FRUS_COL_METADATA)
+                        return xmldb:last-modified($config:FRUS_COL_METADATA, $volume)
                     return max($dates)
                     (:
                     ,

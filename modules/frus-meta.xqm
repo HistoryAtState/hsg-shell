@@ -125,7 +125,7 @@ declare function fm:isbn-format($node, $model) {
 
 declare function fm:pub-status($volume-meta as document-node(element(volume))) {
     let $status := $volume-meta/volume/publication-status/string(.)
-    let $code-table := $config:FRUS_CODE_TABLES_COL || "/publication-status-codes.xml"
+    let $code-table := $config:FRUS_COL_CODE_TABLES || "/publication-status-codes.xml"
     return doc($code-table)/code-table/items/item[value eq $status]/label/string(.)
 };
 
