@@ -753,22 +753,7 @@ declare variable $config:PUBLICATIONS :=
           }
         },
         "search": map{
-            "publication-last-modified": 
-                function() {
-                    max(( 
-                        config:last-modified-from-repo-xml("/db/apps/conferences")(),
-                        config:last-modified-from-repo-xml("/db/apps/other-publications")(),
-                        config:last-modified-from-repo-xml("/db/apps/hac")(),
-                        config:last-modified-from-repo-xml("/db/apps/frus")(),
-                        config:last-modified-from-repo-xml("/db/apps/frus-history")(),
-                        config:last-modified-from-repo-xml("/db/apps/rdcr")(),
-                        config:last-modified-from-repo-xml("/db/apps/wwdai")(),
-                        config:last-modified-from-repo-xml("/db/apps/pocom")(),
-                        config:last-modified-from-repo-xml("/db/apps/travels")(),
-                        config:last-modified-from-repo-xml("/db/apps/visits")(),
-                        config:last-modified-from-repo-xml("/db/apps/milestones")()
-                    ))
-                }
+            "publication-last-modified": config:search-last-modified#0
         },
 
         "news": map{
@@ -789,6 +774,32 @@ declare variable $config:PUBLICATIONS :=
         }
     };
 
+(:
+ : collections that are part of the full-text search
+ : in order to calculate the cacheing time they all
+ : need be taken into consideration
+ :)
+declare variable $config:search-collection-names := (
+    "conferences",
+    "other-publications",
+    "hac",
+    "frus",
+    "frus-history",
+    "rdcr",
+    "wwdai",
+    "pocom",
+    "travels",
+    "visits",
+    "milestones"
+);
+
+declare function config:search-last-modified() {
+    max(
+        for $collection-name in $config:search-collection-names
+        return config:last-modified-from-repo-xml("/db/apps/" || $collection-name)()
+    )
+};
+
 declare variable $config:PUBLICATION-COLLECTIONS :=
     map {
         $config:FRUS_COL_VOLUMES: "frus",
@@ -806,7 +817,7 @@ declare variable $config:PUBLICATION-COLLECTIONS :=
         $config:OP_SECRETARY_BIOS_COL: "people",
         $config:OP_VIETNAM_GUIDE_COL: "vietnam-guide",
         $config:OP_VIEWS_FROM_EMBASSY_COL: "views-from-the-embassy",
-        $config:COUNTRIES_COL_ARTICLES: "countries",        
+        $config:COUNTRIES_COL_ARTICLES: "countries",
         $config:ARCHIVES_COL_ARTICLES: "archives",
         $config:NEWS_COL: "news"
     };
