@@ -59,11 +59,22 @@ declare function travels:load-president($node as node(), $model as map(*), $pers
         else
             travels:by-country("president", $person-or-country-id)
     return
-        map {
-            "title": $title,
-            "breadcrumb": $breadcrumb,
-            "table": $table
-        }
+        (
+            map {
+                "title": $title,
+                "breadcrumb": $breadcrumb,
+                "table": $table
+            },
+            (: NOTE: Remove when Travels of the President hiatus is lifted
+             : Until then, the notice is shown on all country pages and the current admin's listing.
+             : It is not shown on previous admins' listings, since they are complete :)
+            let $affected-admins := ("trump-donald-j")
+            return
+                if (exists($current-country-name) or $person-or-country-id = $affected-admins) then
+                    request:set-attribute("show-travels-hiatus-notice", true())
+                else
+                    ()
+        )
 };
 
 declare function travels:breadcrumb($node as node(), $model as map(*)) {
