@@ -14,6 +14,12 @@
                     <h1>
                         <span data-template="travels:title"/>
                     </h1>
+                    <div data-template="templates:if-parameter-set"
+                        data-template-param="show-travels-hiatus-notice">
+                        <div data-template="templates:include"
+                            data-template-path="pages/departmenthistory/travels/president/_notice-president-travels-hiatus.xml"
+                        />
+                    </div>
                     <table data-template="travels:table"/>
                 </div>
             </div>
