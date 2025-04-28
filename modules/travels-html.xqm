@@ -31,11 +31,25 @@ declare function travels:load-secretary($node as node(), $model as map(*), $pers
         else
             travels:by-country("secretary", $person-or-country-id)
     return
-        map {
-            "title": $title,
-            "breadcrumb": $breadcrumb,
-            "table": $table
-        }
+        if ($title and $table) then
+            map {
+                "title": $title,
+                "table": $table
+            }
+        else
+            let $new-id := collection($pocom:PEOPLE-COL)//old-id[. eq $person-or-country-id]/ancestor::person/id
+            return
+                if ($new-id) then
+                    let $requested-url := request:get-parameter("requested-url", ())
+                    let $new-url := replace($requested-url, "/" || $person-or-country-id || "$", "/" || $new-id)
+                    return
+                        response:redirect-to(xs:anyURI($new-url))
+                else
+                    (
+                        request:set-attribute("hsg-shell.errcode", 404),
+                        request:set-attribute("hsg-shell.path", string-join(("departmenthistory", "travels", "secretary", $person-or-country-id), "/")),
+                        error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "person-or-country-id " || $person-or-country-id || " not found")
+                    )
 };
 
 declare function travels:load-president($node as node(), $model as map(*), $person-or-country-id as xs:string) {
