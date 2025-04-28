@@ -465,7 +465,8 @@ else switch($path-parts[1])
                         else
                             local:render-page('departmenthistory/travels/secretary/person-or-country.xml', map{
                                 "publication-id": "travels-secretary",
-                                "person-or-country-id": $path-parts[4]
+                                "person-or-country-id": $path-parts[4],
+                                "requested-url": local:get-url()
                             })
                     default return
                         local:serve-not-found-page()

@@ -19,23 +19,43 @@ declare variable $travels:PRESIDENTS_COL := '/db/apps/travels/presidents';
 
 declare function travels:load-secretary($node as node(), $model as map(*), $person-or-country-id as xs:string) {
     let $matching-secretary := collection($travels:SECRETARY_TRAVELS_COL)//@who[. eq $person-or-country-id]/..
+    let $current-country-name := 
+        let $trips := 
+            for $trip in collection($travels:SECRETARY_TRAVELS_COL)//trip[country/@id eq $person-or-country-id]
+            order by $trip/start-date
+            return $trip
+        return
+            $trips[last()]/country
     let $title :=
         if ($matching-secretary) then
-            collection($travels:SECRETARY_TRAVELS_COL)//trip[@who eq $person-or-country-id]/name => head()
+            head($matching-secretary)/name/string()
         else
-            collection($travels:SECRETARY_TRAVELS_COL)//country[@id eq $person-or-country-id] => head()
-    let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
+            $current-country-name/string()
     let $table := 
         if ($matching-secretary) then
             travels:by-person("secretary", $person-or-country-id)
         else
             travels:by-country("secretary", $person-or-country-id)
     return
-        map {
-            "title": $title,
-            "breadcrumb": $breadcrumb,
-            "table": $table
-        }
+        if ($title and $table) then
+            map {
+                "title": $title,
+                "table": $table
+            }
+        else
+            let $new-id := collection($pocom:PEOPLE-COL)//old-id[. eq $person-or-country-id]/ancestor::person/id
+            return
+                if ($new-id) then
+                    let $requested-url := request:get-parameter("requested-url", ())
+                    let $new-url := replace($requested-url, "/" || $person-or-country-id || "$", "/" || $new-id)
+                    return
+                        response:redirect-to(xs:anyURI($new-url))
+                else
+                    (
+                        request:set-attribute("hsg-shell.errcode", 404),
+                        request:set-attribute("hsg-shell.path", string-join(("departmenthistory", "travels", "secretary", $person-or-country-id), "/")),
+                        error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "person-or-country-id " || $person-or-country-id || " not found")
+                    )
 };
 
 declare function travels:load-president($node as node(), $model as map(*), $person-or-country-id as xs:string) {
@@ -52,7 +72,6 @@ declare function travels:load-president($node as node(), $model as map(*), $pers
             head($matching-president)/name/string()
         else
             $current-country-name/string()
-    let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
     let $table := 
         if ($matching-president) then
             travels:by-person("president", $person-or-country-id)
@@ -62,7 +81,6 @@ declare function travels:load-president($node as node(), $model as map(*), $pers
         (
             map {
                 "title": $title,
-                "breadcrumb": $breadcrumb,
                 "table": $table
             },
             (: NOTE: Remove when Travels of the President hiatus is lifted
