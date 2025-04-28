@@ -19,12 +19,18 @@ declare variable $travels:PRESIDENTS_COL := '/db/apps/travels/presidents';
 
 declare function travels:load-secretary($node as node(), $model as map(*), $person-or-country-id as xs:string) {
     let $matching-secretary := collection($travels:SECRETARY_TRAVELS_COL)//@who[. eq $person-or-country-id]/..
+    let $current-country-name := 
+        let $trips := 
+            for $trip in collection($travels:SECRETARY_TRAVELS_COL)//trip[country/@id eq $person-or-country-id]
+            order by $trip/start-date
+            return $trip
+        return
+            $trips[last()]/country
     let $title :=
         if ($matching-secretary) then
-            collection($travels:SECRETARY_TRAVELS_COL)//trip[@who eq $person-or-country-id]/name => head()
+            head($matching-secretary)/name/string()
         else
-            collection($travels:SECRETARY_TRAVELS_COL)//country[@id eq $person-or-country-id] => head()
-    let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
+            $current-country-name/string()
     let $table := 
         if ($matching-secretary) then
             travels:by-person("secretary", $person-or-country-id)
