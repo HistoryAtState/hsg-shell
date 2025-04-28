@@ -27,25 +27,21 @@ declare function visits:load($node, $model, $country-or-year as xs:string) {
         if ($is-year) then
             let $page-title := $country-or-year
             let $title := 'Visits By Foreign Leaders in ' || $country-or-year
-            let $breadcrumb := <li><a href="$app/departmenthistory/visits/{$country-or-year}">{$page-title}</a></li>
             let $table := visits:visits-table($sorted-visits, ())
             return
                 map {
                     "page-title": $page-title,
                     "title": $title,
-                    "breadcrumb": $breadcrumb,
                     "table": $table
                 }
         else
             let $page-title := $sorted-visits[last()]/from/string()
             let $title := 'Visits By Foreign Leaders of ' || $page-title
-            let $breadcrumb := <li><a href="$app/departmenthistory/visits/{$country-or-year}">{"$page-title"}</a></li>
             let $table := visits:visits-table($sorted-visits, "from")
             return
                 map {
                     "page-title": $page-title,
                     "title": $title,
-                    "breadcrumb": $breadcrumb,
                     "table": $table
                 }
 };

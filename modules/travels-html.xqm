@@ -72,7 +72,6 @@ declare function travels:load-president($node as node(), $model as map(*), $pers
             head($matching-president)/name/string()
         else
             $current-country-name/string()
-    let $breadcrumb := <li><a href="$app/departmenthistory/travels/secretary/{$person-or-country-id}">{$title}</a></li>
     let $table := 
         if ($matching-president) then
             travels:by-person("president", $person-or-country-id)
@@ -82,7 +81,6 @@ declare function travels:load-president($node as node(), $model as map(*), $pers
         (
             map {
                 "title": $title,
-                "breadcrumb": $breadcrumb,
                 "table": $table
             },
             (: NOTE: Remove when Travels of the President hiatus is lifted
