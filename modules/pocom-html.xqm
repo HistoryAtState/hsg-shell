@@ -85,10 +85,19 @@ function pocom:person-name-birth-death($node as node(), $model as map(*), $perso
                     ),
                     ' '
                 )
-        else (
-            request:set-attribute("hsg-shell.errcode", 404),
-            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "person " || $person-id || " not found")
-        )
+        else
+            let $new-id := collection($pocom:PEOPLE-COL)//old-id[. eq $person-id]/ancestor::person/id
+            return
+                if ($new-id) then
+                    let $requested-url := request:get-parameter("requested-url", ())
+                    let $new-url := replace($requested-url, "/" || $person-id || "$", "/" || $new-id)
+                    return
+                        response:redirect-to(xs:anyURI($new-url))
+                else
+                    (
+                        request:set-attribute("hsg-shell.errcode", 404),
+                        error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "person " || $person-id || " not found")
+                    )
 };
 
 declare function pocom:person-href($person-id) {

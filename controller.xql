@@ -437,7 +437,8 @@ else switch($path-parts[1])
                         local:render-page('departmenthistory/people/person.xml', map{
                             "publication-id": "people",
                             "person-id": $path-parts[3],
-                            "document-id": $path-parts[3]
+                            "document-id": $path-parts[3],
+                            "requested-url": local:get-url()
                         })
 
             case "travels" return
