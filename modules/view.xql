@@ -43,11 +43,10 @@ declare option output:media-type "text/html";
 
 let $publication-id := request:get-parameter('publication-id',())
 let $document-id := request:get-parameter('document-id',())
-let $section-id := request:get-parameter('section-id',())
 
 let $publication-config := ($config:PUBLICATIONS?($publication-id), map{})[1]
-let $created := app:created($publication-config, $document-id, $section-id)
-let $last-modified := app:last-modified($publication-config, $document-id, $section-id)
+let $created := app:created($publication-config, $document-id)
+let $last-modified := app:last-modified($publication-config, $document-id)
 let $not-modified-since := app:modified-since($last-modified, app:safe-parse-if-modified-since-header())
 
 return 

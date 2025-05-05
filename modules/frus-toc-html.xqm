@@ -312,7 +312,7 @@ declare function toc:paginate($child-document-count as xs:int, $start as xs:int)
 :)
 declare function toc:generate-frus-tocs() {
     let $xsl-url := doc('/db/apps/hsg-shell/modules/lib/frus-toc.xsl')
-    for $volume in collection($config:FRUS_VOLUMES_COL)
+    for $volume in collection($config:FRUS_COL_VOLUMES)
         let $toc-name := $volume/tei:TEI/@xml:id || '-toc.xml'
         let $toc := transform:transform(
             $volume,
@@ -325,7 +325,7 @@ declare function toc:generate-frus-tocs() {
 declare
     %templates:replace
 function toc:frus-toc($node as node(), $model as map(*)) as element()* {
-    let $toc-path := $config:FRUS_VOLUMES_TOC || $model?document-id || '-toc.xml'
+    let $toc-path := $config:FRUS_COL_TOC || $model?document-id || '-toc.xml'
     let $log := util:log('debug', ('toc:frus-toc, $model?section-id=', $model?section-id))
     return (
         doc($toc-path)/* => templates:process($model)

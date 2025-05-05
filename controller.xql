@@ -67,15 +67,13 @@ declare function local:render-page($page-template as xs:string) as element() {
     local:render-page($page-template, map{})
 };
 
-
-(:
-util:log('debug', map {
+(: util:log('info', map {
     "request:get-uri": request:get-uri(),
     "nginx-request-uri": request:get-header('nginx-request-uri'),
     "exist:path": $exist:path,
     "path-parts": $path-parts
-}),
-:)
+}), :)
+
 
 local:maybe-set-if-modified-since(request:get-header("If-Modified-Since")),
 
@@ -292,16 +290,6 @@ else switch($path-parts[1])
                 local:render-page('countries/all.xml', map{
                     "publication-id": "countries-other"
                 })
-            case "issues" return
-                if (empty($path-parts[3])) then
-                    local:render-page('countries/issues/index.xml', map{
-                        "publication-id": "countries-other"
-                    })
-                else
-                    local:render-page('countries/issues/article.xml', map {
-                        "publication-id": "countries-issues",
-                        "document-id": $path-parts[3]
-                    })
             case "archives" return
                 switch (string($path-parts[3]))
                     case '' return

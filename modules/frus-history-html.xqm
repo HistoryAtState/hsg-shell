@@ -11,10 +11,10 @@ import module namespace toc="http://history.state.gov/ns/site/hsg/frus-toc-html"
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 declare variable $fhh:FRUS_HISTORY_COL := $config:FRUS_HISTORY_COL;
-declare variable $fhh:FRUS_HISTORY_ARTICLES_COL := $config:FRUS_HISTORY_ARTICLES_COL;
-declare variable $fhh:FRUS_HISTORY_DOCUMENTS_COL := $config:FRUS_HISTORY_DOCUMENTS_COL;
-declare variable $fhh:FRUS_HISTORY_EVENTS_COL := $config:FRUS_HISTORY_EVENTS_COL;
-declare variable $fhh:FRUS_HISTORY_MONOGRAPH_COL := $config:FRUS_HISTORY_MONOGRAPH_COL;
+declare variable $fhh:FRUS_HISTORY_ARTICLES_COL := $config:FRUS_HISTORY_COL_ARTICLES;
+declare variable $fhh:FRUS_HISTORY_DOCUMENTS_COL := $config:FRUS_HISTORY_COL_DOCUMENTS;
+declare variable $fhh:FRUS_HISTORY_EVENTS_COL := $config:FRUS_HISTORY_COL_EVENTS;
+declare variable $fhh:FRUS_HISTORY_MONOGRAPH_COL := $config:FRUS_HISTORY_COL_MONOGRAPH;
 
 declare function fhh:monograph-title($node, $model) {
     let $doc := doc($fhh:FRUS_HISTORY_MONOGRAPH_COL || '/frus-history.xml')
