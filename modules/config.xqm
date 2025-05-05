@@ -485,11 +485,12 @@ declare variable $config:PUBLICATIONS :=
                             return $trip
                         return
                             $trips[last()]/country
+                    let $secretary-name := head(collection($config:TRAVELS_SECRETARIES_COL)//trip[@who eq $key])/name
                     return
                         if (exists($current-country-name)) then
                             $current-country-name/string()
-                        else (: $key is a year :)
-                            $key
+                        else (: if (exists($secretary-name)) then :)
+                            $secretary-name/string()
                 },
             "publication-last-modified": config:last-modified-from-repo-xml($config:TRAVELS_COL)
         },
