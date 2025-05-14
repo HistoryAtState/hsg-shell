@@ -40,7 +40,7 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "mocha": "^7.0.1",
-    "sass": "^1.68.0",
+    "sass": "^1.88.0",
     "semantic-release": "^22.0.12",
     "wdio-chromedriver-service": "^7.3.2",
     "webdriverio": "^7.32.4"
