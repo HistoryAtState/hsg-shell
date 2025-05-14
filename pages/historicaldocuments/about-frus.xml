@@ -12,41 +12,49 @@
         <div class="hsg-width-two-thirds" data-template="app:fix-links">
             <div id="content-inner">
                 <h1>About the <em>Foreign Relations of the United States</em> Series</h1>
-                <p>The <em>Foreign Relations of the United States</em> series presents the official
-                    documentary historical record of major U.S. foreign policy decisions and
-                    significant diplomatic activity. The series, which is produced by the Department
-                    of State's Office of the Historian, <a
-                        href="$app/historicaldocuments/frus-history">began in 1861</a> and now
-                    comprises more than 450 individual volumes. The volumes published over the last
-                    two decades increasingly contain declassified records from all the foreign
-                    affairs agencies.</p>
-                <p>
-                    <em>Foreign Relations</em> volumes contain documents from Presidential
-                    libraries, Departments of State and Defense, National Security Council, Central
-                    Intelligence Agency, Agency for International Development, and other foreign
-                    affairs agencies as well as the private papers of individuals involved in
-                    formulating U.S. foreign policy. In general, the editors choose documentation
-                    that illuminates policy formulation and major aspects and repercussions of its
-                    execution. Volumes published during the last three decades have expanded the
-                    scope of the series by including documents from a wider range of government
-                    agencies, particularly those involved with intelligence activity and covert
-                    actions.</p>
-                <p>Volumes in the series since 1952 are organized chronologically according to
-                    Presidential administrations, and geographically and topically within each
-                    subseries: 65 volumes cover the <a href="$app/historicaldocuments/nixon-ford"
-                        >Nixon and Ford administrations</a> (1969-1976), 32 cover the <a
-                        href="$app/historicaldocuments/carter">Carter administration</a>
-                    (1977-1980), and about 49 are scheduled for the <a
-                        href="$app/historicaldocuments/reagan">Reagan administration</a>
-                    (1981-1988). Volumes on the George H.W. Bush administration are now being <a
-                        href="$app/historicaldocuments/status-of-the-series">researched, annotated,
-                        and prepared for publication</a>.</p>
-                <p>Volumes may be purchased through the <a
-                        href="https://bookstore.gpo.gov/catalog/foreign-relations-united-states-series-frus"
-                        >U.S. Government Publishing Office</a> (202-512-1800). Recent volumes are
-                    also available <a href="$app/historicaldocuments/">online</a>. For further
-                    information please <a href="$app/about/contact-us">contact the Office of the
-                        Historian</a>.</p>
+                <p>The Department of State has published the <a href="$app/historicaldocuments"
+                        ><em>Foreign Relations of the United States</em> (FRUS) series</a>, the
+                    official documentary record of U.S. foreign policy, since 1861. The Office of
+                    the Historian (OH) prepares the series under the requirements established by
+                    Public Law 102-138 (105 Stat. 647, codified in relevant part at 22 U.S.C. § 4351
+                    et seq.), enacted in 1991 and amended in 2021, which specifies that the
+                    Historian of the Department of State is responsible for the preparation of the
+                    series. To ensure that FRUS is “a thorough, accurate, and reliable documentary
+                    record of major United States foreign policy decisions and significant United
+                    States diplomatic activity,” the statute requires OH to make use of
+                    documentation from across the national security establishment and directs United
+                    States Government departments, agencies, and other entities to provide OH
+                    historians full and complete access to pertinent records at 20 years. The
+                    statute also mandates publication of volumes 30 years after the events they
+                    document.</p>
+                <p>Under the direction of the General Editor of the FRUS series, OH historians plan
+                    the overall scope and content of the series, and research, compile, and edit
+                    individual volumes according to guidelines established in 1925 by Secretary of
+                    State Frank Kellogg and codified in the FRUS statute. These include: that the
+                    editing of records selected for inclusion in the series shall be guided by the
+                    principles of historical objectivity and accuracy; that records should not be
+                    altered or deletions made without indicating in the published text that a
+                    deletion has been made; that the published record should omit no facts that were
+                    of major importance in reaching a decision; and that nothing should be omitted
+                    for the purposes of concealing a defect in policy.</p>
+                <p>FRUS documents the history of U.S. bilateral and regional relations; global
+                    issues such as terrorism, narcotics, health, and the environment; and topics
+                    such as national security policy, foreign economic policy, and foreign policy
+                    organization and management. The series is a highly visible manifestation of the
+                    U.S. Government’s commitment to responsible transparency, providing U.S.
+                    citizens an understanding of historical foreign policies. Based upon research in
+                    the records of the White House, National Security Council, Departments of State
+                    and Defense, Central Intelligence Agency, and other foreign affairs agencies, as
+                    well as the private papers of individual U.S. foreign policymakers, FRUS
+                    illuminates how U.S. decision makers determined foreign policy and what that
+                    policy aimed to achieve, increasing understanding of the United States and its
+                    role in the world among scholars, the public, and the international community.
+                    The series offers important insight into the origins of contemporary challenges,
+                    serving the national interest by providing a sound basis of historical context
+                    to support current policymaking. The international reach of FRUS has proven
+                    valuable to U.S. efforts to shape global norms of historical transparency and
+                    offers citizens of many nations an important source for an accurate
+                    understanding of their own histories.</p>
             </div>
         </div>
         <aside data-template="pages:asides">
