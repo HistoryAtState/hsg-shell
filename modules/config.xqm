@@ -271,7 +271,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "about-frus": map {
             "title": "About the Foreign Relations Series - Historical Documents",
-            "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_COL)
+            "publication-last-modified": config:last-modified-from-repo-xml($config:app-root)
         },
         "conferences": map {
             "collection": $config:CONFERENCES_COL_ARTICLES,            
@@ -307,7 +307,7 @@ declare variable $config:PUBLICATIONS :=
    
         "citing-frus": map {
             "title": "Citing the Foreign Relations series - Historical Documents",
-            "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_COL)
+            "publication-last-modified": config:last-modified-from-repo-xml($config:app-root)
         },
         "other-electronic-resources": map {
             "title": "Electronic Resources for U.S. Foreign Relations - Historical Documents",
