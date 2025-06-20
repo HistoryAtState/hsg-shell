@@ -3,32 +3,32 @@
     "master"
   ],
   "plugins": [
-    "@semantic-release/commit-analyzer",
-    {
-      "preset": "conventionalcommits"
-    },
-    "@semantic-release/release-notes-generator",
-    {
-      "preset": "conventionalcommits"
-    },
     [
-      "@semantic-release/exec",
+      "@semantic-release/commit-analyzer",
       {
-        "prepareCmd": "ant -Denv.HSG_ENV=production -Dapp.version=${nextRelease.version}"
+        "preset": "conventionalcommits"
       }
     ],
     [
-      "@semantic-release/git",
+      "@semantic-release/release-notes-generator", 
       {
-        "assets": [
-          "package.json",
-          "package-lock.json"
-        ],
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/exec", {
+        "prepareCmd": "ant -Denv.HSG_ENV=production -Dapp.version=${nextRelease.version} -Drelease=true"
+      }
+    ],
+    [
+      "@semantic-release/git", 
+      {
+        "assets": ["expath-pkg.xml", "repo.xml"],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ],
     [
-      "@semantic-release/github",
+      "@semantic-release/github", 
       {
         "assets": [
           {

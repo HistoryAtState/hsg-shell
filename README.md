@@ -40,10 +40,16 @@ You need to have *ant*, *git*, *asdf* and *nodeJS* installed.
 
    * `ant` will build a XAR file after automatically running npm start and gulp (build).
    * At least on macOS, the asdf shim for `ant` produces an error if the command has no flags. As a workaround, use `ant -Dfoo=bar`.
+  * Since Releases have been automated when building locally you might want to supply your own version number (e.g. X.X.X) like this: `ant -Dapp.version=X.X.X`
+  * During a release the property -Drelease=true must be set for proper processing of template files.
+
+
 
 4. Install the package `build/hsg-shell.xar` with the Package Manager or, as described below, xst
 
 5. Click on the *history.state.gov* icon on the eXist Dashboard
+
+
 
 #### Troubleshooting `npm` Problems
 

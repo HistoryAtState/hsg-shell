@@ -1114,7 +1114,7 @@ function search:load-volumes($node as node(), $model as map(*)) {
         else
             let $new-volumes := 
                 (: full text volumes in the database :)
-                let $ft-vol-ids := collection((:$config:FRUS_VOLUMES_COL:)"/db/apps/frus/volumes")/tei:TEI[.//tei:body/tei:div]/@xml:id
+                let $ft-vol-ids := collection((:$config:FRUS_COL_VOLUMES:)"/db/apps/frus/volumes")/tei:TEI[.//tei:body/tei:div]/@xml:id
                 for $vol in collection("/db/apps/frus/bibliography")/volume[@id = $ft-vol-ids]
                 let $vol-id := $vol/@id/string()
                 let $compact-title := 

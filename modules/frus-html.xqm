@@ -14,9 +14,9 @@ declare
     %templates:wrap
 function fh:volumes($node as node(), $model as map(*), $volume as xs:string?) {
     $node/*,
-    for $vol in collection($config:FRUS_VOLUMES_COL)/tei:TEI[.//tei:body/tei:div]
+    for $vol in collection($config:FRUS_COL_VOLUMES)/tei:TEI[.//tei:body/tei:div]
     let $vol-id := substring-before(util:document-name($vol), '.xml')
-    let $volume-metadata := $config:FRUS_METADATA/volume[@id = $vol-id]
+    let $volume-metadata := $config:FRUS_COL_METADATA_COL/volume[@id = $vol-id]
     let $volume-title := $volume-metadata/title[@type='volume']
     let $volume-number := $volume-metadata/title[@type='volume-number']
     let $sub-series-n := $volume-metadata/title[@type='sub-series']/@n
@@ -50,9 +50,9 @@ declare
     %templates:wrap
 function fh:administrations($node as node(), $model as map(*), $administration-id as xs:string?) {
     $node/*,
-    let $published-vols := collection($config:FRUS_METADATA_COL)//volume[publication-status eq 'published']
+    let $published-vols := collection($config:FRUS_COL_METADATA)//volume[publication-status eq 'published']
     let $administrations := distinct-values($published-vols//administration)
-    let $code-table-items := doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $administrations]
+    let $code-table-items := doc($config:FRUS_COL_CODE_TABLES || '/administration-code-table.xml')//item[value = $administrations]
     let $choices :=
         for $admins in $code-table-items
         let $adminname := $admins/*:label
@@ -71,7 +71,7 @@ function fh:administrations($node as node(), $model as map(*), $administration-i
 declare
     %templates:wrap
 function fh:load-administration($node as node(), $model as map(*), $administration-id as xs:string) {
-    let $admin := doc($config:FRUS_CODE_TABLES_COL || '/administration-code-table.xml')//item[value = $administration-id]
+    let $admin := doc($config:FRUS_COL_CODE_TABLES || '/administration-code-table.xml')//item[value = $administration-id]
     return
         if(empty($admin)) then
             (
@@ -80,8 +80,8 @@ function fh:load-administration($node as node(), $model as map(*), $administrati
             error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "administration " || $administration-id || " not found")
             )
     else
-        let $vols-in-admin := collection($config:FRUS_METADATA_COL)//volume[administration eq $administration-id]
-        let $grouping-codes := doc($config:FRUS_CODE_TABLES_COL || '/grouping-code-table.xml')//item
+        let $vols-in-admin := collection($config:FRUS_COL_METADATA)//volume[administration eq $administration-id]
+        let $grouping-codes := doc($config:FRUS_COL_CODE_TABLES || '/grouping-code-table.xml')//item
         let $groupings-in-use :=
             for $g in distinct-values($vols-in-admin/grouping[@administration/tokenize(., '\s+') = $administration-id]) order by index-of($grouping-codes/value, $g) return $g
         return
@@ -269,7 +269,7 @@ function fh:volume-availability-summary($node as node(), $model as map(*)) {
         if ($publication-status = 'published') then
             ()
         else
-            doc($config:FRUS_CODE_TABLES_COL || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
+            doc($config:FRUS_COL_CODE_TABLES || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
     return
         if ($full-text or $ebook or $pdf or $not-published-status) then
             <span class="hsg-status-notice">{
@@ -442,7 +442,7 @@ declare function fh:breadcrumb-heading($model as map(*), $div as element()) {
 
 declare function fh:recent-publications($node, $model) {
     let $last-year := xs:string(year-from-date(current-date()) - 1)
-    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year ge $last-year]
+    let $volumes := collection($config:FRUS_COL_METADATA)/volume[published-year ge $last-year]
     for $year in distinct-values($volumes/published-year)
     order by $year descending
     return
@@ -475,35 +475,35 @@ declare function fh:next-year($node, $model) {
 
 declare function fh:volumes-published-this-year($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year eq $this-year]
+    let $volumes := collection($config:FRUS_COL_METADATA)/volume[published-year eq $this-year]
     return
         fh:list-published-volumes($volumes)
 };
 
 declare function fh:volumes-published-this-year-count($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year eq $this-year]
+    let $volumes := collection($config:FRUS_COL_METADATA)/volume[published-year eq $this-year]
     return
         count($volumes)
 };
 
 declare function fh:volumes-published-last-year($node, $model) {
     let $last-year := xs:string(year-from-date(current-date()) - 1)
-    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year eq $last-year]
+    let $volumes := collection($config:FRUS_COL_METADATA)/volume[published-year eq $last-year]
     return
         fh:list-published-volumes($volumes)
 };
 
 declare function fh:volumes-published-last-year-count($node, $model) {
     let $last-year := xs:string(year-from-date(current-date()) - 1)
-    let $volumes := collection($config:FRUS_METADATA_COL)/volume[published-year eq $last-year]
+    let $volumes := collection($config:FRUS_COL_METADATA)/volume[published-year eq $last-year]
     return
         count($volumes)
 };
 
 declare function fh:volumes-planned-for-publication-this-year($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-for-publication := collection($config:FRUS_METADATA_COL)/volume[publication-status ne 'published']
+    let $vols-planned-for-publication := collection($config:FRUS_COL_METADATA)/volume[publication-status ne 'published']
     let $vols-planned-for-publication-this-year := $vols-planned-for-publication[public-target-publication-year eq $this-year]
     return
         fh:list-planned-volumes($vols-planned-for-publication-this-year)
@@ -511,7 +511,7 @@ declare function fh:volumes-planned-for-publication-this-year($node, $model) {
 
 declare function fh:volumes-planned-for-publication-this-year-count($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-for-publication := collection($config:FRUS_METADATA_COL)/volume[publication-status ne 'published']
+    let $vols-planned-for-publication := collection($config:FRUS_COL_METADATA)/volume[publication-status ne 'published']
     let $vols-planned-for-publication-this-year := $vols-planned-for-publication[public-target-publication-year eq $this-year]
     return
         count($vols-planned-for-publication-this-year)
@@ -519,7 +519,7 @@ declare function fh:volumes-planned-for-publication-this-year-count($node, $mode
 
 declare function fh:volumes-planned-next-year-beyond-in-production($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
     let $vols-planned-next-year-beyond-in-production := $vols-planned-next-year-beyond[publication-status eq 'in-production']
     return
         fh:list-planned-volumes($vols-planned-next-year-beyond-in-production)
@@ -527,7 +527,7 @@ declare function fh:volumes-planned-next-year-beyond-in-production($node, $model
 
 declare function fh:volumes-planned-next-year-beyond-in-production-count($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
     let $vols-planned-next-year-beyond-in-production := $vols-planned-next-year-beyond[publication-status eq 'in-production']
     return
         count($vols-planned-next-year-beyond-in-production)
@@ -535,7 +535,7 @@ declare function fh:volumes-planned-next-year-beyond-in-production-count($node, 
 
 declare function fh:volumes-planned-next-year-beyond-under-declassification($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
     let $vols-planned-next-year-beyond-under-declassification := $vols-planned-next-year-beyond[publication-status eq 'under-declassification']
     return
         fh:list-planned-volumes($vols-planned-next-year-beyond-under-declassification)
@@ -543,7 +543,7 @@ declare function fh:volumes-planned-next-year-beyond-under-declassification($nod
 
 declare function fh:volumes-planned-next-year-beyond-under-declassification-count($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
     let $vols-planned-next-year-beyond-under-declassification := $vols-planned-next-year-beyond[publication-status eq 'under-declassification']
     return
         count($vols-planned-next-year-beyond-under-declassification)
@@ -551,7 +551,7 @@ declare function fh:volumes-planned-next-year-beyond-under-declassification-coun
 
 declare function fh:volumes-planned-next-year-beyond-being-researched-or-prepared($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
     let $vols-planned-next-year-beyond-being-researched-or-prepared := $vols-planned-next-year-beyond[publication-status eq 'being-researched-or-prepared']
     return
         fh:list-planned-volumes($vols-planned-next-year-beyond-being-researched-or-prepared)
@@ -559,7 +559,7 @@ declare function fh:volumes-planned-next-year-beyond-being-researched-or-prepare
 
 declare function fh:volumes-planned-next-year-beyond-being-researched-or-prepared-count($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
     let $vols-planned-next-year-beyond-being-researched-or-prepared := $vols-planned-next-year-beyond[publication-status eq 'being-researched-or-prepared']
     return
         count($vols-planned-next-year-beyond-being-researched-or-prepared)
@@ -567,7 +567,7 @@ declare function fh:volumes-planned-next-year-beyond-being-researched-or-prepare
 
 declare function fh:volumes-planned-next-year-beyond-being-planned-research-not-yet-begun($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
     let $vols-planned-next-year-beyond-being-planned-research-not-yet-begun := $vols-planned-next-year-beyond[publication-status eq 'being-planned-research-not-yet-begun']
     return
         fh:list-planned-volumes($vols-planned-next-year-beyond-being-planned-research-not-yet-begun)
@@ -575,7 +575,7 @@ declare function fh:volumes-planned-next-year-beyond-being-planned-research-not-
 
 declare function fh:volumes-planned-next-year-beyond-being-planned-research-not-yet-begun-count($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_METADATA_COL)/volume[public-target-publication-year ne xs:string($this-year)]
+    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
     let $vols-planned-next-year-beyond-being-planned-research-not-yet-begun := $vols-planned-next-year-beyond[publication-status eq 'being-planned-research-not-yet-begun']
     return
         count($vols-planned-next-year-beyond-being-planned-research-not-yet-begun)
@@ -614,7 +614,7 @@ declare function fh:published-date-to-english($date as xs:date) {
 };
 
 declare function fh:volumes-with-ebooks() {
-    for $hit in collection($config:FRUS_VOLUMES_COL)//tei:relatedItem[@type eq "epub"]
+    for $hit in collection($config:FRUS_COL_VOLUMES)//tei:relatedItem[@type eq "epub"]
     return
         root($hit)/tei:TEI/@xml:id/string()
 };
@@ -678,7 +678,7 @@ declare function fh:frus-history-ebook-entry($model as map(*)) {
 };
 
 declare function fh:exists-volume($vol-id) {
-    exists(collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id])
+    exists(collection($config:FRUS_COL_METADATA)/volume[@id eq $vol-id])
 };
 
 declare function fh:exists-volume-in-db($vol-id) {
@@ -686,50 +686,50 @@ declare function fh:exists-volume-in-db($vol-id) {
 };
 
 declare function fh:exists-epub($vol-id) {
-    exists(doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "epub"])
+    exists(doc($config:FRUS_COL_VOLUMES || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "epub"])
 };
 
 declare function fh:exists-mobi($vol-id) {
-    exists(doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "mobi"])
+    exists(doc($config:FRUS_COL_VOLUMES || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "mobi"])
 };
 
 declare function fh:exists-pdf($vol-id) {
-    exists(doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "pdf"])
+    exists(doc($config:FRUS_COL_VOLUMES || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "pdf"])
 };
 
 declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
 	if (fh:exists-volume-in-db($vol-id)) then
 	    fh:volume($vol-id)//tei:title[@type = $type][1]/node()
     else
-        collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id]/title[@type eq $type]/node()
+        collection($config:FRUS_COL_METADATA)/volume[@id eq $vol-id]/title[@type eq $type]/node()
 };
 
 declare function fh:vol-title($vol-id as xs:string) {
 	if (fh:exists-volume-in-db($vol-id)) then
 	    fh:volume($vol-id)//tei:title[@type = 'complete']/text()
     else
-        collection($config:FRUS_METADATA_COL)/volume[@id eq $vol-id]/title[@type eq 'complete']/text()
+        collection($config:FRUS_COL_METADATA)/volume[@id eq $vol-id]/title[@type eq 'complete']/text()
 };
 
 declare function fh:volume($vol-id as xs:string) {
-    doc(concat($config:FRUS_VOLUMES_COL, '/', $vol-id, '.xml'))
+    doc(concat($config:FRUS_COL_VOLUMES, '/', $vol-id, '.xml'))
 };
 
 declare function fh:ebook-last-updated($vol-id) {
-    let $epub := doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "epub"]
+    let $epub := doc($config:FRUS_COL_VOLUMES || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "epub"]
     return
         $epub//tei:date/@when
 };
 
 declare function fh:epub-size($vol-id) {
-    let $epub := doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "epub"]
+    let $epub := doc($config:FRUS_COL_VOLUMES || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "epub"]
     let $size := $epub//tei:measure/@quantity
     return
         app:bytes-to-readable($size)
 };
 
 declare function fh:mobi-size($vol-id) {
-    let $mobi := doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "mobi"]
+    let $mobi := doc($config:FRUS_COL_VOLUMES || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "mobi"]
     let $size := $mobi//tei:measure/@quantity
     return
         app:bytes-to-readable($size)
@@ -742,9 +742,9 @@ declare function fh:pdf-size($vol-id) {
 declare function fh:pdf-size($vol-id, $section-id) {
     let $pdf:= 
         if (exists($section-id)) then
-            doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $section-id and @type eq "pdf"]
+            doc($config:FRUS_COL_VOLUMES || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $section-id and @type eq "pdf"]
         else
-            doc($config:FRUS_VOLUMES_COL || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "pdf"]
+            doc($config:FRUS_COL_VOLUMES || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "pdf"]
     let $size := $pdf//tei:measure/@quantity
     return
         app:bytes-to-readable($size)
@@ -776,18 +776,18 @@ function fh:pdf-size-templating($node as node(), $model as map(*), $document-id 
 
 
 declare function fh:mobi-url($document-id as xs:string) {
-	doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq "mobi"]//tei:ref/@target
+	doc($config:FRUS_COL_VOLUMES || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq "mobi"]//tei:ref/@target
 };
 
 declare function fh:pdf-url($document-id as xs:string, $section-id as xs:string?) {
     if ($section-id) then
-        doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $section-id and @type eq "pdf"]//tei:ref/@target
+        doc($config:FRUS_COL_VOLUMES || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $section-id and @type eq "pdf"]//tei:ref/@target
     else
-        doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq "pdf"]//tei:ref/@target
+        doc($config:FRUS_COL_VOLUMES || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq "pdf"]//tei:ref/@target
 };
 
 declare function fh:epub-url($document-id as xs:string) {
-	doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq "epub"]//tei:ref/@target
+	doc($config:FRUS_COL_VOLUMES || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq "epub"]//tei:ref/@target
 };
 
 declare function fh:get-media-types($document-id) {
@@ -811,9 +811,9 @@ function fh:if-media-exists($node as node(), $model as map(*), $document-id as x
 
 declare function fh:media-exists($document-id as xs:string, $section-id as xs:string?, $suffix as xs:string) {
     if (exists($section-id)) then
-        exists(doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $section-id and @type eq $suffix])
+        exists(doc($config:FRUS_COL_VOLUMES || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $section-id and @type eq $suffix])
     else
-        exists(doc($config:FRUS_VOLUMES_COL || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq $suffix])
+        exists(doc($config:FRUS_COL_VOLUMES || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq $suffix])
 };
 
 
@@ -889,7 +889,7 @@ function fh:show-if-tei-document ($node as node(), $model as map(*)) {
  : @return Returns the publication-status of a document as a string
  :)
 declare function fh:publication-status ($document-id) {
-    collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/publication-status/string()
+    collection($config:FRUS_COL_METADATA)/volume[@id eq $document-id]/publication-status/string()
 };
 
 (:~
@@ -898,7 +898,7 @@ declare function fh:publication-status ($document-id) {
  : @return Returns the URL of an external link as HTML
  :)
 declare function fh:location-url ($document-id) {
-    for $external-link in collection($config:FRUS_METADATA_COL)/volume[@id eq $document-id]/external-location
+    for $external-link in collection($config:FRUS_COL_METADATA)/volume[@id eq $document-id]/external-location
         let $link := $external-link/string()
         return
             if ($link) then
@@ -949,7 +949,7 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
         if ($publication-status = 'published') then
             ()
         else
-            doc($config:FRUS_CODE_TABLES_COL || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
+            doc($config:FRUS_COL_CODE_TABLES || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
     let $header :=  pages:header($node, map {
                             "data": <tei:TEI>
                             <tei:teiHeader>

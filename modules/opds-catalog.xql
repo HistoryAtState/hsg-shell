@@ -87,7 +87,7 @@ declare function opds:entry($title, $id, $updated, $summary, $content, $link) {
 
 
 declare function opds:ebook-entries($vol-ids) {
-    (: not needed? let $all-volumes := collection($config:FRUS_VOLUMES_COL) :)
+    (: not needed? let $all-volumes := collection($config:FRUS_COL_VOLUMES) :)
     for $vol-id in $vol-ids
     let $title := normalize-space(fh:vol-title($vol-id, 'volume'))
     let $id := $vol-id
@@ -164,7 +164,7 @@ declare function opds:recent() {
         opds:search-link()
         )
 
-    let $all-volumes := collection($config:FRUS_METADATA_COL)
+    let $all-volumes := collection($config:FRUS_COL_METADATA)
     let $selected-volumes :=
         for $volume in $all-volumes/volume[@id = $opds:frus-ebook-volume-ids][publication-status eq 'published']
         order by $volume/published-year descending
