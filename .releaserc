@@ -14,7 +14,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "ant -Denv.HSG_ENV=production -Dapp.version=${nextRelease.version}"
+        "prepareCmd": "ant -Denv.HSG_ENV=production -Dapp.version=${nextRelease.version} -Drelease=true"
       }
     ],
     [

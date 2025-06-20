@@ -5,11 +5,11 @@
     <xmlproperty file="expath-pkg.xml"/>
     <property name="build.dir" value="build"/>
     <property name="git.repo.path" value="${basedir}/.git"/>
-    <available file="${git.repo.path}" type="dir" property="git.present"/>
-
+    <available file="${git.repo.path}" type="dir" property="git.present" />
+    
     <property environment="env"/>
     <!-- <property name="files-to-be-excluded" value="${build.dir}/**,**/*.tmpl,node_modules/**,package.json,package-lock.json,gulpfile.js,.idea/**,.* example.local.build.properties,npm-shrinkwrap.json,tests/reports/**"/> -->
-    
+
     <!-- Allow HSG_ENV to be passed in either as an environment variable or as a regular variable -->
     <condition property="node-env-is-set-for-production" else="false">
         <or>
@@ -17,11 +17,26 @@
             <equals arg1="${HSG_ENV}" arg2="production"/>
         </or>
     </condition>
-    
+
     <!-- Create a new property that sets production mode based on whether either variation of HSG_ENV is set to production -->
     <condition property="HSG_ENV.production" value="production" else="development">
         <istrue value="${node-env-is-set-for-production}"/>
     </condition>
+
+    <condition property="is-release">
+        <equals arg1="${release}" arg2="true" />
+    </condition>
+
+    <target name="release.true" if="is-release">
+        <echo>Calculating git revision info for release</echo>
+    </target>
+
+    <target name="release.false" unless="is-release">
+        <echo>Not a release, moving on ...</echo>
+    </target>
+
+    <target name="check-release" depends="release.true, release.false">
+    </target>
     
     <target name="clean">
         <echo message="Deleting xar files..."/>
@@ -37,9 +52,10 @@
         <echo message="${npm.output}"/>
     </target>
 
-    <target name="xar" depends="clean,run-npm,git.revision" description="create xar file">
-        <echo message="Creating build folder..."/>
-        <mkdir dir="${build.dir}"/>
+    <target name="templates" description="process template files" if="is-release" depends="git.revision">
+        <echo message="Creating build folder..." />
+        <mkdir dir="${build.dir}" />
+
         <copy todir="${basedir}" overwrite="true" verbose="true">
             <fileset file="*.xml.tmpl"/>
             <filterchain>
@@ -58,8 +74,9 @@
             </filterchain>
             <globmapper from="*.tmpl" to="*"/>
         </copy>
+    </target>
 
-
+    <target name="xar" depends="clean,check-release,git.revision, run-npm,templates" description="create xar file">
         <echo message="------------------------------------------------------------"/>
         <echo message="Creating xar file..."/>
         <echo message="------------------------------------------------------------"/>
@@ -86,29 +103,35 @@
             <exclude name=".releaserc"/>
             <exclude name="commitlint.config.cjs"/>
         </zip>
+        <echo>Version: ${app.version}</echo>
     </target>
 
-    <target name="git.revision" description="Store git revision in ${repository.version}" if="git.present">
-        <exec executable="git" outputproperty="git.revision" failifexecutionfails="false" errorproperty="">
-            <arg value="--git-dir=${git.repo.path}"/>
-            <arg value="rev-parse"/>            
-            <arg value="HEAD"/>
+    <target name="git.revision" description="Store git revision in ${repository.version}"
+        if="is-release" depends="check-release">
+        <exec executable="git" outputproperty="git.revision" failifexecutionfails="false"
+            errorproperty="">
+            <arg value="--git-dir=${git.repo.path}" />
+            <arg value="rev-parse" />
+            <arg value="HEAD" />
         </exec>
         <condition property="repository.version" value="${git.revision}" else="unknown">
             <and>
-                <isset property="git.revision"/>
-                <length string="${git.revision}" trim="yes" length="0" when="greater"/>
+                <isset property="git.revision" />
+                <length string="${git.revision}" trim="yes" length="0" when="greater" />
             </and>
         </condition>
         <echo>Git repo: ${repository.version}</echo>
-        
-        <exec executable="git" outputproperty="git.time" failifexecutionfails="false" errorproperty="">
-            <arg value="--git-dir=${git.repo.path}"/>
-            <arg value="show"/>
-            <arg value="-s"/>
-            <arg value="--format=%ct"/>
-            <arg value="${git.revision}"/>
+
+        <exec executable="git" outputproperty="git.time" failifexecutionfails="false"
+            errorproperty="">
+            <arg value="--git-dir=${git.repo.path}" />
+            <arg value="show" />
+            <arg value="-s" />
+            <arg value="--format=%ct" />
+            <arg value="${git.revision}" />
         </exec>
         <echo>Git time: ${git.time}</echo>
+
     </target>
+
 </project>
