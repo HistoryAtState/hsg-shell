@@ -10,12 +10,6 @@
       }
     ],
     [
-      "@semantic-release/release-notes-generator", 
-      {
-        "preset": "conventionalcommits"
-      }
-    ],
-    [
       "@semantic-release/exec", {
         "prepareCmd": "ant -Denv.HSG_ENV=production -Dapp.version=${nextRelease.version} -Drelease=true"
       }
@@ -24,7 +18,7 @@
       "@semantic-release/git", 
       {
         "assets": ["expath-pkg.xml", "repo.xml"],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "message": "chore(release): ${nextRelease.version} [skip ci]"
       }
     ],
     [
