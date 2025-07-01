@@ -312,6 +312,10 @@
                     <model behaviour="inline"/>
                 </elementSpec>
                 <elementSpec ident="gap" mode="change">
+                    <model predicate="exists(@unit) and @quantity castable as xs:integer" behaviour="gap">
+                        <param name="unit">@unit</param>
+                        <param name="quantity">@quantity cast as xs:integer</param>
+                    </model>
                     <model behaviour="omit"/>
                 </elementSpec>
                 <!-- Elements not in TEI Simple -->

@@ -121,3 +121,10 @@ declare function pmf:pb-link($config as map(*), $node as node(), $class as xs:st
             [{$label, $config?apply-children($config, $node, $content)}]
         </a>
 };
+
+declare function pmf:gap($config as map(*), $node as node(), $class as xs:string+, $content, $unit as xs:string, $quantity as xs:integer) as xs:string {
+    switch ($unit)
+        case "char" return
+            string-join(((1 to $quantity) ! "&#160;"))
+        default return ""
+};
