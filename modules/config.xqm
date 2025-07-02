@@ -23,7 +23,8 @@ declare namespace a="http://www.w3.org/2005/Atom";
 declare namespace xhtml="http://www.w3.org/1999/xhtml";
 
 
-declare variable $config:EDITORIAL_DATE_TIME := xs:dateTime("2020-01-01T00:00:00-00:00");
+(: updated date-time due to: https://github.com/HistoryAtState/hsg-shell/pull/481 :)
+declare variable $config:EDITORIAL_DATE_TIME := xs:dateTime("2025-02-04T00:00:00-00:00");
 (:
     Determine the application root collection from the current module load path.
 :)
