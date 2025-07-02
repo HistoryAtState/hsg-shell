@@ -10,7 +10,7 @@ import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "p
 import module namespace tu="http://history.state.gov/ns/site/hsg/tei-util" at "tei-util.xqm";
 import module namespace frus-history = "http://history.state.gov/ns/site/hsg/frus-history-html" at "frus-history-html.xqm";
 
-import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../transform/frus-web-module.xql";
+import module namespace pm-frus='http://www.tei-c.org/pm/models/frus/web/module' at "../resources/odd/compiled/frus-web-module.xql";
 
 declare namespace templates="http://exist-db.org/xquery/html-templating";
 
