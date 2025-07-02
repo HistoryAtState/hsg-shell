@@ -152,7 +152,8 @@ declare function config:last-modified-from-repo-xml ($collection as xs:string) a
 
 declare function config:last-modified-from-git ($path-to-xar, $path-to-resource as xs:string) {
         let $_ := util:log("debug", "config:last-modified-from-git $path-to-xar: "|| $path-to-xar || " path-to-resource: " || $path-to-resource)
-        let $last-modified-date-time := collection($path-to-xar || "/.last-modified")/id(replace($path-to-resource, "/", "0x2F"))/text()
+        let $id := replace($path-to-resource, "/", "0x2F")
+        let $last-modified-date-time := collection($path-to-xar || "/.last-modified")/id($id)/text()
         let $_ := util:log("debug", "config:last-modified-from-git-path: " || $last-modified-date-time)
         return
             $last-modified-date-time    
