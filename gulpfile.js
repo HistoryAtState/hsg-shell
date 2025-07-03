@@ -58,7 +58,7 @@ gulp.task('fonts:copy', gulp.series(function () {
     return gulp.src([
             'node_modules/bootstrap-sass/assets/fonts/**/*',
             'node_modules/font-awesome/fonts/*'
-        ])
+        ], {encoding: false})
         .pipe(gulp.dest('resources/fonts'))
 }));
 
@@ -76,13 +76,13 @@ gulp.task('fonts:deploy', gulp.series('fonts:copy', function () {
  */
 let imagePath = 'resources/images/**/*';
 gulp.task('images:optimize', function () {
-    return gulp.src('resources/images/*')
+    return gulp.src('resources/images/*', {encoding: false})
         .pipe(imagemin({optimizationLevel: 5}))
         .pipe(gulp.dest('resources/images'))
 });
 
 gulp.task('images:deploy', function () {
-    return gulp.src('resources/images/*', {base: '.'})
+    return gulp.src('resources/images/*', {base: '.', encoding: false})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
 });
@@ -96,12 +96,12 @@ gulp.task('openseadragon:copy', gulp.series(function () {
     return gulp.src([
             'node_modules/openseadragon/build/openseadragon/images/*',
             'node_modules/openseadragon/build/openseadragon/openseadragon.js'
-        ])
+        ], {encoding: false})
         .pipe(gulp.dest('resources/scripts/vendor/openseadragon'))
 }));
 
 gulp.task('openseadragon:deploy', gulp.series('openseadragon:copy', function () {
-    return gulp.src('resources/openseadragon/**/*', {base: '.'})
+    return gulp.src('resources/openseadragon/**/*', {base: '.', encoding: false})
         .pipe(exClient.newer(targetConfiguration))
         .pipe(exClient.dest(targetConfiguration))
 }));
