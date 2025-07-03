@@ -70,6 +70,17 @@ let $result :=
                 <p class="list-group-item-text">{ $err:description }</p>
             </div>
         }
+
+let $handle-invalid-frus := if(util:binary-doc-available("/db/apps/hsg-shell/transform/frus-web.invalid.xql"))
+        then ( 
+            sm:chown(xs:anyURI($config:output-root || "/frus-web.invalid.xql"), "hsg"),
+            xmldb:rename($config:output-root, "frus-web.invalid.xql","frus-web.xql" )
+        )
+        else ()        
+let $resources := ("frus.css", "frus.fo.css", "frus-web.xql", "frus-web-module.xql")
+let $copy-resources := for $resource in $resources  
+    return xmldb:copy-resource($config:output-root, $resource, $config:odd-root || "/compiled", $resource)
+
 return
     <div class="errors">
         <h4>Regenerated XQuery code from ODD files</h4>
