@@ -111,7 +111,8 @@ declare function model:apply($config as map(*), $input as node()*) {
                             html:inline($config, ., ("tei-signed2", css:map-rend-to-class(.)), .)
                     case element(pb) return
                         (
-                            html:link($config, ., ("tei-pb1", css:map-rend-to-class(.)), concat('[', switch (@type) case 'facsimile' return 'Facsimile ' case 'typeset' return 'Typeset ' default return '', 'Page ', @n, ']'), (), (), map {"link": ()})
+                            (: No function found for behavior: pb-link :)
+                            $config?apply($config, ./node())
                         )
 
                     case element(pc) return

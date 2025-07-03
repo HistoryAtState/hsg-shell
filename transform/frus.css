@@ -15,7 +15,6 @@
 .tei-supplied5:after { content:"}"; }
 .tei-signed1 { text-align: right; }
 .tei-signed2 { font-style: italic; }
-.tei-pb1 { display: block; margin-left: 4pt; color: grey; float: right; }
 .tei-hi1 { font-weight: bold; }
 .tei-hi2 { font-style: italic; }
 .tei-hi3 { font-variant: small-caps; }
