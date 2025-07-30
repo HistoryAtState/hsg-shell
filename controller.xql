@@ -99,7 +99,7 @@ else if (contains($exist:path, "//")) then
     </dispatch>
 
 (: handle requests for static resources: css, js, images, etc. :)
-else if (contains($exist:path, "/resources/")) then
+else if (starts-with($exist:path, "/resources/")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <forward url="{$exist:controller}/{replace($exist:path, '^.*(resources.*)$', '$1')}"/>
     </dispatch>
