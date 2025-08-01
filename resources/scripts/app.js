@@ -15,7 +15,7 @@ function initializeImageViewer() {
 
         var viewer = OpenSeadragon({
             id:                   "viewer",
-            prefixUrl:            "resources/images/OSD-icons/",
+            prefixUrl:            "/resources/images/OSD-icons/",
             preserveViewport:     true,
             visibilityRatio:      1,
             minZoomImageRatio:    0.9,
