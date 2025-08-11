@@ -157,22 +157,44 @@ else switch($path-parts[1])
         switch (string($path-parts[2]))
             case '' return
                 (: section landing page :)
-                local:render-page("historicaldocuments/index.xml", map{ "publication-id": "historicaldocuments" })
+                if(empty($path-parts[3])) then 
+                    local:render-page("historicaldocuments/index.xml", map{ "publication-id": "historicaldocuments" })
+                else 
+                    local:serve-not-found-page()
             case "about-frus" return 
-                local:render-page("historicaldocuments/about-frus.xml", map{ "publication-id": "about-frus" })
+                if(empty($path-parts[3])) then 
+                    local:render-page("historicaldocuments/about-frus.xml", map{ "publication-id": "about-frus" })
+                else 
+                    local:serve-not-found-page()
+
             case "citing-frus" return
-                local:render-page("historicaldocuments/citing-frus.xml", map{ "publication-id": "citing-frus" })
+                if(empty($path-parts[3])) then 
+                    local:render-page("historicaldocuments/citing-frus.xml", map{ "publication-id": "citing-frus" })
+                else 
+                    local:serve-not-found-page()
             case "ebooks" return
-                local:render-page("historicaldocuments/ebooks.xml", map{ "publication-id": "ebooks" })
+                if(empty($path-parts[3])) then 
+                    local:render-page("historicaldocuments/ebooks.xml", map{ "publication-id": "ebooks" })
+                else 
+                    local:serve-not-found-page()
             case "other-electronic-resources" return
-                local:render-page("historicaldocuments/other-electronic-resources.xml", map{  "publication-id": "other-electronic-resources" })
+                if(empty($path-parts[3])) then 
+                    local:render-page("historicaldocuments/other-electronic-resources.xml", map{  "publication-id": "other-electronic-resources" })
+                else 
+                    local:serve-not-found-page()
             case "status-of-the-series" return
-                local:render-page("historicaldocuments/status-of-the-series.xml", map{  "publication-id": "status-of-the-series" })
+                if(empty($path-parts[3])) then                 
+                    local:render-page("historicaldocuments/status-of-the-series.xml", map{  "publication-id": "status-of-the-series" })
+                else 
+                    local:serve-not-found-page()
             case "guide-to-sources-on-vietnam-1969-1975" return
-                local:render-page("historicaldocuments/vietnam-guide.xml", map{
-                    "publication-id": "vietnam-guide",
-                    "document-id": "guide-to-sources-on-vietnam-1969-1975"
-                })
+                if(empty($path-parts[3])) then 
+                    local:render-page("historicaldocuments/vietnam-guide.xml", map{
+                        "publication-id": "vietnam-guide",
+                        "document-id": "guide-to-sources-on-vietnam-1969-1975"
+                    })
+                else 
+                    local:serve-not-found-page()
             (:
             case "volume-titles" return
                 local:render-page("historicaldocuments/volume-titles.xml", map{
