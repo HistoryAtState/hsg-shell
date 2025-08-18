@@ -762,6 +762,10 @@ declare function fh:exists-pdf($vol-id) {
     exists(doc($config:FRUS_COL_VOLUMES || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "pdf"])
 };
 
+declare function fh:exists-cover-image($vol-id) {
+    exists(doc($config:FRUS_COL_VOLUMES || "/" || $vol-id || ".xml")//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "jpg"])
+};
+
 declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
 	fh:volume($vol-id)//tei:title[@type eq $type]/node()
 };
@@ -979,9 +983,8 @@ declare function fh:location-url ($document-id) {
  :)
 
 declare function fh:cover-uri($id) {
-    (: Use presence of ebooks to test whether book is published electronically (and therefore has an image)  :)
-    let $media-types := fh:get-media-types($id)
-    return if (exists($media-types)) then 
+    let $has-cover-image := fh:exists-cover-image($id)
+    return if (exists($has-cover-image)) then 
         'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '.jpg'
     else ()
 };
@@ -1009,7 +1012,7 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
     let $publication-status := fh:publication-status($model?document-id)
     let $externalLink := fh:location-url($model?document-id)
     let $not-published-status :=
-        if ($publication-status eq 'published') then
+        if ($publication-status = ('published', 'partially-published')) then
             ()
         else
             doc($config:FRUS_COL_CODE_TABLES || '/frus-production.xml')/id($publication-status)/tei:catDesc/tei:term/string()
