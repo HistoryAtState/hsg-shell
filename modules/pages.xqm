@@ -124,7 +124,7 @@ declare function pages:load-xml($publication-config as map(*), $document-id as x
 
 declare function pages:load-fallback-page($document-id as xs:string?, $section-id as xs:string?) {
     util:log("debug", ("Loading fallback page for ", $document-id)),
-    let $volume := $config:FRUS_COL_METADATA_COL/volume[@id=$document-id]
+    let $volume := $config:FRUS_COL_VOLUMES/id($document-id)
     return
         if (empty($volume)) then (
             request:set-attribute("hsg-shell.errcode", 404),
@@ -134,21 +134,12 @@ declare function pages:load-fallback-page($document-id as xs:string?, $section-i
             pages:volume-to-tei($volume)
 };
 
+(: TODO delete after completing import of external location data and deciding on whether to keep summary data or not :)
 declare function pages:volume-to-tei($volume as element()) {
-    <tei:TEI xmlns:frus="http://history.state.gov/frus/ns/1.0" xml:id="{$volume/@id}">
+    <tei:TEI xmlns:frus="http://history.state.gov/frus/ns/1.0" xml:id="{$volume/@xml:id}">
         <tei:teiHeader>
             <tei:fileDesc>
-                <tei:titleStmt>
-                    <tei:title type="complete">{$volume/title[@type="complete"]/node()}</tei:title>
-                    <tei:title type="sub-series">{$volume/title[@type="sub-series"]/node()}</tei:title>
-                    <tei:title type="volume-number">{$volume/title[@type="volume-number"]/node()}</tei:title>
-                    <tei:title type="volume">{$volume/title[@type="volume"]/node()}</tei:title>
-                    {
-                        for $editor in $volume/editor[. ne '']
-                        return
-                            <tei:editor>{$editor/@role, $editor/node()}</tei:editor>
-                    }
-                </tei:titleStmt>
+                {$volume//tei:fileDesc/node()}
             </tei:fileDesc>
             <tei:sourceDesc>
                 {

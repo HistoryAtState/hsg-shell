@@ -28,8 +28,9 @@ declare function open:frus-latest() {
 
    (: create a list of all volumes sorted by the publication date :)
    let $volumes :=
-      for $volume in collection($config:FRUS_COL_METADATA)/volume[publication-status eq 'published']
-      order by $volume/published-year descending
+      for $revisionDesc in collection($config:FRUS_COL_VOLUMES)//tei:revisionDesc[@status = ("published", "partially-published")]
+      let $volume := $revisionDesc/root(.)/tei:TEI
+      order by $revisionDesc/tei:change[@corresp eq "#" || $volume/@xml:id]/@when descending
       return $volume
 
    let $last-n-volumes := subsequence($volumes, 1, $n)
@@ -40,8 +41,8 @@ declare function open:frus-latest() {
 
    let $entries :=
         for $volume in $last-n-volumes
-            let $id := string($volume/@id)
-            let $volume-title := normalize-space($volume/title[@type="complete"]/text())
+            let $vol-id := string($volume/@xml:id)
+            let $volume-title := normalize-space($volume//tei:title[@type="complete"])
 
         (: Mapping to the atom:author Element
         atom:feed elements MUST contain one or more atom:author elements
@@ -64,16 +65,13 @@ declare function open:frus-latest() {
               the entry.
         :)
 
-            let $published-date := if ($volume/published-date ne '') then $volume/published-date/text() else $volume/published-year/text()
+            let $published-date := $volume//tei:revisionDesc/tei:change[@corresp eq "#" || $vol-id]/@when
 
         (: Mapping to the "atom:rights" Element
            The following text was taken from http://www.whitehouse.gov/copyright :)
 
             let $rights := 'Pursuant to federal law, government-produced materials appearing on this site are not copyright protected.'
-            let $coverage := $volume/coverage/text()
-            let $from := $volume/coverage[@type='from']/text()
-            let $file := concat($application-url, (:$style:web-path-to-app,:) '/data/', $id, '.xml')
-
+            
         (: Mapping to the  The "atom:summary" Element
            http://tools.ietf.org/html/rfc4287#section-4.2.13
 
@@ -96,34 +94,31 @@ declare function open:frus-latest() {
            let $summary := normalize-space(string-join($volume/summary/tei:p/text(), ' '))
         :)
 
-            let $summary := data($volume/summary/tei:p[1])
-
             let $editors :=
                 concat(
-                    if ( count($volume/editor[@role='primary']) gt 1 ) then
-                        concat('Editors: ', string-join($volume/editor[@role='primary'], ', '), '. ')
-                    else if (count($volume/editor[@role='primary']) eq 1) then
-                        concat('Editor: ', $volume/editor[@role='primary'], '. ')
+                    if ( count($volume//tei:editor[@role='primary']) gt 1 ) then
+                        concat('Editors: ', string-join($volume//tei:editor[@role='primary'], ', '), '. ')
+                    else if (count($volume//tei:editor[@role='primary']) eq 1) then
+                        concat('Editor: ', $volume//tei:editor[@role='primary'], '. ')
                     else ()
                     ,
-                    if ($volume/editor[@role='general']) then
-                        concat('General Editor: ', $volume/editor[@role='general']/text())
+                    if ($volume//tei:editor[@role='general']) then
+                        concat('General Editor: ', $volume//tei:editor[@role='general']/text())
                     else ()
                     )
 
-            let $entry-created := $volume/last-modified-datetime/string()
-            let $entry-modified := $volume/last-modified-datetime/string()
+            let $entry-created := config:last-modified-from-repo-xml($config:FRUS_COL)()
+            let $entry-modified := $config:PUBLICATIONS?frus?document-last-modified($vol-id)
 
-            let $link := concat(substring-before($application-url, '/open'), '/historicaldocuments/', $id)
+            let $link := concat(substring-before($application-url, '/open'), '/historicaldocuments/', $vol-id)
 
-            order by $published-date descending, $volume/@id
+            order by $published-date descending, $vol-id
 
             return
                 <entry xmlns="http://www.w3.org/2005/Atom">
                     <title>{$volume-title}</title>
                     <id>{$link}</id>
                     <link type="text/html" href="{$link}"/>
-                    {(: <link type="text/xml" href="{$file}"/> :) ()}
                     <author><name>{$author}</name></author>
                     <published>{$entry-created}</published>
                     <updated>{$entry-modified}</updated>
@@ -131,7 +126,7 @@ declare function open:frus-latest() {
                     <summary>{
                         normalize-space(
                             concat(
-                                $summary, ' (Published ', $published-date, if ($editors) then concat('. ', $editors) else (), '.)'
+                                'Published ', $published-date, if ($editors) then concat('. ', $editors) else (), '.'
                             )
                         )
                     }</summary>
@@ -143,12 +138,7 @@ declare function open:frus-latest() {
             <subtitle>The {$n} most recently published volumes in the Foreign Relations of the United States series, sorted by year of publication.</subtitle>
             <link href="{concat(substring-before($application-url, '/open'), '/open/frus-latest.xml')}" rel="self" />
             <id>{$feed-id}</id>
-            <updated>{
-                let $dates :=
-                    for $volume in xmldb:get-child-resources($config:FRUS_COL_METADATA)
-                    return xmldb:last-modified($config:FRUS_COL_METADATA, $volume)
-                return max($dates)
-            }</updated>
+            <updated>{config:last-modified-from-repo-xml($config:FRUS_COL)()}</updated>
             <author><name>{$author}</name></author>
             { $entries }
         </feed>
@@ -158,27 +148,19 @@ declare function open:frus-metadata() {
     let $serialize := util:declare-option('exist:serialize', 'method=xml media-type=text/xml indent=yes')
 
     let $volumes :=
-        for $volume in collection($config:FRUS_COL_METADATA)/volume[publication-status eq 'published']
-            let $titles := $volume/title[. ne '']
-            let $raw-summary := $volume/summary
-            let $summary := if(normalize-space(string($raw-summary)))
-            then
-                let $odd := $config:PUBLICATIONS?frus?transform
-                let $html-with-bad-links := $odd($volume/summary/node(),map {})
-                let $html := app:fix-links($html-with-bad-links)
-                return
-                    <summary xmlns="http://history.state.gov/ns/1.0">{$html}</summary>
-            else ()
+        for $volume in collection($config:FRUS_COL_VOLUMES)//tei:revisionDesc[@status = ('published', 'partially-published')]/root(.)/tei:TEI
+            let $titles := $volume//tei:title[. ne '']
             let $locations := $volume/external-location[. ne ''][./@loc = ('db', 'madison', 'worldcat')]
-            let $media := $volume/media/@type/string()
-            let $published-year := xs:string($volume/published-year[. ne ''])
-            let $coverage := xs:string($volume/coverage[. ne ''][1])
+            let $media := $volume//tei:keywords[@scheme eq "#frus-media-type"]/tei:term/string()
+            let $published-year := substring($volume//tei:revisionDesc/tei:change[@corresp eq "#" || $volume/@xml:id]/@when, 1, 4)
+            let $coverage := string($volume//tei:publicationStmt/tei:date[@type eq "content-date"])
             let $lengths := $volume/length/span[. ne '']
-            order by string($volume/@id)
+            order by $volume/@xml:id
             return
-                <volume xmlns="http://history.state.gov/ns/1.0">{$volume/@*}
+                <volume xmlns="http://history.state.gov/ns/1.0" id="{$volume/@xml:id}">
                     {
-                    for $title in $titles return
+                    for $title in $titles 
+                    return
                         element title { $title/@*, $title/text() },
                     for $location in $locations
                     return
@@ -196,8 +178,7 @@ declare function open:frus-metadata() {
                         return
                             element span { $length/@*, $length/text() }
                     }</length>
-                    else (),
-                    $summary
+                    else ()
                     }
                 </volume>
     return
@@ -210,10 +191,7 @@ declare function open:frus-metadata() {
     Report Version: 1.0
     Report Last Updated: '
                     ,
-                    let $dates :=
-                        for $volume in xmldb:get-child-resources($config:FRUS_COL_METADATA)
-                        return xmldb:last-modified($config:FRUS_COL_METADATA, $volume)
-                    return max($dates)
+                    config:last-modified-from-repo-xml($config:FRUS_COL)()
                     (:
                     ,
                     '

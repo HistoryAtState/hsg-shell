@@ -10,68 +10,16 @@ import module namespace pages="http://history.state.gov/ns/site/hsg/pages" at "p
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
-declare
-    %templates:wrap
-function fh:volumes($node as node(), $model as map(*), $volume as xs:string?) {
-    $node/*,
-    for $vol in collection($config:FRUS_COL_VOLUMES)/tei:TEI[.//tei:body/tei:div]
-    let $vol-id := substring-before(util:document-name($vol), '.xml')
-    let $volume-metadata := $config:FRUS_COL_METADATA_COL/volume[@id = $vol-id]
-    let $volume-title := $volume-metadata/title[@type='volume']
-    let $volume-number := $volume-metadata/title[@type='volume-number']
-    let $sub-series-n := $volume-metadata/title[@type='sub-series']/@n
-    let $brief-title :=
-        if ($volume-number ne '') then
-            string-join(
-                (
-                $sub-series-n,
-                $volume-number,
-                replace($volume-title, '^The ', '')
-                ),
-                ', ')
-        else
-            string-join(
-                (
-                if (matches($sub-series-n, '[^\dâ€“]')) then () else $sub-series-n,
-                replace($volume-title, '^The ', '')
-                ),
-                ', ')
-    let $selected := if ($vol-id = $volume) then attribute selected {"selected"} else ()
-    order by $vol-id
-    return
-        <option>{
-            attribute value { "$app/historicaldocuments/" || $vol-id },
-            $selected,
-            $brief-title
-        }</option>
-};
+(: XPath for selecting only full text volumes:
 
-declare
-    %templates:wrap
-function fh:administrations($node as node(), $model as map(*), $administration-id as xs:string?) {
-    $node/*,
-    let $published-vols := collection($config:FRUS_COL_METADATA)//volume[publication-status eq 'published']
-    let $administrations := distinct-values($published-vols//administration)
-    let $code-table-items := doc($config:FRUS_COL_CODE_TABLES || '/administration-code-table.xml')//item[value = $administrations]
-    let $choices :=
-        for $admins in $code-table-items
-        let $adminname := $admins/*:label
-        let $admincode := $admins/*:value
-        let $selected := if ($admincode = $administration-id) then attribute selected {"selected"} else ()
-        return
-            element option {
-                attribute value { "$app/historicaldocuments/" || $admincode },
-                $selected,
-                element label {$adminname/string()}
-            }
-    return $choices
-};
+    collection($config:FRUS_COL_VOLUMES)/tei:TEI[.//tei:body/tei:div]
+:)
 
 (: BEGIN: administration.html :)
 declare
     %templates:wrap
 function fh:load-administration($node as node(), $model as map(*), $administration-id as xs:string) {
-    let $admin := doc($config:FRUS_COL_CODE_TABLES || '/administration-code-table.xml')//item[value = $administration-id]
+    let $admin := doc($config:FRUS_COL_CODE_TABLES || '/frus-production.xml')/id($administration-id)
     return
         if(empty($admin)) then
             (
@@ -80,10 +28,16 @@ function fh:load-administration($node as node(), $model as map(*), $administrati
             error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "administration " || $administration-id || " not found")
             )
     else
-        let $vols-in-admin := collection($config:FRUS_COL_METADATA)//volume[administration eq $administration-id]
-        let $grouping-codes := doc($config:FRUS_COL_CODE_TABLES || '/grouping-code-table.xml')//item
+        let $admin-keywords := collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "#frus-administration-coverage"]/tei:term[. eq $administration-id]
+        let $vols-in-admin := $admin-keywords/root(.)/tei:TEI
+        let $admin-refs := $admin-keywords/@xml:id ! ("#" || .)
+        let $admin-production-tracks := $vols-in-admin//tei:keywords[@scheme eq "#frus-production-priority"]/tei:term[@corresp = $admin-refs]
+        let $grouping-codes := doc($config:FRUS_COL_CODE_TABLES || '/frus-production.xml')/id("frus-production-tracks")
         let $groupings-in-use :=
-            for $g in distinct-values($vols-in-admin/grouping[@administration/tokenize(., '\s+') = $administration-id]) order by index-of($grouping-codes/value, $g) return $g
+            for $g in $admin-production-tracks
+            group by $g
+            order by index-of($grouping-codes/@xml:id, $g) 
+            return $g
         return
             map {
                 "admin-id": $administration-id,
@@ -101,7 +55,7 @@ function fh:group-info($node as node(), $model as map(*)) {
         <p>Volumes are grouped into {
             for $g at $n in $model?groupings-in-use
             return (
-                <a href="#{$g}-volumes">{$model?grouping-codes[value=$g]/label/string()}</a>,
+                <a href="#{$g}-volumes">{$model?grouping-codes/id($g)/tei:catDesc/tei:term/string()}</a>,
                 if ($n lt count($model?groupings-in-use)) then
                     concat(
                         if (count($model?groupings-in-use) gt 2) then ', ' else (),
@@ -124,8 +78,8 @@ declare function fh:administration-listing-note($node as node(), $model as map(*
 declare
 function fh:admin-search-href($node as node(), $model as map(*)) {
     let $admin-id := $model?admin-id
-    let $president-n := index-of(doc("/db/apps/frus/code-tables/administration-code-table.xml")//value, $admin-id) + 14
-    let $president := doc("/db/apps/travels/presidents/presidents.xml")//president[@n = $president-n]
+    let $president-n := index-of(doc($config:FRUS_COL_CODE_TABLES || "/frus-production.xml")/id("frus-administrations")/tei:category/@xml:id, $admin-id) + 14
+    let $president := doc($config:TRAVELS_COL_PRESIDENTS || "/presidents.xml")//president[@n = $president-n]
     let $start := $president/took-office-date
     let $end := $president/left-office-date
     let $href := app:fix-href("$app/search?within=documents&amp;start-date=" || $start || "&amp;end-date=" || $end || "&amp;sort=date-asc")
@@ -136,7 +90,7 @@ function fh:admin-search-href($node as node(), $model as map(*)) {
 declare
     %templates:wrap
 function fh:administration-name($node as node(), $model as map(*)) {
-    $model?admin/label/string()
+    $model?admin/tei:catDesc/tei:term/string()
 };
 
 declare
@@ -144,8 +98,10 @@ declare
 function fh:volumes-by-administration-group($node as node(), $model as map(*)) {
     if (count($model?groupings-in-use) gt 1 and $model?admin-id ne "pre-truman") then
         for $vols in $model?vols-in-admin
-        group by $grouping := $vols/grouping[@administration/tokenize(., '\s+') = $model?admin-id]
-        order by index-of($model?grouping-codes/value, $grouping)
+        let $admin-keywords := $vols//tei:keywords[@scheme eq "#frus-administration-coverage"]/tei:term[. = $model?admin-id]
+        let $admin-refs := $admin-keywords/@xml:id ! ("#" || .)
+        group by $grouping := $vols//tei:keywords[@scheme eq "#frus-production-priority"]/tei:term[@corresp = $admin-refs]
+        order by index-of($model?grouping-codes/tei:category/@xml:id, $grouping)
         return
             (: TODO: bug in templates.xql forces us to call templates:process manually :)
             templates:process($node/node(), map:merge(($model,
@@ -163,13 +119,13 @@ declare
 function fh:volumes-by-administration($node as node(), $model as map(*)) {
     if (count($model?groupings-in-use) le 1 and $model?admin-id ne "pre-truman") then
         for $vols in $model?vols-in-admin
-        group by $sub-series := normalize-space($vols/title[@type='sub-series'])
-        order by $vols[1]/title[@type='sub-series']/@n
+        group by $sub-series := normalize-space(string-join(($vols//tei:title[@type='series'], $vols//tei:title[@type='sub-series'])[. ne ""], ", "))
+        order by $vols[1]//tei:title[@type='sub-series']/@n
         return
             (: TODO: bug in templates.xql forces us to call templates:process manually :)
             templates:process($node/node(), map:merge(($model,
                 map {
-                    "series-title": $vols[1]/title[@type='sub-series']/string(),
+                    "series-title": ($sub-series, "Other")[. ne ""][1],
                     "volumes": $vols
                 }
             ),  map{"duplicates": "use-last"}))
@@ -182,8 +138,8 @@ declare
 function fh:volumes-pre-truman($node as node(), $model as map(*)) {
     if ($model?admin-id eq "pre-truman") then
         for $vol in $model?vols-in-admin
-        let $vol-id := $vol/@id
-        let $voltext := $vol/title[@type="complete"]
+        let $vol-id := $vol/@xml:id
+        let $voltext := $vol//tei:title[@type eq "complete"]
         order by $vol-id
         return
             templates:process($node/node(), map:merge(($model,
@@ -200,13 +156,13 @@ declare
     %templates:wrap
 function fh:volumes-by-group($node as node(), $model as map(*)) {
     for $g-vols in $model?volumes
-    group by $sub-series := normalize-space($g-vols/title[@type='sub-series'])
-    order by $g-vols[1]/title[@type='sub-series']/@n
+    group by $sub-series := normalize-space(string-join(($g-vols//tei:title[@type='series'], $g-vols//tei:title[@type='sub-series'])[. ne ""], ", "))
+    order by $g-vols[1]//tei:title[@type='sub-series']/@n
     return
         (: TODO: bug in templates.xql forces us to call templates:process manually :)
         templates:process($node/node(), map:merge(($model,
             map {
-                "series-title": $g-vols[1]/title[@type='sub-series']/string(),
+                "series-title": ($sub-series, "Other")[. ne ""][1],
                 "volumes": $g-vols
             }
         ),  map{"duplicates": "use-last"}))
@@ -224,22 +180,25 @@ function fh:series-volumes($node as node(), $model as map(*)) {
     for $vol in $model?volumes
     let $title :=
         (: catch outliers like frus1918, which have no volume title or number :)
-        if ($vol/title[@type eq "volume"] eq "" and $vol/title[@type eq "volume-number"] eq "") then
-            $vol/title[@type eq "sub-series"]
+        if ($vol//tei:title[@type eq "volume"] eq "" and $vol//tei:title[@type eq "volume-number"] eq "") then
+            $vol//tei:title[@type eq "sub-series"]
         else
             string-join(
-                ($vol/title[@type eq "volume"], $vol/title[@type eq "volume-number"])[. ne ""],
+                ($vol//tei:title[@type eq "volume-number"], $vol//tei:title[@type eq "volume"])[. ne ""],
                 ', '
             )
-    let $vol-id := $vol/@id
-    let $publication-status := $vol/publication-status
+    let $vol-id := $vol/@xml:id
+    let $publication-status := $vol//tei:revisionDesc/@status
     order by $vol-id
     return
         templates:process($node/node(), map:merge(($model,
             map {
                 "title": $title,
+                "volume-sub-series": $vol//tei:title[@type eq "sub-series"]/string(),
+                "volume-number": $vol//tei:title[@type eq "volume-number"]/string(),
+                "volume-title": $vol//tei:title[@type eq "volume"]/string(),
                 "vol-id": $vol-id,
-                "publication-status": $publication-status
+                "publication-status": $publication-status/string()
             }
         ),  map{"duplicates": "use-last"}))
 };
@@ -249,6 +208,31 @@ declare
 function fh:volume-title($node as node(), $model as map(*)) {
     $model?title
 };
+
+declare
+    %templates:wrap
+function fh:volume-title-new($node as node(), $model as map(*)) {
+    $model?volume-title
+};
+
+declare
+    %templates:wrap
+function fh:volume-number($node as node(), $model as map(*)) {
+    $model?volume-number
+};
+
+declare
+    %templates:wrap
+function fh:volume-sub-series($node as node(), $model as map(*)) {
+    $model?volume-sub-series
+};
+
+declare
+    %templates:wrap
+function fh:volume-sub-series-and-number($node as node(), $model as map(*)) {
+    string-join(($model?volume-sub-series, $model?volume-number)[. ne ""], ", ")
+};
+
 
 declare
     %templates:wrap
@@ -297,7 +281,7 @@ function fh:volume-availability-summary($node as node(), $model as map(*)) {
 declare
     %templates:wrap
 function fh:administration-group-code($node as node(), $model as map(*)) {
-    $model?grouping-codes[value = $model?group]/label/string()
+    $model?grouping-codes/id($model?group)/tei:catDesc/tei:term/string()
 };
 
 (: END: administration.html :)
@@ -442,17 +426,17 @@ declare function fh:breadcrumb-heading($model as map(*), $div as element()) {
 
 declare function fh:recent-publications($node, $model) {
     let $last-year := xs:string(year-from-date(current-date()) - 1)
-    let $volumes := collection($config:FRUS_COL_METADATA)/volume[published-year ge $last-year]
-    for $year in distinct-values($volumes/published-year)
+    for $vol in collection($config:FRUS_COL_VOLUMES)//tei:change[@status eq "published" and @when ge $last-year]/root(.)/tei:TEI
+    group by $year := max(($vol//tei:change/@when ! substring(., 1, 4)))
     order by $year descending
     return
         <div>
             <h4>{$year}</h4>
             <ol>
                 {
-                for $volume in $volumes[published-year = $year]
-                let $vol-id := $volume/@id
-                let $title := substring-after($volume/title[@type eq 'complete']/text(), 'Foreign Relations of the United States, ')
+                for $v in $vol
+                let $vol-id := $v/@id
+                let $title := substring-after($v//tei:title[@type eq 'complete']/text(), 'Foreign Relations of the United States, ')
                 order by $vol-id
                 return
                     <li><a href="$app/historicaldocuments/{$vol-id}">{$title}</a></li>
@@ -473,136 +457,217 @@ declare function fh:next-year($node, $model) {
     year-from-date(current-date()) + 1
 };
 
-declare function fh:volumes-published-this-year($node, $model) {
+declare function fh:load-status-of-the-series($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
-    let $volumes := collection($config:FRUS_COL_METADATA)/volume[published-year eq $this-year]
+    let $last-year := xs:string(year-from-date(current-date()) - 1)
+    let $volumes-published-this-year := collection($config:FRUS_COL_VOLUMES)//tei:change[@status eq "published" and starts-with(@when, $this-year)]/root(.)/tei:TEI
+    let $volumes-published-last-year := collection($config:FRUS_COL_VOLUMES)//tei:change[@status eq "published" and starts-with(@when, $last-year)]/root(.)/tei:TEI
+    let $publications-anticipated-this-year := collection($config:FRUS_COL_VOLUMES)//tei:change[@status eq "being-cleared" and starts-with(@to, $this-year)]/root(.)/tei:TEI
+    let $volumes-with-chapters-outstanding := collection($config:FRUS_COL_VOLUMES)//tei:revisionDesc[@status eq "partially-published"]/root(.)/tei:TEI
+    let $volumes-being-cleared := collection($config:FRUS_COL_VOLUMES)//tei:change[@status eq "being-cleared"]/root(.)/tei:TEI
+    let $volumes-being-researched := collection($config:FRUS_COL_VOLUMES)//tei:change[@status eq "being-researched"]/root(.)/tei:TEI
+    let $volumes-planned := collection($config:FRUS_COL_VOLUMES)//tei:change[@status eq "planned"]/root(.)/tei:TEI
+    let $volumes-being-digitized := collection($config:FRUS_COL_VOLUMES)//tei:revisionDesc[@status eq "being-digitized"]/root(.)/tei:TEI
+    let $new-model-entries := map {
+        "this-year": $this-year,
+        "last-year": $last-year,
+        "volumes-published-this-year": $volumes-published-this-year,
+        "volumes-published-last-year": $volumes-published-last-year,
+        "publications-anticipated-this-year": $publications-anticipated-this-year,
+        "volumes-with-chapters-outstanding": $volumes-with-chapters-outstanding,
+        "volumes-being-cleared": $volumes-being-cleared,
+        "volumes-being-researched": $volumes-being-researched,
+        "volumes-planned": $volumes-planned,
+        "volumes-being-digitized": $volumes-being-digitized
+    }
+    let $set-attributes := map:for-each($new-model-entries, function ($key, $value) { if (exists($value)) then request:set-attribute("show-" || $key, true()) else () })        
     return
-        fh:list-published-volumes($volumes)
+        (: TODO: bug in templates.xql forces us to call templates:process manually :)
+        templates:process($node/node(), map:merge(($model, $new-model-entries), map { "duplicates": "use-last" }))
 };
 
-declare function fh:volumes-published-this-year-count($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $volumes := collection($config:FRUS_COL_METADATA)/volume[published-year eq $this-year]
-    return
-        count($volumes)
+declare function fh:volumes-published-this-year($node, $model) {
+    fh:list-published-volumes($model?volumes-published-this-year, $model?this-year)
 };
 
 declare function fh:volumes-published-last-year($node, $model) {
-    let $last-year := xs:string(year-from-date(current-date()) - 1)
-    let $volumes := collection($config:FRUS_COL_METADATA)/volume[published-year eq $last-year]
-    return
-        fh:list-published-volumes($volumes)
+    fh:list-published-volumes($model?volumes-published-last-year, $model?last-year)
 };
 
-declare function fh:volumes-published-last-year-count($node, $model) {
-    let $last-year := xs:string(year-from-date(current-date()) - 1)
-    let $volumes := collection($config:FRUS_COL_METADATA)/volume[published-year eq $last-year]
-    return
-        count($volumes)
+declare function fh:publications-anticipated-this-year($node, $model) {
+    fh:list-anticipated-volumes($model?publications-anticipated-this-year)
 };
 
-declare function fh:volumes-planned-for-publication-this-year($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-for-publication := collection($config:FRUS_COL_METADATA)/volume[publication-status ne 'published']
-    let $vols-planned-for-publication-this-year := $vols-planned-for-publication[public-target-publication-year eq $this-year]
-    return
-        fh:list-planned-volumes($vols-planned-for-publication-this-year)
+declare function fh:volumes-being-cleared($node, $model) {
+    fh:list-in-production-volumes($model?volumes-being-cleared)
 };
 
-declare function fh:volumes-planned-for-publication-this-year-count($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-for-publication := collection($config:FRUS_COL_METADATA)/volume[publication-status ne 'published']
-    let $vols-planned-for-publication-this-year := $vols-planned-for-publication[public-target-publication-year eq $this-year]
-    return
-        count($vols-planned-for-publication-this-year)
+declare function fh:volumes-being-researched($node, $model) {
+    fh:list-in-production-volumes($model?volumes-being-researched)
 };
 
-declare function fh:volumes-planned-next-year-beyond-in-production($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
-    let $vols-planned-next-year-beyond-in-production := $vols-planned-next-year-beyond[publication-status eq 'in-production']
-    return
-        fh:list-planned-volumes($vols-planned-next-year-beyond-in-production)
+declare function fh:volumes-planned($node, $model) {
+    fh:list-in-production-volumes($model?volumes-planned)
 };
 
-declare function fh:volumes-planned-next-year-beyond-in-production-count($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
-    let $vols-planned-next-year-beyond-in-production := $vols-planned-next-year-beyond[publication-status eq 'in-production']
-    return
-        count($vols-planned-next-year-beyond-in-production)
+declare function fh:volumes-being-digitized($node, $model) {
+    fh:list-in-production-volumes($model?volumes-being-digitized)
 };
 
-declare function fh:volumes-planned-next-year-beyond-under-declassification($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
-    let $vols-planned-next-year-beyond-under-declassification := $vols-planned-next-year-beyond[publication-status eq 'under-declassification']
-    return
-        fh:list-planned-volumes($vols-planned-next-year-beyond-under-declassification)
-};
-
-declare function fh:volumes-planned-next-year-beyond-under-declassification-count($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
-    let $vols-planned-next-year-beyond-under-declassification := $vols-planned-next-year-beyond[publication-status eq 'under-declassification']
-    return
-        count($vols-planned-next-year-beyond-under-declassification)
-};
-
-declare function fh:volumes-planned-next-year-beyond-being-researched-or-prepared($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
-    let $vols-planned-next-year-beyond-being-researched-or-prepared := $vols-planned-next-year-beyond[publication-status eq 'being-researched-or-prepared']
-    return
-        fh:list-planned-volumes($vols-planned-next-year-beyond-being-researched-or-prepared)
-};
-
-declare function fh:volumes-planned-next-year-beyond-being-researched-or-prepared-count($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
-    let $vols-planned-next-year-beyond-being-researched-or-prepared := $vols-planned-next-year-beyond[publication-status eq 'being-researched-or-prepared']
-    return
-        count($vols-planned-next-year-beyond-being-researched-or-prepared)
-};
-
-declare function fh:volumes-planned-next-year-beyond-being-planned-research-not-yet-begun($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
-    let $vols-planned-next-year-beyond-being-planned-research-not-yet-begun := $vols-planned-next-year-beyond[publication-status eq 'being-planned-research-not-yet-begun']
-    return
-        fh:list-planned-volumes($vols-planned-next-year-beyond-being-planned-research-not-yet-begun)
-};
-
-declare function fh:volumes-planned-next-year-beyond-being-planned-research-not-yet-begun-count($node, $model) {
-    let $this-year := xs:string(year-from-date(current-date()))
-    let $vols-planned-next-year-beyond := collection($config:FRUS_COL_METADATA)/volume[public-target-publication-year ne xs:string($this-year)]
-    let $vols-planned-next-year-beyond-being-planned-research-not-yet-begun := $vols-planned-next-year-beyond[publication-status eq 'being-planned-research-not-yet-begun']
-    return
-        count($vols-planned-next-year-beyond-being-planned-research-not-yet-begun)
-};
-
-declare function fh:list-published-volumes($volumes) {
+declare function fh:list-published-volumes($volumes as element(tei:TEI)*, $year as xs:string?) {
     <ol>{
         for $vol in $volumes
-        let $vol-id := $vol/@id/string()
-        let $vol-title := substring-after($vol/title[@type eq 'complete']/text(), 'Foreign Relations of the United States, ')
-        let $published-date-raw := xs:date($vol/published-date)
-        let $published-date := fh:published-date-to-english($published-date-raw)
-        order by $published-date-raw
+        let $vol-id := $vol/@xml:id
+        let $vol-title := substring-after($vol//tei:title[@type eq "complete"], "Foreign Relations of the United States, ")
+        let $vol-published := $vol//tei:change[@corresp eq "#" || $vol-id]
+        let $vol-published-date := fh:published-date-to-english(xs:date($vol-published/@when))
+        let $chapters := $vol//tei:change[starts-with(@corresp, "#ch")]
+        let $published-chapters := $chapters[@status eq "published"]
+        let $not-published-chapters := $chapters[@status ne "published"]
+        let $published-chapters-in-year := $published-chapters[starts-with(@when, $year)]
         return
-            <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title}</a> ({$published-date})</li>
+            if (empty($chapters)) then
+                <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title}</a> ({$vol-published-date})</li>
+            else
+                <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title}</a>
+                    {
+                        <ul style="list-style-type: disc">{
+                            if (exists($year)) then
+                                for $chapter in $published-chapters-in-year
+                                let $div-id := substring-after($chapter/@corresp, "#")
+                                let $title := $vol/id($div-id)/tei:head
+                                let $published-date := fh:published-date-to-english(xs:date($chapter/@when))
+                                return
+                                    <li style="margin-bottom: 0px"><a href="$app/historicaldocuments/{$vol-id}/{$div-id}">{$title/string()}</a> ({$published-date})</li>
+                            else
+                                for $chapter in $published-chapters
+                                let $div-id := substring-after($chapter/@corresp, "#")
+                                let $title := $vol/id($div-id)/tei:head
+                                return
+                                    <li style="margin-bottom: 0px"><a href="$app/historicaldocuments/{$vol-id}/{$div-id}">{$title/string()}</a></li>
+                        }</ul>
+                    }
+                </li>                
     }</ol>
 };
 
-declare function fh:list-planned-volumes($volumes) {
+
+declare function fh:list-anticipated-volumes($volumes) {
     <ol>{
         for $vol in $volumes
-        let $vol-id := $vol/@id/string()
-        let $vol-title := substring-after($vol/title[@type eq 'complete']/text(), 'Foreign Relations of the United States, ')
+        let $vol-id := $vol/@xml:id
+        let $vol-title-complete := $vol//tei:title[@type eq 'complete']/normalize-space(.)
+        let $vol-title-to-show := 
+            if (starts-with($vol-title-complete, 'Foreign Relations of the United States, ')) then
+                substring-after($vol-title-complete, 'Foreign Relations of the United States, ')
+            else
+                $vol-title-complete
+        let $chapters := $vol//tei:change[starts-with(@corresp, "#ch")]
+        let $chapters-anticipated := $chapters[@status eq "being-cleared" and @to ne ""]
         order by $vol-id
         return
-            <li>{$vol-title}</li>
+            if (empty($chapters)) then
+                <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title-to-show}</a></li>
+            else
+                <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title-to-show}</a>
+                    {
+                        <ul style="list-style-type: disc">{
+                            for $chapter in $chapters-anticipated
+                            let $div-id := substring-after($chapter/@corresp, "#")
+                            let $title := $vol/id($div-id)/tei:head
+                            return
+                                <li style="margin-bottom: 0px"><a href="$app/historicaldocuments/{$vol-id}/{$div-id}">{$title/string()}</a></li>
+                        }</ul>
+                    }
+                </li>       
     }</ol>
+};
+
+declare function fh:list-in-production-volumes($volumes) {
+    <ol>{
+        for $vol in $volumes
+        let $vol-id := $vol/@xml:id
+        let $vol-title-complete := $vol//tei:title[@type eq 'complete']/normalize-space(.)
+        let $vol-title-to-show := 
+            if (starts-with($vol-title-complete, 'Foreign Relations of the United States, ')) then
+                substring-after($vol-title-complete, 'Foreign Relations of the United States, ')
+            else
+                $vol-title-complete
+        let $chapters := $vol//tei:change[starts-with(@corresp, "#ch")]
+        let $chapters-anticipated := $chapters[@status eq "being-cleared"]
+        order by $vol-id
+        return
+            if (empty($chapters)) then
+                <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title-to-show}</a></li>
+            else
+                <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title-to-show}</a>
+                    {
+                        <ul style="list-style-type: disc">{
+                            for $chapter in $chapters-anticipated
+                            let $div-id := substring-after($chapter/@corresp, "#")
+                            let $title := $vol/id($div-id)/tei:head
+                            return
+                                <li style="margin-bottom: 0px"><a href="$app/historicaldocuments/{$vol-id}/{$div-id}">{$title/string()}</a></li>
+                        }</ul>
+                    }
+                </li>       
+    }</ol>
+};
+
+declare function fh:volumes-with-chapters-outstanding($node, $model) {
+    <table class="hsg-table-bordered" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Volume title</th>
+                <th>Chapters in Clearance</th>
+                <th>Chapters Published</th>
+            </tr>
+        </thead>
+        <tbody>{
+            for $vol in $model?volumes-with-chapters-outstanding
+            let $vol-id := $vol/@xml:id
+            let $vol-title := substring-after($vol//tei:title[@type eq "complete"], "Foreign Relations of the United States, ")
+            let $chapters-in-clearance := $vol//tei:change[@status eq "being-cleared"]
+            let $chapters-published := $vol//tei:change[@status eq "published"]
+            order by $vol-id
+            return
+                <tr>
+                    <td style="vertical-align: top"><a href="$app/historicaldocuments/{$vol-id}">{$vol-title}</a></td>
+                    <td style="vertical-align: top">{
+                        for $chapter-group in $chapters-in-clearance
+                        group by $year := $chapter-group/@from/string()
+                        return
+                            <div>
+                                <u>{$year}</u>
+                                <ul>{
+                                    for $chapter in $chapter-group
+                                    let $div-id := substring-after($chapter/@corresp, "#")
+                                    let $div := $vol/id($div-id)
+                                    where $div instance of element(tei:div)
+                                    return
+                                        <li style="margin-bottom: 0px"><a href="$app/historicaldocuments/{$vol-id}/{$div-id}">{$div/tei:head/string()}</a></li>
+                                }</ul>
+                            </div>
+                    }</td>
+                    <td style="vertical-align: top">{
+                        for $chapter-group in $chapters-published
+                        group by $year := substring($chapter-group/@when, 1, 4)
+                        return
+                            <div>
+                                <u>{$year}</u>
+                                <ul>{
+                                    for $chapter in $chapter-group
+                                    let $div-id := substring-after($chapter/@corresp, "#")
+                                    let $div := $vol/id($div-id)
+                                    where $div instance of element(tei:div)
+                                    return
+                                        <li style="margin-bottom: 0px"><a href="$app/historicaldocuments/{$vol-id}/{$div-id}">{$div/tei:head/string()}</a></li>
+                                }</ul>
+                            </div>
+                    }</td>
+                </tr>
+        }</tbody>
+    </table>
 };
 
 declare function fh:published-date-to-english($date as xs:date) {
@@ -678,7 +743,7 @@ declare function fh:frus-history-ebook-entry($model as map(*)) {
 };
 
 declare function fh:exists-volume($vol-id) {
-    exists(collection($config:FRUS_COL_METADATA)/volume[@id eq $vol-id])
+    exists(collection($config:FRUS_COL_VOLUMES)/tei:TEI[@xml:id eq $vol-id])
 };
 
 declare function fh:exists-volume-in-db($vol-id) {
@@ -698,21 +763,15 @@ declare function fh:exists-pdf($vol-id) {
 };
 
 declare function fh:vol-title($vol-id as xs:string, $type as xs:string) {
-	if (fh:exists-volume-in-db($vol-id)) then
-	    fh:volume($vol-id)//tei:title[@type = $type][1]/node()
-    else
-        collection($config:FRUS_COL_METADATA)/volume[@id eq $vol-id]/title[@type eq $type]/node()
+	fh:volume($vol-id)//tei:title[@type eq $type]/node()
 };
 
 declare function fh:vol-title($vol-id as xs:string) {
-	if (fh:exists-volume-in-db($vol-id)) then
-	    fh:volume($vol-id)//tei:title[@type = 'complete']/text()
-    else
-        collection($config:FRUS_COL_METADATA)/volume[@id eq $vol-id]/title[@type eq 'complete']/text()
+	fh:vol-title($vol-id, "complete")
 };
 
 declare function fh:volume($vol-id as xs:string) {
-    doc(concat($config:FRUS_COL_VOLUMES, '/', $vol-id, '.xml'))
+    doc(concat($config:FRUS_COL_VOLUMES, '/', $vol-id, '.xml'))/tei:TEI
 };
 
 declare function fh:ebook-last-updated($vol-id) {
@@ -889,7 +948,7 @@ function fh:show-if-tei-document ($node as node(), $model as map(*)) {
  : @return Returns the publication-status of a document as a string
  :)
 declare function fh:publication-status ($document-id) {
-    collection($config:FRUS_COL_METADATA)/volume[@id eq $document-id]/publication-status/string()
+    collection($config:FRUS_COL_VOLUMES)/tei:TEI[@xml:id eq $document-id]//tei:revisionDesc/@status/string()
 };
 
 (:~
@@ -898,6 +957,8 @@ declare function fh:publication-status ($document-id) {
  : @return Returns the URL of an external link as HTML
  :)
 declare function fh:location-url ($document-id) {
+    (: commented out until we resolve external links; this data is only in the old bibliography files :)
+    (:
     for $external-link in collection($config:FRUS_COL_METADATA)/volume[@id eq $document-id]/external-location
         let $link := $external-link/string()
         return
@@ -909,6 +970,8 @@ declare function fh:location-url ($document-id) {
                         <a href="{$link}" title="Opens an external link to WorldCat" target="_blank">WorldCat</a>
                     default return ()
             else()
+    :)
+    ()
 };
 
 (:
@@ -946,10 +1009,10 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
     let $publication-status := fh:publication-status($model?document-id)
     let $externalLink := fh:location-url($model?document-id)
     let $not-published-status :=
-        if ($publication-status = 'published') then
+        if ($publication-status eq 'published') then
             ()
         else
-            doc($config:FRUS_COL_CODE_TABLES || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
+            doc($config:FRUS_COL_CODE_TABLES || '/frus-production.xml')/id($publication-status)/tei:catDesc/tei:term/string()
     let $header :=  pages:header($node, map {
                             "data": <tei:TEI>
                             <tei:teiHeader>
@@ -968,7 +1031,7 @@ declare function fh:render-volume-landing($node as node(), $model as map(*)) {
     return
         if ($not-published-status) then (
             $header,
-            <p><strong>Note to Readers:</strong> This volume has not yet been published.  As indicated on the
+            <p><strong>Note:</strong> As indicated on the
             <a href="$app/historicaldocuments/status-of-the-series">Status of the Series</a> page,
             the current status of this volume is “{$not-published-status}.”</p>
         )

@@ -11,10 +11,12 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 declare variable $tags:TAGS_COL := '/db/apps/tags';
 declare variable $tags:TAXONOMY_COL := $tags:TAGS_COL || '/taxonomy';
-declare variable $tags:RESOURCES_COL := $tags:TAGS_COL || '/tagged-resources';
 
 declare function tags:resources($collection) {
-    collection($tags:RESOURCES_COL || "/" || $collection)//study
+    switch ($collection)
+        case "frus" return collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/root(.)/tei:TEI
+        case "secretary-bios" return collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/root(.)/tei:TEI
+        default return ()
 };
 
 declare function tags:count-resources($node, $model, $collection as xs:string) {
@@ -22,7 +24,15 @@ declare function tags:count-resources($node, $model, $collection as xs:string) {
 };
 
 declare function tags:count-resource-tags($node, $model) {
-    format-number(count(collection($tags:RESOURCES_COL)//tag), '#,###.')
+    format-number(
+        count(
+            (
+                collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term,
+                collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term
+            )
+        ),
+        '#,###.'
+    )
 };
 
 declare function tags:tag-count($node, $model) {
@@ -35,7 +45,13 @@ declare function tags:tags-in-context-toc($node, $model, $tag-id as xs:string*) 
         <ul class="list-unstyled">{
             for $top-level in collection($tags:TAXONOMY_COL)/taxonomy/(tag | category)
             let $highlight := if ($top-level = $tag) then attribute class {'highlight'} else ()
-            let $hit-count := count((collection($tags:RESOURCES_COL || '/frus') | collection($tags:RESOURCES_COL || '/secretary-bios'))//tag[@id  = $top-level//id])
+            let $hit-count := 
+                count(
+                    (
+                        collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"]//tei:term[. = $top-level//id],
+                        collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $top-level//id]
+                    )
+                )
             return
                 <li>{
                     let $item := <span>{$highlight}<a href="$app/tags/{$top-level/id}">{$top-level/label/string()}</a> ({$hit-count})</span>
@@ -53,7 +69,13 @@ declare function tags:descend($taxonomy-level, $tag, $show-even-if-empty) {
         let $entries := $taxonomy-level/(tag | category)
         for $entry in $entries
         let $highlight := if ($entry = $tag) then attribute class {'highlight'} else ()
-        let $hit-count := count((collection($tags:RESOURCES_COL || '/frus') | collection($tags:RESOURCES_COL || '/secretary-bios'))//tag[@id  = $entry//id])
+        let $hit-count := 
+            count(
+                (
+                    collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"]//tei:term[. = $entry//id],
+                    collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $entry//id]
+                )
+            )
         return
             if ($hit-count ge 1 or ($hit-count = 0 and $show-even-if-empty)) then
                 <li>
@@ -78,12 +100,8 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
     let $tag-id-exists := collection($tags:TAXONOMY_COL)//id[. = $tag-id]
     let $tag := $tag-id-exists/..
     let $child-tags := $tag/(tag | category)
-    let $frus-resources := collection($tags:RESOURCES_COL || '/frus')
-    let $volume-tags := $frus-resources//tag
-    let $tagged-volumes := $volume-tags[@id = $tag-id]/ancestor::study
-    let $secretary-bios-resources := collection($tags:RESOURCES_COL || '/secretary-bios')
-    let $secretary-bios-tags := $secretary-bios-resources//tag
-    let $tagged-secretary-bios := $secretary-bios-tags[@id = $tag-id]/ancestor::study
+    let $tagged-volumes := collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"][tei:term = $tag-id]/root(.)/tei:TEI
+    let $tagged-secretary-bios := collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"][tei:term = $tag-id]/root(.)/tei:TEI
     return
         if ($tag-id-exists) then
             <div>
@@ -99,7 +117,7 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                                 for $bio in $tagged-secretary-bios
                                 let $url := concat('$app/departmenthistory/people/', $bio/secretary-bios-id)
                                 return
-                                    <li><a href="{$url}">{$bio/title/string()}</a></li>
+                                    <li><a href="{$url}">{$bio//tei:title[@type eq "short"]/string()}</a></li>
                             }</ul>
                         </div>
                     else ()
@@ -109,8 +127,8 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                             <h3><em>Foreign Relations</em> volumes ({count($tagged-volumes)})</h3>
                             <ul class="list-unstyled">{
                                 for $volume in $tagged-volumes
-                                let $url := "$app" || substring-after($volume/link, 'history.state.gov')
-                                let $volume-id := substring-after($url, '/historicaldocuments/')
+                                let $volume-id := $volume/@xml:id
+                                let $url := "$app/historicaldocuments/" || $volume-id
                                 let $volume-title := normalize-space(frus:vol-title($volume-id))
                                 order by $volume-id
                                 return
@@ -128,12 +146,16 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                     )
                 else
                     let $descendant-tag-ids := $child-tags//id
-                    let $matching-resource-tags := $frus-resources//tag[@id = $descendant-tag-ids]
-                    let $matching-resources := $matching-resource-tags/ancestor::study
+                    let $matching-resource-tags := 
+                        (
+                            collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $descendant-tag-ids],
+                            collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $descendant-tag-ids]
+                        )
+                    let $matching-resources := $matching-resource-tags/root(.)/tei:TEI
                     return
                         if ($matching-resources) then
                             <div>
-                                <p>No resources have been specifically identified as “{$tag/label/string()},” but {count($matching-resources)} resources beneath this level in the taxonomy have been tagged with {count(distinct-values($matching-resource-tags/@id))} distinct tags. Please dig deeper:</p>
+                                <p>No resources have been specifically identified as “{$tag/label/string()},” but {count($matching-resources)} resources beneath this level in the taxonomy have been tagged with {count(distinct-values($matching-resource-tags))} distinct tags. Please dig deeper:</p>
                                 {tags:descend($tag, $tag/id, false())}
                             </div>
                         else
@@ -200,7 +222,7 @@ declare function tags:ptr($node) {
 declare
     %templates:wrap
 function tags:load-tags($node as node(), $model as map(*), $document-id as xs:string) {
-    let $tags := collection($tags:RESOURCES_COL)//link[. = 'https://history.state.gov/historicaldocuments/' || $document-id]/..
+    let $tags := $config:PUBLICATIONS?frus?select-document($document-id)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term
     return
         if ($tags) then
             map { "tags": $tags }
@@ -211,7 +233,7 @@ function tags:load-tags($node as node(), $model as map(*), $document-id as xs:st
 declare
     %templates:wrap
 function tags:list-tags($node as node(), $model as map(*)) {
-    for $tag in $model?tags//tag/@id
+    for $tag in $model?tags
     let $label := collection($tags:TAXONOMY_COL)//id[. = $tag]/../label
     order by $tag
     return

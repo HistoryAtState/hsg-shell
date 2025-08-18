@@ -23,6 +23,23 @@
   > ul {
     margin-left: 0;
   }
+  li.pending {
+    font-style: italic;
+    
+      // Borrowed from .hsg-toc a:not(.hsg-current)
+      a {
+         color: $color-base;
+        
+         &:hover {
+           color: $color-primary-darker;
+         }
+    
+         &:focus {
+           //outline-offset: 0;
+           outline: 0.25rem solid $color-gray-light;
+         }
+      }
+  }
 }
 
 #toc,
