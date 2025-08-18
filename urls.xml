@@ -167,8 +167,8 @@
                 <with-param name="publication-id" value="frus-administration"/>
             </page-template>
             <config>
-                <src doc="/db/apps/frus/code-tables/administration-code-table.xml"
-                    xq="/code-table/items/item/value"/>
+                <src doc="/db/apps/frus/shared/frus-production.xml"
+                    xq="/id('frus-administrations')/tei:category/@xml:id"/>
             </config>
         </step>
         <page-template href="pages/historicaldocuments/index.xml">

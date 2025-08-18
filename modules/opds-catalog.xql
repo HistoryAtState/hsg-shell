@@ -87,7 +87,6 @@ declare function opds:entry($title, $id, $updated, $summary, $content, $link) {
 
 
 declare function opds:ebook-entries($vol-ids) {
-    (: not needed? let $all-volumes := collection($config:FRUS_COL_VOLUMES) :)
     for $vol-id in $vol-ids
     let $title := normalize-space(fh:vol-title($vol-id, 'volume'))
     let $id := $vol-id
@@ -142,11 +141,11 @@ declare function opds:all() {
         opds:acquisition-link('start', $opds:opds-base-url, 'Home'),
         opds:search-link()
         )
-    let $vol-ids :=
+    let $sorted-vol-ids :=
         for $vol-id in $opds:frus-ebook-volume-ids
         order by $vol-id
         return $vol-id
-    let $entries := opds:ebook-entries($vol-ids)
+    let $entries := opds:ebook-entries($sorted-vol-ids)
     return
         opds:feed($feed-id, $feed-title, $feed-updated, $feed-author-name, $feed-author-uri, $feed-links, $entries)
 };
@@ -164,14 +163,13 @@ declare function opds:recent() {
         opds:search-link()
         )
 
-    let $all-volumes := collection($config:FRUS_COL_METADATA)
     let $selected-volumes :=
-        for $volume in $all-volumes/volume[@id = $opds:frus-ebook-volume-ids][publication-status eq 'published']
-        order by $volume/published-year descending
+        for $volume in collection($config:FRUS_COL_VOLUMES)/id($opds:frus-ebook-volume-ids)
+        order by $volume//tei:revisionDesc/tei:change[@corresp eq "#" || $volume/@xml:id]/@when descending
         return $volume
     let $n := xs:integer(request:get-parameter('n', '10'))
     let $last-n-volumes := subsequence($selected-volumes, 1, $n)
-    let $last-n-volume-ids := $last-n-volumes/@id/string()
+    let $last-n-volume-ids := $last-n-volumes/@xml:id/string()
     let $entries := opds:ebook-entries($last-n-volume-ids)
 
     return
@@ -230,13 +228,7 @@ declare function opds:browse() {
         let $title := $tag/label/string()
         let $id := $tag/id/string()
         let $updated := current-dateTime()
-        let $vols-with-this-tag := tags:resources('frus')[.//tag/@id = $tag//id]
-        let $vols-with-this-tag :=
-            for $vol in $vols-with-this-tag
-            let $link := $vol/link
-            let $vol-id := substring-after($link, 'historicaldocuments/')
-            return
-                if ($vol-id = $opds:frus-ebook-volume-ids) then $vol else ()
+        let $vols-with-this-tag := collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"][tei:term = $tag//id]/root(.)/tei:TEI
         let $descendant-tags := $tag/(descendant::category | descendant::tag)/id
         let $summary := concat(if (count($descendant-tags) gt 0) then concat(count($descendant-tags), ' sub-topics, ') else (), count($vols-with-this-tag), ' volumes')
         let $content := concat('Browse volumes with subject ', $title)
@@ -251,10 +243,10 @@ declare function opds:browse() {
                 $links
                 )
 
-    let $vols-with-this-tag := tags:resources('frus')[.//tag/@id = $tag-requested]
+    let $vols-with-this-tag := collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"][tei:term = $tag-requested]/root(.)/tei:TEI
     let $vol-ids :=
         for $vol in $vols-with-this-tag
-        let $vol-id := substring-after($vol/link, 'historicaldocuments/')
+        let $vol-id := $vol/@xml:id/string()
         order by $vol-id
         return
             $vol-id
@@ -302,13 +294,7 @@ declare function opds:search() {
         let $title := $tag/label/string()
         let $id := $tag/id/string()
         let $updated := current-dateTime()
-        let $vols-with-this-tag := tags:resources('frus')[.//tag/@id = $tag//id]
-        let $vols-with-this-tag :=
-            for $vol in $vols-with-this-tag
-            let $link := $vol/link
-            let $vol-id := substring-after($link, 'historicaldocuments/')
-            return
-                if ($vol-id = $opds:frus-ebook-volume-ids) then $vol else ()
+        let $vols-with-this-tag := collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"][tei:term =  $tag//id]/root(.)/tei:TEI
         let $descendant-tags := $tag/(descendant::category | descendant::tag)/id
         let $summary := concat(if (count($descendant-tags) gt 0) then concat(count($descendant-tags), ' sub-topics, ') else (), count($vols-with-this-tag), ' volumes')
         let $content := concat('Browse volumes with subject ', $title)

@@ -9,40 +9,72 @@
     </div>
     <div class="row hsg-main">
         <div class="hsg-width-two-thirds" data-template="app:fix-links">
-            <div id="content-inner">
-                <h1> Status of the <em>Foreign Relations of the United States</em> Series</h1>
-                <h2>Volumes Published in <span data-template="frus:current-year"/> (<span
-                        data-template="frus:volumes-published-this-year-count"/>)</h2>
-                <ol data-template="frus:volumes-published-this-year"/>
-                <h2>Volumes Published in <span data-template="frus:last-year"/> (<span
-                        data-template="frus:volumes-published-last-year-count"/>)</h2>
-                <ol data-template="frus:volumes-published-last-year"/>
-                <h2>Volumes Planned for Publication in <span data-template="frus:current-year"/>
-                        (<span data-template="frus:volumes-planned-for-publication-this-year-count"
-                    />)</h2>
-                <h3>Volumes in Production</h3>
-                <ol data-template="frus:volumes-planned-for-publication-this-year"/>
-                <h2>Volumes Planned for Publication in <span data-template="frus:next-year"/> and
-                    later</h2>
-                <h3>Volumes in Production (<span
-                        data-template="frus:volumes-planned-next-year-beyond-in-production-count"
-                    />)</h3>
-                <ol data-template="frus:volumes-planned-next-year-beyond-in-production"/>
-                <h3>Volumes Under Declassification Review (<span
-                        data-template="frus:volumes-planned-next-year-beyond-under-declassification-count"
-                    />)</h3>
-                <ol data-template="frus:volumes-planned-next-year-beyond-under-declassification"/>
-                <h3>Volumes Being Researched or Prepared (<span
-                        data-template="frus:volumes-planned-next-year-beyond-being-researched-or-prepared-count"
-                    />)</h3>
-                <ol
-                    data-template="frus:volumes-planned-next-year-beyond-being-researched-or-prepared"/>
-                <h3>Volumes Being Planned (<span
-                        data-template="frus:volumes-planned-next-year-beyond-being-planned-research-not-yet-begun-count"
-                    />)</h3>
-                <ol
-                    data-template="frus:volumes-planned-next-year-beyond-being-planned-research-not-yet-begun"
-                />
+            <div id="content-inner" data-template="frus:load-status-of-the-series">
+                <h1>Status of the <em>Foreign Relations of the United States</em> Series</h1>
+                
+                <p><em>Foreign Relations</em> volumes proceed through four main stages of
+                    production: Planning (when a volume is assigned to a sub-series plan), Research
+                    (which includes archival research, selection, annotation, and review), Clearance
+                    (when the manuscript undergoes declassification coordination and is edited and
+                    prepared for publication), and Publication (when the volume is released to the
+                    public). This page lists publications released in the current and previous
+                    calendar year, those planned for release later in the current year, and those at
+                    various stages of production. A growing number of volumes are published
+                    incrementally as individual chapters are cleared; volumes with outstanding
+                    chapters are listed in the table below. Published volumes being digitized are
+                    also listed.</p>
+                
+                <!-- Volumes published this year and last year -->
+                
+                <div data-template="templates:if-parameter-set" data-template-param="show-volumes-published-last-year">
+                    <h2>Published in <span data-template="frus:last-year"/></h2>
+                    <ol data-template="frus:volumes-published-last-year"/>
+                </div>
+                
+                <div data-template="templates:if-parameter-set" data-template-param="show-volumes-published-this-year">
+                    <h2>Published in <span data-template="frus:current-year"/></h2>
+                    <ol data-template="frus:volumes-published-this-year"/>
+                </div>
+                
+                <!-- Volumes to be published later this year -->
+                
+                <div data-template="templates:if-parameter-set" data-template-param="show-publications-anticipated-this-year">
+                    <h2>Anticipated in <span data-template="frus:current-year"/></h2>
+                    <ol data-template="frus:publications-anticipated-this-year"/>
+                </div>
+                
+                <!-- Experimental table showing all of the above, including all volumes only partially released -->
+                
+                <div data-template="templates:if-parameter-set" data-template-param="show-volumes-with-chapters-outstanding">
+                    <h2>Volumes with Chapters Outstanding</h2>
+                    <table data-template="frus:volumes-with-chapters-outstanding"/>
+                </div>
+                
+                <!-- Volumes at various stages of production -->
+
+                <h2>Volumes in Progress</h2>
+                
+                <div data-template="templates:if-parameter-set" data-template-param="show-volumes-being-cleared">
+                    <h3>Being Cleared</h3>
+                    <ol data-template="frus:volumes-being-cleared"/>
+                </div>
+                
+                <div data-template="templates:if-parameter-set" data-template-param="show-volumes-being-researched">
+                    <h3>Being Researched</h3>
+                    <ol data-template="frus:volumes-being-researched"/>
+                </div>
+                
+                <div data-template="templates:if-parameter-set" data-template-param="show-volumes-planned">
+                    <h3>Planned</h3>
+                    <ol data-template="frus:volumes-planned"/>
+                </div>
+                
+                <!-- Volumes being digitized -->
+                
+                <div data-template="templates:if-parameter-set" data-template-param="show-volumes-being-digitized">
+                    <h2>Published Volumes Being Digitized</h2>
+                    <ol data-template="frus:volumes-being-digitized"/>
+                </div>
             </div>
         </div>
         <aside data-template="pages:asides">

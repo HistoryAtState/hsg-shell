@@ -106,9 +106,7 @@ declare variable $config:CONFERENCES_COL_ARTICLES := $config:CONFERENCES_COL || 
 declare variable $config:COUNTRIES_COL := "/db/apps/rdcr";
 declare variable $config:COUNTRIES_COL_ARTICLES := $config:COUNTRIES_COL || "/articles";
 declare variable $config:FRUS_COL := "/db/apps/frus";
-declare variable $config:FRUS_COL_CODE_TABLES := $config:FRUS_COL || "/code-tables";
-declare variable $config:FRUS_COL_METADATA := $config:FRUS_COL || "/bibliography";
-declare variable $config:FRUS_COL_METADATA_COL := collection($config:FRUS_COL_METADATA);
+declare variable $config:FRUS_COL_CODE_TABLES := $config:FRUS_COL || "/shared";
 (: TODO: Create post-install task for `toc:generate-frus-tocs()` to create this folder, if not available  :)
 declare variable $config:FRUS_COL_TOC := $config:FRUS_COL || "/frus-toc/";
 declare variable $config:FRUS_COL_VOLUMES := $config:FRUS_COL || "/volumes";
@@ -175,11 +173,7 @@ declare variable $config:PUBLICATIONS :=
         "frus": map {
             "collection": $config:FRUS_COL_VOLUMES,
             "document-last-modified": function($document-id) { 
-                (
-                    config:last-modified-from-git($config:FRUS_COL, "volumes/" || $document-id || '.xml'),
-                    (: for volumes that we do not have as TEI yet, fall back on volume metadata :)
-                    config:last-modified-from-git($config:FRUS_COL, "bibliography/" || $document-id || '.xml')
-                )[1]
+                config:last-modified-from-git($config:FRUS_COL, "volumes/" || $document-id || '.xml')
             },
             "select-document": function($document-id) { doc($config:FRUS_COL_VOLUMES || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) {
@@ -236,18 +230,24 @@ declare variable $config:PUBLICATIONS :=
                 )
               }        
         },
+        (: commented out in urls.xml and controller.xql 
+        - see https://github.com/HistoryAtState/hsg-shell/commit/7584921c69c722c6c40b2418af19d3f551f7f5ef 
+        - note that the referenced collection was the old bibliography collection
+        :)
+        (:
         "frus-list": map{
             "collection": $config:FRUS_COL_METADATA,
             "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_COL)
         },
-        (: not in controller.xql :)
+        :)
+        (: used in urls.xml for loading frus administration listings and processed by pages.xqm for breadcrumbs :)
         "frus-administration": map {
           "select-section": function($administration-id) {
-              doc($config:FRUS_COL_CODE_TABLES || '/administration-code-table.xml')//item[value = $administration-id]
+              doc($config:FRUS_COL_CODE_TABLES || '/frus-production.xml')/id('frus-administrations')//tei:category[@xml:id eq $administration-id]
             },
           "breadcrumb-title": function($parameters as map(*)) as xs:string? {
               let $admin := $config:PUBLICATIONS?frus-administration?select-section($parameters?administration-id)
-              return $admin/label/string()
+              return $admin/tei:catDesc/tei:term/string()
             }
         },
         "buildings": map {
@@ -806,7 +806,6 @@ declare function config:search-last-modified() {
 declare variable $config:PUBLICATION-COLLECTIONS :=
     map {
         $config:FRUS_COL_VOLUMES: "frus",
-        $config:FRUS_COL_METADATA: "frus",
         $config:OP_BUILDINGS_COL: "buildings",
         $config:OP_SHORT_HISTORY_COL: "short-history",
         $config:ADMINISTRATIVE_TIMELINE_DATA_COL: "timeline",
