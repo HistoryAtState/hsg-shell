@@ -984,7 +984,7 @@ declare function fh:location-url ($document-id) {
 
 declare function fh:cover-uri($id) {
     let $has-cover-image := fh:exists-cover-image($id)
-    return if (exists($has-cover-image)) then 
+    return if ($has-cover-image) then 
         'https://static.history.state.gov/frus/' || $id || '/covers/' || $id || '.jpg'
     else ()
 };
