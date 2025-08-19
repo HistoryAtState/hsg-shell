@@ -72,6 +72,7 @@
                     <modelSequence>
                         <model behaviour="heading">
                             <param name="content">title[@type="complete"]</param>
+                            <param name="level">1</param>
                         </model>
                         <!-- Singular vs. plural for "editor(s)" -->
                         <model predicate="count(editor[@role = 'primary']) gt 1" behaviour="block">
