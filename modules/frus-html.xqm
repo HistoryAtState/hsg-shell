@@ -457,7 +457,9 @@ declare function fh:next-year($node, $model) {
     year-from-date(current-date()) + 1
 };
 
-declare function fh:load-status-of-the-series($node, $model) {
+declare 
+    %templates:wrap
+function fh:load-status-of-the-series($node, $model) {
     let $this-year := xs:string(year-from-date(current-date()))
     let $last-year := xs:string(year-from-date(current-date()) - 1)
     let $volumes-published-this-year := collection($config:FRUS_COL_VOLUMES)//tei:change[@status eq "published" and starts-with(@when, $this-year)]/root(.)/tei:TEI
