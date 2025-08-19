@@ -245,37 +245,24 @@ declare
     %templates:wrap
 function fh:volume-availability-summary($node as node(), $model as map(*)) {
     let $volume-id := $model?vol-id
-    let $full-text := if (fh:exists-volume-in-db($volume-id)) then 'Full Text' else ()
+    let $full-text := if (fh:exists-volume-full-text($volume-id)) then 'Full Text' else ()
     let $ebook := if (fh:exists-epub($volume-id)) then 'Ebook' else ()
     let $pdf := if (fh:exists-pdf($volume-id)) then 'PDF' else ()
     let $publication-status := $model?publication-status
-    let $not-published-status :=
-        if ($publication-status = 'published') then
-            ()
-        else
-            doc($config:FRUS_COL_CODE_TABLES || '/publication-status-codes.xml')//item[value = $publication-status]/label/string()
+    let $publication-status-label := doc($config:FRUS_COL_CODE_TABLES || '/frus-production.xml')/id($publication-status)/tei:catDesc/tei:term/string()
     return
-        if ($full-text or $ebook or $pdf or $not-published-status) then
-            <span class="hsg-status-notice">{
+        <span class="hsg-status-notice">({
+            concat(
+                $publication-status-label,
                 if ($full-text or $ebook or $pdf) then
                     concat(
-                       ' (Published and available in ',
-                       string-join(($full-text, $ebook, $pdf), ', '),
-                       ')'
-                    )
-                else if ($not-published-status) then
-                    concat(
-                        ' ('
-                        ,
-                        (: <a href="$app/historicaldocuments/{$volume-id}">{$not-published-status}</a>:)
-                        $not-published-status
-                        ,
-                        ')'
+                       ' and available in ',
+                       string-join(($full-text, $ebook, $pdf), ', ')
                     )
                 else
                     ()
-            }</span>
-        else ()
+            )
+        })</span>
 };
 
 declare
@@ -748,8 +735,8 @@ declare function fh:exists-volume($vol-id) {
     exists(collection($config:FRUS_COL_VOLUMES)/tei:TEI[@xml:id eq $vol-id])
 };
 
-declare function fh:exists-volume-in-db($vol-id) {
-    exists(fh:volume($vol-id))
+declare function fh:exists-volume-full-text($vol-id) {
+    exists(fh:volume($vol-id)/tei:TEI/tei:text/tei:body/tei:div)
 };
 
 declare function fh:exists-epub($vol-id) {
