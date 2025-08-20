@@ -104,6 +104,10 @@ declare function toc:volume-title($node as node(), $type as xs:string) as text()
 declare function toc:toc-div($model as map(*), $node as element(tei:div), $current as element()?) {
     (: we only show certain divs :)
     for $node in $node[@xml:id ne 'toc'][not(@type = ('document', 'document-pending'))]
+    (: DO NOT CHANGE the following expression for $descendant-docs! 
+       WHY? because we discovered that eXist's query optimizer 
+       does NOT work as expected on the following query `tei:div[@type = ___]`
+       it ONLY works if `tei:div/@type[. = ___]` :)
     let $descendant-docs := $node//tei:div/@type[. = ('document', 'document-pending')]/..
     let $is-pending := ends-with($node/@type, "-pending")
     return
