@@ -103,8 +103,8 @@ declare function toc:volume-title($node as node(), $type as xs:string) as text()
 (: handles divs for TOCs :)
 declare function toc:toc-div($model as map(*), $node as element(tei:div), $current as element()?) {
     (: we only show certain divs :)
-    for $node in $node[@xml:id != 'toc'][not(@type = ('document', 'document-pending'))]
-    let $descendant-docs := $node//tei:div[@type = ('document', 'document-pending')]
+    for $node in $node[@xml:id ne 'toc'][not(@type = ('document', 'document-pending'))]
+    let $descendant-docs := $node//tei:div/@type[. = ('document', 'document-pending')]/..
     let $is-pending := ends-with($node/@type, "-pending")
     return
         <li>
