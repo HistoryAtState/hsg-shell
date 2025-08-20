@@ -72,7 +72,7 @@ declare function tags:descend($taxonomy-level, $tag, $show-even-if-empty) {
         let $hit-count := 
             count(
                 (
-                    collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"]//tei:term[. = $entry//id],
+                    collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $entry//id],
                     collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $entry//id]
                 )
             )
