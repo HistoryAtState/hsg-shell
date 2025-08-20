@@ -48,9 +48,9 @@ declare function tags:tags-in-context-toc($node, $model, $tag-id as xs:string*) 
             let $hit-count := 
                 count(
                     (
-                        collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"]//tei:term[. = $top-level//id],
-                        collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $top-level//id]
-                    )
+                        collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"],
+                        collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]
+                    )/tei:term[. = $top-level//id]
                 )
             return
                 <li>{
@@ -72,9 +72,9 @@ declare function tags:descend($taxonomy-level, $tag, $show-even-if-empty) {
         let $hit-count := 
             count(
                 (
-                    collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $entry//id],
-                    collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $entry//id]
-                )
+                    collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"],
+                    collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]
+                )/tei:term[. = $entry//id]
             )
         return
             if ($hit-count ge 1 or ($hit-count = 0 and $show-even-if-empty)) then
@@ -148,9 +148,9 @@ declare function tags:show-tag($node, $model, $tag-id as xs:string) {
                     let $descendant-tag-ids := $child-tags//id
                     let $matching-resource-tags := 
                         (
-                            collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $descendant-tag-ids],
-                            collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]/tei:term[. = $descendant-tag-ids]
-                        )
+                            collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"],
+                            collection($config:OP_SECRETARY_BIOS_COL)//tei:keywords[@scheme eq "https://history.state.gov/tags"]
+                        )/tei:term[. = $descendant-tag-ids]
                     let $matching-resources := $matching-resource-tags/root(.)/tei:TEI
                     return
                         if ($matching-resources) then
