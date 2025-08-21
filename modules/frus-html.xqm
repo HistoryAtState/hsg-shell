@@ -668,28 +668,36 @@ declare function fh:published-date-to-english($date as xs:date) {
 };
 
 declare function fh:volumes-with-ebooks() {
-    for $hit in collection($config:FRUS_COL_VOLUMES)//tei:relatedItem[@type eq "epub"]
-    return
-        root($hit)/tei:TEI/@xml:id/string()
+    collection($config:FRUS_COL_VOLUMES)//tei:relatedItem[@type eq "epub"]/root(.)/tei:TEI
 };
 
 declare function fh:frus-ebooks-catalog($node, $model) {
-    let $vol-ids := fh:volumes-with-ebooks()
+    let $vols-with-ebooks := fh:volumes-with-ebooks()
     return
         <div id="catalog">
-            <p>The following {count($vol-ids) + 1} volumes are currently available:</p>
+            <p>The following {count($vols-with-ebooks) + 1} volumes are currently available:</p>
             {
-            for $vol-id in $vol-ids
+            for $vol in $vols-with-ebooks
+            let $vol-id := $vol/@xml:id/string()
+            let $title-series := $vol//tei:title[@type eq "series"]
+            let $title-rest := string-join($vol//tei:title[@type = ("sub-series", "volume-number", "volume")], ", ")
+            let $epub := $vol//tei:relatedItem[@type eq "epub"]
+            let $ebook-last-updated := app:format-date-month-long-day-year($epub//tei:date/@when)
+            let $epub-url := $epub//tei:ref/@target
+            let $epub-size := app:bytes-to-readable($epub//tei:measure/@quantity)
+            let $mobi := $vol//tei:relatedItem[@type eq "mobi"]
+            let $mobi-url := $mobi//tei:ref/@target
+            let $mobi-size := app:bytes-to-readable($mobi//tei:measure/@quantity)
             order by $vol-id
             return
                 (
                 <div id="{$vol-id}">
                     <img src="{$config:S3_URL}/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-                    <a href="$app/historicaldocuments/{$vol-id}">{let $series := fh:vol-title($vol-id, 'series') return if ($series) then (<em>{fh:vol-title($vol-id, 'series')}</em>, ", ") else (), string-join((fh:vol-title($vol-id, 'sub-series'), fh:vol-title($vol-id, 'volume-number'), fh:vol-title($vol-id, 'volume')), ', ')}</a>.
-                    <p>Ebook last updated: {fh:ebook-last-updated($vol-id) => app:format-date-month-long-day-year()}</p>
+                    <a href="$app/historicaldocuments/{$vol-id}"><em>{$title-series}</em>, {$title-rest}</a>.
+                    <p>Ebook last updated: {$ebook-last-updated}</p>
                     <ul class="hsg-ebook-list">
-                        <li><a class="hsg-link-button" href="{fh:epub-url($vol-id)}">EPUB ({ try {fh:epub-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.epub'}})</a></li>
-                        <li><a class="hsg-link-button" href="{fh:mobi-url($vol-id)}">Mobi ({ try {fh:mobi-size($vol-id)} catch * {'problem getting size of ' || $vol-id || '.mobi'}})</a></li>
+                        <li><a class="hsg-link-button" href="{$epub-url}">EPUB ({$epub-size})</a></li>
+                        <li><a class="hsg-link-button" href="{$mobi-url}">Mobi ({$mobi-size})</a></li>
                     </ul>
                 </div>
                 ,
