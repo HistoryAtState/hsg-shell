@@ -679,7 +679,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
             {
             for $vol in $vols-with-ebooks
             let $vol-id := $vol/@xml:id/string()
-            let $title-series := $vol//tei:title[@type eq "series"]
+            let $title-series := $vol//tei:title[@type eq "series"]/string()
             let $title-rest := string-join($vol//tei:title[@type = ("sub-series", "volume-number", "volume")], ", ")
             let $epub := $vol//tei:relatedItem[@type eq "epub"]
             let $ebook-last-updated := app:format-date-month-long-day-year($epub//tei:date/@when)
@@ -693,7 +693,7 @@ declare function fh:frus-ebooks-catalog($node, $model) {
                 (
                 <div id="{$vol-id}">
                     <img src="{$config:S3_URL}/frus/{$vol-id}/covers/{$vol-id}-thumb.jpg" style="width: 67px; height: 100px; float: left; padding-right: 10px"/>
-                    <a href="$app/historicaldocuments/{$vol-id}"><em>{$title-series}</em>, {$title-rest}</a>.
+                    <a href="$app/historicaldocuments/{$vol-id}"><em>{$title-series}</em>, {$title-rest}</a>
                     <p>Ebook last updated: {$ebook-last-updated}</p>
                     <ul class="hsg-ebook-list">
                         <li><a class="hsg-link-button" href="{$epub-url}">EPUB ({$epub-size})</a></li>
