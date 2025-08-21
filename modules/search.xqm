@@ -1084,11 +1084,7 @@ declare function search:trim-words($string as xs:string, $number as xs:integer) 
     let $words := tokenize($string, "\s")
     return
         if (count($words) gt $number) then
-            string-join((
-                string-join(subsequence($words, 1, ceiling($number div 2)), " ")
-                , "…"
-                , string-join($words[position() ge last() - floor($number div 2) + 1], " ")
-            ))
+            string-join(subsequence($words, 1, $number), " ") || "…"
         else
             $string
 };
@@ -1118,7 +1114,12 @@ function search:load-volumes($node as node(), $model as map(*)) {
                 for $vol in $ft-vols
                 let $vol-id := $vol/@xml:id/string()
                 let $compact-title := 
-                    search:trim-words(normalize-space(string-join($vol//tei:title[@type = ("sub-series", "volume-number", "volume")][. ne ''], ", ")), 10)
+                    $vol//tei:title[@type = ("sub-series", "volume-number", "volume")][. ne ""]
+                    => string-join(", ")
+                    => normalize-space()
+                    => replace("Volume ", "Vol. ")
+                    => replace("Part ", "Pt. ")
+                    => search:trim-words(10)
                 let $complete-title := normalize-space($vol//tei:title[@type eq "complete"])
                 order by $vol-id
                 return
