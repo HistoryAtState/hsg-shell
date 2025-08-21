@@ -248,7 +248,8 @@ declare variable $config:PUBLICATIONS :=
           "breadcrumb-title": function($parameters as map(*)) as xs:string? {
               let $admin := $config:PUBLICATIONS?frus-administration?select-section($parameters?administration-id)
               return $admin/tei:catDesc/tei:term/string()
-            }
+            },
+          "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_COL)
         },
         "buildings": map {
             "collection": $config:OP_BUILDINGS_COL,
