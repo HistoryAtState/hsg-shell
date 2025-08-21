@@ -20,7 +20,7 @@ declare variable $opds:server-url := substring-before(request:get-parameter('xql
 declare variable $opds:opds-base-url := $opds:server-url || $opds:opds-path;
 declare variable $opds:feed-author-name {'Office of the Historian'};
 declare variable $opds:opds-search-url {concat($opds:server-url, 'opensearch.xml')};
-declare variable $opds:frus-ebook-volume-ids { fh:volumes-with-ebooks() };
+declare variable $opds:frus-ebook-volumes { fh:volumes-with-ebooks() };
 
 declare function opds:feed($id, $title, $updated, $author-name, $author-uri, $links, $entries) {
     util:declare-option('exist:serialize', 'method=xml media-type=text/xml indent=yes')
@@ -86,12 +86,20 @@ declare function opds:entry($title, $id, $updated, $summary, $content, $link) {
 };
 
 
-declare function opds:ebook-entries($vol-ids) {
-    for $vol-id in $vol-ids
-    let $title := normalize-space(fh:vol-title($vol-id, 'volume'))
+declare function opds:ebook-entries($vols as element(tei:TEI)*) {
+    for $vol in $vols
+    let $title := normalize-space($vol//tei:title[@type eq 'complete'])
+    let $vol-id := $vol/@xml:id
+    let $epub := $vol//tei:relatedItem[@type eq "epub"]
+    let $updated := $epub//tei:date/@when/string()
+    let $epub-url := $epub//tei:ref/@target
+    let $mobi := $vol//tei:relatedItem[@type eq "mobi"]
+    let $mobi-url := $mobi//tei:ref/@target
+    let $pdf := $vol//tei:relatedItem[@corresp eq "#" || $vol-id and @type eq "pdf"]
+    let $pdf-url := $pdf//tei:ref/@target
+    
     let $id := $vol-id
-    let $updated := xs:dateTime(fh:ebook-last-updated($vol-id))
-    let $summary:= normalize-space(fh:vol-title($vol-id))
+    let $summary:= $title
     let $content :=
         ()
         (: NOTE: I'm suppressing the volume summary for now since the <content> element causes ShuBooks to not show the <summary> element. :)
@@ -103,15 +111,15 @@ declare function opds:ebook-entries($vol-ids) {
             else ()
         :)
     let $epub-mobi-links :=
-        if (fh:exists-epub($vol-id)) then
+        if (exists($epub)) then
             (
-            opds:link('application/epub+zip', 'http://opds-spec.org/acquisition', fh:epub-url($vol-id), concat($title, ' (EPUB)')),
-            opds:link('application/x-mobipocket-ebook', 'http://opds-spec.org/acquisition', fh:mobi-url($vol-id), concat($title, ' (Mobi)'))
+            opds:link('application/epub+zip', 'http://opds-spec.org/acquisition', $epub-url, concat($title, ' (EPUB)')),
+            opds:link('application/x-mobipocket-ebook', 'http://opds-spec.org/acquisition', $mobi-url, concat($title, ' (Mobi)'))
             )
         else ()
     let $pdf-link :=
-        if (fh:exists-pdf($vol-id)) then
-            opds:link('application/pdf', 'http://opds-spec.org/acquisition', fh:epub-url($vol-id), concat($title, ' (PDF)'))
+        if (exists($pdf)) then
+            opds:link('application/pdf', 'http://opds-spec.org/acquisition', $pdf-url, concat($title, ' (PDF)'))
         else ()
     let $cover-image-link :=
         opds:link('image/jpeg', 'http://opds-spec.org/image', concat($config:S3_URL ||'/frus/', $vol-id, '/covers/', $vol-id, '.jpg'), concat('Cover of ', $title))
@@ -141,11 +149,11 @@ declare function opds:all() {
         opds:acquisition-link('start', $opds:opds-base-url, 'Home'),
         opds:search-link()
         )
-    let $sorted-vol-ids :=
-        for $vol-id in $opds:frus-ebook-volume-ids
-        order by $vol-id
-        return $vol-id
-    let $entries := opds:ebook-entries($sorted-vol-ids)
+    let $sorted-vols :=
+        for $vol in $opds:frus-ebook-volumes
+        order by $vol/@xml:id
+        return $vol
+    let $entries := opds:ebook-entries($sorted-vols)
     return
         opds:feed($feed-id, $feed-title, $feed-updated, $feed-author-name, $feed-author-uri, $feed-links, $entries)
 };
@@ -164,13 +172,12 @@ declare function opds:recent() {
         )
 
     let $selected-volumes :=
-        for $volume in collection($config:FRUS_COL_VOLUMES)/id($opds:frus-ebook-volume-ids)
-        order by $volume//tei:revisionDesc/tei:change[@corresp eq "#" || $volume/@xml:id]/@when descending
+        for $volume in $opds:frus-ebook-volumes
+        order by $volume//tei:change[@corresp eq "#" || $volume/@xml:id]/@when descending
         return $volume
     let $n := xs:integer(request:get-parameter('n', '10'))
     let $last-n-volumes := subsequence($selected-volumes, 1, $n)
-    let $last-n-volume-ids := $last-n-volumes/@xml:id/string()
-    let $entries := opds:ebook-entries($last-n-volume-ids)
+    let $entries := opds:ebook-entries($last-n-volumes)
 
     return
         opds:feed($feed-id, $feed-title, $feed-updated, $feed-author-name, $feed-author-uri, $feed-links, $entries)
@@ -228,7 +235,10 @@ declare function opds:browse() {
         let $title := $tag/label/string()
         let $id := $tag/id/string()
         let $updated := current-dateTime()
-        let $vols-with-this-tag := collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"][tei:term = $tag//id]/root(.)/tei:TEI
+        let $vols-with-this-tag := 
+            (
+                $opds:frus-ebook-volumes//tei:keywords[@scheme eq "https://history.state.gov/tags"]
+            )/tei:term[. = $tag//id]/root(.)/tei:TEI
         let $descendant-tags := $tag/(descendant::category | descendant::tag)/id
         let $summary := concat(if (count($descendant-tags) gt 0) then concat(count($descendant-tags), ' sub-topics, ') else (), count($vols-with-this-tag), ' volumes')
         let $content := concat('Browse volumes with subject ', $title)
@@ -243,15 +253,17 @@ declare function opds:browse() {
                 $links
                 )
 
-    let $vols-with-this-tag := collection($config:FRUS_COL_VOLUMES)//tei:keywords[@scheme eq "https://history.state.gov/tags"][tei:term = $tag-requested]/root(.)/tei:TEI
-    let $vol-ids :=
+    let $vols-with-this-tag := 
+        (
+            $opds:frus-ebook-volumes//tei:keywords[@scheme eq "https://history.state.gov/tags"]
+        )/tei:term[. = $tag-requested]/root(.)/tei:TEI
+    let $sorted-vols :=
         for $vol in $vols-with-this-tag
-        let $vol-id := $vol/@xml:id/string()
+        let $vol-id := $vol/@xml:id
         order by $vol-id
         return
-            $vol-id
-    let $vol-ids :=  $vol-ids[. = $opds:frus-ebook-volume-ids]
-    let $volume-entries := opds:ebook-entries($vol-ids)
+            $vol
+    let $volume-entries := opds:ebook-entries($sorted-vols)
 
     let $entries := ($tag-entries, $volume-entries)
 
