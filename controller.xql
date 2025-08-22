@@ -298,7 +298,7 @@ else switch($path-parts[1])
                         })
                 else
                     local:render-page("historicaldocuments/administrations.xml", map{
-                        "publication-id": "frus-administrations",
+                        "publication-id": "frus-administration",
                         "administration-id": $path-parts[2]
                     })
 
