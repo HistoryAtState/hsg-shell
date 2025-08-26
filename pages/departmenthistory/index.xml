@@ -12,43 +12,9 @@
                 <div class="hsg-width-two-thirds">
                     <div data-template="app:fix-links" id="content-inner">
                         <h1>Department History</h1>
-                        <p>Since its creation in 1789, the Department of State has carried out a
-                            series of reorganizations and has created new offices and bureaus to
-                            deal with new diplomatic challenges.</p>
-                        <p>This portion of our website contains <!--<a
-                                href="$app/departmenthistory/timeline">an Administrative Timeline of
-                                the Department of State</a>,--> <a
-                                href="$app/departmenthistory/people/secretaries">biographies of the
-                                Secretaries of State</a>, a database of <a
-                                href="$app/departmenthistory/people/principals-chiefs">Principal
-                                Officers and Chiefs of Mission</a>, and a history of <a
-                                href="$app/departmenthistory/buildings">the buildings of the
-                                Department of State</a>.</p>
-                        <p>The Department of State has grown significantly over the years. The first
-                            Secretary of State, Thomas Jefferson, oversaw a small staff of one chief
-                            clerk, three other clerks, a translator, and a messenger and only
-                            maintained two diplomatic posts, in London and Paris, as well as 10
-                            consular posts. </p>
-                        <p>World War I (1914–1918) and World War II (1939–1945) brought vastly
-                            increased global responsibilities to the United States as it emerged as
-                            a preeminent power. New challenges after the end of the Cold War and the
-                            fall of the Soviet Union, included: <ul>
-                                <li>the newly independent states,</li>
-                                <li>the global economy,</li>
-                                <li>terrorism, and</li>
-                                <li>the security of the American overseas presence. </li>
-                            </ul>
-                        </p>
-                        <p>To address these changing global circumstances, the number of domestic
-                            and overseas employees (not counting local employees) grew to: <ul>
-                                <li>1,228 in 1900,</li>
-                                <li>1,968 in 1940,</li>
-                                <li>13,294 in 1960,</li>
-                                <li>and 15,751 in the year 2000.</li>
-                            </ul>
-                        </p>
-                        <p>The number of diplomatic posts increased from 41 in 1900 to 168 in 2004
-                            and continues to grow.</p>
+                        <p>This section of our website contains publications and datasets on various
+                            aspects of the history of the U.S. Department of State. Please access
+                            these materials via the links in the sidebar.</p>
                     </div>
                 </div>
                 <aside data-template="pages:asides"/>
