@@ -205,7 +205,36 @@ declare function open:frus-metadata() {
         </volumes>
 };
 
-switch(request:get-parameter('xql-feed', ''))
-case 'latest' return open:frus-latest()
-case 'metadata' return open:frus-metadata()
-default return <error/>
+let $publication-config := map{ "publication-id": "frus" }
+let $created := app:created($publication-config, ())
+let $last-modified := app:last-modified($publication-config, ())
+let $not-modified-since := app:modified-since($last-modified, app:safe-parse-if-modified-since-header())
+
+return 
+    if ($not-modified-since) then (
+        (: if the "If-Modified-Since" header in the client request is later than the
+        : last-modified date, then halt further processing of the templates and simply
+        : return a 304 response. :)
+        response:set-status-code(304),
+        app:set-last-modified($last-modified)
+    ) else if (request:get-parameter('x-method', ()) eq 'head') then (
+        (: When revalidating a cached resource and the "If-Modified-Since" header sent by the client indicates
+        : the resource has changed in the meantime, it is just a head request. Do not render the page as the 
+        : response body is discarded anyway and just return status code 200. :)
+        response:set-status-code(200),
+        app:set-last-modified($last-modified)
+    ) else (
+        (:
+        : The HTML is passed in the request from the controller.
+        : Run it through the templating system and return the result.
+        :)
+        (
+            switch(request:get-parameter('xql-feed', ''))
+                case 'latest' return open:frus-latest()
+                case 'metadata' return open:frus-metadata()
+                default return <error/>,
+            (: only set last-modified if rendering was succesful :)
+            app:set-last-modified($last-modified),
+            app:set-created($created)
+        )
+    )
