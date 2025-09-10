@@ -114,24 +114,14 @@ declare function pages:load-xml($publication-config as map(*), $document-id as x
 
         return
             if (empty($block) and not($ignore)) then (
-                pages:load-fallback-page($document-id, $section-id)
+                request:set-attribute("hsg-shell.errcode", 404),
+                request:set-attribute("hsg-shell.path", string-join(($document-id, $section-id), "/")),
+                error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "document " || $document-id || " section " || $section-id || " not found")
             ) else (
                 util:log("debug", ("pages:load-xml: Loaded ", document-uri(root($block)), ". Node name: ", node-name($block), ".")),
                 $block
             )
     )
-};
-
-declare function pages:load-fallback-page($document-id as xs:string?, $section-id as xs:string?) {
-    util:log("debug", ("Loading fallback page for ", $document-id)),
-    let $volume := $config:FRUS_COL_VOLUMES/id($document-id)
-    return
-        if (empty($volume)) then (
-            request:set-attribute("hsg-shell.errcode", 404),
-            request:set-attribute("hsg-shell.path", string-join(($document-id, $section-id), "/")),
-            error(QName("http://history.state.gov/ns/site/hsg", "not-found"), "document " || $document-id || " section " || $section-id || " not found")
-        ) else
-            pages:volume-to-tei($volume)
 };
 
 (: TODO delete after completing import of external location data and deciding on whether to keep summary data or not :)
