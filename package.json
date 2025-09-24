@@ -19,9 +19,9 @@
     "@existdb/gulp-exist": "^5.0.0",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@wdio/cli": "^7.32.4",
+    "@wdio/cli": "^9.19.2",
     "@wdio/junit-reporter": "^7.31.1",
-    "@wdio/local-runner": "^7.32.4",
+    "@wdio/local-runner": "^9.19.2",
     "@wdio/mocha-framework": "^7.30.2",
     "@wdio/spec-reporter": "^7.31.1",
     "autoprefixer": "^9.7.4",
@@ -43,7 +43,7 @@
     "sass": "^1.89.2",
     "semantic-release": "^22.0.12",
     "wdio-chromedriver-service": "^7.3.2",
-    "webdriverio": "^7.32.4"
+    "webdriverio": "^9.19.2"
   },
   "scripts": {
     "test": "./node_modules/.bin/wdio wdio.conf.js --suite jenkins",
