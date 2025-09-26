@@ -514,6 +514,7 @@ declare function fh:list-published-volumes($volumes as element(tei:TEI)*, $year 
         let $published-chapters := $chapters[@status eq "published"]
         let $not-published-chapters := $chapters[@status ne "published"]
         let $published-chapters-in-year := $published-chapters[starts-with(@when, $year)]
+        order by $vol-published/@when, $vol-id
         return
             if (empty($chapters)) then
                 <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title}</a> ({$vol-published-date})</li>
