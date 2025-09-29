@@ -54,17 +54,23 @@ declare function toc:prepare-sidebar-toc-list($nodes as node()*) {
 
 declare function toc:toc($model as map(*), $root as node()?, $show-heading as xs:boolean?, $highlight as xs:boolean?) {
     if ($root) then
-        <div class="toc-inner">
-            { if ($show-heading) then <div><h2>{toc:volume-title($root, "volume")}</h2></div> else () }
-            <ul>
-            {
-                toc:toc-passthru(
-                    $model,
-                    $root/ancestor-or-self::tei:TEI/tei:text,
-                    if ($highlight) then $root/ancestor-or-self::tei:div[@type != ("document", "document-pending")][1] else ()
-                )
-            }</ul>
-        </div>
+        let $some-published := root($root)//tei:revisionDesc[@status = ("published", "partially-published")]
+        return
+            (: only show a TOC if the volume is published or partially published :)
+            if ($some-published) then
+                <div class="toc-inner">
+                    { if ($show-heading) then <div><h2>{toc:volume-title($root, "volume")}</h2></div> else () }
+                    <ul>
+                    {
+                        toc:toc-passthru(
+                            $model,
+                            $root/ancestor-or-self::tei:TEI/tei:text,
+                            if ($highlight) then $root/ancestor-or-self::tei:div[@type != ("document", "document-pending")][1] else ()
+                        )
+                    }</ul>
+                </div>
+            else
+                ()
     else
         ()
 };

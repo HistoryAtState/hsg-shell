@@ -553,6 +553,7 @@ declare function fh:list-anticipated-volumes($volumes) {
             else
                 $vol-title-complete
         let $chapters := $vol//tei:change[starts-with(@corresp, "#ch")]
+        let $some-published := $vol//tei:revisionDesc[@status = ("published", "partially-published")]
         let $chapters-anticipated := $chapters[@status eq "being-cleared" and @to ne ""]
         order by $vol-id
         return
@@ -561,13 +562,22 @@ declare function fh:list-anticipated-volumes($volumes) {
             else
                 <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title-to-show}</a>
                     {
-                        <ul style="list-style-type: disc">{
-                            for $chapter in $chapters-anticipated
-                            let $div-id := substring-after($chapter/@corresp, "#")
-                            let $title := $vol/id($div-id)/tei:head
-                            return
-                                <li style="margin-bottom: 0px"><a href="$app/historicaldocuments/{$vol-id}/{$div-id}">{$title/string()}</a></li>
-                        }</ul>
+                        if ($some-published) then
+                            <ul style="list-style-type: disc">{
+                                for $chapter in $chapters-anticipated
+                                let $div-id := substring-after($chapter/@corresp, "#")
+                                let $title := $vol/id($div-id)/tei:head
+                                return
+                                    <li style="margin-bottom: 0px"><a href="$app/historicaldocuments/{$vol-id}/{$div-id}">{$title/string()}</a></li>
+                            }</ul>
+                        else
+                            <ul style="list-style-type: disc">{
+                                for $chapter in $chapters-anticipated
+                                let $div-id := substring-after($chapter/@corresp, "#")
+                                let $title := $vol/id($div-id)/tei:head
+                                return
+                                    <li style="margin-bottom: 0px">{$title/string()}</li>
+                            }</ul>
                     }
                 </li>       
     }</ol>
@@ -583,6 +593,7 @@ declare function fh:list-in-production-volumes($volumes) {
                 substring-after($vol-title-complete, 'Foreign Relations of the United States, ')
             else
                 $vol-title-complete
+        let $some-published := $vol//tei:revisionDesc[@status = ("published", "partially-published")]
         let $chapters := $vol//tei:change[starts-with(@corresp, "#ch")]
         let $chapters-anticipated := $chapters[@status eq "being-cleared"]
         order by $vol-id
@@ -593,11 +604,18 @@ declare function fh:list-in-production-volumes($volumes) {
                 <li><a href="$app/historicaldocuments/{$vol-id}">{$vol-title-to-show}</a>
                     {
                         <ul style="list-style-type: disc">{
-                            for $chapter in $chapters-anticipated
-                            let $div-id := substring-after($chapter/@corresp, "#")
-                            let $title := $vol/id($div-id)/tei:head
-                            return
-                                <li style="margin-bottom: 0px"><a href="$app/historicaldocuments/{$vol-id}/{$div-id}">{$title/string()}</a></li>
+                            if ($some-published) then
+                                for $chapter in $chapters-anticipated
+                                let $div-id := substring-after($chapter/@corresp, "#")
+                                let $title := $vol/id($div-id)/tei:head
+                                return
+                                    <li style="margin-bottom: 0px"><a href="$app/historicaldocuments/{$vol-id}/{$div-id}">{$title/string()}</a></li>
+                            else
+                                for $chapter in $chapters-anticipated
+                                let $div-id := substring-after($chapter/@corresp, "#")
+                                let $title := $vol/id($div-id)/tei:head
+                                return
+                                    <li style="margin-bottom: 0px">{$title/string()}</li>
                         }</ul>
                     }
                 </li>       
