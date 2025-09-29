@@ -178,9 +178,15 @@ declare variable $config:PUBLICATIONS :=
             "select-document": function($document-id) { doc($config:FRUS_COL_VOLUMES || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) {
                 let $node := doc($config:FRUS_COL_VOLUMES || '/' || $document-id || '.xml')/id($section-id) 
+                let $some-published := root($node)//tei:publicationDesc[@status eq ("published", "partially-published")]
                 return
+                    (: return 404s for interior divs from volumes that are not yet at least partially published, 
+                       since we may need to publish TEI containing just chapter titles, 
+                       when publication of a chapter is anticipated :)
+                    if (not($some-published)) then
+                        ()
                     (: most requests will be for divs :)
-                    if ($node instance of element(tei:div)) then
+                    else if ($node instance of element(tei:div)) then
                         $node
                     (: catch requests for TEI/@xml:id :)
                     else if ($node instance of element(tei:TEI)) then
