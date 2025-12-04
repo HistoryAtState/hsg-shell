@@ -262,7 +262,7 @@ declare variable $config:PUBLICATIONS :=
         },
         :)
         (: used in urls.xml for loading frus administration listings and processed by pages.xqm for breadcrumbs :)
-        "frus-administration": map {
+        "frus-administrations": map {
           "select-section": function($administration-id) {
               doc($config:FRUS_COL_CODE_TABLES || '/frus-production.xml')/id('frus-administrations')//tei:category[@xml:id eq $administration-id]
             },
