@@ -139,23 +139,40 @@ declare variable $config:TUMBLR_COL := "/db/apps/tumblr/data/HistoryAtState";
 declare variable $config:TWITTER_COL := "/db/apps/twitter/data/HistoryAtState";
 declare variable $config:VISITS_COL := "/db/apps/visits";
 
-declare function config:last-modified-from-repo-xml ($collection as xs:string) as function(*) {
+declare function config:last-modified-from-repo-xml ($collection as xs:string)  as function(*) {
     function () {
-        let $repo-xml := doc($collection || "/repo.xml")
-        let $ts := $repo-xml/repo:meta/@commit-time/string()
-        let $seconds := xs:dayTimeDuration("PT" || substring($ts, 1, 10) || "S")
-        return $config:epoch-start + $seconds
+        let $ts := doc($collection || "/repo.xml")/repo:meta/@commit-time/string()
+        let $last-modified-date-time := $config:epoch-start + xs:dayTimeDuration("PT" || substring($ts, 1, 10) || "S")
+        let $_ := util:log("debug", "config:last-modified-from-repo-xml: " || $last-modified-date-time)
+        return
+            $last-modified-date-time
     }
 };
 
-declare function config:last-modified-from-git ($path-to-xar, $path-to-resource as xs:string) {
-        let $_ := util:log("debug", "config:last-modified-from-git $path-to-xar: "|| $path-to-xar || " path-to-resource: " || $path-to-resource)
+declare function config:last-modified-from-git ($path-to-xar as xs:string) as function(*) {
+    function ($document-id as xs:string?) {        
+        let $path-to-resource := $document-id || '.xml'        
+        let $_ := util:log("debug", "config:last-modified-from-git $path-to-xar: "|| $path-to-xar || " path-to-resource: " || $path-to-resource)            
         let $id := replace($path-to-resource, "/", "0x2F")
         let $last-modified-date-time := collection($path-to-xar || "/.last-modified")/id($id)/text()
         let $_ := util:log("debug", "config:last-modified-from-git-path: " || $last-modified-date-time)
         return
-            $last-modified-date-time    
+            $last-modified-date-time
+    }        
 };
+
+declare function config:last-modified-from-git ($path-to-xar as xs:string, $collection as xs:string?) as function(*) {
+    function ($document-id as xs:string?) {        
+        let $path-to-resource := $collection || "/" || $document-id || '.xml'        
+        let $_ := util:log("debug", "config:last-modified-from-git $path-to-xar: "|| $path-to-xar || " path-to-resource: " || $path-to-resource)            
+        let $id := replace($path-to-resource, "/", "0x2F")
+        let $last-modified-date-time := collection($path-to-xar || "/.last-modified")/id($id)/text()
+        let $_ := util:log("debug", "config:last-modified-from-git-path: " || $last-modified-date-time)
+        return
+            $last-modified-date-time
+    }
+};
+
 
 declare function config:pocom-people-last-modified() as xs:dateTime {
     collection($config:POCOM_COL_PEOPLE)//last-modified-date
@@ -172,9 +189,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "frus": map {
             "collection": $config:FRUS_COL_VOLUMES,
-            "document-last-modified": function($document-id) { 
-                config:last-modified-from-git($config:FRUS_COL, "volumes/" || $document-id || '.xml')
-            },
+            "document-last-modified": config:last-modified-from-git($config:FRUS_COL, "volumes"),
             "select-document": function($document-id) { doc($config:FRUS_COL_VOLUMES || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) {
                 let $node := doc($config:FRUS_COL_VOLUMES || '/' || $document-id || '.xml')/id($section-id) 
@@ -259,8 +274,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "buildings": map {
             "collection": $config:OP_BUILDINGS_COL,
-            "publication-last-modified": config:last-modified-from-repo-xml($config:OP_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:OP_COL, "buildings/" || $document-id || '.xml') },              
+            "publication-last-modified": config:last-modified-from-repo-xml($config:OP_COL) ,
+            "document-last-modified": config:last-modified-from-git($config:OP_COL, "buildings"),              
             "select-document": function($document-id) { doc($config:OP_BUILDINGS_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:OP_BUILDINGS_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
@@ -284,7 +299,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "conferences": map {
             "collection": $config:CONFERENCES_COL_ARTICLES,            
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:CONFERENCES_COL, "data/" || $document-id || '.xml') },
+            "document-last-modified": config:last-modified-from-git($config:CONFERENCES_COL, "data"),
             "select-document": function($document-id) { doc($config:CONFERENCES_COL_ARTICLES || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:CONFERENCES_COL_ARTICLES || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/conferences/" || string-join(($document-id, $section-id), '/') },
@@ -324,8 +339,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "countries": map {
             "collection": $config:COUNTRIES_COL_ARTICLES,
-            "publication-last-modified": config:last-modified-from-repo-xml($config:COUNTRIES_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:COUNTRIES_COL, "articles/" || $document-id || '.xml')},
+            "publication-last-modified": config:last-modified-from-repo-xml($config:COUNTRIES_COL) ,
+            "document-last-modified": config:last-modified-from-git($config:COUNTRIES_COL, "articles"),
             "select-document": function($document-id) { doc($config:COUNTRIES_COL_ARTICLES || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:COUNTRIES_COL_ARTICLES || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/countries/" || string-join(($document-id, $section-id), '/') },
@@ -347,8 +362,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "archives": map {
             "collection": $config:ARCHIVES_COL_ARTICLES,
-            "publication-last-modified": config:last-modified-from-repo-xml($config:ARCHIVES_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:ARCHIVES_COL, "articles/" || $document-id || '.xml') },
+            "publication-last-modified": config:last-modified-from-repo-xml($config:ARCHIVES_COL) ,
+            "document-last-modified": config:last-modified-from-git($config:ARCHIVES_COL, "articles"),
             "select-document": function($document-id) { doc($config:ARCHIVES_COL_ARTICLES || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:ARCHIVES_COL_ARTICLES || '/' || $document-id || '.xml')//tei:body },
             "html-href": function($document-id, $section-id) { "$app/countries/" || string-join(($document-id, $section-id), '/') },
@@ -369,8 +384,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "frus-history-articles": map {
             "collection": $config:FRUS_HISTORY_COL_ARTICLES,
-            "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_HISTORY_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:FRUS_HISTORY_COL, "articles/" || $document-id || '.xml') },
+            "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_HISTORY_COL) ,
+            "document-last-modified": config:last-modified-from-git($config:FRUS_HISTORY_COL, "articles"),
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_COL_ARTICLES || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:FRUS_HISTORY_COL_ARTICLES || '/' || $document-id || '.xml')/id($section-id) },
             "next": frus-history:get-next-article#1,
@@ -393,8 +408,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "people": map {
             "collection": $config:OP_SECRETARY_BIOS_COL,
-            "publication-last-modified": config:last-modified-from-repo-xml($config:OP_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:OP_COL, "secretary-bios/" || $document-id || '.xml') },
+            "publication-last-modified": config:last-modified-from-repo-xml($config:OP_COL) ,
+            "document-last-modified": config:last-modified-from-git($config:OP_COL, "secretary-bios"),
             "select-document": function($document-id) { doc($config:OP_SECRETARY_BIOS_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:OP_SECRETARY_BIOS_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/people/" || string-join(($document-id, $section-id), '/') },
@@ -505,7 +520,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "visits": map {
             "title": "Visits of Foreign Leaders and Heads of State - Department History",
-            "publication-last-modified":config:last-modified-from-repo-xml($config:VISITS_COL),
+            "publication-last-modified": config:last-modified-from-repo-xml($config:VISITS_COL) ,
             "breadcrumb-title": 
                 function($parameters as map(*)) as xs:string? {
                     let $key := $parameters?country-or-year
@@ -526,12 +541,12 @@ declare variable $config:PUBLICATIONS :=
         },
         "wwi": map {
             "title": "World War I - Department History",
-            "publication-last-modified":config:last-modified-from-repo-xml($config:app-root)
+            "publication-last-modified": config:last-modified-from-repo-xml($config:app-root)
         },
         "milestones": map {
             "collection": $config:MILESTONES_COL_CHAPTERS,
-            "publication-last-modified":config:last-modified-from-repo-xml($config:MILESTONES_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:MILESTONES_COL, "chapters/" || $document-id || '.xml') },  
+            "publication-last-modified": config:last-modified-from-repo-xml($config:MILESTONES_COL) ,
+            "document-last-modified": config:last-modified-from-git($config:MILESTONES_COL, "chapters"),  
             "select-document": function($document-id) { doc($config:MILESTONES_COL_CHAPTERS || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:MILESTONES_COL_CHAPTERS || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/milestones/" || string-join(($document-id, $section-id), '/') },
@@ -549,8 +564,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "short-history": map {
             "collection": $config:OP_SHORT_HISTORY_COL,
-            "publication-last-modified":config:last-modified-from-repo-xml($config:OP_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:OP_COL, "short-history/" || $document-id || '.xml') },
+            "publication-last-modified": config:last-modified-from-repo-xml($config:OP_COL) ,
+            "document-last-modified": config:last-modified-from-git($config:OP_COL, "short-history"),
             "select-document": function($document-id) { doc($config:OP_SHORT_HISTORY_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:OP_SHORT_HISTORY_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, $section-id), '/') },
@@ -571,8 +586,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "timeline": map {
             "collection": $config:ADMINISTRATIVE_TIMELINE_DATA_COL,
-            "publication-last-modified":config:last-modified-from-repo-xml($config:ADMINISTRATIVE_TIMELINE_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:ADMINISTRATIVE_TIMELINE_COL, "timeline/" || $document-id || '.xml') },
+            "publication-last-modified": config:last-modified-from-repo-xml($config:ADMINISTRATIVE_TIMELINE_COL),  
+            "document-last-modified": config:last-modified-from-git($config:ADMINISTRATIVE_TIMELINE_COL, "timeline"),
             "select-document": function($document-id) { doc($config:ADMINISTRATIVE_TIMELINE_DATA_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:ADMINISTRATIVE_TIMELINE_DATA_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/" || string-join(($document-id, substring-after($section-id, 'chapter_')), '/') },
@@ -594,8 +609,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "faq": map {
             "collection": $config:OP_FAQ_COL,
-            "publication-last-modified": config:last-modified-from-repo-xml($config:OP_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:OP_COL, "faq/" || $document-id || '.xml') },
+            "publication-last-modified": config:last-modified-from-repo-xml($config:OP_COL) ,
+            "document-last-modified": config:last-modified-from-git($config:OP_COL, "faq"),
             "select-document": function($document-id) { doc($config:OP_FAQ_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:OP_FAQ_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
@@ -615,8 +630,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "hac": map {
             "collection": $config:HAC_COL,
-            "publication-last-modified": function($document-id) { config:last-modified-from-git($config:HAC_COL, $document-id || '.xml')},
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:HAC_COL, $document-id || '.xml') },
+            "publication-last-modified": config:last-modified-from-repo-xml($config:HAC_COL),
+            "document-last-modified": config:last-modified-from-git($config:HAC_COL),
             "select-document": function($document-id) { doc($config:HAC_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:HAC_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/about/" || string-join(($document-id, $section-id), '/') },
@@ -636,7 +651,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "education": map {
             "collection": $config:OP_EDUCATION_COL,
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:OP_COL, "education/introductions/" || $document-id || '.xml') },  
+            "document-last-modified": config:last-modified-from-git($config:OP_COL, "education/introductions"),  
             "select-document": function($document-id) { doc($config:OP_EDUCATION_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:OP_EDUCATION_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/education/modules/" || string-join(($document-id, $section-id), '#') },
@@ -657,8 +672,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "frus-history-monograph": map {
             "collection": $config:FRUS_HISTORY_COL_MONOGRAPH,
-            "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_HISTORY_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:FRUS_HISTORY_COL, "monograph/" || $document-id || '.xml') },  
+            "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_HISTORY_COL) ,
+            "document-last-modified": config:last-modified-from-git($config:FRUS_HISTORY_COL, "monograph"),
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_COL_MONOGRAPH || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { 
                 let $target-section-id :=
@@ -722,7 +737,7 @@ declare variable $config:PUBLICATIONS :=
         "frus-history-documents": map {
             "collection": $config:FRUS_HISTORY_COL_DOCUMENTS,
             "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_HISTORY_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:FRUS_HISTORY_COL, "documents/" || $document-id || '.xml') },
+            "document-last-modified": config:last-modified-from-git($config:FRUS_HISTORY_COL, "documents"),
             "next": frus-history:get-next-doc#1,
             "previous": frus-history:get-previous-doc#1,
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_COL_DOCUMENTS || "/" || $document-id || ".xml") },
@@ -732,8 +747,8 @@ declare variable $config:PUBLICATIONS :=
         },
         "vietnam-guide": map {
             "collection": $config:OP_VIETNAM_GUIDE_COL,
-            "publication-last-modified": config:last-modified-from-repo-xml($config:OP_COL),
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:OP_COL, "vietnam-guide/" || $document-id || '.xml') },
+            "publication-last-modified": config:last-modified-from-repo-xml($config:OP_COL) ,
+            "document-last-modified": config:last-modified-from-git($config:OP_COL, "vietnam-guide"),
             "select-document": function($document-id) { doc($config:OP_VIETNAM_GUIDE_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:OP_VIETNAM_GUIDE_COL || '/' || $document-id || '.xml') },
             "html-href": function($document-id, $section-id) { "$app/historicaldocuments/" || string-join(($document-id, $section-id), '/') },
@@ -743,7 +758,7 @@ declare variable $config:PUBLICATIONS :=
         },
         "views-from-the-embassy": map {
             "collection": $config:OP_VIEWS_FROM_EMBASSY_COL,
-            "document-last-modified": function($document-id) { config:last-modified-from-git($config:OP_COL, "views-from-the-embassy/" || $document-id || '.xml') },            
+            "document-last-modified": config:last-modified-from-git($config:OP_COL, "views-from-the-embassy"),            
             "select-document": function($document-id) { doc($config:OP_VIEWS_FROM_EMBASSY_COL || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { doc($config:OP_VIEWS_FROM_EMBASSY_COL || '/' || $document-id || '.xml')/id($section-id) },
             "html-href": function($document-id, $section-id) { "$app/departmenthistory/wwi" },
