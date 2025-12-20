@@ -22,9 +22,11 @@ declare namespace response="http://exist-db.org/xquery/response";
 declare namespace a="http://www.w3.org/2005/Atom";
 declare namespace xhtml="http://www.w3.org/1999/xhtml";
 
+(: editorial date - the earliest possible "last-modified" time applied to all pages on the site 
+ : to ensure any pages that were cached before this date are refreshed when requested after 
+ : this date :)
+declare variable $config:EDITORIAL_DATE_TIME := xs:dateTime("2025-12-20T00:00:00-00:00");
 
-(: updated date-time due to: https://github.com/HistoryAtState/hsg-shell/pull/481 :)
-declare variable $config:EDITORIAL_DATE_TIME := xs:dateTime("2025-08-26T00:00:00-00:00");
 (:
     Determine the application root collection from the current module load path.
 :)
