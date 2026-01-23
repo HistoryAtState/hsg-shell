@@ -140,106 +140,80 @@ Verify you have a local hsg-project running at localhost:8080/exist/apps/hsg-she
 
 ### How to run local web tests
 
-#### 1. Install Chrome
+#### 1. Install Dependencies
 
-Make sure you have Google Chrome >= 110 and all required node_modules installed (`npm install`).
+Make sure you have all required node_modules installed (`npm install`). Cypress will be installed as part of the devDependencies.
 
-##### Troubleshooting Chromedriver Problems
+#### 2. Configuration
 
-If you have problems with installing or running Chromedriver, have a look at these resources: [webdriver.io/docs/wdio-chromedriver-service.html](https://webdriver.io/docs/wdio-chromedriver-service.html), [stackoverflow](https://stackoverflow.com/questions/54940853/chrome-version-must-be-between-71-and-75-error-after-updating-to-chromedriver-2)
+Test configuration is in `cypress.config.cjs`. The baseUrl is set to `http://localhost:8080/exist/apps/hsg-shell` by default. Test files are located in `tests/cypress/e2e/` and organized by feature area.
 
-It might be helpful to run
+Test files follow naming conventions:
+- `prod_*.cy.js` - Production environment tests
+- `uat_*.cy.js` - UAT environment tests
 
-```shell
-npm install chromedriver --detect_chromedriver_version
-```
+#### 3. Run the tests
 
-All available chromedriver versions are listed here: [https://chromedriver.storage.googleapis.com/](https://chromedriver.storage.googleapis.com/).
-
-If your current Chrome version doesn't match the required one.
-This command will check the required version and install a suitable Chromedriver for you.
-
-Note: If you are using an Apple M1 computer, the filename for chromedriver has been changed by Chrome between version 105 and 106 [See fix for node_chromedriver: https://github.com/giggio/node-chromedriver/pull/386/](https://github.com/giggio/node-chromedriver/pull/386/commits/7bc8dc46583ca484ca17707d9d98f8a1f98b9be4#).
-When running this project's ant script on an M1 with a Chrome version <=105, you should either update Chrome to 110 like defined in file `package.json`, or change the chromedriver version to your current Chrome version to match the expected chromedriver filename.
-
-#### 2. Optional: Edit configuration
-
-* Optional: Edit which test files or suites you would like to run.
-  Here is the part where to define the test suites:
-    ```
-      suites: {
-        dev: [
-          './tests/specs/**/dev_*.js'
-        ],
-        prod: [
-          './tests/specs/**/prod_*.js'
-        ]
-      }
-    ```
-
-#### 3. Run the web test
-
-Basic syntax of starting an entire test suite is
+**Open Cypress Test Runner (Interactive Mode):**
 ```bash
-npm test
+npm run cy:open
 ```
 
-Use `npx` to execute different test suites 
-
+**Run all tests (Headless Mode):**
 ```bash
-npx wdio wdio.conf.js --suite <name-of-the-testsuite>
+npm run cy:run
 ```
-for example (runs all development environment test that have been listed in the wdio configuration in `suites: {prod : ...}`):
 
+**Run production tests only:**
 ```bash
-npx wdio wdio.conf.js --suite test-prod
+npm run cy:run:prod
 ```
 
-and for a single test it is
+**Run UAT tests only:**
 ```bash
-npx wdio wdio.conf.js --spec path-to-the-testspec
+npm run cy:run:uat
 ```
-for example:
+
+**Run jenkins suite (production tests):**
 ```bash
-npx wdio wdio.conf.js --spec tests/specs/error/prod_404.spec.js
+npm run cy:run:jenkins
 ```
 
-In addition, you can define running the test commands in `package.json`
-within the `scripts` key, for example:
-```json
-"test": "./node_modules/.bin/wdio wdio.conf.js --suite test-prod"
-```
-and run this command with
-```shell
-npm run-script test-prod
+**Run a specific test file:**
+```bash
+npx cypress run --spec "tests/cypress/e2e/landing/prod_landing_title.cy.js"
 ```
 
-This test runs in "headless" mode. It means the test will run in the background without opening a browser window.
-If you want to observe all actions in the web test in a browser, just comment out the `headless` argument in the `wdio.conf.js`:
+#### 4. Test Structure
 
-```
-chromeOptions: {
-  args: [
-  //'headless',
-    'disable-gpu',
-    '--window-size=1280,1024',
-    'ignore-certificate-errors',
-    'ignore-urlfetcher-cert-requests'
-  ],
-  binary: process.env.WDIO_CHROME_BINARY
-},
-```
+Tests are organized in `tests/cypress/e2e/` by feature:
+- `conferences/` - Conference pages
+- `countries/` - Countries pages
+- `departmenthistory/` - Department history pages
+- `developer/` - Developer resources
+- `education/` - Education pages
+- `error/` - Error pages (404, etc.)
+- `historical-documents/` - FRUS and historical documents
+- `iiif-images/` - IIIF image viewer tests
+- `landing/` - Landing page tests
+- `milestones/` - Milestones pages
+- `open/` - Open Government Initiative
+- `search/` - Search functionality
+- `tags/` - Tags pages
+- `ui-components/` - UI component tests (breadcrumb, etc.)
 
-#### 4. Further documentation
+Custom commands are available in `tests/cypress/support/commands.js` which provide helper methods converted from the original WebdriverIO Page Objects.
 
-This web test is configured to use the framework `Mocha` with `Chai` and activated Chai plugin `assert` (`global.assert = chai.assert;`) for assertions.
+#### 5. Further documentation
+
+This test suite uses Cypress with Mocha and Chai for assertions. The `assert` global is available (matching the previous WebdriverIO setup).
 
 Have a look at the documentation:
 
-* General overview about "webdriver.io": [webdriver.io/docs/gettingstarted](https://webdriver.io/docs/gettingstarted.html)
-* Webdriver.io functions: [webdriver.io/docs/api](https://webdriver.io/docs/api.html)
-* List of all functions in the Chai Assertion library: [chaijs.com/api/assert](https://www.chaijs.com/api/assert/)
-* Overview about mocha.js: [mochajs.org](https://mochajs.org/)
+* Cypress documentation: [docs.cypress.io](https://docs.cypress.io/)
+* Cypress API: [docs.cypress.io/api](https://docs.cypress.io/api)
+* Chai Assertion library: [chaijs.com/api/assert](https://www.chaijs.com/api/assert/)
+* Mocha documentation: [mochajs.org](https://mochajs.org/)
 
 ## Release
 

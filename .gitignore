@@ -11,6 +11,14 @@ resources/scripts/app.min.js
 tests/reports/errorShots/*
 tests/reports/junit-reports/*
 
+test/cypress/screenshots/
+test/cypress/videos/
+test/cypress/downloads/
+
+.DS_Store
+
+plan/
+
 # local properties
 local.node-exist.json
 

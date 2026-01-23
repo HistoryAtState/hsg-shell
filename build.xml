@@ -94,11 +94,14 @@
             <exclude name="package-lock.json"/>
             <exclude name=".idea/**"/>
             <exclude name=".vscode/**"/>
+            <exclude name=".plan/**"/>
             <exclude name="tests/reports/**"/>
+            <exclude name="tests/cypress/**"/>
             <exclude name="npm-shrinkwrap.json"/>
             <exclude name="build.properties.local.xml"/>
             <exclude name="local.node-exist.json"/>   
             <exclude name="wdio*"/>
+            <exclude name="cypress.config.cjs"/>
             <exclude name=".github/**"/>
             <exclude name=".releaserc"/>
             <exclude name="commitlint.config.cjs"/>

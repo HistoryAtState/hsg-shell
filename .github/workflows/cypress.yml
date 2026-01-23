@@ -1,0 +1,106 @@
+# This workflow runs Cypress tests in Firefox against a running eXist-db instance.
+# It mirrors the build workflow structure but executes Cypress tests instead of smoke tests.
+
+name: Cypress Tests
+
+on: [push]
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Test against different eXist-db versions
+        exist-version: [latest, release]
+        java-version: [11, 21]
+        exclude:
+          - exist-version: release
+            java-version: 21
+          - exist-version: latest
+            java-version: 11
+
+    steps:
+      # Checkout code
+      - uses: actions/checkout@v6
+
+      # Install Test Dependencies
+      - name: Install Test Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils
+
+      # Sanity check
+      - name: Ensure all XML files are well-formed
+        run: |
+          find . -type f -name '*.xml' -print0 | xargs -0 xmllint -noout
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          cache: npm
+          node-version: lts/*
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci --no-optional
+
+      # Build
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java-version }}
+
+      - name: Build Expath Package
+        run: ant -Dapp.version=1.0.0-SNAPSHOT
+
+      - name: Add expath dependencies
+        working-directory: build
+        run: |
+          wget https://exist-db.org/exist/apps/public-repo/public/expath-crypto-module-6.0.1.xar  -O 000.xar
+          wget http://exist-db.org/exist/apps/public-repo/public/templating-1.1.0.xar -O 001.xar
+          wget https://exist-db.org/exist/apps/public-repo/public/tei-publisher-lib-2.10.1.xar -O 002.xar
+          wget https://exist-db.org/exist/apps/public-repo/public/functx-1.0.1.xar -O 003.xar
+          wget https://github.com/HistoryAtState/aws.xq/releases/latest/download/aws-xq.xar -O 004.xar
+
+      # Install and start eXist-db
+      - name: Start exist-ci containers
+        run: |
+          docker run -dit -p 8080:8080 -v ${{ github.workspace }}/build:/exist/autodeploy \
+          --name exist --rm --health-interval=2s --health-start-period=4s \
+          duncdrum/existdb:${{ matrix.exist-version }}
+
+      - name: Wait for eXist-db to start
+        timeout-minutes: 10
+        run: |
+          while ! docker logs exist | grep -q "Server has started"; \
+          do sleep 2s; \
+          done
+
+      # Run Cypress tests in Firefox
+      - name: Run Cypress tests in Firefox
+        uses: cypress-io/github-action@v7
+        with:
+          install: false
+          browser: firefox
+          spec: 'tests/cypress/e2e/**/prod_*.cy.js'
+
+
+      # Upload test results
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots-${{ matrix.exist-version }}-${{ matrix.java-version }}
+          path: tests/cypress/screenshots
+          retention-days: 7
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos-${{ matrix.exist-version }}-${{ matrix.java-version }}
+          path: tests/cypress/videos
+          retention-days: 7
