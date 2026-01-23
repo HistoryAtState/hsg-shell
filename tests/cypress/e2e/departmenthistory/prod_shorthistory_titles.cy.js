@@ -28,9 +28,11 @@ describe('Short-history pages: ', function () {
   describe('Each "Short-history" subpage', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
-        cy.openPage(page.link)
+        cy.visit(page.link)
         cy.get('#content-inner ' + page.level).invoke('text').then((title) => {
-          expect(title).to.equal(page.title)
+          // Normalize whitespace (newlines, extra spaces)
+          const normalized = title.replace(/\s+/g, ' ').trim()
+          expect(normalized).to.equal(page.title)
         })
       })
     })

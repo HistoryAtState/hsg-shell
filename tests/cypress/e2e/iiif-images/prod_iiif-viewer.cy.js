@@ -16,8 +16,8 @@ const i3 = 'iiif/3/frus1902app1%2Ftiff%2F0021.tif'
 // TODO: Catch server response when browsing with side navigation, if correct images are served
 
 describe('Requesting images from an external source (S3) via a IIIF server', () => {
-  before(() => {
-    cy.openPage(p1)
+  beforeEach(() => {
+    cy.visit(p1)
     cy.wait(500)
   })
 

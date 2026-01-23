@@ -3,8 +3,8 @@
  */
 
 describe('A breadcrumb', () => {
-  before(() => {
-    cy.openPage('historicaldocuments/frus-history/chapter-4')
+  beforeEach(() => {
+    cy.visit('historicaldocuments/frus-history/chapter-4')
   })
 
   // 1. Check, if rdf attributes render as expected
@@ -60,8 +60,8 @@ describe('A breadcrumb', () => {
 })
 
 describe.skip('A breadcrumb on small screens', () => {
-  before(() => {
-    cy.openPage('historicaldocuments/frus-history/chapter-4')
+  beforeEach(() => {
+    cy.visit('historicaldocuments/frus-history/chapter-4')
     cy.viewport(480, 800)
     cy.get('.hsg-breadcrumb__list-item:nth-last-child(2) .hsg-breadcrumb__link').should('be.visible')
   })

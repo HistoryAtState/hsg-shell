@@ -2,14 +2,13 @@
  * Checks departmenthistory page type
  */
 
-const mainpage = {
-  link: 'countries', // 1st level subpage (landing)
-  title: 'Countries'
-}
-
 describe('The "Countries" landing page', function () {
+  beforeEach(function () {
+    // Use cy.visit() directly with relative path - baseUrl handles the full URL
+    cy.visit('countries')
+  })
+
   it('should display a select input for choosing countries', function () {
-    cy.openPage(mainpage.link)
     cy.get('select[data-template="countries:load-countries"]').should('exist')
   })
 

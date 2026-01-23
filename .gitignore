@@ -11,9 +11,9 @@ resources/scripts/app.min.js
 tests/reports/errorShots/*
 tests/reports/junit-reports/*
 
-test/cypress/screenshots/
-test/cypress/videos/
-test/cypress/downloads/
+tests/cypress/screenshots/
+tests/cypress/videos/
+tests/cypress/downloads/
 
 .DS_Store
 

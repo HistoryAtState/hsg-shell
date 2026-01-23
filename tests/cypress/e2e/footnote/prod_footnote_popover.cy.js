@@ -9,7 +9,8 @@ function escape (value) {
 describe('footnote popover', function () {
   describe('footnote popover look and behavior on desktop', function () {
     beforeEach(function () {
-      cy.openPage('historicaldocuments/frus-history/introduction')
+      // Use cy.visit() with relative path - baseUrl is configured in cypress.config.cjs
+      cy.visit('historicaldocuments/frus-history/introduction')
       cy.window().then((win) => {
         if (win.$) {
           win.$('#touch-detector').hide()
@@ -33,6 +34,7 @@ describe('footnote popover', function () {
 
     it('footnote popover should appear on hover', function () {
       cy.get('.popover').should('not.be.visible')
+      // scrollIntoView is a built-in Cypress command, use it directly
       cy.get('#content-inner a.note[href^="#fn\\:"][rel=footnote]').scrollIntoView()
       cy.get('#content-inner a.note[href^="#fn\\:"][rel=footnote]').trigger('mouseenter')
       cy.get('.popover').should('be.visible')
@@ -43,8 +45,7 @@ describe('footnote popover', function () {
       cy.get('#content-inner a.note[href^="#fn\\:"][rel=footnote]').scrollIntoView()
       cy.get('#content-inner a.note[href^="#fn\\:"][rel=footnote]').trigger('mouseenter')
       cy.get('.popover').should('be.visible')
-      cy.get('.popover .footnote-body a.fn-back').should('exist')
-      cy.get('.popover .footnote-body a.fn-back').should('not.be.visible')
+      cy.get('.popover .footnote-body a.fn-back').should('exist').and('not.be.visible')
     })
 
     it('footnote popover should not disappear with the cursor on it', function () {
@@ -150,7 +151,8 @@ describe('footnote popover', function () {
 
   describe('footnote popover look and behavior on touch devices', function () {
     beforeEach(function () {
-      cy.openPage('historicaldocuments/frus-history/introduction')
+      // Use cy.visit() with relative path - baseUrl is configured in cypress.config.cjs
+      cy.visit('historicaldocuments/frus-history/introduction')
       cy.window().then((win) => {
         if (win.$) {
           win.$('#touch-detector').show()

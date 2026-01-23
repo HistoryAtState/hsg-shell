@@ -65,8 +65,8 @@ describe('Department History pages: ', function () {
   describe('Each "Department History" subpage', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
-        cy.openPage(page.link)
-        cy.getHeadlineH1().then((title) => {
+        cy.visit(page.link)
+        cy.get('#content-inner h1').invoke('text').then((title) => {
           expect(title).to.equal(page.title)
         })
       })

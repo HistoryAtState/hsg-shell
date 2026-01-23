@@ -24,8 +24,8 @@ const subpages = [
 
 describe('on the Milestone page', function () {
   it('should display the headline', function () {
-    cy.openPage(mainpage.link)
-    cy.getHeadlineH1().then((title) => {
+    cy.visit(mainpage.link)
+    cy.get('#content-inner h1').invoke('text').then((title) => {
       expect(title).to.equal(mainpage.title)
     })
   })
@@ -34,9 +34,11 @@ describe('on the Milestone page', function () {
   describe('Each "Milestones" subpage', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
-        cy.openPage(page.link)
-        cy.getHeadlineH1().then((title) => {
-          expect(title).to.equal(page.title)
+        cy.visit(page.link)
+        cy.get('#content-inner h1').invoke('text').then((title) => {
+          // Normalize whitespace (newlines, extra spaces)
+          const normalized = title.replace(/\s+/g, ' ').trim()
+          expect(normalized).to.equal(page.title)
         })
       })
     })

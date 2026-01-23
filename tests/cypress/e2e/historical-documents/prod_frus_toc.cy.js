@@ -3,8 +3,8 @@
  */
 
 describe('The TOC of a volume', () => {
-  before(() => {
-    cy.openPage('historicaldocuments/frus1947v03/comp1')
+  beforeEach(() => {
+    cy.visit('historicaldocuments/frus1947v03/comp1')
   })
 
   it('should highlight the current chapter', () => {

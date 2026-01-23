@@ -8,7 +8,7 @@ const searchDuration = '.hsg-search-section .search-duration'
 describe('Search a keyword with filters "within=documents" and "date"', () => {
   // Keyword Indochina
   it('query "search?q=Indochina" should display the expected number of results', () => {
-    cy.openPage('search?q=Indochina&within=documents&start-date=1940&end-date=1960&sort-by=date-asc')
+    cy.visit('search?q=Indochina&within=documents&start-date=1940&end-date=1960&sort-by=date-asc')
     cy.getElementText(searchCount).then((count) => {
       const countNum = count.replace(/,/, '')
       console.log('count=', countNum)
@@ -17,7 +17,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
   })
 
   it('query "search?q=Indochina" should be performed within expected duration', () => {
-    cy.openPage('search?q=Indochina&within=documents&start-date=1940&end-date=1960')
+    cy.visit('search?q=Indochina&within=documents&start-date=1940&end-date=1960')
     cy.getElementText(searchDuration).then((duration) => {
       const durationNum = parseFloat(duration)
       console.log('duration=', durationNum)
@@ -27,7 +27,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
 
   // Keyword Sudan
   it('query "search?q=Sudan" should display the expected number of results', () => {
-    cy.openPage('search?q=Sudan&within=documents&start-date=1940&end-date=1960&sort-by=date-asc')
+    cy.visit('search?q=Sudan&within=documents&start-date=1940&end-date=1960&sort-by=date-asc')
     cy.getElementText(searchCount).then((count) => {
       const countNum = count.replace(/,/, '')
       console.log('count=', countNum)
@@ -36,7 +36,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
   })
 
   it('query "search?q=Sudan" should be performed within expected duration', () => {
-    cy.openPage('search?q=Sudan&within=documents&start-date=1940&end-date=1960')
+    cy.visit('search?q=Sudan&within=documents&start-date=1940&end-date=1960')
     cy.getElementText(searchDuration).then((duration) => {
       const durationNum = parseFloat(duration)
       console.log('duration=', durationNum)
@@ -46,7 +46,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
 
   // Keyword China
   it('query "search?q=China" should display the expected number of results', () => {
-    cy.openPage('search?q=China&within=documents&start-date=1940&end-date=1960&sort-by=date-asc')
+    cy.visit('search?q=China&within=documents&start-date=1940&end-date=1960&sort-by=date-asc')
     cy.getElementText(searchCount).then((count) => {
       const countNum = count.replace(/,/, '')
       console.log('count=', countNum)
@@ -55,7 +55,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
   })
 
   it('query "search?q=China" should be performed within expected duration', () => {
-    cy.openPage('search?q=China&within=documents&start-date=1940&end-date=1960')
+    cy.visit('search?q=China&within=documents&start-date=1940&end-date=1960')
     cy.getElementText(searchDuration).then((duration) => {
       const durationNum = parseFloat(duration)
       console.log('duration=', durationNum)
@@ -65,7 +65,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
 
   // Keyword Tokyo
   it('query "search?q=Tokyo" should display the expected amount of 101 results', () => {
-    cy.openPage('search?q=Tokyo&within=documents&start-date=1940&end-date=1960&sort-by=date-asc')
+    cy.visit('search?q=Tokyo&within=documents&start-date=1940&end-date=1960&sort-by=date-asc')
     cy.getElementText(searchCount).then((count) => {
       const countNum = count.replace(/,/, '')
       console.log('count=', countNum)
@@ -74,7 +74,7 @@ describe('Search a keyword with filters "within=documents" and "date"', () => {
   })
 
   it('query "search?q=Tokyo" should be performed within expected duration', () => {
-    cy.openPage('search?q=Tokyo&within=documents&start-date=1940&end-date=1960')
+    cy.visit('search?q=Tokyo&within=documents&start-date=1940&end-date=1960')
     cy.getElementText(searchDuration).then((duration) => {
       const durationNum = parseFloat(duration)
       console.log('duration=', durationNum)

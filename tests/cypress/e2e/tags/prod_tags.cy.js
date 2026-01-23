@@ -39,8 +39,8 @@ const subpages = [
 
 describe('On the Tag page: ', function () {
   it('should display the headline', function () {
-    cy.openPage(mainpage.link)
-    cy.getHeadlineH1().then((title) => {
+    cy.visit(mainpage.link)
+    cy.get('#content-inner h1').invoke('text').then((title) => {
       expect(title.replace(regex, '')).to.equal(mainpage.title)
     })
   })
@@ -49,7 +49,7 @@ describe('On the Tag page: ', function () {
   describe('Each "Tags" subpage', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
-        cy.openPage(page.link)
+        cy.visit(page.link)
         cy.get(headline[page.h]).invoke('text').then((title) => {
           expect(title.replace(regex, '')).to.equal(page.title)
         })

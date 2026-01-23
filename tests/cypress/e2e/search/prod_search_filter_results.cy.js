@@ -33,8 +33,8 @@ const noResultsMessage = '#content-inner > section > p' // paragraph containing 
 // Parameterized tests simply opening pages with valid parameters, sorted by relevance
 validFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with valid parameters and sorted by "' + sortingOptions[0] + '"', function () {
-    before(function () {
-      cy.openPage(query + parameters + sortingOptions[0])
+    beforeEach(function () {
+      cy.visit(query + parameters + sortingOptions[0])
     })
 
     it('"' + parameters + '" should return search results', function () {
@@ -48,8 +48,8 @@ validFilterOptions.forEach(function (parameters) {
 // Parameterized tests simply opening pages with valid parameters, sorted by ascending date
 validFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with valid parameters and sorted by "' + sortingOptions[1] + '"', function () {
-    before(function () {
-      cy.openPage(query + parameters + sortingOptions[1])
+    beforeEach(function () {
+      cy.visit(query + parameters + sortingOptions[1])
     })
 
     it('"' + parameters + '" should return search results', function () {
@@ -63,8 +63,8 @@ validFilterOptions.forEach(function (parameters) {
 // Parameterized tests simply opening pages with invalid parameters
 invalidFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with invalid parameters', function () {
-    before(function () {
-      cy.openPage(query + parameters + sortingOptions[0])
+    beforeEach(function () {
+      cy.visit(query + parameters + sortingOptions[0])
     })
 
     it('"' + parameters + '" should display the search page', function () {

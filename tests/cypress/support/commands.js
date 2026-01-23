@@ -1,6 +1,33 @@
 // ***********************************************
 // Custom Cypress commands converted from WebdriverIO Page Objects
 // ***********************************************
+//
+// IMPORTANT: Cypress Best Practices
+//
+// 1. Use cy.visit() directly in beforeEach hooks, not custom commands:
+//    ✅ beforeEach(() => { cy.visit('/path') })
+//    ❌ beforeEach(() => { cy.openPage('path') })
+//
+// 2. Use Cypress built-in commands directly:
+//    ✅ cy.get(selector).invoke('text')
+//    ✅ cy.get(selector).invoke('attr', 'href')
+//    ✅ cy.get(selector).scrollIntoView()
+//    ❌ cy.getElementText(selector)
+//    ❌ cy.getElementAttribute(selector, 'href')
+//    ❌ cy.scrollIntoView(selector) // ERROR: scrollIntoView is already a Cypress command
+//
+// 3. Use baseUrl from cypress.config.cjs:
+//    - baseUrl: 'http://localhost:8080/exist/apps/hsg-shell'
+//    - cy.visit('/') → visits baseUrl
+//    - cy.visit('search') → visits baseUrl + '/search'
+//    - cy.visit('/search') → visits http://localhost:8080/search (absolute, wrong!)
+//
+// 4. Chain assertions for better readability:
+//    ✅ cy.get('.result').should('exist').and('not.be.empty')
+//    ❌ cy.get('.result').should('exist'); cy.get('.result').should('not.be.empty')
+//
+// These custom commands are kept for backward compatibility but should be
+// gradually replaced with idiomatic Cypress patterns in new tests.
 
 /**
  * Serialize parameters object to query string
@@ -25,7 +52,11 @@ function serializeParameters(data) {
 
 /**
  * Open a page with optional query parameters
- * Equivalent to Page.open(path, data)
+ * Uses baseUrl from cypress.config.cjs, so just pass the path
+ * Example: cy.visit('/exist/apps/hsg-shell/') or cy.visit('/exist/apps/hsg-shell/search?q=test')
+ * For query params, use: cy.visit('/exist/apps/hsg-shell/search', { qs: { q: 'test' } })
+ * 
+ * This command is kept for backward compatibility but consider using cy.visit() directly
  */
 Cypress.Commands.add('openPage', (path = '', data = {}) => {
   const prefix = Cypress.env('prefix') || '/exist/apps/hsg-shell/'
@@ -35,7 +66,8 @@ Cypress.Commands.add('openPage', (path = '', data = {}) => {
 
 /**
  * Get element text
- * Equivalent to Page.getElementText(selector)
+ * Note: Prefer using cy.get(selector).invoke('text') or cy.get(selector).should('have.text', ...) directly
+ * This is kept for backward compatibility
  */
 Cypress.Commands.add('getElementText', (selector) => {
   return cy.get(selector).invoke('text')
@@ -43,7 +75,8 @@ Cypress.Commands.add('getElementText', (selector) => {
 
 /**
  * Get element attribute
- * Equivalent to Page.getElementAttribute(selector, attributeName)
+ * Note: Prefer using cy.get(selector).invoke('attr', name) directly
+ * This is kept for backward compatibility
  */
 Cypress.Commands.add('getElementAttribute', (selector, attributeName) => {
   return cy.get(selector).invoke('attr', attributeName)
@@ -122,13 +155,7 @@ Cypress.Commands.add('setDesktopViewport', () => {
   cy.viewport(1200, 800)
 })
 
-/**
- * Scroll element into view
- * Equivalent to Page.scroll(selector)
- */
-Cypress.Commands.add('scrollIntoView', (selector) => {
-  cy.get(selector).scrollIntoView()
-})
+// Note: scrollIntoView is already a Cypress command, use cy.get(selector).scrollIntoView() directly
 
 /**
  * Wait for element to be visible (with timeout)

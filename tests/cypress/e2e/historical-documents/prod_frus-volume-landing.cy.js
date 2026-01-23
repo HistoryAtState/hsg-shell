@@ -5,8 +5,8 @@
 const s3_Prod = 'https://static.history.state.gov'
 
 describe('Volume landing page frus1951-54IranEd2 with a cover image', () => {
-  before(() => {
-    cy.openPage('historicaldocuments/frus1951-54IranEd2')
+  beforeEach(() => {
+    cy.visit('historicaldocuments/frus1951-54IranEd2')
   })
 
   it('should display a cover image loaded from S3 production bucket', () => {
@@ -35,8 +35,8 @@ describe('Volume landing page frus1951-54IranEd2 with a cover image', () => {
 })
 
 describe('Volume landing page "frus1861-99Index" without a cover image', () => {
-  before(() => {
-    cy.openPage('historicaldocuments/frus1861-99Index')
+  beforeEach(() => {
+    cy.visit('historicaldocuments/frus1861-99Index')
   })
 
   it('should NOT display a cover image', () => {

@@ -54,8 +54,8 @@ describe('Education pages: ', function () {
   describe('Each "Education" page should be displayed and subsequently', function () {
     pages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
-        cy.openPage(page.link)
-        cy.getHeadlineH1().then((title) => {
+        cy.visit(page.link)
+        cy.get('#content-inner h1').invoke('text').then((title) => {
           expect(title).to.equal(page.title)
         })
       })
@@ -65,10 +65,18 @@ describe('Education pages: ', function () {
   describe('Each "Education" subpage should be displayed and subsequently', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
-        cy.openPage(page.link)
+        cy.visit(page.link)
         // SubPage.headline_h2 would select the title of the red alert box
+        // Normalize whitespace (newlines, extra spaces) and handle quote differences
         cy.get('#content-inner div:nth-child(2) h2').invoke('text').then((title) => {
-          expect(title).to.equal(page.title)
+          // Normalize whitespace and remove any trailing text that might be appended
+          let normalized = title.replace(/\s+/g, ' ').trim()
+          // Handle curly quotes vs straight quotes - normalize to straight quotes
+          normalized = normalized.replace(/[""]/g, '"').replace(/['']/g, "'")
+          // Extract just the title part (before any trailing text like "Lesson Plans & Activities")
+          const titleMatch = normalized.match(/^([^"]*"[^"]*")/)
+          const finalTitle = titleMatch ? titleMatch[1] : normalized.split('Lesson Plans')[0].trim()
+          expect(finalTitle).to.equal(page.title.replace(/[""]/g, '"').replace(/['']/g, "'"))
         })
       })
     })

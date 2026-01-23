@@ -49,20 +49,20 @@ const subpages = [
 ]
 
 describe('FRUS pages: ', function () {
-  before(function () {
-    cy.openPage('historicaldocuments')
+  beforeEach(function () {
+    cy.visit('historicaldocuments')
   })
 
   // Dropdown check
   describe('Checking the dropdown menu: Clicking the first dropdown item', function () {
-    before(function () {
-      cy.get('ul.nav.navbar-nav li:nth-child(2) > a').click()
+    beforeEach(function () {
+      cy.get('ul.nav.navbar-nav li:nth-child(2) > a').first().click()
       cy.get('ul.dropdown-menu li:nth-child(2)').should('be.visible')
-      cy.get('ul.dropdown-menu li:nth-child(1) a').click()
+      cy.get('ul.dropdown-menu li:nth-child(1) a').first().click()
     })
 
     it('should open the FRUS landing page with headline', function () {
-      cy.getHeadlineH1().then((title) => {
+      cy.get('#content-inner h1').invoke('text').then((title) => {
         expect(title).to.equal(mainpage.title)
       })
     })
@@ -72,9 +72,11 @@ describe('FRUS pages: ', function () {
   describe('Each FRUS subpage should be displayed and subsequently', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
-        cy.openPage(page.link)
+        cy.visit(page.link)
         cy.get('#content-inner ' + page.level).invoke('text').then((title) => {
-          expect(title).to.equal(page.title)
+          // Normalize whitespace (newlines, extra spaces)
+          const normalized = title.replace(/\s+/g, ' ').trim()
+          expect(normalized).to.equal(page.title || '')
         })
       })
     })

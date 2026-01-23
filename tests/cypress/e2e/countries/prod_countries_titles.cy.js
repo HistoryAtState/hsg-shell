@@ -36,8 +36,9 @@ const subpages = [
 
 describe('On the Countries page ', function () {
   it('should display the headline', function () {
-    cy.openPage(mainpage.link)
-    cy.getHeadlineH1().then((title) => {
+    // Use cy.visit() directly with relative path - baseUrl handles the full URL
+    cy.visit(mainpage.link)
+    cy.get('#content-inner h1').invoke('text').then((title) => {
       expect(title.replace(regex, '')).to.equal(mainpage.title)
     })
   })
@@ -46,8 +47,9 @@ describe('On the Countries page ', function () {
   describe('Each Countries subpage', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
-        cy.openPage(page.link)
-        cy.getHeadlineH1().then((title) => {
+        // Use cy.visit() directly with relative path
+        cy.visit(page.link)
+        cy.get('#content-inner h1').invoke('text').then((title) => {
           expect(title.replace(regex, '')).to.equal(page.title)
         })
       })

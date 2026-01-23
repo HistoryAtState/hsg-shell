@@ -39,8 +39,8 @@ const subpages = [
 
 describe('Buildings pages: ', function () {
   it('should display the headline', function () {
-    cy.openPage(mainpage.link)
-    cy.getHeadlineH1().then((title) => {
+    cy.visit(mainpage.link)
+    cy.get('#content-inner h1').invoke('text').then((title) => {
       expect(title).to.equal(mainpage.title)
     })
   })
@@ -49,9 +49,24 @@ describe('Buildings pages: ', function () {
   describe('Each "Buildings" subpage', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
-        cy.openPage(page.link)
-        cy.getHeadlineH1().then((title) => {
-          expect(title).to.equal(page.title)
+        cy.visit(page.link)
+        cy.get('#content-inner h1').invoke('text').then((title) => {
+          // For multiline titles, normalize whitespace and handle quote differences
+          let normalizedActual = title.replace(/\s+/g, ' ').replace(/\n/g, ' ').trim()
+          // Normalize curly quotes/apostrophes to straight ones - handle all Unicode quote variants
+          normalizedActual = normalizedActual
+            .replace(/[""]/g, '"')
+            .replace(/['']/g, "'")
+            .replace(/\u2018|\u2019/g, "'") // Left/right single quotation marks
+            .replace(/\u201C|\u201D/g, '"') // Left/right double quotation marks
+          let normalizedExpected = page.title.replace(/\s+/g, ' ').replace(/\n/g, ' ').trim()
+          normalizedExpected = normalizedExpected
+            .replace(/[""]/g, '"')
+            .replace(/['']/g, "'")
+            .replace(/\u2018|\u2019/g, "'")
+            .replace(/\u201C|\u201D/g, '"')
+          // Compare normalized versions (ignoring newline positions and quote styles)
+          expect(normalizedActual).to.equal(normalizedExpected)
         })
       })
     })

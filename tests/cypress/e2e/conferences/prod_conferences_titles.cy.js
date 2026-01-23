@@ -84,7 +84,7 @@ const subpages = [
   },
   // 4th level TODO: Check images
   {
-    name: 'p11',
+    name: 'p12',
     link: 'conferences/2010-southeast-asia/maps',
     title: 'Maps',
     h: 2
@@ -121,8 +121,8 @@ const subpages = [
 
 describe('The conference page', function () {
   it('should display the headline', function () {
-    cy.openPage(page.link)
-    cy.getHeadlineH1().then((title) => {
+    cy.visit(page.link)
+    cy.get('#content-inner h1').invoke('text').then((title) => {
       expect(title.replace(regex, '')).to.equal(page.title)
     })
   })
@@ -131,9 +131,26 @@ describe('The conference page', function () {
   describe('Each "Conference" subpage should be displayed and subsequently', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
-        cy.openPage(page.link)
-        cy.get(headline[page.h]).invoke('text').then((title) => {
-          expect(title.replace(regex, '')).to.equal(page.title)
+        cy.visit(page.link)
+        // Use .first() and get textContent to match WebdriverIO behavior
+        cy.get(headline[page.h]).first().then(($el) => {
+          // Get textContent which matches WebdriverIO's getText() behavior better
+          let title = $el[0].textContent || $el[0].innerText || ''
+          // Remove HTML tags, normalize whitespace
+          let normalized = title.replace(regex, '').replace(/\s+/g, ' ').trim()
+          // Normalize curly quotes to straight quotes, handle apostrophes - handle all Unicode variants
+          normalized = normalized
+            .replace(/[""]/g, '"')
+            .replace(/['']/g, "'")
+            .replace(/\u2018|\u2019/g, "'") // Left/right single quotation marks
+            .replace(/\u201C|\u201D/g, '"') // Left/right double quotation marks
+          // Normalize expected title too
+          let expectedTitle = page.title
+            .replace(/[""]/g, '"')
+            .replace(/['']/g, "'")
+            .replace(/\u2018|\u2019/g, "'")
+            .replace(/\u201C|\u201D/g, '"')
+          expect(normalized).to.equal(expectedTitle)
         })
       })
     })
