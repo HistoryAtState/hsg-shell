@@ -1,0 +1,89 @@
+# This workflow runs Cypress tests in Firefox against a running eXist-db instance.
+# It mirrors the build workflow structure but executes Cypress tests instead of smoke tests.
+
+name: Cypress Tests
+
+on: [push]
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Test against different eXist-db versions
+        img-version: [latest]
+        java-version: [11]
+        
+
+    steps:
+      # Checkout code
+      - uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          cache: npm
+          node-version: lts/*
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci --no-optional
+
+      # Build
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java-version }}
+
+      - name: Build Expath Package
+        run: ant -Dapp.version=1.0.0-SNAPSHOT
+
+      # TODO(DP): cache image
+      - name: Pull Dev Image
+        run: docker pull joewiz/hsg-project:${{ matrix.img-version }}
+
+      # Install and start eXist-db
+      - name: Start exist-ci containers
+        timeout-minutes: 20
+        run: |
+          docker run -dit -p 8080:8080 -v ${{ github.workspace }}/build:/exist/autodeploy \
+          --name exist --rm --health-interval=2s --health-start-period=4s \
+          joewiz/hsg-project:${{ matrix.img-version }}
+
+      - name: Wait for eXist-db to start
+        timeout-minutes: 10
+        run: |
+          while ! docker logs exist | grep -q "Server has started"; \
+          do sleep 2s; \
+          done
+
+      # Run Cypress tests in Firefox
+      - name: Run Cypress tests in Firefox
+        uses: cypress-io/github-action@v7
+        with:
+          install: false
+          browser: firefox
+
+
+      # Upload test results
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots-${{ matrix.img-version }}-${{ matrix.java-version }}
+          path: tests/cypress/screenshots
+          retention-days: 7
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos-${{ matrix.img-version }}-${{ matrix.java-version }}
+          path: tests/cypress/videos
+          retention-days: 7
