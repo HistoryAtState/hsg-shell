@@ -42,7 +42,7 @@
     "mocha": "^7.0.1",
     "sass": "^1.89.2",
     "semantic-release": "^22.0.12",
-    "wdio-chromedriver-service": "^7.3.2",
+    "wdio-chromedriver-service": "^8.1.1",
     "webdriverio": "^7.32.4"
   },
   "scripts": {
