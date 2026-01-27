@@ -82,9 +82,9 @@ const subpages = [
     title: 'Background Materials',
     h: 3
   },
-  // 4th level TODO: Check images
+  // 4th level TODO: Check images (wdio uses p11 for both background-materials and maps)
   {
-    name: 'p12',
+    name: 'p11',
     link: 'conferences/2010-southeast-asia/maps',
     title: 'Maps',
     h: 2

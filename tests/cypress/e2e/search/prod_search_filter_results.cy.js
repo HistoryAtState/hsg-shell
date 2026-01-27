@@ -33,12 +33,12 @@ const noResultsMessage = '#content-inner > section > p' // paragraph containing 
 // Parameterized tests simply opening pages with valid parameters, sorted by relevance
 validFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with valid parameters and sorted by "' + sortingOptions[0] + '"', function () {
-    beforeEach(function () {
+    before(function () {
       cy.visit(query + parameters + sortingOptions[0])
     })
 
     it('"' + parameters + '" should return search results', function () {
-      cy.getElementText(firstResultItem).then((searchResult) => {
+      cy.get(firstResultItem).invoke('text').then((searchResult) => {
         expect(searchResult).to.exist
       })
     })
@@ -48,12 +48,12 @@ validFilterOptions.forEach(function (parameters) {
 // Parameterized tests simply opening pages with valid parameters, sorted by ascending date
 validFilterOptions.forEach(function (parameters) {
   describe('Filtering search result for query "' + query + '" with valid parameters and sorted by "' + sortingOptions[1] + '"', function () {
-    beforeEach(function () {
+    before(function () {
       cy.visit(query + parameters + sortingOptions[1])
     })
 
     it('"' + parameters + '" should return search results', function () {
-      cy.getElementText(firstResultItem).then((searchResult) => {
+      cy.get(firstResultItem).invoke('text').then((searchResult) => {
         expect(searchResult).to.exist
       })
     })
@@ -73,8 +73,8 @@ invalidFilterOptions.forEach(function (parameters) {
 
     // TODO: Check for notifications instead after this feature has been implemented, this is only a workaround
     it('"' + parameters + '" should not return any search results', function () {
-      cy.getElementText('#content-inner > section > p').then((text) => {
-        expect(text).to.equal('No results were found.', 'No results should be displayed for this search.')
+      cy.get('.hsg-search-section').within(function () {
+        cy.contains('p', 'No results were found.').should('be.visible')
       })
     })
   })

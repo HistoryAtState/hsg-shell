@@ -49,13 +49,13 @@ const subpages = [
 ]
 
 describe('FRUS pages: ', function () {
-  beforeEach(function () {
+  before(function () {
     cy.visit('historicaldocuments')
   })
 
   // Dropdown check
   describe('Checking the dropdown menu: Clicking the first dropdown item', function () {
-    beforeEach(function () {
+    before(function () {
       cy.get('ul.nav.navbar-nav li:nth-child(2) > a').first().click()
       cy.get('ul.dropdown-menu li:nth-child(2)').should('be.visible')
       cy.get('ul.dropdown-menu li:nth-child(1) a').first().click()

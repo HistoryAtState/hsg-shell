@@ -17,7 +17,7 @@ tests/cypress/downloads/
 
 .DS_Store
 
-plan/
+plans/
 
 # local properties
 local.node-exist.json

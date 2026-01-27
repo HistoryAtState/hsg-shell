@@ -3,7 +3,7 @@
  */
 
 describe('The TOC of a volume', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('historicaldocuments/frus1947v03/comp1')
   })
 

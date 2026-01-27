@@ -54,6 +54,7 @@
     "cy:run:prod": "cypress run --spec 'tests/cypress/e2e/**/prod_*.cy.js'",
     "cy:run:uat": "cypress run --spec 'tests/cypress/e2e/**/uat_*.cy.js'",
     "cy:run:jenkins": "cypress run --spec 'tests/cypress/e2e/**/prod_*.cy.js'",
+    "cy:run:six": "cypress run --spec 'tests/cypress/e2e/countries/prod_countries_landing.cy.js' --spec 'tests/cypress/e2e/education/prod_education_titles.cy.js' --spec 'tests/cypress/e2e/historical-documents/prod_frus-volume-landing.cy.js' --spec 'tests/cypress/e2e/historical-documents/prod_frus_landing.cy.js' --spec 'tests/cypress/e2e/landing/prod_landing_twitter.cy.js' --spec 'tests/cypress/e2e/search/prod_search_filter_results.cy.js'",
     "update": "npm update && gulp",
     "start": "npm install --quiet && gulp"
   },

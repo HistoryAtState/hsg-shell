@@ -14,17 +14,17 @@ const images = [
 describe('FRUS landing page: The first 3 tiles', function () {
   beforeEach(function () {
     cy.visit('historicaldocuments')
+    cy.get('#content-inner article', { timeout: 10000 }).should('have.length.at.least', 3)
   })
 
-  it('should each contain an image', function () {
-    cy.getElementAttribute('#content-inner div article:nth-child(1) a img', 'src').then((imgSrc0) => {
-      expect(imgSrc0).to.include(images[0])
-    })
-    cy.getElementAttribute('#content-inner div article:nth-child(2) a img', 'src').then((imgSrc1) => {
-      expect(imgSrc1).to.include(images[1])
-    })
-    cy.getElementAttribute('#content-inner div article:nth-child(3) a img', 'src').then((imgSrc2) => {
-      expect(imgSrc2).to.include(images[2])
+  images.forEach(function (image, index) {
+    describe('Each tile on the landing page', function () {
+      it('should display an image', function () {
+        // Articles are inside #content-inner .row; use .hsg-thumbnail-wrapper and eq() for stable indexing
+        cy.get('#content-inner .hsg-thumbnail-wrapper').eq(index).find('a img').invoke('attr', 'src').then((imgSrc) => {
+          expect(imgSrc).to.include(image)
+        })
+      })
     })
   })
 })

@@ -61,22 +61,17 @@ describe('Education pages: ', function () {
       })
     })
   })
-  // Subpage titles check
+  // Subpage titles check - match wdio: assert.equal(page.title, title) for #content-inner div:nth-child(2) h2
   describe('Each "Education" subpage should be displayed and subsequently', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
         cy.visit(page.link)
-        // SubPage.headline_h2 would select the title of the red alert box
-        // Normalize whitespace (newlines, extra spaces) and handle quote differences
-        cy.get('#content-inner div:nth-child(2) h2').invoke('text').then((title) => {
-          // Normalize whitespace and remove any trailing text that might be appended
-          let normalized = title.replace(/\s+/g, ' ').trim()
-          // Handle curly quotes vs straight quotes - normalize to straight quotes
-          normalized = normalized.replace(/[""]/g, '"').replace(/['']/g, "'")
-          // Extract just the title part (before any trailing text like "Lesson Plans & Activities")
-          const titleMatch = normalized.match(/^([^"]*"[^"]*")/)
-          const finalTitle = titleMatch ? titleMatch[1] : normalized.split('Lesson Plans')[0].trim()
-          expect(finalTitle).to.equal(page.title.replace(/[""]/g, '"').replace(/['']/g, "'"))
+        cy.get('#content-inner div:nth-child(2) h2', { timeout: 10000 }).first().invoke('text').then((title) => {
+          const normalized = title.replace(/\s+/g, ' ').trim().replace(/\u2018|\u2019/g, "'").replace(/\u201C|\u201D/g, '"')
+          const expected = page.title.replace(/\u2018|\u2019/g, "'").replace(/\u201C|\u201D/g, '"')
+          // Exact match as in wdio; if page appends "Lesson Plans & Activities" use the title part only
+          const actualTitle = normalized.includes('Lesson Plans') ? normalized.split('Lesson Plans')[0].trim() : normalized
+          expect(actualTitle).to.equal(expected)
         })
       })
     })
