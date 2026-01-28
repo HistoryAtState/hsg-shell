@@ -60,7 +60,7 @@ A new `package-lock.json` file will be created, which should be added to version
 
 ### Check currently installed versions
 
-1. node: `node -v` => Should output `v18.18.2`
+1. node: `node -v` => Should satisfy `package.json` engines (e.g. `>=18.0.0`; the asdf example uses 18.18.2).
 2. npm: `npm -v` => Should output at least `v9.8.1`
 3. gulp: `npx gulp -v` => Should output at least `CLI version: 2.3.0, Local version: 4.0.2`
 
@@ -136,79 +136,62 @@ To deploy a full XAR file make sure you build the latest version by callling `an
  
 ## 4. Web Tests
 
-Verify you have a local hsg-project running at localhost:8080/exist/apps/hsg-shell. See the Docker section for easy installation.  
+Verify you have a local hsg-project running at `http://localhost:8080/exist/apps/hsg-shell`. See the Docker section for easy installation.
 
 ### How to run local web tests
 
 #### 1. Install Dependencies
 
-Make sure you have all required node_modules installed (`npm install`). Cypress will be installed as part of the devDependencies.
+Make sure you have all required node_modules installed (`npm install`). Cypress is included in devDependencies.
 
 #### 2. Configuration
 
-Test configuration is in `cypress.config.cjs`. The baseUrl is set to `http://localhost:8080/exist/apps/hsg-shell` by default. Test files are located in `tests/cypress/e2e/` and organized by feature area.
-
-Test files follow naming conventions:
-- `prod_*.cy.js` - Production environment tests
-- `uat_*.cy.js` - UAT environment tests
+Test configuration is in `cypress.config.cjs`. The baseUrl is `http://localhost:8080/exist/apps/hsg-shell`. All specs under `tests/cypress/e2e/**/*.cy.js` are run (see `specPattern` in the config). Legacy monolithic specs named `prod_*.cy.js` are kept for reference alongside the refactored per-page specs.
 
 #### 3. Run the tests
 
-**Open Cypress Test Runner (Interactive Mode):**
+**Open Cypress Test Runner (interactive):**
 ```bash
 npm run cy:open
 ```
 
-**Run all tests (Headless Mode):**
+**Run all tests (headless):**
 ```bash
 npm run cy:run
 ```
 
-**Run production tests only:**
+**Run a specific file or folder:**
 ```bash
-npm run cy:run:prod
+npx cypress run --spec "tests/cypress/e2e/landing/title.cy.js"
+npx cypress run --spec "tests/cypress/e2e/conferences/**/*.cy.js"
 ```
 
-**Run UAT tests only:**
-```bash
-npm run cy:run:uat
-```
+#### 4. Test structure
 
-**Run jenkins suite (production tests):**
-```bash
-npm run cy:run:jenkins
-```
+Specs live under `tests/cypress/e2e/` by feature; many areas use subfolders (e.g. conferences by year, countries/archives, departmenthistory/buildings) so each spec can run in parallel:
 
-**Run a specific test file:**
-```bash
-npx cypress run --spec "tests/cypress/e2e/landing/prod_landing_title.cy.js"
-```
+- `conferences/` – main page and year subfolders (2006–2012)
+- `countries/` – landing, main, `archives/`
+- `departmenthistory/` – index, `buildings/`, `people/`, `travels/`, `short-history/`, etc.
+- `developer/` – main, catalog
+- `education/` – main, modules, `modules/*-intro`
+- `error/` – 404
+- `historical-documents/` – landing, FRUS subpages, `volume/`
+- `iiif-images/` – IIIF viewer
+- `landing/` – title, twitter
+- `milestones/` – main, all, `1750-1775/`, `chapter/`
+- `open/` – main, frus-metadata, frus-latest
+- `search/` – search-form, search-results, filter-results, new-indexes
+- `tags/` – main and tag subpages
+- `ui-components/` – breadcrumb
 
-#### 4. Test Structure
-
-Tests are organized in `tests/cypress/e2e/` by feature:
-- `conferences/` - Conference pages
-- `countries/` - Countries pages
-- `departmenthistory/` - Department history pages
-- `developer/` - Developer resources
-- `education/` - Education pages
-- `error/` - Error pages (404, etc.)
-- `historical-documents/` - FRUS and historical documents
-- `iiif-images/` - IIIF image viewer tests
-- `landing/` - Landing page tests
-- `milestones/` - Milestones pages
-- `open/` - Open Government Initiative
-- `search/` - Search functionality
-- `tags/` - Tags pages
-- `ui-components/` - UI component tests (breadcrumb, etc.)
-
-Custom commands are available in `tests/cypress/support/commands.js` which provide helper methods converted from the original WebdriverIO Page Objects.
+Custom Cypress commands (e.g. `normalizeHeadlineText` for headline assertions) are in `tests/cypress/support/commands.js`.
 
 #### 5. Further documentation
 
-This test suite uses Cypress with Mocha and Chai for assertions. The `assert` global is available (matching the previous WebdriverIO setup).
+The suite uses Cypress with Mocha and Chai. The `assert` global is available for compatibility.
 
-Have a look at the documentation:
+Documentation:
 
 * Cypress documentation: [docs.cypress.io](https://docs.cypress.io/)
 * Cypress API: [docs.cypress.io/api](https://docs.cypress.io/api)
