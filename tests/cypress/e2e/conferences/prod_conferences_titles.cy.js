@@ -2,8 +2,6 @@
  * Checks if conference pages have the correct titles
  */
 
-const regex = /(\<|\/)[a-z]*>/gi
-
 const page = { link: 'conferences', title: 'Conferences', h: 1 }
 const headline = {
   1: '#content-inner h1',
@@ -122,9 +120,7 @@ const subpages = [
 describe('The conference page', function () {
   it('should display the headline', function () {
     cy.visit(page.link)
-    cy.get('#content-inner h1').invoke('text').then((title) => {
-      expect(title.replace(regex, '')).to.equal(page.title)
-    })
+    cy.get('#content-inner h1').first().normalizeHeadlineText(page.title)
   })
 
   // Subpage titles check
@@ -132,26 +128,7 @@ describe('The conference page', function () {
     subpages.forEach(page => {
       it('should display the headline (' + page.name + ')', function () {
         cy.visit(page.link)
-        // Use .first() and get textContent to match WebdriverIO behavior
-        cy.get(headline[page.h]).first().then(($el) => {
-          // Get textContent which matches WebdriverIO's getText() behavior better
-          let title = $el[0].textContent || $el[0].innerText || ''
-          // Remove HTML tags, normalize whitespace
-          let normalized = title.replace(regex, '').replace(/\s+/g, ' ').trim()
-          // Normalize curly quotes to straight quotes, handle apostrophes - handle all Unicode variants
-          normalized = normalized
-            .replace(/[""]/g, '"')
-            .replace(/['']/g, "'")
-            .replace(/\u2018|\u2019/g, "'") // Left/right single quotation marks
-            .replace(/\u201C|\u201D/g, '"') // Left/right double quotation marks
-          // Normalize expected title too
-          let expectedTitle = page.title
-            .replace(/[""]/g, '"')
-            .replace(/['']/g, "'")
-            .replace(/\u2018|\u2019/g, "'")
-            .replace(/\u201C|\u201D/g, '"')
-          expect(normalized).to.equal(expectedTitle)
-        })
+        cy.get(headline[page.h]).first().normalizeHeadlineText(page.title)
       })
     })
   })

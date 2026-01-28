@@ -19,7 +19,9 @@ module.exports = defineConfig({
     includeShadowDom: true,
     retries: 1,
     supportFile: 'tests/cypress/support/e2e.js', 
-    specPattern: 'tests/cypress/e2e/**/prod_*.cy.js',
+    specPattern: [
+      'tests/cypress/e2e/**/*.cy.js',
+    ],
     screenshotsFolder: 'tests/cypress/screenshots',
     videosFolder: 'tests/cypress/videos',
     fixturesFolder: 'tests/cypress/fixtures',
