@@ -10,40 +10,32 @@ describe('A breadcrumb', () => {
   // 1. Check, if rdf attributes render as expected
   // 1a. ol contains  vocab="http://schema.org/", typeof="BreadcrumbList", class="hsg-breadcrumb__list"
   it('should contain a list with rdf metadata', () => {
-    cy.getElementAttribute('nav.hsg-breadcrumb ol', 'typeof').then((t) => {
-      expect(t).to.equal('BreadcrumbList')
-    })
-    cy.getElementAttribute('nav.hsg-breadcrumb ol', 'vocab').then((v) => {
-      expect(v).to.equal('http://schema.org/')
-    })
+    cy.get('nav.hsg-breadcrumb ol')
+      .should('have.attr', 'typeof', 'BreadcrumbList')
+      .and('have.attr', 'vocab', 'http://schema.org/')
   })
 
   // 1b. li contains class="hsg-breadcrumb__list-item", property="itemListElement", typeof="ListItem"
   it('should contain list-items with rdf metadata', () => {
-    cy.getElementAttribute('nav.hsg-breadcrumb ol li', 'typeof').then((t) => {
-      expect(t).to.equal('ListItem')
-    })
-    cy.getElementAttribute('nav.hsg-breadcrumb ol li', 'property').then((p) => {
-      expect(p).to.equal('itemListElement')
-    })
+    cy.get('nav.hsg-breadcrumb ol li')
+      .first()
+      .should('have.attr', 'typeof', 'ListItem')
+      .and('have.attr', 'property', 'itemListElement')
   })
 
   // 1c. a contains class="hsg-breadcrumb__link", property="item", typeof="WebPage"
   it('should contain links with rdf metadata', () => {
-    cy.getElementAttribute('nav.hsg-breadcrumb ol li a', 'typeof').then((t) => {
-      expect(t).to.equal('WebPage')
-    })
-    cy.getElementAttribute('nav.hsg-breadcrumb ol li a', 'property').then((p) => {
-      expect(p).to.equal('item')
-    })
+    cy.get('nav.hsg-breadcrumb ol li a')
+      .first()
+      .should('have.attr', 'typeof', 'WebPage')
+      .and('have.attr', 'property', 'item')
   })
 
   // 2. Check, if aria attributes are rendered as expected
   // 2a. nav contains aria-label="breadcrumbs"
   it('should contain an aria-label in the nav element', () => {
-    cy.getElementAttribute('nav.hsg-breadcrumb', 'aria-label').then((a) => {
-      expect(a).to.equal('breadcrumbs')
-    })
+    cy.get('nav.hsg-breadcrumb')
+      .should('have.attr', 'aria-label', 'breadcrumbs')
   })
 
   // 2b. link contains class="hsg-breadcrumb__link", aria-current="page"
@@ -53,9 +45,9 @@ describe('A breadcrumb', () => {
 
   // 3. Check if current page is highlightes with default text color
   it('should contain a last, current breadcrumb highlighted in normal text color #212121', () => {
-    cy.getCssProperty('nav.hsg-breadcrumb a[aria-current="page"] span', 'color').then((c) => {
-      expect(c.parsed.hex).to.equal('#212121')
-    })
+    // #212121 → rgb(33, 33, 33)
+    cy.get('nav.hsg-breadcrumb a[aria-current="page"] span')
+      .should('have.css', 'color', 'rgb(33, 33, 33)')
   })
 })
 
@@ -68,16 +60,19 @@ describe.skip('A breadcrumb on small screens', () => {
 
   // 4. Check, if only the parent level is rendered...
   it('should display the parent chapter breadcrumb', () => {
-    cy.getElementText('.hsg-breadcrumb__list-item:nth-last-child(2) .hsg-breadcrumb__link span').then((t) => {
-      expect(t).to.equal('History of the <em>Foreign Relations</em> Series')
-    })
+    cy.get('.hsg-breadcrumb__list-item:nth-last-child(2) .hsg-breadcrumb__link span')
+      .invoke('html')
+      .then((html) => {
+        expect(html).to.equal('History of the <em>Foreign Relations</em> Series')
+      })
   })
 
   // ...with a left arrow on smaller screens.
   it('should display a "back" arrow before the parent chapter breadcrumb', () => {
-    cy.getCssProperty('.hsg-breadcrumb__list-item:nth-last-child(2) .hsg-breadcrumb__link:before', '-webkit-mask').then((c) => {
-      //console.log('c=', c);
-      expect(c).to.equal('url(../images/arrow_back.svg) no-repeat center/contain;')
+    cy.get('.hsg-breadcrumb__list-item:nth-last-child(2) .hsg-breadcrumb__link').then(($el) => {
+      const style = window.getComputedStyle($el[0], '::before')
+      const mask = style.getPropertyValue('-webkit-mask') || style.getPropertyValue('mask')
+      expect(mask).to.contain('arrow_back.svg')
     })
   })
 })

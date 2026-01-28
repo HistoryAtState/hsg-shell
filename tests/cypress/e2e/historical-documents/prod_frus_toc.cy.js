@@ -8,9 +8,8 @@ describe('The TOC of a volume', () => {
   })
 
   it('should highlight the current chapter', () => {
-    cy.getCssProperty('a.hsg-current[href*="historicaldocuments/frus1947v03/comp1"]', 'color').then((currentLink) => {
-      const color = currentLink.parsed.hex
-      expect(color).to.equal('#205493')
-    })
+    // #205493 → rgb(32, 84, 147)
+    cy.get('a.hsg-current[href*="historicaldocuments/frus1947v03/comp1"]')
+      .should('have.css', 'color', 'rgb(32, 84, 147)')
   })
 })

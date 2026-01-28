@@ -20,7 +20,11 @@ describe('Searching on home page', function () {
 searchPhrases.forEach(function (phrase) {
   describe('Searching for', function () {
     before(function () {
-      cy.visit('search?q=' + phrase)
+      cy.visit('search', {
+        qs: {
+          q: phrase
+        }
+      })
     })
 
     it('"' + phrase + '" should have results', function () {
