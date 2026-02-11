@@ -550,6 +550,18 @@ else switch($path-parts[1])
                         "document-id": "hac",
                         "section-id": $path-parts[3]
                     })
+            case "reports" return
+                if (empty($path-parts[3])) then
+                    local:render-page("about/reports/index.xml", map{
+                        "publication-id": "reports",
+                        "document-id": "reports"
+                    })
+                else
+                    local:render-page("about/reports/report.xml", map{
+                        "publication-id": "reports",
+                        "document-id": "reports",
+                        "section-id": $path-parts[3]
+                    })
             case "contact-us" return local:render-page('about/contact-us.xml', map{ "publication-id": "app" })
             case "the-historian" return local:render-page('about/the-historian.xml', map{ "publication-id": "app" })
             case "recent-publications" return local:render-page('about/recent-publications.xml', map{ "publication-id": "app" })

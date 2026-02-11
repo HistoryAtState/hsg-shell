@@ -588,6 +588,25 @@
                 <hsg:github href="https://github.com/HistoryAtState/hac"/>
             </config>
         </step>
+        <step value="reports">
+            <step key="section">
+                <page-template href="pages/about/reports/section.xml">
+                    <with-param name="publication-id" value="reports"/>
+                    <with-param name="document-id" value="reports"/>
+                    <with-param keyval="section" name="section-id"/>
+                </page-template>
+                <config>
+                    <src collection="/db/apps/reports/data"/>
+                </config>
+            </step>
+            <page-template href="pages/about/reports/index.xml">
+                <with-param name="publication-id" value="reports"/>
+                <with-param name="document-id" value="reports"/>
+            </page-template>
+            <config>
+                <hsg:github href="https://github.com/HistoryAtState/other-publications"/>
+            </config>
+        </step>
         <step value="recent-publications">
             <page-template href="pages/about/recent-publications.xml"/>
         </step>
