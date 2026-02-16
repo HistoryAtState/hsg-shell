@@ -264,7 +264,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                             if (@rend = 'flushleft') then
                                 html:paragraph($config, ., css:get-rendition(., ("tei-p2", css:map-rend-to-class(.))), .)
                             else
-                                html:paragraph($config, ., css:get-rendition(., ("tei-p3", css:map-rend-to-class(.))), .)
+                                if (@rend = 'sectiontitleital') then
+                                    html:paragraph($config, ., ("tei-p4", "section-title", "font-italic", css:map-rend-to-class(.)), .)
+                                else
+                                    html:paragraph($config, ., css:get-rendition(., ("tei-p3", css:map-rend-to-class(.))), .)
                     case element(list) return
                         if (head) then
                             (
