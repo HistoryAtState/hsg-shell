@@ -843,12 +843,6 @@ function fh:mobi-size($node as node(), $model as map(*), $document-id as xs:stri
 
 declare
     %templates:wrap
-function fh:pdf-size-templating($node as node(), $model as map(*), $document-id as xs:string) {
-    fh:pdf-size($document-id)
-};
-
-declare
-    %templates:wrap
 function fh:pdf-size-templating($node as node(), $model as map(*), $document-id as xs:string, $section-id as xs:string?) {
     fh:pdf-size($document-id, $section-id)
 };
@@ -859,7 +853,7 @@ declare function fh:mobi-url($document-id as xs:string) {
 };
 
 declare function fh:pdf-url($document-id as xs:string, $section-id as xs:string?) {
-    if ($section-id) then
+    if (exists($section-id)) then
         doc($config:FRUS_COL_VOLUMES || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $section-id and @type eq "pdf"]//tei:ref/@target
     else
         doc($config:FRUS_COL_VOLUMES || "/" || $document-id || ".xml")//tei:relatedItem[@corresp eq "#" || $document-id and @type eq "pdf"]//tei:ref/@target
