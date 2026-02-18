@@ -264,7 +264,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                             if (@rend = 'flushleft') then
                                 html:paragraph($config, ., css:get-rendition(., ("tei-p2", css:map-rend-to-class(.))), .)
                             else
-                                html:paragraph($config, ., css:get-rendition(., ("tei-p3", css:map-rend-to-class(.))), .)
+                                if (@rend = 'sectiontitleital') then
+                                    html:paragraph($config, ., ("tei-p4", "section-title", "font-italic", css:map-rend-to-class(.)), .)
+                                else
+                                    html:paragraph($config, ., css:get-rendition(., ("tei-p3", css:map-rend-to-class(.))), .)
                     case element(list) return
                         if (head) then
                             (
@@ -360,7 +363,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         if ($parameters?document-list and div[@type='question']) then
                             ext-html:document-list($config, ., ("tei-div1", css:map-rend-to-class(.)))
                         else
-                            if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type and not(@type = 'online-supplement')])) then
+                            if ($parameters?document-list and @type = ('compilation', 'chapter', 'chapter-pending', 'subchapter', 'section', 'section-pending', 'part') and exists(div[@type and not(@type = 'online-supplement')])) then
                                 ext-html:document-list($config, ., ("tei-div2", css:map-rend-to-class(.)))
                             else
                                 html:block($config, ., ("tei-div3", css:map-rend-to-class(.)), .)
@@ -479,7 +482,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                             (: If it is inside a paragraph then it is inline, otherwise it is block level :)
                             html:block($config, ., css:get-rendition(., ("tei-quote2", css:map-rend-to-class(.))), .)
                     case element(gap) return
-                        html:omit($config, ., ("tei-gap", css:map-rend-to-class(.)), .)
+                        if (exists(@unit) and @quantity castable as xs:integer) then
+                            ext-html:gap($config, ., ("tei-gap1", css:map-rend-to-class(.)), ., @unit, @quantity cast as xs:integer)
+                        else
+                            html:omit($config, ., ("tei-gap2", css:map-rend-to-class(.)), .)
                     case element(addrLine) return
                         html:block($config, ., ("tei-addrLine", css:map-rend-to-class(.)), .)
                     case element(row) return
@@ -495,7 +501,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         html:block($config, ., ("tei-byline", css:map-rend-to-class(.)), .)
                     case element(titleStmt) return
                         (
-                            html:heading($config, ., ("tei-titleStmt1", css:map-rend-to-class(.)), title[@type="complete"], ()),
+                            html:heading($config, ., ("tei-titleStmt1", css:map-rend-to-class(.)), title[@type="complete"], 1),
                             if (count(editor[@role = 'primary']) gt 1) then
                                 html:block($config, ., ("tei-titleStmt2", css:map-rend-to-class(.)), "Editors:")
                             else

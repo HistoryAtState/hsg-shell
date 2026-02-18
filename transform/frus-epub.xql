@@ -264,7 +264,10 @@ declare function model:apply($config as map(*), $input as node()*) {
                             if (@rend = 'flushleft') then
                                 html:paragraph($config, ., css:get-rendition(., ("tei-p2", css:map-rend-to-class(.))), .)
                             else
-                                html:paragraph($config, ., css:get-rendition(., ("tei-p3", css:map-rend-to-class(.))), .)
+                                if (@rend = 'sectiontitleital') then
+                                    html:paragraph($config, ., ("tei-p4", "section-title", "font-italic", css:map-rend-to-class(.)), .)
+                                else
+                                    html:paragraph($config, ., css:get-rendition(., ("tei-p3", css:map-rend-to-class(.))), .)
                     case element(list) return
                         if (head) then
                             (
@@ -361,7 +364,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                             (: No function found for behavior: document-list :)
                             $config?apply($config, ./node())
                         else
-                            if ($parameters?document-list and @type = ('compilation', 'chapter', 'subchapter', 'section', 'part') and exists(div[@type and not(@type = 'online-supplement')])) then
+                            if ($parameters?document-list and @type = ('compilation', 'chapter', 'chapter-pending', 'subchapter', 'section', 'section-pending', 'part') and exists(div[@type and not(@type = 'online-supplement')])) then
                                 (: No function found for behavior: document-list :)
                                 $config?apply($config, ./node())
                             else
@@ -482,7 +485,11 @@ declare function model:apply($config as map(*), $input as node()*) {
                             (: If it is inside a paragraph then it is inline, otherwise it is block level :)
                             epub:block($config, ., css:get-rendition(., ("tei-quote2", css:map-rend-to-class(.))), .)
                     case element(gap) return
-                        html:omit($config, ., ("tei-gap", css:map-rend-to-class(.)), .)
+                        if (exists(@unit) and @quantity castable as xs:integer) then
+                            (: No function found for behavior: gap :)
+                            $config?apply($config, ./node())
+                        else
+                            html:omit($config, ., ("tei-gap2", css:map-rend-to-class(.)), .)
                     case element(addrLine) return
                         epub:block($config, ., ("tei-addrLine", css:map-rend-to-class(.)), .)
                     case element(row) return
@@ -498,7 +505,7 @@ declare function model:apply($config as map(*), $input as node()*) {
                         epub:block($config, ., ("tei-byline", css:map-rend-to-class(.)), .)
                     case element(titleStmt) return
                         (
-                            html:heading($config, ., ("tei-titleStmt1", css:map-rend-to-class(.)), title[@type="complete"], ()),
+                            html:heading($config, ., ("tei-titleStmt1", css:map-rend-to-class(.)), title[@type="complete"], 1),
                             if (count(editor[@role = 'primary']) gt 1) then
                                 epub:block($config, ., ("tei-titleStmt2", css:map-rend-to-class(.)), "Editors:")
                             else

@@ -162,6 +162,7 @@
                     <model behaviour="paragraph" useSourceRendition="true">
                         <outputRendition>text-indent: 0em;</outputRendition>
                     </model>
+                    <model predicate="@rend = 'sectiontitleital'" behaviour="paragraph" cssClass="section-title font-italic"/>
                 </elementSpec>
                 <elementSpec mode="change" ident="dateline">
                     <!-- Override any rendition values and make all datelines right-aligned block -->
