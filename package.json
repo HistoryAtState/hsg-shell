@@ -29,6 +29,7 @@
     "chai-as-promised": "^7.1.1",
     "chromedriver": "^131.0.5",
     "conventional-changelog-conventionalcommits": "^7.0.2",
+    "cypress": "^15.9.0",
     "del": "^6.1.1",
     "gulp": "^5.0.1",
     "gulp-autoprefixer": "^7.0.1",
@@ -48,6 +49,8 @@
   "scripts": {
     "test": "./node_modules/.bin/wdio wdio.conf.js --suite jenkins",
     "test-prod": "./node_modules/.bin/wdio wdio.conf.js --suite prod",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "update": "npm update && gulp",
     "start": "npm install --quiet && gulp"
   },
