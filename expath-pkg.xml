@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://expath.org/ns/pkg" name="http://history.state.gov/ns/site/hsg" abbrev="hsg-shell" version="3.10.15" spec="1.0">
+<package xmlns="http://expath.org/ns/pkg" name="http://history.state.gov/ns/site/hsg" abbrev="hsg-shell" version="3.10.16" spec="1.0">
     <title>history.state.gov 3.0 shell</title>
     <dependency processor="http://exist-db.org" semver-min="6.2.0"/>
     <dependency package="http://exist-db.org/html-templating" semver-min="1.1.0" />
