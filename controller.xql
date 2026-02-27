@@ -553,6 +553,7 @@ else switch($path-parts[1])
             case "contact-us" return local:render-page('about/contact-us.xml', map{ "publication-id": "app" })
             case "the-historian" return local:render-page('about/the-historian.xml', map{ "publication-id": "app" })
             case "recent-publications" return local:render-page('about/recent-publications.xml', map{ "publication-id": "app" })
+            case "reports" return local:render-page('about/reports.xml', map{ "publication-id": "app" })
             case "content-warning" return local:render-page('about/content-warning.xml', map{ "publication-id": "app" })
             default return
                 local:serve-not-found-page()

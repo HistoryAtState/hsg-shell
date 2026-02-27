@@ -591,6 +591,9 @@
         <step value="recent-publications">
             <page-template href="pages/about/recent-publications.xml"/>
         </step>
+        <step value="reports">
+            <page-template href="pages/about/reports.xml"/>
+        </step>
         <step value="content-warning">
             <page-template href="pages/about/content-warning.xml"/>
         </step>

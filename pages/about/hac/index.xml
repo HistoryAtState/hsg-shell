@@ -2,22 +2,18 @@
 <div data-template="pages:load">
     <div data-template="templates:surround" data-template-at="content"
         data-template-with="templates/site.xml">
-        <div class="row">
+        <div>
             <div class="hidden" id="static-title">Historical Advisory Committee - About Us</div>
             <div class="row">
                 <div data-template="pages:breadcrumb">
                     <p id="breadcrumb-title">Historical Advisory Committee</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="hsg-navigation-wrapper">
+            <div class="row hsg-main">
+                <div class="hsg-width-two-thirds">
+                    <div data-template="app:fix-links" id="content-inner">
                     <h2 class="hsg-navigation-title" data-template="pages:navigation-title"
                         id="navigation-title"/>
-                </div>
-            </div>
-            <div class="row" data-template="pages:navigation">
-                <div class="hsg-width-main">
-                    <div id="content-inner">
                         <div data-template="app:fix-links" id="content-container">
                             <div class="toc" data-template="toc:table-of-contents"/>
                         </div>
