@@ -52,7 +52,8 @@
                                 </fieldset>
 
                                 <div data-template="frus-history:appendix-a-chart-intro"/>
-                                <script src="$app/resources/scripts/dygraph-combined.js"
+                                <script data-template="app:fix-this-link"
+                                    src="$app/resources/scripts/dygraph-combined.js"
                                     type="text/javascript"/>
                                 <div data-template="frus-history:appendix-a-chart-data"/>
 
