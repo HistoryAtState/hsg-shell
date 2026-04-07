@@ -673,7 +673,6 @@ declare variable $config:PUBLICATIONS :=
         "frus-history-monograph": map {
             "collection": $config:FRUS_HISTORY_COL_MONOGRAPH,
             "publication-last-modified": config:last-modified-from-repo-xml($config:FRUS_HISTORY_COL) ,
-            "document-last-modified": config:last-modified-from-git($config:FRUS_HISTORY_COL, "monograph"),
             "select-document": function($document-id) { doc($config:FRUS_HISTORY_COL_MONOGRAPH || '/' || $document-id || '.xml') },
             "select-section": function($document-id, $section-id) { 
                 let $target-section-id :=
