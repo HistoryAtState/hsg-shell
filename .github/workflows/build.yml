@@ -23,6 +23,12 @@ jobs:
           NODE_PATH: ${{ github.workspace }}/node_modules
   build:
     runs-on: ubuntu-latest
+    # The latest exist-db image (7.0.0-SNAPSHOT on Java 21) is currently
+    # unstable and fails at "wait for install to finish" -- an upstream
+    # eXist issue, not an hsg-shell regression. Mark that cell
+    # continue-on-error so it doesn't block the release job, which has
+    # `needs: [commitlint, build]` and was being skipped on every push.
+    continue-on-error: ${{ matrix.exist-version == 'latest' }}
     strategy:
        fail-fast: false
        matrix:
