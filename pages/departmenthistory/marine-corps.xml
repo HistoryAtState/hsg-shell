@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="pages:load">
+    <div data-template="templates:surround" data-template-at="content"
+        data-template-with="templates/site.xml">
+        <div>
+            <div class="hidden" id="static-title">The U.S. Marine Corps and the Department -
+                Department History</div>
+            <div class="row">
+                <div data-template="pages:breadcrumb">
+                    <p id="breadcrumb-title">The U.S. Marine Corps and the Department</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="hsg-width-two-thirds">
+                    <div data-template="app:fix-links" id="content-inner">
+                        <h1>The U.S. Marine Corps and the Department</h1>
+                        <p>To commemorate the United States Marine Corps’ 250th birthday celebration
+                            in 2025, the Office of the Historian produced a pamphlet that examines
+                            the past 250 years of collaboration between the Marines and the nation’s
+                                diplomats. <a
+                                href="$s3static/marine-corps/history-of-collaboration-usmc-usdos.pdf"
+                                >“A History of Collaboration: The U.S. Marine Corps and the U.S.
+                                Department of State”</a> describes how the United States Marine
+                            Corps (USMC) has played a critical and evolving role in ensuring the
+                            protection of Department of State personnel, classified material, and
+                            U.S. property.  Featuring accounts from the American Revolution through
+                            the Global War on Terror, the pamphlet details how Marines have
+                            protected diplomatic personnel and property during conflicts and periods
+                            of instability across the globe.  It examines how this nearly two and a
+                            half century collaboration between the USMC and the Department adapted
+                            to changing geopolitical landscapes and the growing complexity of
+                            international relations. The pamphlet concludes that the USMC-State
+                            partnership remains a model of interagency collaboration and mutually
+                            supporting missions.</p>
+                        <!-- CSS button -->
+                        <div style="text-align:center;">
+                            <p
+                                style="-moz-box-shadow:inset 0px 1px 0px 0px #ffffff; -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff; box-shadow:inset 0px 1px 0px 0px #ffffff; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) ); background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% ); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf'); background-color:#ededed; -webkit-border-top-left-radius:6px; -moz-border-radius-topleft:6px; border-top-left-radius:6px; -webkit-border-top-right-radius:6px; -moz-border-radius-topright:6px; border-top-right-radius:6px; -webkit-border-bottom-right-radius:6px; -moz-border-radius-bottomright:6px; border-bottom-right-radius:6px; -webkit-border-bottom-left-radius:6px; -moz-border-radius-bottomleft:6px; border-bottom-left-radius:6px; text-indent:0; border:1px solid #dcdcdc; display:inline-block; color:#777777; font-size:15px; font-weight:bold; font-style:normal; height:50px; padding: 0 .5em; line-height:50px; text-decoration:none; text-shadow:1px 1px 0px #ffffff; margin-left: auto; margin-right: auto;">
+                                <a
+                                    href="$s3static/marine-corps/history-of-collaboration-usmc-usdos.pdf"
+                                    style="text-decoration: none;">Download PDF (1.7 MB)</a>
+                            </p>
+                            <hr/>
+                        </div>
+                        <p>The Office of the Historian is grateful to the following individuals and
+                            offices who provided assistance and support for this project: Deputy
+                            Assistant Secretary for Shared Knowledge Services (A/SKS) Timothy Kootz,
+                            Maureen Gregory of the Bureau of Global Public Affairs’ (GPA) Office of
+                            Content Strategy, Kathleen Hendrix of GPA’s Office of Platforms, and Leo
+                            J. Daughterty III, author of <em>The Marine Corps and the State
+                                Department: Enduring Partners in United States Foreign Policy,
+                                1798-2007</em> (2009).</p>
+                    </div>
+                </div>
+                <aside data-template="pages:asides"/>
+            </div>
+        </div>
+    </div>
+</div>
