@@ -15,7 +15,7 @@ const subpages = [
   {
     name: 'p2',
     link: 'departmenthistory/short-history/foundations',
-    level:'h2',
+    level:'h3',
     title: 'Foundations of Foreign Affairs, 1775-1823'
   },
   {
