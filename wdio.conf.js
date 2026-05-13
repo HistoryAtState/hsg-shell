@@ -113,7 +113,8 @@ exports.config = {
             'disable-gpu',
             '--window-size=1280,1024',
             'ignore-certificate-errors',
-            'ignore-urlfetcher-cert-requests'
+            'ignore-urlfetcher-cert-requests',
+            '--blink-settings=imagesEnabled=false'
           ]
           // binary: process.env.WDIO_CHROME_BINARY
         }
