@@ -539,6 +539,10 @@ declare variable $config:PUBLICATIONS :=
                             $key
                   }
         },
+        "marine-corps": map {
+            "title": "U.S. Marine Corps - Department History",
+            "publication-last-modified": config:last-modified-from-repo-xml($config:app-root)
+        },
         "wwi": map {
             "title": "World War I - Department History",
             "publication-last-modified": config:last-modified-from-repo-xml($config:app-root)

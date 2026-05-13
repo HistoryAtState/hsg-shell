@@ -512,6 +512,10 @@ else switch($path-parts[1])
                     default return
                         local:serve-not-found-page()
 
+            case "marine-corps" return
+                local:render-page('departmenthistory/marine-corps.xml', map {
+                    "publication-id": "marine-corps"
+                })
             case "wwi" return
                 local:render-page('departmenthistory/wwi.xml', map {
                     "publication-id": "wwi"

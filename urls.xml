@@ -499,6 +499,14 @@
                 <hsg:github href="https://github.com/HistoryAtState/visits"/>
             </config>
         </step>
+        <step value="marine-corps">
+            <page-template href="pages/departmenthistory/marine-corps.xml">
+                <with-param name="publication-id" value="marine-corps"/>
+            </page-template>
+            <config>
+                <hsg:github href="https://github.com/HistoryAtState/other-publications"/>
+            </config>
+        </step>
         <step value="wwi">
             <page-template href="pages/departmenthistory/wwi.xml">
                 <with-param name="publication-id" value="wwi"/>
