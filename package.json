@@ -49,6 +49,8 @@
   "scripts": {
     "test": "./node_modules/.bin/wdio wdio.conf.js --suite jenkins",
     "test-prod": "./node_modules/.bin/wdio wdio.conf.js --suite prod",
+    "test:ci": "npm run cy:run -- --browser firefox",
+    "test:all": "npm test && npm run test:ci",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "update": "npm update && gulp",
