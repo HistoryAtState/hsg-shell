@@ -114,6 +114,9 @@ exports.config = {
             '--window-size=1280,1024',
             'ignore-certificate-errors',
             'ignore-urlfetcher-cert-requests',
+            // Block image loading: image-heavy pages stall on the `load` event
+            // because our S3 proxy rate-limits when too many image requests
+            // fire at once, causing 60s page-load timeouts.
             '--blink-settings=imagesEnabled=false'
           ]
           // binary: process.env.WDIO_CHROME_BINARY
