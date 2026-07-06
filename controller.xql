@@ -4,6 +4,8 @@ declare namespace exist="http://exist.sourceforge.net/NS/exist";
 declare namespace map="http://www.w3.org/2005/xpath-functions/map";
 declare namespace request="http://exist-db.org/xquery/request";
 
+import module namespace query-guard="http://history.state.gov/ns/site/hsg/query-guard" at "modules/query-guard.xqm";
+
 declare variable $exist:path external;
 declare variable $exist:resource external;
 declare variable $exist:controller external;
@@ -39,6 +41,11 @@ declare function local:maybe-set-if-modified-since($ims-header-value as xs:strin
 declare function local:serve-not-found-page() as element() {
     response:set-status-code(404),
     local:render-page("error-page-404.xml")
+};
+
+declare function local:serve-bad-request-page() as element() {
+    response:set-status-code(400),
+    local:render-page("error-page-400.xml")
 };
 
 declare variable $local:view-module-url := $exist:controller || "/modules/view.xql";
@@ -689,21 +696,26 @@ else switch($path-parts[1])
     case 'search' return
         switch (string($path-parts[2]))
             case '' return
-                let $show-search-results := fold-left(("q", "start-date", "end-date"), false(), function($result, $next-parameter-name) {
-                    let $values := request:get-parameter($next-parameter-name, ()) ! normalize-space()[. ne ""]
-                    return $result or exists($values)
-                })
-                (: If a search query is present, show the results template :)
-                let $page :=
-                    if ($show-search-results) then
-                        'search/search-result.xml'
-                    else
-                        'search/search-landing.xml'
-                return
-                    local:render-page($page, map{
-                        "suppress-sitewide-search-field": "true",
-                        "publication-id": "search"
+                (: reject malicious search queries (documented operators like " + - ( ) * ? ~ still pass) :)
+                if (query-guard:check(request:get-parameter("q", ()))) then (
+                    local:serve-bad-request-page()
+                ) else (
+                    let $show-search-results := fold-left(("q", "start-date", "end-date"), false(), function($result, $next-parameter-name) {
+                        let $values := request:get-parameter($next-parameter-name, ()) ! normalize-space()[. ne ""]
+                        return $result or exists($values)
                     })
+                    (: If a search query is present, show the results template :)
+                    let $page :=
+                        if ($show-search-results) then
+                            'search/search-result.xml'
+                        else
+                            'search/search-landing.xml'
+                    return
+                        local:render-page($page, map{
+                            "suppress-sitewide-search-field": "true",
+                            "publication-id": "search"
+                        })
+                )
             case 'tips' return
                 local:render-page('search/tips.xml', map{ "publication-id": "app" })
             default return
