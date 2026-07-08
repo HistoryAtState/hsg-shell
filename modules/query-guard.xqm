@@ -1,86 +1,76 @@
 xquery version "3.1";
 
 (:~
- : Query guard — rejects malicious or malformed values of the search `q`
- : parameter before they reach the query pipeline.
+ : Query guard — rejects search `q` values that look like SQL-injection probes.
  :
- : The site's search deliberately exposes Lucene query syntax to users (phrases,
- : booleans, wildcards, proximity — see pages/search/tips.xml), so the documented
- : operators " + - ( ) * ? ~ and the AND/OR/NOT keywords must pass through
- : untouched. This module only blocks input that can never be part of a
- : legitimate query:
- :   1. rejected characters — leftover percent-encoding, control characters, and
- :      the Lucene metacharacters that are NOT documented as features; and
- :   2. SQL-injection signatures — inert against our Lucene backend, but rejected
- :      to keep obvious attack traffic out of the query pipeline and the logs.
+ : The site has no SQL backend (searches run against Lucene), so these payloads
+ : can never actually inject; a missed one is inert. The guard exists only to
+ : keep obvious automated attack traffic out of the query pipeline and the logs,
+ : and the controller turns a positive match into an HTTP 400.
  :
- : The controller calls a single entry point, query-guard:check(), so the reject
- : policy lives entirely here.
+ : Because a false negative is harmless but a false positive turns a legitimate
+ : history search into an error page, the patterns below are deliberately biased
+ : toward NOT firing: each targets a shape that effectively never occurs in
+ : ordinary prose queries. Notably we do NOT flag a bare "union select" (cf.
+ : "European Union Select Committee") or a lone "--" dash (cf. "Nixon -- Kissinger").
  :
- : Note: eXist's fn:matches uses the W3C XPath regex grammar. It supports the
- : \p{...} category escapes but has NO \b word-boundary escape and cannot express
- : a reference to codepoint 0, so control characters are matched with \p{Cc} and
- : word boundaries with (^|\W) / (\W|$).
+ : Unsupported Lucene metacharacters (! : ^ / \ [ ] { }) are NOT handled here —
+ : they are escaped at query-build time in search.xqm so they search literally.
+ :
+ : Note: eXist's fn:matches uses the W3C XPath regex grammar, which has no \b
+ : word-boundary escape, so boundaries are written as (^|\W) ... (\W|$).
  :)
 module namespace query-guard = "http://history.state.gov/ns/site/hsg/query-guard";
 
 (:~
- : Characters that make a `q` value invalid:
- :   %                    leftover percent-encoding — request parameters are
- :                        already URL-decoded, so a literal % signals a malformed
- :                        or double-encoded request
- :   ! : ^ / \ [ ] { }    Lucene metacharacters not exposed as search features
- :   \p{Cc}               ASCII/Unicode control characters
- : The documented operators (" + - ( ) * ? ~) are intentionally absent so that
- : phrase, boolean, wildcard, and proximity searches keep working.
+ : Maximum total length (summed over all values) of the `q` parameter the guard
+ : will inspect. The guard is hot code: it runs on unauthenticated input ahead of
+ : the search, so its cost must not scale with attacker input. Real search queries
+ : are short; anything longer is junk or an attempt to make the guard (and the
+ : downstream Lucene parse / cache / render) do unbounded work, so check() rejects
+ : it up front. fn:matches over these patterns is linear — no catastrophic
+ : backtracking — so this cap is defence-in-depth against input *size*, bounding
+ : the work to O(MAX). Tune freely; 1000 chars is already far beyond any real query.
  :)
-declare %private variable $query-guard:INVALID-CHARS-REGEX as xs:string :=
-    "[%!:/{}\[\]\^\\\p{Cc}]";
+declare variable $query-guard:MAX-QUERY-LENGTH as xs:integer := 1000;
 
 (:~
- : Signatures of SQL-injection probes that slip past the character blacklist: a
- : payload such as
- :   gMxR' UNION ALL SELECT NULL,NULL,...-- -
- : uses only letters, digits, spaces, commas, apostrophes and hyphens, none of
- : which are rejected characters. The site has no SQL backend (searches run
- : against Lucene, so these can never actually inject), but rejecting them keeps
- : obvious attack traffic out of the query pipeline and the logs.
- :
- : This is a deliberately heuristic, case-insensitive match. It targets shapes
- : that do not occur in ordinary history queries:
- :   union [all] select        classic UNION-based injection
- :   ; select|insert|drop|...   stacked statements
- :   or/and <n> = <n>           boolean tautologies (e.g. OR 1=1)
- :   sleep(/benchmark(/...      time-based blind injection
- :   --<space or end>           inline SQL comment terminator
- : Trade-off: an unusual literal search like "Union Select Committee" could trip
- : the first rule. That is accepted as the cost of a simple, readable rule.
+ : SQL-injection signatures, joined into one case-insensitive pattern. Each
+ : alternative is chosen to be extremely unlikely in a real history query:
+ :   union all select                  UNION-based injection (ALL makes it safe
+ :                                      against "European Union select ...")
+ :   union select <sql-token>          UNION-based injection whose column list
+ :                                      starts with null / a digit / * / @ /
+ :                                      concat / distinct / from (never a plain
+ :                                      word like "Committee")
+ :   or/and <n> = <n>                  boolean tautology (e.g. OR 1=1)
+ :   sleep(/benchmark(/pg_sleep( <n>   time-based blind injection (numeric arg,
+ :                                      so ordinary "... asleep (" does not fire)
+ :   waitfor delay                     MSSQL time-based injection
+ :   ; <sql-verb>                      stacked statement
+ :   null , null                       UNION column-count padding (the tell-tale
+ :                                     NULL,NULL,... list); requires two
+ :                                     comma-separated NULLs so history terms like
+ :                                     "Nullification" and "annulment" are safe
  :)
 declare %private variable $query-guard:SQL-INJECTION-REGEX as xs:string :=
     string-join(
         (
-            "(^|\W)union\s+(all\s+)?select(\W|$)",
-            ";\s*(select|insert|update|delete|drop|alter|create|truncate|exec|union)(\W|$)",
+            "(^|\W)union\s+all\s+select(\W|$)",
+            "(^|\W)union\s+select\s+(null(\W|$)|distinct(\W|$)|top(\W|$)|from(\W|$)|concat\W|\d|\*|@)",
             "(^|\W)(or|and)\s+\d+\s*=\s*\d+",
-            "(^|\W)(sleep|benchmark|pg_sleep|waitfor\s+delay)\s*\(",
-            "(^|\s)--(\s|$)"
+            "(^|\W)(sleep|benchmark|pg_sleep)\s*\(\s*\d",
+            "(^|\W)waitfor\s+delay(\W|$)",
+            ";\s*(select|insert|update|delete|drop|alter|create|truncate|exec)(\W|$)",
+            "(^|\W)null\s*,\s*null"
         ),
         "|"
     );
 
 (:~
- : Does any `q` value contain a character we refuse to pass to Lucene?
- : @param $q the raw (already URL-decoded) `q` value(s); a `q` parameter may be
- :           repeated, so this accepts a sequence
- : @return true if any value contains a rejected character
- :)
-declare function query-guard:has-invalid-characters($q as xs:string*) as xs:boolean {
-    some $value in $q satisfies matches($value, $query-guard:INVALID-CHARS-REGEX)
-};
-
-(:~
  : Does any `q` value look like a SQL-injection probe? Matching is
- : case-insensitive.
+ : case-insensitive. A `q` parameter may be repeated, so this accepts a sequence
+ : and returns true if any single value matches.
  : @param $q the raw (already URL-decoded) `q` value(s)
  : @return true if any value matches a known injection signature
  :)
@@ -89,12 +79,18 @@ declare function query-guard:looks-like-sql-injection($q as xs:string*) as xs:bo
 };
 
 (:~
- : Single entry point: should this `q` value be rejected with HTTP 400?
- : Combines every reject rule so callers need only this one function.
+ : Single entry point for the controller: should this `q` value be rejected with
+ : HTTP 400? Currently the only reject rule is the SQL-injection heuristic;
+ : keeping this thin wrapper means the controller need not know that.
  : @param $q the raw (already URL-decoded) `q` value(s)
- : @return true if the query is a malicious or malformed payload to reject
+ : @return true if the query must be rejected
  :)
 declare function query-guard:check($q as xs:string*) as xs:boolean {
-    query-guard:has-invalid-characters($q)
-    or query-guard:looks-like-sql-injection($q)
+    (: Gate on length FIRST, via if/then/else rather than `or`, so an oversized q
+       is rejected without fn:matches ever scanning unbounded attacker input.
+       (XQuery does not guarantee `or` short-circuits, so the gate must be explicit.) :)
+    if (sum($q ! string-length(.)) gt $query-guard:MAX-QUERY-LENGTH) then
+        true()
+    else
+        query-guard:looks-like-sql-injection($q)
 };
