@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div data-template="templates:surround" data-template-at="content"
+    data-template-with="templates/site.xml">
+    <div data-template="app:fix-links">
+        <h1>Invalid search query</h1>
+        <p>Your search query contained characters that cannot be processed.
+            Please remove any special characters and
+            <a href="$app/search">try your search again</a>.
+            See the <a href="$app/search/tips">search tips</a> for supported
+            search syntax.</p>
+    </div>
+</div>

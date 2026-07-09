@@ -20,6 +20,22 @@ declare namespace frus="http://history.state.gov/frus/ns/1.0";
 
 declare variable $search:MAX_HITS_SHOWN := 1000;
 
+(:~
+ : Lucene special characters that the site does not expose as search features.
+ : They are backslash-escaped before the query is handed to ft:query (see
+ : search:escape-unsupported-characters) so that, e.g., "title:secret" is
+ : searched as a literal term — yielding zero results — instead of being parsed
+ : as Lucene field syntax or raising a query-parser error.
+ :
+ : The documented operators (" + - ( ) * ? ~ and the AND/OR/NOT keywords) are
+ : intentionally absent from this set so that phrase, boolean, wildcard, and
+ : proximity searches keep working.
+ :
+ : Note: eXist's fn:replace uses the W3C XPath regex grammar; inside the
+ : character class the backslash, brackets and caret are themselves escaped.
+ :)
+declare variable $search:UNSUPPORTED-LUCENE-CHARS as xs:string := "[/\\!:\^\[\]{}]";
+
 declare variable $search:ft-query-options := map {
     "default-operator": "and",
     "phrase-slop": 0,
@@ -690,7 +706,22 @@ declare function search:sort($hits as element()*, $sort-by as xs:string) {
                 $hit
 };
 
-declare %private function search:prepare-query($sections as xs:string*, $volume-ids as xs:string*, 
+(:~
+ : Escape the Lucene special characters we do not support as features so they
+ : are searched literally instead of altering the query or breaking the parser.
+ : @param $query the (already normalized) keyword query
+ : @return the query with $search:UNSUPPORTED-LUCENE-CHARS backslash-escaped
+ :)
+declare %private function search:escape-unsupported-characters($query as xs:string?) as xs:string? {
+    if (exists($query)) then
+        (: the capturing group lets the replacement prepend "\" to each match;
+           XPath fn:replace has no $0 for the whole match :)
+        replace($query, "(" || $search:UNSUPPORTED-LUCENE-CHARS || ")", "\\$1")
+    else
+        ()
+};
+
+declare %private function search:prepare-query($sections as xs:string*, $volume-ids as xs:string*,
     $query as xs:string?, $range-start as xs:dateTime?, $range-end as xs:dateTime?) {
     let $category := 
         for $section in $sections
@@ -715,7 +746,7 @@ declare %private function search:prepare-query($sections as xs:string*, $volume-
     let $is-date-query := exists($range-start)
     let $is-keyword-query := exists($query)
 
-    let $fulltext-query := if (exists($query)) then 'hsg-fulltext:(' || $query || ') ' else ()
+    let $fulltext-query := if (exists($query)) then 'hsg-fulltext:(' || search:escape-unsupported-characters($query) || ') ' else ()
 
     (: translate date ranges to the form used by Lucene index, cf. frus/volumes.xconf :)
     let $range-start := translate($range-start, ':-', '')
