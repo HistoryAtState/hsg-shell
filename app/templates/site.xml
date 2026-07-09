@@ -43,9 +43,9 @@
                     <div class="row">
                         <div class="col-sm-7">
                             <a href="$app/">
-                                <img class="img-responsive" width="400"
-                                    src="$app/resources/images/Office-of-the-Historian-logo_500x168.jpg"
-                                    alt="Office of the Historian"/>
+                                <img alt="Office of the Historian" class="img-responsive"
+                                    src="$app/resources/images/a-sks-oh-flag-logo-horizontal-navy-medium.png"
+                                 />
                             </a>
                         </div>
                         <div class="col-sm-5">
