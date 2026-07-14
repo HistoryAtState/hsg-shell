@@ -54,10 +54,14 @@ declare function toc:prepare-sidebar-toc-list($nodes as node()*) {
 
 declare function toc:toc($model as map(*), $root as node()?, $show-heading as xs:boolean?, $highlight as xs:boolean?) {
     if ($root) then
-        let $some-published := root($root)//tei:revisionDesc[@status = ("published", "partially-published")]
+        (: FRUS volumes carry a tei:revisionDesc/@status and may be published in an anticipated
+           state, with TEI containing just chapter titles; suppress their TOC unless the volume
+           is at least partially published. Publications without a tei:revisionDesc/@status
+           (milestones, FAQ, HAC, short history, etc.) always show a TOC. :)
+        let $statuses := root($root)//tei:revisionDesc/@status
+        let $suppress := exists($statuses) and not($statuses = ("published", "partially-published"))
         return
-            (: only show a TOC if the volume is published or partially published :)
-            if ($some-published) then
+            if (not($suppress)) then
                 <div class="toc-inner">
                     { if ($show-heading) then <div><h2>{toc:volume-title($root, "volume")}</h2></div> else () }
                     <ul>
