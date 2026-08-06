@@ -47,19 +47,15 @@
 // (https://github.com/HistoryAtState/hsg-shell/issues/259)
 
 .list-person {
+  list-style-type: none;
   padding-left: 0;
 }
 
-#persons {
-  .tei-item .tei-item {
-    margin-left: 2em;
-    text-indent: -2em;
-  }
-}
+// Same hanging indents for the "sources" and "terms" glossary lists
 
-// Lists with hanging indents in "sources" - same as for "persons"
-
-#sources {
+#persons,
+#sources,
+#terms {
   .tei-item .tei-item {
     margin-left: 2em;
     text-indent: -2em;
