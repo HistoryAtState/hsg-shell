@@ -41,16 +41,51 @@ declare option output:html-version "5";
 declare option output:indent "no";
 declare option output:media-type "text/html";
 
+(:~
+ : Runs the HTML passed in from the controller through the templating system.
+ :
+ : We have to provide a lookup function to templates:apply to help it find functions
+ : in the imported application modules. The templates module cannot see the application
+ : modules, but the inline function below does see them.
+ :)
+declare function local:render() as item()* {
+    templates:apply(
+        request:get-data(),
+        function($function-name as xs:string, $arity as xs:integer) as function(*)? {
+            function-lookup(xs:QName($function-name), $arity)
+        },
+        (),
+        map {
+            $templates:CONFIG_APP_ROOT : $config:app-root,
+            $templates:CONFIG_STOP_ON_ERROR : true(),
+            $templates:CONFIG_FILTER_ATTRIBUTES : true()
+        }
+    )
+};
+
 let $publication-id := request:get-parameter('publication-id',())
 let $document-id := request:get-parameter('document-id',())
 
 let $publication-config := ($config:PUBLICATIONS?($publication-id), map{})[1]
 let $created := app:created($publication-config, $document-id)
 let $last-modified := app:last-modified($publication-config, $document-id)
-let $not-modified-since := app:modified-since($last-modified, app:safe-parse-if-modified-since-header())
 
-return 
-    if ($not-modified-since) then (
+(: Error pages are served by the controller for any unresolvable request. They must
+ : not take part in Last-Modified/If-Modified-Since negotiation: $last-modified is
+ : not specific to the requested resource — it falls back to $config:EDITORIAL_DATE_TIME
+ : — so an error response would revalidate as 304 forever and a cached 404 could never
+ : be corrected. Send them as uncacheable instead, with no Last-Modified. :)
+let $is-error-page := request:get-parameter('error-page', ()) = 'true'
+
+let $not-modified-since :=
+    not($is-error-page)
+    and app:modified-since($last-modified, app:safe-parse-if-modified-since-header())
+
+return
+    if ($is-error-page) then (
+        response:set-header("Cache-Control", "no-store"),
+        local:render()
+    ) else if ($not-modified-since) then (
         (: if the "If-Modified-Since" header in the client request is later than the
          : last-modified date, then halt further processing of the templates and simply
          : return a 304 response. :)
@@ -63,29 +98,16 @@ return
         response:set-status-code(200),
         app:set-last-modified($last-modified)
     ) else (
-        (:
-         : The HTML is passed in the request from the controller.
-         : Run it through the templating system and return the result.
-         :)
-        templates:apply(
-            request:get-data(),
-            (:
-             : We have to provide a lookup function to templates:apply to help it
-             : find functions in the imported application modules. The templates
-             : module cannot see the application modules, but the inline function
-             : below does see them.
-             :)
-            function($function-name as xs:string, $arity as xs:integer) as function(*)? {
-                function-lookup(xs:QName($function-name), $arity)
-            },
-            (),
-            map {
-                $templates:CONFIG_APP_ROOT : $config:app-root,
-                $templates:CONFIG_STOP_ON_ERROR : true(),
-                $templates:CONFIG_FILTER_ATTRIBUTES : true()
-            }
-        ),
-        (: only set last-modified if rendering was succesful :)
-        app:set-last-modified($last-modified),
-        app:set-created($created)
+        local:render(),
+        (: Only set last-modified if rendering was successful. A template may have
+         : signalled an error while rendering rather than the controller catching it
+         : up front: the publication routes set a "hsg-shell.errcode" request attribute
+         : for a missing document, which app:handle-error turns into a 4xx status.
+         : Those responses must not be cached either, for the reason given above. :)
+        if (exists(request:get-attribute("hsg-shell.errcode"))) then
+            response:set-header("Cache-Control", "no-store")
+        else (
+            app:set-last-modified($last-modified),
+            app:set-created($created)
+        )
     )
