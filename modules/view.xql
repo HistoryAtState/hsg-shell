@@ -47,7 +47,13 @@ let $document-id := request:get-parameter('document-id',())
 let $publication-config := ($config:PUBLICATIONS?($publication-id), map{})[1]
 let $created := app:created($publication-config, $document-id)
 let $last-modified := app:last-modified($publication-config, $document-id)
-let $not-modified-since := app:modified-since($last-modified, app:safe-parse-if-modified-since-header())
+
+(: With HTTP caching off (see $config:HTTP_CACHING_ENABLED) the response takes no part in
+ : Last-Modified negotiation at all: neither short-circuit below may fire, since both
+ : exist only to serve a cache revalidating what it already holds. :)
+let $not-modified-since :=
+    $config:HTTP_CACHING_ENABLED
+    and app:modified-since($last-modified, app:safe-parse-if-modified-since-header())
 
 return 
     if ($not-modified-since) then (
@@ -56,7 +62,7 @@ return
          : return a 304 response. :)
         response:set-status-code(304),
         app:set-last-modified($last-modified)
-    ) else if (request:get-parameter('x-method', ()) eq 'head') then (
+    ) else if ($config:HTTP_CACHING_ENABLED and request:get-parameter('x-method', ()) eq 'head') then (
         (: When revalidating a cached resource and the "If-Modified-Since" header sent by the client indicates
          : the resource has changed in the meantime, it is just a head request. Do not render the page as the 
          : response body is discarded anyway and just return status code 200. :)
@@ -86,6 +92,12 @@ return
             }
         ),
         (: only set last-modified if rendering was succesful :)
-        app:set-last-modified($last-modified),
-        app:set-created($created)
+        if ($config:HTTP_CACHING_ENABLED) then (
+            app:set-last-modified($last-modified),
+            app:set-created($created)
+        ) else (
+            (: no Last-Modified at all, so nothing can revalidate against a value that
+             : does not track the document that was just uploaded :)
+            response:set-header("Cache-Control", "no-store")
+        )
     )
