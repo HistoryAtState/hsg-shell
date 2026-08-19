@@ -26,6 +26,19 @@ status_of() {
   curl -s -o /dev/null -m 30 -w '%{http_code}' "$1"
 }
 
+# hsg-shell cannot render any page without the publication data packages: with none
+# installed, every route answers 400 from app:handle-error's default, and nothing here
+# is meaningful. That is the case in CI, which installs only hsg-shell and the handful
+# of libraries it depends on, so these tests skip there and run against an instance
+# that has been populated.
+setup() {
+  # the first request after a restart can fail while templates compile
+  curl -s -o /dev/null -m 30 "$HSG_BASE/" || true
+  if [ "$(status_of "$HSG_BASE/")" != "200" ]; then
+    skip "instance has no publication data installed"
+  fi
+}
+
 # Echoes a response header's full value, preserving case. Header names are matched
 # case-insensitively without relying on GNU awk's IGNORECASE.
 header_of() {
