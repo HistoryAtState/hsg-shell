@@ -28,6 +28,27 @@ declare namespace xhtml="http://www.w3.org/1999/xhtml";
  : this date :)
 declare variable $config:EDITORIAL_DATE_TIME := xs:dateTime("2026-06-29T00:00:00-00:00");
 
+(: Whether hsg-shell participates in HTTP caching: whether it sends Last-Modified and
+ : honors a client's If-Modified-Since.
+ :
+ : This is unrelated to the server-side caches built on eXist's cache: module, such as
+ : "hsg-search" in search.xqm and "last-modified" in sitemap-config.xqm. Those cache data
+ : inside the database; this governs what we tell a client about the freshness of a
+ : response.
+ :
+ : Set the Java system property hsg.http.caching to "off" to disable it, for example with
+ : -Dhsg.http.caching=off in JAVA_OPTS, or via JAVA_TOOL_OPTIONS in a container. Local and
+ : containerized development instances should run with it off, so that a document uploaded
+ : for preview is visible on the next reload instead of after a force-reload:
+ : $config:EDITORIAL_DATE_TIME describes the editorial state of the site rather than the
+ : mtime of any one document, so an upload does not move it and a warm cache would
+ : otherwise keep serving the previous rendering.
+ :
+ : Only the exact value "off" disables it. An unset property, or a typo, leaves HTTP
+ : caching enabled, so production cannot lose it by accident. :)
+declare variable $config:HTTP_CACHING_ENABLED as xs:boolean :=
+    not(util:system-property("hsg.http.caching") = "off");
+
 (:
     Determine the application root collection from the current module load path.
 :)
