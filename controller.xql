@@ -38,14 +38,19 @@ declare function local:maybe-set-if-modified-since($ims-header-value as xs:strin
     else request:set-attribute("if-modified-since", $ims-header-value)
 };
 
+(: Marks a response as an error page. view.xql uses this to suppress the
+ : Last-Modified/If-Modified-Since handling that is appropriate for content
+ : but not for errors, and to mark the response as uncacheable. :)
+declare variable $local:error-page-parameters := map { "error-page": "true" };
+
 declare function local:serve-not-found-page() as element() {
     response:set-status-code(404),
-    local:render-page("error-page-404.xml")
+    local:render-page("error-page-404.xml", $local:error-page-parameters)
 };
 
 declare function local:serve-bad-request-page() as element() {
     response:set-status-code(400),
-    local:render-page("error-page-400.xml")
+    local:render-page("error-page-400.xml", $local:error-page-parameters)
 };
 
 declare variable $local:view-module-url := $exist:controller || "/modules/view.xql";
