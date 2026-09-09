@@ -124,12 +124,6 @@ else if (ends-with($exist:path, "validate-results-of-twitter-jobs.xq")) then
         </error-handler>
     </dispatch>
 
-(: ignore direct requests to main modules :)
-else if (ends-with($exist:resource, ".xql")) then
-    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <ignore/>
-    </dispatch>
-
 else if (starts-with($exist:path, "/sitemap")) then
      <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
          <forward url="{$exist:controller || "/resources/sitemaps" || $exist:path}"/>
