@@ -247,7 +247,7 @@
 
                 <elementSpec ident="pb" mode="change">
                     <modelSequence>
-                        <model output="web" behaviour="pb-link" cssClass="hsg-facsilime-link">
+                        <model predicate="exists(@xml:id)" output="web" behaviour="pb-link" cssClass="hsg-facsilime-link">
                             <desc>A "pb" link to a Facsimile or Typeset target</desc>
                             <param name="content" value="'Page '|| @n"/>
                             <param name="uri" value="@xml:id"/>
