@@ -77,10 +77,13 @@
                         <a href="$app/historicaldocuments/reagan">Reagan Administration</a>
                     </li>
                     <li class="hsg-list-group-item">
-                        <a href="$app/historicaldocuments/bush-ghw">Bush Administration</a>
+                        <a href="$app/historicaldocuments/bush-ghw">G.H.W. Bush Administration</a>
                     </li>
                     <li class="hsg-list-group-item">
                         <a href="$app/historicaldocuments/clinton">Clinton Administration</a>
+                    </li>
+                    <li class="hsg-list-group-item">
+                        <a href="$app/historicaldocuments/bush-gw">G.W. Bush Administration</a>
                     </li>
                     <li class="hsg-list-group-item">
                         <a href="$app/historicaldocuments">All Administrations</a>

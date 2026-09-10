@@ -227,6 +227,14 @@
                                 1993–2000</div>
                         </a>
                     </article>
+                    <article class="hsg-thumbnail-wrapper">
+                        <a class="thumbnail" href="$app/historicaldocuments/bush-gw">
+                            <img alt="George W. Bush" class="img-thumbnail" height="76"
+                                src="$s3static/images/gwbush.jpg" width="89"/>
+                            <div class="caption">George W. Bush Administration<br/>
+                                2001–2008</div>
+                        </a>
+                    </article>
                 </div>
             </section>
         </div>
