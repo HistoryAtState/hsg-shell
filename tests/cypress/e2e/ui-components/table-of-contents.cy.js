@@ -41,9 +41,9 @@ describe('Table of contents listings', function () {
   })
 
   it('Anticipated (not yet published) FRUS volume landing page suppresses its table of contents', function () {
-    // frus1981-88v16 has revisionDesc/@status "being-cleared" as of 2026-07;
+    // frus1993-00v02 has revisionDesc/@status "planned" as of 2026-09;
     // if this volume is published, replace it with another anticipated volume
-    cy.visit('historicaldocuments/frus1981-88v16')
+    cy.visit('historicaldocuments/frus1993-00v02')
     cy.get('a.toc-link').should('not.exist')
   })
 })

@@ -38,6 +38,20 @@ $icon-font-path: "../fonts/";
     margin-left: 2em;
     font-size: inherit;
   }
+
+  // A nested list inside a headed list (PARTICIPANTS, SUBJECT, TO, FROM) is a
+  // GROUP, not another indent step: a labeled block ("State:", "OSD:") or, in
+  // the newer volumes, an unlabeled delegation. The printed volumes set a group
+  // on the SAME measure as an ungrouped entry, separated only by space —
+  // frus1981-88v44p1 p. 173 has the agency labels sitting exactly on the names'
+  // measure. Without this, the 2em above compounds per level, because the rule
+  // it qualifies is a descendant selector: frus1981-88v16 d478 put its names one
+  // step deep (232px against the SUBJECT entry's 202px) and d471, which nests
+  // twice, two steps (262px). Both now land on 202px, as they do in oXygen and
+  // in the PDF.
+  .listHead + .list li li {
+    margin-left: 0;
+  }
 }
 
 /* Navbar ------------- */
