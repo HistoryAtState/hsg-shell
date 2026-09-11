@@ -284,12 +284,12 @@ function fh:facets($node as node(), $model as map(*)) {
                 if ($model?data/@type=('compilation', 'chapter', 'subchapter')) then
                     ()
                 else
-                    distinct-values($model?data//tei:persName/@corresp),
+                    distinct-values(($model?data//tei:persName/@corresp, tokenize($model?data/@ana)[starts-with(., "#p_")])),
             "gloss":
                 if ($model?data/@type=('compilation', 'chapter', 'subchapter')) then
                     ()
                 else
-                    distinct-values($model?data//tei:gloss/@target)
+                    distinct-values(($model?data//tei:gloss/@target, tokenize($model?data/@ana)[starts-with(., "#t_")]))
         }
 };
 
