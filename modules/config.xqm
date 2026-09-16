@@ -188,7 +188,10 @@ declare function config:pocom-people-last-modified() as xs:dateTime {
 declare variable $config:PUBLICATIONS :=
     map {
         "app": map {
-            "publication-last-modified": config:last-modified-from-repo-xml($config:app-root)
+            "publication-last-modified": max(
+                config:last-modified-from-repo-xml($config:app-root),
+                config:last-modified-from-repo-xml($config:CAROUSEL_COL)
+            )
         },
         "frus": map {
             "collection": $config:FRUS_COL_VOLUMES,
