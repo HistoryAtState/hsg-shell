@@ -12,9 +12,9 @@ jobs:
       fail-fast: false
       matrix:
         # Test against different eXist-db versions
-        img-version: [latest]
+        img-version: [v1]
         java-version: [11]
-        
+
 
     steps:
       # Checkout code
